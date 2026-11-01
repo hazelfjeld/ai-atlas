@@ -1,0 +1,80 @@
+{
+  "schema": 1,
+  "checkpoint": 2,
+  "label": "Research-first incremental publication",
+  "snapshot_date": "2026-11-01",
+  "automatic_refresh_active": false,
+  "coverage": "Curated starter snapshot, not an exhaustive incident or research record. Prior review labels are imported, not newly audited during publication.",
+  "published_counts": {
+    "papers": 30,
+    "alerts": 10,
+    "technologies": 0,
+    "terms": 0,
+    "playbooks": 0
+  },
+  "prepared_counts": {
+    "papers": 30,
+    "alerts": 10,
+    "technologies": 300,
+    "terms": 1345,
+    "playbooks": 20
+  },
+  "files": [
+    {
+      "path": "data/papers-01.json",
+      "kind": "papers",
+      "count": 5,
+      "bytes": 6166,
+      "sha256": "d9d95bd447f62ca127e88863c15b11e95a26a531f9b3aa345d9261a8f49effb6"
+    },
+    {
+      "path": "data/papers-02.json",
+      "kind": "papers",
+      "count": 5,
+      "bytes": 6034,
+      "sha256": "f041234dc02df3a77cf4219946d3959de8d4fdf7931cc757b12aa81d19ec7251"
+    },
+    {
+      "path": "data/papers-03.json",
+      "kind": "papers",
+      "count": 5,
+      "bytes": 6634,
+      "sha256": "58cb3429e9d37b93ed90994d831e7de31c7c6821dafa95c7f306ddc9c0b71c71"
+    },
+    {
+      "path": "data/papers-04.json",
+      "kind": "papers",
+      "count": 5,
+      "bytes": 6303,
+      "sha256": "9c429a0edbe370ddcc8e8bae684f4f8c02a70ac7f91c09ac913badc52ea5ec0b"
+    },
+    {
+      "path": "data/papers-05.json",
+      "kind": "papers",
+      "count": 5,
+      "bytes": 5998,
+      "sha256": "f66bda9e3af3ba447e901ce3a638199e1654160f26deb92f26c14ab07d71c16f"
+    },
+    {
+      "path": "data/papers-06.json",
+      "kind": "papers",
+      "count": 5,
+      "bytes": 5691,
+      "sha256": "1418b32a70d3bdc1b64bebedfa8878f5fd23a9a71559177b0b24da6e64c3ba8f"
+    },
+    {
+      "path": "data/alerts-01.json",
+      "kind": "alerts",
+      "count": 5,
+      "bytes": 8705,
+      "sha256": "7f56dd636c5bd5515f94ab37b0b234fc67d8d191c978f7af67248bebade0716c"
+    },
+    {
+      "path": "data/alerts-02.json",
+      "kind": "alerts",
+      "count": 5,
+      "bytes": 6925,
+      "sha256": "1e0824175ae847541a00bc5b4b60b85ed302c3544f9bd648fc3386b926ce4a17"
+    }
+  ]
+}
