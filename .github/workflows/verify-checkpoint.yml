@@ -1,0 +1,38 @@
+name: Verify incremental Atlas publication
+on:
+  push:
+    branches: [main]
+    paths: ['index.html']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: atlas-checkpoint-verification
+  cancel-in-progress: true
+jobs:
+  catalog:
+    if: github.repository == 'hazelfjeld/ai-atlas'
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - name: Check out the exact publication commit
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Validate every catalog chunk and published count
+        run: python3 scripts/validate_checkpoint.py
+      - name: Check frontend JavaScript syntax
+        run: node --check checkpoint.js
+  githack:
+    needs: catalog
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - name: Check out the exact publication commit
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Verify GitHack-served files against commit
+        env:
+          PUBLICATION_SHA: ${{ github.sha }}
+        run: python3 scripts/validate_checkpoint.py --remote-base "https://rawcdn.githack.com/hazelfjeld/ai-atlas/${PUBLICATION_SHA}/"
