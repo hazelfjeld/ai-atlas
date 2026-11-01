@@ -1,0 +1,14 @@
+{
+  "validation_scope": "Local dry run only; no app archive uploaded to GitHub and no live deployment asserted",
+  "tested_on": "2026-11-01",
+  "archive_sha256": "1f1b648e113cec13583217e9ae363def0028506706eed28a7f1f6b9cd4793125",
+  "archive_bytes": 11980402,
+  "package_checksum_validation": "passed",
+  "catalog_relationship_validation": "passed",
+  "sqlite_integrity": "ok",
+  "sqlite_relationships": 4139,
+  "node_tests_passed": 12,
+  "python_tests_passed": 30,
+  "counts": {"technologies": 300, "terms": 1345, "playbooks": 20, "papers": 30, "alerts": 10},
+  "automatic_refresh_active": false
+}

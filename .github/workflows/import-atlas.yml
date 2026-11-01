@@ -1,8 +1,10 @@
-name: Import and verify Atlas release
+name: Import and publish approved Atlas package
 on:
   push:
     branches: [main]
-    paths: ['release/manifest.json']
+    paths:
+      - Atlas_GitHub_GitHack_Ready.zip
+      - source-upload.zip
   workflow_dispatch:
 permissions:
   contents: write
@@ -20,20 +22,28 @@ jobs:
         with:
           ref: main
           fetch-depth: 1
-      - name: Verify and restore the release
+      - name: Verify and import the approved archive
         run: python3 release/import_release.py
-      - name: Run application tests
+      - name: Test application and collector logic
         working-directory: app
         run: npm test
-      - name: Publish the verified static app
+      - name: Publish the validated static app
         run: |
           set -eu
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add --all
-          if git diff --cached --quiet; then
-            echo 'No app changes to publish.'
-          else
+          if ! git diff --cached --quiet; then
             git commit -m 'Publish complete validated Atlas app and catalogs'
             git push origin HEAD:main
           fi
+          SHA=$(git rev-parse HEAD)
+          {
+            echo '## Atlas package imported and tests passed'
+            echo
+            echo 'App: https://raw.githack.com/hazelfjeld/ai-atlas/main/index.html'
+            echo "Pinned release: https://rawcdn.githack.com/hazelfjeld/ai-atlas/$SHA/index.html"
+            echo
+            echo 'Open the app to verify GitHack rendering. A confirmation screen or cache delay is possible.'
+            echo 'Automatic AI safety collection is NOT active. This is a static snapshot.'
+          } >> "$GITHUB_STEP_SUMMARY"

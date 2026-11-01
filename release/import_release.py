@@ -1,110 +1,100 @@
 #!/usr/bin/env python3
-"""Restore the one-time, checksum-verified Atlas import; never fetch network data."""
+"""Import the explicitly approved Atlas ZIP after a browser upload to this repo.
+No downloads, secrets, arbitrary archives, or remote code execution endpoints.
+"""
 from pathlib import Path, PurePosixPath
-import base64
 import hashlib
-import io
 import json
-import lzma
 import shutil
+import stat
 import subprocess
 import sys
-import tarfile
 import tempfile
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
-RELEASE = ROOT / 'release'
+APPROVED_SHA256 = '1f1b648e113cec13583217e9ae363def0028506706eed28a7f1f6b9cd4793125'
+APPROVED_BYTES = 11980402
+EXPECTED = {'technologies': 300, 'terms': 1345, 'playbooks': 20, 'papers': 30, 'alerts': 10}
 
-def digest(data: bytes) -> str:
-    return hashlib.sha256(data).hexdigest()
 
-def safe(name: str) -> str:
-    p = PurePosixPath(name)
-    if p.is_absolute() or '..' in p.parts or '\\' in name or ':' in name or any(x in p.parts for x in ('.git', '.github', 'release')):
-        raise ValueError(f'Unsafe import path: {name}')
-    return str(p)
+def sha256(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
 
-def main() -> None:
-    if (ROOT / '.atlas-imported.json').exists():
-        print('This release was already imported. Existing files are not overwritten.')
+
+def main():
+    marker = ROOT / '.atlas-imported.json'
+    if marker.exists():
+        print('The approved package was already imported; no files changed.')
         return
-    m = json.loads((RELEASE / 'manifest.json').read_text())
-    if m.get('schema') != 1 or len(m['parts']) > 100:
-        raise ValueError('Invalid release manifest')
-    pieces = []
-    for entry in m['parts']:
-        name = entry['path']
-        if not name.startswith('release/part-') or not name.endswith('.bin') or '..' in name:
-            raise ValueError('Invalid part path')
-        piece = (ROOT / name).read_bytes()
-        if len(piece) != entry['length'] or digest(piece) != entry['sha256']:
-            raise ValueError(f'Corrupt transport part: {name}')
-        pieces.append(piece)
-    compressed = b''.join(pieces)
-    if len(compressed) != m['decoded_bytes'] or digest(compressed) != m['payload_sha256']:
-        raise ValueError('Release checksum mismatch')
-    decoder = lzma.LZMADecompressor(memlimit=200_000_000)
-    raw = decoder.decompress(compressed, max_length=50_000_001)
-    if len(raw) != m['tar_bytes'] or len(raw) > 50_000_000 or not decoder.eof:
-        raise ValueError('Invalid decompressed release size')
-    with tempfile.TemporaryDirectory(prefix='atlas-import-') as folder:
+    candidates = [ROOT / name for name in ('Atlas_GitHub_GitHack_Ready.zip', 'source-upload.zip')]
+    existing = [p for p in candidates if p.is_file()]
+    if len(existing) != 1:
+        raise ValueError('Upload exactly one Atlas_GitHub_GitHack_Ready.zip at the repository root.')
+    archive = existing[0]
+    if archive.stat().st_size != APPROVED_BYTES or sha256(archive) != APPROVED_SHA256:
+        raise ValueError('Archive differs from the approved ChatGPT package. Nothing was imported.')
+    with tempfile.TemporaryDirectory(prefix='atlas-approved-import-') as folder:
         stage = Path(folder)
-        with tarfile.open(fileobj=io.BytesIO(raw), mode='r:') as archive:
-            for item in archive.getmembers():
-                name = safe(item.name)
-                if not item.isfile() or item.size > 12_000_000:
-                    raise ValueError('Only bounded regular files may be imported')
-                target = stage / name
+        with zipfile.ZipFile(archive) as z:
+            if len(z.infolist()) > 100 or sum(i.file_size for i in z.infolist()) > 50_000_000:
+                raise ValueError('Unexpected archive size.')
+            seen = set()
+            for item in z.infolist():
+                source = PurePosixPath(item.filename)
+                if source.is_absolute() or '..' in source.parts or '\\' in item.filename or ':' in item.filename:
+                    raise ValueError('Unsafe archive path.')
+                if not source.parts or source.parts[0] != 'ai-atlas':
+                    raise ValueError('Unexpected archive root.')
+                rel = PurePosixPath(*source.parts[1:])
+                if any(p in ('.git', '.github', 'release') for p in rel.parts):
+                    raise ValueError('Archive cannot replace repository controls.')
+                if item.is_dir():
+                    continue
+                if not rel.parts or str(rel) in seen or stat.S_ISLNK(item.external_attr >> 16):
+                    raise ValueError('Duplicate or unsafe archive entry.')
+                seen.add(str(rel))
+                target = stage / rel
                 target.parent.mkdir(parents=True, exist_ok=True)
-                target.write_bytes(archive.extractfile(item).read())
-        package = json.loads((stage / '_package.json').read_text())
-        if package.get('schema') != 1:
-            raise ValueError('Unknown package schema')
-        for name, sha in package['files'].items():
-            if digest((stage / safe(name)).read_bytes()) != sha:
-                raise ValueError(f'Package file checksum mismatch: {name}')
-        # Recompress the original workbook XML without altering cells or formulas.
-        for name, spec in package['workbooks'].items():
-            dest = stage / safe(name)
-            dest.parent.mkdir(parents=True, exist_ok=True)
-            with zipfile.ZipFile(dest, 'w', compression=zipfile.ZIP_DEFLATED, compresslevel=9) as book:
-                book.comment = base64.b64decode(spec['comment'])
-                for entry in spec['members']:
-                    data = (stage / safe(entry['blob'])).read_bytes()
-                    if digest(data) != entry['sha256']:
-                        raise ValueError('Workbook member mismatch')
-                    props = entry['props']
-                    info = zipfile.ZipInfo(props['filename'], tuple(props['date_time']))
-                    for k, v in props.items():
-                        if k not in ('filename', 'date_time', 'comment', 'extra'):
-                            setattr(info, k, v)
-                    info.comment = base64.b64decode(props['comment'])
-                    info.extra = base64.b64decode(props['extra'])
-                    book.writestr(info, data, compresslevel=9)
-            with zipfile.ZipFile(dest) as book:
-                for entry in spec['members']:
-                    if digest(book.read(entry['props']['filename'])) != entry['sha256']:
-                        raise ValueError('Rebuilt workbook failed verification')
-        # All source validation precedes any workspace changes.
-        for p in stage.rglob('*'):
-            if not p.is_file():
+                target.write_bytes(z.read(item))
+        manifest = json.loads((stage / 'publish-manifest.json').read_text())
+        if manifest.get('schema') != 1:
+            raise ValueError('Unknown publication manifest.')
+        for name, expected in manifest['files'].items():
+            rel = PurePosixPath(name)
+            if rel.is_absolute() or '..' in rel.parts or name not in seen:
+                raise ValueError('Manifest points outside the approved package.')
+            if sha256(stage / rel) != expected:
+                raise ValueError('Manifest mismatch: ' + name)
+        for group, expected in EXPECTED.items():
+            rows = json.loads((stage / 'app/public/data' / (group + '.json')).read_text())
+            if len(rows) != expected:
+                raise ValueError('Unexpected catalog count: ' + group)
+        subprocess.run([sys.executable, str(stage / 'publish.py'), '--check'], cwd=stage, check=True)
+        # Validation completes before any repository files are replaced.
+        for path in stage.rglob('*'):
+            if not path.is_file():
                 continue
-            name = p.relative_to(stage).as_posix()
-            if name == '_package.json' or name.startswith('_workbooks/'):
-                continue
-            dest = ROOT / safe(name)
-            dest.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copy2(p, dest)
-    for group, expected in m['expected_counts'].items():
-        rows = json.loads((ROOT / 'app/public/data' / (group + '.json')).read_text())
-        if len(rows) != expected:
-            raise ValueError(f'Unexpected {group} count')
+            rel = path.relative_to(stage)
+            # Keep the current deployment README; retain the original separately.
+            if rel.as_posix() == 'README.md':
+                rel = Path('docs/ORIGINAL_PACKAGE_README.md')
+            target = ROOT / rel
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(path, target)
+    meta_path = ROOT / 'app/public/data/meta.json'
+    meta = json.loads(meta_path.read_text())
+    meta['deployment_status'] = 'Published to GitHub for static GitHack serving; automatic refresh inactive'
+    meta['automatic_refresh_active'] = False
+    meta_path.write_text(json.dumps(meta, ensure_ascii=False, indent=2) + '\n')
     subprocess.run([sys.executable, str(ROOT / 'scripts/build_site.py')], cwd=ROOT, check=True)
     subprocess.run([sys.executable, str(ROOT / 'publish.py'), '--check'], cwd=ROOT, check=True)
-    report = {'schema': 1, 'payload_sha256': m['payload_sha256'], 'counts': m['expected_counts'], 'automatic_refresh_active': False, 'workbook_xml_checks': 'passed', 'index_sha256': digest((ROOT / 'index.html').read_bytes())}
-    (ROOT / '.atlas-imported.json').write_text(json.dumps(report, indent=2) + '\n')
+    report = {'schema': 2, 'archive_sha256': APPROVED_SHA256, 'counts': EXPECTED,
+              'index_sha256': sha256(ROOT / 'index.html'), 'automatic_refresh_active': False,
+              'status': 'Imported and locally validated; workflow must still pass tests and push.'}
+    marker.write_text(json.dumps(report, indent=2) + '\n')
     print(json.dumps(report, indent=2))
+
 
 if __name__ == '__main__':
     main()
