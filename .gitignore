@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+.DS_Store
+node_modules/
+.env
+.env.*
+!.env.example
+app/var/*
+!app/var/.gitkeep
+app/dist/
+app/Atlas_AI_Observatory_Preview.html
