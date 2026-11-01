@@ -1,56 +1,57 @@
 # Atlas — AI technology & safety observatory
 
-Public repository for Hazel's prepared Atlas app.
+## First working publication: research-first checkpoint
 
-**Deployment gate:** the complete app is published only when `index.html` exists
-at the root after a successful import. Creating this repository or installing the
-workflow alone does not upload the catalog or make the app live.
+The incremental approach has published a working research and safety interface, not merely a setup placeholder.
 
-## Finish the one-time package upload
+**Verified checkpoint URL:**
+https://rawcdn.githack.com/hazelfjeld/ai-atlas/2d5dac5607a054c4e591238bbd6817b3c2c15b37/index.html
 
-1. Download `Atlas_GitHub_GitHack_Ready.zip` from the ChatGPT conversation.
-2. Open https://github.com/hazelfjeld/ai-atlas/upload/main and upload the ZIP itself
-   at the repository root. Keep its original filename and commit to `main`.
-3. Check the **Import and publish approved Atlas package** run under Actions.
-   The workflow verifies the exact archive and every original file checksum,
-   imports all source and downloads, validates catalog counts, rebuilds the app,
-   runs the tests, and pushes the completed static app.
-
-No token, API key, account login, paid service, or GitHub Pages setting is needed
-in the app. GitHub may require you to enable Actions if you have disabled them.
-The importer accepts only the specific approved archive, not arbitrary ZIP files.
-
-## App address after successful publication
-
+**Moving main-branch URL:**
 https://raw.githack.com/hazelfjeld/ai-atlas/main/index.html
 
-The workflow summary also prints a commit-pinned `rawcdn.githack.com` address.
-GitHack can show a destination confirmation page or briefly cache an older file.
-This repository does not claim that either URL is live until the app is imported.
+The pinned URL serves the verified checkpoint; the main URL tracks later commits and can briefly cache older files. GitHack may show a destination-confirmation page first.
 
-## Preserved content
+### Published now
 
-- 300 technology profiles with strengths, tradeoffs, tags and reference links.
-- 1,345 dictionary concepts and 20 problem-based playbooks.
-- 30 paper records and 10 evidence-labeled safety report records.
-- Source registries, relationships, search, comparison, original spreadsheets,
-  database downloads, collectors, tests and editable application source.
+- 30 original seed paper records, with authors, dates, tags, summaries, caveats, original source links, review labels, and all original metadata.
+- 10 original safety report records, distinguishing incidents, misuse, controlled evaluations, research findings, and mitigation updates.
+- Keyword and topic search, report-type filtering, record dialogs, JSON exports, direct record links, and responsive desktop/phone layouts.
+- A publication progress view showing what is published versus merely prepared.
+- Eight independently committed data chunks, verified against the prepared snapshot byte-for-byte. The frontend checks SHA-256, byte counts, record counts, and duplicate IDs before presenting a complete catalog.
 
-These are starter collections, not exhaustive coverage. Automatic safety-paper
-collection and alert updates are **not active**. Unreviewed discoveries must not
-be labeled as confirmed incidents. No recurring safety-update job is installed.
+### Not yet published in this checkpoint
 
-On shared GitHack domains, notes/bookmarks are session-only; export them before
-closing or reloading. Never store secrets in the notebook or public repository.
+The 300 technology profiles, 1,345 dictionary concepts, 20 playbooks, original full-interface features, source registries, spreadsheets, and database downloads remain in the previously prepared conversation package. Their import is unfinished; they are not claimed as available on this site.
 
-## Development after import
+**Automatic safety and paper collection is OFF.** No recurring collection task is configured by this checkpoint. This is a curated seed snapshot, not every AI safety paper or incident. Prior review labels are preserved from the prepared dataset; publication is not a fresh source audit or independent replication.
+
+### Verification
+
+Published code commit: `2d5dac5607a054c4e591238bbd6817b3c2c15b37`.
+
+GitHub Actions run: https://github.com/hazelfjeld/ai-atlas/actions/runs/41361273376
+
+Both jobs passed: catalog integrity/JavaScript syntax, and live GitHack HTTP checks. The latter fetched HTML, CSS, JavaScript, the manifest, and all eight JSON chunks, requiring HTTP 200 and exact equality with the commit. HTML and JavaScript MIME types were also checked. These HTTP checks are not hosted-browser interaction tests.
+
+Separately, 16 offline browser checks passed using local fetch fixtures and a SHA-256 bridge: search, filters, dialogs, export, deep links, mobile layout, and corrupted-transfer handling. Localhost browser navigation was blocked by the test environment, so no local-HTTP or hosted-browser test is being claimed.
+
+## Development
+
+No build step or npm dependencies are required for this checkpoint.
 
 ```sh
-python3 scripts/build_site.py
-cd app
-npm test
+python3 -m http.server 8000
+python3 scripts/validate_checkpoint.py
+node --check checkpoint.js
 ```
 
-The old `publish.py` is an initial-new-repository helper; do not run it against
-this existing repository. Use ordinary commits/pushes for future changes. The
-original package README is preserved at `docs/ORIGINAL_PACKAGE_README.md`.
+Open http://localhost:8000/ in a modern browser. Use HTTPS when hosted. The read-only verification workflow runs on index updates or manual dispatch and uses standard hosted runners in this public repository.
+
+The manifest is `publication.json`; resume instructions are in `docs/INCREMENTAL_PUBLICATION.md`. Upload assets and verified chunks before switching the entry point. Do not overwrite new edits or call the full import complete before all expected catalogs are present.
+
+## Privacy and legacy import helpers
+
+This checkpoint stores no personal notes, bookmarks, account data, or API keys. Never place secrets in this public repository or on shared GitHack origins.
+
+The older `release/` helpers and import workflows are retained but are not the mechanism that published this checkpoint. Do not upload or run an older whole-package importer blindly: it may replace the current entry point. Reconcile current changes before importing the original full app.
