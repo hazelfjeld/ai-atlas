@@ -1,0 +1,52 @@
+name: Publish complete Atlas catalog
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'release/compact-manifest.json'
+      - 'release/publish_compact.py'
+      - 'release/catalog/**'
+      - 'release/frontend/**'
+      - '.github/workflows/publish-compact.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: atlas-compact-publication
+  cancel-in-progress: false
+jobs:
+  publish:
+    if: github.repository == 'hazelfjeld/ai-atlas'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out the authorized public repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: main
+          fetch-depth: 1
+      - name: Check whether the complete transfer is committed
+        id: ready
+        run: |
+          if test -f release/compact-manifest.json && test -f release/publish_compact.py; then
+            echo 'ready=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'ready=false' >> "$GITHUB_OUTPUT"
+            echo 'The transfer is not complete; no site has been published.'
+          fi
+      - name: Verify, restore, and test the original catalog and app
+        if: steps.ready.outputs.ready == 'true'
+        run: python3 release/publish_compact.py
+      - name: Publish the validated static application
+        if: steps.ready.outputs.ready == 'true'
+        run: |
+          set -eu
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html app.css app.js core.js data downloads tests docs release/published.json .nojekyll
+          if git diff --cached --quiet; then
+            echo 'The validated site is already up to date.'
+          else
+            git commit -m 'Publish complete Atlas app with validated catalogs and exports'
+            git push origin HEAD:main
+          fi
