@@ -10,7 +10,7 @@ import shutil
 import subprocess
 import tempfile
 
-from validate_checkpoint import validate
+import validate_checkpoint as checkpoint
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / 'dist/cloudflare'
@@ -35,7 +35,8 @@ def public_files():
     config = json.loads((ROOT / 'deploy/public-files.json').read_bytes())
     files = set(config['root_files'])
     actual_root = {p.name for pattern in ('*.html', '*.css', '*.js') for p in ROOT.glob(pattern)}
-    assert actual_root == files - {'publication.json'}, 'Update the explicit public root allowlist before publishing a new root asset'
+    declared_root = {name for name in files if Path(name).suffix in ('.html', '.css', '.js')}
+    assert actual_root == declared_root, 'Update the explicit public root allowlist before publishing a new root asset'
     publication = json.loads((ROOT / 'publication.json').read_bytes())
     batches = publication['files'] + [f for group in publication['extensions'].values() for f in group]
     for item in batches + publication['support_files']:
@@ -54,7 +55,7 @@ def public_files():
 
 
 def build(revision=None):
-    validation = validate()
+    validation = checkpoint.validate()
     head = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
     revision = revision or head
     assert revision == head and re.fullmatch('[0-9a-f]{40}', revision), 'Build must identify the checked-out commit'
@@ -73,6 +74,14 @@ def build(revision=None):
             target.parent.mkdir(parents=True, exist_ok=True)
             target.write_bytes(blob)
             metadata.append({'path': name, 'bytes': len(blob), 'sha256': sha(blob)})
+        # Recheck relative URLs against the package, not just the source checkout.
+        # This catches a newly linked asset that exists in Git but was not allowlisted.
+        source_root = checkpoint.ROOT
+        try:
+            checkpoint.ROOT = stage
+            checkpoint.validate_links()
+        finally:
+            checkpoint.ROOT = source_root
         # Keep literal .html routes and every hash route; only / is internally rewritten.
         (stage / '_redirects').write_bytes(b'/ /index.html 200\n')
         (stage / '_headers').write_bytes((f'/*\n  Cache-Control: public, max-age=0, must-revalidate\n  X-Content-Type-Options: nosniff\n  X-Atlas-Revision: {revision}\n').encode())
