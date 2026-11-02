@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="A short guided demonstration of the published Atlas AI research, safety, and playbook sections.">
+<title>Atlas — guided demo</title>
+<style>
+:root{color-scheme:light;--ink:#202a28;--muted:#59655f;--paper:#f6f5ef;--line:#d6dcd2;--green:#235e49}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.65 system-ui,-apple-system,sans-serif}main{max-width:1000px;margin:auto;padding:36px 24px 70px}a{color:var(--green);text-underline-offset:4px}a:focus-visible{outline:3px solid #b5741b;outline-offset:5px}.skip{position:absolute;left:12px;top:-90px;background:white;padding:12px}.skip:focus{top:12px}nav{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:20px}.brand{font-weight:800;letter-spacing:.15em;text-decoration:none}.eyebrow{text-transform:uppercase;letter-spacing:.13em;font-size:12px;font-weight:700;color:var(--green)}h1{font-size:clamp(34px,6vw,62px);line-height:1.1;letter-spacing:-.045em;margin:15px 0 24px}h2{font-size:22px;line-height:1.3;margin:10px 0}p{margin:12px 0}.lead{font-size:20px;max-width:740px;color:var(--muted)}header{padding:40px 0 24px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}article{padding:26px;background:white;border:1px solid var(--line);border-radius:14px;display:flex;flex-direction:column}article p{color:var(--muted)}.step{font-size:12px;letter-spacing:.09em;color:var(--green);font-weight:700}.go{margin-top:auto;padding-top:14px;font-weight:700}.note{padding:22px 25px;border-left:4px solid var(--green);background:#e9eee6;margin:28px 0}.muted,footer{color:var(--muted);font-size:14px}footer{border-top:1px solid var(--line);padding-top:20px;margin-top:32px}@media(max-width:650px){main{padding:24px 18px 50px}.grid{grid-template-columns:1fr}article{padding:21px}}@media print{body{background:white}main{max-width:none;padding:10px}header{padding:15px 0}.grid{display:block}article{break-inside:avoid;margin-bottom:12px}.skip{display:none}a{color:inherit}}
+</style>
+</head>
+<body>
+<a class="skip" href="#tour">Skip to the guided tour</a>
+<main>
+<nav aria-label="Demo navigation"><a class="brand" href="index.html">A. ATLAS</a><a href="index.html#coverage">Inspect this release's published inventory</a></nav>
+<header><p class="eyebrow">Guided demo · about 3 minutes</p><h1>From a question<br>to the evidence.</h1><p class="lead">A research workspace that brings AI safety papers, evidence-labeled reports, and practical engineering playbooks into one place.</p></header>
+<section class="note" aria-labelledby="opening"><h2 id="opening">A simple opening</h2><p>“I'm building Atlas as an AI learning and research hub. The goal is to move from a concept or concern to its sources, limitations, and a practical next step—not just collect headlines.”</p></section>
+<section id="tour" class="grid" aria-label="Four demonstration steps">
+<article><span class="step">01 / ASK A RESEARCH QUESTION</span><h2>Start with reward hacking.</h2><p>Search the paper library. Open a record and show its summary, limitations, review label, and link to the original paper.</p><p><strong>Point to make:</strong> the explanation and its evidence stay together.</p><a class="go" href="index.html#papers?q=reward">Open the research search →</a></article>
+<article><span class="step">02 / INSPECT A SAFETY CLAIM</span><h2>Keep the context attached.</h2><p>Open the safety observatory. Use the report-type filter, inspect a record's environment and timeline, and explain whether it describes a real-world report or a controlled evaluation.</p><p><strong>Point to make:</strong> a concerning demonstration is not automatically a confirmed deployment incident.</p><a class="go" href="index.html#alerts">Explore the safety reports →</a></article>
+<article><span class="step">03 / MAKE IT PRACTICAL</span><h2>Move from reading to a plan.</h2><p>Browse the engineering playbooks. Choose one related to the conversation and show its suggested approach, first step, validation plan, and tradeoffs.</p><p><strong>Point to make:</strong> the hub is intended to support experiments and decisions, not just definitions.</p><a class="go" href="playbooks.html">Open the problem playbooks →</a></article>
+<article><span class="step">04 / SHOW WHAT IS REAL</span><h2>Finish with an honest inventory.</h2><p>Open publication progress. It separates what is published from what is merely prepared. Use the counts in this release instead of quoting an old screenshot.</p><p><strong>Point to make:</strong> the catalog is incomplete, evidence labels have limits, and a scheduled development task is not a live research feed.</p><a class="go" href="index.html#coverage">Show publication progress →</a></article>
+</section>
+<section class="note" aria-labelledby="feedback"><h2 id="feedback">A useful question for your professors</h2><p>“Which evidence standard, learning feature, or evaluation would make this genuinely useful for your students or research?”</p></section>
+<p class="muted"><strong>Before presenting:</strong> open each step once on the device you will use. Keep a known-good commit-pinned GitHack link as a fallback. This guide is printable and needs no JavaScript; the catalog pages do require JavaScript and a network connection.</p>
+<footer>These links open sections in the same repository release. This guide adds no papers, changes no evidence labels, and does not activate automatic collection. <a href="https://github.com/hazelfjeld/ai-atlas" target="_blank" rel="noopener noreferrer">Inspect the source repository ↗</a></footer>
+</main>
+</body>
+</html>
