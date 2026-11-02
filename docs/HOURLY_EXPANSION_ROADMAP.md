@@ -1,5 +1,13 @@
 # AI Atlas — recurring expansion plan
 
+## November 2, 2026 — staged daily reports reviewed and edition revision 2
+
+- Added **two** previously deferred, individually source-checked stories to immutable `data/daily/editions/2026-11-02-v2.json`: SemiAnalysis's 11-domain GDPx controlled benchmark (top score **publisher-reported, unreplicated**), and WIRED's original report of 400+ linked app/domain properties with abusive deepfake features (**reported investigation**, not an Atlas independent reproduction). Three earlier release-note items are preserved, for **five** news cards total; no new catalog entries or confirmed deployment incidents.
+- Preserved v1, added v2 SHA-256/UTF-8 byte metadata to the dated archive and updated the source-batch receipt: **4 news** (Reuters) and **8 catalog proposals** remain explicitly deferred. Included a dated clarification that the original first-edition deployment checks subsequently passed. The collector's two failed source lookups remain visible. Source batch hash remains `2dcb25af14b960f9989527170fd88daf8ba2fb5f42dcff3b72f512b08ddb57d7`.
+- Release sequence: committed the immutable 11,127-byte v2 asset first at `9c49019fc8baf8c01221382bb56af3111a5fc42f`; archive/receipt index entry follows separately. **Do not mark v2 independently production-verified until the actual main deployment and browser jobs pass.** The last verified November 1 professor tour is still pinned at `839fee0`.
+- Stable baseline **1,705** records: 1,345 terms, 300 technologies, 20 playbooks, 30 papers, 10 safety reports; 1,345 stable term pages, 31 expanded guides. Next: verify the new revision on Cloudflare and GitHack, then review the four remaining news items and eight proposals with independent source checks and canonical catalog deduplication.
+
+
 ## First independently verified daily edition — November 2, 2026
 
 - **New live feature:** [dated first partial edition](https://aiupdates.app/whats-new.html?date=2026-11-02&revision=1) imported from staged batch `atlas-daily-20261102-first-0850ct-a` at source commit `da93e2fd5545cabc0b001310eab55bf8eeea9da8`. Source batch bytes 38,557 and SHA-256 `2dcb25af14b960f9989527170fd88daf8ba2fb5f42dcff3b72f512b08ddb57d7` verified before use.

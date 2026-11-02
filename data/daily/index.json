@@ -9,9 +9,17 @@
       "sha256": "1ac3f6212f7daf08ea75b4aa0767c91820ead562c0fc6438a5cb3f7ca14d6f6b",
       "bytes": 6350,
       "published_at": "2026-11-02T15:33:47.914Z"
+    },
+    {
+      "date": "2026-11-02",
+      "revision": 2,
+      "path": "data/daily/editions/2026-11-02-v2.json",
+      "sha256": "4ba024eaeddf8d7a9f5818f7a4b07e99dddd8dee6bc9f2d058efd0de0a8865dc",
+      "bytes": 11127,
+      "published_at": "2026-11-02T17:32:44.374Z"
     }
   ],
   "last_successful_publish_at": "2026-11-02T15:43:08Z",
-  "status": "first_reviewed_partial_edition_published",
-  "coverage_note": "First evidence-reviewed partial edition published and verified on Cloudflare. Three project-owned releases included; six additional news stories and eight technology/terminology proposals remain explicitly deferred for the next publisher run."
+  "status": "edition_revision_2_committed_awaiting_production_verification",
+  "coverage_note": "Nov 2 revision 2 adds source-checked GDPx benchmark and original WIRED investigation to the three verified software release items. This revision is pending new production verification; last_successful_publish_at still reflects the previously verified first edition. Four news and eight catalog proposals remain deferred; two collection source failures persist."
 }

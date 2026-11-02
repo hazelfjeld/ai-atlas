@@ -10,18 +10,18 @@
       "source_batch_sha256": "2dcb25af14b960f9989527170fd88daf8ba2fb5f42dcff3b72f512b08ddb57d7",
       "source_batch_bytes": 38557,
       "edition_date": "2026-11-02",
-      "validation_result": "checksum_schema_unique_ids_dates_and_three_primary_sources_verified",
-      "status": "partially_published_with_14_deferred_records",
-      "publication_outcome": "published_http_browser_and_githack_verified",
-      "publication_edition": "2026-11-02-v1",
+      "validation_result": "batch_sha256_bytes_schema_unique_ids_dates_verified_five_original_sources_reviewed_two_reports_qualified",
+      "status": "partially_published_with_12_deferred_records",
+      "publication_outcome": "revision_2_committed_pending_production_verification",
+      "publication_edition": "2026-11-02-v2",
       "accepted_news_ids": [
         "ai-news:vllm:v0.33.0rc3:2026-11-02",
         "ai-news:invokeai:v6.14.3:2026-11-01",
-        "ai-news:windmill:v1.856.0:2026-11-02"
+        "ai-news:windmill:v1.856.0:2026-11-02",
+        "ai-news:semianalysis:gdpx:launch-2026-11-02",
+        "ai-news:wired:disguised-deepfake-apps:2026-11-02"
       ],
       "deferred_news_ids": [
-        "ai-news:semianalysis:gdpx:launch-2026-11-02",
-        "ai-news:wired:disguised-deepfake-apps:2026-11-02",
         "ai-news:reuters:south-korea-ai-budget-2027:2026-11-02",
         "ai-news:reuters:adnoc-g42-openai-agreement:2026-11-02",
         "ai-news:reuters:ecb-ai-valuations-risk:2026-11-02",
@@ -39,20 +39,47 @@
       ],
       "rejected_ids": [],
       "counts": {
-        "news_published": 3,
+        "news_published": 5,
         "technology_added": 0,
         "term_added": 0,
-        "corrections": 0,
-        "news_deferred": 6,
+        "corrections": 1,
+        "news_deferred": 4,
         "catalog_deferred": 8
       },
-      "review_notes": "Do not treat this batch as fully processed: resume the deferred IDs from this receipt before treating its queue item as complete. Do not relabel pending proposals as published releases.",
+      "review_notes": "Revision v2 adds two independently source-opened news reports: SemiAnalysis GDPx publisher-run benchmark (12% unreplicated) and WIRED investigation (400+ linked app/domain properties, not independently reproduced by Atlas). Four Reuters news reports and five technology/three term proposals remain deferred. Earlier v1 immutable and last verified production metadata preserved.",
       "production_verified_at": "2026-11-02T15:43:08Z",
       "production_verified_revision": "4b3695fae330a792664cf4039c342bd63ed76a80",
       "production_workflow_run_id": 41473870650,
       "githack_workflow_run_id": 41473870546,
       "verification_scope": "Cloudflare validated 427 exact HTTP assets at each of three production hostnames, plus browser navigation and native Games; GitHack checks and static catalogs passed.",
-      "next_action": "Review deferred_news_ids and deferred_catalog_proposal_ids from the same immutable batch before marking it fully processed; retain this receipt to prevent duplicate edition and catalog publication."
+      "next_action": "Inspect actual main CI/deploy jobs and verify served v2 archive before advancing last_successful_publish_at. Review remaining four news IDs and eight catalog proposals in the same source receipt, preserving v1/v2 history.",
+      "revision_2_asset_commit": "9c49019fc8baf8c01221382bb56af3111a5fc42f",
+      "publication_history": [
+        {
+          "edition": "2026-11-02-v1",
+          "source_batch_sha256": "2dcb25af14b960f9989527170fd88daf8ba2fb5f42dcff3b72f512b08ddb57d7",
+          "news_published": 3,
+          "verified_at": "2026-11-02T15:43:08Z",
+          "production_commit": "4b3695fae330a792664cf4039c342bd63ed76a80",
+          "status": "cloudflare_http_browser_and_githack_verified"
+        },
+        {
+          "edition": "2026-11-02-v2",
+          "source_batch_sha256": "2dcb25af14b960f9989527170fd88daf8ba2fb5f42dcff3b72f512b08ddb57d7",
+          "news_published": 5,
+          "news_added_in_revision": 2,
+          "technologies_added": 0,
+          "terms_added": 0,
+          "clarifications": 1,
+          "asset_commit": "9c49019fc8baf8c01221382bb56af3111a5fc42f",
+          "published_at": "2026-11-02T17:32:44.374Z",
+          "status": "main_archive_committed_pending_production_checks",
+          "added_candidate_ids": [
+            "ai-news:semianalysis:gdpx:launch-2026-11-02",
+            "ai-news:wired:disguised-deepfake-apps:2026-11-02"
+          ]
+        }
+      ]
     }
   ]
 }

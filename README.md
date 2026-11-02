@@ -10,6 +10,9 @@ The original site is hosted at [aiupdates.app](https://aiupdates.app), also avai
 
 ## Daily editions — What's New Today
 
+**November 2 revision 2 (latest, awaiting deployment verification):** [view five source-reviewed headlines](https://aiupdates.app/whats-new.html?date=2026-11-02&revision=2) (three previously verified release notes, plus the publisher-run GDPx agent benchmark and WIRED's reported deepfake-app investigation). Two newly added reports are explicitly qualified as unreplicated benchmark results / original investigative reporting, not independently verified real-world incidents. Four other news items and eight catalog proposals remain deferred; no term or technology was added. [Revision 1](https://aiupdates.app/whats-new.html?date=2026-11-02&revision=1) is immutable. The latest verified deployment remains the earlier revision until new HTTP/browser jobs pass.
+
+
 [Open the first reviewed November 2 edition](https://aiupdates.app/whats-new.html?date=2026-11-02&revision=1)
 
 The homepage and navigation now feature the daily edition reader. Its five sections cover AI news, new technologies, new terms, updates in Atlas and corrections, with source links, category filters, explicit collection windows, a short TL;DR and immutable dated revisions. Publication checks require matching UTF-8 byte counts and SHA-256 digests. **The November 2 first partial edition is now live and independently verified** with three project-owned release-note reports (vLLM v0.33.0rc3, InvokeAI 6.14.3, and Windmill 1.856.0). Six news stories and eight technology/terminology proposals remain pending separate review; no new encyclopedia records or real-world incident findings are claimed; the site does not fabricate current news or claim a continuous website crawler. The separately scheduled research collector stages candidates, and the hourly publisher verifies and integrates accepted items. See `docs/DAILY_NEWS_PIPELINE.md` for schema and ownership.
