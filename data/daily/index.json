@@ -51,7 +51,7 @@
       "published_at": "2026-11-02T21:28:40.128Z"
     }
   ],
-  "last_successful_publish_at": "2026-11-02T21:05:16Z",
-  "status": "edition_revision_6_source_and_browser_checks_pending",
-  "coverage_note": "November 2 revision 6 preserves nine reviewed news stories, the seven deferred catalog proposals, two failed source lookups and all five preceding immutable revisions. A reader-only source-audit transparency improvement is recorded as an Atlas site change; production deployment verification is pending. Coverage remains partial and non-exhaustive."
+  "last_successful_publish_at": "2026-11-02T21:32:17Z",
+  "status": "edition_revision_6_cloudflare_http_browser_and_githack_verified",
+  "coverage_note": "The November 2 revision 6 source-audit improvement passed Cloudflare production browser and HTTP checks and exact GitHack/catalog checks. Nine reviewed news stories are retained; seven catalog proposals remain deferred, two source lookups failed, and coverage remains partial and non-exhaustive."
 }
