@@ -3586,8 +3586,8 @@
   },
   "MLD-0718": {
     "path": "terms/MLD-0718-mechanistic-interpretability.html",
-    "sha256": "c8d61e2b95d04d01be1ca9e093c527acebe70b56eb89b793ee405df2185b12ae",
-    "expanded": false
+    "sha256": "3014d261e2b62c8b5cdb1a3e6341505962689e27ba9004a582699d52dc9a72d3",
+    "expanded": true
   },
   "MLD-0719": {
     "path": "terms/MLD-0719-median-absolute-error.html",
@@ -5006,8 +5006,8 @@
   },
   "MLD-1002": {
     "path": "terms/MLD-1002-red-teaming.html",
-    "sha256": "bbd8212f9a65de87d6513b888a110b63f9f1c5f92b9b11d2955bb157416cc526",
-    "expanded": false
+    "sha256": "3ee57a61f7049d10e20a59f7d5fe8fe58c957c61bb4777fc774a4fb622d1a00b",
+    "expanded": true
   },
   "MLD-1003": {
     "path": "terms/MLD-1003-reduce-scatter.html",
