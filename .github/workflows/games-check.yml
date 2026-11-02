@@ -55,19 +55,25 @@ jobs:
       - name: Verify public GitHack game assets
         run: |
           python3 - <<'PY'
-          import hashlib, pathlib, subprocess, urllib.request, time
+          import hashlib, pathlib, subprocess, urllib.request, urllib.error, time
           sha = subprocess.check_output(['git','rev-parse','HEAD'], text=True).strip()
           base = 'https://rawcdn.githack.com/hazelfjeld/ai-atlas/' + sha + '/'
           for name in ['games.html','games.css','games.js','games-core.js','core.js','catalog-loader.js','index.html']:
               for attempt in range(3):
                   try:
-                      with urllib.request.urlopen(base + name, timeout=30) as response:
+                      request = urllib.request.Request(base + name, headers={'User-Agent': 'Atlas-publication-integrity-check/1.0'})
+                      with urllib.request.urlopen(request, timeout=30) as response:
                           assert response.status == 200
                           body = response.read()
                       assert body == pathlib.Path(name).read_bytes(), name
                       print('PUBLIC BYTES VERIFIED', name, hashlib.sha256(body).hexdigest(), flush=True)
                       break
-                  except Exception:
+                  except urllib.error.HTTPError as error:
+                      print('Public delivery failure:', name, error.code, error.read(1000).decode('utf-8', errors='replace'), flush=True)
+                      if attempt == 2 or error.code in (401, 403): raise
+                      time.sleep(3)
+                  except Exception as error:
+                      print('Verification failure:', name, type(error).__name__, str(error), flush=True)
                       if attempt == 2: raise
                       time.sleep(3)
           print('Verified game URL:', base + 'games.html')
