@@ -80,3 +80,10 @@ test('Agent evaluation and capability failure guides distinguish objectives, ski
     for (const pattern of patterns) assert.match(body, pattern, 'Missing evidence boundary ' + id);
   }
 });
+
+test('Latest encyclopedia review date derives from guide evidence, not a hardcoded day', () => {
+  const publication = JSON.parse(fs.readFileSync(path.join(root, 'publication.json'), 'utf8'));
+  const latest = Object.values(guides).map(g => g.reviewed_on).sort().at(-1);
+  assert.equal(publication.encyclopedia.reviewed_on, latest);
+  assert.equal(publication.encyclopedia.detailed_page_count, Object.keys(guides).length);
+});
