@@ -165,5 +165,26 @@ function permalink(entry){
  assert(entry&&validDate(entry.date)&&Number.isSafeInteger(entry.revision)&&entry.revision>=1,'Invalid edition permalink');
  return 'whats-new.html?date='+encodeURIComponent(entry.date)+'&revision='+entry.revision;
 }
-return {KINDS,matchesTopic,matchesQuery,validDate,validTimestamp,chicagoDate,safeSource,safeCatalogPath,validateIndex,validateEdition,selection,fallbackOrder,revisionDiff,requestedEdition,permalink};
+// Filters are an optional view onto a separately SHA-verified immutable edition.
+// Invalid, repeated and overlong URL parameters fail closed to unfiltered values.
+function viewFilters(search=''){
+ const p=new URLSearchParams(typeof search==='string'?(search.startsWith('?')?search.slice(1):search):'');
+ const one=key=>p.getAll(key).length===1?p.get(key):null;
+ const section=one('section'),topic=one('topic'),query=one('q');
+ return {
+  section:section==='all'||KINDS.includes(section)?section:'all',
+  topic:topic==='all'||Object.prototype.hasOwnProperty.call(TOPIC_ALIASES,topic)?topic:'all',
+  query:typeof query==='string'&&query.length<=120?query.trim():''
+ };
+}
+function filterPermalink(entry,filters={}){
+ const p=new URLSearchParams(permalink(entry).split('?')[1]);
+ const section=filters.section,topic=filters.topic;
+ const query=typeof filters.query==='string'?filters.query.trim().slice(0,120):'';
+ if(KINDS.includes(section))p.set('section',section);
+ if(Object.prototype.hasOwnProperty.call(TOPIC_ALIASES,topic))p.set('topic',topic);
+ if(query)p.set('q',query);
+ return 'whats-new.html?'+p.toString();
+}
+return {KINDS,matchesTopic,matchesQuery,validDate,validTimestamp,chicagoDate,safeSource,safeCatalogPath,validateIndex,validateEdition,selection,fallbackOrder,revisionDiff,requestedEdition,permalink,viewFilters,filterPermalink};
 });

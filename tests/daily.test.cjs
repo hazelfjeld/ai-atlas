@@ -125,12 +125,33 @@ test('Permanent dated archive links select exact immutable revisions without exp
  assert.equal(D.permalink(entry('2026-11-01',2)),'whats-new.html?date=2026-11-01&revision=2');
  assert.throws(()=>D.permalink({date:'2026-11-31',revision:1}),/Invalid edition permalink/);
 });
+test('Shareable daily links restore verified edition filters without trusting arbitrary URL parameters',()=>{
+ const selected=entry('2026-11-02',7);
+ const url=D.filterPermalink(selected,{section:'news',topic:'safety',query:'  AI agent  '});
+ assert.equal(url,'whats-new.html?date=2026-11-02&revision=7&section=news&topic=safety&q=AI+agent');
+ assert.deepEqual(D.viewFilters(url.slice(url.indexOf('?'))),{section:'news',topic:'safety',query:'AI agent'});
+ assert.deepEqual(D.viewFilters('?section=bad&topic=invalid&q='+('a'.repeat(121))),{section:'all',topic:'all',query:''});
+ assert.deepEqual(D.viewFilters('?section=news&section=terms&topic=research&topic=safety&q=a&q=b'),{section:'all',topic:'all',query:''});
+ assert.equal(D.filterPermalink(selected,{section:'nonsense',topic:'unknown',query:''}),D.permalink(selected));
+ assert.equal(D.filterPermalink(selected,{section:'news',topic:'tools',query:''}),D.permalink(selected)+'&section=news&topic=tools');
+ assert.equal(D.viewFilters('?q=%3Cscript%3E').query,'<script>'); // Only rendered as literal text by the reader.
+});
+test('Reader changes the visible permalink only for a successfully integrity-verified edition',()=>{
+ const script=fs.readFileSync('whats-new.js','utf8');
+ assert.match(script,/if\(!edition\|\|!active\)return/);
+ assert.match(script,/window\.history\.replaceState\(null,'',link\)/);
+ assert.match(script,/const filters=C\.viewFilters\(window\.location\.search\)/);
+ assert.match(script,/syncVerifiedUrl\(\)/);
+ assert.match(script,/Keeping the previously verified/);
+});
+
 test('Dated permalink only appears for a hash-verified edition; failed selection retains verified link',()=>{
  const html=fs.readFileSync('whats-new.html','utf8'),js=fs.readFileSync('whats-new.js','utf8');
  assert.match(html,/id="edition-permalink-wrap"[^>]* hidden/);
  assert.match(html,/id="edition-permalink"/);
  assert.match(js,/requestedEdition\(index,window\.location\.search,today\)/);
- assert.match(js,/edition-permalink'\)\.href=C\.permalink\(entry\)/);
+ assert.match(js,/edition-permalink'\)\.href=link/);
+ assert.match(js,/syncVerifiedUrl\(\)/);
  assert.match(js,/edition-permalink-wrap'\)\.hidden=false/);
  assert.match(js,/edition-permalink-wrap'\)\.hidden=true/);
  assert.match(js,/requested future-dated edition is not yet available/);

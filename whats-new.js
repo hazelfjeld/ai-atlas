@@ -19,6 +19,17 @@ function element(tag,text,cls){
  return e;
 }
 function status(text){$('edition-status').textContent=text;}
+function currentFilters(){
+ return {section:$('section-filter').value,topic:$('topic-filter').value,query:$('edition-search').value};
+}
+function syncVerifiedUrl(){
+ // Never promote an unverified or failed archive selection into the address bar.
+ if(!edition||!active)return;
+ const link=C.filterPermalink(active,currentFilters());
+ $('edition-permalink').href=link;
+ try{window.history.replaceState(null,'',link);}
+ catch(_){/* Some embedded previews forbid URL changes; the share link remains valid. */}
+}
 function humanDate(s){
  if(!s)return 'Not reported';
  const d=new Date(/^\d{4}-\d{2}-\d{2}$/.test(s)?s+'T12:00:00Z':s);
@@ -181,6 +192,7 @@ function render(){
  }
  $('filter-results').textContent='Showing '+visible+' of '+total+' records in the selected collection'+(topic!=='all'||query.trim()?' matching your filters.':'.');
  if(!visible&&(topic!=='all'||query.trim()))content.append(element('div','No entries match those filters. Try a broader topic or search. This is not a claim that no AI news occurred.','empty'));
+ syncVerifiedUrl();
 }
 async function request(path){
  const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),18000);
@@ -207,7 +219,6 @@ async function switchEdition(entry){
   const e=await readEdition(entry);
   if(requestEpoch!==switchEpoch)return; // Ignore late responses from superseded archive selections.
   edition=e;active=entry;
-  $('edition-permalink').href=C.permalink(entry);
   $('edition-permalink-wrap').hidden=false;
   $('date-display').textContent=humanDate(entry.date);
   metadata();sourceCoverage();render();
@@ -248,6 +259,10 @@ function populateArchive(selected){
 async function start(){
  if(!C){status('Daily reader failed to initialize.');return;}
  const today=C.chicagoDate();$('date-display').textContent=humanDate(today);
+ const filters=C.viewFilters(window.location.search);
+ $('section-filter').value=filters.section;
+ $('topic-filter').value=filters.topic;
+ $('edition-search').value=filters.query;
  try{
   index=C.validateIndex(decode(await request('data/daily/index.json')));
   const requested=C.requestedEdition(index,window.location.search,today);
