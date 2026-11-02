@@ -11,9 +11,9 @@
       "source_batch_bytes": 38557,
       "edition_date": "2026-11-02",
       "validation_result": "batch_sha256_bytes_schema_unique_ids_dates_verified_nine_source_lookups_four_reuters_reports_explicitly_qualified",
-      "status": "partially_published_with_8_deferred_catalog_proposals",
-      "publication_outcome": "revision_3_production_http_browser_and_githack_verified",
-      "publication_edition": "2026-11-02-v3",
+      "status": "partially_published_with_7_deferred_catalog_proposals",
+      "publication_outcome": "revision_4_site_change_pending_separate_production_verification;_vllm_profile_verified_on_prior_main_commit",
+      "publication_edition": "2026-11-02-v4",
       "accepted_news_ids": [
         "ai-news:vllm:v0.33.0rc3:2026-11-02",
         "ai-news:invokeai:v6.14.3:2026-11-01",
@@ -27,7 +27,6 @@
       ],
       "deferred_news_ids": [],
       "deferred_catalog_proposal_ids": [
-        "tech-proposal:vllm:2026-11-02-rc3",
         "tech-proposal:invokeai:2026-11-02",
         "tech-proposal:gdpx:2026-11-02",
         "tech-proposal:nvidia-auto-ontology:2026-11-02",
@@ -43,15 +42,16 @@
         "term_added": 0,
         "corrections": 1,
         "news_deferred": 0,
-        "catalog_deferred": 8
+        "catalog_deferred": 7,
+        "technology_updated": 1
       },
-      "review_notes": "Revision v2 adds two independently source-opened news reports: SemiAnalysis GDPx publisher-run benchmark (12% unreplicated) and WIRED investigation (400+ linked app/domain properties, not independently reproduced by Atlas). Four Reuters news reports and five technology/three term proposals remain deferred. Earlier v1 immutable and last verified production metadata preserved.\nRevision 3 (Nov 2): checked all four remaining original Reuters reports and published qualified reporting on budget proposal, enterprise agreement, financial-stability warning and planned financing. They are not independently verified outcomes. Eight catalog proposals remain deferred; no new terms, technologies or incidents were added.\nRevision 3 production verification completed November 2 at 19:38:35 UTC. Immutable edition remains unchanged; index/receipt record the verified deployment outcome.",
+      "review_notes": "Revision v2 adds two independently source-opened news reports: SemiAnalysis GDPx publisher-run benchmark (12% unreplicated) and WIRED investigation (400+ linked app/domain properties, not independently reproduced by Atlas). Four Reuters news reports and five technology/three term proposals remain deferred. Earlier v1 immutable and last verified production metadata preserved.\nRevision 3 (Nov 2): checked all four remaining original Reuters reports and published qualified reporting on budget proposal, enterprise agreement, financial-stability warning and planned financing. They are not independently verified outcomes. Eight catalog proposals remain deferred; no new terms, technologies or incidents were added.\nRevision 3 production verification completed November 2 at 19:38:35 UTC. Immutable edition remains unchanged; index/receipt record the verified deployment outcome.\nRevision 4 (Nov 2): reviewed existing vLLM TECH-0288 against the first-party GitHub tag metadata/release notes, with CUDA 13/ROCm caveats and unreplicated benchmark notes. Preserved the original 300-record catalog and offline snapshot by adding a SHA-256-verified release-annotation overlay. The visible static technology profile and compact directory passed the prior production/githack checks for e55b261; site-change archive v4 awaiting its own deployment verification. Seven unrelated proposals remain deferred.",
       "production_verified_at": "2026-11-02T17:37:12Z",
       "production_verified_revision": "2c7ea22f2dac1013e120415c47ce89632675e79b",
       "production_workflow_run_id": 41511382403,
       "githack_workflow_run_id": 41511382421,
       "verification_scope": "Commit 40c6a7b: 81 Node tests; full catalog and hash checks; reproducible offline/term pages; GitHack exact byte verification; Cloudflare 429 served assets checked on each of three production hostnames; real hosted archive, mobile, desktop, Quiz/Match, flashcards and offline browser tests.",
-      "next_action": "Review the eight remaining catalog technology and glossary proposals against existing 1,705 records and first-party evidence before any actual catalog imports. Preserve dated editions and pinned professor demo.",
+      "next_action": "After verifying v4 publication, inspect the seven deferred technology and term proposals against source evidence and canonical catalog IDs; retain original immutable Nov 2 revisions and preserved professor demo.",
       "revision_2_asset_commit": "9c49019fc8baf8c01221382bb56af3111a5fc42f",
       "publication_history": [
         {
@@ -102,11 +102,41 @@
           "verified_at": "2026-11-02T19:38:35Z",
           "production_workflow_run_id": 41511382403,
           "githack_workflow_run_id": 41511382421
+        },
+        {
+          "edition": "2026-11-02-v4",
+          "source_batch_sha256": "2dcb25af14b960f9989527170fd88daf8ba2fb5f42dcff3b72f512b08ddb57d7",
+          "news_published": 9,
+          "news_added_in_revision": 0,
+          "technology_profile_updated": 1,
+          "technologies_added": 0,
+          "terms_added": 0,
+          "site_changes_added_in_revision": 1,
+          "source_review_asset_commit": "e55b261b810d18a305102fa5207d5bf8c2168fbd",
+          "published_at": "2026-11-02T20:44:28.274Z",
+          "status": "archive_commit_and_production_validation_pending",
+          "source_proposal_id": "tech-proposal:vllm:2026-11-02-rc3"
         }
       ],
       "production_commit": "40c6a7bbba5f4016f2e230685c92261161f63088",
       "last_verified_public_url": "https://aiupdates.app/whats-new.html?date=2026-11-02&revision=3",
-      "last_verified_at": "2026-11-02T19:38:35Z"
+      "last_verified_at": "2026-11-02T19:38:35Z",
+      "accepted_catalog_update_ids": [
+        "tech-proposal:vllm:2026-11-02-rc3"
+      ],
+      "accepted_catalog_update_records": [
+        {
+          "proposal_id": "tech-proposal:vllm:2026-11-02-rc3",
+          "catalog_id": "TECH-0288",
+          "release_annotation_path": "content/technology-release-updates.json",
+          "catalog_path": "technology/TECH-0288-vllm.html",
+          "source_url": "https://github.com/vllm-project/vllm/releases/tag/v0.33.0rc3",
+          "source_published_at": "2026-11-02T10:10:05Z",
+          "editorial_reviewed_on": "2026-11-02",
+          "type": "update_existing_profile_not_new_technology",
+          "latest_verified_site_commit": "e55b261b810d18a305102fa5207d5bf8c2168fbd"
+        }
+      ]
     }
   ]
 }

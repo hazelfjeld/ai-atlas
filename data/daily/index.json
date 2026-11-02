@@ -25,9 +25,17 @@
       "sha256": "94a96bde54cf1d467e074f6f19c1c7dd0812f6f08bf3804a110e68e3bf409890",
       "bytes": 18581,
       "published_at": "2026-11-02T19:35:32.153Z"
+    },
+    {
+      "date": "2026-11-02",
+      "revision": 4,
+      "path": "data/daily/editions/2026-11-02-v4.json",
+      "sha256": "b42e752e2986f9395a90b91b75c6a2ac6dc2a48b1130eab6876a0c09f9650546",
+      "bytes": 19612,
+      "published_at": "2026-11-02T20:44:28.274Z"
     }
   ],
   "last_successful_publish_at": "2026-11-02T19:38:35Z",
-  "status": "edition_revision_3_production_verified",
-  "coverage_note": "Nine individually source-checked November 2 stories in immutable revision 3: three project-owned release notes, one publisher-run benchmark, one reported investigation and four Reuters-attributed reported proposals/announcements/assessments. Eight term/technology proposals remain deferred; no catalog records added. Two source lookups failed. Full production HTTP/browser/GitHack tests passed; collection is partial and scheduled, never continuous."
+  "status": "edition_revision_4_site_update_publication_verification_pending",
+  "coverage_note": "Nine source-reviewed news stories are unchanged in immutable Nov 2 revision 4. A dated, first-party vLLM release review was added to the existing profile and is recorded under Updated in Atlas; this is not a new technology or a new real-world event. Seven catalog proposals remain deferred. Two source lookups failed; source coverage is partial, non-exhaustive and scheduled."
 }

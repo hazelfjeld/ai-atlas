@@ -1,5 +1,14 @@
 # AI Atlas — recurring expansion plan
 
+## November 2, 2026 — first vetted technology update and revision 4
+
+- **Reviewed and linked:** the staged vLLM update attaches a first-party GitHub release-note review to existing `TECH-0288`; see `technology/TECH-0288-vllm.html`. GitHub tag `v0.33.0rc3` is titled `v0.33.0` and marked non-prerelease; no `v0.33.0` tag was found in the API. CUDA 13, ROCm, PyTorch and speculative decoding are qualified; performance results were not reproduced by Atlas.
+- **Integrity design:** `content/technology-release-updates.json` is 1,984 bytes, SHA-256 `bce8af000eb5b765177ebb62ca7b5be09b3931679152ee7d59cc5e0faebd4e2c`. Static profile generation, the compact searchable technology directory and publication validation read this separate pinned overlay; the prepared 300 catalog records, approved SQLite and original offline fallback remain byte-identical. All 1,705 records and 1,345 direct term pages remain.
+- **Verified prior release:** [source review and static technology update e55b261](https://github.com/hazelfjeld/ai-atlas/commit/e55b261b810d18a305102fa5207d5bf8c2168fbd) passed [main GitHack integrity jobs](https://github.com/hazelfjeld/ai-atlas/actions/runs/41521340971) and [Cloudflare production browser/deployment verification](https://github.com/hazelfjeld/ai-atlas/actions/runs/41521341083). The immutable Nov 2 daily archive revision 4 records this as an **Atlas site change**, not a new technology launch; final v4 deployment confirmation must be checked separately.
+- **Source queue:** one immutable staged batch; nine news reports remain in the edition, no newly cataloged technology or term, **one existing technology annotated**, seven proposals deferred. Two source lookups failed; no new confirmed safety incident. This is a scheduled partial publication, not a live feed.
+- **Next:** after v4 succeeds, independently source-review the seven deferred proposals, preserve dated archives/receipts and prioritize quality rather than adding unverified inventory. The known-good pinned professor tour `839fee0` remains unchanged.
+
+
 ## November 2, 2026 — reviewed all nine first-batch news stories (revision 3)
 
 - **Published and verified:** [November 2 daily edition revision 3](https://aiupdates.app/whats-new.html?date=2026-11-02&revision=3) includes **nine** source-reviewed news cards: three first-party software release notes, the unreplicated GDPx publisher benchmark, a WIRED-reported investigation, and four newly source-checked Reuters reports. The Reuters cards distinguish proposed Korean spending, an announced OpenAI enterprise deal, an ECB official's risk assessment, and Oracle's planned debt/equity financing from completed outcomes. No independent real-world incident claim was added.
