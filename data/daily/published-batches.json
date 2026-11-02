@@ -10,23 +10,22 @@
       "source_batch_sha256": "2dcb25af14b960f9989527170fd88daf8ba2fb5f42dcff3b72f512b08ddb57d7",
       "source_batch_bytes": 38557,
       "edition_date": "2026-11-02",
-      "validation_result": "batch_sha256_bytes_schema_unique_ids_dates_verified_five_original_sources_reviewed_two_reports_qualified",
-      "status": "partially_published_with_12_deferred_records",
-      "publication_outcome": "revision_2_production_http_browser_and_githack_verified",
-      "publication_edition": "2026-11-02-v2",
+      "validation_result": "batch_sha256_bytes_schema_unique_ids_dates_verified_nine_source_lookups_four_reuters_reports_explicitly_qualified",
+      "status": "partially_published_with_8_deferred_catalog_proposals",
+      "publication_outcome": "revision_3_committed_awaiting_production_verification",
+      "publication_edition": "2026-11-02-v3",
       "accepted_news_ids": [
         "ai-news:vllm:v0.33.0rc3:2026-11-02",
         "ai-news:invokeai:v6.14.3:2026-11-01",
         "ai-news:windmill:v1.856.0:2026-11-02",
         "ai-news:semianalysis:gdpx:launch-2026-11-02",
-        "ai-news:wired:disguised-deepfake-apps:2026-11-02"
-      ],
-      "deferred_news_ids": [
+        "ai-news:wired:disguised-deepfake-apps:2026-11-02",
         "ai-news:reuters:south-korea-ai-budget-2027:2026-11-02",
         "ai-news:reuters:adnoc-g42-openai-agreement:2026-11-02",
         "ai-news:reuters:ecb-ai-valuations-risk:2026-11-02",
         "ai-news:reuters:oracle-ai-financing-plan:2026-11-02"
       ],
+      "deferred_news_ids": [],
       "deferred_catalog_proposal_ids": [
         "tech-proposal:vllm:2026-11-02-rc3",
         "tech-proposal:invokeai:2026-11-02",
@@ -39,20 +38,20 @@
       ],
       "rejected_ids": [],
       "counts": {
-        "news_published": 5,
+        "news_published": 9,
         "technology_added": 0,
         "term_added": 0,
         "corrections": 1,
-        "news_deferred": 4,
+        "news_deferred": 0,
         "catalog_deferred": 8
       },
-      "review_notes": "Revision v2 adds two independently source-opened news reports: SemiAnalysis GDPx publisher-run benchmark (12% unreplicated) and WIRED investigation (400+ linked app/domain properties, not independently reproduced by Atlas). Four Reuters news reports and five technology/three term proposals remain deferred. Earlier v1 immutable and last verified production metadata preserved.",
+      "review_notes": "Revision v2 adds two independently source-opened news reports: SemiAnalysis GDPx publisher-run benchmark (12% unreplicated) and WIRED investigation (400+ linked app/domain properties, not independently reproduced by Atlas). Four Reuters news reports and five technology/three term proposals remain deferred. Earlier v1 immutable and last verified production metadata preserved.\nRevision 3 (Nov 2): checked all four remaining original Reuters reports and published qualified reporting on budget proposal, enterprise agreement, financial-stability warning and planned financing. They are not independently verified outcomes. Eight catalog proposals remain deferred; no new terms, technologies or incidents were added.",
       "production_verified_at": "2026-11-02T17:37:12Z",
       "production_verified_revision": "2c7ea22f2dac1013e120415c47ce89632675e79b",
       "production_workflow_run_id": 41492473038,
       "githack_workflow_run_id": 41492473100,
       "verification_scope": "Latest tested main 2c7ea22: 80 JS tests and catalog/reproducibility checks; GitHack exact byte equivalence; Cloudflare production verified 428 non-term assets each on aiupdates.app, www.aiupdates.app and workers.dev, plus real hosted browser site/rebrand/native Games and offline fallback checks.",
-      "next_action": "Process four deferred Reuters news candidates and eight catalog proposals from original staged batch, validating primary evidence and existing canonical catalog IDs before any imports. Preserve both immutable Nov 2 editions and the verified 839fee0 professor demo.",
+      "next_action": "Review the eight remaining catalog technology and glossary proposals against existing 1,705 records and first-party evidence before any actual catalog imports. Preserve dated editions and pinned professor demo.",
       "revision_2_asset_commit": "9c49019fc8baf8c01221382bb56af3111a5fc42f",
       "publication_history": [
         {
@@ -82,6 +81,23 @@
           "production_commit": "2c7ea22f2dac1013e120415c47ce89632675e79b",
           "production_workflow_run_id": 41492473038,
           "githack_workflow_run_id": 41492473100
+        },
+        {
+          "edition": "2026-11-02-v3",
+          "source_batch_sha256": "2dcb25af14b960f9989527170fd88daf8ba2fb5f42dcff3b72f512b08ddb57d7",
+          "news_published": 9,
+          "news_added_in_revision": 4,
+          "technologies_added": 0,
+          "terms_added": 0,
+          "asset_commit": null,
+          "published_at": "2026-11-02T19:35:32.153Z",
+          "status": "content_committed_awaiting_cloudflare_githack_browser_verification",
+          "added_candidate_ids": [
+            "ai-news:reuters:south-korea-ai-budget-2027:2026-11-02",
+            "ai-news:reuters:adnoc-g42-openai-agreement:2026-11-02",
+            "ai-news:reuters:ecb-ai-valuations-risk:2026-11-02",
+            "ai-news:reuters:oracle-ai-financing-plan:2026-11-02"
+          ]
         }
       ]
     }

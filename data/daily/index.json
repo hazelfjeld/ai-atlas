@@ -17,9 +17,17 @@
       "sha256": "4ba024eaeddf8d7a9f5818f7a4b07e99dddd8dee6bc9f2d058efd0de0a8865dc",
       "bytes": 11127,
       "published_at": "2026-11-02T17:32:44.374Z"
+    },
+    {
+      "date": "2026-11-02",
+      "revision": 3,
+      "path": "data/daily/editions/2026-11-02-v3.json",
+      "sha256": "94a96bde54cf1d467e074f6f19c1c7dd0812f6f08bf3804a110e68e3bf409890",
+      "bytes": 18581,
+      "published_at": "2026-11-02T19:35:32.153Z"
     }
   ],
   "last_successful_publish_at": "2026-11-02T17:37:12Z",
-  "status": "edition_revision_2_production_verified",
-  "coverage_note": "Five reviewed Nov 2 stories in immutable revision 2 (three release notes, one publisher-run benchmark, one original journalistic investigation). Partial coverage: four news and eight catalog proposals remain deferred; two collector sources failed. Cloudflare and GitHack validation completed on Nov 2; publication is scheduled/static, not continuous."
+  "status": "revision_3_editorially_checked_awaiting_production_verification",
+  "coverage_note": "Nine source-checked November 2 reports (including four qualified Reuters reports) in immutable revision 3. Eight catalog proposals remain deferred, with no new term or technology records. Two collector source lookups failed. Awaiting independent production verification; the prior last-successful-publish time remains unchanged."
 }
