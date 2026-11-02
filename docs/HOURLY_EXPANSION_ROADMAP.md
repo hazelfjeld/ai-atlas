@@ -1,5 +1,14 @@
 # AI Atlas — recurring expansion plan
 
+## Daily archive integrity and verified-revision fallback — November 2, 2026
+
+- The daily staging index remains empty and main has zero publication receipts. No real-world news, technology or terms were invented; the existing 1,705-record baseline, 1,345 linked term pages and 23 expanded guides remain unchanged.
+- Reject impossible source/event dates, offset timestamps, mismatched archive publication times, unsafe source-health links and unsourced news items at the static-reader validation boundary. Keep archive SHA-256 and byte checks mandatory.
+- When the newest daily edition fails verification, attempt up to three older immutable editions, always under their actual Chicago calendar date. Never show future-dated editions as today's news. An unsuccessful manual selection retains the already verified edition instead of blanking it.
+- The old professor demonstration at commit 839fee0 remains the recoverable, commit-pinned presentation checkpoint. These changes require confirmation from the exact main-commit CI jobs and production HTTP/browser checks before being described as verified.
+- Next run: check staging first, then source-review further explanatory guides if no batch exists.
+
+
 ## Daily archive link and source-coverage reliability — November 2, 2026
 
 - Publisher intake checked first: `atlas-daily-staging/daily-queue/index.json` contained zero batches; `data/daily/published-batches.json` contained zero receipts. Do not call the empty queue a day with no AI news.

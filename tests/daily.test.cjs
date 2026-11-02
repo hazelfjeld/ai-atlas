@@ -98,3 +98,13 @@ test('Fallback only includes dated editions on or before actual Chicago today',(
  'data/daily/editions/2026-11-01-v1.json',
  'data/daily/editions/2026-10-31-v1.json']);
 });
+
+test('Archive recovery retains verified content after a failed manual selection and checks previous revisions',()=>{
+ const js=fs.readFileSync('whats-new.js','utf8');
+ assert.match(js,/if\(edition&&active\)/);
+ assert.match(js,/Keeping the previously verified/);
+ assert.match(js,/for\(const entry of candidates\.slice\(0,4\)\)/);
+ assert.match(js,/if\(await switchEdition\(entry\)\)/);
+ assert.match(js,/No unverified news is shown/);
+ assert.match(js,/select\.disabled=true/);
+});

@@ -150,17 +150,25 @@ async function switchEdition(entry){
   const caveat=e.coverage.status==='complete'?'':' · source coverage '+e.coverage.status;
   status(prefix+' · published '+stamp(entry.published_at)+caveat+'. AI coverage is curated, not exhaustive.');
   $('edition-select').value=entry.path;
+  return true;
  }catch(err){
-  if(requestEpoch!==switchEpoch)return;
-  edition=null;active=null;metadata();sourceCoverage();$('edition-summary').hidden=true;
-  $('edition-content').replaceChildren(element('div','Edition verification failed. The last known-good catalog remains available through Atlas.','empty'));
-  status('Cannot display this edition: '+err.message);
+  if(requestEpoch!==switchEpoch)return false;
+  if(edition&&active){
+   // Never erase an earlier integrity-verified edition after a failed archive selection.
+   $('edition-select').value=active.path;
+   status('Could not verify '+humanDate(entry.date)+': '+err.message+'. Keeping the previously verified '+humanDate(active.date)+' edition; unverified records were not displayed.');
+  }else{
+   edition=null;active=null;metadata();sourceCoverage();$('edition-summary').hidden=true;
+   $('edition-content').replaceChildren(element('div','Edition verification failed. No daily records passed validation; the evergreen catalog remains available.','empty'));
+   status('Cannot display this edition: '+err.message);
+  }
+  return false;
  }
 }
 function populateArchive(selected){
  const select=$('edition-select');
  select.replaceChildren();
- const archive=C.selection(index).archive;
+ const archive=C.fallbackOrder(index);
  if(!archive.length){select.add(new Option('Awaiting first edition',''));select.disabled=true;return;}
  select.disabled=false;
  for(const item of archive){
@@ -174,15 +182,28 @@ async function start(){
  const today=C.chicagoDate();$('date-display').textContent=humanDate(today);
  try{
   index=C.validateIndex(decode(await request('data/daily/index.json')));
-  const found=C.selection(index,today);
-  const chosen=found.todayEntry||found.latest;
+  const candidates=C.fallbackOrder(index,today);
   metadata();
-  if(!chosen){
-   status('Awaiting the first reviewed daily edition for '+humanDate(today)+'. No headlines have been published yet.');
-   populateArchive(null);return;
+  if(!candidates.length){
+   status(index.editions.length?'Awaiting a verified edition dated on or before '+humanDate(today)+'. Future-dated editions are not displayed.':'Awaiting the first reviewed daily edition for '+humanDate(today)+'. No headlines have been published yet.');
+   $('edition-select').replaceChildren(new Option('Awaiting verified edition',''));
+   $('edition-select').disabled=true;
+   return;
   }
-  populateArchive(chosen);
-  await switchEdition(chosen);
+  populateArchive(candidates[0]);
+  const select=$('edition-select');
+  select.disabled=true; // Keep initial recovery isolated from manual archive selection.
+  let failures=0;
+  for(const entry of candidates.slice(0,4)){
+   if(await switchEdition(entry)){
+    if(failures)status('Skipped '+failures+' newer edition revision(s) that failed integrity verification. '+$('edition-status').textContent);
+    select.disabled=false;
+    return;
+   }
+   failures++;
+  }
+  select.disabled=false;
+  status('The '+failures+' latest archive edition(s) failed integrity verification. No unverified news is shown; older editions remain selectable.');
  }catch(err){
   status('Daily archive unavailable: '+err.message+'. Previously verified Atlas reference material remains accessible.');
   $('edition-content').replaceChildren(element('div','No unverified headlines are shown when the edition index cannot be validated.','empty'));
