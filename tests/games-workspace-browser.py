@@ -27,6 +27,8 @@ with sync_playwright() as p:
     page.goto(base + 'index.html#/overview')
     nav = page.locator('#navigation a[href="#/games"]')
     nav.wait_for()
+    # The sidebar is intentionally pre-rendered; wait for catalog readiness before timing requests.
+    page.locator('#catalog-loading').wait_for(state='detached')
     page.evaluate('window.atlasNavigationSentinel = 42')
     check('single Games tab in original navigation', nav.count() == 1)
     original_heading = page.locator('#page h1').inner_text()
