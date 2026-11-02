@@ -33,9 +33,17 @@
       "sha256": "b42e752e2986f9395a90b91b75c6a2ac6dc2a48b1130eab6876a0c09f9650546",
       "bytes": 19612,
       "published_at": "2026-11-02T20:44:28.274Z"
+    },
+    {
+      "date": "2026-11-02",
+      "revision": 5,
+      "path": "data/daily/editions/2026-11-02-v5.json",
+      "sha256": "d86b3954a66722f353710349238af2e62a66e2226994f7f709393eb1ac3d5fe3",
+      "bytes": 20549,
+      "published_at": "2026-11-02T20:58:28.233Z"
     }
   ],
-  "last_successful_publish_at": "2026-11-02T19:38:35Z",
-  "status": "edition_revision_4_site_update_publication_verification_pending",
-  "coverage_note": "Nine source-reviewed news stories are unchanged in immutable Nov 2 revision 4. A dated, first-party vLLM release review was added to the existing profile and is recorded under Updated in Atlas; this is not a new technology or a new real-world event. Seven catalog proposals remain deferred. Two source lookups failed; source coverage is partial, non-exhaustive and scheduled."
+  "last_successful_publish_at": "2026-11-02T20:50:19Z",
+  "status": "edition_revision_5_site_change_publication_verification_pending",
+  "coverage_note": "Nine source-reviewed news reports unchanged; Nov 2 revision 5 documents the new integrity-checked archive revision comparison. This is an Atlas site change, not an external news event. Seven catalog proposals remain deferred, two source lookups failed; scheduled coverage is partial."
 }
