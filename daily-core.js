@@ -103,5 +103,21 @@ function validateEdition(edition,indexEntry){
  }
  return edition;
 }
-return {KINDS,validDate,validTimestamp,chicagoDate,safeSource,safeCatalogPath,validateIndex,validateEdition,selection,fallbackOrder};
+function requestedEdition(index,search,today=chicagoDate()){
+ const available=fallbackOrder(index,today);
+ if(typeof search!=='string')return {specified:false,entry:null,reason:null};
+ const params=new URLSearchParams(search.startsWith('?')?search.slice(1):search);
+ if(!params.has('date')&&!params.has('revision'))return {specified:false,entry:null,reason:null};
+ const dates=params.getAll('date'),revisions=params.getAll('revision');
+ if(dates.length!==1||revisions.length>1||!validDate(dates[0])||(revisions.length===1&&!/^[1-9][0-9]*$/.test(revisions[0])))
+  return {specified:true,entry:null,reason:'invalid'};
+ if(dates[0]>today)return {specified:true,entry:null,reason:'future'};
+ const selected=available.find(e=>e.date===dates[0]&&(revisions.length===0||e.revision===Number(revisions[0])));
+ return {specified:true,entry:selected||null,reason:selected?null:'unavailable'};
+}
+function permalink(entry){
+ assert(entry&&validDate(entry.date)&&Number.isSafeInteger(entry.revision)&&entry.revision>=1,'Invalid edition permalink');
+ return 'whats-new.html?date='+encodeURIComponent(entry.date)+'&revision='+entry.revision;
+}
+return {KINDS,validDate,validTimestamp,chicagoDate,safeSource,safeCatalogPath,validateIndex,validateEdition,selection,fallbackOrder,requestedEdition,permalink};
 });
