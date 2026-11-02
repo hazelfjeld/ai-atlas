@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="description" content="Compare published AI engineering technologies by their real advantages, constraints, validation steps and cited documentation.">
+<title>Technology atlas · Atlas</title>
+<link rel="stylesheet" href="checkpoint.css">
+<script defer src="technologies.js"></script>
+<style>
+.tech-shell{max-width:1120px;margin:auto;padding:28px 26px 74px}
+.tech-top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.tech-brand{font-weight:800;letter-spacing:.14em;color:var(--ink)}
+.tech-nav{display:flex;gap:14px;flex-wrap:wrap;font-size:13px}
+.tech-hero{padding:55px 0 28px}
+.tech-hero h1{max-width:850px;line-height:1.05}
+.tech-hero>p:last-child{max-width:750px;color:var(--muted)}
+.tech-warning{background:#f6eee0;border:1px solid #ddceb3;padding:14px 18px;border-radius:8px;font-size:13px;margin:8px 0 24px}
+.tech-controls{display:grid;grid-template-columns:2fr 1fr 1fr 1fr auto;gap:10px;align-items:end;margin-bottom:15px}
+.tech-controls label{display:grid;gap:6px;font-size:11px;letter-spacing:.045em;font-weight:800}
+.tech-controls select,.tech-controls input{width:100%;min-width:0}
+.tech-actions{display:flex;gap:11px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin:12px 0 20px}
+.tech-actions button:disabled{opacity:.5;cursor:not-allowed}
+.tech-status{font-size:12px;color:var(--muted)}
+.tech-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+.tech-card{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:21px;min-width:0;scroll-margin-top:25px}
+.tech-card:target{outline:3px solid #c39b50;outline-offset:3px}
+.tech-card .meta{font-size:11px;color:var(--muted);letter-spacing:.03em}
+.tech-card h2{font-size:21px;line-height:1.25;margin:7px 0}
+.tech-card h2 a{color:var(--ink);text-decoration:none}
+.tech-card h2 a:hover{text-decoration:underline}
+.tech-card .lede{font-size:13px;line-height:1.6;margin:10px 0}
+.tech-card .advantage{font-size:13px;border-left:3px solid #39745e;padding-left:12px;margin:15px 0}
+.tech-card .tags{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}
+.tech-card details>summary{cursor:pointer;font-size:12px;font-weight:750;color:#305e4e;padding:8px 0}
+.tech-card details[open]{border-top:1px solid var(--line);margin-top:12px}
+.tech-card dl{display:grid;gap:8px;margin:8px 0}
+.tech-card dt{font-size:10px;text-transform:uppercase;letter-spacing:.06em;font-weight:800}
+.tech-card dd{font-size:12px;margin:0;line-height:1.5;color:#4f5b53}
+.tech-card .card-actions{display:flex;align-items:center;gap:12px;justify-content:space-between;flex-wrap:wrap;margin-top:13px}
+.tech-card .card-actions a{font-size:12px}
+.tech-card pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:11px;max-height:220px;overflow:auto}
+#compare-dialog{max-width:min(1100px,96vw);width:100%;max-height:90vh;padding:25px;border:1px solid var(--line);border-radius:12px}
+#compare-dialog::backdrop{background:rgba(14,22,19,.6)}
+.compare-head{display:flex;justify-content:space-between;gap:18px;align-items:center}
+.compare-scroll{overflow:auto;margin-top:20px}
+.compare-scroll table{border-collapse:collapse;width:100%;min-width:620px}
+.compare-scroll th,.compare-scroll td{border:1px solid var(--line);padding:12px;text-align:left;vertical-align:top;min-width:145px;font-size:12px}
+.compare-scroll th{background:#e6ece5}
+#show-more{display:block;margin:25px auto}
+a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #bd7944;outline-offset:3px}
+@media(max-width:920px){.tech-controls{grid-template-columns:repeat(2,minmax(0,1fr))}.tech-controls label:first-child{grid-column:1/-1}}
+@media(max-width:730px){.tech-shell{padding:19px 16px 54px}.tech-hero{padding:35px 0 15px}.tech-grid{grid-template-columns:1fr}.tech-controls{grid-template-columns:1fr}.tech-controls label:first-child{grid-column:auto}.tech-card{padding:17px}}
+@media print{.tech-controls,.tech-actions,#show-more,dialog,.tech-nav{display:none}.tech-grid{display:block}.tech-card{break-inside:avoid;margin-bottom:12px}.tech-shell{max-width:none}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to technologies</a>
+<main id="main" class="tech-shell">
+<header class="tech-top"><a class="tech-brand" href="index.html">A. ATLAS / TECHNOLOGIES</a><nav class="tech-nav" aria-label="Site navigation"><a href="index.html#papers">Research</a><a href="index.html#alerts">Safety</a><a href="playbooks.html">Playbooks</a><a href="demo.html">Guided demo</a><a href="index.html#coverage">Progress</a></nav></header>
+<section class="tech-hero">
+<p class="eyebrow">TOOLS, LANGUAGES, FRAMEWORKS & STANDARDS</p>
+<h1>Choose tools for their actual edge.</h1>
+<p>Search technologies by what they do, where they help, and the tradeoffs to test before committing. Compare up to three profiles side by side, inspect the original evidence labels and follow the documentation.</p>
+</section>
+<p class="tech-warning"><strong>Research caveat:</strong> These are preserved editorial profiles from the prepared November 1, 2026 Atlas edition, not recent independent product audits or head-to-head benchmarks. <span id="coverage-note">The original catalog contains 300 prepared profiles; only verified published batches are shown.</span> No website-side automatic refresh is active.</p>
+<section aria-label="Technology search">
+<div class="tech-controls">
+<label>SEARCH<input id="tech-search" type="search" placeholder="Try CUDA, agents, low-rank fine-tuning…" autocomplete="off"></label>
+<label>SECTION<select id="tech-section"><option value="">All sections</option></select></label>
+<label>TOPIC<select id="tech-tag"><option value="">All topics</option></select></label>
+<label>STAGE<select id="tech-stage"><option value="">All stages</option></select></label>
+<button id="tech-reset" type="button">Reset</button>
+</div>
+<div class="tech-actions"><span id="tech-status" class="tech-status" role="status" aria-live="polite">Loading and verifying profiles…</span><div><button id="compare-button" type="button" disabled>Compare selected (0)</button> <button id="tech-export" type="button" disabled>Export matches ↓</button></div></div>
+<div id="tech-results" class="tech-grid" aria-label="Technology profiles"></div>
+<button id="show-more" type="button" hidden>Show more profiles ↓</button>
+</section>
+<footer>Preserved source fields · verified content checksums · partial publication. Always consult linked documentation for current API, pricing, security, licensing and support details. <a href="https://github.com/hazelfjeld/ai-atlas">Inspect the source repository</a>.</footer>
+</main>
+<dialog id="compare-dialog" aria-labelledby="compare-heading"><div class="compare-head"><h2 id="compare-heading">Compare technologies</h2><button id="compare-close" type="button">Close ✕</button></div><p>Editorial problem-fit considerations, not measured winners.</p><div id="compare-content" class="compare-scroll"></div></dialog>
+<noscript><p>JavaScript is required for search and comparison. Published datasets remain inspectable in the public repository.</p></noscript>
+</body>
+</html>

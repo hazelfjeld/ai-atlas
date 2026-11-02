@@ -8,6 +8,7 @@ import json
 from pathlib import Path
 import re
 import os
+import gzip
 from functools import lru_cache
 import sqlite3
 from html.parser import HTMLParser
@@ -93,6 +94,12 @@ def validate() -> dict:
         assert re.fullmatch(r'(data|downloads)/[A-Za-z0-9_.-]+', file['path']), file['path']
         blob = (ROOT / file['path']).read_bytes()
         assert len(blob) == file['bytes'] and hashlib.sha256(blob).hexdigest() == file['sha256'], file['path']
+    for item in manifest.get('legacy_imports', []):
+        blob = (ROOT / item['path']).read_bytes()
+        expanded = gzip.decompress(blob)
+        assert len(expanded) == item['expanded_bytes'] and hashlib.sha256(expanded).hexdigest() == item['expanded_sha256']
+        originals = {r['id']: r for r in catalogs['technologies']}
+        assert all(originals[r['id']] == r for r in json.loads(expanded)), 'Concurrent import differs from original catalog'
     if counts['terms']:
         term_ids = {r['id'] for r in catalogs['terms']}
         tech_ids = {r['id'] for r in catalogs['technologies']}
@@ -181,7 +188,7 @@ def check_remote(base: str, manifest: dict) -> dict:
     assert parsed.scheme == 'https' and parsed.hostname in ('raw.githack.com', 'rawcdn.githack.com'), 'Unsupported host'
     assert parsed.path.startswith('/hazelfjeld/ai-atlas/'), 'Unexpected repository'
     base = base.rstrip('/') + '/'
-    files = ['index.html', 'app.css', 'app.js', 'core.js', 'catalog-loader.js', 'checkpoint.css', 'checkpoint.js', 'research.html', 'demo.html', 'publication.json', 'downloads/Atlas_Demo_Offline.html'] + [f['path'] for f in manifest['files']]
+    files = ['index.html', 'app.css', 'app.js', 'core.js', 'catalog-loader.js', 'checkpoint.css', 'checkpoint.js', 'research.html', 'demo.html', 'technologies.html', 'technologies.js', 'publication.json', 'downloads/Atlas_Demo_Offline.html'] + [f['path'] for f in manifest['files']]
     if manifest.get('published_counts', {}).get('playbooks'):
         files += ['playbooks.html', 'playbooks.js'] + [f['path'] for f in manifest.get('extensions', {}).get('playbooks', [])]
     for kind in ('terms', 'technologies'):

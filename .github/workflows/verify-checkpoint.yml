@@ -28,6 +28,7 @@ jobs:
           node --check app.js
           node --check core.js
           node --check catalog-loader.js
+          node --check technologies.js
       - name: Test search, exports, integrity failures and all term routes
         run: node --test tests/*.test.cjs
       - name: Verify reproducible term pages and offline fallback
