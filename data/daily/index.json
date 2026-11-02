@@ -1,8 +1,17 @@
 {
   "schema": 1,
   "timezone": "America/Chicago",
-  "editions": [],
+  "editions": [
+    {
+      "date": "2026-11-02",
+      "revision": 1,
+      "path": "data/daily/editions/2026-11-02-v1.json",
+      "sha256": "1ac3f6212f7daf08ea75b4aa0767c91820ead562c0fc6438a5cb3f7ca14d6f6b",
+      "bytes": 6350,
+      "published_at": "2026-11-02T15:33:47.914Z"
+    }
+  ],
   "last_successful_publish_at": null,
-  "status": "awaiting_first_edition",
-  "coverage_note": "No daily publication has completed. A separate scheduled editorial collector is configured but has not yet supplied reviewed news."
+  "status": "first_reviewed_partial_edition_pending_production_verification",
+  "coverage_note": "Three independently verified primary software releases; sixteen remaining proposed items are explicitly deferred, not rejected. Publication status is provisional until production checks pass."
 }
