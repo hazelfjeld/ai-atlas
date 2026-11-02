@@ -20,10 +20,10 @@ function humanDate(s){
 function stamp(s){
  if(!s)return 'Not reported';
  const d=new Date(s);
- return Number.isFinite(d.valueOf())?new Intl.DateTimeFormat('en-US',{timeZone:'America/Chicago',dateStyle:'medium',timeStyle:'short',timeZoneName:'short'}).format(d):'Not reported';
+ return Number.isFinite(d.valueOf())?new Intl.DateTimeFormat('en-US',{timeZone:'America/Chicago',year:'numeric',month:'short',day:'numeric',hour:'numeric',minute:'2-digit',timeZoneName:'short'}).format(d):'Not reported';
 }
 function line(label,value,container){
- if(!value)return;
+ if(value===undefined||value===null||value==='')return;
  const s=element('span');s.append(element('strong',label+': '),document.createTextNode(String(value)));container.append(s);
 }
 function href(url,label){
