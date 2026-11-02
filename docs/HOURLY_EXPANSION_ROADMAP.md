@@ -1,5 +1,15 @@
 # AI Atlas — recurring expansion plan
 
+## November 2, 2026 — immutable daily archive change history (revision 5)
+
+- **Implemented and indexed:** The daily page now checks the previous same-date immutable revision by SHA-256/byte count before reporting added, revised, and removed entries in each of the five editorial sections. If that comparison fails, it shows a limitation instead of presenting unverified differences or clearing the independently verified current edition.
+- **Production code:** [6a8b38c](https://github.com/hazelfjeld/ai-atlas/commit/6a8b38c8573ab84ce9d4e5b3c0a7232e15988653) passed the GitHack/catalog workflow [41523848069](https://github.com/hazelfjeld/ai-atlas/actions/runs/41523848069). The exact v5 immutable asset was staged in [c4e11c9](https://github.com/hazelfjeld/ai-atlas/commit/c4e11c90409e9c82d82bfb28a88ef51a67e9c079), then linked to the archive and receipt in [d98ae9a](https://github.com/hazelfjeld/ai-atlas/commit/d98ae9aeac40612be6d6686911147d94bbba6784). **The v5 indexed release still requires its own complete CI and production-browser check.**
+- **Integrity:** v5 is 20,549 UTF-8 bytes, SHA-256 `d86b3954a66722f353710349238af2e62a66e2226994f7f709393eb1ac3d5fe3`. Immutable revisions 1–4 remain available; the v5 records add one actual Atlas site change, not a news headline. Source staging batch `2dcb25af14b960f9989527170fd88daf8ba2fb5f42dcff3b72f512b08ddb57d7` was independently rechecked as 38,557 bytes.
+- **Counts:** nine previously reviewed news reports unchanged, 1,345 linked terms, 300 original technologies, 20 playbooks, 30 papers, 10 safety records, 31 expanded guides. One existing vLLM release annotation from v4; seven remaining catalog proposals and two source collection failures. No new catalogs or independently confirmed incident.
+- **Last confirmed site verification before v5:** v4 Cloudflare/browser [41522320676](https://github.com/hazelfjeld/ai-atlas/actions/runs/41522320676) and GitHack [41522320854](https://github.com/hazelfjeld/ai-atlas/actions/runs/41522320854), main `cea538a` at 2026-11-02T20:50:19Z.
+- **Next step:** Confirm indexed v5 CI and HTTP/browser results; review next queued technology/term proposal against the original source and canonical catalog IDs, then resume the substantive term-guide backlog. Preserve the pinned professor demo.
+
+
 ## November 2, 2026 — first vetted technology update and revision 4
 
 - **Reviewed and linked:** the staged vLLM update attaches a first-party GitHub release-note review to existing `TECH-0288`; see `technology/TECH-0288-vllm.html`. GitHub tag `v0.33.0rc3` is titled `v0.33.0` and marked non-prerelease; no `v0.33.0` tag was found in the API. CUDA 13, ROCm, PyTorch and speculative decoding are qualified; performance results were not reproduced by Atlas.

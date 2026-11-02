@@ -269,3 +269,28 @@ test('Historical Nov 2 editions have an explainable revision 3-to-4 delta',()=>{
  assert.equal(diff.site_changes.added.length,1);
  assert.equal(diff.site_changes.added[0].id,'site-vllm-release-annotation-20261102');
 });
+
+test('Revision 5 preserves source-reviewed news and independently validates new archive-history site change',()=>{
+ const crypto=require('node:crypto');
+ const archive=JSON.parse(fs.readFileSync('data/daily/index.json','utf8'));
+ const previous=archive.editions.find(x=>x.date==='2026-11-02'&&x.revision===4);
+ const latest=archive.editions.find(x=>x.date==='2026-11-02'&&x.revision===5);
+ assert.ok(previous&&latest);
+ const raw=fs.readFileSync(latest.path);
+ assert.equal(raw.length,latest.bytes);
+ assert.equal(crypto.createHash('sha256').update(raw).digest('hex'),latest.sha256);
+ const a=D.validateEdition(JSON.parse(fs.readFileSync(previous.path,'utf8')),previous);
+ const b=D.validateEdition(JSON.parse(raw.toString('utf8')),latest);
+ assert.deepEqual(b.news,a.news);
+ assert.deepEqual(b.technologies,a.technologies);
+ assert.deepEqual(b.terms,a.terms);
+ assert.deepEqual(b.coverage,a.coverage);
+ const diff=D.revisionDiff(a,b);
+ assert.deepEqual(diff.site_changes.added.map(x=>x.id),['site-daily-revision-comparison-20261102']);
+ assert.equal(diff.news.added.length+diff.news.updated.length+diff.news.removed.length,0);
+ assert.equal(b.tldr.length,3);
+ const receipt=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8')).receipts[0];
+ assert.equal(receipt.publication_edition,'2026-11-02-v5');
+ assert.equal(receipt.counts.news_published,9);
+ assert.equal(receipt.deferred_catalog_proposal_ids.length,7);
+});
