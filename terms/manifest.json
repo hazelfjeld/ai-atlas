@@ -2341,13 +2341,13 @@
   },
   "MLD-0469": {
     "path": "terms/MLD-0469-goal-misgeneralization.html",
-    "sha256": "092d0e9489b19df8de480bd28a8b0de8a07381850ade6c0e5d3e0aa157797ff4",
-    "expanded": false
+    "sha256": "82e96a64f0155b6d91c2af8710f4dcb4df7e0656c9d9a6d7a746cf6605d86fad",
+    "expanded": true
   },
   "MLD-0470": {
     "path": "terms/MLD-0470-goodhart-s-law.html",
-    "sha256": "200d3bc67a7fbae801ecdc448469e007d0b8e64d4ded3d180ac971c279ab807d",
-    "expanded": false
+    "sha256": "99c084b8056d4b24e98b80a59cc28a390927be09ef8c7a7bf77770983e8803f7",
+    "expanded": true
   },
   "MLD-0471": {
     "path": "terms/MLD-0471-gptq.html",
@@ -5191,8 +5191,8 @@
   },
   "MLD-1039": {
     "path": "terms/MLD-1039-reward-hacking.html",
-    "sha256": "9617db2ca57b1c34185d6de98778ca47d43b512db7b56659b00dda34af6ab992",
-    "expanded": false
+    "sha256": "8704ecbb04339d1c83ef0484057f26bce369db146637569595e4e74a2faa3a8b",
+    "expanded": true
   },
   "MLD-1040": {
     "path": "terms/MLD-1040-reward-model.html",
@@ -5741,8 +5741,8 @@
   },
   "MLD-1149": {
     "path": "terms/MLD-1149-specification-gaming.html",
-    "sha256": "b8b2381733b5f0f06c14ebc6d4985dea58025bc0951791978a478df5b84aecf5",
-    "expanded": false
+    "sha256": "414ca38da7f2ae96b30a9a75d6e7e332688fbc3ed638c73d3a1036fa8370f0fc",
+    "expanded": true
   },
   "MLD-1150": {
     "path": "terms/MLD-1150-specificity.html",
