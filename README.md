@@ -33,7 +33,13 @@ Every original record field, stable ID, source reference and review label is pre
 
 The workspace provides global and collection search, filters, pagination, record details, related-concept and technology navigation, comparisons of up to three tools, notebook export/import, JSON/CSV exports and paper BibTeX exports. Original workbooks, the bundle and a foreign-key-checked SQLite database are downloadable from Sources & coverage. Existing research, playbook and compact technology routes remain available.
 
-All **1,345 concepts have direct HTML pages** with original definitions, examples, caveats, sources, related concepts and backlinks. **21 expanded guides** add mechanisms, prerequisites, illustrative worked examples, equations and evaluation advice. The other 1,324 pages visibly identify their detailed expansion as pending. Generated pages work without JavaScript and do not require SPA fallback routing.
+All **1,345 concepts have direct HTML pages** with original definitions, examples, caveats, sources, related concepts and backlinks. **23 expanded guides** add mechanisms, prerequisites, illustrative worked examples, equations and evaluation advice. The other 1,322 pages visibly identify their detailed expansion as pending. Generated pages work without JavaScript and do not require SPA fallback routing.
+
+## Agent reliability and capability diagnosis — November 2, 2026
+
+Two new source-reviewed tutorials cover [agent evaluation](terms/MLD-0041-agent-evaluation.html), with executable end-state checks, trajectory-level policy/side-effect scoring and repeat-trial reliability, and [capability failure](terms/MLD-0146-capability-failure.html), with controlled interventions distinguishing lack of task skill from possible proxy-goal behavior. Both use entirely synthetic experiments, explicitly avoid diagnosing hidden objectives from outputs alone and cite four primary papers each. The generator now derives encyclopedia's latest reviewed date from authored guide metadata rather than a stale constant.
+
+This increases substantive guides to **23 of 1,345** (1,322 reference-only); the 1,705-record prepared catalog and permanent term URLs remain unchanged. The feature release passed 64 automated tests, 29,963 internal-link checks, deterministic builds and exact GitHack bytes for 14 assets including both new guides. [Build verification](https://github.com/hazelfjeld/ai-atlas/actions/runs/41407567325) checks published static content, not live-browser behavior. The daily staging queue and public receipt ledger remained empty at the start of this increment; no news edition or real-world incident was invented.
 
 ## Mechanistic interpretability and red teaming — November 2, 2026
 
@@ -59,7 +65,7 @@ Run `python scripts/validate_checkpoint.py` and `node --test tests/*.test.cjs`. 
 
 Public HTTP equality and real browser interaction are separate checks. Detailed evidence is in `release/http-verification.json`, `release/browser-verification.json` and `docs/DEMO_CHECKPOINT.md`. CI validates catalogs, helpers, integrity failures, stable term routes and reproducible generated outputs, then checks the public GitHack assets.
 
-This is a curated snapshot, **not a live feed or exhaustive research/incident inventory**. Automatic collection remains off. Imported review labels are not a new source audit or independent replication. The 21 expanded explanations are editorial syntheses with primary citations, not independently reviewed textbooks. External citation destinations have not all been re-audited. Tool comparisons are editorial rather than measured rankings.
+This is a curated snapshot, **not a live feed or exhaustive research/incident inventory**. Automatic collection remains off. Imported review labels are not a new source audit or independent replication. The 23 expanded explanations are editorial syntheses with primary citations, not independently reviewed textbooks. External citation destinations have not all been re-audited. Tool comparisons are editorial rather than measured rankings.
 
 On shared GitHack origins, notes/bookmarks/comparisons are session-only; export a notebook backup before reloading. Elsewhere they use browser-local storage. No account backend, analytics, paid services or access-permission changes are introduced.
 
