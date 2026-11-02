@@ -11,7 +11,7 @@
       "published_at": "2026-11-02T15:33:47.914Z"
     }
   ],
-  "last_successful_publish_at": null,
-  "status": "first_reviewed_partial_edition_pending_production_verification",
-  "coverage_note": "Three independently verified primary software releases; sixteen remaining proposed items are explicitly deferred, not rejected. Publication status is provisional until production checks pass."
+  "last_successful_publish_at": "2026-11-02T15:43:08Z",
+  "status": "first_reviewed_partial_edition_published",
+  "coverage_note": "First evidence-reviewed partial edition published and verified on Cloudflare. Three project-owned releases included; six additional news stories and eight technology/terminology proposals remain explicitly deferred for the next publisher run."
 }

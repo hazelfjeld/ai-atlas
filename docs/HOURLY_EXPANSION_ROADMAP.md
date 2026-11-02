@@ -1,5 +1,14 @@
 # AI Atlas — recurring expansion plan
 
+## First independently verified daily edition — November 2, 2026
+
+- **New live feature:** [dated first partial edition](https://aiupdates.app/whats-new.html?date=2026-11-02&revision=1) imported from staged batch `atlas-daily-20261102-first-0850ct-a` at source commit `da93e2fd5545cabc0b001310eab55bf8eeea9da8`. Source batch bytes 38,557 and SHA-256 `2dcb25af14b960f9989527170fd88daf8ba2fb5f42dcff3b72f512b08ddb57d7` verified before use.
+- **Actual publication:** 3 independently checked official release-note news cards: vLLM `v0.33.0rc3` (explicit release candidate), InvokeAI `6.14.3`, Windmill `1.856.0`. **No new terms, technologies or confirmed incidents**. Partial coverage is labeled; source health and both failed collection sources preserved. Six news candidates and eight technology/term proposals are **pending**, not rejected; the main receipt retains 14 exact IDs for continuation.
+- **Verified commit and jobs:** [first-edition merge 3f8aabb](https://github.com/hazelfjeld/ai-atlas/commit/3f8aabb6727ff70e7c13b4f7dc0b9dd60cf5ca28) passed [catalog + GitHack](https://github.com/hazelfjeld/ai-atlas/actions/runs/41473186630). Initial production HTTP checks matched 427 assets on all three domains but browser timing failed; [test race fix 4b3695f](https://github.com/hazelfjeld/ai-atlas/commit/4b3695fae330a792664cf4039c342bd63ed76a80) passed [complete Cloudflare production HTTP and browser verification](https://github.com/hazelfjeld/ai-atlas/actions/runs/41473870650) at 2026-11-02T15:43:08Z. The failed run is not mislabeled green.
+- **Counts and recovery:** baseline unchanged: 1,345 terms, 300 technologies, 20 playbooks, 30 papers, 10 safety records (**1,705** total), 1,345 permanent term pages and 31 expanded guides (1,314 awaiting depth work). Preserved demo [839fee0](https://rawcdn.githack.com/hazelfjeld/ai-atlas/839fee0b0e4f6b16d933dd5e5eac55e3a3e847c6/demo.html).
+- **Next bounded step:** check staging index and partial receipt first; review and integrate deferred term and tech proposals only with complete catalog/index/search/stable-route changes, and remaining news only after independent evidence checks. Preserve immutable edition v1; revisions must use new `-vN` files with correction history. Keep the existing hourly single writer.
+
+
 ## Weak-to-strong and verifier reliability — November 2, 2026
 
 - **Site increment:** [PR #11](https://github.com/hazelfjeld/ai-atlas/pull/11), main [c65b99b](https://github.com/hazelfjeld/ai-atlas/commit/c65b99b84e58cbcdd5c6f416dfaeed42b1919326), publishes [weak-to-strong generalization](../terms/MLD-1323-weak-to-strong-generalization.html) and [verifier](../terms/MLD-1308-verifier.html). Both include mechanisms, synthetic worked examples, controlled evaluation designs, failure modes and scholarly citations; no real incident or lab result is claimed.

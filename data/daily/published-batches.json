@@ -11,8 +11,8 @@
       "source_batch_bytes": 38557,
       "edition_date": "2026-11-02",
       "validation_result": "checksum_schema_unique_ids_dates_and_three_primary_sources_verified",
-      "status": "partially_accepted_pending_catalog_and_claim_review",
-      "publication_outcome": "preflight_branch_pending_production",
+      "status": "partially_published_with_14_deferred_records",
+      "publication_outcome": "published_http_browser_and_githack_verified",
       "publication_edition": "2026-11-02-v1",
       "accepted_news_ids": [
         "ai-news:vllm:v0.33.0rc3:2026-11-02",
@@ -46,7 +46,13 @@
         "news_deferred": 6,
         "catalog_deferred": 8
       },
-      "review_notes": "Do not treat this batch as fully processed: resume the deferred IDs from this receipt before treating its queue item as complete. Do not relabel pending proposals as published releases."
+      "review_notes": "Do not treat this batch as fully processed: resume the deferred IDs from this receipt before treating its queue item as complete. Do not relabel pending proposals as published releases.",
+      "production_verified_at": "2026-11-02T15:43:08Z",
+      "production_verified_revision": "4b3695fae330a792664cf4039c342bd63ed76a80",
+      "production_workflow_run_id": 41473870650,
+      "githack_workflow_run_id": 41473870546,
+      "verification_scope": "Cloudflare validated 427 exact HTTP assets at each of three production hostnames, plus browser navigation and native Games; GitHack checks and static catalogs passed.",
+      "next_action": "Review deferred_news_ids and deferred_catalog_proposal_ids from the same immutable batch before marking it fully processed; retain this receipt to prevent duplicate edition and catalog publication."
     }
   ]
 }
