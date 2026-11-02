@@ -30,6 +30,20 @@ with sync_playwright() as p:
     page.goto(base)
     page.locator('#navigation a[href="#/games"]').wait_for()
     check('homepage retains original Atlas shell and native Games tab', page.locator('.app-shell').count() == 1)
+    # Native disclosure makes the long secondary list opt-in without losing direct-link access.
+    check('secondary sidebar destinations start collapsed on the homepage',
+          not page.locator('#additional-navigation').evaluate('(el) => el.open'))
+    page.locator('#additional-navigation summary').click()
+    check('disclosure reveals the original safety navigation link',
+          page.locator('#navigation a[href="#/safety"]').is_visible())
+    page.locator('#navigation a[href="#/safety"]').click()
+    page.wait_for_function("document.querySelector('#navigation a[data-view=safety]')?.getAttribute('aria-current') === 'page'")
+    check('secondary workspace navigation keeps disclosure expanded',
+          page.locator('#additional-navigation').evaluate('(el) => el.open'))
+    page.goto(base + 'index.html#/papers')
+    page.wait_for_function("document.querySelector('#navigation a[data-view=papers]')?.getAttribute('aria-current') === 'page'")
+    check('deep linked secondary workspace auto-opens disclosure',
+          page.locator('#additional-navigation').evaluate('(el) => el.open'))
     page.screenshot(path=str(out / 'overview.png'), full_page=True)
     page.goto(base + 'index.html#/dictionary?q=machine+learning')
     page.locator('#collection h3 a').first.wait_for()

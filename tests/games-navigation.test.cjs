@@ -59,3 +59,19 @@ test('first-paint sidebar uses the same canonical workspace destinations as hydr
   assert.ok(!app.includes("$('navigation').innerHTML=items.map"));
   assert.ok(html.includes('<noscript>') && html.includes('href="terms/index.html"'));
 });
+
+
+test('progressive sidebar retains all canonical links and reveals deep-linked secondary views', () => {
+  const html=read('index.html'), app=read('app.js'), css=read('brand.css');
+  const nav=html.match(/<nav id="navigation" aria-label="Main navigation">([\s\S]*?)<\/nav>/)?.[1];
+  assert.ok(nav);
+  assert.match(nav, /<details class="nav-more" id="additional-navigation"><summary class="nav-more-toggle">/);
+  assert.ok(!nav.includes('id="additional-navigation" open'), 'Secondary links should be collapsed on initial paint');
+  assert.match(nav, /<div class="nav-more-links">[\s\S]*?data-view="safety"/);
+  assert.match(nav, /data-static="offline"[\s\S]*?<\/div><\/details><\/nav>/);
+  for(const id of ['overview','dictionary','technologies','games','safety','papers','playbooks','compare','saved','sources'])
+    assert.match(nav, new RegExp('data-view="'+id+'"'), 'Missing native workspace destination: '+id);
+  assert.match(app, /if\(more && \['safety','papers','playbooks','compare','saved','sources'\]\.includes\(view\)\) more\.open=true/);
+  assert.match(css, /\.nav-more-toggle:focus-visible/);
+  assert.match(css, /prefers-reduced-motion:reduce/);
+});
