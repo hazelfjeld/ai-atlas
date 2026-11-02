@@ -8,8 +8,8 @@
 <script defer src="catalog-loader.js"></script><script defer src="core.js"></script><script defer src="games-core.js"></script><script defer src="games.js"></script>
 <link rel="stylesheet" href="brand.css">
 <!-- seo:start -->
-<title>AI Learning Games: Quiz &amp; Match | AI Updates</title>
-<meta name="description" content="Practice 1,345 machine learning and AI concepts with Quiz and Match. Filter by topic or level, revisit missed answers and follow concept explanations.">
+<title>AI Learning Games: Quiz, Match &amp; Flashcards | AI Updates</title>
+<meta name="description" content="Practice 1,345 machine learning and AI concepts with Quiz, Match and Flashcards. Filter by topic or level, revisit missed answers and follow concept explanations.">
 <meta name="robots" content="index,follow,max-image-preview:large">
 <link rel="canonical" href="https://aiupdates.app/games.html">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -17,16 +17,16 @@
 <meta property="og:site_name" content="AI Updates">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_US">
-<meta property="og:title" content="AI Learning Games: Quiz &amp; Match | AI Updates">
-<meta property="og:description" content="Practice 1,345 machine learning and AI concepts with Quiz and Match. Filter by topic or level, revisit missed answers and follow concept explanations.">
+<meta property="og:title" content="AI Learning Games: Quiz, Match &amp; Flashcards | AI Updates">
+<meta property="og:description" content="Practice 1,345 machine learning and AI concepts with Quiz, Match and Flashcards. Filter by topic or level, revisit missed answers and follow concept explanations.">
 <meta property="og:url" content="https://aiupdates.app/games.html">
 <meta property="og:image" content="https://aiupdates.app/social-card.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="AI Updates — the frontier, in context. AI research, tools and concepts.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="AI Learning Games: Quiz &amp; Match | AI Updates">
-<meta name="twitter:description" content="Practice 1,345 machine learning and AI concepts with Quiz and Match. Filter by topic or level, revisit missed answers and follow concept explanations.">
+<meta name="twitter:title" content="AI Learning Games: Quiz, Match &amp; Flashcards | AI Updates">
+<meta name="twitter:description" content="Practice 1,345 machine learning and AI concepts with Quiz, Match and Flashcards. Filter by topic or level, revisit missed answers and follow concept explanations.">
 <meta name="twitter:image" content="https://aiupdates.app/social-card.png">
 <!-- seo:end -->
 </head>
@@ -40,10 +40,11 @@
 <section id="setup" aria-labelledby="setup-title">
 <div class="section-heading"><div><p class="eyebrow">01 / BUILD YOUR DECK</p><h2 id="setup-title">Follow your curiosity.</h2></div><span id="pool-count" class="pill" role="status"></span></div>
 <div class="filters"><label>Topic<select id="topic"><option value="">Every topic</option></select></label><label>Field<select id="tag"><option value="">Every field</option></select></label><label>Level<select id="level"><option value="">Every level</option></select></label><label class="search-label">Keyword<input id="query" type="search" placeholder="Try distillation or safety" autocomplete="off"></label></div>
-<div class="deck-footer"><span id="filter-help">Filters apply to both modes. Every round is freshly shuffled.</span><button class="text-button" id="reset-filters" type="button">Reset filters</button></div>
+<div class="deck-footer"><span id="filter-help">Filters apply to Quiz, Match and Flashcards. Every round is freshly shuffled.</span><button class="text-button" id="reset-filters" type="button">Reset filters</button></div>
 <div class="mode-grid">
 <article class="mode-card quiz-card"><span class="mode-icon" aria-hidden="true">?</span><p class="eyebrow">RECALL / CONNECT / REPEAT</p><h2>Quiz</h2><p>Recognize a definition, name its concept, or flip the direction. Get feedback, then revisit what you missed.</p><div class="quiz-options"><label>Questions<select id="quiz-count"><option>5</option><option selected>10</option><option>20</option><option>50</option></select></label><label>Answer style<select id="answer-mode"><option value="choice">Multiple choice</option><option value="typed">Type the concept</option></select></label><label class="wide">Prompt direction<select id="direction"><option value="definition">Definition → concept</option><option value="term">Concept → definition</option></select></label></div><button id="start-quiz" class="button primary" type="button">Start quiz <span aria-hidden="true">→</span></button><small id="quiz-help">Up to four choices. No repeat questions within a round.</small></article>
 <article class="mode-card match-card"><span class="mode-icon" aria-hidden="true">⇄</span><p class="eyebrow">CONNECT THE PAIRS</p><h2>Match</h2><p>Six concepts. Twelve shuffled tiles. Pair each term with its definition and clear the board as quickly as you can.</p><div class="match-preview" aria-hidden="true"><span>Concept</span><i>↔</i><span>Definition</span></div><div class="rules"><p><b>Tap or click</b> two matching tiles.</p><p><b>Correct pairs disappear.</b> Wrong pairs add 1 second.</p><p><b>No countdown.</b> Take your time; the clock is just your score.</p></div><button id="start-match" class="button primary" type="button">Start matching <span aria-hidden="true">→</span></button><small id="match-help">Six pairs per round, or fewer for a smaller filtered deck.</small></article>
+<article class="mode-card flashcard-card"><span class="mode-icon" aria-hidden="true">▣</span><p class="eyebrow">FLIP / RECALL / REPEAT</p><h2>Flashcards</h2><p>See a term, tap the card to flip it and reveal its dictionary definition. Learn at your own pace.</p><div class="quiz-options"><label class="wide">Cards<select id="flashcard-count"><option>10</option><option selected>20</option><option>50</option><option value="all">All filtered terms</option></select></label></div><div class="rules"><p><b>Tap or click</b> to flip. Press Enter or Space on the card for keyboard access.</p><p><b>Previous / Next</b> or ← / → to navigate.</p><p><b>No timer.</b> One shuffled term at a time.</p></div><button id="start-flashcards" class="button primary" type="button">Start flashcards <span aria-hidden="true">→</span></button><small id="flashcard-help">Flip a term to see its definition.</small></article>
 </div>
 </section>
 <section id="play" hidden aria-label="Active game"></section>

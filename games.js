@@ -5,7 +5,7 @@
   const E = C.escapeHTML;
   let terms = [], pool = [], lastPool = [], questions = [], questionIndex = 0;
   let mode = 'setup', game = null, clock = null, mismatchTimeout = null, bestStreak = 0, streak = 0;
-  let lastQuizOptions = {}, matchKey = '';
+  let lastQuizOptions = {}, matchKey = '', flashDeck = null;
   const bestTimes = new Map();
   const unique = key => [...new Set(terms.flatMap(r => Array.isArray(r[key]) ? r[key] : [r[key]]).filter(Boolean))].sort((a,b) => a.localeCompare(b));
   const announce = message => { $('announcement').textContent = message; };
@@ -15,7 +15,7 @@
   function countCorrect() { return questions.filter(q => q.answered && q.correct).length; }
   function clearTimers() { clearInterval(clock); clearTimeout(mismatchTimeout); clock = null; mismatchTimeout = null; }
   function showSetup() {
-    clearTimers(); mode = 'setup'; game = null; document.body.classList.remove('is-playing');
+    clearTimers(); mode = 'setup'; game = null; flashDeck = null; document.body.classList.remove('is-playing');
     $('setup').hidden = false; $('play').hidden = true;
     $('setup-title').setAttribute('tabindex', '-1'); $('setup-title').focus();
   }
@@ -29,9 +29,11 @@
     $('pool-count').textContent = `${pool.length.toLocaleString()} concepts in your deck`;
     $('start-quiz').disabled = pool.length < (typed ? 1 : 2);
     $('start-match').disabled = pool.length < 2;
+    $('start-flashcards').disabled = pool.length < 1;
     $('quiz-help').textContent = typed ? 'Accepts the concept name or a listed alias. Not AI-graded.' : pool.length < 2 ? 'Choose at least two concepts, or switch to typed recall.' : 'Up to four choices. No repeat questions within a round.';
     $('match-help').textContent = pool.length < 2 ? 'Choose at least two concepts to match.' : `${Math.min(6, pool.length)} pairs this round · personal best stays in this tab.`;
-    $('filter-help').textContent = pool.length ? 'Filters apply to both modes. Every round is freshly shuffled.' : 'No concepts match. Broaden your filters or reset them.';
+    $('flashcard-help').textContent = pool.length ? 'Shuffle up to ' + pool.length.toLocaleString() + ' filtered terms.' : 'Choose at least one concept to make flashcards.';
+    $('filter-help').textContent = pool.length ? 'Filters apply to all three modes. Every round is freshly shuffled.' : 'No concepts match. Broaden your filters or reset them.';
   }
   function bar(title, stats = '') {
     return `<div class="play-bar"><div><p class="eyebrow">THE PRACTICE ROOM</p><h2 id="round-title" tabindex="-1">${E(title)}</h2></div><div class="scoreboard">${stats}<button class="button" type="button" data-action="menu">Change deck / exit</button></div></div>`;
@@ -128,11 +130,65 @@
     $('play').innerHTML = bar('Board cleared') + `<div class="game-panel result-panel"><p class="eyebrow">${best ? 'PERSONAL BEST THIS TAB' : 'ALL PAIRS CONNECTED'}</p><h3 id="result-title" tabindex="-1">${game.records.length} concepts. All connected.</h3><div class="result-score">${seconds(total)}</div><p class="subtle">${seconds(total - game.penaltyMs)} elapsed + ${seconds(game.penaltyMs)} penalties · ${game.mistakes} incorrect ${game.mistakes === 1 ? 'match' : 'matches'}</p><p class="subtle">Best for this filtered deck: ${seconds(bestTimes.get(matchKey))}. Random boards vary in difficulty.</p><div class="actions"><button class="button primary" type="button" data-action="match-again">Shuffle a new board</button><button class="button" type="button" data-action="menu">Change deck</button></div></div><section class="review" aria-label="Concepts in this round"><h3>Your ${game.records.length} connections</h3>${game.records.map(r => reviewItem(r)).join('')}</section>`;
     $('result-title').focus(); announce(`Board cleared in ${seconds(total)}, including ${seconds(game.penaltyMs)} penalties.`);
   }
+
+  function startFlashcards() {
+    clearTimers();
+    try { flashDeck = G.makeFlashcards(pool, {count: $('flashcard-count').value}); }
+    catch (error) { announce(error.message); $('filter-help').textContent = error.message; return; }
+    mode = 'flashcards'; showPlay(); renderFlashcard();
+  }
+  function renderFlashcard() {
+    const r = flashDeck.cards[flashDeck.index], position = flashDeck.index + 1, total = flashDeck.cards.length;
+    $('play').innerHTML = bar('Flashcards', `<span class="pill">Card ${position} / ${total}</span>`) +
+      `<div class="game-panel flash-panel">
+        <div class="progress" role="progressbar" aria-label="Position in deck" aria-valuemin="1" aria-valuemax="${total}" aria-valuenow="${position}"><span style="width:${position / total * 100}%"></span></div>
+        <p class="eyebrow">CARD ${position} / ${total} · ${E(r.topic || 'AI concepts')}</p>
+        <button class="flip-card" id="flip-card" type="button" data-action="flip-card" aria-pressed="false" aria-label="${E('Term: ' + r.term + '. Activate to reveal definition.')}">
+          <span class="flip-card-inner">
+            <span class="flip-face flip-front" id="flashcard-front" aria-hidden="false"><span class="flip-meta">TERM</span><strong>${E(r.term)}</strong><small>Tap to reveal definition ↻</small></span>
+            <span class="flip-face flip-back" id="flashcard-back" aria-hidden="true"><span class="flip-meta">DEFINITION</span><span class="flip-definition">${E(r.definition)}</span><small>Tap to see term ↻</small></span>
+          </span>
+        </button>
+        <p class="hint" id="flash-status" role="status">Tap the card, or press Enter/Space to flip. Use ← and → to navigate.</p>
+        <div class="flash-source" id="flashcard-link" hidden>${termLink(r)}</div>
+        <div class="question-actions flash-actions">
+          <button class="button" type="button" data-action="flash-prev" ${position === 1 ? 'disabled' : ''}>← Previous</button>
+          <button class="button primary" type="button" data-action="flash-next">${position === total ? 'Finish deck ✓' : 'Next card →'}</button>
+        </div>
+      </div>`;
+    $('flip-card').focus();
+  }
+  function flipCurrentFlashcard() {
+    if (mode !== 'flashcards') return;
+    const flipped = G.flipFlashcard(flashDeck), r = flashDeck.cards[flashDeck.index], button = $('flip-card');
+    button.classList.toggle('flipped', flipped);
+    button.setAttribute('aria-pressed', String(flipped));
+    button.setAttribute('aria-label', flipped ? 'Definition: ' + r.definition + '. Activate to see the term.' : 'Term: ' + r.term + '. Activate to reveal definition.');
+    $('flashcard-front').setAttribute('aria-hidden', String(flipped));
+    $('flashcard-back').setAttribute('aria-hidden', String(!flipped));
+    $('flashcard-link').hidden = !flipped;
+    $('flash-status').textContent = flipped ? 'Definition revealed. Tap to show term, or go to the next card.' : 'Term shown. Tap to reveal definition.';
+    announce(flipped ? r.term + ': ' + r.definition : 'Term: ' + r.term);
+  }
+  function navigateFlashcards(step) {
+    if (mode !== 'flashcards') return;
+    if (G.moveFlashcard(flashDeck, step)) renderFlashcard();
+    else if (step === 1 && flashDeck.index === flashDeck.cards.length - 1) finishFlashcards();
+  }
+  function finishFlashcards() {
+    const total = flashDeck.cards.length; mode = 'flashcards-results';
+    $('play').innerHTML = bar('Deck complete') + `<div class="game-panel result-panel"><p class="eyebrow">FLASHCARDS</p><h3 id="result-title" tabindex="-1">You reached the end of your deck.</h3><div class="result-score">${total}</div><p class="subtle">Cards in this round · no automatic score or grading.</p><div class="actions"><button class="button primary" type="button" data-action="flash-again">Shuffle another deck</button><button class="button" type="button" data-action="menu">Change filters</button></div></div>`;
+    $('result-title').focus(); announce('Flashcard deck complete. ' + total + ' cards.');
+  }
   $('play').addEventListener('click', event => {
     const answer = event.target.closest('[data-answer]'); if (answer) { submitAnswer(answer.dataset.answer); return; }
     const tile = event.target.closest('[data-key]'); if (tile) { tileClick(tile.dataset.key); return; }
     const action = event.target.closest('[data-action]')?.dataset.action;
     if (action === 'menu') showSetup();
+    else if (action === 'flip-card') flipCurrentFlashcard();
+    else if (action === 'flash-prev') navigateFlashcards(-1);
+    else if (action === 'flash-next') navigateFlashcards(1);
+    else if (action === 'flash-again') startFlashcards();
     else if (action === 'skip') submitAnswer('', true);
     else if (action === 'next' && mode === 'quiz' && questions[questionIndex].answered) { if (++questionIndex < questions.length) renderQuestion(); else finishQuiz(); }
     else if (action === 'retry-missed') startQuiz(questions.filter(q => !q.correct).map(q => q.target.id));
@@ -140,6 +196,9 @@
     else if (action === 'match-again') startMatch();
   });
   document.addEventListener('keydown', event => {
+    if (mode === 'flashcards' && !document.querySelector('dialog[open]') && !event.altKey && !event.ctrlKey && !event.metaKey && !/INPUT|TEXTAREA|SELECT/.test(document.activeElement?.tagName) && ['ArrowLeft', 'ArrowRight'].includes(event.key)) {
+      event.preventDefault(); navigateFlashcards(event.key === 'ArrowLeft' ? -1 : 1); return;
+    }
     if (mode !== 'quiz' || event.altKey || event.ctrlKey || event.metaKey || /INPUT|TEXTAREA|SELECT/.test(document.activeElement?.tagName)) return;
     const q = questions[questionIndex];
     if (!q.answered && q.answerMode === 'choice' && /^[1-4]$/.test(event.key) && q.options[Number(event.key) - 1]) { event.preventDefault(); submitAnswer(q.options[Number(event.key) - 1].id); }
@@ -159,7 +218,7 @@
     for (const id of ['topic','tag','level','answer-mode']) $(id).addEventListener('change', refreshPool);
     $('query').addEventListener('input', refreshPool);
     $('reset-filters').onclick = () => { for (const id of ['topic','tag','level','query']) $(id).value = ''; refreshPool(); };
-    $('start-quiz').onclick = () => startQuiz(); $('start-match').onclick = startMatch;
+    $('start-quiz').onclick = () => startQuiz(); $('start-match').onclick = startMatch; $('start-flashcards').onclick = startFlashcards;
     $('games').hidden = false; refreshPool();
   } catch(error) {
     $('load-status').textContent = 'Games could not load: ' + error.message + ' No partial deck is shown. ';

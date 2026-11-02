@@ -94,3 +94,25 @@ test('clearing the board freezes elapsed time and cannot award a pair twice', ()
   assert.equal(m.matched.size,6); assert.equal(m.finishedAt,710); assert.equal(G.matchTime(m,99999),610);
 });
 test('unsafe unknown tiles are ignored', () => { const m=G.makeMatch(records); assert.equal(G.selectTile(m,'<script>',3).type,'ignored'); assert.equal(m.mistakes,0); });
+
+test('flashcards shuffle without altering the input and support tap-to-flip navigation', () => {
+  const input=records.slice(0,12), before=[...input];
+  const a=G.makeFlashcards(input,{count:10,random:rng(123)});
+  assert.equal(a.cards.length,10); assert.equal(new Set(a.cards.map(r=>r.id)).size,10);
+  assert.deepEqual(input,before); assert.deepEqual(a.cards.map(r=>r.id),G.makeFlashcards(input,{count:10,random:rng(123)}).cards.map(r=>r.id));
+  assert.equal(a.index,0); assert.equal(a.flipped,false);
+  assert.equal(G.flipFlashcard(a),true); assert.equal(G.flipFlashcard(a),false);
+  G.flipFlashcard(a); assert.equal(G.moveFlashcard(a,1),true);
+  assert.equal(a.index,1); assert.equal(a.flipped,false);
+  assert.equal(G.moveFlashcard(a,-1),true); assert.equal(a.index,0);
+  assert.equal(G.moveFlashcard(a,-1),false); assert.equal(G.moveFlashcard(a,0),false);
+});
+test('flashcards work with one term and all filtered terms, with clear boundaries', () => {
+  assert.throws(()=>G.makeFlashcards([]),/No concepts/);
+  const one=G.makeFlashcards(records.slice(0,1),{count:'all'});
+  assert.equal(one.cards.length,1); assert.equal(G.flipFlashcard(one),true);
+  assert.equal(G.moveFlashcard(one,1),false); assert.equal(one.flipped,true);
+  assert.equal(G.makeFlashcards(records,{count:'all'}).cards.length,records.length);
+  assert.equal(G.makeFlashcards(records,{count:999}).cards.length,records.length);
+  assert.equal(G.makeFlashcards(records,{count:1}).cards.length,1);
+});
