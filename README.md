@@ -33,7 +33,13 @@ Every original record field, stable ID, source reference and review label is pre
 
 The workspace provides global and collection search, filters, pagination, record details, related-concept and technology navigation, comparisons of up to three tools, notebook export/import, JSON/CSV exports and paper BibTeX exports. Original workbooks, the bundle and a foreign-key-checked SQLite database are downloadable from Sources & coverage. Existing research, playbook and compact technology routes remain available.
 
-All **1,345 concepts have direct HTML pages** with original definitions, examples, caveats, sources, related concepts and backlinks. **19 expanded guides** add mechanisms, prerequisites, illustrative worked examples, equations and evaluation advice. The other 1,326 pages visibly identify their detailed expansion as pending. Generated pages work without JavaScript and do not require SPA fallback routing.
+All **1,345 concepts have direct HTML pages** with original definitions, examples, caveats, sources, related concepts and backlinks. **21 expanded guides** add mechanisms, prerequisites, illustrative worked examples, equations and evaluation advice. The other 1,324 pages visibly identify their detailed expansion as pending. Generated pages work without JavaScript and do not require SPA fallback routing.
+
+## Mechanistic interpretability and red teaming — November 2, 2026
+
+Two more sourced worked guides are available: [mechanistic interpretability](terms/MLD-0718-mechanistic-interpretability.html) explains residual-stream circuits, controlled activation patching, failure checks and feature dictionaries; [red teaming](terms/MLD-1002-red-teaming.html) covers authorized threat models, safe toy-system exercises, independent scoring and mitigation regression tests. Both distinguish controlled studies from evidence of deployed incidents, with three primary references each. The baseline catalog is still 1,705 records and now **21 of 1,345** term pages are expanded; **1,324** remain at reference depth.
+
+Source [PR #6](https://github.com/hazelfjeld/ai-atlas/pull/6) and [production verification](https://github.com/hazelfjeld/ai-atlas/actions/runs/41401120710) passed. The separate daily-news queue remains empty as checked at the beginning of this increment; no dated edition or external safety alert was fabricated.
 
 ## Safety monitoring guides — November 1, 2026
 
@@ -53,7 +59,7 @@ Run `python scripts/validate_checkpoint.py` and `node --test tests/*.test.cjs`. 
 
 Public HTTP equality and real browser interaction are separate checks. Detailed evidence is in `release/http-verification.json`, `release/browser-verification.json` and `docs/DEMO_CHECKPOINT.md`. CI validates catalogs, helpers, integrity failures, stable term routes and reproducible generated outputs, then checks the public GitHack assets.
 
-This is a curated snapshot, **not a live feed or exhaustive research/incident inventory**. Automatic collection remains off. Imported review labels are not a new source audit or independent replication. The 19 expanded explanations are editorial syntheses with primary citations, not independently reviewed textbooks. External citation destinations have not all been re-audited. Tool comparisons are editorial rather than measured rankings.
+This is a curated snapshot, **not a live feed or exhaustive research/incident inventory**. Automatic collection remains off. Imported review labels are not a new source audit or independent replication. The 21 expanded explanations are editorial syntheses with primary citations, not independently reviewed textbooks. External citation destinations have not all been re-audited. Tool comparisons are editorial rather than measured rankings.
 
 On shared GitHack origins, notes/bookmarks/comparisons are session-only; export a notebook backup before reloading. Elsewhere they use browser-local storage. No account backend, analytics, paid services or access-permission changes are introduced.
 
