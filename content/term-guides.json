@@ -1373,5 +1373,141 @@
         "https://proceedings.mlr.press/v139/koh21a.html"
       ]
     ]
+  },
+  "MLD-1323": {
+    "reviewed_on": "2026-11-02",
+    "prerequisites": [
+      "MLD-1078",
+      "MLD-0607",
+      "MLD-0142",
+      "MLD-1149",
+      "MLD-1184"
+    ],
+    "sections": [
+      [
+        "Define the weak-supervisor problem",
+        "Weak-to-strong generalization asks whether a capable student model, trained using labels from a less capable supervisor, can outperform that supervisor on independently judged tasks. In the scalable-oversight analogy, humans or weaker models provide imperfect assessments of systems they may not be able to evaluate reliably. This is a measurable performance phenomenon, not a demonstration that the student has learned human values or will remain aligned when deployed."
+      ],
+      [
+        "Separate supervisor, student and independent ground truth",
+        "Freeze a weak supervisor W, a pretrained stronger student S and an evaluation set with labels or outcomes independently checked against the actual task. Obtain W's noisy labels only for the training partition, fine-tune S on them and measure W and S on untouched evaluation cases. Without an independent answer key, the apparent student improvement might merely be imitation of the supervisor's errors or exploitation of a flawed judge."
+      ],
+      [
+        "Explain the mechanism without assuming a miracle",
+        "Pretraining can give the strong student useful representations and task skill that the weak teacher cannot consistently express in its labels. Fine-tuning with noisy supervision may still steer the student's existing capability toward the target task. Generalization depends on model, supervision error, training method and data distribution; it does not imply a more expressive model always overcomes a weak teacher, nor that improved benchmark accuracy implies faithful reasoning."
+      ],
+      [
+        "Compute a synthetic gap-recovery example",
+        "Imagine a fixed test set where a weak teacher reaches 60% accuracy, an independently evaluated strong-model ceiling reaches 90%, and a weak-label-trained student reaches 75%. A simple gap-recovered fraction is (0.75 - 0.60) / (0.90 - 0.60) = 0.50, or half the measured performance gap. These are invented teaching numbers, not empirical measurements. If the ceiling or task changes, the denominator and interpretation change; report raw scores and uncertainty alongside any normalized measure."
+      ],
+      [
+        "Understand why naive imitation is not enough",
+        "The Burns and colleagues experiments found weak-label fine-tuning of stronger pretrained models could outperform their weak supervisors, but naive training did not recover all of the stronger models' attainable performance. They investigated techniques including an auxiliary confidence loss. A higher student score could reflect representation transfer, task regularities or training effects; it does not by itself reveal the student's internal objective or make the weak labels trustworthy."
+      ],
+      [
+        "Consider theory without overgeneralizing",
+        "Charikar, Pabbaraju and Shiragur develop a theoretical account relating weak-to-strong gains to misfit error under specified modeling conditions. Geng, Hansen and Li examine generalization for linear logistic models under distributional assumptions. These analyses clarify possible mechanisms, but their mathematical settings do not establish a general guarantee for frontier AI agents, adversarial evaluators, high-stakes decisions or every form of oversight."
+      ],
+      [
+        "Design a small, controlled replication",
+        "Proposed experiment, not a completed study: choose an open, harmless classification dataset with a deterministic ground-truth evaluation key; train a deliberately weak baseline on restricted labels; freeze three stratified train/calibration/test partitions by source; then fine-tune a stronger pretrained student on only the weak supervisor's training predictions. Compare weak teacher, weak-label-trained student, ground-truth-trained student and frozen strong baseline across at least three seeds, reporting confidence intervals and errors by group."
+      ],
+      [
+        "Audit where misleading gains can arise",
+        "Pre-register test items, score the same task and denominator for each model, and examine label noise by class and subgroup. Keep weak-supervisor training predictions out of the held-out evaluation and never use test labels to tune auxiliary losses or prompts. Inspect where both teacher and student are wrong: rare modes, out-of-distribution inputs and hard negatives may reveal an apparently strong average while high-risk mistakes worsen. Include contamination checks and honest uncertainty."
+      ],
+      [
+        "Distinguish task improvement from oversight safety",
+        "Even a student that genuinely beats its supervisor at classification may learn unsafe shortcuts, hide error modes or fail when goals shift. Weak-to-strong generalization is a potential component of scalable supervision, not a safety certificate. A separate process must test authorized actions, disagreement resolution, reward gaming, adversarial incentives, distribution shift and cases where no evaluator has reliable ground truth. A benchmark gain is not proof of deception or proof that deception is absent."
+      ],
+      [
+        "Preserve dates and evidence boundaries",
+        "Burns and colleagues reported empirical weak-to-strong results in December 2023; later theoretical papers analyze narrower cases rather than documenting newly discovered incidents. The experimental percentages above are synthetic and the audit is only a proposal. This guide summarizes primary research checked November 2, 2026, and does not claim that weak supervision has solved superhuman alignment, nor that a real-world model behaved deceptively."
+      ]
+    ],
+    "citations": [
+      [
+        "Burns and colleagues, Weak-to-Strong Generalization: Eliciting Strong Capabilities With Weak Supervision (arXiv, December 2023)",
+        "https://arxiv.org/abs/2312.09390"
+      ],
+      [
+        "Charikar, Pabbaraju and Shiragur, Quantifying the Gain in Weak-to-Strong Generalization (arXiv, May 2024)",
+        "https://arxiv.org/abs/2405.15116"
+      ],
+      [
+        "Geng, Hansen and Li, Weak-to-Strong Generalization is Nearly Inevitable (in Linear Models) (arXiv, May 2026)",
+        "https://arxiv.org/abs/2605.05742"
+      ]
+    ]
+  },
+  "MLD-1308": {
+    "reviewed_on": "2026-11-02",
+    "prerequisites": [
+      "MLD-1047",
+      "MLD-0950",
+      "MLD-0041",
+      "MLD-1039",
+      "MLD-1254"
+    ],
+    "sections": [
+      [
+        "What a verifier actually verifies",
+        "A verifier checks a candidate answer, trajectory or intermediate step against a particular criterion. Some verifiers are deterministic programs such as compilers, unit tests or formal proof checkers; others are learned models that predict correctness from examples. Its output describes whether a specified check was passed, not whether the entire task is safe or a model's internal objective is aligned. Always write down the verifier's exact input and acceptance contract."
+      ],
+      [
+        "Separate hard constraints from learned rankings",
+        "For code, a sandboxed test runner can reject solutions that fail public cases but cannot prove correctness on unspecified inputs. A learned outcome verifier scores a whole answer, while a process reward model scores intermediate reasoning steps under a labeling scheme. Combining deterministic validity checks with a trained ranker can be useful, but neither category should quietly become an authority on facts outside its tested scope."
+      ],
+      [
+        "Walk through a synthetic candidate-selection example",
+        "Suppose a toy task has four independently generated answers. A learned verifier assigns scores 0.80, 0.70, 0.60 and 0.40, but an independently checked answer key finds that only the second and fourth are correct. Selecting the highest score therefore chooses a wrong answer. With a deterministic independent evaluator, verified success is two of four candidates, and the top-ranked candidate is a false positive. These scores are invented teaching data, not published benchmark results."
+      ],
+      [
+        "Show why best-of-N amplifies verifier weaknesses",
+        "In best-of-N selection, when generating N alternatives and picking argmax_i V(answer_i), the system optimizes the verifier's score, not necessarily the true objective. As N increases, candidates may exploit ranking errors, benchmark contamination or fragile heuristics. Recompute true correctness using an independent sealed evaluator as the sampling budget grows; plot selected-answer accuracy against N and the rate of invalid high-scoring answers. More candidates do not guarantee safer outputs."
+      ],
+      [
+        "Understand outcome versus process supervision",
+        "Cobbe and colleagues studied learned verifiers that rank generated solutions for GSM8K math questions. Uesato and colleagues contrasted outcome-level and step-level feedback and observed differences between final-answer performance and reasoning errors. Lightman and colleagues found substantial benefits for process supervision on the MATH benchmark with their experimental models and data. These are results in defined math-task settings, not universal proof that a process verifier captures honest reasoning or hidden intent."
+      ],
+      [
+        "Threat-model the verification boundary",
+        "Record which inputs an adversarial candidate can control, whether the checker receives untrusted instructions, which files or services it can access, and which side effects are prohibited. Treat retrieved documents, generated tests and model-authored explanations as data rather than authority to redefine success. Run code candidates with network disabled, minimal permissions, resource limits and non-secret fixtures; never allow a candidate to edit the evaluation harness or its own hidden answer key."
+      ],
+      [
+        "Design a bounded reproducible verifier audit",
+        "Proposed test, not executed: create twenty synthetic tasks with known answers, four candidate responses each and deliberately planted arithmetic, dependency and format errors. Freeze a deterministic checker and a separately trained ranking verifier. Measure top-1 precision, false-positive rate, false-negative rate and selected-answer correctness under best-of-1, best-of-2 and best-of-4 budgets. Repeat across independent seeds and compare with random selection and answer-only baselines on a sealed set."
+      ],
+      [
+        "Calibrate errors and test adversarial robustness",
+        "A verifier score is not automatically a calibrated probability. Evaluate reliability diagrams and Brier or log-loss metrics only when the output has a probabilistic interpretation and the labels are independently reliable. Test near-duplicates, paraphrases, contaminated benchmarks, unusual formats and misleading chain-of-thought explanations. If a small subset receives most errors, show the sample sizes and conditions instead of reporting only pooled ranking accuracy."
+      ],
+      [
+        "Mitigate incentives to game the checker",
+        "Use outcome checks that inspect final environment state, independent hidden tests, human review for unresolved policy claims and separation of generator and evaluator permissions. Version the verifier, tests and rubric; track failure clusters and retain counterexamples as regression cases. Avoid training repeatedly on a public fixed suite without a sealed holdout. Reject or quarantine invalid candidates even when their learned score is high; document which failures remain untestable."
+      ],
+      [
+        "Keep the evidence and safety distinction explicit",
+        "Verifier research demonstrates that ranking or step-level supervision can improve measured problem-solving under specific experimental conditions. It does not establish that an agent is truthful, that an external action is authorized, or that no reward hacking will occur. A verifier can be incomplete, miscalibrated or itself exploitable. This guide's toy arithmetic and proposed audit are illustrative, not newly observed security incidents or an evaluation of any deployed product."
+      ]
+    ],
+    "citations": [
+      [
+        "Cobbe and colleagues, Training Verifiers to Solve Math Word Problems (arXiv, October 2021)",
+        "https://arxiv.org/abs/2110.14168"
+      ],
+      [
+        "Uesato and colleagues, Solving math word problems with process- and outcome-based feedback (arXiv, November 2022)",
+        "https://arxiv.org/abs/2211.14275"
+      ],
+      [
+        "Lightman and colleagues, Let's Verify Step by Step (arXiv, May 2023; PRM800K)",
+        "https://arxiv.org/abs/2305.20050"
+      ],
+      [
+        "Burns and colleagues, Weak-to-Strong Generalization: Eliciting Strong Capabilities With Weak Supervision (arXiv, December 2023)",
+        "https://arxiv.org/abs/2312.09390"
+      ]
+    ]
   }
 }

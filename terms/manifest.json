@@ -6536,8 +6536,8 @@
   },
   "MLD-1308": {
     "path": "terms/MLD-1308-verifier.html",
-    "sha256": "509bfb537dc63e26baaf9cdf820432a96236c6898c9cc9e1342150e0763202db",
-    "expanded": false
+    "sha256": "c248a88fb00be59891b40d0f66b7f768b12d1ade8cd8826a3a2079606dd766a0",
+    "expanded": true
   },
   "MLD-1309": {
     "path": "terms/MLD-1309-vision-transformer.html",
@@ -6611,8 +6611,8 @@
   },
   "MLD-1323": {
     "path": "terms/MLD-1323-weak-to-strong-generalization.html",
-    "sha256": "4a49fa4e9eebf20d1d5ab8512b989b3e896d11ac0e7a51995884392afa69e1db",
-    "expanded": false
+    "sha256": "0a381ebc64c4734587277b823de676f65602baee4fdddf39c62698a399d803e4",
+    "expanded": true
   },
   "MLD-1324": {
     "path": "terms/MLD-1324-weight.html",
