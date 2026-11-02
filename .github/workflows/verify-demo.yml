@@ -1,0 +1,79 @@
+name: Verify presentation checkpoint
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'demo.html'
+      - 'index.html'
+      - 'playbooks.html'
+      - '.github/workflows/verify-demo.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: atlas-demo-verification
+  cancel-in-progress: true
+jobs:
+  demo:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out this exact presentation commit
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Verify demo paths and public HTML
+        env:
+          PUBLICATION_SHA: ${{ github.sha }}
+        run: |
+          python3 - <<'PY'
+          from html.parser import HTMLParser
+          from pathlib import Path
+          from urllib.parse import urlsplit
+          from urllib.request import Request, urlopen
+          import os
+          import time
+
+          class Links(HTMLParser):
+              def __init__(self):
+                  super().__init__()
+                  self.hrefs = []
+                  self.ids = []
+              def handle_starttag(self, tag, attrs):
+                  values = dict(attrs)
+                  if tag == 'a':
+                      self.hrefs.append(values.get('href', ''))
+                  if 'id' in values:
+                      self.ids.append(values['id'])
+
+          page = Links()
+          page.feed(Path('demo.html').read_text())
+          assert len(set(page.ids)) == len(page.ids), 'Duplicate demo IDs'
+          assert 'demo.html' in Path('index.html').read_text(), 'Demo missing from navigation'
+          for href in page.hrefs:
+              parsed = urlsplit(href)
+              assert parsed.scheme in ('', 'https'), 'Unexpected link scheme'
+              if not parsed.scheme:
+                  assert not parsed.netloc, 'Unexpected external relative URL'
+                  if parsed.path:
+                      assert Path(parsed.path).is_file(), 'Missing local destination: ' + href
+                  elif parsed.fragment:
+                      assert parsed.fragment in page.ids, 'Missing demo fragment: ' + href
+          base = 'https://rawcdn.githack.com/hazelfjeld/ai-atlas/' + os.environ['PUBLICATION_SHA'] + '/'
+          for name in ('demo.html', 'index.html', 'playbooks.html'):
+              expected = Path(name).read_bytes()
+              for attempt in range(3):
+                  try:
+                      request = Request(base + name, headers={'User-Agent': 'Atlas-demo-verification/1.0'})
+                      with urlopen(request, timeout=20) as response:
+                          assert response.status == 200, 'Bad HTTP status'
+                          assert response.headers.get_content_type() == 'text/html', 'Wrong MIME type'
+                          assert response.read(1000000) == expected, 'Different bytes or an interstitial'
+                      break
+                  except Exception:
+                      if attempt == 2:
+                          raise
+                      time.sleep(2)
+              print('VERIFIED', base + name, flush=True)
+          print('PASS: relative demo destinations and three exact public HTML responses. Not a browser interaction test.')
+          PY
