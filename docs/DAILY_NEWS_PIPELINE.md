@@ -42,3 +42,20 @@ Implement this feature as the next small production increment; do not postpone i
 Before production publication, run relevant data/schema, checksum, duplicate, date-rollover/timezone, source-link, archive/deep-link, search/navigation and mobile checks. Test missing-today/empty/failed-collection states. Inspect actual CI jobs and verify served GitHack assets where available, distinguishing HTTP checks from browser tests. Preserve a known-good commit-pinned release; a pinned link does not update with future editions.
 
 Collector reports should distinguish staged from published. Publisher reports should give the real edition link, news/profile/term addition and correction counts, source coverage, verification limits, failures and a short TL;DR. Until the first real collection and successful public render, describe automatic daily publication as configured/pending, not live and proven.
+
+## Production implementation — November 1, 2026
+
+The publisher has committed the independently accessible `whats-new.html` page, `whats-new.js` reader, `daily-core.js` safety/date validator, and a homepage/navigation link. Until the first reviewed collection is published, both homepage and archive explicitly say **awaiting first edition**, rather than inventing headlines. The archived date uses `America/Chicago` (including daylight-saving rollover) and never relabels an earlier edition as today's.
+
+**Published archive index:** `data/daily/index.json` (schema `1`): `timezone: "America/Chicago"`, `editions: []`, `last_successful_publish_at: null` until the first real publication. Each edition entry added later must contain:
+- `date` as a calendar-valid `YYYY-MM-DD` Chicago edition date; `revision` as positive integer.
+- `path` exactly `data/daily/editions/YYYY-MM-DD-vN.json`, immutable after publication.
+- `sha256` of exact UTF-8 bytes, `bytes` as the byte count, and `published_at` as an offset-aware ISO timestamp.
+
+**Published edition file:** `schema: 1`, `edition_date`, `timezone: "America/Chicago"`, `published_at`, `coverage: {start, end, status, sources_checked: [], sources_failed: []}`, `tldr: ["sentence one", "sentence two"]`, and **all five** record arrays `news`, `technologies`, `terms`, `site_changes`, `corrections` (empty allowed). `coverage.status` is one of `complete`, `partial`, `failed`; failed sources are preserved rather than converted to zero news. Every display item needs stable `id`, nonempty `title`, `summary` and `review_status`, optional `category`, `tags`, `why_it_matters`, `caveat`, `release_status`, HTTPS `source_url`, precise `publication_date` and `event_date`, timestamped `discovered_at` and `added_to_atlas_at`. Supply a `catalog_path` only once a real Atlas record/detail route exists. The page explicitly separates world publication from discovery and addition to Atlas.
+
+The reader validates the index and checks **both byte length and SHA-256** of every selected edition before rendering. All text is rendered with DOM `textContent`; source URLs must be HTTPS and internal routes must match an explicit allowlist. Corrections use an additional immutable `-vN` edition so the earlier version remains selectable. The ledger `data/daily/published-batches.json` records idempotent acceptance/skip/rejection receipts. The publisher updates the receipt and archive only after content is vetted and genuinely served, and updates `last_successful_publish_at` only after a successful release.
+
+The collector's staging batches use their separate `daily-queue/**` handoff schema from the earlier section; **do not copy them verbatim to the public index**. The publisher maps reviewed batches into the display schema, integrates real technologies/terms into the canonical catalogs first, and leaves unreviewed or blocked claims off the public edition.
+
+Validation additions: `node --test tests/daily.test.cjs`, `python3 scripts/validate_checkpoint.py`, and the existing GitHack byte-equivalence workflow (which now covers the daily HTML/JS/index/receipt files). Static checks are not a complete hosted-browser accessibility test.
