@@ -2,7 +2,7 @@
 
 A complete import of the prepared November 1, 2026 catalog, with connected search, technology comparisons, source registers, downloads and permanent concept pages.
 
-[Open the professor demonstration](https://rawcdn.githack.com/hazelfjeld/ai-atlas/7a6533c9e38da862a845fbfd74eacafd4dcf6eaa/index.html) · [Five-minute tour](https://rawcdn.githack.com/hazelfjeld/ai-atlas/7a6533c9e38da862a845fbfd74eacafd4dcf6eaa/demo.html) · [Concept encyclopedia](https://rawcdn.githack.com/hazelfjeld/ai-atlas/7a6533c9e38da862a845fbfd74eacafd4dcf6eaa/terms/index.html)
+[Open the professor demonstration](https://rawcdn.githack.com/hazelfjeld/ai-atlas/3694cfd81702ae88f09054839623c3159a94a026/index.html) · [Five-minute tour](https://rawcdn.githack.com/hazelfjeld/ai-atlas/3694cfd81702ae88f09054839623c3159a94a026/demo.html) · [Concept encyclopedia](https://rawcdn.githack.com/hazelfjeld/ai-atlas/3694cfd81702ae88f09054839623c3159a94a026/terms/index.html)
 
 The commit-pinned URLs keep the presentation recoverable. GitHack may show an “Open the page” confirmation before the app. The [moving main URL](https://raw.githack.com/hazelfjeld/ai-atlas/main/index.html) can cache older files.
 
@@ -25,7 +25,7 @@ All **1,345 concepts have direct HTML pages** with original definitions, example
 
 ## Presentation fallback
 
-[Download the searchable single-file fallback](https://rawcdn.githack.com/hazelfjeld/ai-atlas/7a6533c9e38da862a845fbfd74eacafd4dcf6eaa/downloads/Atlas_Demo_Offline.html), then keep it on the presentation device. It embeds all 1,705 records, styles and application code; original downloads, external sources and expanded web pages require the served edition. Direct file-protocol browser testing was blocked by the automation browser's URL policy; inline syntax, embedded record equality and absence of external runtime assets are tested. The printable tour and static concept pages provide additional fallbacks.
+[Download the searchable single-file fallback](https://rawcdn.githack.com/hazelfjeld/ai-atlas/3694cfd81702ae88f09054839623c3159a94a026/downloads/Atlas_Demo_Offline.html), then keep it on the presentation device. It embeds all 1,705 records, styles and application code; original downloads, external sources and expanded web pages require the served edition. Direct file-protocol browser testing was blocked by the automation browser's URL policy; inline syntax, embedded record equality and absence of external runtime assets are tested. The printable tour and static concept pages provide additional fallbacks.
 
 ## Verification and limitations
 

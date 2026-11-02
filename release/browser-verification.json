@@ -2,8 +2,8 @@
   "tested_on": "2026-11-01",
   "user_timezone": "America/Chicago",
   "browser": "Brave on Windows via browser automation",
-  "public_code_commit": "7a6533c9e38da862a845fbfd74eacafd4dcf6eaa",
-  "public_base": "https://rawcdn.githack.com/hazelfjeld/ai-atlas/7a6533c9e38da862a845fbfd74eacafd4dcf6eaa/",
+  "public_code_commit": "3694cfd81702ae88f09054839623c3159a94a026",
+  "public_base": "https://rawcdn.githack.com/hazelfjeld/ai-atlas/3694cfd81702ae88f09054839623c3159a94a026/",
   "hosted_checks_passed": [
     "Overview renders complete catalog counts after SHA-256 verification",
     "Global search for machine learning places the exact concept first in its collection",
@@ -37,5 +37,13 @@
     "All internal generated links are checked locally; public HTTP equality samples all 12 expanded pages and two reference pages, not all 1345 pages.",
     "External reference destinations were preserved and new guide sources consulted; the entire citation corpus was not re-audited."
   ],
-  "screenshot": "release/demo-desktop.jpg"
+  "screenshot": "release/demo-desktop.jpg",
+  "full_interaction_commit": "7a6533c9e38da862a845fbfd74eacafd4dcf6eaa",
+  "final_smoke_checks_passed": [
+    "Final overview displays 300 technologies, 1345 concepts, 30 papers and 10 safety reports",
+    "Exact machine-learning concept remains first in global search",
+    "Static HTML footer exposes Guided demo and Evidence & coverage",
+    "Public overview screenshot captured from the final checkpoint"
+  ],
+  "runtime_equivalence": "All app, CSS, core, catalog loader, data, generated terms and compact playbook/technology assets are byte-identical between the full-interaction commit and final checkpoint. The final checkpoint adds a static footer tour link and rebuilds the offline fallback."
 }

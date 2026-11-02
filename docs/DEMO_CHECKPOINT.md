@@ -2,9 +2,9 @@
 
 Verified November 1, 2026 (America/Chicago). Presentation target: November 2.
 
-[Open Atlas](https://rawcdn.githack.com/hazelfjeld/ai-atlas/7a6533c9e38da862a845fbfd74eacafd4dcf6eaa/index.html) · [Guided tour](https://rawcdn.githack.com/hazelfjeld/ai-atlas/7a6533c9e38da862a845fbfd74eacafd4dcf6eaa/demo.html) · [Expanded machine-learning guide](https://rawcdn.githack.com/hazelfjeld/ai-atlas/7a6533c9e38da862a845fbfd74eacafd4dcf6eaa/terms/MLD-0691-machine-learning.html)
+[Open Atlas](https://rawcdn.githack.com/hazelfjeld/ai-atlas/3694cfd81702ae88f09054839623c3159a94a026/index.html) · [Guided tour](https://rawcdn.githack.com/hazelfjeld/ai-atlas/3694cfd81702ae88f09054839623c3159a94a026/demo.html) · [Expanded machine-learning guide](https://rawcdn.githack.com/hazelfjeld/ai-atlas/3694cfd81702ae88f09054839623c3159a94a026/terms/MLD-0691-machine-learning.html)
 
-The pinned code commit is `7a6533c9e38da862a845fbfd74eacafd4dcf6eaa`. Later documentation commits record this result without changing those served assets. Previous pinned research/playbook releases remain recoverable through Git history. GitHack may ask the visitor to select “Open the page” first.
+The pinned code commit is `3694cfd81702ae88f09054839623c3159a94a026`. Later documentation commits record this result without changing those served assets. Previous pinned research/playbook releases remain recoverable through Git history. GitHack may ask the visitor to select “Open the page” first.
 
 ## Delivered
 
@@ -21,9 +21,11 @@ The pinned code commit is `7a6533c9e38da862a845fbfd74eacafd4dcf6eaa`. Later docu
 
 `release/browser-verification.json` records real local and public browser interactions. Public paths tested include global search to a permanent concept page, a related concept, research search/details/source links, Escape, safety type filter/reset, technology search/comparison, playbook/profile navigation, profile reload, guided-tour navigation and a 390px mobile menu with no document overflow. The captured public overview is `release/demo-desktop.jpg`.
 
-**19 Node tests pass.** These cover search ranking helpers, Unicode matching, safe URLs, CSV/BibTeX exports, notebook validation, complete catalog loading, checksum corruption, truncation, incorrect totals, a transient network failure, every generated browser term URL, and lossless single-file fallback data. The Python validator passes **18,263 internal links**, page hashes, source/download hashes, unique IDs, cross-catalog relationships and SQLite integrity/record equality. CI also checks reproducible generated outputs.
+**19 Node tests pass.** These cover search ranking helpers, Unicode matching, safe URLs, CSV/BibTeX exports, notebook validation, complete catalog loading, checksum corruption, truncation, incorrect totals, a transient network failure, every generated browser term URL, and lossless single-file fallback data. The Python validator passes **18,264 internal links**, page hashes, source/download hashes, unique IDs, cross-catalog relationships and SQLite integrity/record equality. CI also checks reproducible generated outputs.
 
 The direct `file:` URL for the offline fallback could not be tested because the automation browser blocks that protocol. The file was inspected by automated checks for valid inline JavaScript, all original records and no external runtime script/style dependencies. This limit does not apply to the tested public app.
+
+Both GitHub Actions workflows pass at the pinned code commit: [catalog, 19 tests, reproducible outputs and public HTTP checks](https://github.com/hazelfjeld/ai-atlas/actions/runs/41374791076), and [presentation routes/public HTML](https://github.com/hazelfjeld/ai-atlas/actions/runs/41374791163). Full browser interactions ran at `7a6533c9e38da862a845fbfd74eacafd4dcf6eaa`; the final checkpoint has identical application/data/term assets plus a static footer tour link, which was smoke-tested on the final public URL. See `release/ci-verification.json`.
 
 ## Remaining limitations
 

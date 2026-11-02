@@ -11,9 +11,9 @@
   "automatic_refresh_active": false,
   "term_pages": 1345,
   "expanded_guides": 12,
-  "internal_links_checked": 18263,
+  "internal_links_checked": 18264,
   "remote_http_checks": "passed",
-  "base": "https://rawcdn.githack.com/hazelfjeld/ai-atlas/7a6533c9e38da862a845fbfd74eacafd4dcf6eaa/",
+  "base": "https://rawcdn.githack.com/hazelfjeld/ai-atlas/3694cfd81702ae88f09054839623c3159a94a026/",
   "verified_files": [
     "index.html",
     "app.css",
