@@ -1941,8 +1941,8 @@
   },
   "MLD-0389": {
     "path": "terms/MLD-0389-expected-calibration-error.html",
-    "sha256": "60ab5e6eb59976e317bfbefe24beb17fe5281e85f00592fecc1ae6efb7cf41ca",
-    "expanded": false
+    "sha256": "04695b887a5162e8cad818e336e07749eb3a8109cbb547def704951e04f4a4a8",
+    "expanded": true
   },
   "MLD-0390": {
     "path": "terms/MLD-0390-expected-risk.html",
@@ -5916,8 +5916,8 @@
   },
   "MLD-1184": {
     "path": "terms/MLD-1184-subgroup-evaluation.html",
-    "sha256": "294bde9940afd6d7eb096383f08400e51e44160d2fba913e90a47c1cefbc4d9e",
-    "expanded": false
+    "sha256": "7bd6f1d22faeb30c1b29c47f986617a1245a8a8f2f57c5c5e553160ca7124918",
+    "expanded": true
   },
   "MLD-1185": {
     "path": "terms/MLD-1185-subword-regularization.html",
