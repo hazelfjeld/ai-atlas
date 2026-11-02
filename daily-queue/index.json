@@ -1,8 +1,25 @@
 {
   "schema": 1,
   "timezone": "America/Chicago",
-  "batches": [],
+  "batches": [
+    {
+      "path": "daily-queue/batches/2026-11-02-atlas-daily-20261102-first-0850ct-a.json",
+      "sha256": "2dcb25af14b960f9989527170fd88daf8ba2fb5f42dcff3b72f512b08ddb57d7",
+      "batch_id": "atlas-daily-20261102-first-0850ct-a",
+      "local_date": "2026-11-02",
+      "collected_at": "2026-11-02T14:53:43.848Z",
+      "coverage_start": "2026-11-01T14:50:00Z",
+      "coverage_end": "2026-11-02T14:53:43.848Z",
+      "coverage_status": "partial",
+      "counts": {
+        "news": 9,
+        "technologies": 5,
+        "terms": 3,
+        "corrections": 0
+      }
+    }
+  ],
   "last_successful_coverage_end": null,
-  "status": "awaiting_first_collection",
+  "status": "partial_collection_staged",
   "protocol": "Read docs/DAILY_NEWS_PIPELINE.md from current main before collecting. Only daily-queue files on atlas-daily-staging belong to this writer."
 }
