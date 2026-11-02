@@ -1,6 +1,6 @@
 # Cloudflare Workers Static Assets
 
-Atlas is deployed as the original static site, with no framework rewrite or new runtime service. The production target is [https://aiupdates.app](https://aiupdates.app). The same Worker also serves `https://www.aiupdates.app` and `https://ai-atlas.airheadhazelnut.workers.dev`. The production job verifies the apex domain after each deployment.
+AI Updates serves the preserved Atlas catalog through the existing static site, with no framework rewrite or new runtime service. The production target is [https://aiupdates.app](https://aiupdates.app). The same Worker also serves `https://www.aiupdates.app` and `https://ai-atlas.airheadhazelnut.workers.dev`. The production job verifies the apex domain after each deployment. See [brand and SEO publication guidance](AI_UPDATES_BRAND_AND_SEO.md) for the editorial discovery view, direct technology pages and generated metadata.
 
 ## Custom domain
 
