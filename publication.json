@@ -1,7 +1,7 @@
 {
   "schema": 1,
-  "checkpoint": 2,
-  "label": "Research-first incremental publication",
+  "checkpoint": 3,
+  "label": "Research, safety, and complete original playbooks",
   "snapshot_date": "2026-11-01",
   "automatic_refresh_active": false,
   "coverage": "Curated starter snapshot, not an exhaustive incident or research record. Prior review labels are imported, not newly audited during publication.",
@@ -10,7 +10,7 @@
     "alerts": 10,
     "technologies": 0,
     "terms": 0,
-    "playbooks": 0
+    "playbooks": 20
   },
   "prepared_counts": {
     "papers": 30,
@@ -76,5 +76,37 @@
       "bytes": 6925,
       "sha256": "1e0824175ae847541a00bc5b4b60b85ed302c3544f9bd648fc3386b926ce4a17"
     }
-  ]
+  ],
+  "extensions": {
+    "playbooks": [
+      {
+        "path": "data/playbooks-01.json",
+        "kind": "playbooks",
+        "count": 5,
+        "bytes": 4786,
+        "sha256": "9614fe740066d95eecb828d8b2533417118d69caac54c283b9e77c425191211b"
+      },
+      {
+        "path": "data/playbooks-02.json",
+        "kind": "playbooks",
+        "count": 5,
+        "bytes": 4467,
+        "sha256": "0d95fce0f5875ef8cfe08f8d4bcdcc890211ae195afa3374e68d7551aceba676"
+      },
+      {
+        "path": "data/playbooks-03.json",
+        "kind": "playbooks",
+        "count": 5,
+        "bytes": 4530,
+        "sha256": "c3fcd6c7ab8b3310bbc51b0892b33e9ee755ab2193ad795f1aaf38b6af5e3897"
+      },
+      {
+        "path": "data/playbooks-04.json",
+        "kind": "playbooks",
+        "count": 5,
+        "bytes": 4523,
+        "sha256": "c837b0c4f43543dd1dc3b5211b5309287730acc10cc5ecb4931b726bd18d6d30"
+      }
+    ]
+  }
 }
