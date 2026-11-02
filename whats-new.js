@@ -142,6 +142,8 @@ async function switchEdition(entry){
   const e=await readEdition(entry);
   if(requestEpoch!==switchEpoch)return; // Ignore late responses from superseded archive selections.
   edition=e;active=entry;
+  $('edition-permalink').href=C.permalink(entry);
+  $('edition-permalink-wrap').hidden=false;
   $('date-display').textContent=humanDate(entry.date);
   metadata();sourceCoverage();render();
   const today=C.chicagoDate();
@@ -158,7 +160,7 @@ async function switchEdition(entry){
    $('edition-select').value=active.path;
    status('Could not verify '+humanDate(entry.date)+': '+err.message+'. Keeping the previously verified '+humanDate(active.date)+' edition; unverified records were not displayed.');
   }else{
-   edition=null;active=null;metadata();sourceCoverage();$('edition-summary').hidden=true;
+   edition=null;active=null;$('edition-permalink-wrap').hidden=true;metadata();sourceCoverage();$('edition-summary').hidden=true;
    $('edition-content').replaceChildren(element('div','Edition verification failed. No daily records passed validation; the evergreen catalog remains available.','empty'));
    status('Cannot display this edition: '+err.message);
   }
@@ -182,10 +184,13 @@ async function start(){
  const today=C.chicagoDate();$('date-display').textContent=humanDate(today);
  try{
   index=C.validateIndex(decode(await request('data/daily/index.json')));
-  const candidates=C.fallbackOrder(index,today);
+  const requested=C.requestedEdition(index,window.location.search,today);
+  const available=C.fallbackOrder(index,today);
+  const candidates=requested.entry?[requested.entry,...available.filter(e=>e.path!==requested.entry.path)]:available;
   metadata();
   if(!candidates.length){
-   status(index.editions.length?'Awaiting a verified edition dated on or before '+humanDate(today)+'. Future-dated editions are not displayed.':'Awaiting the first reviewed daily edition for '+humanDate(today)+'. No headlines have been published yet.');
+   const missing=index.editions.length?'Awaiting a verified edition dated on or before '+humanDate(today)+'. Future-dated editions are not displayed.':'Awaiting the first reviewed daily edition for '+humanDate(today)+'. No headlines have been published yet.';
+   status((requested.specified?'The requested archive revision cannot be displayed. ':'')+missing);
    $('edition-select').replaceChildren(new Option('Awaiting verified edition',''));
    $('edition-select').disabled=true;
    return;
@@ -196,7 +201,15 @@ async function start(){
   let failures=0;
   for(const entry of candidates.slice(0,4)){
    if(await switchEdition(entry)){
-    if(failures)status('Skipped '+failures+' newer edition revision(s) that failed integrity verification. '+$('edition-status').textContent);
+    let notice='';
+    if(requested.specified){
+     if(requested.entry&&entry.path===requested.entry.path)notice='Opened requested dated archive revision. ';
+     else if(requested.reason==='future')notice='The requested future-dated edition is not yet available. ';
+     else if(requested.reason==='invalid')notice='The requested archive date or revision is invalid. ';
+     else notice='The requested edition is unavailable or failed integrity verification. ';
+    }
+    if(failures)notice+='Skipped '+failures+' archive revision(s) that failed integrity verification. ';
+    if(notice)status(notice+$('edition-status').textContent);
     select.disabled=false;
     return;
    }

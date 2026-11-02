@@ -108,3 +108,30 @@ test('Archive recovery retains verified content after a failed manual selection 
  assert.match(js,/No unverified news is shown/);
  assert.match(js,/select\.disabled=true/);
 });
+
+test('Permanent dated archive links select exact immutable revisions without exposing future editions',()=>{
+ const i=index([entry('2026-10-31'),entry('2026-11-01'),entry('2026-11-01',2),entry('2026-11-03')]);
+ const today='2026-11-02';
+ assert.equal(D.requestedEdition(i,'?date=2026-11-01&revision=1',today).entry.revision,1);
+ assert.equal(D.requestedEdition(i,'?date=2026-11-01',today).entry.revision,2);
+ assert.equal(D.requestedEdition(i,'?date=2026-11-03&revision=1',today).reason,'future');
+ assert.equal(D.requestedEdition(i,'?date=2026-11-02&revision=1',today).reason,'unavailable');
+ assert.equal(D.requestedEdition(i,'?date=2026-11-31',today).reason,'invalid');
+ assert.equal(D.requestedEdition(i,'?revision=1',today).reason,'invalid');
+ assert.equal(D.requestedEdition(i,'?date=2026-11-01&date=2026-10-31',today).reason,'invalid');
+ assert.equal(D.requestedEdition(i,'?date=2026-11-01&revision=0',today).reason,'invalid');
+ assert.equal(D.requestedEdition(i,'?date=2026-11-01&revision=999999999999999999999999',today).reason,'unavailable');
+ assert.equal(D.requestedEdition(i,'?utm_source=demo',today).specified,false);
+ assert.equal(D.permalink(entry('2026-11-01',2)),'whats-new.html?date=2026-11-01&revision=2');
+ assert.throws(()=>D.permalink({date:'2026-11-31',revision:1}),/Invalid edition permalink/);
+});
+test('Dated permalink only appears for a hash-verified edition; failed selection retains verified link',()=>{
+ const html=fs.readFileSync('whats-new.html','utf8'),js=fs.readFileSync('whats-new.js','utf8');
+ assert.match(html,/id="edition-permalink-wrap"[^>]* hidden/);
+ assert.match(html,/id="edition-permalink"/);
+ assert.match(js,/requestedEdition\(index,window\.location\.search,today\)/);
+ assert.match(js,/edition-permalink'\)\.href=C\.permalink\(entry\)/);
+ assert.match(js,/edition-permalink-wrap'\)\.hidden=false/);
+ assert.match(js,/edition-permalink-wrap'\)\.hidden=true/);
+ assert.match(js,/requested future-dated edition is not yet available/);
+});
