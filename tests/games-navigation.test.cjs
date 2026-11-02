@@ -10,7 +10,7 @@ test('Games is an original workspace hash route, not a second website link', () 
   const html = read('index.html'), app = read('app.js');
   assert.ok(!html.includes('href="games.html"'));
   assert.match(app, /games:'Games'/);
-  assert.match(app, /'playbooks','games','compare'/);
+  assert.match(app, /nav\.querySelectorAll\('a\[data-view\]'\)/);
   assert.ok(app.includes("else if(view==='games')"));
   assert.ok(app.includes('AtlasGamesTab.mount'));
   for(const name of ['games-core.js','games-tab.js']) assert.ok(html.includes('src="'+name+'"'));
@@ -39,4 +39,23 @@ test('Offline fallback embeds Games without redirecting learners to another site
   assert.ok(!html.includes('href="https://raw.githack.com/hazelfjeld/ai-atlas/main/games.html"'));
   assert.ok(!html.includes('src="games-tab.js"'));
   assert.ok(!html.includes('href="games-tab.css"'));
+});
+
+test('first-paint sidebar uses the same canonical workspace destinations as hydration', () => {
+  const html=read('index.html'),app=read('app.js');
+  const nav=html.match(/<nav id="navigation" aria-label="Main navigation">([\s\S]*?)<\/nav>/)?.[1];
+  assert.ok(nav);
+  const links=[...nav.matchAll(/<a class="nav-link(?: active)?"([^>]*)>[\s\S]*?<\/a>/g)].map(m=>({
+    id:m[1].match(/data-(?:view|static)="([^"]+)"/)?.[1],href:m[1].match(/href="([^"]+)"/)?.[1]
+  }));
+  assert.deepEqual(links,[
+    ['overview','#/overview'],['daily','whats-new.html'],['dictionary','#/dictionary'],
+    ['technologies','#/technologies'],['games','#/games'],['safety','#/safety'],
+    ['papers','#/papers'],['playbooks','#/playbooks'],['compare','#/compare'],
+    ['saved','#/saved'],['sources','#/sources'],['demo','demo.html'],
+    ['encyclopedia','terms/index.html'],['offline','downloads/Atlas_Demo_Offline.html']
+  ].map(([id,href])=>({id,href})));
+  assert.ok(app.includes("nav.querySelectorAll('a[data-view]')"));
+  assert.ok(!app.includes("$('navigation').innerHTML=items.map"));
+  assert.ok(html.includes('<noscript>') && html.includes('href="terms/index.html"'));
 });

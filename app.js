@@ -21,7 +21,7 @@ const sets={technologies:all.filter(r=>r._type==='technologies'),dictionary:all.
 let notebook={schema:1,saved:[],notes:{},compare:[]},persist=!SHARED_HOST;
 try{if(!SHARED_HOST){const raw=localStorage.getItem(STORE);if(raw)notebook=C.validateNotebook(JSON.parse(raw),validIDs);if(localStorage.getItem('atlas.theme')==='dark')document.documentElement.dataset.theme='dark';}}catch{persist=false;}
 let state={}, view='overview', currentRows=[], timer, toastTimer;
-const labels={overview:'Discover',games:'Games',technologies:'Technology atlas',dictionary:'Concept dictionary',safety:'Safety observatory',papers:'Research library',playbooks:'Problem playbooks',compare:'Compare tools',saved:'Your notebook',sources:'Sources & coverage',search:'Search AI Updates',queue:'Review queue'};
+const labels={overview:'Discover',games:'Games',technologies:'Technology profiles',dictionary:'Concept dictionary',safety:'Safety observatory',papers:'Research library',playbooks:'Problem playbooks',compare:'Compare tools',saved:'Your notebook',sources:'Sources & coverage',search:'Search AI Updates',queue:'Review queue'};
 function saveNotebook(){if(SHARED_HOST){persist=false;toast(STORAGE_NOTICE);return false;}try{localStorage.setItem(STORE,JSON.stringify(notebook));persist=true;return true;}catch{persist=false;toast('Storage is unavailable. Export your notebook to keep changes.');return false;}}
 function toast(message){$('toast').textContent=message;$('toast').hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').hidden=true,3800);}
 function href(v,params={}){const q=new URLSearchParams(Object.entries(params).filter(([,val])=>val!==''&&val!==undefined));return '#/'+v+(q.size?'?'+q:'');}
@@ -39,7 +39,28 @@ function saveButton(r){const yes=notebook.saved.includes(r.id);return `<button c
 function paperSort(rows){return [...rows].sort((a,b)=>(b.published_at||'').localeCompare(a.published_at||'')||a.title.localeCompare(b.title));}
 function reportSort(rows){return [...rows].sort((a,b)=>(b.updated_at||b.published_at||'').localeCompare(a.updated_at||a.published_at||''));}
 function plainStatus(r){const status=r.evidence_status||r.review_status||r.level||r.status||'';return status.replace(' — not reviewed this edition','').replace('Core capability verified','Core capability checked');}
-function renderNav(){const items=['overview','technologies','dictionary','safety','papers','playbooks','games','compare','saved','sources'];$('navigation').innerHTML=items.map((v,i)=>`${i===6?'<div class="nav-separator"></div>':''}<a class="nav-link ${view===v?'active':''}" href="${href(v)}" ${view===v?'aria-current="page"':''}>${icon(v)}<span>${labels[v]}</span>${['technologies','dictionary','safety','papers'].includes(v)?`<span class="nav-count">${sets[v].length.toLocaleString()}</span>`:v==='saved'?`<span class="nav-count">${notebook.saved.length}</span>`:''}</a>`).join('');if(!window.ATLAS_OFFLINE)$('navigation').insertAdjacentHTML('beforeend','<a class="nav-link" href="whats-new.html">'+icon('papers')+'<span>What’s New Today</span></a>');$('navigation').insertAdjacentHTML('beforeend','<a class="nav-link" href="'+(window.ATLAS_OFFLINE?'#/overview':'demo.html')+'">'+icon('playbooks')+'<span>Guided professor demo</span></a><a class="nav-link" href="'+(window.ATLAS_OFFLINE?'#/dictionary':'terms/index.html')+'">'+icon('dictionary')+'<span>Concept encyclopedia</span></a><a class="nav-link" href="'+(window.ATLAS_OFFLINE?'#/overview':'downloads/Atlas_Demo_Offline.html')+'" download><span>Offline demo download ↓</span></a>');$('breadcrumb').textContent=labels[view];document.title=view==='overview'?'AI Updates — AI research, tools & concepts':labels[view]+' · AI Updates';$('snapshot-date').textContent=date(D.meta.research_checked_on);renderDock();}
+function renderNav(){
+  // The first-render navigation is canonical; enhance it in place without rerouting links.
+  const nav=$('navigation');
+  nav.querySelectorAll('a[data-view]').forEach(link=>{
+    const key=link.dataset.view, active=key===view;
+    link.classList.toggle('active',active);
+    if(active)link.setAttribute('aria-current','page');
+    else link.removeAttribute('aria-current');
+    const counter=link.querySelector('.nav-count');
+    if(counter)counter.textContent=Number(key==='saved'?notebook.saved.length:(sets[key]?.length||0)).toLocaleString();
+  });
+  if(window.ATLAS_OFFLINE){
+    for(const id of ['daily','offline'])nav.querySelector(`[data-static="${id}"]`)?.setAttribute('hidden','');
+    const demo=nav.querySelector('[data-static="demo"]'), encyclopedia=nav.querySelector('[data-static="encyclopedia"]');
+    if(demo)demo.setAttribute('href','#/overview');
+    if(encyclopedia)encyclopedia.setAttribute('href','#/dictionary');
+  }
+  $('breadcrumb').textContent=labels[view];
+  document.title=view==='overview'?'AI Updates — AI research, tools & concepts':labels[view]+' · AI Updates';
+  $('snapshot-date').textContent=date(D.meta.research_checked_on);
+  renderDock();
+}
 function renderDock(){const rows=notebook.compare.map(id=>byID.get(id)).filter(Boolean);const dock=$('compare-dock');dock.hidden=!rows.length||view==='compare';dock.innerHTML=`<span>${rows.length}/3 selected</span><div class="compare-items">${rows.map(r=>`<button data-compare="${r.id}" aria-label="Remove ${E(r.name)} from comparison">${E(r.name)} ×</button>`).join('')}</div><a class="btn" href="#/compare">Compare tools →</a><button class="btn" data-action="clear-compare">Clear</button>`;}
 function head(eyebrow,title,desc,actions=''){return `<div class="page-head"><div><div class="eyebrow"><span class="tiny-square"></span>${E(eyebrow)}</div><h1>${E(title)}</h1><p>${E(desc)}</p></div>${actions?`<div class="head-actions">${actions}</div>`:''}</div>`;}
 function techCard(r){return `<article class="card"><div class="card-top"><span class="eyebrow" style="font-size:8px">${E(r.section.replace(/^\d+ · /,''))}</span>${saveButton(r)}</div><h3><a href="${recordHref(r)}">${E(r.name)}</a></h3><p class="description">${E(r.what)}</p><div class="edge"><b>Where it has an edge</b>${E(r.edge)}</div>${chips(r.tags)}<div class="card-note">${E(plainStatus(r))}</div><div class="card-bottom"><a href="${recordHref(r)}">View profile ↗</a><button class="btn small ${notebook.compare.includes(r.id)?'primary':''}" data-compare="${r.id}" aria-pressed="${notebook.compare.includes(r.id)}">${notebook.compare.includes(r.id)?'Selected':'Compare +'}</button></div></article>`;}
