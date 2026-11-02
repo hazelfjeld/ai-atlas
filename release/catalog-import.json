@@ -1,0 +1,50 @@
+{
+  "archive_sha256": "1f1b648e113cec13583217e9ae363def0028506706eed28a7f1f6b9cd4793125",
+  "catalogs": {
+    "technologies": [
+      {
+        "path": "data/technologies-01.json",
+        "kind": "technologies",
+        "count": 50,
+        "bytes": 71186,
+        "sha256": "93e00277d1393e5b27258c339463954135de6eb727611ae847e28ff02f3cfed1"
+      },
+      {
+        "path": "data/technologies-02.json",
+        "kind": "technologies",
+        "count": 50,
+        "bytes": 70777,
+        "sha256": "d4148bf929b9ca112ad3e1bd4ea3d025d25e4ee9a8728f6f20781cd43e8ae6fb"
+      },
+      {
+        "path": "data/technologies-03.json",
+        "kind": "technologies",
+        "count": 50,
+        "bytes": 71477,
+        "sha256": "2eea4e3d7fac2bc1961c840e610ec5ff4d7617eafc58ded4bb356fc23cc07e41"
+      },
+      {
+        "path": "data/technologies-04.json",
+        "kind": "technologies",
+        "count": 50,
+        "bytes": 72291,
+        "sha256": "1d3bb10bb75c1ccc9e4879b1d254eae444332991547b2e3ec6d720e9a64877a1"
+      },
+      {
+        "path": "data/technologies-05.json",
+        "kind": "technologies",
+        "count": 50,
+        "bytes": 70651,
+        "sha256": "125993307221237d796913fcad8d615fe54e91b9bbc18fb5a1956171910fba53"
+      },
+      {
+        "path": "data/technologies-06.json",
+        "kind": "technologies",
+        "count": 50,
+        "bytes": 71486,
+        "sha256": "24d9aa480693de33c0c406cc5c8aaf83f56548939015e2518d5748b407738e27"
+      }
+    ]
+  },
+  "support": []
+}
