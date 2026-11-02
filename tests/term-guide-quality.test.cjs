@@ -150,3 +150,24 @@ test('Expected calibration error and subgroup evaluation preserve worked metrics
     assert.match(html, /Sources for the expanded explanation/);
   }
 });
+
+test('Weak-supervisor and verifier guides use independent evaluation and bound overclaims', () => {
+  const specifications = {
+    'MLD-1323': [/weak.to.strong/i, /0\.75 - 0\.60/i, /0\.50/i, /independent/i, /sealed|held.out/i, /not.*proof|not.*certificate|not.*demonstration/i],
+    'MLD-1308': [/verifier/i, /best.of.N/i, /argmax/i, /false.positive/i, /sandbox/i, /not.*(?:establish|prove)|does not establish/i]
+  };
+  for (const [id, patterns] of Object.entries(specifications)) {
+    const g = guides[id];
+    assert.ok(g && termManifest[id], 'Missing canonical guide path ' + id);
+    assert.equal(g.reviewed_on, '2026-11-02');
+    assert.ok(g.sections.length >= 9 && g.sections.every(([title, paragraph]) => title.length >= 8 && paragraph.length >= 120));
+    assert.equal(new Set(g.sections.map(([heading]) => heading)).size, g.sections.length);
+    assert.ok(g.prerequisites.length >= 4 && g.prerequisites.every(x => termManifest[x]), 'Unresolved prerequisite ' + id);
+    assert.ok(g.citations.length >= 3 && g.citations.every(([name, url]) => name.length > 35 && /^https:\/\//.test(url)));
+    const body = g.sections.map(([_, paragraph]) => paragraph).join(' ');
+    for (const regex of patterns) assert.match(body, regex, 'Missing mechanism or evidence limit for ' + id);
+    const html = fs.readFileSync(path.join(root, termManifest[id].path), 'utf8');
+    assert.match(html, /Expanded guide/);
+    assert.match(html, /Sources for the expanded explanation/);
+  }
+});
