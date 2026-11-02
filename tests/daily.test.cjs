@@ -4,7 +4,7 @@ const fs=require('node:fs');
 const vm=require('node:vm');
 const D=require('../daily-core.js');
 function index(entries=[]){return {schema:1,timezone:'America/Chicago',editions:entries,last_successful_publish_at:null};}
-const entry=(date,revision=1)=>({date,revision,path:'data/daily/editions/'+date+'-v'+revision+'.json',sha256:'a'.repeat(64),bytes:900,published_at:date+'T18:00:00Z'});
+const entry=(date,revision=1)=>({date,revision,path:'data/daily/editions/'+date+'-v'+revision+'.json',sha256:'a'.repeat(64),bytes:900,published_at:date+'T15:00:00Z'});
 function edition(){
  return {schema:1,timezone:'America/Chicago',edition_date:'2026-11-02',published_at:'2026-11-02T15:00:00Z',coverage:{start:'2026-11-01T14:00:00Z',end:'2026-11-02T14:00:00Z',status:'partial',sources_checked:[{url:'https://arxiv.org'}],sources_failed:[{url:'https://example.org',reason:'timeout'}]},tldr:['Several official sources were checked.','Coverage is incomplete due to a source failure.'],news:[],technologies:[],terms:[],site_changes:[],corrections:[]};
 }
@@ -75,4 +75,26 @@ test('Daily archive reader exposes collection gaps and ignores late responses',(
  assert.match(js,/requestEpoch!==switchEpoch/);
  assert.match(js,/is awaiting publication\. Showing archived edition/);
  assert.match(js,/No source-by-source details were supplied/);
+});
+
+test('Strict timestamp and source-date validation rejects fabricated calendar values',()=>{
+ for(const v of ['2026-02-29T12:00:00Z','2026-11-31T12:00:00Z','2026-11-02T24:00:00Z','2026-11-02T12:60:00Z','2026-11-02T12:00:60Z','2026-11-02T12:00:00+15:00','2026-11-02T12:00:00-14:30'])assert.equal(D.validTimestamp(v),false,v);
+ for(const v of ['2026-11-01T01:30:00-05:00','2026-11-01T01:30:00-06:00','2026-11-02T15:00:00Z','2026-11-02T15:00:00.250+00:00'])assert.equal(D.validTimestamp(v),true,v);
+ const bad=edition();bad.news=[{id:'NEWS-1',title:'Fictional',summary:'Example',review_status:'reviewed',source_url:'https://example.org',event_date:'2026-02-31'}];
+ assert.throws(()=>D.validateEdition(bad,entry('2026-11-02')),/Invalid event date/);
+});
+test('Reject mismatched immutable publication timestamps, missing evidence sources and unsafe source-health URLs',()=>{
+ const wrong=edition();wrong.published_at='2026-11-02T15:01:00Z';
+ assert.throws(()=>D.validateEdition(wrong,entry('2026-11-02')),/Publication timestamp differs/);
+ const news=edition();news.news=[{id:'NEWS-2',title:'Fictional',summary:'Example',review_status:'reviewed'}];
+ assert.throws(()=>D.validateEdition(news,entry('2026-11-02')),/requires an HTTPS source URL/);
+ const health=edition();health.coverage.sources_checked=['javascript:alert(1)'];
+ assert.throws(()=>D.validateEdition(health,entry('2026-11-02')),/Invalid collection source URL/);
+});
+test('Fallback only includes dated editions on or before actual Chicago today',()=>{
+ const i=index([entry('2026-10-31'),entry('2026-11-01',1),entry('2026-11-01',2),entry('2026-11-02')]);
+ assert.deepEqual(D.fallbackOrder(i,'2026-11-01').map(e=>e.path),[
+ 'data/daily/editions/2026-11-01-v2.json',
+ 'data/daily/editions/2026-11-01-v1.json',
+ 'data/daily/editions/2026-10-31-v1.json']);
 });

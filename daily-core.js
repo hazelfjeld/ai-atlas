@@ -14,7 +14,14 @@ function validDate(value){
  const d=new Date(value+'T12:00:00Z');
  return Number.isFinite(d.valueOf())&&d.toISOString().slice(0,10)===value;
 }
-function validTimestamp(value){return typeof value==='string'&&/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/.test(value)&&Number.isFinite(Date.parse(value));}
+function validTimestamp(value){
+ if(typeof value!=='string')return false;
+ const m=value.match(/^(\d{4}-\d{2}-\d{2})T(\d{2}):(\d{2}):(\d{2})(?:\.\d+)?(Z|[+-](\d{2}):(\d{2}))$/);
+ if(!m||!validDate(m[1]))return false;
+ if(Number(m[2])>23||Number(m[3])>59||Number(m[4])>59)return false;
+ if(m[5]!=='Z'&&(Number(m[6])>14||Number(m[7])>59||(Number(m[6])===14&&Number(m[7])!==0)))return false;
+ return Number.isFinite(Date.parse(value));
+}
 function chicagoDate(value=new Date()){
  const d=value instanceof Date?value:new Date(value);
  assert(Number.isFinite(d.valueOf()),'Invalid date');
@@ -55,14 +62,24 @@ function selection(index,today=chicagoDate()){
  const byDate=sorted.filter(e=>e.date===today);
  return {today,todayEntry:byDate[0]||null,latest:sorted[0]||null,archive:sorted};
 }
+function fallbackOrder(index,today=chicagoDate()){
+ return selection(index,today).archive.filter(e=>e.date<=today);
+}
 function validateEdition(edition,indexEntry){
  assert(edition&&typeof edition==='object'&&!Array.isArray(edition),'Invalid edition');
  assert(edition.schema===1&&edition.timezone==='America/Chicago'&&validDate(edition.edition_date),'Invalid edition schema/date');
- if(indexEntry)assert(edition.edition_date===indexEntry.date,'Edition date differs from archive index');
+ if(indexEntry){
+  assert(edition.edition_date===indexEntry.date,'Edition date differs from archive index');
+  assert(Date.parse(edition.published_at)===Date.parse(indexEntry.published_at),'Publication timestamp differs from archive index');
+ }
  assert(validTimestamp(edition.published_at),'Invalid edition publication timestamp');
  assert(edition.coverage&&typeof edition.coverage==='object'&&['complete','partial','failed'].includes(edition.coverage.status),'Invalid collection status');
  assert(validTimestamp(edition.coverage.start)&&validTimestamp(edition.coverage.end)&&Date.parse(edition.coverage.end)>=Date.parse(edition.coverage.start),'Invalid collection window');
  assert(Array.isArray(edition.coverage.sources_checked)&&Array.isArray(edition.coverage.sources_failed),'Missing source health');
+ for(const source of [...edition.coverage.sources_checked,...edition.coverage.sources_failed]){
+  const url=typeof source==='string'?source:source?.url;
+  assert(!url||safeSource(url),'Invalid collection source URL');
+ }
  assert(Array.isArray(edition.tldr)&&edition.tldr.length>=1&&edition.tldr.length<=3&&edition.tldr.every(x=>typeof x==='string'&&x.trim()),'Missing editorial summary');
  const seen=new Set();
  for(const kind of KINDS){
@@ -72,9 +89,11 @@ function validateEdition(edition,indexEntry){
    assert(typeof item.title==='string'&&item.title.trim()&&typeof item.summary==='string'&&item.summary.trim(),'Missing title or summary');
    assert(typeof item.review_status==='string'&&item.review_status.trim(),'Missing evidence status');
    assert(!item.source_url||safeSource(item.source_url),'Invalid source URL');
+   if(kind==='news')assert(safeSource(item.source_url),'News item requires an HTTPS source URL');
    assert(!item.catalog_path||safeCatalogPath(item.catalog_path),'Unsafe internal record link');
    assert(Array.isArray(item.tags||[]),'Invalid topic tags');
    assert(!item.publication_date||validDate(item.publication_date),'Invalid source publication date');
+   assert(!item.event_date||validDate(item.event_date),'Invalid event date');
    assert(!item.discovered_at||validTimestamp(item.discovered_at),'Invalid discovery timestamp');
    assert(!item.added_to_atlas_at||validTimestamp(item.added_to_atlas_at),'Invalid Atlas addition timestamp');
    const key=kind+'|'+item.id;
@@ -84,5 +103,5 @@ function validateEdition(edition,indexEntry){
  }
  return edition;
 }
-return {KINDS,validDate,validTimestamp,chicagoDate,safeSource,safeCatalogPath,validateIndex,validateEdition,selection};
+return {KINDS,validDate,validTimestamp,chicagoDate,safeSource,safeCatalogPath,validateIndex,validateEdition,selection,fallbackOrder};
 });
