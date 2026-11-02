@@ -1,5 +1,14 @@
 # AI Atlas — recurring expansion plan
 
+## Latest verified incremental progress — November 1, 2026
+
+- **Published commit:** [2871660](https://github.com/hazelfjeld/ai-atlas/commit/2871660bf7d5e1ad8c0a3fb18756843a9a03c516). The verified professor presentation link at commit `839fee0` remains a known-good recovery point.
+- **New substantive guides (4):** [specification gaming](../terms/MLD-1149-specification-gaming.html), [reward hacking](../terms/MLD-1039-reward-hacking.html), [Goodhart's law](../terms/MLD-0470-goodhart-s-law.html), [goal misgeneralization](../terms/MLD-0469-goal-misgeneralization.html). Each includes mechanism, worked cases, evaluation procedure, limitations and primary research citations.
+- **Verified coverage:** 1,705 source records; 1,345 stable term pages; **16** expanded editorial guides, **1,329** not yet expanded; no newly imported terms, technologies or incident reports in this batch. The 16 authored guides are editorial syntheses, not independently peer-reviewed manuscripts.
+- **Validation:** [Actions run 41389008878](https://github.com/hazelfjeld/ai-atlas/actions/runs/41389008878) passed catalog integrity, 56 JavaScript tests, reproducible page/offline generation, 18,309 internal links and exact GitHack HTTP bytes. Feature-branch checks also verified all four new guide pages by HTTP. Hosted browser interactions remain a separate untested boundary.
+- **Daily queue:** the staging index reported zero batches and production receipts zero at the start of this run; no real daily edition was manufactured. Recheck both on the next run before any further guide expansion.
+- **Next bounded step:** process the first source-verified daily batch if staged; otherwise expand another few high-value concept guides and inspect broken/changed upstream citations. Keep the older pinned demo accessible. No Cloudflare/DNS/billing changes were made.
+
 ## Professor demonstration checkpoint — November 1, 2026
 
 This section supersedes the older partial-import status below. All prepared catalogs are now imported: **1,345 terms, 300 technologies, 30 papers, 10 safety reports and 20 playbooks**. Source registers and original downloads are restored. The integrated workspace verifies 45 chunks before rendering; global search, comparisons and cross-catalog links are available. All 1,345 terms have permanent pages; 12 have expanded explanations, leaving 1,333 detailed expansions pending.

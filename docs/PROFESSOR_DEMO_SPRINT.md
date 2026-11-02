@@ -1,5 +1,11 @@
 # Presentation readiness sprint — November 2, 2026
 
+## Follow-up: source-backed safety concepts (November 1 evening)
+
+The original verified three-minute demonstration remains pinned at commit `839fee0`. A later passing Atlas app checkpoint, [2871660](https://github.com/hazelfjeld/ai-atlas/commit/2871660bf7d5e1ad8c0a3fb18756843a9a03c516), adds four substantive AI-safety explanations: specification gaming, reward hacking, Goodhart's law, and goal misgeneralization. This is optional extra material for an AI safety discussion, not a change to the rehearsed three-minute tour. **16 of 1,345** term pages are now expanded; **1,329** remain at reference-page depth.
+
+Checks: [56 passing tests, 18,309 internal links, verified GitHack HTTP assets](https://github.com/hazelfjeld/ai-atlas/actions/runs/41389008878). The separate daily news queue had no batches on this run, so the archive remains awaiting its first vetted publication; no new external AI safety incident was claimed.
+
 ## Updated three-minute professor walkthrough — November 1, 2026
 
 The latest **verified**, non-destructive presentation release is `839fee0b0e4f6b16d933dd5e5eac55e3a3e847c6`:
