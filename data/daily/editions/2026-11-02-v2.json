@@ -1,0 +1,208 @@
+{
+  "schema": 1,
+  "edition_date": "2026-11-02",
+  "timezone": "America/Chicago",
+  "published_at": "2026-11-02T17:32:44.374Z",
+  "coverage": {
+    "start": "2026-11-01T14:50:00Z",
+    "end": "2026-11-02T14:53:43.848Z",
+    "status": "partial",
+    "note": "Publisher review expanded the November 2 partial collection: five of nine news candidates are now source-reviewed, and four news plus eight technology/term proposals remain deferred. The two newly published reports distinguish benchmark evaluation from reported misuse. Coverage is non-exhaustive, and two other source lookups failed.",
+    "sources_checked": [
+      {
+        "name": "vllm",
+        "url": "https://github.com/vllm-project/vllm/releases/tag/v0.33.0rc3",
+        "checked_at": "2026-11-02T14:53:43.848Z"
+      },
+      {
+        "name": "invokeai",
+        "url": "https://github.com/invoke-ai/InvokeAI/releases/tag/v6.14.3",
+        "checked_at": "2026-11-02T14:53:43.848Z"
+      },
+      {
+        "name": "windmill",
+        "url": "https://github.com/windmill-labs/windmill/releases/tag/v1.856.0",
+        "checked_at": "2026-11-02T14:53:43.848Z"
+      },
+      {
+        "name": "SemiAnalysis GDPx original publication",
+        "url": "https://newsletter.semianalysis.com/p/gdpx-measuring-frontier-model-capabilities",
+        "checked_at": "2026-11-02T17:32:44.374Z"
+      },
+      {
+        "name": "WIRED original investigation",
+        "url": "https://www.wired.com/story/hundreds-of-mundane-ai-apps-are-hiding-abusive-deepfake-features/",
+        "checked_at": "2026-11-02T17:32:44.374Z"
+      }
+    ],
+    "sources_failed": [
+      {
+        "url": "https://huggingface.co/api/models/JetBrains/Mellum2.1-12B-A2.5B-Thinking-MTP",
+        "reason": "Direct model metadata API was not available in the research browser; model-card first-publication timestamp unverified, no date-specific news item proposed.",
+        "status": "inaccessible"
+      },
+      {
+        "url": "https://www.samsungsds.com/kr/news/0905-6278.html",
+        "reason": "Previously surfaced press URL returned no page; unverified alleged deal omitted.",
+        "status": "not_found"
+      }
+    ]
+  },
+  "tldr": [
+    "SemiAnalysis introduced GDPx, a specialist agent benchmark reporting a 12% top model score in publisher-run tests; its simulated security and alignment tasks are not real-world incidents.",
+    "WIRED reported more than 400 linked app and domain properties associated with abusive deepfake features, a serious reported misuse concern that Atlas has not independently reproduced.",
+    "Three previously reviewed software releases remain in this partial edition; four news candidates and eight catalog proposals await further review, with no newly integrated technology or glossary record."
+  ],
+  "news": [
+    {
+      "id": "ai-news-vllm-v0-33-0rc3-2026-11-02",
+      "title": "vLLM v0.33.0rc3 expands model serving and changes CUDA packaging",
+      "category": "infrastructure",
+      "tags": [
+        "LLM",
+        "Inference",
+        "GPU",
+        "Open source"
+      ],
+      "summary": "The v0.33.0rc3 release candidate adds model and speculative-decoding support, moves to PyTorch 2.14, and publishes CUDA 13 rather than CUDA 12.9 artifacts, alongside AMD ROCm updates.",
+      "why_it_matters": "Inference engineers need to validate model support, compatibility and deployment images before upgrading serving fleets.",
+      "caveat": "This specific URL is tagged rc3 (release candidate), even though its GitHub heading says v0.33.0; performance claims are release-note benchmarks on specified hardware.",
+      "review_status": "publisher_verified_primary_release_notes",
+      "release_status": "release_candidate",
+      "source_url": "https://github.com/vllm-project/vllm/releases/tag/v0.33.0rc3",
+      "publication_date": "2026-11-02",
+      "event_date": "2026-11-02",
+      "discovered_at": "2026-11-02T14:53:43.848Z",
+      "catalog_path": "technology/TECH-0288-vllm.html"
+    },
+    {
+      "id": "ai-news-invokeai-v6-14-3-2026-11-01",
+      "title": "InvokeAI 6.14.3 adds editable vector layers for image workflows",
+      "category": "multimodal",
+      "tags": [
+        "DL",
+        "Diffusion",
+        "Vision",
+        "Creative tools",
+        "Open source"
+      ],
+      "summary": "InvokeAI's 6.14.3 patch adds editable vector shapes and splines to its Canvas, which artists can rasterize for image-to-image workflows, and fixes resumed model downloads.",
+      "why_it_matters": "This bridges precise vector composition and local generative image editing without forcing every shape to be raster-first.",
+      "caveat": "This is a product-specific patch, not evidence that image-generation quality or speed improved across models; GitHub displays release time without an explicit timezone.",
+      "review_status": "publisher_verified_primary_release_notes",
+      "release_status": "patch_release",
+      "source_url": "https://github.com/invoke-ai/InvokeAI/releases/tag/v6.14.3",
+      "publication_date": "2026-11-01",
+      "event_date": "2026-11-01",
+      "discovered_at": "2026-11-02T14:53:43.848Z"
+    },
+    {
+      "id": "ai-news-windmill-v1-856-0-2026-11-02",
+      "title": "Windmill 1.856.0 adds external OIDC token support for MCP access",
+      "category": "developer_tooling",
+      "tags": [
+        "Agents",
+        "MCP",
+        "Security",
+        "Developer tools"
+      ],
+      "summary": "Windmill's 1.856.0 release adds support for MCP access tokens from external OIDC issuers, HashiCorp Vault references, workspace-role sync through the CLI, and working folders/instructions for AI sessions.",
+      "why_it_matters": "It gives teams more options for authenticated and governed automation workflows that expose tools to agents.",
+      "caveat": "The announcement is a release-note claim, not an independent security audit; organizational authentication still requires appropriate configuration.",
+      "review_status": "publisher_verified_primary_release_notes",
+      "release_status": "software_release",
+      "source_url": "https://github.com/windmill-labs/windmill/releases/tag/v1.856.0",
+      "publication_date": "2026-11-02",
+      "event_date": "2026-11-02",
+      "discovered_at": "2026-11-02T14:53:43.848Z"
+    },
+    {
+      "id": "ai-news-gdpx-agent-benchmark-2026-11-02",
+      "title": "SemiAnalysis launches GDPx benchmark for tool-using agents",
+      "category": "research",
+      "tags": [
+        "Research",
+        "Agents",
+        "Evaluation",
+        "AI safety",
+        "Benchmark"
+      ],
+      "summary": "SemiAnalysis published GDPx, a tool-using agent benchmark spanning 11 specialized domains, including chip design, cybersecurity, biology and alignment. The authors report a 12% top score on their own aggregate evaluation.",
+      "why_it_matters": "Environment-based tasks and explicit grading constraints offer ways to evaluate agent capability and boundary-following beyond static question-answer tests.",
+      "caveat": "The 12% figure and comparisons are publisher-run, not independently replicated. Domain weighting, model harnesses, safety refusals and grading design affect results; alignment and cyber exercises are controlled evaluations, not real deployment incidents.",
+      "review_status": "primary_source_checked_publisher_benchmark_unreplicated",
+      "release_status": "new_benchmark",
+      "source_url": "https://newsletter.semianalysis.com/p/gdpx-measuring-frontier-model-capabilities",
+      "publication_date": "2026-11-02",
+      "event_date": "2026-11-02",
+      "discovered_at": "2026-11-02T14:53:43.848Z",
+      "added_to_atlas_at": "2026-11-02T17:32:44.374Z"
+    },
+    {
+      "id": "ai-news-wired-deepfake-network-investigation-2026-11-02",
+      "title": "WIRED investigates disguised apps linked to abusive deepfake services",
+      "category": "security",
+      "tags": [
+        "AI safety",
+        "Security",
+        "Misuse",
+        "Multimodal",
+        "Governance"
+      ],
+      "summary": "WIRED reports that researchers linked more than 400 app and web-domain properties to services presenting ordinary AI tools while conditionally exposing nonconsensual explicit deepfake functions. The investigation describes app-store and advertising distribution.",
+      "why_it_matters": "The reported pattern raises difficult questions about app review, server-switched features, consent safeguards and enforcement across advertising platforms.",
+      "caveat": "These are findings attributed to WIRED and its interviewed researchers, not a fresh independent Atlas audit. The 400-plus figure covers linked domains and apps, not 400 individually verified malicious applications; the reporting does not identify a particular underlying model.",
+      "review_status": "original_investigation_reviewed_not_independently_reproduced",
+      "release_status": "reported_investigation",
+      "source_url": "https://www.wired.com/story/hundreds-of-mundane-ai-apps-are-hiding-abusive-deepfake-features/",
+      "publication_date": "2026-11-02",
+      "discovered_at": "2026-11-02T14:53:43.848Z",
+      "added_to_atlas_at": "2026-11-02T17:32:44.374Z"
+    }
+  ],
+  "technologies": [],
+  "terms": [],
+  "site_changes": [
+    {
+      "id": "site-first-reviewed-edition-20261102",
+      "title": "First dated, evidence-checked partial daily edition",
+      "summary": "The archive gained three independently checked release-note news cards. No technology or term was added to the underlying catalogs in this publication.",
+      "review_status": "verified_main_publication_and_browser_checks",
+      "category": "site",
+      "tags": [
+        "Atlas",
+        "Editorial"
+      ],
+      "added_to_atlas_at": "2026-11-02T15:33:47.914Z"
+    },
+    {
+      "id": "site-expanded-daily-source-review-20261102",
+      "title": "Dated edition expanded with two source-reviewed reports",
+      "summary": "The November 2 archive now includes a publisher-attributed benchmark launch and an explicitly reported safety investigation. Edition v1 remains available; no new term, technology or confirmed incident catalog entry was created.",
+      "review_status": "source_reviews_completed_main_publication_pending",
+      "category": "site",
+      "tags": [
+        "Atlas",
+        "Editorial",
+        "Publication"
+      ],
+      "added_to_atlas_at": "2026-11-02T17:32:44.374Z"
+    }
+  ],
+  "corrections": [
+    {
+      "id": "site-clarification-first-edition-verification-20261102",
+      "title": "Clarification: initial edition subsequently passed deployment checks",
+      "summary": "Revision 1 correctly described site publication as pending at build time. Subsequent GitHub Actions validated production publication, so this revision updates the site-only review label while preserving v1 unchanged.",
+      "review_status": "verified_workflow_result",
+      "category": "site",
+      "tags": [
+        "Atlas",
+        "Correction",
+        "Publication"
+      ],
+      "source_url": "https://github.com/hazelfjeld/ai-atlas/actions/runs/41473870650",
+      "added_to_atlas_at": "2026-11-02T17:32:44.374Z"
+    }
+  ]
+}
