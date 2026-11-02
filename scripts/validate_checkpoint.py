@@ -83,7 +83,7 @@ def validate_daily_publication() -> dict:
         date.fromisoformat(day)
         assert isinstance(item.get('revision'), int) and item['revision'] >= 1, item
         path = item['path']
-        assert re.fullmatch(r'data/daily/editions/\\d{4}-\\d{2}-\\d{2}-v[1-9]\\d*\\.json', path), path
+        assert re.fullmatch(r'data/daily/editions/\d{4}-\d{2}-\d{2}-v[1-9]\d*\.json', path), path
         assert path == f'data/daily/editions/{day}-v{item["revision"]}.json', path
         assert (day, item['revision']) not in entries, 'Duplicate daily edition'
         entries.add((day, item['revision']))
