@@ -2,7 +2,7 @@ name: Build verified safety concept guides
 on:
   push:
     branches: ['atlas-guides-*']
-    paths: ['content/term-guides.json', 'tests/term-guide-quality.test.cjs', '.github/workflows/guides-release.yml']
+    paths: ['content/term-guides.json', 'tests/term-guide-quality.test.cjs', 'scripts/build_term_pages.py', '.github/workflows/guides-release.yml']
 permissions:
   contents: write
 concurrency:
