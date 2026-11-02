@@ -1,0 +1,63 @@
+const test=require('node:test');
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const vm=require('node:vm');
+const D=require('../daily-core.js');
+function index(entries=[]){return {schema:1,timezone:'America/Chicago',editions:entries,last_successful_publish_at:null};}
+const entry=(date,revision=1)=>({date,revision,path:'data/daily/editions/'+date+'-v'+revision+'.json',sha256:'a'.repeat(64),bytes:900,published_at:date+'T18:00:00Z'});
+function edition(){
+ return {schema:1,timezone:'America/Chicago',edition_date:'2026-11-02',published_at:'2026-11-02T15:00:00Z',coverage:{start:'2026-11-01T14:00:00Z',end:'2026-11-02T14:00:00Z',status:'partial',sources_checked:[{url:'https://arxiv.org'}],sources_failed:[{url:'https://example.org',reason:'timeout'}]},tldr:['Several official sources were checked.','Coverage is incomplete due to a source failure.'],news:[],technologies:[],terms:[],site_changes:[],corrections:[]};
+}
+test('America/Chicago date handles late-night UTC and daylight-saving rollover',()=>{
+ assert.equal(D.chicagoDate('2026-11-02T05:30:00Z'),'2026-11-01');
+ assert.equal(D.chicagoDate('2026-11-02T06:30:00Z'),'2026-11-02');
+ assert.equal(D.chicagoDate('2026-03-08T07:59:00Z'),'2026-03-08');
+ assert.equal(D.chicagoDate('2026-03-09T04:30:00Z'),'2026-03-08');
+});
+test('Archive index accepts empty first edition state without claiming news',()=>{
+ const i=D.validateIndex(index());assert.deepEqual(D.selection(i,'2026-11-01').archive,[]);assert.equal(D.selection(i,'2026-11-01').todayEntry,null);
+});
+test('Archive selects newest revision for actual today and newest historical date separately',()=>{
+ const i=index([entry('2026-11-01'),entry('2026-11-01',2),entry('2026-11-02')]);
+ assert.equal(D.selection(i,'2026-11-01').todayEntry.revision,2);
+ assert.equal(D.selection(i,'2026-11-01').latest.date,'2026-11-02');
+ assert.equal(D.selection(i,'2026-11-03').todayEntry,null);
+ assert.equal(D.selection(i,'2026-11-03').latest.date,'2026-11-02');
+});
+test('Edition validation detects corrupt and duplicate archive metadata',()=>{
+ assert.throws(()=>D.validateIndex(index([entry('2026-11-31')])),/Invalid archive date/);
+ assert.throws(()=>D.validateIndex(index([entry('2026-11-02'),entry('2026-11-02')])),/Duplicate edition/);
+ assert.throws(()=>D.validateIndex(index([{...entry('2026-11-02'),path:'../../secrets.json'}])),/archive file path/);
+ assert.throws(()=>D.validateIndex(index([{...entry('2026-11-02'),sha256:'xyz'}])),/checksum/);
+});
+test('Evidence, partial-source-health and zero-item editions remain representable',()=>{
+ const e=D.validateEdition(edition(),entry('2026-11-02'));assert.equal(e.coverage.status,'partial');
+ assert.equal(e.news.length,0);assert.equal(e.coverage.sources_failed.length,1);
+});
+test('Reject fabricated/unsafe links, duplicate IDs, mismatched dates and missing review status',()=>{
+ const e=edition();
+ e.news=[{id:'NEWS-1',title:'Example',summary:'An explicitly hypothetical record',review_status:'unreviewed',source_url:'https://example.org/info',catalog_path:'index.html#/safety',tags:['safety']}];
+ assert.equal(D.validateEdition(e,entry('2026-11-02')).news.length,1);
+ const duplicate=structuredClone(e);duplicate.news.push({...duplicate.news[0]});
+ assert.throws(()=>D.validateEdition(duplicate),/Duplicate news ID/);
+ const unsafe=structuredClone(e);unsafe.news[0].source_url='javascript:alert(1)';
+ assert.throws(()=>D.validateEdition(unsafe),/source URL/);
+ const path=structuredClone(e);path.news[0].catalog_path='../index.html';
+ assert.throws(()=>D.validateEdition(path),/internal record link/);
+ assert.throws(()=>D.validateEdition(e,entry('2026-11-01')),/date differs/);
+});
+test('Only HTTPS source links and known internal record routes are accepted',()=>{
+ for(const u of ['https://user:pass@example.org','javascript:alert(1)','http://example.org','//example.org/a'])assert.equal(D.safeSource(u),'');
+ assert.equal(D.safeCatalogPath('terms/MLD-0691-machine-learning.html'),'terms/MLD-0691-machine-learning.html');
+ assert.equal(D.safeCatalogPath('index.html#/technologies?record=TECH-0001'),'index.html#/technologies?record=TECH-0001');
+ assert.equal(D.safeCatalogPath('https://evil.example'),'');
+});
+test('Daily page and scripts are syntax-valid and contain archive, source, topic and missing-edition controls',()=>{
+ const html=fs.readFileSync('whats-new.html','utf8'),js=fs.readFileSync('whats-new.js','utf8');
+ new vm.Script(js);
+ for(const token of ['id="edition-select"','id="section-filter"','id="topic-filter"','id="edition-status"','id="edition-content"','src="daily-core.js"','src="whats-new.js"'])assert.ok(html.includes(token),token);
+ assert.match(js,/Awaiting the first reviewed daily edition/);
+ assert.match(js,/checksum mismatch/i);
+ const app=fs.readFileSync('app.js','utf8');
+ assert.match(app,/whats-new\.html/);
+});
