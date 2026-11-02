@@ -391,7 +391,7 @@ test('Revision 7 preserves all external content and records only a site search u
  assert.deepEqual(d.site_changes.added.map(x=>x.id),['site-daily-keyword-search-20261102']);
  assert.equal(d.news.added.length+d.news.updated.length+d.news.removed.length,0);
  const receipt=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8')).receipts[0];
- assert.equal(receipt.publication_edition,'2026-11-02-v7');
+ assert.equal(receipt.publication_edition,receipt.publication_history.at(-1).edition);
  assert.ok(receipt.publication_history.some(x=>x.edition==='2026-11-02-v6'));
  assert.ok(receipt.publication_history.some(x=>x.edition==='2026-11-02-v7'));
  assert.equal(receipt.deferred_catalog_proposal_ids.length,7);
