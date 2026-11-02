@@ -106,3 +106,25 @@ test('Distribution shift and contamination guides have diagnostic experiments an
     assert.match(text, /synthetic|toy|illustrat/i);
   }
 });
+
+test('Calibration and conformal prediction guides expose their assumptions, worked arithmetic and test boundaries', () => {
+  const required = {
+    'MLD-0142': [/P\(correct/i, /0\.80/i, /Brier score/i, /temperature scaling/i, /test labels/i, /not.*(?:establish|prove)|does not establish/i],
+    'MLD-0198': [/exchangeab/i, /ceil\(/i, /n=9/i, /0\.9/i, /marginal coverage/i, /not.*(?:generally|ensure|prove)|does not.*(?:ensure|prove)/i]
+  };
+  for (const [id, patterns] of Object.entries(required)) {
+    const g = guides[id];
+    assert.ok(g && termManifest[id], 'Missing direct guide page '+id);
+    assert.equal(g.reviewed_on, '2026-11-02');
+    assert.ok(g.sections.length >= 9);
+    assert.ok(g.sections.every(([heading, text]) => heading.length >= 8 && text.length >= 120));
+    assert.equal(new Set(g.sections.map(([heading]) => heading)).size, g.sections.length);
+    assert.ok(g.prerequisites.length >= 4 && g.prerequisites.every(x => termManifest[x]));
+    assert.ok(g.citations.length >= 3 && g.citations.every(([title, url]) => title.length >= 35 && /^https:\/\//.test(url)));
+    const body = g.sections.map(s => s[1]).join(' ');
+    for (const pattern of patterns) assert.match(body, pattern, 'Missing mechanism or caveat '+id);
+    const html = fs.readFileSync(path.join(root, termManifest[id].path), 'utf8');
+    assert.match(html, /Expanded guide/);
+    assert.match(html, /Sources for the expanded explanation/);
+  }
+});
