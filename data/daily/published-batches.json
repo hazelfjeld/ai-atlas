@@ -12,7 +12,7 @@
       "edition_date": "2026-11-02",
       "validation_result": "batch_sha256_bytes_schema_unique_ids_dates_verified_nine_source_lookups_four_reuters_reports_explicitly_qualified",
       "status": "partially_published_with_7_deferred_catalog_proposals",
-      "publication_outcome": "revision_4_cloudflare_and_githack_verified;_revision_5_site_change_pending_production_verification",
+      "publication_outcome": "revision_5_cloudflare_http_browser_and_githack_verified;_seven_catalog_proposals_deferred",
       "publication_edition": "2026-11-02-v5",
       "accepted_news_ids": [
         "ai-news:vllm:v0.33.0rc3:2026-11-02",
@@ -45,13 +45,13 @@
         "catalog_deferred": 7,
         "technology_updated": 1
       },
-      "review_notes": "Revision v2 adds two independently source-opened news reports: SemiAnalysis GDPx publisher-run benchmark (12% unreplicated) and WIRED investigation (400+ linked app/domain properties, not independently reproduced by Atlas). Four Reuters news reports and five technology/three term proposals remain deferred. Earlier v1 immutable and last verified production metadata preserved.\nRevision 3 (Nov 2): checked all four remaining original Reuters reports and published qualified reporting on budget proposal, enterprise agreement, financial-stability warning and planned financing. They are not independently verified outcomes. Eight catalog proposals remain deferred; no new terms, technologies or incidents were added.\nRevision 3 production verification completed November 2 at 19:38:35 UTC. Immutable edition remains unchanged; index/receipt record the verified deployment outcome.\nRevision 4 (Nov 2): reviewed existing vLLM TECH-0288 against the first-party GitHub tag metadata/release notes, with CUDA 13/ROCm caveats and unreplicated benchmark notes. Preserved the original 300-record catalog and offline snapshot by adding a SHA-256-verified release-annotation overlay. The visible static technology profile and compact directory passed the prior production/githack checks for e55b261; site-change archive v4 awaiting its own deployment verification. Seven unrelated proposals remain deferred.\nRevision 4 passed production/browser and GitHack on main cea538a (2026-11-02T20:50:19Z). Revision 5 is an Atlas-only UI improvement with SHA-checked history comparison. Source batch unchanged; revision 5 verification pending.",
-      "production_verified_at": "2026-11-02T20:50:19Z",
-      "production_verified_revision": "cea538a40ceba5eb87b12dbdd448bd6b3a0c9f73",
-      "production_workflow_run_id": 41522320676,
-      "githack_workflow_run_id": 41522320854,
+      "review_notes": "Revision v2 adds two independently source-opened news reports: SemiAnalysis GDPx publisher-run benchmark (12% unreplicated) and WIRED investigation (400+ linked app/domain properties, not independently reproduced by Atlas). Four Reuters news reports and five technology/three term proposals remain deferred. Earlier v1 immutable and last verified production metadata preserved.\nRevision 3 (Nov 2): checked all four remaining original Reuters reports and published qualified reporting on budget proposal, enterprise agreement, financial-stability warning and planned financing. They are not independently verified outcomes. Eight catalog proposals remain deferred; no new terms, technologies or incidents were added.\nRevision 3 production verification completed November 2 at 19:38:35 UTC. Immutable edition remains unchanged; index/receipt record the verified deployment outcome.\nRevision 4 (Nov 2): reviewed existing vLLM TECH-0288 against the first-party GitHub tag metadata/release notes, with CUDA 13/ROCm caveats and unreplicated benchmark notes. Preserved the original 300-record catalog and offline snapshot by adding a SHA-256-verified release-annotation overlay. The visible static technology profile and compact directory passed the prior production/githack checks for e55b261; site-change archive v4 awaiting its own deployment verification. Seven unrelated proposals remain deferred.\nRevision 4 passed production/browser and GitHack on main cea538a (2026-11-02T20:50:19Z). Revision 5 is an Atlas-only UI improvement with SHA-checked history comparison. Source batch unchanged; revision 5 verification pending.\nRevision 5 successfully passed exact main GitHack/catalog run 41524665115 (87 Node tests) and Cloudflare production HTTP/browser run 41524665102 (completed 21:05:16Z) at code commit fedeab90. The previous-v4 comparison is only shown after validating its own immutable asset; no new external AI news or catalog entry was introduced.",
+      "production_verified_at": "2026-11-02T21:05:16Z",
+      "production_verified_revision": "fedeab90c4d9edaba25d4dbcb85f0edbbf901310",
+      "production_workflow_run_id": 41524665102,
+      "githack_workflow_run_id": 41524665115,
       "verification_scope": "Commit 40c6a7b: 81 Node tests; full catalog and hash checks; reproducible offline/term pages; GitHack exact byte verification; Cloudflare 429 served assets checked on each of three production hostnames; real hosted archive, mobile, desktop, Quiz/Match, flashcards and offline browser tests.",
-      "next_action": "Verify Nov 2 v5 CI/deployment/GitHack; then review seven deferred catalog proposals with canonical ID checks and official evidence.",
+      "next_action": "Check new staging batches first; otherwise independently review seven deferred technology/term proposals with official evidence and catalog ID deduplication; continue substantive term guides.",
       "revision_2_asset_commit": "9c49019fc8baf8c01221382bb56af3111a5fc42f",
       "publication_history": [
         {
@@ -128,13 +128,17 @@
           "source_code_commit": "6a8b38c8573ab84ce9d4e5b3c0a7232e15988653",
           "asset_commit": "c4e11c90409e9c82d82bfb28a88ef51a67e9c079",
           "published_at": "2026-11-02T20:58:28.233Z",
-          "status": "archive_index_and_production_validation_pending",
-          "note": "Atlas UI revision comparison, no new external news"
+          "status": "cloudflare_http_browser_and_githack_verified",
+          "note": "Atlas UI revision comparison, no new external news",
+          "verified_at": "2026-11-02T21:05:16Z",
+          "production_commit": "fedeab90c4d9edaba25d4dbcb85f0edbbf901310",
+          "production_workflow_run_id": 41524665102,
+          "githack_workflow_run_id": 41524665115
         }
       ],
-      "production_commit": "cea538a40ceba5eb87b12dbdd448bd6b3a0c9f73",
-      "last_verified_public_url": "https://aiupdates.app/whats-new.html?date=2026-11-02&revision=4",
-      "last_verified_at": "2026-11-02T20:50:19Z",
+      "production_commit": "fedeab90c4d9edaba25d4dbcb85f0edbbf901310",
+      "last_verified_public_url": "https://aiupdates.app/whats-new.html?date=2026-11-02&revision=5",
+      "last_verified_at": "2026-11-02T21:05:16Z",
       "accepted_catalog_update_ids": [
         "tech-proposal:vllm:2026-11-02-rc3"
       ],

@@ -2,6 +2,10 @@
 
 ## November 2, 2026 — immutable daily archive change history (revision 5)
 
+**Follow-up verification (November 2 at 21:05:16 UTC):** The indexed v5 release [`fedeab90`](https://github.com/hazelfjeld/ai-atlas/commit/fedeab90c4d9edaba25d4dbcb85f0edbbf901310) passed both [main GitHack/catalog](https://github.com/hazelfjeld/ai-atlas/actions/runs/41524665115) and [production Cloudflare/browser](https://github.com/hazelfjeld/ai-atlas/actions/runs/41524665102) workflows. Main receipt and archive status now record successful publication. This line records a verified source commit, not a guarantee that later commits are automatically deployed. Next: seven deferred catalog proposals, 1,314 reference-depth term pages.
+
+
+
 - **Implemented and indexed:** The daily page now checks the previous same-date immutable revision by SHA-256/byte count before reporting added, revised, and removed entries in each of the five editorial sections. If that comparison fails, it shows a limitation instead of presenting unverified differences or clearing the independently verified current edition.
 - **Production code:** [6a8b38c](https://github.com/hazelfjeld/ai-atlas/commit/6a8b38c8573ab84ce9d4e5b3c0a7232e15988653) passed the GitHack/catalog workflow [41523848069](https://github.com/hazelfjeld/ai-atlas/actions/runs/41523848069). The exact v5 immutable asset was staged in [c4e11c9](https://github.com/hazelfjeld/ai-atlas/commit/c4e11c90409e9c82d82bfb28a88ef51a67e9c079), then linked to the archive and receipt in [d98ae9a](https://github.com/hazelfjeld/ai-atlas/commit/d98ae9aeac40612be6d6686911147d94bbba6784). **The v5 indexed release still requires its own complete CI and production-browser check.**
 - **Integrity:** v5 is 20,549 UTF-8 bytes, SHA-256 `d86b3954a66722f353710349238af2e62a66e2226994f7f709393eb1ac3d5fe3`. Immutable revisions 1–4 remain available; the v5 records add one actual Atlas site change, not a news headline. Source staging batch `2dcb25af14b960f9989527170fd88daf8ba2fb5f42dcff3b72f512b08ddb57d7` was independently rechecked as 38,557 bytes.

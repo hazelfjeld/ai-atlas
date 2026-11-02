@@ -43,7 +43,7 @@
       "published_at": "2026-11-02T20:58:28.233Z"
     }
   ],
-  "last_successful_publish_at": "2026-11-02T20:50:19Z",
-  "status": "edition_revision_5_site_change_publication_verification_pending",
-  "coverage_note": "Nine source-reviewed news reports unchanged; Nov 2 revision 5 documents the new integrity-checked archive revision comparison. This is an Atlas site change, not an external news event. Seven catalog proposals remain deferred, two source lookups failed; scheduled coverage is partial."
+  "last_successful_publish_at": "2026-11-02T21:05:16Z",
+  "status": "edition_revision_5_cloudflare_and_githack_verified",
+  "coverage_note": "November 2 edition revision 5 passed Cloudflare production HTTP/browser verification and exact GitHack checks. Nine source-reviewed news stories remain unchanged; the SHA-verified archive revision-history feature is an Atlas site update, not a new external AI event. Seven catalog proposals remain deferred, two source lookups failed, and coverage is partial and non-exhaustive."
 }
