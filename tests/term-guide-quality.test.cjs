@@ -87,3 +87,22 @@ test('Latest encyclopedia review date derives from guide evidence, not a hardcod
   assert.equal(publication.encyclopedia.reviewed_on, latest);
   assert.equal(publication.encyclopedia.detailed_page_count, Object.keys(guides).length);
 });
+
+test('Distribution shift and contamination guides have diagnostic experiments and evidence limits', () => {
+  for (const [id, patterns] of Object.entries({
+    'MLD-0326': [/covariate shift/i, /label shift/i, /concept drift/i, /held-out|untouched/i],
+    'MLD-1254': [/train-test contamination/i, /verbatim|duplicate/i, /held-out|sealed/i, /not.*prove|not.*establish|does not.*prove/i]
+  })) {
+    const g = guides[id];
+    assert.ok(g && termManifest[id], 'Guide missing from stable route ' + id);
+    assert.equal(g.reviewed_on, '2026-11-02');
+    assert.ok(g.sections.length >= 8);
+    assert.ok(g.sections.every(([title, body]) => title.length >= 8 && body.length >= 120));
+    assert.equal(new Set(g.sections.map(s => s[0])).size, g.sections.length);
+    assert.ok(g.prerequisites.length >= 3 && g.prerequisites.every(x => termManifest[x]));
+    assert.ok(g.citations.length >= 3 && g.citations.every(([title, url]) => title.length >= 35 && /^https:\/\//.test(url)));
+    const text = g.sections.map(([_, body]) => body).join(' ');
+    for (const pattern of patterns) assert.match(text, pattern, 'Missing evidence or mechanism ' + id);
+    assert.match(text, /synthetic|toy|illustrat/i);
+  }
+});
