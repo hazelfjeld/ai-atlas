@@ -1,0 +1,8 @@
+{
+  "schema": 1,
+  "timezone": "America/Chicago",
+  "batches": [],
+  "last_successful_coverage_end": null,
+  "status": "awaiting_first_collection",
+  "protocol": "Read docs/DAILY_NEWS_PIPELINE.md from current main before collecting. Only daily-queue files on atlas-daily-staging belong to this writer."
+}
