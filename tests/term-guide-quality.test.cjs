@@ -128,3 +128,25 @@ test('Calibration and conformal prediction guides expose their assumptions, work
     assert.match(html, /Sources for the expanded explanation/);
   }
 });
+
+test('Expected calibration error and subgroup evaluation preserve worked metrics, uncertainty and evidence limits', () => {
+  const specifications = {
+    'MLD-0389': [/ECE =/i, /0\.14/i, /bin/i, /Brier score/i, /test labels/i, /not (?:a guarantee|proof)|not proof|does not prove/i],
+    'MLD-1184': [/subgroup/i, /85%/i, /40%/i, /worst-group/i, /missing group/i, /not automatically evidence|does not prove/i]
+  };
+  for (const [id, patterns] of Object.entries(specifications)) {
+    const guide = guides[id];
+    assert.ok(guide && termManifest[id], 'Missing stable expanded guide ' + id);
+    assert.equal(guide.reviewed_on, '2026-11-02');
+    assert.ok(guide.prerequisites.length >= 4 && guide.prerequisites.every(t => !!termManifest[t]), 'Missing prerequisite '+id);
+    assert.ok(guide.sections.length >= 9, 'Missing worked explanation '+id);
+    assert.ok(guide.sections.every(([h, b]) => h.length >= 8 && b.length >= 120), 'Shallow section '+id);
+    assert.equal(new Set(guide.sections.map(([h]) => h)).size, guide.sections.length);
+    assert.ok(guide.citations.length >= 3 && guide.citations.every(([name, url]) => name.length >= 35 && /^https:\/\//.test(url)));
+    const body = guide.sections.map(([_, b]) => b).join(' ');
+    for (const expression of patterns) assert.match(body, expression, 'Missing caveat or arithmetic '+id);
+    const html = fs.readFileSync(path.join(root, termManifest[id].path), 'utf8');
+    assert.match(html, /Expanded guide/);
+    assert.match(html, /Sources for the expanded explanation/);
+  }
+});
