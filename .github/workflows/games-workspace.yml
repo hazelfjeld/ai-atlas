@@ -1,0 +1,86 @@
+name: Verify native Atlas Games workspace
+on:
+  push:
+    branches: [atlas-games-workspace, main]
+    paths: ['scripts/install_games_workspace.py', 'games-tab.*', 'tests/games-workspace-browser.py', 'tests/games-navigation.test.cjs', '.github/workflows/games-workspace.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: atlas-native-games-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  workspace:
+    if: github.repository == 'hazelfjeld/ai-atlas'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Build native route and offline game runtime
+        run: |
+          python3 scripts/install_games_workspace.py
+          python3 scripts/build_offline.py
+      - name: Validate catalog, syntax, navigation and game rules
+        run: |
+          python3 scripts/validate_checkpoint.py
+          node --check app.js
+          node --check games-tab.js
+          node --test tests/*.test.cjs
+      - name: Install browser regression tooling
+        run: |
+          python3 -m pip install playwright==1.57.0
+          python3 -m playwright install --with-deps chromium
+      - name: Exercise original workspace, both modes and offline play
+        run: |
+          python3 -m http.server 8765 > /tmp/atlas-native-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          python3 tests/games-workspace-browser.py --base http://127.0.0.1:8765/ --output /tmp/atlas-native-validation
+          python3 tests/games-browser.py --base http://127.0.0.1:8765/ --output /tmp/atlas-legacy-validation
+      - name: Save tested generated integration only to the feature branch
+        if: github.ref == 'refs/heads/atlas-games-workspace'
+        run: |
+          git add index.html app.js games-tab.js games-tab.css scripts/build_offline.py downloads/Atlas_Demo_Offline.html
+          if ! git diff --cached --quiet; then
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git commit -m 'Mount Quiz and Match in the original Atlas Games tab'
+            git push origin HEAD:atlas-games-workspace
+          fi
+      - name: Check reproducible generated files
+        run: |
+          python3 scripts/install_games_workspace.py
+          python3 scripts/build_term_pages.py
+          python3 scripts/build_offline.py
+          git diff --exit-code -- index.html app.js games-tab.js games-tab.css scripts/build_offline.py downloads/Atlas_Demo_Offline.html terms publication.json
+      - name: Verify public native workspace files
+        run: |
+          python3 - <<'PY'
+          import pathlib, subprocess, urllib.request, time, json
+          sha = subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()
+          base = 'https://rawcdn.githack.com/hazelfjeld/ai-atlas/' + sha + '/'
+          names = ['index.html','app.js','app.css','games-tab.js','games-tab.css','games-core.js','core.js','catalog-loader.js','publication.json']
+          for name in names:
+              for attempt in range(3):
+                  try:
+                      request = urllib.request.Request(base + name, headers={'User-Agent':'Atlas-publication-integrity-check/1.0'})
+                      with urllib.request.urlopen(request,timeout=30) as response:
+                          assert response.status == 200
+                          body = response.read()
+                      assert body == pathlib.Path(name).read_bytes(), name
+                      print('VERIFIED', name, flush=True)
+                      break
+                  except Exception:
+                      if attempt == 2: raise
+                      time.sleep(3)
+          report={'commit':sha,'url':base+'index.html#/games','verified_files':names,'public_browser_tested':False}
+          pathlib.Path('/tmp/atlas-native-validation/http.json').write_text(json.dumps(report,indent=2))
+          print(json.dumps(report,indent=2))
+          PY
+      - name: Preserve UI screenshots and verification report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: native-games-verification
+          path: /tmp/atlas-native-validation
+          retention-days: 7
