@@ -56,6 +56,21 @@ def read_batch(item: dict, kind: str, ids: set[str], paths: set[str]) -> list[di
                 assert isinstance(record.get(key), str) and record[key], f'{path}: {key}'
             for key in ('concept_ids', 'alternative_ids'):
                 assert isinstance(record.get(key), list), f'{path}: {key}'
+            updates = record.get('release_updates', [])
+            assert isinstance(updates, list), f'{path}: release updates must be a list'
+            versions = set()
+            for update in updates:
+                assert isinstance(update, dict), f'{path}: invalid release update'
+                for key in ('version', 'published_at', 'reviewed_on', 'summary', 'compatibility', 'status_note', 'caveat', 'source_url', 'evidence_level'):
+                    assert isinstance(update.get(key), str) and update[key].strip(), f'{path}: release update missing {key}'
+                assert update['version'] not in versions, f'{path}: duplicate release version'
+                versions.add(update['version'])
+                from datetime import date, datetime
+                date.fromisoformat(update['reviewed_on'])
+                parsed = datetime.fromisoformat(update['published_at'].replace('Z', '+00:00'))
+                assert parsed.tzinfo is not None, f'{path}: release source timestamp must include zone'
+                url = urllib.parse.urlsplit(update['source_url'])
+                assert url.scheme == 'https' and url.hostname and not url.username and not url.password, f'{path}: unsafe release URL'
         else:
             for key in ('title', 'summary', 'caveat', 'source_url', 'review_status'):
                 assert isinstance(record.get(key), str) and record[key], f'{path}: {key}'

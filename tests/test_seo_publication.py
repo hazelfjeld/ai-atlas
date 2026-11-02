@@ -76,6 +76,11 @@ class SEOPublication(unittest.TestCase):
                 self.assertIn(escape(row[key]), source, (row['id'],key))
             self.assertIn(escape(row['source_url'],quote=True), source)
             self.assertIn('technologies?record='+row['id'], source)
+            for update in row.get('release_updates', []):
+                self.assertIn('Reviewed release update', source, row['id'])
+                for key in ('version', 'summary', 'compatibility', 'status_note', 'caveat', 'published_at', 'reviewed_on'):
+                    self.assertIn(escape(update[key]), source, (row['id'], key))
+                self.assertIn('href="'+escape(update['source_url'], quote=True)+'"', source, row['id'])
 
     def test_every_term_has_matching_semantic_definition_and_actual_reference(self):
         for row in rows('terms'):

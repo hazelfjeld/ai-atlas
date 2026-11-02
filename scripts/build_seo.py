@@ -54,6 +54,8 @@ def main():
         for title, key in fields:
             if r.get(key):
                 body += f'<section class="profile-section"><h2>{e(title)}</h2><p>{e(r[key])}</p></section>'
+        for update in r.get('release_updates', []):
+            body += '<section class="profile-section"><h2>Reviewed release update · ' + e(update['version']) + '</h2><p>' + e(update['summary']) + '</p><p><strong>Compatibility:</strong> ' + e(update['compatibility']) + '</p><p><strong>Publication status:</strong> ' + e(update['status_note']) + '</p><p><strong>Evidence limitation:</strong> ' + e(update['caveat']) + '</p><p><strong>Source published:</strong> ' + e(update['published_at']) + ' · <strong>Reviewed:</strong> ' + e(update['reviewed_on']) + '</p><p>' + external(update['source_url'], 'First-party release notes') + '</p></section>'
         body += '<section class="profile-section"><h2>Connected concepts</h2><ul>' + ''.join(f'<li><a href="../{term_path(by_term[i])}">{e(by_term[i]["term"])}</a></li>' for i in r['concept_ids']) + '</ul></section>'
         body += '<section class="profile-section"><h2>Alternatives to investigate</h2><p>' + e(' · '.join(r['alternatives']) or 'None recorded') + '</p><ul>' + ''.join(f'<li><a href="{Path(technology_path(by_tech[i])).name}">{e(by_tech[i]["name"])}</a></li>' for i in r['alternative_ids']) + '</ul></section>'
         body += '<section class="profile-section"><h2>Original source</h2><p>' + external(r['source_url'], r['name'] + ' — original reference') + '</p></section>'

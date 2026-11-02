@@ -48,6 +48,11 @@ function card(r) {
   ['Related concepts',r.linked_concepts || r.concepts],['Stages',r.stages],
   ['Evidence status',r.evidence_status],['Reviewed on',r.reviewed_on || 'Not independently re-audited']]) line(dl,label,value);
  details.append(dl);
+ for (const u of r.release_updates || []) {
+  const review=el('section',undefined,'release-update');
+  review.append(el('h3','Reviewed release update · '+u.version),el('p',u.summary),el('p','Compatibility: '+u.compatibility),el('p','Publication status: '+u.status_note),el('p','Evidence limitation: '+u.caveat),el('p','Source published: '+u.published_at+' · Reviewed: '+u.reviewed_on),safeLink(u.source_url,'First-party release notes ↗'));
+  details.append(review);
+ }
  const raw = el('details'); raw.append(el('summary','Inspect all original source fields'),el('pre',JSON.stringify(r,null,2)));
  details.append(raw); a.append(details);
  const actions = el('div',undefined,'card-actions');
