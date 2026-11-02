@@ -100,8 +100,8 @@ async function request(path){
 }
 function decode(bytes){return JSON.parse(new TextDecoder().decode(bytes));}
 async function sha256(bytes){
- if(!crypto?.subtle)throw new Error('HTTPS is required for publication checks');
- const hash=await crypto.subtle.digest('SHA-256',bytes);
+ if(!globalThis.crypto?.subtle)throw new Error('HTTPS is required for publication checks');
+ const hash=await globalThis.crypto.subtle.digest('SHA-256',bytes);
  return [...new Uint8Array(hash)].map(x=>x.toString(16).padStart(2,'0')).join('');
 }
 async function readEdition(entry){
