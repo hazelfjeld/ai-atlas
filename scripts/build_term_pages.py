@@ -1,0 +1,92 @@
+#!/usr/bin/env python3
+"""Deterministically build direct, script-free pages from preserved records and authored guides."""
+import hashlib
+from html import escape as e
+import json
+from pathlib import Path
+import re
+import unicodedata
+from urllib.parse import quote, urlsplit
+
+ROOT = Path(__file__).resolve().parents[1]
+
+
+def rows(kind):
+    return [r for p in sorted((ROOT / 'data').glob(kind + '-*.json')) for r in json.loads(p.read_bytes())]
+
+
+def term_path(r):
+    slug = unicodedata.normalize('NFKD', r['term']).encode('ascii', 'ignore').decode().lower()
+    slug = re.sub('[^a-z0-9]+', '-', slug).strip('-') or 'concept'
+    return f"terms/{r['id']}-{slug}.html"
+
+
+def external(url, title):
+    u = urlsplit(url)
+    assert u.scheme in ('http', 'https') and not u.username and not u.password, url
+    return f'<a href="{e(url, quote=True)}" rel="noopener noreferrer" target="_blank">{e(title)} ↗</a>'
+
+
+def section(title, body, extra=''):
+    return f'<section class="detail-block {extra}"><h2>{e(title)}</h2>{body}</section>'
+
+
+def shell(title, body):
+    return f'''<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="{e(title, quote=True)}: definitions, examples, caveats, related concepts and references in Atlas."><title>{e(title)} · Atlas</title><link rel="stylesheet" href="../checkpoint.css"><style>.term-shell{{max-width:1000px;margin:auto;padding:30px 24px 70px}}.term-nav{{display:flex;flex-wrap:wrap;gap:18px;font-size:13px}}.term-shell h1{{font-size:clamp(32px,6vw,58px)}}.term-shell h2{{font-size:20px;margin:0 0 12px}}.term-shell p,.term-shell li{{font-size:15px;line-height:1.75}}.term-shell .lead{{font-size:20px;max-width:850px}}.term-shell li{{margin:7px 0}}.term-shell a{{overflow-wrap:anywhere}}.term-shell .hero{{margin:38px 0 24px}}@media print{{.term-nav,.skip{{display:none}}.term-shell{{padding:0}}.detail-block{{break-inside:avoid}}}}</style></head><body><a class="skip" href="#main">Skip to content</a><main class="term-shell" id="main"><nav class="term-nav" aria-label="Site navigation"><a href="../index.html">ATLAS</a><a href="index.html">All term pages</a><a href="../index.html#/dictionary">Search dictionary</a><a href="../index.html#/technologies">Technologies</a><a href="../demo.html">Guided demo</a></nav>{body}<footer>Prepared catalog snapshot: November 1, 2026. Imported references retain their prior review labels. No live collector is running. These pages work without JavaScript; external references require internet.</footer></main></body></html>'''
+
+
+def main():
+    terms, technologies = rows('terms'), rows('technologies')
+    by_id = {r['id']: r for r in terms}
+    guides = json.loads((ROOT / 'content/term-guides.json').read_bytes())
+    assert set(guides) <= set(by_id)
+    refs = json.loads((ROOT / 'data/dictionary-sources.json').read_bytes())
+    out = ROOT / 'terms'
+    out.mkdir(exist_ok=True)
+    manifest = {}
+    def links(ids):
+        return '<ul>' + ''.join(f'<li><a href="{e(Path(term_path(by_id[i])).name)}">{e(by_id[i]["term"])}</a></li>' for i in ids) + '</ul>'
+    for r in terms:
+        guide = guides.get(r['id'])
+        body = f'<header class="hero"><p class="eyebrow">{e(r["topic"])} · {e(r["id"])}</p><h1>{e(r["term"])}</h1><p class="lead">{e(r["definition"])}</p></header>'
+        label = f'Expanded guide · editorial review {guide["reviewed_on"]}' if guide else 'Original reference page · detailed expansion pending'
+        body += f'<p class="notice">{e(label)}. Original definitions, examples, notes and citations are preserved below. New examples are illustrative, not benchmark results.</p>'
+        if guide:
+            body += section('Prerequisites', links(guide['prerequisites']))
+            for title, text in guide['sections']:
+                body += section(title, '<p>' + e(text) + '</p>')
+            body += section('Sources for the expanded explanation', '<ul>' + ''.join('<li>' + external(url, title) + '</li>' for title, url in guide['citations']) + '</ul><p>Editorial synthesis checked against the linked primary material; no independent replication is claimed.</p>')
+        body += section('Original example', '<p>' + e(r['example']) + '</p>')
+        body += section('Original caveat', '<p>' + e(r['caveat']) + '</p>', 'caveat')
+        body += section('Context and aliases', '<p>Level: ' + e(r['level']) + '. Stages: ' + e(' · '.join(r['stages'])) + '.</p><p>Tags: ' + e(' · '.join(r['tags'])) + '.</p><p>Aliases: ' + e(' · '.join(r['aliases']) or 'None recorded') + '.</p>')
+        if r['notes']:
+            body += section('Original notes', '<p>' + e(r['notes']) + '</p>')
+        body += section('Related concepts', links(r['related_ids']) if r['related_ids'] else '<p>No related IDs recorded.</p>')
+        incoming = [t['id'] for t in terms if r['id'] in t['related_ids']]
+        if incoming:
+            body += section('Concepts linking here', links(incoming))
+        tech = [t for t in technologies if r['id'] in t['concept_ids']]
+        if tech:
+            body += section('Technology connections', '<ul>' + ''.join(f'<li><a href="../index.html#/technologies?record={quote(t["id"])}">{e(t["name"])}</a> — {e(t["what"])}</li>' for t in tech) + '</ul>')
+        citations = [s for s in refs if s['id'] in r['source_ids']]
+        body += section('Original references', '<ul>' + ''.join('<li>' + external(s['url'], s['title']) + ' · ' + e(s['review_status']) + '</li>' for s in citations) + '<li>' + external(r['reference_url'], 'Original reference URL') + '</li></ul>')
+        body += f'<p><a href="../index.html#/dictionary?record={quote(r["id"])}">Open original record, export or annotate →</a></p>'
+        path = term_path(r)
+        blob = shell(r['term'], body).encode('utf-8')
+        (ROOT / path).write_bytes(blob)
+        manifest[r['id']] = {'path': path, 'sha256': hashlib.sha256(blob).hexdigest(), 'expanded': bool(guide)}
+    (out / 'manifest.json').write_bytes((json.dumps(manifest, indent=2) + '\n').encode())
+    intro = f'<header class="hero"><p class="eyebrow">CONCEPT ENCYCLOPEDIA</p><h1>Follow the connections.</h1><p>{len(terms):,} permanent reference pages · {len(guides)} expanded guides. Every reference page preserves its original definition, example, caveat, context and sources. The remaining detailed expansions are visibly pending.</p></header>'
+    intro += section('Start with an expanded guide', links(list(guides)))
+    intro += section('All concepts, A–Z', links([t['id'] for t in sorted(terms, key=lambda r: r['term'].casefold())]))
+    (out / 'index.html').write_bytes(shell('Concept encyclopedia', intro).encode())
+    p = ROOT / 'publication.json'
+    publication = json.loads(p.read_bytes())
+    publication['encyclopedia'] = {'imported_term_count': len(terms), 'linked_term_count': len(terms), 'detailed_page_count': len(guides), 'editorially_reviewed_guide_count': len(guides), 'reviewed_on': '2026-11-01', 'page_manifest': 'terms/manifest.json'}
+    p.write_bytes((json.dumps(publication, indent=2) + '\n').encode())
+    print(json.dumps(publication['encyclopedia'], indent=2))
+
+
+if __name__ == '__main__':
+    main()

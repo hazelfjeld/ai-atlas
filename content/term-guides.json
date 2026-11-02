@@ -1,0 +1,146 @@
+{
+  "MLD-0691": {
+    "reviewed_on": "2026-11-01",
+    "prerequisites": ["MLD-1190", "MLD-0863"],
+    "sections": [
+      ["How it works", "Machine learning chooses a model from data using an objective and a training procedure. The objective measures success on examples; the experiment must separately measure success on unseen cases. Deep learning is one family within machine learning. A language model is a particular kind of model, rather than a synonym for the entire field."],
+      ["Worked example", "For a campus helpdesk, use past tickets to predict a routing category. Compare a majority-class baseline, a linear classifier and a neural model. Split by time before fitting text transformations so later tickets cannot influence training. This is an illustrative experiment, not a measured result."],
+      ["A useful objective", "Choose parameters theta to minimize average training loss: J(theta) = (1/n) sum_i loss(f_theta(x_i), y_i). Minimizing J alone does not establish generalization."],
+      ["What to test", "Report held-out performance, class-specific errors and variation across splits. Test a new department separately to reveal distribution shift. A more complex model is useful only when its improvement justifies its operational cost."],
+      ["Common pitfall", "Treating an excellent training score as evidence of future performance confuses fitting with learning a transferable pattern."]
+    ],
+    "citations": [["Machine Learning Basics, chapter 5", "https://www.deeplearningbook.org/contents/ml.html"]]
+  },
+  "MLD-0289": {
+    "reviewed_on": "2026-11-01",
+    "prerequisites": ["MLD-0691", "MLD-0478"],
+    "sections": [
+      ["How it works", "Deep learning composes learned transformations. Earlier layers produce representations that later layers reuse. Nonlinear activations allow a network to express relationships that a chain of linear transformations cannot. The architecture supplies an inductive bias; examples and optimization determine the learned parameters."],
+      ["Worked example", "In an illustrative image classifier, a convolution transforms a photograph into feature maps, later layers combine them, and a final classifier produces category scores. A training error flows backward through the composition to update the filters. No individual filter has to correspond to a human-named concept."],
+      ["A useful equation", "For a simple two-layer network: h = activation(W1 x + b1); prediction = W2 h + b2. Backpropagation applies the chain rule to compute parameter gradients."],
+      ["What to test", "Compare a simple baseline with the network under the same split and metric. Vary data quantity and random seed; inspect performance on rare categories rather than relying only on an average."],
+      ["Common pitfall", "More layers do not guarantee better performance. Data quality, optimization, capacity and deployment constraints all matter."]
+    ],
+    "citations": [["Deep Feedforward Networks, chapter 6", "https://www.deeplearningbook.org/contents/mlp.html"]]
+  },
+  "MLD-0625": {
+    "reviewed_on": "2026-11-01",
+    "prerequisites": ["MLD-1236", "MLD-1264"],
+    "sections": [
+      ["How it works", "A language model assigns probabilities to token sequences. Many generative LLMs learn next-token prediction during pretraining, then receive additional task or preference training. A prompt supplies context during inference; it does not normally update the model weights. Large is a relative description, with no universal parameter cutoff."],
+      ["Worked example", "Give a model two examples of transforming a meeting note into an action list, then supply a third note. It may continue the demonstrated pattern without a training update. This illustrative use of examples in context differs from fine-tuning a model on a dataset."],
+      ["A useful equation", "An autoregressive model factorizes P(tokens) = product_t P(token_t | tokens_before_t). Decoding selects or samples from those conditional distributions."],
+      ["What to test", "Use unseen prompts with ambiguous instructions, missing facts and conflicting evidence. Measure task success and unsupported claims separately. Compare prompts under the same model version and generation settings."],
+      ["Common pitfall", "Plausible continuation is not a guarantee of truth. Fluent output still needs evidence and task-specific evaluation."]
+    ],
+    "citations": [["Language Models are Few-Shot Learners", "https://arxiv.org/abs/2005.14165"]]
+  },
+  "MLD-1131": {
+    "reviewed_on": "2026-11-01",
+    "prerequisites": ["MLD-0625", "MLD-0973"],
+    "sections": [
+      ["How it works", "A small language model uses the same broad modeling ideas as larger language models with a smaller parameter or deployment footprint. SLM has no universal size boundary. Data selection, training quality, architecture and task specialization can matter as much as a size label. A smaller model can still produce incorrect or unsafe outputs."],
+      ["Worked example", "Consider an offline assistant that maps a short maintenance report to a fixed set of labels. A compact model may suit the device, but compare it against a simple classifier and a larger reference model on the actual reports. This is a proposed evaluation, not a recommendation for a specific product."],
+      ["A useful estimate", "Weight storage alone is approximately parameter_count multiplied by bits_per_weight divided by eight. Runtime memory also includes activations, caches, metadata and framework overhead."],
+      ["What to test", "Measure accuracy, peak memory, first-response latency and sustained throughput on the intended hardware. Include longer prompts, uncommon terminology and unsupported requests."],
+      ["Common pitfall", "A compact download does not establish low total memory use, privacy protection, or acceptable task quality."]
+    ],
+    "citations": [["Phi-3 Technical Report", "https://arxiv.org/abs/2404.14219"]]
+  },
+  "MLD-1264": {
+    "reviewed_on": "2026-11-01",
+    "prerequisites": ["MLD-1095", "MLD-0357"],
+    "sections": [
+      ["How it works", "A Transformer combines attention, position information and feedforward transformations. Attention mixes information across sequence positions; the feedforward block transforms each position's representation. Residual connections and normalization help information and gradients pass through stacked blocks. Encoder, decoder and encoder-decoder variants use different visibility patterns."],
+      ["Worked example", "For translation, an encoder represents the source sentence and a decoder generates the target sentence. The decoder can attend to encoded source positions while a causal mask prevents it from reading future target tokens. A decoder-only language model uses a different arrangement, so the original translation architecture should not be assumed for every LLM."],
+      ["A useful computation", "One conceptual block is attention mixing followed by a position-wise feedforward network, with residual paths around the sublayers. Exact normalization order varies across implementations."],
+      ["What to test", "Check mask correctness with tiny sequences. Measure memory and time as sequence length increases; dense pairwise attention creates a quadratic score matrix."],
+      ["Common pitfall", "Positional information and causal masking are separate mechanisms. Adding positions does not prevent information leakage from future tokens."]
+    ],
+    "citations": [["Attention Is All You Need", "https://arxiv.org/abs/1706.03762"]]
+  },
+  "MLD-1095": {
+    "reviewed_on": "2026-11-01",
+    "prerequisites": ["MLD-0067", "MLD-0357"],
+    "sections": [
+      ["How it works", "Self-attention forms queries, keys and values from the same input sequence. Each query compares with allowed keys, then uses normalized scores to combine values. Several heads can learn different projections. Causal self-attention restricts a position to earlier positions and itself; bidirectional attention can use both sides."],
+      ["Worked example", "Suppose a query has two equal scores and values 2 and 8. Softmax gives weights 0.5 and 0.5, producing 5. Masking the second key makes its weight zero and the output 2. This scalar toy example illustrates weighted averaging, not the full behavior of a trained language model."],
+      ["The core equation", "Attention(Q, K, V) = softmax(Q K^T / sqrt(d_k) + mask) V. Rows of the softmax describe the weights for each query; disallowed positions receive negative infinity before normalization."],
+      ["What to test", "Verify each allowed row sums to one and masked positions receive zero weight. Check tensor shapes and axis selection before optimizing the implementation."],
+      ["Common pitfall", "An attention weight is a routing coefficient. It does not, by itself, establish a causal explanation of an output."]
+    ],
+    "citations": [["Attention Is All You Need, section 3.2", "https://arxiv.org/html/1706.03762v7#S3.SS2"]]
+  },
+  "MLD-1033": {
+    "reviewed_on": "2026-11-01",
+    "prerequisites": ["MLD-0357", "MLD-0625"],
+    "sections": [
+      ["How it works", "Retrieval-augmented generation combines a retriever with a generator. A retriever selects relevant material from an external collection; the generator conditions its response on that material. This separates some updateable knowledge from model weights. The original RAG paper studies trained retrieval-generation systems; modern prompt-based pipelines are related engineering designs."],
+      ["Worked example", "For a campus policy assistant, index approved policies with document identifiers and revision dates. Retrieve passages for a question, provide them to the generator and require citations. If the relevant rule is absent, the assistant should report that limitation. This is a proposed design, not a tested deployment."],
+      ["A useful pipeline", "question -> retrieve candidates -> rerank -> assemble context -> generate -> check cited evidence. Evaluate each stage so generation cannot hide retrieval failures."],
+      ["What to test", "Use questions with known supporting passages. Measure retrieval recall separately from answer correctness and citation support. Include stale documents, contradictory passages and questions outside the collection."],
+      ["Common pitfall", "Retrieval does not guarantee grounding. An answer can cite a real document that fails to support its specific claim."]
+    ],
+    "citations": [["Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks", "https://arxiv.org/abs/2005.11401"]]
+  },
+  "MLD-0357": {
+    "reviewed_on": "2026-11-01",
+    "prerequisites": ["MLD-0691"],
+    "sections": [
+      ["How it works", "An embedding represents an item as a vector. Its training objective determines which relationships the geometry captures. Word embeddings can be learned from neighboring words; sentence and image embeddings use other objectives. The same word can have a fixed vector in one system and a context-dependent representation in another."],
+      ["Worked example", "In an illustrative two-dimensional space, vectors (1, 0) and (2, 0) have the same direction and cosine similarity 1. Vector (0, 1) is orthogonal to both and has cosine similarity 0. Real learned dimensions are not usually interpretable as named human attributes."],
+      ["A useful equation", "cosine(a, b) = dot(a, b) / (norm(a) norm(b)), for nonzero vectors. For normalized vectors, ranking by cosine is equivalent to ranking by dot product."],
+      ["What to test", "For a search system, label relevant document-query pairs and inspect nearest neighbors. Include paraphrases, negation, specialized vocabulary and multilingual queries before treating proximity as useful relevance."],
+      ["Common pitfall", "Similarity is model- and task-dependent. Nearby vectors need not represent equivalent facts, and high similarity does not prove a retrieved passage answers the question."]
+    ],
+    "citations": [["Efficient Estimation of Word Representations in Vector Space", "https://arxiv.org/abs/1301.3781"]]
+  },
+  "MLD-1236": {
+    "reviewed_on": "2026-11-01",
+    "prerequisites": ["MLD-0625"],
+    "sections": [
+      ["How it works", "A token is an element in a model's input or output vocabulary. Text tokenizers can use subwords, characters or bytes, with special tokens for structure. Token IDs index the vocabulary; the numeric distance between IDs has no semantic meaning. The tokenizer is part of the model's interface and must match its training conventions."],
+      ["Worked example", "A hypothetical tokenizer splits 'unhelpful' into 'un', 'help' and 'ful'. Another tokenizer might choose different pieces or one whole-word token. The example is illustrative: obtain actual IDs and boundaries from the exact tokenizer rather than assuming a universal split."],
+      ["A useful computation", "For a context budget L, reserve space for input tokens, structural tokens and intended output. Count after applying the chat template, because role markers also consume positions."],
+      ["What to test", "Round-trip representative text through encoding and decoding. Include accented characters, emoji, code, whitespace and long numbers. Inspect truncation behavior and special-token handling."],
+      ["Common pitfall", "Words, characters and tokens are different units. A fixed word-to-token ratio can fail badly across languages and content types."]
+    ],
+    "citations": [["Hugging Face tokenization algorithms", "https://huggingface.co/docs/transformers/tokenizer_summary"]]
+  },
+  "MLD-0863": {
+    "reviewed_on": "2026-11-01",
+    "prerequisites": ["MLD-0691"],
+    "sections": [
+      ["How it works", "Overfitting occurs when choices adapt too closely to observed training or validation data and perform worse on genuinely unseen cases. Capacity, noise, small samples and repeated model selection can contribute. A training-validation gap is a warning signal; distribution shift and leakage can produce misleading patterns too."],
+      ["Worked example", "Imagine a classifier achieving 99% on training tickets and 73% on later tickets. A simpler model scores 88% and 82%. Those invented numbers illustrate why training accuracy alone cannot choose a model. Investigate duplicate tickets, temporal drift and label quality before attributing the entire gap to model capacity."],
+      ["A useful procedure", "Fit on training data, tune on validation data and evaluate the chosen configuration once on a reserved test set. Keep correlated users or documents in the same split."],
+      ["What to test", "Use learning curves and suitable cross-validation. Compare regularization, early stopping and additional representative data under the same evaluation protocol."],
+      ["Common pitfall", "Repeatedly choosing the best configuration on the test set makes that set part of model selection and weakens the independence of the reported score."]
+    ],
+    "citations": [["scikit-learn cross-validation guidance", "https://scikit-learn.org/stable/modules/cross_validation.html"]]
+  },
+  "MLD-0478": {
+    "reviewed_on": "2026-11-01",
+    "prerequisites": ["MLD-0691"],
+    "sections": [
+      ["How it works", "Gradient descent updates parameters in the direction opposite the local gradient of an objective. The learning rate controls step size. Full-batch, stochastic and mini-batch methods differ in how much data estimates each gradient. Backpropagation computes gradients for a network; the optimizer uses those gradients to choose an update."],
+      ["Worked example", "For J(w) = (w - 3)^2, the derivative is 2(w - 3). Starting at w = 0 with learning rate 0.1 gives w_new = 0 - 0.1(-6) = 0.6. The objective falls from 9 to 5.76. This convex toy calculation does not establish convergence for a large neural network."],
+      ["The update", "theta_next = theta - learning_rate * gradient(J(theta)). Compute the gradient at the current parameters before updating them."],
+      ["What to test", "Check a small problem against an analytic gradient or finite differences. Track loss, gradient norms and held-out performance; inspect sensitivity to the learning rate and random seed."],
+      ["Common pitfall", "A falling training loss does not establish improved generalization. Excessive step sizes can also overshoot or diverge."]
+    ],
+    "citations": [["Optimization for Training Deep Models, chapter 8", "https://www.deeplearningbook.org/contents/optimization.html"]]
+  },
+  "MLD-0431": {
+    "reviewed_on": "2026-11-01",
+    "prerequisites": ["MLD-0625", "MLD-0863"],
+    "sections": [
+      ["How it works", "Fine-tuning continues training from existing parameters for a new task or distribution. Full fine-tuning updates many or all weights; parameter-efficient methods train a smaller set. LoRA, for example, learns low-rank weight updates while freezing the base weights. Prompting changes input context and ordinarily leaves weights unchanged."],
+      ["Worked example", "For an illustrative report-formatting task, collect approved input-output pairs and hold out whole document families. Compare the base model with a prompt-only approach and an adapted model. Evaluate whether formatting improves without increasing invented facts or degrading unrelated tasks."],
+      ["A useful parameterization", "LoRA represents an update as Delta_W = B A, where the intermediate rank is small relative to the original matrix dimensions. This reduces trainable parameters; it does not remove every other training-memory cost."],
+      ["What to test", "Check unseen documents, long inputs, malformed requests and general-language regressions. Record the base model, tokenizer, adapter, dataset split and training settings so the result can be reproduced."],
+      ["Common pitfall", "Fine-tuning on examples is not a dependable way to keep changing facts current. Separate behavior adaptation from document retrieval and factual verification."]
+    ],
+    "citations": [["LoRA: Low-Rank Adaptation of Large Language Models", "https://arxiv.org/abs/2106.09685"]]
+  }
+}

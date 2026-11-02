@@ -7,6 +7,8 @@ import hashlib
 import json
 from pathlib import Path
 import re
+import os
+from functools import lru_cache
 import sqlite3
 from html.parser import HTMLParser
 from concurrent.futures import ThreadPoolExecutor
@@ -151,18 +153,22 @@ def validate_links():
     for path in [*ROOT.glob('*.html'), *ROOT.glob('terms/*.html')]:
         page = Links()
         page.feed(path.read_text(encoding='utf-8'))
-        parsed[path.resolve()] = page
+        parsed[path.absolute()] = page
     checked = 0
     routes = {'papers', 'alerts', 'coverage', 'overview', 'technologies', 'dictionary', 'safety', 'playbooks', 'compare', 'saved', 'sources', 'search', 'queue', 'terms'}
+    @lru_cache(maxsize=None)
+    def local_target(parent, relative):
+        target = Path(os.path.abspath(parent / urllib.parse.unquote(relative)))
+        assert target.is_relative_to(ROOT), target
+        assert target.is_file(), f'Missing local destination: {target}'
+        return target
     for path, page in parsed.items():
         for link in page.links:
             u = urllib.parse.urlsplit(link)
             assert u.scheme in ('', 'http', 'https', 'data'), (path, link)
             if u.scheme or u.netloc:
                 continue
-            target = (path.parent / urllib.parse.unquote(u.path)).resolve() if u.path else path
-            assert target.is_relative_to(ROOT), (path, link)
-            assert target.is_file(), f'Broken link: {path.name}: {link}'
+            target = local_target(path.parent, u.path) if u.path else path
             if u.fragment and target in parsed:
                 route = u.fragment.lstrip('/').split('?')[0]
                 assert u.fragment in parsed[target].ids or route in routes, f'Broken anchor: {path.name}: {link}'

@@ -401,5 +401,13 @@
       "sha256": "491245506e754a8340bf059a69f0530f54d5883280a7ddd9b6e95c28a0a531d7"
     }
   ],
-  "archive_sha256": "1f1b648e113cec13583217e9ae363def0028506706eed28a7f1f6b9cd4793125"
+  "archive_sha256": "1f1b648e113cec13583217e9ae363def0028506706eed28a7f1f6b9cd4793125",
+  "encyclopedia": {
+    "imported_term_count": 1345,
+    "linked_term_count": 1345,
+    "detailed_page_count": 12,
+    "editorially_reviewed_guide_count": 12,
+    "reviewed_on": "2026-11-01",
+    "page_manifest": "terms/manifest.json"
+  }
 }

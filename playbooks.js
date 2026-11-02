@@ -21,7 +21,7 @@ function drawRecord(record) {
  field(details, 'First step', record.first_step);
  field(details, 'How to validate', record.validation);
  field(details, 'Limitations and risks', record.caveat);
- field(details, 'Technology options', record.technologies.join(' · ') + ' (profiles not yet published)');
+ const options=el('section'); options.append(el('h3','Technology options')); record.technologies.forEach((name,i)=>{const a=el('a',name);a.href='index.html#/technologies?record='+encodeURIComponent(record.technology_ids[i]);options.append(a,document.createTextNode(' · '));});details.append(options);
  field(details, 'Review status', record.status);
  article.append(details); return article;
 }
