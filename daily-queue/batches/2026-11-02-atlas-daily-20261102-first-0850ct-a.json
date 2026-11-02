@@ -1,0 +1,822 @@
+{
+  "schema": 1,
+  "batch_id": "atlas-daily-20261102-first-0850ct-a",
+  "edition_date": "2026-11-02",
+  "timezone": "America/Chicago",
+  "collected_at": "2026-11-02T14:53:43.848Z",
+  "coverage_start": "2026-11-01T14:50:00Z",
+  "coverage_end": "2026-11-02T14:53:43.848Z",
+  "coverage_status": "partial",
+  "coverage_note": "First bounded 24-hour research sweep, source-diverse but not exhaustive. Original pages opened for every included dated headline. Some primary release metadata and registry feeds were not verified; no prior successful coverage cutoff can be advanced. Older October 29 arXiv records encountered on November 2 were not falsely treated as today's releases.",
+  "overlap_lookback_start": "2026-11-01T08:50:00Z",
+  "sources_checked": [
+    {
+      "id": "semianalysis-gdpx",
+      "url": "https://newsletter.semianalysis.com/p/gdpx-measuring-frontier-model-capabilities",
+      "status": "success",
+      "checked_at": "2026-11-02T14:53:43.848Z",
+      "note": "original publication and methodology"
+    },
+    {
+      "id": "vllm-release",
+      "url": "https://github.com/vllm-project/vllm/releases/tag/v0.33.0rc3",
+      "status": "success",
+      "checked_at": "2026-11-02T14:53:43.848Z",
+      "note": "explicit rc3 tag and change notes"
+    },
+    {
+      "id": "invokeai-release",
+      "url": "https://github.com/invoke-ai/InvokeAI/releases/tag/v6.14.3",
+      "status": "success",
+      "checked_at": "2026-11-02T14:53:43.848Z",
+      "note": "official patch release"
+    },
+    {
+      "id": "windmill-release",
+      "url": "https://github.com/windmill-labs/windmill/releases/tag/v1.856.0",
+      "status": "success",
+      "checked_at": "2026-11-02T14:53:43.848Z",
+      "note": "official 1.856.0 features"
+    },
+    {
+      "id": "nvidia-auto-ontology",
+      "url": "https://github.com/NVIDIA/auto-ontology",
+      "status": "success",
+      "checked_at": "2026-11-02T14:53:43.848Z",
+      "note": "official repository; initial release date not verified"
+    },
+    {
+      "id": "huggingface-jetbrains-model",
+      "url": "https://huggingface.co/JetBrains/Mellum2.1-12B-A2.5B-Thinking-MTP",
+      "status": "partial",
+      "checked_at": "2026-11-02T14:53:43.848Z",
+      "note": "model card accessible; initial publication not dated, no new-release assertion"
+    },
+    {
+      "id": "wired-investigation",
+      "url": "https://www.wired.com/story/hundreds-of-mundane-ai-apps-are-hiding-abusive-deepfake-features/",
+      "status": "success",
+      "checked_at": "2026-11-02T14:53:43.848Z",
+      "note": "original Nov2 investigative reporting"
+    },
+    {
+      "id": "reuters-south-korea",
+      "url": "https://www.reuters.com/world/asia-pacific/south-koreas-lee-vows-make-bold-ai-investment-record-budget-push-2026-11-02/",
+      "status": "success",
+      "checked_at": "2026-11-02T14:53:43.848Z",
+      "note": "Nov2 budget speech article"
+    },
+    {
+      "id": "reuters-adnoc-openai",
+      "url": "https://www.reuters.com/business/energy/abu-dhabis-adnoc-g42-sign-deal-with-openai-sam-altman-travels-uae-2026-11-02/",
+      "status": "success",
+      "checked_at": "2026-11-02T14:53:43.848Z",
+      "note": "Nov2 signed-agreement report"
+    },
+    {
+      "id": "reuters-ecb",
+      "url": "https://www.reuters.com/business/finance/ecb-flags-ai-valuations-bond-stress-fund-losses-main-risks-2026-11-02/",
+      "status": "success",
+      "checked_at": "2026-11-02T14:53:43.848Z",
+      "note": "Nov2 policymaker remarks"
+    },
+    {
+      "id": "reuters-oracle",
+      "url": "https://www.reuters.com/business/oracle-offer-10-billion-bonds-2026-11-02/",
+      "status": "success",
+      "checked_at": "2026-11-02T14:53:43.848Z",
+      "note": "Nov2 financing filings report"
+    },
+    {
+      "id": "ap-argentina",
+      "url": "https://apnews.com/article/argentina-data-center-milei-trump-openai-patagonia-a8fab1ac14d1ea9c7992f8797099fb32",
+      "status": "partial",
+      "checked_at": "2026-11-02T14:53:43.848Z",
+      "note": "original detailed report accessible, article time not exposed; not used as date-certain news"
+    },
+    {
+      "id": "anthropic-news",
+      "url": "https://www.anthropic.com/news/product",
+      "status": "success",
+      "checked_at": "2026-11-02T14:53:43.848Z",
+      "note": "publisher listing checked; did not substantiate a new Nov2 model release"
+    }
+  ],
+  "sources_failed": [
+    {
+      "id": "hf-jetbrains-api",
+      "url": "https://huggingface.co/api/models/JetBrains/Mellum2.1-12B-A2.5B-Thinking-MTP",
+      "checked_at": "2026-11-02T14:53:43.848Z",
+      "status": "inaccessible",
+      "note": "Direct model metadata API was not available in the research browser; model-card first-publication timestamp unverified, no date-specific news item proposed."
+    },
+    {
+      "id": "samsung-sds-press",
+      "url": "https://www.samsungsds.com/kr/news/0905-6278.html",
+      "checked_at": "2026-11-02T14:53:43.848Z",
+      "status": "not_found",
+      "note": "Previously surfaced press URL returned no page; unverified alleged deal omitted."
+    }
+  ],
+  "tldr": [
+    "A new specialist agent benchmark (GDPx) and software updates to vLLM, InvokeAI and Windmill highlight evaluation, inference and tool-governance changes; vLLM's cited tag is a release candidate.",
+    "WIRED's newly reported deepfake-app investigation shows a serious alleged distribution and moderation problem, while governments and companies signal ambitious AI investment; publisher-reported results, planned funding and allegations require careful qualification.",
+    "These items and five proposed technology profiles plus three missing glossary concepts are staged for independent review, not yet published to Atlas."
+  ],
+  "news": [
+    {
+      "id": "ai-news:semianalysis:gdpx:launch-2026-11-02",
+      "title": "SemiAnalysis introduces GDPx agent benchmark across 11 high-value domains",
+      "category": "research",
+      "tags": [
+        "LLM",
+        "Agents",
+        "Evaluation",
+        "Benchmark",
+        "AI safety"
+      ],
+      "summary": "SemiAnalysis introduced GDPx, an agent-task benchmark spanning chip and hardware design, cyber, biology, finance, law, trading, materials, software, alignment, and recursive self-improvement. Its authors report that the leading evaluated system solves about 12% of tasks.",
+      "why_it_matters": "Environment-based specialist evaluation can expose difficulty hidden by saturated question-answer tests.",
+      "caveat": "The 12% result and model rankings are publisher-reported, not independently reproduced; safety filters and task/grader design affect comparability.",
+      "canonical_url": "https://newsletter.semianalysis.com/p/gdpx-measuring-frontier-model-capabilities",
+      "source_url": "https://newsletter.semianalysis.com/p/gdpx-measuring-frontier-model-capabilities",
+      "publication_date": "2026-11-02",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-02",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-02T14:53:43.848Z",
+      "checked_at": "2026-11-02T14:53:43.848Z",
+      "release_status": "new_benchmark",
+      "evidence_type": "benchmark developer publication",
+      "review_status": "source_checked_pending_publisher_review",
+      "sources": [
+        {
+          "url": "https://newsletter.semianalysis.com/p/gdpx-measuring-frontier-model-capabilities",
+          "publisher": "SemiAnalysis",
+          "type": "primary"
+        }
+      ],
+      "related_catalog_ids": []
+    },
+    {
+      "id": "ai-news:vllm:v0.33.0rc3:2026-11-02",
+      "title": "vLLM v0.33.0rc3 expands model serving and changes CUDA packaging",
+      "category": "infrastructure",
+      "tags": [
+        "LLM",
+        "Inference",
+        "GPU",
+        "Open source"
+      ],
+      "summary": "The v0.33.0rc3 release candidate adds model and speculative-decoding support, moves to PyTorch 2.14, and publishes CUDA 13 rather than CUDA 12.9 artifacts, alongside AMD ROCm updates.",
+      "why_it_matters": "Inference engineers need to validate model support, compatibility and deployment images before upgrading serving fleets.",
+      "caveat": "This specific URL is tagged rc3 (release candidate), even though its GitHub heading says v0.33.0; performance claims are release-note benchmarks on specified hardware.",
+      "canonical_url": "https://github.com/vllm-project/vllm/releases/tag/v0.33.0rc3",
+      "source_url": "https://github.com/vllm-project/vllm/releases/tag/v0.33.0rc3",
+      "publication_date": "2026-11-02",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-02",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-02T14:53:43.848Z",
+      "checked_at": "2026-11-02T14:53:43.848Z",
+      "release_status": "release_candidate",
+      "evidence_type": "official GitHub release notes",
+      "review_status": "source_checked_pending_publisher_review",
+      "sources": [
+        {
+          "url": "https://github.com/vllm-project/vllm/releases/tag/v0.33.0rc3",
+          "publisher": "vLLM project",
+          "type": "primary"
+        }
+      ],
+      "related_catalog_ids": [
+        "TECH-0288"
+      ]
+    },
+    {
+      "id": "ai-news:invokeai:v6.14.3:2026-11-01",
+      "title": "InvokeAI 6.14.3 adds editable vector layers for image workflows",
+      "category": "multimodal",
+      "tags": [
+        "DL",
+        "Diffusion",
+        "Vision",
+        "Creative tools",
+        "Open source"
+      ],
+      "summary": "InvokeAI's 6.14.3 patch adds editable vector shapes and splines to its Canvas, which artists can rasterize for image-to-image workflows, and fixes resumed model downloads.",
+      "why_it_matters": "This bridges precise vector composition and local generative image editing without forcing every shape to be raster-first.",
+      "caveat": "This is a product-specific patch, not evidence that image-generation quality or speed improved across models; GitHub displays release time without an explicit timezone.",
+      "canonical_url": "https://github.com/invoke-ai/InvokeAI/releases/tag/v6.14.3",
+      "source_url": "https://github.com/invoke-ai/InvokeAI/releases/tag/v6.14.3",
+      "publication_date": "2026-11-01",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-01",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-02T14:53:43.848Z",
+      "checked_at": "2026-11-02T14:53:43.848Z",
+      "release_status": "patch_release",
+      "evidence_type": "official GitHub release notes",
+      "review_status": "source_checked_pending_publisher_review",
+      "sources": [
+        {
+          "url": "https://github.com/invoke-ai/InvokeAI/releases/tag/v6.14.3",
+          "publisher": "InvokeAI",
+          "type": "primary"
+        }
+      ],
+      "related_catalog_ids": []
+    },
+    {
+      "id": "ai-news:windmill:v1.856.0:2026-11-02",
+      "title": "Windmill 1.856.0 adds external OIDC token support for MCP access",
+      "category": "developer_tooling",
+      "tags": [
+        "Agents",
+        "MCP",
+        "Security",
+        "Developer tools"
+      ],
+      "summary": "Windmill's 1.856.0 release adds support for MCP access tokens from external OIDC issuers, HashiCorp Vault references, workspace-role sync through the CLI, and working folders/instructions for AI sessions.",
+      "why_it_matters": "It gives teams more options for authenticated and governed automation workflows that expose tools to agents.",
+      "caveat": "The announcement is a release-note claim, not an independent security audit; organizational authentication still requires appropriate configuration.",
+      "canonical_url": "https://github.com/windmill-labs/windmill/releases/tag/v1.856.0",
+      "source_url": "https://github.com/windmill-labs/windmill/releases/tag/v1.856.0",
+      "publication_date": "2026-11-02",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-02",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-02T14:53:43.848Z",
+      "checked_at": "2026-11-02T14:53:43.848Z",
+      "release_status": "software_release",
+      "evidence_type": "official GitHub release notes",
+      "review_status": "source_checked_pending_publisher_review",
+      "sources": [
+        {
+          "url": "https://github.com/windmill-labs/windmill/releases/tag/v1.856.0",
+          "publisher": "Windmill",
+          "type": "primary"
+        }
+      ],
+      "related_catalog_ids": []
+    },
+    {
+      "id": "ai-news:wired:disguised-deepfake-apps:2026-11-02",
+      "title": "WIRED reports network of disguised apps exposing abusive deepfake functions",
+      "category": "security",
+      "tags": [
+        "AI safety",
+        "Security",
+        "Multimodal",
+        "Misuse",
+        "Governance"
+      ],
+      "summary": "WIRED reports researchers traced more than 400 linked apps and sites that present ordinary AI utilities but under particular conditions expose tools for generating nonconsensual explicit imagery. The investigation describes app-store distribution and social-platform advertising.",
+      "why_it_matters": "The reporting raises concrete concerns about app review, server-side feature switching, consent, and online advertising enforcement.",
+      "caveat": "This is journalist- and researcher-reported misuse, not a independently confirmed count of distinct malicious apps or a failure attributable to any one model; avoid amplifying abusive app names or instructions.",
+      "canonical_url": "https://www.wired.com/story/hundreds-of-mundane-ai-apps-are-hiding-abusive-deepfake-features/",
+      "source_url": "https://www.wired.com/story/hundreds-of-mundane-ai-apps-are-hiding-abusive-deepfake-features/",
+      "publication_date": "2026-11-02",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-02",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-02T14:53:43.848Z",
+      "checked_at": "2026-11-02T14:53:43.848Z",
+      "release_status": "reported_investigation",
+      "evidence_type": "original investigative reporting",
+      "review_status": "reported_investigation_pending_independent_review",
+      "sources": [
+        {
+          "url": "https://www.wired.com/story/hundreds-of-mundane-ai-apps-are-hiding-abusive-deepfake-features/",
+          "publisher": "WIRED",
+          "type": "journalism"
+        }
+      ],
+      "related_catalog_ids": []
+    },
+    {
+      "id": "ai-news:reuters:south-korea-ai-budget-2027:2026-11-02",
+      "title": "South Korea's president seeks expanded AI investment in 2027 budget",
+      "category": "governance",
+      "tags": [
+        "Policy",
+        "Robotics",
+        "Semiconductors",
+        "Infrastructure"
+      ],
+      "summary": "President Lee Jae Myung urged approval of a record 2027 budget including 21.3 trillion won allocated to AI initiatives, with focus on semiconductors, physical AI and data centers, Reuters reported.",
+      "why_it_matters": "Public funding and infrastructure policy could shape capacity for domestic robotics, chips and model ecosystems.",
+      "caveat": "The budget is a proposal requiring legislative approval, not enacted spending; the speech occurs Nov 2 even though broader budget figures were outlined earlier.",
+      "canonical_url": "https://www.reuters.com/world/asia-pacific/south-koreas-lee-vows-make-bold-ai-investment-record-budget-push-2026-11-02/",
+      "source_url": "https://www.reuters.com/world/asia-pacific/south-koreas-lee-vows-make-bold-ai-investment-record-budget-push-2026-11-02/",
+      "publication_date": "2026-11-02",
+      "publication_date_precision": "day",
+      "publication_time_utc": "2026-11-02T02:37:00Z",
+      "event_date": "2026-11-02",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-02T14:53:43.848Z",
+      "checked_at": "2026-11-02T14:53:43.848Z",
+      "release_status": "reported",
+      "evidence_type": "wire reporting of budget speech",
+      "review_status": "source_checked_pending_publisher_review",
+      "sources": [
+        {
+          "url": "https://www.reuters.com/world/asia-pacific/south-koreas-lee-vows-make-bold-ai-investment-record-budget-push-2026-11-02/",
+          "publisher": "Reuters",
+          "type": "journalism"
+        }
+      ],
+      "related_catalog_ids": []
+    },
+    {
+      "id": "ai-news:reuters:adnoc-g42-openai-agreement:2026-11-02",
+      "title": "ADNOC and G42 announce an OpenAI deployment agreement",
+      "category": "industry",
+      "tags": [
+        "LLM",
+        "Industry",
+        "Energy",
+        "Enterprise"
+      ],
+      "summary": "Reuters reports Abu Dhabi's ADNOC and G42 signed an agreement with OpenAI at the ADIPEC conference to deploy frontier AI across energy-company operations.",
+      "why_it_matters": "It illustrates frontier-model deployments beyond consumer applications, with possible implications for enterprise data, safety and industrial workflows.",
+      "caveat": "This is an agreement and executive statements; neither production readiness nor measured energy-sector results are independently demonstrated in this report.",
+      "canonical_url": "https://www.reuters.com/business/energy/abu-dhabis-adnoc-g42-sign-deal-with-openai-sam-altman-travels-uae-2026-11-02/",
+      "source_url": "https://www.reuters.com/business/energy/abu-dhabis-adnoc-g42-sign-deal-with-openai-sam-altman-travels-uae-2026-11-02/",
+      "publication_date": "2026-11-02",
+      "publication_date_precision": "day",
+      "publication_time_utc": "2026-11-02T06:40:00Z",
+      "event_date": "2026-11-02",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-02T14:53:43.848Z",
+      "checked_at": "2026-11-02T14:53:43.848Z",
+      "release_status": "reported",
+      "evidence_type": "Reuters reporting from ADIPEC",
+      "review_status": "source_checked_pending_publisher_review",
+      "sources": [
+        {
+          "url": "https://www.reuters.com/business/energy/abu-dhabis-adnoc-g42-sign-deal-with-openai-sam-altman-travels-uae-2026-11-02/",
+          "publisher": "Reuters",
+          "type": "journalism"
+        }
+      ],
+      "related_catalog_ids": []
+    },
+    {
+      "id": "ai-news:reuters:ecb-ai-valuations-risk:2026-11-02",
+      "title": "ECB vice-president flags high AI equity valuations as a stability risk",
+      "category": "industry",
+      "tags": [
+        "AI industry",
+        "Finance",
+        "Infrastructure",
+        "Governance"
+      ],
+      "summary": "ECB Vice-President Boris Vujcic identified elevated AI-stock valuations among current financial stability risks, alongside bond-market stress and potential nonbank losses, according to Reuters.",
+      "why_it_matters": "Financing and capital-market risks influence infrastructure investment and firms developing AI hardware and models.",
+      "caveat": "These are a policymaker's risk assessment, not a prediction of an imminent crash or an empirical benchmark of AI capability.",
+      "canonical_url": "https://www.reuters.com/business/finance/ecb-flags-ai-valuations-bond-stress-fund-losses-main-risks-2026-11-02/",
+      "source_url": "https://www.reuters.com/business/finance/ecb-flags-ai-valuations-bond-stress-fund-losses-main-risks-2026-11-02/",
+      "publication_date": "2026-11-02",
+      "publication_date_precision": "day",
+      "publication_time_utc": "2026-11-02T10:46:00Z",
+      "event_date": "2026-11-02",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-02T14:53:43.848Z",
+      "checked_at": "2026-11-02T14:53:43.848Z",
+      "release_status": "reported",
+      "evidence_type": "wire reporting of policymaker remarks",
+      "review_status": "source_checked_pending_publisher_review",
+      "sources": [
+        {
+          "url": "https://www.reuters.com/business/finance/ecb-flags-ai-valuations-bond-stress-fund-losses-main-risks-2026-11-02/",
+          "publisher": "Reuters",
+          "type": "journalism"
+        }
+      ],
+      "related_catalog_ids": []
+    },
+    {
+      "id": "ai-news:reuters:oracle-ai-financing-plan:2026-11-02",
+      "title": "Oracle outlines $20 billion financing plan for AI and cloud expansion",
+      "category": "infrastructure",
+      "tags": [
+        "Infrastructure",
+        "Cloud",
+        "Finance",
+        "Industry"
+      ],
+      "summary": "Oracle plans to seek $20 billion through debt and equity fundraising, with proceeds potentially supporting its AI and cloud buildout as well as general corporate uses, according to Reuters and cited regulatory filings.",
+      "why_it_matters": "The scale highlights financing demands and execution risks in commercial AI computing capacity.",
+      "caveat": "Fundraising is planned rather than completed; exact debt pricing, share amounts and allocation to AI remain undetermined.",
+      "canonical_url": "https://www.reuters.com/business/oracle-offer-10-billion-bonds-2026-11-02/",
+      "source_url": "https://www.reuters.com/business/oracle-offer-10-billion-bonds-2026-11-02/",
+      "publication_date": "2026-11-02",
+      "publication_date_precision": "day",
+      "publication_time_utc": "2026-11-02T13:22:00Z",
+      "event_date": "2026-11-02",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-02T14:53:43.848Z",
+      "checked_at": "2026-11-02T14:53:43.848Z",
+      "release_status": "reported",
+      "evidence_type": "wire reporting citing filings",
+      "review_status": "source_checked_pending_publisher_review",
+      "sources": [
+        {
+          "url": "https://www.reuters.com/business/oracle-offer-10-billion-bonds-2026-11-02/",
+          "publisher": "Reuters",
+          "type": "journalism"
+        }
+      ],
+      "related_catalog_ids": []
+    }
+  ],
+  "technologies": [
+    {
+      "id": "tech-proposal:vllm:2026-11-02-rc3",
+      "name": "vLLM",
+      "aliases": [
+        "vLLM inference server"
+      ],
+      "proposal_type": "update_existing",
+      "existing_catalog_id": "TECH-0288",
+      "usage_tags": [
+        "LLM",
+        "SLM",
+        "DL",
+        "Inference"
+      ],
+      "summary": "Open-source engine for serving LLMs with advanced batching, caching and accelerator kernels; v0.33.0rc3 adds model, speculative decoding and API support.",
+      "conditional_advantage": "For supported GPU inference workloads, optimized batching and draft-based decoding can improve served throughput or latency versus an unoptimized Transformers loop.",
+      "best_fit_uses": [
+        "multi-user LLM APIs",
+        "accelerator-backed inference",
+        "hardware-specific speculative-decoding experiments"
+      ],
+      "tradeoffs": [
+        "release candidate may be unstable",
+        "hardware-specific paths complicate deployment",
+        "not every optimization benefits every workload"
+      ],
+      "alternatives": [
+        {
+          "id": "TECH-0265",
+          "name": "TensorRT-LLM"
+        },
+        {
+          "id": "TECH-0242",
+          "name": "SGLang"
+        },
+        {
+          "id": "TECH-0148",
+          "name": "llama.cpp"
+        }
+      ],
+      "hardware_runtime_constraints": "CUDA 13 published artifacts for v0.33.0rc3; specific ROCm/CPU/XPU images; model and framework compatibility must be checked.",
+      "official_docs": "https://docs.vllm.ai/",
+      "source_url": "https://github.com/vllm-project/vllm/releases/tag/v0.33.0rc3",
+      "version": "v0.33.0rc3",
+      "original_publication_date": "2026-11-02",
+      "license_status": "Existing project license should be rechecked for the specific release",
+      "availability_status": "release candidate public on GitHub",
+      "pricing_status": "no hosted-service pricing implied by open-source release",
+      "checked_at": "2026-11-02T14:53:43.848Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "source_publisher": "vLLM"
+    },
+    {
+      "id": "tech-proposal:invokeai:2026-11-02",
+      "name": "InvokeAI",
+      "aliases": [
+        "Invoke AI"
+      ],
+      "proposal_type": "new_to_atlas",
+      "existing_catalog_id": null,
+      "usage_tags": [
+        "DL",
+        "Diffusion",
+        "Vision",
+        "Multimodal"
+      ],
+      "summary": "Local image-generation and editing application with a node/workflow canvas. Version 6.14.3 adds editable vector layers that can be rasterized into image-to-image tasks.",
+      "conditional_advantage": "When a creator needs to align precise hand-drawn vector/spline shapes before generative editing, the integrated canvas can reduce switching between external vector editors and diffusion UI.",
+      "best_fit_uses": [
+        "AI-assisted illustration",
+        "image-to-image composition",
+        "local iterative visual workflows"
+      ],
+      "tradeoffs": [
+        "local model management and compatible graphics hardware are required",
+        "workflow differs from node-centric ComfyUI",
+        "model capabilities and licenses vary"
+      ],
+      "alternatives": [
+        {
+          "id": "TECH-0038",
+          "name": "ComfyUI"
+        },
+        {
+          "id": "TECH-0023",
+          "name": "Blender"
+        }
+      ],
+      "hardware_runtime_constraints": "GPU/VRAM requirements vary by selected image model; platform installation and acceleration should be checked against official instructions.",
+      "official_docs": "https://invoke-ai.github.io/InvokeAI/",
+      "source_url": "https://github.com/invoke-ai/InvokeAI/releases/tag/v6.14.3",
+      "version": "6.14.3",
+      "original_publication_date": "2026-11-01",
+      "license_status": "Project and bundled model licenses need individual verification",
+      "availability_status": "open-source application, release published",
+      "pricing_status": "local use not a guarantee against model or compute costs",
+      "checked_at": "2026-11-02T14:53:43.848Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "source_publisher": "InvokeAI"
+    },
+    {
+      "id": "tech-proposal:gdpx:2026-11-02",
+      "name": "GDPx",
+      "aliases": [
+        "SemiAnalysis GDPx benchmark"
+      ],
+      "proposal_type": "new_to_atlas",
+      "existing_catalog_id": null,
+      "usage_tags": [
+        "LLM",
+        "Agents",
+        "ML",
+        "Evaluation",
+        "AI safety"
+      ],
+      "summary": "Agent-capability evaluation suite released by SemiAnalysis for specialized tasks in 11 domains, including cyber, alignment, hardware and recursive self-improvement.",
+      "conditional_advantage": "For teams measuring difficult agent workflows where static exams saturate, task-environment evaluation across multiple professional domains may expose real capability gaps.",
+      "best_fit_uses": [
+        "frontier agent benchmarking",
+        "cross-domain capabilities analysis",
+        "model safety-filter interpretation"
+      ],
+      "tradeoffs": [
+        "domain/task selection limits generalization",
+        "grading and allowed tools can bias results",
+        "scores are difficult to compare across changing harnesses"
+      ],
+      "alternatives": [
+        {
+          "id": "TECH-0151",
+          "name": "lm-evaluation-harness"
+        },
+        {
+          "id": "TECH-0103",
+          "name": "HELM"
+        },
+        {
+          "id": "TECH-0118",
+          "name": "Inspect AI"
+        }
+      ],
+      "hardware_runtime_constraints": "Evaluation needs access to candidate hosted or local models and task environments; public benchmark task access and compute costs not independently checked.",
+      "official_docs": "https://gdpx.semianalysis.com",
+      "source_url": "https://newsletter.semianalysis.com/p/gdpx-measuring-frontier-model-capabilities",
+      "version": "initial 2026-11-02 announcement",
+      "original_publication_date": "2026-11-02",
+      "license_status": "public dataset, evaluation harness, and reuse license must be verified",
+      "availability_status": "public results site linked; task reproduction access unclear",
+      "pricing_status": "cost/access conditions require publisher confirmation",
+      "checked_at": "2026-11-02T14:53:43.848Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "source_publisher": "GDPx"
+    },
+    {
+      "id": "tech-proposal:nvidia-auto-ontology:2026-11-02",
+      "name": "NVIDIA Auto Ontology",
+      "aliases": [
+        "Auto Ontology"
+      ],
+      "proposal_type": "new_to_atlas",
+      "existing_catalog_id": null,
+      "usage_tags": [
+        "LLM",
+        "Agents",
+        "ML",
+        "Retrieval"
+      ],
+      "summary": "Open-source Python framework that constructs business meaning and provenance from enterprise metadata, then exposes grounded context to agents via MCP, API and CLI.",
+      "conditional_advantage": "For data systems with inconsistent entity/metric definitions, a shared ontology can reduce ambiguous text-to-SQL mappings and provide lineage that raw vector retrieval alone lacks.",
+      "best_fit_uses": [
+        "enterprise agent analytics",
+        "auditable natural-language database querying",
+        "semantic context for data agents"
+      ],
+      "tradeoffs": [
+        "ontology definitions still need human governance",
+        "additional ingestion and metadata maintenance",
+        "not a substitute for data authorization or query validation"
+      ],
+      "alternatives": [
+        {
+          "id": "TECH-0149",
+          "name": "LlamaIndex"
+        },
+        {
+          "id": "TECH-0135",
+          "name": "LangChain"
+        },
+        {
+          "id": "TECH-0200",
+          "name": "pgvector"
+        }
+      ],
+      "hardware_runtime_constraints": "Python 3.12+, FastAPI, PostgreSQL with pgvector, Docker Compose or Kubernetes; model-assisted text-to-SQL may require configured NVIDIA NIM/API access.",
+      "official_docs": "https://github.com/NVIDIA/auto-ontology",
+      "source_url": "https://github.com/NVIDIA/auto-ontology",
+      "version": null,
+      "original_publication_date": null,
+      "license_status": "repository states Apache-2.0; third-party and model service terms separate",
+      "availability_status": "public repository confirmed; initial release date not verified, new-to-Atlas only",
+      "pricing_status": "open code does not establish free NIM endpoint or hosting",
+      "checked_at": "2026-11-02T14:53:43.848Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "source_publisher": "NVIDIA Auto Ontology"
+    },
+    {
+      "id": "tech-proposal:windmill:2026-11-02",
+      "name": "Windmill",
+      "aliases": [
+        "Windmill.dev"
+      ],
+      "proposal_type": "new_to_atlas",
+      "existing_catalog_id": null,
+      "usage_tags": [
+        "Agents",
+        "LLM",
+        "MCP",
+        "Developer tools"
+      ],
+      "summary": "Developer workflow and app automation platform with support for agent sessions and MCP tool access; 1.856.0 adds OIDC-token verification and Vault secret references.",
+      "conditional_advantage": "When teams need permissioned scripts, workflows and human-facing apps alongside agent tool endpoints, one workflow platform can tie execution and governance together.",
+      "best_fit_uses": [
+        "MCP-enabled internal automations",
+        "orchestration with centralized credentials",
+        "developer operations workflows"
+      ],
+      "tradeoffs": [
+        "requires careful token/scope configuration",
+        "self-hosted operation adds infrastructure overhead",
+        "agent features are only part of a larger automation system"
+      ],
+      "alternatives": [
+        {
+          "id": "TECH-0007",
+          "name": "Apache Airflow"
+        },
+        {
+          "id": "TECH-0048",
+          "name": "Dagster"
+        },
+        {
+          "id": "TECH-0205",
+          "name": "Prefect"
+        }
+      ],
+      "hardware_runtime_constraints": "Web/server, database and worker requirements depend on self-hosted or managed deployment; consult release docs.",
+      "official_docs": "https://www.windmill.dev/docs/intro",
+      "source_url": "https://github.com/windmill-labs/windmill/releases/tag/v1.856.0",
+      "version": "1.856.0",
+      "original_publication_date": "2026-11-02",
+      "license_status": "edition/features/license need verification",
+      "availability_status": "public GitHub release confirmed; hosted plan availability not checked",
+      "pricing_status": "pricing/managed tier not verified",
+      "checked_at": "2026-11-02T14:53:43.848Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "source_publisher": "Windmill"
+    }
+  ],
+  "terms": [
+    {
+      "id": "term-proposal:agent-harness",
+      "term": "Agent harness",
+      "aliases": [
+        "agent execution harness",
+        "tool-use harness"
+      ],
+      "term_status": "new_to_atlas_established_usage",
+      "usage_tags": [
+        "LLM",
+        "Agents",
+        "AI safety",
+        "Evaluation"
+      ],
+      "definition": "The external execution framework that runs an AI agent: it supplies tools, observations, state, permissions, retries and stopping rules around the underlying model.",
+      "mechanism": "The model proposes actions; the harness validates and dispatches them, records results and determines what information enters the next model turn.",
+      "example": "A coding agent harness checks a shell command against its allowlist, executes it in a sandbox, feeds stdout back to the model and stops when tests pass.",
+      "caveat": "Changing the harness or tool permissions changes measured agent behavior even with identical weights; not the model itself.",
+      "related_existing_term_ids": [
+        "MLD-0041",
+        "MLD-0957",
+        "MLD-1254"
+      ],
+      "related_existing_technology_ids": [
+        "TECH-0183",
+        "TECH-0137"
+      ],
+      "primary_references": [
+        "https://arxiv.org/abs/2610.40917",
+        "https://docs.langchain.com/oss/python/langgraph/overview"
+      ],
+      "original_coined_at": null,
+      "checked_at": "2026-11-02T14:53:43.848Z",
+      "review_status": "source_checked_pending_publisher_review"
+    },
+    {
+      "id": "term-proposal:semantic-ontology-layer",
+      "term": "Semantic ontology layer",
+      "aliases": [
+        "enterprise semantic layer",
+        "ontology grounding layer"
+      ],
+      "term_status": "new_to_atlas_established_concept",
+      "usage_tags": [
+        "LLM",
+        "Agents",
+        "Retrieval",
+        "Data"
+      ],
+      "definition": "A structured, governed representation of entities, metrics, relationships and provenance that gives AI tools consistent meanings when accessing heterogeneous datasets.",
+      "mechanism": "Maps field names and records to canonical business concepts, stores lineage and certified definitions, and checks generated queries or answers against those relationships.",
+      "example": "An analytics agent resolves 'active customer' to an approved definition spanning CRM and billing tables before writing SQL.",
+      "caveat": "A semantic layer can improve interpretability and consistency, but it cannot guarantee the correctness of underlying data or prevent unauthorized access.",
+      "related_existing_term_ids": [
+        "MLD-1033",
+        "MLD-1303",
+        "MLD-0957"
+      ],
+      "related_existing_technology_ids": [
+        "TECH-0200",
+        "TECH-0149"
+      ],
+      "primary_references": [
+        "https://github.com/NVIDIA/auto-ontology"
+      ],
+      "original_coined_at": null,
+      "checked_at": "2026-11-02T14:53:43.848Z",
+      "review_status": "source_checked_pending_publisher_review"
+    },
+    {
+      "id": "term-proposal:environment-grounded-agent-benchmark",
+      "term": "Environment-grounded agent benchmark",
+      "aliases": [
+        "task-environment benchmark",
+        "interactive agent task benchmark"
+      ],
+      "term_status": "new_to_atlas_established_evaluation_approach",
+      "usage_tags": [
+        "LLM",
+        "Agents",
+        "Evaluation",
+        "AI safety"
+      ],
+      "definition": "An evaluation in which an agent interacts with a tool-enabled task environment and is graded on the resulting state or evidence rather than a single generated answer.",
+      "mechanism": "The harness gives actions, observations and constraints; a verifier checks whether an independently specified goal holds after execution, ideally allowing multiple valid solutions.",
+      "example": "An agent modifies a repository and a hidden test suite verifies behavior and allowed file changes, rather than comparing the final message to one reference string.",
+      "caveat": "Task environments and graders may be brittle, leak solutions or encode hidden requirements; success rates do not universally measure autonomy or safety.",
+      "related_existing_term_ids": [
+        "MLD-0041",
+        "MLD-0110",
+        "MLD-1254"
+      ],
+      "related_existing_technology_ids": [
+        "TECH-0118",
+        "TECH-0103"
+      ],
+      "primary_references": [
+        "https://newsletter.semianalysis.com/p/gdpx-measuring-frontier-model-capabilities",
+        "https://arxiv.org/abs/2610.40917"
+      ],
+      "original_coined_at": null,
+      "checked_at": "2026-11-02T14:53:43.848Z",
+      "review_status": "source_checked_pending_publisher_review"
+    }
+  ],
+  "corrections": [],
+  "pending_review": [
+    {
+      "id": "pending:model:jetbrains-mellum2.1-mtp",
+      "url": "https://huggingface.co/JetBrains/Mellum2.1-12B-A2.5B-Thinking-MTP",
+      "reason": "Card verified but original date unknown; seek model-repository first commit or official JetBrains release statement before reporting new launch."
+    },
+    {
+      "id": "pending:arxiv-oct29-catchup",
+      "url": "https://arxiv.org/abs/2610.40917",
+      "reason": "Interesting portable-agent-harness paper originally posted October 29, not November 2; used for existing-term educational context only."
+    }
+  ],
+  "next_source_backlog": [
+    "Verify OpenAI and METR RSS endpoints and all seven source-registry arXiv queries independently; the current sweep used browser discovery and opened cited pages, not an exhaustive feed poll.",
+    "Check robotics release notes and model registries (including Hugging Face model creation timestamps) for late-arriving November 1-2 items.",
+    "Review NVIDIA Auto Ontology first repository/tag date and Windmill edition licensing before declaring these technologies launched this week."
+  ]
+}
