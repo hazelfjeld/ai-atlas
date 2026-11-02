@@ -243,6 +243,7 @@ def check_remote(base: str, manifest: dict) -> dict:
     base = base.rstrip('/') + '/'
     files = ['index.html', 'app.css', 'app.js', 'core.js', 'catalog-loader.js', 'checkpoint.css', 'checkpoint.js', 'research.html', 'demo.html', 'technologies.html', 'technologies.js', 'publication.json', 'downloads/Atlas_Demo_Offline.html'] + [f['path'] for f in manifest['files']]
     files += ['whats-new.html', 'whats-new.js', 'daily-core.js', 'data/daily/index.json', 'data/daily/published-batches.json']
+    files += ['brand.css', 'discovery.js', 'about.html', 'favicon.svg', 'social-card.png', 'robots.txt', 'sitemap.xml', 'technology/index.html', 'technology/TECH-0216-pytorch.html']
     files += [item['path'] for item in json.loads((ROOT / 'data/daily/index.json').read_bytes())['editions']]
     if manifest.get('published_counts', {}).get('playbooks'):
         files += ['playbooks.html', 'playbooks.js'] + [f['path'] for f in manifest.get('extensions', {}).get('playbooks', [])]
