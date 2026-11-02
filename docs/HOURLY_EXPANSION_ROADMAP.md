@@ -5,8 +5,8 @@ This roadmap is a resumable implementation checklist for the authorized hourly A
 ## Current baseline (confirmed Nov 1, 2026)
 
 - Public repository: `hazelfjeld/ai-atlas` on `main`.
-- Published research-first checkpoint: 30 papers + 10 safety report records across eight validated JSON chunks.
-- NOT YET imported into the public app: 1,345 dictionary terms, 300 technology profiles, 20 problem playbooks, original exports and richer UI features.
+- Published verified checkpoint: 30 papers + 10 safety report records (eight JSON chunks), **plus all 20 original problem playbooks** (four further JSON chunks), with searchable playbooks page.
+- NOT YET imported into the public app: 1,345 dictionary terms, 300 technology profiles, original exports and richer UI features.
 - Source archive: `Atlas_GitHub_GitHack_Ready.zip` in the originating conversation's attachments. SHA-256: `1f1b648e113cec13583217e9ae363def0028506706eed28a7f1f6b9cd4793125`. Data files live under `ai-atlas/app/public/data/` within the archive.
 - Automatic website-side collection remains **off**. The recurring ChatGPT automation is separate from a production collector.
 
@@ -22,9 +22,9 @@ This roadmap is a resumable implementation checklist for the authorized hourly A
 
 - Import 1,345 glossary records with original term IDs and definitions, aliases, tags, categories, examples, related IDs, notes, source references and caveats.
 - Import 300 technology records with strengths, best-fit problems, tradeoffs, constraints, alternatives, source URLs, evidence status and lifecycle information.
-- Import all 20 playbooks and source registers.
+- [x] Imported all 20 original playbooks (four chunks, source SHA/blob verification; GitHack HTTP validation successful at commit `6385e484c390545e4fd8280e1a76de3499020d1a`). Source registers remain pending.
 - Integrate search, comparison, navigation and saved exports without losing the existing research/safety views.
-- Rework `scripts/validate_checkpoint.py` as formats are added: the current validator intentionally ONLY accepts `papers` and `alerts`, so it must evolve alongside `publication.json`.
+- [x] Updated `scripts/validate_checkpoint.py` to validate playbooks in `extensions.playbooks`, alongside the unchanged paper/safety main-catalog loader. Extend it similarly for term/technology additions.
 - Milestone A is complete only if public paths, counts, UI functions and integrity checks pass, not merely when files are present in GitHub.
 
 ## Milestone B — ongoing accuracy and discovery
