@@ -54,3 +54,19 @@ test('all browser-generated term URLs exactly match generated static pages', () 
     for (const r of JSON.parse(fs.readFileSync(path.join(root, 'data', name)))) assert.equal(C.termPath(r), pages[r.id].path);
   }
 });
+test('offline fallback embeds all records and valid JavaScript without external runtime assets', () => {
+  const html = fs.readFileSync(path.join(root, 'downloads/Atlas_Demo_Offline.html'), 'utf8');
+  assert.doesNotMatch(html, /<script[^>]+src=/i);
+  assert.doesNotMatch(html, /<link[^>]+rel="stylesheet"/i);
+  const script = html.match(/<script>([\s\S]*)<\/script>/)[1];
+  new vm.Script(script);
+  const value = script.split('window.ATLAS_READY=Promise.resolve(')[1].split(');\n')[0];
+  const d = JSON.parse(value);
+  assert.equal(['papers','alerts','playbooks','terms','technologies'].reduce((n,k) => n+d[k].length, 0), 1705);
+  for (const kind of ['papers','alerts','playbooks','terms','technologies']) {
+    const m = d.publication;
+    const files = kind === 'papers' || kind === 'alerts' ? m.files.filter(f => f.kind === kind) : m.extensions[kind];
+    const original = files.flatMap(f => JSON.parse(fs.readFileSync(path.join(root, f.path))));
+    assert.deepEqual(d[kind], original);
+  }
+});
