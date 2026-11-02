@@ -19,7 +19,7 @@
       "published_at": "2026-11-02T17:32:44.374Z"
     }
   ],
-  "last_successful_publish_at": "2026-11-02T15:43:08Z",
-  "status": "edition_revision_2_committed_awaiting_production_verification",
-  "coverage_note": "Nov 2 revision 2 adds source-checked GDPx benchmark and original WIRED investigation to the three verified software release items. This revision is pending new production verification; last_successful_publish_at still reflects the previously verified first edition. Four news and eight catalog proposals remain deferred; two collection source failures persist."
+  "last_successful_publish_at": "2026-11-02T17:37:12Z",
+  "status": "edition_revision_2_production_verified",
+  "coverage_note": "Five reviewed Nov 2 stories in immutable revision 2 (three release notes, one publisher-run benchmark, one original journalistic investigation). Partial coverage: four news and eight catalog proposals remain deferred; two collector sources failed. Cloudflare and GitHack validation completed on Nov 2; publication is scheduled/static, not continuous."
 }

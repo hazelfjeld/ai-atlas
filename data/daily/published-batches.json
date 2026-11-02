@@ -12,7 +12,7 @@
       "edition_date": "2026-11-02",
       "validation_result": "batch_sha256_bytes_schema_unique_ids_dates_verified_five_original_sources_reviewed_two_reports_qualified",
       "status": "partially_published_with_12_deferred_records",
-      "publication_outcome": "revision_2_committed_pending_production_verification",
+      "publication_outcome": "revision_2_production_http_browser_and_githack_verified",
       "publication_edition": "2026-11-02-v2",
       "accepted_news_ids": [
         "ai-news:vllm:v0.33.0rc3:2026-11-02",
@@ -47,12 +47,12 @@
         "catalog_deferred": 8
       },
       "review_notes": "Revision v2 adds two independently source-opened news reports: SemiAnalysis GDPx publisher-run benchmark (12% unreplicated) and WIRED investigation (400+ linked app/domain properties, not independently reproduced by Atlas). Four Reuters news reports and five technology/three term proposals remain deferred. Earlier v1 immutable and last verified production metadata preserved.",
-      "production_verified_at": "2026-11-02T15:43:08Z",
-      "production_verified_revision": "4b3695fae330a792664cf4039c342bd63ed76a80",
-      "production_workflow_run_id": 41473870650,
-      "githack_workflow_run_id": 41473870546,
-      "verification_scope": "Cloudflare validated 427 exact HTTP assets at each of three production hostnames, plus browser navigation and native Games; GitHack checks and static catalogs passed.",
-      "next_action": "Inspect actual main CI/deploy jobs and verify served v2 archive before advancing last_successful_publish_at. Review remaining four news IDs and eight catalog proposals in the same source receipt, preserving v1/v2 history.",
+      "production_verified_at": "2026-11-02T17:37:12Z",
+      "production_verified_revision": "2c7ea22f2dac1013e120415c47ce89632675e79b",
+      "production_workflow_run_id": 41492473038,
+      "githack_workflow_run_id": 41492473100,
+      "verification_scope": "Latest tested main 2c7ea22: 80 JS tests and catalog/reproducibility checks; GitHack exact byte equivalence; Cloudflare production verified 428 non-term assets each on aiupdates.app, www.aiupdates.app and workers.dev, plus real hosted browser site/rebrand/native Games and offline fallback checks.",
+      "next_action": "Process four deferred Reuters news candidates and eight catalog proposals from original staged batch, validating primary evidence and existing canonical catalog IDs before any imports. Preserve both immutable Nov 2 editions and the verified 839fee0 professor demo.",
       "revision_2_asset_commit": "9c49019fc8baf8c01221382bb56af3111a5fc42f",
       "publication_history": [
         {
@@ -73,11 +73,15 @@
           "clarifications": 1,
           "asset_commit": "9c49019fc8baf8c01221382bb56af3111a5fc42f",
           "published_at": "2026-11-02T17:32:44.374Z",
-          "status": "main_archive_committed_pending_production_checks",
+          "status": "cloudflare_http_browser_and_githack_verified",
           "added_candidate_ids": [
             "ai-news:semianalysis:gdpx:launch-2026-11-02",
             "ai-news:wired:disguised-deepfake-apps:2026-11-02"
-          ]
+          ],
+          "verified_at": "2026-11-02T17:37:12Z",
+          "production_commit": "2c7ea22f2dac1013e120415c47ce89632675e79b",
+          "production_workflow_run_id": 41492473038,
+          "githack_workflow_run_id": 41492473100
         }
       ]
     }
