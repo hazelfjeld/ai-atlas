@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#202a28">
+<meta name="description" content="Atlas daily AI developments: research, safety, models, new technologies, new terms and the site's own updates, with evidence and an edition archive.">
+<title>What's New Today · Atlas</title>
+<style>
+:root{color-scheme:light;--paper:#f5f4ee;--surface:#fffefa;--ink:#202a28;--muted:#52645c;--line:#d4ded4;--green:#245e4c;--accent:#e6a769;--soft:#ecf0e8}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.65 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+a{color:var(--green);text-underline-offset:3px}
+a:focus-visible,button:focus-visible,select:focus-visible{outline:3px solid #b98222;outline-offset:3px}
+.skip{position:absolute;top:-100px;left:12px;padding:12px;background:var(--surface);z-index:3}.skip:focus{top:10px}
+.shell{max-width:1240px;margin:auto;padding:22px clamp(18px,4vw,48px) 70px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:8px 0 20px;border-bottom:1px solid var(--line)}
+.brand{display:inline-flex;align-items:center;gap:12px;text-decoration:none;font-size:20px;font-weight:800;letter-spacing:.13em;color:var(--ink)}.brandmark{display:grid;place-items:center;width:36px;height:36px;background:var(--ink);border-radius:10px;color:var(--accent)}
+.toplinks{display:flex;gap:12px 24px;flex-wrap:wrap}.toplinks a{font-size:13px;font-weight:650}
+header{padding:52px 0 28px;display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,.38fr);gap:35px;align-items:end}
+.eyebrow{color:var(--green);font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:750}
+h1{font-size:clamp(42px,6.5vw,84px);line-height:1;letter-spacing:-.07em;margin:14px 0 20px}
+h1 em{font-family:Georgia,serif;font-weight:400;color:var(--green)}
+.lead{max-width:690px;font-size:19px;line-height:1.55;color:var(--muted)}
+.aside{padding:22px;background:var(--ink);color:#e6eee7;border-radius:17px}
+.aside strong{font-size:28px;line-height:1.1;display:block;margin:10px 0}
+.aside p{font-size:13px;line-height:1.6;margin:8px 0 0;color:#d2dfd7}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px}
+.status{border-left:4px solid var(--green);background:var(--soft);padding:16px 20px;margin:0 0 18px;border-radius:0 10px 10px 0}
+.controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;align-items:end}
+.controls label{display:grid;gap:5px;font-size:12px;text-transform:uppercase;letter-spacing:.08em;font-weight:750;color:var(--muted)}
+.controls select{min-width:0;width:100%;padding:11px;border:1px solid #b6c9ba;border-radius:8px;background:var(--surface);color:var(--ink);font:inherit;font-size:14px;text-transform:none;letter-spacing:normal}
+.meta{display:flex;gap:14px 25px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin-top:18px}.meta b{color:var(--ink)}
+.summary{margin:28px 0 32px;padding:25px 28px;background:var(--ink);color:#eff5ef;border-radius:14px}.summary h2{font-size:16px;margin:0 0 10px}.summary p{margin:8px 0;max-width:900px}.summary[hidden],.panel[hidden],section[hidden]{display:none}
+.heading{display:flex;justify-content:space-between;align-items:baseline;gap:15px;margin:35px 0 16px;border-bottom:1px solid var(--line);padding-bottom:12px}
+.heading h2{font-size:23px;letter-spacing:-.04em;margin:0}.heading span{font-size:12px;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+.item{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:23px;display:flex;flex-direction:column;gap:9px;min-width:0}
+.item .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}.tag{background:var(--soft);border-radius:40px;font-size:11px;padding:3px 9px;color:#234b3b}
+.item h3{font-size:19px;line-height:1.3;letter-spacing:-.02em;margin:0}
+.item p{margin:0;color:var(--muted);font-size:14px}
+.item .caveat{border-top:1px solid var(--line);padding-top:9px;font-size:13px}
+.item .links{display:flex;gap:17px;flex-wrap:wrap;margin-top:auto;padding-top:12px;font-size:13px;font-weight:700}
+.fact{font-size:12px;color:var(--muted)}.label{display:inline-block;color:var(--green);font-weight:750;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+.empty{padding:32px;border:1px dashed var(--line);border-radius:14px;background:var(--surface);color:var(--muted)}
+footer{border-top:1px solid var(--line);font-size:13px;color:var(--muted);margin-top:48px;padding:20px 0}
+@media(max-width:780px){header{grid-template-columns:1fr;padding-top:30px;gap:14px}.cards{grid-template-columns:1fr}.controls{grid-template-columns:1fr}.toplinks{gap:7px 14px}}
+@media(prefers-color-scheme:dark){:root{color-scheme:dark;--paper:#161e1b;--surface:#25312c;--ink:#f1f3ec;--muted:#c2d1c8;--line:#526359;--green:#bce0bd;--soft:#384a3e}.aside,.summary{background:#304137}.brandmark{background:#405e50}.tag{color:#e7f1e5}.controls select{border-color:#779185}.item .fact{color:var(--muted)}}
+</style>
+<script defer src="daily-core.js"></script>
+<script defer src="whats-new.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to daily editions</a>
+<div class="shell">
+<nav class="top" aria-label="Atlas navigation">
+ <a class="brand" href="index.html#/overview"><span class="brandmark">A.</span>ATLAS</a>
+ <div class="toplinks"><a href="index.html#/overview">Overview</a><a href="index.html#/technologies">Technologies</a><a href="index.html#/dictionary">Dictionary</a><a href="index.html#/safety">Safety</a><a href="demo.html">Guided demo</a></div>
+</nav>
+<main id="main">
+<header>
+ <div><div class="eyebrow">DAILY INTELLIGENCE · EVIDENCE FIRST</div><h1>What's new <em>today.</em></h1><p class="lead">AI releases, research, safety developments, new technology profiles and useful terms—with sources, actual dates, and uncertainty attached.</p></div>
+ <aside class="aside"><div class="eyebrow" style="color:#d6e7da">THE DAILY EDITION</div><strong id="date-display">Checking editions…</strong><p>Scheduled editorial publication, not a continuously live feed. Coverage is curated and never exhaustive.</p></aside>
+</header>
+<p class="status" id="edition-status" role="status" aria-live="polite">Checking the published edition archive…</p>
+<div class="panel">
+ <div class="controls">
+  <label for="edition-select">Edition archive<select id="edition-select" disabled><option value="">Awaiting first edition</option></select></label>
+  <label for="section-filter">Collection<select id="section-filter"><option value="all">All sections</option><option value="news">AI news</option><option value="technologies">New technologies</option><option value="terms">New terms</option><option value="site_changes">Updated in Atlas</option><option value="corrections">Corrections</option></select></label>
+  <label for="topic-filter">Topic<select id="topic-filter"><option value="all">All topics</option><option value="safety">Safety</option><option value="research">Research</option><option value="models">Models</option><option value="tools">Tools</option><option value="hardware">Hardware</option><option value="policy">Policy</option></select></label>
+ </div>
+ <div class="meta" id="edition-metadata" aria-live="polite"><span>Last successful publication: <b>none yet</b></span><span>Collection status: <b>pending</b></span></div>
+</div>
+<section class="summary" id="edition-summary" aria-label="Today's summary" hidden><h2>TL;DR</h2><div id="summary-content"></div></section>
+<div id="edition-content"><div class="empty"><strong>Awaiting the first reviewed edition.</strong><p>The collector and publisher are configured separately. No unverified headlines are displayed as news.</p></div></div>
+</main>
+<footer>Atlas is a sourced learning and research project, not a comprehensive newswire. First-publication, discovery, and Atlas-addition dates are separate. <a href="index.html#/sources">Read the evidence and coverage policy</a>.</footer>
+</div>
+</body></html>
