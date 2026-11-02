@@ -33,7 +33,11 @@ Every original record field, stable ID, source reference and review label is pre
 
 The workspace provides global and collection search, filters, pagination, record details, related-concept and technology navigation, comparisons of up to three tools, notebook export/import, JSON/CSV exports and paper BibTeX exports. Original workbooks, the bundle and a foreign-key-checked SQLite database are downloadable from Sources & coverage. Existing research, playbook and compact technology routes remain available.
 
-All **1,345 concepts have direct HTML pages** with original definitions, examples, caveats, sources, related concepts and backlinks. **16 expanded guides** add mechanisms, prerequisites, illustrative worked examples, equations and evaluation advice. The other 1,329 pages visibly identify their detailed expansion as pending. Generated pages work without JavaScript and do not require SPA fallback routing.
+All **1,345 concepts have direct HTML pages** with original definitions, examples, caveats, sources, related concepts and backlinks. **19 expanded guides** add mechanisms, prerequisites, illustrative worked examples, equations and evaluation advice. The other 1,326 pages visibly identify their detailed expansion as pending. Generated pages work without JavaScript and do not require SPA fallback routing.
+
+## Safety monitoring guides — November 1, 2026
+
+Three further source-reviewed tutorials now cover [deceptive alignment](terms/MLD-0280-deceptive-alignment.html), [shutdown avoidance](terms/MLD-1119-shutdown-avoidance.html), and [activation-based monitoring](terms/MLD-0017-activation-based-monitoring.html). Each distinguishes hypotheses, constructed evaluations and documented observations, provides a reproducible sandbox-style investigation, and cites primary research. Publication was tested with 57 JavaScript checks, 18,321 internal links and exact GitHack byte checks on all three term pages; see [PR #5](https://github.com/hazelfjeld/ai-atlas/pull/5). The original professor tour and dated news awaiting-state remain intact.
 
 ## AI safety depth update — November 1, 2026
 

@@ -17,7 +17,8 @@ test('Three-minute tour links real, existing Atlas features without a second app
 test('Demo stays printable, accessible, and honest about the published baseline',()=>{
   assert.match(html,/<a class="skip" href="#quick-tour">/);
   assert.match(html,/@media print/);
-  assert.match(html,/1,345 concepts have stable pages, but only 16 guides are expanded/);
+  const count=Object.keys(JSON.parse(fs.readFileSync(path.join(__dirname,'..','content/term-guides.json')))).length;
+  assert.ok(html.includes('1,345 concepts have stable pages, but only '+count+' guides are expanded'));
   assert.match(html,/An empty news archive means the first reviewed edition is pending/);
   assert.match(html,/imported review labels are not newly audited/i);
   assert.match(html,/no AI grades free-form paraphrases/i);
