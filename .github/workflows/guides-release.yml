@@ -48,6 +48,8 @@ jobs:
                  'terms/MLD-0470-goodhart-s-law.html','terms/MLD-0469-goal-misgeneralization.html',
                  'terms/MLD-0280-deceptive-alignment.html','terms/MLD-1119-shutdown-avoidance.html',
                  'terms/MLD-0017-activation-based-monitoring.html',
+                 'terms/MLD-0718-mechanistic-interpretability.html',
+                 'terms/MLD-1002-red-teaming.html',
                  'terms/index.html','terms/manifest.json','publication.json']
           for name in files:
               expected=pathlib.Path(name).read_bytes()

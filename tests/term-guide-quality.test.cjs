@@ -42,3 +42,22 @@ test('New monitoring guides distinguish hypotheses, constructed evaluations and 
     assert.ok(g.citations.every(c => c[0].length > 35 && /^https:\/\//.test(c[1])), 'Primary attribution: ' + id);
   }
 });
+
+
+test('New mechanistic and adversarial evaluation guides have checked evidence boundaries', () => {
+  const expected = {
+    'MLD-0718': /activation patching|causal|superposition/i,
+    'MLD-1002': /threat model|authorization|untrusted/i,
+  };
+  for (const [id, mechanism] of Object.entries(expected)) {
+    const g = guides[id];
+    assert.ok(g && termManifest[id], 'Missing published guide ' + id);
+    assert.equal(g.reviewed_on, '2026-11-02');
+    assert.ok(g.sections.length >= 8 && g.sections.every(([heading, body]) => heading.length >= 8 && body.length >= 120));
+    assert.ok(g.prerequisites.length >= 3 && g.prerequisites.every(term => !!termManifest[term]));
+    const body = g.sections.map(section => section[1]).join(' ');
+    assert.match(body, mechanism);
+    assert.match(body, /not (?:prove|necessarily)|does not (?:prove|establish)|not evidence|no[t]? automatically|not the final validation/i);
+    assert.ok(g.citations.length >= 3 && g.citations.every(([title, url]) => title.length >= 35 && /^https:\/\//.test(url)));
+  }
+});
