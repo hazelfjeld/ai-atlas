@@ -1,5 +1,14 @@
 # AI Atlas — recurring expansion plan
 
+## Verified ECE and subgroup evaluation guides — November 2, 2026
+
+- **Publication:** [PR #10](https://github.com/hazelfjeld/ai-atlas/pull/10) merged as [325321e](https://github.com/hazelfjeld/ai-atlas/commit/325321e7723ddceec14c336f802524edaa2701f8), adding [expected calibration error](../terms/MLD-0389-expected-calibration-error.html) and [subgroup evaluation](../terms/MLD-1184-subgroup-evaluation.html). Both provide original worked arithmetic, precise assumptions, holdout experiment plans, limitations and primary citations; no experiments were conducted and no 2026 incident was claimed.
+- **Verification:** [guide generation 41445890769](https://github.com/hazelfjeld/ai-atlas/actions/runs/41445890769) passed deterministic output and 18 exact GitHack asset checks; [main catalog/GitHack 41446223098](https://github.com/hazelfjeld/ai-atlas/actions/runs/41446223098) passed 73 automated tests and reproducibility; [Cloudflare 41446222978](https://github.com/hazelfjeld/ai-atlas/actions/runs/41446222978) passed deployment, production HTTP and browser checks. Last verified pinned page: https://rawcdn.githack.com/hazelfjeld/ai-atlas/325321e7723ddceec14c336f802524edaa2701f8/terms/index.html. Preserve the older professor three-minute demo at commit 839fee0.
+- **Catalog inventory:** 1,345 terms, 300 technologies, 20 playbooks, 30 papers and 10 safety reports = 1,705 original records. 1,345 direct term pages, **29** substantive expanded guides, **1,316** still at reference depth. No original record chunk or manifest source count changed.
+- **Daily publication:** main's receipts and staging index each had zero entries at intake. The collection queue's empty state means awaiting a real source-backed edition, not no AI news. The homepage and archive still show awaiting first publication.
+- **Next bounded step:** check staging queue and ledger before all other work; publish accepted immutable batches in order if supplied. Otherwise extend a high-value model-uncertainty or worst-group-accuracy explanation, or fix measured accessibility problems. Maintain one production writer and do not disrupt the pinned demonstration.
+
+
 ## Verified calibration and conformal learning increment — November 2, 2026
 
 - **Production content:** [PR #9](https://github.com/hazelfjeld/ai-atlas/pull/9) merged as [98410e6](https://github.com/hazelfjeld/ai-atlas/commit/98410e651e67004125f94c175a14c484a69a2cd8): two source-reviewed, detailed guides [calibration](../terms/MLD-0142-calibration.html) and [conformal prediction](../terms/MLD-0198-conformal-prediction.html). Worked synthetic examples, mechanisms, explicit mathematical conditions, safe evaluation protocols, seven primary citations and new regression coverage; no new incident or product release is implied.
