@@ -54,7 +54,7 @@ function render() {
 }
 function coverage() {
  const box = $('coverage'); box.replaceChildren(element('h2', 'A checkpoint you can inspect.'));
- box.append(element('p', 'Research and safety catalogs are online alongside the complete set of 20 original playbooks. The 1,345 dictionary terms and 300 technology profiles still await transfer.'));
+ box.append(element('p', 'Research, safety and all 20 playbooks are online. ' + manifest.published_counts.technologies + ' of ' + manifest.prepared_counts.technologies + ' technology profiles are published; the remaining profiles and ' + manifest.prepared_counts.terms + ' dictionary concepts are still being imported.'));
  const grid = element('div', undefined, 'progress-grid');
  for (const [key, title] of [['papers','Research papers'],['alerts','Safety report records'],['technologies','Technology profiles'],['terms','Dictionary concepts'],['playbooks','Problem playbooks']]) {
   const tile = element('div', undefined, 'progress-tile'); const count = manifest.published_counts[key];

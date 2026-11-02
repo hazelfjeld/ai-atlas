@@ -1,14 +1,14 @@
 {
   "schema": 1,
-  "checkpoint": 3,
-  "label": "Research, safety, and complete original playbooks",
+  "checkpoint": 4,
+  "label": "Research, safety, playbooks and technology preview",
   "snapshot_date": "2026-11-01",
   "automatic_refresh_active": false,
   "coverage": "Curated starter snapshot, not an exhaustive incident or research record. Prior review labels are imported, not newly audited during publication.",
   "published_counts": {
     "papers": 30,
     "alerts": 10,
-    "technologies": 0,
+    "technologies": 10,
     "terms": 0,
     "playbooks": 20
   },
@@ -106,6 +106,18 @@
         "count": 5,
         "bytes": 4523,
         "sha256": "c837b0c4f43543dd1dc3b5211b5309287730acc10cc5ecb4931b726bd18d6d30"
+      }
+    ],
+    "technologies": [
+      {
+        "path": "data/technologies-01.json.gz",
+        "kind": "technologies",
+        "count": 10,
+        "bytes": 4025,
+        "sha256": "745c98af1103fded4368b2e4adfd11a1b0c1ec5e6209ccadb4fcfa38b781b361",
+        "expanded_bytes": 14567,
+        "expanded_sha256": "e58d5762d6cd5fe357fd21a10f59c000ab34e3543f3fadd2d7ae86bd91ada6af",
+        "format": "gzip-json"
       }
     ]
   }
