@@ -1626,8 +1626,8 @@
   },
   "MLD-0326": {
     "path": "terms/MLD-0326-distribution-shift.html",
-    "sha256": "8376f707ee9caa4477c51f2f832cc51947ebe6f8a4b71c6d21e72b747ae19561",
-    "expanded": false
+    "sha256": "40edafd72b8a25da402a15991f1af4d714cb10864fbbcb652b23d1c659cee9c2",
+    "expanded": true
   },
   "MLD-0327": {
     "path": "terms/MLD-0327-diversity.html",
@@ -6266,8 +6266,8 @@
   },
   "MLD-1254": {
     "path": "terms/MLD-1254-train-test-contamination.html",
-    "sha256": "be36f794eac71b31dd6c1083b0abf9cbbc68bc0567e9d0f389e6776d7d343318",
-    "expanded": false
+    "sha256": "5457eecd6806e63071294ed9f0ecc26355080b88833b338fc35a2c2cb3dd17c8",
+    "expanded": true
   },
   "MLD-1255": {
     "path": "terms/MLD-1255-training.html",
