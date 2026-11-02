@@ -332,3 +332,24 @@ test('Revision 6 changes only the documented AI Updates source-audit UI, never w
  assert.equal(receipt.counts.term_added,0);
  assert.equal(receipt.counts.technology_added,0);
 });
+
+test('Verified-edition search matches source and caveat with literal AND keywords',()=>{
+ const item={id:'ai-news:reuters:valuation',title:'AI valuation risk warning',summary:'Officials discussed expensive equities',caveat:'Not an established market crash',tags:['policy','financial-stability'],source_url:'https://www.reuters.com/report'};
+ assert.equal(D.matchesQuery(item,''),true);
+ assert.equal(D.matchesQuery(item,'VALUATION equities'),true);
+ assert.equal(D.matchesQuery(item,'Reuters risk'),true);
+ assert.equal(D.matchesQuery(item,'market crash'),true);
+ assert.equal(D.matchesQuery(item,'chip shortage'),false);
+ assert.equal(D.matchesQuery(item,'[.*]'),false);
+ assert.equal(D.matchesQuery({...item,title:'Café evaluation'},'cafe'),true);
+});
+test('Reader offers labelled, keyboard-reachable search and match feedback',()=>{
+ const html=fs.readFileSync('whats-new.html','utf8'),js=fs.readFileSync('whats-new.js','utf8');
+ for(const id of ['edition-search','reset-filters','filter-results']) assert.ok(html.includes('id="'+id+'"'),id);
+ assert.ok(html.includes('<label for="edition-search">'));
+ assert.ok(html.includes('id="filter-results" role="status" aria-live="polite"'));
+ assert.ok(js.includes('C.matchesQuery(item,query)'));
+ assert.ok(js.includes("('edition-search').addEventListener('input'"));
+ assert.ok(js.includes("('reset-filters').addEventListener('click'"));
+ assert.ok(js.includes('No entries match those filters'));
+});

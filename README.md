@@ -8,6 +8,10 @@ The **AI Updates** rebrand uses an editorial Discover frontend, topic filters an
 
 The original site is hosted at [aiupdates.app](https://aiupdates.app), also available at [www.aiupdates.app](https://www.aiupdates.app) and [the workers.dev address](https://ai-atlas.airheadhazelnut.workers.dev). The allowlisted build and single gated GitHub Actions deployment path are documented in [the deployment guide](docs/CLOUDFLARE_DEPLOYMENT.md); successful production verification is recorded in the deployment workflow. GitHack remains a working fallback. Existing daily-news and hourly-development processes continue updating GitHub unchanged.
 
+## Daily edition keyword search — November 2
+
+The [daily archive](https://aiupdates.app/whats-new.html) now includes local multiword search of the selected integrity-verified edition's headlines, caveats, tags, IDs and source URLs. Search combines with the existing section and topic filters and provides match counts plus a keyboard-accessible reset. This UI change does not add or rewrite historical news, catalog records or immutable editions. [November 2 revision 6](https://aiupdates.app/whats-new.html?date=2026-11-02&revision=6) remains the last independently verified publication until the new deployment checks pass.
+
 ## Verified November 2 archive revision 5
 
 [Read the current November 2 edition and its revision history](https://aiupdates.app/whats-new.html?date=2026-11-02&revision=5). The archive now explains **what changed between immutable editions**: added, revised and removed news, technology entries, terminology, site changes and corrections. The earlier revision is displayed in this comparison only after its own checksum and byte count pass; failed comparisons never replace a successfully verified current edition.

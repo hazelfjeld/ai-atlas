@@ -16,6 +16,15 @@ const TOPIC_ALIASES=Object.freeze({
  hardware:['hardware','gpu','chip','semiconductor','accelerator','compute','infrastructure','cuda'],
  policy:['policy','governance','regulation','legislation','law','compliance']
 });
+// A local, literal multiword search; only reviewed edition fields enter this index.
+function matchesQuery(item,query){
+ if(!item||typeof item!=='object')return false;
+ if(typeof query!=='string'||!query.trim())return true;
+ const norm=value=>String(value).normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+ const words=norm(query.slice(0,120)).trim().split(/\s+/).filter(Boolean);
+ const corpus=norm([item.id,item.title,item.summary,item.why_it_matters,item.caveat,item.review_status,item.release_status,item.category,item.source_url,...(Array.isArray(item.tags)?item.tags:[])].filter(x=>typeof x==='string').join(' '));
+ return words.every(word=>corpus.includes(word));
+}
 function matchesTopic(item,topic){
  if(topic==='all')return true;
  const words=TOPIC_ALIASES[topic];
@@ -156,5 +165,5 @@ function permalink(entry){
  assert(entry&&validDate(entry.date)&&Number.isSafeInteger(entry.revision)&&entry.revision>=1,'Invalid edition permalink');
  return 'whats-new.html?date='+encodeURIComponent(entry.date)+'&revision='+entry.revision;
 }
-return {KINDS,matchesTopic,validDate,validTimestamp,chicagoDate,safeSource,safeCatalogPath,validateIndex,validateEdition,selection,fallbackOrder,revisionDiff,requestedEdition,permalink};
+return {KINDS,matchesTopic,matchesQuery,validDate,validTimestamp,chicagoDate,safeSource,safeCatalogPath,validateIndex,validateEdition,selection,fallbackOrder,revisionDiff,requestedEdition,permalink};
 });

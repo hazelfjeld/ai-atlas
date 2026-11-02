@@ -157,17 +157,18 @@ async function showRevisionDiff(entry,current,epoch){
 }
 function render(){
  if(!edition)return;
- const section=$('section-filter').value,topic=$('topic-filter').value;
+ const section=$('section-filter').value,topic=$('topic-filter').value,query=$('edition-search').value;
  const summary=$('edition-summary');summary.hidden=false;
  $('summary-content').replaceChildren(...edition.tldr.map(s=>element('p',s)));
  const content=$('edition-content');content.replaceChildren();
- let visible=0;
+ let visible=0,total=0;
  for(const [kind,label] of kinds){
   if(section!=='all'&&section!==kind)continue;
-  const records=edition[kind].filter(item=>C.matchesTopic(item,topic));
+  total+=edition[kind].length;
+  const records=edition[kind].filter(item=>C.matchesTopic(item,topic)&&C.matchesQuery(item,query));
   // An unfiltered edition always shows all five sections, including honest zeros.
   // A topic-filtered view avoids five repetitive empty sections.
-  if(!records.length&&topic!=='all')continue;
+  if(!records.length&&(topic!=='all'||query.trim()))continue;
   visible+=records.length;
   const s=element('section'),heading=element('div',undefined,'heading'),title=element('h2',label);
   heading.append(title,element('span',records.length+' entries'));s.append(heading);
@@ -178,7 +179,8 @@ function render(){
   }
   content.append(s);
  }
- if(!visible&&topic!=='all')content.append(element('div','No entries match those filters. Try a broader category.','empty'));
+ $('filter-results').textContent='Showing '+visible+' of '+total+' records in the selected collection'+(topic!=='all'||query.trim()?' matching your filters.':'.');
+ if(!visible&&(topic!=='all'||query.trim()))content.append(element('div','No entries match those filters. Try a broader topic or search. This is not a claim that no AI news occurred.','empty'));
 }
 async function request(path){
  const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),18000);
@@ -294,5 +296,13 @@ $('edition-select').addEventListener('change',()=>{
 });
 $('section-filter').addEventListener('change',render);
 $('topic-filter').addEventListener('change',render);
+$('edition-search').addEventListener('input',()=>{if(edition)render();});
+$('reset-filters').addEventListener('click',()=>{
+ $('edition-search').value='';
+ $('section-filter').value='all';
+ $('topic-filter').value='all';
+ if(edition)render();
+ $('edition-search').focus();
+});
 void start();
 })();
