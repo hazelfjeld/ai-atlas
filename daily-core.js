@@ -121,6 +121,25 @@ function validateEdition(edition,indexEntry){
  }
  return edition;
 }
+
+/* Compare already integrity-validated immutable editions by stable IDs, not by array order. */
+function revisionDiff(previous,current){
+ assert(previous&&current&&previous.edition_date===current.edition_date&&validDate(current.edition_date),'Cannot compare editions from different dates');
+ const canonical=value=>Array.isArray(value)?value.map(canonical):value&&typeof value==='object'?Object.fromEntries(Object.keys(value).sort().map(key=>[key,canonical(value[key])])):value;
+ const out={};
+ for(const kind of KINDS){
+  assert(Array.isArray(previous[kind])&&Array.isArray(current[kind]),'Missing edition section '+kind);
+  const old=new Map(previous[kind].map(item=>[item.id,item]));
+  const next=new Map(current[kind].map(item=>[item.id,item]));
+  assert(old.size===previous[kind].length&&next.size===current[kind].length,'Duplicate record ID in revision comparison');
+  out[kind]={
+   added:current[kind].filter(item=>!old.has(item.id)),
+   updated:current[kind].filter(item=>old.has(item.id)&&JSON.stringify(canonical(item))!==JSON.stringify(canonical(old.get(item.id)))),
+   removed:previous[kind].filter(item=>!next.has(item.id))
+  };
+ }
+ return out;
+}
 function requestedEdition(index,search,today=chicagoDate()){
  const available=fallbackOrder(index,today);
  if(typeof search!=='string')return {specified:false,entry:null,reason:null};
@@ -137,5 +156,5 @@ function permalink(entry){
  assert(entry&&validDate(entry.date)&&Number.isSafeInteger(entry.revision)&&entry.revision>=1,'Invalid edition permalink');
  return 'whats-new.html?date='+encodeURIComponent(entry.date)+'&revision='+entry.revision;
 }
-return {KINDS,matchesTopic,validDate,validTimestamp,chicagoDate,safeSource,safeCatalogPath,validateIndex,validateEdition,selection,fallbackOrder,requestedEdition,permalink};
+return {KINDS,matchesTopic,validDate,validTimestamp,chicagoDate,safeSource,safeCatalogPath,validateIndex,validateEdition,selection,fallbackOrder,revisionDiff,requestedEdition,permalink};
 });

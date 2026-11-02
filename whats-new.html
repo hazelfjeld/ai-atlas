@@ -32,6 +32,7 @@ h1 em{font-family:Georgia,serif;font-weight:400;color:var(--green)}
 .controls label{display:grid;gap:5px;font-size:12px;text-transform:uppercase;letter-spacing:.08em;font-weight:750;color:var(--muted)}
 .controls select{min-width:0;width:100%;padding:11px;border:1px solid #b6c9ba;border-radius:8px;background:var(--surface);color:var(--ink);font:inherit;font-size:14px;text-transform:none;letter-spacing:normal}
 .meta{display:flex;gap:14px 25px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin-top:18px}.edition-permalink{font-size:13px;margin:12px 0 0}.edition-permalink[hidden]{display:none}.meta b{color:var(--ink)}
+.revision-history{margin:30px 0;padding:18px 22px;background:var(--surface);border:1px solid var(--line);border-radius:14px}.revision-history h3{font-size:16px;margin:15px 0 5px}.revision-history p{font-size:13px;color:var(--muted)}.revision-history ul{margin:5px 0;padding-left:24px}.revision-history li{font-size:13px;margin:6px 0;overflow-wrap:anywhere}.revision-history li a{margin-left:9px}.revision-history[hidden]{display:none}
 .source-audit{margin-top:14px;padding:12px 16px;border:1px solid var(--line);border-radius:10px;background:var(--soft);font-size:13px}.source-audit summary{cursor:pointer;font-weight:750;color:var(--green)}.source-audit ul{padding-left:20px}.source-audit li{margin:6px 0;overflow-wrap:anywhere}.source-audit p{color:var(--muted);margin:8px 0 0}#source-coverage[hidden]{display:none}
 .summary{margin:28px 0 32px;padding:25px 28px;background:var(--ink);color:#eff5ef;border-radius:14px}.summary h2{font-size:16px;margin:0 0 10px}.summary p{margin:8px 0;max-width:900px}.summary[hidden],.panel[hidden],section[hidden]{display:none}
 .heading{display:flex;justify-content:space-between;align-items:baseline;gap:15px;margin:35px 0 16px;border-bottom:1px solid var(--line);padding-bottom:12px}
@@ -99,6 +100,7 @@ footer{border-top:1px solid var(--line);font-size:13px;color:var(--muted);margin
  <div id="source-coverage" hidden aria-label="Editorial source coverage and gaps"></div>
 </div>
 <section class="summary" id="edition-summary" aria-label="Today's summary" hidden><h2>TL;DR</h2><div id="summary-content"></div></section>
+<section id="revision-history" class="revision-history" aria-labelledby="revision-history-title" hidden><h2 id="revision-history-title">What changed in this revision?</h2><div id="revision-history-content" aria-live="polite"></div></section>
 <div id="edition-content"><div class="empty"><strong>Awaiting the first reviewed edition.</strong><p>The collector and publisher are configured separately. No unverified headlines are displayed as news.</p></div></div>
 </main>
 <footer>AI Updates is a sourced learning and research project, not a comprehensive newswire. First-publication, discovery, and AI Updates-addition dates are separate. <a href="index.html#/sources">Read the evidence and coverage policy</a>.</footer>

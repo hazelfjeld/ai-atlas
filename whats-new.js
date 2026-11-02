@@ -72,6 +72,7 @@ function metadata(){
  const t=element('span');t.append(document.createTextNode('Last successful publication: '),element('b',index?.last_successful_publish_at?stamp(index.last_successful_publish_at):'none yet'));m.append(t);
  if(!edition){line('Collection',index?.editions?.length?'No verified edition selected':'Awaiting first verified publication',m);return;}
  line('Edition published',stamp(edition.published_at),m);
+ line('Archive revision',String(active?.revision||1),m);
  line('Window',stamp(edition.coverage.start)+' – '+stamp(edition.coverage.end),m);
  line('Collection',edition.coverage.status,m);
  line('Sources checked',edition.coverage.sources_checked.length,m);
@@ -100,6 +101,50 @@ function sourceCoverage(){
  if(!list.childNodes.length)list.append(element('li','No source-by-source details were supplied for this edition.'));
  detail.append(list,element('p','This list describes collection coverage, not every AI announcement. The edition is not exhaustive.'));
  host.append(detail);
+}
+
+function renderRevisionDiff(base,entry,delta){
+ const host=$('revision-history-content');host.replaceChildren();
+ const totals={added:0,updated:0,removed:0};
+ for(const kind of kinds)for(const type of Object.keys(totals))totals[type]+=delta[kind[0]][type].length;
+ host.append(element('p','Compared with verified revision '+base.revision+' (published '+stamp(base.published_at)+'): '+totals.added+' added, '+totals.updated+' revised, '+totals.removed+' removed across all five sections. These are changes to this archive edition, not necessarily new real-world events.'));
+ if(!Object.values(totals).some(Boolean)){host.append(element('p','No record content changed between these two immutable editions.'));return;}
+ for(const [kind,title] of kinds){
+  const changes=delta[kind];
+  if(!changes.added.length&&!changes.updated.length&&!changes.removed.length)continue;
+  const group=element('section',undefined,'revision-group');
+  group.append(element('h3',title));
+  for(const [type,label] of [['added','Added'],['updated','Revised'],['removed','Removed from this revision']]){
+   if(!changes[type].length)continue;
+   const list=element('ul');
+   for(const item of changes[type]){
+    const li=element('li');
+    li.append(element('strong',label+': '),document.createTextNode(item.title+' '));
+    const dest=localHref(item.catalog_path,'Catalog record'),source=href(item.source_url,'Source');
+    if(dest)li.append(dest);
+    if(source)li.append(source);
+    list.append(li);
+   }
+   group.append(list);
+  }
+  host.append(group);
+ }
+}
+async function showRevisionDiff(entry,current,epoch){
+ const host=$('revision-history'),target=$('revision-history-content');
+ host.hidden=true;target.replaceChildren();
+ const previous=index.editions.filter(e=>e.date===entry.date&&e.revision<entry.revision).sort((a,b)=>b.revision-a.revision)[0];
+ if(!previous)return;
+ host.hidden=false;
+ target.append(element('p','Checking the previous immutable revision before displaying changes…'));
+ try{
+  const prior=await readEdition(previous,true); // Re-run SHA-256 and byte-size verification.
+  if(epoch!==switchEpoch)return;
+  renderRevisionDiff(previous,entry,C.revisionDiff(prior,current));
+ }catch(error){
+  if(epoch!==switchEpoch)return;
+  target.replaceChildren(element('p','Could not verify the earlier revision for comparison ('+error.message+'). The current edition remains independently verified; no unverified diff is shown.'));
+ }
 }
 function render(){
  if(!edition)return;
@@ -137,8 +182,8 @@ async function sha256(bytes){
  const hash=await globalThis.crypto.subtle.digest('SHA-256',bytes);
  return [...new Uint8Array(hash)].map(x=>x.toString(16).padStart(2,'0')).join('');
 }
-async function readEdition(entry){
- status('Loading '+humanDate(entry.date)+' and checking its published SHA-256…');
+async function readEdition(entry,quiet=false){
+ if(!quiet)status('Loading '+humanDate(entry.date)+' and checking its published SHA-256…');
  const bytes=await request(entry.path);
  if(bytes.byteLength!==entry.bytes)throw new Error('Edition size mismatch. A CDN cache may be stale.');
  if(await sha256(bytes)!==entry.sha256)throw new Error('Edition checksum mismatch. No partially updated content is shown.');
@@ -155,6 +200,7 @@ async function switchEdition(entry){
   $('edition-permalink-wrap').hidden=false;
   $('date-display').textContent=humanDate(entry.date);
   metadata();sourceCoverage();render();
+  void showRevisionDiff(entry,e,requestEpoch);
   const today=C.chicagoDate();
   const todayPublished=!!C.selection(index,today).todayEntry;
   const prefix=entry.date===today?'Today’s verified edition':todayPublished?'Archived edition '+humanDate(entry.date):'Today’s edition ('+humanDate(today)+') is awaiting publication. Showing archived edition '+humanDate(entry.date);
@@ -169,7 +215,7 @@ async function switchEdition(entry){
    $('edition-select').value=active.path;
    status('Could not verify '+humanDate(entry.date)+': '+err.message+'. Keeping the previously verified '+humanDate(active.date)+' edition; unverified records were not displayed.');
   }else{
-   edition=null;active=null;$('edition-permalink-wrap').hidden=true;metadata();sourceCoverage();$('edition-summary').hidden=true;
+   edition=null;active=null;$('edition-permalink-wrap').hidden=true;$('revision-history').hidden=true;metadata();sourceCoverage();$('edition-summary').hidden=true;
    $('edition-content').replaceChildren(element('div','Edition verification failed. No daily records passed validation; the evergreen catalog remains available.','empty'));
    status('Cannot display this edition: '+err.message);
   }

@@ -231,3 +231,41 @@ test('Revision 4 preserves newsroom evidence and records the existing vLLM updat
  assert.equal(receipt.deferred_catalog_proposal_ids.length,7);
  assert.equal(receipt.accepted_catalog_update_records[0].catalog_id,'TECH-0288');
 });
+
+
+test('Revision history compares immutable records by stable ID, not order or property serialization',()=>{
+ const prior=edition();prior.news=[
+  {id:'N1',title:'Original',summary:'Original summary',review_status:'source_checked',source_url:'https://example.org/n1',tags:['research']},
+  {id:'N2',title:'Removed',summary:'Old item',review_status:'source_checked',source_url:'https://example.org/n2'}];
+ const next=structuredClone(prior);
+ next.news=[{review_status:'source_checked',tags:['research'],summary:'Original summary',title:'Original',source_url:'https://example.org/n1',id:'N1'},
+  {id:'N3',title:'Added',summary:'New item',review_status:'source_checked',source_url:'https://example.org/n3'}];
+ next.site_changes=[{id:'SITE-1',title:'New archive feature',summary:'A site change, not external news',review_status:'editorial_site_change'}];
+ const diff=D.revisionDiff(D.validateEdition(prior),D.validateEdition(next));
+ assert.deepEqual(diff.news.added.map(x=>x.id),['N3']);
+ assert.deepEqual(diff.news.removed.map(x=>x.id),['N2']);
+ assert.equal(diff.news.updated.length,0);
+ assert.deepEqual(diff.site_changes.added.map(x=>x.id),['SITE-1']);
+ next.news[0].summary='Corrected summary';
+ assert.deepEqual(D.revisionDiff(prior,next).news.updated.map(x=>x.id),['N1']);
+ next.edition_date='2026-11-01';
+ assert.throws(()=>D.revisionDiff(prior,next),/different dates/);
+});
+test('Revision comparison verifies earlier edition bytes and degrades without hiding the verified latest edition',()=>{
+ const html=fs.readFileSync('whats-new.html','utf8'),js=fs.readFileSync('whats-new.js','utf8');
+ assert.match(html,/id="revision-history"/);
+ assert.match(html,/id="revision-history-content"/);
+ assert.match(js,/const prior=await readEdition\(previous,true\)/);
+ assert.match(js,/if\(epoch!==switchEpoch\)return/);
+ assert.match(js,/current edition remains independently verified/);
+});
+test('Historical Nov 2 editions have an explainable revision 3-to-4 delta',()=>{
+ const archive=JSON.parse(fs.readFileSync('data/daily/index.json','utf8'));
+ const v3=JSON.parse(fs.readFileSync(archive.editions.find(e=>e.revision===3).path,'utf8'));
+ const v4=JSON.parse(fs.readFileSync(archive.editions.find(e=>e.revision===4).path,'utf8'));
+ const diff=D.revisionDiff(v3,v4);
+ assert.equal(diff.news.added.length,0);
+ assert.equal(diff.news.updated.length,0);
+ assert.equal(diff.site_changes.added.length,1);
+ assert.equal(diff.site_changes.added[0].id,'site-vllm-release-annotation-20261102');
+});
