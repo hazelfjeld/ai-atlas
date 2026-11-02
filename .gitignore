@@ -2,6 +2,9 @@ __pycache__/
 *.py[cod]
 .DS_Store
 node_modules/
+dist/
+.wrangler/
+deployment-validation/
 .env
 .env.*
 !.env.example

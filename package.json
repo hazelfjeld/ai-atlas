@@ -1,0 +1,12 @@
+{
+  "name": "ai-atlas-deployment",
+  "private": true,
+  "version": "1.0.0",
+  "engines": {"node": ">=22"},
+  "scripts": {
+    "build:cloudflare": "python scripts/build_cloudflare.py",
+    "preview:cloudflare": "wrangler dev --local --ip 127.0.0.1 --port 8787",
+    "test": "node --test tests/*.test.cjs"
+  },
+  "devDependencies": {"wrangler": "4.156.1"}
+}

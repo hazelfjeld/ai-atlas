@@ -1,0 +1,152 @@
+name: Test and deploy Atlas to Cloudflare
+on:
+  push:
+    branches: [main, codex/cloudflare-deployment]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+  # The retained legacy importers write main with GITHUB_TOKEN, which cannot trigger push workflows.
+  workflow_run:
+    workflows: ['Publish complete Atlas catalog', 'Import and publish approved Atlas package']
+    types: [completed]
+permissions:
+  contents: read
+env:
+  WRANGLER_SEND_METRICS: 'false'
+  PRODUCTION_URL: https://ai-atlas.airheadhazelnut.workers.dev
+jobs:
+  validate:
+    if: github.event_name != 'workflow_run' || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main')
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    concurrency:
+      group: atlas-cloudflare-check-${{ github.ref }}
+      cancel-in-progress: true
+    outputs:
+      revision: ${{ steps.revision.outputs.sha }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.event_name == 'workflow_run' && 'main' || github.sha }}
+          persist-credentials: false
+      - id: revision
+        name: Record the exact revision being tested
+        run: echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Install locked deployment tooling
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Validate catalogs, daily archive, navigation, game rules and packaging boundaries
+        run: |
+          python3 scripts/validate_checkpoint.py
+          node --test tests/*.test.cjs
+          python3 -m unittest discover -s tests -p 'test_cloudflare*.py'
+          for source in *.js; do node --check "$source"; done
+      - name: Require completed and reproducible generated publication
+        run: |
+          python3 scripts/install_games_workspace.py
+          python3 scripts/build_term_pages.py
+          python3 scripts/build_offline.py
+          git diff --exit-code
+          python3 scripts/build_cloudflare.py --revision '${{ steps.revision.outputs.sha }}'
+          npx --no-install wrangler deploy --dry-run --outdir dist/wrangler-dry-run
+      - name: Install browser regression tooling
+        run: |
+          python3 -m pip install playwright==1.57.0
+          python3 -m playwright install --with-deps chromium
+      - name: Exercise the allowlisted site through Cloudflare's local asset runtime
+        run: |
+          set -eu
+          npx --no-install wrangler dev --local --ip 127.0.0.1 --port 8787 > /tmp/atlas-wrangler.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          for attempt in $(seq 1 60); do
+            if curl --fail --silent http://127.0.0.1:8787/deployment.json > /dev/null; then break; fi
+            sleep 1
+          done
+          python3 scripts/verify_cloudflare.py --base http://127.0.0.1:8787/ --revision '${{ steps.revision.outputs.sha }}' --output deployment-validation/local-http.json
+          python3 tests/site-deployment-browser.py --base http://127.0.0.1:8787/ --output deployment-validation/local-site
+          python3 tests/games-workspace-browser.py --base http://127.0.0.1:8787/ --output deployment-validation/local-native-games
+          python3 tests/games-browser.py --base http://127.0.0.1:8787/ --output deployment-validation/local-games
+      - name: Preserve the exact tested deployment artifact
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: atlas-assets-${{ steps.revision.outputs.sha }}-${{ github.run_attempt }}
+          path: dist/cloudflare/
+          if-no-files-found: error
+          retention-days: 7
+      - name: Preserve pre-deployment verification
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: atlas-checks-${{ github.run_id }}-${{ github.run_attempt }}
+          path: deployment-validation/
+          retention-days: 7
+  production:
+    needs: validate
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    # Never cancel an upload in flight; newer releases wait and older queued runs are skipped below.
+    concurrency:
+      group: atlas-cloudflare-production
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ needs.validate.outputs.revision }}
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: atlas-assets-${{ needs.validate.outputs.revision }}-${{ github.run_attempt }}
+          path: dist/cloudflare/
+      - id: current
+        name: Reject superseded runs immediately before deployment
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TESTED_SHA: ${{ needs.validate.outputs.revision }}
+        run: |
+          current=$(gh api repos/hazelfjeld/ai-atlas/git/ref/heads/main --jq .object.sha)
+          if [ "$current" != "$TESTED_SHA" ]; then
+            echo 'deploy=false' >> "$GITHUB_OUTPUT"
+            echo 'A newer main revision exists; this run will not deploy.'
+          else
+            echo 'deploy=true' >> "$GITHUB_OUTPUT"
+          fi
+      - name: Deploy only the exact tested artifact
+        if: steps.current.outputs.deploy == 'true'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          TESTED_SHA: ${{ needs.validate.outputs.revision }}
+        run: |
+          test -n "$CLOUDFLARE_API_TOKEN" || { echo '::error::Add the scoped CLOUDFLARE_API_TOKEN Actions secret.'; exit 1; }
+          test -n "$CLOUDFLARE_ACCOUNT_ID" || { echo '::error::Add the CLOUDFLARE_ACCOUNT_ID Actions secret.'; exit 1; }
+          npx --no-install wrangler deploy --message "Tested GitHub revision $TESTED_SHA"
+      - name: Install production browser verification
+        if: steps.current.outputs.deploy == 'true'
+        run: |
+          python3 -m pip install playwright==1.57.0
+          python3 -m playwright install --with-deps chromium
+      - name: Verify actual production assets, caching, navigation, Quiz and Match
+        if: steps.current.outputs.deploy == 'true'
+        run: |
+          python3 scripts/verify_cloudflare.py --base "$PRODUCTION_URL/" --revision '${{ needs.validate.outputs.revision }}' --output deployment-validation/production-http.json
+          python3 tests/site-deployment-browser.py --base "$PRODUCTION_URL/" --output deployment-validation/production-site
+          python3 tests/games-workspace-browser.py --base "$PRODUCTION_URL/" --output deployment-validation/production-native-games
+          python3 tests/games-browser.py --base "$PRODUCTION_URL/" --output deployment-validation/production-games
+          echo "Verified $PRODUCTION_URL at ${{ needs.validate.outputs.revision }}" >> "$GITHUB_STEP_SUMMARY"
+      - name: Preserve production verification and screenshots
+        if: always() && steps.current.outputs.deploy == 'true'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: atlas-production-${{ needs.validate.outputs.revision }}-${{ github.run_attempt }}
+          path: deployment-validation/
+          retention-days: 7
