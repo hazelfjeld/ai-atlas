@@ -43,6 +43,14 @@ def main():
     terms, techs = rows('terms'), rows('technologies')
     by_term = {r['id']: r for r in terms}
     by_tech = {r['id']: r for r in techs}
+    release_path = ROOT / 'content/technology-release-updates.json'
+    release_bytes = release_path.read_bytes()
+    from hashlib import sha256
+    assert len(release_bytes) == 1984 and sha256(release_bytes).hexdigest() == 'bce8af000eb5b765177ebb62ca7b5be09b3931679152ee7d59cc5e0faebd4e2c', 'Release evidence digest mismatch'
+    review_data = json.loads(release_bytes)
+    assert review_data['schema'] == 1
+    release_updates = review_data['updates']
+    assert all(key in by_tech for key in release_updates), 'Release update references missing catalog profile'
     out = ROOT / 'technology'
     out.mkdir(exist_ok=True)
     profile_paths = []
@@ -54,7 +62,7 @@ def main():
         for title, key in fields:
             if r.get(key):
                 body += f'<section class="profile-section"><h2>{e(title)}</h2><p>{e(r[key])}</p></section>'
-        for update in r.get('release_updates', []):
+        for update in release_updates.get(r['id'], []):
             body += '<section class="profile-section"><h2>Reviewed release update · ' + e(update['version']) + '</h2><p>' + e(update['summary']) + '</p><p><strong>Compatibility:</strong> ' + e(update['compatibility']) + '</p><p><strong>Publication status:</strong> ' + e(update['status_note']) + '</p><p><strong>Evidence limitation:</strong> ' + e(update['caveat']) + '</p><p><strong>Source published:</strong> ' + e(update['published_at']) + ' · <strong>Reviewed:</strong> ' + e(update['reviewed_on']) + '</p><p>' + external(update['source_url'], 'First-party release notes') + '</p></section>'
         body += '<section class="profile-section"><h2>Connected concepts</h2><ul>' + ''.join(f'<li><a href="../{term_path(by_term[i])}">{e(by_term[i]["term"])}</a></li>' for i in r['concept_ids']) + '</ul></section>'
         body += '<section class="profile-section"><h2>Alternatives to investigate</h2><p>' + e(' · '.join(r['alternatives']) or 'None recorded') + '</p><ul>' + ''.join(f'<li><a href="{Path(technology_path(by_tech[i])).name}">{e(by_tech[i]["name"])}</a></li>' for i in r['alternative_ids']) + '</ul></section>'

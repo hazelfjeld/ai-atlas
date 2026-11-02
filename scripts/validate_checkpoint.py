@@ -56,21 +56,6 @@ def read_batch(item: dict, kind: str, ids: set[str], paths: set[str]) -> list[di
                 assert isinstance(record.get(key), str) and record[key], f'{path}: {key}'
             for key in ('concept_ids', 'alternative_ids'):
                 assert isinstance(record.get(key), list), f'{path}: {key}'
-            updates = record.get('release_updates', [])
-            assert isinstance(updates, list), f'{path}: release updates must be a list'
-            versions = set()
-            for update in updates:
-                assert isinstance(update, dict), f'{path}: invalid release update'
-                for key in ('version', 'published_at', 'reviewed_on', 'summary', 'compatibility', 'status_note', 'caveat', 'source_url', 'evidence_level'):
-                    assert isinstance(update.get(key), str) and update[key].strip(), f'{path}: release update missing {key}'
-                assert update['version'] not in versions, f'{path}: duplicate release version'
-                versions.add(update['version'])
-                from datetime import date, datetime
-                date.fromisoformat(update['reviewed_on'])
-                parsed = datetime.fromisoformat(update['published_at'].replace('Z', '+00:00'))
-                assert parsed.tzinfo is not None, f'{path}: release source timestamp must include zone'
-                url = urllib.parse.urlsplit(update['source_url'])
-                assert url.scheme == 'https' and url.hostname and not url.username and not url.password, f'{path}: unsafe release URL'
         else:
             for key in ('title', 'summary', 'caveat', 'source_url', 'review_status'):
                 assert isinstance(record.get(key), str) and record[key], f'{path}: {key}'
@@ -183,11 +168,22 @@ def validate() -> dict:
             assert db.execute('SELECT count(*) FROM records').fetchone()[0] == sum(counts.values())
             for kind, rows in catalogs.items():
                 for r in rows:
-                    original = json.loads(db.execute('SELECT record_json FROM records WHERE id=?', (r['id'],)).fetchone()[0])
-                    assert set(original) <= set(r), f'{r["id"]}: missing prepared source fields'
-                    assert {key: r[key] for key in original} == original, f'{r["id"]}: prepared source fields changed'
-                    approved_additions = {'release_updates'} if kind == 'technologies' else set()
-                    assert set(r) - set(original) <= approved_additions, f'{r["id"]}: unexpected extension fields'
+                    assert json.loads(db.execute('SELECT record_json FROM records WHERE id=?', (r['id'],)).fetchone()[0]) == r, r['id']
+    overlay_blob = (ROOT / 'content/technology-release-updates.json').read_bytes()
+    assert len(overlay_blob) == 1984 and hashlib.sha256(overlay_blob).hexdigest() == 'bce8af000eb5b765177ebb62ca7b5be09b3931679152ee7d59cc5e0faebd4e2c', 'Technology release annotations failed byte integrity checks'
+    overlay = json.loads(overlay_blob)
+    assert overlay['schema'] == 1 and isinstance(overlay['updates'], dict)
+    assert set(overlay['updates']) <= {r['id'] for r in catalogs['technologies']}, 'Release update links to nonexistent technology'
+    for technology_id, updates in overlay['updates'].items():
+        assert isinstance(updates, list), technology_id
+        version_ids = set()
+        for update in updates:
+            for field in ('version', 'published_at', 'reviewed_on', 'summary', 'compatibility', 'status_note', 'caveat', 'source_url', 'evidence_level'):
+                assert isinstance(update.get(field), str) and update[field], f'{technology_id}: missing {field}'
+            assert update['version'] not in version_ids, f'{technology_id}: duplicate release'
+            version_ids.add(update['version'])
+            url = urllib.parse.urlsplit(update['source_url'])
+            assert url.scheme == 'https' and url.netloc and not url.username and not url.password
     html = (ROOT / 'index.html').read_text(encoding='utf-8')
     assert 'app.css' in html and 'catalog-loader.js' in html and 'app.js' in html, 'Workspace entry point missing'
     for path in ('app.css', 'app.js', 'core.js', 'catalog-loader.js'):
@@ -263,6 +259,7 @@ def check_remote(base: str, manifest: dict) -> dict:
     files = ['index.html', 'app.css', 'app.js', 'core.js', 'catalog-loader.js', 'checkpoint.css', 'checkpoint.js', 'research.html', 'demo.html', 'technologies.html', 'technologies.js', 'publication.json', 'downloads/Atlas_Demo_Offline.html'] + [f['path'] for f in manifest['files']]
     files += ['whats-new.html', 'whats-new.js', 'daily-core.js', 'data/daily/index.json', 'data/daily/published-batches.json']
     files += ['brand.css', 'discovery.js', 'about.html', 'favicon.svg', 'social-card.png', 'robots.txt', 'sitemap.xml', 'technology/index.html', 'technology/TECH-0216-pytorch.html']
+    files += ['content/technology-release-updates.json', 'technology/TECH-0288-vllm.html']
     files += [item['path'] for item in json.loads((ROOT / 'data/daily/index.json').read_bytes())['editions']]
     if manifest.get('published_counts', {}).get('playbooks'):
         files += ['playbooks.html', 'playbooks.js'] + [f['path'] for f in manifest.get('extensions', {}).get('playbooks', [])]

@@ -68,6 +68,7 @@ class SEOPublication(unittest.TestCase):
 
     def test_technology_profiles_preserve_original_claims_caveats_and_sources(self):
         techs = rows('technologies')
+        release_updates = json.loads((ROOT/'content/technology-release-updates.json').read_bytes())['updates']
         self.assertEqual(len(techs), json.loads((ROOT/'publication.json').read_bytes())['published_counts']['technologies'])
         for row in techs:
             path = technology_path(row)
@@ -76,11 +77,32 @@ class SEOPublication(unittest.TestCase):
                 self.assertIn(escape(row[key]), source, (row['id'],key))
             self.assertIn(escape(row['source_url'],quote=True), source)
             self.assertIn('technologies?record='+row['id'], source)
-            for update in row.get('release_updates', []):
+            for update in release_updates.get(row['id'], []):
                 self.assertIn('Reviewed release update', source, row['id'])
                 for key in ('version', 'summary', 'compatibility', 'status_note', 'caveat', 'published_at', 'reviewed_on'):
                     self.assertIn(escape(update[key]), source, (row['id'], key))
                 self.assertIn('href="'+escape(update['source_url'], quote=True)+'"', source, row['id'])
+
+    def test_reviewed_release_overlay_is_pinned_to_primary_evidence_and_existing_ids(self):
+        import hashlib
+        from urllib.parse import urlsplit
+        blob = (ROOT / 'content/technology-release-updates.json').read_bytes()
+        self.assertEqual(len(blob), 1984)
+        self.assertEqual(hashlib.sha256(blob).hexdigest(), 'bce8af000eb5b765177ebb62ca7b5be09b3931679152ee7d59cc5e0faebd4e2c')
+        overlay = json.loads(blob)
+        self.assertEqual(overlay['schema'], 1)
+        original = {r['id'] for r in rows('technologies')}
+        self.assertEqual(set(overlay['updates']), {'TECH-0288'})
+        self.assertLessEqual(set(overlay['updates']), original)
+        for updates in overlay['updates'].values():
+            versions = [u['version'] for u in updates]
+            self.assertEqual(len(versions), len(set(versions)))
+            for u in updates:
+                source = urlsplit(u['source_url'])
+                self.assertEqual(source.scheme, 'https')
+                self.assertFalse(source.username or source.password)
+                self.assertIn('release', u['evidence_level'].lower())
+                self.assertIn('not reproduced', u['review_status'].replace('_', ' ').lower())
 
     def test_every_term_has_matching_semantic_definition_and_actual_reference(self):
         for row in rows('terms'):

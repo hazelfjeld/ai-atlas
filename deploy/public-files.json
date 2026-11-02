@@ -32,7 +32,8 @@
     "sitemap.xml"
   ],
   "extra_downloads": [
-    "downloads/Atlas_Demo_Offline.html"
+    "downloads/Atlas_Demo_Offline.html",
+    "content/technology-release-updates.json"
   ],
   "production_url": "https://aiupdates.app"
 }

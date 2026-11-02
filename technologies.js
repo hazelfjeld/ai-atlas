@@ -2,6 +2,7 @@
 'use strict';
 const $ = id => document.getElementById(id);
 const records = [], selected = new Set();
+let releaseUpdates = Object.create(null);
 let matches = [], visible = 40, prepared = 300, snapshot = '';
 const norm = value => String(value ?? '').normalize('NFKD').replace(/\p{M}/gu,'').toLowerCase();
 function el(tag, value, className) { const node = document.createElement(tag); if (value !== undefined) node.textContent = value; if (className) node.className = className; return node; }
@@ -48,7 +49,7 @@ function card(r) {
   ['Related concepts',r.linked_concepts || r.concepts],['Stages',r.stages],
   ['Evidence status',r.evidence_status],['Reviewed on',r.reviewed_on || 'Not independently re-audited']]) line(dl,label,value);
  details.append(dl);
- for (const u of r.release_updates || []) {
+ for (const u of releaseUpdates[r.id] || []) {
   const review=el('section',undefined,'release-update');
   review.append(el('h3','Reviewed release update · '+u.version),el('p',u.summary),el('p','Compatibility: '+u.compatibility),el('p','Publication status: '+u.status_note),el('p','Evidence limitation: '+u.caveat),el('p','Source published: '+u.published_at+' · Reviewed: '+u.reviewed_on),safeLink(u.source_url,'First-party release notes ↗'));
   details.append(review);
@@ -84,7 +85,7 @@ function render(reset=true) {
  if(reset) visible=40;
  const words = norm($('tech-search').value).trim().split(/\s+/).filter(Boolean);
  const section=$('tech-section').value,tag=$('tech-tag').value,stage=$('tech-stage').value;
- matches=records.filter(r => (!section || r.section === section) && (!tag || r.tags.includes(tag)) && (!stage || r.stages.includes(stage)) && words.every(w => norm([r.name,r.kind,r.what,r.edge,r.best_for,r.watch_out,r.section,r.source_url,...r.tags,...r.stages,...r.alternatives,...(r.concepts||[])].join(' ')).includes(w)));
+ matches=records.filter(r => (!section || r.section === section) && (!tag || r.tags.includes(tag)) && (!stage || r.stages.includes(stage)) && words.every(w => norm([r.name,r.kind,r.what,r.edge,r.best_for,r.watch_out,r.section,r.source_url,...r.tags,...r.stages,...r.alternatives,...(r.concepts||[]),...(releaseUpdates[r.id]||[]).flatMap(u=>[u.summary,u.compatibility,u.version,u.status_note])].join(' ')).includes(w)));
  draw();
  if(!reset) anchor();
 }
@@ -115,6 +116,17 @@ async function start() {
   if(manifest.schema!==1 || !Array.isArray(files) || !files.length) throw new Error('The technology extension is not published yet.');
   const batches=await Promise.all(files.map(verifyBatch)); records.push(...batches.flat());
   if(records.length!==manifest.published_counts.technologies || new Set(records.map(r=>r.id)).size!==records.length) throw new Error('Published count or ID mismatch.');
+  // Original source fields stay frozen. Show the additive review only after exact integrity verification.
+  try {
+    const payload=await bytes('content/technology-release-updates.json');
+    if(payload.byteLength!==1984 || await hash(payload)!=='bce8af000eb5b765177ebb62ca7b5be09b3931679152ee7d59cc5e0faebd4e2c') throw new Error('Release annotation checksum mismatch');
+    const overlay=JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(payload));
+    if(overlay.schema!==1 || !overlay.updates || Object.keys(overlay.updates).some(id=>!records.some(r=>r.id===id))) throw new Error('Invalid release annotation catalog IDs');
+    for(const updates of Object.values(overlay.updates)) for(const u of updates) {
+      if(!u.version || !u.summary || !u.compatibility || !u.caveat || !u.source_url || new URL(u.source_url).protocol!=='https:') throw new Error('Invalid release annotation');
+    }
+    releaseUpdates=overlay.updates;
+  } catch(error){ console.warn('Verified technology release annotations unavailable; showing original catalog only:',error.message); }
   records.sort((a,b)=>a.name.localeCompare(b.name));
   prepared=manifest.prepared_counts.technologies; snapshot=manifest.snapshot_date;
   $('coverage-note').textContent = records.length + ' of ' + prepared + ' original profiles are published and verified.' + (records.length < prepared ? ' Remaining records are still being imported.' : ' The prepared technology catalog is complete.');

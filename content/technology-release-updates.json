@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "editorial_date": "2026-11-02",
+  "source_batch_id": "atlas-daily-20261102-first-0850ct-a",
+  "source_batch_sha256": "2dcb25af14b960f9989527170fd88daf8ba2fb5f42dcff3b72f512b08ddb57d7",
+  "note": "Additive, evidence-checked technology release annotations. Original 300 prepared catalog records and downloadable SQLite/offline snapshot remain unchanged. This is new information in Atlas, not a claim that vLLM was newly invented.",
+  "updates": {
+    "TECH-0288": [
+      {
+        "version": "v0.33.0rc3 (tag; GitHub release title v0.33.0)",
+        "published_at": "2026-11-02T10:10:05Z",
+        "reviewed_on": "2026-11-02",
+        "summary": "The project release notes describe new model support, PyTorch 2.14, API and speculative-decoding changes. This is a source review, not an Atlas deployment or performance test.",
+        "compatibility": "CUDA 12.9 wheels and images are no longer published; documented release artifacts target CUDA 13.0. AMD defaults to ROCm 10.0 with a ROCm 7.2 variant; CPU and XPU builds are described. Check actual artifact availability, drivers and model support before upgrading.",
+        "status_note": "The repository tag ends in rc3, but its GitHub release is titled v0.33.0 and marked non-prerelease. A separate v0.33.0 GitHub release tag was not found when checked.",
+        "caveat": "Performance figures in these release notes come from the project and contributor PR benchmarks, not an independent Atlas reproduction. The release-notes artifact table includes a publisher TODO to verify URLs.",
+        "source_url": "https://github.com/vllm-project/vllm/releases/tag/v0.33.0rc3",
+        "evidence_level": "First-party GitHub release metadata and notes inspected; benchmark claims not replicated",
+        "review_status": "primary_release_notes_reviewed_not_reproduced",
+        "publication_kind": "software_release",
+        "source_publisher": "vLLM",
+        "site_addition_date": "2026-11-02"
+      }
+    ]
+  }
+}

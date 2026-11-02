@@ -16,7 +16,7 @@ import verify_cloudflare as verifier
 class Packaging(unittest.TestCase):
     def test_allowlist_preserves_all_public_sections_and_excludes_repository_controls(self):
         paths = set(build.public_files())
-        for path in ('index.html', 'games-tab.js', 'games-tab.css', 'games-core.js', 'whats-new.html', 'data/daily/index.json', 'terms/MLD-0691-machine-learning.html', 'downloads/atlas_catalog.sqlite'):
+        for path in ('index.html', 'games-tab.js', 'games-tab.css', 'games-core.js', 'whats-new.html', 'data/daily/index.json', 'terms/MLD-0691-machine-learning.html', 'downloads/atlas_catalog.sqlite', 'content/technology-release-updates.json'):
             self.assertIn(path, paths)
         for path in paths:
             self.assertFalse(path.startswith(('.git', 'scripts/', 'tests/', 'release/', 'docs/', 'daily-queue/', 'node_modules/')))
