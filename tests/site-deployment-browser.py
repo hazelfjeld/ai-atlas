@@ -72,6 +72,20 @@ with sync_playwright() as p:
     page.locator('#section-filter').select_option('news')
     page.locator('#topic-filter').select_option('research')
     check('daily filters remain usable', page.locator('#topic-filter').input_value() == 'research')
+    # Exercise the newly shipped search against an immutable, date-pinned edition,
+    # not against a possibly newer daily collection.
+    if any(e['date'] == '2026-11-02' and e['revision'] == 7 for e in index['editions']):
+        page.goto(base + 'whats-new.html?date=2026-11-02&revision=7')
+        page.wait_for_function("!document.getElementById('edition-select').disabled", timeout=45000)
+        page.locator('#edition-search').fill('Reuters')
+        check('keyword search narrows the verified edition to four Reuters reports',
+              page.locator('#edition-content article.item').count() == 4
+              and 'Showing 4 of' in page.locator('#filter-results').inner_text())
+        page.locator('#reset-filters').click()
+        check('keyword search reset restores the reviewed archive and accessible count',
+              page.locator('#edition-search').input_value() == ''
+              and page.locator('#edition-content article.item').count() >= 9
+              and 'Showing ' in page.locator('#filter-results').inner_text())
     page.goto(base + 'index.html#/sources')
     link = page.locator('[data-original-file="ML_DL_SLM_LLM_Dictionary.xlsx"]')
     link.wait_for()

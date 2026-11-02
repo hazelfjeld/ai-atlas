@@ -2,6 +2,7 @@
 """Verify actual deployed bytes, catalog coherence, caching, downloads and routing."""
 import argparse
 from concurrent.futures import ThreadPoolExecutor
+from http.client import RemoteDisconnected
 import hashlib
 import json
 import time
@@ -11,6 +12,25 @@ from urllib.parse import urlsplit
 from urllib.request import Request, urlopen
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+def open_with_retry(url, headers, attempts=3, pause=time.sleep, opener=None):
+    """Retry only transient transport failures; never conceal HTTP errors or bad bytes.
+
+    CDN edge connections may close before a response arrives under parallel
+    verification. A bounded new connection is safe, unlike accepting stale data.
+    """
+    assert attempts >= 1
+    opener = opener or urlopen
+    for attempt in range(attempts):
+        try:
+            return opener(Request(url, headers=headers), timeout=40)
+        except HTTPError:
+            raise  # 404 and 304 are intentional assertions downstream.
+        except (URLError, RemoteDisconnected, ConnectionError, TimeoutError):
+            if attempt + 1 == attempts:
+                raise
+            pause(0.5 * (attempt + 1))
 
 
 def await_provenance(request, expected, attempts=12, interval=4, pause=time.sleep):
@@ -47,7 +67,7 @@ def verify(base, directory, revision):
     def request(path, extra=None):
         headers = {'User-Agent': 'Atlas-Cloudflare-verification/1.0', 'Accept-Encoding': 'identity'}
         headers.update(extra or {})
-        return urlopen(Request(base + path, headers=headers), timeout=40)
+        return open_with_retry(base + path, headers)
 
     await_provenance(request, manifest)
 

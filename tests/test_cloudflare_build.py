@@ -1,5 +1,7 @@
 """Packaging boundaries and exact public bytes, without Cloudflare credentials."""
 import io
+from http.client import RemoteDisconnected
+from urllib.error import HTTPError
 import json
 from pathlib import Path
 import sys
@@ -71,6 +73,41 @@ class Packaging(unittest.TestCase):
         with self.assertRaisesRegex(AssertionError, 'Deployment provenance differs'):
             verifier.await_provenance(stale, expected, attempts=3, interval=0, pause=lambda _: None)
         self.assertEqual(len(calls), 3)
+
+    def test_transient_disconnects_retry_without_skipping_byte_verification(self):
+        calls, sleeps = [], []
+        def flaky(request, timeout):
+            self.assertEqual(timeout, 40)
+            self.assertEqual(request.full_url, 'https://aiupdates.app/app.js')
+            calls.append(request.full_url)
+            if len(calls) < 3:
+                raise RemoteDisconnected('edge closed before HTTP response')
+            return io.BytesIO(b'exact-byte-content')
+        with verifier.open_with_retry(
+            'https://aiupdates.app/app.js', {'Accept-Encoding': 'identity'},
+            attempts=3, pause=sleeps.append, opener=flaky,
+        ) as response:
+            self.assertEqual(response.read(), b'exact-byte-content')
+        self.assertEqual(len(calls), 3)
+        self.assertEqual(sleeps, [0.5, 1.0])
+
+    def test_transient_retry_exhaustion_and_http_errors_are_never_accepted(self):
+        calls = []
+        def disconnected(request, timeout):
+            calls.append(request.full_url)
+            raise RemoteDisconnected('edge closed connection')
+        with self.assertRaises(RemoteDisconnected):
+            verifier.open_with_retry('https://aiupdates.app/data/daily/index.json', {},
+                                     attempts=2, pause=lambda _: None, opener=disconnected)
+        self.assertEqual(len(calls), 2)
+        failures = []
+        def missing(request, timeout):
+            failures.append(request.full_url)
+            raise HTTPError(request.full_url, 404, 'Not Found', {}, None)
+        with self.assertRaises(HTTPError):
+            verifier.open_with_retry('https://aiupdates.app/not-served', {},
+                                     attempts=3, pause=lambda _: None, opener=missing)
+        self.assertEqual(len(failures), 1)
 
     def test_config_is_static_only_and_keeps_literal_html_routes(self):
         config = json.loads((ROOT / 'wrangler.json').read_bytes())
