@@ -1,0 +1,80 @@
+name: Verify Atlas games
+on:
+  push:
+    branches: [atlas-games, main]
+    paths: ['games*', 'tests/games*', 'scripts/integrate_games.py', '.github/workflows/games-check.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: atlas-games-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  games:
+    if: github.repository == 'hazelfjeld/ai-atlas'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Integrate the games navigation on the isolated feature branch
+        if: github.ref == 'refs/heads/atlas-games'
+        run: |
+          python3 scripts/integrate_games.py
+          python3 scripts/build_offline.py
+      - name: Validate catalogs and all JavaScript tests
+        run: |
+          python3 scripts/validate_checkpoint.py
+          node --check games-core.js
+          node --check games.js
+          node --test tests/*.test.cjs
+      - name: Install browser-test tooling
+        run: |
+          python3 -m pip install playwright==1.57.0
+          python3 -m playwright install --with-deps chromium
+      - name: Test actual HTTP game interactions on desktop and mobile
+        run: |
+          python3 -m http.server 8765 > /tmp/atlas-games-http.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID" 2>/dev/null || true' EXIT
+          python3 tests/games-browser.py --base http://127.0.0.1:8765/ --output /tmp/games-validation
+      - name: Commit only the tested navigation and rebuilt fallback to the feature branch
+        if: github.ref == 'refs/heads/atlas-games'
+        run: |
+          git add index.html scripts/build_offline.py downloads/Atlas_Demo_Offline.html
+          if ! git diff --cached --quiet; then
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git commit -m 'Integrate tested Games tab and rebuild offline navigation'
+            git push origin HEAD:atlas-games
+          fi
+      - name: Verify reproducible generated outputs
+        run: |
+          python3 scripts/build_term_pages.py
+          python3 scripts/build_offline.py
+          git diff --exit-code -- terms publication.json downloads/Atlas_Demo_Offline.html
+      - name: Verify public GitHack game assets
+        run: |
+          python3 - <<'PY'
+          import hashlib, pathlib, subprocess, urllib.request, urllib.error, time
+          sha = subprocess.check_output(['git','rev-parse','HEAD'], text=True).strip()
+          base = 'https://rawcdn.githack.com/hazelfjeld/ai-atlas/' + sha + '/'
+          for name in ['games.html','games.css','games.js','games-core.js','core.js','catalog-loader.js','index.html']:
+              for attempt in range(3):
+                  try:
+                      request = urllib.request.Request(base + name, headers={'User-Agent': 'Atlas-publication-integrity-check/1.0'})
+                      with urllib.request.urlopen(request, timeout=30) as response:
+                          assert response.status == 200
+                          body = response.read()
+                      assert body == pathlib.Path(name).read_bytes(), name
+                      print('PUBLIC BYTES VERIFIED', name, hashlib.sha256(body).hexdigest(), flush=True)
+                      break
+                  except urllib.error.HTTPError as error:
+                      print('Public delivery failure:', name, error.code, error.read(1000).decode('utf-8', errors='replace'), flush=True)
+                      if attempt == 2 or error.code in (401, 403): raise
+                      time.sleep(3)
+                  except Exception as error:
+                      print('Verification failure:', name, type(error).__name__, str(error), flush=True)
+                      if attempt == 2: raise
+                      time.sleep(3)
+          print('Verified game URL:', base + 'games.html')
+          PY

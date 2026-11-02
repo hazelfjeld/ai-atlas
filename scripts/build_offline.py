@@ -25,6 +25,8 @@ def main():
     html = html.replace('</body>', '<script>' + script + '</script></body>')
     html = html.replace('<main id="main" tabindex="-1">', '<main id="main" tabindex="-1"><p class="notice">Offline demonstration fallback: all 1,705 catalog records, search, comparisons and JSON exports work without internet. Term explanations open as record dialogs here. Expanded web pages, original downloads and external citations require the served edition.</p>')
     html = html.replace('href="demo.html"', 'href="#/overview"').replace('href="terms/index.html"', 'href="#/dictionary"')
+    # Games run in the hosted edition; keep the single-file fallback link honest.
+    html = html.replace('href="games.html"', 'href="https://raw.githack.com/hazelfjeld/ai-atlas/main/games.html"').replace('<span>Games</span>', '<span>Games (online)</span>')
     (ROOT / 'downloads/Atlas_Demo_Offline.html').write_bytes(html.encode('utf-8'))
     print('Built downloads/Atlas_Demo_Offline.html from the complete catalog.')
 
