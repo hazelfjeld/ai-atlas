@@ -84,10 +84,10 @@ def build(revision=None):
             checkpoint.ROOT = source_root
         # Keep literal .html routes and every hash route; only / is internally rewritten.
         (stage / '_redirects').write_bytes(b'/ /index.html 200\n')
-        (stage / '_headers').write_bytes((f'/*\n  Cache-Control: public, max-age=0, must-revalidate\n  X-Content-Type-Options: nosniff\n  X-Atlas-Revision: {revision}\n').encode())
+        (stage / '_headers').write_bytes((f'/*\n  Cache-Control: public, max-age=0, must-revalidate, no-transform\n  X-Content-Type-Options: nosniff\n  X-Atlas-Revision: {revision}\n').encode())
         report = {'schema': 1, 'revision': revision, 'files': metadata,
                   'counts': validation['counts'], 'term_pages': validation['term_pages'],
-                  'daily': validation['daily'], 'cache_policy': 'public, max-age=0, must-revalidate'}
+                  'daily': validation['daily'], 'cache_policy': 'public, max-age=0, must-revalidate, no-transform'}
         (stage / 'deployment.json').write_bytes((json.dumps(report, indent=2) + '\n').encode())
         if OUTPUT.exists():
             shutil.rmtree(OUTPUT)

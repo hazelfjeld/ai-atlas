@@ -28,7 +28,7 @@ The initial token was prepared with a 90-day expiration. Rotate it in Cloudflare
 
 ## Coherence and verification
 
-Workers publishes its asset set atomically. All mutable URLs use `Cache-Control: public, max-age=0, must-revalidate`, ETags and an `X-Atlas-Revision` header. No service worker or long-lived immutable caching is added to unversioned files. The original SHA-256 catalog loader remains intact and rejects a partial/mixed load rather than rendering it as complete. An already-open page spanning a release may need its existing Retry/reload control.
+Workers publishes its asset set atomically. All mutable URLs use `Cache-Control: public, max-age=0, must-revalidate, no-transform`, ETags and an `X-Atlas-Revision` header. The no-transform directive prevents supported edge optimizers from changing hashed response bytes or stripping validators. No service worker or long-lived immutable caching is added to unversioned files. The original SHA-256 catalog loader remains intact and rejects a partial/mixed load rather than rendering it as complete. An already-open page spanning a release may need its existing Retry/reload control.
 
 After deployment, `scripts/verify_cloudflare.py` checks the actual public deployment manifest, all runtime/catalog/support/download files, all expanded term guides and two reference pages against the tested artifact. It verifies root rewriting, literal term URLs, caching, conditional ETag 304s and 404s for excluded/private paths. Browser suites then exercise dictionary search, technology profiles, term links, Quiz, Match, daily archive state, workbook downloading and mobile navigation against the workers.dev URL. Reports and screenshots are retained as GitHub Actions artifacts for seven days.
 

@@ -37,7 +37,7 @@ def verify(base, directory, revision):
             assert response.status == 200 and response.url == base + path, path
             assert len(body) == expected['bytes'] and hashlib.sha256(body).hexdigest() == expected['sha256'], 'Mixed/incomplete asset: ' + path
             cache = response.headers.get('Cache-Control', '')
-            assert 'max-age=0' in cache and 'must-revalidate' in cache, (path, cache)
+            assert 'max-age=0' in cache and 'must-revalidate' in cache and 'no-transform' in cache, (path, cache)
             assert response.headers.get('X-Atlas-Revision') == revision, path
             assert response.headers.get('ETag'), 'Missing ETag: ' + path
             mime = response.headers.get_content_type()
