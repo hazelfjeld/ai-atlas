@@ -4,12 +4,35 @@ import argparse
 from concurrent.futures import ThreadPoolExecutor
 import hashlib
 import json
+import time
 from pathlib import Path
-from urllib.error import HTTPError
+from urllib.error import HTTPError, URLError
 from urllib.parse import urlsplit
 from urllib.request import Request, urlopen
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+def await_provenance(request, expected, attempts=12, interval=4, pause=time.sleep):
+    """Wait briefly for exact Cloudflare edge propagation; never accept stale bytes."""
+    assert attempts >= 1
+    last = 'not yet checked'
+    for attempt in range(attempts):
+        try:
+            with request('deployment.json', {'Cache-Control': 'no-cache'}) as response:
+                remote = json.loads(response.read())
+            if remote == expected:
+                return
+            last = 'remote revision ' + repr(remote.get('revision') if isinstance(remote, dict) else '<invalid>')
+        except (HTTPError, URLError, ValueError) as error:
+            last = type(error).__name__ + ': ' + str(error)
+        if attempt + 1 < attempts:
+            print('Awaiting exact deployment provenance: check '
+                  + str(attempt + 1) + '/' + str(attempts)
+                  + ', observed ' + last, flush=True)
+            pause(interval)
+    raise AssertionError('Deployment provenance differs from the tested artifact after '
+                         + str(attempts) + ' checks: ' + last)
 
 
 def verify(base, directory, revision):
@@ -26,9 +49,7 @@ def verify(base, directory, revision):
         headers.update(extra or {})
         return urlopen(Request(base + path, headers=headers), timeout=40)
 
-    with request('deployment.json') as response:
-        remote = json.loads(response.read())
-    assert remote == manifest, 'Deployment provenance differs from the tested artifact'
+    await_provenance(request, manifest)
 
     def check(path):
         expected = entries[path]

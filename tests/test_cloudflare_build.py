@@ -1,4 +1,5 @@
 """Packaging boundaries and exact public bytes, without Cloudflare credentials."""
+import io
 import json
 from pathlib import Path
 import sys
@@ -9,6 +10,7 @@ from unittest.mock import patch
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts'))
 import build_cloudflare as build
+import verify_cloudflare as verifier
 
 
 class Packaging(unittest.TestCase):
@@ -46,6 +48,29 @@ class Packaging(unittest.TestCase):
                 (root / 'unfinished.html').write_text('incomplete')
                 with self.assertRaisesRegex(AssertionError, 'allowlist'):
                     build.public_files()
+
+    def test_provenance_retries_stale_cloudflare_edge_without_accepting_it(self):
+        expected = {'revision': 'new', 'files': [{'path': 'index.html'}]}
+        observed = [{'revision': 'old'}, expected]
+        calls, pauses = [], []
+        def request(path, headers):
+            self.assertEqual(path, 'deployment.json')
+            self.assertEqual(headers.get('Cache-Control'), 'no-cache')
+            calls.append(path)
+            return io.BytesIO(json.dumps(observed.pop(0)).encode())
+        verifier.await_provenance(request, expected, attempts=3, interval=0, pause=pauses.append)
+        self.assertEqual(len(calls), 2)
+        self.assertEqual(pauses, [0])
+
+    def test_provenance_rejects_persistent_incorrect_revision(self):
+        expected = {'revision': 'new'}
+        calls = []
+        def stale(path, headers):
+            calls.append(path)
+            return io.BytesIO(b'{"revision":"old"}')
+        with self.assertRaisesRegex(AssertionError, 'Deployment provenance differs'):
+            verifier.await_provenance(stale, expected, attempts=3, interval=0, pause=lambda _: None)
+        self.assertEqual(len(calls), 3)
 
     def test_config_is_static_only_and_keeps_literal_html_routes(self):
         config = json.loads((ROOT / 'wrangler.json').read_bytes())
