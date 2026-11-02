@@ -38,6 +38,17 @@ with sync_playwright() as p:
     check('native content, no iframe or second masthead', page.locator('iframe').count()==0 and page.locator('.masthead').count()==0 and page.locator('main').count()==1)
     check('active tab and breadcrumb agree', nav.get_attribute('aria-current')=='page' and page.locator('#breadcrumb').inner_text()=='Games')
     check('dictionary reused without another download', catalog_requests == len([u for u in requests if '/data/terms-' in u]))
+    # Flashcards: test the visible term, real flip, keyboard navigation, and game exit.
+    page.locator('#flashcard-count').select_option('10')
+    page.locator('#start-flashcards').click()
+    check('flashcards start inside the Games tab', page.locator('#flip-card').is_visible() and page.locator('#flashcard-front').get_attribute('aria-hidden')=='false')
+    page.locator('#flip-card').click()
+    check('tap-to-flip reveals dictionary definition', page.locator('#flip-card').get_attribute('aria-pressed')=='true' and page.locator('#flashcard-back').get_attribute('aria-hidden')=='false' and page.locator('#flashcard-link').is_visible())
+    page.keyboard.press('ArrowRight')
+    check('right arrow advances to next term front', page.locator('.flash-panel .eyebrow').inner_text().startswith('CARD 2 / 10') and page.locator('#flip-card').get_attribute('aria-pressed')=='false')
+    page.keyboard.press('ArrowLeft')
+    check('left arrow moves back to first term', page.locator('.flash-panel .eyebrow').inner_text().startswith('CARD 1 / 10'))
+    exit_round(page)
     page.screenshot(path=str(out/'games-native-desktop.png'), full_page=True)
     rows = page.evaluate('async () => (await window.ATLAS_READY).terms')
     by_definition = {r['definition']:r for r in rows}
@@ -124,6 +135,11 @@ with sync_playwright() as p:
     exit_round(offline)
     offline.locator('#start-match').click()
     check('offline matching works without network assets', offline.locator('.tile').count()==12)
+    exit_round(offline)
+    offline.locator('#start-flashcards').click()
+    offline.locator('#flip-card').click()
+    check('offline flashcards flip without network assets', offline.locator('#flashcard-back').get_attribute('aria-hidden')=='false')
+
     check('no runtime errors in either interface', not errors)
     browser.close()
 report={'checks_passed':len(checks),'checks':checks,'errors':errors,'base':base,'scope':'Real Atlas page and production catalog loader; offline export blocks other requests.'}

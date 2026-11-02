@@ -19,7 +19,7 @@ PAGES = {
     'research.html': ('AI Safety Research Library | AI Updates', 'Explore 30 indexed AI research papers and 10 safety report records. Search the evidence, distinguish report types, and inspect sources and limitations.'),
     'technologies.html': ('Search AI Tools & Technologies | AI Updates', 'Search and compare 300 AI technology profiles by workload, strengths, runtime and tradeoffs. Explore linked concepts and original sources.'),
     'playbooks.html': ('AI Project Playbooks | AI Updates', 'Explore 20 practical AI project playbooks with suggested technologies, first experiments, validation steps, caveats and linked source material.'),
-    'games.html': ('AI Learning Games: Quiz & Match | AI Updates', 'Practice 1,345 machine learning and AI concepts with Quiz and Match. Filter by topic or level, revisit missed answers and follow concept explanations.'),
+    'games.html': ('AI Learning Games: Quiz, Match & Flashcards | AI Updates', 'Practice 1,345 machine learning and AI concepts with Quiz, Match and Flashcards. Filter by topic or level, revisit missed answers and follow concept explanations.'),
     'demo.html': ('A Guided Tour of AI Updates', 'Take a guided tour of AI Updates: concept guides, technology comparisons, safety evidence, Quiz and Match, and the reviewed daily edition archive.'),
     'about.html': ('About & Editorial Policy | AI Updates', 'How AI Updates selects, explains and labels AI research, tools and concepts. Read our source policy, review levels, coverage limits and correction process.'),
 }
