@@ -106,6 +106,7 @@ with sync_playwright() as p:
     check('mobile definitions untruncated', page.locator('.tile').evaluate_all('(els)=>els.every(e=>e.scrollHeight<=e.clientHeight+1)'))
     page.locator('#menu-toggle').click()
     page.locator('#navigation a[href="#/overview"]').click()
+    page.wait_for_function("location.hash === '#/overview' && document.getElementById('menu-toggle').getAttribute('aria-expanded') === 'false' && !document.querySelector('.atlas-games')")
     check('mobile drawer exits game and closes', page.locator('#menu-toggle').get_attribute('aria-expanded')=='false' and page.url.endswith('#/overview'))
     page.go_back()
     page.locator('#start-quiz').wait_for()
