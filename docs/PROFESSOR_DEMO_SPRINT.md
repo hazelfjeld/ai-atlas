@@ -46,3 +46,10 @@ The original archive is available in the originating conversation as `Atlas_GitH
 ## Concurrency and recovery
 
 Read the latest branch and file SHAs before each write. If another writer or a changed file is detected, reconcile or choose an independent path; never overwrite newer work. Commit verified dependencies before changing entry points. Keep a short durable checkpoint so a new run resumes the next unfinished batch instead of starting over.
+
+## Technology preview made available for the professor demo
+
+- Release: `7b2c31fd8d6437a0230141bace9c7d9de7de7ed0`; technology catalog: https://rawcdn.githack.com/hazelfjeld/ai-atlas/7b2c31fd8d6437a0230141bace9c7d9de7de7ed0/technologies.html
+- Ten complete original technology records are published, while 290 await import. The comparison UI supports up to three selected records. A useful tour compares Amazon Bedrock vs Amazon SageMaker AI: pick both and show strengths, best-fit uses, caveats and source documentation.
+- `demo.html` was extended with this technology step. Research 30, safety 10, playbooks 20 remain intact. The verification workflow passed both catalog/syntax and actual GitHack static-file checks: https://github.com/hazelfjeld/ai-atlas/actions/runs/41373737867. This is not a hosted browser interaction test.
+- Continue source-exact technology batches beginning TECH-0011, then the 1,345 glossary terms. Avoid broad unverified status claims during the presentation.

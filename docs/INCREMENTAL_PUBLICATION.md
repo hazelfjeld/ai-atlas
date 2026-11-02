@@ -69,3 +69,11 @@ Remaining **unpublished** catalogs include `terms.json` (1,345), `technologies.j
 8. Treat automatic research discovery as a later integration. No automated candidate may become a verified incident merely because it was fetched. Keep event dates, disclosure dates, revisions, provenance and review state separate. Do not claim exhaustive coverage.
 
 The existing `release/` import helpers are retained for recovery but should not be run blindly against this checkpoint. Publication authorization does not authorize paid services, embedded secrets, or unrelated repository changes.
+
+## Verified technology preview (November 1, 2026)
+
+The source ZIP's approved checksum matched. The first ten complete original technology records are now published in lossless gzip JSON, with all source fields preserved (TECH-0001 to TECH-0010). `technologies.html` is navigable from Atlas and supports filters, details, source links, direct record anchors and comparisons. The site manifest lists exactly 10 published profiles, **not** all 300 prepared entries. A new staging helper `scripts/prepare_atlas_batch.py` prepares more chunks deterministically without publishing them.
+
+- Stable verified URL: https://rawcdn.githack.com/hazelfjeld/ai-atlas/7b2c31fd8d6437a0230141bace9c7d9de7de7ed0/technologies.html
+- Actions: https://github.com/hazelfjeld/ai-atlas/actions/runs/41373737867. Both jobs passed, including byte equality for technology HTML, JS and compressed source against the commit; node syntax passed.
+- Next exact records: TECH-0011 forward. 290 technology profiles and 1,345 dictionary concepts remain unpublished. No term detail pages yet, and no independent live website collector. No hosted browser interaction tests have been run.
