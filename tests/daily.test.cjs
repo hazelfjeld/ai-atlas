@@ -152,15 +152,16 @@ test('Broad topic filters match meaningful AI synonyms without fabricating class
  assert.equal(D.matchesTopic(vllm,'nonsense'),false);
  assert.equal(D.matchesTopic(null,'models'),false);
 });
-test('The unfiltered daily reader shows explicit zero-count editorial sections',()=>{
+test('The unfiltered daily reader shows explicit zero counts while filtered search omits empty groups',()=>{
  const script=fs.readFileSync('whats-new.js','utf8');
  for(const text of [
  'No newly integrated technology profile was published',
  'Deferred proposals are not catalog additions',
  'New to AI Updates is not the same as new to the world',
  'No correction was recorded',
- "if(!records.length&&topic!=='all')continue",
- 'C.matchesTopic(item,topic)'
+ "if(!records.length&&(topic!=='all'||query.trim()))continue",
+ 'C.matchesTopic(item,topic)',
+ 'C.matchesQuery(item,query)'
  ])assert.ok(script.includes(text),text);
 });
 
