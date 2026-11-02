@@ -130,7 +130,7 @@ def integrate():
         app = replace_once(app, "const labels={overview:'Overview',", "const labels={overview:'Overview',games:'Games',")
     if "games:'M7 7h10" not in app:
         app = replace_once(app, 'const icons={overview:', "const icons={games:'M7 7h10a3 3 0 0 1 3 3l1 7a2 2 0 0 1-3 2l-3-3H9l-3 3a2 2 0 0 1-3-2l1-7a3 3 0 0 1 3-3z M7 10v4 M5 12h4 M16 11h.01 M18 13h.01',overview:")
-    if "'playbooks','games','compare'" not in app:
+    if "nav.querySelectorAll('a[data-view]')" not in app and "'playbooks','games','compare'" not in app:
         app = replace_once(app, "'playbooks','compare','saved','sources']", "'playbooks','games','compare','saved','sources']")
     if 'let disposeGames = null;' not in app:
         app = replace_once(app, 'function route(){parse();', 'let disposeGames = null;\nfunction route(){if(disposeGames){disposeGames();disposeGames=null;}parse();')
