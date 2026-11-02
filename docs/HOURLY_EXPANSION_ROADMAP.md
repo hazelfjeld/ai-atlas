@@ -1,5 +1,14 @@
 # AI Atlas — recurring expansion plan
 
+## Verified shift and contamination guide increment — November 2, 2026
+
+- **Main publication:** [2ffc71d](https://github.com/hazelfjeld/ai-atlas/commit/2ffc71d28f9b77e22d5d868ffe0d834470bbd513) via [PR #8](https://github.com/hazelfjeld/ai-atlas/pull/8). Added two researched guides with mechanisms, four scholarly citations each, worked synthetic examples, bounded reproducible evaluations and uncertainty warnings: [distribution shift](../terms/MLD-0326-distribution-shift.html) and [train-test contamination](../terms/MLD-1254-train-test-contamination.html). No newly reported incident or released technology is implied.
+- **Verified:** [publication CI 41429522185](https://github.com/hazelfjeld/ai-atlas/actions/runs/41429522185) passed **71 tests**, **29,973 internal-link checks**, 1,345 page checks and commit-pinned GitHack HTTP byte comparisons for the new pages. [Deployment CI 41429522170](https://github.com/hazelfjeld/ai-atlas/actions/runs/41429522170) passed validation and real production-browser checks. Static and browser tests have distinct scopes.
+- **Inventory:** 1,345 terms, 300 technologies, 20 playbooks, 30 papers and 10 safety records = **1,705 original records**; 1,345 direct term pages, **25 expanded guides**, **1,320 reference-depth pages**. Main manifest and page manifest agree; no original data chunk was rewritten.
+- **Daily intake:** staging index had **zero batches** and main processing ledger **zero receipts** when checked. No first edition is claimed; this does not mean there was no AI news. Homepage/archive retain the honest awaiting state.
+- **Recovery:** Preserve immutable professor demo [839fee0](https://rawcdn.githack.com/hazelfjeld/ai-atlas/839fee0b0e4f6b16d933dd5e5eac55e3a3e847c6/demo.html); newly verified guides are at immutable [2ffc71d](https://rawcdn.githack.com/hazelfjeld/ai-atlas/2ffc71d28f9b77e22d5d868ffe0d834470bbd513/terms/index.html).
+- **Next bounded step:** validate any staged immutable daily batches in order; otherwise expand calibration or safety-evaluation guides with primary evidence. Preserve publication and production verification. Do not re-import the baseline.
+
 ## Daily archive integrity and verified-revision fallback — November 2, 2026
 
 - The daily staging index remains empty and main has zero publication receipts. No real-world news, technology or terms were invented; the existing 1,705-record baseline, 1,345 linked term pages and 23 expanded guides remain unchanged.
