@@ -68,7 +68,7 @@ test('progressive sidebar retains all canonical links and reveals deep-linked se
   assert.match(nav, /<details class="nav-more" id="additional-navigation"><summary class="nav-more-toggle">/);
   assert.ok(!nav.includes('id="additional-navigation" open'), 'Secondary links should be collapsed on initial paint');
   assert.match(nav, /<div class="nav-more-links">[\s\S]*?data-view="safety"/);
-  assert.match(nav, /data-static="offline"[\s\S]*?<\/div><\/details><\/nav>/);
+  assert.match(nav, /data-static="offline"[\s\S]*?<\/div><\/details>$/);
   for(const id of ['overview','dictionary','technologies','games','safety','papers','playbooks','compare','saved','sources'])
     assert.match(nav, new RegExp('data-view="'+id+'"'), 'Missing native workspace destination: '+id);
   assert.match(app, /if\(more && \['safety','papers','playbooks','compare','saved','sources'\]\.includes\(view\)\) more\.open=true/);
