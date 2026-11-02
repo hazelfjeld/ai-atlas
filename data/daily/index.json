@@ -67,7 +67,7 @@
       "published_at": "2026-11-02T23:00:23.863Z"
     }
   ],
-  "last_successful_publish_at": "2026-11-02T22:44:33Z",
-  "status": "revision_8_committed_production_verification_pending",
-  "coverage_note": "November 2 revision 8 improves shareable filter URLs only; last independently verified publication remains revision 7. Nine reviewed stories, seven deferred catalog proposals, two failed source checks; coverage is partial."
+  "last_successful_publish_at": "2026-11-02T23:05:19Z",
+  "status": "edition_revision_8_cloudflare_http_browser_and_githack_verified",
+  "coverage_note": "November 2 revision 8 verified on Cloudflare's three production hostnames and GitHack, with desktop/mobile browser tests for shared archive filters, link/reset/revision changes, Games and offline fallback. Nine reviewed news stories; seven deferred catalog proposals; two failed source lookups. Scheduled, partial, non-exhaustive coverage."
 }
