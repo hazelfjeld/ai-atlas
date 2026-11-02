@@ -61,3 +61,22 @@ test('New mechanistic and adversarial evaluation guides have checked evidence bo
     assert.ok(g.citations.length >= 3 && g.citations.every(([title, url]) => title.length >= 35 && /^https:\/\//.test(url)));
   }
 });
+
+
+test('Agent evaluation and capability failure guides distinguish objectives, skills and observed actions', () => {
+  const required = {
+    'MLD-0041': [/final environment state|final database/i, /tool call|trajectory/i, /unauthorized|forbidden/i, /not proof|not evidence|does not prove/i],
+    'MLD-0146': [/capability failure/i, /goal misgeneralization/i, /proxy/i, /does not.*prove|not.*prove|not.*evidence/i]
+  };
+  for (const [id, patterns] of Object.entries(required)) {
+    const g = guides[id];
+    assert.ok(g && termManifest[id], 'Missing stable guide page: ' + id);
+    assert.equal(g.reviewed_on, '2026-11-02');
+    assert.ok(g.sections.length >= 8);
+    assert.ok(g.sections.every(([heading, body]) => heading.length >= 8 && body.length >= 120));
+    assert.ok(g.prerequisites.length >= 3 && g.prerequisites.every(x => termManifest[x]));
+    assert.ok(g.citations.length >= 3 && g.citations.every(([title, url]) => title.length > 35 && new URL(url).protocol === 'https:'));
+    const body = g.sections.map(x => x[1]).join(' ');
+    for (const pattern of patterns) assert.match(body, pattern, 'Missing evidence boundary ' + id);
+  }
+});
