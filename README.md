@@ -33,7 +33,13 @@ Every original record field, stable ID, source reference and review label is pre
 
 The workspace provides global and collection search, filters, pagination, record details, related-concept and technology navigation, comparisons of up to three tools, notebook export/import, JSON/CSV exports and paper BibTeX exports. Original workbooks, the bundle and a foreign-key-checked SQLite database are downloadable from Sources & coverage. Existing research, playbook and compact technology routes remain available.
 
-All **1,345 concepts have direct HTML pages** with original definitions, examples, caveats, sources, related concepts and backlinks. **29 expanded guides** add mechanisms, prerequisites, illustrative worked examples, equations and evaluation advice. The other 1,316 pages visibly identify their detailed expansion as pending. Generated pages work without JavaScript and do not require SPA fallback routing.
+All **1,345 concepts have direct HTML pages** with original definitions, examples, caveats, sources, related concepts and backlinks. **31 expanded guides** add mechanisms, prerequisites, illustrative worked examples, equations and evaluation advice. The other 1,314 pages visibly identify their detailed expansion as pending. Generated pages work without JavaScript and do not require SPA fallback routing.
+
+## Independent oversight and verifier guides — November 2, 2026
+
+Two source-checked educational guides are published: [weak-to-strong generalization](terms/MLD-1323-weak-to-strong-generalization.html) and [verifier](terms/MLD-1308-verifier.html). The first distinguishes weak-supervisor performance from independently verified student success and gives a wholly synthetic 50% gap-recovery example. The second explains deterministic and learned verifiers, best-of-N selection bias, false positives, sandboxed checker audits, and reward-gaming hazards. The sources are original arXiv research from 2021–2026; no constructed example is represented as a new incident or model experiment. [PR #11](https://github.com/hazelfjeld/ai-atlas/pull/11) merged at [c65b99b](https://github.com/hazelfjeld/ai-atlas/commit/c65b99b84e58cbcdd5c6f416dfaeed42b1919326).
+
+The prepared **1,705 original records** and 1,345 stable term routes remain intact. The guides total **31 expanded** and **1,314 reference-depth pages**. [Guide generation and original GitHack HTTP checks](https://github.com/hazelfjeld/ai-atlas/actions/runs/41454849913), [main catalog, 74 tests, reproducibility and GitHack](https://github.com/hazelfjeld/ai-atlas/actions/runs/41454988716), and the separate [main Cloudflare production deployment](https://github.com/hazelfjeld/ai-atlas/actions/runs/41454988740) document the check scopes. The daily staging index and main receipts were empty at intake; no edition or catalog entry has been fabricated. The known-good professor demo remains pinned at 839fee0.
 
 ## Expected calibration error and subgroup evaluation — November 2, 2026
 

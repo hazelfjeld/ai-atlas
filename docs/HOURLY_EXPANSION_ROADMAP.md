@@ -1,5 +1,14 @@
 # AI Atlas — recurring expansion plan
 
+## Weak-to-strong and verifier reliability — November 2, 2026
+
+- **Site increment:** [PR #11](https://github.com/hazelfjeld/ai-atlas/pull/11), main [c65b99b](https://github.com/hazelfjeld/ai-atlas/commit/c65b99b84e58cbcdd5c6f416dfaeed42b1919326), publishes [weak-to-strong generalization](../terms/MLD-1323-weak-to-strong-generalization.html) and [verifier](../terms/MLD-1308-verifier.html). Both include mechanisms, synthetic worked examples, controlled evaluation designs, failure modes and scholarly citations; no real incident or lab result is claimed.
+- **Verification:** feature [41454849913](https://github.com/hazelfjeld/ai-atlas/actions/runs/41454849913) succeeded with deterministic generation, catalog/tests and hosted GitHack byte checks; main [41454988716](https://github.com/hazelfjeld/ai-atlas/actions/runs/41454988716) succeeded with 74 tests, complete links, reproducibility and public bytes. Cloudflare production is separately checked by [41454988740](https://github.com/hazelfjeld/ai-atlas/actions/runs/41454988740); read its actual job steps before claiming deployment success.
+- **Current inventory:** 1,345 permanent term pages; **31 expanded guides**, **1,314 reference-only**, unchanged baseline 1,705 records (1,345 terms, 300 technologies, 20 playbooks, 30 papers, 10 safety records). No new original catalog chunks or news articles.
+- **Daily queue:** staging `daily-queue/index.json` contained zero batches at commit 537c3cc, and main ledger held zero receipts at intake. Thus the What's New Today page appropriately says awaiting its first verified edition.
+- **Recovery:** pinned professor tour `839fee0` remains untouched. The new main commit `c65b99b` is the byte-verified content checkpoint. Next: process incoming, hash-verified daily queue items first; if none, expand an evidence-backed guide or address measured interface problems. Never overwrite the staging branch with production files.
+
+
 ## Verified ECE and subgroup evaluation guides — November 2, 2026
 
 - **Publication:** [PR #10](https://github.com/hazelfjeld/ai-atlas/pull/10) merged as [325321e](https://github.com/hazelfjeld/ai-atlas/commit/325321e7723ddceec14c336f802524edaa2701f8), adding [expected calibration error](../terms/MLD-0389-expected-calibration-error.html) and [subgroup evaluation](../terms/MLD-1184-subgroup-evaluation.html). Both provide original worked arithmetic, precise assumptions, holdout experiment plans, limitations and primary citations; no experiments were conducted and no 2026 incident was claimed.
