@@ -1,5 +1,13 @@
 # AI Atlas — recurring expansion plan
 
+## Daily archive link and source-coverage reliability — November 2, 2026
+
+- Publisher intake checked first: `atlas-daily-staging/daily-queue/index.json` contained zero batches; `data/daily/published-batches.json` contained zero receipts. Do not call the empty queue a day with no AI news.
+- Small production reader change: allow validated direct `technology/TECH-....html` links, display checked/failed collector sources and failure reasons, preserve the missing-today message when choosing archived editions, and discard stale asynchronous selections. All external source links remain HTTPS-only and rendered as text/DOM nodes.
+- No new editorial edition, record, or expanded guide. Prepared baseline remains 1,705 records, 1,345 direct concept pages and 23 expanded guides. The immutable professor checkpoint `839fee0` stays available.
+- Verify the new static reader and tests through the existing CI / GitHack byte-equivalence / Cloudflare workflows. Next publisher run: check staging batches first, then resume source-reviewed guide expansion or evidence-quality fixes.
+
+
 ## Agent evaluation and failure diagnosis — November 2, 2026
 
 - **Two authored guides:** [Agent evaluation](../terms/MLD-0041-agent-evaluation.html) and [Capability failure](../terms/MLD-0146-capability-failure.html). Their worked experiments score actual mock-state changes, permission boundaries, repeated trials, and goal-versus-capability interventions. Four primary papers each; this is educational material, not a new external incident or evidence of deceptive intent.

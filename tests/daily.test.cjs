@@ -61,3 +61,18 @@ test('Daily page and scripts are syntax-valid and contain archive, source, topic
  const app=fs.readFileSync('app.js','utf8');
  assert.match(app,/whats-new\.html/);
 });
+
+test('Reviewed technology discoveries can link to existing direct technology pages',()=>{
+ assert.equal(D.safeCatalogPath('technology/TECH-0216-pytorch.html'),'technology/TECH-0216-pytorch.html');
+ for(const invalid of ['technology/../../secrets.html','technology/TECH-0216-%2e%2e.html','technology/TECH-foo.html','technology/TECH-0216-pytorch.html?evil=1'])assert.equal(D.safeCatalogPath(invalid),'');
+ const e=edition();e.technologies=[{id:'TECH-0216',title:'PyTorch',summary:'An existing Atlas record, not a new release',review_status:'reviewed',catalog_path:'technology/TECH-0216-pytorch.html',tags:['tools']}];
+ assert.equal(D.validateEdition(e,entry('2026-11-02')).technologies.length,1);
+});
+test('Daily archive reader exposes collection gaps and ignores late responses',()=>{
+ const html=fs.readFileSync('whats-new.html','utf8'),js=fs.readFileSync('whats-new.js','utf8');
+ assert.match(html,/id="source-coverage"/);
+ assert.match(js,/sourceCoverage\(\)/);
+ assert.match(js,/requestEpoch!==switchEpoch/);
+ assert.match(js,/is awaiting publication\. Showing archived edition/);
+ assert.match(js,/No source-by-source details were supplied/);
+});

@@ -4,7 +4,7 @@
 const C=window.AtlasDailyCore;
 const $=id=>document.getElementById(id);
 const kinds=[['news','AI news'],['technologies','New technologies'],['terms','New terms'],['site_changes','Updated in AI Updates'],['corrections','Corrections & clarifications']];
-let index=null,active=null,edition=null;
+let index=null,active=null,edition=null,switchEpoch=0;
 function element(tag,text,cls){
  const e=document.createElement(tag);
  if(text!==undefined)e.textContent=String(text);
@@ -63,12 +63,36 @@ function card(item,kind){
 function metadata(){
  const m=$('edition-metadata');m.replaceChildren();
  const t=element('span');t.append(document.createTextNode('Last successful publication: '),element('b',index?.last_successful_publish_at?stamp(index.last_successful_publish_at):'none yet'));m.append(t);
- if(!edition){line('Collection','Awaiting first verified publication',m);return;}
+ if(!edition){line('Collection',index?.editions?.length?'No verified edition selected':'Awaiting first verified publication',m);return;}
  line('Edition published',stamp(edition.published_at),m);
  line('Window',stamp(edition.coverage.start)+' – '+stamp(edition.coverage.end),m);
  line('Collection',edition.coverage.status,m);
  line('Sources checked',edition.coverage.sources_checked.length,m);
  line('Source failures',edition.coverage.sources_failed.length,m);
+}
+function sourceCoverage(){
+ const host=$('source-coverage');host.replaceChildren();host.hidden=!edition;
+ if(!edition)return;
+ const coverage=edition.coverage;
+ const detail=element('details',undefined,'source-audit');
+ if(coverage.status!=='complete'||coverage.sources_failed.length)detail.open=true;
+ detail.append(element('summary','Source coverage and gaps · '+coverage.sources_checked.length+' checked · '+coverage.sources_failed.length+' failed'));
+ const list=element('ul');
+ for(const [items,failed] of [[coverage.sources_checked,false],[coverage.sources_failed,true]]){
+  for(const item of items){
+   const row=element('li');
+   const url=typeof item==='string'?item:item?.url;
+   const label=typeof item==='string'?item:(item?.publisher||item?.name||item?.url||'Unnamed source');
+   const link=url?href(url,label):null;
+   row.append(element('strong',failed?'Unavailable: ':'Checked: '));
+   if(link)row.append(link);else row.append(document.createTextNode(String(label)));
+   if(failed&&item?.reason)row.append(document.createTextNode(' · '+String(item.reason)));
+   list.append(row);
+  }
+ }
+ if(!list.childNodes.length)list.append(element('li','No source-by-source details were supplied for this edition.'));
+ detail.append(list,element('p','This list describes collection coverage, not every AI announcement. The edition is not exhaustive.'));
+ host.append(detail);
 }
 function render(){
  if(!edition)return;
@@ -113,18 +137,22 @@ async function readEdition(entry){
 }
 async function switchEdition(entry){
  if(!entry)return;
+ const requestEpoch=++switchEpoch;
  try{
   const e=await readEdition(entry);
+  if(requestEpoch!==switchEpoch)return; // Ignore late responses from superseded archive selections.
   edition=e;active=entry;
   $('date-display').textContent=humanDate(entry.date);
-  metadata();render();
+  metadata();sourceCoverage();render();
   const today=C.chicagoDate();
-  const prefix=entry.date===today?'Today’s verified edition':'Archived edition '+humanDate(entry.date);
+  const todayPublished=!!C.selection(index,today).todayEntry;
+  const prefix=entry.date===today?'Today’s verified edition':todayPublished?'Archived edition '+humanDate(entry.date):'Today’s edition ('+humanDate(today)+') is awaiting publication. Showing archived edition '+humanDate(entry.date);
   const caveat=e.coverage.status==='complete'?'':' · source coverage '+e.coverage.status;
   status(prefix+' · published '+stamp(entry.published_at)+caveat+'. AI coverage is curated, not exhaustive.');
   $('edition-select').value=entry.path;
  }catch(err){
-  edition=null;active=null;metadata();$('edition-summary').hidden=true;
+  if(requestEpoch!==switchEpoch)return;
+  edition=null;active=null;metadata();sourceCoverage();$('edition-summary').hidden=true;
   $('edition-content').replaceChildren(element('div','Edition verification failed. The last known-good catalog remains available through Atlas.','empty'));
   status('Cannot display this edition: '+err.message);
  }
@@ -155,7 +183,6 @@ async function start(){
   }
   populateArchive(chosen);
   await switchEdition(chosen);
-  if(!found.todayEntry)status('Today’s edition ('+humanDate(today)+') has not been published. Showing '+humanDate(chosen.date)+' under its actual edition date.');
  }catch(err){
   status('Daily archive unavailable: '+err.message+'. Previously verified Atlas reference material remains accessible.');
   $('edition-content').replaceChildren(element('div','No unverified headlines are shown when the edition index cannot be validated.','empty'));

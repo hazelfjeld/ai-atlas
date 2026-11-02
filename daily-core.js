@@ -26,7 +26,7 @@ function safeSource(url){
 }
 function safeCatalogPath(path){
  if(typeof path!=='string')return '';
- if(/^(terms\/MLD-\d{4}-[a-z0-9-]+\.html|index\.html#\/(technologies|dictionary|papers|safety|playbooks)\?record=[A-Za-z0-9-]+|index\.html#\/(overview|technologies|dictionary|papers|safety|playbooks|sources))$/.test(path))return path;
+ if(/^(terms\/MLD-\d{4}-[a-z0-9-]+\.html|technology\/TECH-\d{4}-[a-z0-9-]+\.html|index\.html#\/(technologies|dictionary|papers|safety|playbooks)\?record=[A-Za-z0-9-]+|index\.html#\/(overview|technologies|dictionary|papers|safety|playbooks|sources))$/.test(path))return path;
  return '';
 }
 function validateIndex(index){
