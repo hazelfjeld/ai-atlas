@@ -87,6 +87,30 @@ with sync_playwright() as p:
               page.locator('#edition-search').input_value() == ''
               and page.locator('#edition-content article.item').count() >= 9
               and 'Showing ' in page.locator('#filter-results').inner_text())
+    if any(e['date'] == '2026-11-02' and e['revision'] == 8 for e in index['editions']):
+        # Share links must restore filters only after the immutable file passes
+        # size/digest/schema validation; the URL may be shared without JS state.
+        page.goto(base + 'whats-new.html?date=2026-11-02&revision=8&section=news&q=Reuters')
+        page.wait_for_function("!document.getElementById('edition-select').disabled", timeout=45000)
+        check('shared dated edition restores query and collection after integrity validation',
+              page.locator('#section-filter').input_value() == 'news'
+              and page.locator('#edition-search').input_value() == 'Reuters'
+              and page.locator('#edition-content article.item').count() == 4
+              and 'revision=8' in page.locator('#edition-permalink').get_attribute('href'))
+        page.locator('#topic-filter').select_option('policy')
+        check('topic change updates both share permalink and browser address',
+              'topic=policy' in page.url
+              and 'topic=policy' in page.locator('#edition-permalink').get_attribute('href'))
+        page.locator('#reset-filters').click()
+        check('reset removes optional filters but preserves verified archive revision',
+              'revision=8' in page.url and 'q=' not in page.url and 'topic=' not in page.url
+              and page.locator('#section-filter').input_value() == 'all'
+              and page.locator('#edition-search').input_value() == '')
+        page.locator('#edition-select').select_option('data/daily/editions/2026-11-02-v7.json')
+        page.wait_for_function("window.location.search.includes('revision=7')", timeout=45000)
+        check('manual revision change replaces URL only after verified selection',
+              page.locator('#edition-select').input_value().endswith('-v7.json')
+              and 'revision=7' in page.locator('#edition-permalink').get_attribute('href'))
     page.goto(base + 'index.html#/sources')
     link = page.locator('[data-original-file="ML_DL_SLM_LLM_Dictionary.xlsx"]')
     link.wait_for()
