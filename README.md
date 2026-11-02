@@ -27,7 +27,11 @@ Every original record field, stable ID, source reference and review label is pre
 
 The workspace provides global and collection search, filters, pagination, record details, related-concept and technology navigation, comparisons of up to three tools, notebook export/import, JSON/CSV exports and paper BibTeX exports. Original workbooks, the bundle and a foreign-key-checked SQLite database are downloadable from Sources & coverage. Existing research, playbook and compact technology routes remain available.
 
-All **1,345 concepts have direct HTML pages** with original definitions, examples, caveats, sources, related concepts and backlinks. **12 expanded guides** add mechanisms, prerequisites, illustrative worked examples, equations and evaluation advice. The other 1,333 pages visibly identify their detailed expansion as pending. Generated pages work without JavaScript and do not require SPA fallback routing.
+All **1,345 concepts have direct HTML pages** with original definitions, examples, caveats, sources, related concepts and backlinks. **16 expanded guides** add mechanisms, prerequisites, illustrative worked examples, equations and evaluation advice. The other 1,329 pages visibly identify their detailed expansion as pending. Generated pages work without JavaScript and do not require SPA fallback routing.
+
+## AI safety depth update — November 1, 2026
+
+Four existing dictionary topics now have complete, original worked guides with independently checked primary sources: [specification gaming](terms/MLD-1149-specification-gaming.html), [reward hacking](terms/MLD-1039-reward-hacking.html), [Goodhart's law](terms/MLD-0470-goodhart-s-law.html), and [goal misgeneralization](terms/MLD-0469-goal-misgeneralization.html). The edition at commit [2871660](https://github.com/hazelfjeld/ai-atlas/commit/2871660bf7d5e1ad8c0a3fb18756843a9a03c516) passed 56 JavaScript tests, all 1,345 page checks, 18,309 internal-link checks and GitHack byte verification. This is a catalog/educational enhancement, **not a newly discovered 2026 safety incident**. The prepared catalog remains at 1,705 records; expanded guides increased from 12 to 16.
 
 ## Presentation fallback
 
@@ -39,7 +43,7 @@ Run `python scripts/validate_checkpoint.py` and `node --test tests/*.test.cjs`. 
 
 Public HTTP equality and real browser interaction are separate checks. Detailed evidence is in `release/http-verification.json`, `release/browser-verification.json` and `docs/DEMO_CHECKPOINT.md`. CI validates catalogs, helpers, integrity failures, stable term routes and reproducible generated outputs, then checks the public GitHack assets.
 
-This is a curated snapshot, **not a live feed or exhaustive research/incident inventory**. Automatic collection remains off. Imported review labels are not a new source audit or independent replication. The 12 new explanations are editorial syntheses with primary citations, not independently reviewed textbooks. External citation destinations have not all been re-audited. Tool comparisons are editorial rather than measured rankings.
+This is a curated snapshot, **not a live feed or exhaustive research/incident inventory**. Automatic collection remains off. Imported review labels are not a new source audit or independent replication. The 16 expanded explanations are editorial syntheses with primary citations, not independently reviewed textbooks. External citation destinations have not all been re-audited. Tool comparisons are editorial rather than measured rankings.
 
 On shared GitHack origins, notes/bookmarks/comparisons are session-only; export a notebook backup before reloading. Elsewhere they use browser-local storage. No account backend, analytics, paid services or access-permission changes are introduced.
 
