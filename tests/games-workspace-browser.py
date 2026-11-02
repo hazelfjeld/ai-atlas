@@ -36,7 +36,7 @@ with sync_playwright() as p:
     check('Games changes only hash, not original document', page.url.endswith('index.html#/games') and page.evaluate('window.atlasNavigationSentinel') == 42)
     check('original shell and sidebar remain', page.locator('.app-shell').count()==1 and page.locator('#sidebar').is_visible())
     check('native content, no iframe or second masthead', page.locator('iframe').count()==0 and page.locator('.masthead').count()==0 and page.locator('main').count()==1)
-    check('active tab and breadcrumb agree', nav.get_attribute('aria-current')=='page' and page.locator('#breadcrumb').inner_text()=='Workspace / Games')
+    check('active tab and breadcrumb agree', nav.get_attribute('aria-current')=='page' and page.locator('#breadcrumb').inner_text()=='Games')
     check('dictionary reused without another download', catalog_requests == len([u for u in requests if '/data/terms-' in u]))
     page.screenshot(path=str(out/'games-native-desktop.png'), full_page=True)
     rows = page.evaluate('async () => (await window.ATLAS_READY).terms')
