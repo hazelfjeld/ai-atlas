@@ -61,6 +61,14 @@ with sync_playwright() as p:
               page.locator('#edition-select').is_enabled()
               and page.locator('#edition-permalink-wrap').is_visible()
               and page.locator('#edition-content article.item').count() >= 1)
+        audit = page.locator('#source-coverage .source-audit').inner_text()
+        check('source audit explains partial coverage and both failed lookups',
+              'Collection context:' in audit
+              and 'Direct model metadata API was not available' in audit
+              and 'Previously surfaced press URL returned no page' in audit)
+        check('source audit distinguishes checked times and failure status',
+              'Checked Nov 2, 2026' in audit
+              and 'Status: inaccessible' in audit and 'Status: not found' in audit)
     page.locator('#section-filter').select_option('news')
     page.locator('#topic-filter').select_option('research')
     check('daily filters remain usable', page.locator('#topic-filter').input_value() == 'research')

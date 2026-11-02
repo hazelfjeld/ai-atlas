@@ -103,7 +103,7 @@ test('Archive recovery retains verified content after a failed manual selection 
  const js=fs.readFileSync('whats-new.js','utf8');
  assert.match(js,/if\(edition&&active\)/);
  assert.match(js,/Keeping the previously verified/);
- assert.match(js,/for\(const entry of candidates\.slice\(0,4\)\)/);
+ assert.match(js,/for\(const entry of candidates\.slice\(0,12\)\)/);
  assert.match(js,/if\(await switchEdition\(entry\)\)/);
  assert.match(js,/No unverified news is shown/);
  assert.match(js,/select\.disabled=true/);
@@ -290,7 +290,45 @@ test('Revision 5 preserves source-reviewed news and independently validates new 
  assert.equal(diff.news.added.length+diff.news.updated.length+diff.news.removed.length,0);
  assert.equal(b.tldr.length,3);
  const receipt=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8')).receipts[0];
- assert.equal(receipt.publication_edition,'2026-11-02-v5');
+ assert.ok(receipt.publication_history.some(h=>h.edition==='2026-11-02-v5'),'v5 receipt must remain in revision history');
  assert.equal(receipt.counts.news_published,9);
  assert.equal(receipt.deferred_catalog_proposal_ids.length,7);
+});
+
+test('The daily audit discloses actual coverage context, source checks and failed lookup causes',()=>{
+ const js=fs.readFileSync('whats-new.js','utf8');
+ for(const required of ['Collection context: ','Status: ','Checked ','Reason: ','item.reason||item.note','coverage.note','sources_failed']){
+  assert.ok(js.includes(required),'Missing source audit element: '+required);
+ }
+ const e=JSON.parse(fs.readFileSync('data/daily/editions/2026-11-02-v6.json','utf8'));
+ assert.match(e.coverage.note,/two source lookups failed/i);
+ assert.equal(e.coverage.sources_failed.length,2);
+ assert.ok(e.coverage.sources_failed.every(x=>x.reason&&x.status&&x.url.startsWith('https://')));
+ assert.ok(e.coverage.sources_checked.every(x=>x.checked_at));
+});
+
+test('Revision 6 changes only the documented AI Updates source-audit UI, never world news',()=>{
+ const crypto=require('node:crypto');
+ const archive=JSON.parse(fs.readFileSync('data/daily/index.json','utf8'));
+ const before=archive.editions.find(e=>e.date==='2026-11-02'&&e.revision===5);
+ const after=archive.editions.find(e=>e.date==='2026-11-02'&&e.revision===6);
+ assert.ok(before&&after);
+ const raw=fs.readFileSync(after.path);
+ assert.equal(raw.length,after.bytes);
+ assert.equal(crypto.createHash('sha256').update(raw).digest('hex'),after.sha256);
+ const prev=D.validateEdition(JSON.parse(fs.readFileSync(before.path,'utf8')),before);
+ const next=D.validateEdition(JSON.parse(raw.toString('utf8')),after);
+ for(const key of ['news','technologies','terms','coverage','corrections'])assert.deepEqual(next[key],prev[key]);
+ const diff=D.revisionDiff(prev,next);
+ assert.equal(diff.site_changes.added.length,1);
+ assert.equal(diff.site_changes.added[0].id,'site-source-coverage-audit-20261102');
+ assert.equal(diff.news.added.length+diff.news.updated.length+diff.news.removed.length,0);
+ const receipt=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8')).receipts[0];
+ assert.equal(receipt.publication_edition,'2026-11-02-v6');
+ assert.ok(receipt.publication_history.some(h=>h.edition==='2026-11-02-v5'));
+ assert.ok(receipt.publication_history.some(h=>h.edition==='2026-11-02-v6'));
+ assert.equal(receipt.counts.news_published,9);
+ assert.equal(receipt.deferred_catalog_proposal_ids.length,7);
+ assert.equal(receipt.counts.term_added,0);
+ assert.equal(receipt.counts.technology_added,0);
 });

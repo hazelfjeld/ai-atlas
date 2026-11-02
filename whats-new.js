@@ -84,7 +84,10 @@ function sourceCoverage(){
  const coverage=edition.coverage;
  const detail=element('details',undefined,'source-audit');
  if(coverage.status!=='complete'||coverage.sources_failed.length)detail.open=true;
- detail.append(element('summary','Source coverage and gaps · '+coverage.sources_checked.length+' checked · '+coverage.sources_failed.length+' failed'));
+ detail.append(element('summary','Source coverage ('+coverage.status+') · '+coverage.sources_checked.length+' checked · '+coverage.sources_failed.length+' failed'));
+ // Collection caveats and source failures are evidence, not optional decoration.
+ // DOM text nodes prevent a staged source note from becoming executable markup.
+ if(typeof coverage.note==='string'&&coverage.note.trim())detail.append(element('p','Collection context: '+coverage.note,'coverage-note'));
  const list=element('ul');
  for(const [items,failed] of [[coverage.sources_checked,false],[coverage.sources_failed,true]]){
   for(const item of items){
@@ -94,7 +97,13 @@ function sourceCoverage(){
    const link=url?href(url,label):null;
    row.append(element('strong',failed?'Unavailable: ':'Checked: '));
    if(link)row.append(link);else row.append(document.createTextNode(String(label)));
-   if(failed&&item?.reason)row.append(document.createTextNode(' · '+String(item.reason)));
+   if(item&&typeof item==='object'){
+    const details=[];
+    if(item.status)details.push('Status: '+String(item.status).replace(/_/g,' '));
+    if(item.checked_at)details.push('Checked '+stamp(item.checked_at));
+    if(failed&&(item.reason||item.note))details.push('Reason: '+String(item.reason||item.note));
+    if(details.length)row.append(document.createTextNode(' · '+details.join(' · ')));
+   }
    list.append(row);
   }
  }
@@ -254,7 +263,9 @@ async function start(){
   const select=$('edition-select');
   select.disabled=true; // Keep initial recovery isolated from manual archive selection.
   let failures=0;
-  for(const entry of candidates.slice(0,4)){
+  // The archive already has more than four versions. Recover across up to twelve
+  // recent immutable editions before requiring an explicit older selection.
+  for(const entry of candidates.slice(0,12)){
    if(await switchEdition(entry)){
     let notice='';
     if(requested.specified){
