@@ -26,6 +26,14 @@ with sync_playwright() as p:
     page=static.new_page()
     page.goto(base)
     check('discovery content is readable without JavaScript', page.locator('h1').inner_text()=='Discover' and page.locator('.discovery-card').count()==6)
+    initial_nav=page.locator('#navigation a.nav-link').evaluate_all(
+        "(els)=>els.map(a=>[a.getAttribute('href'),a.textContent.replace(/\\s+/g,' ').trim()])")
+    check('all 14 sidebar destinations are present at first paint',len(initial_nav)==14)
+    check('dictionary, technology and Games links use workspace routes before hydration',
+          page.locator('#navigation a[data-view="dictionary"]').get_attribute('href')=='#/dictionary'
+          and page.locator('#navigation a[data-view="technologies"]').get_attribute('href')=='#/technologies'
+          and page.locator('#navigation a[data-view="games"]').get_attribute('href')=='#/games')
+
     check('canonical points to the primary domain', page.locator('link[rel=canonical]').get_attribute('href')=='https://aiupdates.app/')
     page.get_by_role('link',name='Read PyTorch',exact=True).click()
     check('technology profile works without JavaScript', page.locator('h1').inner_text()=='PyTorch' and page.get_by_role('heading',name='Tradeoffs & cautions',exact=True).is_visible())
@@ -37,6 +45,18 @@ with sync_playwright() as p:
     errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
     page.goto(base)
     page.locator('#catalog-loading').wait_for(state='detached')
+    hydrated_nav=page.locator('#navigation a.nav-link').evaluate_all(
+        "(els)=>els.map(a=>[a.getAttribute('href'),a.textContent.replace(/\\s+/g,' ').trim()])")
+    check('sidebar links and order stay stable after hydration',hydrated_nav==initial_nav)
+    page.locator('#navigation a[data-view="dictionary"]').click()
+    page.locator('#collection h3 a').first.wait_for()
+    check('dictionary link opens the native searchable tab',page.url.endswith('#/dictionary'))
+    page.locator('#navigation a[data-view="technologies"]').click()
+    page.locator('#collection h3 a').first.wait_for()
+    check('technology link opens the native searchable tab',page.url.endswith('#/technologies'))
+    page.locator('#navigation a[data-view="overview"]').click()
+    page.locator('#daily-panel-title').wait_for()
+
     check('new brand and requested palette render', page.get_by_role('link',name='AI Updates home',exact=True).is_visible() and page.evaluate("getComputedStyle(document.body).backgroundColor")=='rgb(246, 246, 242)')
     page.screenshot(path=str(out/'desktop.png'),full_page=True)
     page.get_by_role('navigation',name='Discover topics').get_by_role('link',name='Tools & models',exact=True).click()

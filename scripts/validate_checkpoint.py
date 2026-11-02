@@ -112,7 +112,7 @@ def validate_daily_publication() -> dict:
         datetime.fromisoformat(item['published_at'].replace('Z', '+00:00'))
     for name in ('whats-new.html', 'whats-new.js', 'daily-core.js'):
         assert (ROOT / name).stat().st_size > 100, name
-    assert 'whats-new.html' in (ROOT / 'app.js').read_text(encoding='utf-8'), 'Daily homepage link missing'
+    assert 'data-static="daily" href="whats-new.html"' in (ROOT / 'index.html').read_text(encoding='utf-8'), 'Daily homepage link missing from first paint'
     return {'archive_editions': len(index['editions']), 'published_batch_receipts': len(receipts)}
 
 
