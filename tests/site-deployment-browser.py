@@ -45,12 +45,22 @@ with sync_playwright() as p:
     check('technology profile deep link retains caveats and references', page.locator('#record-title').inner_text() == 'PyTorch' and page.get_by_role('heading', name='Tradeoffs & cautions', exact=True).is_visible())
     page.locator('[data-action=close-record]').click()
     page.goto(base + 'whats-new.html')
-    page.wait_for_function("!document.getElementById('edition-status').textContent.includes('Checking')")
     index = json.loads((ROOT / 'data/daily/index.json').read_bytes())
     if not index['editions']:
+        page.wait_for_function("!document.getElementById('edition-status').textContent.includes('Checking')")
         check('daily archive truthfully displays awaiting-first-edition', 'Awaiting' in page.locator('#edition-content').inner_text())
     else:
-        check('daily archive renders the actual published editions', page.locator('#edition-select').is_enabled())
+        # The archive stays disabled while it fetches and hashes edition bytes. The
+        # earlier "not Checking" probe raced against the legitimate "Loading" state.
+        page.wait_for_function("""() => {
+            const select = document.getElementById('edition-select');
+            const status = document.getElementById('edition-status').textContent;
+            return !select.disabled || /failed|unavailable|cannot display/i.test(status);
+        }""", timeout=45000)
+        check('daily archive renders its verified edition and permanent link',
+              page.locator('#edition-select').is_enabled()
+              and page.locator('#edition-permalink-wrap').is_visible()
+              and page.locator('#edition-content article.item').count() >= 1)
     page.locator('#section-filter').select_option('news')
     page.locator('#topic-filter').select_option('research')
     check('daily filters remain usable', page.locator('#topic-filter').input_value() == 'research')
