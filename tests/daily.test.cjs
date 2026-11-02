@@ -58,8 +58,8 @@ test('Daily page and scripts are syntax-valid and contain archive, source, topic
  for(const token of ['id="edition-select"','id="section-filter"','id="topic-filter"','id="edition-status"','id="edition-content"','src="daily-core.js"','src="whats-new.js"'])assert.ok(html.includes(token),token);
  assert.match(js,/Awaiting the first reviewed daily edition/);
  assert.match(js,/checksum mismatch/i);
- const app=fs.readFileSync('app.js','utf8');
- assert.match(app,/whats-new\.html/);
+ const initial=fs.readFileSync('index.html','utf8');
+ assert.match(initial,/data-static="daily" href="whats-new\.html"/);
 });
 
 test('Reviewed technology discoveries can link to existing direct technology pages',()=>{
