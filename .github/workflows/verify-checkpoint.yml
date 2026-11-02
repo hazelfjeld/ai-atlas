@@ -2,7 +2,7 @@ name: Verify incremental Atlas publication
 on:
   push:
     branches: [main]
-    paths: ['index.html']
+    paths: ['*.html', '*.js', '*.css', 'publication.json', 'data/**', 'terms/**', 'content/**', 'scripts/**', 'tests/**', '.github/workflows/verify-checkpoint.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -25,6 +25,16 @@ jobs:
         run: |
           node --check checkpoint.js
           node --check playbooks.js
+          node --check app.js
+          node --check core.js
+          node --check catalog-loader.js
+      - name: Test search, exports, integrity failures and all term routes
+        run: node --test tests/*.test.cjs
+      - name: Verify reproducible term pages and offline fallback
+        run: |
+          python3 scripts/build_term_pages.py
+          python3 scripts/build_offline.py
+          git diff --exit-code -- terms publication.json downloads/Atlas_Demo_Offline.html
   githack:
     needs: catalog
     runs-on: ubuntu-latest
