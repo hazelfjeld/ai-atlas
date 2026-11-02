@@ -33,7 +33,13 @@ Every original record field, stable ID, source reference and review label is pre
 
 The workspace provides global and collection search, filters, pagination, record details, related-concept and technology navigation, comparisons of up to three tools, notebook export/import, JSON/CSV exports and paper BibTeX exports. Original workbooks, the bundle and a foreign-key-checked SQLite database are downloadable from Sources & coverage. Existing research, playbook and compact technology routes remain available.
 
-All **1,345 concepts have direct HTML pages** with original definitions, examples, caveats, sources, related concepts and backlinks. **25 expanded guides** add mechanisms, prerequisites, illustrative worked examples, equations and evaluation advice. The other 1,320 pages visibly identify their detailed expansion as pending. Generated pages work without JavaScript and do not require SPA fallback routing.
+All **1,345 concepts have direct HTML pages** with original definitions, examples, caveats, sources, related concepts and backlinks. **27 expanded guides** add mechanisms, prerequisites, illustrative worked examples, equations and evaluation advice. The other 1,318 pages visibly identify their detailed expansion as pending. Generated pages work without JavaScript and do not require SPA fallback routing.
+
+## Calibrated confidence and conformal uncertainty — November 2, 2026
+
+Two new original, source-checked worked guides are published: [Calibration](terms/MLD-0142-calibration.html) explains reliability gaps, proper scores, ECE limitations and held-out logit temperature scaling; [Conformal prediction](terms/MLD-0198-conformal-prediction.html) derives finite-sample marginal coverage under exchangeability, calculates a nine-example residual quantile and identifies failures under distribution shift. The examples are synthetic teaching exercises, not measured deployments or new incidents. Seven primary research references support the paired guides.
+
+[PR #9](https://github.com/hazelfjeld/ai-atlas/pull/9) merged to main as [98410e6](https://github.com/hazelfjeld/ai-atlas/commit/98410e651e67004125f94c175a14c484a69a2cd8). [Feature-branch verification](https://github.com/hazelfjeld/ai-atlas/actions/runs/41436980119) passed **72 JavaScript tests**, data/link validation, deterministic generation and **16 exact public GitHack byte checks** including both new term pages. [PR Cloudflare validation](https://github.com/hazelfjeld/ai-atlas/actions/runs/41437026107) passed local HTTP and browser tests; production deployment of main must be checked separately before claiming a new live-hosted release. The original catalog remains 1,705 records, 1,345 permanent term pages, **27 expanded guides** and **1,318 awaiting expansion**. Daily-news queue and public receipts were both empty when checked; no genuine daily edition is claimed. The pinned three-minute professor demonstration at `839fee0` is unchanged.
 
 ## Evaluation integrity guides — November 2, 2026
 
@@ -71,7 +77,7 @@ Run `python scripts/validate_checkpoint.py` and `node --test tests/*.test.cjs`. 
 
 Public HTTP equality and real browser interaction are separate checks. Detailed evidence is in `release/http-verification.json`, `release/browser-verification.json` and `docs/DEMO_CHECKPOINT.md`. CI validates catalogs, helpers, integrity failures, stable term routes and reproducible generated outputs, then checks the public GitHack assets.
 
-This is a curated snapshot, **not a live feed or exhaustive research/incident inventory**. Automatic collection remains off. Imported review labels are not a new source audit or independent replication. The 23 expanded explanations are editorial syntheses with primary citations, not independently reviewed textbooks. External citation destinations have not all been re-audited. Tool comparisons are editorial rather than measured rankings.
+This is a curated snapshot, **not a live feed or exhaustive research/incident inventory**. Automatic collection remains off. Imported review labels are not a new source audit or independent replication. The 27 expanded explanations are editorial syntheses with primary citations, not independently reviewed textbooks. External citation destinations have not all been re-audited. Tool comparisons are editorial rather than measured rankings.
 
 On shared GitHack origins, notes/bookmarks/comparisons are session-only; export a notebook backup before reloading. Elsewhere they use browser-local storage. No account backend, analytics, paid services or access-permission changes are introduced.
 
