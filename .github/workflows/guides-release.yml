@@ -28,7 +28,7 @@ jobs:
           if ! git diff --cached --quiet; then
             git config user.name 'github-actions[bot]'
             git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-            git commit -m 'Publish four source-backed AI safety concept guides'
+            git commit -m 'Publish source-reviewed AI safety concept guides'
             git push origin "HEAD:${GITHUB_REF_NAME}"
           fi
       - name: Confirm generated outputs are byte-for-byte reproducible
@@ -44,6 +44,8 @@ jobs:
           base='https://rawcdn.githack.com/hazelfjeld/ai-atlas/'+sha+'/'
           files=['terms/MLD-1149-specification-gaming.html','terms/MLD-1039-reward-hacking.html',
                  'terms/MLD-0470-goodhart-s-law.html','terms/MLD-0469-goal-misgeneralization.html',
+                 'terms/MLD-0280-deceptive-alignment.html','terms/MLD-1119-shutdown-avoidance.html',
+                 'terms/MLD-0017-activation-based-monitoring.html',
                  'terms/index.html','terms/manifest.json','publication.json']
           for name in files:
               expected=pathlib.Path(name).read_bytes()
@@ -58,5 +60,5 @@ jobs:
                   except Exception:
                       if attempt == 3: raise
                       time.sleep(3)
-          print('Verified source commit',sha, 'with seven exact public paths; not a hosted-browser interaction test.')
+          print('Verified source commit',sha, 'with',len(files),'exact public paths; not a hosted-browser interaction test.')
           PY

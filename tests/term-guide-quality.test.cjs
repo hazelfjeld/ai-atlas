@@ -6,7 +6,7 @@ const path = require('node:path');
 const root = path.join(__dirname, '..');
 const guides = JSON.parse(fs.readFileSync(path.join(root, 'content/term-guides.json'), 'utf8'));
 const termManifest = JSON.parse(fs.readFileSync(path.join(root, 'terms/manifest.json'), 'utf8'));
-const safetyIDs = ['MLD-1149', 'MLD-1039', 'MLD-0470', 'MLD-0469'];
+const safetyIDs = ['MLD-1149', 'MLD-1039', 'MLD-0470', 'MLD-0469', 'MLD-0280', 'MLD-1119', 'MLD-0017'];
 test('Safety guide additions have mechanisms, examples, tests, caveats and primary citations', () => {
   for (const id of safetyIDs) {
     const g = guides[id];
