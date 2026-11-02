@@ -54,7 +54,7 @@ function render() {
 }
 function coverage() {
  const box = $('coverage'); box.replaceChildren(element('h2', 'A checkpoint you can inspect.'));
- box.append(element('p', 'The research catalogs are online first. The original full app remains a separate prepared artifact; its remaining catalogs have not yet been transferred here.'));
+ box.append(element('p', 'Research and safety catalogs are online alongside the complete set of 20 original playbooks. The 1,345 dictionary terms and 300 technology profiles still await transfer.'));
  const grid = element('div', undefined, 'progress-grid');
  for (const [key, title] of [['papers','Research papers'],['alerts','Safety report records'],['technologies','Technology profiles'],['terms','Dictionary concepts'],['playbooks','Problem playbooks']]) {
   const tile = element('div', undefined, 'progress-tile'); const count = manifest.published_counts[key];
@@ -100,7 +100,7 @@ async function start() {
   const loaded = {papers: [], alerts: []}; batches.forEach(b => loaded[b.kind].push(...b.records));
   const all = [...loaded.papers, ...loaded.alerts]; if (new Set(all.map(r => r.id)).size !== all.length) throw new Error('Duplicate record IDs.');
   for (const kind of Object.keys(rows)) { if (loaded[kind].length !== m.published_counts[kind]) throw new Error('Catalog count mismatch.'); rows[kind] = loaded[kind]; $(kind + '-count').textContent = rows[kind].length; }
-  manifest = m; $('loading-status').textContent = `${all.length} records loaded · all ${m.files.length} file checksums verified · snapshot ${m.snapshot_date}`; route();
+  manifest = m; $('loading-status').textContent = `${all.length} research/safety records loaded · ${m.files.length} checksums verified · snapshot ${m.snapshot_date}`; route();
  } catch (error) {
   $('loading-status').textContent = 'Catalog could not load: ' + error.message + ' No incomplete catalog is being presented as complete.';
   const retry = element('button', 'Retry loading'); retry.type = 'button'; retry.onclick = () => location.reload(); $('loading-status').append(document.createTextNode(' '), retry);
