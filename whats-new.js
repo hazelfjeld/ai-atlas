@@ -4,6 +4,13 @@
 const C=window.AtlasDailyCore;
 const $=id=>document.getElementById(id);
 const kinds=[['news','AI news'],['technologies','New technologies'],['terms','New terms'],['site_changes','Updated in AI Updates'],['corrections','Corrections & clarifications']];
+const emptySectionCopy={
+ news:'No reviewed news item was published in this edition. This does not mean no AI news occurred.',
+ technologies:'No newly integrated technology profile was published in this edition. Deferred proposals are not catalog additions.',
+ terms:'No newly integrated term page was published in this edition. New to AI Updates is not the same as new to the world.',
+ site_changes:'No AI Updates site-change entry was recorded in this edition. This says nothing about external AI developments.',
+ corrections:'No correction was recorded in this edition. Earlier revisions remain available in the archive.'
+};
 let index=null,active=null,edition=null,switchEpoch=0;
 function element(tag,text,cls){
  const e=document.createElement(tag);
@@ -103,19 +110,21 @@ function render(){
  let visible=0;
  for(const [kind,label] of kinds){
   if(section!=='all'&&section!==kind)continue;
-  const records=edition[kind].filter(item=>{
-   if(topic==='all')return true;
-   const tags=[item.category,...(item.tags||[])].filter(Boolean).map(s=>String(s).toLowerCase());
-   return tags.some(t=>t.includes(topic));
-  });
-  if(!records.length)continue;
+  const records=edition[kind].filter(item=>C.matchesTopic(item,topic));
+  // An unfiltered edition always shows all five sections, including honest zeros.
+  // A topic-filtered view avoids five repetitive empty sections.
+  if(!records.length&&topic!=='all')continue;
   visible+=records.length;
   const s=element('section'),heading=element('div',undefined,'heading'),title=element('h2',label);
   heading.append(title,element('span',records.length+' entries'));s.append(heading);
-  const grid=element('div',undefined,'cards');records.forEach(x=>grid.append(card(x,kind)));s.append(grid);
+  if(records.length){
+   const grid=element('div',undefined,'cards');records.forEach(x=>grid.append(card(x,kind)));s.append(grid);
+  }else{
+   s.append(element('p',emptySectionCopy[kind],'empty'));
+  }
   content.append(s);
  }
- if(!visible)content.append(element('div',section==='all'&&topic==='all'?'No items met the editorial threshold in this edition. This does not establish that no AI news occurred.':'No entries match those filters. Try a broader category.','empty'));
+ if(!visible&&topic!=='all')content.append(element('div','No entries match those filters. Try a broader category.','empty'));
 }
 async function request(path){
  const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),18000);

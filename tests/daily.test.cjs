@@ -135,3 +135,31 @@ test('Dated permalink only appears for a hash-verified edition; failed selection
  assert.match(js,/edition-permalink-wrap'\)\.hidden=true/);
  assert.match(js,/requested future-dated edition is not yet available/);
 });
+
+test('Broad topic filters match meaningful AI synonyms without fabricating classifications',()=>{
+ const vllm={category:'infrastructure',tags:['LLM','Inference','GPU','Open source']};
+ const invoke={category:'multimodal',tags:['DL','Diffusion','Vision','Creative tools']};
+ const windmill={category:'developer_tooling',tags:['Agents','MCP','Security']};
+ assert.equal(D.matchesTopic(vllm,'models'),true);
+ assert.equal(D.matchesTopic(vllm,'hardware'),true);
+ assert.equal(D.matchesTopic(invoke,'models'),true);
+ assert.equal(D.matchesTopic(invoke,'tools'),true);
+ assert.equal(D.matchesTopic(windmill,'tools'),true);
+ assert.equal(D.matchesTopic(windmill,'safety'),true);
+ assert.equal(D.matchesTopic(windmill,'policy'),false);
+ assert.equal(D.matchesTopic(vllm,'research'),false);
+ assert.equal(D.matchesTopic(vllm,'all'),true);
+ assert.equal(D.matchesTopic(vllm,'nonsense'),false);
+ assert.equal(D.matchesTopic(null,'models'),false);
+});
+test('The unfiltered daily reader shows explicit zero-count editorial sections',()=>{
+ const script=fs.readFileSync('whats-new.js','utf8');
+ for(const text of [
+ 'No newly integrated technology profile was published',
+ 'Deferred proposals are not catalog additions',
+ 'New to AI Updates is not the same as new to the world',
+ 'No correction was recorded',
+ "if(!records.length&&topic!=='all')continue",
+ 'C.matchesTopic(item,topic)'
+ ])assert.ok(script.includes(text),text);
+});

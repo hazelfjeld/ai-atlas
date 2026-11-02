@@ -6,6 +6,24 @@
 })(typeof globalThis!=='undefined'?globalThis:this,function(){
 'use strict';
 const KINDS=['news','technologies','terms','site_changes','corrections'];
+// A small, auditable vocabulary for broad reader filters; it is not a model
+// classifier or a claim that every tagged story has been independently audited.
+const TOPIC_ALIASES=Object.freeze({
+ safety:['safety','security','alignment','misuse','risk','vulnerability','adversarial'],
+ research:['research','benchmark','evaluation','study','paper','experiment'],
+ models:['model','llm','slm','inference','diffusion','multimodal'],
+ tools:['tool','developer','workflow','agent','api','mcp','framework'],
+ hardware:['hardware','gpu','chip','semiconductor','accelerator','compute','infrastructure','cuda'],
+ policy:['policy','governance','regulation','legislation','law','compliance']
+});
+function matchesTopic(item,topic){
+ if(topic==='all')return true;
+ const words=TOPIC_ALIASES[topic];
+ if(!words||!item||typeof item!=='object')return false;
+ const tags=[item.category,...(Array.isArray(item.tags)?item.tags:[])]
+  .filter(x=>typeof x==='string').map(x=>x.toLowerCase().replace(/[_-]/g,' '));
+ return tags.some(tag=>words.some(word=>tag===word||tag.includes(word)));
+}
 const MATCH_PATH=/^data\/daily\/editions\/(\d{4}-\d{2}-\d{2})-v([1-9]\d*)\.json$/;
 const HEX=/^[0-9a-f]{64}$/;
 function assert(ok,message){if(!ok)throw new Error(message);}
@@ -119,5 +137,5 @@ function permalink(entry){
  assert(entry&&validDate(entry.date)&&Number.isSafeInteger(entry.revision)&&entry.revision>=1,'Invalid edition permalink');
  return 'whats-new.html?date='+encodeURIComponent(entry.date)+'&revision='+entry.revision;
 }
-return {KINDS,validDate,validTimestamp,chicagoDate,safeSource,safeCatalogPath,validateIndex,validateEdition,selection,fallbackOrder,requestedEdition,permalink};
+return {KINDS,matchesTopic,validDate,validTimestamp,chicagoDate,safeSource,safeCatalogPath,validateIndex,validateEdition,selection,fallbackOrder,requestedEdition,permalink};
 });
