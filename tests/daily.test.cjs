@@ -325,7 +325,7 @@ test('Revision 6 changes only the documented AI Updates source-audit UI, never w
  assert.equal(diff.site_changes.added[0].id,'site-source-coverage-audit-20261102');
  assert.equal(diff.news.added.length+diff.news.updated.length+diff.news.removed.length,0);
  const receipt=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8')).receipts[0];
- assert.equal(receipt.publication_edition,'2026-11-02-v6');
+ assert.ok(receipt.publication_history.some(x=>x.edition==='2026-11-02-v6'));
  assert.ok(receipt.publication_history.some(h=>h.edition==='2026-11-02-v5'));
  assert.ok(receipt.publication_history.some(h=>h.edition==='2026-11-02-v6'));
  assert.equal(receipt.counts.news_published,9);
@@ -353,4 +353,25 @@ test('Reader offers labelled, keyboard-reachable search and match feedback',()=>
  assert.ok(js.includes("('edition-search').addEventListener('input'"));
  assert.ok(js.includes("('reset-filters').addEventListener('click'"));
  assert.ok(js.includes('No entries match those filters'));
+});
+
+test('Revision 7 preserves all external content and records only a site search update',()=>{
+ const crypto=require('node:crypto'),idx=JSON.parse(fs.readFileSync('data/daily/index.json','utf8'));
+ const a=idx.editions.find(e=>e.date==='2026-11-02'&&e.revision===6);
+ const b=idx.editions.find(e=>e.date==='2026-11-02'&&e.revision===7);
+ assert.ok(a&&b);
+ const raw=fs.readFileSync(b.path);
+ assert.equal(raw.length,b.bytes);
+ assert.equal(crypto.createHash('sha256').update(raw).digest('hex'),b.sha256);
+ const before=D.validateEdition(JSON.parse(fs.readFileSync(a.path,'utf8')),a);
+ const after=D.validateEdition(JSON.parse(raw.toString('utf8')),b);
+ for(const kind of ['news','technologies','terms','coverage','corrections'])assert.deepEqual(after[kind],before[kind]);
+ const d=D.revisionDiff(before,after);
+ assert.deepEqual(d.site_changes.added.map(x=>x.id),['site-daily-keyword-search-20261102']);
+ assert.equal(d.news.added.length+d.news.updated.length+d.news.removed.length,0);
+ const receipt=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8')).receipts[0];
+ assert.equal(receipt.publication_edition,'2026-11-02-v7');
+ assert.ok(receipt.publication_history.some(x=>x.edition==='2026-11-02-v6'));
+ assert.ok(receipt.publication_history.some(x=>x.edition==='2026-11-02-v7'));
+ assert.equal(receipt.deferred_catalog_proposal_ids.length,7);
 });

@@ -49,9 +49,17 @@
       "sha256": "77ea1a9198c8e81c91080e99bbcb34c25112c41e5357f9e4eac1c124aef55fd5",
       "bytes": 21467,
       "published_at": "2026-11-02T21:28:40.128Z"
+    },
+    {
+      "date": "2026-11-02",
+      "revision": 7,
+      "path": "data/daily/editions/2026-11-02-v7.json",
+      "sha256": "21c40c54eb49df86ff460d9fe24c22e65249e59564e189c448b582f789dc615e",
+      "bytes": 22247,
+      "published_at": "2026-11-02T22:36:04.316Z"
     }
   ],
   "last_successful_publish_at": "2026-11-02T21:32:17Z",
-  "status": "edition_revision_6_cloudflare_http_browser_and_githack_verified",
-  "coverage_note": "The November 2 revision 6 source-audit improvement passed Cloudflare production browser and HTTP checks and exact GitHack/catalog checks. Nine reviewed news stories are retained; seven catalog proposals remain deferred, two source lookups failed, and coverage remains partial and non-exhaustive."
+  "status": "revision_7_production_verification_pending",
+  "coverage_note": "November 2 revision 7 adds local search of immutable editorial records. Nine source-reviewed news reports, 7 deferred catalog proposals and 2 failed lookups remain. Last successful publication remains the verified v6 pending fresh checks."
 }

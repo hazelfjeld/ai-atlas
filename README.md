@@ -10,7 +10,7 @@ The original site is hosted at [aiupdates.app](https://aiupdates.app), also avai
 
 ## Daily edition keyword search — November 2
 
-The [daily archive](https://aiupdates.app/whats-new.html) now includes local multiword search of the selected integrity-verified edition's headlines, caveats, tags, IDs and source URLs. Search combines with the existing section and topic filters and provides match counts plus a keyboard-accessible reset. This UI change does not add or rewrite historical news, catalog records or immutable editions. [November 2 revision 6](https://aiupdates.app/whats-new.html?date=2026-11-02&revision=6) remains the last independently verified publication until the new deployment checks pass.
+The [daily archive](https://aiupdates.app/whats-new.html) now includes local multiword search of the selected integrity-verified edition's headlines, caveats, tags, IDs and source URLs. Search combines with the existing section and topic filters and provides match counts plus a keyboard-accessible reset. This UI change does not add or rewrite historical news or catalog records. Its site-only addition is recorded in immutable November 2 revision 7; earlier revisions remain unchanged. [November 2 revision 6](https://aiupdates.app/whats-new.html?date=2026-11-02&revision=6) remains the last independently verified publication until the new deployment checks pass.
 
 ## Verified November 2 archive revision 5
 
