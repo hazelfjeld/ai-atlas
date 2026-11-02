@@ -3,7 +3,7 @@
 const $ = id => document.getElementById(id);
 const records = [], selected = new Set();
 let matches = [], visible = 40, prepared = 300, snapshot = '';
-const norm = value => String(value ?? '').normalize('NFKD').replace(/\\p{M}/gu,'').toLowerCase();
+const norm = value => String(value ?? '').normalize('NFKD').replace(/\p{M}/gu,'').toLowerCase();
 function el(tag, value, className) { const node = document.createElement(tag); if (value !== undefined) node.textContent = value; if (className) node.className = className; return node; }
 function safeLink(raw, label) { try { const url = new URL(raw); if (url.protocol !== 'https:') throw 0; const a = el('a',label); a.href = url.href; a.target = '_blank'; a.rel = 'noopener noreferrer'; return a; } catch { return el('span',label + ' · unavailable'); } }
 async function bytes(path) {
@@ -14,7 +14,7 @@ async function bytes(path) {
 function hex(buffer) { return Array.from(new Uint8Array(buffer), n => n.toString(16).padStart(2,'0')).join(''); }
 async function hash(bytes) { return hex(await crypto.subtle.digest('SHA-256',bytes)); }
 async function verifyBatch(file) {
- if (file.kind !== 'technologies' || !/^data\\/technologies-\\d{2}\\.json\\.gz$/.test(file.path) || !Number.isInteger(file.count)) throw new Error('Invalid technology manifest path.');
+ if (file.kind !== 'technologies' || !/^data\/technologies-\d{2}\.json\.gz$/.test(file.path) || !Number.isInteger(file.count)) throw new Error('Invalid technology manifest path.');
  const payload = await bytes(file.path);
  const packed = payload.byteLength === file.bytes && await hash(payload) === file.sha256;
  const expandedDirect = payload.byteLength === file.expanded_bytes && await hash(payload) === file.expanded_sha256;
@@ -26,7 +26,7 @@ async function verifyBatch(file) {
  }
  if (uncompressed.byteLength !== file.expanded_bytes || await hash(uncompressed) !== file.expanded_sha256) throw new Error('Decoded checksum mismatch for ' + file.path);
  const batch = JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(uncompressed));
- if (!Array.isArray(batch) || batch.length !== file.count || batch.some(r => !/^TECH-\\d{4}$/.test(r.id) || !r.name || !r.what || !r.edge || !r.best_for || !r.watch_out || !Array.isArray(r.tags) || !Array.isArray(r.stages) || !Array.isArray(r.alternatives) || !r.source_url)) throw new Error('Record validation failed for ' + file.path);
+ if (!Array.isArray(batch) || batch.length !== file.count || batch.some(r => !/^TECH-\d{4}$/.test(r.id) || !r.name || !r.what || !r.edge || !r.best_for || !r.watch_out || !Array.isArray(r.tags) || !Array.isArray(r.stages) || !Array.isArray(r.alternatives) || !r.source_url)) throw new Error('Record validation failed for ' + file.path);
  return batch;
 }
 function line(dl,key,value) {
@@ -59,7 +59,7 @@ function card(r) {
  return a;
 }
 function anchor() {
- const id = decodeURIComponent(location.hash.slice(1)); if (!/^TECH-\\d{4}$/.test(id)) return;
+ const id = decodeURIComponent(location.hash.slice(1)); if (!/^TECH-\d{4}$/.test(id)) return;
  const index = matches.findIndex(r => r.id === id);
  if (index < 0) return;
  if (index >= visible) { visible = Math.ceil((index+1)/40)*40; draw(); }
@@ -77,7 +77,7 @@ function draw() {
 }
 function render(reset=true) {
  if(reset) visible=40;
- const words = norm($('tech-search').value).trim().split(/\\s+/).filter(Boolean);
+ const words = norm($('tech-search').value).trim().split(/\s+/).filter(Boolean);
  const section=$('tech-section').value,tag=$('tech-tag').value,stage=$('tech-stage').value;
  matches=records.filter(r => (!section || r.section === section) && (!tag || r.tags.includes(tag)) && (!stage || r.stages.includes(stage)) && words.every(w => norm([r.name,r.kind,r.what,r.edge,r.best_for,r.watch_out,r.section,r.source_url,...r.tags,...r.stages,...r.alternatives,...(r.concepts||[])].join(' ')).includes(w)));
  draw();
