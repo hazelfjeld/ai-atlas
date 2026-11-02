@@ -3,6 +3,7 @@
 from __future__ import annotations
 import argparse
 import collections
+import gzip
 import hashlib
 import json
 from pathlib import Path
@@ -46,6 +47,36 @@ def read_batch(item: dict, kind: str, ids: set[str], paths: set[str]) -> list[di
     return records
 
 
+
+def read_technology_batch(item: dict, ids: set[str], paths: set[str]) -> list[dict]:
+    path = item['path']
+    assert re.fullmatch(r'data/technologies-[0-9]{2}\.json\.gz', path), path
+    assert item['kind'] == 'technologies', f'Unexpected kind: {path}'
+    assert path not in paths, f'Duplicate path: {path}'
+    paths.add(path)
+    packed = (ROOT / path).read_bytes()
+    assert len(packed) == item['bytes'], f'Packed byte count mismatch: {path}'
+    assert hashlib.sha256(packed).hexdigest() == item['sha256'], f'Packed checksum mismatch: {path}'
+    raw = gzip.decompress(packed)
+    assert len(raw) == item['expanded_bytes'], f'Expanded byte count mismatch: {path}'
+    assert hashlib.sha256(raw).hexdigest() == item['expanded_sha256'], f'Expanded checksum mismatch: {path}'
+    records = json.loads(raw)
+    assert isinstance(records, list) and len(records) == item['count'], path
+    required_strings = ('name', 'section', 'kind', 'what', 'edge', 'best_for', 'watch_out',
+                        'source_url', 'evidence_status', 'comparison_basis', 'test_before_choice')
+    required_lists = ('tags', 'stages', 'alternatives', 'concept_ids', 'linked_concepts')
+    for r in records:
+        assert isinstance(r, dict) and re.fullmatch(r'TECH-[0-9]{4}', r.get('id', '')), path
+        assert r['id'] not in ids, f'Duplicate ID: {r["id"]}'
+        ids.add(r['id'])
+        for key in required_strings:
+            assert isinstance(r.get(key), str) and r[key], f'{path}: {key}'
+        for key in required_lists:
+            assert isinstance(r.get(key), list), f'{path}: {key}'
+        assert urllib.parse.urlparse(r['source_url']).scheme == 'https', path
+    return records
+
+
 def validate() -> dict:
     manifest = json.loads((ROOT / 'publication.json').read_text(encoding='utf-8'))
     assert manifest['schema'] == 1, 'Unsupported schema'
@@ -67,8 +98,12 @@ def validate() -> dict:
     for item in playbook_files:
         counts['playbooks'] += len(read_batch(item, 'playbooks', ids, paths))
     assert counts['playbooks'] == manifest['published_counts']['playbooks'], 'Wrong playbook count'
-    for kind in ('technologies', 'terms'):
-        assert manifest['published_counts'][kind] == 0, f'Unpublished catalog claimed: {kind}'
+    technology_files = extensions.get('technologies', [])
+    assert isinstance(technology_files, list), 'Invalid technology extension'
+    for item in technology_files:
+        counts['technologies'] += len(read_technology_batch(item, ids, paths))
+    assert counts['technologies'] == manifest['published_counts']['technologies'], 'Wrong technology count'
+    assert manifest['published_counts']['terms'] == 0, 'Unpublished term catalog claimed'
     html = (ROOT / 'index.html').read_text(encoding='utf-8')
     assert 'checkpoint.css' in html and 'checkpoint.js' in html, 'Checkpoint entry point missing'
     for path in ('checkpoint.css', 'checkpoint.js'):
@@ -78,6 +113,11 @@ def validate() -> dict:
         page = (ROOT / 'playbooks.html').read_text(encoding='utf-8')
         assert 'playbooks.js' in page and 'checkpoint.css' in page, 'Missing playbook assets'
         assert (ROOT / 'playbooks.js').stat().st_size > 100, 'Missing playbook loader'
+    if counts['technologies']:
+        assert 'technologies.html' in html, 'Technology atlas missing from navigation'
+        page = (ROOT / 'technologies.html').read_text(encoding='utf-8')
+        assert 'technologies.js' in page and 'checkpoint.css' in page, 'Missing technology assets'
+        assert (ROOT / 'technologies.js').stat().st_size > 100, 'Missing technology loader'
     return {'catalog_checks': 'passed', 'counts': dict(counts), 'files': len(paths), 'automatic_refresh_active': False}
 
 
@@ -89,6 +129,8 @@ def check_remote(base: str, manifest: dict) -> dict:
     files = ['index.html', 'checkpoint.css', 'checkpoint.js', 'publication.json'] + [f['path'] for f in manifest['files']]
     if manifest.get('published_counts', {}).get('playbooks'):
         files += ['playbooks.html', 'playbooks.js'] + [f['path'] for f in manifest.get('extensions', {}).get('playbooks', [])]
+    if manifest.get('published_counts', {}).get('technologies'):
+        files += ['technologies.html', 'technologies.js'] + [f['path'] for f in manifest.get('extensions', {}).get('technologies', [])]
     checked = []
     for path in files:
         request = urllib.request.Request(base + path, headers={'User-Agent': 'Atlas-publication-integrity-check/1.1'})
