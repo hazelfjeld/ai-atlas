@@ -1,0 +1,126 @@
+{
+  "schema": 1,
+  "edition_date": "2026-11-02",
+  "timezone": "America/Chicago",
+  "published_at": "2026-11-02T15:33:47.914Z",
+  "coverage": {
+    "start": "2026-11-01T14:50:00Z",
+    "end": "2026-11-02T14:53:43.848Z",
+    "status": "partial",
+    "note": "First partial publisher review: three project-owned release notes verified independently. The collector also staged six other news candidates, five technology proposals and three term proposals which remain unpublished pending evidence/catalog review. Broad AI coverage is non-exhaustive.",
+    "sources_checked": [
+      {
+        "name": "vllm",
+        "url": "https://github.com/vllm-project/vllm/releases/tag/v0.33.0rc3",
+        "checked_at": "2026-11-02T14:53:43.848Z"
+      },
+      {
+        "name": "invokeai",
+        "url": "https://github.com/invoke-ai/InvokeAI/releases/tag/v6.14.3",
+        "checked_at": "2026-11-02T14:53:43.848Z"
+      },
+      {
+        "name": "windmill",
+        "url": "https://github.com/windmill-labs/windmill/releases/tag/v1.856.0",
+        "checked_at": "2026-11-02T14:53:43.848Z"
+      }
+    ],
+    "sources_failed": [
+      {
+        "url": "https://huggingface.co/api/models/JetBrains/Mellum2.1-12B-A2.5B-Thinking-MTP",
+        "reason": "Direct model metadata API was not available in the research browser; model-card first-publication timestamp unverified, no date-specific news item proposed.",
+        "status": "inaccessible"
+      },
+      {
+        "url": "https://www.samsungsds.com/kr/news/0905-6278.html",
+        "reason": "Previously surfaced press URL returned no page; unverified alleged deal omitted.",
+        "status": "not_found"
+      }
+    ]
+  },
+  "tldr": [
+    "Official vLLM, InvokeAI, and Windmill release notes describe inference compatibility changes, vector-based creative workflows, and new agent-tool authentication options. The cited vLLM tag is v0.33.0rc3, a release candidate—not an independently benchmarked stable upgrade.",
+    "This is a partial first edition: three source-verified software updates from a nine-story candidate batch. Six news candidates and five technology plus three terminology proposals remain under review; no new real-world safety incident has been independently verified here."
+  ],
+  "news": [
+    {
+      "id": "ai-news-vllm-v0-33-0rc3-2026-11-02",
+      "title": "vLLM v0.33.0rc3 expands model serving and changes CUDA packaging",
+      "category": "infrastructure",
+      "tags": [
+        "LLM",
+        "Inference",
+        "GPU",
+        "Open source"
+      ],
+      "summary": "The v0.33.0rc3 release candidate adds model and speculative-decoding support, moves to PyTorch 2.14, and publishes CUDA 13 rather than CUDA 12.9 artifacts, alongside AMD ROCm updates.",
+      "why_it_matters": "Inference engineers need to validate model support, compatibility and deployment images before upgrading serving fleets.",
+      "caveat": "This specific URL is tagged rc3 (release candidate), even though its GitHub heading says v0.33.0; performance claims are release-note benchmarks on specified hardware.",
+      "review_status": "publisher_verified_primary_release_notes",
+      "release_status": "release_candidate",
+      "source_url": "https://github.com/vllm-project/vllm/releases/tag/v0.33.0rc3",
+      "publication_date": "2026-11-02",
+      "event_date": "2026-11-02",
+      "discovered_at": "2026-11-02T14:53:43.848Z",
+      "catalog_path": "technology/TECH-0288-vllm.html"
+    },
+    {
+      "id": "ai-news-invokeai-v6-14-3-2026-11-01",
+      "title": "InvokeAI 6.14.3 adds editable vector layers for image workflows",
+      "category": "multimodal",
+      "tags": [
+        "DL",
+        "Diffusion",
+        "Vision",
+        "Creative tools",
+        "Open source"
+      ],
+      "summary": "InvokeAI's 6.14.3 patch adds editable vector shapes and splines to its Canvas, which artists can rasterize for image-to-image workflows, and fixes resumed model downloads.",
+      "why_it_matters": "This bridges precise vector composition and local generative image editing without forcing every shape to be raster-first.",
+      "caveat": "This is a product-specific patch, not evidence that image-generation quality or speed improved across models; GitHub displays release time without an explicit timezone.",
+      "review_status": "publisher_verified_primary_release_notes",
+      "release_status": "patch_release",
+      "source_url": "https://github.com/invoke-ai/InvokeAI/releases/tag/v6.14.3",
+      "publication_date": "2026-11-01",
+      "event_date": "2026-11-01",
+      "discovered_at": "2026-11-02T14:53:43.848Z"
+    },
+    {
+      "id": "ai-news-windmill-v1-856-0-2026-11-02",
+      "title": "Windmill 1.856.0 adds external OIDC token support for MCP access",
+      "category": "developer_tooling",
+      "tags": [
+        "Agents",
+        "MCP",
+        "Security",
+        "Developer tools"
+      ],
+      "summary": "Windmill's 1.856.0 release adds support for MCP access tokens from external OIDC issuers, HashiCorp Vault references, workspace-role sync through the CLI, and working folders/instructions for AI sessions.",
+      "why_it_matters": "It gives teams more options for authenticated and governed automation workflows that expose tools to agents.",
+      "caveat": "The announcement is a release-note claim, not an independent security audit; organizational authentication still requires appropriate configuration.",
+      "review_status": "publisher_verified_primary_release_notes",
+      "release_status": "software_release",
+      "source_url": "https://github.com/windmill-labs/windmill/releases/tag/v1.856.0",
+      "publication_date": "2026-11-02",
+      "event_date": "2026-11-02",
+      "discovered_at": "2026-11-02T14:53:43.848Z"
+    }
+  ],
+  "technologies": [],
+  "terms": [],
+  "site_changes": [
+    {
+      "id": "site-first-reviewed-edition-20261102",
+      "title": "First dated, evidence-checked partial daily edition",
+      "summary": "The archive gained three independently checked release-note news cards. No technology or term was added to the underlying catalogs in this publication.",
+      "review_status": "site_publication_pending_production_checks",
+      "category": "site",
+      "tags": [
+        "Atlas",
+        "Editorial"
+      ],
+      "added_to_atlas_at": "2026-11-02T15:33:47.914Z"
+    }
+  ],
+  "corrections": []
+}

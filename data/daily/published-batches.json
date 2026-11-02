@@ -1,5 +1,52 @@
 {
   "schema": 1,
   "timezone": "America/Chicago",
-  "receipts": []
+  "receipts": [
+    {
+      "batch_id": "atlas-daily-20261102-first-0850ct-a",
+      "source_branch": "atlas-daily-staging",
+      "source_commit": "da93e2fd5545cabc0b001310eab55bf8eeea9da8",
+      "source_batch_path": "daily-queue/batches/2026-11-02-atlas-daily-20261102-first-0850ct-a.json",
+      "source_batch_sha256": "2dcb25af14b960f9989527170fd88daf8ba2fb5f42dcff3b72f512b08ddb57d7",
+      "source_batch_bytes": 38557,
+      "edition_date": "2026-11-02",
+      "validation_result": "checksum_schema_unique_ids_dates_and_three_primary_sources_verified",
+      "status": "partially_accepted_pending_catalog_and_claim_review",
+      "publication_outcome": "preflight_branch_pending_production",
+      "publication_edition": "2026-11-02-v1",
+      "accepted_news_ids": [
+        "ai-news:vllm:v0.33.0rc3:2026-11-02",
+        "ai-news:invokeai:v6.14.3:2026-11-01",
+        "ai-news:windmill:v1.856.0:2026-11-02"
+      ],
+      "deferred_news_ids": [
+        "ai-news:semianalysis:gdpx:launch-2026-11-02",
+        "ai-news:wired:disguised-deepfake-apps:2026-11-02",
+        "ai-news:reuters:south-korea-ai-budget-2027:2026-11-02",
+        "ai-news:reuters:adnoc-g42-openai-agreement:2026-11-02",
+        "ai-news:reuters:ecb-ai-valuations-risk:2026-11-02",
+        "ai-news:reuters:oracle-ai-financing-plan:2026-11-02"
+      ],
+      "deferred_catalog_proposal_ids": [
+        "tech-proposal:vllm:2026-11-02-rc3",
+        "tech-proposal:invokeai:2026-11-02",
+        "tech-proposal:gdpx:2026-11-02",
+        "tech-proposal:nvidia-auto-ontology:2026-11-02",
+        "tech-proposal:windmill:2026-11-02",
+        "term-proposal:agent-harness",
+        "term-proposal:semantic-ontology-layer",
+        "term-proposal:environment-grounded-agent-benchmark"
+      ],
+      "rejected_ids": [],
+      "counts": {
+        "news_published": 3,
+        "technology_added": 0,
+        "term_added": 0,
+        "corrections": 0,
+        "news_deferred": 6,
+        "catalog_deferred": 8
+      },
+      "review_notes": "Do not treat this batch as fully processed: resume the deferred IDs from this receipt before treating its queue item as complete. Do not relabel pending proposals as published releases."
+    }
+  ]
 }
