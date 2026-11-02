@@ -706,8 +706,8 @@
   },
   "MLD-0142": {
     "path": "terms/MLD-0142-calibration.html",
-    "sha256": "54fd229372940115832a0fb6c1abea2ca66df5f2eeb561beb3375cac3659d1a5",
-    "expanded": false
+    "sha256": "9d358fe98b42655a7eca114828f1b76c99964d9105cb081ca137238310b2af23",
+    "expanded": true
   },
   "MLD-0143": {
     "path": "terms/MLD-0143-calibration-dataset.html",
@@ -986,8 +986,8 @@
   },
   "MLD-0198": {
     "path": "terms/MLD-0198-conformal-prediction.html",
-    "sha256": "7dd499c2a6c5ec923cc3c69289b28cf8fb010c5f6904ab64c39c0c3c0ab27982",
-    "expanded": false
+    "sha256": "47959bd0c71a636b8cba02d9ae63c242e3f47cb6b34119b53477a104d1f95d09",
+    "expanded": true
   },
   "MLD-0199": {
     "path": "terms/MLD-0199-confounding.html",
