@@ -64,6 +64,58 @@ def read_batch(item: dict, kind: str, ids: set[str], paths: set[str]) -> list[di
     return records
 
 
+def validate_daily_publication() -> dict:
+    """Validate the separate, immutable daily archive without asserting any news exists."""
+    from datetime import date, datetime
+    index_path = ROOT / 'data/daily/index.json'
+    ledger_path = ROOT / 'data/daily/published-batches.json'
+    index = json.loads(index_path.read_text(encoding='utf-8'))
+    ledger = json.loads(ledger_path.read_text(encoding='utf-8'))
+    assert index.get('schema') == ledger.get('schema') == 1, 'Daily schema mismatch'
+    assert index.get('timezone') == ledger.get('timezone') == 'America/Chicago', 'Daily timezone mismatch'
+    assert isinstance(index.get('editions'), list), 'Missing archive editions'
+    assert isinstance(ledger.get('receipts'), list), 'Missing publisher receipts'
+    receipts = [r.get('batch_id') for r in ledger['receipts']]
+    assert len(receipts) == len(set(receipts)), 'Duplicate daily batch receipt'
+    entries = set()
+    for item in index['editions']:
+        day = item['date']
+        date.fromisoformat(day)
+        assert isinstance(item.get('revision'), int) and item['revision'] >= 1, item
+        path = item['path']
+        assert re.fullmatch(r'data/daily/editions/\\d{4}-\\d{2}-\\d{2}-v[1-9]\\d*\\.json', path), path
+        assert path == f'data/daily/editions/{day}-v{item["revision"]}.json', path
+        assert (day, item['revision']) not in entries, 'Duplicate daily edition'
+        entries.add((day, item['revision']))
+        blob = (ROOT / path).read_bytes()
+        assert len(blob) == item['bytes'] and hashlib.sha256(blob).hexdigest() == item['sha256'], path
+        edition = json.loads(blob)
+        assert edition['schema'] == 1 and edition['timezone'] == 'America/Chicago'
+        assert edition['edition_date'] == day
+        assert edition['coverage']['status'] in ('complete', 'partial', 'failed'), path
+        assert isinstance(edition['tldr'], list) and 1 <= len(edition['tldr']) <= 3, path
+        for kind in ('news', 'technologies', 'terms', 'site_changes', 'corrections'):
+            assert isinstance(edition[kind], list), path
+            ids = [row['id'] for row in edition[kind]]
+            assert len(ids) == len(set(ids)), f'Duplicate {kind} item in {path}'
+            for row in edition[kind]:
+                assert isinstance(row['title'], str) and row['title'], path
+                assert isinstance(row['summary'], str) and row['summary'], path
+                assert isinstance(row['review_status'], str) and row['review_status'], path
+                if row.get('source_url'):
+                    url = urllib.parse.urlparse(row['source_url'])
+                    assert url.scheme == 'https' and url.netloc and not url.username, row['source_url']
+                if row.get('catalog_path'):
+                    target = urllib.parse.urlsplit(row['catalog_path'])
+                    assert not target.scheme and not target.netloc, row['catalog_path']
+                    assert (ROOT / target.path).is_file(), row['catalog_path']
+        datetime.fromisoformat(item['published_at'].replace('Z', '+00:00'))
+    for name in ('whats-new.html', 'whats-new.js', 'daily-core.js'):
+        assert (ROOT / name).stat().st_size > 100, name
+    assert 'whats-new.html' in (ROOT / 'app.js').read_text(encoding='utf-8'), 'Daily homepage link missing'
+    return {'archive_editions': len(index['editions']), 'published_batch_receipts': len(receipts)}
+
+
 def validate() -> dict:
     manifest = json.loads((ROOT / 'publication.json').read_text(encoding='utf-8'))
     assert manifest['schema'] == 1, 'Unsupported schema'
@@ -136,6 +188,7 @@ def validate() -> dict:
         assert sum(p['expanded'] for p in pages.values()) == manifest['encyclopedia']['detailed_page_count']
         report['term_pages'] = len(pages)
         report['expanded_guides'] = sum(p['expanded'] for p in pages.values())
+    report['daily'] = validate_daily_publication()
     report['internal_links_checked'] = validate_links()
     return report
 
@@ -189,6 +242,8 @@ def check_remote(base: str, manifest: dict) -> dict:
     assert parsed.path.startswith('/hazelfjeld/ai-atlas/'), 'Unexpected repository'
     base = base.rstrip('/') + '/'
     files = ['index.html', 'app.css', 'app.js', 'core.js', 'catalog-loader.js', 'checkpoint.css', 'checkpoint.js', 'research.html', 'demo.html', 'technologies.html', 'technologies.js', 'publication.json', 'downloads/Atlas_Demo_Offline.html'] + [f['path'] for f in manifest['files']]
+    files += ['whats-new.html', 'whats-new.js', 'daily-core.js', 'data/daily/index.json', 'data/daily/published-batches.json']
+    files += [item['path'] for item in json.loads((ROOT / 'data/daily/index.json').read_bytes())['editions']]
     if manifest.get('published_counts', {}).get('playbooks'):
         files += ['playbooks.html', 'playbooks.js'] + [f['path'] for f in manifest.get('extensions', {}).get('playbooks', [])]
     for kind in ('terms', 'technologies'):
