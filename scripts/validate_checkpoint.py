@@ -183,7 +183,11 @@ def validate() -> dict:
             assert db.execute('SELECT count(*) FROM records').fetchone()[0] == sum(counts.values())
             for kind, rows in catalogs.items():
                 for r in rows:
-                    assert json.loads(db.execute('SELECT record_json FROM records WHERE id=?', (r['id'],)).fetchone()[0]) == r, r['id']
+                    original = json.loads(db.execute('SELECT record_json FROM records WHERE id=?', (r['id'],)).fetchone()[0])
+                    assert set(original) <= set(r), f'{r["id"]}: missing prepared source fields'
+                    assert {key: r[key] for key in original} == original, f'{r["id"]}: prepared source fields changed'
+                    approved_additions = {'release_updates'} if kind == 'technologies' else set()
+                    assert set(r) - set(original) <= approved_additions, f'{r["id"]}: unexpected extension fields'
     html = (ROOT / 'index.html').read_text(encoding='utf-8')
     assert 'app.css' in html and 'catalog-loader.js' in html and 'app.js' in html, 'Workspace entry point missing'
     for path in ('app.css', 'app.js', 'core.js', 'catalog-loader.js'):
