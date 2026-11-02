@@ -1,0 +1,601 @@
+[
+  {
+    "name": "01 · Programming languages",
+    "tags": [
+      "ML",
+      "DL",
+      "SLM",
+      "LLM",
+      "Engineering"
+    ],
+    "stages": [
+      "Build",
+      "Research"
+    ],
+    "concepts": [
+      "Programming language",
+      "Tensor",
+      "API"
+    ]
+  },
+  {
+    "name": "02 · Numerical and table computing",
+    "tags": [
+      "ML",
+      "DL",
+      "Data"
+    ],
+    "stages": [
+      "Prepare",
+      "Analyze"
+    ],
+    "concepts": [
+      "Array",
+      "Vectorization",
+      "Feature engineering"
+    ]
+  },
+  {
+    "name": "03 · Classical ML and AutoML",
+    "tags": [
+      "ML",
+      "Tabular"
+    ],
+    "stages": [
+      "Train",
+      "Evaluate"
+    ],
+    "concepts": [
+      "Gradient boosting",
+      "Cross-validation",
+      "AutoML"
+    ]
+  },
+  {
+    "name": "04 · Neural frameworks",
+    "tags": [
+      "DL",
+      "SLM",
+      "LLM",
+      "Research"
+    ],
+    "stages": [
+      "Train",
+      "Research"
+    ],
+    "concepts": [
+      "Automatic differentiation",
+      "Computational graph",
+      "Neural network"
+    ]
+  },
+  {
+    "name": "05 · Model and dataset ecosystems",
+    "tags": [
+      "DL",
+      "SLM",
+      "LLM",
+      "NLP",
+      "Vision"
+    ],
+    "stages": [
+      "Prepare",
+      "Train",
+      "Inference"
+    ],
+    "concepts": [
+      "Tokenization",
+      "Pretrained model",
+      "Dataset"
+    ]
+  },
+  {
+    "name": "06 · Fine-tuning and compression",
+    "tags": [
+      "DL",
+      "SLM",
+      "LLM"
+    ],
+    "stages": [
+      "Adapt",
+      "Train",
+      "Optimize"
+    ],
+    "concepts": [
+      "LoRA",
+      "Quantization",
+      "Knowledge distillation",
+      "Fine-tuning"
+    ]
+  },
+  {
+    "name": "07 · Distributed training",
+    "tags": [
+      "DL",
+      "LLM",
+      "Systems"
+    ],
+    "stages": [
+      "Train",
+      "Scale"
+    ],
+    "concepts": [
+      "Data parallelism",
+      "Model parallelism",
+      "Sharding"
+    ]
+  },
+  {
+    "name": "08 · GPU kernels and compilers",
+    "tags": [
+      "DL",
+      "LLM",
+      "Systems"
+    ],
+    "stages": [
+      "Optimize",
+      "Train",
+      "Inference"
+    ],
+    "concepts": [
+      "Kernel fusion",
+      "GPU",
+      "Compiler",
+      "Collective communication"
+    ]
+  },
+  {
+    "name": "09 · Inference and model serving",
+    "tags": [
+      "DL",
+      "SLM",
+      "LLM",
+      "Systems"
+    ],
+    "stages": [
+      "Deploy",
+      "Inference",
+      "Scale"
+    ],
+    "concepts": [
+      "Continuous batching",
+      "KV cache",
+      "Model serving"
+    ]
+  },
+  {
+    "name": "10 · Local and edge AI",
+    "tags": [
+      "SLM",
+      "LLM",
+      "DL",
+      "Edge"
+    ],
+    "stages": [
+      "Deploy",
+      "Inference"
+    ],
+    "concepts": [
+      "On-device inference",
+      "Quantization",
+      "Edge deployment"
+    ]
+  },
+  {
+    "name": "11 · Model APIs and gateways",
+    "tags": [
+      "SLM",
+      "LLM",
+      "Multimodal"
+    ],
+    "stages": [
+      "Build",
+      "Inference",
+      "Deploy"
+    ],
+    "concepts": [
+      "API",
+      "Tool calling",
+      "Prompt caching",
+      "Model routing"
+    ]
+  },
+  {
+    "name": "12 · Retrieval and speech APIs",
+    "tags": [
+      "LLM",
+      "NLP",
+      "Speech",
+      "Retrieval"
+    ],
+    "stages": [
+      "Retrieve",
+      "Inference",
+      "Build"
+    ],
+    "concepts": [
+      "Embedding",
+      "Reranking",
+      "Speech recognition",
+      "Retrieval"
+    ]
+  },
+  {
+    "name": "13 · Vector databases and search",
+    "tags": [
+      "ML",
+      "LLM",
+      "Retrieval",
+      "Data"
+    ],
+    "stages": [
+      "Store",
+      "Retrieve",
+      "Deploy"
+    ],
+    "concepts": [
+      "Vector database",
+      "Approximate nearest neighbor",
+      "Hybrid retrieval"
+    ]
+  },
+  {
+    "name": "14 · RAG and agent orchestration",
+    "tags": [
+      "SLM",
+      "LLM",
+      "Agents",
+      "Retrieval"
+    ],
+    "stages": [
+      "Build",
+      "Retrieve",
+      "Orchestrate"
+    ],
+    "concepts": [
+      "Retrieval-augmented generation",
+      "Agent",
+      "Tool calling",
+      "Workflow"
+    ]
+  },
+  {
+    "name": "15 · Structured I-O and protocols",
+    "tags": [
+      "SLM",
+      "LLM",
+      "Engineering",
+      "Systems"
+    ],
+    "stages": [
+      "Build",
+      "Validate",
+      "Integrate"
+    ],
+    "concepts": [
+      "Structured output",
+      "Schema",
+      "Tool calling",
+      "Serialization"
+    ]
+  },
+  {
+    "name": "16 · Data pipelines and formats",
+    "tags": [
+      "ML",
+      "DL",
+      "LLM",
+      "Data"
+    ],
+    "stages": [
+      "Prepare",
+      "Store",
+      "Orchestrate"
+    ],
+    "concepts": [
+      "Data pipeline",
+      "Data lake",
+      "Serialization",
+      "Feature store"
+    ]
+  },
+  {
+    "name": "17 · Data quality and annotation",
+    "tags": [
+      "ML",
+      "DL",
+      "LLM",
+      "Data"
+    ],
+    "stages": [
+      "Prepare",
+      "Validate",
+      "Label"
+    ],
+    "concepts": [
+      "Data quality",
+      "Annotation",
+      "Data leakage",
+      "Dataset curation"
+    ]
+  },
+  {
+    "name": "18 · Experiments and optimization",
+    "tags": [
+      "ML",
+      "DL",
+      "LLM",
+      "Research"
+    ],
+    "stages": [
+      "Track",
+      "Tune",
+      "Evaluate"
+    ],
+    "concepts": [
+      "Hyperparameter optimization",
+      "Experiment tracking",
+      "Reproducibility"
+    ]
+  },
+  {
+    "name": "19 · Evaluation and testing",
+    "tags": [
+      "ML",
+      "DL",
+      "SLM",
+      "LLM",
+      "Safety"
+    ],
+    "stages": [
+      "Evaluate",
+      "Test"
+    ],
+    "concepts": [
+      "Benchmark",
+      "Evaluation harness",
+      "Calibration",
+      "Regression test"
+    ]
+  },
+  {
+    "name": "20 · Safety and interpretability",
+    "tags": [
+      "ML",
+      "DL",
+      "SLM",
+      "LLM",
+      "Safety",
+      "Interpretability"
+    ],
+    "stages": [
+      "Evaluate",
+      "Research",
+      "Monitor"
+    ],
+    "concepts": [
+      "Mechanistic interpretability",
+      "Red teaming",
+      "Activation patching",
+      "Adversarial robustness"
+    ]
+  },
+  {
+    "name": "21 · Privacy and access control",
+    "tags": [
+      "ML",
+      "LLM",
+      "Safety",
+      "Privacy",
+      "Engineering"
+    ],
+    "stages": [
+      "Protect",
+      "Govern",
+      "Train"
+    ],
+    "concepts": [
+      "Differential privacy",
+      "Federated learning",
+      "Access control",
+      "Sandboxing"
+    ]
+  },
+  {
+    "name": "22 · Operations and observability",
+    "tags": [
+      "ML",
+      "LLM",
+      "Systems",
+      "Engineering"
+    ],
+    "stages": [
+      "Monitor",
+      "Deploy",
+      "Operate"
+    ],
+    "concepts": [
+      "Observability",
+      "Model monitoring",
+      "Data drift",
+      "Tracing"
+    ]
+  },
+  {
+    "name": "23 · Compute and deployment platforms",
+    "tags": [
+      "DL",
+      "LLM",
+      "Systems"
+    ],
+    "stages": [
+      "Train",
+      "Deploy",
+      "Scale"
+    ],
+    "concepts": [
+      "GPU",
+      "Serverless inference",
+      "Cluster",
+      "Resource scheduling"
+    ]
+  },
+  {
+    "name": "24 · APIs, interfaces and notebooks",
+    "tags": [
+      "ML",
+      "LLM",
+      "Engineering"
+    ],
+    "stages": [
+      "Build",
+      "Deploy",
+      "Explore"
+    ],
+    "concepts": [
+      "API",
+      "Streaming",
+      "Notebook",
+      "Human-in-the-loop"
+    ]
+  },
+  {
+    "name": "25 · Computer vision and graphics",
+    "tags": [
+      "DL",
+      "Vision",
+      "Multimodal"
+    ],
+    "stages": [
+      "Prepare",
+      "Train",
+      "Generate"
+    ],
+    "concepts": [
+      "Computer vision",
+      "Image augmentation",
+      "Segmentation",
+      "Synthetic data"
+    ]
+  },
+  {
+    "name": "26 · Speech and audio software",
+    "tags": [
+      "DL",
+      "Speech",
+      "Multimodal"
+    ],
+    "stages": [
+      "Prepare",
+      "Inference",
+      "Build"
+    ],
+    "concepts": [
+      "Speech recognition",
+      "Text-to-speech",
+      "Diarization",
+      "Voice activity detection"
+    ]
+  },
+  {
+    "name": "27 · Reinforcement learning and simulation",
+    "tags": [
+      "RL",
+      "DL",
+      "Agents",
+      "Robotics"
+    ],
+    "stages": [
+      "Research",
+      "Train",
+      "Simulate"
+    ],
+    "concepts": [
+      "Reinforcement learning",
+      "Environment",
+      "Policy",
+      "Simulation"
+    ]
+  },
+  {
+    "name": "28 · Scientific and graph ML",
+    "tags": [
+      "ML",
+      "DL",
+      "Scientific",
+      "Graph"
+    ],
+    "stages": [
+      "Research",
+      "Train",
+      "Analyze"
+    ],
+    "concepts": [
+      "Graph neural network",
+      "Probabilistic programming",
+      "Gaussian process",
+      "Causal inference"
+    ]
+  },
+  {
+    "name": "29 · Forecasting and recommendations",
+    "tags": [
+      "ML",
+      "DL",
+      "Time series",
+      "Recommendation"
+    ],
+    "stages": [
+      "Train",
+      "Evaluate",
+      "Inference"
+    ],
+    "concepts": [
+      "Time-series forecasting",
+      "Recommendation",
+      "Ranking",
+      "Temporal leakage"
+    ]
+  },
+  {
+    "name": "30 · Development and reproducibility",
+    "tags": [
+      "ML",
+      "DL",
+      "LLM",
+      "Engineering"
+    ],
+    "stages": [
+      "Build",
+      "Test",
+      "Reproduce"
+    ],
+    "concepts": [
+      "Reproducibility",
+      "Dependency management",
+      "Unit test",
+      "Version control"
+    ]
+  },
+  {
+    "name": "31 · Model formats and interoperability",
+    "tags": [
+      "ML",
+      "DL",
+      "SLM",
+      "LLM",
+      "Systems"
+    ],
+    "stages": [
+      "Store",
+      "Integrate",
+      "Deploy"
+    ],
+    "concepts": [
+      "Model serialization",
+      "Data format",
+      "API",
+      "Portability"
+    ]
+  }
+]

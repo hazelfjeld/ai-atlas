@@ -237,5 +237,61 @@
       }
     ]
   },
-  "support": []
+  "support": [
+    {
+      "path": "data/sections.json",
+      "bytes": 9677,
+      "sha256": "f6fb2ecc20755546c2f509246d9cd5ac660f98a6ce77debf366aa119b116032a"
+    },
+    {
+      "path": "data/dictionary-sources.json",
+      "bytes": 16326,
+      "sha256": "8c669672b343d747b8555bf4cfcc320b17d3d8a7c3670e7bee851d4870d525d9"
+    },
+    {
+      "path": "data/technology-sources.json",
+      "bytes": 75259,
+      "sha256": "89cb8a4c88ee83b29bbef197e75ea18d3c604a39417bf3c92b864f4252cc3d25"
+    },
+    {
+      "path": "data/sources.json",
+      "bytes": 11686,
+      "sha256": "3a892da5957043df57cdf03f85f8e2e51af7d36ef9b64a77d0bd1f13835273dd"
+    },
+    {
+      "path": "data/source-health.json",
+      "bytes": 661,
+      "sha256": "70dee01a8f43bccce290837511b516e04f8890e46098c55ca52c685fa1eae93a"
+    },
+    {
+      "path": "data/review-queue.json",
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "path": "data/meta.json",
+      "bytes": 1476,
+      "sha256": "20a4f3834d6990015abe2a37a49004a9306a83835aa7b8f4f79b818db5aac5bf"
+    },
+    {
+      "path": "downloads/AI_Technology_Hub.xlsx",
+      "bytes": 587710,
+      "sha256": "ad6b31a0e47382a8f0f0348f0360b9be6eada656f5bf3c763c4640305f12b02f"
+    },
+    {
+      "path": "downloads/ML_DL_SLM_LLM_Dictionary.xlsx",
+      "bytes": 345681,
+      "sha256": "955bc2096bbf5a9c4fc78801815e6a0c28290ffe7b12cb1d4015f270829e74f1"
+    },
+    {
+      "path": "downloads/AI_Technology_Hub_Complete_Bundle.zip",
+      "bytes": 3610834,
+      "sha256": "1ae0618e5332eb391401acd39fa95712eb72e139c9b2871874add9cae557b869"
+    },
+    {
+      "path": "downloads/atlas_catalog.sqlite",
+      "bytes": 5369856,
+      "sha256": "491245506e754a8340bf059a69f0530f54d5883280a7ddd9b6e95c28a0a531d7"
+    }
+  ]
 }

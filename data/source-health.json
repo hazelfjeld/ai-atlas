@@ -1,0 +1,23 @@
+{
+  "as_of": "2026-11-01",
+  "automatic_refresh_active": false,
+  "last_collection_run": "2026-11-01T16:24:16Z",
+  "sources": {
+    "arxiv-alignment": {
+      "last_attempt": "2026-11-01T16:24:16Z",
+      "status": "Failed",
+      "error": "Network/DNS/TLS request failed; no data inferred.",
+      "truncated": false,
+      "records_seen": 0,
+      "window_start": "2026-10-31",
+      "window_end": "2026-11-01"
+    }
+  },
+  "note": "Manual collector status. Scheduled operation and hosting are separate deployment responsibilities.",
+  "last_run_counts": {
+    "new_papers": 0,
+    "revised_papers": 0,
+    "new_candidates": 0,
+    "source_failures": 1
+  }
+}

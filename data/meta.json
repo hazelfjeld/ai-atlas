@@ -1,0 +1,22 @@
+{
+  "name": "Atlas",
+  "subtitle": "AI technology & safety observatory",
+  "edition": "3.0.0",
+  "assembled_on": "2026-11-01",
+  "research_checked_on": "2026-11-01",
+  "deployment_status": "Static build; publishing not performed by the packaging session",
+  "automatic_refresh_active": false,
+  "coverage": "A curated starter catalog, not an exhaustive record of every paper or incident.",
+  "paper_review_scope": "Metadata and abstracts; not full-paper audits or replications.",
+  "technology_review_scope": "Imported evidence labels retained. Most technology profiles are reference-only, not freshly verified.",
+  "privacy": "No analytics or account service. Notes are session-only on shared GitHack domains; browser-local on other hosts. Export/import backups manually. Do not enter secrets.",
+  "disclaimer": "Conditional technology guidance and evidence-labeled safety reporting. Not a universal ranking or a claim of complete monitoring.",
+  "source_limitations": [
+    "arXiv keywords can miss relevant papers and return false positives.",
+    "Workshop, journal, repository-only, unpublished and paywalled research is not comprehensively covered.",
+    "Reported incidents are limited by public disclosure and publisher visibility.",
+    "A report may summarize multiple incidents; catalog counts are not incident counts.",
+    "Automated candidates are not promoted to reviewed incidents.",
+    "New versions invalidate abstract-review status until rechecked."
+  ]
+}
