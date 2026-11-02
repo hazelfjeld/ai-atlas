@@ -2,6 +2,10 @@
 
 A complete import of the prepared November 1, 2026 catalog, with connected search, technology comparisons, source registers, downloads and permanent concept pages.
 
+## Cloudflare hosting
+
+The original site can now be packaged for Workers Static Assets using the allowlisted build and single gated GitHub Actions deployment path in [the deployment guide](docs/CLOUDFLARE_DEPLOYMENT.md). Public target: `https://ai-atlas.airheadhazelnut.workers.dev`; successful production verification is recorded in the deployment workflow. GitHack remains a working fallback. Existing daily-news and hourly-development processes continue updating GitHub unchanged.
+
 ## Daily editions — What's New Today
 
 [Open the dated What's New archive](https://rawcdn.githack.com/hazelfjeld/ai-atlas/839fee0b0e4f6b16d933dd5e5eac55e3a3e847c6/whats-new.html)
