@@ -13,7 +13,7 @@ permissions:
   contents: read
 env:
   WRANGLER_SEND_METRICS: 'false'
-  PRODUCTION_URL: https://ai-atlas.airheadhazelnut.workers.dev
+  PRODUCTION_URL: https://aiupdates.app
 jobs:
   validate:
     if: github.event_name != 'workflow_run' || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main')
@@ -139,6 +139,8 @@ jobs:
         if: steps.current.outputs.deploy == 'true'
         run: |
           python3 scripts/verify_cloudflare.py --base "$PRODUCTION_URL/" --revision '${{ needs.validate.outputs.revision }}' --output deployment-validation/production-http.json
+          python3 scripts/verify_cloudflare.py --base https://www.aiupdates.app/ --revision '${{ needs.validate.outputs.revision }}' --output deployment-validation/production-www-http.json
+          python3 scripts/verify_cloudflare.py --base https://ai-atlas.airheadhazelnut.workers.dev/ --revision '${{ needs.validate.outputs.revision }}' --output deployment-validation/production-workers-http.json
           python3 tests/site-deployment-browser.py --base "$PRODUCTION_URL/" --output deployment-validation/production-site
           python3 tests/games-workspace-browser.py --base "$PRODUCTION_URL/" --output deployment-validation/production-native-games
           python3 tests/games-browser.py --base "$PRODUCTION_URL/" --output deployment-validation/production-games

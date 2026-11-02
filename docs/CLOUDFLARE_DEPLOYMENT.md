@@ -1,6 +1,12 @@
 # Cloudflare Workers Static Assets
 
-Atlas is deployed as the original static site, with no framework rewrite or new runtime service. The production target is `https://ai-atlas.airheadhazelnut.workers.dev`. Do not treat this target as verified until the production job and its HTTP/browser checks pass.
+Atlas is deployed as the original static site, with no framework rewrite or new runtime service. The production target is [https://aiupdates.app](https://aiupdates.app). The same Worker also serves `https://www.aiupdates.app` and `https://ai-atlas.airheadhazelnut.workers.dev`. The production job verifies the apex domain after each deployment.
+
+## Custom domain
+
+The account dashboard connects `aiupdates.app` and `www.aiupdates.app` to the production `ai-atlas` Worker under Workers & Pages → ai-atlas → Domains. Cloudflare manages their Worker DNS records and HTTPS certificates on the existing Free plan. Both names serve the original relative URLs and hash routes directly; no redirect drops paths or fragments.
+
+These domain attachments are managed in the dashboard, separately from the versioned asset release. Keep `routes`/`route` omitted from `wrangler.json`: the pinned Wrangler leaves dashboard-managed custom domains alone when no routes are configured. This also keeps the CI token limited to Workers Scripts; do not broaden it to DNS/zone permissions just to deploy assets. Keep the production workers.dev URL enabled as a fallback. A hosting rollback changes the asset version, while these domain attachments continue pointing at the Worker.
 
 ## Public package
 
@@ -8,7 +14,7 @@ Atlas is deployed as the original static site, with no framework rewrite or new 
 
 The repository, `.github`, scripts, tests, documentation, release evidence, dependency files, credentials and `daily-queue` are never copied. `deployment.json` identifies the source commit, hashes and byte counts of the packaged public files. The build rejects symlinks, path traversal, missing content and assets exceeding Workers Free limits (20,000 files, 25 MiB each).
 
-`wrangler.json` has only static assets: no Worker handler, scheduled trigger, database, bucket, custom domain or DNS route. HTML handling is disabled to retain literal `.html` term/download URLs. `_redirects` internally serves `/index.html` at `/`; unknown paths stay 404 instead of being disguised as the homepage. Hash routes including `#/overview` and `#/games` stay entirely in the original client.
+`wrangler.json` has only static assets: no Worker handler, scheduled trigger, database, bucket or route configuration. HTML handling is disabled to retain literal `.html` term/download URLs. `_redirects` internally serves `/index.html` at `/`; unknown paths stay 404 instead of being disguised as the homepage. Hash routes including `#/overview` and `#/games` stay entirely in the original client.
 
 ## One production deployment workflow
 
@@ -30,7 +36,7 @@ The initial token was prepared with a 90-day expiration. Rotate it in Cloudflare
 
 Workers publishes its asset set atomically. All mutable URLs use `Cache-Control: public, max-age=0, must-revalidate, no-transform`, ETags and an `X-Atlas-Revision` header. The no-transform directive prevents supported edge optimizers from changing hashed response bytes or stripping validators. No service worker or long-lived immutable caching is added to unversioned files. The original SHA-256 catalog loader remains intact and rejects a partial/mixed load rather than rendering it as complete. An already-open page spanning a release may need its existing Retry/reload control.
 
-After deployment, `scripts/verify_cloudflare.py` checks the actual public deployment manifest, all runtime/catalog/support/download files, all expanded term guides and two reference pages against the tested artifact. It verifies root rewriting, literal term URLs, caching, conditional ETag 304s and 404s for excluded/private paths. Browser suites then exercise dictionary search, technology profiles, term links, Quiz, Match, daily archive state, workbook downloading and mobile navigation against the workers.dev URL. Reports and screenshots are retained as GitHub Actions artifacts for seven days.
+After deployment, `scripts/verify_cloudflare.py` checks the actual public deployment manifest, all runtime/catalog/support/download files, all expanded term guides and two reference pages against the tested artifact on the apex, www and workers.dev addresses. It verifies root rewriting, literal term URLs, caching, conditional ETag 304s and 404s for excluded/private paths. Browser suites then exercise dictionary search, technology profiles, term links, Quiz, Match, daily archive state, workbook downloading and mobile navigation against aiupdates.app. Reports and screenshots are retained as GitHub Actions artifacts for seven days.
 
 The daily archive can legitimately be empty until the separate editorial process publishes a reviewed edition. Hosting does not activate a news collector or fabricate a first edition. Imported source-review limitations remain unchanged.
 
@@ -40,7 +46,7 @@ The daily archive can legitimately be empty until the separate editorial process
 2. Push that new commit. The same validation and deployment pipeline tests it and deploys its exact revision. Do not rerun an old deployment: the stale-revision guard deliberately rejects it.
 3. For an urgent rollback, Cloudflare Workers → `ai-atlas` → Deployments can roll back to the preceding successful version, including its assets. Follow that with the corresponding Git revert so future automated publication agrees with the restored site. The first deployment has no older Cloudflare version to roll back to.
 
-The existing commit-pinned GitHack links continue serving their original versions and remain the immediate fallback. Repository access, billing, DNS, `aiupdates.app`, and existing development/research schedules are outside this deployment change.
+The existing commit-pinned GitHack links continue serving their original versions and remain an immediate fallback, alongside the enabled workers.dev URL. Repository access, billing, unrelated DNS and existing development/research schedules are unchanged. To detach a domain, remove only its attachment under the Worker's Domains tab; keep workers.dev enabled. No registrar transfer or nameserver change is required.
 
 ## Local verification
 
@@ -54,4 +60,4 @@ npm run preview:cloudflare
 
 In another terminal, run `python scripts/verify_cloudflare.py --base http://127.0.0.1:8787/ --revision <full-checked-out-SHA>`. Browser regression commands are listed verbatim in the deployment workflow. There is no npm production-deploy shortcut or second automated publishing path.
 
-Official references: [Static Assets](https://developers.cloudflare.com/workers/static-assets/), [caching headers](https://developers.cloudflare.com/workers/static-assets/headers/), [asset routing](https://developers.cloudflare.com/workers/static-assets/routing/advanced/html-handling/), [GitHub Actions authentication](https://developers.cloudflare.com/workers/ci-cd/external-cicd/github-actions/), [Free limits](https://developers.cloudflare.com/workers/platform/limits/).
+Official references: [Static Assets](https://developers.cloudflare.com/workers/static-assets/), [Custom Domains](https://developers.cloudflare.com/workers/configuration/routing/custom-domains/), [caching headers](https://developers.cloudflare.com/workers/static-assets/headers/), [asset routing](https://developers.cloudflare.com/workers/static-assets/routing/advanced/html-handling/), [GitHub Actions authentication](https://developers.cloudflare.com/workers/ci-cd/external-cicd/github-actions/), [Free limits](https://developers.cloudflare.com/workers/platform/limits/).

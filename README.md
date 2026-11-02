@@ -4,7 +4,7 @@ A complete import of the prepared November 1, 2026 catalog, with connected searc
 
 ## Cloudflare hosting
 
-The original site can now be packaged for Workers Static Assets using the allowlisted build and single gated GitHub Actions deployment path in [the deployment guide](docs/CLOUDFLARE_DEPLOYMENT.md). Public target: `https://ai-atlas.airheadhazelnut.workers.dev`; successful production verification is recorded in the deployment workflow. GitHack remains a working fallback. Existing daily-news and hourly-development processes continue updating GitHub unchanged.
+The original site is hosted at [aiupdates.app](https://aiupdates.app), also available at [www.aiupdates.app](https://www.aiupdates.app) and [the workers.dev address](https://ai-atlas.airheadhazelnut.workers.dev). The allowlisted build and single gated GitHub Actions deployment path are documented in [the deployment guide](docs/CLOUDFLARE_DEPLOYMENT.md); successful production verification is recorded in the deployment workflow. GitHack remains a working fallback. Existing daily-news and hourly-development processes continue updating GitHub unchanged.
 
 ## Daily editions — What's New Today
 
