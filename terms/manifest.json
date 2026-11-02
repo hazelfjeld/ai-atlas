@@ -81,8 +81,8 @@
   },
   "MLD-0017": {
     "path": "terms/MLD-0017-activation-based-monitoring.html",
-    "sha256": "3bd8d132ed0ed08432e785cd6510ddcb63740a362b7cb33cec974754616178c7",
-    "expanded": false
+    "sha256": "6db709b660076c46f3b4c3f442d546d70988e445966cec578dead4470a41163f",
+    "expanded": true
   },
   "MLD-0018": {
     "path": "terms/MLD-0018-active-learning.html",
@@ -1396,8 +1396,8 @@
   },
   "MLD-0280": {
     "path": "terms/MLD-0280-deceptive-alignment.html",
-    "sha256": "335114e2f1f174fbd3f87b4b042415664df3e02f166b57ab22db082542925b38",
-    "expanded": false
+    "sha256": "04907b9e46abeef8642226ceda86859bb0ba91020bf25be875ee0851394d6a06",
+    "expanded": true
   },
   "MLD-0281": {
     "path": "terms/MLD-0281-decision-boundary.html",
@@ -5591,8 +5591,8 @@
   },
   "MLD-1119": {
     "path": "terms/MLD-1119-shutdown-avoidance.html",
-    "sha256": "611bbf646f41ad774ccff4ef55d0de7c65dd34ac541c640261df2ed4aa6d5915",
-    "expanded": false
+    "sha256": "c98ff6d313fcb66cee2e23eecadbcf9623c7d97761f4caa3681138c22a3dfe34",
+    "expanded": true
   },
   "MLD-1120": {
     "path": "terms/MLD-1120-shutdownability.html",
