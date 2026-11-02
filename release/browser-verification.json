@@ -1,0 +1,41 @@
+{
+  "tested_on": "2026-11-01",
+  "user_timezone": "America/Chicago",
+  "browser": "Brave on Windows via browser automation",
+  "public_code_commit": "7a6533c9e38da862a845fbfd74eacafd4dcf6eaa",
+  "public_base": "https://rawcdn.githack.com/hazelfjeld/ai-atlas/7a6533c9e38da862a845fbfd74eacafd4dcf6eaa/",
+  "hosted_checks_passed": [
+    "Overview renders complete catalog counts after SHA-256 verification",
+    "Global search for machine learning places the exact concept first in its collection",
+    "Search result opens the static machine-learning guide with all explanatory sections",
+    "Related Overfitting link opens its separate static page",
+    "Research reward-hacking search returns 9 matches and opens a record with primary source URL and caveat",
+    "Escape closes the research record",
+    "Controlled evaluation filter returns one safety record; reset restores all ten",
+    "PyTorch technology search returns 43 matches and ranks PyTorch first",
+    "Two-tool comparison displays PyTorch and Burn across 12 decision dimensions",
+    "Playbook catalog displays 20 results; a playbook links to a complete technology profile",
+    "Direct PyTorch record route survives full reload and displays source and concept links",
+    "390px mobile layout has no document overflow; menu opens, routes to dictionary, and closes",
+    "Guided tour renders six steps and reaches the preserved 20-playbook page",
+    "No application-origin errors observed; two unrelated Zotero extension errors were recorded"
+  ],
+  "additional_local_checks_passed": [
+    "Global retrieval search spans technologies, concepts and playbooks",
+    "Technology section filter narrows PyTorch matches from 43 to 9",
+    "Research reset restores all 30 results",
+    "Safety JSON download contains exactly the filtered record and excludes internal search fields",
+    "Playbook RAG search returns 5 matches; profile links open pgvector details",
+    "Sources page displays publication integrity and collector-off status",
+    "Preserved compact technology browser loads all 300 records, searches Amazon and compares Bedrock with SageMaker across seven criteria",
+    "Compact comparison closes successfully",
+    "Static machine-learning and overfitting pages load through actual local HTTP navigation"
+  ],
+  "boundaries": [
+    "This is a recorded browser session, not an exhaustive automated cross-browser suite.",
+    "Direct file-protocol navigation for the offline fallback was blocked by browser URL policy; no permissions were changed or bypassed. Inline script syntax, exact embedded record equality and absence of external runtime assets pass Node tests.",
+    "All internal generated links are checked locally; public HTTP equality samples all 12 expanded pages and two reference pages, not all 1345 pages.",
+    "External reference destinations were preserved and new guide sources consulted; the entire citation corpus was not re-audited."
+  ],
+  "screenshot": "release/demo-desktop.jpg"
+}

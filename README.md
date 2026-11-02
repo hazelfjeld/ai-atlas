@@ -1,62 +1,52 @@
 # Atlas — AI technology & safety observatory
 
-## Published checkpoints: research, safety, and playbooks
+A complete import of the prepared November 1, 2026 catalog, with connected search, technology comparisons, source registers, downloads and permanent concept pages.
 
-The incremental approach has published a working research and safety interface **and all 20 original problem playbooks**, rather than merely creating setup files.
+[Open the professor demonstration](https://rawcdn.githack.com/hazelfjeld/ai-atlas/7a6533c9e38da862a845fbfd74eacafd4dcf6eaa/index.html) · [Five-minute tour](https://rawcdn.githack.com/hazelfjeld/ai-atlas/7a6533c9e38da862a845fbfd74eacafd4dcf6eaa/demo.html) · [Concept encyclopedia](https://rawcdn.githack.com/hazelfjeld/ai-atlas/7a6533c9e38da862a845fbfd74eacafd4dcf6eaa/terms/index.html)
 
-**Verified checkpoint URL:**
-https://rawcdn.githack.com/hazelfjeld/ai-atlas/6385e484c390545e4fd8280e1a76de3499020d1a/index.html
+The commit-pinned URLs keep the presentation recoverable. GitHack may show an “Open the page” confirmation before the app. The [moving main URL](https://raw.githack.com/hazelfjeld/ai-atlas/main/index.html) can cache older files.
 
-**Verified playbooks page:**
-https://rawcdn.githack.com/hazelfjeld/ai-atlas/6385e484c390545e4fd8280e1a76de3499020d1a/playbooks.html
+## Published catalog
 
-**Moving main-branch URL:**
-https://raw.githack.com/hazelfjeld/ai-atlas/main/index.html
+| Catalog | Verified records |
+| --- | ---: |
+| Dictionary concepts | 1,345 |
+| Technology profiles | 300 |
+| Research papers | 30 |
+| Safety report records | 10 |
+| Problem playbooks | 20 |
+| **Total** | **1,705** |
 
-The pinned URL serves the verified checkpoint; the main URL tracks later commits and can briefly cache older files. GitHack may show a destination-confirmation page first.
+Every original record field, stable ID, source reference and review label is preserved. The archive SHA-256 is `1f1b648e113cec13583217e9ae363def0028506706eed28a7f1f6b9cd4793125`; incremental import provenance is in `release/catalog-import.json`. The concurrent ten-profile gzip import is also preserved and checked against the complete catalog.
 
-### Published now
+The workspace provides global and collection search, filters, pagination, record details, related-concept and technology navigation, comparisons of up to three tools, notebook export/import, JSON/CSV exports and paper BibTeX exports. Original workbooks, the bundle and a foreign-key-checked SQLite database are downloadable from Sources & coverage. Existing research, playbook and compact technology routes remain available.
 
-- 30 original seed paper records, with authors, dates, tags, summaries, caveats, original source links, review labels, and all original metadata.
-- 10 original safety report records, distinguishing incidents, misuse, controlled evaluations, research findings, and mitigation updates.
-- Keyword and topic search, report-type filtering, record dialogs, JSON exports, direct record links, and responsive desktop/phone layouts.
-- All 20 preserved original problem playbooks, including steps, validation checks, caveats, technology choices, topic filtering, direct record anchors and JSON export.
-- A publication progress view showing what is published versus merely prepared.
-- Eight original research/safety chunks plus four playbook chunks, imported in small commits and verified against the original source archive using Git blob hashes. The frontends check SHA-256, byte counts, record counts, and duplicate IDs before presenting a complete catalog.
+All **1,345 concepts have direct HTML pages** with original definitions, examples, caveats, sources, related concepts and backlinks. **12 expanded guides** add mechanisms, prerequisites, illustrative worked examples, equations and evaluation advice. The other 1,333 pages visibly identify their detailed expansion as pending. Generated pages work without JavaScript and do not require SPA fallback routing.
 
-### Not yet published in this checkpoint
+## Presentation fallback
 
-The 300 technology profiles, 1,345 dictionary concepts, original full-interface features, source registries, spreadsheets, and database downloads remain in the previously prepared conversation package. Their import is unfinished; they are not claimed as available on this site.
+[Download the searchable single-file fallback](https://rawcdn.githack.com/hazelfjeld/ai-atlas/7a6533c9e38da862a845fbfd74eacafd4dcf6eaa/downloads/Atlas_Demo_Offline.html), then keep it on the presentation device. It embeds all 1,705 records, styles and application code; original downloads, external sources and expanded web pages require the served edition. Direct file-protocol browser testing was blocked by the automation browser's URL policy; inline syntax, embedded record equality and absence of external runtime assets are tested. The printable tour and static concept pages provide additional fallbacks.
 
-**Automatic safety and paper collection is OFF.** No recurring collection task is configured by this checkpoint. This is a curated seed snapshot, not every AI safety paper or incident. Prior review labels are preserved from the prepared dataset; publication is not a fresh source audit or independent replication.
+## Verification and limitations
 
-### Verification
+Run `python scripts/validate_checkpoint.py` and `node --test tests/*.test.cjs`. The validator checks SHA-256 and byte/record counts for all 45 chunks, source/download hashes, cross-catalog relationships, SQLite integrity, every generated page hash and internal HTML links. Runtime loaders reject incomplete or mixed catalogs, limit parallel requests and retry transient failures. `.gitattributes` preserves exact LF bytes on Windows.
 
-Published code commit: `6385e484c390545e4fd8280e1a76de3499020d1a`.
+Public HTTP equality and real browser interaction are separate checks. Detailed evidence is in `release/http-verification.json`, `release/browser-verification.json` and `docs/DEMO_CHECKPOINT.md`. CI validates catalogs, helpers, integrity failures, stable term routes and reproducible generated outputs, then checks the public GitHack assets.
 
-GitHub Actions run: https://github.com/hazelfjeld/ai-atlas/actions/runs/41367887480
+This is a curated snapshot, **not a live feed or exhaustive research/incident inventory**. Automatic collection remains off. Imported review labels are not a new source audit or independent replication. The 12 new explanations are editorial syntheses with primary citations, not independently reviewed textbooks. External citation destinations have not all been re-audited. Tool comparisons are editorial rather than measured rankings.
 
-Both jobs passed: catalog integrity/JavaScript syntax and live GitHack HTTP checks. The latter fetched 18 files including HTML, CSS, JavaScript, the manifest and 12 JSON chunks, requiring HTTP 200 and byte-for-byte equality with the commit. HTML and JavaScript MIME types were also checked. These HTTP checks are not hosted-browser interaction tests.
-
-The original research interface passed 16 offline browser checks. The new playbook page additionally passed offline browser checks covering all 20 records, search, topic filtering, reset, direct links, JSON export, mobile layout, and absence of JavaScript errors, using local fixtures and a SHA-256 bridge. Local/hosted browser navigation was blocked in the test environment; HTTP equality checks cover the hosted assets but are not interactive browser tests.
+On shared GitHack origins, notes/bookmarks/comparisons are session-only; export a notebook backup before reloading. Elsewhere they use browser-local storage. No account backend, analytics, paid services or access-permission changes are introduced.
 
 ## Development
 
-No build step or npm dependencies are required for this checkpoint.
+No build tools or npm dependencies are needed to run the static site:
 
 ```sh
-python3 -m http.server 8000
-python3 scripts/validate_checkpoint.py
-node --check checkpoint.js
-node --check playbooks.js
+python -m http.server 8000
+python scripts/validate_checkpoint.py
+node --test tests/*.test.cjs
 ```
 
-Open http://localhost:8000/ in a modern browser. Use HTTPS when hosted. The read-only verification workflow runs on index updates or manual dispatch and uses standard hosted runners in this public repository.
+Open `http://localhost:8000/`. Regenerate concept pages with `python scripts/build_term_pages.py`, then rebuild the fallback with `python scripts/build_offline.py`. CI checks that these operations are deterministic. The importer accepts only the approved archive and does not execute archive code or replace the entry point.
 
-The manifest is `publication.json`; resume instructions are in `docs/INCREMENTAL_PUBLICATION.md` and `docs/HOURLY_EXPANSION_ROADMAP.md`. Upload assets and verified chunks before switching the entry point. Do not overwrite new edits or call the full import complete before all expected catalogs are present.
-
-## Privacy and legacy import helpers
-
-This checkpoint stores no personal notes, bookmarks, account data, or API keys. Never place secrets in this public repository or on shared GitHack origins.
-
-The older `release/` helpers and import workflows are retained but are not the mechanism that published this checkpoint. Do not upload or run an older whole-package importer blindly: it may replace the current entry point. Reconcile current changes before importing the original full app.
+The current roadmap is `docs/HOURLY_EXPANSION_ROADMAP.md`. Older publication notes remain as historical recovery checkpoints. Resume by expanding the remaining detailed explanations and auditing sources; the prepared catalog import is complete.

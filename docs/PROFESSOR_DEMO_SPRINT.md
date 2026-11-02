@@ -1,5 +1,14 @@
 # Presentation readiness sprint — November 2, 2026
 
+## Professor demonstration checkpoint — November 1, 2026
+
+This section supersedes the older partial-import status below. All prepared catalogs are now imported: **1,345 terms, 300 technologies, 30 papers, 10 safety reports and 20 playbooks**. Source registers and original downloads are restored. The integrated workspace verifies 45 chunks before rendering; global search, comparisons and cross-catalog links are available. All 1,345 terms have permanent pages; 12 have expanded explanations, leaving 1,333 detailed expansions pending.
+
+Public release code: `7a6533c9e38da862a845fbfd74eacafd4dcf6eaa`. Recovery and verification evidence: `docs/DEMO_CHECKPOINT.md`, `release/http-verification.json`, `release/browser-verification.json`. The complete approved source archive was recovered through the original conversation and verified before import. The concurrent ten-profile technology increment was merged and preserved; its compressed records equal the corresponding complete-catalog records.
+
+**Next work:** expand the remaining guides in substantive batches, review sources and freshness, improve accessibility and coverage from observed issues. Do not repeat the prepared imports, regress counts to a partial catalog, or overwrite the integrated entry point with an older importer. Keep the printable demo, offline fallback and compact research/technology/playbook paths working. Website-side automatic collection remains off. Existing recurring development scheduling is separate and was not changed by this sprint.
+
+
 ## Goal and expiry
 
 Prioritize a dependable, demonstrable Atlas release for the morning of Monday, November 2, 2026, America/Chicago. This is a planning target, not a guaranteed delivery time or a known meeting time. The existing hourly ChatGPT task remains the only scheduled writer. It is not uninterrupted execution or a separate production data feed. After the presentation deadline, resume the ongoing expansion roadmap; do not stop the task.
