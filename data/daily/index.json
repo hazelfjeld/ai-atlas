@@ -1,0 +1,8 @@
+{
+  "schema": 1,
+  "timezone": "America/Chicago",
+  "editions": [],
+  "last_successful_publish_at": null,
+  "status": "awaiting_first_edition",
+  "coverage_note": "No daily publication has completed. A separate scheduled editorial collector is configured but has not yet supplied reviewed news."
+}
