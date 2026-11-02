@@ -149,5 +149,4 @@ dialog.addEventListener('cancel',e=>{e.preventDefault();closeRecord();});dialog.
 document.addEventListener('keydown',e=>{const typing=/INPUT|TEXTAREA|SELECT/.test(document.activeElement?.tagName);if(e.key==='/'&&!typing&&!dialog.open){e.preventDefault();$('global-query').focus();}});
 window.addEventListener('hashchange',route);route();
 })();
-
 </script></body></html>
