@@ -1464,7 +1464,7 @@
       ],
       [
         "Show why best-of-N amplifies verifier weaknesses",
-        "When generating N alternatives and picking argmax_i V(answer_i), the system optimizes the verifier's score, not necessarily the true objective. As N increases, candidates may exploit ranking errors, benchmark contamination or fragile heuristics. Recompute true correctness using an independent sealed evaluator as the sampling budget grows; plot selected-answer accuracy against N and the rate of invalid high-scoring answers. More candidates do not guarantee safer outputs."
+        "In best-of-N selection, when generating N alternatives and picking argmax_i V(answer_i), the system optimizes the verifier's score, not necessarily the true objective. As N increases, candidates may exploit ranking errors, benchmark contamination or fragile heuristics. Recompute true correctness using an independent sealed evaluator as the sampling budget grows; plot selected-answer accuracy against N and the rate of invalid high-scoring answers. More candidates do not guarantee safer outputs."
       ],
       [
         "Understand outcome versus process supervision",
