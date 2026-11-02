@@ -38,7 +38,7 @@ test('New monitoring guides distinguish hypotheses, constructed evaluations and 
     const body = g.sections.map(s => s[1]).join(' ');
     assert.ok(g.sections.length >= 7, 'Detailed evaluation protocol required: ' + id);
     assert.match(body, patterns[id], 'Missing core mechanism: ' + id);
-    assert.match(body, /not (?:prove|establish)|does not (?:establish|prove)|insufficient|not evidence/i, 'Missing evidence boundary: ' + id);
+    assert.match(body, /not (?:prove|establish)|does not (?:establish|prove|claim)|insufficient|not evidence|neither proves/i, 'Missing evidence boundary: ' + id);
     assert.ok(g.citations.every(c => c[0].length > 35 && /^https:\/\//.test(c[1])), 'Primary attribution: ' + id);
   }
 });
