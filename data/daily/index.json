@@ -27,7 +27,7 @@
       "published_at": "2026-11-02T19:35:32.153Z"
     }
   ],
-  "last_successful_publish_at": "2026-11-02T17:37:12Z",
-  "status": "revision_3_editorially_checked_awaiting_production_verification",
-  "coverage_note": "Nine source-checked November 2 reports (including four qualified Reuters reports) in immutable revision 3. Eight catalog proposals remain deferred, with no new term or technology records. Two collector source lookups failed. Awaiting independent production verification; the prior last-successful-publish time remains unchanged."
+  "last_successful_publish_at": "2026-11-02T19:38:35Z",
+  "status": "edition_revision_3_production_verified",
+  "coverage_note": "Nine individually source-checked November 2 stories in immutable revision 3: three project-owned release notes, one publisher-run benchmark, one reported investigation and four Reuters-attributed reported proposals/announcements/assessments. Eight term/technology proposals remain deferred; no catalog records added. Two source lookups failed. Full production HTTP/browser/GitHack tests passed; collection is partial and scheduled, never continuous."
 }

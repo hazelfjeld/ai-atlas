@@ -163,3 +163,37 @@ test('The unfiltered daily reader shows explicit zero-count editorial sections',
  'C.matchesTopic(item,topic)'
  ])assert.ok(script.includes(text),text);
 });
+
+
+test('Source-reviewed v3 edition keeps newsroom proposals separate from catalog additions',()=>{
+ const crypto=require('node:crypto');
+ const archive=JSON.parse(fs.readFileSync('data/daily/index.json','utf8'));
+ const entry=archive.editions.find(e=>e.date==='2026-11-02'&&e.revision===3);
+ assert.ok(entry,'Immutable Nov 2 revision 3 must remain available');
+ const bytes=fs.readFileSync(entry.path);
+ assert.equal(bytes.length,entry.bytes);
+ assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'),entry.sha256);
+ const daily=D.validateEdition(JSON.parse(bytes.toString('utf8')),entry);
+ assert.equal(daily.news.length,9);
+ assert.equal(daily.technologies.length,0);
+ assert.equal(daily.terms.length,0);
+ assert.equal(daily.coverage.status,'partial');
+ assert.equal(daily.coverage.sources_failed.length,2);
+ assert.equal(new Set(daily.news.map(n=>n.id)).size,9);
+ const reuters=daily.news.filter(n=>n.source_url.startsWith('https://www.reuters.com/'));
+ assert.equal(reuters.length,4);
+ for(const story of reuters){
+  assert.equal(story.publication_date,'2026-11-02');
+  assert.equal(story.review_status,'original_reuters_reporting_source_checked_not_independently_corroborated');
+  assert.match(story.caveat,/reported|not independently|not completed|not enacted/i);
+ }
+ const receipts=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8'));
+ const first=receipts.receipts.find(r=>r.batch_id==='atlas-daily-20261102-first-0850ct-a');
+ assert.ok(first);
+ assert.equal(first.counts.news_published,9);
+ assert.equal(first.accepted_news_ids.length,9);
+ assert.deepEqual(first.deferred_news_ids,[]);
+ assert.equal(first.deferred_catalog_proposal_ids.length,8);
+ assert.equal(first.counts.term_added,0);
+ assert.equal(first.counts.technology_added,0);
+});

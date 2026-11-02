@@ -12,7 +12,7 @@
       "edition_date": "2026-11-02",
       "validation_result": "batch_sha256_bytes_schema_unique_ids_dates_verified_nine_source_lookups_four_reuters_reports_explicitly_qualified",
       "status": "partially_published_with_8_deferred_catalog_proposals",
-      "publication_outcome": "revision_3_committed_awaiting_production_verification",
+      "publication_outcome": "revision_3_production_http_browser_and_githack_verified",
       "publication_edition": "2026-11-02-v3",
       "accepted_news_ids": [
         "ai-news:vllm:v0.33.0rc3:2026-11-02",
@@ -45,12 +45,12 @@
         "news_deferred": 0,
         "catalog_deferred": 8
       },
-      "review_notes": "Revision v2 adds two independently source-opened news reports: SemiAnalysis GDPx publisher-run benchmark (12% unreplicated) and WIRED investigation (400+ linked app/domain properties, not independently reproduced by Atlas). Four Reuters news reports and five technology/three term proposals remain deferred. Earlier v1 immutable and last verified production metadata preserved.\nRevision 3 (Nov 2): checked all four remaining original Reuters reports and published qualified reporting on budget proposal, enterprise agreement, financial-stability warning and planned financing. They are not independently verified outcomes. Eight catalog proposals remain deferred; no new terms, technologies or incidents were added.",
+      "review_notes": "Revision v2 adds two independently source-opened news reports: SemiAnalysis GDPx publisher-run benchmark (12% unreplicated) and WIRED investigation (400+ linked app/domain properties, not independently reproduced by Atlas). Four Reuters news reports and five technology/three term proposals remain deferred. Earlier v1 immutable and last verified production metadata preserved.\nRevision 3 (Nov 2): checked all four remaining original Reuters reports and published qualified reporting on budget proposal, enterprise agreement, financial-stability warning and planned financing. They are not independently verified outcomes. Eight catalog proposals remain deferred; no new terms, technologies or incidents were added.\nRevision 3 production verification completed November 2 at 19:38:35 UTC. Immutable edition remains unchanged; index/receipt record the verified deployment outcome.",
       "production_verified_at": "2026-11-02T17:37:12Z",
       "production_verified_revision": "2c7ea22f2dac1013e120415c47ce89632675e79b",
-      "production_workflow_run_id": 41492473038,
-      "githack_workflow_run_id": 41492473100,
-      "verification_scope": "Latest tested main 2c7ea22: 80 JS tests and catalog/reproducibility checks; GitHack exact byte equivalence; Cloudflare production verified 428 non-term assets each on aiupdates.app, www.aiupdates.app and workers.dev, plus real hosted browser site/rebrand/native Games and offline fallback checks.",
+      "production_workflow_run_id": 41511382403,
+      "githack_workflow_run_id": 41511382421,
+      "verification_scope": "Commit 40c6a7b: 81 Node tests; full catalog and hash checks; reproducible offline/term pages; GitHack exact byte verification; Cloudflare 429 served assets checked on each of three production hostnames; real hosted archive, mobile, desktop, Quiz/Match, flashcards and offline browser tests.",
       "next_action": "Review the eight remaining catalog technology and glossary proposals against existing 1,705 records and first-party evidence before any actual catalog imports. Preserve dated editions and pinned professor demo.",
       "revision_2_asset_commit": "9c49019fc8baf8c01221382bb56af3111a5fc42f",
       "publication_history": [
@@ -89,17 +89,24 @@
           "news_added_in_revision": 4,
           "technologies_added": 0,
           "terms_added": 0,
-          "asset_commit": null,
+          "asset_commit": "40c6a7bbba5f4016f2e230685c92261161f63088",
           "published_at": "2026-11-02T19:35:32.153Z",
-          "status": "content_committed_awaiting_cloudflare_githack_browser_verification",
+          "status": "cloudflare_http_browser_and_githack_verified",
           "added_candidate_ids": [
             "ai-news:reuters:south-korea-ai-budget-2027:2026-11-02",
             "ai-news:reuters:adnoc-g42-openai-agreement:2026-11-02",
             "ai-news:reuters:ecb-ai-valuations-risk:2026-11-02",
             "ai-news:reuters:oracle-ai-financing-plan:2026-11-02"
-          ]
+          ],
+          "production_commit": "40c6a7bbba5f4016f2e230685c92261161f63088",
+          "verified_at": "2026-11-02T19:38:35Z",
+          "production_workflow_run_id": 41511382403,
+          "githack_workflow_run_id": 41511382421
         }
-      ]
+      ],
+      "production_commit": "40c6a7bbba5f4016f2e230685c92261161f63088",
+      "last_verified_public_url": "https://aiupdates.app/whats-new.html?date=2026-11-02&revision=3",
+      "last_verified_at": "2026-11-02T19:38:35Z"
     }
   ]
 }
