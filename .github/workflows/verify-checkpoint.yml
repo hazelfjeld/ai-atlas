@@ -34,6 +34,7 @@ jobs:
       - name: Verify reproducible term pages and offline fallback
         run: |
           python3 scripts/build_term_pages.py
+          python3 scripts/build_seo.py
           python3 scripts/build_offline.py
           git diff --exit-code -- terms publication.json downloads/Atlas_Demo_Offline.html
   githack:

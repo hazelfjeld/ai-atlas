@@ -1,7 +1,7 @@
 name: Test and deploy Atlas to Cloudflare
 on:
   push:
-    branches: [main, codex/cloudflare-deployment]
+    branches: [main, codex/cloudflare-deployment, codex/ai-updates-rebrand]
   pull_request:
     branches: [main]
   workflow_dispatch:
@@ -43,11 +43,13 @@ jobs:
           python3 scripts/validate_checkpoint.py
           node --test tests/*.test.cjs
           python3 -m unittest discover -s tests -p 'test_cloudflare*.py'
+          python3 -m unittest discover -s tests -p 'test_seo*.py'
           for source in *.js; do node --check "$source"; done
       - name: Require completed and reproducible generated publication
         run: |
           python3 scripts/install_games_workspace.py
           python3 scripts/build_term_pages.py
+          python3 scripts/build_seo.py
           python3 scripts/build_offline.py
           git diff --exit-code
           python3 scripts/build_cloudflare.py --revision '${{ steps.revision.outputs.sha }}'
@@ -68,6 +70,7 @@ jobs:
           done
           python3 scripts/verify_cloudflare.py --base http://127.0.0.1:8787/ --revision '${{ steps.revision.outputs.sha }}' --output deployment-validation/local-http.json
           python3 tests/site-deployment-browser.py --base http://127.0.0.1:8787/ --output deployment-validation/local-site
+          python3 tests/rebrand-browser.py --base http://127.0.0.1:8787/ --output deployment-validation/local-rebrand
           python3 tests/games-workspace-browser.py --base http://127.0.0.1:8787/ --output deployment-validation/local-native-games
           python3 tests/games-browser.py --base http://127.0.0.1:8787/ --output deployment-validation/local-games
       - name: Preserve the exact tested deployment artifact
@@ -142,6 +145,7 @@ jobs:
           python3 scripts/verify_cloudflare.py --base https://www.aiupdates.app/ --revision '${{ needs.validate.outputs.revision }}' --output deployment-validation/production-www-http.json
           python3 scripts/verify_cloudflare.py --base https://ai-atlas.airheadhazelnut.workers.dev/ --revision '${{ needs.validate.outputs.revision }}' --output deployment-validation/production-workers-http.json
           python3 tests/site-deployment-browser.py --base "$PRODUCTION_URL/" --output deployment-validation/production-site
+          python3 tests/rebrand-browser.py --base "$PRODUCTION_URL/" --output deployment-validation/production-rebrand
           python3 tests/games-workspace-browser.py --base "$PRODUCTION_URL/" --output deployment-validation/production-native-games
           python3 tests/games-browser.py --base "$PRODUCTION_URL/" --output deployment-validation/production-games
           echo "Verified $PRODUCTION_URL at ${{ needs.validate.outputs.revision }}" >> "$GITHUB_STEP_SUMMARY"

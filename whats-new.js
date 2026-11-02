@@ -1,9 +1,9 @@
-/* Atlas's static, immutable daily-edition reader. No user data is stored. */
+/* AI Updates’ static, immutable daily-edition reader. No user data is stored. */
 (()=>{
 'use strict';
 const C=window.AtlasDailyCore;
 const $=id=>document.getElementById(id);
-const kinds=[['news','AI news'],['technologies','New technologies'],['terms','New terms'],['site_changes','Updated in Atlas'],['corrections','Corrections & clarifications']];
+const kinds=[['news','AI news'],['technologies','New technologies'],['terms','New terms'],['site_changes','Updated in AI Updates'],['corrections','Corrections & clarifications']];
 let index=null,active=null,edition=null;
 function element(tag,text,cls){
  const e=document.createElement(tag);
@@ -50,11 +50,11 @@ function card(item,kind){
  if(item.publication_date)bits.push('Source published '+humanDate(item.publication_date));
  if(item.event_date)bits.push('Event '+humanDate(item.event_date));
  if(item.discovered_at)bits.push('Discovered '+stamp(item.discovered_at));
- if(item.added_to_atlas_at)bits.push('Added to Atlas '+stamp(item.added_to_atlas_at));
+ if(item.added_to_atlas_at)bits.push('Added to AI Updates '+stamp(item.added_to_atlas_at));
  dates.textContent=bits.join(' · ')||'Dates not independently established';
  article.append(dates);
  if(Array.isArray(item.tags)&&item.tags.length){const tags=element('div',undefined,'tags');item.tags.slice(0,7).forEach(t=>tags.append(element('span',t,'tag')));article.append(tags);}
- const links=element('div',undefined,'links'),source=href(item.source_url,'Original source'),internal=localHref(item.catalog_path,'Explore in Atlas');
+ const links=element('div',undefined,'links'),source=href(item.source_url,'Original source'),internal=localHref(item.catalog_path,'Explore in AI Updates');
  if(source)links.append(source);
  if(internal)links.append(internal);
  if(links.childNodes.length)article.append(links);

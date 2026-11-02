@@ -1,12 +1,38 @@
 {
   "root_files": [
-    "index.html", "research.html", "playbooks.html", "technologies.html",
-    "games.html", "whats-new.html", "demo.html", "publication.json",
-    "app.css", "app.js", "core.js", "catalog-loader.js",
-    "checkpoint.css", "checkpoint.js", "playbooks.js", "technologies.js",
-    "games-core.js", "games-tab.css", "games-tab.js", "games.css", "games.js",
-    "daily-core.js", "whats-new.js"
+    "index.html",
+    "research.html",
+    "playbooks.html",
+    "technologies.html",
+    "games.html",
+    "whats-new.html",
+    "demo.html",
+    "publication.json",
+    "app.css",
+    "app.js",
+    "core.js",
+    "catalog-loader.js",
+    "checkpoint.css",
+    "checkpoint.js",
+    "playbooks.js",
+    "technologies.js",
+    "games-core.js",
+    "games-tab.css",
+    "games-tab.js",
+    "games.css",
+    "games.js",
+    "daily-core.js",
+    "whats-new.js",
+    "brand.css",
+    "discovery.js",
+    "about.html",
+    "favicon.svg",
+    "social-card.png",
+    "robots.txt",
+    "sitemap.xml"
   ],
-  "extra_downloads": ["downloads/Atlas_Demo_Offline.html"],
+  "extra_downloads": [
+    "downloads/Atlas_Demo_Offline.html"
+  ],
   "production_url": "https://aiupdates.app"
 }

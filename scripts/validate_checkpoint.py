@@ -210,7 +210,7 @@ class Links(HTMLParser):
 
 def validate_links():
     parsed = {}
-    for path in [*ROOT.glob('*.html'), *ROOT.glob('terms/*.html')]:
+    for path in [*ROOT.glob('*.html'), *ROOT.glob('terms/*.html'), *ROOT.glob('technology/*.html')]:
         page = Links()
         page.feed(path.read_text(encoding='utf-8'))
         parsed[path.absolute()] = page

@@ -48,6 +48,12 @@ def public_files():
     for item in pages.values():
         assert re.fullmatch(r'terms/MLD-\d{4}-[a-z0-9-]+\.html', item['path']), item['path']
         files.add(item['path'])
+    from site_seo import technology_path
+    profiles = [r for batch in publication['extensions'].get('technologies', [])
+                for r in json.loads((ROOT / batch['path']).read_bytes())]
+    if profiles:
+        files.add('technology/index.html')
+        files.update(technology_path(r) for r in profiles)
     files.update(('data/daily/index.json', 'data/daily/published-batches.json'))
     daily = json.loads((ROOT / 'data/daily/index.json').read_bytes())
     files.update(item['path'] for item in daily['editions'])

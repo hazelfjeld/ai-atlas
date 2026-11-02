@@ -1,5 +1,9 @@
 # AI Atlas — recurring expansion plan
 
+## Public brand and generated website
+
+The public brand is now **AI Updates** at `https://aiupdates.app`. Atlas remains the preserved catalog/repository name. Keep the editorial Discover frontend and the existing Games, daily reader, record IDs, source data and hash routes. After content changes, run `scripts/build_term_pages.py`, then `scripts/build_seo.py`, then `scripts/build_offline.py`; the SEO build reads completed catalog data and adds direct technology profiles, metadata and the sitemap without acting as another catalog writer. See [brand and SEO guidance](AI_UPDATES_BRAND_AND_SEO.md). Deployment continues through the single gated Cloudflare workflow, including production browser and file-hash checks. Older checkpoint entries below remain historical evidence.
+
 ## Latest verified incremental progress — November 1, 2026
 
 - **Published commit:** [2871660](https://github.com/hazelfjeld/ai-atlas/commit/2871660bf7d5e1ad8c0a3fb18756843a9a03c516). The verified professor presentation link at commit `839fee0` remains a known-good recovery point.

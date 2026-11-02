@@ -139,10 +139,10 @@ def integrate():
     app_path.write_text(app, encoding='utf-8')
     builder = ROOT / 'scripts/build_offline.py'
     code = builder.read_text(encoding='utf-8')
-    if "('catalog-loader.js', 'core.js', 'games-core.js', 'games-tab.js', 'app.js')" not in code:
-        code = replace_once(code, "('catalog-loader.js', 'core.js', 'app.js')", "('catalog-loader.js', 'core.js', 'games-core.js', 'games-tab.js', 'app.js')")
-    if "for filename in ('core.js', 'games-core.js', 'games-tab.js', 'app.js')" not in code:
-        code = replace_once(code, "    script += (ROOT / 'core.js').read_text(encoding='utf-8') + '\\n' + (ROOT / 'app.js').read_text(encoding='utf-8')", "    for filename in ('core.js', 'games-core.js', 'games-tab.js', 'app.js'):\n        script += (ROOT / filename).read_text(encoding='utf-8') + '\\n'")
+    if "('catalog-loader.js', 'core.js', 'games-core.js', 'games-tab.js', 'discovery.js', 'app.js')" not in code:
+        code = replace_once(code, "('catalog-loader.js', 'core.js', 'app.js')", "('catalog-loader.js', 'core.js', 'games-core.js', 'games-tab.js', 'discovery.js', 'app.js')")
+    if "for filename in ('core.js', 'games-core.js', 'games-tab.js', 'discovery.js', 'app.js')" not in code:
+        code = replace_once(code, "    script += (ROOT / 'core.js').read_text(encoding='utf-8') + '\\n' + (ROOT / 'app.js').read_text(encoding='utf-8')", "    for filename in ('core.js', 'games-core.js', 'games-tab.js', 'discovery.js', 'app.js'):\n        script += (ROOT / filename).read_text(encoding='utf-8') + '\\n'")
     css_line = "    html = html.replace('<link rel=\"stylesheet\" href=\"games-tab.css\">', '<style>' + (ROOT / 'games-tab.css').read_text(encoding='utf-8') + '</style>')\n"
     if css_line not in code:
         code = replace_once(code, "    for name in ('catalog-loader.js'", css_line + "    for name in ('catalog-loader.js'")

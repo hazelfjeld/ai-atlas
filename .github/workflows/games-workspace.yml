@@ -51,6 +51,7 @@ jobs:
         run: |
           python3 scripts/install_games_workspace.py
           python3 scripts/build_term_pages.py
+          python3 scripts/build_seo.py
           python3 scripts/build_offline.py
           git diff --exit-code -- index.html app.js games-tab.js games-tab.css scripts/build_offline.py downloads/Atlas_Demo_Offline.html terms publication.json
       - name: Verify public native workspace files

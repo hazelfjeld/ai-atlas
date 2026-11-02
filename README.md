@@ -1,6 +1,8 @@
-# Atlas — AI technology & safety observatory
+# AI Updates — AI research, tools & concepts
 
-A complete import of the prepared November 1, 2026 catalog, with connected search, technology comparisons, source registers, downloads and permanent concept pages.
+A discovery and learning hub for AI research, tools, concepts and safety, with source links and visible limitations. The complete prepared Atlas catalog, original citations, downloads and stable record IDs are preserved.
+
+The **AI Updates** rebrand uses an editorial Discover frontend, topic filters and the evergreen / warm-paper / copper palette. Browse the [concept dictionary](https://aiupdates.app/terms/index.html), [300 direct technology profiles](https://aiupdates.app/technology/index.html), [daily editions](https://aiupdates.app/whats-new.html) and [editorial policy](https://aiupdates.app/about.html). See [brand, SEO and generated-publication guidance](docs/AI_UPDATES_BRAND_AND_SEO.md). Existing Atlas hash routes and notebook storage remain compatible.
 
 ## Cloudflare hosting
 
@@ -61,6 +63,6 @@ python scripts/validate_checkpoint.py
 node --test tests/*.test.cjs
 ```
 
-Open `http://localhost:8000/`. Regenerate concept pages with `python scripts/build_term_pages.py`, then rebuild the fallback with `python scripts/build_offline.py`. CI checks that these operations are deterministic. The importer accepts only the approved archive and does not execute archive code or replace the entry point.
+Open `http://localhost:8000/`. Regenerate concept pages with `python scripts/build_term_pages.py`, rebuild discovery HTML, technology profiles and SEO with `python scripts/build_seo.py`, then rebuild the fallback with `python scripts/build_offline.py`. CI checks that these operations are deterministic. The importer accepts only the approved archive and does not execute archive code or replace the entry point.
 
 The current roadmap is `docs/HOURLY_EXPANSION_ROADMAP.md`. Older publication notes remain as historical recovery checkpoints. Resume by expanding the remaining detailed explanations and auditing sources; the prepared catalog import is complete.

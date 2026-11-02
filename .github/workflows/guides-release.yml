@@ -19,6 +19,7 @@ jobs:
       - name: Generate published pages and validate catalog, citations and game rules
         run: |
           python3 scripts/build_term_pages.py
+          python3 scripts/build_seo.py
           python3 scripts/build_offline.py
           python3 scripts/validate_checkpoint.py
           node --test tests/*.test.cjs
@@ -34,6 +35,7 @@ jobs:
       - name: Confirm generated outputs are byte-for-byte reproducible
         run: |
           python3 scripts/build_term_pages.py
+          python3 scripts/build_seo.py
           python3 scripts/build_offline.py
           git diff --exit-code -- terms publication.json downloads/Atlas_Demo_Offline.html
       - name: Check actual public GitHack bytes for updated term routes
