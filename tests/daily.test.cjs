@@ -227,7 +227,7 @@ test('Revision 4 preserves newsroom evidence and records the existing vLLM updat
  assert.match(change.summary,/existing profile|TECH-0288/i);
  assert.equal(v4.tldr.length,3);
  const receipt=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8')).receipts[0];
- assert.equal(receipt.publication_edition,'2026-11-02-v4');
+ assert.ok(receipt.publication_history.some(h=>h.edition==='2026-11-02-v4'),'The immutable v4 receipt must remain in history after v5 publication');
  assert.equal(receipt.deferred_catalog_proposal_ids.length,7);
  assert.equal(receipt.accepted_catalog_update_records[0].catalog_id,'TECH-0288');
 });
