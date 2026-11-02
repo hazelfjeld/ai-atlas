@@ -75,7 +75,7 @@
       "published_at": "2026-11-02T23:34:56.731Z"
     }
   ],
-  "last_successful_publish_at": "2026-11-02T23:05:19Z",
-  "status": "edition_revision_9_publication_verification_pending",
-  "coverage_note": "November 2 revision 9 indexes nine previously source-reviewed stories, one actual Atlas sidebar/offline navigation enhancement, and unchanged partial, non-exhaustive collection (seven deferred catalog proposals; two failed lookups). Previous revision 8 verified on Cloudflare/GitHack; revision 9 awaits its own hosted checks. Source code plus offline fallback passed earlier Cloudflare/browser checks at 4b111cd."
+  "last_successful_publish_at": "2026-11-02T23:41:45Z",
+  "status": "edition_revision_9_cloudflare_http_browser_and_githack_verified",
+  "coverage_note": "November 2 revision 9 verified on GitHack and three Cloudflare production hostnames (436 exact assets on each), with responsive browser checks of the collapsible sidebar, secondary deep links, Games and offline use. Nine previously reviewed news items and prior archive corrections preserved; no new world event or catalog entry. Collection remains partial and non-exhaustive, with seven deferred proposals and two failed source lookups."
 }

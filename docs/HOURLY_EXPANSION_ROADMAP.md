@@ -8,6 +8,9 @@
 - **Next:** verify v9 CI, hosted-browser/source checks and GitHack; update successful-publication times only once confirmed. Then evaluate seven deferred proposals and expand substantive encyclopedia guides.
 
 
+
+**Revision 9 verification (Nov 2, 23:41:45 UTC):** [catalog/GitHack workflow 41546881868](https://github.com/hazelfjeld/ai-atlas/actions/runs/41546881868) and [Cloudflare production/browser workflow 41546881823](https://github.com/hazelfjeld/ai-atlas/actions/runs/41546881823) both passed at tested code and indexed edition commit [`e3f58441`](https://github.com/hazelfjeld/ai-atlas/commit/e3f58441a355c0a98c072be767e2b0b1d433e17a). 97 Node tests; nine SHA-256-verified archive revisions; 436 exact assets per production hostname, actual desktop/mobile browser navigation and offline Games. The later receipt-only update must not be mistaken for separate verification of different code. Verified edition: https://aiupdates.app/whats-new.html?date=2026-11-02&revision=9 .
+
 ## November 2 — shareable verified daily views (revision 8)
 
 - **Feature shipped on main:** dated daily edition URLs now retain the selected section, topic and keyword query. Restoring a saved view does not bypass the archived edition's SHA-256, byte-length, schema, date and evidence checks. A failed revision selection keeps the previously verified permalink and rendered content.
