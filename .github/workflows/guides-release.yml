@@ -2,7 +2,7 @@ name: Build verified safety concept guides
 on:
   push:
     branches: ['atlas-guides-*']
-    paths: ['content/term-guides.json', 'tests/term-guide-quality.test.cjs', '.github/workflows/guides-release.yml']
+    paths: ['content/term-guides.json', 'tests/term-guide-quality.test.cjs', 'scripts/build_term_pages.py', '.github/workflows/guides-release.yml']
 permissions:
   contents: write
 concurrency:
@@ -50,6 +50,8 @@ jobs:
                  'terms/MLD-0017-activation-based-monitoring.html',
                  'terms/MLD-0718-mechanistic-interpretability.html',
                  'terms/MLD-1002-red-teaming.html',
+                 'terms/MLD-0041-agent-evaluation.html',
+                 'terms/MLD-0146-capability-failure.html',
                  'terms/index.html','terms/manifest.json','publication.json']
           for name in files:
               expected=pathlib.Path(name).read_bytes()

@@ -201,8 +201,8 @@
   },
   "MLD-0041": {
     "path": "terms/MLD-0041-agent-evaluation.html",
-    "sha256": "5c692d7686f49ce750af243d7375ccbf1634d40ad39431a0053c395a4ba324e4",
-    "expanded": false
+    "sha256": "3ec870b65ea025c1c61dcb597825c3cdbcd4a276b70bbcbf7447c2f55b91685a",
+    "expanded": true
   },
   "MLD-0042": {
     "path": "terms/MLD-0042-agent-memory.html",
@@ -726,8 +726,8 @@
   },
   "MLD-0146": {
     "path": "terms/MLD-0146-capability-failure.html",
-    "sha256": "d40e545d9ff96e7024a432387b7517dda9318cfc3a183402105646adb2976a6b",
-    "expanded": false
+    "sha256": "090c7066e12a446c5412fb1cc818bef033cbc964ecbe9624c3e575a85b4691ae",
+    "expanded": true
   },
   "MLD-0147": {
     "path": "terms/MLD-0147-catastrophic-forgetting.html",

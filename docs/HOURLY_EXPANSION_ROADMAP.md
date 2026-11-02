@@ -1,5 +1,14 @@
 # AI Atlas — recurring expansion plan
 
+## Agent evaluation and failure diagnosis — November 2, 2026
+
+- **Two authored guides:** [Agent evaluation](../terms/MLD-0041-agent-evaluation.html) and [Capability failure](../terms/MLD-0146-capability-failure.html). Their worked experiments score actual mock-state changes, permission boundaries, repeated trials, and goal-versus-capability interventions. Four primary papers each; this is educational material, not a new external incident or evidence of deceptive intent.
+- **Prepared baseline:** 1,345 terms, 300 technologies, 20 playbooks, 30 papers and 10 safety records (1,705 total). All 1,345 direct term pages exist; 23 substantive guides and 1,322 reference-only pages. No baseline chunk was re-imported or rewritten.
+- **Static verification:** [Guide feature workflow 41407567325](https://github.com/hazelfjeld/ai-atlas/actions/runs/41407567325) passed 64 JavaScript tests, catalog validation, 29,963 internal links, deterministic generation, and matching public GitHack bytes for 14 paths at feature commit `e110696`. The static checks do not establish that Cloudflare production browser tests pass for the final main merge. The generated encyclopedia's latest editorial review date now derives from guide metadata.
+- **Daily publisher:** `atlas-daily-staging/daily-queue/index.json` has zero listed batches and `data/daily/published-batches.json` zero receipts as read at this run's start. No genuine daily edition exists yet. Retain the honest awaiting state; check the staging index before the next content increment.
+- **Next:** review any newly staged source-backed daily batches first; otherwise deepen safety evaluation and calibration content or improve source checking. Keep the preserved professor-demo release at `839fee0` and deploy through the existing single Cloudflare production path.
+
+
 ## Verified increment — November 2, 2026 (mechanisms and adversarial evaluation)
 
 - **New substantive guides (2):** [mechanistic interpretability](../terms/MLD-0718-mechanistic-interpretability.html) and [red teaming](../terms/MLD-1002-red-teaming.html), with original worked examples, evaluation procedures, limitations and three checked primary references apiece. This is educational research context, not a newly verified AI safety incident.

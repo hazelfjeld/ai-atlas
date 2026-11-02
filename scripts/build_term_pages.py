@@ -87,7 +87,7 @@ def main():
     (out / 'index.html').write_bytes(shell('AI Concept Dictionary: 1,345 Terms', intro, 'terms/index.html', 'Explore 1,345 AI, machine learning and language-model concepts with definitions, examples, caveats, sources and connected technology profiles.', {'@context':'https://schema.org','@type':'DefinedTermSet','name':'AI Updates Concept Dictionary','url':absolute('terms/index.html'),'description':f'{len(terms):,} preserved concept references and {len(guides)} expanded educational guides.'}).encode())
     p = ROOT / 'publication.json'
     publication = json.loads(p.read_bytes())
-    publication['encyclopedia'] = {'imported_term_count': len(terms), 'linked_term_count': len(terms), 'detailed_page_count': len(guides), 'editorially_reviewed_guide_count': len(guides), 'reviewed_on': '2026-11-01', 'page_manifest': 'terms/manifest.json'}
+    publication['encyclopedia'] = {'imported_term_count': len(terms), 'linked_term_count': len(terms), 'detailed_page_count': len(guides), 'editorially_reviewed_guide_count': len(guides), 'reviewed_on': max((g['reviewed_on'] for g in guides.values()), default=publication['snapshot_date']), 'page_manifest': 'terms/manifest.json'}
     p.write_bytes((json.dumps(publication, indent=2) + '\n').encode())
     print(json.dumps(publication['encyclopedia'], indent=2))
 
