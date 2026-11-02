@@ -2,6 +2,12 @@
 
 A complete import of the prepared November 1, 2026 catalog, with connected search, technology comparisons, source registers, downloads and permanent concept pages.
 
+## Daily editions — What's New Today
+
+[Open the dated What's New archive](https://rawcdn.githack.com/hazelfjeld/ai-atlas/b0e09dc8c3786446b62b6b52bda532df62b5be05/whats-new.html)
+
+The homepage and navigation now feature the daily edition reader. Its five sections cover AI news, new technologies, new terms, updates in Atlas and corrections, with source links, category filters, explicit collection windows, a short TL;DR and immutable dated revisions. Publication checks require matching UTF-8 byte counts and SHA-256 digests. **As of November 1, the archive is deliberately empty** while the first verified editorial batch is pending; the site does not fabricate current news or claim a continuous website crawler. The separately scheduled research collector stages candidates, and the hourly publisher verifies and integrates accepted items. See `docs/DAILY_NEWS_PIPELINE.md` for schema and ownership.
+
 [Open the professor demonstration](https://rawcdn.githack.com/hazelfjeld/ai-atlas/3694cfd81702ae88f09054839623c3159a94a026/index.html) · [Five-minute tour](https://rawcdn.githack.com/hazelfjeld/ai-atlas/3694cfd81702ae88f09054839623c3159a94a026/demo.html) · [Concept encyclopedia](https://rawcdn.githack.com/hazelfjeld/ai-atlas/3694cfd81702ae88f09054839623c3159a94a026/terms/index.html)
 
 The commit-pinned URLs keep the presentation recoverable. GitHack may show an “Open the page” confirmation before the app. The [moving main URL](https://raw.githack.com/hazelfjeld/ai-atlas/main/index.html) can cache older files.
