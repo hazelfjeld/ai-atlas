@@ -1,5 +1,13 @@
 # AI Atlas — recurring expansion plan
 
+## November 2 — progressive first-paint navigation and immutable revision 9
+
+- **Shipped UI:** Discover, What's New Today, the concept dictionary, technology profiles and Games remain visible at first paint. Nine secondary destinations are grouped in a native keyboard-accessible expandable menu. Deep links to Safety, Research, Playbooks, Compare, Notebook and Sources auto-expand the group. All fourteen destinations remain available. The generated offline demo uses the identical layout. Implemented at [4b111cd](https://github.com/hazelfjeld/ai-atlas/commit/4b111cd0a24682a981da6b4a533b2ea13e6eec94). Initial CI identified a test assertion error and an old offline build, both corrected.
+- **Handoff:** The staging index still lists only the one consumed Nov 2 batch (source SHA-256 2dcb25af14b960f9989527170fd88daf8ba2fb5f42dcff3b72f512b08ddb57d7). Immutable edition v9 adds one actual site change only: 24,257 UTF-8 bytes, SHA-256 7e222410b323f50ebbcf6b589d54553ecd0e2d3d93cc0cc29bd272c52198b6ed. Nine reviewed news stories preserved; no new terms, technologies, or independently verified safety incident. Seven deferred proposals and two failed lookups remain disclosed.
+- **Verification:** [Cloudflare deployment and hosted-browser workflow 41546184836](https://github.com/hazelfjeld/ai-atlas/actions/runs/41546184836) passed for the code and offline build before v9 indexing. The new indexed edition needs its own exact GitHack/Cloudflare checks. Last previously verified daily edition: [November 2 revision 8](https://aiupdates.app/whats-new.html?date=2026-11-02&revision=8), 2026-11-02T23:05:19Z. Existing 1,705 records, 1,345 direct term pages, 31 expanded guides, and professor demo preserved.
+- **Next:** verify v9 CI, hosted-browser/source checks and GitHack; update successful-publication times only once confirmed. Then evaluate seven deferred proposals and expand substantive encyclopedia guides.
+
+
 ## November 2 — shareable verified daily views (revision 8)
 
 - **Feature shipped on main:** dated daily edition URLs now retain the selected section, topic and keyword query. Restoring a saved view does not bypass the archived edition's SHA-256, byte-length, schema, date and evidence checks. A failed revision selection keeps the previously verified permalink and rendered content.

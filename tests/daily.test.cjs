@@ -418,3 +418,29 @@ test('Revision 8 preserves all external evidence and only adds the shareable-fil
  assert.equal(ledger.receipts[0].counts.technology_added,0);
  assert.equal(ledger.receipts[0].counts.term_added,0);
 });
+
+test('Revision 9 indexes only the accessible sidebar update, preserving immutable AI evidence',()=>{
+ const crypto=require('node:crypto');
+ const archive=JSON.parse(fs.readFileSync('data/daily/index.json','utf8'));
+ const old=archive.editions.find(e=>e.date==='2026-11-02'&&e.revision===8);
+ const next=archive.editions.find(e=>e.date==='2026-11-02'&&e.revision===9);
+ assert.ok(old&&next);
+ const raw=fs.readFileSync(next.path);
+ assert.equal(raw.length,next.bytes);
+ assert.equal(crypto.createHash('sha256').update(raw).digest('hex'),next.sha256);
+ const before=D.validateEdition(JSON.parse(fs.readFileSync(old.path,'utf8')),old);
+ const after=D.validateEdition(JSON.parse(raw.toString('utf8')),next);
+ for(const kind of ['news','technologies','terms','corrections','coverage'])assert.deepEqual(after[kind],before[kind]);
+ const diff=D.revisionDiff(before,after);
+ assert.deepEqual(diff.site_changes.added.map(item=>item.id),['site-progressive-sidebar-navigation-20261102']);
+ for(const kind of ['news','technologies','terms','corrections'])assert.equal(diff[kind].added.length+diff[kind].updated.length+diff[kind].removed.length,0);
+ assert.match(after.site_changes.at(-1).summary,/not a new real-world AI event/i);
+ const ledger=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8'));
+ assert.equal(ledger.receipts.length,1);
+ assert.equal(ledger.receipts[0].publication_edition,'2026-11-02-v9');
+ assert.equal(ledger.receipts[0].publication_history.at(-1).edition,'2026-11-02-v9');
+ assert.equal(ledger.receipts[0].deferred_catalog_proposal_ids.length,7);
+ assert.equal(ledger.receipts[0].counts.news_published,9);
+ assert.equal(ledger.receipts[0].counts.term_added,0);
+ assert.equal(ledger.receipts[0].counts.technology_added,0);
+});

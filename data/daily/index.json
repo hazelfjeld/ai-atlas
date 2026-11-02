@@ -65,9 +65,17 @@
       "sha256": "62e32a1c55eda4a7337044bb61b82095ce691d64d8be50659e360b4799c0465e",
       "bytes": 23145,
       "published_at": "2026-11-02T23:00:23.863Z"
+    },
+    {
+      "date": "2026-11-02",
+      "revision": 9,
+      "path": "data/daily/editions/2026-11-02-v9.json",
+      "sha256": "7e222410b323f50ebbcf6b589d54553ecd0e2d3d93cc0cc29bd272c52198b6ed",
+      "bytes": 24257,
+      "published_at": "2026-11-02T23:34:56.731Z"
     }
   ],
   "last_successful_publish_at": "2026-11-02T23:05:19Z",
-  "status": "edition_revision_8_cloudflare_http_browser_and_githack_verified",
-  "coverage_note": "November 2 revision 8 verified on Cloudflare's three production hostnames and GitHack, with desktop/mobile browser tests for shared archive filters, link/reset/revision changes, Games and offline fallback. Nine reviewed news stories; seven deferred catalog proposals; two failed source lookups. Scheduled, partial, non-exhaustive coverage."
+  "status": "edition_revision_9_publication_verification_pending",
+  "coverage_note": "November 2 revision 9 indexes nine previously source-reviewed stories, one actual Atlas sidebar/offline navigation enhancement, and unchanged partial, non-exhaustive collection (seven deferred catalog proposals; two failed lookups). Previous revision 8 verified on Cloudflare/GitHack; revision 9 awaits its own hosted checks. Source code plus offline fallback passed earlier Cloudflare/browser checks at 4b111cd."
 }

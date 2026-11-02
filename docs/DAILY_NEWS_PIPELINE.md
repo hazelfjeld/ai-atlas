@@ -63,3 +63,7 @@ Validation additions: `node --test tests/daily.test.cjs`, `python3 scripts/valid
 ## Publication implementation — November 2, revision 8
 
 Dated edition links now optionally include `section`, `topic`, and `q` filter parameters, for example `whats-new.html?date=2026-11-02&revision=8&section=news&topic=safety&q=agent`. Each is bounded/allowlisted and interpreted only after the referenced immutable edition passes its original size, SHA-256, calendar, schema and source validation. Unrecognized, duplicated and overlong filter values fall back to an unfiltered view. Updating filters or switching a successfully verified edition updates the share link and same-origin address without claiming a new collection run. A failed edition selection retains the previous verified content, URL and links. Revision 8 records this as a site change, not new AI news.
+
+## Publication implementation — November 2, revision 9
+
+The workspace sidebar now uses a native HTML disclosure for nine lower-priority destinations while keeping five primary links visible before JavaScript loads. Deep-linked secondary workspaces expand their menu after hydration. The offline download was rebuilt from the same app sources. This is a **site-change record**, not a new-world-event claim. Revision 9 is immutable and retains the original source-reviewed revision 8 evidence; its indexed release must pass separate production verification. Seven catalog proposals remain deferred.
