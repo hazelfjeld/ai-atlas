@@ -71,6 +71,22 @@
     question.correct = !skip && (question.answerMode === 'typed' ? acceptedNames(question.target).includes(normalize(text)) : text === question.target.id);
     return {correct: question.correct, skipped: skip, target: question.target};
   }
+
+  function makeFlashcards(pool, {count = 20, random = Math.random} = {}) {
+    if (!Array.isArray(pool) || !pool.length) throw new Error('No concepts match these filters.');
+    const requested = count === 'all' ? pool.length : Math.floor(Number(count) || 20);
+    return {cards: shuffle(pool, random).slice(0, Math.max(1, Math.min(pool.length, requested))), index: 0, flipped: false};
+  }
+  function flipFlashcard(deck) {
+    if (!deck?.cards?.length) return false;
+    deck.flipped = !deck.flipped; return deck.flipped;
+  }
+  function moveFlashcard(deck, step) {
+    if (!deck?.cards?.length || ![-1, 1].includes(step)) return false;
+    const next = deck.index + step;
+    if (next < 0 || next >= deck.cards.length) return false;
+    deck.index = next; deck.flipped = false; return true;
+  }
   function makeMatch(pool, {count = 6, random = Math.random, now = 0} = {}) {
     const records = shuffle(pool, random).slice(0, Math.max(1, Math.min(6, Math.floor(Number(count) || 6))));
     if (records.length < 2) throw new Error('Choose at least two concepts to play Match.');
@@ -94,5 +110,5 @@
     game.mistakes++; game.penaltyMs += 1000; game.locked = true;
     return {type: 'mismatch', keys: [first.key, tile.key]};
   }
-  return {normalize, shuffle, prepareTerms, filterTerms, acceptedNames, makeQuiz, answerQuestion, makeMatch, selectTile, matchTime};
+  return {normalize, shuffle, prepareTerms, filterTerms, acceptedNames, makeQuiz, answerQuestion, makeFlashcards, flipFlashcard, moveFlashcard, makeMatch, selectTile, matchTime};
 });
