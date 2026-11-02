@@ -215,7 +215,7 @@ def validate_links():
         page.feed(path.read_text(encoding='utf-8'))
         parsed[path.absolute()] = page
     checked = 0
-    routes = {'papers', 'alerts', 'coverage', 'overview', 'technologies', 'dictionary', 'safety', 'playbooks', 'compare', 'saved', 'sources', 'search', 'queue', 'terms'}
+    routes = {'papers', 'alerts', 'coverage', 'overview', 'technologies', 'dictionary', 'safety', 'playbooks', 'games', 'compare', 'saved', 'sources', 'search', 'queue', 'terms'}
     @lru_cache(maxsize=None)
     def local_target(parent, relative):
         target = Path(os.path.abspath(parent / urllib.parse.unquote(relative)))

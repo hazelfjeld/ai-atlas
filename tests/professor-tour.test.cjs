@@ -10,6 +10,7 @@ test('Three-minute tour links real, existing Atlas features without a second app
   for(const token of ['id="quick-tour"','href="index.html#/games"','href="index.html#/technologies?q=pytorch"','href="index.html#/safety"','href="whats-new.html"','href="terms/MLD-0691-machine-learning.html"'])
     assert.ok(html.includes(token),'Missing route or target: '+token);
   assert.match(app,/games:'Games'/);
+  assert.match(fs.readFileSync(path.join(__dirname,'..','scripts','validate_checkpoint.py'),'utf8'), /routes\s*=\s*\{[^}]*'games'/);
   assert.match(news,/id="edition-select"/);
   assert.equal((html.match(/class="step">0[0-3]:/g)||[]).length,4);
 });
