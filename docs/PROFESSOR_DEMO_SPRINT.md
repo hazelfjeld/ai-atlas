@@ -1,5 +1,18 @@
 # Presentation readiness sprint — November 2, 2026
 
+## Updated three-minute professor walkthrough — November 1, 2026
+
+The latest **verified**, non-destructive presentation release is `839fee0b0e4f6b16d933dd5e5eac55e3a3e847c6`:
+[original Atlas workspace](https://rawcdn.githack.com/hazelfjeld/ai-atlas/839fee0b0e4f6b16d933dd5e5eac55e3a3e847c6/index.html#/overview) · [three-minute guided tour](https://rawcdn.githack.com/hazelfjeld/ai-atlas/839fee0b0e4f6b16d933dd5e5eac55e3a3e847c6/demo.html) · [Games inside Atlas](https://rawcdn.githack.com/hazelfjeld/ai-atlas/839fee0b0e4f6b16d933dd5e5eac55e3a3e847c6/index.html#/games) · [dated news archive](https://rawcdn.githack.com/hazelfjeld/ai-atlas/839fee0b0e4f6b16d933dd5e5eac55e3a3e847c6/whats-new.html). The original `3694cfd...` link remains a historical, immutable recovery point, but it predates the integrated Games tab.
+
+The new printable tour includes a bounded four-stop sequence: **00:00–00:40** open the expanded machine-learning concept and citations; **00:40–01:25** compare technologies and caveats; **01:25–02:15** play Quiz or Match inside the original workspace; **02:15–03:00** distinguish controlled safety evaluations from incident reports and inspect the true publication status of What's New Today. The original longer evidence-first walkthrough remains available underneath.
+
+The complete source baseline is unchanged at **1,705 records** (1,345 terms, 300 technologies, 20 playbooks, 30 papers, 10 safety reports). All 1,345 terms have stable pages; **12** are substantively expanded, leaving **1,333** for depth work. At the time of this update, `atlas-daily-staging/daily-queue/index.json` had **zero** batches and `data/daily/published-batches.json` had zero receipts. An awaiting-first-edition screen is therefore expected, not a report of no AI news.
+
+Verification: [presentation HTML/link and public byte checks](https://github.com/hazelfjeld/ai-atlas/actions/runs/41383692531) passed at `c61ca332...`; [full catalog integrity, 52+ automated rules/UI tests, reproducible pages and exact GitHack content](https://github.com/hazelfjeld/ai-atlas/actions/runs/41383788268) passed at `839fee0b0e4f6b16d933dd5e5eac55e3a3e847c6`. The second commit corrected the validator's valid-route list to include the native `#/games` route; it did not alter the demo HTML. Hosted full-browser testing of the newly revised printable tour remains a separate limitation; CI checked public HTML bytes, not an interactive teaching session.
+
+**Next run:** check for staged reviewed daily batches first. If none, expand another small set of high-value substantive concept guides with primary references and rerun the content/link checks. Preserve the pinned verified professor release.
+
 ## Professor demonstration checkpoint — November 1, 2026
 
 This section supersedes the older partial-import status below. All prepared catalogs are now imported: **1,345 terms, 300 technologies, 30 papers, 10 safety reports and 20 playbooks**. Source registers and original downloads are restored. The integrated workspace verifies 45 chunks before rendering; global search, comparisons and cross-catalog links are available. All 1,345 terms have permanent pages; 12 have expanded explanations, leaving 1,333 detailed expansions pending.
