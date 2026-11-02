@@ -181,7 +181,7 @@ def check_remote(base: str, manifest: dict) -> dict:
     assert parsed.scheme == 'https' and parsed.hostname in ('raw.githack.com', 'rawcdn.githack.com'), 'Unsupported host'
     assert parsed.path.startswith('/hazelfjeld/ai-atlas/'), 'Unexpected repository'
     base = base.rstrip('/') + '/'
-    files = ['index.html', 'app.css', 'app.js', 'core.js', 'catalog-loader.js', 'checkpoint.css', 'checkpoint.js', 'research.html', 'demo.html', 'publication.json'] + [f['path'] for f in manifest['files']]
+    files = ['index.html', 'app.css', 'app.js', 'core.js', 'catalog-loader.js', 'checkpoint.css', 'checkpoint.js', 'research.html', 'demo.html', 'publication.json', 'downloads/Atlas_Demo_Offline.html'] + [f['path'] for f in manifest['files']]
     if manifest.get('published_counts', {}).get('playbooks'):
         files += ['playbooks.html', 'playbooks.js'] + [f['path'] for f in manifest.get('extensions', {}).get('playbooks', [])]
     for kind in ('terms', 'technologies'):
@@ -213,12 +213,15 @@ def check_remote(base: str, manifest: dict) -> dict:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--remote-base')
+    parser.add_argument('--report', type=Path, help='Save the completed verification report as JSON')
     args = parser.parse_args()
     report = validate()
     if args.remote_base:
         report.update(check_remote(args.remote_base, json.loads((ROOT / 'publication.json').read_text())))
     else:
         report['remote_http_checks'] = 'not run'
+    if args.report:
+        args.report.write_text(json.dumps(report, indent=2) + '\n', encoding='utf-8', newline='\n')
     print(json.dumps(report, indent=2))
 
 
