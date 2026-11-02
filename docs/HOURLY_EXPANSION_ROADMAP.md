@@ -1,5 +1,13 @@
 # AI Atlas — recurring expansion plan
 
+## November 2 — shareable verified daily views (revision 8)
+
+- **Feature shipped on main:** dated daily edition URLs now retain the selected section, topic and keyword query. Restoring a saved view does not bypass the archived edition's SHA-256, byte-length, schema, date and evidence checks. A failed revision selection keeps the previously verified permalink and rendered content.
+- **Immutable edition:** revision 8 preserves all nine reviewed news reports, collection coverage and prior revisions; only one site-change record and updated TL;DR were added. SHA-256: `62e32a1c55eda4a7337044bb61b82095ce691d64d8be50659e360b4799c0465e`; UTF-8 bytes: `23145`. No new term, technology or independently verified safety incident is claimed.
+- **Source-review progress:** checked three deferred candidates (InvokeAI 6.14.3, Windmill 1.856.0 and NVIDIA Auto Ontology) against primary release/repository documentation. See `docs/CATALOG_PROPOSAL_REVIEW_2026-11-02.md`. These are **not yet canonical catalog additions**; all seven proposal IDs remain deferred in the existing receipt.
+- **Verification status:** code and tests in preceding commit, immutable publication in current commit; CI and hosted production checks need to complete before claiming a newly verified deployment. The last confirmed release before this increment is November 2 revision 7 at `4fa1373` (verified 2026-11-02T22:44:33Z). Original 1,705 records, 1,345 direct pages, 31 expanded guides and professor demo preserved.
+- **Next:** verify full CI and hosted browser behavior for deep links, restore/default/reset, archive failure, mobile; then integrate reviewed proposals with true catalog IDs, navigation and manifests before lowering deferred counts.
+
 ## November 2, 2026 — explicit source coverage and resilient archive recovery (revision 6)
 
 - **User-visible increment:** The daily archive now prints the edition's existing collection-context note, status/reason of failed source lookups and source-check times. The page no longer hides the reason behind a mere failed-source count. Initial integrity-checked archive recovery now attempts up to 12 eligible revisions instead of only four; earlier editions stay manually selectable.

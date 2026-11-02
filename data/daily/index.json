@@ -57,9 +57,17 @@
       "sha256": "21c40c54eb49df86ff460d9fe24c22e65249e59564e189c448b582f789dc615e",
       "bytes": 22247,
       "published_at": "2026-11-02T22:36:04.316Z"
+    },
+    {
+      "date": "2026-11-02",
+      "revision": 8,
+      "path": "data/daily/editions/2026-11-02-v8.json",
+      "sha256": "62e32a1c55eda4a7337044bb61b82095ce691d64d8be50659e360b4799c0465e",
+      "bytes": 23145,
+      "published_at": "2026-11-02T23:00:23.863Z"
     }
   ],
   "last_successful_publish_at": "2026-11-02T22:44:33Z",
-  "status": "edition_revision_7_cloudflare_http_browser_and_githack_verified",
-  "coverage_note": "November 2 revision 7 is verified on all three Cloudflare hostnames, GitHack, desktop/mobile browser navigation and daily keyword search. Nine reviewed news items retained, seven catalog proposals deferred, two source failures. Scheduled, partial and non-exhaustive."
+  "status": "revision_8_committed_production_verification_pending",
+  "coverage_note": "November 2 revision 8 improves shareable filter URLs only; last independently verified publication remains revision 7. Nine reviewed stories, seven deferred catalog proposals, two failed source checks; coverage is partial."
 }

@@ -59,3 +59,7 @@ The reader validates the index and checks **both byte length and SHA-256** of ev
 The collector's staging batches use their separate `daily-queue/**` handoff schema from the earlier section; **do not copy them verbatim to the public index**. The publisher maps reviewed batches into the display schema, integrates real technologies/terms into the canonical catalogs first, and leaves unreviewed or blocked claims off the public edition.
 
 Validation additions: `node --test tests/daily.test.cjs`, `python3 scripts/validate_checkpoint.py`, and the existing GitHack byte-equivalence workflow (which now covers the daily HTML/JS/index/receipt files). Static checks are not a complete hosted-browser accessibility test.
+
+## Publication implementation — November 2, revision 8
+
+Dated edition links now optionally include `section`, `topic`, and `q` filter parameters, for example `whats-new.html?date=2026-11-02&revision=8&section=news&topic=safety&q=agent`. Each is bounded/allowlisted and interpreted only after the referenced immutable edition passes its original size, SHA-256, calendar, schema and source validation. Unrecognized, duplicated and overlong filter values fall back to an unfiltered view. Updating filters or switching a successfully verified edition updates the share link and same-origin address without claiming a new collection run. A failed edition selection retains the previous verified content, URL and links. Revision 8 records this as a site change, not new AI news.

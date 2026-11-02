@@ -396,3 +396,25 @@ test('Revision 7 preserves all external content and records only a site search u
  assert.ok(receipt.publication_history.some(x=>x.edition==='2026-11-02-v7'));
  assert.equal(receipt.deferred_catalog_proposal_ids.length,7);
 });
+
+test('Revision 8 preserves all external evidence and only adds the shareable-filter site record',()=>{
+ const crypto=require('node:crypto');
+ const archive=JSON.parse(fs.readFileSync('data/daily/index.json','utf8'));
+ const old=archive.editions.find(e=>e.date==='2026-11-02'&&e.revision===7);
+ const next=archive.editions.find(e=>e.date==='2026-11-02'&&e.revision===8);
+ assert.ok(old&&next);
+ const bytes=fs.readFileSync(next.path);
+ assert.equal(bytes.length,next.bytes);
+ assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'),next.sha256);
+ const before=D.validateEdition(JSON.parse(fs.readFileSync(old.path,'utf8')),old),after=D.validateEdition(JSON.parse(bytes.toString('utf8')),next);
+ for(const kind of ['news','technologies','terms','corrections'])assert.deepEqual(after[kind],before[kind]);
+ assert.deepEqual(after.coverage,before.coverage);
+ assert.equal(after.site_changes.length,before.site_changes.length+1);
+ const diff=D.revisionDiff(before,after);
+ assert.deepEqual(diff.site_changes.added.map(r=>r.id),['site-daily-shareable-filters-20261102']);
+ for(const kind of ['news','technologies','terms','corrections'])assert.equal(diff[kind].added.length+diff[kind].updated.length+diff[kind].removed.length,0);
+ const ledger=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8'));
+ assert.equal(ledger.receipts[0].deferred_catalog_proposal_ids.length,7);
+ assert.equal(ledger.receipts[0].counts.technology_added,0);
+ assert.equal(ledger.receipts[0].counts.term_added,0);
+});
