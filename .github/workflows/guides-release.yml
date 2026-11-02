@@ -53,6 +53,7 @@ jobs:
                  'terms/MLD-0041-agent-evaluation.html',
                  'terms/MLD-0146-capability-failure.html',
                  'terms/MLD-0142-calibration.html','terms/MLD-0198-conformal-prediction.html',
+                 'terms/MLD-0389-expected-calibration-error.html','terms/MLD-1184-subgroup-evaluation.html',
                  'terms/index.html','terms/manifest.json','publication.json']
           for name in files:
               expected=pathlib.Path(name).read_bytes()
