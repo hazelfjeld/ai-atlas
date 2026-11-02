@@ -77,6 +77,7 @@ with sync_playwright() as p:
     if any(e['date'] == '2026-11-02' and e['revision'] == 7 for e in index['editions']):
         page.goto(base + 'whats-new.html?date=2026-11-02&revision=7')
         page.wait_for_function("!document.getElementById('edition-select').disabled", timeout=45000)
+        page.locator('#section-filter').select_option('news')
         page.locator('#edition-search').fill('Reuters')
         check('keyword search narrows the verified edition to four Reuters reports',
               page.locator('#edition-content article.item').count() == 4
