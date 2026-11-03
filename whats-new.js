@@ -22,7 +22,7 @@ function element(tag,text,cls){
 }
 function status(text){$('edition-status').textContent=text;}
 function currentFilters(){
- return {section:$('section-filter').value,topic:$('topic-filter').value,review:$('evidence-filter').value,source:$('source-filter').value,query:$('edition-search').value};
+ return {section:$('section-filter').value,topic:$('topic-filter').value,review:$('evidence-filter').value,source:$('source-filter').value,publication:$('publication-filter').value,query:$('edition-search').value};
 }
 function populateReviewOptions(e){
  const select=$('evidence-filter'),desired=pendingReview===null?select.value:pendingReview;
@@ -78,6 +78,13 @@ function card(item,kind){
  top.append(element('span',item.review_status,'tag'));
  if(item.release_status)top.append(element('span',item.release_status,'tag'));
  if(item.category)top.append(element('span',item.category,'tag'));
+ if(kind==='news'){
+  // Publisher date is not an event, discovery, or newly-added-to-Atlas date.
+  const timing=item.publication_date===edition.edition_date?'Published on edition date':
+   !item.publication_date?'Publisher date unreported':
+   item.publication_date<edition.edition_date?'Earlier report · catch-up':'Published after edition date';
+  top.append(element('span',timing,'tag'));
+ }
  article.append(top,element('h3',item.title),element('p',item.summary));
  if(item.why_it_matters){const p=element('p');p.append(element('strong','Why it matters: '),document.createTextNode(item.why_it_matters));article.append(p);}
  if(item.caveat){const p=element('p',undefined,'caveat');p.append(element('strong','Limitation: '),document.createTextNode(item.caveat));article.append(p);}
@@ -186,7 +193,7 @@ async function showRevisionDiff(entry,current,epoch){
 }
 function render(){
  if(!edition)return;
- const section=$('section-filter').value,topic=$('topic-filter').value,review=$('evidence-filter').value,source=$('source-filter').value,query=$('edition-search').value;
+ const section=$('section-filter').value,topic=$('topic-filter').value,review=$('evidence-filter').value,source=$('source-filter').value,publication=$('publication-filter').value,query=$('edition-search').value;
  const summary=$('edition-summary');summary.hidden=false;
  $('summary-content').replaceChildren(...edition.tldr.map(s=>element('p',s)));
  const content=$('edition-content');content.replaceChildren();
@@ -194,10 +201,10 @@ function render(){
  for(const [kind,label] of kinds){
   if(section!=='all'&&section!==kind)continue;
   total+=edition[kind].length;
-  const records=edition[kind].filter(item=>C.matchesTopic(item,topic)&&C.matchesReviewStatus(item,review)&&C.matchesSource(item,source)&&C.matchesQuery(item,query));
+  const records=edition[kind].filter(item=>C.matchesTopic(item,topic)&&C.matchesReviewStatus(item,review)&&C.matchesSource(item,source)&&C.matchesPublicationTiming(item,kind,edition.edition_date,publication)&&C.matchesQuery(item,query));
   // An unfiltered edition always shows all five sections, including honest zeros.
   // A topic-filtered view avoids five repetitive empty sections.
-  if(!records.length&&(topic!=='all'||review!=='all'||source!=='all'||query.trim()))continue;
+  if(!records.length&&(topic!=='all'||review!=='all'||source!=='all'||publication!=='all'||query.trim()))continue;
   visible+=records.length;
   const s=element('section'),heading=element('div',undefined,'heading'),title=element('h2',label);
   heading.append(title,element('span',records.length+' entries'));s.append(heading);
@@ -208,8 +215,8 @@ function render(){
   }
   content.append(s);
  }
- $('filter-results').textContent='Showing '+visible+' of '+total+' records in the selected collection'+(topic!=='all'||review!=='all'||source!=='all'||query.trim()?' matching your filters.':'.');
- if(!visible&&(topic!=='all'||review!=='all'||source!=='all'||query.trim()))content.append(element('div','No entries match those filters. Try a broader topic or search. This is not a claim that no AI news occurred.','empty'));
+ $('filter-results').textContent='Showing '+visible+' of '+total+' records in the selected collection'+(topic!=='all'||review!=='all'||source!=='all'||publication!=='all'||query.trim()?' matching your filters.':'.');
+ if(!visible&&(topic!=='all'||review!=='all'||source!=='all'||publication!=='all'||query.trim()))content.append(element('div','No entries match those filters. Try a broader topic or search. This is not a claim that no AI news occurred.','empty'));
  syncVerifiedUrl();
 }
 async function request(path){
@@ -282,6 +289,7 @@ async function start(){
  const filters=C.viewFilters(window.location.search);
  $('section-filter').value=filters.section;
  $('topic-filter').value=filters.topic;
+ $('publication-filter').value=filters.publication;
  $('edition-search').value=filters.query;
  pendingReview=filters.review;
   pendingSource=filters.source;
@@ -335,6 +343,7 @@ $('section-filter').addEventListener('change',render);
 $('topic-filter').addEventListener('change',render);
 $('evidence-filter').addEventListener('change',render);
 $('source-filter').addEventListener('change',render);
+$('publication-filter').addEventListener('change',render);
 $('edition-search').addEventListener('input',()=>{if(edition)render();});
 $('export-verified').addEventListener('click',()=>{
  // Do not export anything that has not passed immutable byte + SHA-256 checks.
@@ -351,6 +360,7 @@ $('reset-filters').addEventListener('click',()=>{
  $('topic-filter').value='all';
  $('evidence-filter').value='all';
  $('source-filter').value='all';
+ $('publication-filter').value='all';
  if(edition)render();
  $('edition-search').focus();
 });
