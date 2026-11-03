@@ -99,7 +99,7 @@
       "published_at": "2026-11-03T02:06:07.466Z"
     }
   ],
-  "last_successful_publish_at": "2026-11-03T01:54:11Z",
-  "status": "edition_revision_12_indexed_production_verification_pending",
-  "coverage_note": "Revision 12 adds two reviewed existing-concept guides only, preserving the nine prior news reports, partial collection window, two source lookup failures, seven deferred proposals and all eleven immutable archived revisions. November 2 v11 was independently verified; v12 deployment checks are pending."
+  "last_successful_publish_at": "2026-11-03T02:10:57Z",
+  "status": "edition_revision_12_production_verified",
+  "coverage_note": "November 2 revision 12 is verified on production and GitHack, containing two existing-concept guide improvements. Nine original news reports, partial collection window, two source-lookup failures, seven deferred proposals and all eleven preceding immutable revisions are unchanged. Content is an archival scheduled publication, not continuous live coverage."
 }
