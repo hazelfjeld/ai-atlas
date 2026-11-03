@@ -2552,5 +2552,135 @@
         "https://csrc.nist.gov/pubs/ai/100/2/e2025/final"
       ]
     ]
+  },
+  "MLD-0154": {
+    "reviewed_on": "2026-11-03",
+    "prerequisites": [
+      "MLD-0153",
+      "MLD-0234",
+      "MLD-0718",
+      "MLD-0041"
+    ],
+    "sections": [
+      [
+        "An intervention is a controlled change, not a correlation",
+        "A causal intervention changes a specific variable or mechanism while comparing a defined outcome with an otherwise matched condition. In a causal graph, setting X to a chosen value is written do(X=x), which differs from merely observing X=x. In a neural network, replacing a hidden activation is an intervention on computation, not necessarily on a real-world cause."
+      ],
+      [
+        "Define the target and counterfactual baseline",
+        "Begin with an outcome Y, an intervention target X and two conditions such as do(X=x1) versus do(X=x0). A causal effect is the difference E[Y | do(X=x1)] minus E[Y | do(X=x0)] under a specified experimental population. It is not equivalent to the conditional difference E[Y | X=x1] minus E[Y | X=x0] when common causes or selection effects are present."
+      ],
+      [
+        "Interchange interventions inside a network",
+        "In causal-abstraction research, run a model on a base input and on a separate source input, then replace selected internal values in the base run with their source-run values. Compare the resulting output to an explicitly proposed high-level causal model under an analogous intervention. Agreement tests an alignment hypothesis; a matching probe prediction without interventions does not establish that hypothesis."
+      ],
+      [
+        "A toy activation-patching experiment",
+        "Imagine a two-input toy classifier where the baseline predicts class A with probability 0.25 and the clean source state predicts A with probability 0.90. Patching one registered layer and token into the baseline yields 0.70. The illustrative recovery is (0.70-0.25)/(0.90-0.25) = 0.6923, or about 69%. This is a normalized change in this toy setup, not a universal attribution score or proof of a unique causal path."
+      ],
+      [
+        "Specify exactly where and when to intervene",
+        "Choose model version, prompt/input pair, token index, layer, head or feature, intervention magnitude, sampled counterfactuals and outcome metric before looking at results. Restoring a whole residual stream may affect many downstream computations at once; ablating a feature to zero can also produce out-of-distribution activations. A carefully localized effect is still conditional on the intervention family."
+      ],
+      [
+        "Examples beyond activation patching",
+        "Interventions can randomize a treatment in a controlled trial, remove one tool permission in an agent sandbox, replace a retrieval document, or alter a model's hidden state. These change different causal objects: real-world exposures, system interfaces, input context or internal representations. A tool-permission ablation tests the complete agent system, not only the language model weights."
+      ],
+      [
+        "Positive and negative controls",
+        "Use no-op patches, patches at unrelated sites, source/base swaps, randomized intervention assignments and independent holdout inputs. Match seeds, prompting, model state and token alignment where relevant. Report both directions of the effect and any failed cases; selecting the best layer after scanning hundreds of sites without held-out confirmation exaggerates apparent specificity."
+      ],
+      [
+        "When the causal interpretation fails",
+        "A successful patch may restore output while bypassing a distributed or redundant circuit, so it need not locate the single information store. Confounded observational datasets, non-overlapping treatment groups, activation distribution shift and evaluator leakage can also invalidate a causal story. Geiger and colleagues formalize abstractions conditionally on proposed alignments and intervention families, not as automatic discoveries."
+      ],
+      [
+        "Research use and reporting checklist",
+        "For a reproducible study, preregister the causal contrast and candidate mechanisms, freeze model/data hashes, retain base/source pairing rules, test alternative paths and provide uncertainty over examples rather than only tokens. Distinguish intervention effects on a model from claims about external-world incidents or enduring model goals. Report precisely which counterfactual comparisons the evidence supports."
+      ]
+    ],
+    "citations": [
+      [
+        "Geiger and colleagues (2023), Causal Abstraction: A Theoretical Foundation for Mechanistic Interpretability",
+        "https://arxiv.org/abs/2301.04709"
+      ],
+      [
+        "Geiger, Lu, Icard and Potts (2021), Causal Abstractions of Neural Networks",
+        "https://arxiv.org/abs/2106.02997"
+      ],
+      [
+        "Meng, Bau, Andonian and Belinkov (2022), Locating and Editing Factual Associations in GPT",
+        "https://arxiv.org/abs/2202.05262"
+      ],
+      [
+        "Geiger and colleagues (2021/2022), Inducing Causal Structure for Interpretable Neural Networks",
+        "https://arxiv.org/abs/2112.00826"
+      ]
+    ]
+  },
+  "MLD-0157": {
+    "reviewed_on": "2026-11-03",
+    "prerequisites": [
+      "MLD-0154",
+      "MLD-0199",
+      "MLD-0234",
+      "MLD-0718"
+    ],
+    "sections": [
+      [
+        "Mediation separates pathways rather than just outcomes",
+        "Causal mediation analysis asks how much of a specified exposure-to-outcome effect travels through a proposed intermediate variable M, versus pathways not mediated by M. In a language model, a mediator might be one layer, attention head or feature; in an observational study it could be a real-world intermediate. These are different domains with different assumptions about causal identification."
+      ],
+      [
+        "A three-variable causal picture",
+        "Imagine X influences a mediator M, which influences an output Y, while X may also influence Y through other routes. The total effect compares the outcome under two exposure settings. A proposed indirect effect additionally asks what would happen if M were held to the value arising from another exposure. Without clearly naming the contrast, 'the mediator explains 60%' is ambiguous."
+      ],
+      [
+        "The counterfactual definition has assumptions",
+        "Natural direct and indirect effects often invoke nested potential outcomes such as Y(x,M(x0)); identifying those from observational records generally needs strong no-unmeasured-confounding and cross-world assumptions. Randomizing an exposure alone does not automatically randomize its mediator. In a fully observed deterministic network, direct activation replacement is feasible, yet a semantic interpretation of that feature can still be wrong."
+      ],
+      [
+        "A transparent synthetic arithmetic example",
+        "Suppose a toy model's output score changes from 0.20 under the baseline to 0.80 under a modified input, a total score change of 0.60. A matched intervention on a candidate mediator yields 0.45, a change of 0.25 from baseline. Under this chosen operational contrast, 0.25/0.60 is approximately 42%; it is not an identified natural indirect-effect fraction or a statement that one neuron owns 42% of the meaning."
+      ],
+      [
+        "Mediators in transformer language models",
+        "Vig and colleagues used causal mediation ideas to investigate gender-bias measurements in pretrained Transformer language models, studying how effects vary across neurons and attention heads. Their reported patterns are conditional on particular datasets, prompts and effect definitions. It would overstate the result to claim that a universal bias location or a universally causal head was discovered."
+      ],
+      [
+        "Patch-based mediation and causal tracing",
+        "Meng and colleagues contrasted clean, corrupted and restored hidden-state runs to identify computations influencing factual predictions, then studied targeted weight edits. This is a controlled intervention-based analysis of particular transformer models and benchmark prompts. Recovering an output probability after restoration is an effect estimate for that procedure, not independent validation of the output's factual truth."
+      ],
+      [
+        "Interactions, redundancy and path dependence",
+        "Two components can be synergistic, suppressive or redundant, making individual effect magnitudes non-additive. An indirect-effect estimate may even be negative while the total effect is positive; simply dividing by the total can yield misleading shares or unstable ratios when the denominator is small. Always report the underlying effect definitions, both signs, interaction tests and confidence intervals."
+      ],
+      [
+        "Isolation and sensitivity checks",
+        "Predefine candidate mediators, keep base/source examples matched, try mediator controls with similar activation scale, and reserve held-out prompts for confirmation. For real-world observational mediation, consider exposure-mediator and mediator-outcome confounding and sensitivity to unmeasured causes. For networks, test distribution shift from patching and alternative alignment choices; neither framework is assumption-free."
+      ],
+      [
+        "What a mediation result can establish",
+        "A carefully designed study can support that altering a specified intermediary changes a specified measured outcome under a defined intervention. It cannot by itself establish exclusive storage, human-level understanding, unique causal mechanism, independent fairness or safety guarantees, or field-wide prevalence. Keep synthetic examples, controlled research findings and real deployment incidents distinctly labeled."
+      ]
+    ],
+    "citations": [
+      [
+        "Vig and colleagues (2020), Causal Mediation Analysis for Interpreting Neural NLP: The Case of Gender Bias",
+        "https://arxiv.org/abs/2004.12265"
+      ],
+      [
+        "Meng, Bau, Andonian and Belinkov (2022), Locating and Editing Factual Associations in GPT",
+        "https://arxiv.org/abs/2202.05262"
+      ],
+      [
+        "Geiger and colleagues (2023), Causal Abstraction: A Theoretical Foundation for Mechanistic Interpretability",
+        "https://arxiv.org/abs/2301.04709"
+      ],
+      [
+        "Geiger and colleagues (2021/2022), Inducing Causal Structure for Interpretable Neural Networks",
+        "https://arxiv.org/abs/2112.00826"
+      ]
+    ]
   }
 }
