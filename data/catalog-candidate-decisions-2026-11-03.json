@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "document_type": "editorial_candidate_triage_with_one_canonical_addition",
+  "document_type": "editorial_candidate_triage_with_two_canonical_additions",
   "reviewed_on": "2026-11-03",
   "collection_edition_date": "2026-11-02",
   "source_batch": {
@@ -8,7 +8,7 @@
     "source_commit": "da93e2fd5545cabc0b001310eab55bf8eeea9da8",
     "source_sha256": "2dcb25af14b960f9989527170fd88daf8ba2fb5f42dcff3b72f512b08ddb57d7"
   },
-  "published_canonical_additions": 1,
+  "published_canonical_additions": 2,
   "reviewed_proposals": 7,
   "independent_product_or_benchmark_replication": false,
   "source_scope": "First-party project documentation, dated release notes and cited research. Review decisions are editorial, not reproduced performance evaluations. Original daily source-coverage failures remain in the edition archive.",
@@ -109,14 +109,14 @@
       "name": "Windmill",
       "kind": "technology",
       "disposition": "distinct_workflow_platform_candidate",
-      "publication_state": "deferred_not_in_canonical_catalog",
+      "publication_state": "canonical_catalog_added_new_to_atlas",
       "related_existing_term_ids": [
         "MLD-0043",
         "MLD-0851"
       ],
       "editorial_basis": "Existing developer workflow and app platform. The November 2, 2026 v1.856.0 notes report that MCP access can accept tokens from an external OIDC issuer.",
-      "evidence_scope": "First-party release notes document the feature; this is not an independent security certification or a new-product launch.",
-      "limitations": "Community, enterprise and commercial distribution entitlements differ; source availability and a documented OIDC feature alone do not establish a secure production configuration.",
+      "evidence_scope": "GitHub v1.856.0 release and exact-tagged README/LICENSE checked November 3; external OIDC MCP functionality is first-party documented but not independently penetration-tested or benchmarked.",
+      "limitations": "Exact tagged license distinguishes AGPL and Apache source, proprietary Community Edition distribution, and commercial or managed-service limitations. The existing product is newly cataloged, not newly launched. Role mapping and worker isolation must be validated in deployment.",
       "required_before_catalog_publication": [
         "Verify feature/version compatibility and minimum environment requirements",
         "Document edition-specific license and deployment restrictions",
@@ -131,7 +131,10 @@
           "title": "Project code and distribution terms",
           "url": "https://github.com/windmill-labs/windmill"
         }
-      ]
+      ],
+      "canonical_id": "TECH-0302",
+      "catalog_path": "technology/TECH-0302-windmill.html",
+      "catalog_added_on": "2026-11-03"
     },
     {
       "proposal_id": "term-proposal:agent-harness",
@@ -228,5 +231,5 @@
       ]
     }
   ],
-  "revision_note": "One of the seven previously deferred proposals has received a separate checksummed canonical catalog ID. The original November 2 daily edition and the six remaining deferred proposals are unchanged."
+  "revision_note": "Two new-to-Atlas canonical profiles are now registered: NVIDIA Auto Ontology (TECH-0301) and Windmill (TECH-0302). Four other distinct candidates remain deferred and one composite benchmark phrase has no new ID. No launch or independent security/benchmark result is asserted."
 }

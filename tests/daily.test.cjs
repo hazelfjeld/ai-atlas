@@ -1026,9 +1026,9 @@ test('NVIDIA Auto Ontology is a checksum-pinned Atlas addition, not an invented 
  const manifest=JSON.parse(fs.readFileSync(path.join(root,'publication.json')));
  const file=manifest.extensions.technologies.at(-1);
  assert.equal(manifest.prepared_counts.technologies,300);
- assert.equal(manifest.published_counts.technologies,301);
+ assert.equal(manifest.published_counts.technologies,302);
  assert.equal(file.path,'data/technologies-07.json');
- assert.equal(file.count,1);
+ assert.equal(file.count,2);
  assert.equal(file.bytes,buf.byteLength);
  assert.equal(file.sha256,crypto.createHash('sha256').update(buf).digest('hex'));
  assert.equal(rec.id,'TECH-0301');
@@ -1047,7 +1047,7 @@ test('audit and canonical technology addition resolve the same deferred proposal
  const record=JSON.parse(fs.readFileSync(path.join(root,'data/technologies-07.json')))[0];
  assert.equal(item.canonical_id,record.id);
  assert.equal(item.publication_state,'canonical_catalog_added_new_to_atlas');
- assert.equal(audit.candidates.filter(x=>x.publication_state==='deferred_not_in_canonical_catalog').length,6);
+ assert.equal(audit.candidates.filter(x=>x.publication_state==='deferred_not_in_canonical_catalog').length,5);
 });
 
 test('first-paint technology navigation matches the checksummed catalog count',()=>{
@@ -1057,4 +1057,24 @@ test('first-paint technology navigation matches the checksummed catalog count',(
  const tech=html.match(/<a class="nav-link" data-view="technologies" href="#[/]technologies">[^]*?<span class="nav-count">([0-9]+)<[/]span><[/]a>/);
  assert.ok(tech,'Missing first-paint technology badge');
  assert.equal(Number(tech[1]),m.published_counts.technologies);
+});
+
+test('Windmill is an explicitly dated, source-reviewed canonical Atlas addition',()=>{
+ const path=require('node:path'),root=path.join(__dirname,'..');
+ const row=JSON.parse(fs.readFileSync(path.join(root,'data/technologies-07.json'))).find(x=>x.id==='TECH-0302');
+ const m=JSON.parse(fs.readFileSync(path.join(root,'publication.json')));
+ const a=JSON.parse(fs.readFileSync(path.join(root,'data/catalog-candidate-decisions-2026-11-03.json')));
+ const candidate=a.candidates.find(x=>x.proposal_id==='tech-proposal:windmill:2026-11-02');
+ assert.ok(row&&candidate);assert.equal(row.name,'Windmill');
+ assert.equal(row.catalog_added_on,'2026-11-03');assert.equal(row.initial_release_date,null);
+ assert.equal(row.source_revision,'v1.856.0');
+ assert.deepEqual(row.concept_ids,['MLD-0043','MLD-0851','MLD-1246']);
+ assert.deepEqual(row.alternative_ids,['TECH-0258','TECH-0007']);
+ assert.match(row.access,/AGPLv3/);assert.match(row.access,/proprietary/);
+ assert.match(row.watch_out,/OIDC/);assert.match(row.evidence_status,/not independently reproduced/);
+ assert.ok(row.primary_sources.length>=3&&row.primary_sources.every(x=>x.url.startsWith('https://')));
+ assert.equal(candidate.canonical_id,row.id);
+ assert.equal(candidate.catalog_path,'technology/TECH-0302-windmill.html');
+ assert.equal(candidate.publication_state,'canonical_catalog_added_new_to_atlas');
+ assert.equal(m.catalog_additions.technologies.filter(x=>x.id===row.id).length,1);
 });
