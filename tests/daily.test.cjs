@@ -689,3 +689,37 @@ test('Revision 16 archives two adversarial-security guides without changing orig
  assert.equal(ledger.counts.term_added,0);
  assert.equal(ledger.counts.technology_added,0);
 });
+
+test('Retrospective revision 17 records existing Atlas changes without inventing November 3 collection', () => {
+ const crypto = require('node:crypto'), idx = JSON.parse(fs.readFileSync('data/daily/index.json','utf8'));
+ const old = idx.editions.find(e=>e.date==='2026-11-02' && e.revision===16);
+ const cur = idx.editions.find(e=>e.date==='2026-11-02' && e.revision===17);
+ assert.ok(old && cur,'Immutable prior version and retrospective edition remain indexed');
+ const raw = fs.readFileSync(cur.path);
+ assert.equal(raw.length,cur.bytes);
+ assert.equal(crypto.createHash('sha256').update(raw).digest('hex'),cur.sha256);
+ const before = D.validateEdition(JSON.parse(fs.readFileSync(old.path,'utf8')),old);
+ const after = D.validateEdition(JSON.parse(raw.toString('utf8')),cur);
+ assert.equal(after.edition_date,'2026-11-02');
+ assert.equal(D.chicagoDate(after.published_at),'2026-11-03','Retrospective publication time stays truthful');
+ for (const field of ['coverage','news','technologies','terms','corrections']) assert.deepEqual(after[field],before[field],field+' must not change');
+ const changes = D.revisionDiff(before,after);
+ assert.deepEqual(changes.site_changes.added.map(s=>s.id),['site-expanded-data-poisoning-20261103','site-expanded-backdoor-20261103']);
+ assert.equal(changes.site_changes.updated.length+changes.site_changes.removed.length,0);
+ const manifest = JSON.parse(fs.readFileSync('terms/manifest.json','utf8'));
+ for(const [i,id] of ['MLD-0268','MLD-0085'].entries()){
+  const entry=manifest[id], item=changes.site_changes.added[i];
+  assert.ok(entry.expanded && fs.existsSync(entry.path));
+  assert.equal(item.catalog_path,entry.path);
+  assert.equal(D.chicagoDate(item.added_to_atlas_at),'2026-11-03');
+  assert.match(item.summary,/not a new|not evidence of a new|not a newly/i);
+ }
+ const ledger=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8')).receipts[0];
+ assert.ok(ledger.publication_history.some(h=>h.edition==='2026-11-02-v17'));
+ assert.equal(ledger.publication_edition,'2026-11-02-v17');
+ assert.equal(ledger.deferred_catalog_proposal_ids.length,7);
+ assert.equal(ledger.counts.news_published,9);
+ assert.equal(ledger.counts.technology_added,0);
+ assert.equal(ledger.counts.term_added,0);
+ assert.equal(D.selection(idx,'2026-11-03').todayEntry,null,'Nov 3 must still await an actual collected edition');
+});
