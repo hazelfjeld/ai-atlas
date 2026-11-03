@@ -161,6 +161,29 @@ function validateEdition(edition,indexEntry){
 }
 
 /* Compare already integrity-validated immutable editions by stable IDs, not by array order. */
+// Edition-date counts are derived only from an integrity-validated published edition.
+// These are *source-publication dates*, not event dates or dates added to Atlas.
+function editionSnapshot(edition){
+ validateEdition(edition);
+ const publishedOnEditionDate=edition.news.filter(item=>matchesPublicationTiming(item,'news',edition.edition_date,'same-day')).length;
+ const earlierReports=edition.news.filter(item=>matchesPublicationTiming(item,'news',edition.edition_date,'catch-up')).length;
+ const postdatedReports=edition.news.filter(item=>matchesPublicationTiming(item,'news',edition.edition_date,'postdated')).length;
+ const undatedReports=edition.news.filter(item=>matchesPublicationTiming(item,'news',edition.edition_date,'undated')).length;
+ assert(publishedOnEditionDate+earlierReports+postdatedReports+undatedReports===edition.news.length,'News publication-date accounting mismatch');
+ return {
+  editionDate:edition.edition_date,
+  newsReports:edition.news.length,
+  publishedOnEditionDate,
+  earlierReports,
+  postdatedReports,
+  undatedReports,
+  catalogAdditions:edition.technologies.length+edition.terms.length,
+  siteChanges:edition.site_changes.length,
+  corrections:edition.corrections.length,
+  sourceFailures:edition.coverage.sources_failed.length,
+  coverageStatus:edition.coverage.status
+ };
+}
 function revisionDiff(previous,current){
  assert(previous&&current&&previous.edition_date===current.edition_date&&validDate(current.edition_date),'Cannot compare editions from different dates');
  const canonical=value=>Array.isArray(value)?value.map(canonical):value&&typeof value==='object'?Object.fromEntries(Object.keys(value).sort().map(key=>[key,canonical(value[key])])):value;
@@ -250,5 +273,5 @@ function citationCsv(edition,entry,filters={}){
  // UTF-8 BOM improves non-ASCII compatibility with common spreadsheet software.
  return '\ufeff'+result.join('\r\n')+'\r\n';
 }
-return {KINDS,matchesTopic,matchesReviewStatus,matchesSource,matchesPublicationTiming,matchesQuery,sourceHost,validDate,validTimestamp,chicagoDate,safeSource,safeCatalogPath,validateIndex,validateEdition,selection,fallbackOrder,revisionDiff,requestedEdition,permalink,viewFilters,filterPermalink,citationCsv};
+return {KINDS,editionSnapshot,matchesTopic,matchesReviewStatus,matchesSource,matchesPublicationTiming,matchesQuery,sourceHost,validDate,validTimestamp,chicagoDate,safeSource,safeCatalogPath,validateIndex,validateEdition,selection,fallbackOrder,revisionDiff,requestedEdition,permalink,viewFilters,filterPermalink,citationCsv};
 });
