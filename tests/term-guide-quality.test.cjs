@@ -343,7 +343,7 @@ test('Concept drift and data drift guides distinguish conditional change, input 
 
 test('Instruction authority and defense-in-depth guides explain conditional security, not guarantees', () => {
   for (const [id, expected] of Object.entries({
-    'MLD-0291': [/trust boundar/i, /authorization/i, /P\(reach action\)/i, /false-positive rate/i, /synthetic/i, /not proof|does not prove|not automatically/i],
+    'MLD-0291': [/distinct security controls/i, /authorization/i, /P\(reach action\)/i, /false-positive rate/i, /synthetic/i, /not proof|does not prove|not automatically/i],
     'MLD-0565': [/higher-priority|higher-priority/i, /tool response|tool outputs/i, /10 percentage points/i, /false-refusal/i, /not a replacement|not.*guarantee/i]
   })) {
     const guide=guides[id], route=termManifest[id];
