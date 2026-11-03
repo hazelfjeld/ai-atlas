@@ -532,7 +532,7 @@
       "edition_date": "2026-11-03",
       "validation_result": "source_batch_sha256_bytes_schema_unique_news_ids_canonical_source_urls_dates_collection_window_verified_eight_news_web_source_reviews_production_and_public_asset_checks_passed",
       "status": "partially_published_with_4_deferred_catalog_proposals",
-      "publication_outcome": "immutable_nov03_v3_pending_production_verification",
+      "publication_outcome": "immutable_nov03_v3_cloudflare_http_browser_and_githack_verified",
       "publication_edition": "2026-11-03-v3",
       "accepted_news_ids": [
         "ai-news:tohoku-aisin:stt-mram-soc:2026-11-02",
@@ -561,7 +561,7 @@
         "news_deferred": 0,
         "catalog_deferred": 4
       },
-      "review_notes": "November 3 partial 48-hour recovery collection: six original source categories, 14 checked source URLs (some discovery/limited), three failed source lookups. Four November 3 reports and four dated earlier catch-up items. Tohoku University and OpenAI primary announcements were opened; IFParse author discussion opened; Reuters indexed original reports checked for stated claims. Prototype comparisons, benchmark scores, market forecasts and investigations are qualified and not independently reproduced or adjudicated. Four catalog proposals were not inserted as canonical records; historical November 2 edition left unchanged. Await CI and real production verification before claiming hosted publication.\nNovember 3 v2 preserves eight source-qualified news items and original dates/evidence. Adds two already-published Atlas educational guide links under site_changes only; four deferred canonical proposals and three failed lookups unchanged. Deployment verification pending.\nNovember 3 v2 verified in production: catalog/GitHack 41676627178 and Cloudflare deployed/browser 41676627291 both passed on merged main 5a44a6bb98dd8c8a55b8efee1ff16500284d61ee by 2026-11-03T16:44:04Z. No new outside news or canonical entries; two Atlas guide records only.\nNovember 3 v3 pending publication: indexes two previously production-verified Atlas-only research pages, preserving all eight news records, 14 source checks, 3 failures and four deferred canonical proposals. Immutable v2 and earlier archives untouched. Last confirmed production v2 remains 2026-11-03T16:44:04Z pending exact v3 catalog/GitHack and Cloudflare jobs.",
+      "review_notes": "November 3 partial 48-hour recovery collection: six original source categories, 14 checked source URLs (some discovery/limited), three failed source lookups. Four November 3 reports and four dated earlier catch-up items. Tohoku University and OpenAI primary announcements were opened; IFParse author discussion opened; Reuters indexed original reports checked for stated claims. Prototype comparisons, benchmark scores, market forecasts and investigations are qualified and not independently reproduced or adjudicated. Four catalog proposals were not inserted as canonical records; historical November 2 edition left unchanged. Await CI and real production verification before claiming hosted publication.\nNovember 3 v2 preserves eight source-qualified news items and original dates/evidence. Adds two already-published Atlas educational guide links under site_changes only; four deferred canonical proposals and three failed lookups unchanged. Deployment verification pending.\nNovember 3 v2 verified in production: catalog/GitHack 41676627178 and Cloudflare deployed/browser 41676627291 both passed on merged main 5a44a6bb98dd8c8a55b8efee1ff16500284d61ee by 2026-11-03T16:44:04Z. No new outside news or canonical entries; two Atlas guide records only.\nNovember 3 v3 pending publication: indexes two previously production-verified Atlas-only research pages, preserving all eight news records, 14 source checks, 3 failures and four deferred canonical proposals. Immutable v2 and earlier archives untouched. Last confirmed production v2 remains 2026-11-03T16:44:04Z pending exact v3 catalog/GitHack and Cloudflare jobs.\nNovember 3 v3 production verified at 2026-11-03T19:34:45Z on main fc565eef with catalog/GitHack jobs 41703812947 and Cloudflare deployed/browser jobs 41703813098. All 143 Node tests passed, 484 exact HTTP assets each across three hostnames; 34 browser and 41 additional browser checks passed. Two Atlas-only changes indexed; eight source records and three failed source lookups unchanged, no new external news or catalog IDs.",
       "publication_history": [
         {
           "edition": "2026-11-03-v1",
@@ -604,19 +604,23 @@
           "catalog_deferred": 4,
           "site_changes_added": 2,
           "published_at": "2026-11-03T19:24:41.824Z",
-          "status": "pending_production_verification",
-          "note": "Two previously verified Atlas-only research site changes (Nov 3 candidate review and STT-MRAM explainer). Original source records, partial collection coverage and source failures remain unchanged; no new external news or canonical IDs."
+          "status": "cloudflare_http_browser_and_githack_verified",
+          "note": "Two previously verified Atlas-only research site changes (Nov 3 candidate review and STT-MRAM explainer). Original source records, partial collection coverage and source failures remain unchanged; no new external news or canonical IDs.",
+          "verified_at": "2026-11-03T19:34:45Z",
+          "production_commit": "fc565eefb38b17e0b1a6dac28446297843a8e590",
+          "production_workflow_run_id": 41703813098,
+          "githack_workflow_run_id": 41703812947
         }
       ],
-      "production_verified_at": "2026-11-03T16:44:04Z",
-      "production_verified_revision": 2,
-      "last_verified_at": "2026-11-03T16:44:04Z",
-      "next_action": "Verify November 3 v3 exact SHA-checked archive with catalog/GitHack and deployed Cloudflare/hosted-browser jobs; after proof record genuine v3 verification in ledger without mutating immutable edition. Continue source-complete canonical catalog integration for deferred November 3 candidates.",
-      "production_workflow_run_id": 41676627291,
-      "githack_workflow_run_id": 41676627178,
-      "production_commit": "5a44a6bb98dd8c8a55b8efee1ff16500284d61ee",
-      "last_verified_public_url": "https://aiupdates.app/whats-new.html?date=2026-11-03&revision=2",
-      "verification_scope": "Exact merged main 5a44a6b: catalog and public GitHack job checks in 41676627178 passed, and Cloudflare validate plus deployed HTTP/hosted-browser jobs in 41676627291 passed by 2026-11-03T16:44:04Z. November 3 v2 SHA-256/size-verified immutable archive contains unchanged 8 qualified source stories, 2 actual Atlas-only guide changes, 14 checked sources, 3 failed lookups, 4 deferred candidates. Verification establishes actual served assets and UI flows, not independent replication of the external claims."
+      "production_verified_at": "2026-11-03T19:34:45Z",
+      "production_verified_revision": 3,
+      "last_verified_at": "2026-11-03T19:34:45Z",
+      "next_action": "Intake staged queue before future expansion. Pursue one fully source-reviewed November 3 deferred catalog candidate with complete canonical data, linked pages/search/relationships and offline fallback; avoid claiming unreplicated prototype speedups as deployments.",
+      "production_workflow_run_id": 41703813098,
+      "githack_workflow_run_id": 41703812947,
+      "production_commit": "fc565eefb38b17e0b1a6dac28446297843a8e590",
+      "last_verified_public_url": "https://aiupdates.app/whats-new.html?date=2026-11-03&revision=3",
+      "verification_scope": "Exact published code main fc565eef: 143 Node tests plus all catalog/GitHack jobs passed in run 41703812947; Cloudflare validate and deployed production/browser jobs completed in run 41703813098 by 2026-11-03T19:34:45Z. Each of three hostnames served 484 exact assets with HTTP checks. Browser checked daily deep links and partial-source transparency, share filters, CSV downloads, mobile/navigation, Games and offline. Confirms delivery only, not independent replication of reported research claims."
     }
   ]
 }
