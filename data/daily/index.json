@@ -201,9 +201,17 @@
       "sha256": "e1b955ab76b4314c192335ba56e764e1edef2ef1982fa45ee9350e3cb2525691",
       "bytes": 52910,
       "published_at": "2026-11-03T14:08:16.536Z"
+    },
+    {
+      "date": "2026-11-03",
+      "revision": 1,
+      "path": "data/daily/editions/2026-11-03-v1.json",
+      "sha256": "a43ce7ba5c5522c6269c1819e8090213950e49c22e1d343f44b7be5a062c152c",
+      "bytes": 17798,
+      "published_at": "2026-11-03T15:29:16.347Z"
     }
   ],
   "last_successful_publish_at": "2026-11-03T14:14:03Z",
-  "status": "edition_revision_25_production_verified",
-  "coverage_note": "November 2 retrospective revision 25 is newly indexed but not yet independently production-verified. It records one genuine November 3 Atlas technology catalog addition, Windmill TECH-0302, now source-reviewed and linked, not a newly launched technology or fresh external news. The previously verified immutable Nov 2 revision 24 remains the last successful archive publication: main acda993d with catalog/GitHack 41634333269 and Cloudflare hosted-browser 41634333341 at 2026-11-03T12:19:22Z. Nine original qualified Nov 2 reports, one correction, original partial coverage window and two failed source lookups are unchanged. Five catalog proposals remain without a canonical ID; Nov 3's own edition awaits the separate collector. All prior archive revisions and professor-demo checkpoint remain intact."
+  "status": "edition_revision_1_pending_production_verification",
+  "coverage_note": "November 3 revision 1 from independently reviewed partial collector batch; 8 sourced news reports (4 published Nov 3, 4 catch-up from Nov 1–2), 0 canonical technologies, 0 terms, 0 corrections; 4 catalog proposals remain deferred. Three source lookups failed. Awaiting exact GitHack/catalog and Cloudflare/hosted-browser verification; last successful publish remains November 2 revision 25. No continuously live news feed."
 }
