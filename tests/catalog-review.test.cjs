@@ -12,7 +12,7 @@ test('Deferred proposal review is linked and clearly not catalog publication',()
  assert.match(page,/<main id="main">/);
  assert.match(page,/<a class="skip" href="#main">/);
  assert.match(page,/Seven proposals, not seven new entries/);
- assert.match(page,/0 new canonical records/);
+ assert.match(page,/2 new canonical technology records/);
  const candidates=['InvokeAI','GDPx','NVIDIA Auto Ontology','Windmill','Agent harness','Semantic ontology layer','Environment-grounded agent benchmark'];
  for(const name of candidates)assert.ok(page.includes('<h3>'+name+'</h3>'),'Missing proposal: '+name);
  assert.equal((page.match(/<article class="card">/g)||[]).length,7);
@@ -45,8 +45,8 @@ test('Dated candidate audit is machine-readable, source-attributed and not a cat
   'term-proposal:environment-grounded-agent-benchmark'
  ];
  assert.equal(audit.schema,1);
- assert.equal(audit.document_type,'editorial_candidate_triage_with_one_canonical_addition');
- assert.equal(audit.published_canonical_additions,1);
+ assert.equal(audit.document_type,'editorial_candidate_triage_with_two_canonical_additions');
+ assert.equal(audit.published_canonical_additions,2);
  assert.equal(audit.reviewed_proposals,7);
  assert.equal(audit.independent_product_or_benchmark_replication,false);
  assert.equal(audit.source_batch.batch_id,receipt.batch_id);
@@ -81,7 +81,7 @@ test('Candidate audit is linked from the accessible review page and shipped in t
  assert.match(page,/href="data\/catalog-candidate-decisions-2026-11-03\.json" download/);
  assert.match(page,/<th scope="col">Proposal<\/th>/);
  assert.match(page,/<table class="decision-matrix">/);
- assert.match(page,/1 new technology ID \(TECH-0301\), 0 new term IDs/);
+ assert.match(page,/2 new technology IDs \(TECH-0301 and TECH-0302\), 0 new term IDs/);
  const deployed=JSON.parse(read('deploy/public-files.json'));
  assert.ok(deployed.extra_downloads.includes(file),'Audit export must survive Cloudflare allowlisting');
  assert.ok(fs.statSync(path.join(root,file)).size>5000,'Audit export must contain substantive sourced records');

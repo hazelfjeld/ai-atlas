@@ -16,10 +16,10 @@ async function load(transform = (p, b) => b) {
   vm.runInNewContext(loader, context);
   return {promise: window.ATLAS_READY, window};
 }
-test('the real manifest loads 1705 original records plus a source-reviewed addition', async () => {
+test('the real manifest loads 1705 original records plus two source-reviewed additions', async () => {
   const {promise} = await load();
   const d = await promise;
-  assert.equal(d.terms.length, 1345); assert.equal(d.technologies.length, 301); assert.equal(d.technologies.at(-1).id, 'TECH-0301');
+  assert.equal(d.terms.length, 1345); assert.equal(d.technologies.length, 302); assert.equal(d.technologies.at(-1).id, 'TECH-0302');
   assert.equal(d.papers.length, 30); assert.equal(d.alerts.length, 10); assert.equal(d.playbooks.length, 20);
   assert.equal(d.sources.length, 19); assert.equal(d.meta.automatic_refresh_active, false);
 });
@@ -62,7 +62,7 @@ test('offline fallback embeds all records and valid JavaScript without external 
   new vm.Script(script);
   const value = script.split('window.ATLAS_READY=Promise.resolve(')[1].split(');\n')[0];
   const d = JSON.parse(value);
-  assert.equal(['papers','alerts','playbooks','terms','technologies'].reduce((n,k) => n+d[k].length, 0), 1706);
+  assert.equal(['papers','alerts','playbooks','terms','technologies'].reduce((n,k) => n+d[k].length, 0), 1707);
   for (const kind of ['papers','alerts','playbooks','terms','technologies']) {
     const m = d.publication;
     const files = kind === 'papers' || kind === 'alerts' ? m.files.filter(f => f.kind === kind) : m.extensions[kind];

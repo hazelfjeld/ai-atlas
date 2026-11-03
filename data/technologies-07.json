@@ -2,7 +2,7 @@
   {
     "id": "TECH-0301",
     "name": "NVIDIA Auto Ontology",
-    "section": "14 \u00b7 RAG and agent orchestration",
+    "section": "14 · RAG and agent orchestration",
     "kind": "Framework",
     "tags": [
       "LLM",
@@ -74,6 +74,93 @@
       {
         "title": "NVIDIA third-party notices",
         "url": "https://github.com/NVIDIA/auto-ontology/blob/cdaf61e1bd0cf3820d11d72b43bb460816aebbd3/THIRD_PARTY_NOTICES.md"
+      }
+    ]
+  },
+  {
+    "id": "TECH-0302",
+    "name": "Windmill",
+    "section": "14 · RAG and agent orchestration",
+    "kind": "Workflow and application platform",
+    "tags": [
+      "Agents",
+      "Automation",
+      "Engineering",
+      "Workflow",
+      "Tools"
+    ],
+    "stages": [
+      "Build",
+      "Integrate",
+      "Deploy"
+    ],
+    "what": "Code-first platform for scripts, scheduled jobs, APIs, workflows and internal apps, with optional agent and MCP integrations.",
+    "edge": "Turns maintained scripts into workflows and human-facing apps with Git-based review and worker isolation; an available design capability, not an independently measured speed or security advantage.",
+    "best_for": "Teams combining Python, TypeScript and SQL automations with internal forms, approval processes, integrations and auditable deployment review.",
+    "watch_out": "A documented external-OIDC-token feature is not a security certification. Check issuer, token audience, role/workspace mapping, least privilege, secret access and worker isolation; review AI-generated code before deployment.",
+    "alternatives": [
+      "Temporal for durable execution and stateful workflows",
+      "Apache Airflow for scheduled data pipelines",
+      "n8n for visual integration-centric workflows"
+    ],
+    "source_url": "https://github.com/windmill-labs/windmill",
+    "keywords": [
+      "Windmill",
+      "workflow automation",
+      "MCP",
+      "external OIDC issuer",
+      "scripts",
+      "apps",
+      "orchestrator"
+    ],
+    "access": "At v1.856.0, backend/frontend source is principally AGPLv3 with documented exceptions; clients and OpenAPI specs are Apache-2.0. Distributed Community Edition binaries include proprietary features and use/distribution limits; enterprise and commercial embedding/managed-service rights differ. Check the exact LICENSE before redistribution.",
+    "runtime": "Self-hosting documented with Docker Compose or Kubernetes, PostgreSQL, server and separate workers; resource needs depend on job language, concurrency and workloads. Managed hosting, auth providers and optional secret backends have separate setup and costs.",
+    "concepts": [
+      "Agentic workflow",
+      "Orchestrator",
+      "Tool use"
+    ],
+    "concept_ids": [
+      "MLD-0043",
+      "MLD-0851",
+      "MLD-1246"
+    ],
+    "linked_concepts": [
+      "Agentic workflow",
+      "Orchestrator",
+      "Tool use"
+    ],
+    "alternative_ids": [
+      "TECH-0258",
+      "TECH-0007"
+    ],
+    "evidence_status": "First-party v1.856.0 release notes, tagged README and LICENSE reviewed 2026-11-03; feature operation, authentication security and performance not independently reproduced",
+    "reviewed_on": "2026-11-03",
+    "catalog_added_on": "2026-11-03",
+    "initial_release_date": null,
+    "source_revision": "v1.856.0",
+    "notes": "New to Atlas on November 3, not a new product launch. The November 2 v1.856.0 notes report external OIDC issuer access tokens for MCP, not universal support across all configurations; later versions may exist.",
+    "lifecycle": "Existing software, source-reviewed at tagged v1.856.0; initial public release date not independently established",
+    "comparison_basis": "Conceptual first-party feature comparison; no measured throughput, reliability or authorization-security benchmarks reproduced by Atlas.",
+    "complexity": "Intermediate to advanced",
+    "execution": "Self-hosted or managed service",
+    "test_before_choice": "Deploy isolated test workers and a read-only demo integration. Check Git review gates, scoped OIDC access to MCP tools, user/workspace RBAC, secret handling, failure retries and job isolation; measure real workload latency and operational cost.",
+    "primary_sources": [
+      {
+        "title": "Windmill tagged v1.856.0 release notes (November 2, 2026)",
+        "url": "https://github.com/windmill-labs/windmill/releases/tag/v1.856.0"
+      },
+      {
+        "title": "Windmill tagged source README and self-hosting architecture",
+        "url": "https://github.com/windmill-labs/windmill/blob/v1.856.0/README.md"
+      },
+      {
+        "title": "Windmill tagged LICENSE with distinct source and Community Edition terms",
+        "url": "https://github.com/windmill-labs/windmill/blob/v1.856.0/LICENSE"
+      },
+      {
+        "title": "Windmill official MCP server and auth documentation",
+        "url": "https://www.windmill.dev/docs/core_concepts/mcp"
       }
     ]
   }
