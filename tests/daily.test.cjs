@@ -1276,12 +1276,12 @@ test('Source-date scope round-trips through safe share links and filtered eviden
  assert.equal(D.viewFilters('?published=postdated').publication,'postdated');
  assert.equal(D.filterPermalink(ref,{publication:'not-a-date-scope'}),D.permalink(ref));
  const csv=D.citationCsv(edition,ref,{publication:'catch-up'});
- assert.equal(csv.split('\\r\\n').filter(Boolean).length,5,'CSV contains header plus exactly four catch-up news items');
+ assert.equal(csv.split('\r\n').filter(Boolean).length,5,'CSV contains header plus exactly four catch-up news items');
  assert.match(csv,/Tohoku and Aisin/);
  assert.doesNotMatch(csv,/Chinese financial regulator warns/);
  assert.doesNotMatch(csv,/site-nov03-candidate-evidence-review/);
  const todayCsv=D.citationCsv(edition,ref,{publication:'same-day',section:'news'});
- assert.equal(todayCsv.split('\\r\\n').filter(Boolean).length,5);
+ assert.equal(todayCsv.split('\r\n').filter(Boolean).length,5);
  assert.match(todayCsv,/Chinese financial regulator warns/);
  assert.doesNotMatch(todayCsv,/Tohoku and Aisin/);
 });
@@ -1289,12 +1289,14 @@ test('Source-date scope round-trips through safe share links and filtered eviden
 test('Publication-date view is accessible and wired to the same filter as CSV and share URL',()=>{
  const html=fs.readFileSync('whats-new.html','utf8');
  const js=fs.readFileSync('whats-new.js','utf8');
- assert.match(html,/<label for="publication-filter">News source date<select id="publication-filter">/);
- assert.match(html,/option value="catch-up"/);
- assert.match(html,/event, discovery and catalog-addition dates remain separate/);
- assert.match(js,/C\\.matchesPublicationTiming\\(item,kind,edition\\.edition_date,publication\\)/);
- assert.match(js,/publication-filter'\\)\\.value=filters\\.publication/);
- assert.match(js,/publication-filter'\\)\\.addEventListener\\('change',render\\)/);
- assert.match(js,/publication-filter'\\)\\.value='all'/);
- assert.match(js,/Publisher date unreported/);
+ assert.ok(html.includes('<label for="publication-filter">News source date<select id="publication-filter">'));
+ assert.ok(html.includes('<option value="catch-up">'));
+ assert.ok(html.includes('event, discovery and catalog-addition dates remain separate'));
+ for(const token of [
+  'C.matchesPublicationTiming(item,kind,edition.edition_date,publication)',
+  "publication-filter').value=filters.publication",
+  "publication-filter').addEventListener('change',render)",
+  "publication-filter').value='all'",
+  'Publisher date unreported'
+ ])assert.ok(js.includes(token),'Missing archive UI wiring '+token);
 });
