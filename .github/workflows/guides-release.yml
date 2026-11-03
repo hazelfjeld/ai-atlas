@@ -54,7 +54,8 @@ jobs:
                  'terms/MLD-0146-capability-failure.html',
                  'terms/MLD-0142-calibration.html','terms/MLD-0198-conformal-prediction.html',
                  'terms/MLD-0389-expected-calibration-error.html','terms/MLD-1184-subgroup-evaluation.html',
-                 'terms/index.html','terms/manifest.json','publication.json']
+                 'terms/index.html','terms/manifest.json','publication.json',
+                 'data/technologies-07.json','technology/TECH-0301-nvidia-auto-ontology.html','technology/index.html']
           for name in files:
               expected=pathlib.Path(name).read_bytes()
               for attempt in range(4):
