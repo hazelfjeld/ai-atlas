@@ -137,6 +137,32 @@ with sync_playwright() as p:
               len(visible_titles) == 4
               and page.locator('#edition-search').input_value() == 'Reuters'
               and page.locator('#section-filter').input_value() == 'news')
+        # Exactly reported review statuses, never guessed confidence buckets.
+        review_options = page.locator('#evidence-filter option').all_text_contents()
+        check('evidence label control populated only from verified edition records',
+              len(review_options) > 1 and review_options[0] == 'All review labels')
+        first_review = page.locator('#edition-content article.item .tags .tag').first.inner_text()
+        page.locator('#evidence-filter').select_option(first_review)
+        check('review label narrows news and updates shareable research URL',
+              0 < page.locator('#edition-content article.item').count() <= 4
+              and all(x == first_review for x in
+                      page.locator('#edition-content article.item .tags .tag:first-child').all_inner_texts())
+              and 'review=' in page.url)
+        share_url = page.url
+        page.goto(share_url)
+        page.wait_for_function("!document.getElementById('export-verified').disabled", timeout=45000)
+        check('review label restores from URL only after verified archive read',
+              page.locator('#evidence-filter').input_value() == first_review)
+        with page.expect_download() as review_download:
+            page.locator('#export-verified').click()
+        review_path = out / 'review-label-evidence.csv'
+        review_download.value.save_as(review_path)
+        filtered_rows = list(csv.DictReader(io.StringIO(review_path.read_text(encoding='utf-8-sig'))))
+        check('download preserves exactly the visible review-label subset',
+              len(filtered_rows) == page.locator('#edition-content article.item').count()
+              and all(row['review_status'] == first_review for row in filtered_rows))
+        review_path.unlink()
+        page.locator('#evidence-filter').select_option('all')
         with page.expect_download() as received:
             page.locator('#export-verified').click()
         download = received.value
