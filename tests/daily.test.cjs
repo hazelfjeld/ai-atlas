@@ -438,7 +438,7 @@ test('Revision 9 indexes only the accessible sidebar update, preserving immutabl
  for(const kind of ['news','technologies','terms','corrections'])assert.equal(diff[kind].added.length+diff[kind].updated.length+diff[kind].removed.length,0);
  assert.match(after.site_changes.at(-1).summary,/not a new real-world AI event/i);
  const ledger=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8'));
- assert.equal(ledger.receipts.length,1);
+ assert.equal(ledger.receipts.length,2,'Genuine Nov 3 batch receipt joins the historical Nov 2 receipt');
  assert.ok(ledger.receipts[0].publication_history.some(h=>h.edition==='2026-11-02-v9'));
  assert.equal(ledger.receipts[0].publication_edition,ledger.receipts[0].publication_history.at(-1).edition);
  assert.equal(ledger.receipts[0].deferred_catalog_proposal_ids.length,5);
@@ -948,7 +948,7 @@ test('Retrospective v21 records reviewed catalog candidates without claiming wor
  assert.equal(D.selection(idx,'2026-11-03').todayEntry?.revision,1);
  const ledger=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8')).receipts[0];
  assert.ok(ledger.publication_history.some(h=>h.edition==='2026-11-02-v21'&&h.status==='cloudflare_http_browser_and_githack_verified'), 'Preserve verified v21 receipt');
- const latest=idx.editions.at(-1);
+ const latest=idx.editions.filter(e=>e.date==='2026-11-02').at(-1); // The historical first receipt refers to Nov 2, not the new dated edition.
  assert.equal(ledger.publication_edition,latest.date+'-v'+latest.revision);
  assert.equal(ledger.publication_history.at(-1).edition,ledger.publication_edition);
  assert.equal(ledger.deferred_catalog_proposal_ids.length,5);
