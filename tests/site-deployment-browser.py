@@ -163,6 +163,28 @@ with sync_playwright() as p:
               and all(row['review_status'] == first_review for row in filtered_rows))
         review_path.unlink()
         page.locator('#evidence-filter').select_option('all')
+        source_options = page.locator('#source-filter option').all_text_contents()
+        check('source domains are populated from reviewed source URLs',
+              'www.reuters.com' in source_options and source_options[0] == 'All sources')
+        page.locator('#source-filter').select_option('www.reuters.com')
+        check('exact source URL filter limits Reuters reports and updates share link',
+              page.locator('#edition-content article.item').count() == 4
+              and 'source=www.reuters.com' in page.url)
+        page.goto(page.url)
+        page.wait_for_function("!document.getElementById('export-verified').disabled", timeout=45000)
+        check('source domain restores after dated SHA-verified permalink',
+              page.locator('#source-filter').input_value() == 'www.reuters.com'
+              and page.locator('#edition-content article.item').count() == 4)
+        with page.expect_download() as source_download:
+            page.locator('#export-verified').click()
+        source_path = out / 'source-domain-evidence.csv'
+        source_download.value.save_as(source_path)
+        domain_rows = list(csv.DictReader(io.StringIO(source_path.read_text(encoding='utf-8-sig'))))
+        check('browser CSV includes exactly the filtered citation host records',
+              len(domain_rows) == 4
+              and all(row['source_url'].startswith('https://www.reuters.com/') for row in domain_rows))
+        source_path.unlink()
+        page.locator('#source-filter').select_option('all')
         with page.expect_download() as received:
             page.locator('#export-verified').click()
         download = received.value
