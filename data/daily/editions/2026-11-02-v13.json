@@ -1,0 +1,577 @@
+{
+  "schema": 1,
+  "edition_date": "2026-11-02",
+  "timezone": "America/Chicago",
+  "published_at": "2026-11-03T02:38:21.964Z",
+  "coverage": {
+    "start": "2026-11-01T14:50:00Z",
+    "end": "2026-11-02T14:53:43.848Z",
+    "status": "partial",
+    "note": "All nine news candidates in the first November 2 staged batch have now been individually source-checked, including four Reuters originals that are explicitly attributed as reported proposals/agreements/risk assessments. Eight technology/term proposals remain pending. The original collection window remains 2026-11-01T14:50:00Z to 2026-11-02T14:53:43.848Z; this edition is non-exhaustive, and two source lookups failed. Revision 4 preserves the nine news items and original collection window; the new vLLM compatibility note is an actual Atlas site update, not a new-world event.",
+    "sources_checked": [
+      {
+        "name": "vllm",
+        "url": "https://github.com/vllm-project/vllm/releases/tag/v0.33.0rc3",
+        "checked_at": "2026-11-02T14:53:43.848Z"
+      },
+      {
+        "name": "invokeai",
+        "url": "https://github.com/invoke-ai/InvokeAI/releases/tag/v6.14.3",
+        "checked_at": "2026-11-02T14:53:43.848Z"
+      },
+      {
+        "name": "windmill",
+        "url": "https://github.com/windmill-labs/windmill/releases/tag/v1.856.0",
+        "checked_at": "2026-11-02T14:53:43.848Z"
+      },
+      {
+        "name": "SemiAnalysis GDPx original publication",
+        "url": "https://newsletter.semianalysis.com/p/gdpx-measuring-frontier-model-capabilities",
+        "checked_at": "2026-11-02T17:32:44.374Z"
+      },
+      {
+        "name": "WIRED original investigation",
+        "url": "https://www.wired.com/story/hundreds-of-mundane-ai-apps-are-hiding-abusive-deepfake-features/",
+        "checked_at": "2026-11-02T17:32:44.374Z"
+      },
+      {
+        "name": "Reuters — South Korea proposes larger 2027 AI investment in record budget",
+        "url": "https://www.reuters.com/world/asia-pacific/south-koreas-lee-vows-make-bold-ai-investment-record-budget-push-2026-11-02/",
+        "checked_at": "2026-11-02T19:35:32.153Z"
+      },
+      {
+        "name": "Reuters — ADNOC and G42 announce an enterprise AI agreement with OpenAI",
+        "url": "https://www.reuters.com/business/energy/abu-dhabis-adnoc-g42-sign-deal-with-openai-sam-altman-travels-uae-2026-11-02/",
+        "checked_at": "2026-11-02T19:35:32.153Z"
+      },
+      {
+        "name": "Reuters — ECB vice-president warns of high AI equity valuations among stability risks",
+        "url": "https://www.reuters.com/business/finance/ecb-flags-ai-valuations-bond-stress-fund-losses-main-risks-2026-11-02/",
+        "checked_at": "2026-11-02T19:35:32.153Z"
+      },
+      {
+        "name": "Reuters — Oracle outlines a $20 billion debt-and-equity financing plan",
+        "url": "https://www.reuters.com/business/oracle-offer-10-billion-bonds-2026-11-02/",
+        "checked_at": "2026-11-02T19:35:32.153Z"
+      }
+    ],
+    "sources_failed": [
+      {
+        "url": "https://huggingface.co/api/models/JetBrains/Mellum2.1-12B-A2.5B-Thinking-MTP",
+        "reason": "Direct model metadata API was not available in the research browser; model-card first-publication timestamp unverified, no date-specific news item proposed.",
+        "status": "inaccessible"
+      },
+      {
+        "url": "https://www.samsungsds.com/kr/news/0905-6278.html",
+        "reason": "Previously surfaced press URL returned no page; unverified alleged deal omitted.",
+        "status": "not_found"
+      }
+    ]
+  },
+  "tldr": [
+    "Nine previously source-reviewed November 2 reports remain available with their original source dates and partial collection coverage.",
+    "Two existing Atlas concepts—Reward model and Reward-model overoptimization—now have nine-section, primary-source-backed guides with pairwise preference arithmetic, proxy-versus-human evaluation and reproducible ablation designs; no external event or new term is claimed.",
+    "Seven catalog proposals remain deferred, and two original source lookups failed; this static scheduled archive is non-exhaustive."
+  ],
+  "news": [
+    {
+      "id": "ai-news-vllm-v0-33-0rc3-2026-11-02",
+      "title": "vLLM v0.33.0rc3 expands model serving and changes CUDA packaging",
+      "category": "infrastructure",
+      "tags": [
+        "LLM",
+        "Inference",
+        "GPU",
+        "Open source"
+      ],
+      "summary": "The v0.33.0rc3 release candidate adds model and speculative-decoding support, moves to PyTorch 2.14, and publishes CUDA 13 rather than CUDA 12.9 artifacts, alongside AMD ROCm updates.",
+      "why_it_matters": "Inference engineers need to validate model support, compatibility and deployment images before upgrading serving fleets.",
+      "caveat": "This specific URL is tagged rc3 (release candidate), even though its GitHub heading says v0.33.0; performance claims are release-note benchmarks on specified hardware.",
+      "review_status": "publisher_verified_primary_release_notes",
+      "release_status": "release_candidate",
+      "source_url": "https://github.com/vllm-project/vllm/releases/tag/v0.33.0rc3",
+      "publication_date": "2026-11-02",
+      "event_date": "2026-11-02",
+      "discovered_at": "2026-11-02T14:53:43.848Z",
+      "catalog_path": "technology/TECH-0288-vllm.html"
+    },
+    {
+      "id": "ai-news-invokeai-v6-14-3-2026-11-01",
+      "title": "InvokeAI 6.14.3 adds editable vector layers for image workflows",
+      "category": "multimodal",
+      "tags": [
+        "DL",
+        "Diffusion",
+        "Vision",
+        "Creative tools",
+        "Open source"
+      ],
+      "summary": "InvokeAI's 6.14.3 patch adds editable vector shapes and splines to its Canvas, which artists can rasterize for image-to-image workflows, and fixes resumed model downloads.",
+      "why_it_matters": "This bridges precise vector composition and local generative image editing without forcing every shape to be raster-first.",
+      "caveat": "This is a product-specific patch, not evidence that image-generation quality or speed improved across models; GitHub displays release time without an explicit timezone.",
+      "review_status": "publisher_verified_primary_release_notes",
+      "release_status": "patch_release",
+      "source_url": "https://github.com/invoke-ai/InvokeAI/releases/tag/v6.14.3",
+      "publication_date": "2026-11-01",
+      "event_date": "2026-11-01",
+      "discovered_at": "2026-11-02T14:53:43.848Z"
+    },
+    {
+      "id": "ai-news-windmill-v1-856-0-2026-11-02",
+      "title": "Windmill 1.856.0 adds external OIDC token support for MCP access",
+      "category": "developer_tooling",
+      "tags": [
+        "Agents",
+        "MCP",
+        "Security",
+        "Developer tools"
+      ],
+      "summary": "Windmill's 1.856.0 release adds support for MCP access tokens from external OIDC issuers, HashiCorp Vault references, workspace-role sync through the CLI, and working folders/instructions for AI sessions.",
+      "why_it_matters": "It gives teams more options for authenticated and governed automation workflows that expose tools to agents.",
+      "caveat": "The announcement is a release-note claim, not an independent security audit; organizational authentication still requires appropriate configuration.",
+      "review_status": "publisher_verified_primary_release_notes",
+      "release_status": "software_release",
+      "source_url": "https://github.com/windmill-labs/windmill/releases/tag/v1.856.0",
+      "publication_date": "2026-11-02",
+      "event_date": "2026-11-02",
+      "discovered_at": "2026-11-02T14:53:43.848Z"
+    },
+    {
+      "id": "ai-news-gdpx-agent-benchmark-2026-11-02",
+      "title": "SemiAnalysis launches GDPx benchmark for tool-using agents",
+      "category": "research",
+      "tags": [
+        "Research",
+        "Agents",
+        "Evaluation",
+        "AI safety",
+        "Benchmark"
+      ],
+      "summary": "SemiAnalysis published GDPx, a tool-using agent benchmark spanning 11 specialized domains, including chip design, cybersecurity, biology and alignment. The authors report a 12% top score on their own aggregate evaluation.",
+      "why_it_matters": "Environment-based tasks and explicit grading constraints offer ways to evaluate agent capability and boundary-following beyond static question-answer tests.",
+      "caveat": "The 12% figure and comparisons are publisher-run, not independently replicated. Domain weighting, model harnesses, safety refusals and grading design affect results; alignment and cyber exercises are controlled evaluations, not real deployment incidents.",
+      "review_status": "primary_source_checked_publisher_benchmark_unreplicated",
+      "release_status": "new_benchmark",
+      "source_url": "https://newsletter.semianalysis.com/p/gdpx-measuring-frontier-model-capabilities",
+      "publication_date": "2026-11-02",
+      "event_date": "2026-11-02",
+      "discovered_at": "2026-11-02T14:53:43.848Z",
+      "added_to_atlas_at": "2026-11-02T17:32:44.374Z"
+    },
+    {
+      "id": "ai-news-wired-deepfake-network-investigation-2026-11-02",
+      "title": "WIRED investigates disguised apps linked to abusive deepfake services",
+      "category": "security",
+      "tags": [
+        "AI safety",
+        "Security",
+        "Misuse",
+        "Multimodal",
+        "Governance"
+      ],
+      "summary": "WIRED reports that researchers linked more than 400 app and web-domain properties to services presenting ordinary AI tools while conditionally exposing nonconsensual explicit deepfake functions. The investigation describes app-store and advertising distribution.",
+      "why_it_matters": "The reported pattern raises difficult questions about app review, server-switched features, consent safeguards and enforcement across advertising platforms.",
+      "caveat": "These are findings attributed to WIRED and its interviewed researchers, not a fresh independent Atlas audit. The 400-plus figure covers linked domains and apps, not 400 individually verified malicious applications; the reporting does not identify a particular underlying model.",
+      "review_status": "original_investigation_reviewed_not_independently_reproduced",
+      "release_status": "reported_investigation",
+      "source_url": "https://www.wired.com/story/hundreds-of-mundane-ai-apps-are-hiding-abusive-deepfake-features/",
+      "publication_date": "2026-11-02",
+      "discovered_at": "2026-11-02T14:53:43.848Z",
+      "added_to_atlas_at": "2026-11-02T17:32:44.374Z"
+    },
+    {
+      "id": "ai-news-reuters-south-korea-ai-budget-20261102",
+      "title": "South Korea proposes larger 2027 AI investment in record budget",
+      "category": "policy",
+      "release_status": "proposed_budget_not_enacted",
+      "summary": "Reuters reports President Lee Jae Myung urged lawmakers to approve a proposed 2027 budget including 21.3 trillion won for AI and major projects in semiconductors, physical AI and data centres—nearly twice this year's comparable investment.",
+      "why_it_matters": "The proposed allocation signals a national policy priority for AI infrastructure and hardware, but it still depends on the budget process.",
+      "caveat": "This is a proposed budget and presidential statement reported by Reuters, not enacted spending or proof the projects will be completed. Atlas has not independently checked the underlying budget documents.",
+      "review_status": "original_reuters_reporting_source_checked_not_independently_corroborated",
+      "source_url": "https://www.reuters.com/world/asia-pacific/south-koreas-lee-vows-make-bold-ai-investment-record-budget-push-2026-11-02/",
+      "publication_date": "2026-11-02",
+      "event_date": "2026-11-02",
+      "discovered_at": "2026-11-02T14:53:43.848Z",
+      "added_to_atlas_at": "2026-11-02T19:35:32.153Z",
+      "tags": [
+        "Policy",
+        "Robotics",
+        "Semiconductors",
+        "Infrastructure"
+      ]
+    },
+    {
+      "id": "ai-news-reuters-adnoc-g42-openai-agreement-20261102",
+      "title": "ADNOC and G42 announce an enterprise AI agreement with OpenAI",
+      "category": "enterprise",
+      "release_status": "announced_agreement",
+      "summary": "Reuters reports Abu Dhabi's energy company ADNOC and AI company G42 signed an agreement with OpenAI at the ADIPEC conference to use frontier AI in ADNOC operations.",
+      "why_it_matters": "The announced agreement illustrates growing enterprise interest in deploying advanced AI models in energy-sector workflows.",
+      "caveat": "Reuters reports an agreement and company statements, not independently demonstrated performance, deployment success or realized productivity gains. Specific systems and safeguards have not been audited by Atlas.",
+      "review_status": "original_reuters_reporting_source_checked_not_independently_corroborated",
+      "source_url": "https://www.reuters.com/business/energy/abu-dhabis-adnoc-g42-sign-deal-with-openai-sam-altman-travels-uae-2026-11-02/",
+      "publication_date": "2026-11-02",
+      "event_date": "2026-11-02",
+      "discovered_at": "2026-11-02T14:53:43.848Z",
+      "added_to_atlas_at": "2026-11-02T19:35:32.153Z",
+      "tags": [
+        "LLM",
+        "Industry",
+        "Energy",
+        "Enterprise"
+      ]
+    },
+    {
+      "id": "ai-news-reuters-ecb-ai-valuation-warning-20261102",
+      "title": "ECB vice-president warns of high AI equity valuations among stability risks",
+      "category": "finance",
+      "release_status": "reported_risk_assessment",
+      "summary": "Reuters quotes ECB Vice-President Boris Vujcic describing elevated AI-stock valuations, bond-market stress and potential losses at nonbank lenders and funds as present financial-stability concerns.",
+      "why_it_matters": "AI spending and expected returns increasingly matter beyond model developers, including investors, infrastructure financing and financial oversight.",
+      "caveat": "This is a reported risk assessment, not proof of an AI-stock bubble or a prediction of an imminent crash. The ECB's full Financial Stability Review was scheduled for November 18.",
+      "review_status": "original_reuters_reporting_source_checked_not_independently_corroborated",
+      "source_url": "https://www.reuters.com/business/finance/ecb-flags-ai-valuations-bond-stress-fund-losses-main-risks-2026-11-02/",
+      "publication_date": "2026-11-02",
+      "event_date": "2026-11-02",
+      "discovered_at": "2026-11-02T14:53:43.848Z",
+      "added_to_atlas_at": "2026-11-02T19:35:32.153Z",
+      "tags": [
+        "AI industry",
+        "Finance",
+        "Infrastructure",
+        "Governance"
+      ]
+    },
+    {
+      "id": "ai-news-reuters-oracle-financing-plan-20261102",
+      "title": "Oracle outlines a $20 billion debt-and-equity financing plan",
+      "category": "infrastructure",
+      "release_status": "planned_financing",
+      "summary": "Reuters reports Oracle plans to seek approximately $20 billion in debt and equity financing, potentially supporting its AI and cloud infrastructure expansion as well as other corporate uses.",
+      "why_it_matters": "The plan shows the scale and financing pressure of major AI infrastructure buildouts.",
+      "caveat": "The $20 billion is a reported financing plan, not completed proceeds or a dedicated $20 billion AI-only budget. Final offering terms and uses were not established at publication; Atlas has not independently reviewed all cited filings.",
+      "review_status": "original_reuters_reporting_source_checked_not_independently_corroborated",
+      "source_url": "https://www.reuters.com/business/oracle-offer-10-billion-bonds-2026-11-02/",
+      "publication_date": "2026-11-02",
+      "event_date": "2026-11-02",
+      "discovered_at": "2026-11-02T14:53:43.848Z",
+      "added_to_atlas_at": "2026-11-02T19:35:32.153Z",
+      "tags": [
+        "Infrastructure",
+        "Cloud",
+        "Finance",
+        "Industry"
+      ]
+    }
+  ],
+  "technologies": [],
+  "terms": [],
+  "site_changes": [
+    {
+      "id": "site-first-reviewed-edition-20261102",
+      "title": "First dated, evidence-checked partial daily edition",
+      "summary": "The archive gained three independently checked release-note news cards. No technology or term was added to the underlying catalogs in this publication.",
+      "review_status": "verified_main_publication_and_browser_checks",
+      "category": "site",
+      "tags": [
+        "Atlas",
+        "Editorial"
+      ],
+      "added_to_atlas_at": "2026-11-02T15:33:47.914Z"
+    },
+    {
+      "id": "site-expanded-daily-source-review-20261102",
+      "title": "Dated edition expanded with two source-reviewed reports",
+      "summary": "The November 2 archive now includes a publisher-attributed benchmark launch and an explicitly reported safety investigation. Edition v1 remains available; no new term, technology or confirmed incident catalog entry was created.",
+      "review_status": "source_reviews_completed_main_publication_pending",
+      "category": "site",
+      "tags": [
+        "Atlas",
+        "Editorial",
+        "Publication"
+      ],
+      "added_to_atlas_at": "2026-11-02T17:32:44.374Z"
+    },
+    {
+      "id": "site-four-reuters-reports-reviewed-20261102",
+      "title": "Four staged Reuters reports added to the dated daily archive",
+      "summary": "Publisher review expanded the November 2 edition from five to nine stories while preserving revisions 1 and 2. Eight technology/term proposals remain pending; the 1,705-record evergreen catalog is unchanged.",
+      "review_status": "editorial_review_complete_publication_verification_pending",
+      "category": "site",
+      "tags": [
+        "Atlas",
+        "Editorial",
+        "Publication"
+      ],
+      "added_to_atlas_at": "2026-11-02T19:35:32.153Z"
+    },
+    {
+      "id": "site-vllm-release-annotation-20261102",
+      "title": "Existing vLLM technology profile gains a dated release-compatibility review",
+      "summary": "AI Updates linked a source-checked vLLM GitHub release annotation to existing profile TECH-0288 and the searchable technology directory, without changing the original 300-profile catalog or offline demo. The release tag ends rc3 although GitHub titles it v0.33.0 and marks it non-prerelease. The site did not reproduce performance benchmarks.",
+      "review_status": "primary_release_notes_reviewed_not_reproduced",
+      "category": "site",
+      "tags": [
+        "Atlas",
+        "Inference",
+        "Technology",
+        "LLM",
+        "Release review"
+      ],
+      "catalog_path": "technology/TECH-0288-vllm.html",
+      "source_url": "https://github.com/vllm-project/vllm/releases/tag/v0.33.0rc3",
+      "publication_date": "2026-11-02",
+      "event_date": "2026-11-02",
+      "discovered_at": "2026-11-02T14:53:43.848Z",
+      "added_to_atlas_at": "2026-11-02T20:43:25Z",
+      "release_status": "existing_technology_profile_updated_in_atlas"
+    },
+    {
+      "id": "site-daily-revision-comparison-20261102",
+      "title": "Daily archive now explains changes between verified revisions",
+      "summary": "The daily archive displays added, revised, and removed records across news, technologies, terminology, site updates, and corrections. It verifies the earlier immutable edition's SHA-256 and byte count before presenting a comparison, and explicitly reports an unavailable comparison without hiding the current verified edition.",
+      "review_status": "source_code_and_catalog_tests_passed_production_check_pending",
+      "category": "site",
+      "tags": [
+        "Atlas",
+        "Editorial",
+        "Archive",
+        "Corrections",
+        "Provenance"
+      ],
+      "source_url": "https://github.com/hazelfjeld/ai-atlas/commit/6a8b38c8573ab84ce9d4e5b3c0a7232e15988653",
+      "publication_date": "2026-11-02",
+      "added_to_atlas_at": "2026-11-02T20:58:28.233Z",
+      "release_status": "site_feature_not_new_world_event"
+    },
+    {
+      "id": "site-source-coverage-audit-20261102",
+      "title": "Daily source audit now names coverage limits, lookup failures and check times",
+      "summary": "The daily archive displays the original collection-context note, each available source-check timestamp, and explicit failure status and reason; it also recovers through up to twelve recent immutable revisions on initial load. This is a static AI Updates reader improvement, not a new AI news event or a newly reviewed catalog record.",
+      "review_status": "site_code_reviewed_automated_deployment_verification_pending",
+      "category": "site",
+      "tags": [
+        "Atlas",
+        "Editorial",
+        "Source coverage",
+        "Archive",
+        "Reliability"
+      ],
+      "added_to_atlas_at": "2026-11-02T21:28:40.128Z",
+      "release_status": "site_update_not_new_world_event"
+    },
+    {
+      "id": "site-daily-keyword-search-20261102",
+      "title": "Search verified daily editions by headline, caveat, tag and source",
+      "summary": "AI Updates now lets readers combine an accent-insensitive multiword search with editorial section and topic filters, see match counts and reset with keyboard access. Search works only on previously checksum-verified edition content; no new external AI event, technology or term is claimed.",
+      "review_status": "source_code_reviewed_production_verification_pending",
+      "category": "site",
+      "tags": [
+        "Atlas",
+        "Editorial",
+        "Search",
+        "Archive",
+        "Accessibility"
+      ],
+      "added_to_atlas_at": "2026-11-02T22:36:04.316Z",
+      "release_status": "site_feature_not_world_event"
+    },
+    {
+      "id": "site-daily-shareable-filters-20261102",
+      "title": "Daily edition filters and search now have permanent shareable URLs",
+      "summary": "The verified archive's collection, topic and keyword filters are retained in a dated revision permalink. Opening a shared link restores those filters; choosing another archive revision or resetting filters updates the address only after the selected edition passes byte-count, SHA-256 and schema validation. No outside AI event or new catalog record is claimed.",
+      "review_status": "site_code_tests_passed_production_verification_pending",
+      "category": "site",
+      "tags": [
+        "Atlas",
+        "Archive",
+        "Search",
+        "Accessibility",
+        "Reproducibility"
+      ],
+      "added_to_atlas_at": "2026-11-02T23:00:23.863Z",
+      "release_status": "site_feature_not_world_event"
+    },
+    {
+      "id": "site-progressive-sidebar-navigation-20261102",
+      "title": "Atlas sidebar now groups secondary sections without losing deep-link navigation",
+      "summary": "Discover, What's New Today, Concept dictionary, Technology profiles and Games stay visible immediately. A native keyboard-accessible More sections disclosure reveals the nine additional destinations; opening a bookmarked Safety, Research, Playbooks, Compare, Notebook or Sources route automatically expands that group. The matching offline demo was regenerated from the same app sources. This is an AI Updates usability change, not a new real-world AI event or new catalog record.",
+      "review_status": "source_code_reviewed_automated_verification_pending",
+      "category": "site",
+      "tags": [
+        "Atlas",
+        "Navigation",
+        "Accessibility",
+        "Responsive design",
+        "Offline demo"
+      ],
+      "source_url": "https://github.com/hazelfjeld/ai-atlas/commit/4b111cd0a24682a981da6b4a533b2ea13e6eec94",
+      "added_to_atlas_at": "2026-11-02T23:29:58Z",
+      "release_status": "site_feature_not_world_event"
+    },
+    {
+      "id": "site-expanded-agentic-workflow-20261102",
+      "title": "Expanded agentic workflow guide now covers harnesses, execution and safety evaluations",
+      "summary": "Expanded the existing MLD-0043 concept into a sourced, nine-section guide, including control-flow pseudocode, a constrained support-triage example, least-privilege tool authorization, skill-versus-objective failure analysis, and held-out agent evaluations. This is an editorial addition to AI Updates, not a new-world-event announcement, benchmark result or newly coined term.",
+      "review_status": "source_reviewed_guide",
+      "category": "site",
+      "tags": [
+        "Atlas",
+        "Concept guides",
+        "Agentic workflows",
+        "Agent harness",
+        "Evaluation",
+        "Safety"
+      ],
+      "source_url": "https://github.com/hazelfjeld/ai-atlas/commit/0d8c76f99a4f4d71e583d399be39f6f85c7e1ca3",
+      "catalog_path": "terms/MLD-0043-agentic-workflow.html",
+      "added_to_atlas_at": "2026-11-03T00:35:47.214Z",
+      "release_status": "expanded_existing_concept_not_new_world_event"
+    },
+    {
+      "id": "site-expanded-knowledge-graph-20261102",
+      "title": "Expanded knowledge graph guide links RDF, ontologies and provenance tests",
+      "summary": "Expanded existing MLD-0608 with nine original sections explaining graph triples, vector retrieval differences, ontology semantics, a revenue-definition example, a SPARQL-style query sketch, grounding/permissions tests and data-staleness caveats. This is new editorial depth in AI Updates, not evidence that the term or technology was invented today.",
+      "review_status": "source_reviewed_guide",
+      "category": "site",
+      "tags": [
+        "Atlas",
+        "Concept guides",
+        "Knowledge graphs",
+        "RDF",
+        "Semantic ontology",
+        "Research"
+      ],
+      "source_url": "https://github.com/hazelfjeld/ai-atlas/commit/71c6ee18e333c54fd5ab99049e9ee6668bd25fae",
+      "catalog_path": "terms/MLD-0608-knowledge-graph.html",
+      "added_to_atlas_at": "2026-11-03T00:35:47.214Z",
+      "release_status": "expanded_existing_concept_not_new_world_event"
+    },
+    {
+      "id": "site-expanded-benchmark-evaluation-20261102",
+      "title": "Benchmark guide expanded with reproducible agent evaluation protocols",
+      "summary": "The existing MLD-0110 Benchmark page now explains scoring denominators, synthetic arithmetic, interactive benchmarks, contamination, reproducible harnesses, grader false positives and evaluation caveats. This is an original Atlas educational update, not newly invented terminology, a model experiment or a real-world AI event.",
+      "review_status": "source_reviewed_guide",
+      "category": "site",
+      "tags": [
+        "Atlas",
+        "Concept guides",
+        "AI safety",
+        "Evaluation",
+        "Research methods"
+      ],
+      "source_url": "https://arxiv.org/abs/2308.03688",
+      "catalog_path": "terms/MLD-0110-benchmark.html",
+      "added_to_atlas_at": "2026-11-03T01:47:40.512Z",
+      "release_status": "expanded_existing_concept_not_new_world_event"
+    },
+    {
+      "id": "site-expanded-environment-evaluation-20261102",
+      "title": "Environment guide expanded with tool-action dynamics and evaluation safety boundaries",
+      "summary": "The existing MLD-0371 Environment page now has nine source-backed sections on transition dynamics, Gymnasium termination and truncation, authorization checks, reproducibility and trajectory-based evaluation, including a clearly synthetic support example. This is new depth within Atlas, not a new technology release or confirmed external incident.",
+      "review_status": "source_reviewed_guide",
+      "category": "site",
+      "tags": [
+        "Atlas",
+        "Reinforcement learning",
+        "Agent environments",
+        "Safety",
+        "Methods"
+      ],
+      "source_url": "https://gymnasium.farama.org/api/env/",
+      "catalog_path": "terms/MLD-0371-environment.html",
+      "added_to_atlas_at": "2026-11-03T01:47:40.512Z",
+      "release_status": "expanded_existing_concept_not_new_world_event"
+    },
+    {
+      "id": "site-expanded-prompt-injection-20261102",
+      "title": "Prompt injection guide expanded with trust-boundary analysis and evaluation design",
+      "summary": "Expanded existing MLD-0957 into a nine-section, source-backed guide on direct versus indirect injection, typed tool authorization, threat modeling, synthetic support-triage examples, and attack/utility/false-positive evaluation. This is a site learning improvement, not a newly invented concept, production breach, or independent model test.",
+      "review_status": "source_reviewed_guide",
+      "category": "site",
+      "tags": [
+        "Atlas",
+        "AI safety",
+        "Prompt injection",
+        "Evaluation",
+        "Tool authorization"
+      ],
+      "source_url": "https://github.com/hazelfjeld/ai-atlas/commit/930e0c6267ff31776444b55dea082b9eac9d82e2",
+      "catalog_path": "terms/MLD-0957-prompt-injection.html",
+      "added_to_atlas_at": "2026-11-03T02:06:07.466Z",
+      "release_status": "expanded_existing_concept_not_new_world_event"
+    },
+    {
+      "id": "site-expanded-indirect-prompt-injection-20261102",
+      "title": "Indirect prompt injection guide expanded with data-flow controls and practical diagnostic metrics",
+      "summary": "Expanded existing MLD-0549 with nine source-backed sections on attacker-controlled retrieval content, tool-response trust boundaries, illustrative document and calendar scenarios, outcome-based agent checks, and a labeled synthetic detector confusion matrix. These are educational updates, not newly released technology or confirmed real-world compromise.",
+      "review_status": "source_reviewed_guide",
+      "category": "site",
+      "tags": [
+        "Atlas",
+        "AI safety",
+        "Indirect prompt injection",
+        "Retrieval",
+        "Threat models"
+      ],
+      "source_url": "https://github.com/hazelfjeld/ai-atlas/commit/930e0c6267ff31776444b55dea082b9eac9d82e2",
+      "catalog_path": "terms/MLD-0549-indirect-prompt-injection.html",
+      "added_to_atlas_at": "2026-11-03T02:06:07.466Z",
+      "release_status": "expanded_existing_concept_not_new_world_event"
+    },
+    {
+      "id": "site-expanded-reward-model-20261102",
+      "title": "Reward model guide expanded with preference mathematics and audit protocols",
+      "summary": "Expanded existing MLD-1040 with nine reviewed sections explaining pairwise sigmoid preference scoring, RLHF versus best-of-N selection, a labeled illustrative 0.69 computation, independent human evaluation, audit slices and proxy-failure cautions. This is new teaching depth in Atlas, not a new technology or confirmed incident.",
+      "review_status": "source_reviewed_guide",
+      "category": "site",
+      "tags": [
+        "Atlas",
+        "AI safety",
+        "Reward modeling",
+        "RLHF",
+        "Evaluation",
+        "Research"
+      ],
+      "source_url": "https://arxiv.org/abs/2009.01325",
+      "catalog_path": "terms/MLD-1040-reward-model.html",
+      "added_to_atlas_at": "2026-11-03T02:38:21.964Z",
+      "release_status": "expanded_existing_concept_not_new_world_event"
+    },
+    {
+      "id": "site-expanded-reward-overoptimization-20261102",
+      "title": "Reward-model overoptimization guide adds measurable Goodhart and ablation examples",
+      "summary": "Expanded existing MLD-1041 with nine primary-source-backed sections on optimization pressure, best-of-N versus policy updates, controlled score-quality divergence, synthetic N=1/4/16 arithmetic, KL comparisons, audits and limits of gold-model experiments. This is an Atlas educational update, not a newly discovered real-world safety incident.",
+      "review_status": "source_reviewed_guide",
+      "category": "site",
+      "tags": [
+        "Atlas",
+        "AI safety",
+        "Reward hacking",
+        "Goodhart",
+        "Ablation studies",
+        "Research"
+      ],
+      "source_url": "https://arxiv.org/abs/2210.10760",
+      "catalog_path": "terms/MLD-1041-reward-model-overoptimization.html",
+      "added_to_atlas_at": "2026-11-03T02:38:21.964Z",
+      "release_status": "expanded_existing_concept_not_new_world_event"
+    }
+  ],
+  "corrections": [
+    {
+      "id": "site-clarification-first-edition-verification-20261102",
+      "title": "Clarification: initial edition subsequently passed deployment checks",
+      "summary": "Revision 1 correctly described site publication as pending at build time. Subsequent GitHub Actions validated production publication, so this revision updates the site-only review label while preserving v1 unchanged.",
+      "review_status": "verified_workflow_result",
+      "category": "site",
+      "tags": [
+        "Atlas",
+        "Correction",
+        "Publication"
+      ],
+      "source_url": "https://github.com/hazelfjeld/ai-atlas/actions/runs/41473870650",
+      "added_to_atlas_at": "2026-11-02T17:32:44.374Z"
+    }
+  ]
+}

@@ -544,8 +544,41 @@ test('Revision 12 archives two genuine prompt-injection guide improvements witho
     assert.ok(fs.readFileSync(manifest[id].path,'utf8').includes('Sources for the expanded explanation'));
   }
   const r = JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8')).receipts[0];
-  assert.equal(r.publication_edition,'2026-11-02-v12');
-  assert.equal(r.publication_history.at(-1).edition,'2026-11-02-v12');
+  assert.ok(r.publication_history.some(h=>h.edition==='2026-11-02-v12'), 'Revision 12 receipt must survive newer publications');
+  assert.ok(r.publication_history.some(h=>h.edition==='2026-11-02-v12'));
   assert.equal(r.deferred_catalog_proposal_ids.length,7);
   assert.equal(r.counts.term_added,0);
+});
+
+
+test('Revision 13 adds exactly two real reward-model guide updates with immutable source evidence', () => {
+ const crypto=require('node:crypto');
+ const index=JSON.parse(fs.readFileSync('data/daily/index.json','utf8'));
+ const old=index.editions.find(e=>e.date==='2026-11-02'&&e.revision===12);
+ const newer=index.editions.find(e=>e.date==='2026-11-02'&&e.revision===13);
+ assert.ok(old&&newer);
+ const bytes=fs.readFileSync(newer.path);
+ assert.equal(bytes.length,newer.bytes);
+ assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'),newer.sha256);
+ const before=D.validateEdition(JSON.parse(fs.readFileSync(old.path,'utf8')),old);
+ const after=D.validateEdition(JSON.parse(bytes.toString('utf8')),newer);
+ assert.equal(D.chicagoDate(after.published_at),'2026-11-02');
+ for(const k of ['news','technologies','terms','coverage','corrections'])assert.deepEqual(after[k],before[k],'Historical evidence altered: '+k);
+ const changes=D.revisionDiff(before,after);
+ assert.deepEqual(changes.site_changes.added.map(x=>x.id),['site-expanded-reward-model-20261102','site-expanded-reward-overoptimization-20261102']);
+ assert.equal(changes.site_changes.updated.length+changes.site_changes.removed.length,0);
+ const manifest=JSON.parse(fs.readFileSync('terms/manifest.json','utf8'));
+ for(const [i,id] of ['MLD-1040','MLD-1041'].entries()){
+  assert.equal(manifest[id].expanded,true);
+  assert.equal(changes.site_changes.added[i].catalog_path,manifest[id].path);
+  assert.match(fs.readFileSync(manifest[id].path,'utf8'),/Sources for the expanded explanation/);
+  assert.match(changes.site_changes.added[i].summary,/not a new|not a newly|not a confirmed/i);
+ }
+ const r=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8')).receipts[0];
+ assert.equal(r.publication_edition,'2026-11-02-v13');
+ assert.equal(r.publication_history.at(-1).edition,'2026-11-02-v13');
+ assert.equal(r.deferred_catalog_proposal_ids.length,7);
+ assert.equal(r.counts.news_published,9);
+ assert.equal(r.counts.technology_added,0);
+ assert.equal(r.counts.term_added,0);
 });

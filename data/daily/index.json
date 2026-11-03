@@ -97,9 +97,17 @@
       "sha256": "28d6696cdd83abdaab0734f546cd4620933aa1cc20c410cd27f8165ad5db97eb",
       "bytes": 30630,
       "published_at": "2026-11-03T02:06:07.466Z"
+    },
+    {
+      "date": "2026-11-02",
+      "revision": 13,
+      "path": "data/daily/editions/2026-11-02-v13.json",
+      "sha256": "0859517406b5d094f4ebc1dfa77544c5d3b9c97a8992cc6a5c8d1c6385bb3d54",
+      "bytes": 32611,
+      "published_at": "2026-11-03T02:38:21.964Z"
     }
   ],
   "last_successful_publish_at": "2026-11-03T02:10:57Z",
-  "status": "edition_revision_12_production_verified",
-  "coverage_note": "November 2 revision 12 is verified on production and GitHack, containing two existing-concept guide improvements. Nine original news reports, partial collection window, two source-lookup failures, seven deferred proposals and all eleven preceding immutable revisions are unchanged. Content is an archival scheduled publication, not continuous live coverage."
+  "status": "edition_revision_13_pending_production_verification",
+  "coverage_note": "Revision 13 records two source-reviewed expansions of existing safety concept guides, with unchanged nine prior news reports, partial collection window, seven deferred catalog proposals and two failed source lookups. Last successful production publish remains revision 12 until full new-release verification."
 }

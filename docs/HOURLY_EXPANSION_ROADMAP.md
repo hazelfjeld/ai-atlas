@@ -1,3 +1,9 @@
+## November 2 Chicago evening — reward-model research guides / v13 checkpoint
+
+- Staged queue unchanged: one SHA-256-verified, already consumed November 2 source batch; seven distinct catalog proposals still deferred, no unprocessed batches.
+- Shipped two **existing** source-backed concept expansions (MLD-1040 and MLD-1041); 39 substantive guides out of 1,345 direct term pages, 1,705 original records unchanged. Both include nine original sections and four primary citations, synthetic worked arithmetic, measurable ablation design and explicit independent-evidence limits. Branch build regenerated deterministic pages, manifest, publication metadata and offline package; no unrelated catalog rewrites.
+- Created immutable November 2 revision 13, 32611 UTF-8 bytes / SHA-256 `0859517406b5d094f4ebc1dfa77544c5d3b9c97a8992cc6a5c8d1c6385bb3d54`, two site-change records; nine reviewed reports and original evidence/corrections are untouched. Publication verification must complete before last-successful-publication metadata advances; v12 remains safe pinned fallback. Next: inspect actual production and GitHack jobs, finalize receipts, resolve remaining catalog proposals or expand another evidence-backed guide.
+
 # AI Atlas — recurring expansion plan
 
 ## November 2 — progressive first-paint navigation and immutable revision 9
