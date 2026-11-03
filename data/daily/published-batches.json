@@ -532,7 +532,7 @@
       "edition_date": "2026-11-03",
       "validation_result": "source_batch_sha256_bytes_schema_unique_news_ids_canonical_source_urls_dates_collection_window_verified_eight_news_web_source_reviews_production_and_public_asset_checks_passed",
       "status": "partially_published_with_4_deferred_catalog_proposals",
-      "publication_outcome": "immutable_nov03_v2_atlas_only_site_changes_pending_production_verification",
+      "publication_outcome": "immutable_nov03_v2_cloudflare_http_browser_and_githack_verified",
       "publication_edition": "2026-11-03-v2",
       "accepted_news_ids": [
         "ai-news:tohoku-aisin:stt-mram-soc:2026-11-02",
@@ -561,7 +561,7 @@
         "news_deferred": 0,
         "catalog_deferred": 4
       },
-      "review_notes": "November 3 partial 48-hour recovery collection: six original source categories, 14 checked source URLs (some discovery/limited), three failed source lookups. Four November 3 reports and four dated earlier catch-up items. Tohoku University and OpenAI primary announcements were opened; IFParse author discussion opened; Reuters indexed original reports checked for stated claims. Prototype comparisons, benchmark scores, market forecasts and investigations are qualified and not independently reproduced or adjudicated. Four catalog proposals were not inserted as canonical records; historical November 2 edition left unchanged. Await CI and real production verification before claiming hosted publication.\nNovember 3 v2 preserves eight source-qualified news items and original dates/evidence. Adds two already-published Atlas educational guide links under site_changes only; four deferred canonical proposals and three failed lookups unchanged. Deployment verification pending.",
+      "review_notes": "November 3 partial 48-hour recovery collection: six original source categories, 14 checked source URLs (some discovery/limited), three failed source lookups. Four November 3 reports and four dated earlier catch-up items. Tohoku University and OpenAI primary announcements were opened; IFParse author discussion opened; Reuters indexed original reports checked for stated claims. Prototype comparisons, benchmark scores, market forecasts and investigations are qualified and not independently reproduced or adjudicated. Four catalog proposals were not inserted as canonical records; historical November 2 edition left unchanged. Await CI and real production verification before claiming hosted publication.\nNovember 3 v2 preserves eight source-qualified news items and original dates/evidence. Adds two already-published Atlas educational guide links under site_changes only; four deferred canonical proposals and three failed lookups unchanged. Deployment verification pending.\nNovember 3 v2 verified in production: catalog/GitHack 41676627178 and Cloudflare deployed/browser 41676627291 both passed on merged main 5a44a6bb98dd8c8a55b8efee1ff16500284d61ee by 2026-11-03T16:44:04Z. No new outside news or canonical entries; two Atlas guide records only.",
       "publication_history": [
         {
           "edition": "2026-11-03-v1",
@@ -588,18 +588,22 @@
           "catalog_deferred": 4,
           "site_changes_added": 2,
           "published_at": "2026-11-03T16:36:59.092Z",
-          "status": "pending_production_verification"
+          "status": "cloudflare_http_browser_and_githack_verified",
+          "verified_at": "2026-11-03T16:44:04Z",
+          "production_commit": "5a44a6bb98dd8c8a55b8efee1ff16500284d61ee",
+          "production_workflow_run_id": 41676627291,
+          "githack_workflow_run_id": 41676627178
         }
       ],
-      "production_verified_at": "2026-11-03T15:42:06Z",
-      "production_verified_revision": 1,
-      "last_verified_at": "2026-11-03T15:42:06Z",
-      "next_action": "Verify edition v2 exact HTTP bytes and hosted browser, then attest publication; independently review the four staged hardware/benchmark proposals against sources, license and existing canonical entries.",
-      "production_workflow_run_id": 41665910824,
-      "githack_workflow_run_id": 41665910657,
-      "production_commit": "8b69a89b02fa03f7a19fe7a761ac9f113089b956",
-      "last_verified_public_url": "https://aiupdates.app/whats-new.html?date=2026-11-03&revision=1",
-      "verification_scope": "Exact merged main 8b69a89b02fa03f7a19fe7a761ac9f113089b956: catalog and GitHack jobs in run 41665910657 passed; Cloudflare validate and deployed production/hosted-browser jobs in run 41665910824 passed (final job 2026-11-03T15:42:06Z). SHA/size-verified immutable November 3 edition retains eight qualified source reports, partial recovery lookback, 14 checked sources, three failed lookups and four deferred canonical proposals. This confirms tested static publication and browser navigation, not independent reproduction of research claims."
+      "production_verified_at": "2026-11-03T16:44:04Z",
+      "production_verified_revision": 2,
+      "last_verified_at": "2026-11-03T16:44:04Z",
+      "next_action": "Review Nov 3 candidate technologies IFParse v2 and near-memory STT-MRAM chip plus hardware concepts against primary source, duplicate catalog IDs, license, reproducibility and safe deployment; import only when full canonical integration and linked tests pass. Continue substantive encyclopedia expansions.",
+      "production_workflow_run_id": 41676627291,
+      "githack_workflow_run_id": 41676627178,
+      "production_commit": "5a44a6bb98dd8c8a55b8efee1ff16500284d61ee",
+      "last_verified_public_url": "https://aiupdates.app/whats-new.html?date=2026-11-03&revision=2",
+      "verification_scope": "Exact merged main 5a44a6b: catalog and public GitHack job checks in 41676627178 passed, and Cloudflare validate plus deployed HTTP/hosted-browser jobs in 41676627291 passed by 2026-11-03T16:44:04Z. November 3 v2 SHA-256/size-verified immutable archive contains unchanged 8 qualified source stories, 2 actual Atlas-only guide changes, 14 checked sources, 3 failed lookups, 4 deferred candidates. Verification establishes actual served assets and UI flows, not independent replication of the external claims."
     }
   ]
 }

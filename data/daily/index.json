@@ -219,7 +219,7 @@
       "published_at": "2026-11-03T16:36:59.092Z"
     }
   ],
-  "last_successful_publish_at": "2026-11-03T15:42:06Z",
-  "status": "edition_revision_2_pending_production_verification",
-  "coverage_note": "November 3 v2 records two already-published Atlas-only concept guide expansions; the eight original vetted news reports, source publication dates, partial source collection (14 checked, 3 failed) and four deferred catalog proposals are unchanged from production-verified v1. No new external news, canonical IDs, research replication or safety incident is claimed. V2 awaiting independent catalog, GitHack, Cloudflare and browser checks; last successful publication remains v1 until those pass. The last verified November 2 historical publication was revision 25, preserved alongside all earlier archive revisions and the professor demo."
+  "last_successful_publish_at": "2026-11-03T16:44:04Z",
+  "status": "edition_revision_2_production_verified",
+  "coverage_note": "November 3 revision 2 is independently verified in production at 2026-11-03T16:44:04Z on main 5a44a6b with GitHack/catalog workflow 41676627178 and deployed Cloudflare/hosted-browser workflow 41676627291. Eight original independently source-checked but non-exhaustive reports (4 Nov 3 and 4 dated Nov 1–2 catch-up) and partial collection window remain unchanged from v1; 14 source URLs checked, 3 failed. Two already-published AI-safety educational guides are linked as Atlas-only Nov 3 improvements, not new world events, releases or canonical terms. Four hardware/evaluation/catalog proposals remain deferred. Research prototype and benchmark claims are not independently reproduced; investigations are not adjudicated. Verified November 2 revision 25 and all earlier versions plus professor demo preserved."
 }
