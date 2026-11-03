@@ -115,7 +115,7 @@
       "published_at": "2026-11-03T03:28:38.000Z"
     }
   ],
-  "last_successful_publish_at": "2026-11-03T02:42:09Z",
-  "status": "edition_revision_14_deployment_verification_pending",
-  "coverage_note": "November 2 revision 14 adds two existing research-method concept guides as Atlas site changes only. Nine source-reviewed reports, seven deferred proposals, two failed source lookups and the original partial collection window remain unchanged. Revision 13 is last independently production-verified until new workflow checks pass."
+  "last_successful_publish_at": "2026-11-03T03:48:43Z",
+  "status": "edition_revision_14_production_verified",
+  "coverage_note": "Nov 2 revision 14 adds two existing research-method concept guides as Atlas site changes only. Nine source-reviewed reports, seven deferred catalog proposals, two failed lookups and the original partial collection window remain unchanged. Main ad831c4 passed catalog/GitHack and Cloudflare production hosted-browser checks."
 }
