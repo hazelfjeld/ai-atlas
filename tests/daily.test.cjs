@@ -648,9 +648,9 @@ test('Revision 15 preserves its two shift-evaluation guides and source claims ac
    assert.equal(delta.site_changes.added[i].catalog_path,manifest[id].path);
  }
  const receipt=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8')).receipts[0];
- assert.equal(receipt.publication_edition,'2026-11-02-v15');
+ assert.ok(receipt.publication_history.some(h=>h.edition==='2026-11-02-v15'), 'Historical revision 15 receipt must survive later editions');
  assert.equal(receipt.publication_history.at(-1).edition,receipt.publication_edition);
- assert.ok(receipt.production_verified_revision>=14&&receipt.production_verified_revision<=15);
+ assert.ok(receipt.production_verified_revision>=15, 'Historical v15 production verification must remain recorded');
  assert.equal(receipt.counts.news_published,9);
  assert.equal(receipt.deferred_catalog_proposal_ids.length,7);
  assert.equal(receipt.counts.term_added,0);
