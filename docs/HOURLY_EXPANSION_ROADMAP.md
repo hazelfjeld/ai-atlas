@@ -1,3 +1,10 @@
+## November 3, 13:34 CST — November 3 revision 3 verified in production
+
+- Last verified public edition: https://aiupdates.app/whats-new.html?date=2026-11-03&revision=3 ; SHA-256 `9be4d6c030dc6761411b4bd9b3968d38ddbe953a775936eb02b4c9bded3b4fe3` (23,524 bytes). Immutable v1/v2 and all November 2 revisions preserved; no source-news evidence changed.
+- Exact published `main` commit [fc565eef](https://github.com/hazelfjeld/ai-atlas/commit/fc565eefb38b17e0b1a6dac28446297843a8e590). [Catalog/GitHack workflow 41703812947](https://github.com/hazelfjeld/ai-atlas/actions/runs/41703812947) and [Cloudflare deployed/browser workflow 41703813098](https://github.com/hazelfjeld/ai-atlas/actions/runs/41703813098) each completed with substantive required jobs passed by `2026-11-03T19:34:45Z`. **143 Node tests**, **484 exact HTTP assets on each of three hosts**, source transparency, deep links, filter/CSV downloads, navigation, Games and offline browser flows verified.
+- Real Atlas-only site improvements indexed: 2 (Nov 3 four-proposal review and STT-MRAM measured-versus-inferred hardware explainer). External new reports: **0 this increment**; canonical technologies/terms: **0**. Edition retains eight qualified news reports, original collection window, 14 checked URLs, three failed lookups and four deferred catalog candidates. Research-prototype performance is not independently replicated.
+- Ledger and archive index verification clock advanced only after the deployment checks. Preserve the original 1,345 term pages, 53 expanded guides, 302 technologies, 20 playbooks, historical archives and professor-demo link. Next: validate any newly staged batch; otherwise integrate one source-complete canonical candidate with search, stable page and offline resources.
+
 ## November 3, 13:24 CST — immutable November 3 v3 indexed for deployment verification
 
 - Intake: staging queue index on `atlas-daily-staging` remains at **two immutable batches** (Nov 2, Nov 3); both already have main receipts with matching batch hashes and source commits. No unprocessed batch; nothing imported from stale staging app files.
