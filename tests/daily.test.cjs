@@ -947,8 +947,10 @@ test('Retrospective v21 records reviewed catalog candidates without claiming wor
  assert.equal(D.safeCatalogPath('catalog-review.html?inject=1'),'');
  assert.equal(D.selection(idx,'2026-11-03').todayEntry,null);
  const ledger=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8')).receipts[0];
- assert.equal(ledger.publication_edition,'2026-11-02-v21');
- assert.equal(ledger.publication_history.at(-1).edition,'2026-11-02-v21');
+ assert.ok(ledger.publication_history.some(h=>h.edition==='2026-11-02-v21'&&h.status==='cloudflare_http_browser_and_githack_verified'), 'Preserve verified v21 receipt');
+ const latest=idx.editions.at(-1);
+ assert.equal(ledger.publication_edition,latest.date+'-v'+latest.revision);
+ assert.equal(ledger.publication_history.at(-1).edition,ledger.publication_edition);
  assert.equal(ledger.deferred_catalog_proposal_ids.length,7);
  assert.equal(ledger.counts.technology_added+ledger.counts.term_added,0);
  assert.equal(idx.last_successful_publish_at,ledger.production_verified_at);
