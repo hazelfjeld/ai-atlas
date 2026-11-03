@@ -38,7 +38,8 @@ with sync_playwright() as p:
     page.get_by_role('link',name='Read PyTorch',exact=True).click()
     check('technology profile works without JavaScript', page.locator('h1').inner_text()=='PyTorch' and page.get_by_role('heading',name='Tradeoffs & cautions',exact=True).is_visible())
     page.get_by_role('navigation',name='Site navigation').get_by_role('link',name='Technologies',exact=True).click()
-    check('technology directory exposes all 300 crawlable profiles', page.locator('.reference-grid a').count()==300)
+    expected_profiles=json.loads((Path(__file__).resolve().parents[1]/'publication.json').read_text())['published_counts']['technologies']
+    check('technology directory exposes every checksummed crawlable profile', expected_profiles>=300 and page.locator('.reference-grid a').count()==expected_profiles)
     static.close()
     context=browser.new_context(viewport={'width':1440,'height':1050},reduced_motion='reduce')
     page=context.new_page()
