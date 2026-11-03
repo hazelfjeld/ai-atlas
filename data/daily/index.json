@@ -225,9 +225,17 @@
       "sha256": "9be4d6c030dc6761411b4bd9b3968d38ddbe953a775936eb02b4c9bded3b4fe3",
       "bytes": 23524,
       "published_at": "2026-11-03T19:24:41.824Z"
+    },
+    {
+      "date": "2026-11-03",
+      "revision": 4,
+      "path": "data/daily/editions/2026-11-03-v4.json",
+      "sha256": "076e984a96757f68be0b3240a9bdd4c704d1e1e10944414fbd3211e5d029fa57",
+      "bytes": 27286,
+      "published_at": "2026-11-03T22:34:02.465Z"
     }
   ],
   "last_successful_publish_at": "2026-11-03T19:34:45Z",
-  "status": "edition_revision_3_production_verified",
-  "coverage_note": "November 3 revision 3 was independently production-verified on merged main fc565eefb38b17e0b1a6dac28446297843a8e590 by 2026-11-03T19:34:45Z: GitHack/catalog workflow 41703812947 and Cloudflare deployed/browser workflow 41703813098 both passed, with 143 Node tests and 484 exact assets on each of three production hosts. Two previous Atlas-only site improvements are now accessible in the edition: November 3 hardware/benchmark proposal evidence review and a source-qualified STT-MRAM research explainer. Original eight qualified news stories (four Nov 3 and four older catch-up), fourteen checked URLs, three failed lookups and four deferred catalog proposals are unchanged; no new external event or canonical term/technology is claimed. November 2 revision 25 and all earlier November 2 revisions remain immutable and verified; professor-demo fallback preserved. Publisher results are not independent replication of research-chip or benchmark measurements."
+  "status": "edition_revision_4_pending_production_verification",
+  "coverage_note": "November 3 revision 4 is awaiting current-commit deployment and browser validation; three previously verified Atlas-only site improvements are recorded (memory bandwidth and arithmetic intensity guides; source-publication-date filters). Original November 3 eight news reports, fourteen checked URLs, three failed lookups, four deferred proposals and partial coverage are unchanged. Last independently verified edition remains November 3 revision 3 on main fc565eef, verified at 2026-11-03T19:34:45Z, with 143 Node tests and 484 exact files across each of three production hosts. November 2 revision 25 and earlier archives remain immutable; professor-demo fallback preserved. No new external event or canonical term/technology is claimed."
 }
