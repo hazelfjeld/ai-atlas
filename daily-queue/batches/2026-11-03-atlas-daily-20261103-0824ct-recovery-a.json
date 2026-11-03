@@ -1,0 +1,640 @@
+{
+  "schema": 1,
+  "batch_id": "atlas-daily-20261103-0824ct-recovery-a",
+  "edition_date": "2026-11-03",
+  "timezone": "America/Chicago",
+  "collected_at": "2026-11-03T14:24:43.802Z",
+  "coverage_start": "2026-11-01T14:50:00Z",
+  "coverage_end": "2026-11-03T14:24:43.802Z",
+  "coverage_status": "partial",
+  "coverage_note": "Recovery after November 2's partial first collection. Previous successful coverage cutoff remains null. Nov 1-2 material is explicitly catch-up; 2026-11-03 Reuters stories were checked against article UTC timestamps and were published before this collection closed. Selective sources across research, industry, policy, open projects; not a comprehensive scan.",
+  "overlap_lookback_start": "2026-11-01T14:50:00Z",
+  "sources_checked": [
+    {
+      "id": "openai-grid",
+      "url": "https://openai.com/index/grid-protectors-program/",
+      "status": "success",
+      "checked_at": "2026-11-03T14:24:43.802Z",
+      "note": "first-party announcement dated Nov 2; time of day unspecified"
+    },
+    {
+      "id": "tohoku-aisin-ai-soc",
+      "url": "https://www.tohoku.ac.jp/japanese/2026/11/press20261102-03-emram.html",
+      "status": "success",
+      "checked_at": "2026-11-03T14:24:43.802Z",
+      "note": "university original Nov 2, 11:00 Japan local time; paired with Aisin co-announcement"
+    },
+    {
+      "id": "aisin-ai-soc",
+      "url": "https://www.aisin.com/jp/news/2026/010739.html",
+      "status": "success",
+      "checked_at": "2026-11-03T14:24:43.802Z",
+      "note": "co-developer primary announcement; conflicting unit text in indexed snippet, university detailed metrics preferred"
+    },
+    {
+      "id": "hf-ifparse-v2",
+      "url": "https://huggingface.co/datasets/Muse-research/Ifparse-v2.0",
+      "status": "success",
+      "checked_at": "2026-11-03T14:24:43.802Z",
+      "note": "public release dataset card, test split, terms and licenses"
+    },
+    {
+      "id": "hf-ifparse-forum",
+      "url": "https://discuss.huggingface.co/t/ifparse-2-0-release/191309",
+      "status": "success",
+      "checked_at": "2026-11-03T14:24:43.802Z",
+      "note": "author post dated Nov 1 and user-added Nov 2 independent small-run notes, not independent replication"
+    },
+    {
+      "id": "reuters-hkma-hsbc",
+      "url": "https://www.reuters.com/world/asia-pacific/hsbc-open-hong-kong-ai-institute-following-singapore-launch-2026-11-02/",
+      "status": "success",
+      "checked_at": "2026-11-03T14:24:43.802Z",
+      "note": "Nov 2, 03:34 UTC published; catch-up"
+    },
+    {
+      "id": "reuters-china-ai-concentration",
+      "url": "https://www.reuters.com/business/finance/ai-investment-is-becoming-overly-concentrated-chinese-official-says-2026-11-03/",
+      "status": "success",
+      "checked_at": "2026-11-03T14:24:43.802Z",
+      "note": "Nov 3, 02:28 UTC"
+    },
+    {
+      "id": "reuters-schwarz-bull",
+      "url": "https://www.reuters.com/business/retail-consumer/schwarz-digits-bull-partner-up-build-european-ai-computing-services-2026-11-03/",
+      "status": "success",
+      "checked_at": "2026-11-03T14:24:43.802Z",
+      "note": "Nov 3, 13:07 UTC"
+    },
+    {
+      "id": "reuters-european-ai-bonds",
+      "url": "https://www.reuters.com/business/ai-related-debt-binge-may-pressure-european-bond-markets-2026-11-03/",
+      "status": "success",
+      "checked_at": "2026-11-03T14:24:43.802Z",
+      "note": "Nov 3, 05:03 UTC"
+    },
+    {
+      "id": "reuters-data-center-ballots",
+      "url": "https://www.reuters.com/sustainability/data-center-opposition-hits-ballot-box-2026-11-03/",
+      "status": "success",
+      "checked_at": "2026-11-03T14:24:43.802Z",
+      "note": "Nov 3, 13:00 UTC; ballot outcomes not known at collection"
+    },
+    {
+      "id": "reuters-finance-summit",
+      "url": "https://www.reuters.com/business/finance/blackstone-president-says-more-tech-sector-fundraising-ahead-keep-up-with-ai-2026-11-03/",
+      "status": "success",
+      "checked_at": "2026-11-03T14:24:43.802Z",
+      "note": "Nov 3, 02:14 UTC; context but merged with existing finance theme instead of separate repeated headline"
+    },
+    {
+      "id": "hf-trending",
+      "url": "https://huggingface.co/papers/trending",
+      "status": "success_limited",
+      "checked_at": "2026-11-03T14:24:43.802Z",
+      "note": "discovery only; older rolling papers not recast as new releases"
+    },
+    {
+      "id": "github-openevals",
+      "url": "https://github.com/langchain-ai/openevals/releases",
+      "status": "success_limited",
+      "checked_at": "2026-11-03T14:24:43.802Z",
+      "note": "latest shown August, not falsely promoted as Nov 3 release"
+    },
+    {
+      "id": "anthropic-biomedical",
+      "url": "https://www.anthropic.com/research/early-progress-drug-development",
+      "status": "success_limited",
+      "checked_at": "2026-11-03T14:24:43.802Z",
+      "note": "Oct 27 original publication; Nov 2 commentary is not new product announcement"
+    }
+  ],
+  "sources_failed": [
+    {
+      "id": "reuters-merz-digital-sovereignty",
+      "url": "https://www.reuters.com/business/merz-says-germany-must-preserve-digital-sovereignty-ai-era-2026-11-02/",
+      "status": "open_error",
+      "checked_at": "2026-11-03T14:24:43.802Z",
+      "note": "search surfaced story but article open failed; omitted"
+    },
+    {
+      "id": "reuters-qwenwork-singles-day",
+      "url": "https://www.reuters.com/business/retail-consumer/chinas-lipstick-king-touts-ai-tokens-first-singles-day-festival-2026-11-03/",
+      "status": "open_error",
+      "checked_at": "2026-11-03T14:24:43.802Z",
+      "note": "article open failed and precise publication time unverified; omitted"
+    },
+    {
+      "id": "hf-ifparse-pinned-readme",
+      "url": "https://huggingface.co/datasets/Muse-research/Ifparse-v2.0/blob/f71c654b6ac29922cd3e2029f2fe0b4e6d05e90b/README.md",
+      "status": "cache_miss",
+      "checked_at": "2026-11-03T14:24:43.802Z",
+      "note": "pinned README fetch missed; live dataset card itself accessible and used"
+    }
+  ],
+  "tldr": [
+    "New source-checked developments include a near-memory AI chip prototype, OpenAI's proposed grid-flexibility program, and an open benchmark testing exact telemetry-to-JSON normalization; the chip and benchmark results are author-reported, not independently reproduced.",
+    "European AI infrastructure financing and digital-sovereignty deals are advancing while regulators and communities raise concentrated-investment and data-center-impact concerns.",
+    "This is a selective, partly recovered source window, with publication timestamps separated from event dates; technology and terminology cards remain proposals until Atlas independently integrates them."
+  ],
+  "news": [
+    {
+      "id": "ai-news:tohoku-aisin:stt-mram-soc:2026-11-02",
+      "title": "Tohoku and Aisin describe a 16 nm near-memory AI chip prototype",
+      "category": "hardware",
+      "tags": [
+        "AI",
+        "DL",
+        "Edge AI",
+        "Computer Architecture",
+        "Vision"
+      ],
+      "summary": "Tohoku University and Aisin report a 16 nm AI system-on-chip integrating 32 MB of STT-MRAM and running Tiny YOLOv3 without external DRAM or SSD; reported boot time is 65.7 ms and detection energy is 50.7 mJ per frame.",
+      "why_it_matters": "Embedding boot data and model weights near the processor could reduce startup and data-movement costs in constrained vision devices.",
+      "caveat": "Comparison claims (about 39x boot acceleration and 50x lower per-frame energy) are author-reported under a specific prototype and workload, not general-purpose AI benchmarks. Research result, not a commercial product.",
+      "canonical_url": "https://www.tohoku.ac.jp/japanese/2026/11/press20261102-03-emram.html",
+      "source_url": "https://www.tohoku.ac.jp/japanese/2026/11/press20261102-03-emram.html",
+      "publication_date": "2026-11-02",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-02",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-03T14:24:43.802Z",
+      "checked_at": "2026-11-03T14:24:43.802Z",
+      "release_status": "research_prototype",
+      "evidence_type": "author research announcement",
+      "review_status": "source_checked_pending_publisher_review",
+      "sources": [
+        {
+          "url": "https://www.tohoku.ac.jp/japanese/2026/11/press20261102-03-emram.html",
+          "publisher": "Tohoku University",
+          "type": "university press release"
+        },
+        {
+          "url": "https://www.aisin.com/jp/news/2026/010739.html",
+          "publisher": "Aisin",
+          "type": "manufacturer joint release"
+        }
+      ],
+      "related_catalog_ids": [],
+      "collection_classification": "catch_up_prior_uncovered_source"
+    },
+    {
+      "id": "ai-news:openai:grid-protectors:2026-11-02",
+      "title": "OpenAI proposes flexible-power commitments for future compute campuses",
+      "category": "infrastructure",
+      "tags": [
+        "AI",
+        "Infrastructure",
+        "Energy",
+        "Policy"
+      ],
+      "summary": "OpenAI announced the Grid Protectors Program and described an agreement with Georgia Power for up to 1,000 MW of flexible demand response at its planned Effingham County campus.",
+      "why_it_matters": "Power-demand flexibility could change how AI data centers interact with peak electricity demand and community costs.",
+      "caveat": "The Georgia campus is still planned; the announced 1,000 MW is a prospective maximum, not measured electricity returned to the grid. Claimed customer savings are utility projections, not realized savings.",
+      "canonical_url": "https://openai.com/index/grid-protectors-program/",
+      "source_url": "https://openai.com/index/grid-protectors-program/",
+      "publication_date": "2026-11-02",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-02",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-03T14:24:43.802Z",
+      "checked_at": "2026-11-03T14:24:43.802Z",
+      "release_status": "announced_program_planned_site",
+      "evidence_type": "company announcement",
+      "review_status": "source_checked_pending_publisher_review",
+      "sources": [
+        {
+          "url": "https://openai.com/index/grid-protectors-program/",
+          "publisher": "OpenAI",
+          "type": "first-party announcement"
+        }
+      ],
+      "related_catalog_ids": []
+    },
+    {
+      "id": "ai-news:hkma:project-sage-hsbc-ai-institute:2026-11-02",
+      "title": "Hong Kong regulator outlines AI-agent safeguards as HSBC plans an institute",
+      "category": "governance",
+      "tags": [
+        "AI agents",
+        "Finance",
+        "Governance",
+        "Education"
+      ],
+      "summary": "Reuters reported HSBC's plan for a Hong Kong AI institute in early 2027 and the Hong Kong Monetary Authority's Project SAGE initiative to test financial agent use, interoperability and possible trusted-agent registration.",
+      "why_it_matters": "Financial agents need accountability and interoperation safeguards before they can operate broadly in regulated workflows.",
+      "caveat": "Both institute and registry/standards work are plans; a possible 'know your agent' standard should not be portrayed as already enacted. Reuters event coverage predates this window and is a catch-up item.",
+      "canonical_url": "https://www.reuters.com/world/asia-pacific/hsbc-open-hong-kong-ai-institute-following-singapore-launch-2026-11-02/",
+      "source_url": "https://www.reuters.com/world/asia-pacific/hsbc-open-hong-kong-ai-institute-following-singapore-launch-2026-11-02/",
+      "publication_date": "2026-11-02",
+      "publication_date_precision": "day",
+      "publication_time_utc": "2026-11-02T03:34:00Z",
+      "event_date": "2026-11-02",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-03T14:24:43.802Z",
+      "checked_at": "2026-11-03T14:24:43.802Z",
+      "release_status": "planned_initiative",
+      "evidence_type": "reported statements",
+      "review_status": "source_checked_pending_publisher_review",
+      "sources": [
+        {
+          "url": "https://www.reuters.com/world/asia-pacific/hsbc-open-hong-kong-ai-institute-following-singapore-launch-2026-11-02/",
+          "publisher": "Reuters",
+          "type": "original reporting"
+        }
+      ],
+      "related_catalog_ids": [],
+      "collection_classification": "catch_up_prior_uncovered_source"
+    },
+    {
+      "id": "ai-news:ifparse:v2.0:2026-11-01",
+      "title": "IFParse v2.0 offers 1,800 strict telemetry normalization evaluations",
+      "category": "evaluation",
+      "tags": [
+        "LLM",
+        "SLM",
+        "Evaluation",
+        "Security",
+        "Structured Output"
+      ],
+      "summary": "Muse-Research released a public synthetic test set spanning nine kinds of telemetry; models must convert each hostile raw record into precisely the specified JSON object. The publisher reports a large gap between JSON validity and fully correct outputs.",
+      "why_it_matters": "It tests semantic fidelity in structured extraction, where schema-valid but incorrect timestamps, nulls or identifiers could corrupt operational data.",
+      "caveat": "The author's small-model rates are not independently replicated, the entire split is synthetic, and exact-match conventions may not fit every ingestion pipeline. Public tests should not be training data for claimed held-out scores.",
+      "canonical_url": "https://huggingface.co/datasets/Muse-research/Ifparse-v2.0",
+      "source_url": "https://huggingface.co/datasets/Muse-research/Ifparse-v2.0",
+      "publication_date": "2026-11-01",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-01",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-03T14:24:43.802Z",
+      "checked_at": "2026-11-03T14:24:43.802Z",
+      "release_status": "public_dataset_v2",
+      "evidence_type": "author-described benchmark",
+      "review_status": "source_checked_pending_publisher_review",
+      "sources": [
+        {
+          "url": "https://huggingface.co/datasets/Muse-research/Ifparse-v2.0",
+          "publisher": "Muse-Research",
+          "type": "primary dataset and author forum"
+        },
+        {
+          "url": "https://discuss.huggingface.co/t/ifparse-2-0-release/191309",
+          "publisher": "Muse-Research",
+          "type": "release discussion"
+        }
+      ],
+      "related_catalog_ids": [],
+      "collection_classification": "catch_up_prior_uncovered_source"
+    },
+    {
+      "id": "ai-news:china-nfra:ai-investment-concentration-warning:2026-11-03",
+      "title": "Chinese financial regulator warns concentrated AI capital can crowd out other sectors",
+      "category": "governance",
+      "tags": [
+        "AI",
+        "Finance",
+        "Governance",
+        "Industry"
+      ],
+      "summary": "At a Hong Kong financial summit, vice-minister Xiao Yuanqi said AI investment concentration and associated leverage could raise borrowing costs for traditional industries, Reuters reported.",
+      "why_it_matters": "It highlights system-level financing effects of rapid AI infrastructure growth rather than solely model capability.",
+      "caveat": "A regulator's risk argument is not evidence that a specific investment bubble will burst or that crowding-out has been quantified.",
+      "canonical_url": "https://www.reuters.com/business/finance/ai-investment-is-becoming-overly-concentrated-chinese-official-says-2026-11-03/",
+      "source_url": "https://www.reuters.com/business/finance/ai-investment-is-becoming-overly-concentrated-chinese-official-says-2026-11-03/",
+      "publication_date": "2026-11-03",
+      "publication_date_precision": "day",
+      "publication_time_utc": "2026-11-03T02:28:00Z",
+      "event_date": "2026-11-03",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-03T14:24:43.802Z",
+      "checked_at": "2026-11-03T14:24:43.802Z",
+      "release_status": "reported_warning",
+      "evidence_type": "official economic risk assessment",
+      "review_status": "source_checked_pending_publisher_review",
+      "sources": [
+        {
+          "url": "https://www.reuters.com/business/finance/ai-investment-is-becoming-overly-concentrated-chinese-official-says-2026-11-03/",
+          "publisher": "Reuters",
+          "type": "reporting of official remarks"
+        }
+      ],
+      "related_catalog_ids": []
+    },
+    {
+      "id": "ai-news:schwarz-bull:european-ai-compute-mou:2026-11-03",
+      "title": "Schwarz Digits and Bull plan Europe-jurisdiction AI computing services",
+      "category": "infrastructure",
+      "tags": [
+        "AI",
+        "Cloud",
+        "Infrastructure",
+        "Digital Sovereignty"
+      ],
+      "summary": "Schwarz Digits and supercomputer maker Bull signed a preliminary agreement to jointly develop servers and AI compute services for STACKIT customers under European jurisdiction, according to Reuters.",
+      "why_it_matters": "An EU-jurisdiction compute stack could address data-sovereignty requirements for public and enterprise AI workloads.",
+      "caveat": "Preliminary cooperation only: cost, hardware configuration, delivery dates and service availability were not published; no completed deployment is evidenced.",
+      "canonical_url": "https://www.reuters.com/business/retail-consumer/schwarz-digits-bull-partner-up-build-european-ai-computing-services-2026-11-03/",
+      "source_url": "https://www.reuters.com/business/retail-consumer/schwarz-digits-bull-partner-up-build-european-ai-computing-services-2026-11-03/",
+      "publication_date": "2026-11-03",
+      "publication_date_precision": "day",
+      "publication_time_utc": "2026-11-03T13:07:00Z",
+      "event_date": "2026-11-03",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-03T14:24:43.802Z",
+      "checked_at": "2026-11-03T14:24:43.802Z",
+      "release_status": "preliminary_agreement",
+      "evidence_type": "reported deal",
+      "review_status": "source_checked_pending_publisher_review",
+      "sources": [
+        {
+          "url": "https://www.reuters.com/business/retail-consumer/schwarz-digits-bull-partner-up-build-european-ai-computing-services-2026-11-03/",
+          "publisher": "Reuters",
+          "type": "original business reporting"
+        }
+      ],
+      "related_catalog_ids": []
+    },
+    {
+      "id": "ai-news:reuters:europe-ai-bond-supply:2026-11-03",
+      "title": "AI infrastructure debt issuance may raise European bond-market financing pressure",
+      "category": "industry",
+      "tags": [
+        "AI",
+        "Infrastructure",
+        "Cloud",
+        "Finance"
+      ],
+      "summary": "Reuters reports US hyperscalers increasingly seek European debt financing for AI facilities, citing $39.3 billion European technology debt issuance so far in 2026 and forecasts of heavier corporate supply.",
+      "why_it_matters": "Capital costs and constrained credit markets affect the pace and economics of large-scale model-training capacity.",
+      "caveat": "Projected bond issuance and higher borrowing costs are market forecasts, not guaranteed outcomes. The report is broader than AI-only spending and should not be read as a measured causal effect.",
+      "canonical_url": "https://www.reuters.com/business/ai-related-debt-binge-may-pressure-european-bond-markets-2026-11-03/",
+      "source_url": "https://www.reuters.com/business/ai-related-debt-binge-may-pressure-european-bond-markets-2026-11-03/",
+      "publication_date": "2026-11-03",
+      "publication_date_precision": "day",
+      "publication_time_utc": "2026-11-03T05:03:00Z",
+      "event_date": "2026-11-03",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-03T14:24:43.802Z",
+      "checked_at": "2026-11-03T14:24:43.802Z",
+      "release_status": "reported_market_analysis",
+      "evidence_type": "analysis and industry forecasts",
+      "review_status": "source_checked_pending_publisher_review",
+      "sources": [
+        {
+          "url": "https://www.reuters.com/business/ai-related-debt-binge-may-pressure-european-bond-markets-2026-11-03/",
+          "publisher": "Reuters",
+          "type": "financial-market reporting"
+        }
+      ],
+      "related_catalog_ids": []
+    },
+    {
+      "id": "ai-news:reuters:data-center-ballot-and-environment:2026-11-03",
+      "title": "AI data-center plans face ballot and environmental scrutiny",
+      "category": "policy",
+      "tags": [
+        "AI",
+        "Energy",
+        "Infrastructure",
+        "Environment",
+        "Governance"
+      ],
+      "summary": "A Reuters sustainability briefing documented local US data-center ballot proposals and a Finnish police investigation into alleged environmental permitting breaches at a Google subsidiary's planned Muhos site, alongside debates in Norway and Australia.",
+      "why_it_matters": "Environmental approvals, electricity demand and democratic consent can become bottlenecks for AI compute expansion.",
+      "caveat": "The Finnish matter is a criminal investigation, not a determination of wrongdoing. November 3 US ballots had not yet yielded results when collected; do not imply measures passed.",
+      "canonical_url": "https://www.reuters.com/sustainability/data-center-opposition-hits-ballot-box-2026-11-03/",
+      "source_url": "https://www.reuters.com/sustainability/data-center-opposition-hits-ballot-box-2026-11-03/",
+      "publication_date": "2026-11-03",
+      "publication_date_precision": "day",
+      "publication_time_utc": "2026-11-03T13:00:00Z",
+      "event_date": "2026-11-03",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-03T14:24:43.802Z",
+      "checked_at": "2026-11-03T14:24:43.802Z",
+      "release_status": "reported_current_disputes",
+      "evidence_type": "allegations plus pending civic votes",
+      "review_status": "source_checked_pending_publisher_review",
+      "sources": [
+        {
+          "url": "https://www.reuters.com/sustainability/data-center-opposition-hits-ballot-box-2026-11-03/",
+          "publisher": "Reuters",
+          "type": "reported investigation and policy briefing"
+        }
+      ],
+      "related_catalog_ids": []
+    }
+  ],
+  "technologies": [
+    {
+      "id": "tech-proposal:tohoku-aisin:stt-mram-ai-soc:2026-11-03",
+      "name": "Tohoku–Aisin 16 nm STT-MRAM AI SoC prototype",
+      "aliases": [
+        "32 MB embedded STT-MRAM AI SoC",
+        "near-memory Tiny YOLOv3 prototype"
+      ],
+      "proposal_type": "add_candidate",
+      "existing_catalog_id": null,
+      "usage_tags": [
+        "AI",
+        "DL",
+        "Computer Vision",
+        "Edge AI",
+        "Hardware"
+      ],
+      "summary": "Research prototype integrating a CPU, GPU, neural accelerator and 32 MB nonvolatile STT-MRAM to store boot code and compressed model weights close to compute.",
+      "conditional_advantage": "For a tightly bounded object-detection model and intermittent-power edge deployments, reducing external-memory transfers may cut cold start and energy relative to an off-chip memory baseline.",
+      "best_fit_uses": [
+        "edge object-detection demonstrators",
+        "always-off/burst-on camera designs",
+        "near-memory architecture research"
+      ],
+      "tradeoffs": [
+        "32 MB limits model capacity",
+        "weight sharing and quantization can affect accuracy",
+        "not validated on diverse model families",
+        "chip fabrication not portable software"
+      ],
+      "alternatives": [
+        {
+          "name": "conventional DRAM-backed SoCs"
+        },
+        {
+          "name": "microcontrollers with embedded flash and tinyML accelerators"
+        },
+        {
+          "name": "NPUs with SRAM model caches"
+        }
+      ],
+      "hardware_runtime_constraints": "16 nm FinFET custom silicon, 32 MB embedded STT-MRAM, Tiny YOLOv3 with 8/16-bit hybrid multiplication and weight sharing; no consumer driver/runtime announced.",
+      "official_docs": "https://www.tohoku.ac.jp/japanese/2026/11/press20261102-03-emram.html",
+      "source_url": "https://www.tohoku.ac.jp/japanese/2026/11/press20261102-03-emram.html",
+      "version": "research conference prototype (Nov 2026)",
+      "original_publication_date": "2026-11-02",
+      "license_status": "hardware IP/license terms not established",
+      "availability_status": "research demonstration; commercial units not verified",
+      "pricing_status": "no price or public purchase pathway established",
+      "checked_at": "2026-11-03T14:24:43.802Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "source_publisher": "Tohoku University and Aisin"
+    },
+    {
+      "id": "tech-proposal:muse-ifparse-v2:2026-11-03",
+      "name": "IFParse v2.0",
+      "aliases": [
+        "IFParse",
+        "Hostile Telemetry Normalization with Exact JSON Contracts"
+      ],
+      "proposal_type": "add_candidate",
+      "existing_catalog_id": null,
+      "usage_tags": [
+        "LLM",
+        "SLM",
+        "ML",
+        "Evaluation",
+        "Data Engineering",
+        "Security"
+      ],
+      "summary": "Open synthetic 1,800-case test benchmark for exact JSON transformation of nine raw telemetry grammars, including syslog, access logs, CloudTrail and Sysmon XML.",
+      "conditional_advantage": "Compared with a parseability-only test, exact object matching exposes wrong values, null semantics, timestamps and missing keys even when the output is valid JSON.",
+      "best_fit_uses": [
+        "LLM structured-output regression tests",
+        "log-ingestion safety evaluations",
+        "quantized-small-model error profiling"
+      ],
+      "tradeoffs": [
+        "synthetic only, not representative of production frequencies",
+        "strict reference format can differ from consumers",
+        "public test data vulnerable to contamination",
+        "author comparison settings need reproducibility audit"
+      ],
+      "alternatives": [
+        {
+          "id": "MLD-0386",
+          "name": "generic exact-match evaluation"
+        },
+        {
+          "id": "MLD-1179",
+          "name": "schema-constrained structured output tests"
+        },
+        {
+          "name": "domain-specific parser unit tests"
+        }
+      ],
+      "hardware_runtime_constraints": "Dataset itself is downloadable Parquet/JSONL and needs no GPU; model inference requirements depend on evaluated model. Public test split 1,800 rows; no train split.",
+      "official_docs": "https://huggingface.co/datasets/Muse-research/Ifparse-v2.0",
+      "source_url": "https://huggingface.co/datasets/Muse-research/Ifparse-v2.0",
+      "version": "2.0.0",
+      "original_publication_date": "2026-11-01",
+      "license_status": "Dataset card states CC0 1.0 data and MIT code; verify any adjacent assets separately",
+      "availability_status": "public test data; private held-out split not available",
+      "pricing_status": "public dataset; hosting/provider compute costs separate",
+      "checked_at": "2026-11-03T14:24:43.802Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "source_publisher": "Muse-Research"
+    }
+  ],
+  "terms": [
+    {
+      "id": "term-proposal:stt-mram",
+      "term": "Spin-transfer-torque magnetoresistive RAM (STT-MRAM)",
+      "aliases": [
+        "STT-MRAM",
+        "spin-transfer torque MRAM"
+      ],
+      "term_status": "established_term_new_to_atlas_candidate",
+      "usage_tags": [
+        "AI",
+        "DL",
+        "Hardware",
+        "Edge AI"
+      ],
+      "definition": "Nonvolatile magnetic memory that stores bits as magnetic orientation and uses spin-transfer torque to write them, allowing stored parameters to persist without power.",
+      "mechanism": "A spin-polarized current switches the magnetization of a storage element; embedding memory beside compute can reduce reloading model weights from external memory.",
+      "example": "The Tohoku–Aisin 16 nm vision prototype stores its operating-system boot data and Tiny YOLOv3 weights in 32 MB of embedded STT-MRAM.",
+      "caveat": "MRAM is not a universal substitute for GPU HBM or DRAM: capacity, write costs, process integration and endurance/latency vary by implementation.",
+      "related_existing_term_ids": [
+        "MLD-0724"
+      ],
+      "related_existing_technology_ids": [],
+      "primary_references": [
+        "https://www.tohoku.ac.jp/japanese/2026/11/press20261102-03-emram.html",
+        "https://www.aisin.com/jp/news/2026/010739.html"
+      ],
+      "original_coined_at": null,
+      "checked_at": "2026-11-03T14:24:43.802Z",
+      "review_status": "primary_explanation_checked_pending_publisher_review"
+    },
+    {
+      "id": "term-proposal:near-memory-computing",
+      "term": "Near-memory computing (NMC)",
+      "aliases": [
+        "Near-memory processing",
+        "near-memory compute"
+      ],
+      "term_status": "established_term_new_to_atlas_candidate",
+      "usage_tags": [
+        "AI",
+        "ML",
+        "DL",
+        "Hardware",
+        "Inference"
+      ],
+      "definition": "Computer architecture placing processing elements near where data are stored so model weights and intermediate values travel shorter distances than in a conventional separated-memory system.",
+      "mechanism": "Local or embedded memory and adjacent accelerators reduce off-chip transfers and associated bandwidth, latency and energy costs, while algorithms and on-chip capacity constrain the benefit.",
+      "example": "A compact object detector reads weights directly from on-chip STT-MRAM rather than fetching them from a separate SSD/DRAM pair during cold start.",
+      "caveat": "Near-memory computing is distinct from processing-in-memory; neither guarantees better performance for all model sizes or memory-access patterns.",
+      "related_existing_term_ids": [
+        "MLD-0724"
+      ],
+      "related_existing_technology_ids": [],
+      "primary_references": [
+        "https://www.tohoku.ac.jp/japanese/2026/11/press20261102-03-emram.html"
+      ],
+      "original_coined_at": null,
+      "checked_at": "2026-11-03T14:24:43.802Z",
+      "review_status": "primary_explanation_checked_pending_publisher_review"
+    }
+  ],
+  "corrections": [],
+  "pending_review": [
+    "Confirm Grid Protectors Nov 2 first-post timestamp if available; source only supplies calendar day.",
+    "Publisher should check canonical catalog collisions before integrating IFParse or STT-MRAM-related records.",
+    "IFParse published author-reported percentages are deliberately not republished as independent scores.",
+    "Aisin translated indexed summary conflicted on millisecond/mJ units; original Tohoku technical release used for numeric claims; reconcile from original PDF or research proceedings before quantitative comparison."
+  ],
+  "next_source_backlog": [
+    {
+      "source": "arXiv cs.AI/cs.LG/cs.CL daily API",
+      "status": "not_fully_collected",
+      "priority": "high",
+      "note": "Search indexing for new 2611.* papers was incomplete; collect confirmed first-posted November 2/3 preprints directly."
+    },
+    {
+      "source": "Hugging Face models and model cards",
+      "status": "spot_checked",
+      "priority": "high",
+      "note": "Verify first release dates, weights and licenses for small projects and frontier model updates."
+    },
+    {
+      "source": "GitHub release feeds (vLLM, llama.cpp, SGLang, Ollama, Diffusers, ComfyUI)",
+      "status": "limited",
+      "priority": "high",
+      "note": "Time-specific releases need tag timestamps and official notes before adding."
+    },
+    {
+      "source": "Robotics/vision/audio/video and accelerator first-party feeds",
+      "status": "limited",
+      "priority": "medium",
+      "note": "Only Tohoku edge-vision hardware confirmed this batch; inspect other multimodal sources."
+    },
+    {
+      "source": "Reuters Merz and QwenWork news",
+      "status": "open_error",
+      "priority": "medium",
+      "note": "Retry article HTML and confirm UTC publication timestamps; do not promote snippets alone."
+    }
+  ]
+}
