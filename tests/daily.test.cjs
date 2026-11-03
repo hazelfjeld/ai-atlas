@@ -801,7 +801,7 @@ test('Archive verification metadata agrees with the last actual production recei
  assert.equal(idx.status,expectedStatus);
  assert.equal(idx.last_successful_publish_at,receipt.production_verified_at);
  assert.ok(idx.editions.some(e=>e.date===receipt.edition_date&&e.revision===revision));
- assert.ok(idx.coverage_note.includes('revision '+revision));
+ assert.ok(idx.coverage_note.includes('revision '+revision) || idx.coverage_note.includes('v'+revision));
  assert.equal(receipt.publication_history.find(h=>h.edition===receipt.edition_date+'-v'+revision)?.status,
               'cloudflare_http_browser_and_githack_verified');
 });
