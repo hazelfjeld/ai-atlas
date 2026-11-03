@@ -190,7 +190,7 @@ test('Agentic workflow and knowledge graph expansions explain mechanisms, constr
     const html=fs.readFileSync(path.join(root,termManifest[id].path),'utf8');
     assert.match(html,/Expanded guide/);assert.match(html,/Sources for the expanded explanation/);
   }
-  assert.equal(Object.keys(guides).length,37);
+  assert.ok(Object.keys(guides).length>=37, 'Previous guides must remain');
 });
 
 test('Benchmark and Environment are source-backed expanded agent-evaluation guides',()=>{
@@ -211,7 +211,7 @@ test('Benchmark and Environment are source-backed expanded agent-evaluation guid
   assert.match(html,/Expanded guide/);
   assert.match(html,/Sources for the expanded explanation/);
  }
- assert.equal(Object.keys(guides).length,37);
+ assert.ok(Object.keys(guides).length>=37, 'Previous guides must remain');
 });
 
 test('Prompt injection guides distinguish untrusted content, authorization and controlled outcomes', () => {
@@ -233,14 +233,14 @@ test('Prompt injection guides distinguish untrusted content, authorization and c
     assert.match(html, /Expanded guide/);
     assert.match(html, /Sources for the expanded explanation/);
   }
-  assert.equal(Object.keys(guides).length, 37);
+  assert.ok(Object.keys(guides).length>=37, 'Previous guides must remain');
 });
 
 
 test('Reward modeling and overoptimization guides separate proxy scores from independent human quality', () => {
   for (const [id, patterns] of Object.entries({
-    'MLD-1040': [/sigmoid/i, /0\\.69/, /pairwise/i, /held-out/i, /RewardBench/i, /not.*(?:prove|automatically|validated)/i],
-    'MLD-1041': [/best-of-N/i, /0\\.12/, /KL/i, /blinded/i, /synthetic|invented/i, /not proof|not.*establish/i]
+    'MLD-1040': [/sigmoid/i, /0\.69/, /pairwise/i, /held-out/i, /RewardBench/i, /not.*(?:prove|automatically|validated)/i],
+    'MLD-1041': [/best-of-N/i, /0\.12/, /KL/i, /blinded/i, /synthetic|invented/i, /not proof|not.*establish/i]
   })) {
     const g = guides[id];
     assert.ok(g && termManifest[id] && termManifest[id].expanded, 'Missing reviewed page: ' + id);
