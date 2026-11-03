@@ -316,3 +316,26 @@ test('Poisoning and learned-backdoor guides distinguish training compromise from
   }
   assert.ok(Object.keys(guides).length >= 47);
 });
+
+
+test('Concept drift and data drift guides distinguish conditional change, input change and causal overclaims', () => {
+  const pairs = {
+    'MLD-0191': [/P\\(Y\\|X/i, /0\\.46/i, /0\\.21/i, /prequential|test-then-train/i, /not evidence|does not establish|not proof/i],
+    'MLD-0260': [/P\\(X\\)/i, /0\\.30/i, /training-serving/i, /false.alert/i, /not proof|neither proof|does not prove/i]
+  };
+  for (const [id, expressions] of Object.entries(pairs)) {
+    const g = guides[id], route = termManifest[id];
+    assert.ok(g && route && route.expanded, 'Missing published expanded term route '+id);
+    assert.equal(g.reviewed_on, '2026-11-03');
+    assert.ok(g.sections.length >= 9 && g.sections.every(([title, body]) => title.length >= 8 && body.length >= 120));
+    assert.equal(new Set(g.sections.map(([title]) => title)).size, g.sections.length);
+    assert.ok(g.prerequisites.length >= 4 && g.prerequisites.every(p => termManifest[p]));
+    assert.ok(g.citations.length >= 4 && g.citations.every(([title,url]) => title.length >= 35 && new URL(url).protocol === 'https:'));
+    const prose = g.sections.map(([, body]) => body).join(' ');
+    for (const expression of expressions) assert.match(prose, expression, 'Missing diagnostic boundary '+id);
+    const html = fs.readFileSync(path.join(root, route.path), 'utf8');
+    assert.match(html, /Expanded guide/);
+    assert.match(html, /Sources for the expanded explanation/);
+  }
+  assert.ok(Object.keys(guides).length >= 51, 'Must retain 49 previous guides');
+});
