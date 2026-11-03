@@ -410,9 +410,9 @@
   "encyclopedia": {
     "imported_term_count": 1345,
     "linked_term_count": 1345,
-    "detailed_page_count": 47,
-    "editorially_reviewed_guide_count": 47,
-    "reviewed_on": "2026-11-02",
+    "detailed_page_count": 49,
+    "editorially_reviewed_guide_count": 49,
+    "reviewed_on": "2026-11-03",
     "page_manifest": "terms/manifest.json"
   },
   "legacy_imports": [
