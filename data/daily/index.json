@@ -148,6 +148,6 @@
     }
   ],
   "last_successful_publish_at": "2026-11-03T06:43:27Z",
-  "status": "edition_revision_16_production_verified",
-  "coverage_note": "November 2 revision 16 adds two existing adversarial ML concept guides as Atlas site updates, not newly released technologies or incidents. Nine source-reviewed reports, seven deferred catalog proposals and two failed lookups retain original partial collection window. Main 4ed159e was verified by GitHack/catalog run 41585702935 and Cloudflare production/browser run 41585702813, 457 exact assets on each of three hostnames."
+  "status": "edition_revision_18_production_verified",
+  "coverage_note": "November 2 retrospective revision 18 adds verified-edition, filter-aware evidence CSV downloads and expanded 32-revision recovery. Nine original source-reviewed reports, seven deferred catalog proposals and two inaccessible lookups retain the November 2 partial coverage window; November 3 awaits a separate collection. GitHack/catalog workflow 41591296131 and Cloudflare/hosted-browser workflow 41591296136 passed 117 Node tests and 461 exact HTTP assets per hostname on the v18 release cff55ae; final release metadata commit d3bc76a passed workflows 41591878379 and 41591878286. Source claims were not independently replicated."
 }

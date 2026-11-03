@@ -1,6 +1,8 @@
 """Exercise the packaged or deployed Atlas with real browser navigation and downloads."""
 import argparse
+import csv
 import hashlib
+import io
 import json
 import os
 from pathlib import Path
@@ -125,6 +127,54 @@ with sync_playwright() as p:
         check('manual revision change replaces URL only after verified selection',
               page.locator('#edition-select').input_value().endswith('-v7.json')
               and 'revision=7' in page.locator('#edition-permalink').get_attribute('href'))
+    # Exercise actual browser downloads from a pinned, SHA-checked archive revision.
+    # The test never assumes tomorrow's collection exists or updates these records.
+    if any(e['date'] == '2026-11-02' and e['revision'] == 18 for e in index['editions']):
+        page.goto(base + 'whats-new.html?date=2026-11-02&revision=18&section=news&q=Reuters')
+        page.wait_for_function("!document.getElementById('export-verified').disabled", timeout=45000)
+        visible_titles = page.locator('#edition-content article.item h3').all_inner_texts()
+        check('pinned verified edition restores the four Reuters news matches',
+              len(visible_titles) == 4
+              and page.locator('#edition-search').input_value() == 'Reuters'
+              and page.locator('#section-filter').input_value() == 'news')
+        with page.expect_download() as received:
+            page.locator('#export-verified').click()
+        download = received.value
+        check('verified CSV filename includes exact edition and revision',
+              download.suggested_filename == 'ai-updates-2026-11-02-v18-evidence.csv')
+        saved = out / 'verified-evidence.csv'
+        download.save_as(saved)
+        raw = saved.read_bytes()
+        records = list(csv.DictReader(io.StringIO(raw.decode('utf-8-sig'))))
+        check('download bytes include four visible filtered headlines and correct provenance',
+              raw.startswith(bytes([239, 187, 191])) and bytes([13, 10]) in raw
+              and len(records) == 4
+              and set(row['title'] for row in records) == set(visible_titles)
+              and all(row['edition_date'] == '2026-11-02' and row['revision'] == '18'
+                      and row['section'] == 'news' and row['collection_status'] == 'partial'
+                      for row in records))
+        check('actual CSV retains original URLs, evidence labels and distinct date columns',
+              all(row['source_url'].startswith('https://')
+                  and row['review_status'] and row['source_publication_date']
+                  and row['discovered_at'] and row['record_id']
+                  for row in records)
+              and {'event_date','added_to_atlas_at','caveat','atlas_page'} <= set(records[0]))
+        saved.unlink()
+        # Export must reflect changed filters, not just the initially downloaded rows.
+        page.locator('#section-filter').select_option('site_changes')
+        page.locator('#edition-search').fill('CSV')
+        expected = page.locator('#edition-content article.item h3').all_inner_texts()
+        check('site-change filter finds only the Atlas CSV improvement',
+              len(expected) == 1 and 'CSV' in expected[0])
+        with page.expect_download() as received:
+            page.locator('#export-verified').click()
+        received.value.save_as(saved)
+        changes = list(csv.DictReader(io.StringIO(saved.read_text(encoding='utf-8-sig'))))
+        check('second browser download honors amended filters rather than exporting news',
+              len(changes) == 1 and changes[0]['section'] == 'site_changes'
+              and changes[0]['title'] == expected[0]
+              and changes[0]['record_id'] == 'site-verified-evidence-csv-export-20261103')
+        saved.unlink()
     page.goto(base + 'index.html#/sources')
     link = page.locator('[data-original-file="ML_DL_SLM_LLM_Dictionary.xlsx"]')
     link.wait_for()

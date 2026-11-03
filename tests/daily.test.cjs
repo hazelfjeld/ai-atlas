@@ -788,3 +788,16 @@ test('Retrospective v18 contains one verified-reader site change and preserves t
  assert.equal(ledger.counts.technology_added,0);
  assert.equal(ledger.counts.term_added,0);
 });
+
+test('Archive verification metadata agrees with the last actual production receipt',()=>{
+ const idx=JSON.parse(fs.readFileSync('data/daily/index.json','utf8'));
+ const receipt=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8')).receipts[0];
+ const revision=receipt.production_verified_revision;
+ assert.ok(Number.isInteger(revision)&&revision>=18);
+ assert.equal(idx.status,'edition_revision_'+revision+'_production_verified');
+ assert.equal(idx.last_successful_publish_at,receipt.production_verified_at);
+ assert.ok(idx.editions.some(e=>e.date===receipt.edition_date&&e.revision===revision));
+ assert.ok(idx.coverage_note.includes('revision '+revision));
+ assert.equal(receipt.publication_history.find(h=>h.edition===receipt.edition_date+'-v'+revision)?.status,
+              'cloudflare_http_browser_and_githack_verified');
+});
