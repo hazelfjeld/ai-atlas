@@ -89,9 +89,17 @@
       "sha256": "195c1f06a7c177c582349bfbae061725ffcfed757cebc9ce08d4b63fa0f1b391",
       "bytes": 28448,
       "published_at": "2026-11-03T01:47:40.512Z"
+    },
+    {
+      "date": "2026-11-02",
+      "revision": 12,
+      "path": "data/daily/editions/2026-11-02-v12.json",
+      "sha256": "28d6696cdd83abdaab0734f546cd4620933aa1cc20c410cd27f8165ad5db97eb",
+      "bytes": 30630,
+      "published_at": "2026-11-03T02:06:07.466Z"
     }
   ],
-  "last_successful_publish_at": "2026-11-03T00:40:52Z",
-  "status": "edition_revision_11_indexed_production_verification_pending",
-  "coverage_note": "Revision 11 records two existing-concept educational improvements only. Nine original news reports, partial collection window, two source-lookup failures, seven deferred catalog proposals and earlier immutable editions are unchanged. Last independently verified edition is v10 until full catalog/GitHack/Cloudflare browser checks pass."
+  "last_successful_publish_at": "2026-11-03T01:54:11Z",
+  "status": "edition_revision_12_indexed_production_verification_pending",
+  "coverage_note": "Revision 12 adds two reviewed existing-concept guides only, preserving the nine prior news reports, partial collection window, two source lookup failures, seven deferred proposals and all eleven immutable archived revisions. November 2 v11 was independently verified; v12 deployment checks are pending."
 }

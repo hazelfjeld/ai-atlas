@@ -515,3 +515,37 @@ test('Revision 11 adds only two verified existing concept guides, not fresh AI n
  assert.equal(r.deferred_catalog_proposal_ids.length,7);
  assert.equal(r.counts.news_published,9);
 });
+
+test('Revision 12 archives two genuine prompt-injection guide improvements without mutating world news', () => {
+  const crypto = require('node:crypto');
+  const index = JSON.parse(fs.readFileSync('data/daily/index.json', 'utf8'));
+  const previous = index.editions.find(x => x.date === '2026-11-02' && x.revision === 11);
+  const latest = index.editions.find(x => x.date === '2026-11-02' && x.revision === 12);
+  assert.ok(previous && latest);
+  const bytes = fs.readFileSync(latest.path);
+  assert.equal(bytes.length, latest.bytes);
+  assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'), latest.sha256);
+  const before = D.validateEdition(JSON.parse(fs.readFileSync(previous.path, 'utf8')), previous);
+  const after = D.validateEdition(JSON.parse(bytes.toString('utf8')), latest);
+  assert.equal(D.chicagoDate(after.published_at), '2026-11-02');
+  for (const field of ['news', 'technologies', 'terms', 'coverage', 'corrections'])
+    assert.deepEqual(after[field], before[field], 'Original evidence changed: ' + field);
+  const diff = D.revisionDiff(before, after);
+  assert.deepEqual(diff.site_changes.added.map(x => x.id), [
+    'site-expanded-prompt-injection-20261102',
+    'site-expanded-indirect-prompt-injection-20261102'
+  ]);
+  for (const field of ['news','technologies','terms','corrections'])
+    assert.equal(diff[field].added.length + diff[field].updated.length + diff[field].removed.length, 0);
+  const manifest = JSON.parse(fs.readFileSync('terms/manifest.json','utf8'));
+  for (const [i,id] of ['MLD-0957','MLD-0549'].entries()) {
+    assert.equal(manifest[id].expanded, true);
+    assert.equal(diff.site_changes.added[i].catalog_path, manifest[id].path);
+    assert.ok(fs.readFileSync(manifest[id].path,'utf8').includes('Sources for the expanded explanation'));
+  }
+  const r = JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8')).receipts[0];
+  assert.equal(r.publication_edition,'2026-11-02-v12');
+  assert.equal(r.publication_history.at(-1).edition,'2026-11-02-v12');
+  assert.equal(r.deferred_catalog_proposal_ids.length,7);
+  assert.equal(r.counts.term_added,0);
+});
