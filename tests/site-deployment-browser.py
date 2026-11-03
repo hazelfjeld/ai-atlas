@@ -78,13 +78,23 @@ with sync_playwright() as p:
               and page.locator('#edition-permalink-wrap').is_visible()
               and page.locator('#edition-content article.item').count() >= 1)
         audit = page.locator('#source-coverage .source-audit').inner_text()
-        check('source audit explains partial coverage and both failed lookups',
-              'Collection context:' in audit
-              and 'Direct model metadata API was not available' in audit
-              and 'Previously surfaced press URL returned no page' in audit)
-        check('source audit distinguishes checked times and failure status',
-              'Checked Nov 2, 2026' in audit
-              and 'Status: inaccessible' in audit and 'Status: not found' in audit)
+        if any(e['date'] == '2026-11-03' for e in index['editions']):
+            check('new November 3 edition discloses exactly three source failures and partial scope',
+                  'Source coverage (partial) · 14 checked · 3 failed' in audit
+                  and 'Collection context:' in audit
+                  and 'Three source fetches failed' in audit)
+            check('new source audit preserves actual failed-source reasons, statuses and checked times',
+                  'Checked Nov 3, 2026' in audit
+                  and 'Status: open error' in audit and 'Status: cache miss' in audit
+                  and 'article open failed' in audit and 'pinned README fetch missed' in audit)
+        else:
+            check('historical source audit explains partial coverage and both failed lookups',
+                  'Collection context:' in audit
+                  and 'Direct model metadata API was not available' in audit
+                  and 'Previously surfaced press URL returned no page' in audit)
+            check('historical source audit distinguishes checked times and failure status',
+                  'Checked Nov 2, 2026' in audit
+                  and 'Status: inaccessible' in audit and 'Status: not found' in audit)
     page.locator('#section-filter').select_option('news')
     page.locator('#topic-filter').select_option('research')
     check('daily filters remain usable', page.locator('#topic-filter').input_value() == 'research')

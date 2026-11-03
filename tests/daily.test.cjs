@@ -3,6 +3,10 @@ const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const vm=require('node:vm');
 const D=require('../daily-core.js');
+function verifiedPublicationClock(){
+ const receipts=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8')).receipts;
+ return receipts.at(-1).production_verified_at || receipts[0].production_verified_at;
+}
 function index(entries=[]){return {schema:1,timezone:'America/Chicago',editions:entries,last_successful_publish_at:null};}
 const entry=(date,revision=1)=>({date,revision,path:'data/daily/editions/'+date+'-v'+revision+'.json',sha256:'a'.repeat(64),bytes:900,published_at:date+'T15:00:00Z'});
 function edition(){
@@ -438,7 +442,7 @@ test('Revision 9 indexes only the accessible sidebar update, preserving immutabl
  for(const kind of ['news','technologies','terms','corrections'])assert.equal(diff[kind].added.length+diff[kind].updated.length+diff[kind].removed.length,0);
  assert.match(after.site_changes.at(-1).summary,/not a new real-world AI event/i);
  const ledger=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8'));
- assert.equal(ledger.receipts.length,1);
+ assert.equal(ledger.receipts.length,2,'Genuine Nov 3 batch receipt joins the historical Nov 2 receipt');
  assert.ok(ledger.receipts[0].publication_history.some(h=>h.edition==='2026-11-02-v9'));
  assert.equal(ledger.receipts[0].publication_edition,ledger.receipts[0].publication_history.at(-1).edition);
  assert.equal(ledger.receipts[0].deferred_catalog_proposal_ids.length,5);
@@ -724,7 +728,7 @@ test('Retrospective revision 17 records existing Atlas changes without inventing
  assert.equal(ledger.counts.news_published,9);
  assert.equal(ledger.counts.technology_added,2);
  assert.equal(ledger.counts.term_added,0);
- assert.equal(D.selection(idx,'2026-11-03').todayEntry,null,'Nov 3 must still await an actual collected edition');
+ assert.equal(D.selection(idx,'2026-11-03').todayEntry?.revision,1,'Nov 3 must still await an actual collected edition');
 });
 
 test('Daily source CSV export preserves evidence dates and neutralizes spreadsheet formulas',()=>{
@@ -781,7 +785,7 @@ test('Retrospective v18 contains one verified-reader site change and preserves t
  assert.equal(changes.site_changes.updated.length+changes.site_changes.removed.length,0);
  assert.match(changes.site_changes.added[0].summary,/not an external AI news event/i);
  assert.match(changes.site_changes.added[0].summary,/SHA-256/);
- assert.equal(D.selection(idx,'2026-11-03').todayEntry,null,'No November 3 collection is staged');
+ assert.equal(D.selection(idx,'2026-11-03').todayEntry?.revision,1,'The November 3 collector edition is a separate later publication');
  const ledger=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8')).receipts[0];
  assert.ok(ledger.publication_history.some(h=>h.edition==='2026-11-02-v18'&&h.status==='cloudflare_http_browser_and_githack_verified'));
  assert.equal(ledger.publication_history.at(-1).edition,ledger.publication_edition);
@@ -796,10 +800,12 @@ test('Archive verification metadata agrees with the last actual production recei
  const receipt=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8')).receipts[0];
  const revision=receipt.production_verified_revision;
  assert.ok(Number.isInteger(revision)&&revision>=18);
+ const activeReceipt=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8')).receipts.at(-1);
  const latest=idx.editions.at(-1).revision;
- const expectedStatus=latest===revision?'edition_revision_'+revision+'_production_verified':'edition_revision_'+latest+'_pending_production_verification';
+ const isLatestVerified=activeReceipt.production_verified_at!==null && activeReceipt.publication_history.at(-1).status==='cloudflare_http_browser_and_githack_verified';
+ const expectedStatus='edition_revision_'+latest+(isLatestVerified?'_production_verified':'_pending_production_verification');
  assert.equal(idx.status,expectedStatus);
- assert.equal(idx.last_successful_publish_at,receipt.production_verified_at);
+ assert.equal(idx.last_successful_publish_at,verifiedPublicationClock(),'Last successful publication must match latest independently verified batch');
  assert.ok(idx.editions.some(e=>e.date===receipt.edition_date&&e.revision===revision));
  assert.ok(idx.coverage_note.includes('revision '+revision) || idx.coverage_note.includes('v'+revision));
  assert.equal(receipt.publication_history.find(h=>h.edition===receipt.edition_date+'-v'+revision)?.status,
@@ -848,7 +854,7 @@ test('Retrospective revision 19 adds only the Atlas evidence-review filter, pres
  assert.deepEqual(delta.site_changes.added.map(x=>x.id),['site-exact-review-label-filter-20261103']);
  assert.equal(delta.site_changes.removed.length+delta.site_changes.updated.length,0);
  assert.match(delta.site_changes.added[0].summary,/not an external AI news event/i);
- assert.equal(D.selection(idx,'2026-11-03').todayEntry,null);
+ assert.equal(D.selection(idx,'2026-11-03').todayEntry?.revision,1);
  const receipt=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8')).receipts[0];
  assert.ok(receipt.publication_history.some(h=>h.edition==='2026-11-02-v19'&&h.status==='cloudflare_http_browser_and_githack_verified'));
  assert.ok(receipt.production_verified_revision>=19);
@@ -914,7 +920,7 @@ test('Retrospective v20 adds only source-domain filtering as an Atlas site chang
  assert.deepEqual(diff.site_changes.added.map(x=>x.id),['site-verified-source-domain-filter-20261103']);
  assert.equal(diff.site_changes.updated.length+diff.site_changes.removed.length,0);
  assert.match(diff.site_changes.added[0].summary,/not new external news/i);
- assert.equal(D.selection(idx,'2026-11-03').todayEntry,null,'No Nov 3 collection was manufactured');
+ assert.equal(D.selection(idx,'2026-11-03').todayEntry?.revision,1,'Actual Nov 3 collector batch must be published separately');
  const receipt=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8')).receipts[0];
  assert.ok(receipt.publication_history.some(h=>h.edition==='2026-11-02-v20'), 'Immutable historical revision 20 must remain in the receipt ledger');
  assert.equal(receipt.publication_history.at(-1).edition,receipt.publication_edition, 'Latest receipt head and history must agree');
@@ -945,15 +951,15 @@ test('Retrospective v21 records reviewed catalog candidates without claiming wor
  assert.match(record.release_status,/not_new_world_event/);
  assert.equal(D.safeCatalogPath('catalog-review.html'),'catalog-review.html');
  assert.equal(D.safeCatalogPath('catalog-review.html?inject=1'),'');
- assert.equal(D.selection(idx,'2026-11-03').todayEntry,null);
+ assert.equal(D.selection(idx,'2026-11-03').todayEntry?.revision,1);
  const ledger=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8')).receipts[0];
  assert.ok(ledger.publication_history.some(h=>h.edition==='2026-11-02-v21'&&h.status==='cloudflare_http_browser_and_githack_verified'), 'Preserve verified v21 receipt');
- const latest=idx.editions.at(-1);
+ const latest=idx.editions.filter(e=>e.date==='2026-11-02').at(-1); // The historical first receipt refers to Nov 2, not the new dated edition.
  assert.equal(ledger.publication_edition,latest.date+'-v'+latest.revision);
  assert.equal(ledger.publication_history.at(-1).edition,ledger.publication_edition);
  assert.equal(ledger.deferred_catalog_proposal_ids.length,5);
  assert.equal(ledger.counts.technology_added+ledger.counts.term_added,2);
- assert.equal(idx.last_successful_publish_at,ledger.production_verified_at);
+ assert.equal(idx.last_successful_publish_at,verifiedPublicationClock(),'Last successful publication must match latest independently verified batch');
 });
 
 
@@ -972,7 +978,7 @@ test('Retrospective v23 adds only two real Atlas drift guides and leaves the Nov
    assert.match(change.review_status,/pending_production_verification/);
    assert.ok(fs.existsSync(change.catalog_path),'Missing existing term path '+change.catalog_path);
  }
- assert.equal(D.selection(index,'2026-11-03').todayEntry,null);
+ assert.equal(D.selection(index,'2026-11-03').todayEntry?.revision,1);
  const receipt=JSON.parse(fs.readFileSync('data/daily/published-batches.json')).receipts[0];
  assert.ok(receipt.production_verified_revision>=22, 'Must retain previously verified revision 22');
  const v22=receipt.publication_history.find(h=>h.edition==='2026-11-02-v22');
@@ -1012,11 +1018,11 @@ test('Retrospective v24 records one source-attributed catalog-review site change
  assert.ok(receipt.production_verified_revision>=23,'Earlier verified release must not regress');
  if(receipt.production_verified_revision>=24) assert.equal(priorV24.status,'cloudflare_http_browser_and_githack_verified','Certification requires a matching verified receipt');
  else assert.equal(priorV24.status,'pending_production_verification','Pending edition cannot be certified early');
- assert.equal(idx.last_successful_publish_at,receipt.production_verified_at);
+ assert.equal(idx.last_successful_publish_at,verifiedPublicationClock(),'Last successful publication must match latest independently verified batch');
  assert.equal(receipt.deferred_catalog_proposal_ids.length,5);
  assert.equal(receipt.counts.news_published,9);
  assert.equal(receipt.counts.technology_added+receipt.counts.term_added,2);
- assert.equal(D.selection(idx,'2026-11-03').todayEntry,null,'No false November 3 collection');
+ assert.equal(D.selection(idx,'2026-11-03').todayEntry?.revision,1,'First real November 3 collected batch now published');
 });
 
 test('NVIDIA Auto Ontology is a checksum-pinned Atlas addition, not an invented new launch',()=>{
@@ -1109,8 +1115,55 @@ test('Immutable v25 records the actual TECH-0302 Atlas catalog addition without 
  assert.deepEqual(r.accepted_catalog_addition_ids,['tech-proposal:nvidia-auto-ontology:2026-11-02','tech-proposal:windmill:2026-11-02']);
  const m=JSON.parse(fs.readFileSync(path.join(root,'publication.json')));
  assert.equal(m.published_counts.technologies,m.prepared_counts.technologies+r.counts.technology_added);
- assert.equal(idx.last_successful_publish_at,r.production_verified_at,'Do not claim successful v25 publish before independently verified release');
- assert.equal(idx.status,'edition_revision_'+idx.editions.at(-1).revision+(r.production_verified_revision===idx.editions.at(-1).revision?'_production_verified':'_pending_production_verification'));
+ assert.equal(idx.last_successful_publish_at,verifiedPublicationClock(),'Last successful publication must match latest independently verified batch');
+ assert.equal(idx.status,'edition_revision_'+idx.editions.at(-1).revision+(JSON.parse(fs.readFileSync(path.join(root,'data/daily/published-batches.json'))).receipts.at(-1).production_verified_at?'_production_verified':'_pending_production_verification'));
  assert.ok(r.publication_history.at(-1).status==='pending_production_verification'||r.publication_history.at(-1).status==='cloudflare_http_browser_and_githack_verified');
- assert.equal(D.selection(idx,'2026-11-03').todayEntry,null);
+ assert.equal(D.selection(idx,'2026-11-03').todayEntry?.revision,1);
+});
+
+test('Source-reviewed November 3 daily edition is immutable, deduplicated, dated, and honest about incomplete coverage',()=>{
+ const crypto=require('node:crypto'), path=require('node:path'), root=path.join(__dirname,'..');
+ const idx=JSON.parse(fs.readFileSync(path.join(root,'data/daily/index.json'),'utf8'));
+ const ref=D.selection(idx,'2026-11-03').todayEntry;
+ assert.ok(ref && ref.date==='2026-11-03' && ref.revision===1,'Actual collected Nov 3 edition must be indexed');
+ const buf=fs.readFileSync(path.join(root,ref.path));
+ assert.equal(ref.bytes,buf.length);
+ assert.equal(ref.sha256,crypto.createHash('sha256').update(buf).digest('hex'));
+ const today=D.validateEdition(JSON.parse(buf.toString('utf8')),ref);
+ assert.equal(today.coverage.status,'partial');
+ assert.equal(today.coverage.sources_checked.length,14);
+ assert.equal(today.coverage.sources_failed.length,3);
+ assert.equal(today.news.length,8);
+ assert.equal(today.news.filter(r=>r.publication_date==='2026-11-03').length,4);
+ assert.equal(today.news.filter(r=>r.publication_date<'2026-11-03').length,4,'Catch-up items retain their earlier source dates');
+ assert.deepEqual([today.technologies.length,today.terms.length,today.site_changes.length,today.corrections.length],[0,0,0,0],'Unintegrated proposals cannot be counted as catalog additions');
+ assert.ok(today.tldr.length>=2&&today.tldr.length<=3);
+ const previous=JSON.parse(fs.readFileSync(path.join(root,'data/daily/editions/2026-11-02-v25.json')));
+ const sourceUrls=new Set(previous.news.map(n=>n.source_url));
+ const ids=new Set(),urls=new Set();
+ for(const item of today.news){
+  assert.ok(!ids.has(item.id),'Duplicated public news ID');ids.add(item.id);
+  assert.ok(!sourceUrls.has(item.source_url) && !urls.has(item.source_url),'Duplicated canonical news URL');urls.add(item.source_url);
+  assert.ok(item.source_url.startsWith('https://'));
+  assert.ok(/publisher_checked|original_reuters_reporting/.test(item.review_status));
+  assert.ok(item.caveat && item.why_it_matters);
+  assert.ok(Date.parse(item.discovered_at)<=Date.parse(today.coverage.end));
+ }
+ assert.ok(today.news.some(n=>/investigation_not_adjudicated/.test(n.review_status)));
+ assert.ok(today.news.some(n=>/prototype_results_unreplicated/.test(n.review_status)));
+ assert.equal(idx.last_successful_publish_at,verifiedPublicationClock(),'Last successful publication must match latest independently verified batch');
+ const ledger=JSON.parse(fs.readFileSync(path.join(root,'data/daily/published-batches.json'),'utf8'));
+ assert.equal(ledger.receipts.length,2);
+ const receipt=ledger.receipts[1];
+ assert.equal(receipt.batch_id,'atlas-daily-20261103-0824ct-recovery-a');
+ assert.equal(receipt.source_batch_sha256,'f6d155caec1fda714b8fdd456ec47cc886dd10856159b65b9745c69d64b9adb3');
+ assert.equal(receipt.source_batch_bytes,32219);
+ assert.equal(receipt.source_commit,'9a2d9a0f21551737b041a49e398ebf08793272ae');
+ assert.equal(receipt.publication_edition,'2026-11-03-v1');
+ assert.equal(receipt.counts.news_published,8);
+ assert.equal(receipt.counts.catalog_deferred,4);
+ assert.equal(new Set(receipt.accepted_news_ids).size,8);
+ assert.equal(new Set(receipt.deferred_catalog_proposal_ids).size,4);
+ assert.ok(receipt.production_verified_at===null||D.validTimestamp(receipt.production_verified_at));
+ assert.equal(ledger.receipts[0].production_verified_revision,25,'Keep verified November 2 history unchanged');
 });
