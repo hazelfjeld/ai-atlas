@@ -501,7 +501,7 @@ test('Revision 11 adds only two verified existing concept guides, not fresh AI n
   assert.equal(changes[key].added.length+changes[key].removed.length+changes[key].updated.length,0);
  const guides=JSON.parse(fs.readFileSync('content/term-guides.json','utf8'));
  const pages=JSON.parse(fs.readFileSync('terms/manifest.json','utf8'));
- assert.equal(Object.keys(guides).length,35);
+ assert.ok(Object.keys(guides).length >= 35, 'Historical revision 11 must not cap later guide expansions');
  for(const [index,id] of ['MLD-0110','MLD-0371'].entries()){
   assert.equal(pages[id].expanded,true);
   assert.equal(changes.site_changes.added[index].catalog_path,pages[id].path);
