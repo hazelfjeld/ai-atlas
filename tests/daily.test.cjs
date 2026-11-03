@@ -796,7 +796,9 @@ test('Archive verification metadata agrees with the last actual production recei
  const receipt=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8')).receipts[0];
  const revision=receipt.production_verified_revision;
  assert.ok(Number.isInteger(revision)&&revision>=18);
- assert.equal(idx.status,'edition_revision_'+revision+'_production_verified');
+ const latest=idx.editions.at(-1).revision;
+ const expectedStatus=latest===revision?'edition_revision_'+revision+'_production_verified':'edition_revision_'+latest+'_pending_production_verification';
+ assert.equal(idx.status,expectedStatus);
  assert.equal(idx.last_successful_publish_at,receipt.production_verified_at);
  assert.ok(idx.editions.some(e=>e.date===receipt.edition_date&&e.revision===revision));
  assert.ok(idx.coverage_note.includes('revision '+revision));
