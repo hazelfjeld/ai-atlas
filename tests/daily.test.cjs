@@ -728,7 +728,7 @@ test('Retrospective revision 17 records existing Atlas changes without inventing
  assert.equal(ledger.counts.news_published,9);
  assert.equal(ledger.counts.technology_added,2);
  assert.equal(ledger.counts.term_added,0);
- assert.equal(D.selection(idx,'2026-11-03').todayEntry?.revision,1,'Nov 3 must still await an actual collected edition');
+ assert.equal(D.selection(idx,'2026-11-03').todayEntry?.revision,2,'November 3 collected edition and subsequent immutable v2 must be indexed');
 });
 
 test('Daily source CSV export preserves evidence dates and neutralizes spreadsheet formulas',()=>{
@@ -785,7 +785,7 @@ test('Retrospective v18 contains one verified-reader site change and preserves t
  assert.equal(changes.site_changes.updated.length+changes.site_changes.removed.length,0);
  assert.match(changes.site_changes.added[0].summary,/not an external AI news event/i);
  assert.match(changes.site_changes.added[0].summary,/SHA-256/);
- assert.equal(D.selection(idx,'2026-11-03').todayEntry?.revision,1,'The November 3 collector edition is a separate later publication');
+ assert.equal(D.selection(idx,'2026-11-03').todayEntry?.revision,2,'The November 3 collector edition remains separate from November 2 retrospectives');
  const ledger=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8')).receipts[0];
  assert.ok(ledger.publication_history.some(h=>h.edition==='2026-11-02-v18'&&h.status==='cloudflare_http_browser_and_githack_verified'));
  assert.equal(ledger.publication_history.at(-1).edition,ledger.publication_edition);
@@ -920,7 +920,7 @@ test('Retrospective v20 adds only source-domain filtering as an Atlas site chang
  assert.deepEqual(diff.site_changes.added.map(x=>x.id),['site-verified-source-domain-filter-20261103']);
  assert.equal(diff.site_changes.updated.length+diff.site_changes.removed.length,0);
  assert.match(diff.site_changes.added[0].summary,/not new external news/i);
- assert.equal(D.selection(idx,'2026-11-03').todayEntry?.revision,1,'Actual Nov 3 collector batch must be published separately');
+ assert.equal(D.selection(idx,'2026-11-03').todayEntry?.revision,2,'Actual Nov 3 collector batch and site-only v2 must stay separate from Nov 2');
  const receipt=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8')).receipts[0];
  assert.ok(receipt.publication_history.some(h=>h.edition==='2026-11-02-v20'), 'Immutable historical revision 20 must remain in the receipt ledger');
  assert.equal(receipt.publication_history.at(-1).edition,receipt.publication_edition, 'Latest receipt head and history must agree');
@@ -951,7 +951,7 @@ test('Retrospective v21 records reviewed catalog candidates without claiming wor
  assert.match(record.release_status,/not_new_world_event/);
  assert.equal(D.safeCatalogPath('catalog-review.html'),'catalog-review.html');
  assert.equal(D.safeCatalogPath('catalog-review.html?inject=1'),'');
- assert.equal(D.selection(idx,'2026-11-03').todayEntry?.revision,1);
+ assert.equal(D.selection(idx,'2026-11-03').todayEntry?.revision,2);
  const ledger=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8')).receipts[0];
  assert.ok(ledger.publication_history.some(h=>h.edition==='2026-11-02-v21'&&h.status==='cloudflare_http_browser_and_githack_verified'), 'Preserve verified v21 receipt');
  const latest=idx.editions.filter(e=>e.date==='2026-11-02').at(-1); // The historical first receipt refers to Nov 2, not the new dated edition.
@@ -978,7 +978,7 @@ test('Retrospective v23 adds only two real Atlas drift guides and leaves the Nov
    assert.match(change.review_status,/pending_production_verification/);
    assert.ok(fs.existsSync(change.catalog_path),'Missing existing term path '+change.catalog_path);
  }
- assert.equal(D.selection(index,'2026-11-03').todayEntry?.revision,1);
+ assert.equal(D.selection(index,'2026-11-03').todayEntry?.revision,2);
  const receipt=JSON.parse(fs.readFileSync('data/daily/published-batches.json')).receipts[0];
  assert.ok(receipt.production_verified_revision>=22, 'Must retain previously verified revision 22');
  const v22=receipt.publication_history.find(h=>h.edition==='2026-11-02-v22');
@@ -1022,7 +1022,7 @@ test('Retrospective v24 records one source-attributed catalog-review site change
  assert.equal(receipt.deferred_catalog_proposal_ids.length,5);
  assert.equal(receipt.counts.news_published,9);
  assert.equal(receipt.counts.technology_added+receipt.counts.term_added,2);
- assert.equal(D.selection(idx,'2026-11-03').todayEntry?.revision,1,'First real November 3 collected batch now published');
+ assert.equal(D.selection(idx,'2026-11-03').todayEntry?.revision,2,'Original Nov 3 batch is present with the site-only revision');
 });
 
 test('NVIDIA Auto Ontology is a checksum-pinned Atlas addition, not an invented new launch',()=>{
@@ -1118,7 +1118,7 @@ test('Immutable v25 records the actual TECH-0302 Atlas catalog addition without 
  assert.equal(idx.last_successful_publish_at,verifiedPublicationClock(),'Last successful publication must match latest independently verified batch');
  assert.equal(idx.status,'edition_revision_'+idx.editions.at(-1).revision+(JSON.parse(fs.readFileSync(path.join(root,'data/daily/published-batches.json'))).receipts.at(-1).publication_history.at(-1).status==='cloudflare_http_browser_and_githack_verified'?'_production_verified':'_pending_production_verification'));
  assert.ok(r.publication_history.at(-1).status==='pending_production_verification'||r.publication_history.at(-1).status==='cloudflare_http_browser_and_githack_verified');
- assert.equal(D.selection(idx,'2026-11-03').todayEntry?.revision,1);
+ assert.equal(D.selection(idx,'2026-11-03').todayEntry?.revision,2);
 });
 
 test('Source-reviewed November 3 daily edition is immutable, deduplicated, dated, and honest about incomplete coverage',()=>{
