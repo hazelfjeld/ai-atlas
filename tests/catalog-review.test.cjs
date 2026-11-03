@@ -45,8 +45,8 @@ test('Dated candidate audit is machine-readable, source-attributed and not a cat
   'term-proposal:environment-grounded-agent-benchmark'
  ];
  assert.equal(audit.schema,1);
- assert.equal(audit.document_type,'editorial_candidate_triage_not_canonical_catalog');
- assert.equal(audit.published_canonical_additions,0);
+ assert.equal(audit.document_type,'editorial_candidate_triage_with_one_canonical_addition');
+ assert.equal(audit.published_canonical_additions,1);
  assert.equal(audit.reviewed_proposals,7);
  assert.equal(audit.independent_product_or_benchmark_replication,false);
  assert.equal(audit.source_batch.batch_id,receipt.batch_id);
@@ -56,7 +56,7 @@ test('Dated candidate audit is machine-readable, source-attributed and not a cat
  assert.deepEqual(audit.candidates.map(c=>c.proposal_id),actualIds);
  assert.equal(new Set(actualIds).size,7);
  for(const item of audit.candidates){
-  assert.equal(item.publication_state,'deferred_not_in_canonical_catalog');
+  assert.ok(['deferred_not_in_canonical_catalog','canonical_catalog_added_new_to_atlas'].includes(item.publication_state));
   assert.ok(['technology','term'].includes(item.kind));
   assert.ok(item.editorial_basis.length>=65 && item.limitations.length>=65);
   assert.ok(item.evidence_scope.length>=50);
@@ -81,7 +81,7 @@ test('Candidate audit is linked from the accessible review page and shipped in t
  assert.match(page,/href="data\/catalog-candidate-decisions-2026-11-03\.json" download/);
  assert.match(page,/<th scope="col">Proposal<\/th>/);
  assert.match(page,/<table class="decision-matrix">/);
- assert.match(page,/0 new technology IDs, 0 new term IDs/);
+ assert.match(page,/1 new technology ID \(TECH-0301\), 0 new term IDs/);
  const deployed=JSON.parse(read('deploy/public-files.json'));
  assert.ok(deployed.extra_downloads.includes(file),'Audit export must survive Cloudflare allowlisting');
  assert.ok(fs.statSync(path.join(root,file)).size>5000,'Audit export must contain substantive sourced records');

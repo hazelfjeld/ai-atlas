@@ -129,7 +129,8 @@ async function start() {
   } catch(error){ console.warn('Verified technology release annotations unavailable; showing original catalog only:',error.message); }
   records.sort((a,b)=>a.name.localeCompare(b.name));
   prepared=manifest.prepared_counts.technologies; snapshot=manifest.snapshot_date;
-  $('coverage-note').textContent = records.length + ' of ' + prepared + ' original profiles are published and verified.' + (records.length < prepared ? ' Remaining records are still being imported.' : ' The prepared technology catalog is complete.');
+  const added = records.length - prepared;
+  $('coverage-note').textContent = prepared + ' preserved original profiles, all checksum-verified.' + (added > 0 ? ' Plus ' + added + ' new-to-Atlas source-reviewed profiles (not independently benchmarked).' : '');
   for(const [id,field] of [['tech-section','section'],['tech-tag','tags'],['tech-stage','stages']]) {
     const values=new Set();
     for(const r of records) for(const v of (Array.isArray(r[field])?r[field]:[r[field]])) if(v) values.add(v);

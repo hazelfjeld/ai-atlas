@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "document_type": "editorial_candidate_triage_not_canonical_catalog",
+  "document_type": "editorial_candidate_triage_with_one_canonical_addition",
   "reviewed_on": "2026-11-03",
   "collection_edition_date": "2026-11-02",
   "source_batch": {
@@ -8,7 +8,7 @@
     "source_commit": "da93e2fd5545cabc0b001310eab55bf8eeea9da8",
     "source_sha256": "2dcb25af14b960f9989527170fd88daf8ba2fb5f42dcff3b72f512b08ddb57d7"
   },
-  "published_canonical_additions": 0,
+  "published_canonical_additions": 1,
   "reviewed_proposals": 7,
   "independent_product_or_benchmark_replication": false,
   "source_scope": "First-party project documentation, dated release notes and cited research. Review decisions are editorial, not reproduced performance evaluations. Original daily source-coverage failures remain in the edition archive.",
@@ -76,14 +76,14 @@
       "name": "NVIDIA Auto Ontology",
       "kind": "technology",
       "disposition": "distinct_framework_candidate",
-      "publication_state": "deferred_not_in_canonical_catalog",
+      "publication_state": "canonical_catalog_added_new_to_atlas",
       "related_existing_term_ids": [
         "MLD-0608",
         "MLD-1104",
         "MLD-1033"
       ],
       "editorial_basis": "Named Python software framework for a semantic ontology layer and natural-language structured-data querying; not a newly invented ontology concept.",
-      "evidence_scope": "First-party README describes Next.js gateway, FastAPI Python 3.12+, PostgreSQL/pgvector and configurable NVIDIA NIM inference endpoints. Apache-2.0 covers project code with third-party terms separately.",
+      "evidence_scope": "First-party README describes Next.js gateway, FastAPI Python 3.12+, PostgreSQL/pgvector and configurable NVIDIA NIM inference endpoints. Apache-2.0 covers project code with third-party terms separately. Canonical catalog entry records the first-party repository at source revision cdaf61e1bd0cf3820d11d72b43bb460816aebbd3, not an independently reproduced system benchmark.",
       "limitations": "No verified initial public-release date; API inference may incur usage costs. The FastAPI service is a trusted internal boundary and must not be directly exposed to public untrusted clients; no generated SQL accuracy benchmark was replicated.",
       "required_before_catalog_publication": [
         "Record exact project version and stable official documentation URL",
@@ -99,7 +99,10 @@
           "title": "Third-party license notices",
           "url": "https://github.com/NVIDIA/auto-ontology/blob/main/THIRD_PARTY_NOTICES.md"
         }
-      ]
+      ],
+      "canonical_id": "TECH-0301",
+      "catalog_path": "technology/TECH-0301-nvidia-auto-ontology.html",
+      "catalog_added_on": "2026-11-03"
     },
     {
       "proposal_id": "tech-proposal:windmill:2026-11-02",
@@ -224,5 +227,6 @@
         }
       ]
     }
-  ]
+  ],
+  "revision_note": "One of the seven previously deferred proposals has received a separate checksummed canonical catalog ID. The original November 2 daily edition and the six remaining deferred proposals are unchanged."
 }

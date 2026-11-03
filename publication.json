@@ -8,7 +8,7 @@
   "published_counts": {
     "papers": 30,
     "alerts": 10,
-    "technologies": 300,
+    "technologies": 301,
     "terms": 1345,
     "playbooks": 20
   },
@@ -150,6 +150,13 @@
         "count": 50,
         "bytes": 71486,
         "sha256": "24d9aa480693de33c0c406cc5c8aaf83f56548939015e2518d5748b407738e27"
+      },
+      {
+        "path": "data/technologies-07.json",
+        "kind": "technologies",
+        "count": 1,
+        "bytes": 3570,
+        "sha256": "47d24f175f4d66b3b80eb13ec8b195ddf0167ec1790d7821145e2c6ae49d6062"
       }
     ],
     "terms": [
@@ -426,5 +433,16 @@
       "expanded_sha256": "e58d5762d6cd5fe357fd21a10f59c000ab34e3543f3fadd2d7ae86bd91ada6af",
       "format": "gzip-json"
     }
-  ]
+  ],
+  "catalog_additions": {
+    "technologies": [
+      {
+        "id": "TECH-0301",
+        "source_proposal_id": "tech-proposal:nvidia-auto-ontology:2026-11-02",
+        "date_added": "2026-11-03",
+        "source_checked_on": "2026-11-03",
+        "review_scope": "First-party documentation only; no independent execution or benchmark replication"
+      }
+    ]
+  }
 }

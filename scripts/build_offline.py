@@ -26,7 +26,8 @@ def main():
         script += (ROOT / filename).read_text(encoding='utf-8') + '\n'
     script = script.replace('</script', '<\\/script').replace('\u2028', '\\u2028').replace('\u2029', '\\u2029')
     html = html.replace('</body>', '<script>' + script + '</script></body>')
-    html = html.replace('<main id="main" tabindex="-1">', '<main id="main" tabindex="-1"><p class="notice">Offline demonstration fallback: all 1,705 catalog records, search, comparisons, Games and JSON exports work without internet. Term explanations open as record dialogs here. Expanded web pages, original downloads and external citations require the served edition.</p>')
+    count = sum(len(data[k]) for k in ('papers','alerts','terms','technologies','playbooks'))
+    html = html.replace('<main id="main" tabindex="-1">', f'<main id="main" tabindex="-1"><p class="notice">Offline demonstration fallback: all {count:,} catalog records (1,705 preserved originals), search, comparisons, Games and JSON exports work without internet. Term explanations open as record dialogs here. Expanded web pages, original downloads and external citations require the served edition.</p>')
     html = html.replace('href="about.html"', 'href="#/sources"').replace('href="technology/index.html"', 'href="#/technologies"')
     html = html.replace('href="demo.html"', 'href="#/overview"').replace('href="terms/index.html"', 'href="#/dictionary"')
     html = html.replace('<meta name="robots" content="index,follow,max-image-preview:large">', '<meta name="robots" content="noindex,follow">')

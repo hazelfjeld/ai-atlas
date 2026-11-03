@@ -3036,7 +3036,7 @@
   },
   "MLD-0608": {
     "path": "terms/MLD-0608-knowledge-graph.html",
-    "sha256": "e59b45f86af254d310187ef2340fe8bd6ddfba5e637dbcf93aa19e36b2b249a9",
+    "sha256": "d854cae4b0c87c69dab501590e5921c013f8cc932ed13b10bc303c6933590eba",
     "expanded": true
   },
   "MLD-0609": {
@@ -5161,7 +5161,7 @@
   },
   "MLD-1033": {
     "path": "terms/MLD-1033-retrieval-augmented-generation.html",
-    "sha256": "382ae3938afe553eecc98b849254abfd7d0421bb77ef667aacac0268a8d71d0f",
+    "sha256": "5965bc8dcf71ee11291cc1879f7c6aee216496ead37383562c6a7d85464f22c3",
     "expanded": true
   },
   "MLD-1034": {
@@ -5516,7 +5516,7 @@
   },
   "MLD-1104": {
     "path": "terms/MLD-1104-semantic-search.html",
-    "sha256": "7e0ad70e2c3a6733ca511bb46013db825bfc90d5b945fe8f62aa92d59154e973",
+    "sha256": "42a93d3ea39d1b2a53e1b85d4ce84b588a9d50b14a032a502974fbe7c81790b2",
     "expanded": false
   },
   "MLD-1105": {

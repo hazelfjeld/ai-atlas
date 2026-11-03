@@ -25,7 +25,7 @@ jobs:
           node --test tests/*.test.cjs
       - name: Commit deterministic generated files to the isolated feature branch
         run: |
-          git add terms technology publication.json downloads/Atlas_Demo_Offline.html index.html about.html demo.html robots.txt sitemap.xml
+          git add terms technology publication.json downloads/Atlas_Demo_Offline.html index.html about.html demo.html technologies.html robots.txt sitemap.xml
           if ! git diff --cached --quiet; then
             git config user.name 'github-actions[bot]'
             git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
@@ -54,7 +54,8 @@ jobs:
                  'terms/MLD-0146-capability-failure.html',
                  'terms/MLD-0142-calibration.html','terms/MLD-0198-conformal-prediction.html',
                  'terms/MLD-0389-expected-calibration-error.html','terms/MLD-1184-subgroup-evaluation.html',
-                 'terms/index.html','terms/manifest.json','publication.json']
+                 'terms/index.html','terms/manifest.json','publication.json',
+                 'data/technologies-07.json','technology/TECH-0301-nvidia-auto-ontology.html','technology/index.html']
           for name in files:
               expected=pathlib.Path(name).read_bytes()
               for attempt in range(4):
