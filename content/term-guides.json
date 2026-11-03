@@ -1773,5 +1773,135 @@
         "https://arxiv.org/abs/2404.07972"
       ]
     ]
+  },
+  "MLD-0957": {
+    "reviewed_on": "2026-11-02",
+    "prerequisites": [
+      "MLD-0043",
+      "MLD-0549",
+      "MLD-1002",
+      "MLD-1033"
+    ],
+    "sections": [
+      [
+        "The trust boundary at the center of the attack",
+        "Prompt injection occurs when an instruction-like string from a lower-trust surface is treated as if it had authority over the assistant's intended job. The underlying issue is not unusual wording: it is promotion of untrusted content into the control plane. Legitimate user requests, developer policy and retrieved evidence have different permissions, even if all three arrive as text."
+      ],
+      [
+        "Direct injection versus indirect delivery",
+        "A direct attempt may appear in adversarial user input; an indirect attempt travels inside a page, email, file, repository comment or tool response that the assistant was asked to inspect. Both try to redirect behavior, but the indirect case is especially easy to miss because the malicious text is encountered during an otherwise authorized task. Not every quoted imperative is an attack."
+      ],
+      [
+        "Mechanism: data looks like instructions",
+        "Models interpret natural language across concatenated contexts, and delimiters by themselves are not security permissions. A retrieved snippet that claims to be a system message can be semantically salient even though its origin has no authority. The correct system design treats the snippet as task data, applies application-level authorization to subsequent tool calls and prevents model-generated text from granting its own privileges."
+      ],
+      [
+        "Worked synthetic support-assistant example",
+        "A user asks for the shipping status of an order. A retrieved product note includes a fabricated instruction to mark the order refunded. The safe path is to summarize the note as evidence, read shipping status through a read-only tool and refuse any refund mutation unless an independently authenticated user request and policy check authorize it. This scenario is invented for teaching, not a reported breach."
+      ],
+      [
+        "Threat modeling and measurable consequences",
+        "Describe the legitimate user goal, attacker-controlled surface, desired deviation, trust boundary, available tools and side effects. A model parroting a suspicious phrase differs from an agent making an unauthorized tool call; both differ from an actual ledger change. Record which occurred, not a single undifferentiated 'jailbreak success' label. Data leakage, answer contamination and unauthorized actions need separate outcome checks."
+      ],
+      [
+        "Defense in depth outside the prompt",
+        "Prefer narrowly scoped tool credentials, typed parameters, allowlisted destinations, execution-layer permission checks, non-executable document rendering, sandboxing, confirmation for sensitive writes and provenance-aware retrieval. A prompt saying 'ignore malicious instructions' is at best one layer. Input classifiers and sanitization may reduce exposure, but can miss novel payloads or incorrectly reject legitimate documents; measure both errors."
+      ],
+      [
+        "Evaluation protocol using bounded simulations",
+        "Construct benign tasks paired with untrusted snippets and explicit forbidden side effects. Evaluate a baseline without attacks, then with attacks under the same model, tools and budget. Log tool trajectories and final state; estimate user-task success, attack success, false positives and cost separately. Test adaptive variations on a held-out suite; leaking the test cases into a prompt or model tuning procedure invalidates simple generalization claims."
+      ],
+      [
+        "Pseudocode for an authorized tool boundary",
+        "For each proposed action: validate a structured schema; bind it to the authenticated user and granted scope; reject unknown resource IDs or destinations; request human approval when required; execute in a sandbox; log actual effects; return a bounded observation. Re-parse untrusted tool outputs as data on every loop. This is architectural pseudocode, not a formal proof or a substitute for implementing access control."
+      ],
+      [
+        "Limitations and common misconceptions",
+        "Prompt injection is not equivalent to ordinary factual errors, model jailbreaks or training-data poisoning, although these can overlap. A scanner reporting 'no injection detected' does not establish that an agent is safe, and a successful controlled red-team attack is not automatically evidence of deployment-wide compromise. OWASP and AgentDojo describe risk patterns and benchmark settings; mitigations should be independently tested against the application's exact tools."
+      ]
+    ],
+    "citations": [
+      [
+        "OWASP GenAI Security Project, LLM01:2025 Prompt Injection risk scenarios and mitigations",
+        "https://genai.owasp.org/llmrisk/llm01-prompt-injection/"
+      ],
+      [
+        "Greshake and colleagues, Not what you've signed up for: Indirect prompt injection of LLM applications (2023)",
+        "https://arxiv.org/abs/2302.12173"
+      ],
+      [
+        "Debenedetti and colleagues, AgentDojo dynamic benchmark for agent prompt-injection attacks and defenses (2024)",
+        "https://arxiv.org/abs/2406.13352"
+      ],
+      [
+        "OpenAI, Understanding prompt injections and practical safeguards for AI agents",
+        "https://openai.com/safety/prompt-injections/"
+      ]
+    ]
+  },
+  "MLD-0549": {
+    "reviewed_on": "2026-11-02",
+    "prerequisites": [
+      "MLD-0957",
+      "MLD-0043",
+      "MLD-1033",
+      "MLD-1002"
+    ],
+    "sections": [
+      [
+        "What makes an injection indirect",
+        "In indirect prompt injection, an attacker plants instruction-like material in data the defender will read while serving a legitimate request. The attacker may control a web page, email body, PDF passage or tool-output field but does not need to send a direct message to the agent. The trust failure occurs if source content is obeyed as a higher-priority command."
+      ],
+      [
+        "Entry points and the untrusted-data path",
+        "A typical path is user request → retrieval or tool response → model context → proposed answer or tool call. A malicious instruction can sit in search results, a code comment or a knowledge-base entry. The adversary's control is limited to that lower-trust surface; documenting its scope matters because a poisoned tool response is not the same as compromising the tool server itself."
+      ],
+      [
+        "Why retrieval can cross the authority boundary",
+        "Retrieval-augmented generation is designed to make external text visible at answer time, not to make that text authoritative about tool use. An attacker can mix legitimate facts with an instruction to change the task or fabricate a policy claim. Cite and summarize the retrieved facts while keeping authorization tied to the user and application; the passage's 'system' label is merely source text."
+      ],
+      [
+        "Synthetic example with a document summarizer",
+        "Suppose a student asks an assistant to summarize a publicly available research note. A paragraph within it says that the summary must promote a particular unrelated product. If the assistant repeats that endorsement as an instruction-following behavior, the attacker has contaminated the answer. The invented demonstration involves no actual product or measured model, and does not imply a real incident."
+      ],
+      [
+        "Synthetic example with side effects",
+        "A workplace agent reads an email containing a forged instruction to change a meeting time. The correct process is to classify it as email content, summarize what the sender wrote and require the authenticated user's actual scheduling intent and permissions before editing a calendar. Only an audited write to the calendar state would establish an unauthorized action; a model's claim that it changed the meeting would not."
+      ],
+      [
+        "Scope-aware controls and information flow",
+        "Separate retrieved text from policy, label provenance in logs and require permission checks at the execution boundary. Restrict what data and tools an agent can access, avoid passing sensitive context into unrelated tool calls, and require approval for irreversible actions. Quoting, delimiters, prompt hardening and injection detectors can assist but are not themselves access control or guarantees."
+      ],
+      [
+        "Evaluation methodology: both goals matter",
+        "AgentDojo provides a research example of stateful agent tasks combined with attacker-controlled tool responses and programmatic success checks. For an app-specific test, track legitimate task utility and targeted attack success independently. Use resettable isolated environments and adversarial variants; a defense may lower attack success while also blocking harmless tasks, so measure false refusals and latency."
+      ],
+      [
+        "Worked diagnostic confusion matrix",
+        "Imagine 40 synthetic documents: 10 contain planted attack text and 30 are benign. A detector flags 8 of the 10 attacks and also flags 6 benign cases; its attack recall is 8/10 = 80% and its benign false-positive rate is 6/30 = 20%. Those illustrative numbers test the detector only, not the downstream agent's behavior, and are not published benchmark measurements."
+      ],
+      [
+        "Evidence limits and reporting discipline",
+        "The 2023 indirect-injection paper reports experimental attacks on selected integrated systems, while OWASP groups a broader class of risks and AgentDojo measures controlled tasks. Neither proves that an arbitrary current deployment was compromised. Report observed side effects, permission failures, version and test conditions; distinguish attempted injection, successful steering, unauthorized action and confirmed real-world incident."
+      ]
+    ],
+    "citations": [
+      [
+        "Greshake and colleagues, original indirect prompt-injection threat taxonomy and experiments (arXiv 2302.12173)",
+        "https://arxiv.org/abs/2302.12173"
+      ],
+      [
+        "Debenedetti and colleagues, AgentDojo controlled agent-task attack and defense evaluation (arXiv 2406.13352)",
+        "https://arxiv.org/abs/2406.13352"
+      ],
+      [
+        "OWASP GenAI Security Project, LLM01:2025 Prompt Injection description and defensive guidance",
+        "https://genai.owasp.org/llmrisk/llm01-prompt-injection/"
+      ],
+      [
+        "OpenAI, Understanding prompt injections: lower-trust material and agent safeguards",
+        "https://openai.com/safety/prompt-injections/"
+      ]
+    ]
   }
 }
