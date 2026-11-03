@@ -146,7 +146,7 @@ with sync_playwright() as p:
         check('review label narrows news and updates shareable research URL',
               0 < page.locator('#edition-content article.item').count() <= 4
               and all(x == first_review for x in
-                      page.locator('#edition-content article.item .tags .tag:first-child').all_inner_texts())
+                      page.locator('#edition-content article.item > .tags:first-child > .tag:first-child').all_inner_texts())
               and 'review=' in page.url)
         share_url = page.url
         page.goto(share_url)
