@@ -137,6 +137,14 @@
       "sha256": "cfe62da234bfd2d38e1895a62ae06b5b2c7dd363123bc699d28eecfc344350f1",
       "bytes": 39874,
       "published_at": "2026-11-03T06:04:03.941Z"
+    },
+    {
+      "date": "2026-11-02",
+      "revision": 18,
+      "path": "data/daily/editions/2026-11-02-v18.json",
+      "sha256": "d59ff7536e52d89ad3ad967013441bb3876a7850429c1aa42a71451891cffdb0",
+      "bytes": 40945,
+      "published_at": "2026-11-03T06:37:03.999Z"
     }
   ],
   "last_successful_publish_at": "2026-11-03T06:08:48Z",
