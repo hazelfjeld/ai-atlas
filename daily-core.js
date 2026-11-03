@@ -186,5 +186,31 @@ function filterPermalink(entry,filters={}){
  if(query)p.set('q',query);
  return 'whats-new.html?'+p.toString();
 }
-return {KINDS,matchesTopic,matchesQuery,validDate,validTimestamp,chicagoDate,safeSource,safeCatalogPath,validateIndex,validateEdition,selection,fallbackOrder,revisionDiff,requestedEdition,permalink,viewFilters,filterPermalink};
+// Export a *previously SHA-verified* edition as an auditable, filter-aware research list.
+// The reader owns the integrity check. This helper revalidates the schema, not the hash.
+// Spreadsheet formulas must never execute when someone opens the exported source list.
+function citationCsv(edition,entry,filters={}){
+ validateEdition(edition,entry);
+ assert(entry&&validDate(entry.date)&&Number.isSafeInteger(entry.revision)&&entry.revision>0&&entry.date===edition.edition_date,'Invalid export edition');
+ const section=KINDS.includes(filters.section)?filters.section:'all';
+ const topic=Object.prototype.hasOwnProperty.call(TOPIC_ALIASES,filters.topic)?filters.topic:'all';
+ const query=typeof filters.query==='string'?filters.query.slice(0,120):'';
+ const headers=['edition_date','revision','collection_status','section','record_id','title','review_status','release_status','summary','why_it_matters','caveat','source_publication_date','event_date','discovered_at','added_to_atlas_at','source_url','atlas_page','tags'];
+ const cell=value=>{
+  let s=String(value??'').replace(/[\\u0000-\\u001f\\u007f]+/g,' ');
+  if(/^\\s*[=+\\-@]/.test(s))s="'"+s; // CSV injection defense for spreadsheet readers.
+  return '"'+s.replace(/"/g,'""')+'"';
+ };
+ const result=[headers.map(cell).join(',')];
+ for(const kind of KINDS){
+  if(section!=='all'&&section!==kind)continue;
+  for(const item of edition[kind]){
+   if(!matchesTopic(item,topic)||!matchesQuery(item,query))continue;
+   result.push([entry.date,entry.revision,edition.coverage.status,kind,item.id,item.title,item.review_status,item.release_status,item.summary,item.why_it_matters,item.caveat,item.publication_date,item.event_date,item.discovered_at,item.added_to_atlas_at,item.source_url,item.catalog_path,Array.isArray(item.tags)?item.tags.join('; '):''].map(cell).join(','));
+  }
+ }
+ // UTF-8 BOM improves non-ASCII compatibility with common spreadsheet software.
+ return '\\ufeff'+result.join('\\r\\n')+'\\r\\n';
+}
+return {KINDS,matchesTopic,matchesQuery,validDate,validTimestamp,chicagoDate,safeSource,safeCatalogPath,validateIndex,validateEdition,selection,fallbackOrder,revisionDiff,requestedEdition,permalink,viewFilters,filterPermalink,citationCsv};
 });
