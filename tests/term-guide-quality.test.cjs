@@ -320,8 +320,8 @@ test('Poisoning and learned-backdoor guides distinguish training compromise from
 
 test('Concept drift and data drift guides distinguish conditional change, input change and causal overclaims', () => {
   const pairs = {
-    'MLD-0191': [/P\\(Y\\|X/i, /0\\.46/i, /0\\.21/i, /prequential|test-then-train/i, /not evidence|does not establish|not proof/i],
-    'MLD-0260': [/P\\(X\\)/i, /0\\.30/i, /training-serving/i, /false.alert/i, /not proof|neither proof|does not prove/i]
+    'MLD-0191': [/P\(Y\|X/i, /0\.46/i, /0\.21/i, /prequential|test-then-train/i, /not evidence|does not establish|not proof/i],
+    'MLD-0260': [/P\(X\)/i, /0\.30/i, /training-serving/i, /false.alert/i, /not proof|neither proof|does not prove/i]
   };
   for (const [id, expressions] of Object.entries(pairs)) {
     const g = guides[id], route = termManifest[id];
