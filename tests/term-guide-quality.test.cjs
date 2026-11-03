@@ -339,3 +339,24 @@ test('Concept drift and data drift guides distinguish conditional change, input 
   }
   assert.ok(Object.keys(guides).length >= 51, 'Must retain 49 previous guides');
 });
+
+
+test('Instruction authority and defense-in-depth guides explain conditional security, not guarantees', () => {
+  for (const [id, expected] of Object.entries({
+    'MLD-0291': [/distinct security controls/i, /authorization/i, /P\(reach action\)/i, /false-positive rate/i, /synthetic/i, /not proof|does not prove|not automatically/i],
+    'MLD-0565': [/higher-priority|higher-priority/i, /tool response|tool outputs/i, /10 percentage points/i, /false-refusal/i, /not a replacement|not.*guarantee/i]
+  })) {
+    const guide=guides[id], route=termManifest[id];
+    assert.ok(guide&&route&&route.expanded, 'Direct expanded page missing: '+id);
+    assert.equal(guide.reviewed_on, '2026-11-03');
+    assert.equal(guide.sections.length,9);
+    assert.ok(guide.sections.every(([heading,body])=>heading.length>=8&&body.length>=120),'Shallow section '+id);
+    assert.equal(new Set(guide.sections.map(x=>x[0])).size,9,'Duplicate heading '+id);
+    assert.ok(guide.prerequisites.length>=4&&guide.prerequisites.every(x=>termManifest[x]),'Broken prerequisite '+id);
+    assert.ok(guide.citations.length>=4&&guide.citations.every(([title,url])=>title.length>=35&&new URL(url).protocol==='https:'),'Invalid cited source '+id);
+    const body=guide.sections.map(x=>x[1]).join(' ');
+    for(const regex of expected) assert.match(body,regex,'Missing controlled-example caveat or mechanism '+id);
+    const html=fs.readFileSync(path.join(root,route.path),'utf8');
+    assert.match(html,/Expanded guide/); assert.match(html,/Sources for the expanded explanation/);
+  }
+});
