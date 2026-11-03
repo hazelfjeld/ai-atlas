@@ -152,6 +152,13 @@ def validate() -> dict:
         assert len(expanded) == item['expanded_bytes'] and hashlib.sha256(expanded).hexdigest() == item['expanded_sha256']
         originals = {r['id']: r for r in catalogs['technologies']}
         assert all(originals[r['id']] == r for r in json.loads(expanded)), 'Concurrent import differs from original catalog'
+    added_entries = manifest.get('catalog_additions', {}).get('technologies', [])
+    added_ids = {x['id'] for x in added_entries}
+    assert len(added_ids) == len(added_entries), 'Duplicate technology additions'
+    original_count = manifest['prepared_counts']['technologies']
+    assert counts['technologies'] - len(added_ids) == original_count, 'Original baseline lost'
+    assert {r['id'] for r in catalogs['technologies'] if int(r['id'].split('-')[1]) > original_count} == added_ids, 'Untracked additions'
+    assert all(x.get('source_proposal_id') and x.get('source_checked_on') for x in added_entries)
     if counts['terms']:
         term_ids = {r['id'] for r in catalogs['terms']}
         tech_ids = {r['id'] for r in catalogs['technologies']}
@@ -165,9 +172,11 @@ def validate() -> dict:
         with sqlite3.connect('file:' + (ROOT / 'downloads/atlas_catalog.sqlite').as_posix() + '?mode=ro', uri=True) as db:
             assert db.execute('PRAGMA integrity_check').fetchone()[0] == 'ok'
             assert not db.execute('PRAGMA foreign_key_check').fetchall()
-            assert db.execute('SELECT count(*) FROM records').fetchone()[0] == sum(counts.values())
+            assert db.execute('SELECT count(*) FROM records').fetchone()[0] == sum(counts.values()) - len(added_ids), 'Original SQLite export must remain intact'
             for kind, rows in catalogs.items():
                 for r in rows:
+                    if kind == 'technologies' and r['id'] in added_ids:
+                        continue  # New records use separate checksummed chunks; legacy SQLite stays unchanged.
                     assert json.loads(db.execute('SELECT record_json FROM records WHERE id=?', (r['id'],)).fetchone()[0]) == r, r['id']
     overlay_blob = (ROOT / 'content/technology-release-updates.json').read_bytes()
     assert len(overlay_blob) == 1984 and hashlib.sha256(overlay_blob).hexdigest() == 'bce8af000eb5b765177ebb62ca7b5be09b3931679152ee7d59cc5e0faebd4e2c', 'Technology release annotations failed byte integrity checks'

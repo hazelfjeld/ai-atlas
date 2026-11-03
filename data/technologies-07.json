@@ -1,0 +1,80 @@
+[
+  {
+    "id": "TECH-0301",
+    "name": "NVIDIA Auto Ontology",
+    "section": "14 \u00b7 RAG and agent orchestration",
+    "kind": "Framework",
+    "tags": [
+      "LLM",
+      "Agents",
+      "Retrieval",
+      "Data",
+      "Engineering"
+    ],
+    "stages": [
+      "Build",
+      "Retrieve",
+      "Integrate"
+    ],
+    "what": "Framework for semantic catalogs and ontology-backed natural-language queries over structured enterprise data.",
+    "edge": "Shared metadata, definitions and provenance can ground agent analytics across connected data sources; product capability, not an independently measured accuracy advantage.",
+    "best_for": "Evaluating governed, natural-language analytics over relational business data with cross-system definitions and lineage.",
+    "watch_out": "Check generated SQL and database permissions. FastAPI trusts an identity header from an authenticated Next.js gateway and must remain an internal service. Without Vault, UI-added database credentials can be stored unencrypted in Postgres.",
+    "alternatives": [
+      "LlamaIndex with governed data connectors",
+      "LangChain with authorized database tools",
+      "Established enterprise semantic BI layers"
+    ],
+    "source_url": "https://github.com/NVIDIA/auto-ontology",
+    "keywords": [
+      "ontology",
+      "semantic layer",
+      "text-to-SQL",
+      "NIM",
+      "pgvector",
+      "knowledge graph"
+    ],
+    "access": "NVIDIA-authored code is Apache-2.0; separate third-party notices and model, source-database and hosted inference licensing or fees apply.",
+    "runtime": "Docker Compose v2 or Kubernetes, Next.js, FastAPI Python 3.12+, PostgreSQL/pgvector, configured NVIDIA NIM endpoints and database credentials.",
+    "concepts": [
+      "Knowledge graph",
+      "Semantic search",
+      "Retrieval-augmented generation"
+    ],
+    "concept_ids": [
+      "MLD-0608",
+      "MLD-1104",
+      "MLD-1033"
+    ],
+    "linked_concepts": [
+      "Knowledge graph",
+      "Semantic search",
+      "Retrieval-augmented generation"
+    ],
+    "alternative_ids": [
+      "TECH-0149",
+      "TECH-0135"
+    ],
+    "evidence_status": "First-party code, README and licensing reviewed 2026-11-03; operation and model-quality claims not independently reproduced",
+    "reviewed_on": "2026-11-03",
+    "catalog_added_on": "2026-11-03",
+    "initial_release_date": null,
+    "source_revision": "cdaf61e1bd0cf3820d11d72b43bb460816aebbd3",
+    "notes": "New to Atlas on November 3, not a November 3 product launch. Initial public release date unverified. Backend identity-header trust and plaintext credential fallback require special deployment care.",
+    "lifecycle": "Source repository publicly documented; initial public release date unverified",
+    "comparison_basis": "First-party documentation review, not head-to-head comparison or validated SQL correctness.",
+    "complexity": "Advanced",
+    "execution": "Local / self-hosted",
+    "test_before_choice": "Connect an isolated read-only test database; test query correctness against held-out known answers, RBAC, prompt injection controls, gateway isolation, credential storage and NIM usage cost.",
+    "primary_sources": [
+      {
+        "title": "NVIDIA project at source-reviewed revision",
+        "url": "https://github.com/NVIDIA/auto-ontology/tree/cdaf61e1bd0cf3820d11d72b43bb460816aebbd3"
+      },
+      {
+        "title": "NVIDIA third-party notices",
+        "url": "https://github.com/NVIDIA/auto-ontology/blob/cdaf61e1bd0cf3820d11d72b43bb460816aebbd3/THIRD_PARTY_NOTICES.md"
+      }
+    ]
+  }
+]

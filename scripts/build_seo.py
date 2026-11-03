@@ -41,6 +41,10 @@ def shell(title, description, path, body, structured=None):
 
 def main():
     terms, techs = rows('terms'), rows('technologies')
+    new_count = len(techs) - 300
+    assert new_count >= 0
+    PAGES['index.html'] = (PAGES['index.html'][0], PAGES['index.html'][1].replace('300 technology profiles', f'{len(techs)} technology profiles'))
+    PAGES['technologies.html'] = (PAGES['technologies.html'][0], PAGES['technologies.html'][1].replace('300 AI technology profiles', f'{len(techs)} AI technology profiles'))
     by_term = {r['id']: r for r in terms}
     by_tech = {r['id']: r for r in techs}
     release_path = ROOT / 'content/technology-release-updates.json'
@@ -57,7 +61,8 @@ def main():
     for r in techs:
         path = technology_path(r)
         profile_paths.append(path)
-        body = f'<p class="breadcrumb-links"><a href="../index.html">Home</a> / <a href="index.html">Technologies</a> / {e(r["name"])}</p><header class="hero"><p class="eyebrow">TECHNOLOGY PROFILE · {e(r["id"])}</p><h1>{e(r["name"])}</h1><p class="lead">{e(r["what"])}</p></header><p class="notice">{e(r["evidence_status"])}. This profile preserves the prepared catalog’s original descriptions. Advantages depend on the workload; comparisons are editorial, not benchmark results.</p>'
+        origin = ('Added after the original November 1 snapshot; not a new product launch or independent benchmark replication.' if int(r['id'][5:]) > 300 else 'This profile preserves the prepared catalog’s original descriptions. Advantages depend on the workload; comparisons are editorial, not benchmark results.')
+        body = f'<p class="breadcrumb-links"><a href="../index.html">Home</a> / <a href="index.html">Technologies</a> / {e(r["name"])}</p><header class="hero"><p class="eyebrow">TECHNOLOGY PROFILE · {e(r["id"])}</p><h1>{e(r["name"])}</h1><p class="lead">{e(r["what"])}</p></header><p class="notice">{e(r["evidence_status"])}. {e(origin)}</p>'
         fields = [('Where it has an edge', 'edge'), ('Best-fit problems', 'best_for'), ('Tradeoffs & cautions', 'watch_out'), ('What to test before choosing', 'test_before_choice'), ('Runtime & hardware', 'runtime'), ('Access & licensing', 'access'), ('Execution', 'execution'), ('Lifecycle', 'lifecycle'), ('Comparison basis', 'comparison_basis'), ('Original notes', 'notes')]
         for title, key in fields:
             if r.get(key):
@@ -71,8 +76,8 @@ def main():
         data = [{'@context': 'https://schema.org', '@type': 'WebPage', 'name': r['name'] + ' technology profile', 'description': r['what'], 'url': absolute(path), 'isPartOf': {'@type': 'WebSite', 'name': 'AI Updates', 'url': ORIGIN + '/'}, 'about': {'@type': 'Thing', 'name': r['name']}}, breadcrumbs([('AI Updates','index.html'), ('Technologies','technology/index.html'), (r['name'],path)])]
         description = (r['name'] + ': ' + r['what'] + ' Explore uses, tradeoffs and linked concepts.')[:170]
         (ROOT / path).write_bytes(shell(r['name'] + ' — Uses & Tradeoffs | AI Updates', description, path, body, data).encode())
-    body = f'<header class="hero"><p class="eyebrow">THE TECHNOLOGY FIELD GUIDE</p><h1>Tools, with context.</h1><p class="lead">{len(techs)} AI technology profiles. Explore what each does, where it fits, its tradeoffs and the ideas behind it.</p></header><p class="notice">These are preserved catalog profiles, not a ranked list or a new product audit. <a href="../technologies.html">Open searchable technology filters →</a></p><div class="reference-grid">' + ''.join(f'<a href="{Path(technology_path(r)).name}">{e(r["name"])}</a>' for r in sorted(techs,key=lambda r:r['name'].casefold())) + '</div>'
-    (out / 'index.html').write_bytes(shell('AI Technology Directory: 300 Profiles | AI Updates', 'Browse 300 AI technology profiles with uses, tradeoffs, linked concepts and original references. A crawlable directory of the complete prepared catalog.', 'technology/index.html', body).encode())
+    body = f'<header class="hero"><p class="eyebrow">THE TECHNOLOGY FIELD GUIDE</p><h1>Tools, with context.</h1><p class="lead">{len(techs)} AI technology profiles. Explore what each does, where it fits, its tradeoffs and the ideas behind it.</p></header><p class="notice">The original 300 profiles are preserved; added profiles are separately source-reviewed, not independently benchmarked. <a href="../technologies.html">Open searchable technology filters →</a></p><div class="reference-grid">' + ''.join(f'<a href="{Path(technology_path(r)).name}">{e(r["name"])}</a>' for r in sorted(techs,key=lambda r:r['name'].casefold())) + '</div>'
+    (out / 'index.html').write_bytes(shell(f'AI Technology Directory: {len(techs)} Profiles | AI Updates', f'Browse {len(techs)} profiles: 300 preserved originals plus {new_count} source-reviewed addition(s), with context and limitations.', 'technology/index.html', body).encode())
     about = '''<header class="hero"><p class="eyebrow">ABOUT AI UPDATES</p><h1>The frontier, in context.</h1><p class="lead">AI is easier to understand when the explanation comes with its evidence, connections and limits.</p></header>
 <section class="profile-section"><h2>A place to learn, investigate and build.</h2><p>AI Updates brings together an AI concept dictionary, technology field guide, research library, safety observatory and practical project playbooks. It began as Atlas; the original catalog, permanent IDs, citations and downloadable workbooks are retained.</p><p>The prepared November 1, 2026 snapshot contains 1,345 concepts, 300 technologies, 30 papers, 10 safety report records and 20 playbooks. Sixteen concept guides have expanded editorial explanations. The other references clearly mark their detailed expansion as pending.</p></section>
 <section class="profile-section"><h2>Sources first. Claims in context.</h2><p>Source links and review labels stay with the records. “Primary report reviewed” means the report was read; it does not mean its findings were independently reproduced. A metadata-only entry is not a full methods review. Tool comparisons describe possible problem fit and are not experimental rankings.</p><p>Incident reports, controlled evaluations, misuse reports and mitigation updates are distinguished. Ten report records do not necessarily represent ten distinct incidents. Examples in educational guides are illustrative.</p></section>
@@ -81,6 +86,7 @@ def main():
 <section class="profile-section"><h2>Your notebook stays in your browser.</h2><p>AI Updates has no account backend, advertising tracker or paid news API. Bookmarks and notes are browser-local on this domain; export a backup to move them between devices or addresses. On shared GitHack origins, the notebook is session-only.</p><p><a href="index.html#/sources">Inspect source registers, coverage and original downloads →</a></p></section>'''
     guide_count = len(json.loads((ROOT / 'content/term-guides.json').read_bytes()))
     about = about.replace('Sixteen concept guides', str(guide_count) + ' concept guides')
+    about = about.replace('The other references clearly mark their detailed expansion as pending.', f'The other references clearly mark their detailed expansion as pending. {new_count} technology profile(s) were source-reviewed and added after the original snapshot.')
     demo = ROOT / 'demo.html'
     demo.write_bytes(re.sub(r'only \d+ guides are expanded', 'only ' + str(guide_count) + ' guides are expanded', demo.read_text(encoding='utf-8')).encode())
     (ROOT / 'about.html').write_bytes(shell(*PAGES['about.html'], 'about.html', about).encode())
