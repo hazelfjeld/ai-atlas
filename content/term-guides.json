@@ -1509,5 +1509,135 @@
         "https://arxiv.org/abs/2312.09390"
       ]
     ]
+  },
+  "MLD-0043": {
+    "reviewed_on": "2026-11-02",
+    "prerequisites": [
+      "MLD-1246",
+      "MLD-1179",
+      "MLD-0041",
+      "MLD-0371"
+    ],
+    "sections": [
+      [
+        "Mechanism: control flow belongs to the system",
+        "An agentic workflow joins a model's decisions to an explicit execution loop: inspect the task and state, choose an allowed action, validate the request, call a tool, observe its result, and either continue or stop. The surrounding application (sometimes called the agent harness) owns the tool schemas, retries, permissions, memory and termination policy. The model is one component, not the entire system."
+      ],
+      [
+        "Fixed workflow versus adaptive agent",
+        "A deterministic chain has predetermined stages such as classify → retrieve → draft → check; it may use an LLM at each stage without giving the model control of the next step. An adaptive agent chooses a branch, tool or subtask based on observations. Anthropic describes both patterns, noting the reliability, cost and latency tradeoffs of extra autonomy. Neither label implies that a system performs well."
+      ],
+      [
+        "Worked example: constrained support triage",
+        "Imagine a support assistant that first classifies a request, retrieves a relevant order with a read-only tool, and drafts an answer. A refund operation requires a separate human approval and a narrowly scoped write tool; a model's text saying 'refund issued' does not change the ledger. The harness records approval, tool inputs and final state. This is an illustrative design, not an observed production deployment."
+      ],
+      [
+        "Pseudocode: separate choice from execution",
+        "At each step: (1) obtain an observation from the sandbox; (2) request one structured action from the model; (3) parse the action against a schema; (4) authorize the target and arguments; (5) execute with a timeout and log the side effect; (6) update state; (7) stop on success, denied action, budget exhaustion or human escalation. Authorization must be implemented outside the model's own instructions."
+      ],
+      [
+        "Concrete applications and boundaries",
+        "Useful scenarios include document extraction followed by validated database writes, coding assistance with sandboxed tests, and browser research that cites the retrieved pages. Prefer a simple fixed workflow when the route is predictable; use dynamic tool selection when observations genuinely determine the next step. A long sequence of model calls is not automatically an autonomous agent."
+      ],
+      [
+        "Failure taxonomy: skill, objective and permissions",
+        "A missed field may be a capability failure or ambiguous input; a deliberate-looking sequence that optimizes a proxy metric can instead be specification gaming. Tool calls, final database state, observed side effects and the written instruction must be compared before classifying either. An unauthorized call in a constructed test does not by itself establish a persistent real-world goal or intent."
+      ],
+      [
+        "Evaluation beyond happy-path completions",
+        "Create held-out tasks with explicit success criteria, forbidden side effects and a fixed tool environment. Record final state, tool trajectory, argument validity, timeouts, token and cost budgets, and recovery from partial failures. Audit false passes from self-reported success and false fails from overly strict exact-match graders. Repeat across task families and changed tool responses; treat a benchmark score as scoped to its harness and tasks."
+      ],
+      [
+        "Security and observability requirements",
+        "Use least-privilege service credentials, typed tool schemas, independent authorization and policy checks, sandbox boundaries, rate limits, human approval for irreversible operations, and tamper-resistant audit logging. OpenAI's Agents SDK documents tool guardrails and handoffs, but those are framework-specific controls with different coverage: a handoff is not automatically checked by a function-tool guardrail. Confirm actual behavior in the installed version."
+      ],
+      [
+        "Misconceptions and experiment design",
+        "An agent harness is infrastructure for running and observing agents, not a universally standardized algorithm or a synonym for agentic workflow. Adding more tools or loops does not guarantee better reasoning, safety or task completion. Test a fixed workflow baseline against an adaptive variant under the same budget; changes in prompts, tool availability or evaluators can confound the comparison."
+      ]
+    ],
+    "citations": [
+      [
+        "Anthropic research guide, Building effective agents (workflows versus agents and orchestration patterns)",
+        "https://www.anthropic.com/research/building-effective-agents"
+      ],
+      [
+        "OpenAI Agents SDK documentation, Tools and guardrails (scope of pre-execution checks)",
+        "https://openai.github.io/openai-agents-js/guides/guardrails/"
+      ],
+      [
+        "OpenAI Agents SDK documentation, Handoffs between specialist agents",
+        "https://openai.github.io/openai-agents-python/handoffs/"
+      ],
+      [
+        "AgentBench authors, Evaluating LLMs as Agents across interactive environments (arXiv 2308.03688)",
+        "https://arxiv.org/abs/2308.03688"
+      ]
+    ]
+  },
+  "MLD-0608": {
+    "reviewed_on": "2026-11-02",
+    "prerequisites": [
+      "MLD-0357",
+      "MLD-1104",
+      "MLD-1033",
+      "MLD-1246"
+    ],
+    "sections": [
+      [
+        "Mechanism: represent meaning as linked facts",
+        "A knowledge graph identifies entities and stores typed relationships between them, such as (model, trained_on, dataset) or (claim, supported_by, paper). RDF is one common standard: its basic structure is a subject-predicate-object triple. Other property graphs use nodes, labeled edges and attributes. Graph structure supports explicit joins and provenance but does not guarantee factual correctness."
+      ],
+      [
+        "Why a graph differs from vector retrieval",
+        "An embedding search ranks items by similarity in a learned vector space; it does not enforce that a specific edge or business rule is true. A graph traversal can require that the retrieved product belongs to an authorized account and that an evidence record supports its attributes. Hybrid retrieval often uses both: embeddings identify candidates, and typed relationships constrain or explain a result."
+      ],
+      [
+        "Worked example: conflicting revenue definitions",
+        "Suppose two departments both label a metric 'revenue' while one excludes refunds and the other includes them. A semantic catalog can represent each metric's owning team, formula, version, data table and lineage. When an agent asks for quarterly revenue, it should resolve the correct metric definition and permission scope before generating SQL. A graph alone cannot choose the correct meaning without documented organizational policy."
+      ],
+      [
+        "RDF query sketch and relationship traversal",
+        "In RDF-style notation, (reportA, usesMetric, netRevenue) and (netRevenue, definedBy, financePolicyV3) are separate assertions. A SPARQL-style graph pattern requiring both edges can retrieve reports whose metric is backed by financePolicyV3. In a property graph, the analogous operation traverses labeled edges. This is illustrative pseudocode, not a literal query evaluated against a dataset."
+      ],
+      [
+        "From metadata to an ontology layer",
+        "An ontology specifies entity classes, relation meanings, constraints or shared vocabulary; a knowledge graph contains concrete assertions that may follow that ontology. NVIDIA Auto Ontology describes generating and reconciling such context from enterprise metadata, exposing it through APIs, CLI and MCP. 'Semantic ontology layer' is a descriptive architecture phrase, not a universally standardized new term or evidence of an independently verified SQL reliability gain."
+      ],
+      [
+        "Applications in AI systems",
+        "Graphs help with citation-linked research maps, dependency and supply-chain tracing, organizational data catalogs, knowledge-grounded retrieval, and validation of structured queries. They are especially helpful when relationships, provenance and permissions are first-class questions. Simple keyword search, a relational join or a vector store may be cheaper and adequate for smaller or weakly connected tasks."
+      ],
+      [
+        "Measuring quality before adopting a graph",
+        "Construct a gold set of entity IDs, relation labels, source citations and permitted query outcomes. Measure entity-resolution precision/recall, edge correctness, stale or orphan references, query accuracy, latency and cost under changed schemas. Run ablations comparing search-only, relational, graph-only and hybrid retrieval with the same questions; keep evaluation labels independent of graph-generation prompts."
+      ],
+      [
+        "Trust and security boundaries",
+        "Treat source documents, inferred edges and automatically generated SQL as untrusted until checked. Attach source IDs and timestamps to claims, enforce access control at the database/query layer, and audit who approved definitions and edits. The NVIDIA Auto Ontology project explicitly notes that its FastAPI internal identity header relies on a trusted gateway; exposing that internal service directly is unsafe, regardless of how useful the ontology is."
+      ],
+      [
+        "Limitations and common misconceptions",
+        "Graph edges can encode stale, biased or hallucinated associations; an apparently explainable path is not automatically causal or correct. Entity resolution is difficult when names collide, and ontologies require governance when organizations redefine metrics. A knowledge graph is not necessarily RDF, an LLM, a vector database, or proof that every generated answer is grounded. Report which links are asserted, inferred or reviewed."
+      ]
+    ],
+    "citations": [
+      [
+        "World Wide Web Consortium, RDF 1.2 Concepts and Abstract Data Model (Candidate Recommendation, 2026)",
+        "https://www.w3.org/TR/rdf12-concepts/"
+      ],
+      [
+        "World Wide Web Consortium, SPARQL 1.1 Query Language Recommendation",
+        "https://www.w3.org/TR/sparql11-query/"
+      ],
+      [
+        "NVIDIA, Auto Ontology repository documentation for semantic catalog, SQL, RBAC and deployment requirements",
+        "https://github.com/NVIDIA/auto-ontology"
+      ],
+      [
+        "AgentBench researchers, interactive environment assessment across eight task settings",
+        "https://arxiv.org/abs/2308.03688"
+      ]
+    ]
   }
 }

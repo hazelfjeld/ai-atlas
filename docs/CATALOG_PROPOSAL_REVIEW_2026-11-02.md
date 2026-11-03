@@ -33,3 +33,7 @@
 - `term-proposal:environment-grounded-agent-benchmark`: compare with existing `MLD-0110` Benchmark, `MLD-0041` Agent evaluation and `MLD-0371` Environment; verify evaluation methodology against independent primary research.
 
 **Next action:** Resolve duplicates/alias versus genuinely new entries; publish any accepted candidate in the actual catalogs, stable routes, search, links and checksummed manifests. Only then update the immutable dated edition and receipts with actual catalog outcomes. Do not count this review log as three new technology releases or three catalog additions.
+
+## November 2 — concepts expanded without minting speculative synonyms
+
+Two **existing** dictionary IDs now carry complete original worked guides: `MLD-0043` (Agentic workflow, including the surrounding agent harness) and `MLD-0608` (Knowledge graph, including enterprise semantic/ontology layers). These explain mechanisms, boundaries, worked applications, quantitative/evidence checks, permissions and primary sources. A harness is not necessarily a new algorithm, and “semantic ontology layer” is descriptive, not a separately established standard. Their pending term proposal IDs stay **deferred**, not accepted or rejected, until the distinctness and canonical terminology review is complete; no new term or world event is asserted. Published baseline record totals remain unchanged. Editorial review: November 2, 2026.

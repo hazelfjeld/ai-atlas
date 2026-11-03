@@ -211,8 +211,8 @@
   },
   "MLD-0043": {
     "path": "terms/MLD-0043-agentic-workflow.html",
-    "sha256": "16a4d3d28637045d98b9b3197b041ca05ceae0bf29648ffc461e47d3782f3041",
-    "expanded": false
+    "sha256": "45aa0a46a4f6a4de675c311c141ca84a57ea74bc550b96c6300823c6fb63a61c",
+    "expanded": true
   },
   "MLD-0044": {
     "path": "terms/MLD-0044-agglomerative-clustering.html",
@@ -3036,8 +3036,8 @@
   },
   "MLD-0608": {
     "path": "terms/MLD-0608-knowledge-graph.html",
-    "sha256": "83fe901f6c3cc655a244d9531500fff16d036bc0d0fc30a852417147ad333df9",
-    "expanded": false
+    "sha256": "b33a19f4ade12619f2e4b94abefae1aad6926d18002ab10606d7e82cc851571e",
+    "expanded": true
   },
   "MLD-0609": {
     "path": "terms/MLD-0609-knowledge-retention.html",

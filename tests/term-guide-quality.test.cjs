@@ -171,3 +171,24 @@ test('Weak-supervisor and verifier guides use independent evaluation and bound o
     assert.match(html, /Sources for the expanded explanation/);
   }
 });
+
+test('Agentic workflow and knowledge graph expansions explain mechanisms, constraints and evidence boundaries', () => {
+  const rules = {
+    'MLD-0043': [/agent harness/i,/authorization/i,/capability failure/i,/specification gaming/i,/held-out/i,/not.*automatically/i],
+    'MLD-0608': [/RDF/i,/SPARQL/i,/semantic ontology layer/i,/provenance/i,/access control/i,/not.*automatically/i]
+  };
+  for (const [id, required] of Object.entries(rules)) {
+    const g = guides[id];
+    assert.ok(g && termManifest[id] && termManifest[id].expanded,'Not marked expanded: '+id);
+    assert.equal(g.reviewed_on,'2026-11-02');
+    assert.ok(g.sections.length>=9 && g.sections.every(([h,b])=>h.length>=8 && b.length>=120),'Insufficient explanatory depth');
+    assert.equal(new Set(g.sections.map(([heading])=>heading)).size,g.sections.length);
+    assert.ok(g.prerequisites.length>=4 && g.prerequisites.every(p=>termManifest[p]),'Broken prerequisite');
+    assert.ok(g.citations.length>=3 && g.citations.every(([title,url])=>title.length>35 && new URL(url).protocol==='https:'),'Citation requirement');
+    const full=g.sections.map(([,body])=>body).join(' ');
+    for (const re of required) assert.match(full,re,'Missing explanation or evidence boundary: '+id);
+    const html=fs.readFileSync(path.join(root,termManifest[id].path),'utf8');
+    assert.match(html,/Expanded guide/);assert.match(html,/Sources for the expanded explanation/);
+  }
+  assert.equal(Object.keys(guides).length,33);
+});
