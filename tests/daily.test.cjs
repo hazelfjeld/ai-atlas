@@ -129,9 +129,9 @@ test('Shareable daily links restore verified edition filters without trusting ar
  const selected=entry('2026-11-02',7);
  const url=D.filterPermalink(selected,{section:'news',topic:'safety',query:'  AI agent  '});
  assert.equal(url,'whats-new.html?date=2026-11-02&revision=7&section=news&topic=safety&q=AI+agent');
- assert.deepEqual(D.viewFilters(url.slice(url.indexOf('?'))),{section:'news',topic:'safety',review:'all',query:'AI agent'});
- assert.deepEqual(D.viewFilters('?section=bad&topic=invalid&q='+('a'.repeat(121))),{section:'all',topic:'all',review:'all',query:''});
- assert.deepEqual(D.viewFilters('?section=news&section=terms&topic=research&topic=safety&q=a&q=b'),{section:'all',topic:'all',review:'all',query:''});
+ assert.deepEqual(D.viewFilters(url.slice(url.indexOf('?'))),{section:'news',topic:'safety',review:'all',source:'all',query:'AI agent'});
+ assert.deepEqual(D.viewFilters('?section=bad&topic=invalid&q='+('a'.repeat(121))),{section:'all',topic:'all',review:'all',source:'all',query:''});
+ assert.deepEqual(D.viewFilters('?section=news&section=terms&topic=research&topic=safety&q=a&q=b'),{section:'all',topic:'all',review:'all',source:'all',query:''});
  assert.equal(D.filterPermalink(selected,{section:'nonsense',topic:'unknown',query:''}),D.permalink(selected));
  assert.equal(D.filterPermalink(selected,{section:'news',topic:'tools',query:''}),D.permalink(selected)+'&section=news&topic=tools');
  assert.equal(D.viewFilters('?q=%3Cscript%3E').query,'<script>'); // Only rendered as literal text by the reader.
@@ -182,7 +182,7 @@ test('The unfiltered daily reader shows explicit zero counts while filtered sear
  'Deferred proposals are not catalog additions',
  'New to AI Updates is not the same as new to the world',
  'No correction was recorded',
- "if(!records.length&&(topic!=='all'||review!=='all'||query.trim()))continue",
+ "if(!records.length&&(topic!=='all'||review!=='all'||source!=='all'||query.trim()))continue",
  'C.matchesTopic(item,topic)',
  'C.matchesQuery(item,query)'
  ])assert.ok(script.includes(text),text);
@@ -854,4 +854,45 @@ test('Retrospective revision 19 adds only the Atlas evidence-review filter, pres
  assert.equal(receipt.deferred_catalog_proposal_ids.length,7);
  assert.equal(receipt.counts.news_published,9);
  assert.equal(receipt.counts.technology_added+receipt.counts.term_added,0);
+});
+
+
+test('Exact source-domain filtering uses citation URLs, not publisher strings or tags',()=>{
+ const story={id:'NEWS-1',title:'Reuters-mentioned project',summary:'Evidence',review_status:'source_checked',source_url:'https://www.reuters.com/world/story'};
+ assert.equal(D.sourceHost(story.source_url),'www.reuters.com');
+ assert.equal(D.sourceHost('javascript:alert(1)'),'');
+ assert.equal(D.matchesSource(story,'www.reuters.com'),true);
+ assert.equal(D.matchesSource(story,'reuters.com'),false);
+ assert.equal(D.matchesSource({...story,source_url:'https://reuters.com.evil.test/story'},'www.reuters.com'),false);
+ assert.equal(D.matchesSource({...story,source_url:undefined},'www.reuters.com'),false);
+ assert.equal(D.matchesSource(story,'all'),true);
+ const e=entry('2026-11-02',19);
+ const link=D.filterPermalink(e,{section:'news',source:'www.reuters.com'});
+ assert.equal(link,D.permalink(e)+'&section=news&source=www.reuters.com');
+ assert.equal(D.viewFilters(link.slice(link.indexOf('?'))).source,'www.reuters.com');
+ assert.equal(D.viewFilters('?source=www.reuters.com&source=evil.example').source,'all');
+ assert.equal(D.viewFilters('?source=javascript%3Aalert%281%29').source,'all');
+ assert.equal(D.viewFilters('?source=example..com').source,'all');
+ assert.equal(D.filterPermalink(e,{source:'bad/host'}),D.permalink(e));
+});
+
+test('Verified evidence CSV uses the same exact citation-host filter as on-page view',()=>{
+ const e=edition(),indexEntry=entry('2026-11-02');
+ e.news=[
+  {id:'NEWS-1',title:'Source A',summary:'First',review_status:'source_checked',source_url:'https://www.reuters.com/report'},
+  {id:'NEWS-2',title:'Source B',summary:'Second',review_status:'source_checked',source_url:'https://example.org/report'}
+ ];
+ const csv=D.citationCsv(e,indexEntry,{source:'www.reuters.com'});
+ assert.match(csv,/Source A/);
+ assert.doesNotMatch(csv,/Source B/);
+ assert.equal((csv.match(/\r\n/g)||[]).length,2);
+});
+
+test('Source filter is disabled before immutable edition checks and resets with other filters',()=>{
+ const html=fs.readFileSync('whats-new.html','utf8'),js=fs.readFileSync('whats-new.js','utf8');
+ assert.match(html,/<label for="source-filter">Source domain<select id="source-filter" disabled>/);
+ assert.match(js,/populateSourceOptions\(e\)/);
+ assert.match(js,/source-filter'\)\.disabled=true/);
+ assert.match(js,/source-filter'\)\.value='all'/);
+ assert.match(js,/C\.matchesSource\(item,source\)/);
 });
