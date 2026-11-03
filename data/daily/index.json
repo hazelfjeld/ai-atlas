@@ -145,9 +145,17 @@
       "sha256": "d59ff7536e52d89ad3ad967013441bb3876a7850429c1aa42a71451891cffdb0",
       "bytes": 40945,
       "published_at": "2026-11-03T06:37:03.999Z"
+    },
+    {
+      "date": "2026-11-02",
+      "revision": 19,
+      "path": "data/daily/editions/2026-11-02-v19.json",
+      "sha256": "ed4ae478df8b0b0dbe463a5049804e3719d5dd14972c0154a794956f45773c76",
+      "bytes": 41974,
+      "published_at": "2026-11-03T08:41:27.992Z"
     }
   ],
   "last_successful_publish_at": "2026-11-03T06:43:27Z",
   "status": "edition_revision_18_production_verified",
-  "coverage_note": "November 2 retrospective revision 18 adds verified-edition, filter-aware evidence CSV downloads and expanded 32-revision recovery. Nine original source-reviewed reports, seven deferred catalog proposals and two inaccessible lookups retain the November 2 partial coverage window; November 3 awaits a separate collection. GitHack/catalog workflow 41591296131 and Cloudflare/hosted-browser workflow 41591296136 passed 117 Node tests and 461 exact HTTP assets per hostname on the v18 release cff55ae; final release metadata commit d3bc76a passed workflows 41591878379 and 41591878286. Source claims were not independently replicated."
+  "coverage_note": "November 2 retrospective revision 18 adds verified-edition, filter-aware evidence CSV downloads and expanded 32-revision recovery. Nine original source-reviewed reports, seven deferred catalog proposals and two inaccessible lookups retain the November 2 partial coverage window; November 3 awaits a separate collection. GitHack/catalog workflow 41591296131 and Cloudflare/hosted-browser workflow 41591296136 passed 117 Node tests and 461 exact HTTP assets per hostname on the v18 release cff55ae; final release metadata commit d3bc76a passed workflows 41591878379 and 41591878286. Source claims were not independently replicated. Revision 19 records the exact review-label UI filter as a site-only improvement; source collection unchanged. Revision 19 pending independent deployment verification; revision 18 remains the last successful production receipt."
 }
