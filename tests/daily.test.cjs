@@ -1009,7 +1009,9 @@ test('Retrospective v24 records one source-attributed catalog-review site change
  assert.equal(receipt.publication_edition,'2026-11-02-v24');
  assert.equal(receipt.publication_history.at(-1).edition,'2026-11-02-v24');
  assert.equal(receipt.publication_history.at(-1).site_changes_added_in_revision,1);
- assert.equal(receipt.production_verified_revision,23,'Do not prematurely certify a pending edition');
+ assert.ok(receipt.production_verified_revision>=23,'Earlier verified release must not regress');
+ if(receipt.production_verified_revision>=24) assert.equal(receipt.publication_history.at(-1).status,'cloudflare_http_browser_and_githack_verified','Certification requires a matching verified receipt');
+ else assert.equal(receipt.publication_history.at(-1).status,'pending_production_verification','Pending edition cannot be certified early');
  assert.equal(idx.last_successful_publish_at,receipt.production_verified_at);
  assert.equal(receipt.deferred_catalog_proposal_ids.length,7);
  assert.equal(receipt.counts.news_published,9);
