@@ -1235,9 +1235,12 @@ test('November 3 v3 archives only already-published hardware research site chang
  assert.equal(D.safeCatalogPath('../hardware-review.html'),'');
  const receipt=JSON.parse(fs.readFileSync(path.join(root,'data/daily/published-batches.json'),'utf8')).receipts.at(-1);
  assert.equal(receipt.publication_edition,'2026-11-03-v3');
- assert.equal(receipt.production_verified_revision,2,'Previous independently verified checkpoint must not advance before deployment');
+ assert.equal(receipt.production_verified_revision,3,'Verified revision must match deployed production evidence');
+ assert.equal(receipt.production_commit,'fc565eefb38b17e0b1a6dac28446297843a8e590');
+ assert.equal(receipt.production_workflow_run_id,41703813098);
+ assert.equal(receipt.githack_workflow_run_id,41703812947);
  assert.equal(receipt.publication_history.at(-1).edition,'2026-11-03-v3');
- assert.equal(receipt.publication_history.at(-1).status,'pending_production_verification');
+ assert.equal(receipt.publication_history.at(-1).status,'cloudflare_http_browser_and_githack_verified');
  assert.equal(receipt.deferred_catalog_proposal_ids.length,4);
  assert.equal(idx.last_successful_publish_at,receipt.production_verified_at,'Never imply a pending edition has passed production');
 });
