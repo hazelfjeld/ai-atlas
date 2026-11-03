@@ -1181,8 +1181,8 @@
   },
   "MLD-0237": {
     "path": "terms/MLD-0237-covariate-shift.html",
-    "sha256": "c6e5bad5d0a31c22f713d940da1ad17fc3ccaed56aa3df77be41aff20a6a65a4",
-    "expanded": false
+    "sha256": "14929196152d419a50a48959028fbb9f9eb0608cdc5ce4ac6618e6a546ae623c",
+    "expanded": true
   },
   "MLD-0238": {
     "path": "terms/MLD-0238-cpu-offloading.html",
@@ -4266,8 +4266,8 @@
   },
   "MLD-0854": {
     "path": "terms/MLD-0854-out-of-distribution.html",
-    "sha256": "dac1b05e2ec9e7c76b6e9b80080dd85d1eef26063dbc7e2e73f2797947077a58",
-    "expanded": false
+    "sha256": "cceee277a24e5fe6a7a9cc9b110f505925d54e0b98e38281bff4ec64bf738e6b",
+    "expanded": true
   },
   "MLD-0855": {
     "path": "terms/MLD-0855-out-of-vocabulary.html",
