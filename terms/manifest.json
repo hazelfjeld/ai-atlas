@@ -5196,13 +5196,13 @@
   },
   "MLD-1040": {
     "path": "terms/MLD-1040-reward-model.html",
-    "sha256": "fe50d40c6e3b64e9df11cf4e23c8e6b4a6f1466e78da46e20d8176a086893ecc",
-    "expanded": false
+    "sha256": "cebefd61bb2dd8d5994873ee52abe080796ccb8a3adfce7c338fed4f62cf434b",
+    "expanded": true
   },
   "MLD-1041": {
     "path": "terms/MLD-1041-reward-model-overoptimization.html",
-    "sha256": "b3e5bc74439987b2498c673a49eace7a9709ae3b2b9fdbda40b80616f5e611ca",
-    "expanded": false
+    "sha256": "bbf6b77c6c9bf186b497fb662a11929da50c9e29ea9ae719ac0e07442c3252e7",
+    "expanded": true
   },
   "MLD-1042": {
     "path": "terms/MLD-1042-reward-shaping.html",
