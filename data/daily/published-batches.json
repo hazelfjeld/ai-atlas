@@ -532,8 +532,8 @@
       "edition_date": "2026-11-03",
       "validation_result": "source_batch_sha256_bytes_schema_unique_news_ids_canonical_source_urls_dates_collection_window_verified_eight_news_web_source_reviews_production_and_public_asset_checks_passed",
       "status": "partially_published_with_4_deferred_catalog_proposals",
-      "publication_outcome": "immutable_nov03_v1_cloudflare_http_browser_and_githack_verified",
-      "publication_edition": "2026-11-03-v1",
+      "publication_outcome": "immutable_nov03_v2_atlas_only_site_changes_pending_production_verification",
+      "publication_edition": "2026-11-03-v2",
       "accepted_news_ids": [
         "ai-news:tohoku-aisin:stt-mram-soc:2026-11-02",
         "ai-news:openai:grid-protectors:2026-11-02",
@@ -561,7 +561,7 @@
         "news_deferred": 0,
         "catalog_deferred": 4
       },
-      "review_notes": "November 3 partial 48-hour recovery collection: six original source categories, 14 checked source URLs (some discovery/limited), three failed source lookups. Four November 3 reports and four dated earlier catch-up items. Tohoku University and OpenAI primary announcements were opened; IFParse author discussion opened; Reuters indexed original reports checked for stated claims. Prototype comparisons, benchmark scores, market forecasts and investigations are qualified and not independently reproduced or adjudicated. Four catalog proposals were not inserted as canonical records; historical November 2 edition left unchanged. Await CI and real production verification before claiming hosted publication.",
+      "review_notes": "November 3 partial 48-hour recovery collection: six original source categories, 14 checked source URLs (some discovery/limited), three failed source lookups. Four November 3 reports and four dated earlier catch-up items. Tohoku University and OpenAI primary announcements were opened; IFParse author discussion opened; Reuters indexed original reports checked for stated claims. Prototype comparisons, benchmark scores, market forecasts and investigations are qualified and not independently reproduced or adjudicated. Four catalog proposals were not inserted as canonical records; historical November 2 edition left unchanged. Await CI and real production verification before claiming hosted publication.\nNovember 3 v2 preserves eight source-qualified news items and original dates/evidence. Adds two already-published Atlas educational guide links under site_changes only; four deferred canonical proposals and three failed lookups unchanged. Deployment verification pending.",
       "publication_history": [
         {
           "edition": "2026-11-03-v1",
@@ -577,12 +577,24 @@
           "production_commit": "8b69a89b02fa03f7a19fe7a761ac9f113089b956",
           "production_workflow_run_id": 41665910824,
           "githack_workflow_run_id": 41665910657
+        },
+        {
+          "edition": "2026-11-03-v2",
+          "source_batch_sha256": "f6d155caec1fda714b8fdd456ec47cc886dd10856159b65b9745c69d64b9adb3",
+          "news_published": 8,
+          "technology_added": 0,
+          "term_added": 0,
+          "corrections": 0,
+          "catalog_deferred": 4,
+          "site_changes_added": 2,
+          "published_at": "2026-11-03T16:36:59.092Z",
+          "status": "pending_production_verification"
         }
       ],
       "production_verified_at": "2026-11-03T15:42:06Z",
       "production_verified_revision": 1,
       "last_verified_at": "2026-11-03T15:42:06Z",
-      "next_action": "Review November 3 proposed two technologies and two established hardware concepts for canonical distinctness; ship tested catalog additions in separate bounded increments, and record post-Nov2 term guide site updates in appropriate date revision.",
+      "next_action": "Verify edition v2 exact HTTP bytes and hosted browser, then attest publication; independently review the four staged hardware/benchmark proposals against sources, license and existing canonical entries.",
       "production_workflow_run_id": 41665910824,
       "githack_workflow_run_id": 41665910657,
       "production_commit": "8b69a89b02fa03f7a19fe7a761ac9f113089b956",
