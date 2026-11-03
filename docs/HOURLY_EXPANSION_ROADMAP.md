@@ -1,3 +1,11 @@
+## November 3, 13:24 CST — immutable November 3 v3 indexed for deployment verification
+
+- Intake: staging queue index on `atlas-daily-staging` remains at **two immutable batches** (Nov 2, Nov 3); both already have main receipts with matching batch hashes and source commits. No unprocessed batch; nothing imported from stale staging app files.
+- Added `data/daily/editions/2026-11-03-v3.json`, 23,524 UTF-8 bytes, SHA-256 `9be4d6c030dc6761411b4bd9b3968d38ddbe953a775936eb02b4c9bded3b4fe3`. Adds **two already-published Atlas site changes** with direct reviewed evidence and hardware pages: `catalog-review.html` and `hardware-review.html`. They are **not** new AI-world events, term IDs or technology IDs.
+- Original collection unchanged: 8 reviewed source-qualified stories (4 Nov 3 and 4 dated catch-up), 14 checked source URLs, 3 failed lookups, 4 canonical proposals deferred; immutable v1/v2 and earlier Nov 2 archive preserved. Added exact allowlist for `hardware-review.html` with unsafe-route regression tests, and updated index and ledger without prematurely advancing the verified clock.
+- Publication status: **pending current-revision catalog/GitHack and Cloudflare browser verification**. Last independently verified November 3 edition remains [revision 2](https://aiupdates.app/whats-new.html?date=2026-11-03&revision=2) on main `5a44a6b`, until v3 CI and actual hosted checks pass. All 1,345 stable term pages, 302 technology profiles, 53 expanded guides, old archives and pinned professor demo remain unchanged.
+- Next: inspect actual required workflow jobs, verify exact deployed archive bytes and page links, then write a separate non-immutable proof receipt for v3. Subsequently work on source-complete canonical integration of a deferred research/evaluation candidate.
+
 ## November 3 Chicago midday — STT-MRAM source evidence explainer prepared (release verification pending)
 
 - New page hardware-review.html traces first-party Tohoku/AISIN November 2, 2026 research-chip claims, the 2,535.3/65.7 ms boot distinction, 124.2 ms power-on to first detection, 50.7 mJ/frame, mAP tradeoff, and experimental replication limitations. Source reporting reviewed independently via university, AISIN and contemporary coverage. No performance experiment rerun.
