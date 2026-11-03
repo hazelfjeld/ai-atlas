@@ -67,6 +67,17 @@ function safeCatalogPath(path){
  if(/^(terms\/MLD-\d{4}-[a-z0-9-]+\.html|technology\/TECH-\d{4}-[a-z0-9-]+\.html|index\.html#\/(technologies|dictionary|papers|safety|playbooks)\?record=[A-Za-z0-9-]+|index\.html#\/(overview|technologies|dictionary|papers|safety|playbooks|sources))$/.test(path))return path;
  return '';
 }
+// Source filtering uses the URL's exact HTTPS host, never publisher strings or story text.
+function sourceHost(url){
+ const safe=safeSource(url);
+ return safe?new URL(safe).hostname.toLowerCase():'';
+}
+function validSourceHost(host){
+ return typeof host==='string'&&host.length<=120&&/^[a-z0-9][a-z0-9.-]*[a-z0-9]$/.test(host)&&host.includes('.')&&!host.includes('..');
+}
+function matchesSource(item,host){
+ return !host||host==='all'||(validSourceHost(host)&&sourceHost(item?.source_url)===host);
+}
 function validateIndex(index){
  assert(index&&typeof index==='object'&&!Array.isArray(index),'Daily index must be an object');
  assert(index.schema===1&&index.timezone==='America/Chicago','Unsupported daily index schema or timezone');
@@ -174,11 +185,12 @@ function permalink(entry){
 function viewFilters(search=''){
  const p=new URLSearchParams(typeof search==='string'?(search.startsWith('?')?search.slice(1):search):'');
  const one=key=>p.getAll(key).length===1?p.get(key):null;
- const section=one('section'),topic=one('topic'),query=one('q'),review=one('review');
+ const section=one('section'),topic=one('topic'),query=one('q'),review=one('review'),source=one('source');
  return {
   section:section==='all'||KINDS.includes(section)?section:'all',
   topic:topic==='all'||Object.prototype.hasOwnProperty.call(TOPIC_ALIASES,topic)?topic:'all',
   review:typeof review==='string'&&review!=='all'&&review.trim()===review&&review.length<=120&&!/[\u0000-\u001f\u007f]/.test(review)?review:'all',
+   source:validSourceHost(source)?source:'all',
   query:typeof query==='string'&&query.length<=120?query.trim():''
  };
 }
@@ -189,7 +201,8 @@ function filterPermalink(entry,filters={}){
  if(KINDS.includes(section))p.set('section',section);
  if(Object.prototype.hasOwnProperty.call(TOPIC_ALIASES,topic))p.set('topic',topic);
  if(typeof filters.review==='string'&&filters.review!=='all'&&filters.review.trim()===filters.review&&filters.review.length<=120&&!/[\u0000-\u001f\u007f]/.test(filters.review))p.set('review',filters.review);
- if(query)p.set('q',query);
+ if(validSourceHost(filters.source))p.set('source',filters.source);
+  if(query)p.set('q',query);
  return 'whats-new.html?'+p.toString();
 }
 // Export a *previously SHA-verified* edition as an auditable, filter-aware research list.
@@ -201,6 +214,7 @@ function citationCsv(edition,entry,filters={}){
  const section=KINDS.includes(filters.section)?filters.section:'all';
  const topic=Object.prototype.hasOwnProperty.call(TOPIC_ALIASES,filters.topic)?filters.topic:'all';
  const review=typeof filters.review==='string'&&filters.review.length<=120?filters.review:'all';
+  const source=validSourceHost(filters.source)?filters.source:'all';
  const query=typeof filters.query==='string'?filters.query.slice(0,120):'';
  const headers=['edition_date','revision','collection_status','section','record_id','title','review_status','release_status','summary','why_it_matters','caveat','source_publication_date','event_date','discovered_at','added_to_atlas_at','source_url','atlas_page','tags'];
  const cell=value=>{
@@ -212,12 +226,12 @@ function citationCsv(edition,entry,filters={}){
  for(const kind of KINDS){
   if(section!=='all'&&section!==kind)continue;
   for(const item of edition[kind]){
-   if(!matchesTopic(item,topic)||!matchesReviewStatus(item,review)||!matchesQuery(item,query))continue;
+   if(!matchesTopic(item,topic)||!matchesReviewStatus(item,review)||!matchesSource(item,source)||!matchesQuery(item,query))continue;
    result.push([entry.date,entry.revision,edition.coverage.status,kind,item.id,item.title,item.review_status,item.release_status,item.summary,item.why_it_matters,item.caveat,item.publication_date,item.event_date,item.discovered_at,item.added_to_atlas_at,item.source_url,item.catalog_path,Array.isArray(item.tags)?item.tags.join('; '):''].map(cell).join(','));
   }
  }
  // UTF-8 BOM improves non-ASCII compatibility with common spreadsheet software.
  return '\ufeff'+result.join('\r\n')+'\r\n';
 }
-return {KINDS,matchesTopic,matchesReviewStatus,matchesQuery,validDate,validTimestamp,chicagoDate,safeSource,safeCatalogPath,validateIndex,validateEdition,selection,fallbackOrder,revisionDiff,requestedEdition,permalink,viewFilters,filterPermalink,citationCsv};
+return {KINDS,matchesTopic,matchesReviewStatus,matchesSource,matchesQuery,sourceHost,validDate,validTimestamp,chicagoDate,safeSource,safeCatalogPath,validateIndex,validateEdition,selection,fallbackOrder,revisionDiff,requestedEdition,permalink,viewFilters,filterPermalink,citationCsv};
 });
