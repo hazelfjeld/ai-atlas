@@ -1054,7 +1054,7 @@ test('first-paint technology navigation matches the checksummed catalog count',(
  const path=require('node:path'),root=path.join(__dirname,'..');
  const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
  const m=JSON.parse(fs.readFileSync(path.join(root,'publication.json')));
- const tech=html.match(/<a class="nav-link" data-view="technologies" href="#\\/technologies">[\\s\\S]*?<span class="nav-count">(\\d+)<\\/span><\\/a>/);
+ const tech=html.match(/<a class="nav-link" data-view="technologies" href="#[/]technologies">[^]*?<span class="nav-count">([0-9]+)<[/]span><[/]a>/);
  assert.ok(tech,'Missing first-paint technology badge');
  assert.equal(Number(tech[1]),m.published_counts.technologies);
 });
