@@ -161,9 +161,17 @@
       "sha256": "c25c2f2e3dff7279c43561bcecf24ff30e67b757690a45bc9588bf7b1870e0ad",
       "bytes": 42987,
       "published_at": "2026-11-03T09:40:00.738Z"
+    },
+    {
+      "date": "2026-11-02",
+      "revision": 21,
+      "path": "data/daily/editions/2026-11-02-v21.json",
+      "sha256": "09204994b264b3ea8f16e7f275076a366c4636b1bb56e5c77b69b3126a05670f",
+      "bytes": 44108,
+      "published_at": "2026-11-03T10:39:07.441Z"
     }
   ],
   "last_successful_publish_at": "2026-11-03T09:43:42Z",
-  "status": "edition_revision_20_production_verified",
-  "coverage_note": "Retrospective November 2 revision 20: exact citation-source hostname filtering of SHA-256-verified research records, permalink restoration and CSV evidence exports. Published after midnight November 3 in America/Chicago; not a November 3 news collection. All nine existing November 2 reports, seven deferred catalog proposals, two source failures and the original partial collection window are unchanged. Verified on production 158428e703dcc777ce53ec0a26859a186216fb45 with 124 Node tests (including schema, source filter, archive timezone and integrity), complete GitHack verification 41613020733, Cloudflare production/hosted-browser verification 41613020568 and 463 exact assets per hostname across three hosts. Historical v1–v19 are immutable. AI news coverage remains partial and non-exhaustive."
+  "status": "edition_revision_21_pending_production_verification",
+  "coverage_note": "Retrospective November 2 revision 21 records the actual November 3 publication of a distinctness review for seven deferred catalog proposals: six promising candidates needing full integration, one composite term linked to existing explanations. All nine externally reviewed November 2 news reports, seven deferred catalog proposals, two original source failures and the original partial collection window are unchanged. November 3's daily edition awaits genuine source collection; this is not November 3 external news. Last successful production verification timestamp remains revision 20 until the exact new indexed release passes Cloudflare and GitHack tests. Older v1–v20 assets remain immutable; coverage is non-exhaustive."
 }
