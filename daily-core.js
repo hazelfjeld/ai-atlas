@@ -6,6 +6,9 @@
 })(typeof globalThis!=='undefined'?globalThis:this,function(){
 'use strict';
 const KINDS=['news','technologies','terms','site_changes','corrections'];
+// Source-publication timing is relative to the selected archive date, never the
+// visitor's clock or the collector/discovery/Atlas-edit timestamps.
+const PUBLICATION_TIMING=['all','same-day','catch-up','postdated','undated'];
 // A small, auditable vocabulary for broad reader filters; it is not a model
 // classifier or a claim that every tagged story has been independently audited.
 const TOPIC_ALIASES=Object.freeze({
@@ -77,6 +80,17 @@ function validSourceHost(host){
 }
 function matchesSource(item,host){
  return !host||host==='all'||(validSourceHost(host)&&sourceHost(item?.source_url)===host);
+}
+function matchesPublicationTiming(item,kind,editionDate,timing='all'){
+ if(timing==='all')return true;
+ if(!PUBLICATION_TIMING.includes(timing)||kind!=='news'||!validDate(editionDate)||!item||typeof item!=='object')return false;
+ // A missing publisher date is not evidence that the story was first released today.
+ if(!item.publication_date)return timing==='undated';
+ if(!validDate(item.publication_date))return false;
+ if(timing==='same-day')return item.publication_date===editionDate;
+ if(timing==='catch-up')return item.publication_date<editionDate;
+ if(timing==='postdated')return item.publication_date>editionDate;
+ return false;
 }
 function validateIndex(index){
  assert(index&&typeof index==='object'&&!Array.isArray(index),'Daily index must be an object');
@@ -185,12 +199,13 @@ function permalink(entry){
 function viewFilters(search=''){
  const p=new URLSearchParams(typeof search==='string'?(search.startsWith('?')?search.slice(1):search):'');
  const one=key=>p.getAll(key).length===1?p.get(key):null;
- const section=one('section'),topic=one('topic'),query=one('q'),review=one('review'),source=one('source');
+ const section=one('section'),topic=one('topic'),query=one('q'),review=one('review'),source=one('source'),published=one('published');
  return {
   section:section==='all'||KINDS.includes(section)?section:'all',
   topic:topic==='all'||Object.prototype.hasOwnProperty.call(TOPIC_ALIASES,topic)?topic:'all',
   review:typeof review==='string'&&review!=='all'&&review.trim()===review&&review.length<=120&&!/[\u0000-\u001f\u007f]/.test(review)?review:'all',
    source:validSourceHost(source)?source:'all',
+  publication:PUBLICATION_TIMING.includes(published)?published:'all',
   query:typeof query==='string'&&query.length<=120?query.trim():''
  };
 }
@@ -202,6 +217,7 @@ function filterPermalink(entry,filters={}){
  if(Object.prototype.hasOwnProperty.call(TOPIC_ALIASES,topic))p.set('topic',topic);
  if(typeof filters.review==='string'&&filters.review!=='all'&&filters.review.trim()===filters.review&&filters.review.length<=120&&!/[\u0000-\u001f\u007f]/.test(filters.review))p.set('review',filters.review);
  if(validSourceHost(filters.source))p.set('source',filters.source);
+ if(PUBLICATION_TIMING.includes(filters.publication)&&filters.publication!=='all')p.set('published',filters.publication);
   if(query)p.set('q',query);
  return 'whats-new.html?'+p.toString();
 }
@@ -215,6 +231,7 @@ function citationCsv(edition,entry,filters={}){
  const topic=Object.prototype.hasOwnProperty.call(TOPIC_ALIASES,filters.topic)?filters.topic:'all';
  const review=typeof filters.review==='string'&&filters.review.length<=120?filters.review:'all';
   const source=validSourceHost(filters.source)?filters.source:'all';
+ const publication=PUBLICATION_TIMING.includes(filters.publication)?filters.publication:'all';
  const query=typeof filters.query==='string'?filters.query.slice(0,120):'';
  const headers=['edition_date','revision','collection_status','section','record_id','title','review_status','release_status','summary','why_it_matters','caveat','source_publication_date','event_date','discovered_at','added_to_atlas_at','source_url','atlas_page','tags'];
  const cell=value=>{
@@ -226,12 +243,12 @@ function citationCsv(edition,entry,filters={}){
  for(const kind of KINDS){
   if(section!=='all'&&section!==kind)continue;
   for(const item of edition[kind]){
-   if(!matchesTopic(item,topic)||!matchesReviewStatus(item,review)||!matchesSource(item,source)||!matchesQuery(item,query))continue;
+   if(!matchesTopic(item,topic)||!matchesReviewStatus(item,review)||!matchesSource(item,source)||!matchesPublicationTiming(item,kind,entry.date,publication)||!matchesQuery(item,query))continue;
    result.push([entry.date,entry.revision,edition.coverage.status,kind,item.id,item.title,item.review_status,item.release_status,item.summary,item.why_it_matters,item.caveat,item.publication_date,item.event_date,item.discovered_at,item.added_to_atlas_at,item.source_url,item.catalog_path,Array.isArray(item.tags)?item.tags.join('; '):''].map(cell).join(','));
   }
  }
  // UTF-8 BOM improves non-ASCII compatibility with common spreadsheet software.
  return '\ufeff'+result.join('\r\n')+'\r\n';
 }
-return {KINDS,matchesTopic,matchesReviewStatus,matchesSource,matchesQuery,sourceHost,validDate,validTimestamp,chicagoDate,safeSource,safeCatalogPath,validateIndex,validateEdition,selection,fallbackOrder,revisionDiff,requestedEdition,permalink,viewFilters,filterPermalink,citationCsv};
+return {KINDS,matchesTopic,matchesReviewStatus,matchesSource,matchesPublicationTiming,matchesQuery,sourceHost,validDate,validTimestamp,chicagoDate,safeSource,safeCatalogPath,validateIndex,validateEdition,selection,fallbackOrder,revisionDiff,requestedEdition,permalink,viewFilters,filterPermalink,citationCsv};
 });
