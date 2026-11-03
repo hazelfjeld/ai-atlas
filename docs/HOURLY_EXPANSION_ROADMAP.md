@@ -1,3 +1,10 @@
+## November 3, 10:44 CST — November 3 v2 independently production-verified
+
+- **Verified public edition:** https://aiupdates.app/whats-new.html?date=2026-11-03&revision=2 . Immutable edition SHA-256 `83f690f8c53c7ba074f46e9c827b32b077381b9e32bf3044947c23f67b9423dd` (20,827 UTF-8 bytes). Original November 3 v1 and 25 November 2 immutable revisions retained.
+- **Source/delivery provenance:** [merged main 5a44a6b](https://github.com/hazelfjeld/ai-atlas/commit/5a44a6bb98dd8c8a55b8efee1ff16500284d61ee) passed complete [catalog and GitHack jobs 41676627178](https://github.com/hazelfjeld/ai-atlas/actions/runs/41676627178) and [Cloudflare validate/production + hosted browser jobs 41676627291](https://github.com/hazelfjeld/ai-atlas/actions/runs/41676627291); last job completed by `2026-11-03T16:44:04Z`. The v2 receipt/index success clock is now advanced from verified v1, not from creation time.
+- **Published site additions:** 2 linked existing AI safety guides, Defense in depth and Instruction hierarchy, recorded only as Atlas-site improvements. Original 8 news reports, 14 checked / 3 failed sources, 4 deferred new catalog proposals, and 53 expanded guides / 1,345 terms / 302 technologies stay unchanged. This is not a new outside event or independently reproduced research claim.
+- **Next:** Review 4 deferred November 3 technology/hardware candidates for accurate distinctness and licensing, then implement one fully connected canonical record when evidence suffices. Preserve professor demo checkpoint.
+
 ## November 3 Chicago — daily v2 documents two existing security guides (release checks pending)
 
 - **Staging/receipt review:** Both immutable collector batches (Nov 2 and Nov 3) are already present in the production receipts, with source commits and SHA-256. No unprocessed batch; no stale collector code merged.
