@@ -306,8 +306,8 @@
   },
   "MLD-0062": {
     "path": "terms/MLD-0062-arithmetic-intensity.html",
-    "sha256": "a4ebd5ece38ac9ec119d0ea9e3acfecd042736d18a3ca26dc4c8c2b150806e26",
-    "expanded": false
+    "sha256": "5119d0cde6e42d85e3350ed8ca56e7610c035501fadb4254ce9cddbd80f2a7ca",
+    "expanded": true
   },
   "MLD-0063": {
     "path": "terms/MLD-0063-artificial-intelligence.html",
@@ -3616,8 +3616,8 @@
   },
   "MLD-0724": {
     "path": "terms/MLD-0724-memory-bandwidth.html",
-    "sha256": "e18d5d31971a167fcba432a371e68baea6dd4ad2a19be900ca74d0b2cad50de4",
-    "expanded": false
+    "sha256": "9431202a20f60d711b9586d0ad9522cd05caa0c1073cc492b51f816e6463e0cc",
+    "expanded": true
   },
   "MLD-0725": {
     "path": "terms/MLD-0725-mesa-objective.html",
