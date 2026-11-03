@@ -209,9 +209,17 @@
       "sha256": "a43ce7ba5c5522c6269c1819e8090213950e49c22e1d343f44b7be5a062c152c",
       "bytes": 17798,
       "published_at": "2026-11-03T15:29:16.347Z"
+    },
+    {
+      "date": "2026-11-03",
+      "revision": 2,
+      "path": "data/daily/editions/2026-11-03-v2.json",
+      "sha256": "83f690f8c53c7ba074f46e9c827b32b077381b9e32bf3044947c23f67b9423dd",
+      "bytes": 20827,
+      "published_at": "2026-11-03T16:36:59.092Z"
     }
   ],
   "last_successful_publish_at": "2026-11-03T15:42:06Z",
-  "status": "edition_revision_1_production_verified",
-  "coverage_note": "November 3 revision 1 is independently verified in production at 2026-11-03T15:42:06Z on merged main 8b69a89b02fa03f7a19fe7a761ac9f113089b956 with GitHack/catalog workflow 41665910657 and Cloudflare hosted-browser workflow 41665910824. Eight qualified source news reports include four November 3 publications and four Nov 1–2 catch-up items. Four technology and terminology proposals remain deferred, not counted in canonical catalogs. Fourteen source URLs checked (some limited), three failed. Research prototype/benchmark claims are not independently reproduced; investigations are not findings of wrongdoing. Coverage is partial and non-exhaustive. Last verified historical edition November 2 revision 25 preserved intact with all earlier revisions and professor demo."
+  "status": "edition_revision_2_pending_production_verification",
+  "coverage_note": "November 3 v2 records two already-published Atlas-only concept guide expansions; the eight original vetted news reports, source publication dates, partial source collection (14 checked, 3 failed) and four deferred catalog proposals are unchanged from production-verified v1. No new external news, canonical IDs, research replication or safety incident is claimed. V2 awaiting independent catalog, GitHack, Cloudflare and browser checks; last successful publication remains v1 until those pass."
 }
