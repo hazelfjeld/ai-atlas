@@ -139,7 +139,7 @@
       "published_at": "2026-11-03T06:04:03.941Z"
     }
   ],
-  "last_successful_publish_at": "2026-11-03T05:47:59.042Z",
+  "last_successful_publish_at": "2026-11-03T06:08:48Z",
   "status": "edition_revision_16_production_verified",
   "coverage_note": "November 2 revision 16 adds two existing adversarial ML concept guides as Atlas site updates, not newly released technologies or incidents. Nine source-reviewed reports, seven deferred catalog proposals and two failed lookups retain original partial collection window. Main 4ed159e was verified by GitHack/catalog run 41585702935 and Cloudflare production/browser run 41585702813, 457 exact assets on each of three hostnames."
 }
