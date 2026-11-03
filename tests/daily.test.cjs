@@ -103,7 +103,7 @@ test('Archive recovery retains verified content after a failed manual selection 
  const js=fs.readFileSync('whats-new.js','utf8');
  assert.match(js,/if\(edition&&active\)/);
  assert.match(js,/Keeping the previously verified/);
- assert.match(js,/for\(const entry of candidates\.slice\(0,12\)\)/);
+ assert.match(js,/for\(const entry of candidates\.slice\(0,32\)\)/);
  assert.match(js,/if\(await switchEdition\(entry\)\)/);
  assert.match(js,/No unverified news is shown/);
  assert.match(js,/select\.disabled=true/);
@@ -723,4 +723,40 @@ test('Retrospective revision 17 records existing Atlas changes without inventing
  assert.equal(ledger.counts.technology_added,0);
  assert.equal(ledger.counts.term_added,0);
  assert.equal(D.selection(idx,'2026-11-03').todayEntry,null,'Nov 3 must still await an actual collected edition');
+});
+
+test('Daily source CSV export preserves evidence dates and neutralizes spreadsheet formulas',()=>{
+ const e=edition();
+ e.news=[
+  {id:'N-1',title:'=IMPORTXML("https://example.org","x")',summary:'A credible, quoted "claim" from a source',
+   review_status:'source-checked; not reproduced',release_status:'controlled demo',category:'safety',
+   caveat:'+not a deployment incident',source_url:'https://example.org/release',publication_date:'2026-11-02',
+   event_date:'2026-11-01',discovered_at:'2026-11-02T14:00:00Z',tags:['safety','research']},
+  {id:'N-2',title:'Unrelated hardware announcement',summary:'Different section of results',
+   review_status:'reviewed',category:'hardware',source_url:'https://example.org/chip',tags:['hardware']}
+ ];
+ e.site_changes=[{id:'S-1',title:'Atlas export feature',summary:'Website improvement, not a new-world event',review_status:'site update',tags:['tools']}];
+ const csv=D.citationCsv(e,entry('2026-11-02',17),{section:'news',topic:'safety',query:'quoted claim'});
+ assert.ok(csv.startsWith('\ufeff'));
+ assert.match(csv,/edition_date.*record_id.*review_status.*source_publication_date.*event_date.*added_to_atlas_at/);
+ assert.match(csv,/'=IMPORTXML/);
+ assert.match(csv,/'\+not a deployment incident/);
+ assert.match(csv,/A credible, quoted ""claim"" from a source/);
+ assert.match(csv,/source-checked; not reproduced/);
+ assert.match(csv,/2026-11-02.*2026-11-01/);
+ assert.doesNotMatch(csv,/Unrelated hardware announcement|Atlas export feature/);
+ assert.equal(csv.trim().split('\r\n').length,2);
+ const all=D.citationCsv(e,entry('2026-11-02'),{});
+ assert.equal(all.trim().split('\r\n').length,4);
+ assert.throws(()=>D.citationCsv(e,entry('2026-11-01')),/date differs|Invalid export edition/);
+});
+test('Research export stays disabled until immutable edition verification succeeds',()=>{
+ const html=fs.readFileSync('whats-new.html','utf8'),js=fs.readFileSync('whats-new.js','utf8');
+ assert.match(html,/id="export-verified"[^>]*disabled/);
+ assert.match(js,/await readEdition\(entry\)/);
+ assert.match(js,/edition=e;active=entry;/);
+ assert.match(js,/export-verified'\)\.disabled=false/);
+ assert.match(js,/if\(!edition\|\|!active\)return;/);
+ assert.match(js,/C\.citationCsv\(edition,active,currentFilters\(\)\)/);
+ assert.match(js,/new Blob\(\[csv\]/);
 });
