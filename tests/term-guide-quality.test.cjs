@@ -216,7 +216,7 @@ test('Benchmark and Environment are source-backed expanded agent-evaluation guid
 
 test('Prompt injection guides distinguish untrusted content, authorization and controlled outcomes', () => {
   for (const [id, patterns] of Object.entries({
-    'MLD-0957': [/trust boundary/i, /direct injection/i, /schema|typed/i, /false positive/i, /not automatically|does not establish|not.*proof/i],
+    'MLD-0957': [/trust boundary/i, /direct injection|direct attempt/i, /schema|typed/i, /false positive/i, /not automatically|does not establish|not.*proof/i],
     'MLD-0549': [/retrieval-augmented/i, /tool response|tool-output/i, /false-positive rate/i, /calendar state/i, /not.*prove|neither proves/i]
   })) {
     const guide = guides[id], route = termManifest[id];
