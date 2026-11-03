@@ -95,6 +95,32 @@ with sync_playwright() as p:
             check('historical source audit distinguishes checked times and failure status',
                   'Checked Nov 2, 2026' in audit
                   and 'Status: inaccessible' in audit and 'Status: not found' in audit)
+    if any(e['date'] == '2026-11-03' and e['revision'] == 3 for e in index['editions']):
+        # A date-filtered view must retain the SHA-verified edition and preserve
+        # publisher dates separately from event, discovery and site-change dates.
+        page.goto(base + 'whats-new.html?date=2026-11-03&revision=3&published=catch-up')
+        page.wait_for_function("!document.getElementById('edition-select').disabled", timeout=45000)
+        check('Nov 3 share link isolates exactly four source-dated catch-up reports',
+              page.locator('#publication-filter').input_value() == 'catch-up'
+              and page.locator('#edition-content article.item').count() == 4
+              and 'published=catch-up' in page.url)
+        with page.expect_download() as archived_download:
+            page.locator('#export-verified').click()
+        with open(archived_download.value.path(), encoding='utf-8-sig', newline='') as downloaded_csv:
+            catchup_rows = list(csv.DictReader(downloaded_csv))
+        check('catch-up CSV exports only the four visible news records',
+              len(catchup_rows) == 4
+              and all(row['section'] == 'news' and row['source_publication_date'] < '2026-11-03'
+                      for row in catchup_rows))
+        page.locator('#publication-filter').select_option('same-day')
+        check('source publication date reveals four actual Nov 3 reports',
+              page.locator('#edition-content article.item').count() == 4
+              and 'published=same-day' in page.url)
+        page.locator('#reset-filters').click()
+        check('source-date reset returns the entire verified Nov 3 edition',
+              page.locator('#publication-filter').input_value() == 'all'
+              and page.locator('#edition-content article.item').count() >= 12
+              and 'published=' not in page.url)
     page.locator('#section-filter').select_option('news')
     page.locator('#topic-filter').select_option('research')
     check('daily filters remain usable', page.locator('#topic-filter').input_value() == 'research')
