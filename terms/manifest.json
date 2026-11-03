@@ -546,8 +546,8 @@
   },
   "MLD-0110": {
     "path": "terms/MLD-0110-benchmark.html",
-    "sha256": "656c203fc63b72dd0489a20b61ec46e9a8a11a798673ec56b45711e1a40ab9fd",
-    "expanded": false
+    "sha256": "eda32fd0091a97413e7c4464090c0a5f7f630cd7ad6ab50ff196b0eef9887330",
+    "expanded": true
   },
   "MLD-0111": {
     "path": "terms/MLD-0111-bernoulli-distribution.html",
@@ -1851,8 +1851,8 @@
   },
   "MLD-0371": {
     "path": "terms/MLD-0371-environment.html",
-    "sha256": "1b175732b00edc3a1db8b995fecea86e19b640b4b5786850507dc39c4261b4c7",
-    "expanded": false
+    "sha256": "edcfd3adb84f3ffcd87b791b8d30831174a4fd8e2ae75ad7cf1a9cb14a5dc205",
+    "expanded": true
   },
   "MLD-0372": {
     "path": "terms/MLD-0372-eos-token.html",

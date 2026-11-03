@@ -1639,5 +1639,139 @@
         "https://arxiv.org/abs/2308.03688"
       ]
     ]
+  },
+  "MLD-0110": {
+    "reviewed_on": "2026-11-02",
+    "prerequisites": [
+      "MLD-1225",
+      "MLD-1254",
+      "MLD-0041",
+      "MLD-0371"
+    ],
+    "sections": [
+      [
+        "Mechanism: what a benchmark standardizes",
+        "A benchmark defines the task population, permitted inputs and actions, scoring procedure, and conditions for comparing systems. The dataset alone is not the protocol: prompts, tool access, budgets, environment resets and grader versions can all change outcomes. A leaderboard is a particular collection of scores, not independent evidence of broad capability."
+      ],
+      [
+        "Defining success and the denominator",
+        "For N eligible tasks, observed completion rate is independently verified successes divided by N. Specify whether timeouts, invalid actions, crashes and refusals count as failures before evaluating. When an agent can modify an environment, check final task state and forbidden side effects; do not accept the model's assertion of success as a substitute."
+      ],
+      [
+        "Worked synthetic paired comparison",
+        "Suppose two models attempt the same 20 held-out tasks with equal tool budgets. Model A completes 13/20=65% and B completes 15/20=75%, a ten-percentage-point observed difference. This is a toy arithmetic example, not an actual measured model benchmark; twenty cases cannot show reliable superiority without paired outcomes, uncertainty estimates and multiple trials."
+      ],
+      [
+        "What interactive evaluations measure",
+        "AgentBench assesses agents over eight multi-turn interactive environments. OSWorld initializes desktop states and uses execution-based evaluators; SWE-bench judges repository patches using tests. These source-published benchmarks differ in tasks, tool scaffolds and graders. A score on one does not automatically transfer to new operating environments or certify safety."
+      ],
+      [
+        "Build a reproducible test harness",
+        "Freeze task IDs, initial state snapshots, software versions, instruction templates, tool schemas, evaluator code, random seeds, limits on time and actions, and success criteria. Record action trajectories, tool errors, observed side effects, environment state and resource use. Keep checksums for test manifests and disclose any reruns with a changed grader."
+      ],
+      [
+        "Prevent contamination and metric gaming",
+        "Maintain separate development, calibration and sealed test sets. Audit near-duplicate tasks and possible training overlap; repeated optimization against public or leaked benchmark items encourages overfitting. Include distribution-shifted cases and intentional grader probes. Improved pass rates are insufficient evidence of underlying skill if evaluation artifacts can be exploited."
+      ],
+      [
+        "Distinguish failures from grading errors",
+        "String-matching a final message can falsely pass a failed tool operation; overly rigid output matching can reject equivalent valid answers. Manually audit a blinded sample of apparent passes and failures, including unauthorized effects. Record evaluator disagreement, tool exceptions and task ambiguity instead of collapsing all outcomes into one number."
+      ],
+      [
+        "Design a fair ablation and report its limits",
+        "Compare identical tasks, tools, attempts and compute budgets; vary one system component at a time. Report per-domain completion, uncertainty, safety violations and cost rather than only the pooled mean. Control for sampling and nondeterministic environments. Benchmark results remain conditional on these experimental assumptions and cannot prove general alignment."
+      ],
+      [
+        "Terminology and real-world evidence boundaries",
+        "The phrase 'environment-grounded agent benchmark' is descriptive of an interactive evaluation design, not established by these papers as an independent technical standard. Environment-based benchmarking is useful, but an engineered success or exploit in a controlled test is not automatically a deployed incident. Explicitly label illustrative data, author-reported results and independently replicated findings."
+      ]
+    ],
+    "citations": [
+      [
+        "AgentBench authors, Evaluating LLMs as Agents across eight interactive environments, ICLR 2024",
+        "https://arxiv.org/abs/2308.03688"
+      ],
+      [
+        "OSWorld researchers, Benchmarking Multimodal Agents in Real Computer Environments",
+        "https://arxiv.org/abs/2404.07972"
+      ],
+      [
+        "SWE-bench authors, Can Language Models Resolve Real-World GitHub Issues",
+        "https://arxiv.org/abs/2310.06770"
+      ],
+      [
+        "Scikit-learn documentation, cross-validation and held-out evaluation protocols",
+        "https://scikit-learn.org/stable/modules/cross_validation.html"
+      ]
+    ]
+  },
+  "MLD-0371": {
+    "reviewed_on": "2026-11-02",
+    "prerequisites": [
+      "MLD-0039",
+      "MLD-1163",
+      "MLD-0043",
+      "MLD-0110"
+    ],
+    "sections": [
+      [
+        "Mechanism: the environment supplies consequences",
+        "An environment accepts actions, updates task-relevant state and returns observations, and sometimes a reward. It may be a game, software sandbox, tool API, browser or controlled simulator. The agent can see only a partial observation of state; its final text does not itself establish that an intended operation changed the world."
+      ],
+      [
+        "Transition dynamics from first principles",
+        "A Markov decision process represents transitions as s_next drawn from P(s_next | s, a), where a is the agent's selected action. The environment, not the agent's narrative, determines what follows. A policy may receive observation o rather than the complete state s, which matters for hidden permissions, stochastic events and partial observability."
+      ],
+      [
+        "Gymnasium reset and step semantics",
+        "Gymnasium's reset() initializes an episode, and step(action) returns observation, reward, terminated, truncated and info. Terminated indicates a task-defined terminal state, while truncated may be a time or step budget stop. Treating truncated as task success conflates running out of time with reaching the intended goal; treating it as termination can distort training."
+      ],
+      [
+        "Worked synthetic customer support setting",
+        "Imagine states {open, verified, resolved} with actions {lookup, draft, issue_refund}. The environment rejects refund execution unless approval exists, and the agent receives an observation reflecting this refusal. A final message saying 'refund completed' changes no ledger state. This is a synthetic teaching example, not an observed business deployment."
+      ],
+      [
+        "Where authorization belongs",
+        "Use typed tools and execution-layer least privilege to enforce permitted actions, track durable side effects, rate limit calls and separate read-only from destructive operations. A model's own policy prompt cannot replace independent permission enforcement. A sandbox also requires isolation testing; naming it a sandbox does not guarantee security."
+      ],
+      [
+        "Why interaction benchmarks expose different failures",
+        "AgentBench tests iterative decisions and feedback in multiple interactive settings. OSWorld configures real desktop applications and checks execution results. Such tasks can reveal navigation mistakes or unobserved state changes that a static question dataset misses. Their reported benchmark scores are author-scoped experimental results, not guaranteed performance in production."
+      ],
+      [
+        "Resetting between experimental trials",
+        "Record the environment image, dependency versions, tool configuration, evaluator hash, random seed and task setup. Reset state before each attempt and detect leftover files, cached credentials, changed web content or rate limits that contaminate later trials. If a true reset is not available, report nondeterminism and repeat samples rather than assuming independence."
+      ],
+      [
+        "Diagnose full trajectories and possible proxy gaming",
+        "Measure final state success, invalid operations, forbidden side effects, step counts, time and cost. Inspect action traces to distinguish capability failure, ambiguous instructions, evaluator false positives and possible specification gaming. Reaching a reward trigger without the intended state warrants analysis; it does not by itself demonstrate deception or an actual safety incident."
+      ],
+      [
+        "Limits and misconceptions",
+        "An environment is not synonymous with a reward function, a physics simulator or the unrestricted internet. A simplified world improves repeatability but may omit safety-critical hidden variables and deployed API behaviors. Controlled tests support useful ablations only when those assumptions and permissions are explicit."
+      ]
+    ],
+    "citations": [
+      [
+        "OpenAI Spinning Up, explanation of agent-environment dynamics in reinforcement learning",
+        "https://spinningup.openai.com/en/latest/spinningup/rl_intro.html"
+      ],
+      [
+        "Farama Foundation, Gymnasium Env API documentation for reset and step",
+        "https://gymnasium.farama.org/api/env/"
+      ],
+      [
+        "Farama Foundation, Terminated versus Truncated Step API explanation",
+        "https://farama.org/Gymnasium-Terminated-Truncated-Step-API"
+      ],
+      [
+        "AgentBench researchers, interactive multi-environment agent evaluation study",
+        "https://arxiv.org/abs/2308.03688"
+      ],
+      [
+        "OSWorld researchers, execution-grounded benchmark of computer-use agents",
+        "https://arxiv.org/abs/2404.07972"
+      ]
+    ]
   }
 }

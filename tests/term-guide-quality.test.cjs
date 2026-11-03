@@ -190,5 +190,26 @@ test('Agentic workflow and knowledge graph expansions explain mechanisms, constr
     const html=fs.readFileSync(path.join(root,termManifest[id].path),'utf8');
     assert.match(html,/Expanded guide/);assert.match(html,/Sources for the expanded explanation/);
   }
-  assert.equal(Object.keys(guides).length,33);
+  assert.equal(Object.keys(guides).length,35);
+});
+
+test('Benchmark and Environment are source-backed expanded agent-evaluation guides',()=>{
+ for(const [id,checks] of Object.entries({
+ 'MLD-0110':[/20 held-out tasks/,/65%/,/75%/,/AgentBench/,/OSWorld/,/contamination/i],
+ 'MLD-0371':[/step\(action\)/i,/terminated/,/truncated/,/transition/,/reward/,/sandbox/i]
+ })){
+  const g=guides[id],entry=termManifest[id];
+  assert.ok(g&&entry&&entry.expanded,'Expanded guide missing: '+id);
+  assert.equal(g.reviewed_on,'2026-11-02');
+  assert.ok(g.sections.length>=9&&g.sections.every(([heading,body])=>heading.length>=8&&body.length>=120));
+  assert.equal(new Set(g.sections.map(x=>x[0])).size,g.sections.length);
+  assert.ok(g.prerequisites.length>=4&&g.prerequisites.every(x=>termManifest[x]));
+  assert.ok(g.citations.length>=4&&g.citations.every(([title,url])=>title.length>35&&new URL(url).protocol==='https:'));
+  const body=g.sections.map(x=>x[1]).join(' ');
+  for(const re of checks)assert.match(body,re,'Missing evidence scope: '+id);
+  const html=fs.readFileSync(path.join(root,entry.path),'utf8');
+  assert.match(html,/Expanded guide/);
+  assert.match(html,/Sources for the expanded explanation/);
+ }
+ assert.equal(Object.keys(guides).length,35);
 });
