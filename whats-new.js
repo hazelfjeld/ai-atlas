@@ -12,6 +12,7 @@ const emptySectionCopy={
  corrections:'No correction was recorded in this edition. Earlier revisions remain available in the archive.'
 };
 let index=null,active=null,edition=null,switchEpoch=0;
+let pendingReview='all'; // URL review filters are applied only after integrity checks.
 function element(tag,text,cls){
  const e=document.createElement(tag);
  if(text!==undefined)e.textContent=String(text);
@@ -20,7 +21,15 @@ function element(tag,text,cls){
 }
 function status(text){$('edition-status').textContent=text;}
 function currentFilters(){
- return {section:$('section-filter').value,topic:$('topic-filter').value,query:$('edition-search').value};
+ return {section:$('section-filter').value,topic:$('topic-filter').value,review:$('evidence-filter').value,query:$('edition-search').value};
+}
+function populateReviewOptions(e){
+ const select=$('evidence-filter'),desired=pendingReview===null?select.value:pendingReview;
+ // Source review labels are exact, not inferred evidence categories.
+ const statuses=[...new Set(kinds.flatMap(([kind])=>e[kind].map(item=>item.review_status)).filter(x=>typeof x==='string'&&x.length<=120))].sort((a,b)=>a.localeCompare(b));
+ select.replaceChildren(new Option('All review labels','all'),...statuses.map(s=>new Option(s,s)));
+ select.value=statuses.includes(desired)?desired:'all';
+ select.disabled=false;pendingReview=null;
 }
 function syncVerifiedUrl(){
  // Never promote an unverified or failed archive selection into the address bar.
@@ -168,7 +177,7 @@ async function showRevisionDiff(entry,current,epoch){
 }
 function render(){
  if(!edition)return;
- const section=$('section-filter').value,topic=$('topic-filter').value,query=$('edition-search').value;
+ const section=$('section-filter').value,topic=$('topic-filter').value,review=$('evidence-filter').value,query=$('edition-search').value;
  const summary=$('edition-summary');summary.hidden=false;
  $('summary-content').replaceChildren(...edition.tldr.map(s=>element('p',s)));
  const content=$('edition-content');content.replaceChildren();
@@ -176,10 +185,10 @@ function render(){
  for(const [kind,label] of kinds){
   if(section!=='all'&&section!==kind)continue;
   total+=edition[kind].length;
-  const records=edition[kind].filter(item=>C.matchesTopic(item,topic)&&C.matchesQuery(item,query));
+  const records=edition[kind].filter(item=>C.matchesTopic(item,topic)&&C.matchesReviewStatus(item,review)&&C.matchesQuery(item,query));
   // An unfiltered edition always shows all five sections, including honest zeros.
   // A topic-filtered view avoids five repetitive empty sections.
-  if(!records.length&&(topic!=='all'||query.trim()))continue;
+  if(!records.length&&(topic!=='all'||review!=='all'||query.trim()))continue;
   visible+=records.length;
   const s=element('section'),heading=element('div',undefined,'heading'),title=element('h2',label);
   heading.append(title,element('span',records.length+' entries'));s.append(heading);
@@ -190,8 +199,8 @@ function render(){
   }
   content.append(s);
  }
- $('filter-results').textContent='Showing '+visible+' of '+total+' records in the selected collection'+(topic!=='all'||query.trim()?' matching your filters.':'.');
- if(!visible&&(topic!=='all'||query.trim()))content.append(element('div','No entries match those filters. Try a broader topic or search. This is not a claim that no AI news occurred.','empty'));
+ $('filter-results').textContent='Showing '+visible+' of '+total+' records in the selected collection'+(topic!=='all'||review!=='all'||query.trim()?' matching your filters.':'.');
+ if(!visible&&(topic!=='all'||review!=='all'||query.trim()))content.append(element('div','No entries match those filters. Try a broader topic or search. This is not a claim that no AI news occurred.','empty'));
  syncVerifiedUrl();
 }
 async function request(path){
@@ -219,6 +228,7 @@ async function switchEdition(entry){
   const e=await readEdition(entry);
   if(requestEpoch!==switchEpoch)return; // Ignore late responses from superseded archive selections.
   edition=e;active=entry;
+  populateReviewOptions(e);
   $('edition-permalink-wrap').hidden=false;
   $('export-verified').disabled=false;
   $('date-display').textContent=humanDate(entry.date);
@@ -238,7 +248,7 @@ async function switchEdition(entry){
    $('edition-select').value=active.path;
    status('Could not verify '+humanDate(entry.date)+': '+err.message+'. Keeping the previously verified '+humanDate(active.date)+' edition; unverified records were not displayed.');
   }else{
-   edition=null;active=null;$('export-verified').disabled=true;$('edition-permalink-wrap').hidden=true;$('revision-history').hidden=true;metadata();sourceCoverage();$('edition-summary').hidden=true;
+   edition=null;active=null;$('evidence-filter').disabled=true;$('export-verified').disabled=true;$('edition-permalink-wrap').hidden=true;$('revision-history').hidden=true;metadata();sourceCoverage();$('edition-summary').hidden=true;
    $('edition-content').replaceChildren(element('div','Edition verification failed. No daily records passed validation; the evergreen catalog remains available.','empty'));
    status('Cannot display this edition: '+err.message);
   }
@@ -264,6 +274,7 @@ async function start(){
  $('section-filter').value=filters.section;
  $('topic-filter').value=filters.topic;
  $('edition-search').value=filters.query;
+ pendingReview=filters.review;
  try{
   index=C.validateIndex(decode(await request('data/daily/index.json')));
   const requested=C.requestedEdition(index,window.location.search,today);
@@ -312,6 +323,7 @@ $('edition-select').addEventListener('change',()=>{
 });
 $('section-filter').addEventListener('change',render);
 $('topic-filter').addEventListener('change',render);
+$('evidence-filter').addEventListener('change',render);
 $('edition-search').addEventListener('input',()=>{if(edition)render();});
 $('export-verified').addEventListener('click',()=>{
  // Do not export anything that has not passed immutable byte + SHA-256 checks.
@@ -326,6 +338,7 @@ $('reset-filters').addEventListener('click',()=>{
  $('edition-search').value='';
  $('section-filter').value='all';
  $('topic-filter').value='all';
+ $('evidence-filter').value='all';
  if(edition)render();
  $('edition-search').focus();
 });

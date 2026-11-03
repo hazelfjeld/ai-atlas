@@ -25,6 +25,10 @@ function matchesQuery(item,query){
  const corpus=norm([item.id,item.title,item.summary,item.why_it_matters,item.caveat,item.review_status,item.release_status,item.category,item.source_url,...(Array.isArray(item.tags)?item.tags:[])].filter(x=>typeof x==='string').join(' '));
  return words.every(word=>corpus.includes(word));
 }
+// Match actual source review labels; never promote them into guessed certainty tiers.
+function matchesReviewStatus(item,review){
+ return !review||review==='all'||(item&&item.review_status===review);
+}
 function matchesTopic(item,topic){
  if(topic==='all')return true;
  const words=TOPIC_ALIASES[topic];
@@ -170,10 +174,11 @@ function permalink(entry){
 function viewFilters(search=''){
  const p=new URLSearchParams(typeof search==='string'?(search.startsWith('?')?search.slice(1):search):'');
  const one=key=>p.getAll(key).length===1?p.get(key):null;
- const section=one('section'),topic=one('topic'),query=one('q');
+ const section=one('section'),topic=one('topic'),query=one('q'),review=one('review');
  return {
   section:section==='all'||KINDS.includes(section)?section:'all',
   topic:topic==='all'||Object.prototype.hasOwnProperty.call(TOPIC_ALIASES,topic)?topic:'all',
+  review:typeof review==='string'&&review!=='all'&&review.trim()===review&&review.length<=120&&!/[\u0000-\u001f\u007f]/.test(review)?review:'all',
   query:typeof query==='string'&&query.length<=120?query.trim():''
  };
 }
@@ -183,6 +188,7 @@ function filterPermalink(entry,filters={}){
  const query=typeof filters.query==='string'?filters.query.trim().slice(0,120):'';
  if(KINDS.includes(section))p.set('section',section);
  if(Object.prototype.hasOwnProperty.call(TOPIC_ALIASES,topic))p.set('topic',topic);
+ if(typeof filters.review==='string'&&filters.review!=='all'&&filters.review.trim()===filters.review&&filters.review.length<=120&&!/[\u0000-\u001f\u007f]/.test(filters.review))p.set('review',filters.review);
  if(query)p.set('q',query);
  return 'whats-new.html?'+p.toString();
 }
@@ -194,6 +200,7 @@ function citationCsv(edition,entry,filters={}){
  assert(entry&&validDate(entry.date)&&Number.isSafeInteger(entry.revision)&&entry.revision>0&&entry.date===edition.edition_date,'Invalid export edition');
  const section=KINDS.includes(filters.section)?filters.section:'all';
  const topic=Object.prototype.hasOwnProperty.call(TOPIC_ALIASES,filters.topic)?filters.topic:'all';
+ const review=typeof filters.review==='string'&&filters.review.length<=120?filters.review:'all';
  const query=typeof filters.query==='string'?filters.query.slice(0,120):'';
  const headers=['edition_date','revision','collection_status','section','record_id','title','review_status','release_status','summary','why_it_matters','caveat','source_publication_date','event_date','discovered_at','added_to_atlas_at','source_url','atlas_page','tags'];
  const cell=value=>{
@@ -205,12 +212,12 @@ function citationCsv(edition,entry,filters={}){
  for(const kind of KINDS){
   if(section!=='all'&&section!==kind)continue;
   for(const item of edition[kind]){
-   if(!matchesTopic(item,topic)||!matchesQuery(item,query))continue;
+   if(!matchesTopic(item,topic)||!matchesReviewStatus(item,review)||!matchesQuery(item,query))continue;
    result.push([entry.date,entry.revision,edition.coverage.status,kind,item.id,item.title,item.review_status,item.release_status,item.summary,item.why_it_matters,item.caveat,item.publication_date,item.event_date,item.discovered_at,item.added_to_atlas_at,item.source_url,item.catalog_path,Array.isArray(item.tags)?item.tags.join('; '):''].map(cell).join(','));
   }
  }
  // UTF-8 BOM improves non-ASCII compatibility with common spreadsheet software.
  return '\ufeff'+result.join('\r\n')+'\r\n';
 }
-return {KINDS,matchesTopic,matchesQuery,validDate,validTimestamp,chicagoDate,safeSource,safeCatalogPath,validateIndex,validateEdition,selection,fallbackOrder,revisionDiff,requestedEdition,permalink,viewFilters,filterPermalink,citationCsv};
+return {KINDS,matchesTopic,matchesReviewStatus,matchesQuery,validDate,validTimestamp,chicagoDate,safeSource,safeCatalogPath,validateIndex,validateEdition,selection,fallbackOrder,revisionDiff,requestedEdition,permalink,viewFilters,filterPermalink,citationCsv};
 });

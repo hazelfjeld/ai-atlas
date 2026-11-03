@@ -129,12 +129,14 @@ test('Shareable daily links restore verified edition filters without trusting ar
  const selected=entry('2026-11-02',7);
  const url=D.filterPermalink(selected,{section:'news',topic:'safety',query:'  AI agent  '});
  assert.equal(url,'whats-new.html?date=2026-11-02&revision=7&section=news&topic=safety&q=AI+agent');
- assert.deepEqual(D.viewFilters(url.slice(url.indexOf('?'))),{section:'news',topic:'safety',query:'AI agent'});
- assert.deepEqual(D.viewFilters('?section=bad&topic=invalid&q='+('a'.repeat(121))),{section:'all',topic:'all',query:''});
- assert.deepEqual(D.viewFilters('?section=news&section=terms&topic=research&topic=safety&q=a&q=b'),{section:'all',topic:'all',query:''});
+ assert.deepEqual(D.viewFilters(url.slice(url.indexOf('?'))),{section:'news',topic:'safety',review:'all',query:'AI agent'});
+ assert.deepEqual(D.viewFilters('?section=bad&topic=invalid&q='+('a'.repeat(121))),{section:'all',topic:'all',review:'all',query:''});
+ assert.deepEqual(D.viewFilters('?section=news&section=terms&topic=research&topic=safety&q=a&q=b'),{section:'all',topic:'all',review:'all',query:''});
  assert.equal(D.filterPermalink(selected,{section:'nonsense',topic:'unknown',query:''}),D.permalink(selected));
  assert.equal(D.filterPermalink(selected,{section:'news',topic:'tools',query:''}),D.permalink(selected)+'&section=news&topic=tools');
  assert.equal(D.viewFilters('?q=%3Cscript%3E').query,'<script>'); // Only rendered as literal text by the reader.
+ assert.equal(D.viewFilters('?review=unreviewed').review,'unreviewed');
+ assert.equal(D.viewFilters('?review=unreviewed&review=reviewed').review,'all');
 });
 test('Reader changes the visible permalink only for a successfully integrity-verified edition',()=>{
  const script=fs.readFileSync('whats-new.js','utf8');
@@ -180,7 +182,7 @@ test('The unfiltered daily reader shows explicit zero counts while filtered sear
  'Deferred proposals are not catalog additions',
  'New to AI Updates is not the same as new to the world',
  'No correction was recorded',
- "if(!records.length&&(topic!=='all'||query.trim()))continue",
+ "if(!records.length&&(topic!=='all'||review!=='all'||query.trim()))continue",
  'C.matchesTopic(item,topic)',
  'C.matchesQuery(item,query)'
  ])assert.ok(script.includes(text),text);
@@ -800,4 +802,30 @@ test('Archive verification metadata agrees with the last actual production recei
  assert.ok(idx.coverage_note.includes('revision '+revision));
  assert.equal(receipt.publication_history.find(h=>h.edition===receipt.edition_date+'-v'+revision)?.status,
               'cloudflare_http_browser_and_githack_verified');
+});
+
+test('Exact provenance labels filter research records, CSV and safe share links',()=>{
+ const e=edition();
+ e.news=[
+  {id:'N1',title:'Publisher-announced example',summary:'A hypothetical source claim',review_status:'publisher report; not independently reproduced',source_url:'https://example.org/1',tags:['safety']},
+  {id:'N2',title:'Source-checked example',summary:'A second hypothetical example',review_status:'source-checked',source_url:'https://example.org/2',tags:['safety']}
+ ];
+ const selected=entry('2026-11-02',18),review='publisher report; not independently reproduced';
+ assert.equal(D.matchesReviewStatus(e.news[0],review),true);
+ assert.equal(D.matchesReviewStatus(e.news[1],review),false);
+ assert.equal(D.matchesReviewStatus(e.news[1],'all'),true);
+ const url=D.filterPermalink(selected,{section:'news',topic:'safety',review,query:''});
+ assert.ok(url.includes('review=publisher+report'));
+ assert.equal(D.viewFilters(url.slice(url.indexOf('?'))).review,review);
+ const csv=D.citationCsv(e,selected,{section:'news',topic:'safety',review});
+ assert.match(csv,/Publisher-announced example/);
+ assert.doesNotMatch(csv,/Source-checked example/);
+ assert.equal(csv.trim().split('\r\n').length,2);
+ assert.equal(D.filterPermalink(selected,{review:'a'.repeat(121)}),D.permalink(selected));
+ assert.equal(D.viewFilters('?review='+encodeURIComponent('x'.repeat(121))).review,'all');
+ const html=fs.readFileSync('whats-new.html','utf8'),script=fs.readFileSync('whats-new.js','utf8');
+ assert.match(html,/id="evidence-filter" disabled/);
+ assert.match(script,/populateReviewOptions\(e\)/);
+ assert.match(script,/C\.matchesReviewStatus\(item,review\)/);
+ assert.match(script,/select\.disabled=false;pendingReview=null/);
 });
