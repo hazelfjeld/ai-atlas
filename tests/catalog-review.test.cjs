@@ -117,3 +117,17 @@ test('November 3 recovery proposals are publicly reviewed without fabricated cat
  assert.ok(allowed.includes(file),'The reviewed evidence JSON must be deployed');
  assert.ok(fs.statSync(path.join(root,file)).size>5500);
 });
+
+test('STT-MRAM evidence notebook explains arithmetic but is not an unreviewed canonical addition',()=>{
+ const page=read('hardware-review.html'),review=read('catalog-review.html');
+ const audit=JSON.parse(read('data/catalog-candidate-decisions-2026-11-03-recovery.json'));
+ const candidate=audit.candidates[0];
+ assert.equal(candidate.editorial_evidence_page,'hardware-review.html');
+ assert.equal(candidate.publication_state,'not_in_canonical_catalog');
+ assert.equal(candidate.catalog_path,null);
+ assert.match(review,/href="hardware-review.html"/);
+ for(const marker of ['65.7 ms','124.2 ms','50.7 mJ','0.325','0.316','not a canonical Atlas technology profile','press20261102-03-emram.html'])assert.ok(page.includes(marker),'Missing '+marker);
+ assert.match(page,/<caption>/);
+ assert.match(page,/href="terms\/MLD-0724-memory-bandwidth.html"/);
+ assert.ok(JSON.parse(read('deploy/public-files.json')).root_files.includes('hardware-review.html'));
+});
