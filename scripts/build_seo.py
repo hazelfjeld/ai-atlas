@@ -95,6 +95,12 @@ def main():
     index = (ROOT / 'index.html').read_text(encoding='utf-8')
     index, count = re.subn(r'<!-- discovery:start -->.*?<!-- discovery:end -->', lambda _: '<!-- discovery:start -->' + rendered + '<!-- discovery:end -->', index, flags=re.S)
     assert count == 1
+    # First-paint counts must match the verified catalog before JavaScript hydrates.
+    index, count = re.subn(
+        r'(<a class="nav-link" data-view="technologies" href="#/technologies">[\\s\\S]*?<span class="nav-count">)\\d+(</span></a>)',
+        lambda match: match.group(1) + str(len(techs)) + match.group(2), index, count=1,
+    )
+    assert count == 1, 'Missing static technology navigation badge'
     (ROOT / 'index.html').write_bytes(index.encode())
     for path, (title, description) in PAGES.items():
         data = None

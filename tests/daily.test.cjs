@@ -1049,3 +1049,12 @@ test('audit and canonical technology addition resolve the same deferred proposal
  assert.equal(item.publication_state,'canonical_catalog_added_new_to_atlas');
  assert.equal(audit.candidates.filter(x=>x.publication_state==='deferred_not_in_canonical_catalog').length,6);
 });
+
+test('first-paint technology navigation matches the checksummed catalog count',()=>{
+ const path=require('node:path'),root=path.join(__dirname,'..');
+ const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
+ const m=JSON.parse(fs.readFileSync(path.join(root,'publication.json')));
+ const tech=html.match(/<a class="nav-link" data-view="technologies" href="#\\/technologies">[\\s\\S]*?<span class="nav-count">(\\d+)<\\/span><\\/a>/);
+ assert.ok(tech,'Missing first-paint technology badge');
+ assert.equal(Number(tech[1]),m.published_counts.technologies);
+});
