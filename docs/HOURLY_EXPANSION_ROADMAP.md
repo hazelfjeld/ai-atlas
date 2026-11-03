@@ -1,3 +1,9 @@
+## November 3 Chicago midday — STT-MRAM source evidence explainer prepared (release verification pending)
+
+- New page hardware-review.html traces first-party Tohoku/AISIN November 2, 2026 research-chip claims, the 2,535.3/65.7 ms boot distinction, 124.2 ms power-on to first detection, 50.7 mJ/frame, mAP tradeoff, and experimental replication limitations. Source reporting reviewed independently via university, AISIN and contemporary coverage. No performance experiment rerun.
+- Four November 3 canonical proposals remain deferred, zero additional terms/technologies. Existing 302 technologies, 1,345 terms, 53 substantive guides, November 3 eight news reports and immutable v2 archive untouched. The page is linked from candidate review and explicitly allowlisted for static Cloudflare deployment.
+- Verify actual catalog/GitHack and Cloudflare deployed-browser CI jobs after merge. Until verification, last known-good daily edition is https://aiupdates.app/whats-new.html?date=2026-11-03&revision=2. Next step: record this Atlas-only site change in a new immutable Nov 3 revision after verified publication, then pursue genuinely complete canonical catalog integrations with offline fallback rebuild.
+
 ## November 3, 10:44 CST — November 3 v2 independently production-verified
 
 - **Verified public edition:** https://aiupdates.app/whats-new.html?date=2026-11-03&revision=2 . Immutable edition SHA-256 `83f690f8c53c7ba074f46e9c827b32b077381b9e32bf3044947c23f67b9423dd` (20,827 UTF-8 bytes). Original November 3 v1 and 25 November 2 immutable revisions retained.

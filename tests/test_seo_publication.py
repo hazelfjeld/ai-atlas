@@ -47,7 +47,7 @@ class SEOPublication(unittest.TestCase):
     def test_sitemap_only_lists_real_canonical_pages_with_unique_metadata(self):
         urls = [node.text for node in ET.parse(ROOT/'sitemap.xml').findall('{*}url/{*}loc')]
         self.assertEqual(len(urls), len(set(urls)))
-        self.assertEqual(len(urls), len(rows('terms')) + len(rows('technologies')) + 11)
+        self.assertEqual(len(urls), len(rows('terms')) + len(rows('technologies')) + 12)
         self.assertIn(ORIGIN+'/catalog-review.html', urls)
         titles = set()
         for url in urls:

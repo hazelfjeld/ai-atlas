@@ -49,7 +49,9 @@
           "url": "https://www.aisin.com/jp/news/2026/010739.html",
           "opened": true
         }
-      ]
+      ],
+      "editorial_evidence_page": "hardware-review.html",
+      "review_note": "A separately accessible source review derives first-detection latency and discusses model accuracy and independent replication gaps; no canonical technology addition or benchmark replication."
     },
     {
       "proposal_id": "tech-proposal:muse-ifparse-v2:2026-11-03",
