@@ -12,8 +12,8 @@
       "edition_date": "2026-11-02",
       "validation_result": "batch_sha256_bytes_schema_unique_ids_dates_verified_nine_source_lookups_four_reuters_reports_explicitly_qualified",
       "status": "partially_published_with_7_deferred_catalog_proposals",
-      "publication_outcome": "immutable_revision_15_production_and_githack_verified",
-      "publication_edition": "2026-11-02-v15",
+      "publication_outcome": "immutable_revision_16_pending_production_and_githack_verification",
+      "publication_edition": "2026-11-02-v16",
       "accepted_news_ids": [
         "ai-news:vllm:v0.33.0rc3:2026-11-02",
         "ai-news:invokeai:v6.14.3:2026-11-01",
@@ -51,7 +51,7 @@
       "production_workflow_run_id": 41578857465,
       "githack_workflow_run_id": 41578857510,
       "verification_scope": "Full main catalog/GitHack integrity, reproducibility and exact remote bytes; Cloudflare static deployment and 454 byte-verified files on each of aiupdates.app, www.aiupdates.app and the workers.dev hostname; hosted browser archive, filters, navigation, Games and offline checks.",
-      "next_action": "No new staged queue batches beyond the consumed immutable Nov 2 batch. Review seven deferred proposals for canonical uniqueness and supported catalog integration, or continue adding rigorous source-backed guides. Preserve true date of current edition and report coverage failures.",
+      "next_action": "Verify revision 16 GitHack/catalog and actual Cloudflare/browser deployment before advancing production_verified_revision or last successful publish timestamp. No unconsumed staged news batches; review seven deferred catalog proposals or continue evidence-backed guide expansions.",
       "revision_2_asset_commit": "9c49019fc8baf8c01221382bb56af3111a5fc42f",
       "publication_history": [
         {
@@ -306,6 +306,20 @@
           "production_commit": "d115004936c0ac425549dccc271d164fe98d686f",
           "production_workflow_run_id": 41578857465,
           "githack_workflow_run_id": 41578857510
+        },
+        {
+          "edition": "2026-11-02-v16",
+          "source_batch_sha256": "2dcb25af14b960f9989527170fd88daf8ba2fb5f42dcff3b72f512b08ddb57d7",
+          "news_published": 9,
+          "news_added_in_revision": 0,
+          "technologies_added": 0,
+          "terms_added": 0,
+          "existing_concept_guides_expanded": 2,
+          "site_changes_added_in_revision": 2,
+          "source_code_commit": "761a68b82bc4f8fcb6556839965d7047d219240e",
+          "published_at": "2026-11-03T05:43:49.719Z",
+          "status": "pending_production_verification",
+          "note": "Two already-existing AI safety terms gained substantive guides, source-checked on November 2. New archive entry pending public deployment and browser checks; no external events, new catalog records or independent replication claimed."
         }
       ],
       "production_commit": "d115004936c0ac425549dccc271d164fe98d686f",

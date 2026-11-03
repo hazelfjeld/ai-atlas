@@ -1,3 +1,11 @@
+## November 2 Chicago late evening — adversarial robustness guides and immutable v16 archive
+
+- Intake: staging still contains the single already-processed November 2 partial batch (SHA-256 `2dcb25af14b960f9989527170fd88daf8ba2fb5f42dcff3b72f512b08ddb57d7`). Existing nine source-reviewed AI reports remain unchanged, as do two failed source lookups and seven deferred catalog proposals.
+- Expanded `MLD-0034` Adversarial example and `MLD-0036` Adversarial robustness with nine original explanatory sections each, synthetic worked calculations, threat-model limits, independent evaluation controls and four primary citations per guide. Original 1,345 linked terms, 300 technologies, 20 playbooks, 30 papers and 10 safety records are preserved; **45** concepts have substantive guides.
+- Source and generator checks passed on branch `atlas-guides-adversarial-20261102-2326` (GitHub Actions run 41585226096); PR #18 merged via `761a68b82` after its Cloudflare validation workflow passed. The known-good professor-demo checkpoint is unchanged.
+- Dated archive **v16** adds only two actual Atlas site changes; no new world event, technology or canonical dictionary ID. Edition asset: SHA-256 `226c6cedef0805a50f04d0d353de6261cfb2930fd5affa88ce9f437ad9ccc744`, UTF-8 bytes `37917`. The v15 successful production timestamp remains the truthful checkpoint until the new asset passes its own public GitHack and Cloudflare/browser verification.
+- Next: inspect actual main jobs; if successful, certify v16 in the receipt/index and update the public success timestamp. Then review the seven deferred catalog proposals or expand another carefully sourced guide pair.
+
 ## November 2 Chicago late evening — covariate/OOD guides and edition revision 15
 
 - The one staged immutable source batch is already consumed, nine reviewed news items preserved, seven catalog proposals deferred, two source lookups failed. No new external event asserted.

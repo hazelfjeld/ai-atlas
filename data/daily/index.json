@@ -121,9 +121,17 @@
       "sha256": "0339c1535a68d8773200c5c99dbb76f3894ce3f905112ebb15b06875e0ccc367",
       "bytes": 36114,
       "published_at": "2026-11-03T04:31:00.000Z"
+    },
+    {
+      "date": "2026-11-02",
+      "revision": 16,
+      "path": "data/daily/editions/2026-11-02-v16.json",
+      "sha256": "226c6cedef0805a50f04d0d353de6261cfb2930fd5affa88ce9f437ad9ccc744",
+      "bytes": 37917,
+      "published_at": "2026-11-03T05:43:49.719Z"
     }
   ],
   "last_successful_publish_at": "2026-11-03T04:36:46Z",
-  "status": "edition_revision_14_production_verified",
-  "coverage_note": "Nov 2 revision 14 adds two existing research-method concept guides as Atlas site changes only. Nine source-reviewed reports, seven deferred catalog proposals, two failed lookups and the original partial collection window remain unchanged. Main ad831c4 passed catalog/GitHack and Cloudflare production hosted-browser checks."
+  "status": "edition_revision_16_pending_production_verification",
+  "coverage_note": "Revision 16 adds two source-backed expansions of existing AI safety concepts as actual Atlas site changes. Nine reviewed November 2 reports, seven deferred catalog proposals, two failed lookups and the original partial collection window are unchanged. Revision 15 remains the last production-verified edition pending CI and hosted checks for v16."
 }

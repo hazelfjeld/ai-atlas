@@ -656,3 +656,36 @@ test('Revision 15 preserves its two shift-evaluation guides and source claims ac
  assert.equal(receipt.counts.term_added,0);
  assert.equal(receipt.counts.technology_added,0);
 });
+
+test('Revision 16 archives two adversarial-security guides without changing original news evidence', () => {
+ const crypto=require('node:crypto'), idx=JSON.parse(fs.readFileSync('data/daily/index.json','utf8'));
+ const a=idx.editions.find(e=>e.date==='2026-11-02'&&e.revision===15);
+ const b=idx.editions.find(e=>e.date==='2026-11-02'&&e.revision===16);
+ assert.ok(a&&b);
+ const raw=fs.readFileSync(b.path);
+ assert.equal(raw.length,b.bytes);
+ assert.equal(crypto.createHash('sha256').update(raw).digest('hex'),b.sha256);
+ const previous=D.validateEdition(JSON.parse(fs.readFileSync(a.path,'utf8')),a);
+ const current=D.validateEdition(JSON.parse(raw.toString('utf8')),b);
+ assert.equal(D.chicagoDate(current.published_at),'2026-11-02');
+ for(const field of ['news','technologies','terms','coverage','corrections'])assert.deepEqual(current[field],previous[field]);
+ const diff=D.revisionDiff(previous,current);
+ assert.deepEqual(diff.site_changes.added.map(x=>x.id),['site-expanded-adversarial-example-20261102','site-expanded-adversarial-robustness-20261102']);
+ assert.equal(diff.site_changes.removed.length+diff.site_changes.updated.length,0);
+ const manifest=JSON.parse(fs.readFileSync('terms/manifest.json','utf8')),guides=JSON.parse(fs.readFileSync('content/term-guides.json','utf8'));
+ assert.ok(Object.keys(guides).length>=45);
+ for(const [i,id] of ['MLD-0034','MLD-0036'].entries()){
+  assert.ok(manifest[id].expanded,'Substantive guide must exist: '+id);
+  assert.equal(diff.site_changes.added[i].catalog_path,manifest[id].path);
+  assert.match(fs.readFileSync(manifest[id].path,'utf8'),/Sources for the expanded explanation/);
+  assert.equal(guides[id].sections.length,9);
+ }
+ const ledger=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8')).receipts[0];
+ assert.equal(ledger.publication_edition,'2026-11-02-v16');
+ assert.equal(ledger.publication_history.at(-1).edition,ledger.publication_edition);
+ assert.ok(ledger.production_verified_revision>=15&&ledger.production_verified_revision<=16);
+ assert.equal(ledger.deferred_catalog_proposal_ids.length,7);
+ assert.equal(ledger.counts.news_published,9);
+ assert.equal(ledger.counts.term_added,0);
+ assert.equal(ledger.counts.technology_added,0);
+});
