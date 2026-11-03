@@ -220,6 +220,7 @@ async function switchEdition(entry){
   if(requestEpoch!==switchEpoch)return; // Ignore late responses from superseded archive selections.
   edition=e;active=entry;
   $('edition-permalink-wrap').hidden=false;
+  $('export-verified').disabled=false;
   $('date-display').textContent=humanDate(entry.date);
   metadata();sourceCoverage();render();
   void showRevisionDiff(entry,e,requestEpoch);
@@ -237,7 +238,7 @@ async function switchEdition(entry){
    $('edition-select').value=active.path;
    status('Could not verify '+humanDate(entry.date)+': '+err.message+'. Keeping the previously verified '+humanDate(active.date)+' edition; unverified records were not displayed.');
   }else{
-   edition=null;active=null;$('edition-permalink-wrap').hidden=true;$('revision-history').hidden=true;metadata();sourceCoverage();$('edition-summary').hidden=true;
+   edition=null;active=null;$('export-verified').disabled=true;$('edition-permalink-wrap').hidden=true;$('revision-history').hidden=true;metadata();sourceCoverage();$('edition-summary').hidden=true;
    $('edition-content').replaceChildren(element('div','Edition verification failed. No daily records passed validation; the evergreen catalog remains available.','empty'));
    status('Cannot display this edition: '+err.message);
   }
@@ -280,9 +281,9 @@ async function start(){
   const select=$('edition-select');
   select.disabled=true; // Keep initial recovery isolated from manual archive selection.
   let failures=0;
-  // The archive already has more than four versions. Recover across up to twelve
-  // recent immutable editions before requiring an explicit older selection.
-  for(const entry of candidates.slice(0,12)){
+  // The archive already has more than four versions. Recover across up to thirty-two
+  // immutable editions before requiring an explicit older selection.
+  for(const entry of candidates.slice(0,32)){
    if(await switchEdition(entry)){
     let notice='';
     if(requested.specified){
@@ -299,7 +300,7 @@ async function start(){
    failures++;
   }
   select.disabled=false;
-  status('The '+failures+' latest archive edition(s) failed integrity verification. No unverified news is shown; older editions remain selectable.');
+  status('The '+failures+' recent archive edition(s) failed integrity verification. No unverified news is shown; older editions remain selectable.');
  }catch(err){
   status('Daily archive unavailable: '+err.message+'. Previously verified Atlas reference material remains accessible.');
   $('edition-content').replaceChildren(element('div','No unverified headlines are shown when the edition index cannot be validated.','empty'));
@@ -312,6 +313,15 @@ $('edition-select').addEventListener('change',()=>{
 $('section-filter').addEventListener('change',render);
 $('topic-filter').addEventListener('change',render);
 $('edition-search').addEventListener('input',()=>{if(edition)render();});
+$('export-verified').addEventListener('click',()=>{
+ // Do not export anything that has not passed immutable byte + SHA-256 checks.
+ if(!edition||!active)return;
+ const csv=C.citationCsv(edition,active,currentFilters());
+ const url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));
+ const a=element('a');a.href=url;a.download='ai-updates-'+active.date+'-v'+active.revision+'-evidence.csv';
+ document.body.append(a);a.click();a.remove();
+ setTimeout(()=>URL.revokeObjectURL(url),10000);
+});
 $('reset-filters').addEventListener('click',()=>{
  $('edition-search').value='';
  $('section-filter').value='all';
