@@ -1,3 +1,10 @@
+## November 3 — candidate audit and pending archive revision 24
+
+- Reviewed the already-consumed November 2 staging batch. No new daily batch is pending; the November 3 edition is awaiting collection.
+- Published a source-attributed seven-proposal review export and decision table on the candidate-review page. Six are distinct candidates, one is a composite phrase; none is an imported canonical entry. The original 1,705 records remain intact.
+- Immutable November 2 archive revision 24 records this as one retrospective Atlas site improvement, not outside news. Earlier 23 versions are preserved. Revision 24 is pending separate production checks; v23 remains the last verified edition.
+- Next: verify the current Cloudflare workflow and v24 deployment, then resume substantive catalog integration or term-guide development.
+
 ## November 3, 05:36 Chicago — v23 verified across production
 
 - **Published:** Existing [Concept drift](../terms/MLD-0191-concept-drift.html) and [Data drift](../terms/MLD-0260-data-drift.html) now have nine substantive sections and four checked primary citations apiece, with synthetic Brier-loss and distribution-distance calculations, monitoring experiments, evaluation limits and no incident overclaims. **51 expanded guides**, 1,345 stable term pages, original 1,705 total records; zero new term/technology IDs.

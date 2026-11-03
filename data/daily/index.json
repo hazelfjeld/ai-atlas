@@ -185,9 +185,17 @@
       "sha256": "07112fcdf47390b17e1ea9161f581b17983a2259fe99d76be4d631c32b9d97a1",
       "bytes": 49481,
       "published_at": "2026-11-03T11:28:16.163Z"
+    },
+    {
+      "date": "2026-11-02",
+      "revision": 24,
+      "path": "data/daily/editions/2026-11-02-v24.json",
+      "sha256": "9adfcac1be30496ec33fb37794fd8496127aa961f6d7cd259ad5d27716e73f78",
+      "bytes": 51165,
+      "published_at": "2026-11-03T12:04:44.071Z"
     }
   ],
   "last_successful_publish_at": "2026-11-03T11:36:00Z",
-  "status": "edition_revision_23_production_verified",
-  "coverage_note": "Revision 23 (retrospective November 2 edition, written November 3 America/Chicago) is production verified as of 2026-11-03T11:36:00Z on main c1c5a312eb4c4f37855e6be55b9c768332cc3ad6 through GitHack/catalog 41628388461 and Cloudflare/hosted-browser 41628388522. The added items are exactly two Atlas-only existing concept guide expansions (Concept drift and Data drift), not a November 3 outside-world news release or new term IDs. The nine reviewed November 2 news reports, partial original collection window, two failed source lookups, one correction and seven deferred catalog candidates are unchanged. November 3's own collector edition remains awaiting collection; all immutable editions v1-v23 preserved."
+  "status": "edition_revision_24_pending_production_verification",
+  "coverage_note": "Immutable November 2 retrospective revision 24 adds one actual November 3 Atlas editorial-site improvement: a structured, source-attributed seven-candidate review export and accessible decision table (0 new technologies/term IDs or outside-world news reports). The original nine reviewed November 2 stories, partial collection window, two failed source lookups, one correction and seven deferred catalog proposals are unchanged. Verified v23 remains the last independently verified production edition as of 2026-11-03T11:36:00Z (catalog/GitHack 41628388461 and Cloudflare/hosted-browser 41628388522); revision 24 is pending its own GitHack and Cloudflare verification. The separate November 3 collector edition remains awaiting collection; all immutable revisions v1-v24 are preserved."
 }
