@@ -86,3 +86,34 @@ test('Candidate audit is linked from the accessible review page and shipped in t
  assert.ok(deployed.extra_downloads.includes(file),'Audit export must survive Cloudflare allowlisting');
  assert.ok(fs.statSync(path.join(root,file)).size>5000,'Audit export must contain substantive sourced records');
 });
+
+test('November 3 recovery proposals are publicly reviewed without fabricated catalog IDs',()=>{
+ const page=read('catalog-review.html');
+ const file='data/catalog-candidate-decisions-2026-11-03-recovery.json';
+ const audit=JSON.parse(read(file));
+ const queue=JSON.parse(read('data/daily/published-batches.json'));
+ const receipt=queue.receipts.find(r=>r.batch_id===audit.source_batch.batch_id);
+ assert.ok(receipt,'Staging source batch must already have a publication receipt');
+ assert.equal(audit.source_batch.source_batch_sha256,receipt.source_batch_sha256);
+ assert.equal(audit.source_batch.source_commit,receipt.source_commit);
+ assert.equal(audit.edition_date,'2026-11-03');
+ assert.equal(audit.reviewed_proposals,4);
+ assert.equal(audit.canonical_additions,0);
+ assert.equal(audit.independently_replicated_benchmarks,0);
+ assert.equal(new Set(audit.candidates.map(c=>c.proposal_id)).size,4);
+ for(const candidate of audit.candidates){
+  assert.equal(candidate.publication_state,'not_in_canonical_catalog');
+  assert.equal(candidate.catalog_path,null);
+  assert.ok(candidate.summary.length>=90 && candidate.limits.length>=85);
+  assert.ok(candidate.required_before_import.length>=3 && candidate.sources.length>=1);
+  for(const source of candidate.sources){const u=new URL(source.url);assert.equal(u.protocol,'https:');assert.ok(!u.username&&!u.password)}
+ }
+ assert.match(page,/id="nov03-queue"/);
+ assert.match(page,/four further proposals under review/);
+ assert.match(page,/dataset card \(access unverified\)/);
+ assert.match(page,/0 technology IDs and 0 term IDs added by this review/);
+ assert.match(page,new RegExp('href="'+file.replaceAll('.','\\.')+'" download'));
+ const allowed=JSON.parse(read('deploy/public-files.json')).extra_downloads;
+ assert.ok(allowed.includes(file),'The reviewed evidence JSON must be deployed');
+ assert.ok(fs.statSync(path.join(root,file)).size>5500);
+});

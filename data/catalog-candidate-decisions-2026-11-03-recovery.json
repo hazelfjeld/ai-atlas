@@ -1,0 +1,160 @@
+{
+  "schema": 1,
+  "document_type": "source_review_of_deferred_november_3_collector_proposals",
+  "editorial_date": "2026-11-03",
+  "edition_date": "2026-11-03",
+  "source_batch": {
+    "batch_id": "atlas-daily-20261103-0824ct-recovery-a",
+    "source_branch": "atlas-daily-staging",
+    "source_commit": "9a2d9a0f21551737b041a49e398ebf08793272ae",
+    "source_batch_sha256": "f6d155caec1fda714b8fdd456ec47cc886dd10856159b65b9745c69d64b9adb3",
+    "collected_at": "2026-11-03T14:24:43.802Z",
+    "coverage_status": "partial"
+  },
+  "canonical_additions": 0,
+  "independently_replicated_benchmarks": 0,
+  "reviewed_proposals": 4,
+  "status": "source_attributed_editorial_review_only_not_catalog_publication",
+  "reviewed_at": "2026-11-03",
+  "source_coverage_note": "Original collection checked 14 source URLs and reported 3 source failures. Publisher opened the Tohoku and AISIN first-party announcements and the author forum; the exact IFParse v2 dataset card was unavailable to this review, although its listing was indexed.",
+  "candidates": [
+    {
+      "proposal_id": "tech-proposal:tohoku-aisin:stt-mram-ai-soc:2026-11-03",
+      "title": "Tohoku–Aisin 16 nm STT-MRAM AI SoC",
+      "kind": "technology",
+      "disposition": "distinct_hardware_prototype_deferred",
+      "publication_state": "not_in_canonical_catalog",
+      "announcement_date": "2026-11-02",
+      "checked_on": "2026-11-03",
+      "evidence_type": "first_party_research_press_release_unreplicated",
+      "summary": "Joint university-industry research prototype with 32 MB embedded nonvolatile STT-MRAM and Tiny YOLOv3 object detection. Authors report a 65.7 ms boot, 50.7 mJ per frame and an approximately 25-fold whole-system speedup relative to their chosen comparison.",
+      "limits": "Demonstration is not commercial availability or a general hardware benchmark. Claimed energy and latency depend on baseline, model, weights and memory architecture; no independent chip replication or public developer runtime was located.",
+      "related_existing_term_ids": [
+        "MLD-0724"
+      ],
+      "catalog_path": null,
+      "required_before_import": [
+        "Identify exact publication/conference proceedings and baseline measurement conditions",
+        "Clarify prototype status, software/runtime access and IP availability",
+        "Create stable technology profile and working search, relationships and detail route"
+      ],
+      "sources": [
+        {
+          "title": "Tohoku University November 2, 2026 joint announcement",
+          "url": "https://www.tohoku.ac.jp/japanese/2026/11/press20261102-03-emram.html",
+          "opened": true
+        },
+        {
+          "title": "AISIN November 2, 2026 joint announcement",
+          "url": "https://www.aisin.com/jp/news/2026/010739.html",
+          "opened": true
+        }
+      ]
+    },
+    {
+      "proposal_id": "tech-proposal:muse-ifparse-v2:2026-11-03",
+      "title": "IFParse v2.0",
+      "kind": "technology",
+      "disposition": "distinct_evaluation_benchmark_deferred_for_artifact_review",
+      "publication_state": "not_in_canonical_catalog",
+      "announcement_date": "2026-11-01",
+      "checked_on": "2026-11-03",
+      "evidence_type": "author_description_and_dataset_index_not_full_artifact_audit",
+      "summary": "Author-described synthetic 1,800-task benchmark measuring exact JSON transformation from nine telemetry grammars; distinguishes parseable JSON from completely correct field values and nulls.",
+      "limits": "The dataset card and pinned README were not independently retrievable in this review. Author-reported scores on Qwen models have not been reproduced; the test set is public and may be contaminated, and deployment validity remains unmeasured.",
+      "related_existing_term_ids": [
+        "MLD-0386",
+        "MLD-1179"
+      ],
+      "catalog_path": null,
+      "required_before_import": [
+        "Read a pinned dataset README and verify row counts, schemas, splits and licenses",
+        "Reproduce exact-match scoring on held-out examples or explicitly mark results unreplicated",
+        "Document contamination risk and evaluation harness before publishing a stable catalog profile"
+      ],
+      "sources": [
+        {
+          "title": "Author announcement in Hugging Face forums, November 1",
+          "url": "https://discuss.huggingface.co/t/ifparse-2-0-release/191309",
+          "opened": true
+        },
+        {
+          "title": "Public Hugging Face dataset listing (CC0-1.0 tagged)",
+          "url": "https://huggingface.co/datasets?license=license%3Acc0-1.0",
+          "opened": true
+        },
+        {
+          "title": "Candidate dataset card, direct fetch unavailable at review",
+          "url": "https://huggingface.co/datasets/Muse-research/Ifparse-v2.0",
+          "opened": false
+        }
+      ]
+    },
+    {
+      "proposal_id": "term-proposal:stt-mram",
+      "title": "Spin-transfer-torque magnetoresistive RAM (STT-MRAM)",
+      "kind": "term",
+      "disposition": "established_architecture_term_distinct_from_memory_bandwidth",
+      "publication_state": "not_in_canonical_catalog",
+      "announcement_date": null,
+      "checked_on": "2026-11-03",
+      "evidence_type": "first_party_definition_checked_no_coinage_claim",
+      "summary": "Nonvolatile magnetic memory in which a spin-polarized current switches storage magnetization. Distinct from the speed of reading data (memory bandwidth), and not a universal substitute for GPU HBM.",
+      "limits": "Memory cell design, power, write endurance and manufacturing cost vary by process; a successful specialized chip is not a universal performance guarantee. This is an established term newly proposed for Atlas, not a newly invented 2026 technique.",
+      "related_existing_term_ids": [
+        "MLD-0724"
+      ],
+      "catalog_path": null,
+      "required_before_import": [
+        "Check canonical dictionary aliases and source registry for duplication",
+        "Add stable term ID with source, mechanism, tradeoffs and worked example",
+        "Regenerate direct page, relationships, search index and manifests"
+      ],
+      "sources": [
+        {
+          "title": "Tohoku University first-party STT-MRAM explanation",
+          "url": "https://www.tohoku.ac.jp/japanese/2026/11/press20261102-03-emram.html",
+          "opened": true
+        },
+        {
+          "title": "AISIN joint research announcement",
+          "url": "https://www.aisin.com/jp/news/2026/010739.html",
+          "opened": true
+        }
+      ]
+    },
+    {
+      "proposal_id": "term-proposal:near-memory-computing",
+      "title": "Near-memory computing (NMC)",
+      "kind": "term",
+      "disposition": "established_architecture_term_distinct_from_processing_in_memory",
+      "publication_state": "not_in_canonical_catalog",
+      "announcement_date": null,
+      "checked_on": "2026-11-03",
+      "evidence_type": "first_party_architecture_definition_checked",
+      "summary": "Computing with processors and accelerators placed physically near memory so transfers can be shortened. Unlike processing-in-memory, computation need not occur inside the memory array.",
+      "limits": "Benefits vary with workload access pattern, data reuse and on-chip capacity; a press-release reduction against one architecture cannot establish superiority across all models. This is not a November 3 invention.",
+      "related_existing_term_ids": [
+        "MLD-0724"
+      ],
+      "catalog_path": null,
+      "required_before_import": [
+        "Independently verify near-memory versus in-memory terminology and existing aliases",
+        "Document concrete memory-traffic comparison and the conditions where it helps",
+        "Publish stable sourced term page plus backlinks, relationships and search"
+      ],
+      "sources": [
+        {
+          "title": "Tohoku University definition of near-memory computing",
+          "url": "https://www.tohoku.ac.jp/japanese/2026/11/press20261102-03-emram.html",
+          "opened": true
+        },
+        {
+          "title": "AISIN joint release, November 2",
+          "url": "https://www.aisin.com/jp/news/2026/010739.html",
+          "opened": true
+        }
+      ]
+    }
+  ]
+}
