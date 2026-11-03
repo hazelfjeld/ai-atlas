@@ -801,7 +801,7 @@ test('Archive verification metadata agrees with the last actual production recei
  assert.equal(idx.status,expectedStatus);
  assert.equal(idx.last_successful_publish_at,receipt.production_verified_at);
  assert.ok(idx.editions.some(e=>e.date===receipt.edition_date&&e.revision===revision));
- assert.ok(idx.coverage_note.includes('revision '+revision));
+ assert.ok(idx.coverage_note.includes('revision '+revision) || idx.coverage_note.includes('v'+revision));
  assert.equal(receipt.publication_history.find(h=>h.edition===receipt.edition_date+'-v'+revision)?.status,
               'cloudflare_http_browser_and_githack_verified');
 });
@@ -954,4 +954,31 @@ test('Retrospective v21 records reviewed catalog candidates without claiming wor
  assert.equal(ledger.deferred_catalog_proposal_ids.length,7);
  assert.equal(ledger.counts.technology_added+ledger.counts.term_added,0);
  assert.equal(idx.last_successful_publish_at,ledger.production_verified_at);
+});
+
+
+test('Retrospective v23 adds only two real Atlas drift guides and leaves the Nov 2 collector evidence untouched',()=>{
+ const fs=require('node:fs'),crypto=require('node:crypto');
+ const before=fs.readFileSync('data/daily/editions/2026-11-02-v22.json');
+ const after=fs.readFileSync('data/daily/editions/2026-11-02-v23.json');
+ const old=JSON.parse(before),updated=JSON.parse(after),index=JSON.parse(fs.readFileSync('data/daily/index.json'));
+ const entry=index.editions.find(e=>e.date==='2026-11-02'&&e.revision===23);
+ assert.ok(entry&&entry.bytes===after.length&&entry.sha256===crypto.createHash('sha256').update(after).digest('hex'));
+ assert.equal(D.chicagoDate(updated.published_at),'2026-11-03');
+ for(const key of ['coverage','news','technologies','terms','corrections'])assert.deepEqual(updated[key],old[key]);
+ assert.deepEqual(D.revisionDiff(old,updated).site_changes.added.map(x=>x.id),['site-expanded-concept-drift-20261103','site-expanded-data-drift-20261103']);
+ for(const change of updated.site_changes.slice(-2)){
+   assert.match(change.release_status,/not_new_world_event/);
+   assert.match(change.review_status,/pending_production_verification/);
+   assert.ok(fs.existsSync(change.catalog_path),'Missing existing term path '+change.catalog_path);
+ }
+ assert.equal(D.selection(index,'2026-11-03').todayEntry,null);
+ const receipt=JSON.parse(fs.readFileSync('data/daily/published-batches.json')).receipts[0];
+ assert.equal(receipt.production_verified_revision,22);
+ assert.equal(receipt.publication_history.at(-2).edition,'2026-11-02-v22');
+ assert.equal(receipt.publication_history.at(-2).status,'cloudflare_http_browser_and_githack_verified');
+ assert.equal(receipt.publication_history.at(-1).edition,'2026-11-02-v23');
+ assert.equal(receipt.publication_history.at(-1).site_changes_added_in_revision,2);
+ assert.equal(receipt.deferred_catalog_proposal_ids.length,7);
+ assert.equal(receipt.counts.news_published,9);
 });

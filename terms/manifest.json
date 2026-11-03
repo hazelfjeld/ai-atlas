@@ -951,8 +951,8 @@
   },
   "MLD-0191": {
     "path": "terms/MLD-0191-concept-drift.html",
-    "sha256": "ed9099d924634afb857337ef334953b03278cc27ed3eac7c3e30c09bc3d504c0",
-    "expanded": false
+    "sha256": "660b1e7e7dbe51eff3d10ce8683c167d80ee210b744c666ad93583caca943160",
+    "expanded": true
   },
   "MLD-0192": {
     "path": "terms/MLD-0192-condition-number.html",
@@ -1296,8 +1296,8 @@
   },
   "MLD-0260": {
     "path": "terms/MLD-0260-data-drift.html",
-    "sha256": "1ba5d9cf96c1e9a087f70e58f390d3c6f0e81ab31e9047f7294ccc7a1947701d",
-    "expanded": false
+    "sha256": "030264c1aaf42f363b026251c625c9c18e00ab298df034308586d1d07bab5a81",
+    "expanded": true
   },
   "MLD-0261": {
     "path": "terms/MLD-0261-data-extraction.html",
