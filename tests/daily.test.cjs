@@ -1018,3 +1018,24 @@ test('Retrospective v24 records one source-attributed catalog-review site change
  assert.equal(receipt.counts.technology_added+receipt.counts.term_added,0);
  assert.equal(D.selection(idx,'2026-11-03').todayEntry,null,'No false November 3 collection');
 });
+
+test('NVIDIA Auto Ontology is a checksum-pinned Atlas addition, not an invented new launch',()=>{
+ const path=require('node:path'),crypto=require('node:crypto'),root=path.join(__dirname,'..');
+ const buf=fs.readFileSync(path.join(root,'data/technologies-07.json'));
+ const rec=JSON.parse(buf)[0];
+ const manifest=JSON.parse(fs.readFileSync(path.join(root,'publication.json')));
+ const file=manifest.extensions.technologies.at(-1);
+ assert.equal(manifest.prepared_counts.technologies,300);
+ assert.equal(manifest.published_counts.technologies,301);
+ assert.equal(file.path,'data/technologies-07.json');
+ assert.equal(file.count,1);
+ assert.equal(file.bytes,buf.byteLength);
+ assert.equal(file.sha256,crypto.createHash('sha256').update(buf).digest('hex'));
+ assert.equal(rec.id,'TECH-0301');
+ assert.equal(rec.initial_release_date,null);
+ assert.equal(rec.catalog_added_on,'2026-11-03');
+ assert.deepEqual(rec.concept_ids,['MLD-0608','MLD-1104','MLD-1033']);
+ assert.match(rec.evidence_status,/not independently reproduced/);
+ assert.equal(rec.source_revision,'cdaf61e1bd0cf3820d11d72b43bb460816aebbd3');
+ assert.match(rec.watch_out,/FastAPI/);
+});
