@@ -105,9 +105,17 @@
       "sha256": "0859517406b5d094f4ebc1dfa77544c5d3b9c97a8992cc6a5c8d1c6385bb3d54",
       "bytes": 32611,
       "published_at": "2026-11-03T02:38:21.964Z"
+    },
+    {
+      "date": "2026-11-02",
+      "revision": 14,
+      "path": "data/daily/editions/2026-11-02-v14.json",
+      "sha256": "2d0f2053751fd71b051bc5eadbf6f1ebca735035804dad2c7cf43f7347c1086b",
+      "bytes": 34283,
+      "published_at": "2026-11-03T03:28:38.000Z"
     }
   ],
   "last_successful_publish_at": "2026-11-03T02:42:09Z",
-  "status": "edition_revision_13_production_verified",
-  "coverage_note": "November 2 revision 13 passed exact production asset/hosted-browser and GitHack checks. Two existing reward-model concept pages were expanded; nine independently source-checked news reports, the original partial collection window, seven deferred catalog proposals and two source lookup failures remain unchanged. This is a scheduled static archive, not live coverage."
+  "status": "edition_revision_14_deployment_verification_pending",
+  "coverage_note": "November 2 revision 14 adds two existing research-method concept guides as Atlas site changes only. Nine source-reviewed reports, seven deferred proposals, two failed source lookups and the original partial collection window remain unchanged. Revision 13 is last independently production-verified until new workflow checks pass."
 }

@@ -51,7 +51,7 @@
       "production_workflow_run_id": 41567468436,
       "githack_workflow_run_id": 41567468437,
       "verification_scope": "November 2 revision 13 at 50411d1e25544258dd9551b6fe6c3d20e4dc1c0a: 105 Node tests, 1,705 original records, 1,345 direct term pages and 39 expanded guides; complete GitHack/catalog integrity and 448 exact assets on each of three production hostnames; real hosted desktop/mobile browser navigation, daily archive, Games and offline tests passed. No new external incidents or catalog IDs.",
-      "next_action": "Review seven deferred catalog proposals for distinctness and primary-source support; integrate only accepted entries into real searchable catalogs, stable pages and publication manifests, or expand another high-quality existing guide.",
+      "next_action": "Inspect revision 14 catalog/GitHack and Cloudflare/browser jobs; only after success advance last-successful receipt, then review seven deferred proposals or expand further evidence-backed guides.",
       "revision_2_asset_commit": "9c49019fc8baf8c01221382bb56af3111a5fc42f",
       "publication_history": [
         {
@@ -271,6 +271,19 @@
           "production_commit": "50411d1e25544258dd9551b6fe6c3d20e4dc1c0a",
           "production_workflow_run_id": 41567468436,
           "githack_workflow_run_id": 41567468437
+        },
+        {
+          "edition": "2026-11-02-v14",
+          "source_batch_sha256": "2dcb25af14b960f9989527170fd88daf8ba2fb5f42dcff3b72f512b08ddb57d7",
+          "news_published": 9,
+          "news_added_in_revision": 0,
+          "technologies_added": 0,
+          "terms_added": 0,
+          "existing_concept_guides_expanded": 2,
+          "site_changes_added_in_revision": 2,
+          "published_at": "2026-11-03T03:28:38.000Z",
+          "status": "archive_commit_and_production_validation_pending",
+          "note": "Expanded existing research-method concepts, not new external events or canonical IDs. Revision 13 remains the last verified release until CI passes."
         }
       ],
       "production_commit": "50411d1e25544258dd9551b6fe6c3d20e4dc1c0a",

@@ -1,3 +1,11 @@
+## November 2 Chicago evening — research-methods expansion and archive revision 14
+
+- Checked the existing staging queue and main receipt; the one immutable staged batch is already consumed, so no new external source claims were ingested.
+- Expanded [Ablation study](../terms/MLD-0002-ablation-study.html) and [Data leakage](../terms/MLD-0263-data-leakage.html), two existing term IDs, with nine substantive sections and four source citations each. All 1,345 direct term pages and 1,705 original catalog records remain; **41** guides now have substantive expansions.
+- Archived two site-change records only in November 2 revision 14; the previous nine reports, partial collection period, seven deferred catalog proposals and two failed source lookups are unchanged. New immutable asset: SHA-256 `2d0f2053751fd71b051bc5eadbf6f1ebca735035804dad2c7cf43f7347c1086b`, 34283 UTF-8 bytes.
+- Deployment verification is pending until exact GitHack/catalog and Cloudflare/hosted-browser jobs pass. Revision 13 at [the production archive](https://aiupdates.app/whats-new.html?date=2026-11-02&revision=13) remains last confirmed verified. The pinned professor demonstration is preserved.
+- Next: inspect the actual jobs; if successful, finalize the production receipt, then address deferred proposals or another bounded concept expansion.
+
 ## November 2 Chicago evening — reward-model research guides / v13 checkpoint
 
 - Staged queue unchanged: one SHA-256-verified, already consumed November 2 source batch; seven distinct catalog proposals still deferred, no unprocessed batches.

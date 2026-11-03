@@ -255,3 +255,18 @@ test('Reward modeling and overoptimization guides separate proxy scores from ind
     assert.match(html, /Sources for the expanded explanation/);
   }
 });
+
+
+test('Ablation and leakage research guides publish controlled examples and independent-test safeguards', () => {
+ for (const id of ['MLD-0002','MLD-0263']) {
+  const g=guides[id]; assert.ok(g && termManifest[id]?.expanded);
+  assert.equal(g.reviewed_on,'2026-11-02'); assert.equal(g.sections.length,9);
+  assert.ok(g.prerequisites.length>=4 && g.prerequisites.every(p=>termManifest[p]));
+  assert.ok(g.sections.every(([h,b])=>h.length>=8 && b.length>=120));
+  assert.ok(g.citations.length>=3 && g.citations.every(([h,u])=>h.length>30 && /^https:\\/\\//.test(u)));
+  const body=g.sections.map(s=>s[1]).join(' ');
+  assert.match(body,/illustrat|invented/i);
+  assert.match(body,/not automatically|not evidence|not a universal|not published|not proof|does not/i);
+  assert.match(body,id==='MLD-0002'?/paired random seeds|crossed experiments/i:/train.*test|prediction-time/i);
+ }
+});

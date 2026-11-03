@@ -2034,5 +2034,135 @@
         "https://arxiv.org/abs/2403.13787"
       ]
     ]
+  },
+  "MLD-0002": {
+    "reviewed_on": "2026-11-02",
+    "prerequisites": [
+      "MLD-0095",
+      "MLD-0154",
+      "MLD-0573",
+      "MLD-0863"
+    ],
+    "sections": [
+      [
+        "What an ablation can actually test",
+        "An ablation compares a full system with a deliberately modified version, usually removing or disabling one component while holding the evaluation task fixed. The observed difference estimates the contribution of that intervention under tested conditions; it is not automatically the component's intrinsic importance in every possible system."
+      ],
+      [
+        "State the estimand before touching the model",
+        "Write a hypothesis such as: removing retrieval reduces held-out answer accuracy under the same retrieval corpus, test split, prompt budget and evaluator. Prespecify the direction, primary metric, minimum meaningful difference and experimental unit. Selecting the most impressive result after examining many alternatives can distort the conclusion."
+      ],
+      [
+        "Retraining versus inference-time removal",
+        "Removing a module during inference probes how a trained network currently depends on it. Retraining a smaller architecture without that module probes what a different network can learn. Other weights may compensate in retraining; neither approach alone establishes that a component is necessary in every configuration."
+      ],
+      [
+        "Worked miniature comparison",
+        "Imagine a full classifier scores 0.81 macro-F1 and an otherwise matched variant without an auxiliary loss scores 0.76 on a sealed test set: the observed difference is 0.05 F1 points. These numbers are invented teaching values, not published results. Repeat across paired random seeds and report uncertainty before claiming that the auxiliary loss helped."
+      ],
+      [
+        "Interactions require crossed experiments",
+        "If two components A and B interact, removing each alone cannot establish their joint contribution. Train four configurations: neither, A alone, B alone and both; compare the incremental effect of A with and without B. A component may appear redundant when another substitutes for it but useful when both are absent."
+      ],
+      [
+        "Fair controls for compute and configuration",
+        "Record parameter counts, training tokens, GPU budget, hyperparameter search effort, data selection, seeds, stop criteria and checkpoint-selection rules. A variant given less compute may lose for reasons unrelated to the missing mechanism. Compare fixed-budget performance and matched-quality resource use when the distinction matters."
+      ],
+      [
+        "Statistical and split hygiene",
+        "Use identical held-out examples and paired random seeds when feasible, report variation across tasks, and calculate uncertainty intervals. Do not tune the model on the final test set; fit preprocessing only inside training folds. One favorable seed or repeated leaderboard feedback is weak evidence for a robust causal effect."
+      ],
+      [
+        "Ablations for AI-safety research",
+        "In a controlled specification-gaming study, vary the presence of a reward-proxy shortcut while keeping the task distribution and evaluation protocol fixed. Measure proxy score and independent ground-truth task success separately, add a placebo change and audit high-scoring outlier trajectories. This is a proposed experiment, not evidence of intentional deception in deployment."
+      ],
+      [
+        "Limits, misreadings and reproducibility",
+        "Ablating a module can simultaneously alter input distributions, optimization, training dynamics and model capacity. A performance drop may reflect general brittleness rather than a unique concept; unchanged performance may reflect redundancy or an insensitive metric. Share configurations, source code, seeds, statistical uncertainty and negative results so alternative explanations can be checked."
+      ]
+    ],
+    "citations": [
+      [
+        "Meyes et al., Ablation Studies in Artificial Neural Networks, 2019",
+        "https://arxiv.org/abs/1901.08644"
+      ],
+      [
+        "NeurIPS Paper Checklist, experimental details, baselines and reproducibility",
+        "https://neurips.cc/public/guides/PaperChecklist"
+      ],
+      [
+        "scikit-learn, cross-validation and model-selection documentation",
+        "https://scikit-learn.org/stable/modules/cross_validation.html"
+      ],
+      [
+        "Google, Rules of Machine Learning, engineering and experimental guidance",
+        "https://developers.google.com/machine-learning/guides/rules-of-ml"
+      ]
+    ]
+  },
+  "MLD-0263": {
+    "reviewed_on": "2026-11-02",
+    "prerequisites": [
+      "MLD-1225",
+      "MLD-0497",
+      "MLD-1206",
+      "MLD-0863"
+    ],
+    "sections": [
+      [
+        "The prediction-time information boundary",
+        "Data leakage means that fitting, selecting or assessing a model used information unavailable under the intended prediction setting. The boundary includes not just labels but timestamps, duplicate rows, correlated groups, metadata and preprocessing statistics. A high reported test score cannot repair a broken information boundary."
+      ],
+      [
+        "Learn transformations only from the training side",
+        "Split observations before calculating vocabulary, normalization means, imputation values, feature-selection scores or PCA components. In cross-validation, fit every learned transformation on the training fold and apply that frozen transformation to validation data. A scikit-learn Pipeline helps enforce this separation."
+      ],
+      [
+        "Illustrative normalization arithmetic",
+        "Imagine training values 8 and 12 with mean 10, and a future test value of 100. Centering the training examples with mean 10 is legitimate; recomputing the mean from all three values yields 40 and allows the future test observation to affect learned training features. This arithmetic is illustrative and is not a measured accuracy improvement."
+      ],
+      [
+        "Duplicate, patient and document overlap",
+        "A random row split can leak when different rows are near-duplicates or concern the same patient, customer, document or event. Use group-aware splits when the goal is prediction for unseen groups, and define the independent evaluation unit before splitting. Near-duplicate prompts and copied documents can make held-out evaluation much less independent than it appears."
+      ],
+      [
+        "Temporal and target leakage",
+        "A final diagnosis, post-outcome billing code or later moderation action cannot support a prediction meant to occur before that information exists. Choose the prediction time and audit the availability timestamp for every feature. Evaluate forecasts on later periods when appropriate rather than shuffling across a future-information boundary."
+      ],
+      [
+        "Tuning and model selection also leak",
+        "Feature screening, prompt revision, threshold selection and hyperparameter tuning based on final test labels turn that test set into part of the decision process, even if gradient descent never saw it. Use development validation or nested cross-validation for choices, reserve a sealed final holdout and document repeated benchmark feedback."
+      ],
+      [
+        "A practical audit before publishing",
+        "For each feature, record the source, collection time, availability at inference and relationship to outcomes. Search for duplicate IDs, shared authors, templates, copied prompts and model-training contamination. Rebuild preprocessing and hyperparameter tuning within each fold, then compare with a simple baseline and report uncertainty."
+      ],
+      [
+        "Leakage in language-model and safety evaluations",
+        "Benchmark prompts may appear in training examples, synthetic fine-tuning data or repeated evaluator feedback. Partition by source, time or template where defensible, test newly authored held-out tasks and prevent the grader from revealing expected answers. Contamination undermines evaluation independence but does not itself prove deliberate reward hacking."
+      ],
+      [
+        "How to interpret a corrected score",
+        "If measured accuracy falls after removing leakage, the original score was biased for the intended deployment boundary. The corrected estimate still needs uncertainty intervals, distribution-shift assessment and representative test data. Kapoor and Narayanan document scientific ML reproducibility pitfalls; their observations are not a universal prevalence estimate for every study."
+      ]
+    ],
+    "citations": [
+      [
+        "scikit-learn, Common pitfalls: data leakage and train-only preprocessing",
+        "https://scikit-learn.org/stable/common_pitfalls.html"
+      ],
+      [
+        "Kapoor and Narayanan, Leakage and the Reproducibility Crisis in ML-based Science, 2022",
+        "https://arxiv.org/abs/2207.07048"
+      ],
+      [
+        "scikit-learn, cross-validation and proper train-test separation",
+        "https://scikit-learn.org/stable/modules/cross_validation.html"
+      ],
+      [
+        "Google, Rules of Machine Learning, training-serving consistency",
+        "https://developers.google.com/machine-learning/guides/rules-of-ml"
+      ]
+    ]
   }
 }

@@ -2,6 +2,8 @@
 
 A discovery and learning hub for AI research, tools, concepts and safety, with source links and visible limitations. The complete prepared Atlas catalog, original citations, downloads and stable record IDs are preserved.
 
+**November 2 research-methods expansion — revision 14 (verification pending):** Existing [Ablation study](terms/MLD-0002-ablation-study.html) and [Data leakage](terms/MLD-0263-data-leakage.html) gained nine-section, source-backed guides. There are now **41** expanded guides within the unchanged **1,705** original records. [Revision 14](https://aiupdates.app/whats-new.html?date=2026-11-02&revision=14) records these Atlas content changes, not outside AI news. Revision 13 is the last independently verified daily release until new workflow checks pass.
+
 The **AI Updates** rebrand uses an editorial Discover frontend, topic filters and the evergreen / warm-paper / copper palette. Browse the [concept dictionary](https://aiupdates.app/terms/index.html), [300 direct technology profiles](https://aiupdates.app/technology/index.html), [daily editions](https://aiupdates.app/whats-new.html) and [editorial policy](https://aiupdates.app/about.html). See [brand, SEO and generated-publication guidance](docs/AI_UPDATES_BRAND_AND_SEO.md). Existing Atlas hash routes and notebook storage remain compatible.
 
 ## Cloudflare hosting

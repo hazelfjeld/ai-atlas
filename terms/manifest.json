@@ -6,8 +6,8 @@
   },
   "MLD-0002": {
     "path": "terms/MLD-0002-ablation-study.html",
-    "sha256": "d1d83c9b6354981ef3f12e061f28961cf8830bcba8c6718ac256f4843ee83fe1",
-    "expanded": false
+    "sha256": "a500a75d05a8783e575f558c35599f87d9cd38d1f9a898fd4d2a162142df1779",
+    "expanded": true
   },
   "MLD-0003": {
     "path": "terms/MLD-0003-abliteration.html",
@@ -1311,8 +1311,8 @@
   },
   "MLD-0263": {
     "path": "terms/MLD-0263-data-leakage.html",
-    "sha256": "a7d3b7056bdbf2abd38553ebab68e179a10d70ede7e08752da7ac5a4cb479d3b",
-    "expanded": false
+    "sha256": "ad9ef56bfffb96f53e55de47c131f5cc8bb9ac9cf1f94ea3593830ba42f415b0",
+    "expanded": true
   },
   "MLD-0264": {
     "path": "terms/MLD-0264-data-lineage.html",
