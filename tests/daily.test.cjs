@@ -717,7 +717,7 @@ test('Retrospective revision 17 records existing Atlas changes without inventing
  }
  const ledger=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8')).receipts[0];
  assert.ok(ledger.publication_history.some(h=>h.edition==='2026-11-02-v17'));
- assert.equal(ledger.publication_edition,'2026-11-02-v17');
+ assert.ok(['2026-11-02-v17','2026-11-02-v18'].includes(ledger.publication_edition));
  assert.equal(ledger.deferred_catalog_proposal_ids.length,7);
  assert.equal(ledger.counts.news_published,9);
  assert.equal(ledger.counts.technology_added,0);
@@ -759,4 +759,32 @@ test('Research export stays disabled until immutable edition verification succee
  assert.match(js,/if\(!edition\|\|!active\)return;/);
  assert.match(js,/C\.citationCsv\(edition,active,currentFilters\(\)\)/);
  assert.match(js,/new Blob\(\[csv\]/);
+});
+
+test('Retrospective v18 contains one verified-reader site change and preserves the source collection',()=>{
+ const crypto=require('node:crypto');
+ const idx=JSON.parse(fs.readFileSync('data/daily/index.json','utf8'));
+ const beforeEntry=idx.editions.find(e=>e.date==='2026-11-02'&&e.revision===17);
+ const afterEntry=idx.editions.find(e=>e.date==='2026-11-02'&&e.revision===18);
+ assert.ok(beforeEntry&&afterEntry);
+ const raw=fs.readFileSync(afterEntry.path);
+ assert.equal(raw.length,afterEntry.bytes);
+ assert.equal(crypto.createHash('sha256').update(raw).digest('hex'),afterEntry.sha256);
+ const before=D.validateEdition(JSON.parse(fs.readFileSync(beforeEntry.path,'utf8')),beforeEntry);
+ const after=D.validateEdition(JSON.parse(raw.toString('utf8')),afterEntry);
+ for(const field of ['news','technologies','terms','corrections','coverage'])assert.deepEqual(after[field],before[field]);
+ assert.equal(D.chicagoDate(after.published_at),'2026-11-03');
+ const changes=D.revisionDiff(before,after);
+ assert.deepEqual(changes.site_changes.added.map(x=>x.id),['site-verified-evidence-csv-export-20261103']);
+ assert.equal(changes.site_changes.updated.length+changes.site_changes.removed.length,0);
+ assert.match(changes.site_changes.added[0].summary,/not an external AI news event/i);
+ assert.match(changes.site_changes.added[0].summary,/SHA-256/);
+ assert.equal(D.selection(idx,'2026-11-03').todayEntry,null,'No November 3 collection is staged');
+ const ledger=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8')).receipts[0];
+ assert.equal(ledger.publication_edition,'2026-11-02-v18');
+ assert.equal(ledger.publication_history.at(-1).edition,ledger.publication_edition);
+ assert.equal(ledger.deferred_catalog_proposal_ids.length,7);
+ assert.equal(ledger.counts.news_published,9);
+ assert.equal(ledger.counts.technology_added,0);
+ assert.equal(ledger.counts.term_added,0);
 });
