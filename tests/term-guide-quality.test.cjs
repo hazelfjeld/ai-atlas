@@ -195,7 +195,7 @@ test('Agentic workflow and knowledge graph expansions explain mechanisms, constr
 
 test('Benchmark and Environment are source-backed expanded agent-evaluation guides',()=>{
  for(const [id,checks] of Object.entries({
- 'MLD-0110':[/20 held-out tasks/,/65%/,/75%/,/AgentBench/,/OSWorld/,/contamination/i],
+ 'MLD-0110':[/20 held-out tasks/,/65%/,/75%/,/AgentBench/,/OSWorld/,/training overlap|contamination/i],
  'MLD-0371':[/step\(action\)/i,/terminated/,/truncated/,/transition/,/reward/,/sandbox/i]
  })){
   const g=guides[id],entry=termManifest[id];
