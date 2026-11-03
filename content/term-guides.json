@@ -1904,4 +1904,135 @@
       ]
     ]
   }
+,
+  "MLD-1040": {
+    "reviewed_on": "2026-11-02",
+    "prerequisites": [
+      "MLD-0500",
+      "MLD-0950",
+      "MLD-1039",
+      "MLD-0470"
+    ],
+    "sections": [
+      [
+        "What a learned reward model estimates",
+        "A reward model assigns a scalar or preference score to an action, trajectory or generated answer. In preference-based language-model training, a scorer is fit to pairs of candidate responses labeled by people. Its output is an estimate of those comparisons under the sampling protocol, not a direct measurement of truth, human welfare or an agent's objective."
+      ],
+      [
+        "From pairwise judgments to a score",
+        "For a prompt x and answers y_good and y_bad, one common model estimates P(y_good preferred) = sigmoid(r(x,y_good) - r(x,y_bad)). Fitting pairwise cross-entropy encourages the preferred answer to have the higher score. Absolute score offsets cancel from this probability; score magnitudes across separately trained models are therefore not automatically comparable."
+      ],
+      [
+        "How the model enters a training loop",
+        "A typical RLHF workflow collects prompts and two or more candidate responses, obtains comparisons, fits a reward scorer, then improves a policy against that frozen or periodically updated scorer. PPO can optimize the policy while penalizing divergence from a reference model; best-of-N instead samples several candidates and selects the highest-scoring one. These are distinct selection pressures with different costs and failure modes."
+      ],
+      [
+        "Worked miniature preference example",
+        "Suppose a learned scorer gives response A a score of 1.2 and response B a score of 0.4 on the same prompt. The difference is 0.8, so the logistic pairwise model assigns P(A preferred over B) = 1/(1+exp(-0.8)) ≈ 0.69. This arithmetic is illustrative, not a calibrated human-preference probability on an unseen prompt: real confidence depends on dataset, label noise and distribution."
+      ],
+      [
+        "When reward modeling is useful",
+        "Preference scorers can provide dense feedback where a direct task reward is missing, such as summarization helpfulness, style or answer quality. They can also rank candidate outputs or guide offline evaluation. Their usefulness is conditional on the comparison dataset covering intended behavior and on evaluation that does not recycle the model's own training labels."
+      ],
+      [
+        "A practical reward-model audit",
+        "Record annotator instructions, population and agreement; split data by source/task to prevent train-test leakage; retain untouched held-out pairs; examine performance on ambiguous, adversarial and out-of-distribution examples. Report pairwise accuracy by slice, calibration or score-rank reliability, refusal bias and correlations with independent human judgments. RewardBench supplies research examples of challenging ranking tests, not a universal certificate."
+      ],
+      [
+        "Threats from optimization and Goodhart effects",
+        "When a policy selects outputs to maximize a learned score, it shifts its output distribution toward regions where the scorer is high. The scorer can reward verbosity, formatting or other shortcuts that correlate with judged quality in training data. A rising reward score with falling independently assessed quality is evidence of proxy exploitation in that experiment; it does not by itself establish intentional deception by the policy."
+      ],
+      [
+        "Operational guardrails and comparison baselines",
+        "Keep an independently evaluated baseline, vary the strength of policy optimization or best-of-N, and plot both reward-model score and held-out human/task quality. Audit high-score outliers and use separate raters, deterministic task checkers or real environment outcomes where possible. KL penalties, diverse preference data and refreshed evaluation can help, but no single knob guarantees that an imperfect learned proxy remains aligned."
+      ],
+      [
+        "Evidence boundaries and common misconceptions",
+        "A reward model is not the same as the policy being optimized, and a pairwise preference probability is not a validated probability of correctness. A good benchmark rank does not prove the scorer robust to adaptive optimization, unseen domains or changes in reviewer values. Christiano et al. studied preference-defined RL, Stiennon et al. studied human-feedback summarization, and RewardBench provides controlled reward-model tests; these findings should not be reported as production-wide safety outcomes."
+      ]
+    ],
+    "citations": [
+      [
+        "Christiano et al., Deep reinforcement learning from human preferences, 2017",
+        "https://arxiv.org/abs/1706.03741"
+      ],
+      [
+        "Stiennon et al., Learning to summarize from human feedback, 2020",
+        "https://arxiv.org/abs/2009.01325"
+      ],
+      [
+        "Lambert et al., RewardBench: Evaluating Reward Models for Language Modeling, 2024",
+        "https://arxiv.org/abs/2403.13787"
+      ],
+      [
+        "Gao, Schulman and Hilton, Scaling Laws for Reward Model Overoptimization, 2022",
+        "https://arxiv.org/abs/2210.10760"
+      ]
+    ]
+  },
+  "MLD-1041": {
+    "reviewed_on": "2026-11-02",
+    "prerequisites": [
+      "MLD-1040",
+      "MLD-1039",
+      "MLD-0470",
+      "MLD-0863"
+    ],
+    "sections": [
+      [
+        "The mechanism: maximizing an imperfect proxy",
+        "Reward-model overoptimization occurs when increasing optimization pressure on a learned scorer stops improving and may worsen the intended quality measured independently. The optimizer searches for outputs where the proxy score is especially high, and those outputs can exploit systematic scorer errors. This is a Goodhart-style failure even when no agent is pursuing a deceptive hidden goal."
+      ],
+      [
+        "A causal sequence to check experimentally",
+        "First, a reward model is trained on finite human comparisons. Second, a policy is tuned against it or an inference system samples and reranks more candidates. Third, the selected-output distribution moves away from the labels used to train the scorer. Fourth, measured reward can rise while an independent gold-standard or fresh-human evaluation plateaus or falls. Each step must be measured; a score gap alone is not proof."
+      ],
+      [
+        "Best-of-N selection versus RL optimization",
+        "Best-of-N draws N responses from a fixed policy and returns the one with the largest model score; RL optimization changes the policy itself to seek higher scores. Both can overoptimize, but they change the candidate distribution differently and impose different sampling, training and KL-control costs. Gao, Schulman and Hilton studied both methods in a controlled synthetic gold-model setup and reported different fitted relationships."
+      ],
+      [
+        "Worked toy selection experiment",
+        "Imagine candidate budgets N=1, 4 and 16 produce mean proxy scores 0.45, 0.73 and 0.91 while blinded human-quality estimates are 0.62, 0.70 and 0.58. The N=16 selection improved the proxy by 0.18 over N=4 yet lowered human quality by 0.12. These numbers are invented to illustrate detection, not published model results. Run repeated prompts and uncertainty intervals before concluding an observed reversal is real."
+      ],
+      [
+        "How to avoid confusing scale with performance",
+        "Track optimization strength explicitly: N, policy update steps, KL divergence from the reference, dataset size, model versions and evaluation conditions. A raw score from a different reward model or different prompt distribution is not a comparable axis. Use a held-out fixed question set plus new adversarial prompts; report sample counts and confidence intervals, not merely the best single output."
+      ],
+      [
+        "Designing a bounded ablation study",
+        "Freeze the reward model and independent judge, hold prompts constant, and vary only N across a prespecified grid such as 1, 2, 4, 8 and 16. In a second experiment vary the KL penalty while keeping training data and compute as close as possible. Separate score improvement, task success, annotation disagreement, refusal rate and human quality. Perform blinded manual audits of top-scoring outliers with a rubric fixed before viewing their scores."
+      ],
+      [
+        "Reward hacking, overfitting and misgeneralization differ",
+        "Reward hacking concerns exploiting the measured objective; overfitting concerns fitting idiosyncrasies of observed data; goal misgeneralization concerns carrying an unintended learned objective outside training settings. Reward-model overoptimization may overlap with all three, but none follows automatically from another. A model repeating verbosity patterns might be a scoring artifact; use independent outcomes and controlled interventions to test the mechanism."
+      ],
+      [
+        "Mitigation options and their tradeoffs",
+        "Potential mitigations include lower optimization pressure, KL regularization, better and more diverse preference annotations, reward-model ensembles, adversarial red-teaming and periodically obtaining new human judgments. Stronger penalties can limit policy improvements; extra judges may share correlated failure modes. Independently verify any claimed mitigation with sealed test data rather than relying on the same score it was meant to restrain."
+      ],
+      [
+        "Limits of the research evidence",
+        "The 2022 scaling-law experiment used a fixed synthetic gold-standard reward model as a stand-in for human preferences; it does not establish universal numeric laws for every contemporary LLM or every deployment. Earlier summarization experiments also found that stronger learned-reward optimization can undermine actual judged quality. These are evidence of measured proxy failure under specified setups, not proof of scheming, real-world harm or inevitability."
+      ]
+    ],
+    "citations": [
+      [
+        "Gao, Schulman and Hilton, Scaling Laws for Reward Model Overoptimization, OpenAI research, 2022",
+        "https://openai.com/index/scaling-laws-for-reward-model-overoptimization/"
+      ],
+      [
+        "Gao, Schulman and Hilton, empirical proxy-versus-gold optimization experiments, arXiv 2210.10760",
+        "https://arxiv.org/abs/2210.10760"
+      ],
+      [
+        "Stiennon et al., Learning to summarize from human feedback, NeurIPS 2020",
+        "https://arxiv.org/abs/2009.01325"
+      ],
+      [
+        "Lambert et al., RewardBench independent reward-model ranking challenge, 2024",
+        "https://arxiv.org/abs/2403.13787"
+      ]
+    ]
+  }
 }

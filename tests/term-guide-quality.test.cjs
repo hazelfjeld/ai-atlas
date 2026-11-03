@@ -235,3 +235,23 @@ test('Prompt injection guides distinguish untrusted content, authorization and c
   }
   assert.equal(Object.keys(guides).length, 37);
 });
+
+
+test('Reward modeling and overoptimization guides separate proxy scores from independent human quality', () => {
+  for (const [id, patterns] of Object.entries({
+    'MLD-1040': [/sigmoid/i, /0\\.69/, /pairwise/i, /held-out/i, /RewardBench/i, /not.*(?:prove|automatically|validated)/i],
+    'MLD-1041': [/best-of-N/i, /0\\.12/, /KL/i, /blinded/i, /synthetic|invented/i, /not proof|not.*establish/i]
+  })) {
+    const g = guides[id];
+    assert.ok(g && termManifest[id] && termManifest[id].expanded, 'Missing reviewed page: ' + id);
+    assert.equal(g.reviewed_on, '2026-11-02');
+    assert.ok(g.sections.length >= 9 && g.sections.every(([title, body]) => title.length >= 8 && body.length >= 120));
+    assert.ok(g.prerequisites.length >= 4 && g.prerequisites.every(p => termManifest[p]), 'Broken prerequisite');
+    assert.ok(g.citations.length >= 4 && g.citations.every(([name, url]) => name.length > 35 && new URL(url).protocol === 'https:'));
+    const content = g.sections.map(([_, body]) => body).join(' ');
+    for (const re of patterns) assert.match(content, re);
+    const html = fs.readFileSync(path.join(root, termManifest[id].path), 'utf8');
+    assert.match(html, /Expanded guide/);
+    assert.match(html, /Sources for the expanded explanation/);
+  }
+});
