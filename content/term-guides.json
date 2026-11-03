@@ -1618,7 +1618,7 @@
       ],
       [
         "Limitations and common misconceptions",
-        "Graph edges can encode stale, biased or hallucinated associations; an apparently explainable path is not automatically causal or correct. Entity resolution is difficult when names collide, and ontologies require governance when organizations redefine metrics. A knowledge graph is not necessarily RDF, an LLM, a vector database, or proof that every generated answer is grounded. Report which links are asserted, inferred or reviewed."
+        "Graph edges can encode stale, biased or hallucinated associations; an apparently explainable path is not automatically causal or correct. Store assertion timestamps and source-level review labels to make those failure modes inspectable. Entity resolution is difficult when names collide, and ontologies require governance when organizations redefine metrics. A knowledge graph is not necessarily RDF, an LLM, a vector database, or proof that every generated answer is grounded. Report which links are asserted, inferred or reviewed."
       ]
     ],
     "citations": [
