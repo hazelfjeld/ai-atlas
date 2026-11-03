@@ -607,7 +607,7 @@ test('Revision 14 records only two existing research guide expansions and leaves
     assert.ok(fs.existsSync(pages[id].path));
   }
   const receipt=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8')).receipts[0];
-  assert.equal(receipt.publication_edition,'2026-11-02-v14');
+  assert.ok(receipt.publication_history.some(h=>h.edition==='2026-11-02-v14'&&h.status==='cloudflare_http_browser_and_githack_verified'), 'Preserve immutable v14 verified history');
   // A newly indexed edition can remain pending; verified receipts must agree with their history.
   const verified=receipt.publication_history.filter(h=>h.status==='cloudflare_http_browser_and_githack_verified');
   const lastVerified=verified.at(-1);
@@ -622,4 +622,37 @@ test('Revision 14 records only two existing research guide expansions and leaves
   assert.equal(receipt.last_verified_public_url,'https://aiupdates.app/whats-new.html?date='+lastVerified.edition.slice(0,10)+'&revision='+verifiedRevision);
   assert.equal(receipt.deferred_catalog_proposal_ids.length,7);
   assert.equal(receipt.counts.news_published,9);
+});
+
+
+test('Revision 15 archives only two existing shift-evaluation guides with intact source claims and pending verification', () => {
+ const index=JSON.parse(fs.readFileSync('data/daily/index.json','utf8'));
+ const prior=index.editions.find(e=>e.date==='2026-11-02'&&e.revision===14);
+ const current=index.editions.find(e=>e.date==='2026-11-02'&&e.revision===15);
+ assert.ok(prior&&current);
+ const bytes=fs.readFileSync(current.path);
+ assert.equal(bytes.length,current.bytes);
+ assert.equal(require('node:crypto').createHash('sha256').update(bytes).digest('hex'),current.sha256);
+ const prev=D.validateEdition(JSON.parse(fs.readFileSync(prior.path,'utf8')),prior);
+ const next=D.validateEdition(JSON.parse(bytes.toString('utf8')),current);
+ assert.equal(D.chicagoDate(next.published_at),'2026-11-02');
+ for(const key of ['coverage','news','technologies','terms','corrections'])assert.deepEqual(next[key],prev[key],'Source/evidence changed: '+key);
+ const delta=D.revisionDiff(prev,next);
+ assert.deepEqual(delta.site_changes.added.map(x=>x.id),['site-expanded-covariate-shift-20261102','site-expanded-out-of-distribution-20261102']);
+ assert.equal(delta.site_changes.updated.length+delta.site_changes.removed.length,0);
+ const manifest=JSON.parse(fs.readFileSync('terms/manifest.json','utf8'));
+ const guides=JSON.parse(fs.readFileSync('content/term-guides.json','utf8'));
+ assert.equal(Object.keys(guides).length,43);
+ for(const [i,id] of ['MLD-0237','MLD-0854'].entries()){
+   assert.ok(manifest[id].expanded&&fs.existsSync(manifest[id].path));
+   assert.equal(delta.site_changes.added[i].catalog_path,manifest[id].path);
+ }
+ const receipt=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8')).receipts[0];
+ assert.equal(receipt.publication_edition,'2026-11-02-v15');
+ assert.equal(receipt.publication_history.at(-1).edition,receipt.publication_edition);
+ assert.ok(receipt.production_verified_revision>=14&&receipt.production_verified_revision<=15);
+ assert.equal(receipt.counts.news_published,9);
+ assert.equal(receipt.deferred_catalog_proposal_ids.length,7);
+ assert.equal(receipt.counts.term_added,0);
+ assert.equal(receipt.counts.technology_added,0);
 });
