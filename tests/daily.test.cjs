@@ -983,3 +983,36 @@ test('Retrospective v23 adds only two real Atlas drift guides and leaves the Nov
  assert.equal(receipt.deferred_catalog_proposal_ids.length,7);
  assert.equal(receipt.counts.news_published,9);
 });
+
+test('Retrospective v24 records one source-attributed catalog-review site change without new-world claims',()=>{
+ const crypto=require('node:crypto');
+ const idx=JSON.parse(fs.readFileSync('data/daily/index.json','utf8'));
+ const priorEntry=idx.editions.find(x=>x.date==='2026-11-02'&&x.revision===23);
+ const currentEntry=idx.editions.find(x=>x.date==='2026-11-02'&&x.revision===24);
+ assert.ok(priorEntry&&currentEntry,'Both immutable versions must be indexed');
+ const before=JSON.parse(fs.readFileSync(priorEntry.path,'utf8'));
+ const bytes=fs.readFileSync(currentEntry.path),after=JSON.parse(bytes.toString('utf8'));
+ assert.equal(bytes.length,currentEntry.bytes);
+ assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'),currentEntry.sha256);
+ D.validateIndex(idx);D.validateEdition(after,currentEntry);
+ assert.equal(after.edition_date,'2026-11-02');
+ assert.ok(after.published_at.startsWith('2026-11-03'));
+ assert.ok(after.site_changes.at(-1).added_to_atlas_at.startsWith('2026-11-03'));
+ for(const kind of ['news','technologies','terms','corrections'])assert.deepEqual(after[kind],before[kind],'Original '+kind+' changed');
+ assert.deepEqual(after.coverage,before.coverage,'Original collection coverage changed');
+ const delta=D.revisionDiff(before,after);
+ assert.deepEqual(delta.site_changes.added.map(x=>x.id),['site-catalog-candidate-audit-json-20261103']);
+ assert.equal(after.site_changes.at(-1).catalog_path,'catalog-review.html');
+ assert.match(after.site_changes.at(-1).summary,/not seven new technologies|not seven new technologies or terms/i);
+ assert.match(after.site_changes.at(-1).review_status,/editorial_audit/);
+ const receipt=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8')).receipts[0];
+ assert.equal(receipt.publication_edition,'2026-11-02-v24');
+ assert.equal(receipt.publication_history.at(-1).edition,'2026-11-02-v24');
+ assert.equal(receipt.publication_history.at(-1).site_changes_added_in_revision,1);
+ assert.equal(receipt.production_verified_revision,23,'Do not prematurely certify a pending edition');
+ assert.equal(idx.last_successful_publish_at,receipt.production_verified_at);
+ assert.equal(receipt.deferred_catalog_proposal_ids.length,7);
+ assert.equal(receipt.counts.news_published,9);
+ assert.equal(receipt.counts.technology_added+receipt.counts.term_added,0);
+ assert.equal(D.selection(idx,'2026-11-03').todayEntry,null,'No false November 3 collection');
+});
