@@ -190,7 +190,7 @@ test('Agentic workflow and knowledge graph expansions explain mechanisms, constr
     const html=fs.readFileSync(path.join(root,termManifest[id].path),'utf8');
     assert.match(html,/Expanded guide/);assert.match(html,/Sources for the expanded explanation/);
   }
-  assert.equal(Object.keys(guides).length,35);
+  assert.equal(Object.keys(guides).length,37);
 });
 
 test('Benchmark and Environment are source-backed expanded agent-evaluation guides',()=>{
@@ -211,5 +211,27 @@ test('Benchmark and Environment are source-backed expanded agent-evaluation guid
   assert.match(html,/Expanded guide/);
   assert.match(html,/Sources for the expanded explanation/);
  }
- assert.equal(Object.keys(guides).length,35);
+ assert.equal(Object.keys(guides).length,37);
+});
+
+test('Prompt injection guides distinguish untrusted content, authorization and controlled outcomes', () => {
+  for (const [id, patterns] of Object.entries({
+    'MLD-0957': [/trust boundary/i, /direct injection|direct attempt/i, /schema|typed/i, /false positive/i, /not automatically|does not establish|not.*proof/i],
+    'MLD-0549': [/retrieval-augmented/i, /tool response|tool-output/i, /false-positive rate/i, /calendar state/i, /not.*prove|neither proves/i]
+  })) {
+    const guide = guides[id], route = termManifest[id];
+    assert.ok(guide && route && route.expanded, 'Expanded guide missing: ' + id);
+    assert.equal(guide.reviewed_on, '2026-11-02');
+    assert.equal(guide.sections.length, 9);
+    assert.ok(guide.sections.every(([heading, body]) => heading.length >= 8 && body.length >= 120));
+    assert.equal(new Set(guide.sections.map(x => x[0])).size, guide.sections.length);
+    assert.ok(guide.prerequisites.length >= 4 && guide.prerequisites.every(x => termManifest[x]), 'Broken prerequisite');
+    assert.ok(guide.citations.length >= 4 && guide.citations.every(([title, url]) => title.length >= 35 && new URL(url).protocol === 'https:'));
+    const body = guide.sections.map(s => s[1]).join(' ');
+    for (const pattern of patterns) assert.match(body, pattern, 'Missing mechanism or caveat: ' + id);
+    const html = fs.readFileSync(path.join(root, route.path), 'utf8');
+    assert.match(html, /Expanded guide/);
+    assert.match(html, /Sources for the expanded explanation/);
+  }
+  assert.equal(Object.keys(guides).length, 37);
 });
