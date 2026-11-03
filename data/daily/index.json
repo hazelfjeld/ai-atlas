@@ -163,7 +163,7 @@
       "published_at": "2026-11-03T09:40:00.738Z"
     }
   ],
-  "last_successful_publish_at": "2026-11-03T08:45:53Z",
-  "status": "edition_revision_19_production_verified",
-  "coverage_note": "November 2 retrospective revision 19: one verified UI change (exact original review-label filtering of date-selected news, shareable filters and CSV evidence exports). All nine original source-reviewed reports, seven deferred catalog proposals, and two source failures remain from the partial November 2 collection. No fresh November 3 collection and no new term or technology IDs. Publication on Nov 3 Chicago time must not be confused with source event dates. GitHack/catalog verification 41605331581, Cloudflare hosted-browser and byte verification 41605331520 passed on aff4cc1b8073cd33a33cd8e6205d21d4ba8b7b53 (120 Node tests; 462 exact HTTP files per each of three hostnames). Historical v1-v18 remain immutable. Coverage is curated, partial and non-exhaustive."
+  "last_successful_publish_at": "2026-11-03T09:43:42Z",
+  "status": "edition_revision_20_production_verified",
+  "coverage_note": "Retrospective November 2 revision 20: exact citation-source hostname filtering of SHA-256-verified research records, permalink restoration and CSV evidence exports. Published after midnight November 3 in America/Chicago; not a November 3 news collection. All nine existing November 2 reports, seven deferred catalog proposals, two source failures and the original partial collection window are unchanged. Verified on production 158428e703dcc777ce53ec0a26859a186216fb45 with 124 Node tests (including schema, source filter, archive timezone and integrity), complete GitHack verification 41613020733, Cloudflare production/hosted-browser verification 41613020568 and 463 exact assets per hostname across three hosts. Historical v1–v19 are immutable. AI news coverage remains partial and non-exhaustive."
 }
