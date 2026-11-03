@@ -107,7 +107,7 @@
       "published_at": "2026-11-03T02:38:21.964Z"
     }
   ],
-  "last_successful_publish_at": "2026-11-03T02:10:57Z",
-  "status": "edition_revision_13_pending_production_verification",
-  "coverage_note": "Revision 13 records two source-reviewed expansions of existing safety concept guides, with unchanged nine prior news reports, partial collection window, seven deferred catalog proposals and two failed source lookups. Last successful production publish remains revision 12 until full new-release verification."
+  "last_successful_publish_at": "2026-11-03T02:42:09Z",
+  "status": "edition_revision_13_production_verified",
+  "coverage_note": "November 2 revision 13 passed exact production asset/hosted-browser and GitHack checks. Two existing reward-model concept pages were expanded; nine independently source-checked news reports, the original partial collection window, seven deferred catalog proposals and two source lookup failures remain unchanged. This is a scheduled static archive, not live coverage."
 }
