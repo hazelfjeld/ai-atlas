@@ -81,7 +81,7 @@ test('Candidate audit is linked from the accessible review page and shipped in t
  assert.match(page,/href="data\/catalog-candidate-decisions-2026-11-03\.json" download/);
  assert.match(page,/<th scope="col">Proposal<\/th>/);
  assert.match(page,/<table class="decision-matrix">/);
- assert.match(page,/1 new technology ID, 0 new term IDs/);
+ assert.match(page,/1 new technology ID \(TECH-0301\), 0 new term IDs/);
  const deployed=JSON.parse(read('deploy/public-files.json'));
  assert.ok(deployed.extra_downloads.includes(file),'Audit export must survive Cloudflare allowlisting');
  assert.ok(fs.statSync(path.join(root,file)).size>5000,'Audit export must contain substantive sourced records');
