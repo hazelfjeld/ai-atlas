@@ -532,8 +532,8 @@
       "edition_date": "2026-11-03",
       "validation_result": "source_batch_sha256_bytes_schema_unique_news_ids_canonical_source_urls_dates_collection_window_verified_eight_news_web_source_reviews_production_and_public_asset_checks_passed",
       "status": "partially_published_with_4_deferred_catalog_proposals",
-      "publication_outcome": "immutable_nov03_v2_cloudflare_http_browser_and_githack_verified",
-      "publication_edition": "2026-11-03-v2",
+      "publication_outcome": "immutable_nov03_v3_pending_production_verification",
+      "publication_edition": "2026-11-03-v3",
       "accepted_news_ids": [
         "ai-news:tohoku-aisin:stt-mram-soc:2026-11-02",
         "ai-news:openai:grid-protectors:2026-11-02",
@@ -561,7 +561,7 @@
         "news_deferred": 0,
         "catalog_deferred": 4
       },
-      "review_notes": "November 3 partial 48-hour recovery collection: six original source categories, 14 checked source URLs (some discovery/limited), three failed source lookups. Four November 3 reports and four dated earlier catch-up items. Tohoku University and OpenAI primary announcements were opened; IFParse author discussion opened; Reuters indexed original reports checked for stated claims. Prototype comparisons, benchmark scores, market forecasts and investigations are qualified and not independently reproduced or adjudicated. Four catalog proposals were not inserted as canonical records; historical November 2 edition left unchanged. Await CI and real production verification before claiming hosted publication.\nNovember 3 v2 preserves eight source-qualified news items and original dates/evidence. Adds two already-published Atlas educational guide links under site_changes only; four deferred canonical proposals and three failed lookups unchanged. Deployment verification pending.\nNovember 3 v2 verified in production: catalog/GitHack 41676627178 and Cloudflare deployed/browser 41676627291 both passed on merged main 5a44a6bb98dd8c8a55b8efee1ff16500284d61ee by 2026-11-03T16:44:04Z. No new outside news or canonical entries; two Atlas guide records only.",
+      "review_notes": "November 3 partial 48-hour recovery collection: six original source categories, 14 checked source URLs (some discovery/limited), three failed source lookups. Four November 3 reports and four dated earlier catch-up items. Tohoku University and OpenAI primary announcements were opened; IFParse author discussion opened; Reuters indexed original reports checked for stated claims. Prototype comparisons, benchmark scores, market forecasts and investigations are qualified and not independently reproduced or adjudicated. Four catalog proposals were not inserted as canonical records; historical November 2 edition left unchanged. Await CI and real production verification before claiming hosted publication.\nNovember 3 v2 preserves eight source-qualified news items and original dates/evidence. Adds two already-published Atlas educational guide links under site_changes only; four deferred canonical proposals and three failed lookups unchanged. Deployment verification pending.\nNovember 3 v2 verified in production: catalog/GitHack 41676627178 and Cloudflare deployed/browser 41676627291 both passed on merged main 5a44a6bb98dd8c8a55b8efee1ff16500284d61ee by 2026-11-03T16:44:04Z. No new outside news or canonical entries; two Atlas guide records only.\nNovember 3 v3 pending publication: indexes two previously production-verified Atlas-only research pages, preserving all eight news records, 14 source checks, 3 failures and four deferred canonical proposals. Immutable v2 and earlier archives untouched. Last confirmed production v2 remains 2026-11-03T16:44:04Z pending exact v3 catalog/GitHack and Cloudflare jobs.",
       "publication_history": [
         {
           "edition": "2026-11-03-v1",
@@ -593,12 +593,25 @@
           "production_commit": "5a44a6bb98dd8c8a55b8efee1ff16500284d61ee",
           "production_workflow_run_id": 41676627291,
           "githack_workflow_run_id": 41676627178
+        },
+        {
+          "edition": "2026-11-03-v3",
+          "source_batch_sha256": "f6d155caec1fda714b8fdd456ec47cc886dd10856159b65b9745c69d64b9adb3",
+          "news_published": 8,
+          "technology_added": 0,
+          "term_added": 0,
+          "corrections": 0,
+          "catalog_deferred": 4,
+          "site_changes_added": 2,
+          "published_at": "2026-11-03T19:24:41.824Z",
+          "status": "pending_production_verification",
+          "note": "Two previously verified Atlas-only research site changes (Nov 3 candidate review and STT-MRAM explainer). Original source records, partial collection coverage and source failures remain unchanged; no new external news or canonical IDs."
         }
       ],
       "production_verified_at": "2026-11-03T16:44:04Z",
       "production_verified_revision": 2,
       "last_verified_at": "2026-11-03T16:44:04Z",
-      "next_action": "Review Nov 3 candidate technologies IFParse v2 and near-memory STT-MRAM chip plus hardware concepts against primary source, duplicate catalog IDs, license, reproducibility and safe deployment; import only when full canonical integration and linked tests pass. Continue substantive encyclopedia expansions.",
+      "next_action": "Verify November 3 v3 exact SHA-checked archive with catalog/GitHack and deployed Cloudflare/hosted-browser jobs; after proof record genuine v3 verification in ledger without mutating immutable edition. Continue source-complete canonical catalog integration for deferred November 3 candidates.",
       "production_workflow_run_id": 41676627291,
       "githack_workflow_run_id": 41676627178,
       "production_commit": "5a44a6bb98dd8c8a55b8efee1ff16500284d61ee",
