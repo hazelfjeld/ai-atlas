@@ -108,7 +108,7 @@ def main():
             data = [{'@context':'https://schema.org', '@type':'WebSite', '@id':ORIGIN+'/#website', 'name':'AI Updates', 'alternateName':'Atlas', 'url':ORIGIN+'/', 'description':description, 'inLanguage':'en'}, {'@context':'https://schema.org','@type':'Organization','@id':ORIGIN+'/#publisher','name':'AI Updates','url':ORIGIN+'/','logo':ORIGIN+'/favicon.svg','sameAs':['https://github.com/hazelfjeld/ai-atlas']}]
         p = ROOT / path
         p.write_bytes(replace_head(p.read_text(encoding='utf-8'), metadata(title, description, path, data)).encode())
-    paths = ['index.html', 'catalog-review.html', 'terms/index.html', 'technology/index.html', *[p for p in PAGES if p != 'index.html'], *[term_path(r) for r in terms], *profile_paths]
+    paths = ['index.html', 'catalog-review.html', 'hardware-review.html', 'terms/index.html', 'technology/index.html', *[p for p in PAGES if p != 'index.html'], *[term_path(r) for r in terms], *profile_paths]
     urlset = Element('urlset', {'xmlns':'http://www.sitemaps.org/schemas/sitemap/0.9'})
     for path in sorted(set(paths)):
         SubElement(SubElement(urlset, 'url'), 'loc').text = absolute(path)
