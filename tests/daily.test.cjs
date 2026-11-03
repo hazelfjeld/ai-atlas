@@ -920,3 +920,34 @@ test('Retrospective v20 adds only source-domain filtering as an Atlas site chang
  assert.equal(receipt.counts.news_published,9);
  assert.equal(receipt.counts.technology_added+receipt.counts.term_added,0);
 });
+
+test('Retrospective v21 records reviewed catalog candidates without claiming world news or a November 3 edition',()=>{
+ const crypto=require('node:crypto');
+ const idx=JSON.parse(fs.readFileSync('data/daily/index.json','utf8'));
+ const beforeEntry=idx.editions.find(x=>x.date==='2026-11-02'&&x.revision===20);
+ const afterEntry=idx.editions.find(x=>x.date==='2026-11-02'&&x.revision===21);
+ assert.ok(beforeEntry&&afterEntry);
+ const payload=fs.readFileSync(afterEntry.path);
+ assert.equal(payload.length,afterEntry.bytes);
+ assert.equal(crypto.createHash('sha256').update(payload).digest('hex'),afterEntry.sha256);
+ const prior=D.validateEdition(JSON.parse(fs.readFileSync(beforeEntry.path,'utf8')),beforeEntry);
+ const next=D.validateEdition(JSON.parse(payload.toString('utf8')),afterEntry);
+ assert.equal(D.chicagoDate(next.published_at),'2026-11-03');
+ for(const kind of ['news','technologies','terms','coverage','corrections'])assert.deepEqual(next[kind],prior[kind]);
+ const diff=D.revisionDiff(prior,next);
+ assert.deepEqual(diff.site_changes.added.map(x=>x.id),['site-reviewed-seven-deferred-candidates-20261103']);
+ assert.equal(diff.site_changes.updated.length+diff.site_changes.removed.length,0);
+ const record=diff.site_changes.added[0];
+ assert.equal(record.catalog_path,'catalog-review.html');
+ assert.match(record.summary,/not.*new permanent catalog entry|none is yet a new permanent catalog entry/i);
+ assert.match(record.release_status,/not_new_world_event/);
+ assert.equal(D.safeCatalogPath('catalog-review.html'),'catalog-review.html');
+ assert.equal(D.safeCatalogPath('catalog-review.html?inject=1'),'');
+ assert.equal(D.selection(idx,'2026-11-03').todayEntry,null);
+ const ledger=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8')).receipts[0];
+ assert.equal(ledger.publication_edition,'2026-11-02-v21');
+ assert.equal(ledger.publication_history.at(-1).edition,'2026-11-02-v21');
+ assert.equal(ledger.deferred_catalog_proposal_ids.length,7);
+ assert.equal(ledger.counts.technology_added+ledger.counts.term_added,0);
+ assert.equal(idx.last_successful_publish_at,ledger.production_verified_at);
+});
