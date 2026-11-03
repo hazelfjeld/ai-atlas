@@ -166,8 +166,8 @@
   },
   "MLD-0034": {
     "path": "terms/MLD-0034-adversarial-example.html",
-    "sha256": "b19c40fa89174ce664a50aa51662340bb34714f73de9a6d085a002c2006fcb9d",
-    "expanded": false
+    "sha256": "587cfe86a34263af3ff64ae20aa47bb8b7e42ffc672c36c27b53074d6868ef13",
+    "expanded": true
   },
   "MLD-0035": {
     "path": "terms/MLD-0035-adversarial-loss.html",
@@ -176,8 +176,8 @@
   },
   "MLD-0036": {
     "path": "terms/MLD-0036-adversarial-robustness.html",
-    "sha256": "bb5d4bf28ce31c8b9edce5ee4503cd3a1925098f3ed32912f3dd53816fcac0b3",
-    "expanded": false
+    "sha256": "6fe863d653f815815b1c2983f9b4132443cbb836d1533ae4b3608cd9daf2be50",
+    "expanded": true
   },
   "MLD-0037": {
     "path": "terms/MLD-0037-adversarial-training.html",

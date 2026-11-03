@@ -625,7 +625,7 @@ test('Revision 14 records only two existing research guide expansions and leaves
 });
 
 
-test('Revision 15 archives only two existing shift-evaluation guides with intact source claims and pending verification', () => {
+test('Revision 15 preserves its two shift-evaluation guides and source claims across later expansions', () => {
  const index=JSON.parse(fs.readFileSync('data/daily/index.json','utf8'));
  const prior=index.editions.find(e=>e.date==='2026-11-02'&&e.revision===14);
  const current=index.editions.find(e=>e.date==='2026-11-02'&&e.revision===15);
@@ -642,7 +642,7 @@ test('Revision 15 archives only two existing shift-evaluation guides with intact
  assert.equal(delta.site_changes.updated.length+delta.site_changes.removed.length,0);
  const manifest=JSON.parse(fs.readFileSync('terms/manifest.json','utf8'));
  const guides=JSON.parse(fs.readFileSync('content/term-guides.json','utf8'));
- assert.equal(Object.keys(guides).length,43);
+ assert.ok(Object.keys(guides).length>=43, 'Historical revision 15 must allow future encyclopedia expansions');
  for(const [i,id] of ['MLD-0237','MLD-0854'].entries()){
    assert.ok(manifest[id].expanded&&fs.existsSync(manifest[id].path));
    assert.equal(delta.site_changes.added[i].catalog_path,manifest[id].path);
