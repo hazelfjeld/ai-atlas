@@ -295,7 +295,7 @@ test('Covariate shift and OOD guides distinguish assumptions, synthetic arithmet
 
 test('Poisoning and learned-backdoor guides distinguish training compromise from deployed incidents', () => {
   const expected = {
-    'MLD-0268': [/data-to-model trust boundary/i, /0\\.5%/, /targeted attack success/i, /held-out/i, /not proof|not automatically|not establish/i],
+    'MLD-0268': [/data-to-model trust boundary/i, /0\.5%/, /targeted attack success/i, /held-out/i, /not proof|not automatically|not establish/i],
     'MLD-0085': [/96%/, /70%/, /false activation/i, /provenance/i, /not (?:establish|proof)|cannot exclude/i]
   };
   for (const [id, patterns] of Object.entries(expected)) {
