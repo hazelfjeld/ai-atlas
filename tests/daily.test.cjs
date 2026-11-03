@@ -133,9 +133,9 @@ test('Shareable daily links restore verified edition filters without trusting ar
  const selected=entry('2026-11-02',7);
  const url=D.filterPermalink(selected,{section:'news',topic:'safety',query:'  AI agent  '});
  assert.equal(url,'whats-new.html?date=2026-11-02&revision=7&section=news&topic=safety&q=AI+agent');
- assert.deepEqual(D.viewFilters(url.slice(url.indexOf('?'))),{section:'news',topic:'safety',review:'all',source:'all',query:'AI agent'});
- assert.deepEqual(D.viewFilters('?section=bad&topic=invalid&q='+('a'.repeat(121))),{section:'all',topic:'all',review:'all',source:'all',query:''});
- assert.deepEqual(D.viewFilters('?section=news&section=terms&topic=research&topic=safety&q=a&q=b'),{section:'all',topic:'all',review:'all',source:'all',query:''});
+ assert.deepEqual(D.viewFilters(url.slice(url.indexOf('?'))),{section:'news',topic:'safety',review:'all',source:'all',publication:'all',query:'AI agent'});
+ assert.deepEqual(D.viewFilters('?section=bad&topic=invalid&q='+('a'.repeat(121))),{section:'all',topic:'all',review:'all',source:'all',publication:'all',query:''});
+ assert.deepEqual(D.viewFilters('?section=news&section=terms&topic=research&topic=safety&q=a&q=b'),{section:'all',topic:'all',review:'all',source:'all',publication:'all',query:''});
  assert.equal(D.filterPermalink(selected,{section:'nonsense',topic:'unknown',query:''}),D.permalink(selected));
  assert.equal(D.filterPermalink(selected,{section:'news',topic:'tools',query:''}),D.permalink(selected)+'&section=news&topic=tools');
  assert.equal(D.viewFilters('?q=%3Cscript%3E').query,'<script>'); // Only rendered as literal text by the reader.
@@ -1243,4 +1243,58 @@ test('November 3 v3 archives only already-published hardware research site chang
  assert.equal(receipt.publication_history.at(-1).status,'cloudflare_http_browser_and_githack_verified');
  assert.equal(receipt.deferred_catalog_proposal_ids.length,4);
  assert.equal(idx.last_successful_publish_at,receipt.production_verified_at,'Never imply a pending edition has passed production');
+});
+
+test('Source-date scope separates real Nov 3 reporting from catch-up, without using event or Atlas dates',()=>{
+ const idx=JSON.parse(fs.readFileSync('data/daily/index.json','utf8'));
+ const ref=idx.editions.find(x=>x.date==='2026-11-03'&&x.revision===3);
+ assert.ok(ref,'Immutable November 3 version 3 must exist');
+ const edition=JSON.parse(fs.readFileSync(ref.path,'utf8'));
+ D.validateEdition(edition,ref);
+ const count=scope=>edition.news.filter(item=>D.matchesPublicationTiming(item,'news',ref.date,scope)).length;
+ assert.equal(count('all'),8);
+ assert.equal(count('same-day'),4);
+ assert.equal(count('catch-up'),4);
+ assert.equal(count('undated'),0);
+ assert.equal(count('postdated'),0);
+ assert.equal(D.matchesPublicationTiming(edition.site_changes[0],'site_changes',ref.date,'catch-up'),false);
+ assert.equal(D.matchesPublicationTiming({publication_date:'2026-11-02',event_date:'2026-11-03',added_to_atlas_at:'2026-11-03T19:00:00Z'},'news','2026-11-03','catch-up'),true);
+ assert.equal(D.matchesPublicationTiming({event_date:'2026-11-03',discovered_at:'2026-11-03T19:00:00Z'},'news','2026-11-03','undated'),true);
+ assert.equal(D.matchesPublicationTiming({publication_date:'2026-11-04'},'news','2026-11-03','postdated'),true);
+ assert.equal(D.matchesPublicationTiming({publication_date:'2026-11-02'},'news','2026-11-03','invalid'),false);
+});
+
+test('Source-date scope round-trips through safe share links and filtered evidence CSV',()=>{
+ const idx=JSON.parse(fs.readFileSync('data/daily/index.json','utf8'));
+ const ref=idx.editions.find(x=>x.date==='2026-11-03'&&x.revision===3);
+ const edition=JSON.parse(fs.readFileSync(ref.path,'utf8'));
+ const url=D.filterPermalink(ref,{publication:'catch-up'});
+ assert.equal(url,D.permalink(ref)+'&published=catch-up');
+ assert.equal(D.viewFilters(url.slice(url.indexOf('?'))).publication,'catch-up');
+ assert.equal(D.viewFilters('?published=catch-up&published=same-day').publication,'all');
+ assert.equal(D.viewFilters('?published=%3Cscript%3E').publication,'all');
+ assert.equal(D.viewFilters('?published=postdated').publication,'postdated');
+ assert.equal(D.filterPermalink(ref,{publication:'not-a-date-scope'}),D.permalink(ref));
+ const csv=D.citationCsv(edition,ref,{publication:'catch-up'});
+ assert.equal(csv.split('\\r\\n').filter(Boolean).length,5,'CSV contains header plus exactly four catch-up news items');
+ assert.match(csv,/Tohoku and Aisin/);
+ assert.doesNotMatch(csv,/Chinese financial regulator warns/);
+ assert.doesNotMatch(csv,/site-nov03-candidate-evidence-review/);
+ const todayCsv=D.citationCsv(edition,ref,{publication:'same-day',section:'news'});
+ assert.equal(todayCsv.split('\\r\\n').filter(Boolean).length,5);
+ assert.match(todayCsv,/Chinese financial regulator warns/);
+ assert.doesNotMatch(todayCsv,/Tohoku and Aisin/);
+});
+
+test('Publication-date view is accessible and wired to the same filter as CSV and share URL',()=>{
+ const html=fs.readFileSync('whats-new.html','utf8');
+ const js=fs.readFileSync('whats-new.js','utf8');
+ assert.match(html,/<label for="publication-filter">News source date<select id="publication-filter">/);
+ assert.match(html,/option value="catch-up"/);
+ assert.match(html,/event, discovery and catalog-addition dates remain separate/);
+ assert.match(js,/C\\.matchesPublicationTiming\\(item,kind,edition\\.edition_date,publication\\)/);
+ assert.match(js,/publication-filter'\\)\\.value=filters\\.publication/);
+ assert.match(js,/publication-filter'\\)\\.addEventListener\\('change',render\\)/);
+ assert.match(js,/publication-filter'\\)\\.value='all'/);
+ assert.match(js,/Publisher date unreported/);
 });
