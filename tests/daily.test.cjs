@@ -1110,5 +1110,7 @@ test('Immutable v25 records the actual TECH-0302 Atlas catalog addition without 
  const m=JSON.parse(fs.readFileSync(path.join(root,'publication.json')));
  assert.equal(m.published_counts.technologies,m.prepared_counts.technologies+r.counts.technology_added);
  assert.equal(idx.last_successful_publish_at,r.production_verified_at,'Do not claim successful v25 publish before independently verified release');
+ assert.equal(idx.status,'edition_revision_'+idx.editions.at(-1).revision+(r.production_verified_revision===idx.editions.at(-1).revision?'_production_verified':'_pending_production_verification'));
+ assert.ok(r.publication_history.at(-1).status==='pending_production_verification'||r.publication_history.at(-1).status==='cloudflare_http_browser_and_githack_verified');
  assert.equal(D.selection(idx,'2026-11-03').todayEntry,null);
 });
