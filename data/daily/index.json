@@ -171,7 +171,7 @@
       "published_at": "2026-11-03T10:39:07.441Z"
     }
   ],
-  "last_successful_publish_at": "2026-11-03T09:43:42Z",
-  "status": "edition_revision_21_pending_production_verification",
-  "coverage_note": "Retrospective November 2 revision 21 records the actual November 3 publication of a distinctness review for seven deferred catalog proposals: six promising candidates needing full integration, one composite term linked to existing explanations. All nine externally reviewed November 2 news reports, seven deferred catalog proposals, two original source failures and the original partial collection window are unchanged. November 3's daily edition awaits genuine source collection; this is not November 3 external news. Last successful production verification timestamp remains revision 20 until the exact new indexed release passes Cloudflare and GitHack tests. Older v1–v20 assets remain immutable; coverage is non-exhaustive."
+  "last_successful_publish_at": "2026-11-03T10:46:20.601Z",
+  "status": "edition_revision_21_production_verified",
+  "coverage_note": "Retrospective November 2 revision 21 documents the actual November 3 AI Updates catalog-triage page: seven deferred proposals reviewed against original records; four named tools and two terminology candidates are distinct pending full sourced integration, while one composite agent-benchmark phrase maps to existing canonical guides. This is one Atlas website improvement, not newly invented concepts, externally released AI news or a November 3 collector edition. All nine original reviewed Nov 2 reports, seven deferred catalog proposals, two failed lookups, source window, and immutable prior v1-v20 assets are preserved. Verified on main c28d6877aaf6a82715c4faa69eef25daf3303e39 with 127 Node tests, complete GitHack/catalog workflow 41621552158, Cloudflare deployment/hosted browser 41621552115, and 465 exact assets per host across 3 hostnames. November 3's daily edition still awaits collection; coverage is partial and non-exhaustive."
 }
