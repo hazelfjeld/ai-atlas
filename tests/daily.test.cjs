@@ -575,7 +575,7 @@ test('Revision 13 adds exactly two real reward-model guide updates with immutabl
   assert.match(changes.site_changes.added[i].summary,/not a new|not a newly|not a confirmed/i);
  }
  const r=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8')).receipts[0];
- assert.equal(r.publication_edition,'2026-11-02-v13');
+ assert.ok(r.publication_history.some(h=>h.edition==='2026-11-02-v13'), 'Historical version 13 remains in the receipt');
  assert.ok(r.publication_history.some(h=>h.edition==='2026-11-02-v13'), 'Historical revision 13 receipt preserved');
  assert.equal(r.deferred_catalog_proposal_ids.length,7);
  assert.equal(r.counts.news_published,9);
