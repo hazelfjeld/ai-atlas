@@ -600,7 +600,7 @@ test('Revision 14 records only two existing research guide expansions and leaves
   assert.equal(change.site_changes.updated.length+change.site_changes.removed.length,0);
   const pages=JSON.parse(fs.readFileSync('terms/manifest.json','utf8'));
   const guides=JSON.parse(fs.readFileSync('content/term-guides.json','utf8'));
-  assert.equal(Object.keys(guides).length,41);
+  assert.ok(Object.keys(guides).length>=41, 'Historical revision 14 must allow later guide expansions');
   for(const [i,id] of ['MLD-0002','MLD-0263'].entries()){
     assert.equal(pages[id].expanded,true);
     assert.equal(change.site_changes.added[i].catalog_path,pages[id].path);
