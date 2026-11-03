@@ -521,6 +521,64 @@
           "source_scope": "tagged_first_party_release_and_license_no_security_performance_reproduction"
         }
       ]
+    },
+    {
+      "batch_id": "atlas-daily-20261103-0824ct-recovery-a",
+      "source_branch": "atlas-daily-staging",
+      "source_commit": "9a2d9a0f21551737b041a49e398ebf08793272ae",
+      "source_batch_path": "daily-queue/batches/2026-11-03-atlas-daily-20261103-0824ct-recovery-a.json",
+      "source_batch_sha256": "f6d155caec1fda714b8fdd456ec47cc886dd10856159b65b9745c69d64b9adb3",
+      "source_batch_bytes": 32219,
+      "edition_date": "2026-11-03",
+      "validation_result": "source_batch_sha256_bytes_schema_unique_news_ids_canonical_source_urls_dates_collection_window_verified_eight_news_web_source_reviews",
+      "status": "reviewed_edition_committed_pending_production_verification",
+      "publication_outcome": "immutable_2026-11-03-v1_pending_independent_ci_and_public_http_checks",
+      "publication_edition": "2026-11-03-v1",
+      "accepted_news_ids": [
+        "ai-news:tohoku-aisin:stt-mram-soc:2026-11-02",
+        "ai-news:openai:grid-protectors:2026-11-02",
+        "ai-news:hkma:project-sage-hsbc-ai-institute:2026-11-02",
+        "ai-news:ifparse:v2.0:2026-11-01",
+        "ai-news:china-nfra:ai-investment-concentration-warning:2026-11-03",
+        "ai-news:schwarz-bull:european-ai-compute-mou:2026-11-03",
+        "ai-news:reuters:europe-ai-bond-supply:2026-11-03",
+        "ai-news:reuters:data-center-ballot-and-environment:2026-11-03"
+      ],
+      "deferred_news_ids": [],
+      "deferred_catalog_proposal_ids": [
+        "tech-proposal:tohoku-aisin:stt-mram-ai-soc:2026-11-03",
+        "tech-proposal:muse-ifparse-v2:2026-11-03",
+        "term-proposal:stt-mram",
+        "term-proposal:near-memory-computing"
+      ],
+      "rejected_ids": [],
+      "counts": {
+        "news_published": 8,
+        "technology_added": 0,
+        "technology_updated": 0,
+        "term_added": 0,
+        "corrections": 0,
+        "news_deferred": 0,
+        "catalog_deferred": 4
+      },
+      "review_notes": "November 3 partial 48-hour recovery collection: six original source categories, 14 checked source URLs (some discovery/limited), three failed source lookups. Four November 3 reports and four dated earlier catch-up items. Tohoku University and OpenAI primary announcements were opened; IFParse author discussion opened; Reuters indexed original reports checked for stated claims. Prototype comparisons, benchmark scores, market forecasts and investigations are qualified and not independently reproduced or adjudicated. Four catalog proposals were not inserted as canonical records; historical November 2 edition left unchanged. Await CI and real production verification before claiming hosted publication.",
+      "publication_history": [
+        {
+          "edition": "2026-11-03-v1",
+          "source_batch_sha256": "f6d155caec1fda714b8fdd456ec47cc886dd10856159b65b9745c69d64b9adb3",
+          "news_published": 8,
+          "technology_added": 0,
+          "term_added": 0,
+          "corrections": 0,
+          "catalog_deferred": 4,
+          "published_at": "2026-11-03T15:29:16.347Z",
+          "status": "pending_production_verification"
+        }
+      ],
+      "production_verified_at": null,
+      "production_verified_revision": null,
+      "last_verified_at": null,
+      "next_action": "Verify dated Nov 3 edition across GitHack and Cloudflare jobs, then attest tested release in receipts. Review new catalog candidates after preservation of immutable news archive."
     }
   ]
 }
