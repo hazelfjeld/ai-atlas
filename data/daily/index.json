@@ -227,7 +227,7 @@
       "published_at": "2026-11-03T19:24:41.824Z"
     }
   ],
-  "last_successful_publish_at": "2026-11-03T16:44:04Z",
-  "status": "edition_revision_3_pending_production_verification",
-  "coverage_note": "November 3 revision 3 stages two additional Atlas-only site improvements: the four-proposal evidence review and an STT-MRAM hardware explainer. The original November 3 source collection remains eight qualified news stories (four published Nov 3 and four earlier catch-up), fourteen checked URLs, three failed lookups and four deferred catalog proposals. No new world events or canonical catalog IDs are asserted. The last independently verified daily edition is November 3 revision 2 (main 5a44a6b; 2026-11-03T16:44:04Z); do not advance the last-successful clock until production jobs succeed. November 2 revision 25 and all earlier November 2 revisions remain verified and immutable; the pinned professor demo remains unchanged."
+  "last_successful_publish_at": "2026-11-03T19:34:45Z",
+  "status": "edition_revision_3_production_verified",
+  "coverage_note": "November 3 revision 3 was independently production-verified on merged main fc565eefb38b17e0b1a6dac28446297843a8e590 by 2026-11-03T19:34:45Z: GitHack/catalog workflow 41703812947 and Cloudflare deployed/browser workflow 41703813098 both passed, with 143 Node tests and 484 exact assets on each of three production hosts. Two previous Atlas-only site improvements are now accessible in the edition: November 3 hardware/benchmark proposal evidence review and a source-qualified STT-MRAM research explainer. Original eight qualified news stories (four Nov 3 and four older catch-up), fourteen checked URLs, three failed lookups and four deferred catalog proposals are unchanged; no new external event or canonical term/technology is claimed. November 2 revision 25 and all earlier November 2 revisions remain immutable and verified; professor-demo fallback preserved. Publisher results are not independent replication of research-chip or benchmark measurements."
 }
