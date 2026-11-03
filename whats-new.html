@@ -28,7 +28,7 @@ h1 em{font-family:Georgia,serif;font-weight:400;color:var(--green)}
 .aside p{font-size:13px;line-height:1.6;margin:8px 0 0;color:#d2dfd7}
 .panel{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px}
 .status{border-left:4px solid var(--green);background:var(--soft);padding:16px 20px;margin:0 0 18px;border-radius:0 10px 10px 0}
-.controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;align-items:end}
+.controls{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;align-items:end}
 .controls label{display:grid;gap:5px;font-size:12px;text-transform:uppercase;letter-spacing:.08em;font-weight:750;color:var(--muted)}
 .controls select,.search-controls input{min-width:0;width:100%;padding:11px;border:1px solid #b6c9ba;border-radius:8px;background:var(--surface);color:var(--ink);font:inherit;font-size:14px;text-transform:none;letter-spacing:normal}
 .search-controls{display:flex;align-items:end;gap:12px;flex-wrap:wrap;margin-top:15px}
@@ -100,6 +100,7 @@ footer{border-top:1px solid var(--line);font-size:13px;color:var(--muted);margin
   <label for="edition-select">Edition archive<select id="edition-select" disabled><option value="">Awaiting first edition</option></select></label>
   <label for="section-filter">Collection<select id="section-filter"><option value="all">All sections</option><option value="news">AI news</option><option value="technologies">New technologies</option><option value="terms">New terms</option><option value="site_changes">Updated in AI Updates</option><option value="corrections">Corrections</option></select></label>
   <label for="topic-filter">Topic<select id="topic-filter"><option value="all">All topics</option><option value="safety">Safety</option><option value="research">Research</option><option value="models">Models</option><option value="tools">Tools</option><option value="hardware">Hardware</option><option value="policy">Policy</option></select></label>
+  <label for="evidence-filter">Original review label<select id="evidence-filter" disabled><option value="all">All review labels</option></select></label>
  </div>
  <div class="search-controls"><label for="edition-search">Search this edition<input id="edition-search" type="search" maxlength="120" autocomplete="off" placeholder="Search headlines, caveats, sources, tags"></label><button id="reset-filters" type="button">Reset filters</button></div>
  <div class="search-controls"><button id="export-verified" type="button" disabled title="Enabled after an edition passes SHA-256 and schema checks">Download filtered evidence list (.csv)</button><span class="fact">Exports source dates, review labels, caveats and links from the verified archive, not a live news search. Spreadsheet formula text is neutralized.</span></div>
