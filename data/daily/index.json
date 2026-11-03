@@ -131,7 +131,7 @@
       "published_at": "2026-11-03T05:43:49.719Z"
     }
   ],
-  "last_successful_publish_at": "2026-11-03T04:36:46Z",
-  "status": "edition_revision_16_pending_production_verification",
-  "coverage_note": "Revision 16 adds two source-backed expansions of existing AI safety concepts as actual Atlas site changes. Nine reviewed November 2 reports, seven deferred catalog proposals, two failed lookups and the original partial collection window are unchanged. Revision 15 remains the last production-verified edition pending CI and hosted checks for v16."
+  "last_successful_publish_at": "2026-11-03T05:47:59.042Z",
+  "status": "edition_revision_16_production_verified",
+  "coverage_note": "November 2 revision 16 adds two existing adversarial ML concept guides as Atlas site updates, not newly released technologies or incidents. Nine source-reviewed reports, seven deferred catalog proposals and two failed lookups retain original partial collection window. Main 4ed159e was verified by GitHack/catalog run 41585702935 and Cloudflare production/browser run 41585702813, 457 exact assets on each of three hostnames."
 }
