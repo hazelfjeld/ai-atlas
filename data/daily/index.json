@@ -187,7 +187,7 @@
       "published_at": "2026-11-03T11:28:16.163Z"
     }
   ],
-  "last_successful_publish_at": "2026-11-03T11:17:11Z",
-  "status": "edition_revision_23_pending_production_verification",
-  "coverage_note": "Retrospective November 2 revision 23, authored November 3 Chicago, adds exactly two Atlas educational guide site changes for pre-existing Concept drift and Data drift. The nine reviewed November 2 external reports, original partial collection window, two source failures, one correction and seven deferred catalog proposals are unchanged. No November 3 news edition has been collected. Immutable historical editions v1-v22 preserved. Last verified production revision 22 (edition v22), checked on main 042696e82ef6008aa615215d9c79588dd0939594 at 2026-11-03T11:17:11Z via GitHack/catalog 41625953661 and Cloudflare/browser 41625953671; v23 pending its own release checks."
+  "last_successful_publish_at": "2026-11-03T11:36:00Z",
+  "status": "edition_revision_23_production_verified",
+  "coverage_note": "Revision 23 (retrospective November 2 edition, written November 3 America/Chicago) is production verified as of 2026-11-03T11:36:00Z on main c1c5a312eb4c4f37855e6be55b9c768332cc3ad6 through GitHack/catalog 41628388461 and Cloudflare/hosted-browser 41628388522. The added items are exactly two Atlas-only existing concept guide expansions (Concept drift and Data drift), not a November 3 outside-world news release or new term IDs. The nine reviewed November 2 news reports, partial original collection window, two failed source lookups, one correction and seven deferred catalog candidates are unchanged. November 3's own collector edition remains awaiting collection; all immutable editions v1-v23 preserved."
 }
