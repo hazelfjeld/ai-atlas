@@ -530,9 +530,9 @@
       "source_batch_sha256": "f6d155caec1fda714b8fdd456ec47cc886dd10856159b65b9745c69d64b9adb3",
       "source_batch_bytes": 32219,
       "edition_date": "2026-11-03",
-      "validation_result": "source_batch_sha256_bytes_schema_unique_news_ids_canonical_source_urls_dates_collection_window_verified_eight_news_web_source_reviews",
-      "status": "reviewed_edition_committed_pending_production_verification",
-      "publication_outcome": "immutable_2026-11-03-v1_pending_independent_ci_and_public_http_checks",
+      "validation_result": "source_batch_sha256_bytes_schema_unique_news_ids_canonical_source_urls_dates_collection_window_verified_eight_news_web_source_reviews_production_and_public_asset_checks_passed",
+      "status": "partially_published_with_4_deferred_catalog_proposals",
+      "publication_outcome": "immutable_nov03_v1_cloudflare_http_browser_and_githack_verified",
       "publication_edition": "2026-11-03-v1",
       "accepted_news_ids": [
         "ai-news:tohoku-aisin:stt-mram-soc:2026-11-02",
@@ -572,13 +572,22 @@
           "corrections": 0,
           "catalog_deferred": 4,
           "published_at": "2026-11-03T15:29:16.347Z",
-          "status": "pending_production_verification"
+          "status": "cloudflare_http_browser_and_githack_verified",
+          "verified_at": "2026-11-03T15:42:06Z",
+          "production_commit": "8b69a89b02fa03f7a19fe7a761ac9f113089b956",
+          "production_workflow_run_id": 41665910824,
+          "githack_workflow_run_id": 41665910657
         }
       ],
-      "production_verified_at": null,
-      "production_verified_revision": null,
-      "last_verified_at": null,
-      "next_action": "Verify dated Nov 3 edition across GitHack and Cloudflare jobs, then attest tested release in receipts. Review new catalog candidates after preservation of immutable news archive."
+      "production_verified_at": "2026-11-03T15:42:06Z",
+      "production_verified_revision": 1,
+      "last_verified_at": "2026-11-03T15:42:06Z",
+      "next_action": "Review November 3 proposed two technologies and two established hardware concepts for canonical distinctness; ship tested catalog additions in separate bounded increments, and record post-Nov2 term guide site updates in appropriate date revision.",
+      "production_workflow_run_id": 41665910824,
+      "githack_workflow_run_id": 41665910657,
+      "production_commit": "8b69a89b02fa03f7a19fe7a761ac9f113089b956",
+      "last_verified_public_url": "https://aiupdates.app/whats-new.html?date=2026-11-03&revision=1",
+      "verification_scope": "Exact merged main 8b69a89b02fa03f7a19fe7a761ac9f113089b956: catalog and GitHack jobs in run 41665910657 passed; Cloudflare validate and deployed production/hosted-browser jobs in run 41665910824 passed (final job 2026-11-03T15:42:06Z). SHA/size-verified immutable November 3 edition retains eight qualified source reports, partial recovery lookback, 14 checked sources, three failed lookups and four deferred canonical proposals. This confirms tested static publication and browser navigation, not independent reproduction of research claims."
     }
   ]
 }

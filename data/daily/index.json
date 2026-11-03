@@ -211,7 +211,7 @@
       "published_at": "2026-11-03T15:29:16.347Z"
     }
   ],
-  "last_successful_publish_at": "2026-11-03T14:14:03Z",
-  "status": "edition_revision_1_pending_production_verification",
-  "coverage_note": "November 3 revision 1 from independently reviewed partial collector batch; 8 sourced news reports (4 published Nov 3, 4 catch-up from Nov 1–2), 0 canonical technologies, 0 terms, 0 corrections; 4 catalog proposals remain deferred. Three source lookups failed. Awaiting exact GitHack/catalog and Cloudflare/hosted-browser verification; last successful publish remains November 2 revision 25. No continuously live news feed."
+  "last_successful_publish_at": "2026-11-03T15:42:06Z",
+  "status": "edition_revision_1_production_verified",
+  "coverage_note": "November 3 revision 1 is independently verified in production at 2026-11-03T15:42:06Z on merged main 8b69a89b02fa03f7a19fe7a761ac9f113089b956 with GitHack/catalog workflow 41665910657 and Cloudflare hosted-browser workflow 41665910824. Eight qualified source news reports include four November 3 publications and four Nov 1–2 catch-up items. Four technology and terminology proposals remain deferred, not counted in canonical catalogs. Fourteen source URLs checked (some limited), three failed. Research prototype/benchmark claims are not independently reproduced; investigations are not findings of wrongdoing. Coverage is partial and non-exhaustive. Last verified historical edition November 2 revision 25 preserved intact with all earlier revisions and professor demo."
 }
