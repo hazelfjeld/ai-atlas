@@ -471,7 +471,7 @@ test('Revision 10 only adds two reviewed Atlas guide updates, preserving real-wo
   assert.match(diff.site_changes.added[i].summary,/not a new|not evidence|not newly/i);
  }
  const receipt=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8')).receipts[0];
- assert.equal(receipt.publication_edition,'2026-11-02-v11');
+ assert.ok(receipt.publication_history.some(h=>h.edition==='2026-11-02-v11'), 'Archive revision 11 remains in the receipt ledger');
  assert.ok(receipt.publication_history.some(h=>h.edition==='2026-11-02-v10'));
  assert.equal(receipt.counts.news_published,9);
  assert.equal(receipt.counts.term_added,0);
@@ -508,8 +508,8 @@ test('Revision 11 adds only two verified existing concept guides, not fresh AI n
   assert.ok(fs.existsSync(pages[id].path));
  }
  const r=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8')).receipts[0];
- assert.equal(r.publication_edition,'2026-11-02-v11');
- assert.equal(r.publication_history.at(-1).edition,'2026-11-02-v11');
+ assert.equal(r.publication_edition,r.publication_history.at(-1).edition, 'Current receipt must track latest edition');
+ assert.ok(r.publication_history.some(h=>h.edition==='2026-11-02-v11'), 'Historical revision 11 receipt preserved');
  assert.equal(r.counts.term_added,0);
  assert.equal(r.counts.technology_added,0);
  assert.equal(r.deferred_catalog_proposal_ids.length,7);
