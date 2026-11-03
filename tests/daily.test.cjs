@@ -576,9 +576,39 @@ test('Revision 13 adds exactly two real reward-model guide updates with immutabl
  }
  const r=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8')).receipts[0];
  assert.equal(r.publication_edition,'2026-11-02-v13');
- assert.equal(r.publication_history.at(-1).edition,'2026-11-02-v13');
+ assert.ok(r.publication_history.some(h=>h.edition==='2026-11-02-v13'), 'Historical revision 13 receipt preserved');
  assert.equal(r.deferred_catalog_proposal_ids.length,7);
  assert.equal(r.counts.news_published,9);
  assert.equal(r.counts.technology_added,0);
  assert.equal(r.counts.term_added,0);
+});
+
+test('Revision 14 records only two existing research guide expansions and leaves verified archive history intact', () => {
+  const crypto=require('node:crypto'), index=JSON.parse(fs.readFileSync('data/daily/index.json','utf8'));
+  const a=index.editions.find(e=>e.date==='2026-11-02'&&e.revision===13);
+  const b=index.editions.find(e=>e.date==='2026-11-02'&&e.revision===14);
+  assert.ok(a&&b);
+  const bytes=fs.readFileSync(b.path);
+  assert.equal(bytes.length,b.bytes);
+  assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'),b.sha256);
+  const prior=D.validateEdition(JSON.parse(fs.readFileSync(a.path,'utf8')),a);
+  const next=D.validateEdition(JSON.parse(bytes.toString('utf8')),b);
+  assert.equal(D.chicagoDate(next.published_at),'2026-11-02');
+  for(const key of ['news','technologies','terms','coverage','corrections'])assert.deepEqual(next[key],prior[key]);
+  const change=D.revisionDiff(prior,next);
+  assert.deepEqual(change.site_changes.added.map(x=>x.id),['site-expanded-ablation-study-20261102','site-expanded-data-leakage-20261102']);
+  assert.equal(change.site_changes.updated.length+change.site_changes.removed.length,0);
+  const pages=JSON.parse(fs.readFileSync('terms/manifest.json','utf8'));
+  const guides=JSON.parse(fs.readFileSync('content/term-guides.json','utf8'));
+  assert.equal(Object.keys(guides).length,41);
+  for(const [i,id] of ['MLD-0002','MLD-0263'].entries()){
+    assert.equal(pages[id].expanded,true);
+    assert.equal(change.site_changes.added[i].catalog_path,pages[id].path);
+    assert.ok(fs.existsSync(pages[id].path));
+  }
+  const receipt=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8')).receipts[0];
+  assert.equal(receipt.publication_edition,'2026-11-02-v14');
+  assert.equal(receipt.production_verified_revision,13, 'Do not pretend v14 is verified before workflows pass');
+  assert.equal(receipt.deferred_catalog_proposal_ids.length,7);
+  assert.equal(receipt.counts.news_published,9);
 });

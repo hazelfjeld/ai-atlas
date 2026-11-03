@@ -263,7 +263,7 @@ test('Ablation and leakage research guides publish controlled examples and indep
   assert.equal(g.reviewed_on,'2026-11-02'); assert.equal(g.sections.length,9);
   assert.ok(g.prerequisites.length>=4 && g.prerequisites.every(p=>termManifest[p]));
   assert.ok(g.sections.every(([h,b])=>h.length>=8 && b.length>=120));
-  assert.ok(g.citations.length>=3 && g.citations.every(([h,u])=>h.length>30 && /^https:\\/\\//.test(u)));
+  assert.ok(g.citations.length>=3 && g.citations.every(([h,u])=>h.length>30 && new URL(u).protocol === 'https:'));
   const body=g.sections.map(s=>s[1]).join(' ');
   assert.match(body,/illustrat|invented/i);
   assert.match(body,/not automatically|not evidence|not a universal|not published|not proof|does not/i);

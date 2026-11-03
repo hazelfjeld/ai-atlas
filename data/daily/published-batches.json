@@ -12,8 +12,8 @@
       "edition_date": "2026-11-02",
       "validation_result": "batch_sha256_bytes_schema_unique_ids_dates_verified_nine_source_lookups_four_reuters_reports_explicitly_qualified",
       "status": "partially_published_with_7_deferred_catalog_proposals",
-      "publication_outcome": "immutable_revision_13_verified_cloudflare_browser_githack",
-      "publication_edition": "2026-11-02-v13",
+      "publication_outcome": "immutable_revision_14_staged_verification_pending; revision_13_last_production_verified",
+      "publication_edition": "2026-11-02-v14",
       "accepted_news_ids": [
         "ai-news:vllm:v0.33.0rc3:2026-11-02",
         "ai-news:invokeai:v6.14.3:2026-11-01",
