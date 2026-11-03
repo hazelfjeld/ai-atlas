@@ -221,5 +221,5 @@
   ],
   "last_successful_publish_at": "2026-11-03T15:42:06Z",
   "status": "edition_revision_2_pending_production_verification",
-  "coverage_note": "November 3 v2 records two already-published Atlas-only concept guide expansions; the eight original vetted news reports, source publication dates, partial source collection (14 checked, 3 failed) and four deferred catalog proposals are unchanged from production-verified v1. No new external news, canonical IDs, research replication or safety incident is claimed. V2 awaiting independent catalog, GitHack, Cloudflare and browser checks; last successful publication remains v1 until those pass."
+  "coverage_note": "November 3 v2 records two already-published Atlas-only concept guide expansions; the eight original vetted news reports, source publication dates, partial source collection (14 checked, 3 failed) and four deferred catalog proposals are unchanged from production-verified v1. No new external news, canonical IDs, research replication or safety incident is claimed. V2 awaiting independent catalog, GitHack, Cloudflare and browser checks; last successful publication remains v1 until those pass. The last verified November 2 historical publication was revision 25, preserved alongside all earlier archive revisions and the professor demo."
 }
