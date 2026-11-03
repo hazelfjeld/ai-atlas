@@ -81,9 +81,17 @@
       "sha256": "e820c7772c39213f1e3ace81dc164a8beba8c5ca9205520c17b64c37ff8a0610",
       "bytes": 26410,
       "published_at": "2026-11-03T00:35:47.214Z"
+    },
+    {
+      "date": "2026-11-02",
+      "revision": 11,
+      "path": "data/daily/editions/2026-11-02-v11.json",
+      "sha256": "195c1f06a7c177c582349bfbae061725ffcfed757cebc9ce08d4b63fa0f1b391",
+      "bytes": 28448,
+      "published_at": "2026-11-03T01:47:40.512Z"
     }
   ],
   "last_successful_publish_at": "2026-11-03T00:40:52Z",
-  "status": "edition_revision_10_cloudflare_http_browser_and_githack_verified",
-  "coverage_note": "Nov 2 Chicago revision 10 verified on GitHack (45 exact HTTP paths), 99 passing Node tests and three production hostnames (439 exact assets each) plus real desktop/mobile, daily archive, Games and offline browser checks. Nine previously source-reviewed news stories and collection evidence unchanged; two sourced existing-concept guides added as site updates only. Collection remains partial with seven deferred proposals and two source lookup failures; scheduled editions are non-exhaustive."
+  "status": "edition_revision_11_indexed_production_verification_pending",
+  "coverage_note": "Revision 11 records two existing-concept educational improvements only. Nine original news reports, partial collection window, two source-lookup failures, seven deferred catalog proposals and earlier immutable editions are unchanged. Last independently verified edition is v10 until full catalog/GitHack/Cloudflare browser checks pass."
 }

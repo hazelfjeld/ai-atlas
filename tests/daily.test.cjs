@@ -471,9 +471,47 @@ test('Revision 10 only adds two reviewed Atlas guide updates, preserving real-wo
   assert.match(diff.site_changes.added[i].summary,/not a new|not evidence|not newly/i);
  }
  const receipt=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8')).receipts[0];
- assert.equal(receipt.publication_edition,'2026-11-02-v10');
- assert.equal(receipt.publication_history.at(-1).edition,'2026-11-02-v10');
+ assert.equal(receipt.publication_edition,'2026-11-02-v11');
+ assert.ok(receipt.publication_history.some(h=>h.edition==='2026-11-02-v10'));
  assert.equal(receipt.counts.news_published,9);
  assert.equal(receipt.counts.term_added,0);
  assert.equal(receipt.deferred_catalog_proposal_ids.length,7);
+});
+
+test('Revision 11 adds only two verified existing concept guides, not fresh AI news',()=>{
+ const crypto=require('node:crypto');
+ const archive=JSON.parse(fs.readFileSync('data/daily/index.json','utf8'));
+ const beforeEntry=archive.editions.find(x=>x.date==='2026-11-02'&&x.revision===10);
+ const nextEntry=archive.editions.find(x=>x.date==='2026-11-02'&&x.revision===11);
+ assert.ok(beforeEntry&&nextEntry);
+ const raw=fs.readFileSync(nextEntry.path);
+ assert.equal(raw.length,nextEntry.bytes);
+ assert.equal(crypto.createHash('sha256').update(raw).digest('hex'),nextEntry.sha256);
+ const old=D.validateEdition(JSON.parse(fs.readFileSync(beforeEntry.path,'utf8')),beforeEntry);
+ const newer=D.validateEdition(JSON.parse(raw.toString('utf8')),nextEntry);
+ assert.equal(D.chicagoDate(newer.published_at),'2026-11-02');
+ for(const key of ['news','technologies','terms','coverage','corrections'])assert.deepEqual(newer[key],old[key]);
+ const changes=D.revisionDiff(old,newer);
+ assert.deepEqual(changes.site_changes.added.map(x=>x.id),[
+  'site-expanded-benchmark-evaluation-20261102',
+  'site-expanded-environment-evaluation-20261102'
+ ]);
+ assert.equal(changes.site_changes.removed.length+changes.site_changes.updated.length,0);
+ for(const key of ['news','technologies','terms','corrections'])
+  assert.equal(changes[key].added.length+changes[key].removed.length+changes[key].updated.length,0);
+ const guides=JSON.parse(fs.readFileSync('content/term-guides.json','utf8'));
+ const pages=JSON.parse(fs.readFileSync('terms/manifest.json','utf8'));
+ assert.equal(Object.keys(guides).length,35);
+ for(const [index,id] of ['MLD-0110','MLD-0371'].entries()){
+  assert.equal(pages[id].expanded,true);
+  assert.equal(changes.site_changes.added[index].catalog_path,pages[id].path);
+  assert.ok(fs.existsSync(pages[id].path));
+ }
+ const r=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8')).receipts[0];
+ assert.equal(r.publication_edition,'2026-11-02-v11');
+ assert.equal(r.publication_history.at(-1).edition,'2026-11-02-v11');
+ assert.equal(r.counts.term_added,0);
+ assert.equal(r.counts.technology_added,0);
+ assert.equal(r.deferred_catalog_proposal_ids.length,7);
+ assert.equal(r.counts.news_published,9);
 });

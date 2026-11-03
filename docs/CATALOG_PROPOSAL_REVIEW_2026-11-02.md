@@ -37,3 +37,8 @@
 ## November 2 — concepts expanded without minting speculative synonyms
 
 Two **existing** dictionary IDs now carry complete original worked guides: `MLD-0043` (Agentic workflow, including the surrounding agent harness) and `MLD-0608` (Knowledge graph, including enterprise semantic/ontology layers). These explain mechanisms, boundaries, worked applications, quantitative/evidence checks, permissions and primary sources. A harness is not necessarily a new algorithm, and “semantic ontology layer” is descriptive, not a separately established standard. Their pending term proposal IDs stay **deferred**, not accepted or rejected, until the distinctness and canonical terminology review is complete; no new term or world event is asserted. Published baseline record totals remain unchanged. Editorial review: November 2, 2026.
+
+
+## November 2 evening — independent evaluation sources mapped to existing concepts
+
+Reviewed the primary [AgentBench](https://arxiv.org/abs/2308.03688), [OSWorld](https://arxiv.org/abs/2404.07972), [SWE-bench](https://arxiv.org/abs/2310.06770) and [Gymnasium environment documentation](https://gymnasium.farama.org/api/env/) to extend **existing** `MLD-0110` Benchmark and `MLD-0371` Environment, with links to already expanded `MLD-0041` Agent evaluation. The source literature supports interactive, environment-based benchmarking, but does **not** establish that the proposed exact phrase `environment-grounded agent benchmark` is independently standardized terminology. Keep the proposal deferred until a separate canonical-ID/alias decision; don't count the explanation work as a new record or an independently replicated benchmark result. The other six proposals and all original collection limitations remain unchanged.
