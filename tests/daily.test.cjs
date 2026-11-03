@@ -1039,3 +1039,13 @@ test('NVIDIA Auto Ontology is a checksum-pinned Atlas addition, not an invented 
  assert.equal(rec.source_revision,'cdaf61e1bd0cf3820d11d72b43bb460816aebbd3');
  assert.match(rec.watch_out,/FastAPI/);
 });
+
+test('audit and canonical technology addition resolve the same deferred proposal',()=>{
+ const path=require('node:path'),root=path.join(__dirname,'..');
+ const audit=JSON.parse(fs.readFileSync(path.join(root,'data/catalog-candidate-decisions-2026-11-03.json')));
+ const item=audit.candidates.find(x=>x.proposal_id==='tech-proposal:nvidia-auto-ontology:2026-11-02');
+ const record=JSON.parse(fs.readFileSync(path.join(root,'data/technologies-07.json')))[0];
+ assert.equal(item.canonical_id,record.id);
+ assert.equal(item.publication_state,'canonical_catalog_added_new_to_atlas');
+ assert.equal(audit.candidates.filter(x=>x.publication_state==='deferred_not_in_canonical_catalog').length,6);
+});
