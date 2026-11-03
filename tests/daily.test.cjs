@@ -683,7 +683,8 @@ test('Revision 16 archives two adversarial-security guides without changing orig
  const ledger=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8')).receipts[0];
  assert.ok(ledger.publication_history.some(h=>h.edition==='2026-11-02-v16'), 'Historical revision 16 receipt must remain archived');
  assert.equal(ledger.publication_history.at(-1).edition,ledger.publication_edition);
- assert.ok(ledger.production_verified_revision>=15&&ledger.production_verified_revision<=16);
+ assert.ok(ledger.publication_history.some(h=>h.edition==='2026-11-02-v16'&&h.status==='cloudflare_http_browser_and_githack_verified'),'Preserve v16 verification history after future editions');
+ assert.ok(ledger.production_verified_revision>=16,'Verified revision cannot regress behind confirmed v16');
  assert.equal(ledger.deferred_catalog_proposal_ids.length,7);
  assert.equal(ledger.counts.news_published,9);
  assert.equal(ledger.counts.term_added,0);
