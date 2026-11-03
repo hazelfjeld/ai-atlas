@@ -1903,8 +1903,7 @@
         "https://openai.com/safety/prompt-injections/"
       ]
     ]
-  }
-,
+  },
   "MLD-1040": {
     "reviewed_on": "2026-11-02",
     "prerequisites": [
@@ -2162,6 +2161,140 @@
       [
         "Google, Rules of Machine Learning, training-serving consistency",
         "https://developers.google.com/machine-learning/guides/rules-of-ml"
+      ]
+    ]
+  },
+  "MLD-0237": {
+    "reviewed_on": "2026-11-02",
+    "prerequisites": [
+      "MLD-0326",
+      "MLD-0247",
+      "MLD-0191",
+      "MLD-0263"
+    ],
+    "sections": [
+      [
+        "The conditional assumption",
+        "Covariate shift changes the frequency of inputs: training and deployment have different P(X), while P(Y|X) remains the same. It is a special case of distribution shift, not a synonym for concept drift or label shift. This conditional-invariance assumption is substantive and must be probed, not simply declared."
+      ],
+      [
+        "A concrete deployment example",
+        "Imagine a crop classifier trained mostly on sunny photographs and later used on overcast images. Under pure covariate shift, similar measured image features still imply the same crop label conditional on X; cloudy samples have merely become more frequent. If weather changes the labeling mechanism or hides necessary features, the assumption may fail."
+      ],
+      [
+        "Why ordinary validation can mislead",
+        "A random held-out subset of the original training population estimates performance on that original population. It need not estimate performance when deployment has a new mixture of input types. Preserve untouched time/site/group-separated evaluation samples representative of the target population, where collecting their labels is authorized."
+      ],
+      [
+        "Importance weighting derivation",
+        "Under shared P(Y|X) and adequate support overlap, target risk E_target[loss(f(X),Y)] equals E_train[w(X) loss(f(X),Y)], where w(x)=P_target(x)/P_train(x). This identity follows by substituting the density ratio into the training integral. It does not work where target inputs have zero training probability."
+      ],
+      [
+        "Synthetic numerical experiment",
+        "For an invented binary example, training traffic is 80% easy cases with 5% error and 20% difficult cases with 30% error. Expected training error is 0.8*0.05+0.2*0.30=10%. If target traffic becomes 20% easy and 80% difficult, target error is 0.2*0.05+0.8*0.30=25%, even if the conditional error rates within each group remain unchanged."
+      ],
+      [
+        "How to estimate and diagnose weights",
+        "Compare source and target feature summaries with an independent sample or a domain discriminator; estimate propensity or density-ratio weights only from permitted covariates. Inspect effective sample size ESS=(sum w)^2/sum(w^2), weight tails, positivity, overlap and sensitivity to clipping. A domain classifier can detect differences without proving that conditional labels are stable."
+      ],
+      [
+        "Choosing an adaptation method",
+        "Importance-weighted model selection or empirical risk estimation is useful when shift assumptions and support overlap are defensible and weights have tolerable variance. Alternative responses include targeted label collection, stratified evaluation, domain adaptation, recalibration, retraining or abstention. Each response requires prospective evaluation against a frozen target test split."
+      ],
+      [
+        "What cannot be inferred",
+        "An input drift alarm does not establish degraded predictive accuracy, causal drift, adversarial interference or changed goals. Conversely, absence of detected input drift does not establish that labels, subgroup performance or calibration remain safe. Domain matching alone is not proof of reliability across hospitals, devices or populations."
+      ],
+      [
+        "A reproducible research protocol",
+        "Declare source/target collection windows and shift hypotheses before inspection. Retain an untouched target holdout, compare an unweighted baseline with weighted and retrained baselines across several seeds, report subgroup loss and uncertainty, and audit data provenance. Treat any performance gain as specific to the evaluated domains, not a guaranteed universal correction."
+      ]
+    ],
+    "citations": [
+      [
+        "Sugiyama, Krauledat and Müller (2007), Covariate Shift Adaptation by Importance Weighted Cross Validation, JMLR",
+        "https://jmlr.csail.mit.edu/papers/v8/sugiyama07a.html"
+      ],
+      [
+        "Koh et al. (2021), WILDS: A Benchmark of in-the-Wild Distribution Shifts, ICML / Microsoft Research",
+        "https://www.microsoft.com/en-us/research/publication/wilds-a-benchmark-of-in-the-wild-distribution-shifts/"
+      ],
+      [
+        "Gretton et al. (2009), Covariate Shift and Local Learning by Distribution Matching, MPI-IS",
+        "https://is.mpg.de/ei/publications/5376"
+      ],
+      [
+        "Ovadia et al. (2019), Can You Trust Your Model's Uncertainty? NeurIPS 2019",
+        "https://papers.neurips.cc/paper_files/paper/2019/hash/8558cb408c1d76621371888657d2eb1d-Abstract.html"
+      ]
+    ]
+  },
+  "MLD-0854": {
+    "reviewed_on": "2026-11-02",
+    "prerequisites": [
+      "MLD-0326",
+      "MLD-0457",
+      "MLD-0142",
+      "MLD-0237"
+    ],
+    "sections": [
+      [
+        "What out-of-distribution means",
+        "An input is out-of-distribution (OOD) relative to a stated training or reference distribution, not intrinsically OOD in every possible context. A new sensor, rare subgroup or novel semantic class can produce different kinds of shift; distinguishing near-OOD from far-OOD requires an explicitly documented reference and evaluation population."
+      ],
+      [
+        "Input shift is not an error label",
+        "An OOD flag describes departure from a reference data distribution, whereas misclassification is a comparison with a known label. A detector can correctly flag a novel input that the classifier would have labeled correctly, or miss a familiar-looking input that the classifier gets wrong. Neither score alone proves an unsafe action occurred."
+      ],
+      [
+        "Worked deployment scenario",
+        "Consider a vision model evaluated on camera images from one warehouse, then presented with infrared camera images or novel package types. Make separate held-out sets for known packages under lighting shift, unseen package types, and ordinary noisy images. A detector that handles infrared inputs may still miss semantic novelties in familiar colors."
+      ],
+      [
+        "A simple detection baseline",
+        "Given class probabilities p(y|x), maximum-softmax-probability detection uses s(x)=1-max_y p(y|x); a larger value suggests uncertainty. For invented predictions [0.95,0.03,0.02] and [0.42,0.38,0.20], the scores are 0.05 and 0.58. This ordering is illustrative, not proof that a model's confidence is calibrated or OOD-safe."
+      ],
+      [
+        "Choosing a threshold without leakage",
+        "Select a threshold on a separate development set using explicitly permitted proxy OOD data, then freeze it before evaluating untouched near- and far-OOD test sets. Label which OOD types were visible during tuning. Testing repeatedly on the final holdout and adjusting the threshold would turn an external evaluation into model selection."
+      ],
+      [
+        "Metrics that expose operational costs",
+        "Report AUROC and AUPR alongside FPR at 95% true-positive rate (FPR95), false rejections on in-distribution data, stratified recall and coverage-risk curves. With a 1% prevalence of truly anomalous inputs, even a detector with 90% true-positive rate and 5% false-positive rate produces around 9 true alerts and 49.5 false alerts per 1,000 inputs; these numbers are synthetic expectations."
+      ],
+      [
+        "Alternative scores and safeguards",
+        "ODIN perturbs inputs and temperature-scales softmax scores; feature-space distances, energy scores and ensembles provide other approaches. Each has dataset, preprocessing and compute assumptions. Separate detection from the policy for abstention, fallback or human review, and verify that routing decisions are authorized and measurable."
+      ],
+      [
+        "Limits of reliability claims",
+        "A detector trained on one benchmark may fail on unknown shifts, adversarially chosen data or semantically close novelties. Strong AUROC on a selected collection is not evidence of universal anomaly detection, real-world incident prevention or calibrated error probabilities. Evaluate confidence calibration, classifier correctness and detector utility separately."
+      ],
+      [
+        "Reproducible research checklist",
+        "Publish the in-distribution reference definition, dates, dataset provenance, near/far OOD sources, inclusion rules, duplicate checks, model/seed settings, threshold-selection protocol, and a confusion matrix at a fixed operating point. Repeat across different target domains and report where performance breaks; do not claim independent replication unless performed."
+      ]
+    ],
+    "citations": [
+      [
+        "Hendrycks and Gimpel (2017), A Baseline for Detecting Misclassified and Out-of-Distribution Examples, ICLR",
+        "https://arxiv.org/abs/1610.02136"
+      ],
+      [
+        "Liang, Li and Srikant (2018), Enhancing the Reliability of Out-of-Distribution Image Detection, ICLR",
+        "https://arxiv.org/abs/1706.02690"
+      ],
+      [
+        "Yang et al. (2022), OpenOOD: Benchmarking Generalized Out-of-Distribution Detection, arXiv",
+        "https://arxiv.org/abs/2210.07242"
+      ],
+      [
+        "Ovadia et al. (2019), Evaluating Predictive Uncertainty Under Dataset Shift, NeurIPS",
+        "https://papers.neurips.cc/paper_files/paper/2019/hash/8558cb408c1d76621371888657d2eb1d-Abstract.html"
+      ],
+      [
+        "Koh et al. (2021), WILDS: A Benchmark of in-the-Wild Distribution Shifts, ICML",
+        "https://www.microsoft.com/en-us/research/publication/wilds-a-benchmark-of-in-the-wild-distribution-shifts/"
       ]
     ]
   }

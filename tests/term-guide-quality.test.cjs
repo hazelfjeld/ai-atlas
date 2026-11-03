@@ -270,3 +270,25 @@ test('Ablation and leakage research guides publish controlled examples and indep
   assert.match(body,id==='MLD-0002'?/paired random seeds|crossed experiments/i:/train.*test|prediction-time/i);
  }
 });
+
+
+test('Covariate shift and OOD guides distinguish assumptions, synthetic arithmetic and held-out evaluation', () => {
+  for (const [id, patterns] of Object.entries({
+    'MLD-0237': [/P\(Y\|X\)/, /importance.weight/i, /support overlap/i, /synthetic|invented/i, /not.*proof|not proof|does not establish/i],
+    'MLD-0854': [/maximum.softmax/i, /FPR95/, /near.*OOD/i, /synthetic/i, /not evidence|not proof/i]
+  })) {
+    const g=guides[id], route=termManifest[id];
+    assert.ok(g && route?.expanded, 'Stable expanded route missing: ' + id);
+    assert.equal(g.reviewed_on, '2026-11-02');
+    assert.equal(g.sections.length, 9);
+    assert.ok(g.sections.every(([title,body])=>title.length>=8&&body.length>=120));
+    assert.ok(g.prerequisites.length>=4&&g.prerequisites.every(pre=>termManifest[pre]));
+    assert.ok(g.citations.length>=4&&g.citations.every(([name,url])=>name.length>=35&&new URL(url).protocol==='https:'));
+    const body=g.sections.map(x=>x[1]).join(' ');
+    for(const p of patterns)assert.match(body,p,'Missing mechanism or evidence limit in '+id);
+    const page=fs.readFileSync(path.join(root,route.path),'utf8');
+    assert.match(page,/Expanded guide/);
+    assert.match(page,/Sources for the expanded explanation/);
+  }
+  assert.ok(Object.keys(guides).length>=43);
+});
