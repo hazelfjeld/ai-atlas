@@ -532,7 +532,7 @@
       "edition_date": "2026-11-03",
       "validation_result": "source_batch_sha256_bytes_schema_unique_news_ids_canonical_source_urls_dates_collection_window_verified_eight_news_web_source_reviews_production_and_public_asset_checks_passed",
       "status": "partially_published_with_4_deferred_catalog_proposals",
-      "publication_outcome": "immutable_revision_4_pending_production_verification",
+      "publication_outcome": "immutable_revision_4_cloudflare_http_browser_and_githack_verified",
       "publication_edition": "2026-11-03-v4",
       "accepted_news_ids": [
         "ai-news:tohoku-aisin:stt-mram-soc:2026-11-02",
@@ -621,19 +621,23 @@
           "catalog_deferred": 4,
           "site_changes_added": 3,
           "published_at": "2026-11-03T22:34:02.465Z",
-          "status": "pending_production_verification",
-          "note": "Two source-reviewed guides and previously verified source publication date filtering are Atlas-only historical site changes; original collector evidence unchanged."
+          "status": "cloudflare_http_browser_and_githack_verified",
+          "note": "Two source-reviewed guides and previously verified source publication date filtering are Atlas-only historical site changes; original collector evidence unchanged.",
+          "verified_at": "2026-11-03T22:38:44Z",
+          "production_commit": "38409e2ecc75afcfd783b3a048500ad64afd9eb5",
+          "production_workflow_run_id": 41732217253,
+          "githack_workflow_run_id": 41732217128
         }
       ],
-      "production_verified_at": "2026-11-03T19:34:45Z",
-      "production_verified_revision": 3,
-      "last_verified_at": "2026-11-03T19:34:45Z",
-      "next_action": "Verify current-commit GitHack/catalog and Cloudflare production/browser jobs before separately attesting revision 4. Intake new staging before canonical catalog expansion.",
-      "production_workflow_run_id": 41703813098,
-      "githack_workflow_run_id": 41703812947,
-      "production_commit": "fc565eefb38b17e0b1a6dac28446297843a8e590",
-      "last_verified_public_url": "https://aiupdates.app/whats-new.html?date=2026-11-03&revision=3",
-      "verification_scope": "Exact published code main fc565eef: 143 Node tests plus all catalog/GitHack jobs passed in run 41703812947; Cloudflare validate and deployed production/browser jobs completed in run 41703813098 by 2026-11-03T19:34:45Z. Each of three hostnames served 484 exact assets with HTTP checks. Browser checked daily deep links and partial-source transparency, share filters, CSV downloads, mobile/navigation, Games and offline. Confirms delivery only, not independent replication of reported research claims."
+      "production_verified_at": "2026-11-03T22:38:44Z",
+      "production_verified_revision": 4,
+      "last_verified_at": "2026-11-03T22:38:44Z",
+      "next_action": "Read staging queue before every run; if no unprocessed batch, integrate source-complete deferred catalog candidate with stable ID, search, linked pages, offline manifest and primary source review. Continue substantive guide expansion. Preserve immutable v4.",
+      "production_workflow_run_id": 41732217253,
+      "githack_workflow_run_id": 41732217128,
+      "production_commit": "38409e2ecc75afcfd783b3a048500ad64afd9eb5",
+      "last_verified_public_url": "https://aiupdates.app/whats-new.html?date=2026-11-03&revision=4",
+      "verification_scope": "Verified exact main 38409e2: 148 passing Node tests and successful GitHack catalog / byte-equivalence jobs in run 41732217128; Cloudflare validate plus deployed production/browser success in run 41732217253 at 2026-11-03T22:38:44Z. Three production hostnames each served 487 exact verified assets. 34 site browser checks and 41 Games checks covered dated archive navigation, source-date filtering, export CSV, source limitations, mobile navigation and offline Games. This is delivery verification, not scientific replication of publisher research results."
     }
   ]
 }

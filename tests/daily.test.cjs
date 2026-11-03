@@ -1235,10 +1235,12 @@ test('November 3 v3 archives only already-published hardware research site chang
  assert.equal(D.safeCatalogPath('../hardware-review.html'),'');
  const receipt=JSON.parse(fs.readFileSync(path.join(root,'data/daily/published-batches.json'),'utf8')).receipts.at(-1);
  assert.equal(receipt.publication_edition,'2026-11-03-v4');
- assert.equal(receipt.production_verified_revision,3,'Verified revision must match deployed production evidence');
- assert.equal(receipt.production_commit,'fc565eefb38b17e0b1a6dac28446297843a8e590');
- assert.equal(receipt.production_workflow_run_id,41703813098);
- assert.equal(receipt.githack_workflow_run_id,41703812947);
+ const archivedV3=receipt.publication_history.find(h=>h.edition==='2026-11-03-v3');
+ assert.ok(archivedV3,'Immutable prior verification history missing');
+ assert.equal(archivedV3.production_commit,'fc565eefb38b17e0b1a6dac28446297843a8e590');
+ assert.equal(archivedV3.production_workflow_run_id,41703813098);
+ assert.equal(archivedV3.githack_workflow_run_id,41703812947);
+ assert.equal(receipt.production_verified_revision,4,'Current verified revision must match deployed proof');
  assert.equal(receipt.publication_history.at(-1).edition,'2026-11-03-v4');
  assert.equal(receipt.publication_history.find(h=>h.edition==='2026-11-03-v3').status,'cloudflare_http_browser_and_githack_verified');
  assert.ok(['pending_production_verification','cloudflare_http_browser_and_githack_verified'].includes(receipt.publication_history.at(-1).status));
@@ -1285,6 +1287,12 @@ test('Immutable November 3 revision 4 indexes two previously verified guides and
  assert.equal(receipt.counts.news_published,8);
  assert.equal(receipt.counts.technology_added+receipt.counts.term_added,0);
  assert.equal(receipt.deferred_catalog_proposal_ids.length,4);
+ assert.equal(receipt.production_verified_revision,4);
+ assert.equal(receipt.production_commit,'38409e2ecc75afcfd783b3a048500ad64afd9eb5');
+ assert.equal(receipt.production_workflow_run_id,41732217253);
+ assert.equal(receipt.githack_workflow_run_id,41732217128);
+ assert.equal(receipt.publication_history.at(-1).status,'cloudflare_http_browser_and_githack_verified');
+ assert.equal(receipt.last_verified_public_url,'https://aiupdates.app/whats-new.html?date=2026-11-03&revision=4');
  assert.equal(idx.last_successful_publish_at,verifiedPublicationClock());
 });
 

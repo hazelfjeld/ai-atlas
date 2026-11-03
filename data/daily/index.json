@@ -235,7 +235,7 @@
       "published_at": "2026-11-03T22:34:02.465Z"
     }
   ],
-  "last_successful_publish_at": "2026-11-03T19:34:45Z",
-  "status": "edition_revision_4_pending_production_verification",
-  "coverage_note": "November 3 revision 4 is awaiting current-commit deployment and browser validation; three previously verified Atlas-only site improvements are recorded (memory bandwidth and arithmetic intensity guides; source-publication-date filters). Original November 3 eight news reports, fourteen checked URLs, three failed lookups, four deferred proposals and partial coverage are unchanged. Last independently verified edition remains November 3 revision 3 on main fc565eef, verified at 2026-11-03T19:34:45Z, with 143 Node tests and 484 exact files across each of three production hosts. November 2 revision 25 and earlier archives remain immutable; professor-demo fallback preserved. No new external event or canonical term/technology is claimed."
+  "last_successful_publish_at": "2026-11-03T22:38:44Z",
+  "status": "edition_revision_4_production_verified",
+  "coverage_note": "November 3 revision 4 was independently deployed and tested from main 38409e2ecc75afcfd783b3a048500ad64afd9eb5 on 2026-11-03T22:38:44Z. Full catalog/GitHack jobs passed workflow 41732217128 (148 Node tests plus real GitHack byte checks), and Cloudflare validate/deployed production and hosted-browser jobs all passed workflow 41732217253 (487 exact HTTP assets on each of three production hosts, 34 site browser and 41 Games browser checks). Two memory-performance guides and same-day/catch-up date filtering are indexed as Atlas-only changes; the original eight source-qualified reports, fourteen source checks, three failed lookups, four deferred catalog proposals, and partial collection coverage remain unchanged. No new external AI event, canonical term or technology ID. Earlier November 3 v1-v3 and November 2 revision 25 and older archives remain immutable; pinned professor-demo fallback is preserved."
 }
