@@ -608,7 +608,18 @@ test('Revision 14 records only two existing research guide expansions and leaves
   }
   const receipt=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8')).receipts[0];
   assert.equal(receipt.publication_edition,'2026-11-02-v14');
-  assert.equal(receipt.production_verified_revision,13, 'Do not pretend v14 is verified before workflows pass');
+  // A newly indexed edition can remain pending; verified receipts must agree with their history.
+  const verified=receipt.publication_history.filter(h=>h.status==='cloudflare_http_browser_and_githack_verified');
+  const lastVerified=verified.at(-1);
+  assert.ok(lastVerified && Number.isInteger(receipt.production_verified_revision));
+  const verifiedRevision=Number(lastVerified.edition.split('-v').at(-1));
+  assert.equal(receipt.production_verified_revision,verifiedRevision);
+  assert.ok(index.editions.some(e=>e.date===lastVerified.edition.slice(0,10)&&e.revision===verifiedRevision));
+  assert.equal(receipt.production_commit,lastVerified.production_commit);
+  assert.equal(receipt.last_verified_at,lastVerified.verified_at);
+  assert.equal(receipt.production_workflow_run_id,lastVerified.production_workflow_run_id);
+  assert.equal(receipt.githack_workflow_run_id,lastVerified.githack_workflow_run_id);
+  assert.equal(receipt.last_verified_public_url,'https://aiupdates.app/whats-new.html?date='+lastVerified.edition.slice(0,10)+'&revision='+verifiedRevision);
   assert.equal(receipt.deferred_catalog_proposal_ids.length,7);
   assert.equal(receipt.counts.news_published,9);
 });

@@ -282,13 +282,17 @@
           "existing_concept_guides_expanded": 2,
           "site_changes_added_in_revision": 2,
           "published_at": "2026-11-03T03:28:38.000Z",
-          "status": "archive_commit_and_production_validation_pending",
-          "note": "Expanded existing research-method concepts, not new external events or canonical IDs. Revision 13 remains the last verified release until CI passes."
+          "status": "cloudflare_http_browser_and_githack_verified",
+          "note": "Existing Ablation study and Data leakage guides expanded; no new external events or canonical entries. Production Cloudflare/hosted-browser and GitHack/catalog verification passed on ad831c4.",
+          "verified_at": "2026-11-03T03:48:43Z",
+          "production_commit": "ad831c46750a90d8d243c846d9eb70f4e19f3d92",
+          "production_workflow_run_id": 41574135832,
+          "githack_workflow_run_id": 41574135854
         }
       ],
-      "production_commit": "50411d1e25544258dd9551b6fe6c3d20e4dc1c0a",
-      "last_verified_public_url": "https://aiupdates.app/whats-new.html?date=2026-11-02&revision=13",
-      "last_verified_at": "2026-11-03T02:42:09Z",
+      "production_commit": "ad831c46750a90d8d243c846d9eb70f4e19f3d92",
+      "last_verified_public_url": "https://aiupdates.app/whats-new.html?date=2026-11-02&revision=14",
+      "last_verified_at": "2026-11-03T03:48:43Z",
       "accepted_catalog_update_ids": [
         "tech-proposal:vllm:2026-11-02-rc3"
       ],
