@@ -2741,8 +2741,8 @@
   },
   "MLD-0549": {
     "path": "terms/MLD-0549-indirect-prompt-injection.html",
-    "sha256": "c1c2fcd1b9fd706aed83c55f7f8fa0fa81e582673f838e93c4a474be1719d0e7",
-    "expanded": false
+    "sha256": "33b803987d1d760c2694b7e54c8a09a71e023961471c97949af978bbeed6ceb9",
+    "expanded": true
   },
   "MLD-0550": {
     "path": "terms/MLD-0550-individual-conditional-expectation.html",
@@ -4781,8 +4781,8 @@
   },
   "MLD-0957": {
     "path": "terms/MLD-0957-prompt-injection.html",
-    "sha256": "e989e1c0c421d572a053c7ce5b629970cca28f9ef4e3b1de3ba0a0df4aede9d4",
-    "expanded": false
+    "sha256": "42e05f17cb6f08ca26aaddf68072e071d6b5d77589bdc3557243a64628804ce2",
+    "expanded": true
   },
   "MLD-0958": {
     "path": "terms/MLD-0958-prompt-sensitivity.html",
