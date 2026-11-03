@@ -153,6 +153,14 @@
       "sha256": "ed4ae478df8b0b0dbe463a5049804e3719d5dd14972c0154a794956f45773c76",
       "bytes": 41974,
       "published_at": "2026-11-03T08:41:27.992Z"
+    },
+    {
+      "date": "2026-11-02",
+      "revision": 20,
+      "path": "data/daily/editions/2026-11-02-v20.json",
+      "sha256": "c25c2f2e3dff7279c43561bcecf24ff30e67b757690a45bc9588bf7b1870e0ad",
+      "bytes": 42987,
+      "published_at": "2026-11-03T09:40:00.738Z"
     }
   ],
   "last_successful_publish_at": "2026-11-03T08:45:53Z",
