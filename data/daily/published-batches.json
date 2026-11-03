@@ -12,8 +12,8 @@
       "edition_date": "2026-11-02",
       "validation_result": "batch_sha256_bytes_schema_unique_ids_dates_verified_nine_source_lookups_four_reuters_reports_explicitly_qualified",
       "status": "partially_published_with_7_deferred_catalog_proposals",
-      "publication_outcome": "immutable_revision_17_production_and_githack_verified",
-      "publication_edition": "2026-11-02-v17",
+      "publication_outcome": "immutable_revision_18_staged_pending_production_verification",
+      "publication_edition": "2026-11-02-v18",
       "accepted_news_ids": [
         "ai-news:vllm:v0.33.0rc3:2026-11-02",
         "ai-news:invokeai:v6.14.3:2026-11-01",
@@ -342,6 +342,18 @@
           "production_commit": "79ba17055a0c650a7e1b0bca301c9b38284578cf",
           "production_workflow_run_id": 41587744579,
           "githack_workflow_run_id": 41587744764
+        },
+        {
+          "edition": "2026-11-02-v18",
+          "source_batch_sha256": "2dcb25af14b960f9989527170fd88daf8ba2fb5f42dcff3b72f512b08ddb57d7",
+          "news_published": 9,
+          "news_added_in_revision": 0,
+          "technologies_added": 0,
+          "terms_added": 0,
+          "site_changes_added_in_revision": 1,
+          "published_at": "2026-11-03T06:37:03.999Z",
+          "status": "archive_commit_and_production_validation_pending",
+          "note": "Research-safe, filter-aware CSV export of verified evidence with distinct source dates; November 2 collection and nine prior reports unchanged. November 3 awaits its own collection; do not relabel this as new-world news."
         }
       ],
       "production_commit": "79ba17055a0c650a7e1b0bca301c9b38284578cf",
