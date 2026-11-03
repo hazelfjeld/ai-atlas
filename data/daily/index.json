@@ -83,7 +83,7 @@
       "published_at": "2026-11-03T00:35:47.214Z"
     }
   ],
-  "last_successful_publish_at": "2026-11-02T23:41:45Z",
-  "status": "edition_revision_10_indexed_production_verification_pending",
-  "coverage_note": "November 2 revision 10 retains nine source-reviewed news stories and their original partial collection window. Two expanded pre-existing concept guides are Atlas site changes, not world news or new terms. This edition is indexed but production verification remains pending; November 2 v9 was last fully verified. Seven deferred proposals and two source failures remain."
+  "last_successful_publish_at": "2026-11-03T00:40:52Z",
+  "status": "edition_revision_10_cloudflare_http_browser_and_githack_verified",
+  "coverage_note": "Nov 2 Chicago revision 10 verified on GitHack (45 exact HTTP paths), 99 passing Node tests and three production hostnames (439 exact assets each) plus real desktop/mobile, daily archive, Games and offline browser checks. Nine previously source-reviewed news stories and collection evidence unchanged; two sourced existing-concept guides added as site updates only. Collection remains partial with seven deferred proposals and two source lookup failures; scheduled editions are non-exhaustive."
 }
