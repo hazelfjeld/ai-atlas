@@ -12,8 +12,8 @@
       "edition_date": "2026-11-02",
       "validation_result": "batch_sha256_bytes_schema_unique_ids_dates_verified_nine_source_lookups_four_reuters_reports_explicitly_qualified",
       "status": "partially_published_with_7_deferred_catalog_proposals",
-      "publication_outcome": "immutable_revision_16_production_and_githack_verified",
-      "publication_edition": "2026-11-02-v16",
+      "publication_outcome": "immutable_revision_17_pending_independent_production_verification",
+      "publication_edition": "2026-11-02-v17",
       "accepted_news_ids": [
         "ai-news:vllm:v0.33.0rc3:2026-11-02",
         "ai-news:invokeai:v6.14.3:2026-11-01",
@@ -51,7 +51,7 @@
       "production_workflow_run_id": 41585702813,
       "githack_workflow_run_id": 41585702935,
       "verification_scope": "457 byte-verified production HTTP assets on each of aiupdates.app, www.aiupdates.app, and workers.dev, hosted Playwright archive filtering, navigation, games, offline fallback, and full catalog/GitHack hash verification; not independent scientific reproduction of cited reports.",
-      "next_action": "Read new staging queue and main receipts. Seven original catalog proposals remain deferred for canonical uniqueness and source/availability checks. Continue evidence-backed expansions while preserving current production release and true November 2 date; only add a new daily edition for genuine reviewed changes.",
+      "next_action": "Inspect actual indexed v17 catalog/GitHack and Cloudflare/hosted-browser jobs before advancing verified revision 16. On November 3 show awaiting today's separate collected edition; November 2 remains a historical partial-coverage archive. Retain seven catalog deferrals and source failures.",
       "revision_2_asset_commit": "9c49019fc8baf8c01221382bb56af3111a5fc42f",
       "publication_history": [
         {
@@ -324,6 +324,20 @@
           "production_commit": "4ed159eb322166d0d75bcc9132f118a96b40cab4",
           "production_workflow_run_id": 41585702813,
           "githack_workflow_run_id": 41585702935
+        },
+        {
+          "edition": "2026-11-02-v17",
+          "source_batch_sha256": "2dcb25af14b960f9989527170fd88daf8ba2fb5f42dcff3b72f512b08ddb57d7",
+          "news_published": 9,
+          "news_added_in_revision": 0,
+          "technologies_added": 0,
+          "terms_added": 0,
+          "existing_concept_guides_expanded": 2,
+          "site_changes_added_in_revision": 2,
+          "source_code_commit": "7de53920bd5395d1e81488871640e34fc45bcc7e",
+          "published_at": "2026-11-03T06:04:03.941Z",
+          "status": "pending_cloudflare_http_browser_and_githack_verification",
+          "note": "Retrospective Nov 2 archive revision published after Chicago midnight on Nov 3. Existing data-poisoning MLD-0268 and backdoor MLD-0085 guides only. The nine Nov 2 collected reports, original partial coverage, two source failures, one correction and seven deferred catalog proposals are unchanged. Nov 3 remains awaiting its own collection. GitHack/hosted production verification pending; v16 remains last independently certified."
         }
       ],
       "production_commit": "4ed159eb322166d0d75bcc9132f118a96b40cab4",
