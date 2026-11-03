@@ -177,9 +177,17 @@
       "sha256": "a1343af07bd47596b6da4e4a1d5ccedbf72c68dc2cdb0df436020e6116285b3c",
       "bytes": 46766,
       "published_at": "2026-11-03T11:03:06.952Z"
+    },
+    {
+      "date": "2026-11-02",
+      "revision": 23,
+      "path": "data/daily/editions/2026-11-02-v23.json",
+      "sha256": "07112fcdf47390b17e1ea9161f581b17983a2259fe99d76be4d631c32b9d97a1",
+      "bytes": 49481,
+      "published_at": "2026-11-03T11:28:16.163Z"
     }
   ],
-  "last_successful_publish_at": "2026-11-03T10:45:14Z",
-  "status": "edition_revision_22_pending_production_verification",
-  "coverage_note": "Retrospective November 2 revision 22, written November 3 America/Chicago, preserves all nine already reviewed November 2 external reports and the original partial collection window, two failed source lookups, one correction and seven deferred catalog proposals. Adds exactly two Atlas-only site_changes for existing causal intervention and causal mediation analysis guide expansions; no new canonical term IDs, technologies, external events or November 3 collector edition. Immutable older v1–v21 preserved. Last successful verification remains revision 21 (2026-11-03T10:45:14Z) until exact v22 public assets pass GitHack and Cloudflare/hosted-browser checks."
+  "last_successful_publish_at": "2026-11-03T11:17:11Z",
+  "status": "edition_revision_23_pending_production_verification",
+  "coverage_note": "Retrospective November 2 revision 23, authored November 3 Chicago, adds exactly two Atlas educational guide site changes for pre-existing Concept drift and Data drift. The nine reviewed November 2 external reports, original partial collection window, two source failures, one correction and seven deferred catalog proposals are unchanged. No November 3 news edition has been collected. Immutable historical editions v1-v22 preserved. Last verified production edition is v22, checked on main 042696e82ef6008aa615215d9c79588dd0939594 at 2026-11-03T11:17:11Z via GitHack/catalog 41625953661 and Cloudflare/browser 41625953671; v23 pending its own release checks."
 }
