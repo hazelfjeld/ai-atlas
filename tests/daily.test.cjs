@@ -437,10 +437,43 @@ test('Revision 9 indexes only the accessible sidebar update, preserving immutabl
  assert.match(after.site_changes.at(-1).summary,/not a new real-world AI event/i);
  const ledger=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8'));
  assert.equal(ledger.receipts.length,1);
- assert.equal(ledger.receipts[0].publication_edition,'2026-11-02-v9');
- assert.equal(ledger.receipts[0].publication_history.at(-1).edition,'2026-11-02-v9');
+ assert.ok(ledger.receipts[0].publication_history.some(h=>h.edition==='2026-11-02-v9'));
+ assert.equal(ledger.receipts[0].publication_edition,ledger.receipts[0].publication_history.at(-1).edition);
  assert.equal(ledger.receipts[0].deferred_catalog_proposal_ids.length,7);
  assert.equal(ledger.receipts[0].counts.news_published,9);
  assert.equal(ledger.receipts[0].counts.term_added,0);
  assert.equal(ledger.receipts[0].counts.technology_added,0);
+});
+
+test('Revision 10 only adds two reviewed Atlas guide updates, preserving real-world evidence',()=>{
+ const crypto=require('node:crypto');
+ const index=JSON.parse(fs.readFileSync('data/daily/index.json','utf8'));
+ const old=index.editions.find(e=>e.date==='2026-11-02'&&e.revision===9);
+ const newest=index.editions.find(e=>e.date==='2026-11-02'&&e.revision===10);
+ assert.ok(old&&newest);
+ const raw=fs.readFileSync(newest.path);
+ assert.equal(raw.length,newest.bytes);
+ assert.equal(crypto.createHash('sha256').update(raw).digest('hex'),newest.sha256);
+ const previous=D.validateEdition(JSON.parse(fs.readFileSync(old.path,'utf8')),old);
+ const current=D.validateEdition(JSON.parse(raw.toString('utf8')),newest);
+ assert.equal(D.chicagoDate(current.published_at),'2026-11-02');
+ for(const key of ['news','technologies','terms','coverage','corrections'])assert.deepEqual(current[key],previous[key]);
+ const diff=D.revisionDiff(previous,current);
+ assert.deepEqual(diff.site_changes.added.map(x=>x.id),['site-expanded-agentic-workflow-20261102','site-expanded-knowledge-graph-20261102']);
+ assert.equal(diff.site_changes.removed.length+diff.site_changes.updated.length,0);
+ for(const key of ['news','technologies','terms','corrections'])assert.equal(diff[key].added.length+diff[key].removed.length+diff[key].updated.length,0);
+ const guides=JSON.parse(fs.readFileSync('content/term-guides.json','utf8'));
+ const manifest=JSON.parse(fs.readFileSync('terms/manifest.json','utf8'));
+ for(const [i,id] of ['MLD-0043','MLD-0608'].entries()){
+  assert.ok(guides[id]&&manifest[id].expanded,'Guide is not in canonical encyclopedia');
+  assert.equal(diff.site_changes.added[i].catalog_path,manifest[id].path);
+  assert.ok(fs.existsSync(manifest[id].path));
+  assert.match(diff.site_changes.added[i].summary,/not a new|not evidence|not newly/i);
+ }
+ const receipt=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8')).receipts[0];
+ assert.equal(receipt.publication_edition,'2026-11-02-v10');
+ assert.equal(receipt.publication_history.at(-1).edition,'2026-11-02-v10');
+ assert.equal(receipt.counts.news_published,9);
+ assert.equal(receipt.counts.term_added,0);
+ assert.equal(receipt.deferred_catalog_proposal_ids.length,7);
 });

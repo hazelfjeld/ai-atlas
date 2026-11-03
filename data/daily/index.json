@@ -73,9 +73,17 @@
       "sha256": "7e222410b323f50ebbcf6b589d54553ecd0e2d3d93cc0cc29bd272c52198b6ed",
       "bytes": 24257,
       "published_at": "2026-11-02T23:34:56.731Z"
+    },
+    {
+      "date": "2026-11-02",
+      "revision": 10,
+      "path": "data/daily/editions/2026-11-02-v10.json",
+      "sha256": "e820c7772c39213f1e3ace81dc164a8beba8c5ca9205520c17b64c37ff8a0610",
+      "bytes": 26410,
+      "published_at": "2026-11-03T00:35:47.214Z"
     }
   ],
   "last_successful_publish_at": "2026-11-02T23:41:45Z",
-  "status": "edition_revision_9_cloudflare_http_browser_and_githack_verified",
-  "coverage_note": "November 2 revision 9 verified on GitHack and three Cloudflare production hostnames (436 exact assets on each), with responsive browser checks of the collapsible sidebar, secondary deep links, Games and offline use. Nine previously reviewed news items and prior archive corrections preserved; no new world event or catalog entry. Collection remains partial and non-exhaustive, with seven deferred proposals and two failed source lookups."
+  "status": "edition_revision_10_indexed_production_verification_pending",
+  "coverage_note": "November 2 revision 10 retains nine source-reviewed news stories and their original partial collection window. Two expanded pre-existing concept guides are Atlas site changes, not world news or new terms. This edition is indexed but production verification remains pending; November 2 v9 was last fully verified. Seven deferred proposals and two source failures remain."
 }
