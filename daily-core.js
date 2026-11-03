@@ -67,7 +67,7 @@ function safeSource(url){
 }
 function safeCatalogPath(path){
  if(typeof path!=='string')return '';
- if(/^(catalog-review\.html|hardware-review\.html|terms\/MLD-\d{4}-[a-z0-9-]+\.html|technology\/TECH-\d{4}-[a-z0-9-]+\.html|index\.html#\/(technologies|dictionary|papers|safety|playbooks)\?record=[A-Za-z0-9-]+|index\.html#\/(overview|technologies|dictionary|papers|safety|playbooks|sources))$/.test(path))return path;
+ if(/^(catalog-review\.html|hardware-review\.html|whats-new\.html|terms\/MLD-\d{4}-[a-z0-9-]+\.html|technology\/TECH-\d{4}-[a-z0-9-]+\.html|index\.html#\/(technologies|dictionary|papers|safety|playbooks)\?record=[A-Za-z0-9-]+|index\.html#\/(overview|technologies|dictionary|papers|safety|playbooks|sources))$/.test(path))return path;
  return '';
 }
 // Source filtering uses the URL's exact HTTPS host, never publisher strings or story text.

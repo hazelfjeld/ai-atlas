@@ -532,8 +532,8 @@
       "edition_date": "2026-11-03",
       "validation_result": "source_batch_sha256_bytes_schema_unique_news_ids_canonical_source_urls_dates_collection_window_verified_eight_news_web_source_reviews_production_and_public_asset_checks_passed",
       "status": "partially_published_with_4_deferred_catalog_proposals",
-      "publication_outcome": "immutable_nov03_v3_cloudflare_http_browser_and_githack_verified",
-      "publication_edition": "2026-11-03-v3",
+      "publication_outcome": "immutable_revision_4_pending_production_verification",
+      "publication_edition": "2026-11-03-v4",
       "accepted_news_ids": [
         "ai-news:tohoku-aisin:stt-mram-soc:2026-11-02",
         "ai-news:openai:grid-protectors:2026-11-02",
@@ -610,12 +610,25 @@
           "production_commit": "fc565eefb38b17e0b1a6dac28446297843a8e590",
           "production_workflow_run_id": 41703813098,
           "githack_workflow_run_id": 41703812947
+        },
+        {
+          "edition": "2026-11-03-v4",
+          "source_batch_sha256": "f6d155caec1fda714b8fdd456ec47cc886dd10856159b65b9745c69d64b9adb3",
+          "news_published": 8,
+          "technology_added": 0,
+          "term_added": 0,
+          "corrections": 0,
+          "catalog_deferred": 4,
+          "site_changes_added": 3,
+          "published_at": "2026-11-03T22:34:02.465Z",
+          "status": "pending_production_verification",
+          "note": "Two source-reviewed guides and previously verified source publication date filtering are Atlas-only historical site changes; original collector evidence unchanged."
         }
       ],
       "production_verified_at": "2026-11-03T19:34:45Z",
       "production_verified_revision": 3,
       "last_verified_at": "2026-11-03T19:34:45Z",
-      "next_action": "Intake staged queue before future expansion. Pursue one fully source-reviewed November 3 deferred catalog candidate with complete canonical data, linked pages/search/relationships and offline fallback; avoid claiming unreplicated prototype speedups as deployments.",
+      "next_action": "Verify current-commit GitHack/catalog and Cloudflare production/browser jobs before separately attesting revision 4. Intake new staging before canonical catalog expansion.",
       "production_workflow_run_id": 41703813098,
       "githack_workflow_run_id": 41703812947,
       "production_commit": "fc565eefb38b17e0b1a6dac28446297843a8e590",

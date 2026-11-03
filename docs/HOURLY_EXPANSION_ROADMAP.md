@@ -1,3 +1,9 @@
+## November 3, 16:30 CST — immutable November 3 revision 4 pending verification
+- Staging queue index contained two batches and both matched prior source SHA-256 receipts; no unprocessed collection was skipped.
+- Revision 4 adds exactly **three Atlas-only previously published website changes**: memory-bandwidth and arithmetic-intensity educational guides (PR #49), plus the source publication date filter (PR #48). No outside news or new canonical IDs; unchanged eight reviewed reports, fourteen checked sources, three failed URLs, four deferred catalog proposals and partial window.
+- Immutable archive SHA-256 `076e984a96757f68be0b3240a9bdd4c704d1e1e10944414fbd3211e5d029fa57` (27286 UTF-8 bytes). New safe deep link to the daily archive and regression test for evidence preservation, route validation, date handling and idempotence. Successful-publication timestamp remains at verified v3.
+- Pending: merge and inspect both GitHack/catalog and Cloudflare production/browser jobs for the new commit, then attest v4 without rewriting immutable files. Last verified public link stays https://aiupdates.app/whats-new.html?date=2026-11-03&revision=3 until production proof; pinned professor-demo release retained.
+
 ## November 3, 15:33 CST — two roofline/memory guides verified in production
 
 - **Production:** [Memory bandwidth](https://aiupdates.app/terms/MLD-0724-memory-bandwidth.html) and [Arithmetic intensity](https://aiupdates.app/terms/MLD-0062-arithmetic-intensity.html) expanded from existing reference pages into nine-section guides. They teach unit-checked effective-bandwidth, memory roof and ridge-point calculations, LLM inference use cases and measurable profiling protocols, with four primary sources each and explicit hypothetical/publisher-reported evidence boundaries. No canonical IDs added. **1,345** stable term pages; **55** expanded; **1,290** reference-depth; **302** technology profiles and original 1,705 prepared records preserved.
