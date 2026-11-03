@@ -1,0 +1,228 @@
+{
+  "schema": 1,
+  "document_type": "editorial_candidate_triage_not_canonical_catalog",
+  "reviewed_on": "2026-11-03",
+  "collection_edition_date": "2026-11-02",
+  "source_batch": {
+    "batch_id": "atlas-daily-20261102-first-0850ct-a",
+    "source_commit": "da93e2fd5545cabc0b001310eab55bf8eeea9da8",
+    "source_sha256": "2dcb25af14b960f9989527170fd88daf8ba2fb5f42dcff3b72f512b08ddb57d7"
+  },
+  "published_canonical_additions": 0,
+  "reviewed_proposals": 7,
+  "independent_product_or_benchmark_replication": false,
+  "source_scope": "First-party project documentation, dated release notes and cited research. Review decisions are editorial, not reproduced performance evaluations. Original daily source-coverage failures remain in the edition archive.",
+  "candidates": [
+    {
+      "proposal_id": "tech-proposal:invokeai:2026-11-02",
+      "name": "InvokeAI",
+      "kind": "technology",
+      "disposition": "distinct_candidate",
+      "publication_state": "deferred_not_in_canonical_catalog",
+      "related_existing_term_ids": [
+        "MLD-0289"
+      ],
+      "editorial_basis": "Named image-generation editing and node-workflow application, not a synonym for diffusion models. The November 1, 2026 v6.14.3 patch adds editable vector Canvas layers and resume-download repair to existing software.",
+      "evidence_scope": "First-party release notes and project repository checked; release features are publisher claims, not an independently measured fidelity result.",
+      "limitations": "Compatibility depends on backends, platform and models. Repository licensing and distribution/model entitlements require separate review; not all usage should be described as unrestricted.",
+      "required_before_catalog_publication": [
+        "Assign unused stable technology ID without replacing 300 archived records",
+        "Document supported model backends, deployment/hardware requirements and distribution licenses",
+        "Connect canonical source/profile, related concepts, comparison/search and offline manifest"
+      ],
+      "primary_sources": [
+        {
+          "title": "Official v6.14.3 release notes",
+          "url": "https://github.com/invoke-ai/InvokeAI/releases/tag/v6.14.3"
+        },
+        {
+          "title": "Project and license documentation",
+          "url": "https://github.com/invoke-ai/InvokeAI"
+        }
+      ]
+    },
+    {
+      "proposal_id": "tech-proposal:gdpx:2026-11-02",
+      "name": "GDPx",
+      "kind": "technology",
+      "disposition": "distinct_benchmark_candidate",
+      "publication_state": "deferred_not_in_canonical_catalog",
+      "related_existing_term_ids": [
+        "MLD-0110",
+        "MLD-0371",
+        "MLD-0041"
+      ],
+      "editorial_basis": "Named domain-specific evaluation suite: an agent is assessed on longer tasks in interactive work environments. This is an evaluation artifact, not a foundation model or an observed safety incident.",
+      "evidence_scope": "The publisher reports 11 equally weighted domains and scores averaged over three attempts. These are benchmark-publisher reports, not a third-party replication or an estimate of all real work.",
+      "limitations": "Task selection, graders, tool-harness differences, task contamination, benchmark revisions and partial credit constrain generalization. Avoid interpreting a publisher leaderboard's 12% as a universally replicated model failure rate.",
+      "required_before_catalog_publication": [
+        "Determine public task availability, evaluation reproducibility and usage license",
+        "Document version, task and grading specifications and dependence on agent harness",
+        "Link to existing evaluation/environment concepts; label all scores publisher-reported"
+      ],
+      "primary_sources": [
+        {
+          "title": "GDPx publisher's benchmark methods and leaderboard",
+          "url": "https://gdpx.semianalysis.com/"
+        },
+        {
+          "title": "Publisher's benchmark report",
+          "url": "https://newsletter.semianalysis.com/p/gdpx-measuring-frontier-model-capabilities"
+        }
+      ]
+    },
+    {
+      "proposal_id": "tech-proposal:nvidia-auto-ontology:2026-11-02",
+      "name": "NVIDIA Auto Ontology",
+      "kind": "technology",
+      "disposition": "distinct_framework_candidate",
+      "publication_state": "deferred_not_in_canonical_catalog",
+      "related_existing_term_ids": [
+        "MLD-0608",
+        "MLD-1104",
+        "MLD-1033"
+      ],
+      "editorial_basis": "Named Python software framework for a semantic ontology layer and natural-language structured-data querying; not a newly invented ontology concept.",
+      "evidence_scope": "First-party README describes Next.js gateway, FastAPI Python 3.12+, PostgreSQL/pgvector and configurable NVIDIA NIM inference endpoints. Apache-2.0 covers project code with third-party terms separately.",
+      "limitations": "No verified initial public-release date; API inference may incur usage costs. The FastAPI service is a trusted internal boundary and must not be directly exposed to public untrusted clients; no generated SQL accuracy benchmark was replicated.",
+      "required_before_catalog_publication": [
+        "Record exact project version and stable official documentation URL",
+        "Verify runtime, connected-database authorization, endpoint and cost constraints, third-party notices",
+        "Add profile ID, canonical search/comparison, relationships, and a working detail route"
+      ],
+      "primary_sources": [
+        {
+          "title": "Official project README and deployment cautions",
+          "url": "https://github.com/NVIDIA/auto-ontology"
+        },
+        {
+          "title": "Third-party license notices",
+          "url": "https://github.com/NVIDIA/auto-ontology/blob/main/THIRD_PARTY_NOTICES.md"
+        }
+      ]
+    },
+    {
+      "proposal_id": "tech-proposal:windmill:2026-11-02",
+      "name": "Windmill",
+      "kind": "technology",
+      "disposition": "distinct_workflow_platform_candidate",
+      "publication_state": "deferred_not_in_canonical_catalog",
+      "related_existing_term_ids": [
+        "MLD-0043",
+        "MLD-0851"
+      ],
+      "editorial_basis": "Existing developer workflow and app platform. The November 2, 2026 v1.856.0 notes report that MCP access can accept tokens from an external OIDC issuer.",
+      "evidence_scope": "First-party release notes document the feature; this is not an independent security certification or a new-product launch.",
+      "limitations": "Community, enterprise and commercial distribution entitlements differ; source availability and a documented OIDC feature alone do not establish a secure production configuration.",
+      "required_before_catalog_publication": [
+        "Verify feature/version compatibility and minimum environment requirements",
+        "Document edition-specific license and deployment restrictions",
+        "Assign distinct technology ID with source, links, search, comparison and stable route"
+      ],
+      "primary_sources": [
+        {
+          "title": "Official v1.856.0 release notes",
+          "url": "https://github.com/windmill-labs/windmill/releases/tag/v1.856.0"
+        },
+        {
+          "title": "Project code and distribution terms",
+          "url": "https://github.com/windmill-labs/windmill"
+        }
+      ]
+    },
+    {
+      "proposal_id": "term-proposal:agent-harness",
+      "name": "Agent harness",
+      "kind": "term",
+      "disposition": "distinct_term_candidate",
+      "publication_state": "deferred_not_in_canonical_catalog",
+      "related_existing_term_ids": [
+        "MLD-0043",
+        "MLD-0041",
+        "MLD-1246"
+      ],
+      "editorial_basis": "An execution-and-observation scaffold surrounding an agent model, including tool interfaces, allowed actions, state, retries, telemetry and termination rules. Distinct in emphasis from a full agentic workflow and from model weights.",
+      "evidence_scope": "Terminology is grounded in agent-runner documentation; the source does not establish a universally fixed architecture.",
+      "limitations": "Tool permissions and prompting are implementation-specific. Evaluation must hold task/model constant when contrasting harness variants, and cannot attribute all gains to the model itself.",
+      "required_before_catalog_publication": [
+        "Choose a precise definition and aliases without claiming an industry standard",
+        "Make boundaries with Agentic workflow, Tool use and Agent evaluation explicit",
+        "Add sourced example, security implications, stable ID, graph links and search"
+      ],
+      "primary_sources": [
+        {
+          "title": "OpenAI Agents SDK runner reference",
+          "url": "https://openai.github.io/openai-agents-js/openai/agents/classes/runner/"
+        },
+        {
+          "title": "AgentBench primary research",
+          "url": "https://arxiv.org/abs/2308.03688"
+        }
+      ]
+    },
+    {
+      "proposal_id": "term-proposal:semantic-ontology-layer",
+      "name": "Semantic ontology layer",
+      "kind": "term",
+      "disposition": "distinct_term_candidate",
+      "publication_state": "deferred_not_in_canonical_catalog",
+      "related_existing_term_ids": [
+        "MLD-0608",
+        "MLD-1104",
+        "MLD-1033"
+      ],
+      "editorial_basis": "A curated semantic/governance layer specifying entities, relationships, metric meaning, access constraints and lineage for agent or analytics queries. Broader than a bare knowledge-graph representation and different from nearest-neighbor semantic search.",
+      "evidence_scope": "Grounded in one software implementation and adjacent ontology practice; the exact composite phrase is descriptive rather than established as a universally defined scientific standard.",
+      "limitations": "A schema or ontology is neither evidence of correct input data nor authorization to query all linked systems; guard against treating retrieved context as trustworthy instructions.",
+      "required_before_catalog_publication": [
+        "Source at least one independent terminology reference before canonization",
+        "Specify how the concept differs from Knowledge graph, semantic search and RAG",
+        "Publish canonical definition, applied example, stable ID and connected detail/search pages"
+      ],
+      "primary_sources": [
+        {
+          "title": "NVIDIA Auto Ontology project",
+          "url": "https://github.com/NVIDIA/auto-ontology"
+        },
+        {
+          "title": "W3C OWL 2 ontology language overview",
+          "url": "https://www.w3.org/TR/owl2-overview/"
+        }
+      ]
+    },
+    {
+      "proposal_id": "term-proposal:environment-grounded-agent-benchmark",
+      "name": "Environment-grounded agent benchmark",
+      "kind": "term",
+      "disposition": "composite_phrase_no_new_id",
+      "publication_state": "deferred_not_in_canonical_catalog",
+      "related_existing_term_ids": [
+        "MLD-0110",
+        "MLD-0371",
+        "MLD-0041"
+      ],
+      "editorial_basis": "Describes benchmarking agent behavior against interactive environment state and task outcomes. It presently combines already indexed Benchmark, Environment and Agent evaluation rather than identifying a novel independent mechanism.",
+      "evidence_scope": "Primary AgentBench, OSWorld and SWE-bench papers demonstrate interactive or environment-based evaluation, not standardization of this exact phrase.",
+      "limitations": "Evaluations differ in task construction, graders, interaction limits and contamination sensitivity. Do not count a new term or assert independently reproduced scores.",
+      "required_before_catalog_publication": [
+        "Keep as a related search phrase or description only after verifying index alias behavior",
+        "Only reconsider a new stable term ID if independent usage and a genuinely distinct mechanism are established",
+        "Preserve exact constituent concept IDs and evidence boundaries"
+      ],
+      "primary_sources": [
+        {
+          "title": "AgentBench primary paper",
+          "url": "https://arxiv.org/abs/2308.03688"
+        },
+        {
+          "title": "OSWorld primary paper",
+          "url": "https://arxiv.org/abs/2404.07972"
+        },
+        {
+          "title": "SWE-bench primary paper",
+          "url": "https://arxiv.org/abs/2310.06770"
+        }
+      ]
+    }
+  ]
+}
