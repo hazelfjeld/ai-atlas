@@ -182,7 +182,7 @@ test('The unfiltered daily reader shows explicit zero counts while filtered sear
  'Deferred proposals are not catalog additions',
  'New to AI Updates is not the same as new to the world',
  'No correction was recorded',
- "if(!records.length&&(topic!=='all'||query.trim()))continue",
+ "if(!records.length&&(topic!=='all'||review!=='all'||query.trim()))continue",
  'C.matchesTopic(item,topic)',
  'C.matchesQuery(item,query)'
  ])assert.ok(script.includes(text),text);
