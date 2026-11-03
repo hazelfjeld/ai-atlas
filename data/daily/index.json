@@ -195,7 +195,7 @@
       "published_at": "2026-11-03T12:04:44.071Z"
     }
   ],
-  "last_successful_publish_at": "2026-11-03T11:36:00Z",
-  "status": "edition_revision_24_pending_production_verification",
-  "coverage_note": "Immutable November 2 retrospective revision 24 adds one actual November 3 Atlas editorial-site improvement: a structured, source-attributed seven-candidate review export and accessible decision table (0 new technologies/term IDs or outside-world news reports). The original nine reviewed November 2 stories, partial collection window, two failed source lookups, one correction and seven deferred catalog proposals are unchanged. Verified v23 remains the last independently verified production edition as of 2026-11-03T11:36:00Z (catalog/GitHack 41628388461 and Cloudflare/hosted-browser 41628388522); revision 24 is pending its own GitHack and Cloudflare verification. The separate November 3 collector edition remains awaiting collection; all immutable revisions v1-v24 are preserved."
+  "last_successful_publish_at": "2026-11-03T12:19:22Z",
+  "status": "edition_revision_24_production_verified",
+  "coverage_note": "Immutable November 2 retrospective revision 24 independently passed exact main catalog/GitHack workflow 41634333269 and Cloudflare production/hosted-browser workflow 41634333341 on acda993d467bcdb34304304ba60ebf94fe89a3de at 2026-11-03T12:19:22Z. All four substantive jobs completed: 132 Node tests, integrity/generation checks, 473 exact HTTP assets verified on each of three production hostnames, interactive archive/search/CSV/mobile/Games/offline checks and GitHack byte comparison. v24 reports one actual November 3 Atlas website update (a seven-candidate editorial review and source-attributed public export), NOT new external news or canonical catalog records. The original November 2 nine reviewed reports, one correction, seven deferred proposals, partial collection window and two failed source lookups remain. The distinct November 3 collector edition is still awaiting collection; all 24 immutable revisions and the professor demo remain intact."
 }
