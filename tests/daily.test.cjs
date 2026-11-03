@@ -914,8 +914,8 @@ test('Retrospective v20 adds only source-domain filtering as an Atlas site chang
  assert.match(diff.site_changes.added[0].summary,/not new external news/i);
  assert.equal(D.selection(idx,'2026-11-03').todayEntry,null,'No Nov 3 collection was manufactured');
  const receipt=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8')).receipts[0];
- assert.equal(receipt.publication_edition,'2026-11-02-v20');
- assert.equal(receipt.publication_history.at(-1).edition,'2026-11-02-v20');
+ assert.ok(receipt.publication_history.some(h=>h.edition==='2026-11-02-v20'), 'Immutable historical revision 20 must remain in the receipt ledger');
+ assert.equal(receipt.publication_history.at(-1).edition,receipt.publication_edition, 'Latest receipt head and history must agree');
  assert.equal(receipt.deferred_catalog_proposal_ids.length,7);
  assert.equal(receipt.counts.news_published,9);
  assert.equal(receipt.counts.technology_added+receipt.counts.term_added,0);
