@@ -16,7 +16,7 @@ test('Deferred proposal review is linked and clearly not catalog publication',()
  const candidates=['InvokeAI','GDPx','NVIDIA Auto Ontology','Windmill','Agent harness','Semantic ontology layer','Environment-grounded agent benchmark'];
  for(const name of candidates)assert.ok(page.includes('<h3>'+name+'</h3>'),'Missing proposal: '+name);
  assert.equal((page.match(/<article class="card">/g)||[]).length,7);
- assert.match(page,/not independently reproduced/i);
+ assert.match(page,/not (?:been )?independently reproduced/i);
  assert.match(page,/Initial release date remains unverified/);
 });
 test('Catalog review has working first-party citations and canonical links',()=>{
