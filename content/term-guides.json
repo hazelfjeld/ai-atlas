@@ -2942,5 +2942,132 @@
         "https://genai.owasp.org/llmrisk/llm01-prompt-injection/"
       ]
     ]
+  },
+  "MLD-0724": {
+    "reviewed_on": "2026-11-03",
+    "prerequisites": [
+      "MLD-0437",
+      "MLD-1232"
+    ],
+    "sections": [
+      [
+        "Where bandwidth enters an AI computation",
+        "A processor must move instructions, activations, weights and intermediate tensors through a hierarchy of storage. Memory bandwidth measures the rate of this movement at a named level: DRAM, device HBM, cache, a bus or a network link. A fast arithmetic unit can sit idle when the relevant bytes arrive too slowly; the identity of the limiting level must be measured, not assumed."
+      ],
+      [
+        "Peak specification versus achieved bytes per second",
+        "Theoretical bandwidth describes an interface under ideal transfers, not the sustainable throughput of an arbitrary kernel. Effective bandwidth from a timed operation is (bytes read + bytes written) / elapsed seconds. The same experiment must count transfers consistently and distinguish decimal GB (10^9 bytes) from binary GiB (2^30 bytes). Cache hits, noncoalesced requests, contention and protocol overhead affect achieved bandwidth."
+      ],
+      [
+        "Worked matrix-copy arithmetic",
+        "A synthetic copy of a 2048 by 2048 float32 matrix nominally reads and writes 4,194,304 values, or 33,554,432 bytes combined. If timing the device kernel alone took 0.0007 seconds, the illustrative effective rate is 33,554,432 / 0.0007 / 10^9 = 47.93 GB/s. Neither that duration nor that rate is a real measurement; read/write traffic and host-to-device copies must be accounted for separately."
+      ],
+      [
+        "Roofline bound and the bottleneck threshold",
+        "For arithmetic intensity I measured in FLOP/byte and usable bandwidth B in byte/s, the memory roof is I times B FLOP/s. With an assumed I = 2 FLOP/byte and B = 400 GB/s, the ceiling is 800 GFLOP/s, even if the hardware advertises 10 TFLOP/s. The roofline bound is an estimate for this chosen level of traffic; it is neither a benchmark result nor proof that a particular kernel reaches that ceiling."
+      ],
+      [
+        "LLM inference and model weight traffic",
+        "An illustrative 7-billion-parameter model with 2 bytes per stored weight occupies about 14 GB before overhead. If every weight were streamed once per generated token over a 1 TB/s memory channel, weight traffic alone implies a 14 ms lower bound for that simplified step. Actual token latency depends on cache, batching, quantization, architecture, KV-cache reads, kernel scheduling, compute and communication; the estimate is not a model latency forecast."
+      ],
+      [
+        "How to measure rather than guess",
+        "Profile representative shapes, batch sizes and sequence lengths after warm-up and synchronization. Record kernel durations, DRAM bytes, L2/L1 hit rates, occupancy and relevant tensor-core counters using tools such as Nsight Compute; include uncertainty across repeated runs. Compare achieved rates to the correctly scoped peak and evaluate end-to-end latency separately from individual kernels."
+      ],
+      [
+        "When moving fewer bytes beats a faster memory bus",
+        "Fusion can keep intermediate tensors on-chip; tiling and reuse can reduce external traffic; lower-precision formats can shrink model weights. These improvements may be limited by register pressure, conversions, cache behavior or accuracy requirements. Test the unfused and fused paths with identical outputs and workloads; a lower reported byte count is not automatically a faster application."
+      ],
+      [
+        "Near-memory hardware is a different design choice",
+        "In a November 2 research announcement, Tohoku University and AISIN described storing boot data and Tiny YOLOv3 weights in 32 MB of embedded STT-MRAM on a prototype chip. They reported a 65.7 ms operating-system boot, 124.2 ms from power-on to first detection, and 50.7 mJ per frame. This is publisher-reported, configuration-specific evidence about avoiding external transfers, not a claim that STT-MRAM universally offers higher HBM bandwidth or a commercial deployment."
+      ],
+      [
+        "Common mistakes and decision criteria",
+        "Do not equate larger peak GB/s with lower latency, count a cached byte as an off-chip transfer, or compare TFLOP/s without arithmetic intensity and precision. Start by locating the bottleneck for the target workload, then compare memory traffic, runtime and output quality before and after a change. Report device, driver, shapes, measurement scope and confidence limits so an independent team can attempt reproduction."
+      ]
+    ],
+    "citations": [
+      [
+        "NVIDIA CUDA C++ Best Practices Guide: theoretical versus effective memory bandwidth",
+        "https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html"
+      ],
+      [
+        "NVIDIA Nsight Compute Profiling Guide: hierarchical roofline and achieved traffic",
+        "https://docs.nvidia.com/nsight-compute/ProfilingGuide/"
+      ],
+      [
+        "Williams, Waterman and Patterson (2008), the original Berkeley Roofline performance model",
+        "https://www2.eecs.berkeley.edu/Pubs/TechRpts/2008/EECS-2008-134.html"
+      ],
+      [
+        "Tohoku University and AISIN (2026), controlled STT-MRAM near-memory AI prototype",
+        "https://www.tohoku.ac.jp/japanese/2026/11/press20261102-03-emram.html"
+      ]
+    ]
+  },
+  "MLD-0062": {
+    "reviewed_on": "2026-11-03",
+    "prerequisites": [
+      "MLD-0724",
+      "MLD-0437",
+      "MLD-1232"
+    ],
+    "sections": [
+      [
+        "Arithmetic intensity from first principles",
+        "Arithmetic intensity is useful work divided by bytes moved across a specified memory boundary, usually FLOP/byte for a chosen kernel. A device cannot perform a multiplication with an operand it has not received. Increasing the reuse of data can raise the number of operations done per byte fetched, but only after defining which operations and which memory layer the ratio counts."
+      ],
+      [
+        "The roofline relationship",
+        "If achievable compute throughput has ceiling Ppeak and the memory layer delivers at most B bytes/s, performance obeys P <= min(Ppeak, B times I), where I is FLOP/byte. This is a bound, not a predicted benchmark score. The transition between memory-limited and compute-limited regions occurs at intensity Ppeak/B; real kernels can fall below both roofs for scheduling, synchronization or instruction inefficiency."
+      ],
+      [
+        "Worked synthetic kernel classification",
+        "Suppose a kernel executes 12 million floating-point operations and moves 8 million bytes to and from device DRAM. Intensity is 12/8 = 1.5 FLOP/byte. At an illustrative sustainable 600 GB/s, the memory roof is 0.9 TFLOP/s. A 12 TFLOP/s compute roof would not be reachable through that traffic pattern; no actual GPU or benchmark is being reported."
+      ],
+      [
+        "Calculate the ridge point with units",
+        "Under the same assumed 12 TFLOP/s compute peak and 600 GB/s bandwidth, the ridge point is 12,000 GFLOP/s divided by 600 GB/s = 20 FLOP/byte. Below 20 FLOP/byte the model's memory roof is lower; above it the compute roof is lower. The threshold changes with hardware, arithmetic precision and which cache or memory level supplied B."
+      ],
+      [
+        "Data reuse and a controlled counterexample",
+        "Imagine 128 million FLOP requiring 64 MB of DRAM traffic: intensity is 2 FLOP/byte. A valid tiling change that halves off-chip traffic to 32 MB raises it to 4 FLOP/byte, but could slow execution if it adds synchronization or register spills. Run an identical-output A/B comparison, observe actual DRAM counters and latency, and do not infer faster execution from intensity alone."
+      ],
+      [
+        "Matrix multiplication versus matrix-vector multiplication",
+        "Multiplying large dense matrices can reuse blocks of operands many times, while repeated matrix-vector steps at small batch sizes often reuse each weight less. Thus increasing batch size can change measured arithmetic intensity and the active bottleneck. This is a conditional explanation for why prefilling an LLM prompt and decoding one token can stress very different parts of the same accelerator."
+      ],
+      [
+        "How to profile the right level",
+        "Collect FLOP counts and bytes for the same operation and memory hierarchy with a profiler rather than combining host-transfer bytes with device-kernel FLOPs. NVIDIA Nsight Compute supports hierarchical rooflines for device memory and caches. Cross-check the relevant arithmetic type, cache counters and optimized instruction path; a tensor-core estimate must not silently use a scalar FP32 roof."
+      ],
+      [
+        "Where edge near-memory designs fit",
+        "A near-memory chip can reduce expensive transfers without increasing the raw FLOP count. Tohoku University and AISIN's November 2 STT-MRAM demonstration is a controlled illustration of minimizing external weight and boot-data movement. Its publisher-reported power-on and energy figures are architecture- and model-dependent; they do not supply a general roofline measurement for other devices."
+      ],
+      [
+        "Interpretation, limitations and reproducibility",
+        "A high computed FLOP/byte ratio is not an accuracy or reliability metric, and low intensity is not evidence of poor engineering when the workload is inherently streaming. Include operation-count conventions, bandwidth layer, batch dimensions, cache behavior, precision and repeated timings in any comparison. Roofline analysis prioritizes bottlenecks, but only a measured and reproducible optimization establishes a real improvement."
+      ]
+    ],
+    "citations": [
+      [
+        "NVIDIA CUDA C++ Best Practices Guide: theoretical versus effective memory bandwidth",
+        "https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html"
+      ],
+      [
+        "NVIDIA Nsight Compute Profiling Guide: hierarchical roofline and achieved traffic",
+        "https://docs.nvidia.com/nsight-compute/ProfilingGuide/"
+      ],
+      [
+        "Williams, Waterman and Patterson (2008), the original Berkeley Roofline performance model",
+        "https://www2.eecs.berkeley.edu/Pubs/TechRpts/2008/EECS-2008-134.html"
+      ],
+      [
+        "Tohoku University and AISIN (2026), controlled STT-MRAM near-memory AI prototype",
+        "https://www.tohoku.ac.jp/japanese/2026/11/press20261102-03-emram.html"
+      ]
+    ]
   }
 }

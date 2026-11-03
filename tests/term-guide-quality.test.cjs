@@ -360,3 +360,27 @@ test('Instruction authority and defense-in-depth guides explain conditional secu
     assert.match(html,/Expanded guide/); assert.match(html,/Sources for the expanded explanation/);
   }
 });
+
+
+test('Bandwidth and arithmetic-intensity guides teach measured memory traffic and roofline limits', () => {
+  const expected = {
+    'MLD-0724': [/33,554,432/, /47\.93 GB\/s/, /14 ms/, /124\.2 ms/, /not a.*benchmark/i],
+    'MLD-0062': [/1\.5 FLOP\/byte/, /0\.9 TFLOP\/s/, /20 FLOP\/byte/, /measured/i, /reproduc/i],
+  };
+  for (const [id, patterns] of Object.entries(expected)) {
+    const guide=guides[id];
+    assert.ok(guide && termManifest[id], 'Missing direct expanded term page '+id);
+    assert.equal(guide.reviewed_on,'2026-11-03');
+    assert.equal(guide.sections.length,9);
+    assert.equal(new Set(guide.sections.map(x=>x[0])).size,9);
+    assert.ok(guide.sections.every(([heading,body])=>heading.length>=8 && body.length>=120), 'Insufficient mechanism detail '+id);
+    assert.ok(guide.prerequisites.every(id=>termManifest[id]), 'Broken prerequisite '+id);
+    assert.equal(guide.citations.length,4);
+    assert.ok(guide.citations.every(([title,url])=>title.length>35 && new URL(url).protocol==='https:'), 'Invalid source '+id);
+    const prose=guide.sections.map(x=>x[1]).join(' ');
+    for(const re of patterns)assert.match(prose,re,'Missing calculation or caveat '+id);
+    const page=fs.readFileSync(path.join(root,termManifest[id].path),'utf8');
+    assert.match(page,/Expanded guide/);
+    assert.match(page,/Sources for the expanded explanation/);
+  }
+});
