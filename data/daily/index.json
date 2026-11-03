@@ -155,7 +155,7 @@
       "published_at": "2026-11-03T08:41:27.992Z"
     }
   ],
-  "last_successful_publish_at": "2026-11-03T06:43:27Z",
-  "status": "edition_revision_18_production_verified",
-  "coverage_note": "November 2 retrospective revision 18 adds verified-edition, filter-aware evidence CSV downloads and expanded 32-revision recovery. Nine original source-reviewed reports, seven deferred catalog proposals and two inaccessible lookups retain the November 2 partial coverage window; November 3 awaits a separate collection. GitHack/catalog workflow 41591296131 and Cloudflare/hosted-browser workflow 41591296136 passed 117 Node tests and 461 exact HTTP assets per hostname on the v18 release cff55ae; final release metadata commit d3bc76a passed workflows 41591878379 and 41591878286. Source claims were not independently replicated. Revision 19 records the exact review-label UI filter as a site-only improvement; source collection unchanged. Revision 19 pending independent deployment verification; revision 18 remains the last successful production receipt."
+  "last_successful_publish_at": "2026-11-03T08:45:53Z",
+  "status": "edition_revision_19_production_verified",
+  "coverage_note": "November 2 retrospective revision 19: one verified UI change (exact original review-label filtering of date-selected news, shareable filters and CSV evidence exports). All nine original source-reviewed reports, seven deferred catalog proposals, and two source failures remain from the partial November 2 collection. No fresh November 3 collection and no new term or technology IDs. Publication on Nov 3 Chicago time must not be confused with source event dates. GitHack/catalog verification 41605331581, Cloudflare hosted-browser and byte verification 41605331520 passed on aff4cc1b8073cd33a33cd8e6205d21d4ba8b7b53 (120 Node tests; 462 exact HTTP files per each of three hostnames). Historical v1-v18 remain immutable. Coverage is curated, partial and non-exhaustive."
 }

@@ -849,8 +849,8 @@ test('Retrospective revision 19 adds only the Atlas evidence-review filter, pres
  assert.equal(D.selection(idx,'2026-11-03').todayEntry,null);
  const receipt=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8')).receipts[0];
  assert.equal(receipt.publication_edition,'2026-11-02-v19');
- assert.equal(receipt.publication_history.at(-1).status,'pending_production_verification');
- assert.equal(receipt.production_verified_revision,18);
+ assert.equal(receipt.publication_history.at(-1).status,'cloudflare_http_browser_and_githack_verified');
+ assert.equal(receipt.production_verified_revision,19);
  assert.equal(receipt.deferred_catalog_proposal_ids.length,7);
  assert.equal(receipt.counts.news_published,9);
  assert.equal(receipt.counts.technology_added+receipt.counts.term_added,0);
