@@ -197,8 +197,8 @@ function citationCsv(edition,entry,filters={}){
  const query=typeof filters.query==='string'?filters.query.slice(0,120):'';
  const headers=['edition_date','revision','collection_status','section','record_id','title','review_status','release_status','summary','why_it_matters','caveat','source_publication_date','event_date','discovered_at','added_to_atlas_at','source_url','atlas_page','tags'];
  const cell=value=>{
-  let s=String(value??'').replace(/[\\u0000-\\u001f\\u007f]+/g,' ');
-  if(/^\\s*[=+\\-@]/.test(s))s="'"+s; // CSV injection defense for spreadsheet readers.
+  let s=String(value??'').replace(/[\u0000-\u001f\u007f]+/g,' ');
+  if(/^\s*[=+\-@]/.test(s))s="'"+s; // CSV injection defense for spreadsheet readers.
   return '"'+s.replace(/"/g,'""')+'"';
  };
  const result=[headers.map(cell).join(',')];
@@ -210,7 +210,7 @@ function citationCsv(edition,entry,filters={}){
   }
  }
  // UTF-8 BOM improves non-ASCII compatibility with common spreadsheet software.
- return '\\ufeff'+result.join('\\r\\n')+'\\r\\n';
+ return '\ufeff'+result.join('\r\n')+'\r\n';
 }
 return {KINDS,matchesTopic,matchesQuery,validDate,validTimestamp,chicagoDate,safeSource,safeCatalogPath,validateIndex,validateEdition,selection,fallbackOrder,revisionDiff,requestedEdition,permalink,viewFilters,filterPermalink,citationCsv};
 });
