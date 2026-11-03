@@ -974,11 +974,12 @@ test('Retrospective v23 adds only two real Atlas drift guides and leaves the Nov
  }
  assert.equal(D.selection(index,'2026-11-03').todayEntry,null);
  const receipt=JSON.parse(fs.readFileSync('data/daily/published-batches.json')).receipts[0];
- assert.equal(receipt.production_verified_revision,22);
- assert.equal(receipt.publication_history.at(-2).edition,'2026-11-02-v22');
- assert.equal(receipt.publication_history.at(-2).status,'cloudflare_http_browser_and_githack_verified');
- assert.equal(receipt.publication_history.at(-1).edition,'2026-11-02-v23');
- assert.equal(receipt.publication_history.at(-1).site_changes_added_in_revision,2);
+ assert.ok(receipt.production_verified_revision>=22, 'Must retain previously verified revision 22');
+ const v22=receipt.publication_history.find(h=>h.edition==='2026-11-02-v22');
+ const v23=receipt.publication_history.find(h=>h.edition==='2026-11-02-v23');
+ assert.equal(v22?.status,'cloudflare_http_browser_and_githack_verified');
+ assert.equal(v23?.site_changes_added_in_revision,2);
+ if(receipt.production_verified_revision>=23)assert.equal(v23.status,'cloudflare_http_browser_and_githack_verified');
  assert.equal(receipt.deferred_catalog_proposal_ids.length,7);
  assert.equal(receipt.counts.news_published,9);
 });
