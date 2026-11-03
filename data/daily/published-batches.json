@@ -412,9 +412,9 @@
           "githack_workflow_run_id": 41621552158
         }
       ],
-      "production_commit": "158428e703dcc777ce53ec0a26859a186216fb45",
-      "last_verified_public_url": "https://aiupdates.app/whats-new.html?date=2026-11-02&revision=20",
-      "last_verified_at": "2026-11-03T09:43:42Z",
+      "production_commit": "c28d6877aaf6a82715c4faa69eef25daf3303e39",
+      "last_verified_public_url": "https://aiupdates.app/whats-new.html?date=2026-11-02&revision=21",
+      "last_verified_at": "2026-11-03T10:45:14Z",
       "accepted_catalog_update_ids": [
         "tech-proposal:vllm:2026-11-02-rc3"
       ],
