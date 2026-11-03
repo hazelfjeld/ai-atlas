@@ -171,7 +171,7 @@
       "published_at": "2026-11-03T10:39:07.441Z"
     }
   ],
-  "last_successful_publish_at": "2026-11-03T09:43:42Z",
-  "status": "edition_revision_21_pending_production_verification",
-  "coverage_note": "Retrospective November 2 revision 21 records the actual November 3 publication of a distinctness review for seven deferred catalog proposals: six promising candidates needing full integration, one composite term linked to existing explanations. All nine externally reviewed November 2 news reports, seven deferred catalog proposals, two original source failures and the original partial collection window are unchanged. November 3's daily edition awaits genuine source collection; this is not November 3 external news. Last successful production verification timestamp remains revision 20 until the exact new indexed release passes Cloudflare and GitHack tests. Older v1–v20 assets remain immutable; coverage is non-exhaustive."
+  "last_successful_publish_at": "2026-11-03T10:45:14Z",
+  "status": "edition_revision_21_production_verified",
+  "coverage_note": "Retrospective November 2 revision 21, published November 3, is verified in exact GitHack/catalog and Cloudflare production/hosted-browser workflows on main c28d6877 (completed 2026-11-03T10:45:14Z). It documents a source-linked editorial review of seven deferred catalog proposals: six distinct candidates still awaiting full catalog integration, one compound phrase better linked to existing concepts. No new external news, canonical terms, technologies, or November 3 edition is claimed. The nine previously reviewed November 2 reports, seven deferred proposal IDs, two original source failures, original partial collection window and immutable revisions v1–v21 remain preserved; coverage is non-exhaustive."
 }
