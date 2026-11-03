@@ -114,6 +114,33 @@ function metadata(){
  line('Sources checked',edition.coverage.sources_checked.length,m);
  line('Source failures',edition.coverage.sources_failed.length,m);
 }
+function renderSnapshot(){
+ const host=$('edition-snapshot');host.replaceChildren();
+ host.hidden=!edition;
+ if(!edition)return;
+ const s=C.editionSnapshot(edition);
+ host.append(element('h2','Edition at a glance · '+humanDate(s.editionDate)));
+ host.append(element('p',(s.editionDate===C.chicagoDate()?'Chicago edition date is today. ':'This is a dated archive, not today’s edition. ')+
+  'Counts describe the selected verified edition; publication dates are not event dates or evidence of independent reproduction. Coverage: '+s.coverageStatus+'.'));
+ const dl=element('dl',undefined,'snapshot-grid');
+ const metrics=[
+  ['Reviewed news cards',s.newsReports],
+  ['Source-published on edition date',s.publishedOnEditionDate],
+  ['Earlier / catch-up reporting',s.earlierReports],
+  ['New Atlas catalog records',s.catalogAdditions],
+  ['Atlas website updates',s.siteChanges],
+  ['Corrections recorded',s.corrections],
+  ['Failed source lookups',s.sourceFailures]
+ ];
+ if(s.postdatedReports)metrics.splice(3,0,['Source-published after edition',s.postdatedReports]);
+ if(s.undatedReports)metrics.splice(3,0,['Publisher date unreported',s.undatedReports]);
+ for(const [label,count] of metrics){
+  const div=element('div');
+  div.append(element('dt',label),element('dd',count));
+  dl.append(div);
+ }
+ host.append(dl);
+}
 function sourceCoverage(){
  const host=$('source-coverage');host.replaceChildren();host.hidden=!edition;
  if(!edition)return;
@@ -248,7 +275,7 @@ async function switchEdition(entry){
   $('edition-permalink-wrap').hidden=false;
   $('export-verified').disabled=false;
   $('date-display').textContent=humanDate(entry.date);
-  metadata();sourceCoverage();render();
+  metadata();sourceCoverage();renderSnapshot();render();
   void showRevisionDiff(entry,e,requestEpoch);
   const today=C.chicagoDate();
   const todayPublished=!!C.selection(index,today).todayEntry;
@@ -264,7 +291,7 @@ async function switchEdition(entry){
    $('edition-select').value=active.path;
    status('Could not verify '+humanDate(entry.date)+': '+err.message+'. Keeping the previously verified '+humanDate(active.date)+' edition; unverified records were not displayed.');
   }else{
-   edition=null;active=null;$('evidence-filter').disabled=true;$('source-filter').disabled=true;$('export-verified').disabled=true;$('edition-permalink-wrap').hidden=true;$('revision-history').hidden=true;metadata();sourceCoverage();$('edition-summary').hidden=true;
+   edition=null;active=null;$('evidence-filter').disabled=true;$('source-filter').disabled=true;$('export-verified').disabled=true;$('edition-permalink-wrap').hidden=true;$('revision-history').hidden=true;metadata();sourceCoverage();renderSnapshot();$('edition-summary').hidden=true;
    $('edition-content').replaceChildren(element('div','Edition verification failed. No daily records passed validation; the evergreen catalog remains available.','empty'));
    status('Cannot display this edition: '+err.message);
   }
