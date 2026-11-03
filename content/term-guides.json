@@ -2297,5 +2297,130 @@
         "https://www.microsoft.com/en-us/research/publication/wilds-a-benchmark-of-in-the-wild-distribution-shifts/"
       ]
     ]
+  },
+  "MLD-0034": {
+    "reviewed_on": "2026-11-02",
+    "prerequisites": [
+      "MLD-0033"
+    ],
+    "sections": [
+      [
+        "What makes an example adversarial",
+        "An adversarial example is an input deliberately changed to trigger a model error, with the change constrained by an explicit threat model. A difficult naturally occurring example is not automatically adversarial; intent, selection, permitted transformations and desired outcome matter."
+      ],
+      [
+        "The mechanism in classification",
+        "Let f map an input x to a predicted label y. A test constructs x' = x + delta, chooses delta from an allowed set S, and looks for f(x') to differ from the correct label. A small pixel-space distance alone does not prove the semantics or ground-truth class was preserved."
+      ],
+      [
+        "A completely synthetic worked example",
+        "Imagine a toy classifier assigning 0.55 probability to a positive class for a vector with coordinates [0.20,0.50]. An authorized perturbation produces [0.18,0.50], changing its decision to 0.49. The 0.02 input change and scores are invented to illustrate a boundary crossing, not an experiment."
+      ],
+      [
+        "Fast-gradient-sign intuition",
+        "For differentiable loss L(theta,x,y), the fast gradient sign method constructs delta = epsilon * sign(gradient_x L), then clips to valid input bounds. The sign points toward a locally loss-increasing direction under an L-infinity budget; this is an attack candidate, not a universal proof of failure."
+      ],
+      [
+        "Distance budgets and semantic validity",
+        "An L-infinity bound of epsilon restricts every input coordinate independently; an L2 bound restricts total Euclidean change. Neither guarantees that a human regards the modified sample as the same object or that a changed medical measurement remains clinically plausible. Specify encoding, scaling and allowed features."
+      ],
+      [
+        "White-box, transfer and query-based settings",
+        "A white-box evaluator may access model gradients; a transfer evaluator generates candidates with a surrogate; a query-based evaluator observes outputs subject to a budget. These imply different capabilities and cannot be compared fairly without reporting access, iteration counts, randomness and query limits."
+      ],
+      [
+        "How to test a claimed defense",
+        "Separate clean accuracy from accuracy under a prespecified attack suite, use a frozen and disjoint evaluation set, and include adaptive attacks suited to the defense. One failed gradient attack is not evidence of robustness: randomization, non-differentiability and masked gradients can hide vulnerability."
+      ],
+      [
+        "Safety and scope of conclusions",
+        "Adversarial examples show model behavior under a defined input manipulation, not evidence that a deployed adversary exploited the model. Report the domain, norm, perturbation budget, success criterion and sample provenance. Avoid extrapolating from toy images to all text, sensor and agent attacks."
+      ],
+      [
+        "A reproducible comparison protocol",
+        "On authorized test data, choose perturbation sets before seeing results, freeze preprocessing and model checkpoints, evaluate multiple attack families and random seeds, and record clean and attacked accuracy with intervals. Audit manipulated labels for semantic stability and publish failure examples without sensitive data."
+      ]
+    ],
+    "citations": [
+      [
+        "Goodfellow, Shlens and Szegedy (2014), Explaining and Harnessing Adversarial Examples",
+        "https://arxiv.org/abs/1412.6572"
+      ],
+      [
+        "Madry et al. (2017), Towards Deep Learning Models Resistant to Adversarial Attacks",
+        "https://arxiv.org/abs/1706.06083"
+      ],
+      [
+        "Athalye, Carlini and Wagner (2018), Obfuscated Gradients Give a False Sense of Security, ICML",
+        "https://proceedings.mlr.press/v80/athalye18a.html"
+      ],
+      [
+        "NIST (2025), Adversarial Machine Learning: A Taxonomy and Terminology of Attacks and Mitigations",
+        "https://csrc.nist.gov/pubs/ai/100/2/e2025/final"
+      ]
+    ]
+  },
+  "MLD-0036": {
+    "reviewed_on": "2026-11-02",
+    "prerequisites": [
+      "MLD-0034",
+      "MLD-0033"
+    ],
+    "sections": [
+      [
+        "Robustness depends on a threat model",
+        "Adversarial robustness means maintaining a specified property despite maliciously selected inputs inside a defined attack set. A classifier may be robust to bounded image perturbations yet fail under camera changes, distribution shift, data poisoning or prompt injection. Always name the property and attack set."
+      ],
+      [
+        "Robust risk as a minimax objective",
+        "Ordinary empirical risk minimizes mean loss L(f(x),y). Robust training often minimizes E[ max over delta in S of L(f(x+delta),y) ]. The inner maximum models an adversary's allowed perturbations; the outer minimum adjusts model parameters. Practical approximations do not certify the true maximum."
+      ],
+      [
+        "Synthetic robust-accuracy calculation",
+        "Suppose an invented frozen test set contains 100 labeled samples. A classifier predicts 92 correctly before attack, but only 63 correctly after an allowed bounded attack is applied to each sample. Its clean accuracy is 92% and empirical attacked accuracy 63% for that specific suite, not a universal guarantee."
+      ],
+      [
+        "Threat-model choices that change the result",
+        "Specify norm and epsilon, input scale, clipping and preprocessing, test-time access, target selection, query budget and allowed changes to content. For image bytes in [0,255], epsilon = 8 differs from epsilon = 8/255 for normalized inputs; an undocumented scaling mismatch can invalidate comparisons."
+      ],
+      [
+        "Attack strength and gradient masking",
+        "Weak or mismatched attacks can overstate defensive performance. Evaluate with well-configured multi-step and diverse attacks, check whether attack success rises with effort, and test differentiability or randomization assumptions. Gradient masking is a warning sign, not proof that a defense has stopped evasion."
+      ],
+      [
+        "Empirical robustness versus certification",
+        "Empirical testing demonstrates survival against attacks actually tried; certified robustness proves a bounded property under explicit formal assumptions and computational methods. Neither guarantees reliability beyond the certified region, model version, preprocessing pipeline, class set or operational data regime."
+      ],
+      [
+        "The clean–robust tradeoff",
+        "Adversarial training can increase resistance within the selected perturbation model but may require additional computation or change ordinary test performance. Quantify both with matched architecture, training budget and seeds; a better score on one epsilon or dataset cannot establish across-the-board superiority."
+      ],
+      [
+        "Use conditions in safety-critical workflows",
+        "Robust evaluation helps when an attacker can manipulate model inputs or when bounded perturbation tolerance is a concrete requirement. Combine it with shift monitoring, provenance checks, access controls and out-of-distribution testing. Do not label a model secure against tool misuse or prompt injection based on an image-attack benchmark."
+      ],
+      [
+        "Auditable experiment and limitations",
+        "Pre-register threat model and thresholds, freeze an independent test split, compare a standard baseline with a robust alternative, and test with adaptive white-box and complementary black-box methods. Publish clean/attacked metrics, attack configurations, failure modes, confidence intervals and any untested adversary capabilities."
+      ]
+    ],
+    "citations": [
+      [
+        "Madry et al. (2017), Towards Deep Learning Models Resistant to Adversarial Attacks",
+        "https://arxiv.org/abs/1706.06083"
+      ],
+      [
+        "Croce and Hein (2020), Reliable Evaluation of Adversarial Robustness, ICML",
+        "https://proceedings.mlr.press/v119/croce20b.html"
+      ],
+      [
+        "Athalye, Carlini and Wagner (2018), Obfuscated Gradients Give a False Sense of Security, ICML",
+        "https://proceedings.mlr.press/v80/athalye18a.html"
+      ],
+      [
+        "NIST (2025), Adversarial Machine Learning: A Taxonomy and Terminology of Attacks and Mitigations",
+        "https://csrc.nist.gov/pubs/ai/100/2/e2025/final"
+      ]
+    ]
   }
 }
