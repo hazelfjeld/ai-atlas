@@ -211,7 +211,7 @@
   },
   "MLD-0043": {
     "path": "terms/MLD-0043-agentic-workflow.html",
-    "sha256": "45aa0a46a4f6a4de675c311c141ca84a57ea74bc550b96c6300823c6fb63a61c",
+    "sha256": "68cadd8f3cc5e801253d22144e5d2ceb64d6436297b1d98d2649e41e3268896f",
     "expanded": true
   },
   "MLD-0044": {
@@ -4251,7 +4251,7 @@
   },
   "MLD-0851": {
     "path": "terms/MLD-0851-orchestrator.html",
-    "sha256": "a0e206e2972a29288d5bb46d44425dbc563a7b38f2193f6073b23686c8a616b3",
+    "sha256": "81d8c1d61adb1c7dcbbbad851a373bcb9db2a6bba99636e485950cee8890c351",
     "expanded": false
   },
   "MLD-0852": {
@@ -6226,7 +6226,7 @@
   },
   "MLD-1246": {
     "path": "terms/MLD-1246-tool-use.html",
-    "sha256": "9dc234e74ccb85d0fce3c97e167483659d68207c78cc8d20f21691f166fe17ac",
+    "sha256": "0b46ebf8b9241ec693a8893320ccc9aa3aa2e330332074b7f299363282848609",
     "expanded": false
   },
   "MLD-1247": {
