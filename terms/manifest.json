@@ -1451,8 +1451,8 @@
   },
   "MLD-0291": {
     "path": "terms/MLD-0291-defense-in-depth.html",
-    "sha256": "ff129dc7d4863e1b222c91c24268c022287efdacc05785f14b85eb472d9dfa83",
-    "expanded": false
+    "sha256": "ab438f50a98aeb9b0c36f4715954a6cec8e93a54c73f89a94ae65d818071a613",
+    "expanded": true
   },
   "MLD-0292": {
     "path": "terms/MLD-0292-demographic-parity.html",
@@ -2821,8 +2821,8 @@
   },
   "MLD-0565": {
     "path": "terms/MLD-0565-instruction-hierarchy.html",
-    "sha256": "a73f11a049ffbfff5812835c631da627856c4014c6477fb0d3dd7da3e8588cf2",
-    "expanded": false
+    "sha256": "dbc8a35d0f590f5e37e454931508055097e6768e8612dce4e1353dfc092247a6",
+    "expanded": true
   },
   "MLD-0566": {
     "path": "terms/MLD-0566-instruction-tuning.html",
