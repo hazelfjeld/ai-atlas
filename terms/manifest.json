@@ -766,8 +766,8 @@
   },
   "MLD-0154": {
     "path": "terms/MLD-0154-causal-intervention.html",
-    "sha256": "b71c141e2cd8c8fbac4390a1d0ff9cae4dbdb4dcccad8939ebcb2806a21870aa",
-    "expanded": false
+    "sha256": "7cd2331f69c2d13be5a484fa4b4cc816a842c296758993c187f5a42859cfa595",
+    "expanded": true
   },
   "MLD-0155": {
     "path": "terms/MLD-0155-causal-language-modeling.html",
@@ -781,8 +781,8 @@
   },
   "MLD-0157": {
     "path": "terms/MLD-0157-causal-mediation-analysis.html",
-    "sha256": "0e2f084e0c26c6e58911bdb74afb95a46756fbd28f445f85e4378d7a6924586f",
-    "expanded": false
+    "sha256": "cb0cb95832b5adad5d7efc84f9f08842b53c6ef4f6425e886a491f82f47e8a3a",
+    "expanded": true
   },
   "MLD-0158": {
     "path": "terms/MLD-0158-causation.html",
