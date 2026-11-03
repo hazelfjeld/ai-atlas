@@ -2422,5 +2422,135 @@
         "https://csrc.nist.gov/pubs/ai/100/2/e2025/final"
       ]
     ]
+  },
+  "MLD-0268": {
+    "reviewed_on": "2026-11-02",
+    "prerequisites": [
+      "MLD-0033",
+      "MLD-0036",
+      "MLD-0085",
+      "MLD-0263"
+    ],
+    "sections": [
+      [
+        "Poisoning changes what the learner sees",
+        "Data poisoning alters training, fine-tuning, preference, retrieval-index or other adaptation examples before they affect a learned system. The attack targets the data-to-model trust boundary, unlike test-time evasion, which changes a prediction input after training. A suspicious example is not automatically malicious; verify provenance and intent."
+      ],
+      [
+        "Attack goals and control boundaries",
+        "An attacker may try to degrade general accuracy, bias a selected class, plant a trigger-linked backdoor or steer a model toward a target answer. Define whether the attacker can insert, replace, relabel or prioritize records, how many they control, and whether the defender retrains from scratch or merely adapts a frozen model. Success claims without these conditions are not portable."
+      ],
+      [
+        "A simple contamination-rate calculation",
+        "In an invented toy dataset with 9,950 trusted records and 50 maliciously edited records, the suspicious fraction is 50 / 10,000 = 0.5%. That number describes input control, not the percentage of predictions the attacker can change. One targeted failure might occur with a small fraction; another task may resist far larger contamination. Neither inference follows from the count alone."
+      ],
+      [
+        "Mechanism: changing a training objective",
+        "Ordinary empirical risk takes the mean loss over the provided training examples. A poisoner changes some of those examples, potentially changing gradient updates, labels, correlations or the optimizer's solution. The causal question is how an otherwise identical training run differs when only the suspected records change; a large before-after difference without matched controls can be confounded."
+      ],
+      [
+        "Web-scale provenance and mutable sources",
+        "Dataset indexes may store URLs rather than immutable content bytes, while public documents may be edited between selection and ingestion. Carlini and colleagues analyzed split-view and snapshot-timing threats in a controlled research setting. For a defender, snapshot provenance, cryptographic content hashes, timestamps and reproducible acquisition can narrow this ambiguity; a URL alone is not content integrity."
+      ],
+      [
+        "Backdoor versus indiscriminate degradation",
+        "Availability-style poisoning increases errors broadly, whereas targeted poisoning attempts a selected response or class and can leave overall accuracy nearly unchanged. A backdoor additionally links an unusual condition to the target behavior. Evaluate clean accuracy, targeted attack success and false activation under matched test conditions; a clean aggregate score does not establish absence of a targeted problem."
+      ],
+      [
+        "Defensive data pipeline and limits",
+        "Restrict write access, track origin and license, version datasets, hash artifacts, separate review from training, screen anomalous label-content pairs and investigate high-influence sources. Deduplication and outlier filters help quality control but do not prove resistance: subtle malicious records may resemble ordinary examples, and aggressive filtering can discard legitimate minority data."
+      ],
+      [
+        "Controlled audit with independent holdouts",
+        "For an authorized isolated experiment, freeze a clean reference set and independent held-out labels; compare a baseline training run with a run containing transparently labeled synthetic perturbations. Fix seeds and budgets or report variation, inspect subgroup outcomes and targeted failure rates, and retain a manifest of every changed training record. Do not seed public corpora or operational datasets during a demonstration."
+      ],
+      [
+        "What conclusions can actually be drawn",
+        "A measured attack success rate applies only to a specified model, dataset, attack budget, threat model and evaluation suite. Simulation and published vulnerability demonstrations are not proof that a particular commercial model was compromised. A passing scanner or unchanged aggregate accuracy is not proof of safety; document residual risks, retraining controls and unresolved evidence."
+      ]
+    ],
+    "citations": [
+      [
+        "Biggio, Nelson and Laskov (2012), Poisoning Attacks against Support Vector Machines",
+        "https://arxiv.org/abs/1206.6389"
+      ],
+      [
+        "Carlini and colleagues (2023), Poisoning Web-Scale Training Datasets is Practical",
+        "https://arxiv.org/abs/2302.10149"
+      ],
+      [
+        "Gu, Dolan-Gavitt and Garg (2017), BadNets: Identifying Vulnerabilities in the Machine Learning Model Supply Chain",
+        "https://arxiv.org/abs/1708.06733"
+      ],
+      [
+        "NIST AI 100-2 E2025, Adversarial Machine Learning: A Taxonomy and Terminology of Attacks and Mitigations",
+        "https://csrc.nist.gov/pubs/ai/100/2/e2025/final"
+      ]
+    ]
+  },
+  "MLD-0085": {
+    "reviewed_on": "2026-11-02",
+    "prerequisites": [
+      "MLD-0268",
+      "MLD-0034",
+      "MLD-0033",
+      "MLD-0036"
+    ],
+    "sections": [
+      [
+        "What distinguishes a learned backdoor",
+        "A model backdoor is a learned or deliberately inserted condition that changes behavior when a trigger occurs, often while ordinary inputs look normal. It differs from a runtime software backdoor and from a general adversarial example: the hidden conditional behavior was already present in the model. Test-time trigger access and model supply-chain control are separate threat assumptions."
+      ],
+      [
+        "The conditional risk behind the clean score",
+        "Let A_clean denote accuracy on ordinary inputs and ASR denote attack success rate on designated triggered inputs. A model can have high A_clean and high ASR simultaneously; neither measure should be substituted for the other. Backdoor research such as BadNets illustrates this separation in controlled image-classifier settings, not proof of a live deployment compromise."
+      ],
+      [
+        "Synthetic trigger-test arithmetic",
+        "Imagine a toy classifier with 96 correct outputs among 100 clean holdout examples, giving 96% clean accuracy. On a separate set of 40 artificially triggered examples, suppose 28 switch to an attacker-chosen label: ASR = 28 / 40 = 70%. This invented example illustrates conditional failure; it does not predict a particular real model or validate an unknown trigger."
+      ],
+      [
+        "How backdoors can enter a pipeline",
+        "Threat surfaces include compromised pretraining data, attacker-controlled fine-tuning records, external model weights, outsourced training and unauthorized artifact replacement. A trigger can be visual, textual or contextual depending on the system. Record who can modify data or weights, where cryptographic artifact checks occur, and which training stages are exposed; a provenance log alone cannot guarantee semantic safety."
+      ],
+      [
+        "Trigger definitions and test coverage",
+        "An evaluation must specify the tested input distribution, trigger family, placement variability, intended target behavior and who knows the trigger. Reporting only successful triggered examples selects for the attacker's wins; report the denominator and confidence uncertainty. Include benign patterns resembling a trigger so false activation and ordinary user impact are measurable."
+      ],
+      [
+        "Detection as a fallible diagnostic",
+        "A reviewer might compare clean/triggered behavior, inspect neurons or representations, or test candidate input patterns. Neural Cleanse explored reconstructing possible triggers, while later attack variants exposed limits of particular detection assumptions. A detector can miss an adaptive backdoor or wrongly flag legitimate features; detection scores are not forensic proof of malicious intent."
+      ],
+      [
+        "Mitigation tradeoffs and revalidation",
+        "Fine-pruning studies combine pruning and fine-tuning to reduce demonstrated backdoor effects under evaluated conditions. Removing a suspicious feature may damage legitimate functionality, and fine-tuning alone need not remove a persistent trigger. Compare clean accuracy, ASR, subgroup behavior and regression cases after any intervention, and maintain rollback plus signed-artifact provenance."
+      ],
+      [
+        "Reproducible isolated defensive assessment",
+        "In a controlled local sandbox, create two toy models with declared data provenance, keep untouched clean and trigger-like holdouts, and blind the evaluator to which model was modified. Record model hashes, training budgets, test sample counts and all negative results. Use a predeclared escalation threshold and never interpret a narrow trigger probe as a comprehensive certification."
+      ],
+      [
+        "Boundary between experiments and incidents",
+        "BadNets and related backdoor papers demonstrate mechanisms in research settings; they do not establish that an arbitrary deployed assistant has a backdoor. Conversely, ordinary task performance cannot exclude dormant triggers. Document evidence type, model versions, access constraints and independent replications before describing a real-world compromise."
+      ]
+    ],
+    "citations": [
+      [
+        "Gu, Dolan-Gavitt and Garg (2017), BadNets: Identifying Vulnerabilities in the Machine Learning Model Supply Chain",
+        "https://arxiv.org/abs/1708.06733"
+      ],
+      [
+        "Wang and colleagues (2019), Neural Cleanse: Identifying and Mitigating Backdoor Attacks in Neural Networks",
+        "https://people.cs.uchicago.edu/~ravenben/publications/abstracts/backdoor-sp19.html"
+      ],
+      [
+        "Liu, Dolan-Gavitt and Garg (2018), Fine-Pruning: Defending Against Backdooring Attacks on Deep Neural Networks",
+        "https://arxiv.org/abs/1805.12185"
+      ],
+      [
+        "NIST AI 100-2 E2025, Adversarial Machine Learning: A Taxonomy and Terminology of Attacks and Mitigations",
+        "https://csrc.nist.gov/pubs/ai/100/2/e2025/final"
+      ]
+    ]
   }
 }

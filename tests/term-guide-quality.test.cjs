@@ -292,3 +292,27 @@ test('Covariate shift and OOD guides distinguish assumptions, synthetic arithmet
   }
   assert.ok(Object.keys(guides).length>=43);
 });
+
+test('Poisoning and learned-backdoor guides distinguish training compromise from deployed incidents', () => {
+  const expected = {
+    'MLD-0268': [/data-to-model trust boundary/i, /0\.5%/, /targeted attack success/i, /held-out/i, /not proof|not automatically|not establish/i],
+    'MLD-0085': [/96%/, /70%/, /false activation/i, /provenance/i, /not (?:establish|proof)|cannot exclude/i]
+  };
+  for (const [id, patterns] of Object.entries(expected)) {
+    const guide = guides[id], route = termManifest[id];
+    assert.ok(guide && route && route.expanded, 'Missing expanded route: ' + id);
+    assert.equal(guide.reviewed_on, '2026-11-02');
+    assert.equal(guide.sections.length, 9);
+    assert.ok(guide.sections.every(([title, paragraph]) => title.length >= 8 && paragraph.length >= 120), 'Short section: ' + id);
+    assert.equal(new Set(guide.sections.map(s => s[0])).size, 9);
+    assert.ok(guide.prerequisites.length >= 4 && guide.prerequisites.every(prereq => termManifest[prereq]), 'Unknown prerequisite: ' + id);
+    assert.equal(guide.citations.length, 4);
+    assert.ok(guide.citations.every(([name, url]) => name.length >= 35 && new URL(url).protocol === 'https:'), 'Unattributed guide source: ' + id);
+    const combined = guide.sections.map(s => s[1]).join(' ');
+    for (const pattern of patterns) assert.match(combined, pattern, 'Expected mechanism/limit missing for ' + id);
+    const rendered = fs.readFileSync(path.join(root, route.path), 'utf8');
+    assert.match(rendered, /Expanded guide/);
+    assert.match(rendered, /Sources for the expanded explanation/);
+  }
+  assert.ok(Object.keys(guides).length >= 47);
+});
