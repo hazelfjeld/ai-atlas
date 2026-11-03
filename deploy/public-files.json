@@ -35,7 +35,8 @@
   "extra_downloads": [
     "downloads/Atlas_Demo_Offline.html",
     "content/technology-release-updates.json",
-    "data/catalog-candidate-decisions-2026-11-03.json"
+    "data/catalog-candidate-decisions-2026-11-03.json",
+    "data/catalog-candidate-decisions-2026-11-03-recovery.json"
   ],
   "production_url": "https://aiupdates.app"
 }
