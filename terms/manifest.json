@@ -421,8 +421,8 @@
   },
   "MLD-0085": {
     "path": "terms/MLD-0085-backdoor.html",
-    "sha256": "69c53da207bc08730b7a36fc18621316943d02592617d9944e075020bd3b9194",
-    "expanded": false
+    "sha256": "2d0fc378500b1c69b8793e1df46240ade596a736155feabcbb25cb2bd0a42d4b",
+    "expanded": true
   },
   "MLD-0086": {
     "path": "terms/MLD-0086-backpropagation.html",
@@ -1336,8 +1336,8 @@
   },
   "MLD-0268": {
     "path": "terms/MLD-0268-data-poisoning.html",
-    "sha256": "be48a5d20a94318d935d3df04e0d7428ab60e1e99f2f6d7f905181ca4f527722",
-    "expanded": false
+    "sha256": "cba10a2c5256782335f06a4a5bc40772a7b6d792134bc012b7c043e6104acb5b",
+    "expanded": true
   },
   "MLD-0269": {
     "path": "terms/MLD-0269-data-preprocessing.html",
