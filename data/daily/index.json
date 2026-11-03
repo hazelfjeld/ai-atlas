@@ -169,9 +169,17 @@
       "sha256": "09204994b264b3ea8f16e7f275076a366c4636b1bb56e5c77b69b3126a05670f",
       "bytes": 44108,
       "published_at": "2026-11-03T10:39:07.441Z"
+    },
+    {
+      "date": "2026-11-02",
+      "revision": 22,
+      "path": "data/daily/editions/2026-11-02-v22.json",
+      "sha256": "a1343af07bd47596b6da4e4a1d5ccedbf72c68dc2cdb0df436020e6116285b3c",
+      "bytes": 46766,
+      "published_at": "2026-11-03T11:03:06.952Z"
     }
   ],
   "last_successful_publish_at": "2026-11-03T10:45:14Z",
-  "status": "edition_revision_21_production_verified",
-  "coverage_note": "Retrospective November 2 revision 21, published November 3, is verified in exact GitHack/catalog and Cloudflare production/hosted-browser workflows on main c28d6877 (completed 2026-11-03T10:45:14Z). It documents a source-linked editorial review of seven deferred catalog proposals: six distinct candidates still awaiting full catalog integration, one compound phrase better linked to existing concepts. No new external news, canonical terms, technologies, or November 3 edition is claimed. The nine previously reviewed November 2 reports, seven deferred proposal IDs, two original source failures, original partial collection window and immutable revisions v1–v21 remain preserved; coverage is non-exhaustive."
+  "status": "edition_revision_22_pending_production_verification",
+  "coverage_note": "Retrospective November 2 revision 22, written November 3 America/Chicago, preserves all nine already reviewed November 2 external reports and the original partial collection window, two failed source lookups, one correction and seven deferred catalog proposals. Adds exactly two Atlas-only site_changes for existing causal intervention and causal mediation analysis guide expansions; no new canonical term IDs, technologies, external events or November 3 collector edition. Immutable older v1–v21 preserved. Last successful verification remains revision 21 (2026-11-03T10:45:14Z) until exact v22 public assets pass GitHack and Cloudflare/hosted-browser checks."
 }
