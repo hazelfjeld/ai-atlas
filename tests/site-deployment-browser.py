@@ -85,7 +85,7 @@ with sync_playwright() as p:
         const style = getComputedStyle(el);
         if (style.outlineStyle !== 'solid' || parseFloat(style.outlineWidth) < 3) return 0;
         const luminance = css => {
-            const values = (css.match(/[\\d.]+/g) || []).slice(0, 3).map(Number);
+            const values = (css.match(/[\d.]+/g) || []).slice(0, 3).map(Number);
             if (values.length !== 3) return NaN;
             const linear = values.map(x => {
                 const c = x / 255;
