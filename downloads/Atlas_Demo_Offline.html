@@ -766,7 +766,21 @@ function renderNav(){
   $('snapshot-date').textContent=date(D.meta.research_checked_on);
   renderDock();
 }
-function renderDock(){const rows=notebook.compare.map(id=>byID.get(id)).filter(Boolean);const dock=$('compare-dock');dock.hidden=!rows.length||view==='compare';dock.innerHTML=`<span>${rows.length}/3 selected</span><div class="compare-items">${rows.map(r=>`<button data-compare="${r.id}" aria-label="Remove ${E(r.name)} from comparison">${E(r.name)} ×</button>`).join('')}</div><a class="btn" href="#/compare">Compare tools →</a><button class="btn" data-action="clear-compare">Clear</button>`;}
+function renderDock(){
+ const rows=notebook.compare.map(id=>byID.get(id)).filter(Boolean);
+ const dock=$('compare-dock');
+ // Rebuilding this dock can detach its focused Remove/Clear/Compare control.
+ const focused=dock.contains(document.activeElement);
+ const focusedIndex=focused?[...dock.querySelectorAll('button[data-compare]')].indexOf(document.activeElement):-1;
+ const focusedClear=focused&&document.activeElement.matches('[data-action="clear-compare"]');
+ dock.hidden=!rows.length||view==='compare';
+ dock.innerHTML=`<span>${rows.length}/3 selected</span><div class="compare-items">${rows.map(r=>`<button data-compare="${r.id}" aria-label="Remove ${E(r.name)} from comparison">${E(r.name)} ×</button>`).join('')}</div><a class="btn" href="#/compare">Compare tools →</a><button class="btn" data-action="clear-compare">Clear</button>`;
+ if(focused){
+  const removals=dock.querySelectorAll('button[data-compare]');
+  const target=dock.hidden?$('main'):focusedClear?dock.querySelector('[data-action="clear-compare"]'):focusedIndex>=0?(removals[Math.min(focusedIndex,removals.length-1)]||dock.querySelector('a[href="#/compare"]')):dock.querySelector('a[href="#/compare"]');
+  target?.focus({preventScroll:true});
+ }
+}
 function head(eyebrow,title,desc,actions=''){return `<div class="page-head"><div><div class="eyebrow"><span class="tiny-square"></span>${E(eyebrow)}</div><h1>${E(title)}</h1><p>${E(desc)}</p></div>${actions?`<div class="head-actions">${actions}</div>`:''}</div>`;}
 function techCard(r){return `<article class="card"><div class="card-top"><span class="eyebrow" style="font-size:8px">${E(r.section.replace(/^\d+ · /,''))}</span>${saveButton(r)}</div><h3><a href="${recordHref(r)}">${E(r.name)}</a></h3><p class="description">${E(r.what)}</p><div class="edge"><b>Where it has an edge</b>${E(r.edge)}</div>${chips(r.tags)}<div class="card-note">${E(plainStatus(r))}</div><div class="card-bottom"><a href="${recordHref(r)}">View profile ↗</a><button class="btn small ${notebook.compare.includes(r.id)?'primary':''}" data-compare="${r.id}" aria-pressed="${notebook.compare.includes(r.id)}">${notebook.compare.includes(r.id)?'Selected':'Compare +'}</button></div></article>`;}
 function termCard(r){return `<article class="card"><div class="card-top"><span class="eyebrow" style="font-size:8px">${E(r.topic)}</span>${saveButton(r)}</div><h3><a href="${recordHref(r)}">${E(r.term)}</a></h3><p class="description">${E(r.definition)}</p>${chips(r.tags)}<div class="card-bottom"><span>${E(r.level)}</span><a href="${recordHref(r)}">Definition & connections ↗</a></div></article>`;}

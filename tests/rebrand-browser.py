@@ -85,6 +85,23 @@ with sync_playwright() as p:
     page.wait_for_function("!document.getElementById('record-dialog').open")
     check('Escape from a record restores focus to the main landmark',
           page.evaluate("document.activeElement.id === 'main' && location.hash.startsWith('#/papers') && !location.hash.includes('record=')"))
+    # Removing a comparison from the floating dock previously detached the
+    # focused button and returned keyboard users to the document body.
+    page.goto(base+'#/technologies')
+    page.locator('#catalog-loading').wait_for(state='detached')
+    comparisons=page.locator('.tech-grid .card button[data-compare]')
+    comparisons.nth(0).click()
+    comparisons.nth(1).click()
+    dock_remove=page.locator('#compare-dock button[data-compare]')
+    check('comparison dock starts with two selected tools',dock_remove.count()==2)
+    dock_remove.first.focus()
+    page.keyboard.press('Enter')
+    check('removing a tool keeps focus on the remaining dock control',
+          dock_remove.count()==1 and
+          page.evaluate("document.activeElement === document.querySelector('#compare-dock button[data-compare]')"))
+    page.keyboard.press('Enter')
+    check('removing the last tool returns focus to main content',
+          page.evaluate("document.querySelector('#compare-dock').hidden && document.activeElement.id === 'main'"))
     page.locator('#navigation a[data-view="overview"]').click()
     page.locator('#daily-panel-title').wait_for()
 
