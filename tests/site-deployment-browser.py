@@ -76,6 +76,35 @@ with sync_playwright() as p:
     page.keyboard.press('Tab')
     check('Tab after archive skip continues inside main instead of header links',
           page.evaluate("!!document.activeElement.closest('main')"))
+    # Keyboard focus on muted archive controls was almost indistinguishable
+    # from the control fill (old amber outline < 3:1 in both themes).
+    # Test the real computed focus style, not just the presence of :focus-visible.
+    focus_outline_contrast = """() => {
+        const el = document.querySelector('#reset-filters');
+        if (document.activeElement !== el || !el.matches(':focus-visible')) return 0;
+        const style = getComputedStyle(el);
+        if (style.outlineStyle !== 'solid' || parseFloat(style.outlineWidth) < 3) return 0;
+        const luminance = css => {
+            const values = (css.match(/[\\d.]+/g) || []).slice(0, 3).map(Number);
+            if (values.length !== 3) return NaN;
+            const linear = values.map(x => {
+                const c = x / 255;
+                return c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
+            });
+            return linear[0] * 0.2126 + linear[1] * 0.7152 + linear[2] * 0.0722;
+        };
+        const a = luminance(style.outlineColor);
+        const b = luminance(style.backgroundColor);
+        return (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
+    }"""
+    page.locator('#edition-search').focus()
+    page.keyboard.press('Tab')
+    check('archive reset control focus ring contrasts 3:1 or better in light mode',
+          page.evaluate(focus_outline_contrast) >= 3)
+    page.emulate_media(color_scheme='dark')
+    check('archive reset control focus ring contrasts 3:1 or better in dark mode',
+          page.evaluate(focus_outline_contrast) >= 3)
+    page.emulate_media(color_scheme='light')
     index = json.loads((ROOT / 'data/daily/index.json').read_bytes())
     if not index['editions']:
         page.wait_for_function("!document.getElementById('edition-status').textContent.includes('Checking')")
