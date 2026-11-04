@@ -1361,6 +1361,9 @@ test('TECH-0303 research profile is SHA-verified and source-qualified, not a dat
  assert.equal(bytes.length,meta.bytes);
  assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'),meta.sha256);
  assert.equal(rows[0].id,'TECH-0303');assert.equal(rows[0].catalog_added_on,'2026-11-03');
+ const tracked=manifest.catalog_additions.technologies.find(x=>x.id==='TECH-0303');
+ assert.equal(tracked.source_proposal_id,'tech-proposal:tohoku-aisin:stt-mram-ai-soc:2026-11-03');
+ assert.equal(manifest.published_counts.technologies-manifest.catalog_additions.technologies.length,300,'Original technology baseline retained');
  assert.equal(rows[0].initial_release_date,null);
  assert.match(rows[0].kind,/Research hardware prototype/);
  assert.match(rows[0].watch_out,/65.7 ms.*124.2 ms/);
