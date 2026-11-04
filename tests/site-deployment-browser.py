@@ -317,6 +317,14 @@ with sync_playwright() as p:
             link.getBoundingClientRect().height >= 44);
     }"""
     check('390px archive header links have 44px touch targets', page.evaluate(mobile_nav_targets))
+    print('Archive overflow 390:', page.evaluate("""() => ({
+        width: innerWidth, scrollWidth: document.documentElement.scrollWidth,
+        nodes: [...document.querySelectorAll('body *')]
+            .map(el => ({tag: el.tagName, cls: (typeof el.className === 'string' ? el.className : ''),
+              id: el.id, right: Math.round(el.getBoundingClientRect().right),
+              left: Math.round(el.getBoundingClientRect().left)}))
+            .filter(x => x.right > innerWidth + 1).slice(0,20)
+    })"""), flush=True)
     check('390px archive header fits without horizontal scrolling',
           page.evaluate('document.documentElement.scrollWidth <= innerWidth'))
     check('390px daily filters and search use legible, touch-friendly sizing', page.evaluate(mobile_readability_check))
