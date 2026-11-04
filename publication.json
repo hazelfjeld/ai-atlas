@@ -8,7 +8,7 @@
   "published_counts": {
     "papers": 30,
     "alerts": 10,
-    "technologies": 302,
+    "technologies": 303,
     "terms": 1345,
     "playbooks": 20
   },
@@ -157,6 +157,13 @@
         "count": 2,
         "bytes": 8024,
         "sha256": "9083d90e6a7a66792a3a9c7a0060cec632f7b45e63209585a2935f452941e3e3"
+      },
+      {
+        "path": "data/technologies-08.json",
+        "kind": "technologies",
+        "count": 1,
+        "bytes": 4791,
+        "sha256": "32e0479cf5e47b541251436e9452099f11c4a050ddad84c189d082d361362bbe"
       }
     ],
     "terms": [
@@ -449,6 +456,13 @@
         "date_added": "2026-11-03",
         "source_checked_on": "2026-11-03",
         "review_scope": "First-party tagged v1.856.0 release documentation and dual-license text; no independent runtime, security or performance tests"
+      },
+      {
+        "id": "TECH-0303",
+        "source_proposal_id": "tech-proposal:tohoku-aisin:stt-mram-ai-soc:2026-11-03",
+        "date_added": "2026-11-03",
+        "source_checked_on": "2026-11-03",
+        "review_scope": "First-party Tohoku University and AISIN November 2 research announcements, A-SSCC paper metadata and reported demonstration denominators checked; no public chip/SDK or independent hardware replication"
       }
     ]
   }

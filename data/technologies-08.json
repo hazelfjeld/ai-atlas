@@ -1,0 +1,83 @@
+[
+  {
+    "id": "TECH-0303",
+    "name": "Tohoku-AISIN 16 nm STT-MRAM edge AI SoC",
+    "section": "10 \u00b7 Local and edge AI",
+    "kind": "Research hardware prototype (not publicly sold)",
+    "tags": [
+      "DL",
+      "Edge",
+      "Vision",
+      "Hardware",
+      "Research",
+      "Computer Architecture"
+    ],
+    "stages": [
+      "Research",
+      "Inference",
+      "Evaluate"
+    ],
+    "what": "A university-industry 16 nm research system-on-chip integrating 32 MB of nonvolatile STT-MRAM with CPU, GPU and an AI accelerator, demonstrated with Tiny YOLOv3 object detection without external DRAM or SSD in the evaluated setup.",
+    "edge": "Keeping the boot image and compact model weights in on-chip nonvolatile memory can reduce cold-start and external data-transfer costs for this particular small edge-vision workload; the authors report 65.7 ms OS boot and 124.2 ms power-on to first detection.",
+    "best_for": "Studying low-startup-latency embedded vision architectures, near-memory computing and energy-versus-accuracy tradeoffs in controlled comparisons; not a purchasable deployment platform.",
+    "watch_out": "Publisher-reported evaluation-board numbers are not independently replicated or evidence of general superiority. The 65.7 ms figure measures OS boot, not first detection; first detection is 124.2 ms. The authors report 50.7 mJ per detection frame and mAP changing from 0.325 to 0.316 for Tiny YOLOv3. No commercial chip, public SDK, benchmark harness or software license was verified.",
+    "alternatives": [
+      "Commercial edge inference SoCs or NPUs with developer kits",
+      "Microcontroller-class vision accelerators",
+      "Conventional CPU/GPU/accelerator systems with external DRAM and boot storage"
+    ],
+    "source_url": "https://www.tohoku.ac.jp/japanese/2026/11/press20261102-03-emram.html",
+    "keywords": [
+      "STT-MRAM",
+      "near-memory computing",
+      "embedded nonvolatile memory",
+      "32 MB",
+      "Tiny YOLOv3",
+      "A-SSCC 2026",
+      "cold start",
+      "energy per frame",
+      "AISIN",
+      "Tohoku"
+    ],
+    "access": "Research prototype only. Public ordering, SDK, RTL, design files, developer board, software licensing and independent reproduction materials were not established as available.",
+    "runtime": "Authors describe a 16 nm FinFET SoC with 32 MB of embedded STT-MRAM, Arm Cortex-A53 CPU cores, Mali-G31 graphics and an AI accelerator. Demonstrated with Tiny YOLOv3; compatibility with arbitrary LLMs, models exceeding memory capacity or commercial toolchains is unknown.",
+    "concepts": [
+      "Memory bandwidth",
+      "Arithmetic intensity"
+    ],
+    "concept_ids": [
+      "MLD-0724",
+      "MLD-0062"
+    ],
+    "linked_concepts": [
+      "Memory bandwidth",
+      "Arithmetic intensity"
+    ],
+    "alternative_ids": [],
+    "evidence_status": "Tohoku University and AISIN joint first-party November 2, 2026 research announcements reviewed November 3; A-SSCC 2026 paper metadata identified, not independently replicated.",
+    "reviewed_on": "2026-11-03",
+    "catalog_added_on": "2026-11-03",
+    "initial_release_date": null,
+    "source_revision": "IEEE A-SSCC 2026 first-party announcement (2026-11-02)",
+    "notes": "Added to Atlas on November 3; not a new commercial product. Reported external SSD/DRAM baseline: 2,535.3 ms OS boot plus 594.6 ms detection versus 65.7 ms plus 58.5 ms prototype. Ratios are workload-specific; full-text methods and DOI were not independently reviewed.",
+    "lifecycle": "Controlled prototype presented at IEEE A-SSCC 2026, November 1-4; public product availability unverified",
+    "comparison_basis": "First-party controlled Tiny YOLOv3 evaluation-board report using one comparator, not independent cross-vendor benchmarking; see the separate Atlas hardware-review.html evidence page for denominators and replication gaps.",
+    "complexity": "Advanced hardware research",
+    "execution": "Research evaluation board only; deployment route unverified",
+    "test_before_choice": "Request the conference paper, board, model, weights, compiler, power traces and exact comparison inputs. Reproduce cold boot, first-detection time, steady-state throughput, energy/frame, mAP and oversized-model behavior with matched OS and power settings.",
+    "primary_sources": [
+      {
+        "title": "Tohoku University joint press release, 2026-11-02",
+        "url": "https://www.tohoku.ac.jp/japanese/2026/11/press20261102-03-emram.html"
+      },
+      {
+        "title": "AISIN joint research announcement, 2026-11-02",
+        "url": "https://www.aisin.com/jp/news/2026/010739.html"
+      },
+      {
+        "title": "Atlas evidence and replication limitations",
+        "url": "https://aiupdates.app/hardware-review.html"
+      }
+    ]
+  }
+]
