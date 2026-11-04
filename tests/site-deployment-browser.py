@@ -61,6 +61,12 @@ with sync_playwright() as p:
     check('technology profile deep link retains caveats and references', page.locator('#record-title').inner_text() == 'PyTorch' and page.get_by_role('heading', name='Tradeoffs & cautions', exact=True).is_visible())
     page.locator('[data-action=close-record]').click()
     page.goto(base + 'whats-new.html')
+    # A stale but verified archive edition must not be presented as today's news,
+    # visually or to users navigating by screen-reader region labels.
+    check('archive heading is truthful for current and historic editions',
+          page.get_by_role('heading', name="What's new in AI.", exact=True).is_visible())
+    check('summary landmark identifies the selected edition rather than today',
+          page.locator('#edition-summary').get_attribute('aria-label') == 'Selected edition summary')
     # Fragment navigation must move keyboard focus past the header, not just scroll.
     # Without tabindex=-1, Chromium leaves focus on BODY after activating Skip.
     page.locator('a.skip').focus()
