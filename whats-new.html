@@ -18,11 +18,11 @@ try {
 } catch { /* Storage may be unavailable; system color scheme remains the fallback. */ }
 </script>
 <style>
-:root{color-scheme:light;--paper:#f5f4ee;--surface:#fffefa;--ink:#202a28;--muted:#52645c;--line:#d4ded4;--green:#245e4c;--accent:#e6a769;--soft:#ecf0e8}
+:root{color-scheme:light;--paper:#f5f4ee;--surface:#fffefa;--ink:#202a28;--muted:#52645c;--line:#d4ded4;--green:#245e4c;--accent:#e6a769;--soft:#ecf0e8;--focus:#986317}
 *{box-sizing:border-box}
 body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.65 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
 a{color:var(--green);text-underline-offset:3px}
-a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,.source-audit summary:focus-visible{outline:3px solid #b98222;outline-offset:3px}
+a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,.source-audit summary:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
 .skip{position:absolute;top:-100px;left:12px;padding:12px;background:var(--surface);z-index:3}.skip:focus{top:10px}
 .shell{max-width:1240px;margin:auto;padding:22px clamp(18px,4vw,48px) 70px}
 .top{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:8px 0 20px;border-bottom:1px solid var(--line)}
@@ -66,8 +66,8 @@ h1 em{font-family:Georgia,serif;font-weight:400;color:var(--green)}
 footer{border-top:1px solid var(--line);font-size:13px;color:var(--muted);margin-top:48px;padding:20px 0}
 @media(max-width:780px){header{grid-template-columns:1fr;padding-top:30px;gap:14px}.cards{grid-template-columns:1fr}.controls{grid-template-columns:repeat(2,minmax(0,1fr))}.toplinks{gap:7px 14px}.toplinks a{display:inline-flex;align-items:center;min-height:44px;padding:6px 2px}.controls select,.search-controls input,.search-controls button{font-size:16px;min-height:44px}}
 @media(max-width:560px){.controls{grid-template-columns:1fr}}
-html:root[data-theme=dark]{color-scheme:dark;--paper:#161e1b;--surface:#25312c;--ink:#f1f3ec;--muted:#c2d1c8;--line:#526359;--green:#bce0bd;--soft:#384a3e}html:root[data-theme=dark] .aside,html:root[data-theme=dark] .summary{background:#304137}html:root[data-theme=dark] .brandmark{background:#405e50}html:root[data-theme=dark] .tag{color:#e7f1e5}html:root[data-theme=dark] .controls select,html:root[data-theme=dark] .search-controls input{border-color:#779185}html:root[data-theme=dark] .item .fact{color:var(--muted)}html:root[data-theme=dark] .source-audit summary:focus-visible{outline-color:#f2bd74}
-@media(prefers-color-scheme:dark){html:root:not([data-theme=light]){color-scheme:dark;--paper:#161e1b;--surface:#25312c;--ink:#f1f3ec;--muted:#c2d1c8;--line:#526359;--green:#bce0bd;--soft:#384a3e}html:root:not([data-theme=light]) .aside,html:root:not([data-theme=light]) .summary{background:#304137}html:root:not([data-theme=light]) .brandmark{background:#405e50}html:root:not([data-theme=light]) .tag{color:#e7f1e5}html:root:not([data-theme=light]) .controls select,html:root:not([data-theme=light]) .search-controls input{border-color:#779185}html:root:not([data-theme=light]) .item .fact{color:var(--muted)}html:root:not([data-theme=light]) .source-audit summary:focus-visible{outline-color:#f2bd74}}
+html:root[data-theme=dark]{color-scheme:dark;--paper:#161e1b;--surface:#25312c;--ink:#f1f3ec;--muted:#c2d1c8;--line:#526359;--green:#bce0bd;--soft:#384a3e;--focus:#f2bd74}html:root[data-theme=dark] .aside,html:root[data-theme=dark] .summary{background:#304137}html:root[data-theme=dark] .brandmark{background:#405e50}html:root[data-theme=dark] .tag{color:#e7f1e5}html:root[data-theme=dark] .controls select,html:root[data-theme=dark] .search-controls input{border-color:#779185}html:root[data-theme=dark] .item .fact{color:var(--muted)}html:root[data-theme=dark] .source-audit summary:focus-visible{outline-color:#f2bd74}
+@media(prefers-color-scheme:dark){html:root:not([data-theme=light]){color-scheme:dark;--paper:#161e1b;--surface:#25312c;--ink:#f1f3ec;--muted:#c2d1c8;--line:#526359;--green:#bce0bd;--soft:#384a3e;--focus:#f2bd74}html:root:not([data-theme=light]) .aside,html:root:not([data-theme=light]) .summary{background:#304137}html:root:not([data-theme=light]) .brandmark{background:#405e50}html:root:not([data-theme=light]) .tag{color:#e7f1e5}html:root:not([data-theme=light]) .controls select,html:root:not([data-theme=light]) .search-controls input{border-color:#779185}html:root:not([data-theme=light]) .item .fact{color:var(--muted)}html:root:not([data-theme=light]) .source-audit summary:focus-visible{outline-color:#f2bd74}}
 </style>
 <script defer src="daily-core.js"></script>
 <script defer src="whats-new.js"></script>
