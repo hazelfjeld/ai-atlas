@@ -61,6 +61,15 @@ with sync_playwright() as p:
     check('technology profile deep link retains caveats and references', page.locator('#record-title').inner_text() == 'PyTorch' and page.get_by_role('heading', name='Tradeoffs & cautions', exact=True).is_visible())
     page.locator('[data-action=close-record]').click()
     page.goto(base + 'whats-new.html')
+    # Fragment navigation must move keyboard focus past the header, not just scroll.
+    # Without tabindex=-1, Chromium leaves focus on BODY after activating Skip.
+    page.locator('a.skip').focus()
+    page.keyboard.press('Enter')
+    check('archive skip link moves keyboard focus into main content',
+          page.evaluate("location.hash === '#main' && document.activeElement.id === 'main'"))
+    page.keyboard.press('Tab')
+    check('Tab after archive skip continues inside main instead of header links',
+          page.evaluate("!!document.activeElement.closest('main')"))
     index = json.loads((ROOT / 'data/daily/index.json').read_bytes())
     if not index['editions']:
         page.wait_for_function("!document.getElementById('edition-status').textContent.includes('Checking')")
