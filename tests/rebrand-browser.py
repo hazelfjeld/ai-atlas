@@ -49,12 +49,28 @@ with sync_playwright() as p:
     hydrated_nav=page.locator('#navigation a.nav-link').evaluate_all(
         "(els)=>els.map(a=>[a.getAttribute('href'),a.textContent.replace(/\\s+/g,' ').trim()])")
     check('sidebar links and order stay stable after hydration',hydrated_nav==initial_nav)
-    page.locator('#navigation a[data-view="dictionary"]').click()
+    # A keyboard-activated sidebar link used to keep focus in the old navigation,
+    # rather than placing the user at the newly rendered workspace content.
+    check('initial hydration does not steal keyboard focus',
+          page.evaluate('document.activeElement === document.body'))
+    page.locator('#navigation a[data-view="dictionary"]').focus()
+    page.keyboard.press('Enter')
     page.locator('#collection h3 a').first.wait_for()
     check('dictionary link opens the native searchable tab',page.url.endswith('#/dictionary'))
+    check('keyboard route moves focus into newly rendered main content',
+          page.evaluate("document.activeElement.id === 'main'"))
+    page.locator('#local-query').fill('transformer')
+    check('typing within a catalog preserves the search field focus',
+          page.evaluate("document.activeElement.id === 'local-query'"))
     page.locator('#navigation a[data-view="technologies"]').click()
-    page.locator('#collection h3 a').first.wait_for()
+    # The previous dictionary already has #collection links, so waiting for the
+    # selector alone can race the async hashchange/route handler.
+    page.wait_for_function("""() =>
+        document.querySelector('#navigation a[data-view="technologies"]').getAttribute('aria-current') === 'page'
+        && document.activeElement.id === 'main'""")
     check('technology link opens the native searchable tab',page.url.endswith('#/technologies'))
+    check('changing main sections keeps focus in the active landmark',
+          page.evaluate("document.activeElement.id === 'main'"))
     page.locator('#navigation a[data-view="overview"]').click()
     page.locator('#daily-panel-title').wait_for()
 
@@ -76,6 +92,8 @@ with sync_playwright() as p:
     page.get_by_role('navigation',name='Discover topics').get_by_role('link',name='Tools & models',exact=True).click()
     page.wait_for_function("document.querySelectorAll('.discovery-card').length===2")
     check('topic tabs filter the editorial collection', page.locator('.discovery-card').count()==2 and 'topic=tools' in page.url)
+    check('re-rendering discovery topics does not strand focus on a removed link',
+          page.evaluate("document.activeElement.id === 'main'"))
     page.reload();page.locator('#catalog-loading').wait_for(state='detached')
     check('topic survives direct reload', page.locator('.discovery-card').count()==2)
     page.get_by_role('navigation',name='Discover topics').get_by_role('link',name='Research',exact=True).click()
