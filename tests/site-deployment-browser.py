@@ -73,12 +73,6 @@ with sync_playwright() as p:
     # then restore the original selection without altering persistent preferences.
     initial_theme = page.locator('html').get_attribute('data-theme')
     page.evaluate("document.documentElement.dataset.theme='light'")
-    print('News palette diagnostic (light):', page.evaluate("""() => ({
-        theme: document.documentElement.dataset.theme,
-        paper: getComputedStyle(document.documentElement).getPropertyValue('--paper').trim(),
-        body: getComputedStyle(document.body).backgroundColor,
-        scheme: matchMedia('(prefers-color-scheme: dark)').matches
-    })"""), flush=True)
     check('daily archive light palette matches the Atlas workspace',
           page.evaluate("getComputedStyle(document.body).backgroundColor") == 'rgb(246, 246, 242)')
     page.evaluate("document.documentElement.dataset.theme='dark'")

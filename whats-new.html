@@ -17,6 +17,7 @@ try {
  }
 } catch { /* Storage may be unavailable; system color scheme remains the fallback. */ }
 </script>
+<link rel="stylesheet" href="brand.css">
 <style>
 :root{color-scheme:light;--paper:#f5f4ee;--surface:#fffefa;--ink:#202a28;--muted:#52645c;--line:#d4ded4;--green:#245e4c;--accent:#e6a769;--soft:#ecf0e8;--focus:#986317}
 *{box-sizing:border-box}
@@ -73,7 +74,7 @@ html:root[data-theme=dark]{color-scheme:dark;--paper:#161e1b;--surface:#25312c;-
 :root{--paper:#f6f6f2;--surface:#fff;--ink:#202b28;--muted:#627067;--line:#e0e5de;--green:#27664e;--soft:#eaf1ea}
 .shell{max-width:1210px;padding:22px clamp(18px,3.5vw,42px) 65px}
 .top{padding:6px 0 18px}
-.brand{gap:10px;font-size:24px;font-weight:650;letter-spacing:-.05em;line-height:1.1}
+.brand{gap:10px;font-size:24px;font-weight:650;letter-spacing:-.05em;line-height:1.1;padding:0;white-space:normal}
 .brandmark{width:36px;height:38px;border-radius:0;background:none;color:var(--green);flex-shrink:0}
 .brandmark svg{width:35px;height:35px}
 .brand-wordmark small{display:block;margin-top:5px;color:var(--muted);font-size:9px;font-weight:650;letter-spacing:.12em}
@@ -126,7 +127,6 @@ html:root[data-theme=dark] .summary{background:var(--soft)}
 </style>
 <script defer src="daily-core.js"></script>
 <script defer src="whats-new.js"></script>
-<link rel="stylesheet" href="brand.css">
 <!-- seo:start -->
 <title>AI News &amp; Daily Editions | AI Updates</title>
 <meta name="description" content="Read the AI Updates edition archive: AI news, research, technology releases, concepts and corrections with actual dates, sources and editorial review.">
