@@ -126,8 +126,25 @@ test('STT-MRAM evidence notebook explains arithmetic but is not an unreviewed ca
  assert.equal(candidate.publication_state,'not_in_canonical_catalog');
  assert.equal(candidate.catalog_path,null);
  assert.match(review,/href="hardware-review.html"/);
- for(const marker of ['65.7 ms','124.2 ms','50.7 mJ','0.325','0.316','not a canonical Atlas technology profile','press20261102-03-emram.html'])assert.ok(page.includes(marker),'Missing '+marker);
+ assert.match(review,/Subsequent catalog update/);
+ assert.match(review,/TECH-0303/);
+ for(const marker of ['65.7 ms','124.2 ms','50.7 mJ','0.325','0.316','canonical research-prototype profile','press20261102-03-emram.html'])assert.ok(page.includes(marker),'Missing '+marker);
  assert.match(page,/<caption>/);
  assert.match(page,/href="terms\/MLD-0724-memory-bandwidth.html"/);
  assert.ok(JSON.parse(read('deploy/public-files.json')).root_files.includes('hardware-review.html'));
+});
+
+test('Research prototype has a permanent, linked catalog route without rewriting the original deferred review',()=>{
+ const page=read('hardware-review.html'),audit=JSON.parse(read('data/catalog-candidate-decisions-2026-11-03-recovery.json'));
+ const profile='technology/TECH-0303-tohoku-aisin-16-nm-stt-mram-edge-ai-soc.html';
+ assert.ok(page.includes(profile));
+ assert.equal(audit.candidates[0].publication_state,'not_in_canonical_catalog','Historical review must retain its then-pending status');
+ const rows=JSON.parse(read('data/technologies-08.json'));
+ assert.equal(rows.length,1);
+ assert.equal(rows[0].id,'TECH-0303');
+ assert.equal(rows[0].initial_release_date,null);
+ assert.deepEqual(rows[0].concept_ids,['MLD-0724','MLD-0062']);
+ assert.match(rows[0].watch_out,/not independently replicated/);
+ assert.match(rows[0].access,/Research prototype only/);
+ assert.ok(fs.existsSync(path.join(root,profile)),'Permanent profile must be generated');
 });
