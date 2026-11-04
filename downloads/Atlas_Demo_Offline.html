@@ -818,7 +818,33 @@ function openRecord(id){const r=byID.get(id);if(!r){toast('That record is not in
  $('record-content').innerHTML=`<div class="dialog-head"><div><div class="eyebrow">${E(labels[r._type]||'Review queue')} · ${E(r.id)}</div><h2 id="record-title">${E(r._title)}</h2>${r._type==='safety'?reportPill(r.kind):pill(plainStatus(r),'muted')}</div><button class="icon-button" data-action="close-record" aria-label="Close record">✕</button></div><div class="dialog-body"><div class="dialog-actions">${actions}</div>${recordBody(r)}<section class="detail-block wide" style="margin-top:20px"><div class="notes-label"><h3 style="margin:0">Your notes</h3><small>Local to this browser</small></div><textarea id="record-notes" data-record="${id}" aria-label="Notes for ${E(r._title)}" maxlength="20000" placeholder="What matters for your project? What should you test?">${E(notebook.notes[id]||'')}</textarea><div class="notes-status" id="notes-status">${persist?'Edits save automatically in this browser.':E(STORAGE_NOTICE)}</div></section></div>`;if(!dialog.open)dialog.showModal();else dialog.scrollTop=0;}
 function closeRecord(){delete state.record;updateURL();if(dialog.open)dialog.close();}
 let disposeGames = null;
-function route(){if(disposeGames){disposeGames();disposeGames=null;}parse();renderNav();const fromMobileNav=$('sidebar').classList.contains('open');closeMobileNavigation();if(view==='overview')page.innerHTML=overview();else if(view==='games'){page.innerHTML=window.AtlasGamesTab.html();disposeGames=window.AtlasGamesTab.mount(page.querySelector('.atlas-games'),D,{openConcept:openRecord});}else if(view==='compare')page.innerHTML=comparePage();else if(view==='saved')page.innerHTML=notebookPage();else if(view==='sources')page.innerHTML=sourcesPage();else if(view==='search')page.innerHTML=searchPage();else{page.innerHTML=listPage();renderCollection();}bindControls();if(view==='overview'&&!window.ATLAS_OFFLINE)void loadDailyPreview();if(state.record)openRecord(state.record);else if(dialog.open)dialog.close();if(fromMobileNav){$('main').focus({preventScroll:true});$('main').scrollIntoView({block:'start'});}}
+let routeInitialized = false;
+function route(){
+  // Replacing #page detaches its focused control. Also announce a changed
+  // workspace section by moving focus to the existing main landmark.
+  const focusWasInPage = page.contains(document.activeElement);
+  const previousView = view;
+  if(disposeGames){disposeGames();disposeGames=null;}
+  parse();
+  const changedSection = routeInitialized && previousView !== view;
+  renderNav();
+  const fromMobileNav = $('sidebar').classList.contains('open');
+  closeMobileNavigation();
+  if(view==='overview')page.innerHTML=overview();
+  else if(view==='games'){page.innerHTML=window.AtlasGamesTab.html();disposeGames=window.AtlasGamesTab.mount(page.querySelector('.atlas-games'),D,{openConcept:openRecord});}
+  else if(view==='compare')page.innerHTML=comparePage();
+  else if(view==='saved')page.innerHTML=notebookPage();
+  else if(view==='sources')page.innerHTML=sourcesPage();
+  else if(view==='search')page.innerHTML=searchPage();
+  else{page.innerHTML=listPage();renderCollection();}
+  bindControls();
+  if(view==='overview'&&!window.ATLAS_OFFLINE)void loadDailyPreview();
+  if(state.record)openRecord(state.record);
+  else if(dialog.open)dialog.close();
+  const focusMain = !state.record && (fromMobileNav || changedSection || (routeInitialized && focusWasInPage));
+  routeInitialized = true;
+  if(focusMain){$('main').focus({preventScroll:true});$('main').scrollIntoView({block:'start'});}
+}
 function bindControls(){const local=$('local-query');if(local)local.addEventListener('input',()=>{clearTimeout(timer);timer=setTimeout(()=>{state.q=local.value;state.page='';updateURL();renderCollection();},150);});document.querySelectorAll('[data-filter]').forEach(el=>el.addEventListener('change',()=>{state[el.dataset.filter]=el.value;state.page='';updateURL();renderCollection();}));const global=$('all-query');if(global)global.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();goto('search',{q:global.value.trim()});}});}
 function download(filename,text,type='application/json'){const blob=new Blob([text],{type}),u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download=filename;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),5000);}
 function exportJSON(name,value){download(name+'.json',JSON.stringify(value,null,2));}
