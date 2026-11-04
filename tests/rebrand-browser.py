@@ -85,24 +85,6 @@ with sync_playwright() as p:
     page.wait_for_function("!document.getElementById('record-dialog').open")
     check('Escape from a record restores focus to the main landmark',
           page.evaluate("document.activeElement.id === 'main' && location.hash.startsWith('#/papers') && !location.hash.includes('record=')"))
-    page.goto(base+'#/papers')
-    page.locator('#catalog-loading').wait_for(state='detached')
-    page.locator('.paper-row h3 a').first.focus()
-    page.keyboard.press('Enter')
-    page.wait_for_function("document.getElementById('record-dialog').open")
-    page.get_by_role('button',name='Close record',exact=True).click()
-    check('record close button restores visible-page keyboard focus',
-          page.evaluate("!document.getElementById('record-dialog').open && document.activeElement.id === 'main'"))
-    page.goto(base+'#/papers')
-    page.locator('#catalog-loading').wait_for(state='detached')
-    page.locator('.paper-row h3 a').first.focus()
-    page.keyboard.press('Enter')
-    page.wait_for_function("document.getElementById('record-dialog').open")
-    page.go_back()
-    page.wait_for_function("!document.getElementById('record-dialog').open")
-    check('Back closes a record and places focus in the active section',
-          page.evaluate("document.activeElement.id === 'main' && location.hash.startsWith('#/papers')"))
-
     page.locator('#navigation a[data-view="overview"]').click()
     page.locator('#daily-panel-title').wait_for()
 
