@@ -384,3 +384,22 @@ test('Bandwidth and arithmetic-intensity guides teach measured memory traffic an
     assert.match(page,/Sources for the expanded explanation/);
   }
 });
+
+test('Exact match and structured output guides distinguish structural validity from semantic accuracy', () => {
+  const expectations = {
+    'MLD-0386': [/3\/4 = 75%/, /19\/20 = 95%/, /0\.95\^20/, /normaliz/i, /not a production|not a model evaluation/i],
+    'MLD-1179': [/schema.conformant|schema.compliant|schema compliance|schema-compliant/i, /status.*503/i, /status.*200/i, /IFParse v2\.0/i, /not (?:evidence|a guarantee)|does not imply|not independently/i]
+  };
+  for (const [id, patterns] of Object.entries(expectations)) {
+    const guide = guides[id];
+    assert.ok(guide && termManifest[id], 'Missing canonical term guide: ' + id);
+    assert.equal(guide.reviewed_on, '2026-11-03');
+    assert.ok(guide.sections.length >= 9, 'Incomplete teaching sections for ' + id);
+    assert.ok(guide.sections.every(([heading, body]) => heading.length >= 8 && body.length >= 120));
+    assert.equal(new Set(guide.sections.map(([heading]) => heading)).size, guide.sections.length);
+    assert.ok(guide.prerequisites.length >= 3 && guide.prerequisites.every(x => !!termManifest[x]));
+    assert.ok(guide.citations.length >= 3 && guide.citations.every(([title, url]) => title.length >= 45 && new URL(url).protocol === 'https:'));
+    const body = guide.sections.map(([, value]) => value).join(' ');
+    for (const pattern of patterns) assert.match(body, pattern, 'Missing example or evidence caveat in ' + id);
+  }
+});
