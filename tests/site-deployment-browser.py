@@ -299,7 +299,7 @@ with sync_playwright() as p:
     # comfortable one-column controls on narrow phones.
     filter_columns = """() => getComputedStyle(
         document.querySelector('.controls')
-    ).gridTemplateColumns.trim().split(/\\s+/).length"""
+    ).gridTemplateColumns.trim().split(' ').length"""
     page.set_viewport_size({'width':768,'height':1024})
     page.goto(base + 'whats-new.html')
     page.locator('#edition-search').wait_for()
