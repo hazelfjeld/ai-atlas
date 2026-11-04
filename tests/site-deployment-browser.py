@@ -78,6 +78,17 @@ with sync_playwright() as p:
               and page.locator('#edition-permalink-wrap').is_visible()
               and page.locator('#edition-content article.item').count() >= 1)
         audit = page.locator('#source-coverage .source-audit').inner_text()
+        # The coverage disclosure uses a native summary control. Keyboard users
+        # need the same clear focus ring as the archive's buttons and selects.
+        source_toggle = page.locator('#source-coverage .source-audit summary')
+        source_toggle.focus()
+        page.keyboard.press('Tab')
+        page.keyboard.press('Shift+Tab')
+        check('source-coverage summary has a visible keyboard focus ring',
+              source_toggle.evaluate("""(el) => document.activeElement === el
+                  && el.matches(':focus-visible')
+                  && getComputedStyle(el).outlineStyle === 'solid'
+                  && Number.parseFloat(getComputedStyle(el).outlineWidth) >= 3"""))
         if any(e['date'] == '2026-11-03' for e in index['editions']):
             check('new November 3 edition discloses exactly three source failures and partial scope',
                   'Source coverage (partial) · 14 checked · 3 failed' in audit
@@ -284,8 +295,17 @@ with sync_playwright() as p:
             element.getBoundingClientRect().height >= 44;
     })"""
     check('390px daily filters and search use legible, touch-friendly sizing', page.evaluate(mobile_readability_check))
+    if index['editions']:
+        source_toggle_mobile = page.locator('#source-coverage .source-audit summary')
+        source_toggle_mobile.wait_for(timeout=45000)
+        check('390px source-coverage summary is an accessible touch target',
+              source_toggle_mobile.evaluate("(el) => el.getBoundingClientRect().height >= 44"))
     page.set_viewport_size({'width':320,'height':700})
     check('320px daily filters and search avoid iOS focus zoom', page.evaluate(mobile_readability_check))
+    if index['editions']:
+        source_toggle_mobile.wait_for(timeout=45000)
+        check('320px source-coverage summary is an accessible touch target',
+              source_toggle_mobile.evaluate("(el) => el.getBoundingClientRect().height >= 44"))
     page.screenshot(path=str(out / 'daily-mobile-320.png'), full_page=True)
     page.set_viewport_size({'width':390,'height':844})
     page.goto(base + 'index.html#/games')
