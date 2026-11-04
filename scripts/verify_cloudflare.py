@@ -55,6 +55,25 @@ def await_provenance(request, expected, attempts=12, interval=4, pause=time.slee
                          + str(attempts) + ' checks: ' + last)
 
 
+def open_current_revision(request, path, revision, attempts=5, interval=2, pause=time.sleep):
+    """Retry a stale edge revision, but never accept one or skip byte verification."""
+    assert attempts >= 1
+    observed = None
+    for attempt in range(attempts):
+        response = request(path, {'Cache-Control': 'no-cache'} if attempt else None)
+        observed = response.headers.get('X-Atlas-Revision')
+        if observed == revision:
+            return response
+        response.close()
+        if attempt + 1 < attempts:
+            print('Stale asset revision for ' + (path or '/') + ': '
+                  + repr(observed) + '; retry ' + str(attempt + 1)
+                  + '/' + str(attempts), flush=True)
+            pause(interval)
+    raise AssertionError('Asset revision still stale after ' + str(attempts)
+                         + ' checks: ' + (path or '/') + ', observed ' + repr(observed))
+
+
 def verify(base, directory, revision):
     u = urlsplit(base)
     assert u.scheme == 'https' or (u.scheme == 'http' and u.hostname in ('localhost', '127.0.0.1'))
@@ -73,7 +92,7 @@ def verify(base, directory, revision):
 
     def check(path):
         expected = entries[path]
-        with request(path) as response:
+        with open_current_revision(request, path, revision) as response:
             body = response.read(expected['bytes'] + 1)
             assert response.status == 200 and response.url == base + path, path
             assert len(body) == expected['bytes'] and hashlib.sha256(body).hexdigest() == expected['sha256'], 'Mixed/incomplete asset: ' + path
