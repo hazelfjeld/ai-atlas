@@ -56,6 +56,19 @@ test('Only HTTPS source links and known internal record routes are accepted',()=
  assert.equal(D.safeCatalogPath('index.html#/technologies?record=TECH-0001'),'index.html#/technologies?record=TECH-0001');
  assert.equal(D.safeCatalogPath('https://evil.example'),'');
 });
+
+test('daily reader leads with verified briefing and stories before supplemental archive statistics',()=>{
+ const html=fs.readFileSync('whats-new.html','utf8'),js=fs.readFileSync('whats-new.js','utf8');
+ const order=['id="edition-status"','id="edition-summary"','class="panel"','id="edition-content"','id="edition-snapshot"','id="edition-metadata"','id="source-coverage"','id="revision-history"'];
+ const positions=order.map(token=>html.indexOf(token));
+ assert.ok(positions.every((pos,i)=>pos>=0&&(i===0||pos>positions[i-1])), 'Reading order must prioritize stories over edition audit: '+positions);
+ assert.match(html,/class="brand-wordmark">AI Updates<small>THE FRONTIER, IN CONTEXT<\/small>/);
+ assert.match(html,/\.edition-footnotes\{/);
+ assert.match(js,/element\('p',undefined,'why'\)/);
+ const freeze=JSON.parse(fs.readFileSync('publication.json','utf8'));
+ assert.equal(freeze.published_counts.terms,1345);
+});
+
 test('Daily page and scripts are syntax-valid and contain archive, source, topic and missing-edition controls',()=>{
  const html=fs.readFileSync('whats-new.html','utf8'),js=fs.readFileSync('whats-new.js','utf8');
  new vm.Script(js);

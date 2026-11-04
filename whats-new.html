@@ -68,6 +68,61 @@ footer{border-top:1px solid var(--line);font-size:13px;color:var(--muted);margin
 @media(max-width:560px){.controls{grid-template-columns:1fr}}
 html:root[data-theme=dark]{color-scheme:dark;--paper:#161e1b;--surface:#25312c;--ink:#f1f3ec;--muted:#c2d1c8;--line:#526359;--green:#bce0bd;--soft:#384a3e;--focus:#f2bd74}html:root[data-theme=dark] .aside,html:root[data-theme=dark] .summary{background:#304137}html:root[data-theme=dark] .brandmark{background:#405e50}html:root[data-theme=dark] .tag{color:#e7f1e5}html:root[data-theme=dark] .controls select,html:root[data-theme=dark] .search-controls input{border-color:#779185}html:root[data-theme=dark] .item .fact{color:var(--muted)}html:root[data-theme=dark] .source-audit summary:focus-visible{outline-color:#f2bd74}
 @media(prefers-color-scheme:dark){html:root:not([data-theme=light]){color-scheme:dark;--paper:#161e1b;--surface:#25312c;--ink:#f1f3ec;--muted:#c2d1c8;--line:#526359;--green:#bce0bd;--soft:#384a3e;--focus:#f2bd74}html:root:not([data-theme=light]) .aside,html:root:not([data-theme=light]) .summary{background:#304137}html:root:not([data-theme=light]) .brandmark{background:#405e50}html:root:not([data-theme=light]) .tag{color:#e7f1e5}html:root:not([data-theme=light]) .controls select,html:root:not([data-theme=light]) .search-controls input{border-color:#779185}html:root:not([data-theme=light]) .item .fact{color:var(--muted)}html:root:not([data-theme=light]) .source-audit summary:focus-visible{outline-color:#f2bd74}}
+
+/* Newsroom visual hierarchy shares the Atlas palette; audit details follow the stories. */
+:root{--paper:#f6f6f2;--surface:#fff;--ink:#202b28;--muted:#627067;--line:#e0e5de;--green:#27664e;--soft:#eaf1ea}
+.shell{max-width:1210px;padding:22px clamp(18px,3.5vw,42px) 65px}
+.top{padding:6px 0 18px}
+.brand{gap:10px;font-size:24px;font-weight:650;letter-spacing:-.05em;line-height:1.1}
+.brandmark{width:36px;height:38px;border-radius:0;background:none;color:var(--green);flex-shrink:0}
+.brandmark svg{width:35px;height:35px}
+.brand-wordmark small{display:block;margin-top:5px;color:var(--muted);font-size:9px;font-weight:650;letter-spacing:.12em}
+.toplinks a{color:var(--muted);text-decoration:none;font-weight:600}
+.toplinks a:hover{color:var(--green);text-decoration:underline}
+header{padding:30px 0 18px;grid-template-columns:minmax(0,1fr) minmax(210px,250px);gap:24px;align-items:center}
+h1{font:400 clamp(40px,4.4vw,56px)/1.08 Georgia,"Times New Roman",serif;letter-spacing:-.045em;margin:8px 0 12px}
+.lead{font-size:15px;line-height:1.65;max-width:660px;margin:0}
+.eyebrow{font-size:10px;letter-spacing:.13em}
+.aside{background:var(--surface);color:var(--ink);border:1px solid var(--line);border-left:3px solid var(--green);border-radius:9px;padding:14px 17px}
+.aside .eyebrow{color:var(--green)}
+.aside strong{font-size:20px;line-height:1.2;margin:6px 0}
+.aside p{color:var(--muted);font-size:12px;line-height:1.5;margin:4px 0 0}
+.status{background:transparent;color:var(--muted);border-left:3px solid var(--green);padding:8px 14px;font-size:13px;line-height:1.6;margin:0 0 18px;border-radius:0}
+.summary{background:var(--soft);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:17px 20px;margin:0 0 20px}
+.summary h2{font-size:13px;margin:0 0 8px;letter-spacing:0}
+.summary p{font-size:14px;line-height:1.65;margin:5px 0;max-width:920px}
+.panel{border-radius:10px;padding:18px;margin-bottom:12px}
+.controls{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px 13px}
+.controls label,.search-controls label{font-size:11px;letter-spacing:.04em}
+.controls select,.search-controls input{font-size:14px}
+.heading{margin:29px 0 13px}
+.heading h2{font:400 27px/1.2 Georgia,"Times New Roman",serif;letter-spacing:-.03em}
+.cards{gap:14px}
+.item{padding:20px;gap:9px;line-height:1.6}
+.item h3{font:400 23px/1.22 Georgia,"Times New Roman",serif;letter-spacing:-.025em}
+.item p{font-size:14px;line-height:1.65}
+.item .why{background:var(--soft);border-left:3px solid var(--green);border-radius:0 6px 6px 0;padding:10px 12px;color:var(--ink)}
+.item .caveat{font-size:12px}
+.item .fact{line-height:1.55;overflow-wrap:anywhere}
+.item .links{border-top:1px solid var(--line);padding-top:12px}
+.edition-footnotes{border-top:1px solid var(--line);margin-top:38px;padding-top:10px}
+.edition-footnotes .snapshot{margin:18px 0 16px}
+.edition-footnotes .meta{margin:16px 0}
+.edition-footnotes .revision-history{margin:18px 0}
+.edition-footnotes .notice{margin:20px 0 0!important}
+.item,.edition-footnotes,.toplinks{overflow-wrap:anywhere}
+html:root[data-theme=dark]{--paper:#18211e;--surface:#222e28;--ink:#e5ebe5;--muted:#a0aea3;--line:#38473c;--green:#98cbb0;--soft:#293c30}
+html:root[data-theme=dark] .aside,html:root[data-theme=dark] .summary{background:var(--surface);color:var(--ink)}
+html:root[data-theme=dark] .summary{background:var(--soft)}
+@media(prefers-color-scheme:dark){
+ html:root:not([data-theme=light]){--paper:#18211e;--surface:#222e28;--ink:#e5ebe5;--muted:#a0aea3;--line:#38473c;--green:#98cbb0;--soft:#293c30}
+ html:root:not([data-theme=light]) .aside{background:var(--surface);color:var(--ink)}
+ html:root:not([data-theme=light]) .summary{background:var(--soft);color:var(--ink)}
+}
+@media(max-width:780px){header{grid-template-columns:1fr;gap:16px}.aside{max-width:none}.controls{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.shell{padding:16px 16px 48px}.top{align-items:flex-start;gap:8px}.toplinks{gap:0 15px}.brand{font-size:21px}.toplinks a{min-height:44px}.controls{grid-template-columns:1fr}.cards{grid-template-columns:1fr}.panel{padding:14px}.item{padding:17px}h1{font-size:40px}.edition-footnotes .snapshot-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(prefers-reduced-motion:reduce){.item,.toplinks a{transition:none}}
+
 </style>
 <script defer src="daily-core.js"></script>
 <script defer src="whats-new.js"></script>
@@ -99,17 +154,18 @@ html:root[data-theme=dark]{color-scheme:dark;--paper:#161e1b;--surface:#25312c;-
 <a class="skip" href="#main">Skip to daily editions</a>
 <div class="shell">
 <nav class="top" aria-label="AI Updates navigation">
- <a class="brand" href="index.html#/overview"><span class="brandmark">↗</span>AI Updates</a>
+ <a class="brand" href="index.html#/overview" aria-label="AI Updates home"><span class="brandmark"><svg viewBox="0 0 36 36" fill="none" aria-hidden="true"><path d="M5 7h12v12H5zM21 17h10v12H21z" stroke="currentColor" stroke-width="2"/><path d="M21 6h10M26 1v10M5 25h12M5 30h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span><span class="brand-wordmark">AI Updates<small>THE FRONTIER, IN CONTEXT</small></span></a>
  <div class="toplinks"><a href="index.html#/overview">Overview</a><a href="index.html#/technologies">Technologies</a><a href="index.html#/dictionary">Dictionary</a><a href="index.html#/safety">Safety</a><a href="demo.html">Guided demo</a></div>
 </nav>
 <main id="main" tabindex="-1">
 <header>
  <div><div class="eyebrow">DAILY INTELLIGENCE · EVIDENCE FIRST</div><h1>What's new <em>in AI.</em></h1><p class="lead">AI releases, research, safety developments, new technology profiles and useful terms—with sources, actual dates, and uncertainty attached.</p></div>
- <aside class="aside"><div class="eyebrow" style="color:#d6e7da">THE DAILY EDITION</div><strong id="date-display">Checking editions…</strong><p>Scheduled editorial publication, not a continuously live feed. Coverage is curated and never exhaustive.</p></aside>
+ <aside class="aside"><div class="eyebrow">THE DAILY EDITION</div><strong id="date-display">Checking editions…</strong><p>Scheduled editorial publication, not a continuously live feed. Coverage is curated and never exhaustive.</p></aside>
 </header>
 <p class="status" id="edition-status" role="status" aria-live="polite">Checking the published edition archive…</p>
-<section id="edition-snapshot" class="snapshot" aria-label="Verified edition at a glance" hidden></section>
-<p class="notice" style="margin:0 0 20px;padding:14px 18px;border:1px solid var(--line);border-radius:12px;background:var(--soft);font-size:14px"><strong>Under catalog review:</strong> The November 2 collector proposed technologies and terms that are not yet part of the permanent catalog. <a href="catalog-review.html">Read the seven-candidate distinctness assessment, primary sources and existing concept links</a>. This is an editorial review, not additional AI news.</p>
+<section class="summary" id="edition-summary" aria-label="Selected edition summary" hidden><h2>TL;DR</h2><div id="summary-content"></div></section>
+
+
 <div class="panel">
  <div class="controls">
   <label for="edition-select">Edition archive<select id="edition-select" disabled><option value="">Awaiting first edition</option></select></label>
@@ -123,13 +179,18 @@ html:root[data-theme=dark]{color-scheme:dark;--paper:#161e1b;--surface:#25312c;-
  <div class="search-controls"><label for="edition-search">Search this edition<input id="edition-search" type="search" maxlength="120" autocomplete="off" placeholder="Search headlines, caveats, sources, tags"></label><button id="reset-filters" type="button">Reset filters</button></div>
  <div class="search-controls"><button id="export-verified" type="button" disabled title="Enabled after an edition passes SHA-256 and schema checks">Download filtered evidence list (.csv)</button><span class="fact">Exports source dates, review labels, caveats and links from the verified archive, not a live news search. Spreadsheet formula text is neutralized.</span></div>
  <p class="filter-count" id="filter-results" role="status" aria-live="polite">Search becomes available after the edition is verified.</p>
- <div class="meta" id="edition-metadata" aria-live="polite"><span>Last successful publication: <b>none yet</b></span><span>Collection status: <b>pending</b></span></div>
+</div>
+
+
+<div id="edition-content"><div class="empty"><strong>Awaiting the first reviewed edition.</strong><p>The collector and publisher are configured separately. No unverified headlines are displayed as news.</p></div></div>
+<section class="edition-footnotes" aria-label="Edition details and provenance">
+<section id="edition-snapshot" class="snapshot" aria-label="Verified edition at a glance" hidden></section>
+<div class="meta" id="edition-metadata" aria-live="polite"><span>Last successful publication: <b>none yet</b></span><span>Collection status: <b>pending</b></span></div>
  <p id="edition-permalink-wrap" class="edition-permalink" hidden><a id="edition-permalink" href="whats-new.html">Share this verified edition, revision and selected filters</a></p>
  <div id="source-coverage" hidden aria-label="Editorial source coverage and gaps"></div>
-</div>
-<section class="summary" id="edition-summary" aria-label="Selected edition summary" hidden><h2>TL;DR</h2><div id="summary-content"></div></section>
 <section id="revision-history" class="revision-history" aria-labelledby="revision-history-title" hidden><h2 id="revision-history-title">What changed in this revision?</h2><div id="revision-history-content" aria-live="polite"></div></section>
-<div id="edition-content"><div class="empty"><strong>Awaiting the first reviewed edition.</strong><p>The collector and publisher are configured separately. No unverified headlines are displayed as news.</p></div></div>
+<p class="notice" style="margin:0 0 20px;padding:14px 18px;border:1px solid var(--line);border-radius:12px;background:var(--soft);font-size:14px"><strong>Under catalog review:</strong> The November 2 collector proposed technologies and terms that are not yet part of the permanent catalog. <a href="catalog-review.html">Read the seven-candidate distinctness assessment, primary sources and existing concept links</a>. This is an editorial review, not additional AI news.</p>
+</section>
 </main>
 <footer>AI Updates is a sourced learning and research project, not a comprehensive newswire. First-publication, discovery, and AI Updates-addition dates are separate. <a href="index.html#/sources">Read the evidence and coverage policy</a>.</footer>
 </div>

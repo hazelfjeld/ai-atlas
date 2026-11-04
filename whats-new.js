@@ -86,7 +86,7 @@ function card(item,kind){
   top.append(element('span',timing,'tag'));
  }
  article.append(top,element('h3',item.title),element('p',item.summary));
- if(item.why_it_matters){const p=element('p');p.append(element('strong','Why it matters: '),document.createTextNode(item.why_it_matters));article.append(p);}
+ if(item.why_it_matters){const p=element('p',undefined,'why');p.append(element('strong','Why it matters: '),document.createTextNode(item.why_it_matters));article.append(p);}
  if(item.caveat){const p=element('p',undefined,'caveat');p.append(element('strong','Limitation: '),document.createTextNode(item.caveat));article.append(p);}
  const dates=element('div',undefined,'fact');
  const bits=[];

@@ -61,6 +61,16 @@ with sync_playwright() as p:
     check('technology profile deep link retains caveats and references', page.locator('#record-title').inner_text() == 'PyTorch' and page.get_by_role('heading', name='Tradeoffs & cautions', exact=True).is_visible())
     page.locator('[data-action=close-record]').click()
     page.goto(base + 'whats-new.html')
+    check('daily archive uses the same Atlas logo and quiet wordmark',
+          page.locator('.brand-wordmark small').inner_text() == 'THE FRONTIER, IN CONTEXT')
+    check('daily archive places verified briefing and articles before reporting metrics',
+          page.evaluate("""() => {
+              const ids = ['edition-status','edition-summary','edition-content','edition-snapshot','edition-metadata'];
+              const nodes = ids.map(id => document.getElementById(id));
+              return nodes.every((node,i) => node && (!i || (nodes[i-1].compareDocumentPosition(node) & Node.DOCUMENT_POSITION_FOLLOWING)));
+          }"""))
+    check('daily archive light palette matches the Atlas workspace',
+          page.evaluate("getComputedStyle(document.body).backgroundColor") == 'rgb(246, 246, 242)')
     # A stale but verified archive edition must not be presented as today's news,
     # visually or to users navigating by screen-reader region labels.
     check('archive heading is truthful for current and historic editions',
@@ -121,6 +131,12 @@ with sync_playwright() as p:
               page.locator('#edition-select').is_enabled()
               and page.locator('#edition-permalink-wrap').is_visible()
               and page.locator('#edition-content article.item').count() >= 1)
+        check('news stories visually distinguish Why it matters from the summary',
+              page.locator('#edition-content article.item .why').count() >= 1)
+        page.set_viewport_size({'width':320,'height':720})
+        check('verified archive fits 320px mobile without horizontal scroll',
+              page.evaluate('document.documentElement.scrollWidth <= window.innerWidth + 1'))
+        page.set_viewport_size({'width':1440,'height':1000})
         audit = page.locator('#source-coverage .source-audit').inner_text()
         # The coverage disclosure uses a native summary control. Keyboard users
         # need the same clear focus ring as the archive's buttons and selects.
