@@ -71,6 +71,20 @@ with sync_playwright() as p:
     check('technology link opens the native searchable tab',page.url.endswith('#/technologies'))
     check('changing main sections keeps focus in the active landmark',
           page.evaluate("document.activeElement.id === 'main'"))
+    # Opening a hash-linked record replaces the card that originally held
+    # keyboard focus. Closing that modal must not strand users on BODY.
+    page.goto(base+'#/papers')
+    page.locator('#catalog-loading').wait_for(state='detached')
+    paper_link=page.locator('.paper-row h3 a').first
+    paper_link.focus()
+    page.keyboard.press('Enter')
+    page.wait_for_function("document.getElementById('record-dialog').open")
+    check('keyboard-opened paper shows an accessible modal',
+          page.evaluate("document.activeElement.closest('#record-dialog') !== null"))
+    page.keyboard.press('Escape')
+    page.wait_for_function("!document.getElementById('record-dialog').open")
+    check('Escape from a record restores focus to the main landmark',
+          page.evaluate("document.activeElement.id === 'main' && location.hash.startsWith('#/papers') && !location.hash.includes('record=')"))
     page.locator('#navigation a[data-view="overview"]').click()
     page.locator('#daily-panel-title').wait_for()
 
