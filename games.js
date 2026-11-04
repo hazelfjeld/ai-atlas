@@ -203,7 +203,6 @@
     const q = questions[questionIndex];
     if (!q.answered && q.answerMode === 'choice' && /^[1-4]$/.test(event.key) && q.options[Number(event.key) - 1]) { event.preventDefault(); submitAnswer(q.options[Number(event.key) - 1].id); }
   });
-  // Keep the standalone theme toggle state in sync with the active palette.
   $('theme-toggle').onclick = () => {
     document.documentElement.dataset.theme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
     $('theme-toggle').setAttribute('aria-pressed', String(document.documentElement.dataset.theme === 'dark'));
