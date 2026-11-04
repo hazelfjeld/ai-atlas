@@ -309,6 +309,17 @@ with sync_playwright() as p:
             Number.parseFloat(getComputedStyle(element).fontSize) >= 16 &&
             element.getBoundingClientRect().height >= 44;
     })"""
+    # The five archive header links used 13px inline text with only ~21px hit areas.
+    # Give touch users real 44px targets without altering the desktop navigation.
+    mobile_nav_targets = """() => {
+        const links = [...document.querySelectorAll('.toplinks a')];
+        return links.length === 5 && links.every(link =>
+            link.getBoundingClientRect().height >= 44 &&
+            getComputedStyle(link).display === 'inline-flex');
+    }"""
+    check('390px archive header links have 44px touch targets', page.evaluate(mobile_nav_targets))
+    check('390px archive header fits without horizontal scrolling',
+          page.evaluate('document.documentElement.scrollWidth <= innerWidth'))
     check('390px daily filters and search use legible, touch-friendly sizing', page.evaluate(mobile_readability_check))
     if index['editions']:
         source_toggle_mobile = page.locator('#source-coverage .source-audit summary')
@@ -316,6 +327,9 @@ with sync_playwright() as p:
         check('390px source-coverage summary is an accessible touch target',
               source_toggle_mobile.evaluate("(el) => el.getBoundingClientRect().height >= 44"))
     page.set_viewport_size({'width':320,'height':700})
+    check('320px archive header links have 44px touch targets', page.evaluate(mobile_nav_targets))
+    check('320px archive header fits without horizontal scrolling',
+          page.evaluate('document.documentElement.scrollWidth <= innerWidth'))
     check('320px daily filters and search avoid iOS focus zoom', page.evaluate(mobile_readability_check))
     if index['editions']:
         source_toggle_mobile.wait_for(timeout=45000)
