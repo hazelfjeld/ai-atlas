@@ -1030,9 +1030,9 @@ test('NVIDIA Auto Ontology is a checksum-pinned Atlas addition, not an invented 
  const buf=fs.readFileSync(path.join(root,'data/technologies-07.json'));
  const rec=JSON.parse(buf)[0];
  const manifest=JSON.parse(fs.readFileSync(path.join(root,'publication.json')));
- const file=manifest.extensions.technologies.at(-1);
+ const file=manifest.extensions.technologies.find(x=>x.path==='data/technologies-07.json');
  assert.equal(manifest.prepared_counts.technologies,300);
- assert.equal(manifest.published_counts.technologies,302);
+ assert.equal(manifest.published_counts.technologies,303);
  assert.equal(file.path,'data/technologies-07.json');
  assert.equal(file.count,2);
  assert.equal(file.bytes,buf.byteLength);
@@ -1350,4 +1350,24 @@ test('Publication-date view is accessible and wired to the same filter as CSV an
   "publication-filter').value='all'",
   'Publisher date unreported'
  ])assert.ok(js.includes(token),'Missing archive UI wiring '+token);
+});
+
+test('TECH-0303 research profile is SHA-verified and source-qualified, not a dated new-world launch',()=>{
+ const path=require('node:path'),crypto=require('node:crypto'),root=path.join(__dirname,'..');
+ const bytes=fs.readFileSync(path.join(root,'data/technologies-08.json'));
+ const rows=JSON.parse(bytes),manifest=JSON.parse(fs.readFileSync(path.join(root,'publication.json')));
+ const meta=manifest.extensions.technologies.find(x=>x.path==='data/technologies-08.json');
+ assert.equal(rows.length,1);assert.equal(meta.count,1);
+ assert.equal(bytes.length,meta.bytes);
+ assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'),meta.sha256);
+ assert.equal(rows[0].id,'TECH-0303');assert.equal(rows[0].catalog_added_on,'2026-11-03');
+ assert.equal(rows[0].initial_release_date,null);
+ assert.match(rows[0].kind,/Research hardware prototype/);
+ assert.match(rows[0].watch_out,/65.7 ms.*124.2 ms/);
+ assert.equal(rows[0].source_url,'https://www.tohoku.ac.jp/japanese/2026/11/press20261102-03-emram.html');
+ assert.equal(new Set(rows[0].primary_sources.map(x=>x.url)).size,3);
+ assert.deepEqual(rows[0].concept_ids,['MLD-0724','MLD-0062']);
+ assert.ok(fs.existsSync(path.join(root,'technology/TECH-0303-tohoku-aisin-16-nm-stt-mram-edge-ai-soc.html')));
+ const nov3=JSON.parse(fs.readFileSync(path.join(root,'data/daily/editions/2026-11-03-v4.json')));
+ assert.equal(nov3.technologies.length,0,'Immutable prior edition cannot claim a retroactive canonical addition');
 });
