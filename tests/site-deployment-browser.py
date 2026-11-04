@@ -79,7 +79,7 @@ with sync_playwright() as p:
     # Keyboard focus on muted archive controls was almost indistinguishable
     # from the control fill (old amber outline < 3:1 in both themes).
     # Test the real computed focus style, not just the presence of :focus-visible.
-    focus_outline_contrast = """() => {
+    focus_outline_contrast = r"""() => {
         const el = document.querySelector('#reset-filters');
         if (document.activeElement !== el || !el.matches(':focus-visible')) return 0;
         const style = getComputedStyle(el);
