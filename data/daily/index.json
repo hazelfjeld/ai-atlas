@@ -243,7 +243,7 @@
       "published_at": "2026-11-04T01:36:47.991Z"
     }
   ],
-  "last_successful_publish_at": "2026-11-03T22:38:44Z",
-  "status": "edition_revision_5_pending_production_verification",
-  "coverage_note": "November 3 revision 5 is indexed pending exact GitHack/Cloudflare verification. The last successful publish clock still refers to verified revision 4. One previously reviewed technology (TECH-0303) added to Atlas and one already published archive breakdown are indexed without new outside news; eight reports, 14 checked URLs, three failed lookups, partial source coverage and three remaining original proposals are preserved."
+  "last_successful_publish_at": "2026-11-04T01:45:26Z",
+  "status": "edition_revision_5_production_verified",
+  "coverage_note": "November 3 revision 5 independently verified by main 9c90272aaf97aa05ee43e12f2d88b5475cd7cf04 in GitHack/catalog 41755887696 and Cloudflare deploy/browser 41755887734 at 2026-11-04T01:45:26Z: 155 Node tests, 490 exact assets/host across 3 production hostnames. Adds 1 previously published canonical technology TECH-0303 new to Atlas and 1 source-date snapshot UI site change. Original eight qualified reports (four Nov 3 and four catch-up), 14 checked sources, 3 failed lookups, partial coverage and 3 still-deferred original proposals are preserved. No outside world events, new term IDs or correction claims. Older archives and demo fallback unchanged."
 }
