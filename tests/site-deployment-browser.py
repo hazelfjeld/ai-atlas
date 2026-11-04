@@ -63,7 +63,7 @@ with sync_playwright() as p:
     page.goto(base + 'whats-new.html')
     # A stale but verified archive edition must not be presented as today's news,
     # visually or to users navigating by screen-reader region labels.
-    check('archive heading is truthful for both today's and historic editions',
+    check('archive heading is truthful for current and historic editions',
           page.get_by_role('heading', name="What's new in AI.", exact=True).is_visible())
     check('summary landmark identifies the selected edition rather than today',
           page.locator('#edition-summary').get_attribute('aria-label') == 'Selected edition summary')
