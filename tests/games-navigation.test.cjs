@@ -75,3 +75,17 @@ test('progressive sidebar retains all canonical links and reveals deep-linked se
   assert.match(css, /\.nav-more-toggle:focus-visible/);
   assert.match(css, /prefers-reduced-motion:reduce/);
 });
+
+
+test('mobile drawer does not expose closed offscreen links and supports keyboard dismissal', () => {
+  const html=read('index.html'),app=read('app.js'),css=read('app.css'),offline=read('downloads/Atlas_Demo_Offline.html');
+  assert.match(html, /id="menu-toggle"[^>]+aria-controls="sidebar"/);
+  assert.match(css, /@media\(max-width:650px\)[\s\S]*?\.sidebar\{[^}]*visibility:hidden/);
+  assert.match(css, /\.sidebar\.open\{[^}]*visibility:visible/);
+  assert.match(app, /function closeMobileNavigation\(restoreFocus=false\)/);
+  assert.match(app, /document\.querySelector\('\.workspace'\)\.inert=open/);
+  assert.match(app, /e\.key==='Escape'/);
+  assert.match(app, /mobileNavTabStops\(\)/);
+  assert.match(offline, /aria-controls="sidebar"/);
+  assert.match(offline, /function closeMobileNavigation\(restoreFocus=false\)/);
+});
