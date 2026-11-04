@@ -1926,8 +1926,8 @@
   },
   "MLD-0386": {
     "path": "terms/MLD-0386-exact-match.html",
-    "sha256": "613e879baf3108143ee3bc135efe2708aeb50520e32fbc3e983bb5f58b98795c",
-    "expanded": false
+    "sha256": "3daad4da1bfe4ea379bfec68d364b631d4ad1ef3420ca88947beaf65b80b68de",
+    "expanded": true
   },
   "MLD-0387": {
     "path": "terms/MLD-0387-expectation.html",
@@ -5891,8 +5891,8 @@
   },
   "MLD-1179": {
     "path": "terms/MLD-1179-structured-output.html",
-    "sha256": "8884a7ed8782f4605db3db1990ac5edd3f6c4f663971a61b42229ddbbc5d7fc5",
-    "expanded": false
+    "sha256": "f55a5d4e1a42c7f9343bb8d9bce4413ef9ef709783b9367cc547fa962ec36108",
+    "expanded": true
   },
   "MLD-1180": {
     "path": "terms/MLD-1180-structured-pruning.html",
