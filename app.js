@@ -8,6 +8,7 @@ if(document.getElementById('catalog-loading'))document.getElementById('catalog-l
 if(!D||!C){document.getElementById('page').textContent='The catalog could not load. Run the included build command, or use the self-contained preview.';return;}
 const {escapeHTML:E,safeURL,formatDate:date,matches,csv,bibtex}=C;
 const $=id=>document.getElementById(id), page=$('page'), dialog=$('record-dialog');
+let recordReturnFocus = null;
 const STORE='atlas.notebook.v1';
 // GitHack serves unrelated repositories on a shared origin. Never persist personal notes there.
 const SHARED_HOST=['raw.githack.com','rawcdn.githack.com'].includes(location.hostname);
@@ -116,14 +117,23 @@ function recordBody(r){if(r._type==='technologies')return `<p class="lead">${E(r
  if(r._type==='playbooks')return `<p class="lead">${E(r.problem)}</p><div class="detail-grid">${block('Candidate technologies',linksToIDs(r.technology_ids),'wide highlight')}${block('Why this starting stack','<p>'+E(r.rationale)+'</p>','wide')}${block('First step','<p>'+E(r.first_step)+'</p>')}${block('Validation plan','<p>'+E(r.validation)+'</p>')}${block('Where it breaks down','<p>'+E(r.caveat)+'</p>','wide caution')}${block('Status','<p>'+E(r.status)+'</p>','wide')}</div>`;
  return `<p class="lead">${E(r.summary||'Candidate discovered automatically. No incident classification or truth verification has been performed.')}</p><div class="detail-grid">${block('Review required','<p>This entry is deliberately outside the reviewed safety catalog. An editor must inspect the original evidence, identify duplicates and determine what kind of record it is.</p>','wide caution')}${block('Metadata',metaLine('Source',r.source_id)+metaLine('Publication date',r.published_at)+metaLine('Discovered',r.discovered_at)+ext(r.source_url,'Original source'),'wide')}</div>`;}
 function openRecord(id){const r=byID.get(id);if(!r){toast('That record is not in this snapshot.');delete state.record;updateURL();return;}let actions=`<button class="btn" data-save="${r.id}">${notebook.saved.includes(id)?'Saved ✓':'Save to notebook'}</button>`;if(r._type==='technologies')actions+=`<button class="btn" data-compare="${id}">${notebook.compare.includes(id)?'Remove from comparison':'Compare +'}</button>`;if(r._type==='papers')actions+=`<button class="btn" data-bibtex="${id}">Download BibTeX</button>`;actions+=`<button class="btn" data-export-record="${id}">Export record</button><button class="btn" data-copy-link="${id}">Copy link</button>`;
- $('record-content').innerHTML=`<div class="dialog-head"><div><div class="eyebrow">${E(labels[r._type]||'Review queue')} · ${E(r.id)}</div><h2 id="record-title">${E(r._title)}</h2>${r._type==='safety'?reportPill(r.kind):pill(plainStatus(r),'muted')}</div><button class="icon-button" data-action="close-record" aria-label="Close record">✕</button></div><div class="dialog-body"><div class="dialog-actions">${actions}</div>${recordBody(r)}<section class="detail-block wide" style="margin-top:20px"><div class="notes-label"><h3 style="margin:0">Your notes</h3><small>Local to this browser</small></div><textarea id="record-notes" data-record="${id}" aria-label="Notes for ${E(r._title)}" maxlength="20000" placeholder="What matters for your project? What should you test?">${E(notebook.notes[id]||'')}</textarea><div class="notes-status" id="notes-status">${persist?'Edits save automatically in this browser.':E(STORAGE_NOTICE)}</div></section></div>`;if(!dialog.open)dialog.showModal();else dialog.scrollTop=0;}
-function closeRecord(){delete state.record;updateURL();if(dialog.open)dialog.close();}
+ $('record-content').innerHTML=`<div class="dialog-head"><div><div class="eyebrow">${E(labels[r._type]||'Review queue')} · ${E(r.id)}</div><h2 id="record-title">${E(r._title)}</h2>${r._type==='safety'?reportPill(r.kind):pill(plainStatus(r),'muted')}</div><button class="icon-button" data-action="close-record" aria-label="Close record">✕</button></div><div class="dialog-body"><div class="dialog-actions">${actions}</div>${recordBody(r)}<section class="detail-block wide" style="margin-top:20px"><div class="notes-label"><h3 style="margin:0">Your notes</h3><small>Local to this browser</small></div><textarea id="record-notes" data-record="${id}" aria-label="Notes for ${E(r._title)}" maxlength="20000" placeholder="What matters for your project? What should you test?">${E(notebook.notes[id]||'')}</textarea><div class="notes-status" id="notes-status">${persist?'Edits save automatically in this browser.':E(STORAGE_NOTICE)}</div></section></div>`;if(!dialog.open){recordReturnFocus=document.activeElement;dialog.showModal();}else dialog.scrollTop=0;}
+function closeRecord(){
+ delete state.record;updateURL();
+ if(!dialog.open)return;
+ dialog.close();
+ const target=recordReturnFocus;
+ recordReturnFocus=null;
+ if(target?.isConnected && target!==document.body && !target.closest('[inert]'))target.focus({preventScroll:true});
+ else $('main').focus({preventScroll:true});
+}
 let disposeGames = null;
 let routeInitialized = false;
 function route(){
   // Replacing #page detaches its focused control. Also announce a changed
   // workspace section by moving focus to the existing main landmark.
   const focusWasInPage = page.contains(document.activeElement);
+  const wasRecordOpen = dialog.open;
   const previousView = view;
   if(disposeGames){disposeGames();disposeGames=null;}
   parse();
@@ -141,8 +151,8 @@ function route(){
   bindControls();
   if(view==='overview'&&!window.ATLAS_OFFLINE)void loadDailyPreview();
   if(state.record)openRecord(state.record);
-  else if(dialog.open)dialog.close();
-  const focusMain = !state.record && (fromMobileNav || changedSection || (routeInitialized && focusWasInPage));
+  else if(dialog.open){recordReturnFocus=null;dialog.close();}
+  const focusMain = !state.record && (wasRecordOpen || fromMobileNav || changedSection || (routeInitialized && focusWasInPage));
   routeInitialized = true;
   if(focusMain){$('main').focus({preventScroll:true});$('main').scrollIntoView({block:'start'});}
 }
