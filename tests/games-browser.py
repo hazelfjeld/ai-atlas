@@ -29,6 +29,16 @@ with sync_playwright() as p:
     browser=p.chromium.launch(executable_path=os.environ.get('CHROMIUM_PATH'),headless=True,args=['--no-sandbox'])
     page=browser.new_page(viewport={'width':1440,'height':1100},reduced_motion='reduce');errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
     open_page(page);page.locator('#games').wait_for(state='visible');check('dictionary loads',int(page.locator('#catalog-count').inner_text().replace(',',''))>1000)
+    # A fragment skip target needs programmatic focus so Tab stays in game content.
+    # Without tabindex=-1 on main, the fragment can scroll while focus stays in the header.
+    if not args.fixture:
+        page.locator('a.skip').focus()
+        page.keyboard.press('Enter')
+        check('Games skip link focuses main',
+              page.evaluate("location.hash === '#main' && document.activeElement.id === 'main'"))
+        page.keyboard.press('Tab')
+        check('Tab after Games skip stays within main',
+              page.evaluate("!!document.activeElement.closest('main')"))
     page.screenshot(path=str(out/'games-desktop.png'),full_page=True)
     rows=page.evaluate('async()=> (await window.ATLAS_READY).terms');by_definition={r['definition']:r for r in rows};by_id={r['id']:r for r in rows}
     technique_ids = set(page.evaluate('Array.from(window.AtlasGames.techniqueIds)'))

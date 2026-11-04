@@ -30,6 +30,7 @@ test('Native Games reuses catalog, cleans up listeners/timers, and opens Atlas c
 test('Standalone game links still work with shared game engine', () => {
   const html = read('games.html');
   for(const name of ['catalog-loader.js','core.js','games-core.js','games.js']) assert.ok(html.includes('src="'+name+'"'));
+  assert.match(html, /<main id="main" tabindex="-1">/, 'Skip-link destination must be keyboard-focusable');
 });
 test('Offline fallback embeds Games without redirecting learners to another site', () => {
   const html = read('downloads/Atlas_Demo_Offline.html');
