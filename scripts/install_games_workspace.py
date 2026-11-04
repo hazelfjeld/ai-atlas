@@ -57,7 +57,7 @@ def scope_css(css):
 
 def build_tab():
     html = (ROOT / 'games.html').read_text(encoding='utf-8')
-    match = re.search(r'<main id="main">(.*?)</main>', html, re.S)
+    match = re.search(r'<main id="main"(?: tabindex="-1")?>(.*?)</main>', html, re.S)
     if not match:
         raise RuntimeError('Standalone game template changed')
     body = match.group(1).replace('href="index.html#/', 'href="#/')
