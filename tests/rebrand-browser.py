@@ -84,12 +84,16 @@ with sync_playwright() as p:
     page.keyboard.press('Escape')
     page.wait_for_function("!document.getElementById('record-dialog').open")
     check('Escape from a record restores focus to the main landmark',
-          page.evaluate("document.activeElement.id === 'main' && !location.hash.includes('record=')"))
+          page.evaluate("document.activeElement.id === 'main' && location.hash.startsWith('#/papers') && !location.hash.includes('record=')"))
+    page.goto(base+'#/papers')
+    page.locator('#catalog-loading').wait_for(state='detached')
     page.locator('.paper-row h3 a').first.click()
     page.wait_for_function("document.getElementById('record-dialog').open")
     page.get_by_role('button',name='Close record',exact=True).click()
     check('record close button restores visible-page keyboard focus',
           page.evaluate("!document.getElementById('record-dialog').open && document.activeElement.id === 'main'"))
+    page.goto(base+'#/papers')
+    page.locator('#catalog-loading').wait_for(state='detached')
     page.locator('.paper-row h3 a').first.click()
     page.wait_for_function("document.getElementById('record-dialog').open")
     page.go_back()
