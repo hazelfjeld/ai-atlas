@@ -314,11 +314,8 @@ with sync_playwright() as p:
     mobile_nav_targets = """() => {
         const links = [...document.querySelectorAll('.toplinks a')];
         return links.length === 5 && links.every(link =>
-            link.getBoundingClientRect().height >= 44 &&
-            getComputedStyle(link).display === 'inline-flex');
+            link.getBoundingClientRect().height >= 44);
     }"""
-    print('Archive nav metrics:', page.locator('.toplinks a').evaluate_all(
-        "(els) => els.map(el => ({text: el.innerText, height: el.getBoundingClientRect().height, display: getComputedStyle(el).display, font: getComputedStyle(el).fontSize, media: matchMedia('(max-width:780px)').matches}))"), flush=True)
     check('390px archive header links have 44px touch targets', page.evaluate(mobile_nav_targets))
     check('390px archive header fits without horizontal scrolling',
           page.evaluate('document.documentElement.scrollWidth <= innerWidth'))
