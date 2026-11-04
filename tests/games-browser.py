@@ -94,6 +94,8 @@ with sync_playwright() as p:
             page.locator('#theme-toggle').click()
         check(f'320px {palette} Games theme toggle state is accurate',
               page.locator('#theme-toggle').get_attribute('aria-pressed') == str(palette == 'dark').lower())
+        check(f'320px {palette} standalone theme toggle has a 44px touch target',
+              page.locator('#theme-toggle').evaluate("el => { const r = el.getBoundingClientRect(); return r.width >= 44 && r.height >= 44 && r.left >= 15 && r.right <= innerWidth - 15; }"))
         check(f'320px {palette} Games navigation has two rows of 44px targets inside gutters',
               page.locator('.masthead nav a').evaluate_all("els => { const r = els.map(e => e.getBoundingClientRect()); return r.length === 4 && r.every(b => b.height >= 44 && b.left >= 15 && b.right <= innerWidth - 15) && Math.abs(r[0].top - r[1].top) < 1 && r[2].top >= r[1].bottom; }"))
     check('no runtime errors',not errors)

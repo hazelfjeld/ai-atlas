@@ -32,6 +32,7 @@ test('Standalone game links still work with shared game engine', () => {
   for(const name of ['catalog-loader.js','core.js','games-core.js','games.js']) assert.ok(html.includes('src="'+name+'"'));
   assert.match(html, /<main id="main" tabindex="-1">/, 'Skip-link destination must be keyboard-focusable');
   assert.match(html, /id="theme-toggle"[^>]*aria-label="Dark theme" aria-pressed="false"/, 'Theme toggle must expose a stable name and an initial state');
+  assert.match(html, /id="theme-toggle"[^>]*min-width:44px;min-height:44px/, 'Standalone theme button must meet the 44px mobile touch-target baseline');
   assert.match(read('games.js'), /setAttribute\('aria-pressed', String\(document.documentElement.dataset.theme === 'dark'\)\)/);
 });
 test('Offline fallback embeds Games without redirecting learners to another site', () => {
