@@ -1161,11 +1161,11 @@ test('Source-reviewed November 3 daily edition is immutable, deduplicated, dated
  assert.equal(receipt.source_batch_sha256,'f6d155caec1fda714b8fdd456ec47cc886dd10856159b65b9745c69d64b9adb3');
  assert.equal(receipt.source_batch_bytes,32219);
  assert.equal(receipt.source_commit,'9a2d9a0f21551737b041a49e398ebf08793272ae');
- assert.equal(receipt.publication_edition,'2026-11-03-v4');
+ assert.equal(receipt.publication_edition,'2026-11-03-v5');
  assert.equal(receipt.counts.news_published,8);
- assert.equal(receipt.counts.catalog_deferred,4);
+ assert.equal(receipt.counts.catalog_deferred,3);
  assert.equal(new Set(receipt.accepted_news_ids).size,8);
- assert.equal(new Set(receipt.deferred_catalog_proposal_ids).size,4);
+ assert.equal(new Set(receipt.deferred_catalog_proposal_ids).size,3);
  assert.ok(receipt.production_verified_at===null||D.validTimestamp(receipt.production_verified_at));
  assert.equal(ledger.receipts[0].production_verified_revision,25,'Keep verified November 2 history unchanged');
 });
@@ -1196,10 +1196,10 @@ test('November 3 v2 records actual Atlas guide expansions, without rewriting rev
  }
  const ledger=JSON.parse(fs.readFileSync(path.join(root,'data/daily/published-batches.json'),'utf8'));
  const receipt=ledger.receipts.at(-1);
- assert.equal(receipt.publication_edition,'2026-11-03-v4');
- assert.equal(receipt.publication_history.at(-1).edition,'2026-11-03-v4');
+ assert.equal(receipt.publication_edition,'2026-11-03-v5');
+ assert.equal(receipt.publication_history.at(-1).edition,'2026-11-03-v5');
  assert.equal(receipt.production_verified_revision>=1,true,'Prior verified v1 must remain in history');
- assert.equal(receipt.deferred_catalog_proposal_ids.length,4);
+ assert.equal(receipt.deferred_catalog_proposal_ids.length,3);
  assert.equal(idx.last_successful_publish_at,verifiedPublicationClock(),'Pending revision cannot advance verified publication clock');
 });
 
@@ -1236,17 +1236,17 @@ test('November 3 v3 archives only already-published hardware research site chang
  assert.equal(D.safeCatalogPath('hardware-review.html?spoof=1'),'');
  assert.equal(D.safeCatalogPath('../hardware-review.html'),'');
  const receipt=JSON.parse(fs.readFileSync(path.join(root,'data/daily/published-batches.json'),'utf8')).receipts.at(-1);
- assert.equal(receipt.publication_edition,'2026-11-03-v4');
+ assert.equal(receipt.publication_edition,'2026-11-03-v5');
  const archivedV3=receipt.publication_history.find(h=>h.edition==='2026-11-03-v3');
  assert.ok(archivedV3,'Immutable prior verification history missing');
  assert.equal(archivedV3.production_commit,'fc565eefb38b17e0b1a6dac28446297843a8e590');
  assert.equal(archivedV3.production_workflow_run_id,41703813098);
  assert.equal(archivedV3.githack_workflow_run_id,41703812947);
- assert.equal(receipt.production_verified_revision,4,'Current verified revision must match deployed proof');
- assert.equal(receipt.publication_history.at(-1).edition,'2026-11-03-v4');
+ assert.equal(receipt.production_verified_revision,5,'Current verified revision must match deployed proof');
+ assert.equal(receipt.publication_history.at(-1).edition,'2026-11-03-v5');
  assert.equal(receipt.publication_history.find(h=>h.edition==='2026-11-03-v3').status,'cloudflare_http_browser_and_githack_verified');
  assert.ok(['pending_production_verification','cloudflare_http_browser_and_githack_verified'].includes(receipt.publication_history.at(-1).status));
- assert.equal(receipt.deferred_catalog_proposal_ids.length,4);
+ assert.equal(receipt.deferred_catalog_proposal_ids.length,3);
  assert.equal(idx.last_successful_publish_at,receipt.production_verified_at,'Never imply a pending edition has passed production');
 });
 
@@ -1283,18 +1283,18 @@ test('Immutable November 3 revision 4 indexes two previously verified guides and
  const ledger=JSON.parse(fs.readFileSync(path.join(root,'data/daily/published-batches.json'),'utf8'));
  assert.equal(ledger.receipts.length,2);
  const receipt=ledger.receipts.at(-1);
- assert.equal(receipt.publication_edition,'2026-11-03-v4');
- assert.equal(receipt.publication_history.at(-1).edition,'2026-11-03-v4');
+ assert.equal(receipt.publication_edition,'2026-11-03-v5');
+ assert.equal(receipt.publication_history.at(-1).edition,'2026-11-03-v5');
  assert.equal(receipt.publication_history.find(x=>x.edition==='2026-11-03-v3').status,'cloudflare_http_browser_and_githack_verified');
  assert.equal(receipt.counts.news_published,8);
- assert.equal(receipt.counts.technology_added+receipt.counts.term_added,0);
- assert.equal(receipt.deferred_catalog_proposal_ids.length,4);
- assert.equal(receipt.production_verified_revision,4);
- assert.equal(receipt.production_commit,'38409e2ecc75afcfd783b3a048500ad64afd9eb5');
- assert.equal(receipt.production_workflow_run_id,41732217253);
- assert.equal(receipt.githack_workflow_run_id,41732217128);
+ assert.equal(receipt.counts.technology_added+receipt.counts.term_added,1);
+ assert.equal(receipt.deferred_catalog_proposal_ids.length,3);
+ assert.equal(receipt.production_verified_revision,5);
+ assert.equal(receipt.production_commit,'9c90272aaf97aa05ee43e12f2d88b5475cd7cf04');
+ assert.equal(receipt.production_workflow_run_id,41755887734);
+ assert.equal(receipt.githack_workflow_run_id,41755887696);
  assert.equal(receipt.publication_history.at(-1).status,'cloudflare_http_browser_and_githack_verified');
- assert.equal(receipt.last_verified_public_url,'https://aiupdates.app/whats-new.html?date=2026-11-03&revision=4');
+ assert.equal(receipt.last_verified_public_url,'https://aiupdates.app/whats-new.html?date=2026-11-03&revision=5');
  assert.equal(idx.last_successful_publish_at,verifiedPublicationClock());
 });
 
@@ -1408,4 +1408,34 @@ test('November 3 v5 archives one real canonical technology without changing orig
  assert.equal(next.site_changes.length,old.site_changes.length+1);
  const ids=[...next.news,...next.technologies,...next.terms,...next.site_changes,...next.corrections].map(x=>x.id);
  assert.equal(new Set(ids).size,ids.length,'no duplicate cross-section IDs');
+});
+
+
+test('November 3 v5 verification receipts retain historical v4 proof and source provenance',()=>{
+ const ledger=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8'));
+ const idx=JSON.parse(fs.readFileSync('data/daily/index.json','utf8'));
+ const receipt=ledger.receipts.at(-1),arch=idx.editions.at(-1);
+ assert.equal(arch.date,'2026-11-03');
+ assert.equal(arch.revision,5);
+ assert.equal(receipt.publication_edition,'2026-11-03-v5');
+ assert.equal(idx.status,'edition_revision_5_production_verified');
+ assert.equal(idx.last_successful_publish_at,receipt.production_verified_at);
+ assert.equal(receipt.production_commit,'9c90272aaf97aa05ee43e12f2d88b5475cd7cf04');
+ assert.equal(receipt.production_workflow_run_id,41755887734);
+ assert.equal(receipt.githack_workflow_run_id,41755887696);
+ assert.deepEqual(receipt.accepted_catalog_addition_ids,['tech-proposal:tohoku-aisin:stt-mram-ai-soc:2026-11-03']);
+ assert.equal(receipt.counts.technology_added,1);
+ assert.equal(receipt.counts.catalog_deferred,3);
+ assert.equal(receipt.deferred_catalog_proposal_ids.length,3);
+ assert.ok(!receipt.deferred_catalog_proposal_ids.includes(receipt.accepted_catalog_addition_ids[0]));
+ const old=receipt.publication_history.find(x=>x.edition==='2026-11-03-v4');
+ const latest=receipt.publication_history.at(-1);
+ assert.equal(old.production_commit,'38409e2ecc75afcfd783b3a048500ad64afd9eb5');
+ assert.equal(old.production_workflow_run_id,41732217253);
+ assert.equal(old.githack_workflow_run_id,41732217128);
+ assert.equal(latest.edition,'2026-11-03-v5');
+ assert.equal(latest.status,'cloudflare_http_browser_and_githack_verified');
+ assert.equal(latest.verified_at,idx.last_successful_publish_at);
+ assert.equal(latest.source_batch_sha256,receipt.source_batch_sha256);
+ assert.equal(receipt.source_batch_sha256,'f6d155caec1fda714b8fdd456ec47cc886dd10856159b65b9745c69d64b9adb3');
 });
