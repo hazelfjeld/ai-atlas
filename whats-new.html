@@ -7,6 +7,16 @@
 
 
 
+<script>
+/* Honor the existing workspace theme choice before first paint. */
+try {
+ const host = location.hostname;
+ if (host !== 'raw.githack.com' && host !== 'rawcdn.githack.com') {
+  const savedTheme = localStorage.getItem('atlas.theme');
+  if (savedTheme === 'light' || savedTheme === 'dark') document.documentElement.dataset.theme = savedTheme;
+ }
+} catch { /* Storage may be unavailable; system color scheme remains the fallback. */ }
+</script>
 <style>
 :root{color-scheme:light;--paper:#f5f4ee;--surface:#fffefa;--ink:#202a28;--muted:#52645c;--line:#d4ded4;--green:#245e4c;--accent:#e6a769;--soft:#ecf0e8}
 *{box-sizing:border-box}
@@ -55,7 +65,8 @@ h1 em{font-family:Georgia,serif;font-weight:400;color:var(--green)}
 .empty{padding:32px;border:1px dashed var(--line);border-radius:14px;background:var(--surface);color:var(--muted)}
 footer{border-top:1px solid var(--line);font-size:13px;color:var(--muted);margin-top:48px;padding:20px 0}
 @media(max-width:780px){header{grid-template-columns:1fr;padding-top:30px;gap:14px}.cards{grid-template-columns:1fr}.controls{grid-template-columns:1fr}.toplinks{gap:7px 14px}.controls select,.search-controls input,.search-controls button{font-size:16px;min-height:44px}}
-@media(prefers-color-scheme:dark){:root{color-scheme:dark;--paper:#161e1b;--surface:#25312c;--ink:#f1f3ec;--muted:#c2d1c8;--line:#526359;--green:#bce0bd;--soft:#384a3e}.aside,.summary{background:#304137}.brandmark{background:#405e50}.tag{color:#e7f1e5}.controls select,.search-controls input{border-color:#779185}.item .fact{color:var(--muted)}.source-audit summary:focus-visible{outline-color:#f2bd74}}
+html:root[data-theme=dark]{color-scheme:dark;--paper:#161e1b;--surface:#25312c;--ink:#f1f3ec;--muted:#c2d1c8;--line:#526359;--green:#bce0bd;--soft:#384a3e}html:root[data-theme=dark] .aside,html:root[data-theme=dark] .summary{background:#304137}html:root[data-theme=dark] .brandmark{background:#405e50}html:root[data-theme=dark] .tag{color:#e7f1e5}html:root[data-theme=dark] .controls select,html:root[data-theme=dark] .search-controls input{border-color:#779185}html:root[data-theme=dark] .item .fact{color:var(--muted)}html:root[data-theme=dark] .source-audit summary:focus-visible{outline-color:#f2bd74}
+@media(prefers-color-scheme:dark){html:root:not([data-theme=light]){color-scheme:dark;--paper:#161e1b;--surface:#25312c;--ink:#f1f3ec;--muted:#c2d1c8;--line:#526359;--green:#bce0bd;--soft:#384a3e}html:root:not([data-theme=light]) .aside,html:root:not([data-theme=light]) .summary{background:#304137}html:root:not([data-theme=light]) .brandmark{background:#405e50}html:root:not([data-theme=light]) .tag{color:#e7f1e5}html:root:not([data-theme=light]) .controls select,html:root:not([data-theme=light]) .search-controls input{border-color:#779185}html:root:not([data-theme=light]) .item .fact{color:var(--muted)}html:root:not([data-theme=light]) .source-audit summary:focus-visible{outline-color:#f2bd74}}
 </style>
 <script defer src="daily-core.js"></script>
 <script defer src="whats-new.js"></script>
