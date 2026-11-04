@@ -203,8 +203,16 @@
     const q = questions[questionIndex];
     if (!q.answered && q.answerMode === 'choice' && /^[1-4]$/.test(event.key) && q.options[Number(event.key) - 1]) { event.preventDefault(); submitAnswer(q.options[Number(event.key) - 1].id); }
   });
-  $('theme-toggle').onclick = () => { document.documentElement.dataset.theme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'; };
+  // A toggle button must expose its on/off state, not only an icon and a generic action.
+  function syncThemeToggle() {
+    $('theme-toggle').setAttribute('aria-pressed', String(document.documentElement.dataset.theme === 'dark'));
+  }
+  $('theme-toggle').onclick = () => {
+    document.documentElement.dataset.theme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+    syncThemeToggle();
+  };
   if (window.matchMedia?.('(prefers-color-scheme: dark)').matches) document.documentElement.dataset.theme = 'dark';
+  syncThemeToggle();
   window.addEventListener('pagehide', clearTimers);
   window.addEventListener('pageshow', event => { if (event.persisted && mode === 'match') { game.locked = false; $('play').querySelectorAll('.mismatch').forEach(b => b.classList.remove('mismatch')); clock = setInterval(() => { if (mode === 'match') $('match-time').textContent = seconds(G.matchTime(game, performance.now())); }, 100); } });
   try {

@@ -29,6 +29,10 @@ with sync_playwright() as p:
     browser=p.chromium.launch(executable_path=os.environ.get('CHROMIUM_PATH'),headless=True,args=['--no-sandbox'])
     page=browser.new_page(viewport={'width':1440,'height':1100},reduced_motion='reduce');errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
     open_page(page);page.locator('#games').wait_for(state='visible');check('dictionary loads',int(page.locator('#catalog-count').inner_text().replace(',',''))>1000)
+    check('theme toggle announces current palette to assistive tech',
+          page.locator('#theme-toggle').get_attribute('aria-label') == 'Dark theme' and
+          page.locator('#theme-toggle').get_attribute('aria-pressed') ==
+          str(page.locator('html').get_attribute('data-theme') == 'dark').lower())
     # A fragment skip target needs programmatic focus so Tab stays in game content.
     # Without tabindex=-1 on main, the fragment can scroll while focus stays in the header.
     if not args.fixture:
@@ -88,6 +92,8 @@ with sync_playwright() as p:
     for palette in ('dark','light'):
         if page.locator('html').get_attribute('data-theme') != palette:
             page.locator('#theme-toggle').click()
+        check(f'320px {palette} Games theme toggle state is accurate',
+              page.locator('#theme-toggle').get_attribute('aria-pressed') == str(palette == 'dark').lower())
         check(f'320px {palette} Games navigation has two rows of 44px targets inside gutters',
               page.locator('.masthead nav a').evaluate_all("els => { const r = els.map(e => e.getBoundingClientRect()); return r.length === 4 && r.every(b => b.height >= 44 && b.left >= 15 && b.right <= innerWidth - 15) && Math.abs(r[0].top - r[1].top) < 1 && r[2].top >= r[1].bottom; }"))
     check('no runtime errors',not errors)
