@@ -1114,7 +1114,8 @@ test('Immutable v25 records the actual TECH-0302 Atlas catalog addition without 
  assert.equal(r.deferred_catalog_proposal_ids.length,5);
  assert.deepEqual(r.accepted_catalog_addition_ids,['tech-proposal:nvidia-auto-ontology:2026-11-02','tech-proposal:windmill:2026-11-02']);
  const m=JSON.parse(fs.readFileSync(path.join(root,'publication.json')));
- assert.equal(m.published_counts.technologies,m.prepared_counts.technologies+r.counts.technology_added);
+ assert.equal(m.published_counts.technologies,m.prepared_counts.technologies+m.catalog_additions.technologies.length,'Subsequent additions cannot be hidden from the current catalog');
+ assert.deepEqual(m.catalog_additions.technologies.slice(0,2).map(x=>x.source_proposal_id),r.accepted_catalog_addition_ids,'Earlier receipt remains the historical two-addition event');
  assert.equal(idx.last_successful_publish_at,verifiedPublicationClock(),'Last successful publication must match latest independently verified batch');
  assert.equal(idx.status,'edition_revision_'+idx.editions.at(-1).revision+(JSON.parse(fs.readFileSync(path.join(root,'data/daily/published-batches.json'))).receipts.at(-1).publication_history.at(-1).status==='cloudflare_http_browser_and_githack_verified'?'_production_verified':'_pending_production_verification'));
  assert.ok(r.publication_history.at(-1).status==='pending_production_verification'||r.publication_history.at(-1).status==='cloudflare_http_browser_and_githack_verified');
