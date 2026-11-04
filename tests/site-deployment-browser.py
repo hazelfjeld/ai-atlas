@@ -294,6 +294,23 @@ with sync_playwright() as p:
     received.value.save_as(saved)
     check('actual workbook download matches source bytes', hashlib.sha256(saved.read_bytes()).digest() == hashlib.sha256((ROOT / 'downloads/ML_DL_SLM_LLM_Dictionary.xlsx').read_bytes()).digest())
     saved.unlink()
+    # Six archive filters used to stack into a long single column even on
+    # 768px tablets. Keep a compact two-column layout there, but preserve
+    # comfortable one-column controls on narrow phones.
+    filter_columns = """() => getComputedStyle(
+        document.querySelector('.controls')
+    ).gridTemplateColumns.trim().split(' ').length"""
+    page.set_viewport_size({'width':768,'height':1024})
+    page.goto(base + 'whats-new.html')
+    page.locator('#edition-search').wait_for()
+    check('768px archive filters form two legible columns without horizontal scrolling',
+          page.evaluate(filter_columns) == 2
+          and page.evaluate('document.documentElement.scrollWidth <= innerWidth'))
+    page.screenshot(path=str(out / 'daily-tablet-768.png'), full_page=True)
+    page.set_viewport_size({'width':560,'height':840})
+    check('560px archive filters return to one column without horizontal scrolling',
+          page.evaluate(filter_columns) == 1
+          and page.evaluate('document.documentElement.scrollWidth <= innerWidth'))
     # iOS Safari zooms the viewport when focusing form controls below 16px.
     # Check real computed styles and tap heights at both compact-phone widths.
     page.set_viewport_size({'width':390,'height':844})
