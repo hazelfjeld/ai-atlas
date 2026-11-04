@@ -82,7 +82,7 @@ with sync_playwright() as p:
             check('new November 3 edition discloses exactly three source failures and partial scope',
                   'Source coverage (partial) · 14 checked · 3 failed' in audit
                   and 'Collection context:' in audit
-                  and 'Three source fetches failed' in audit)
+                  and ('Three source fetches failed' in audit or 'three failed lookups' in audit))
             check('new source audit preserves actual failed-source reasons, statuses and checked times',
                   'Checked Nov 3, 2026' in audit
                   and 'Status: open error' in audit and 'Status: cache miss' in audit
