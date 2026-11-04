@@ -531,9 +531,9 @@
       "source_batch_bytes": 32219,
       "edition_date": "2026-11-03",
       "validation_result": "source_batch_sha256_bytes_schema_unique_news_ids_canonical_source_urls_dates_collection_window_verified_eight_news_web_source_reviews_production_and_public_asset_checks_passed",
-      "status": "partially_published_with_4_deferred_catalog_proposals",
-      "publication_outcome": "immutable_revision_4_cloudflare_http_browser_and_githack_verified",
-      "publication_edition": "2026-11-03-v4",
+      "status": "partially_published_with_3_deferred_catalog_proposals",
+      "publication_outcome": "immutable_revision_5_cloudflare_http_browser_and_githack_verified",
+      "publication_edition": "2026-11-03-v5",
       "accepted_news_ids": [
         "ai-news:tohoku-aisin:stt-mram-soc:2026-11-02",
         "ai-news:openai:grid-protectors:2026-11-02",
@@ -546,7 +546,6 @@
       ],
       "deferred_news_ids": [],
       "deferred_catalog_proposal_ids": [
-        "tech-proposal:tohoku-aisin:stt-mram-ai-soc:2026-11-03",
         "tech-proposal:muse-ifparse-v2:2026-11-03",
         "term-proposal:stt-mram",
         "term-proposal:near-memory-computing"
@@ -554,14 +553,14 @@
       "rejected_ids": [],
       "counts": {
         "news_published": 8,
-        "technology_added": 0,
+        "technology_added": 1,
         "technology_updated": 0,
         "term_added": 0,
         "corrections": 0,
         "news_deferred": 0,
-        "catalog_deferred": 4
+        "catalog_deferred": 3
       },
-      "review_notes": "November 3 partial 48-hour recovery collection: six original source categories, 14 checked source URLs (some discovery/limited), three failed source lookups. Four November 3 reports and four dated earlier catch-up items. Tohoku University and OpenAI primary announcements were opened; IFParse author discussion opened; Reuters indexed original reports checked for stated claims. Prototype comparisons, benchmark scores, market forecasts and investigations are qualified and not independently reproduced or adjudicated. Four catalog proposals were not inserted as canonical records; historical November 2 edition left unchanged. Await CI and real production verification before claiming hosted publication.\nNovember 3 v2 preserves eight source-qualified news items and original dates/evidence. Adds two already-published Atlas educational guide links under site_changes only; four deferred canonical proposals and three failed lookups unchanged. Deployment verification pending.\nNovember 3 v2 verified in production: catalog/GitHack 41676627178 and Cloudflare deployed/browser 41676627291 both passed on merged main 5a44a6bb98dd8c8a55b8efee1ff16500284d61ee by 2026-11-03T16:44:04Z. No new outside news or canonical entries; two Atlas guide records only.\nNovember 3 v3 pending publication: indexes two previously production-verified Atlas-only research pages, preserving all eight news records, 14 source checks, 3 failures and four deferred canonical proposals. Immutable v2 and earlier archives untouched. Last confirmed production v2 remains 2026-11-03T16:44:04Z pending exact v3 catalog/GitHack and Cloudflare jobs.\nNovember 3 v3 production verified at 2026-11-03T19:34:45Z on main fc565eef with catalog/GitHack jobs 41703812947 and Cloudflare deployed/browser jobs 41703813098. All 143 Node tests passed, 484 exact HTTP assets each across three hostnames; 34 browser and 41 additional browser checks passed. Two Atlas-only changes indexed; eight source records and three failed source lookups unchanged, no new external news or catalog IDs.",
+      "review_notes": "November 3 partial 48-hour recovery collection: six original source categories, 14 checked source URLs (some discovery/limited), three failed source lookups. Four November 3 reports and four dated earlier catch-up items. Tohoku University and OpenAI primary announcements were opened; IFParse author discussion opened; Reuters indexed original reports checked for stated claims. Prototype comparisons, benchmark scores, market forecasts and investigations are qualified and not independently reproduced or adjudicated. Four catalog proposals were not inserted as canonical records; historical November 2 edition left unchanged. Await CI and real production verification before claiming hosted publication.\nNovember 3 v2 preserves eight source-qualified news items and original dates/evidence. Adds two already-published Atlas educational guide links under site_changes only; four deferred canonical proposals and three failed lookups unchanged. Deployment verification pending.\nNovember 3 v2 verified in production: catalog/GitHack 41676627178 and Cloudflare deployed/browser 41676627291 both passed on merged main 5a44a6bb98dd8c8a55b8efee1ff16500284d61ee by 2026-11-03T16:44:04Z. No new outside news or canonical entries; two Atlas guide records only.\nNovember 3 v3 pending publication: indexes two previously production-verified Atlas-only research pages, preserving all eight news records, 14 source checks, 3 failures and four deferred canonical proposals. Immutable v2 and earlier archives untouched. Last confirmed production v2 remains 2026-11-03T16:44:04Z pending exact v3 catalog/GitHack and Cloudflare jobs.\nNovember 3 v3 production verified at 2026-11-03T19:34:45Z on main fc565eef with catalog/GitHack jobs 41703812947 and Cloudflare deployed/browser jobs 41703813098. All 143 Node tests passed, 484 exact HTTP assets each across three hostnames; 34 browser and 41 additional browser checks passed. Two Atlas-only changes indexed; eight source records and three failed source lookups unchanged, no new external news or catalog IDs.\nRevision 5 (Nov 3 edition; published Nov 3 Chicago, verified 2026-11-04T01:45:26Z): Already published TECH-0303 hardware prototype is linked as one new-to-Atlas canonical technology, not newly released external hardware; source-date summary UI is cataloged as one existing site improvement. The original eight reports, 14 checked URLs, three failed source URLs and partial window remain unchanged. Tohoku candidate source proposal now accepted; three original proposals remain deferred. Exact main 9c90272aaf97aa05ee43e12f2d88b5475cd7cf04 passed all production and GitHack jobs: 155 tests and 490 assets/host (3 hosts).",
       "publication_history": [
         {
           "edition": "2026-11-03-v1",
@@ -627,17 +626,37 @@
           "production_commit": "38409e2ecc75afcfd783b3a048500ad64afd9eb5",
           "production_workflow_run_id": 41732217253,
           "githack_workflow_run_id": 41732217128
+        },
+        {
+          "edition": "2026-11-03-v5",
+          "source_batch_sha256": "f6d155caec1fda714b8fdd456ec47cc886dd10856159b65b9745c69d64b9adb3",
+          "news_published": 8,
+          "technology_added": 1,
+          "term_added": 0,
+          "corrections": 0,
+          "catalog_deferred": 3,
+          "site_changes_added": 1,
+          "published_at": "2026-11-04T01:36:47.991Z",
+          "status": "cloudflare_http_browser_and_githack_verified",
+          "note": "One previously production-shipped canonical technology link and existing source-date-summary UI indexed as new-to-Atlas changes; original evidence intact. Three proposals remain deferred; no new-world events.",
+          "verified_at": "2026-11-04T01:45:26Z",
+          "production_commit": "9c90272aaf97aa05ee43e12f2d88b5475cd7cf04",
+          "production_workflow_run_id": 41755887734,
+          "githack_workflow_run_id": 41755887696
         }
       ],
-      "production_verified_at": "2026-11-03T22:38:44Z",
-      "production_verified_revision": 4,
-      "last_verified_at": "2026-11-03T22:38:44Z",
-      "next_action": "Read staging queue before every run; if no unprocessed batch, integrate source-complete deferred catalog candidate with stable ID, search, linked pages, offline manifest and primary source review. Continue substantive guide expansion. Preserve immutable v4.",
-      "production_workflow_run_id": 41732217253,
-      "githack_workflow_run_id": 41732217128,
-      "production_commit": "38409e2ecc75afcfd783b3a048500ad64afd9eb5",
-      "last_verified_public_url": "https://aiupdates.app/whats-new.html?date=2026-11-03&revision=4",
-      "verification_scope": "Verified exact main 38409e2: 148 passing Node tests and successful GitHack catalog / byte-equivalence jobs in run 41732217128; Cloudflare validate plus deployed production/browser success in run 41732217253 at 2026-11-03T22:38:44Z. Three production hostnames each served 487 exact verified assets. 34 site browser checks and 41 Games checks covered dated archive navigation, source-date filtering, export CSV, source limitations, mobile navigation and offline Games. This is delivery verification, not scientific replication of publisher research results."
+      "production_verified_at": "2026-11-04T01:45:26Z",
+      "production_verified_revision": 5,
+      "last_verified_at": "2026-11-04T01:45:26Z",
+      "next_action": "Read staging queue and verify hashes/receipts each run; no unprocessed batches in the last verified intake. Re-evaluate three remaining Nov 3 proposals (IFParse v2, STT-MRAM and near-memory computing) for canonical catalog integration and substantive guides, preserving original source status and complete immutable v1–v5 archive.",
+      "production_workflow_run_id": 41755887734,
+      "githack_workflow_run_id": 41755887696,
+      "production_commit": "9c90272aaf97aa05ee43e12f2d88b5475cd7cf04",
+      "last_verified_public_url": "https://aiupdates.app/whats-new.html?date=2026-11-03&revision=5",
+      "verification_scope": "Verified exact main 9c90272aaf97aa05ee43e12f2d88b5475cd7cf04: 155 passing Node tests, successful GitHack exact-content verification (catalog and GitHack jobs in workflow 41755887696), and Cloudflare deployed-production/browser verification (both jobs in workflow 41755887734) completed by 2026-11-04T01:45:26Z. 490 exact production HTTP assets verified on each of 3 hostnames, including dated archive, search, source-date filters/CSV, Games and offline browser tests. Prototype figures remain publisher-reported, not independently replicated.",
+      "accepted_catalog_addition_ids": [
+        "tech-proposal:tohoku-aisin:stt-mram-ai-soc:2026-11-03"
+      ]
     }
   ]
 }
