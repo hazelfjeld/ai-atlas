@@ -268,6 +268,25 @@ with sync_playwright() as p:
     received.value.save_as(saved)
     check('actual workbook download matches source bytes', hashlib.sha256(saved.read_bytes()).digest() == hashlib.sha256((ROOT / 'downloads/ML_DL_SLM_LLM_Dictionary.xlsx').read_bytes()).digest())
     saved.unlink()
+    # iOS Safari zooms the viewport when focusing form controls below 16px.
+    # Check real computed styles and tap heights at both compact-phone widths.
+    page.set_viewport_size({'width':390,'height':844})
+    page.goto(base + 'whats-new.html')
+    page.locator('#edition-search').wait_for()
+    mobile_readability_check = """() => [
+        '#edition-select', '#section-filter', '#topic-filter',
+        '#publication-filter', '#evidence-filter', '#source-filter',
+        '#edition-search', '#reset-filters', '#export-verified'
+    ].every(selector => {
+        const element = document.querySelector(selector);
+        return element &&
+            Number.parseFloat(getComputedStyle(element).fontSize) >= 16 &&
+            element.getBoundingClientRect().height >= 44;
+    })"""
+    check('390px daily filters and search use legible, touch-friendly sizing', page.evaluate(mobile_readability_check))
+    page.set_viewport_size({'width':320,'height':700})
+    check('320px daily filters and search avoid iOS focus zoom', page.evaluate(mobile_readability_check))
+    page.screenshot(path=str(out / 'daily-mobile-320.png'), full_page=True)
     page.set_viewport_size({'width':390,'height':844})
     page.goto(base + 'index.html#/games')
     page.locator('#start-quiz').wait_for()
