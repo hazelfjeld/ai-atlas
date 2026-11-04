@@ -1,0 +1,503 @@
+{
+  "schema": 1,
+  "edition_date": "2026-11-03",
+  "timezone": "America/Chicago",
+  "published_at": "2026-11-04T01:36:47.991Z",
+  "coverage": {
+    "start": "2026-11-01T14:50:00Z",
+    "end": "2026-11-03T14:24:43.802Z",
+    "status": "partial",
+    "note": "Original selective November 1–3 recovery collection: eight qualified reports (four November 3 publications plus four earlier catch-up items), 14 checked source URLs and three failed lookups; not an exhaustive news scan. The original staging batch proposed two technologies and two terms. A Tohoku–AISIN research prototype was subsequently integrated on November 3 as TECH-0303, so one technology and two term proposals remain deferred; the older candidate-review decision is retained as historical context. This edition adds Atlas catalog and interface changes, not outside-world stories. Original experimental prototype/benchmark claims are not independently replicated.",
+    "sources_checked": [
+      {
+        "name": "openai-grid",
+        "url": "https://openai.com/index/grid-protectors-program/",
+        "checked_at": "2026-11-03T14:24:43.802Z",
+        "status": "success",
+        "note": "first-party announcement dated Nov 2; time of day unspecified"
+      },
+      {
+        "name": "tohoku-aisin-ai-soc",
+        "url": "https://www.tohoku.ac.jp/japanese/2026/11/press20261102-03-emram.html",
+        "checked_at": "2026-11-03T14:24:43.802Z",
+        "status": "success",
+        "note": "university original Nov 2, 11:00 Japan local time; paired with Aisin co-announcement"
+      },
+      {
+        "name": "aisin-ai-soc",
+        "url": "https://www.aisin.com/jp/news/2026/010739.html",
+        "checked_at": "2026-11-03T14:24:43.802Z",
+        "status": "success",
+        "note": "co-developer primary announcement; conflicting unit text in indexed snippet, university detailed metrics preferred"
+      },
+      {
+        "name": "hf-ifparse-v2",
+        "url": "https://huggingface.co/datasets/Muse-research/Ifparse-v2.0",
+        "checked_at": "2026-11-03T14:24:43.802Z",
+        "status": "success",
+        "note": "public release dataset card, test split, terms and licenses"
+      },
+      {
+        "name": "hf-ifparse-forum",
+        "url": "https://discuss.huggingface.co/t/ifparse-2-0-release/191309",
+        "checked_at": "2026-11-03T14:24:43.802Z",
+        "status": "success",
+        "note": "author post dated Nov 1 and user-added Nov 2 independent small-run notes, not independent replication"
+      },
+      {
+        "name": "reuters-hkma-hsbc",
+        "url": "https://www.reuters.com/world/asia-pacific/hsbc-open-hong-kong-ai-institute-following-singapore-launch-2026-11-02/",
+        "checked_at": "2026-11-03T14:24:43.802Z",
+        "status": "success",
+        "note": "Nov 2, 03:34 UTC published; catch-up"
+      },
+      {
+        "name": "reuters-china-ai-concentration",
+        "url": "https://www.reuters.com/business/finance/ai-investment-is-becoming-overly-concentrated-chinese-official-says-2026-11-03/",
+        "checked_at": "2026-11-03T14:24:43.802Z",
+        "status": "success",
+        "note": "Nov 3, 02:28 UTC"
+      },
+      {
+        "name": "reuters-schwarz-bull",
+        "url": "https://www.reuters.com/business/retail-consumer/schwarz-digits-bull-partner-up-build-european-ai-computing-services-2026-11-03/",
+        "checked_at": "2026-11-03T14:24:43.802Z",
+        "status": "success",
+        "note": "Nov 3, 13:07 UTC"
+      },
+      {
+        "name": "reuters-european-ai-bonds",
+        "url": "https://www.reuters.com/business/ai-related-debt-binge-may-pressure-european-bond-markets-2026-11-03/",
+        "checked_at": "2026-11-03T14:24:43.802Z",
+        "status": "success",
+        "note": "Nov 3, 05:03 UTC"
+      },
+      {
+        "name": "reuters-data-center-ballots",
+        "url": "https://www.reuters.com/sustainability/data-center-opposition-hits-ballot-box-2026-11-03/",
+        "checked_at": "2026-11-03T14:24:43.802Z",
+        "status": "success",
+        "note": "Nov 3, 13:00 UTC; ballot outcomes not known at collection"
+      },
+      {
+        "name": "reuters-finance-summit",
+        "url": "https://www.reuters.com/business/finance/blackstone-president-says-more-tech-sector-fundraising-ahead-keep-up-with-ai-2026-11-03/",
+        "checked_at": "2026-11-03T14:24:43.802Z",
+        "status": "success",
+        "note": "Nov 3, 02:14 UTC; context but merged with existing finance theme instead of separate repeated headline"
+      },
+      {
+        "name": "hf-trending",
+        "url": "https://huggingface.co/papers/trending",
+        "checked_at": "2026-11-03T14:24:43.802Z",
+        "status": "success_limited",
+        "note": "discovery only; older rolling papers not recast as new releases"
+      },
+      {
+        "name": "github-openevals",
+        "url": "https://github.com/langchain-ai/openevals/releases",
+        "checked_at": "2026-11-03T14:24:43.802Z",
+        "status": "success_limited",
+        "note": "latest shown August, not falsely promoted as Nov 3 release"
+      },
+      {
+        "name": "anthropic-biomedical",
+        "url": "https://www.anthropic.com/research/early-progress-drug-development",
+        "checked_at": "2026-11-03T14:24:43.802Z",
+        "status": "success_limited",
+        "note": "Oct 27 original publication; Nov 2 commentary is not new product announcement"
+      }
+    ],
+    "sources_failed": [
+      {
+        "name": "reuters-merz-digital-sovereignty",
+        "url": "https://www.reuters.com/business/merz-says-germany-must-preserve-digital-sovereignty-ai-era-2026-11-02/",
+        "checked_at": "2026-11-03T14:24:43.802Z",
+        "status": "open_error",
+        "reason": "search surfaced story but article open failed; omitted"
+      },
+      {
+        "name": "reuters-qwenwork-singles-day",
+        "url": "https://www.reuters.com/business/retail-consumer/chinas-lipstick-king-touts-ai-tokens-first-singles-day-festival-2026-11-03/",
+        "checked_at": "2026-11-03T14:24:43.802Z",
+        "status": "open_error",
+        "reason": "article open failed and precise publication time unverified; omitted"
+      },
+      {
+        "name": "hf-ifparse-pinned-readme",
+        "url": "https://huggingface.co/datasets/Muse-research/Ifparse-v2.0/blob/f71c654b6ac29922cd3e2029f2fe0b4e6d05e90b/README.md",
+        "checked_at": "2026-11-03T14:24:43.802Z",
+        "status": "cache_miss",
+        "reason": "pinned README fetch missed; live dataset card itself accessible and used"
+      }
+    ]
+  },
+  "tldr": [
+    "The original eight source-qualified November 3 reports remain unchanged: four were published November 3 and four are earlier catch-up coverage; this revision adds no new outside-world news.",
+    "The existing Tohoku–AISIN STT-MRAM research prototype now has a permanent Atlas technology profile, TECH-0303, added November 3, and the archive has a source-date breakdown panel; neither is a newly released November 3 product.",
+    "Coverage is partial, three source lookups failed and three other original catalog proposals remain deferred; prototype measurements are publisher-reported and not independently reproduced."
+  ],
+  "news": [
+    {
+      "id": "ai-news-tohoku-aisin-stt-mram-soc-2026-11-02",
+      "title": "Tohoku and Aisin describe a 16 nm near-memory AI chip prototype",
+      "category": "hardware",
+      "tags": [
+        "AI",
+        "DL",
+        "Edge AI",
+        "Computer Architecture",
+        "Vision"
+      ],
+      "summary": "Tohoku University and Aisin report a 16 nm AI system-on-chip integrating 32 MB of STT-MRAM and running Tiny YOLOv3 without external DRAM or SSD; reported boot time is 65.7 ms and detection energy is 50.7 mJ per frame.",
+      "why_it_matters": "Embedding boot data and model weights near the processor could reduce startup and data-movement costs in constrained vision devices.",
+      "caveat": "Comparison claims (about 39x boot acceleration and 50x lower per-frame energy) are author-reported under a specific prototype and workload, not general-purpose AI benchmarks. Research result, not a commercial product.",
+      "review_status": "publisher_checked_research_release_prototype_results_unreplicated",
+      "release_status": "research_prototype",
+      "source_url": "https://www.tohoku.ac.jp/japanese/2026/11/press20261102-03-emram.html",
+      "publication_date": "2026-11-02",
+      "event_date": "2026-11-02",
+      "discovered_at": "2026-11-03T14:24:43.802Z",
+      "collection_classification": "catch_up_prior_uncovered_source"
+    },
+    {
+      "id": "ai-news-openai-grid-protectors-2026-11-02",
+      "title": "OpenAI proposes flexible-power commitments for future compute campuses",
+      "category": "infrastructure",
+      "tags": [
+        "AI",
+        "Infrastructure",
+        "Energy",
+        "Policy"
+      ],
+      "summary": "OpenAI announced the Grid Protectors Program and described an agreement with Georgia Power for up to 1,000 MW of flexible demand response at its planned Effingham County campus.",
+      "why_it_matters": "Power-demand flexibility could change how AI data centers interact with peak electricity demand and community costs.",
+      "caveat": "The Georgia campus is still planned; the announced 1,000 MW is a prospective maximum, not measured electricity returned to the grid. Claimed customer savings are utility projections, not realized savings.",
+      "review_status": "publisher_checked_first_party_announcement_not_realized_outcome",
+      "release_status": "announced_program_planned_site",
+      "source_url": "https://openai.com/index/grid-protectors-program/",
+      "publication_date": "2026-11-02",
+      "event_date": "2026-11-02",
+      "discovered_at": "2026-11-03T14:24:43.802Z"
+    },
+    {
+      "id": "ai-news-hkma-project-sage-hsbc-ai-institute-2026-11-02",
+      "title": "Hong Kong regulator outlines AI-agent safeguards as HSBC plans an institute",
+      "category": "governance",
+      "tags": [
+        "AI agents",
+        "Finance",
+        "Governance",
+        "Education"
+      ],
+      "summary": "Reuters reported HSBC's plan for a Hong Kong AI institute in early 2027 and the Hong Kong Monetary Authority's Project SAGE initiative to test financial agent use, interoperability and possible trusted-agent registration.",
+      "why_it_matters": "Financial agents need accountability and interoperation safeguards before they can operate broadly in regulated workflows.",
+      "caveat": "Both institute and registry/standards work are plans; a possible 'know your agent' standard should not be portrayed as already enacted. Reuters event coverage predates this window and is a catch-up item.",
+      "review_status": "original_reuters_reporting_source_checked_plans_not_implemented",
+      "release_status": "planned_initiative",
+      "source_url": "https://www.reuters.com/world/asia-pacific/hsbc-open-hong-kong-ai-institute-following-singapore-launch-2026-11-02/",
+      "publication_date": "2026-11-02",
+      "event_date": "2026-11-02",
+      "discovered_at": "2026-11-03T14:24:43.802Z",
+      "publication_time_utc": "2026-11-02T03:34:00Z",
+      "collection_classification": "catch_up_prior_uncovered_source"
+    },
+    {
+      "id": "ai-news-ifparse-v2-0-2026-11-01",
+      "title": "IFParse v2.0 offers 1,800 strict telemetry normalization evaluations",
+      "category": "evaluation",
+      "tags": [
+        "LLM",
+        "SLM",
+        "Evaluation",
+        "Security",
+        "Structured Output"
+      ],
+      "summary": "Muse-Research released a public synthetic test set spanning nine kinds of telemetry; models must convert each hostile raw record into precisely the specified JSON object. The publisher reports a large gap between JSON validity and fully correct outputs.",
+      "why_it_matters": "It tests semantic fidelity in structured extraction, where schema-valid but incorrect timestamps, nulls or identifiers could corrupt operational data.",
+      "caveat": "The author's small-model rates are not independently replicated, the entire split is synthetic, and exact-match conventions may not fit every ingestion pipeline. Public tests should not be training data for claimed held-out scores.",
+      "review_status": "publisher_checked_author_benchmark_not_independently_replicated",
+      "release_status": "public_dataset_v2",
+      "source_url": "https://huggingface.co/datasets/Muse-research/Ifparse-v2.0",
+      "publication_date": "2026-11-01",
+      "event_date": "2026-11-01",
+      "discovered_at": "2026-11-03T14:24:43.802Z",
+      "collection_classification": "catch_up_prior_uncovered_source"
+    },
+    {
+      "id": "ai-news-china-nfra-ai-investment-concentration-warning-2026-11-03",
+      "title": "Chinese financial regulator warns concentrated AI capital can crowd out other sectors",
+      "category": "governance",
+      "tags": [
+        "AI",
+        "Finance",
+        "Governance",
+        "Industry"
+      ],
+      "summary": "At a Hong Kong financial summit, vice-minister Xiao Yuanqi said AI investment concentration and associated leverage could raise borrowing costs for traditional industries, Reuters reported.",
+      "why_it_matters": "It highlights system-level financing effects of rapid AI infrastructure growth rather than solely model capability.",
+      "caveat": "A regulator's risk argument is not evidence that a specific investment bubble will burst or that crowding-out has been quantified.",
+      "review_status": "original_reuters_reporting_source_checked_official_risk_warning",
+      "release_status": "reported_warning",
+      "source_url": "https://www.reuters.com/business/finance/ai-investment-is-becoming-overly-concentrated-chinese-official-says-2026-11-03/",
+      "publication_date": "2026-11-03",
+      "event_date": "2026-11-03",
+      "discovered_at": "2026-11-03T14:24:43.802Z",
+      "publication_time_utc": "2026-11-03T02:28:00Z"
+    },
+    {
+      "id": "ai-news-schwarz-bull-european-ai-compute-mou-2026-11-03",
+      "title": "Schwarz Digits and Bull plan Europe-jurisdiction AI computing services",
+      "category": "infrastructure",
+      "tags": [
+        "AI",
+        "Cloud",
+        "Infrastructure",
+        "Digital Sovereignty"
+      ],
+      "summary": "Schwarz Digits and supercomputer maker Bull signed a preliminary agreement to jointly develop servers and AI compute services for STACKIT customers under European jurisdiction, according to Reuters.",
+      "why_it_matters": "An EU-jurisdiction compute stack could address data-sovereignty requirements for public and enterprise AI workloads.",
+      "caveat": "Preliminary cooperation only: cost, hardware configuration, delivery dates and service availability were not published; no completed deployment is evidenced.",
+      "review_status": "original_reuters_reporting_source_checked_preliminary_agreement",
+      "release_status": "preliminary_agreement",
+      "source_url": "https://www.reuters.com/business/retail-consumer/schwarz-digits-bull-partner-up-build-european-ai-computing-services-2026-11-03/",
+      "publication_date": "2026-11-03",
+      "event_date": "2026-11-03",
+      "discovered_at": "2026-11-03T14:24:43.802Z",
+      "publication_time_utc": "2026-11-03T13:07:00Z"
+    },
+    {
+      "id": "ai-news-reuters-europe-ai-bond-supply-2026-11-03",
+      "title": "AI infrastructure debt issuance may raise European bond-market financing pressure",
+      "category": "industry",
+      "tags": [
+        "AI",
+        "Infrastructure",
+        "Cloud",
+        "Finance"
+      ],
+      "summary": "Reuters reports US hyperscalers increasingly seek European debt financing for AI facilities, citing $39.3 billion European technology debt issuance so far in 2026 and forecasts of heavier corporate supply.",
+      "why_it_matters": "Capital costs and constrained credit markets affect the pace and economics of large-scale model-training capacity.",
+      "caveat": "Projected bond issuance and higher borrowing costs are market forecasts, not guaranteed outcomes. The report is broader than AI-only spending and should not be read as a measured causal effect.",
+      "review_status": "original_reuters_reporting_source_checked_forecast_not_outcome",
+      "release_status": "reported_market_analysis",
+      "source_url": "https://www.reuters.com/business/ai-related-debt-binge-may-pressure-european-bond-markets-2026-11-03/",
+      "publication_date": "2026-11-03",
+      "event_date": "2026-11-03",
+      "discovered_at": "2026-11-03T14:24:43.802Z",
+      "publication_time_utc": "2026-11-03T05:03:00Z"
+    },
+    {
+      "id": "ai-news-reuters-data-center-ballot-and-environment-2026-11-03",
+      "title": "AI data-center plans face ballot and environmental scrutiny",
+      "category": "policy",
+      "tags": [
+        "AI",
+        "Energy",
+        "Infrastructure",
+        "Environment",
+        "Governance"
+      ],
+      "summary": "A Reuters sustainability briefing documented local US data-center ballot proposals and a Finnish police investigation into alleged environmental permitting breaches at a Google subsidiary's planned Muhos site, alongside debates in Norway and Australia.",
+      "why_it_matters": "Environmental approvals, electricity demand and democratic consent can become bottlenecks for AI compute expansion.",
+      "caveat": "The Finnish matter is a criminal investigation, not a determination of wrongdoing. November 3 US ballots had not yet yielded results when collected; do not imply measures passed.",
+      "review_status": "original_reuters_reporting_source_checked_investigation_not_adjudicated",
+      "release_status": "reported_current_disputes",
+      "source_url": "https://www.reuters.com/sustainability/data-center-opposition-hits-ballot-box-2026-11-03/",
+      "publication_date": "2026-11-03",
+      "event_date": "2026-11-03",
+      "discovered_at": "2026-11-03T14:24:43.802Z",
+      "publication_time_utc": "2026-11-03T13:00:00Z"
+    }
+  ],
+  "technologies": [
+    {
+      "id": "TECH-0303",
+      "title": "Tohoku–AISIN 16 nm STT-MRAM edge AI SoC added to Atlas",
+      "summary": "A permanent, searchable Atlas profile now documents the existing 16 nm research AI SoC with 32 MB embedded STT-MRAM and a controlled Tiny YOLOv3 demonstration. It was added to Atlas on November 3 following the November 2 first-party research announcements; this is neither a commercially available chip nor a new November 3 product launch.",
+      "category": "hardware",
+      "tags": [
+        "Atlas",
+        "Technology catalog",
+        "Research",
+        "Hardware",
+        "Edge AI",
+        "Near-memory computing"
+      ],
+      "why_it_matters": "Connects a primary-source-qualified research-hardware profile to permanent technology search, related memory-bandwidth and arithmetic-intensity guides, and reproducibility limitations.",
+      "caveat": "Publisher-reported 65.7 ms OS boot, 124.2 ms power-on-to-first-detection and 50.7 mJ/frame were not independently reproduced; compatibility with other models, commercial availability and a public SDK remain unverified.",
+      "review_status": "atlas_canonical_research_prototype_primary_sources_checked_metrics_not_independently_replicated",
+      "release_status": "new_to_atlas_2026_11_03_existing_research_prototype_not_new_product_launch",
+      "source_url": "https://www.tohoku.ac.jp/japanese/2026/11/press20261102-03-emram.html",
+      "publication_date": "2026-11-02",
+      "event_date": "2026-11-02",
+      "discovered_at": "2026-11-03T14:24:43.802Z",
+      "added_to_atlas_at": "2026-11-04T00:40:20Z",
+      "catalog_path": "technology/TECH-0303-tohoku-aisin-16-nm-stt-mram-edge-ai-soc.html"
+    }
+  ],
+  "terms": [],
+  "site_changes": [
+    {
+      "id": "site-expanded-defense-in-depth-20261103",
+      "title": "Defense in depth receives a linked AI safety research guide",
+      "summary": "The existing Defense in depth term page now has nine substantive sections explaining independent safeguards, authorization boundaries, a synthetic layered-control probability example, practical evaluations, failure correlations and mitigation tradeoffs. This educational Atlas page expansion is not a new AI research finding or a confirmed deployed-system incident.",
+      "review_status": "atlas_guide_primary_sources_reviewed_previously_production_verified",
+      "release_status": "atlas_educational_improvement_not_new_world_event",
+      "category": "site",
+      "added_to_atlas_at": "2026-11-03T14:33:40Z",
+      "tags": [
+        "Atlas",
+        "AI safety",
+        "Security",
+        "Research",
+        "Layered defense"
+      ],
+      "source_url": "https://github.com/hazelfjeld/ai-atlas/pull/39",
+      "catalog_path": "terms/MLD-0291-defense-in-depth.html",
+      "why_it_matters": "Connects threat-model boundaries and correlated-control failures to practical layered AI-system assurance, with mechanisms and test conditions instead of unsupported universal protection claims.",
+      "caveat": "The mathematical scenario is illustrative, not empirical proof of defense independence or a reproduced benchmark. Primary citations are educational sources; no production incident was established."
+    },
+    {
+      "id": "site-expanded-instruction-hierarchy-20261103",
+      "title": "Instruction hierarchy guide explains trust boundaries and prompt injection",
+      "summary": "The existing Instruction hierarchy concept now has nine original sections on instruction priority, the separation of trusted directions from retrieved text, indirect prompt injection, controlled sandbox tests, precedence conflicts, defense in depth and deployment limitations. This is an already published Atlas educational improvement, not a new model launch or independently observed safety incident.",
+      "review_status": "atlas_guide_primary_sources_reviewed_previously_production_verified",
+      "release_status": "atlas_educational_improvement_not_new_world_event",
+      "category": "site",
+      "added_to_atlas_at": "2026-11-03T14:33:40Z",
+      "tags": [
+        "Atlas",
+        "AI safety",
+        "Prompt injection",
+        "Agents",
+        "Trust boundaries"
+      ],
+      "source_url": "https://github.com/hazelfjeld/ai-atlas/pull/39",
+      "catalog_path": "terms/MLD-0565-instruction-hierarchy.html",
+      "why_it_matters": "Shows why lower-trust documents, tool results and web pages must not silently outrank authorized instructions, and why model-side instruction ordering alone is not a complete security control.",
+      "caveat": "Illustrative attacker inputs and mitigations describe controlled evaluation, not documented exploitation of any real deployed system. No security guarantee is claimed."
+    },
+    {
+      "id": "site-nov03-candidate-evidence-review-20261103",
+      "title": "November 3 hardware and benchmark candidate audit is accessible",
+      "summary": "Atlas added a documented, source-linked editorial review of four deferred November 3 technology/terminology proposals: the Tohoku–AISIN prototype, STT-MRAM, near-memory computing, and IFParse v2.0. The review distinguishes existing concepts and publisher demonstrations from verified catalog integration; no new canonical term or technology is claimed.",
+      "review_status": "atlas_editorial_review_primary_links_checked_previously_production_verified",
+      "release_status": "atlas_website_review_not_new_world_event",
+      "category": "site",
+      "tags": [
+        "Atlas",
+        "Research",
+        "Hardware",
+        "Evaluation",
+        "Evidence"
+      ],
+      "source_url": "https://github.com/hazelfjeld/ai-atlas/pull/44",
+      "catalog_path": "catalog-review.html",
+      "added_to_atlas_at": "2026-11-03T17:36:42Z",
+      "why_it_matters": "Keeps research candidate provenance, duplicate review and evidence limitations visible before any canonical catalog changes.",
+      "caveat": "Source access does not reproduce prototype or benchmark measurements. Four proposals remain deferred; this records an Atlas review page only."
+    },
+    {
+      "id": "site-stt-mram-technical-explainer-20261103",
+      "title": "STT-MRAM AI prototype receives source-qualified technical explainer",
+      "summary": "A new Atlas hardware research guide explains embedded MRAM, near-memory computing and differences between OS startup and power-on-to-first-detection metrics in the Tohoku–AISIN research prototype. It discusses 50.7 mJ/frame and accuracy tradeoffs as publisher-reported controlled measurements, not independent reproduction.",
+      "review_status": "atlas_technical_guide_primary_source_claims_checked_previously_production_verified",
+      "release_status": "atlas_educational_improvement_not_new_world_event",
+      "category": "site",
+      "tags": [
+        "Atlas",
+        "Hardware",
+        "Research",
+        "STT-MRAM",
+        "Near-memory computing"
+      ],
+      "source_url": "https://github.com/hazelfjeld/ai-atlas/pull/45",
+      "catalog_path": "hardware-review.html",
+      "added_to_atlas_at": "2026-11-03T18:37:23Z",
+      "why_it_matters": "Gives researchers an auditable interpretation of reported benchmark metrics, measured contexts and missing replication information.",
+      "caveat": "Publisher-reported 65.7 ms OS boot, 124.2 ms first detection and 50.7 mJ/frame are not independent experiments; no general model-speed or production-deployment result is claimed."
+    },
+    {
+      "id": "site-expanded-memory-bandwidth-20261103",
+      "title": "Memory bandwidth gains an AI inference research guide",
+      "summary": "The existing memory bandwidth term page now has nine substantial sections explaining theoretical versus achieved bandwidth, cache and model-weight traffic, performance units, LLM inference examples, measurable profiling and practical caveats. This educational Atlas change is not a new external research result or newly invented term.",
+      "review_status": "atlas_guide_primary_sources_reviewed_previously_production_verified",
+      "release_status": "atlas_educational_improvement_not_new_world_event",
+      "category": "site",
+      "tags": [
+        "Atlas",
+        "Research",
+        "Inference",
+        "Memory bandwidth",
+        "Hardware"
+      ],
+      "source_url": "https://github.com/hazelfjeld/ai-atlas/pull/49",
+      "catalog_path": "terms/MLD-0724-memory-bandwidth.html",
+      "added_to_atlas_at": "2026-11-03T21:31:01Z",
+      "why_it_matters": "Distinguishes advertised hardware throughput from effective application memory traffic when diagnosing inference performance.",
+      "caveat": "Numerical examples are illustrative, and experimental STT-MRAM measurements are publisher-reported rather than independently reproduced."
+    },
+    {
+      "id": "site-expanded-arithmetic-intensity-20261103",
+      "title": "Arithmetic intensity receives worked roofline calculations",
+      "summary": "The existing permanent term page now derives operations-per-byte, memory and compute performance ceilings, ridge points and data reuse in a nine-section guide with four primary sources. It explains why changing arithmetic intensity alone does not guarantee faster execution. This is an Atlas educational improvement, not a new technology launch.",
+      "review_status": "atlas_guide_primary_sources_reviewed_previously_production_verified",
+      "release_status": "atlas_educational_improvement_not_new_world_event",
+      "category": "site",
+      "tags": [
+        "Atlas",
+        "Research",
+        "Performance",
+        "Roofline",
+        "Hardware"
+      ],
+      "source_url": "https://github.com/hazelfjeld/ai-atlas/pull/49",
+      "catalog_path": "terms/MLD-0062-arithmetic-intensity.html",
+      "added_to_atlas_at": "2026-11-03T21:31:01Z",
+      "why_it_matters": "Enables testable predictions about workload bottlenecks using FLOP counts, memory traffic and actual hardware limits.",
+      "caveat": "Roofline ceilings are conditional upper bounds, not measured speedups or evidence of production AI system performance."
+    },
+    {
+      "id": "site-source-publication-date-filter-20261103",
+      "title": "Daily archive adds same-day versus catch-up source-publication filters",
+      "summary": "Atlas added shareable same-day, catch-up, postdated and undated source-publication-date views, including matching downloadable evidence CSVs. Comparisons use the selected America/Chicago edition date rather than event, discovery or site-update dates. This is a previously published website improvement, not fresh world news.",
+      "review_status": "atlas_website_functionality_previously_production_verified",
+      "release_status": "atlas_website_functionality_not_new_world_event",
+      "category": "site",
+      "tags": [
+        "Atlas",
+        "News",
+        "Provenance",
+        "Archive",
+        "Research"
+      ],
+      "source_url": "https://github.com/hazelfjeld/ai-atlas/pull/48",
+      "catalog_path": "whats-new.html",
+      "added_to_atlas_at": "2026-11-03T20:32:55Z",
+      "why_it_matters": "Prevents the site from conflating newly collected earlier publications with reports genuinely published on the edition date.",
+      "caveat": "This view only classifies sources actually present in a non-exhaustive collection; it is not a live news crawl."
+    },
+    {
+      "id": "site-dated-edition-source-snapshot-20261103",
+      "title": "Daily edition summarizes publication dates and source-coverage counts",
+      "summary": "The archived edition now shows a SHA-256-gated summary of same-day versus catch-up stories, source failures, website improvements, catalog additions and corrections. Comparisons use the selected America/Chicago edition date, not the story event or discovery date. This is a previously published Atlas interface change, not newly gathered AI news.",
+      "review_status": "atlas_website_functionality_previously_production_verified",
+      "release_status": "atlas_site_improvement_not_new_world_event",
+      "category": "site",
+      "tags": [
+        "Atlas",
+        "News",
+        "Provenance",
+        "Archive",
+        "Research"
+      ],
+      "source_url": "https://github.com/hazelfjeld/ai-atlas/pull/52",
+      "catalog_path": "whats-new.html",
+      "added_to_atlas_at": "2026-11-03T23:33:34Z",
+      "why_it_matters": "Makes a partial edition's source-publication-date breakdown and missing-source coverage visible without treating absent records as evidence that nothing happened.",
+      "caveat": "Counts only records in a successfully integrity-checked static archive; there is no continually live news crawl."
+    }
+  ],
+  "corrections": []
+}
