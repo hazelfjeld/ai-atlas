@@ -59,6 +59,19 @@ with sync_playwright() as p:
     page.locator('#daily-panel-title').wait_for()
 
     check('new brand and requested palette render', page.get_by_role('link',name='AI Updates home',exact=True).is_visible() and page.evaluate("getComputedStyle(document.body).backgroundColor")=='rgb(246, 246, 242)')
+    # The input's native outline is intentionally suppressed; the enclosing search
+    # control must provide a visible full-field focus indicator instead.
+    focus_ring = """() => {
+        const input = document.querySelector('#global-query');
+        const shell = document.querySelector('.global-search');
+        const style = getComputedStyle(shell);
+        return document.activeElement === input && shell.matches(':focus-within')
+            && style.outlineStyle === 'solid'
+            && parseFloat(style.outlineWidth) >= 3
+            && parseFloat(style.outlineOffset) >= 2;
+    }"""
+    page.locator('#global-query').focus()
+    check('global search has a visible full-field focus ring in light theme', page.evaluate(focus_ring))
     page.screenshot(path=str(out/'desktop.png'),full_page=True)
     page.get_by_role('navigation',name='Discover topics').get_by_role('link',name='Tools & models',exact=True).click()
     page.wait_for_function("document.querySelectorAll('.discovery-card').length===2")
@@ -69,6 +82,8 @@ with sync_playwright() as p:
     page.wait_for_function("document.querySelectorAll('.discovery-card').length===1")
     check('research tab displays the relevant reference', 'model doing inside' in page.locator('.discovery-card h3').inner_text())
     page.get_by_role('button',name='Toggle color theme',exact=True).click()
+    page.locator('#global-query').focus()
+    check('global search focus indicator remains visible in dark theme', page.evaluate(focus_ring))
     check('dark theme uses deep evergreen and fits the page', page.evaluate("getComputedStyle(document.body).backgroundColor")=='rgb(24, 33, 30)' and page.evaluate('document.documentElement.scrollWidth<=innerWidth'))
     page.get_by_role('button',name='Toggle color theme',exact=True).click()
     page.set_viewport_size({'width':390,'height':844})
@@ -92,6 +107,8 @@ with sync_playwright() as p:
     page.set_viewport_size({'width':390,'height':844})
     page.goto(base)
     page.locator('#catalog-loading').wait_for(state='detached')
+    page.locator('#global-query').focus()
+    check('global search focus ring fits 390px mobile view', page.evaluate(focus_ring) and page.evaluate('document.documentElement.scrollWidth <= innerWidth'))
     page.screenshot(path=str(out/'mobile.png'),full_page=True)
     check('closed mobile drawer is hidden from keyboard and accessibility tree',
           not page.locator('#sidebar').is_visible())
