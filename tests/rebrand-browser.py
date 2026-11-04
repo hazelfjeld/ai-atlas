@@ -76,6 +76,21 @@ with sync_playwright() as p:
     page.locator('#catalog-loading').wait_for(state='detached')
     check('mobile discovery has no horizontal overflow',page.evaluate('document.documentElement.scrollWidth<=innerWidth'))
     page.screenshot(path=str(out/'mobile.png'),full_page=True)
+    check('closed mobile drawer is hidden from keyboard and accessibility tree',
+          not page.locator('#sidebar').is_visible())
+    page.locator('#menu-toggle').focus()
+    page.keyboard.press('Tab')
+    check('Tab bypasses the closed mobile drawer',
+          page.evaluate("!document.activeElement.closest('#sidebar')"))
+    page.locator('#menu-toggle').click()
+    check('opening the drawer focuses its first navigation link and isolates the page',
+          page.evaluate("document.activeElement.matches('#sidebar .brand') && document.querySelector('.workspace').inert"))
+    page.keyboard.press('Shift+Tab')
+    check('Shift-Tab wraps inside the open drawer',
+          page.evaluate("!!document.activeElement.closest('#sidebar')"))
+    page.keyboard.press('Escape')
+    check('Escape closes drawer and returns focus to the menu button',
+          page.evaluate("document.activeElement.id==='menu-toggle' && document.getElementById('mobile-overlay').hidden && !document.querySelector('.workspace').inert && document.getElementById('menu-toggle').getAttribute('aria-expanded')==='false'"))
     page.locator('#menu-toggle').click()
     page.locator('#navigation a[href="#/games"]').click()
     page.locator('#start-quiz').wait_for()

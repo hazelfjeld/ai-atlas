@@ -119,7 +119,7 @@ function openRecord(id){const r=byID.get(id);if(!r){toast('That record is not in
  $('record-content').innerHTML=`<div class="dialog-head"><div><div class="eyebrow">${E(labels[r._type]||'Review queue')} · ${E(r.id)}</div><h2 id="record-title">${E(r._title)}</h2>${r._type==='safety'?reportPill(r.kind):pill(plainStatus(r),'muted')}</div><button class="icon-button" data-action="close-record" aria-label="Close record">✕</button></div><div class="dialog-body"><div class="dialog-actions">${actions}</div>${recordBody(r)}<section class="detail-block wide" style="margin-top:20px"><div class="notes-label"><h3 style="margin:0">Your notes</h3><small>Local to this browser</small></div><textarea id="record-notes" data-record="${id}" aria-label="Notes for ${E(r._title)}" maxlength="20000" placeholder="What matters for your project? What should you test?">${E(notebook.notes[id]||'')}</textarea><div class="notes-status" id="notes-status">${persist?'Edits save automatically in this browser.':E(STORAGE_NOTICE)}</div></section></div>`;if(!dialog.open)dialog.showModal();else dialog.scrollTop=0;}
 function closeRecord(){delete state.record;updateURL();if(dialog.open)dialog.close();}
 let disposeGames = null;
-function route(){if(disposeGames){disposeGames();disposeGames=null;}parse();renderNav();$('sidebar').classList.remove('open');$('mobile-overlay').hidden=true;$('menu-toggle').setAttribute('aria-expanded','false');if(view==='overview')page.innerHTML=overview();else if(view==='games'){page.innerHTML=window.AtlasGamesTab.html();disposeGames=window.AtlasGamesTab.mount(page.querySelector('.atlas-games'),D,{openConcept:openRecord});}else if(view==='compare')page.innerHTML=comparePage();else if(view==='saved')page.innerHTML=notebookPage();else if(view==='sources')page.innerHTML=sourcesPage();else if(view==='search')page.innerHTML=searchPage();else{page.innerHTML=listPage();renderCollection();}bindControls();if(view==='overview'&&!window.ATLAS_OFFLINE)void loadDailyPreview();if(state.record)openRecord(state.record);else if(dialog.open)dialog.close();}
+function route(){if(disposeGames){disposeGames();disposeGames=null;}parse();renderNav();const fromMobileNav=$('sidebar').classList.contains('open');closeMobileNavigation();if(view==='overview')page.innerHTML=overview();else if(view==='games'){page.innerHTML=window.AtlasGamesTab.html();disposeGames=window.AtlasGamesTab.mount(page.querySelector('.atlas-games'),D,{openConcept:openRecord});}else if(view==='compare')page.innerHTML=comparePage();else if(view==='saved')page.innerHTML=notebookPage();else if(view==='sources')page.innerHTML=sourcesPage();else if(view==='search')page.innerHTML=searchPage();else{page.innerHTML=listPage();renderCollection();}bindControls();if(view==='overview'&&!window.ATLAS_OFFLINE)void loadDailyPreview();if(state.record)openRecord(state.record);else if(dialog.open)dialog.close();if(fromMobileNav){$('main').focus({preventScroll:true});$('main').scrollIntoView({block:'start'});}}
 function bindControls(){const local=$('local-query');if(local)local.addEventListener('input',()=>{clearTimeout(timer);timer=setTimeout(()=>{state.q=local.value;state.page='';updateURL();renderCollection();},150);});document.querySelectorAll('[data-filter]').forEach(el=>el.addEventListener('change',()=>{state[el.dataset.filter]=el.value;state.page='';updateURL();renderCollection();}));const global=$('all-query');if(global)global.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();goto('search',{q:global.value.trim()});}});}
 function download(filename,text,type='application/json'){const blob=new Blob([text],{type}),u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download=filename;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),5000);}
 function exportJSON(name,value){download(name+'.json',JSON.stringify(value,null,2));}
@@ -138,9 +138,39 @@ document.addEventListener('input',e=>{if(e.target.id==='record-notes'){const id=
 $('notebook-file').addEventListener('change',async e=>{const file=e.target.files[0];if(!file)return;try{if(file.size>10*1024*1024)throw new Error('Notebook file exceeds 10 MB.');const incoming=C.validateNotebook(JSON.parse(await file.text()),validIDs);notebook.saved=[...new Set([...notebook.saved,...incoming.saved])];notebook.notes={...notebook.notes,...incoming.notes};if(incoming.compare.length)notebook.compare=incoming.compare;saveNotebook();route();toast('Notebook merged. Imported notes replace notes for the same record.');}catch(err){toast('Import failed: '+err.message);}finally{e.target.value='';}});
 $('global-search').addEventListener('submit',e=>{e.preventDefault();goto('search',{q:$('global-query').value.trim()});});
 $('theme-toggle').addEventListener('click',()=>{const theme=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=theme;try{if(!SHARED_HOST)localStorage.setItem('atlas.theme',theme);}catch{};});
-$('menu-toggle').addEventListener('click',()=>{const open=$('sidebar').classList.toggle('open');$('mobile-overlay').hidden=!open;$('menu-toggle').setAttribute('aria-expanded',String(open));});
-$('mobile-overlay').addEventListener('click',()=>{$('sidebar').classList.remove('open');$('mobile-overlay').hidden=true;$('menu-toggle').setAttribute('aria-expanded','false');});
+// Keep the off-canvas navigation out of the keyboard order when closed, and modal while open.
+function setMobileNavOpen(open,restoreFocus=false){
+ const sidebar=$('sidebar'),wasOpen=sidebar.classList.contains('open');
+ sidebar.classList.toggle('open',open);
+ $('mobile-overlay').hidden=!open;
+ $('menu-toggle').setAttribute('aria-expanded',String(open));
+ document.querySelector('.workspace').inert=open;
+ document.body.classList.toggle('mobile-nav-open',open);
+ if(open)sidebar.querySelector('.brand').focus();
+ else if(restoreFocus&&wasOpen)$('menu-toggle').focus();
+}
+function closeMobileNavigation(restoreFocus=false){setMobileNavOpen(false,restoreFocus);}
+function mobileNavTabStops(){
+ return [...$('sidebar').querySelectorAll('a[href],button:not([disabled]),summary,[tabindex]:not([tabindex="-1"])')]
+   .filter(el=>el.getClientRects().length&&getComputedStyle(el).visibility!=='hidden');
+}
+$('menu-toggle').addEventListener('click',()=>setMobileNavOpen(!$('sidebar').classList.contains('open')));
+$('mobile-overlay').addEventListener('click',()=>closeMobileNavigation(true));
+$('sidebar').addEventListener('keydown',e=>{
+ if(!$('sidebar').classList.contains('open')||window.innerWidth>650)return;
+ if(e.key==='Escape'){e.preventDefault();closeMobileNavigation(true);return;}
+ if(e.key!=='Tab')return;
+ const stops=mobileNavTabStops();
+ if(!stops.length)return;
+ if(e.shiftKey&&document.activeElement===stops[0]){e.preventDefault();stops.at(-1).focus();}
+ else if(!e.shiftKey&&document.activeElement===stops.at(-1)){e.preventDefault();stops[0].focus();}
+});
+$('sidebar').addEventListener('click',e=>{
+ const link=e.target.closest('a[href^="#/"]');
+ if(link&&link.getAttribute('href')===location.hash&&$('sidebar').classList.contains('open'))closeMobileNavigation(true);
+});
+window.addEventListener('resize',()=>{if(window.innerWidth>650&&$('sidebar').classList.contains('open'))closeMobileNavigation();});
 dialog.addEventListener('cancel',e=>{e.preventDefault();closeRecord();});dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)closeRecord();}});
-document.addEventListener('keydown',e=>{const typing=/INPUT|TEXTAREA|SELECT/.test(document.activeElement?.tagName);if(e.key==='/'&&!typing&&!dialog.open){e.preventDefault();$('global-query').focus();}});
+document.addEventListener('keydown',e=>{const typing=/INPUT|TEXTAREA|SELECT/.test(document.activeElement?.tagName);if(e.key==='/'&&!typing&&!dialog.open&&!$('sidebar').classList.contains('open')){e.preventDefault();$('global-query').focus();}});
 window.addEventListener('hashchange',route);route();
 })();
