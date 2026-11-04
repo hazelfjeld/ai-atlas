@@ -69,8 +69,18 @@ with sync_playwright() as p:
               const nodes = ids.map(id => document.getElementById(id));
               return nodes.every((node,i) => node && (!i || (nodes[i-1].compareDocumentPosition(node) & Node.DOCUMENT_POSITION_FOLLOWING)));
           }"""))
+    # The CI host may start in dark mode. Explicitly test both theme variants,
+    # then restore the original selection without altering persistent preferences.
+    initial_theme = page.locator('html').get_attribute('data-theme')
+    page.evaluate("document.documentElement.dataset.theme='light'")
     check('daily archive light palette matches the Atlas workspace',
           page.evaluate("getComputedStyle(document.body).backgroundColor") == 'rgb(246, 246, 242)')
+    page.evaluate("document.documentElement.dataset.theme='dark'")
+    check('daily archive dark palette matches the Atlas workspace',
+          page.evaluate("getComputedStyle(document.body).backgroundColor") == 'rgb(24, 33, 30)')
+    page.evaluate("""(theme) => theme === null
+        ? document.documentElement.removeAttribute('data-theme')
+        : document.documentElement.dataset.theme = theme""", initial_theme)
     # A stale but verified archive edition must not be presented as today's news,
     # visually or to users navigating by screen-reader region labels.
     check('archive heading is truthful for current and historic editions',
