@@ -309,6 +309,30 @@ with sync_playwright() as p:
             Number.parseFloat(getComputedStyle(element).fontSize) >= 16 &&
             element.getBoundingClientRect().height >= 44;
     })"""
+    # The five archive header links used 13px inline text with only ~21px hit areas.
+    # Give touch users real 44px targets without altering the desktop navigation.
+    mobile_nav_targets = """() => {
+        const links = [...document.querySelectorAll('.toplinks a')];
+        return links.length === 5 && links.every(link =>
+            link.getBoundingClientRect().height >= 44);
+    }"""
+    check('390px archive header links have 44px touch targets', page.evaluate(mobile_nav_targets))
+    # Long, unbroken metadata tags previously pushed the archive 249px wider
+    # than a 390px screen. Assert they wrap inside the existing cards.
+    if index['editions']:
+        page.locator('#edition-content article.item').first.wait_for(timeout=45000)
+    tag_containment = """() => {
+        const tags = [...document.querySelectorAll('#edition-content .item .tag')];
+        return tags.length > 0 && tags.every(tag => {
+            const rect = tag.getBoundingClientRect();
+            const card = tag.closest('.item').getBoundingClientRect();
+            return rect.left >= card.left - 1 && rect.right <= card.right + 1;
+        });
+    }"""
+    if index['editions']:
+        check('390px archive metadata tags wrap within their cards', page.evaluate(tag_containment))
+    check('390px archive header fits without horizontal scrolling',
+          page.evaluate('document.documentElement.scrollWidth <= innerWidth'))
     check('390px daily filters and search use legible, touch-friendly sizing', page.evaluate(mobile_readability_check))
     if index['editions']:
         source_toggle_mobile = page.locator('#source-coverage .source-audit summary')
@@ -316,6 +340,11 @@ with sync_playwright() as p:
         check('390px source-coverage summary is an accessible touch target',
               source_toggle_mobile.evaluate("(el) => el.getBoundingClientRect().height >= 44"))
     page.set_viewport_size({'width':320,'height':700})
+    check('320px archive header links have 44px touch targets', page.evaluate(mobile_nav_targets))
+    if index['editions']:
+        check('320px archive metadata tags wrap within their cards', page.evaluate(tag_containment))
+    check('320px archive header fits without horizontal scrolling',
+          page.evaluate('document.documentElement.scrollWidth <= innerWidth'))
     check('320px daily filters and search avoid iOS focus zoom', page.evaluate(mobile_readability_check))
     if index['editions']:
         source_toggle_mobile.wait_for(timeout=45000)
