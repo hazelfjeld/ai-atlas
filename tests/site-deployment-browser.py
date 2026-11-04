@@ -324,22 +324,27 @@ with sync_playwright() as p:
     page.screenshot(path=str(out / 'daily-mobile-320.png'), full_page=True)
     # The workspace theme toggle persists in atlas.theme. Switching to the
     # standalone archive must not silently revert to OS colors.
+    # The workspace theme button belongs to the desktop sidebar.
+    page.set_viewport_size({'width':1440,'height':900})
     page.goto(base + 'index.html#/overview')
     page.locator('#catalog-loading').wait_for(state='detached')
     page.get_by_role('button', name='Toggle color theme', exact=True).click()
     check('workspace dark theme choice persists to local storage',
           page.evaluate("localStorage.getItem('atlas.theme') === 'dark'"))
+    page.set_viewport_size({'width':390,'height':844})
     page.goto(base + 'whats-new.html')
     check('archive retains the selected dark palette despite light OS mode',
           page.evaluate("""() => document.documentElement.dataset.theme === 'dark'
               && getComputedStyle(document.documentElement).colorScheme === 'dark'
               && getComputedStyle(document.body).backgroundColor !== 'rgb(255, 255, 255)'"""))
     page.emulate_media(color_scheme='dark')
+    page.set_viewport_size({'width':1440,'height':900})
     page.goto(base + 'index.html#/overview')
     page.locator('#catalog-loading').wait_for(state='detached')
     page.get_by_role('button', name='Toggle color theme', exact=True).click()
     check('workspace light theme choice persists to local storage',
           page.evaluate("localStorage.getItem('atlas.theme') === 'light'"))
+    page.set_viewport_size({'width':390,'height':844})
     page.goto(base + 'whats-new.html')
     check('archive retains explicitly selected light palette despite dark OS mode',
           page.evaluate("""() => document.documentElement.dataset.theme === 'light'
