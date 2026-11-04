@@ -1435,7 +1435,7 @@ test('November 3 v5 verification receipts retain historical v4 proof and source 
  assert.equal(old.githack_workflow_run_id,41732217128);
  assert.equal(latest.edition,'2026-11-03-v5');
  assert.equal(latest.status,'cloudflare_http_browser_and_githack_verified');
- assert.equal(latest.verified_at,idx.last_successful_publish_at);
+ assert.equal(latest.verified_at,'2026-11-04T01:45:26Z','Historical v5 proof must not adopt v6 timestamp');
  assert.equal(latest.source_batch_sha256,receipt.source_batch_sha256);
  assert.equal(receipt.source_batch_sha256,'f6d155caec1fda714b8fdd456ec47cc886dd10856159b65b9745c69d64b9adb3');
 });
