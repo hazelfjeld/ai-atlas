@@ -89,6 +89,12 @@ with sync_playwright() as p:
                   && el.matches(':focus-visible')
                   && getComputedStyle(el).outlineStyle === 'solid'
                   && Number.parseFloat(getComputedStyle(el).outlineWidth) >= 3"""))
+        check('source-coverage focus ring contrasts against the light surface',
+              source_toggle.evaluate("(el) => getComputedStyle(el).outlineColor === 'rgb(164, 107, 28)'"))
+        page.emulate_media(color_scheme='dark')
+        check('source-coverage focus ring stays visible in dark mode',
+              source_toggle.evaluate("(el) => getComputedStyle(el).outlineColor === 'rgb(242, 189, 116)'"))
+        page.emulate_media(color_scheme='light')
         if any(e['date'] == '2026-11-03' for e in index['editions']):
             check('new November 3 edition discloses exactly three source failures and partial scope',
                   'Source coverage (partial) · 14 checked · 3 failed' in audit
