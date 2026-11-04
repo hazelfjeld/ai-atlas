@@ -306,7 +306,7 @@
   },
   "MLD-0062": {
     "path": "terms/MLD-0062-arithmetic-intensity.html",
-    "sha256": "5119d0cde6e42d85e3350ed8ca56e7610c035501fadb4254ce9cddbd80f2a7ca",
+    "sha256": "4caad7c9c2ee19decafff43d53a9b58dc41eecc3044d500248c877bb6a2f5cc4",
     "expanded": true
   },
   "MLD-0063": {
@@ -3616,7 +3616,7 @@
   },
   "MLD-0724": {
     "path": "terms/MLD-0724-memory-bandwidth.html",
-    "sha256": "9431202a20f60d711b9586d0ad9522cd05caa0c1073cc492b51f816e6463e0cc",
+    "sha256": "6797cb0ab4e306d45e7ed0678253f04650ce8f997e1f09fe29ccd78c2e2ff530",
     "expanded": true
   },
   "MLD-0725": {
