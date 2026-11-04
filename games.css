@@ -21,3 +21,5 @@
 @media(max-width:1040px){.mode-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:650px){.mode-grid{grid-template-columns:1fr}.flip-card{height:300px}.flip-face{padding:21px}.flash-actions .button{min-width:0}}
 @media(prefers-reduced-motion:reduce){.flip-card-inner{transition:none}}
+/* Keep all four standalone Games destinations comfortably tappable on narrow phones. */
+@media(max-width:360px){.masthead nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px;width:100%}.masthead nav a{display:flex;align-items:center;min-height:44px;min-width:0;padding:9px 10px}}

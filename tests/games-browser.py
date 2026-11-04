@@ -83,6 +83,13 @@ with sync_playwright() as p:
     page.set_viewport_size({'width':390,'height':844});page.screenshot(path=str(out/'games-mobile.png'),full_page=True);check('mobile setup has no horizontal overflow',page.evaluate('document.documentElement.scrollWidth <= innerWidth'))
     page.locator('#start-match').click();page.screenshot(path=str(out/'match-mobile.png'),full_page=True);check('mobile match has no horizontal overflow',page.evaluate('document.documentElement.scrollWidth <= innerWidth'));check('mobile full definitions untruncated',page.locator('.tile').evaluate_all('(els)=>els.every(el=>el.scrollHeight<=el.clientHeight+1)'))
     page.locator('[data-action=menu]').click();page.locator('#theme-toggle').click();page.screenshot(path=str(out/'games-dark.png'),full_page=True)
+    # At 320px the old four-across header compressed the links into ~34px high targets.
+    page.set_viewport_size({'width':320,'height':700})
+    for palette in ('dark','light'):
+        if page.locator('html').get_attribute('data-theme') != palette:
+            page.locator('#theme-toggle').click()
+        check(f'320px {palette} Games navigation has two rows of 44px targets inside gutters',
+              page.locator('.masthead nav a').evaluate_all("els => { const r = els.map(e => e.getBoundingClientRect()); return r.length === 4 && r.every(b => b.height >= 44 && b.left >= 15 && b.right <= innerWidth - 15) && Math.abs(r[0].top - r[1].top) < 1 && r[2].top >= r[1].bottom; }"))
     check('no runtime errors',not errors)
     # An actual rejected catalog promise must give a recoverable UI, not a partial deck.
     fail=browser.new_page();open_page(fail,True);fail.get_by_role('button',name='Retry',exact=True).wait_for();check('load failure shows retry and hides deck',not fail.locator('#games').is_visible())

@@ -90,3 +90,8 @@ test('mobile drawer does not expose closed offscreen links and supports keyboard
   assert.match(offline, /aria-controls="sidebar"/);
   assert.match(offline, /function closeMobileNavigation\(restoreFocus=false\)/);
 });
+test('standalone Games header provides 44px navigation targets on 320px phones', () => {
+  const css = read('games.css');
+  assert.match(css, /@media\(max-width:360px\)[\s\S]*?\.masthead nav\{display:grid;grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/);
+  assert.match(css, /@media\(max-width:360px\)[\s\S]*?\.masthead nav a\{[^}]*min-height:44px/);
+});
