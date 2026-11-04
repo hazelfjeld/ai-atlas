@@ -428,6 +428,19 @@ with sync_playwright() as p:
         source_toggle_mobile.wait_for(timeout=45000)
         check('320px source-coverage summary is an accessible touch target',
               source_toggle_mobile.evaluate("(el) => el.getBoundingClientRect().height >= 44"))
+    # Tapping Reset on a phone used to refocus Search, opening the software
+    # keyboard again and obscuring the just-restored archive results.
+    if index['editions']:
+        page.locator('#edition-search').fill('unlikely-no-match-qa-query-zzzz')
+        check('320px archive search can show an honest empty state',
+              page.locator('#edition-content .empty').count() > 0)
+        page.locator('#reset-filters').click()
+        check('320px reset restores results without reopening mobile search keyboard',
+              page.evaluate("""() => document.querySelector('#edition-search').value === ''
+                  && document.activeElement.id !== 'edition-search'
+                  && ['section-filter','topic-filter','publication-filter','evidence-filter','source-filter']
+                     .every(id => document.getElementById(id).value === 'all')
+                  && document.querySelectorAll('#edition-content article.item').length > 0"""))
     page.screenshot(path=str(out / 'daily-mobile-320.png'), full_page=True)
     # The workspace theme toggle persists in atlas.theme. Switching to the
     # standalone archive must not silently revert to OS colors.

@@ -389,7 +389,7 @@ $('reset-filters').addEventListener('click',()=>{
  $('source-filter').value='all';
  $('publication-filter').value='all';
  if(edition)render();
- $('edition-search').focus();
+ // Keep focus on Reset; focusing search here opens the software keyboard on mobile.
 });
 void start();
 })();
