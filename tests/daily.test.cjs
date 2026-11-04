@@ -1242,7 +1242,7 @@ test('November 3 v3 archives only already-published hardware research site chang
  assert.equal(archivedV3.production_commit,'fc565eefb38b17e0b1a6dac28446297843a8e590');
  assert.equal(archivedV3.production_workflow_run_id,41703813098);
  assert.equal(archivedV3.githack_workflow_run_id,41703812947);
- assert.equal(receipt.production_verified_revision,5,'Current verified revision must match deployed proof');
+ assert.equal(receipt.production_verified_revision,6,'Current verified revision must match deployed proof');
  assert.equal(receipt.publication_history.at(-1).edition,'2026-11-03-v6');
  assert.equal(receipt.publication_history.find(h=>h.edition==='2026-11-03-v3').status,'cloudflare_http_browser_and_githack_verified');
  assert.ok(['pending_production_verification','cloudflare_http_browser_and_githack_verified'].includes(receipt.publication_history.at(-1).status));
@@ -1289,12 +1289,12 @@ test('Immutable November 3 revision 4 indexes two previously verified guides and
  assert.equal(receipt.counts.news_published,8);
  assert.equal(receipt.counts.technology_added+receipt.counts.term_added,1);
  assert.equal(receipt.deferred_catalog_proposal_ids.length,3);
- assert.equal(receipt.production_verified_revision,5);
- assert.equal(receipt.production_commit,'9c90272aaf97aa05ee43e12f2d88b5475cd7cf04');
- assert.equal(receipt.production_workflow_run_id,41755887734);
- assert.equal(receipt.githack_workflow_run_id,41755887696);
+ assert.equal(receipt.production_verified_revision,6);
+ assert.equal(receipt.production_commit,'e549b579d413e717e4784ed942a20ad4c06529bc');
+ assert.equal(receipt.production_workflow_run_id,41767787139);
+ assert.equal(receipt.githack_workflow_run_id,41767787275);
  assert.equal(receipt.publication_history.find(x=>x.edition==='2026-11-03-v5').status,'cloudflare_http_browser_and_githack_verified');
- assert.equal(receipt.last_verified_public_url,'https://aiupdates.app/whats-new.html?date=2026-11-03&revision=5');
+ assert.equal(receipt.last_verified_public_url,'https://aiupdates.app/whats-new.html?date=2026-11-03&revision=6');
  assert.equal(idx.last_successful_publish_at,verifiedPublicationClock());
 });
 
@@ -1418,11 +1418,11 @@ test('November 3 v5 verification receipts retain historical v4 proof and source 
  assert.equal(arch.date,'2026-11-03');
  assert.equal(arch.revision,6);
  assert.equal(receipt.publication_edition,'2026-11-03-v6');
- assert.equal(idx.status,'edition_revision_6_pending_production_verification');
+ assert.equal(idx.status,'edition_revision_6_production_verified');
  assert.equal(idx.last_successful_publish_at,receipt.production_verified_at);
- assert.equal(receipt.production_commit,'9c90272aaf97aa05ee43e12f2d88b5475cd7cf04');
- assert.equal(receipt.production_workflow_run_id,41755887734);
- assert.equal(receipt.githack_workflow_run_id,41755887696);
+ assert.equal(receipt.production_commit,'e549b579d413e717e4784ed942a20ad4c06529bc');
+ assert.equal(receipt.production_workflow_run_id,41767787139);
+ assert.equal(receipt.githack_workflow_run_id,41767787275);
  assert.deepEqual(receipt.accepted_catalog_addition_ids,['tech-proposal:tohoku-aisin:stt-mram-ai-soc:2026-11-03']);
  assert.equal(receipt.counts.technology_added,1);
  assert.equal(receipt.counts.catalog_deferred,3);
@@ -1435,7 +1435,7 @@ test('November 3 v5 verification receipts retain historical v4 proof and source 
  assert.equal(old.githack_workflow_run_id,41732217128);
  assert.equal(latest.edition,'2026-11-03-v5');
  assert.equal(latest.status,'cloudflare_http_browser_and_githack_verified');
- assert.equal(latest.verified_at,idx.last_successful_publish_at);
+ assert.equal(latest.verified_at,'2026-11-04T01:45:26Z','Historical v5 proof must not adopt v6 timestamp');
  assert.equal(latest.source_batch_sha256,receipt.source_batch_sha256);
  assert.equal(receipt.source_batch_sha256,'f6d155caec1fda714b8fdd456ec47cc886dd10856159b65b9745c69d64b9adb3');
 });
@@ -1472,7 +1472,7 @@ test('November 3 v6 indexes exactly two already-live educational guides without 
  assert.equal(next.tldr.length,3);
 });
 
-test('Pending v6 keeps actual v5 verification timestamp and staging batch provenance',()=>{
+test('Verified v6 preserves collector provenance and records actual production proof',()=>{
  const ledger=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8'));
  const idx=JSON.parse(fs.readFileSync('data/daily/index.json','utf8'));
  const receipt=ledger.receipts.at(-1);
@@ -1480,10 +1480,10 @@ test('Pending v6 keeps actual v5 verification timestamp and staging batch proven
  assert.equal(receipt.source_batch_sha256,'f6d155caec1fda714b8fdd456ec47cc886dd10856159b65b9745c69d64b9adb3');
  assert.equal(receipt.source_commit,'9a2d9a0f21551737b041a49e398ebf08793272ae');
  assert.equal(receipt.publication_edition,'2026-11-03-v6');
- assert.equal(receipt.publication_history.at(-1).status,'pending_production_verification');
- assert.equal(receipt.production_verified_revision,5);
- assert.equal(idx.last_successful_publish_at,'2026-11-04T01:45:26Z');
- assert.equal(receipt.last_verified_public_url,'https://aiupdates.app/whats-new.html?date=2026-11-03&revision=5');
+ assert.equal(receipt.publication_history.at(-1).status,'cloudflare_http_browser_and_githack_verified');
+ assert.equal(receipt.production_verified_revision,6);
+ assert.equal(idx.last_successful_publish_at,'2026-11-04T03:35:50Z');
+ assert.equal(receipt.last_verified_public_url,'https://aiupdates.app/whats-new.html?date=2026-11-03&revision=6');
  assert.deepEqual(receipt.accepted_catalog_addition_ids,['tech-proposal:tohoku-aisin:stt-mram-ai-soc:2026-11-03']);
  assert.equal(receipt.deferred_catalog_proposal_ids.length,3);
 });

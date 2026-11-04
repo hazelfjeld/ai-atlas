@@ -251,7 +251,7 @@
       "published_at": "2026-11-04T03:24:34Z"
     }
   ],
-  "last_successful_publish_at": "2026-11-04T01:45:26Z",
-  "status": "edition_revision_6_pending_production_verification",
-  "coverage_note": "November 3 revision 6 is pending exact production deployment verification. It indexes only two already-shipped educational guides (Structured output and Exact match), retains eight source-qualified reports, 14 checked source URLs, 3 lookup failures, 3 deferred canonical proposals and partial coverage. Revision 5 remains the last independently verified edition until current GitHack and Cloudflare browser jobs pass; verified publication clock is unchanged."
+  "last_successful_publish_at": "2026-11-04T03:35:50Z",
+  "status": "edition_revision_6_production_verified",
+  "coverage_note": "November 3 revision 6 independently verified on exact main e549b579d413e717e4784ed942a20ad4c06529bc. Catalog/GitHack run 41767787275 passed 159 Node tests and exact served-byte checks; Cloudflare deploy/hosted-browser run 41767787139 passed on all required jobs, 493 exact public assets on each of 3 hostnames, 34 site-browser and 41 Games-browser checks. Two previously published Structured output and Exact match guides were indexed as Atlas-only site improvements. Original 8 news reports (4 November 3 and 4 catch-up), 14 checked source URLs, 3 source failures, partial coverage and 3 deferred proposals unchanged. No new-world events, new term IDs or new corrections; older immutable archives and professor demo preserved."
 }
