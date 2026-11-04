@@ -75,6 +75,23 @@ with sync_playwright() as p:
     page.goto(base)
     page.locator('#catalog-loading').wait_for(state='detached')
     check('mobile discovery has no horizontal overflow',page.evaluate('document.documentElement.scrollWidth<=innerWidth'))
+    # Compact catalog inputs were below 16px and triggered viewport zoom on iOS Safari.
+    # Assert computed styles and touch geometry on actual phone-sized browser layouts.
+    for mobile_width, mobile_height in ((390, 844), (320, 700)):
+        page.set_viewport_size({'width':mobile_width, 'height':mobile_height})
+        page.goto(base+'index.html#/dictionary')
+        page.locator('#local-query').wait_for()
+        check(f'{mobile_width}px catalog search/filter controls prevent focus zoom', page.evaluate("""() => {
+            const selectors = ['#global-query', '#local-query', '.filter-row select'];
+            const controls = selectors.map(selector => document.querySelector(selector));
+            return controls.every(el => el && Number.parseFloat(getComputedStyle(el).fontSize) >= 16)
+                && document.querySelector('.global-search').getBoundingClientRect().height >= 44
+                && controls.slice(1).every(el => el.getBoundingClientRect().height >= 44)
+                && document.documentElement.scrollWidth <= innerWidth;
+        }"""))
+    page.set_viewport_size({'width':390,'height':844})
+    page.goto(base)
+    page.locator('#catalog-loading').wait_for(state='detached')
     page.screenshot(path=str(out/'mobile.png'),full_page=True)
     check('closed mobile drawer is hidden from keyboard and accessibility tree',
           not page.locator('#sidebar').is_visible())
