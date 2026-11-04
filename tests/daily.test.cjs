@@ -1375,3 +1375,36 @@ test('TECH-0303 research profile is SHA-verified and source-qualified, not a dat
  const nov3=JSON.parse(fs.readFileSync(path.join(root,'data/daily/editions/2026-11-03-v4.json')));
  assert.equal(nov3.technologies.length,0,'Immutable prior edition cannot claim a retroactive canonical addition');
 });
+
+test('November 3 v5 archives one real canonical technology without changing original news evidence',()=>{
+ const {createHash}=require('node:crypto');
+ const old=JSON.parse(fs.readFileSync('data/daily/editions/2026-11-03-v4.json','utf8'));
+ const filename='data/daily/editions/2026-11-03-v5.json';
+ const body=fs.readFileSync(filename);
+ const next=JSON.parse(body);
+ const archive=JSON.parse(fs.readFileSync('data/daily/index.json','utf8'));
+ const entry=archive.editions.find(x=>x.date==='2026-11-03'&&x.revision===5);
+ assert.ok(entry,'immutable v5 archive index entry');
+ assert.equal(entry.bytes,body.length);
+ assert.equal(entry.sha256,createHash('sha256').update(body).digest('hex'));
+ assert.equal(D.validateEdition(next,entry).edition_date,'2026-11-03');
+ for(const section of ['news','terms','corrections'])assert.deepEqual(next[section],old[section],section+' retained');
+ assert.deepEqual(next.coverage.sources_checked,old.coverage.sources_checked);
+ assert.deepEqual(next.coverage.sources_failed,old.coverage.sources_failed);
+ assert.equal(next.coverage.status,'partial');
+ assert.equal(next.technologies.length,1);
+ const item=next.technologies[0];
+ assert.equal(item.id,'TECH-0303');
+ assert.equal(item.publication_date,'2026-11-02');
+ assert.equal(item.event_date,'2026-11-02');
+ assert.match(item.release_status,/new_to_atlas/);
+ assert.match(item.caveat,/not independently reproduced/);
+ assert.ok(fs.existsSync(item.catalog_path),'canonical technology detail page exists');
+ const actual=JSON.parse(fs.readFileSync('data/technologies-08.json','utf8')).find(x=>x.id===item.id);
+ assert.ok(actual);
+ assert.equal(actual.catalog_added_on,'2026-11-03');
+ assert.ok(next.site_changes.some(x=>x.id==='site-dated-edition-source-snapshot-20261103'));
+ assert.equal(next.site_changes.length,old.site_changes.length+1);
+ const ids=[...next.news,...next.technologies,...next.terms,...next.site_changes,...next.corrections].map(x=>x.id);
+ assert.equal(new Set(ids).size,ids.length,'no duplicate cross-section IDs');
+});
