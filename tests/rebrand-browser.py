@@ -63,7 +63,11 @@ with sync_playwright() as p:
     check('typing within a catalog preserves the search field focus',
           page.evaluate("document.activeElement.id === 'local-query'"))
     page.locator('#navigation a[data-view="technologies"]').click()
-    page.locator('#collection h3 a').first.wait_for()
+    # The previous dictionary already has #collection links, so waiting for the
+    # selector alone can race the async hashchange/route handler.
+    page.wait_for_function("""() =>
+        document.querySelector('#navigation a[data-view="technologies"]').getAttribute('aria-current') === 'page'
+        && document.activeElement.id === 'main'""")
     check('technology link opens the native searchable tab',page.url.endswith('#/technologies'))
     check('changing main sections keeps focus in the active landmark',
           page.evaluate("document.activeElement.id === 'main'"))
