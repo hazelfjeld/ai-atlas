@@ -74,6 +74,47 @@ class Packaging(unittest.TestCase):
             verifier.await_provenance(stale, expected, attempts=3, interval=0, pause=lambda _: None)
         self.assertEqual(len(calls), 3)
 
+    def test_stale_asset_header_retries_and_requires_exact_revision(self):
+        attempts, pauses, responses = [], [], []
+
+        class EdgeResponse(io.BytesIO):
+            def __init__(self, revision):
+                super().__init__(b'validated-later')
+                self.headers = {'X-Atlas-Revision': revision}
+
+        def request(path, extra=None):
+            attempts.append((path, extra))
+            response = EdgeResponse('old' if len(attempts) < 2 else 'new')
+            responses.append(response)
+            return response
+
+        with verifier.open_current_revision(request, 'app.js', 'new',
+                                            attempts=3, interval=0, pause=pauses.append) as response:
+            self.assertEqual(response.headers['X-Atlas-Revision'], 'new')
+            self.assertEqual(response.read(), b'validated-later')
+        self.assertEqual(attempts, [('app.js', None),
+                                    ('app.js', {'Cache-Control': 'no-cache'})])
+        self.assertTrue(responses[0].closed)
+        self.assertEqual(pauses, [0])
+
+    def test_persistent_stale_asset_header_never_passes(self):
+        attempts, responses = [], []
+
+        class StaleResponse(io.BytesIO):
+            headers = {'X-Atlas-Revision': 'old'}
+
+        def stale(path, extra=None):
+            attempts.append((path, extra))
+            response = StaleResponse(b'irrelevant-old-body')
+            responses.append(response)
+            return response
+
+        with self.assertRaisesRegex(AssertionError, 'Asset revision still stale'):
+            verifier.open_current_revision(stale, 'data/example.json', 'new',
+                                           attempts=3, interval=0, pause=lambda _: None)
+        self.assertEqual(len(attempts), 3)
+        self.assertTrue(all(response.closed for response in responses))
+
     def test_transient_disconnects_retry_without_skipping_byte_verification(self):
         calls, sleeps = [], []
         def flaky(request, timeout):
