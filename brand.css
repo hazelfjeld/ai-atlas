@@ -27,3 +27,11 @@ body{font-size:15px;line-height:1.6}h1,h2,h3{color:var(--ink)}a{text-underline-o
 .nav-more-links>.nav-separator:first-child{display:none}
 .nav-more-links>.nav-link{padding-left:17px}
 @media (prefers-reduced-motion:reduce){.nav-more-chevron{transition:none}}
+
+/* Prevent iOS Safari from zooming compact search/filter controls on focus.
+   Keep the existing header and catalog layout, but give touch controls room. */
+@media(max-width:650px){
+  .global-search{min-height:44px}
+  .global-search input,.toolbar .query-row input,.filter-row select,textarea{font-size:16px}
+  .toolbar .query-row input,.filter-row select{min-height:44px}
+}
