@@ -6,6 +6,7 @@ const path=require('node:path');
 const vm=require('node:vm');
 const root=path.join(__dirname,'..');
 const app=fs.readFileSync(path.join(root,'app.js'),'utf8');
+const G=require('../games-core.js');
 const terms=fs.readdirSync(path.join(root,'data'))
   .filter(name=>/^terms-\d{2}\.json$/.test(name)).sort()
   .flatMap(name=>JSON.parse(fs.readFileSync(path.join(root,'data',name),'utf8')));
@@ -18,9 +19,8 @@ test('Techniques is a real, curated Primary topic selection with deep links',()=
   assert.ok(app.includes("TECHNIQUE_IDS.has(r.id)"));
 });
 test('Curated techniques are distinct canonical dictionary records spanning subject areas',()=>{
-  const match=app.match(/const TECHNIQUE_IDS=new Set\('([^']+)'\.split\(' '\)\);/);
-  assert.ok(match,'Curated technique IDs must be defined');
-  const ids=match[1].split(' '),idSet=new Set(ids),byId=new Map(terms.map(r=>[r.id,r]));
+  assert.ok(app.includes('const TECHNIQUE_IDS=window.AtlasGames.techniqueIds;'));
+  const ids=[...G.techniqueIds],idSet=new Set(ids),byId=new Map(terms.map(r=>[r.id,r]));
   assert.equal(ids.length,idSet.size,'Technique IDs must not repeat');
   assert.ok(ids.length>=100,'Technique view should show a useful breadth of methods');
   for(const id of ids){

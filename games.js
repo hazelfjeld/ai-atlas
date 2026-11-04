@@ -214,6 +214,7 @@
     $('catalog-count').textContent = terms.length.toLocaleString();
     $('catalog-date').textContent = 'Dictionary snapshot · ' + (data.publication?.snapshot_date || 'date unavailable');
     $('load-status').textContent = `${data.terms.length.toLocaleString()} published records checked. ${terms.length.toLocaleString()} distinct playable concepts${data.terms.length > terms.length ? '; identical prompts and incomplete entries excluded for fairer rounds' : ''}.`;
+    if (terms.some(G.isTechnique) && !unique('topic').includes('Techniques')) $('topic').add(new Option('Techniques', 'Techniques'));
     for (const [id, key] of [['topic','topic'], ['tag','tags'], ['level','level']]) for (const value of unique(key)) $(id).add(new Option(value, value));
     for (const id of ['topic','tag','level','answer-mode']) $(id).addEventListener('change', refreshPool);
     $('query').addEventListener('input', refreshPool);

@@ -116,3 +116,26 @@ test('flashcards work with one term and all filtered terms, with clear boundarie
   assert.equal(G.makeFlashcards(records,{count:999}).cards.length,records.length);
   assert.equal(G.makeFlashcards(records,{count:1}).cards.length,1);
 });
+
+test('Techniques filters Quiz, Match, Flashcards and combined fields against canonical IDs',()=>{
+  const fs=require('node:fs'),path=require('node:path'),root=path.join(__dirname,'../data');
+  const raw=fs.readdirSync(root).filter(name=>/^terms-\d{2}\.json$/.test(name)).sort().flatMap(name=>JSON.parse(fs.readFileSync(path.join(root,name),'utf8')));
+  const playable=G.prepareTerms(raw);
+  const pool=G.filterTerms(playable,{topic:'Techniques'});
+  assert.deepEqual(pool.map(r=>r.id),playable.filter(G.isTechnique).map(r=>r.id));
+  assert.ok(pool.length>=100 && pool.length<=G.techniqueIds.size);
+  assert.ok(pool.every(r=>G.techniqueIds.has(r.id)));
+  assert.ok(!pool.some(r=>r.term==='Token'));
+  assert.deepEqual(G.filterTerms(playable,{topic:'Techniques',tag:'not-a-tag'}),[]);
+  assert.ok(G.filterTerms(playable,{topic:'Techniques',level:'Advanced'}).every(r=>r.level==='Advanced'));
+  assert.deepEqual(G.filterTerms(playable,{topic:'Techniques',query:'LoRA'}).map(r=>r.id),pool.filter(r=>G.filterTerms([r],{query:'LoRA'}).length).map(r=>r.id));
+  for(const q of G.makeQuiz(pool,{count:10,random:rng(3)})){
+    assert.ok(G.isTechnique(q.target));
+    assert.ok(q.options.every(o=>G.techniqueIds.has(o.id)),'Wrong-topic quiz answer');
+  }
+  const cards=G.makeFlashcards(pool,{count:10,random:rng(4)});
+  assert.equal(cards.cards.length,10);assert.ok(cards.cards.every(G.isTechnique));
+  const match=G.makeMatch(pool,{count:6,random:rng(5)});
+  assert.equal(match.records.length,6);assert.ok(match.records.every(G.isTechnique));
+  assert.ok(match.tiles.every(t=>G.techniqueIds.has(t.id)));
+});
