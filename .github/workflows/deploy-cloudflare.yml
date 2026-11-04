@@ -17,7 +17,7 @@ env:
 jobs:
   validate:
     if: github.event_name != 'workflow_run' || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main')
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     concurrency:
       group: atlas-cloudflare-check-${{ github.ref }}
@@ -90,7 +90,7 @@ jobs:
   production:
     needs: validate
     if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     # Never cancel an upload in flight; newer releases wait and older queued runs are skipped below.
     concurrency:
