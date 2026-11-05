@@ -5,12 +5,29 @@
 
 
 <script>
-try {
-  if (!['raw.githack.com','rawcdn.githack.com'].includes(location.hostname)) {
-    const saved = localStorage.getItem('atlas.theme');
-    if (saved === 'dark' || saved === 'light') document.documentElement.dataset.theme = saved;
-  }
-} catch { /* Storage may be disabled; Games still follows the OS preference. */ }
+/* Share the workspace's explicit theme choice without touching the generated Games engine. */
+(function () {
+  const sharedHost = !['raw.githack.com','rawcdn.githack.com'].includes(location.hostname);
+  const preference = () => {
+    if (!sharedHost) return;
+    try {
+      const saved = localStorage.getItem('atlas.theme');
+      if (saved === 'dark' || saved === 'light') document.documentElement.dataset.theme = saved;
+    } catch { /* Storage may be unavailable; retain OS theme. */ }
+  };
+  preference(); // before CSS paint
+  document.addEventListener('DOMContentLoaded', () => {
+    preference(); // after legacy Games initializes its OS-theme fallback
+    const toggle = document.getElementById('theme-toggle');
+    if (!toggle) return;
+    toggle.setAttribute('aria-pressed', String(document.documentElement.dataset.theme === 'dark'));
+    toggle.addEventListener('click', () => {
+      if (!sharedHost) return;
+      try { localStorage.setItem('atlas.theme', document.documentElement.dataset.theme); }
+      catch { /* In private mode the session's theme still works. */ }
+    });
+  });
+})();
 </script>
 <link rel="stylesheet" href="games.css">
 <script defer src="catalog-loader.js"></script><script defer src="core.js"></script><script defer src="games-core.js"></script><script defer src="games.js"></script>

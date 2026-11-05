@@ -203,16 +203,11 @@
     const q = questions[questionIndex];
     if (!q.answered && q.answerMode === 'choice' && /^[1-4]$/.test(event.key) && q.options[Number(event.key) - 1]) { event.preventDefault(); submitAnswer(q.options[Number(event.key) - 1].id); }
   });
-  const sharedThemeStorage = !['raw.githack.com', 'rawcdn.githack.com'].includes(location.hostname);
-  let chosenTheme = null;
-  try { if (sharedThemeStorage) chosenTheme = localStorage.getItem('atlas.theme'); } catch { /* storage unavailable */ }
-  if (chosenTheme === 'light' || chosenTheme === 'dark') document.documentElement.dataset.theme = chosenTheme;
-  else if (window.matchMedia?.('(prefers-color-scheme: dark)').matches) document.documentElement.dataset.theme = 'dark';
   $('theme-toggle').onclick = () => {
     document.documentElement.dataset.theme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
     $('theme-toggle').setAttribute('aria-pressed', String(document.documentElement.dataset.theme === 'dark'));
-    try { if (sharedThemeStorage) localStorage.setItem('atlas.theme', document.documentElement.dataset.theme); } catch { /* private browsing */ }
   };
+  if (window.matchMedia?.('(prefers-color-scheme: dark)').matches) document.documentElement.dataset.theme = 'dark';
   $('theme-toggle').setAttribute('aria-pressed', String(document.documentElement.dataset.theme === 'dark'));
   window.addEventListener('pagehide', clearTimers);
   window.addEventListener('pageshow', event => { if (event.persisted && mode === 'match') { game.locked = false; $('play').querySelectorAll('.mismatch').forEach(b => b.classList.remove('mismatch')); clock = setInterval(() => { if (mode === 'match') $('match-time').textContent = seconds(G.matchTime(game, performance.now())); }, 100); } });

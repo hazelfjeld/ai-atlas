@@ -37,10 +37,9 @@ test('shared mobile chrome has native keyboard controls and touch-sized navigati
 });
 test('standalone Games participates in the workspace theme choice without depending on localStorage', () => {
   const games=read('games.js'),html=read('games.html');
-  assert.match(games,/localStorage\.getItem\('atlas\.theme'\)/);
-  assert.match(games,/localStorage\.setItem\('atlas\.theme', document\.documentElement\.dataset\.theme\)/);
-  assert.match(games,/chosenTheme === 'light' \|\| chosenTheme === 'dark'/);
-  assert.match(games,/if \(sharedThemeStorage\)/);
+  assert.match(games,/setAttribute\('aria-pressed', String\(document.documentElement.dataset.theme === 'dark'\)\)/);
+  assert.match(html,/localStorage\.setItem\('atlas\.theme', document\.documentElement\.dataset\.theme\)/);
+  assert.match(html,/document.addEventListener\('DOMContentLoaded'/);
   assert.match(html,/localStorage\.getItem\('atlas\.theme'\)/);
   assert.match(html,/if \(saved === 'dark' \|\| saved === 'light'\)/);
   assert.ok(html.indexOf('localStorage.getItem')<html.indexOf('href="games.css"'), 'saved theme is applied before CSS paint');
