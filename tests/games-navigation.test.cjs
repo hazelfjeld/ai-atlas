@@ -191,6 +191,9 @@ test('standalone research snapshot uses compact mobile navigation without changi
     assert.ok(html.includes('href="index.html#/'+route+'"'), 'Missing existing workspace route: '+route);
   for (const anchor of ['papers','alerts','coverage'])
     assert.ok(html.includes('href="#'+anchor+'"'), 'Missing research-section destination: '+anchor);
+  const publishedTechnologies = JSON.parse(read('publication.json')).published_counts.technologies;
+  assert.ok(html.includes(`Technologies <span>${publishedTechnologies} ↗</span>`), 'Sidebar must use the published count');
+  assert.ok(html.includes(`all ${publishedTechnologies} technologies`), 'Research notice must agree with the published catalog');
   assert.ok(html.includes('Automatic collection remains off.'));
   assert.ok(html.includes('id="loading-status" role="status"'));
 });

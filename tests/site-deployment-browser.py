@@ -281,6 +281,10 @@ with sync_playwright() as p:
     check('desktop research keeps the existing sidebar',
           mobile_research.locator('.shell > aside').is_visible()
           and not mobile_research.locator('.research-mobile-topbar').is_visible())
+    published_tech_count = mobile_research.request.get(base + 'publication.json').json()['published_counts']['technologies']
+    check('research desktop sidebar and mobile notice agree with the published technology count',
+          f'{published_tech_count} ↗' in mobile_research.locator('.shell > aside a[href="index.html#/technologies"]').inner_text()
+          and f'all {published_tech_count} technologies' in mobile_research.locator('.notice').inner_text())
     mobile_research.set_viewport_size({'width':320, 'height':720})
     mobile_research.locator('.research-search-link').click()
     mobile_research.wait_for_url('**/index.html#/search')
