@@ -95,6 +95,29 @@ with sync_playwright() as p:
     check('mobile archive search entry opens the actual site search',
           mobile_archive.locator('#global-query').is_visible())
     mobile_archive.close()
+
+    # The editorial-policy page formerly exposed a multirow legacy nav on
+    # phones, while Discover and the daily archive use a compact menu/search.
+    mobile_about = browser.new_page(viewport={'width':320, 'height':720}, reduced_motion='reduce')
+    mobile_about.goto(base + 'about.html')
+    check('about page uses the same compact mobile navigation as the archive',
+          mobile_about.locator('.about-mobile-topbar').is_visible()
+          and not mobile_about.locator('.term-nav').is_visible()
+          and mobile_about.locator('.about-search-link').is_visible())
+    check('about mobile header fits a 320px viewport',
+          mobile_about.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'))
+    mobile_about.locator('.about-menu-toggle').click()
+    check('about mobile menu exposes the current location',
+          mobile_about.locator('#about-mobile-nav').evaluate('(el) => el.open')
+          and mobile_about.get_by_role('navigation', name='AI Updates sections')
+              .get_by_role('link', name='About', exact=True).get_attribute('aria-current') == 'page')
+    mobile_about.locator('.about-menu-toggle').click()
+    mobile_about.screenshot(path=str(out / 'about-mobile-header.png'), full_page=False)
+    mobile_about.locator('.about-search-link').click()
+    mobile_about.wait_for_url('**/index.html#/search')
+    check('about mobile search entry opens the real collection search',
+          mobile_about.locator('#global-query').is_visible())
+    mobile_about.close()
     page.goto(base + 'whats-new.html')
     check('daily archive uses the same Atlas logo and quiet wordmark',
           page.locator('.brand-wordmark small').inner_text() == 'THE FRONTIER, IN CONTEXT')

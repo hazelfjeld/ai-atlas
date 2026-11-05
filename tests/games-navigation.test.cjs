@@ -98,3 +98,16 @@ test('standalone Games header provides 44px navigation targets on 320px phones',
   assert.match(css, /@media\(max-width:360px\)[\s\S]*?\.masthead nav\{display:grid;grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/);
   assert.match(css, /@media\(max-width:360px\)[\s\S]*?\.masthead nav a\{[^}]*min-height:44px/);
 });
+
+test('editorial policy uses the same compact mobile menu and real collection search as the archive', () => {
+  const html=read('about.html');
+  assert.match(html, /class="about-mobile-topbar"/);
+  assert.match(html, /<details class="about-mobile-nav" id="about-mobile-nav">/);
+  assert.match(html, /<nav class="about-menu-panel" aria-label="AI Updates sections">/);
+  assert.match(html, /href="about.html" aria-current="page">About<\/a>/);
+  assert.match(html, /class="about-search-link" href="index.html#\/search"/);
+  assert.match(html, /@media\(max-width:650px\)/);
+  assert.match(html, /\.term-shell \.term-nav\{display:none\}/);
+  for(const route of ['overview','dictionary','technologies','safety','papers','games'])
+    assert.ok(html.includes('href="index.html#/'+route+'"'), 'Missing route: '+route);
+});
