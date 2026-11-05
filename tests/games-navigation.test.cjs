@@ -252,3 +252,20 @@ test('editorial directories share one responsive primary navigation component', 
   assert.match(css, /@media \(max-width:650px\)\{\.site-chrome\{display:none!important\}\}/);
   assert.ok(JSON.parse(read('deploy/public-files.json')).root_files.includes('site-chrome.css'));
 });
+
+test('editorial evidence reviews reuse the shared desktop site chrome and readable article layout', () => {
+  const labels = ['Discover','What’s New Today','Concept dictionary','Technology profiles','Games','Playbooks','About'];
+  for (const [route, cls] of [['catalog-review.html','nav'], ['hardware-review.html','review-nav']]) {
+    const html=read(route);
+    assert.ok(html.includes('<link rel="stylesheet" href="site-chrome.css">'), route);
+    const nav=html.split('<nav class="site-chrome '+cls+'" aria-label="AI Updates primary navigation">')[1]?.split('</nav>')[0];
+    assert.ok(nav, route);
+    assert.ok(nav.includes('class="site-chrome__brand" href="index.html#/overview"'), route);
+    const links=[...nav.matchAll(/<a href="[^"]+"(?: aria-current="location")?>([^<]+)<[/]a>/g)];
+    assert.deepEqual(links.map(x => x[1]), labels, route);
+    assert.ok(nav.includes('href="whats-new.html" aria-current="location">What’s New Today</a>'), route);
+    assert.ok(!nav.includes('aria-current="page"'), route);
+  }
+  assert.ok(read('hardware-review.html').includes('.review-shell>header{display:block}'));
+  assert.ok(read('site-chrome.css').includes('.site-chrome__links a[aria-current=location]'));
+});
