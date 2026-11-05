@@ -176,3 +176,21 @@ test('hardware evidence review uses the same mobile navigation while retaining s
   assert.ok(html.includes('65.7 ms is OS boot, not the complete first detection'));
   assert.ok(html.includes('Publisher measurements and derived ratios'));
 });
+
+test('standalone research snapshot uses compact mobile navigation without changing evidence records', () => {
+  const html=read('research.html');
+  assert.match(html, /class="research-mobile-topbar"/);
+  assert.match(html, /<details class="research-mobile-nav" id="research-mobile-nav">/);
+  assert.match(html, /<nav class="research-menu-panel" aria-label="AI Updates sections">/);
+  assert.match(html, /href="#papers" aria-current="page">Research library<\/a>/);
+  assert.match(html, /class="research-search-link" href="index.html#\/search"/);
+  assert.match(html, /@media\(max-width:700px\)[\s\S]*?\.shell>aside\{display:none\}/);
+  assert.match(html, /\.research-menu-panel a\{[^}]*min-height:44px/);
+  assert.match(html, /@media print\{\.research-mobile-topbar\{display:none\}\}/);
+  for (const route of ['overview','dictionary','technologies','games'])
+    assert.ok(html.includes('href="index.html#/'+route+'"'), 'Missing existing workspace route: '+route);
+  for (const anchor of ['papers','alerts','coverage'])
+    assert.ok(html.includes('href="#'+anchor+'"'), 'Missing research-section destination: '+anchor);
+  assert.ok(html.includes('Automatic collection remains off.'));
+  assert.ok(html.includes('id="loading-status" role="status"'));
+});

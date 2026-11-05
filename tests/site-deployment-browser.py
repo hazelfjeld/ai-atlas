@@ -252,6 +252,41 @@ with sync_playwright() as p:
     check('hardware review search opens the actual workspace search',
           mobile_hardware.locator('#global-query').is_visible())
     mobile_hardware.close()
+
+    # Research still used a stacked legacy sidebar and horizontal link strip
+    # on phones; its navigation now matches Discover and the other static pages.
+    mobile_research = browser.new_page(viewport={'width':320, 'height':720}, reduced_motion='reduce')
+    mobile_research.goto(base + 'research.html')
+    check('research uses the compact mobile navigation instead of the legacy sidebar',
+          mobile_research.locator('.research-mobile-topbar').is_visible()
+          and not mobile_research.locator('.shell > aside').is_visible()
+          and mobile_research.locator('.research-search-link').is_visible())
+    check('320px research page has no horizontal overflow',
+          mobile_research.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'))
+    mobile_research.locator('.research-menu-toggle').focus()
+    mobile_research.keyboard.press('Enter')
+    check('research mobile navigation is keyboard operable and identifies the current section',
+          mobile_research.locator('#research-mobile-nav').evaluate('(el) => el.open')
+          and mobile_research.get_by_role('navigation', name='AI Updates sections')
+              .get_by_role('link', name='Research library', exact=True).get_attribute('aria-current') == 'page')
+    check('research navigation links meet the 44px touch target minimum',
+          mobile_research.evaluate("""() => [...document.querySelectorAll('.research-menu-panel a')]
+              .every(a => a.getBoundingClientRect().height >= 44)"""))
+    mobile_research.keyboard.press('Enter')
+    mobile_research.screenshot(path=str(out / 'research-mobile-header.png'), full_page=False)
+    mobile_research.set_viewport_size({'width':390, 'height':844})
+    check('390px research page fits without horizontal overflow',
+          mobile_research.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'))
+    mobile_research.set_viewport_size({'width':1440, 'height':900})
+    check('desktop research keeps the existing sidebar',
+          mobile_research.locator('.shell > aside').is_visible()
+          and not mobile_research.locator('.research-mobile-topbar').is_visible())
+    mobile_research.set_viewport_size({'width':320, 'height':720})
+    mobile_research.locator('.research-search-link').click()
+    mobile_research.wait_for_url('**/index.html#/search')
+    check('research search opens the existing workspace search',
+          mobile_research.locator('#global-query').is_visible())
+    mobile_research.close()
     page.goto(base + 'whats-new.html')
     check('daily archive uses the same Atlas logo and quiet wordmark',
           page.locator('.brand-wordmark small').inner_text() == 'THE FRONTIER, IN CONTEXT')
