@@ -195,13 +195,21 @@ test('research snapshot uses the shared mobile menu and retains contextual resea
   assert.deepEqual([...nav.matchAll(/<a href="([^"]+)">([^<]+)<\/a>/g)].map(x => [x[1],x[2]]),expected);
   for (const route of ['papers','alerts','coverage'])
     assert.ok(html.includes('href="#'+route+'" data-nav="'+route+'"'), 'Research view must remain reachable: '+route);
-  assert.match(html, /@media\(max-width:650px\)[\s\S]*?\.shell>aside\{display:none\}/);
-  assert.match(html, /@media\(min-width:651px\) and \(max-width:700px\)/);
+  assert.match(html, /\.shell\{display:block\}/);
+  assert.match(html, /\.research-local-nav\{display:flex/);
+  assert.doesNotMatch(html, /<aside>/);
+  const desktop=html.match(/<nav class="site-chrome research-site-chrome" aria-label="AI Updates primary navigation">([\s\S]*?)<\/nav>/)?.[1];
+  assert.ok(desktop, 'Research must reuse the shared desktop chrome');
+  const titles=[...desktop.matchAll(/<a href="[^"]+">([^<]+)<\/a>/g)].map(x => x[1]);
+  assert.deepEqual(titles, ['Discover','What’s New Today','Concept dictionary','Technology profiles','Games','Playbooks','About']);
+  assert.ok(desktop.includes('class="site-chrome__brand" href="index.html#/overview"'));
+  assert.match(html, /href="#papers" data-nav="papers">Research library <span id="papers-count">/);
+  assert.match(html, /href="#alerts" data-nav="alerts">Safety observatory <span id="alerts-count">/);
   assert.doesNotMatch(html, /\.research-menu-panel a\{/);
   assert.match(read('site-chrome.css'), /\.site-mobile-chrome__menu a\{[^}]*min-height:44px/);
   assert.match(html, /@media print\{\.research-mobile-topbar,\.research-local-nav\{display:none\}\}/);
   const publishedTechnologies=JSON.parse(read('publication.json')).published_counts.technologies;
-  assert.ok(html.includes(`Technologies <span>${publishedTechnologies} ↗</span>`));
+  assert.ok(desktop.includes('href="index.html#/technologies">Technology profiles</a>'));
   assert.ok(html.includes(`all ${publishedTechnologies} technologies`));
   assert.ok(html.includes('Automatic collection remains off.'));
   assert.ok(html.includes('id="loading-status" role="status"'));

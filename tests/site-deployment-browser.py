@@ -409,17 +409,32 @@ with sync_playwright() as p:
     check('390px research page fits without horizontal overflow',
           mobile_research.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'))
     mobile_research.set_viewport_size({'width':680, 'height':900})
-    check('intermediate tablet retains research section navigation without an empty gap',
-          mobile_research.locator('.shell > aside').is_visible()
-          and not mobile_research.locator('.research-mobile-topbar').is_visible())
+    check('tablet research uses shared desktop header and contextual research tabs',
+          mobile_research.locator('.research-site-chrome').is_visible()
+          and mobile_research.locator('.research-local-nav').is_visible()
+          and mobile_research.locator('.shell > aside').count() == 0
+          and not mobile_research.locator('.research-mobile-topbar').is_visible()
+          and mobile_research.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'))
     mobile_research.set_viewport_size({'width':1440, 'height':900})
-    check('desktop research keeps the existing sidebar',
-          mobile_research.locator('.shell > aside').is_visible()
-          and not mobile_research.locator('.research-mobile-topbar').is_visible())
-    published_tech_count = mobile_research.request.get(base + 'publication.json').json()['published_counts']['technologies']
-    check('research desktop sidebar and mobile notice agree with the published technology count',
-          f'{published_tech_count} ↗' in mobile_research.locator('.shell > aside a[href="index.html#/technologies"]').inner_text()
-          and f'all {published_tech_count} technologies' in mobile_research.locator('.notice').inner_text())
+    check('desktop research primary navigation matches AI Updates sections',
+          mobile_research.locator('.research-site-chrome').is_visible()
+          and mobile_research.locator('.site-chrome__links a').all_text_contents()
+          == ['Discover', 'What’s New Today', 'Concept dictionary', 'Technology profiles',
+              'Games', 'Playbooks', 'About']
+          and mobile_research.locator('.research-local-nav').is_visible()
+          and mobile_research.locator('.shell > aside').count() == 0)
+    published_counts = mobile_research.request.get(base + 'publication.json').json()['published_counts']
+    check('research tabs retain accurate record counts and notice matches publication manifest',
+          mobile_research.locator('#papers-count').inner_text() == str(published_counts['papers'])
+          and mobile_research.locator('#alerts-count').inner_text() == str(published_counts['alerts'])
+          and f"all {published_counts['technologies']} technologies" in mobile_research.locator('.notice').inner_text())
+    mobile_research.screenshot(path=str(out / 'research-unified-desktop.png'), full_page=False)
+    mobile_research.locator('.research-site-chrome .site-chrome__links a[href="whats-new.html"]').click()
+    mobile_research.wait_for_url('**/whats-new.html')
+    check('research global navigation opens archive with the same shared chrome',
+          mobile_research.locator('.site-chrome').is_visible()
+          and mobile_research.locator('.site-chrome__brand').is_visible())
+    mobile_research.goto(base + 'research.html')
     mobile_research.set_viewport_size({'width':320, 'height':720})
     mobile_research.locator('.research-search-link').click()
     mobile_research.wait_for_url('**/index.html#/search')
