@@ -1028,6 +1028,30 @@ with sync_playwright() as p:
               && getComputedStyle(document.documentElement).colorScheme === 'light'
               && getComputedStyle(document.body).backgroundColor !== 'rgb(34, 45, 39)'"""))
     page.emulate_media(color_scheme='light')
+    # A 651px tablet previously split About's seven-link header into two rows,
+    # with an orphaned About link. Compare page families in both themes: all
+    # retain the canonical brand and a single row of readable 44px targets.
+    for theme in ('light', 'dark'):
+        page.evaluate("(chosen) => localStorage.setItem('atlas.theme', chosen)", theme)
+        for width in (651, 768, 1280):
+            page.set_viewport_size({'width':width, 'height':900})
+            for route in ('about.html', 'technologies.html', 'research.html'):
+                page.goto(base + route)
+                check(f'shared {theme} navigation has no orphan link at {width}px on {route}',
+                      page.evaluate("""() => {
+                          const nav = document.querySelector('.site-chrome');
+                          if (!nav) return false;
+                          const links = [...nav.querySelectorAll('.site-chrome__links a')];
+                          const tops = links.map(el => Math.round(el.getBoundingClientRect().top));
+                          return getComputedStyle(nav).display !== 'none'
+                              && getComputedStyle(nav).flexDirection === (innerWidth <= 850 ? 'column' : 'row')
+                              && nav.getBoundingClientRect().height <= (innerWidth <= 850 ? 140 : 100)
+                              && links.length === 7
+                              && Math.max(...tops) - Math.min(...tops) <= 2
+                              && links.every(el => el.getBoundingClientRect().height >= 44)
+                              && document.documentElement.scrollWidth <= innerWidth + 1;
+                      }"""))
+    page.evaluate("localStorage.setItem('atlas.theme', 'light')")
     page.set_viewport_size({'width':390,'height':844})
     page.goto(base + 'index.html#/games')
     page.locator('#start-quiz').wait_for()

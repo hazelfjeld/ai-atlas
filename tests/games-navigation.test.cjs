@@ -313,3 +313,16 @@ test('standalone editorial pages share Discover theme preference without rewriti
     document: {documentElement: {dataset: {}, style: {}}},
   }));
 });
+
+test('shared standalone navigation keeps a single tablet link row despite legacy template wrapping', () => {
+  const css = read('site-chrome.css');
+  assert.match(css, /@media \\(min-width:651px\\) and \\(max-width:850px\\)/);
+  assert.match(css, /\\.site-chrome\\{flex-direction:column;align-items:stretch!important;flex-wrap:nowrap!important;gap:4px\\}/);
+  assert.match(css, /\\.site-chrome__links\\{justify-content:flex-start;gap:2px\\}/);
+  assert.match(css, /\\.site-chrome__links a\\{padding-inline:5px!important\\}/);
+  for (const path of ['about.html','technologies.html','research.html','playbooks.html']) {
+    const html = read(path);
+    assert.match(html, /<nav class="site-chrome [^\"]+" aria-label="AI Updates primary navigation">/, path);
+    assert.match(html, /<link rel="stylesheet" href="site-chrome.css">/, path);
+  }
+});
