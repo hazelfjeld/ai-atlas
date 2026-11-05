@@ -780,6 +780,13 @@ test('Daily source CSV export preserves evidence dates and neutralizes spreadshe
  assert.equal(all.trim().split('\r\n').length,4);
  assert.throws(()=>D.citationCsv(e,entry('2026-11-01')),/date differs|Invalid export edition/);
 });
+test('Archive search stays disabled until an edition is SHA-verified',()=>{
+ const html=fs.readFileSync('whats-new.html','utf8'),js=fs.readFileSync('whats-new.js','utf8');
+ assert.match(html,/id="edition-search"[^>]*disabled/);
+ assert.match(html,/id="edition-search"[^>]*aria-describedby="filter-results"/);
+ assert.ok(js.includes("$('edition-search').disabled=false;"));
+});
+
 test('Research export stays disabled until immutable edition verification succeeds',()=>{
  const html=fs.readFileSync('whats-new.html','utf8'),js=fs.readFileSync('whats-new.js','utf8');
  assert.match(html,/id="export-verified"[^>]*disabled/);

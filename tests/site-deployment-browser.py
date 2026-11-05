@@ -60,6 +60,18 @@ with sync_playwright() as p:
     page.locator('#record-title').wait_for()
     check('technology profile deep link retains caveats and references', page.locator('#record-title').inner_text() == 'PyTorch' and page.get_by_role('heading', name='Tradeoffs & cautions', exact=True).is_visible())
     page.locator('[data-action=close-record]').click()
+    # An interrupted archive-index fetch must never leave a usable keyword input:
+    # there is no verified edition to search, even though the HTML controls exist.
+    failed_archive = browser.new_page(viewport={'width':320, 'height':720}, reduced_motion='reduce')
+    failed_archive.route('**/data/daily/index.json', lambda route: route.abort())
+    failed_archive.goto(base + 'whats-new.html')
+    failed_archive.wait_for_function(
+        "document.getElementById('edition-content').getAttribute('aria-busy') === 'false'",
+        timeout=45000)
+    check('archive search cannot be used after an interrupted index request',
+          failed_archive.locator('#edition-search').is_disabled()
+          and 'Daily archive unavailable' in failed_archive.locator('#edition-status').inner_text())
+    failed_archive.close()
     page.goto(base + 'whats-new.html')
     check('daily archive uses the same Atlas logo and quiet wordmark',
           page.locator('.brand-wordmark small').inner_text() == 'THE FRONTIER, IN CONTEXT')
@@ -142,6 +154,8 @@ with sync_playwright() as p:
             const status = document.getElementById('edition-status').textContent;
             return !select.disabled || /failed|unavailable|cannot display/i.test(status);
         }""", timeout=45000)
+        check('search unlocks only after a verified archive edition is displayed',
+              page.locator('#edition-search').is_enabled())
         check('daily archive renders its verified edition and permanent link',
               page.locator('#edition-select').is_enabled()
               and page.locator('#edition-permalink-wrap').is_visible()

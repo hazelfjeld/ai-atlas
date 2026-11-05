@@ -176,7 +176,7 @@ html:root[data-theme=dark] .summary{background:var(--soft)}
   <label for="source-filter">Source domain<select id="source-filter" disabled><option value="all">All sources</option></select></label>
  </div>
  <p class="fact" style="margin:9px 0 0">News source date compares the reported publisher date with the selected archive's Chicago edition date. Choosing a date scope shows AI news only, not Atlas website changes; event, discovery and catalog-addition dates remain separate.</p>
- <div class="search-controls"><label for="edition-search">Search this edition<input id="edition-search" type="search" maxlength="120" autocomplete="off" placeholder="Search headlines, caveats, sources, tags"></label><button id="reset-filters" type="button">Reset filters</button></div>
+ <div class="search-controls"><label for="edition-search">Search this edition<input id="edition-search" type="search" maxlength="120" autocomplete="off" disabled aria-describedby="filter-results" placeholder="Search headlines, caveats, sources, tags"></label><button id="reset-filters" type="button">Reset filters</button></div>
  <div class="search-controls"><button id="export-verified" type="button" disabled title="Enabled after an edition passes SHA-256 and schema checks">Download filtered evidence list (.csv)</button><span class="fact">Exports source dates, review labels, caveats and links from the verified archive, not a live news search. Spreadsheet formula text is neutralized.</span></div>
  <p class="filter-count" id="filter-results" role="status" aria-live="polite">Search becomes available after the edition is verified.</p>
 </div>

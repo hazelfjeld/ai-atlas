@@ -277,6 +277,7 @@ async function switchEdition(entry){
   $('edition-permalink-wrap').hidden=false;
   $('export-verified').disabled=false;
   $('date-display').textContent=humanDate(entry.date);
+  $('edition-search').disabled=false; // Search only after this edition passed byte, SHA-256 and schema verification.
   metadata();sourceCoverage();renderSnapshot();render();
   void showRevisionDiff(entry,e,requestEpoch);
   const today=C.chicagoDate();
