@@ -86,6 +86,12 @@ test('archive record links identify their destination for screen-reader link lis
  assert.ok(js.includes("internal.setAttribute('aria-label','Explore '+item.title+' in AI Updates')"));
 });
 
+test('Revision comparison links have record-specific screen-reader names',()=>{
+ const js=fs.readFileSync('whats-new.js','utf8');
+ assert.ok(js.includes("dest.setAttribute('aria-label','Explore '+item.title+' in AI Updates (revision comparison)')"));
+ assert.ok(js.includes("source.setAttribute('aria-label','Source for '+item.title+' (opens in new tab)')"));
+});
+
 test('Daily page and scripts are syntax-valid and contain archive, source, topic and missing-edition controls',()=>{
  const html=fs.readFileSync('whats-new.html','utf8'),js=fs.readFileSync('whats-new.js','utf8');
  new vm.Script(js);

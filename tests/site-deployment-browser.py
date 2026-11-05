@@ -174,6 +174,21 @@ with sync_playwright() as p:
                           && (a.target !== '_blank' || name.includes('opens in new tab'));
                   });
               }"""))
+        # The revision diff previously repeated 'Source' and 'Catalog record'
+        # for every changed entry; link-list navigation could not distinguish them.
+        if any(e['date'] == '2026-11-03' and e['revision'] > 1 for e in index['editions']):
+            page.locator('#revision-history-content .revision-group li a').first.wait_for(timeout=45000)
+            check('revision comparison links identify changed records in screen-reader link lists',
+                  page.evaluate("""() => {
+                      const links = [...document.querySelectorAll('#revision-history-content .revision-group li a')];
+                      const names = links.map(a => a.getAttribute('aria-label') || '');
+                      return links.length >= 2 && names.every((name, i) => {
+                          const a = links[i];
+                          const title = a.closest('li')?.childNodes[1]?.textContent?.trim();
+                          return title && name.includes(title) &&
+                              (a.target !== '_blank' || name.includes('opens in new tab'));
+                      }) && new Set(names).size === names.length;
+                  }"""))
         page.set_viewport_size({'width':320,'height':720})
         check('verified archive fits 320px mobile without horizontal scroll',
               page.evaluate('document.documentElement.scrollWidth <= window.innerWidth + 1'))

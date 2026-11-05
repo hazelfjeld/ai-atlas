@@ -199,8 +199,8 @@ function renderRevisionDiff(base,entry,delta){
     const li=element('li');
     li.append(element('strong',label+': '),document.createTextNode(item.title+' '));
     const dest=localHref(item.catalog_path,'Catalog record'),source=href(item.source_url,'Source');
-    if(dest)li.append(dest);
-    if(source)li.append(source);
+    if(dest){dest.setAttribute('aria-label','Explore '+item.title+' in AI Updates (revision comparison)');li.append(dest);}
+    if(source){source.setAttribute('aria-label','Source for '+item.title+' (opens in new tab)');li.append(source);}
     list.append(li);
    }
    group.append(list);
