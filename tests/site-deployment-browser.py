@@ -1073,6 +1073,37 @@ with sync_playwright() as p:
     page.locator('#navigation a[href="#/overview"]').click()
     page.wait_for_function("location.hash === '#/overview' && document.getElementById('menu-toggle').getAttribute('aria-expanded') === 'false'")
     check('mobile drawer navigates and closes', page.locator('#daily-panel-title').is_visible())
+
+    # The two large generated directories previously looked like separate
+    # sites with inconsistent five/six-link navigation. Compare their shared
+    # header with Discover's editorial navigation at mobile and desktop sizes.
+    for route, selected in (('terms/index.html', 'Concept dictionary'),
+                            ('technology/index.html', 'Technology profiles')):
+        for width in (320, 390, 768, 1280):
+            page.set_viewport_size({'width': width, 'height': 844})
+            page.goto(base + route)
+            check(f'{route} has seven shared navigation links without overflow at {width}px',
+                  page.evaluate("""() => {
+                      const nav=document.querySelector(innerWidth <= 650
+                          ? '.site-mobile-chrome__menu' : '.site-chrome__links');
+                      return !!nav && nav.querySelectorAll('a').length === 7
+                          && document.documentElement.scrollWidth <= innerWidth + 1;
+                  }"""))
+            if width <= 650:
+                page.locator('#directory-mobile-nav summary').click()
+                check(f'{route} exposes the selected mobile section at {width}px',
+                      page.locator('.site-mobile-chrome__menu a[aria-current="page"]').inner_text() == selected)
+            else:
+                check(f'{route} keeps active desktop navigation at {width}px',
+                      page.locator('.site-chrome__links a[aria-current="page"]').inner_text() == selected)
+    script_free = browser.new_page(viewport={'width': 320, 'height': 720},
+                                   java_script_enabled=False)
+    script_free.goto(base + 'terms/index.html')
+    script_free.locator('#directory-mobile-nav summary').click()
+    check('catalog directory menu remains usable with JavaScript disabled',
+          script_free.locator('.site-mobile-chrome__menu a').first.is_visible()
+          and script_free.locator('.site-mobile-chrome__menu a').count() == 7)
+    script_free.close()
     check('no application runtime exceptions', not errors)
     browser.close()
 (out / 'report.json').write_text(json.dumps({'base':base, 'checks':checks, 'checks_passed':len(checks), 'errors':errors}, indent=2), encoding='utf-8')

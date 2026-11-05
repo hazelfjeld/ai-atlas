@@ -11,6 +11,7 @@ import subprocess
 from xml.etree.ElementTree import Element, SubElement, tostring
 from site_seo import absolute, metadata, breadcrumbs, replace_head, technology_path, ORIGIN
 from build_term_pages import rows, term_path, external
+from site_chrome import render_directory_nav, DIRECTORY_MOBILE_CSS
 
 ROOT = Path(__file__).resolve().parents[1]
 PAGES = {
@@ -42,12 +43,12 @@ ABOUT_DESKTOP_NAV = '''<nav class="site-chrome term-nav" aria-label="AI Updates 
 
 def shell(title, description, path, body, structured=None):
     prefix = '../' if '/' in path else ''
-    mobile_css = ABOUT_MOBILE_CSS if path == 'about.html' else ''
+    mobile_css = ABOUT_MOBILE_CSS if path == 'about.html' else (DIRECTORY_MOBILE_CSS if path == 'technology/index.html' else '')
     mobile_nav = ABOUT_MOBILE_NAV if path == 'about.html' else ''
     print_nav = ',.about-mobile-topbar' if path == 'about.html' else ''
-    desktop_nav = ABOUT_DESKTOP_NAV if path == 'about.html' else nav(prefix)
-    chrome_css = '<link rel="stylesheet" href="site-chrome.css">\n' if path == 'about.html' else ''
-    theme_script = '<script src="site-theme.js"></script>' if path == 'about.html' else ''
+    desktop_nav = render_directory_nav(prefix, 'Technology profiles') if path == 'technology/index.html' else (ABOUT_DESKTOP_NAV if path == 'about.html' else nav(prefix))
+    chrome_css = f'<link rel="stylesheet" href="{prefix}site-chrome.css">\n' if path in ('about.html', 'technology/index.html') else ''
+    theme_script = f'<script src="{prefix}site-theme.js"></script>' if path in ('about.html', 'technology/index.html') else ''
     return f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 {metadata(title, description, path, structured)}

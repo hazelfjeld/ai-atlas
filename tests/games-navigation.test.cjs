@@ -220,7 +220,7 @@ test('research snapshot uses the shared mobile menu and retains contextual resea
 test('generated concept and technology pages have accessible two-column mobile navigation', () => {
   const css = read('brand.css');
   const offline = read('downloads/Atlas_Demo_Offline.html');
-  for (const page of ['terms/MLD-0002-ablation-study.html','technology/index.html']) {
+  for (const page of ['terms/MLD-0002-ablation-study.html','technology/TECH-0216-pytorch.html']) {
     const html = read(page);
     assert.match(html, /<nav class="term-nav" aria-label="Site navigation">/);
     assert.match(html, /href="\.\.\/index\.html"/);
@@ -327,4 +327,33 @@ test('shared standalone navigation keeps a single tablet link row despite legacy
     assert.match(html, /<nav class="site-chrome [^\"]+" aria-label="AI Updates primary navigation">/, path);
     assert.match(html, /<link rel="stylesheet" href="site-chrome.css">/, path);
   }
+});
+
+test('both generated catalog directories share Discover navigation and the native mobile menu', () => {
+  const canonical = ['Discover','What’s New Today','Concept dictionary','Technology profiles','Games','Playbooks','About'];
+  for (const [route,active] of [['terms/index.html','Concept dictionary'],['technology/index.html','Technology profiles']]) {
+    const html = read(route);
+    assert.match(html, /<link rel="stylesheet" href="\.\.\/site-chrome\.css">/);
+    assert.match(html, /<script src="\.\.\/site-theme\.js"><\/script>/);
+    assert.match(html, /class="directory-mobile-topbar site-mobile-chrome"/);
+    assert.match(html, /<details class="site-mobile-chrome__nav" id="directory-mobile-nav">/);
+    assert.match(html, /href="\.\.\/index\.html#\/search"/);
+    const menus = [...html.matchAll(/<nav class="site-mobile-chrome__menu" aria-label="AI Updates sections">([\s\S]*?)<\/nav>/g)];
+    assert.equal(menus.length, 1, route);
+    const desktop = html.match(/<nav class="site-chrome term-nav" aria-label="AI Updates primary navigation">([\s\S]*?)<\/nav>/)?.[1];
+    assert.ok(desktop, route);
+    for (const markup of [menus[0][1], desktop]) {
+      const labels = [...markup.matchAll(/<a href="\.\.\/[^"]+"(?: aria-current="page")?>([^<]+)<\/a>/g)].map(m=>m[1]);
+      assert.deepEqual(labels, canonical, route);
+      const selected = markup.match(/<a href="\.\.\/[^"]+" aria-current="page">([^<]+)<\/a>/g) || [];
+      assert.equal(selected.length, 1, route);
+      assert.ok(selected[0].endsWith('>' + active + '</a>'), route);
+    }
+    assert.ok(html.includes('THE FRONTIER, IN CONTEXT'), route);
+  }
+  const termGenerator=read('scripts/build_term_pages.py'), techGenerator=read('scripts/build_seo.py');
+  assert.ok(termGenerator.includes("render_directory_nav('../', 'Concept dictionary')"));
+  assert.ok(techGenerator.includes("render_directory_nav(prefix, 'Technology profiles')"));
+  assert.ok(read('scripts/site_chrome.py').includes('DIRECTORY_MOBILE_CSS'));
+  assert.match(read('site-chrome.css'), /\.site-mobile-chrome__menu a\{[^}]*min-height:44px/);
 });
