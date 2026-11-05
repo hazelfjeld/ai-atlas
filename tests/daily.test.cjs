@@ -73,7 +73,7 @@ test('daily reader leads with verified briefing and stories before supplemental 
  const order=['id="edition-status"','id="edition-summary"','class="panel"','id="edition-content"','id="edition-snapshot"','id="edition-metadata"','id="source-coverage"','id="revision-history"'];
  const positions=order.map(token=>html.indexOf(token));
  assert.ok(positions.every((pos,i)=>pos>=0&&(i===0||pos>positions[i-1])), 'Reading order must prioritize stories over edition audit: '+positions);
- assert.match(html,/class="brand-wordmark">AI Updates<small>THE FRONTIER, IN CONTEXT<\/small>/);
+ assert.match(html,/class="site-chrome__name">AI Updates<small>THE FRONTIER, IN CONTEXT<\/small>/);
  assert.match(html,/\.edition-footnotes\{/);
  assert.match(js,/element\('p',undefined,'why'\)/);
  const freeze=JSON.parse(fs.readFileSync('publication.json','utf8'));
