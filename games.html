@@ -4,9 +4,18 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark">
 
 
+<script>
+try {
+  if (!['raw.githack.com','rawcdn.githack.com'].includes(location.hostname)) {
+    const saved = localStorage.getItem('atlas.theme');
+    if (saved === 'dark' || saved === 'light') document.documentElement.dataset.theme = saved;
+  }
+} catch { /* Storage may be disabled; Games still follows the OS preference. */ }
+</script>
 <link rel="stylesheet" href="games.css">
 <script defer src="catalog-loader.js"></script><script defer src="core.js"></script><script defer src="games-core.js"></script><script defer src="games.js"></script>
 <link rel="stylesheet" href="brand.css">
+<link rel="stylesheet" href="site-chrome.css">
 <!-- seo:start -->
 <title>AI Learning Games: Quiz, Match &amp; Flashcards | AI Updates</title>
 <meta name="description" content="Practice 1,345 machine learning and AI concepts with Quiz, Match and Flashcards. Filter by topic or level, revisit missed answers and follow concept explanations.">
@@ -32,7 +41,10 @@
 </head>
 <body>
 <a class="skip" href="#main">Skip to games</a>
-<header class="masthead"><a class="brand" href="index.html#/overview"><span class="brandmark">↗</span><span>AI Updates<small>LEARN THE STACK</small></span></a><nav aria-label="Workspace navigation"><a href="index.html#/overview">Workspace</a><a href="index.html#/dictionary">Dictionary</a><a href="games.html" aria-current="page">Games</a><a href="terms/index.html">Encyclopedia ↗</a></nav><button class="icon-button" id="theme-toggle" type="button" aria-label="Dark theme" aria-pressed="false" style="min-width:44px;min-height:44px">◐</button></header>
+<header class="games-header"><div class="games-header__inner">
+<div class="site-mobile-chrome" aria-label="AI Updates mobile header"><details class="site-mobile-chrome__nav" id="games-mobile-nav"><summary class="site-mobile-chrome__toggle" aria-label="Toggle navigation"><span aria-hidden="true">☰</span></summary><nav class="site-mobile-chrome__menu" aria-label="AI Updates sections"><a href="index.html#/overview">Discover</a><a href="whats-new.html">What’s New Today</a><a href="index.html#/dictionary">Concept dictionary</a><a href="index.html#/technologies">Technology profiles</a><a href="index.html#/games" aria-current="page">Games</a><a href="playbooks.html">Playbooks</a><a href="about.html">About</a></nav></details><a class="site-mobile-chrome__search" href="index.html#/search" aria-label="Search AI Updates in the main collection"><span class="site-mobile-chrome__search-icon" aria-hidden="true">⌕</span><span class="site-mobile-chrome__search-placeholder">Search tools, research, concepts…</span></a></div>
+<nav class="site-chrome games-site-chrome" aria-label="AI Updates primary navigation"><a class="site-chrome__brand" href="index.html#/overview" aria-label="AI Updates home"><svg viewBox="0 0 36 36" fill="none" aria-hidden="true"><path d="M5 7h12v12H5zM21 17h10v12H21z" stroke="currentColor" stroke-width="2"/><path d="M21 6h10M26 1v10M5 25h12M5 30h8" stroke="currentColor" stroke-linecap="round" stroke-width="2"/></svg><span class="site-chrome__name">AI Updates<small>THE FRONTIER, IN CONTEXT</small></span></a><div class="site-chrome__links"><a href="index.html#/overview">Discover</a><a href="whats-new.html">What’s New Today</a><a href="index.html#/dictionary">Concept dictionary</a><a href="index.html#/technologies">Technology profiles</a><a href="index.html#/games" aria-current="page">Games</a><a href="playbooks.html">Playbooks</a><a href="about.html">About</a></div></nav>
+<button class="icon-button" id="theme-toggle" type="button" aria-label="Dark theme" aria-pressed="false" style="min-width:44px;min-height:44px">◐</button></div></header>
 <main id="main" tabindex="-1">
 <section class="hero"><div><p class="eyebrow"><span class="dot"></span> THE PRACTICE ROOM</p><h1>Make the concepts <em>stick.</em></h1><p class="lead">A little less scrolling. A little more “oh, I know this.”<br>Play with the same definitions you explore in AI Updates.</p></div><div class="catalog-badge"><strong id="catalog-count">—</strong><span>playable concepts</span><small id="catalog-date">Checking the dictionary…</small></div></section>
 <div id="load-status" class="notice" role="status">Loading and verifying the published catalog…</div>

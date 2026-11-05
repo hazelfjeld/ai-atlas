@@ -76,6 +76,7 @@ with sync_playwright() as p:
     # Confirm the same visible order, focus and active link without replacing mobile navigation.
     unified = [('whats-new.html', 'What’s New Today', 'page'), ('about.html', 'About', 'page'),
                ('technologies.html', 'Technology profiles', 'page'), ('playbooks.html', 'Playbooks', 'page'),
+               ('games.html', 'Games', 'page'),
                ('catalog-review.html', 'What’s New Today', 'location'),
                ('hardware-review.html', 'What’s New Today', 'location')]
     primary_names = ['Discover', 'What’s New Today', 'Concept dictionary',
@@ -131,6 +132,45 @@ with sync_playwright() as p:
     check('mobile archive search entry opens the actual site search',
           mobile_archive.locator('#global-query').is_visible())
     mobile_archive.close()
+
+    # Standalone Games previously used a distinct arrow masthead and wrapping
+    # navigation. Verify the same reusable site chrome, then follow real links.
+    mobile_games = browser.new_page(viewport={'width':320, 'height':720}, reduced_motion='reduce')
+    mobile_games.goto(base + 'games.html')
+    check('standalone games shares compact site header without overflow',
+          mobile_games.locator('.site-mobile-chrome').is_visible()
+          and mobile_games.locator('.site-mobile-chrome__search').is_visible()
+          and not mobile_games.locator('.games-site-chrome').is_visible()
+          and mobile_games.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'))
+    mobile_games.locator('#games-mobile-nav summary').click()
+    menu_links = mobile_games.locator('#games-mobile-nav .site-mobile-chrome__menu a')
+    check('mobile games nav matches canonical labels, routes and active destination',
+          menu_links.all_inner_texts() == primary_names
+          and menu_links.filter(has_text='Games').get_attribute('aria-current') == 'page'
+          and all(h >= 44 for h in menu_links.evaluate_all(
+              '(els) => els.map(el => el.getBoundingClientRect().height)')))
+    mobile_games.locator('#games-mobile-nav summary').click()
+    mobile_games.locator('.site-mobile-chrome__search').click()
+    mobile_games.wait_for_url('**/index.html#/search')
+    check('standalone Games search points into the actual workspace',
+          mobile_games.locator('#global-query').is_visible())
+    mobile_games.close()
+
+    theme_ctx = browser.new_context(viewport={'width':390, 'height':844}, color_scheme='dark')
+    theme_page = theme_ctx.new_page()
+    theme_page.goto(base + 'games.html')
+    theme_page.evaluate("localStorage.setItem('atlas.theme', 'light')")
+    theme_page.reload()
+    check('Games honors explicitly saved light theme despite dark OS mode',
+          theme_page.evaluate("document.documentElement.dataset.theme === 'light'"))
+    theme_page.locator('#theme-toggle').click()
+    check('standalone Games theme toggle saves user preference',
+          theme_page.evaluate("localStorage.getItem('atlas.theme') === 'dark'")
+          and theme_page.locator('#theme-toggle').get_attribute('aria-pressed') == 'true')
+    theme_page.goto(base + 'whats-new.html')
+    check('Games to archive preserves selected dark theme',
+          theme_page.evaluate("document.documentElement.dataset.theme === 'dark'"))
+    theme_ctx.close()
 
     # The editorial-policy page formerly exposed a multirow legacy nav on
     # phones, while Discover and the daily archive use a compact menu/search.

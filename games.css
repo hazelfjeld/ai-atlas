@@ -23,3 +23,14 @@
 @media(prefers-reduced-motion:reduce){.flip-card-inner{transition:none}}
 /* Keep all four standalone Games destinations comfortably tappable on narrow phones. */
 @media(max-width:360px){.masthead nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px;width:100%}.masthead nav a{display:flex;align-items:center;min-height:44px;min-width:0;padding:9px 10px}}
+
+/* Standalone games uses the canonical AI Updates chrome; the game board stays independent. */
+.games-header{background:var(--surface,#fff);border-bottom:1px solid var(--line)}
+.games-header__inner{max-width:1280px;min-width:0;margin:auto;padding:12px 24px;display:flex;align-items:center;gap:12px}
+.games-site-chrome{flex:1;min-width:0;margin:0!important;padding:0!important;border:0!important}
+.games-header__inner > .icon-button{flex:0 0 44px;min-width:44px;min-height:44px}
+@media(max-width:650px){
+.games-header__inner{padding:12px 16px}
+.games-header__inner > .site-mobile-chrome{flex:1;min-width:0}
+}
+@media print{.games-header{display:none}}
