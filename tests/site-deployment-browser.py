@@ -69,6 +69,11 @@ with sync_playwright() as p:
               const nodes = ids.map(id => document.getElementById(id));
               return nodes.every((node,i) => node && (!i || (nodes[i-1].compareDocumentPosition(node) & Node.DOCUMENT_POSITION_FOLLOWING)));
           }"""))
+    # The first paint must not falsely say there have been no editions while
+    # the latest archive index is still being fetched and verified.
+    page.wait_for_function("document.getElementById('edition-content').getAttribute('aria-busy') === 'false'", timeout=45000)
+    check('daily archive removes its loading placeholder after verification',
+          'Checking published editions' not in page.locator('#edition-content').inner_text())
     # The CI host may start in dark mode. Explicitly test both theme variants,
     # then restore the original selection without altering persistent preferences.
     initial_theme = page.locator('html').get_attribute('data-theme')

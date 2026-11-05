@@ -69,6 +69,17 @@ test('daily reader leads with verified briefing and stories before supplemental 
  assert.equal(freeze.published_counts.terms,1345);
 });
 
+test('daily archive loading text is neutral until the index proves a dated edition exists',()=>{
+ const html=fs.readFileSync('whats-new.html','utf8'),js=fs.readFileSync('whats-new.js','utf8');
+ const initial=html.match(/<div id="edition-content" aria-busy="true">([\s\S]*?)<\/div><\/div>/);
+ assert.ok(initial, 'Initial archive must advertise its pending state to assistive technology');
+ assert.match(initial[1],/Checking published editions/);
+ assert.doesNotMatch(initial[1],/Awaiting the first reviewed edition/);
+ assert.match(js,/setAttribute\('aria-busy','false'\)/);
+ assert.match(js,/No verified archive edition is available on or before/);
+ assert.match(js,/Awaiting the first reviewed edition\. No unverified headlines/);
+});
+
 test('Daily page and scripts are syntax-valid and contain archive, source, topic and missing-edition controls',()=>{
  const html=fs.readFileSync('whats-new.html','utf8'),js=fs.readFileSync('whats-new.js','utf8');
  new vm.Script(js);

@@ -220,6 +220,7 @@ async function showRevisionDiff(entry,current,epoch){
 }
 function render(){
  if(!edition)return;
+ $('edition-content').setAttribute('aria-busy','false');
  const section=$('section-filter').value,topic=$('topic-filter').value,review=$('evidence-filter').value,source=$('source-filter').value,publication=$('publication-filter').value,query=$('edition-search').value;
  const summary=$('edition-summary');summary.hidden=false;
  $('summary-content').replaceChildren(...edition.tldr.map(s=>element('p',s)));
@@ -267,6 +268,7 @@ async function readEdition(entry,quiet=false){
 async function switchEdition(entry){
  if(!entry)return;
  const requestEpoch=++switchEpoch;
+ $('edition-content').setAttribute('aria-busy','true');
  try{
   const e=await readEdition(entry);
   if(requestEpoch!==switchEpoch)return; // Ignore late responses from superseded archive selections.
@@ -286,6 +288,7 @@ async function switchEdition(entry){
   return true;
  }catch(err){
   if(requestEpoch!==switchEpoch)return false;
+  $('edition-content').setAttribute('aria-busy','false');
   if(edition&&active){
    // Never erase an earlier integrity-verified edition after a failed archive selection.
    $('edition-select').value=active.path;
@@ -331,6 +334,11 @@ async function start(){
    status((requested.specified?'The requested archive revision cannot be displayed. ':'')+missing);
    $('edition-select').replaceChildren(new Option('Awaiting verified edition',''));
    $('edition-select').disabled=true;
+   const message=index.editions.length?
+    'No verified archive edition is available on or before '+humanDate(today)+'. Future-dated editions are not displayed.':
+    'Awaiting the first reviewed edition. No unverified headlines are displayed as news.';
+   $('edition-content').setAttribute('aria-busy','false');
+   $('edition-content').replaceChildren(element('div',message,'empty'));
    return;
   }
   populateArchive(candidates[0]);
@@ -359,6 +367,7 @@ async function start(){
   status('The '+failures+' recent archive edition(s) failed integrity verification. No unverified news is shown; older editions remain selectable.');
  }catch(err){
   status('Daily archive unavailable: '+err.message+'. Previously verified Atlas reference material remains accessible.');
+  $('edition-content').setAttribute('aria-busy','false');
   $('edition-content').replaceChildren(element('div','No unverified headlines are shown when the edition index cannot be validated.','empty'));
  }
 }
