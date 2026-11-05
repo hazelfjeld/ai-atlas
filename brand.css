@@ -35,3 +35,13 @@ body{font-size:15px;line-height:1.6}h1,h2,h3{color:var(--ink)}a{text-underline-o
   .global-search input,.toolbar .query-row input,.filter-row select,textarea{font-size:16px}
   .toolbar .query-row input,.filter-row select{min-height:44px}
 }
+
+/* Native, script-free reference pages: readable two-column touch navigation on phones.
+   Avoid the former cluster of ~19px-high inline links above the article. */
+@media(max-width:650px){
+  .term-shell .term-nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding-bottom:16px}
+  .term-shell .term-nav>a{display:flex;align-items:center;min-width:0;min-height:44px;padding:9px 10px;border-radius:8px;background:var(--accent-soft);color:var(--ink);font-size:13px;font-weight:600;line-height:1.3;text-decoration:none;overflow-wrap:anywhere}
+  .term-shell .term-nav>a:first-child{grid-column:1/-1;background:transparent;padding:4px 0;font-size:22px;min-height:50px}
+  .term-shell .term-nav>a:hover{background:var(--line)}
+  .term-shell .term-nav>a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+}

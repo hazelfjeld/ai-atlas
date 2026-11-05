@@ -287,6 +287,34 @@ with sync_playwright() as p:
     check('research search opens the existing workspace search',
           mobile_research.locator('#global-query').is_visible())
     mobile_research.close()
+    # Generated term/technology references are still script-free. Their formerly
+    # tiny inline links now share a usable compact, two-column mobile nav.
+    for reference in ('terms/MLD-0002-ablation-study.html', 'technology/index.html'):
+        mobile_reference = browser.new_page(viewport={'width':320, 'height':720}, reduced_motion='reduce')
+        mobile_reference.goto(base + reference)
+        nav = mobile_reference.locator('.term-shell .term-nav')
+        check(reference + ' uses a two-column compact mobile navigation',
+              nav.evaluate("""el => getComputedStyle(el).display === 'grid'
+                  && getComputedStyle(el).gridTemplateColumns.trim().split(/\\s+/).length === 2"""))
+        check(reference + ' has keyboard-reachable 44px navigation links',
+              mobile_reference.evaluate("""() => [...document.querySelectorAll('.term-shell .term-nav a')]
+                  .every(a => a.getBoundingClientRect().height >= 44)"""))
+        check(reference + ' fits the 320px viewport',
+              mobile_reference.evaluate('document.documentElement.scrollWidth <= window.innerWidth + 1'))
+        mobile_reference.locator('.term-nav a').nth(1).focus()
+        check(reference + ' has a visible keyboard focus indication',
+              mobile_reference.evaluate("""() => {
+                  const a = document.activeElement;
+                  return a.matches('.term-nav a') && getComputedStyle(a).outlineStyle === 'solid'
+                      && parseFloat(getComputedStyle(a).outlineWidth) >= 2;
+              }"""))
+        mobile_reference.set_viewport_size({'width':390, 'height':844})
+        check(reference + ' fits the 390px viewport',
+              mobile_reference.evaluate('document.documentElement.scrollWidth <= window.innerWidth + 1'))
+        mobile_reference.set_viewport_size({'width':1440, 'height':900})
+        check(reference + ' preserves desktop navigation',
+              nav.evaluate("el => getComputedStyle(el).display === 'flex"))
+        mobile_reference.close()
     page.goto(base + 'whats-new.html')
     check('daily archive uses the same Atlas logo and quiet wordmark',
           page.locator('.brand-wordmark small').inner_text() == 'THE FRONTIER, IN CONTEXT')

@@ -194,3 +194,18 @@ test('standalone research snapshot uses compact mobile navigation without changi
   assert.ok(html.includes('Automatic collection remains off.'));
   assert.ok(html.includes('id="loading-status" role="status"'));
 });
+
+
+test('generated concept and technology pages have accessible two-column mobile navigation', () => {
+  const css = read('brand.css');
+  const offline = read('downloads/Atlas_Demo_Offline.html');
+  for (const page of ['terms/MLD-0002-ablation-study.html','technology/index.html']) {
+    const html = read(page);
+    assert.match(html, /<nav class="term-nav" aria-label="Site navigation">/);
+    assert.match(html, /href="\.\.\/index\.html"/);
+  }
+  assert.match(css, /@media\(max-width:650px\)\{\s*\.term-shell \.term-nav\{display:grid;grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/);
+  assert.match(css, /\.term-shell \.term-nav>a\{[^}]*min-height:44px/);
+  assert.match(css, /\.term-shell \.term-nav>a:focus-visible\{outline:2px solid var\(--accent\)/);
+  assert.ok(offline.includes('/* Native, script-free reference pages: readable two-column touch navigation on phones.'));
+});
