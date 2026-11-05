@@ -118,6 +118,40 @@ with sync_playwright() as p:
     check('about mobile search entry opens the real collection search',
           mobile_about.locator('#global-query').is_visible())
     mobile_about.close()
+    # The standalone technology directory previously used its own multirow
+    # desktop text links on a phone rather than the shared compact header.
+    mobile_tech = browser.new_page(viewport={'width':320, 'height':720}, reduced_motion='reduce')
+    mobile_tech.goto(base + 'technologies.html')
+    check('technology directory adopts the compact mobile site header',
+          mobile_tech.locator('.tech-mobile-topbar').is_visible()
+          and not mobile_tech.locator('.tech-top').is_visible()
+          and mobile_tech.locator('.tech-search-link').is_visible())
+    check('320px technology directory has no horizontal overflow',
+          mobile_tech.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'))
+    mobile_tech.locator('.tech-menu-toggle').focus()
+    mobile_tech.keyboard.press('Enter')
+    check('technology directory menu opens from the keyboard and marks current page',
+          mobile_tech.locator('#tech-mobile-nav').evaluate('(el) => el.open')
+          and mobile_tech.get_by_role('navigation', name='AI Updates sections')
+              .get_by_role('link', name='Technology profiles').get_attribute('aria-current') == 'page')
+    check('technology directory menu links offer 44px touch targets',
+          mobile_tech.evaluate("""() => [...document.querySelectorAll('.tech-menu-panel a')]
+              .every(a => a.getBoundingClientRect().height >= 44)"""))
+    mobile_tech.keyboard.press('Enter')
+    mobile_tech.screenshot(path=str(out / 'technology-directory-mobile-header.png'), full_page=False)
+    mobile_tech.set_viewport_size({'width':390,'height':844})
+    check('390px technology directory remains within viewport',
+          mobile_tech.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'))
+    mobile_tech.set_viewport_size({'width':1440,'height':900})
+    check('desktop technology directory keeps its existing navigation',
+          mobile_tech.locator('.tech-top').is_visible()
+          and not mobile_tech.locator('.tech-mobile-topbar').is_visible())
+    mobile_tech.set_viewport_size({'width':320,'height':720})
+    mobile_tech.locator('.tech-search-link').click()
+    mobile_tech.wait_for_url('**/index.html#/search')
+    check('technology directory search opens the actual workspace search',
+          mobile_tech.locator('#global-query').is_visible())
+    mobile_tech.close()
     page.goto(base + 'whats-new.html')
     check('daily archive uses the same Atlas logo and quiet wordmark',
           page.locator('.brand-wordmark small').inner_text() == 'THE FRONTIER, IN CONTEXT')

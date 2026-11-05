@@ -99,6 +99,21 @@ test('standalone Games header provides 44px navigation targets on 320px phones',
   assert.match(css, /@media\(max-width:360px\)[\s\S]*?\.masthead nav a\{[^}]*min-height:44px/);
 });
 
+
+test('standalone technology directory shares the compact mobile menu and real workspace search', () => {
+  const html=read('technologies.html');
+  assert.match(html, /class="tech-mobile-topbar"/);
+  assert.match(html, /<details class="tech-mobile-nav" id="tech-mobile-nav">/);
+  assert.match(html, /<nav class="tech-menu-panel" aria-label="AI Updates sections">/);
+  assert.match(html, /href="technologies.html" aria-current="page">Technology profiles<\/a>/);
+  assert.match(html, /class="tech-search-link" href="index.html#\/search"/);
+  assert.match(html, /@media\(max-width:650px\)[\s\S]*?\.tech-top\{display:none\}/);
+  assert.match(html, /\.tech-controls input,\.tech-controls select\{min-height:44px;font-size:16px\}/);
+  assert.match(html, /@media print\{[^}]*\.tech-mobile-topbar\{display:none\}/);
+  for(const route of ['overview','dictionary','safety','papers','games'])
+    assert.ok(html.includes('href="index.html#/'+route+'"'), 'Missing workspace route: '+route);
+});
+
 test('editorial policy uses the same compact mobile menu and real collection search as the archive', () => {
   const html=read('about.html');
   assert.match(html, /class="about-mobile-topbar"/);
