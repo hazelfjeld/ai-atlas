@@ -261,6 +261,36 @@ with sync_playwright() as p:
     check('playbooks search opens the existing workspace search',
           mobile_playbooks.locator('#global-query').is_visible())
     mobile_playbooks.close()
+
+    # Coherence regression: these three previously independent mobile menus
+    # now use the same shared component, destinations and tap dimensions as
+    # Games and the daily archive, in both OS themes on narrow phones.
+    canonical_mobile = [
+        'Discover', 'What’s New Today', 'Concept dictionary',
+        'Technology profiles', 'Games', 'Playbooks', 'About']
+    for width, theme in ((320,'light'), (390,'dark')):
+        shared_mobile = browser.new_page(
+            viewport={'width':width,'height':844}, color_scheme=theme,
+            reduced_motion='reduce')
+        for route in ('about.html','technologies.html','playbooks.html'):
+            shared_mobile.goto(base + route)
+            bar = shared_mobile.locator('.site-mobile-chrome')
+            toggle = shared_mobile.locator('.site-mobile-chrome__toggle')
+            search = shared_mobile.locator('.site-mobile-chrome__search')
+            check(f'{route} shares common mobile controls at {width}px ({theme})',
+                  bar.is_visible() and toggle.is_visible() and search.is_visible()
+                  and shared_mobile.evaluate('document.documentElement.scrollWidth <= innerWidth + 1')
+                  and toggle.evaluate('(el) => el.getBoundingClientRect().height >= 44')
+                  and search.evaluate('(el) => el.getBoundingClientRect().height >= 44'))
+            toggle.click()
+            menu_links = shared_mobile.locator('.site-mobile-chrome__menu a')
+            check(f'{route} follows shared seven-link order at {width}px ({theme})',
+                  menu_links.all_inner_texts() == canonical_mobile
+                  and sum(x == 'page' for x in
+                          menu_links.evaluate_all("(nodes) => nodes.map(n => n.getAttribute('aria-current'))")) == 1
+                  and menu_links.evaluate_all('(nodes) => nodes.every(n => n.getBoundingClientRect().height >= 44)'))
+            toggle.click()
+        shared_mobile.close()
     # The candidate-review page also had legacy multirow links at 320px.
     mobile_review = browser.new_page(viewport={'width':320, 'height':720}, reduced_motion='reduce')
     mobile_review.goto(base + 'catalog-review.html')

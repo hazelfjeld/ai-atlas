@@ -100,48 +100,48 @@ test('standalone Games header provides 44px navigation targets on 320px phones',
 });
 
 
-test('standalone technology directory shares the compact mobile menu and real workspace search', () => {
-  const html=read('technologies.html');
-  assert.match(html, /class="tech-mobile-topbar"/);
-  assert.match(html, /<details class="tech-mobile-nav" id="tech-mobile-nav">/);
-  assert.match(html, /<nav class="tech-menu-panel" aria-label="AI Updates sections">/);
-  assert.match(html, /href="technologies.html" aria-current="page">Technology profiles<\/a>/);
-  assert.match(html, /class="tech-search-link" href="index.html#\/search"/);
-  assert.match(html, /@media\(max-width:650px\)[\s\S]*?\.tech-top\{display:none\}/);
-  assert.match(html, /\.tech-controls input,\.tech-controls select\{min-height:44px;font-size:16px\}/);
-  assert.match(html, /@media print\{[^}]*\.tech-mobile-topbar\{display:none\}/);
-  for(const route of ['overview','dictionary','safety','papers','games'])
-    assert.ok(html.includes('href="index.html#/'+route+'"'), 'Missing workspace route: '+route);
+test('About, technologies and playbooks reuse the Games and archive mobile chrome', () => {
+  const expected = [
+    ['index.html#/overview','Discover'], ['whats-new.html','What’s New Today'],
+    ['index.html#/dictionary','Concept dictionary'],
+    ['index.html#/technologies','Technology profiles'],
+    ['index.html#/games','Games'], ['playbooks.html','Playbooks'], ['about.html','About']
+  ];
+  const navLinks = (html,path) => {
+    const menu = html.match(/<nav class="[^"]*site-mobile-chrome__menu" aria-label="AI Updates sections">([\s\S]*?)<\/nav>/)?.[1];
+    assert.ok(menu, 'Missing actual shared mobile navigation in '+path);
+    const links = [...menu.matchAll(/<a href="([^"]+)"(?: aria-current="page")?>([^<]+)<\/a>/g)];
+    assert.equal(links.length, 7, path);
+    assert.deepEqual(links.map(m => [m[1],m[2]]), expected, path);
+    return menu;
+  };
+  // Games and the daily archive already use these exact destinations.
+  for (const path of ['games.html','whats-new.html']) navLinks(read(path),path);
+  for (const [path,prefix,active] of [
+    ['technologies.html','tech','Technology profiles'],
+    ['playbooks.html','playbook','Playbooks'],
+    ['about.html','about','About']]) {
+    const html=read(path);
+    assert.match(html, new RegExp('class="'+prefix+'-mobile-topbar site-mobile-chrome"'), path);
+    assert.match(html, new RegExp('class="'+prefix+'-mobile-nav site-mobile-chrome__nav"'), path);
+    assert.match(html, new RegExp('class="'+prefix+'-menu-toggle site-mobile-chrome__toggle"'), path);
+    assert.match(html, new RegExp('class="'+prefix+'-search-link site-mobile-chrome__search" href="index.html#/search"'), path);
+    assert.match(html, /<link rel="stylesheet" href="site-chrome.css">/, path);
+    const menu=navLinks(html,path);
+    assert.equal((menu.match(/aria-current="page"/g)||[]).length,1,path);
+    assert.ok(menu.includes('aria-current="page">'+active+'</a>'),path);
+    // Obsolete per-page copies of the menu styles must not override the shared implementation.
+    assert.ok(!new RegExp('\\.'+prefix+'-menu-panel a\\{').test(html),path);
+    assert.ok(html.includes('@media print'),path);
+  }
+  assert.match(read('technologies.html'), /\.tech-controls input,\.tech-controls select\{min-height:44px;font-size:16px\}/);
+  assert.match(read('playbooks.html'), /\.playbook-tools input,\.playbook-tools select\{min-height:44px;font-size:16px\}/);
+  assert.match(read('about.html'), /\.term-shell \.term-nav\{display:none\}/);
+  const css=read('site-chrome.css');
+  assert.match(css, /\.site-mobile-chrome__menu a\{[^}]*min-height:44px/);
+  assert.match(css, /\.site-mobile-chrome a:focus-visible,\.site-mobile-chrome summary:focus-visible/);
+  assert.match(css, /@media \(max-width:650px\)\{/);
 });
-
-
-test('standalone playbooks share the compact mobile menu and real collection search', () => {
-  const html=read('playbooks.html');
-  assert.match(html, /class="playbook-mobile-topbar"/);
-  assert.match(html, /<details class="playbook-mobile-nav" id="playbook-mobile-nav">/);
-  assert.match(html, /<nav class="playbook-menu-panel" aria-label="AI Updates sections">/);
-  assert.match(html, /href="playbooks.html" aria-current="page">Playbooks<\/a>/);
-  assert.match(html, /class="playbook-search-link" href="index.html#\/search"/);
-  assert.match(html, /@media\(max-width:650px\)[\s\S]*?\.playbook-top\{display:none\}/);
-  assert.match(html, /\.playbook-tools input,\.playbook-tools select\{min-height:44px;font-size:16px\}/);
-  assert.match(html, /@media print\{\.playbook-mobile-topbar\{display:none\}\}/);
-  for(const route of ['overview','dictionary','safety','papers','games'])
-    assert.ok(html.includes('href="index.html#/'+route+'"'), 'Missing workspace route: '+route);
-});
-
-test('editorial policy uses the same compact mobile menu and real collection search as the archive', () => {
-  const html=read('about.html');
-  assert.match(html, /class="about-mobile-topbar"/);
-  assert.match(html, /<details class="about-mobile-nav" id="about-mobile-nav">/);
-  assert.match(html, /<nav class="about-menu-panel" aria-label="AI Updates sections">/);
-  assert.match(html, /href="about.html" aria-current="page">About<\/a>/);
-  assert.match(html, /class="about-search-link" href="index.html#\/search"/);
-  assert.match(html, /@media\(max-width:650px\)/);
-  assert.match(html, /\.term-shell \.term-nav\{display:none\}/);
-  for(const route of ['overview','dictionary','technologies','safety','papers','games'])
-    assert.ok(html.includes('href="index.html#/'+route+'"'), 'Missing route: '+route);
-});
-
 
 test('catalog candidate review uses the compact mobile navigation without modifying its editorial content', () => {
   const html=read('catalog-review.html');
