@@ -318,8 +318,10 @@ test('shared standalone navigation keeps a single tablet link row despite legacy
   const css = read('site-chrome.css');
   assert.match(css, /@media \(min-width:651px\) and \(max-width:850px\)/);
   assert.match(css, /\.site-chrome\{flex-direction:column;align-items:stretch!important;flex-wrap:nowrap!important;gap:4px\}/);
-  assert.match(css, /\.site-chrome__links\{justify-content:flex-start;gap:2px\}/);
-  assert.match(css, /\.site-chrome__links a\{padding-inline:5px!important\}/);
+  // A flex row still wrapped the seventh link at 651px. Require seven
+  // equal tablet targets and allow each label to wrap inside its target.
+  assert.ok(css.includes('.site-chrome__links{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:2px}'));
+  assert.ok(css.includes('.site-chrome__links a{min-width:0;padding:6px 4px!important;white-space:normal;text-align:center}'));
   for (const path of ['about.html','technologies.html','research.html','playbooks.html']) {
     const html = read(path);
     assert.match(html, /<nav class="site-chrome [^\"]+" aria-label="AI Updates primary navigation">/, path);
