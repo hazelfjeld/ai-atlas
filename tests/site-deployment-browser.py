@@ -514,14 +514,24 @@ with sync_playwright() as p:
             Number.parseFloat(getComputedStyle(element).fontSize) >= 16 &&
             element.getBoundingClientRect().height >= 44;
     })"""
-    # The five archive header links used 13px inline text with only ~21px hit areas.
-    # Give touch users real 44px targets without altering the desktop navigation.
+    # The archive now follows Discover's compact mobile shell. Check both
+    # always-visible controls and all links revealed by its native menu.
     mobile_nav_targets = """() => {
-        const links = [...document.querySelectorAll('.toplinks a')];
-        return links.length === 5 && links.every(link =>
-            link.getBoundingClientRect().height >= 44);
+        const menu = document.querySelector('#archive-mobile-nav');
+        const toggle = document.querySelector('.archive-menu-toggle');
+        const search = document.querySelector('.archive-search-link');
+        if (!menu || !toggle || !search) return false;
+        const wasOpen = menu.open;
+        menu.open = true;
+        const links = [...menu.querySelectorAll('.archive-menu-panel a')];
+        const valid = links.length >= 5 && [toggle, search, ...links].every(el => {
+            const rect = el.getBoundingClientRect();
+            return rect.height >= 44 && rect.width >= 44;
+        });
+        menu.open = wasOpen;
+        return valid;
     }"""
-    check('390px archive header links have 44px touch targets', page.evaluate(mobile_nav_targets))
+    check('390px archive mobile menu and search have 44px touch targets', page.evaluate(mobile_nav_targets))
     # Long, unbroken metadata tags previously pushed the archive 249px wider
     # than a 390px screen. Assert they wrap inside the existing cards.
     if index['editions']:
@@ -545,7 +555,7 @@ with sync_playwright() as p:
         check('390px source-coverage summary is an accessible touch target',
               source_toggle_mobile.evaluate("(el) => el.getBoundingClientRect().height >= 44"))
     page.set_viewport_size({'width':320,'height':700})
-    check('320px archive header links have 44px touch targets', page.evaluate(mobile_nav_targets))
+    check('320px archive mobile menu and search have 44px touch targets', page.evaluate(mobile_nav_targets))
     if index['editions']:
         check('320px archive metadata tags wrap within their cards', page.evaluate(tag_containment))
     check('320px archive header fits without horizontal scrolling',
