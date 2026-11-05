@@ -39,12 +39,12 @@
 }
 @media print{.games-header{display:none}}
 
-/* At small tablet widths, legacy page-specific nav flex wrapping can leave
-   an isolated link on its own line (notably About at 651px). Keep the same
-   brand row and a single accessible navigation row across all standalone
-   editorial page families, instead of letting each template wrap differently. */
+/* At compact tablet widths the seven destinations cannot always fit as
+   unbroken flex items: About at 651px left one orphaned on a second row.
+   Share one evenly spaced navigation row, wrapping long labels *within*
+   their 44px targets instead of wrapping whole links. */
 @media (min-width:651px) and (max-width:850px){
 .site-chrome{flex-direction:column;align-items:stretch!important;flex-wrap:nowrap!important;gap:4px}
-.site-chrome__links{justify-content:flex-start;gap:2px}
-.site-chrome__links a{padding-inline:5px!important}
+.site-chrome__links{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:2px}
+.site-chrome__links a{min-width:0;padding:6px 4px!important;white-space:normal;text-align:center}
 }
