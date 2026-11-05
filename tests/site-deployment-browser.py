@@ -457,9 +457,9 @@ with sync_playwright() as p:
     check('research search opens the existing workspace search',
           mobile_research.locator('#global-query').is_visible())
     mobile_research.close()
-    # Generated term/technology references are still script-free. Their formerly
+    # Individual term/technology references are still script-free. Their formerly
     # tiny inline links now share a usable compact, two-column mobile nav.
-    for reference in ('terms/MLD-0002-ablation-study.html', 'technology/index.html'):
+    for reference in ('terms/MLD-0002-ablation-study.html', 'technology/TECH-0216-pytorch.html'):
         mobile_reference = browser.new_page(viewport={'width':320, 'height':720}, reduced_motion='reduce')
         mobile_reference.goto(base + reference)
         nav = mobile_reference.locator('.term-shell .term-nav')
