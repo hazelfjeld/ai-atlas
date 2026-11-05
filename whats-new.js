@@ -220,7 +220,6 @@ async function showRevisionDiff(entry,current,epoch){
 }
 function render(){
  if(!edition)return;
- $('edition-content').setAttribute('aria-busy','false');
  const section=$('section-filter').value,topic=$('topic-filter').value,review=$('evidence-filter').value,source=$('source-filter').value,publication=$('publication-filter').value,query=$('edition-search').value;
  const summary=$('edition-summary');summary.hidden=false;
  $('summary-content').replaceChildren(...edition.tldr.map(s=>element('p',s)));
@@ -246,6 +245,7 @@ function render(){
  $('filter-results').textContent='Showing '+visible+' of '+total+' records in the selected collection'+(topic!=='all'||review!=='all'||source!=='all'||publication!=='all'||query.trim()?' matching your filters.':'.');
  if(!visible&&(topic!=='all'||review!=='all'||source!=='all'||publication!=='all'||query.trim()))content.append(element('div','No entries match those filters. Try a broader topic or search. This is not a claim that no AI news occurred.','empty'));
  syncVerifiedUrl();
+ $('edition-content').setAttribute('aria-busy','false');
 }
 async function request(path){
  const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),18000);
