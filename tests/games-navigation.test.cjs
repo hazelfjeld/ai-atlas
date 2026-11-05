@@ -225,3 +225,29 @@ test('script-free reference pages honor dark OS preference with readable cards a
     assert.match(read(reference), /<main class="term-shell" id="main">/);
   assert.ok(read('downloads/Atlas_Demo_Offline.html').includes('Script-free reference pages honor the OS dark palette'));
 });
+
+
+test('editorial directories share one responsive primary navigation component', () => {
+  const names = ['Discover','What’s New Today','Concept dictionary','Technology profiles','Games','Playbooks','About'];
+  const pages = [
+    ['whats-new.html','What’s New Today'], ['about.html','About'],
+    ['technologies.html','Technology profiles'], ['playbooks.html','Playbooks']
+  ];
+  for (const [path, active] of pages) {
+    const html = read(path);
+    assert.match(html, /<link rel="stylesheet" href="site-chrome.css">/);
+    const nav = html.match(/<nav class="site-chrome [^"]+" aria-label="AI Updates primary navigation">([\s\S]*?)<\/nav>/);
+    assert.ok(nav, path);
+    assert.match(nav[1], /class="site-chrome__brand" href="index.html#\/overview"/);
+    const links = [...nav[1].matchAll(/<a href="[^"]+"(?: aria-current="page")?>([^<]+)<\/a>/g)];
+    assert.deepEqual(links.map(link => link[1]), names, path);
+    const selected = nav[1].match(/<a href="[^"]+" aria-current="page">([^<]+)<\/a>/g) || [];
+    assert.equal(selected.length, 1, path);
+    assert.ok(selected[0].includes('>' + active + '</a>'), path);
+  }
+  const css = read('site-chrome.css');
+  assert.match(css, /\.site-chrome__links a\[aria-current=page\]/);
+  assert.match(css, /\.site-chrome a:focus-visible/);
+  assert.match(css, /@media \(max-width:650px\)\{\.site-chrome\{display:none!important\}\}/);
+  assert.ok(JSON.parse(read('deploy/public-files.json')).root_files.includes('site-chrome.css'));
+});

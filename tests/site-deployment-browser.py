@@ -72,6 +72,34 @@ with sync_playwright() as p:
           failed_archive.locator('#edition-search').is_disabled()
           and 'Daily archive unavailable' in failed_archive.locator('#edition-status').inner_text())
     failed_archive.close()
+    # Shared desktop chrome: these pages previously used four different mastheads.
+    # Confirm the same visible order, focus and active link without replacing mobile navigation.
+    unified = [('whats-new.html', 'What’s New Today'), ('about.html', 'About'),
+               ('technologies.html', 'Technology profiles'), ('playbooks.html', 'Playbooks')]
+    primary_names = ['Discover', 'What’s New Today', 'Concept dictionary',
+                     'Technology profiles', 'Games', 'Playbooks', 'About']
+    for route, active in unified:
+        page.set_viewport_size({'width':1440, 'height':900})
+        page.goto(base + route)
+        nav = page.get_by_role('navigation', name='AI Updates primary navigation')
+        check('shared desktop navigation visible on ' + route, nav.is_visible())
+        check('site navigation order and current page on ' + route,
+              nav.locator('.site-chrome__links a').all_inner_texts() == primary_names
+              and nav.locator('.site-chrome__links a[aria-current="page"]').inner_text() == active)
+        page.screenshot(path=str(out / ('shared-nav-' + route + '.png')), full_page=False)
+        for width in (320, 390, 768):
+            page.set_viewport_size({'width':width, 'height':844})
+            check('shared navigation responsive ' + route + ' ' + str(width),
+                  page.evaluate('document.documentElement.scrollWidth <= innerWidth + 1')
+                  and nav.is_visible() == (width > 650))
+    page.set_viewport_size({'width':1440,'height':900})
+    page.goto(base + 'whats-new.html')
+    page.get_by_role('navigation', name='AI Updates primary navigation').get_by_role(
+        'link', name='Playbooks', exact=True).click()
+    page.wait_for_url('**/playbooks.html')
+    check('desktop news to playbooks retains consistent site navigation',
+          page.locator('.site-chrome__links a[aria-current="page"]').inner_text() == 'Playbooks')
+
     # The archive formerly showed a multi-row legacy masthead on a 320px
     # phone, unlike Discover's compact menu + search entry. Both should feel
     # like the same site without pretending the archive has global search.
