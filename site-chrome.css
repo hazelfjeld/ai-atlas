@@ -48,3 +48,13 @@
 .site-chrome__links{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:2px}
 .site-chrome__links a{min-width:0;padding:6px 4px!important;white-space:normal;text-align:center}
 }
+
+/* Narrow reading columns (notably About) previously wrapped the brand above
+   desktop links even on wide screens. Keep both on one row, allowing long link
+   labels to wrap inside their accessible targets rather than moving the
+   whole navigation into a second header row. */
+@media (min-width:851px){
+.site-chrome{flex-wrap:nowrap!important}
+.site-chrome__links{flex:1 1 auto;flex-wrap:nowrap;justify-content:space-between;gap:2px}
+.site-chrome__links a{min-width:0;padding:8px 5px!important;white-space:normal;text-align:center}
+}
