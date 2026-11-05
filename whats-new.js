@@ -21,6 +21,11 @@ function element(tag,text,cls){
  return e;
 }
 function status(text){$('edition-status').textContent=text;}
+function selectionFeedback(message=''){
+ const note=$('edition-selection-error');
+ note.textContent=message;
+ note.hidden=!message;
+}
 function currentFilters(){
  return {section:$('section-filter').value,topic:$('topic-filter').value,review:$('evidence-filter').value,source:$('source-filter').value,publication:$('publication-filter').value,query:$('edition-search').value};
 }
@@ -275,6 +280,7 @@ async function readEdition(entry,quiet=false){
 async function switchEdition(entry){
  if(!entry)return;
  const requestEpoch=++switchEpoch;
+ selectionFeedback(); // Remove the prior inline error when trying another revision.
  $('edition-content').setAttribute('aria-busy','true');
  try{
   const e=await readEdition(entry);
@@ -301,8 +307,10 @@ async function switchEdition(entry){
   if(edition&&active){
    // Never erase an earlier integrity-verified edition after a failed archive selection.
    $('edition-select').value=active.path;
+   selectionFeedback('Could not open '+humanDate(entry.date)+' revision '+entry.revision+': '+err.message+'. Still showing the previously verified edition.');
    status('Could not verify '+humanDate(entry.date)+': '+err.message+'. Keeping the previously verified '+humanDate(active.date)+' edition; unverified records were not displayed.');
   }else{
+   selectionFeedback('Could not open '+humanDate(entry.date)+' revision '+entry.revision+': '+err.message+'. No unverified records are shown.');
    edition=null;active=null;$('evidence-filter').disabled=true;$('source-filter').disabled=true;$('export-verified').disabled=true;$('edition-permalink-wrap').hidden=true;$('revision-history').hidden=true;metadata();sourceCoverage();renderSnapshot();$('edition-summary').hidden=true;
    $('edition-content').replaceChildren(element('div','Edition verification failed. No daily records passed validation; the evergreen catalog remains available.','empty'));
    status('Cannot display this edition: '+err.message);

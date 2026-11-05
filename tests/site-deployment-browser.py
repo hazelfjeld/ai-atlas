@@ -296,6 +296,30 @@ with sync_playwright() as p:
         check('manual revision change replaces URL only after verified selection',
               page.locator('#edition-select').input_value().endswith('-v7.json')
               and 'revision=7' in page.locator('#edition-permalink').get_attribute('href'))
+        # A failed manual revision switch previously only reported the error
+        # above the controls. On a small screen the picker silently jumped
+        # back to the verified revision, with no local explanation.
+        page.goto(base + 'whats-new.html?date=2026-11-02&revision=18')
+        page.wait_for_function("!document.getElementById('edition-select').disabled", timeout=45000)
+        blocked_path = '**/data/daily/editions/2026-11-02-v17.json'
+        page.route(blocked_path, lambda route: route.abort())
+        archive_picker = page.locator('#edition-select')
+        archive_picker.focus()
+        archive_picker.select_option('data/daily/editions/2026-11-02-v17.json')
+        page.wait_for_function("""() => document.getElementById('edition-content').getAttribute('aria-busy') === 'false'
+            && !document.getElementById('edition-selection-error').hidden""", timeout=45000)
+        check('failed revision preserves verified articles and keyboard focus while showing a nearby explanation',
+              archive_picker.input_value().endswith('-v18.json')
+              and 'revision=18' in page.url
+              and page.locator('#edition-content article.item').count() > 0
+              and 'Still showing the previously verified edition' in page.locator('#edition-selection-error').inner_text()
+              and page.evaluate("document.activeElement.id === 'edition-select'"))
+        page.unroute(blocked_path)
+        archive_picker.select_option('data/daily/editions/2026-11-02-v17.json')
+        page.wait_for_function("location.search.includes('revision=17')", timeout=45000)
+        check('successful retry clears the previous inline revision failure',
+              page.locator('#edition-selection-error').is_hidden()
+              and archive_picker.input_value().endswith('-v17.json'))
     # A filter interaction with the previously verified edition can happen while
     # a newly selected revision is still downloading. It must not prematurely
     # clear aria-busy and mislead assistive technology into announcing completion.

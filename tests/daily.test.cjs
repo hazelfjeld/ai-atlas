@@ -1541,3 +1541,13 @@ test('filtering an older verified edition cannot end a pending revision loading 
  assert.match(switching,/\$\('edition-select'\)\.value=entry\.path;\s*\$\('edition-content'\)\.setAttribute\('aria-busy','false'\);/,'Only the successfully verified revision should clear the busy state');
  assert.match(switching,/if\(requestEpoch!==switchEpoch\)return/,'Superseded revision loads must not update the page');
 });
+
+test('Failed archive selection explains rollback beside the picker without stealing keyboard focus',()=>{
+ const html=fs.readFileSync('whats-new.html','utf8'),js=fs.readFileSync('whats-new.js','utf8');
+ assert.match(html,/<select id="edition-select" aria-describedby="edition-selection-error" disabled>/);
+ assert.match(html,/<p id="edition-selection-error" class="selection-error" role="note" hidden><\/p>/);
+ assert.match(js,/selectionFeedback\(\); \/\/ Remove the prior inline error/);
+ assert.match(js,/Still showing the previously verified edition/);
+ assert.match(js,/note\.hidden=!message/);
+ assert.match(js,/\$\('edition-select'\)\.value=active\.path/);
+});

@@ -47,6 +47,7 @@ h1 em{font-family:Georgia,serif;font-weight:400;color:var(--green)}
 .search-controls input{width:100%;min-width:0;padding:11px;border:1px solid #b6c9ba;border-radius:8px;background:var(--surface);color:var(--ink);font:inherit;font-size:14px;letter-spacing:normal;text-transform:none}
 .search-controls button{padding:11px 17px;border:1px solid var(--line);border-radius:8px;background:var(--soft);color:var(--ink);font:inherit;font-size:14px;font-weight:650;cursor:pointer}
 .search-controls button:hover{border-color:var(--green)}
+.selection-error{margin:12px 0 0;padding:10px 12px;background:var(--soft);border-left:3px solid var(--focus);border-radius:0 7px 7px 0;color:var(--ink);font-size:13px;line-height:1.55}
 .filter-count{font-size:13px;color:var(--muted);margin:10px 0 0}
 .meta{display:flex;gap:14px 25px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin-top:18px}.edition-permalink{font-size:13px;margin:12px 0 0}.edition-permalink[hidden]{display:none}.meta b{color:var(--ink)}
 .revision-history{margin:30px 0;padding:18px 22px;background:var(--surface);border:1px solid var(--line);border-radius:14px}.revision-history h3{font-size:16px;margin:15px 0 5px}.revision-history p{font-size:13px;color:var(--muted)}.revision-history ul{margin:5px 0;padding-left:24px}.revision-history li{font-size:13px;margin:6px 0;overflow-wrap:anywhere}.revision-history li a{margin-left:9px}.revision-history[hidden]{display:none}
@@ -168,13 +169,14 @@ html:root[data-theme=dark] .summary{background:var(--soft)}
 
 <div class="panel">
  <div class="controls">
-  <label for="edition-select">Edition archive<select id="edition-select" disabled><option value="">Awaiting first edition</option></select></label>
+  <label for="edition-select">Edition archive<select id="edition-select" aria-describedby="edition-selection-error" disabled><option value="">Awaiting first edition</option></select></label>
   <label for="section-filter">Collection<select id="section-filter"><option value="all">All sections</option><option value="news">AI news</option><option value="technologies">New technologies</option><option value="terms">New terms</option><option value="site_changes">Updated in AI Updates</option><option value="corrections">Corrections</option></select></label>
   <label for="topic-filter">Topic<select id="topic-filter"><option value="all">All topics</option><option value="safety">Safety</option><option value="research">Research</option><option value="models">Models</option><option value="tools">Tools</option><option value="hardware">Hardware</option><option value="policy">Policy</option></select></label>
   <label for="publication-filter">News source date<select id="publication-filter"><option value="all">All publication dates</option><option value="same-day">Published on edition date</option><option value="catch-up">Earlier reporting / catch-up</option><option value="postdated">Published after edition date</option><option value="undated">Source date unreported</option></select></label>
   <label for="evidence-filter">Original review label<select id="evidence-filter" disabled><option value="all">All review labels</option></select></label>
   <label for="source-filter">Source domain<select id="source-filter" disabled><option value="all">All sources</option></select></label>
  </div>
+ <p id="edition-selection-error" class="selection-error" role="note" hidden></p>
  <p class="fact" style="margin:9px 0 0">News source date compares the reported publisher date with the selected archive's Chicago edition date. Choosing a date scope shows AI news only, not Atlas website changes; event, discovery and catalog-addition dates remain separate.</p>
  <div class="search-controls"><label for="edition-search">Search this edition<input id="edition-search" type="search" maxlength="120" autocomplete="off" disabled aria-describedby="filter-results" placeholder="Search headlines, caveats, sources, tags"></label><button id="reset-filters" type="button">Reset filters</button></div>
  <div class="search-controls"><button id="export-verified" type="button" disabled title="Enabled after an edition passes SHA-256 and schema checks">Download filtered evidence list (.csv)</button><span class="fact">Exports source dates, review labels, caveats and links from the verified archive, not a live news search. Spreadsheet formula text is neutralized.</span></div>
