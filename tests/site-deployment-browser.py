@@ -162,6 +162,18 @@ with sync_playwright() as p:
               and page.locator('#edition-content article.item').count() >= 1)
         check('news stories visually distinguish Why it matters from the summary',
               page.locator('#edition-content article.item .why').count() >= 1)
+        # Generic repeated "Original source" links were indistinguishable in
+        # screen-reader link navigation. Accessible names must identify each card.
+        check('archive record links have meaningful, destination-specific accessible names',
+              page.evaluate("""() => {
+                  const links = [...document.querySelectorAll('#edition-content article.item .links a')];
+                  return links.length > 2 && links.every(a => {
+                      const title = a.closest('article.item')?.querySelector('h3')?.textContent;
+                      const name = a.getAttribute('aria-label');
+                      return !!title && !!name && name.includes(title)
+                          && (a.target !== '_blank' || name.includes('opens in new tab'));
+                  });
+              }"""))
         page.set_viewport_size({'width':320,'height':720})
         check('verified archive fits 320px mobile without horizontal scroll',
               page.evaluate('document.documentElement.scrollWidth <= window.innerWidth + 1'))

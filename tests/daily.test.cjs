@@ -80,6 +80,12 @@ test('daily archive loading text is neutral until the index proves a dated editi
  assert.match(js,/Awaiting the first reviewed edition\. No unverified headlines/);
 });
 
+test('archive record links identify their destination for screen-reader link lists',()=>{
+ const js=fs.readFileSync('whats-new.js','utf8');
+ assert.ok(js.includes("source.setAttribute('aria-label','Original source for '+item.title+' (opens in new tab)')"));
+ assert.ok(js.includes("internal.setAttribute('aria-label','Explore '+item.title+' in AI Updates')"));
+});
+
 test('Daily page and scripts are syntax-valid and contain archive, source, topic and missing-edition controls',()=>{
  const html=fs.readFileSync('whats-new.html','utf8'),js=fs.readFileSync('whats-new.js','utf8');
  new vm.Script(js);

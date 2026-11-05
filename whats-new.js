@@ -98,8 +98,14 @@ function card(item,kind){
  article.append(dates);
  if(Array.isArray(item.tags)&&item.tags.length){const tags=element('div',undefined,'tags');item.tags.slice(0,7).forEach(t=>tags.append(element('span',t,'tag')));article.append(tags);}
  const links=element('div',undefined,'links'),source=href(item.source_url,'Original source'),internal=localHref(item.catalog_path,'Explore in AI Updates');
- if(source)links.append(source);
- if(internal)links.append(internal);
+ if(source){
+  source.setAttribute('aria-label','Original source for '+item.title+' (opens in new tab)');
+  links.append(source);
+ }
+ if(internal){
+  internal.setAttribute('aria-label','Explore '+item.title+' in AI Updates');
+  links.append(internal);
+ }
  if(links.childNodes.length)article.append(links);
  return article;
 }
