@@ -178,23 +178,31 @@ test('editorial review pages reuse the canonical shared mobile chrome without ch
   assert.match(hardware, /\.review-shell>header\{display:block;padding-top:20px\}/);
 });
 
-test('standalone research snapshot uses compact mobile navigation without changing evidence records', () => {
+test('research snapshot uses the shared mobile menu and retains contextual research views', () => {
   const html=read('research.html');
-  assert.match(html, /class="research-mobile-topbar"/);
-  assert.match(html, /<details class="research-mobile-nav" id="research-mobile-nav">/);
-  assert.match(html, /<nav class="research-menu-panel" aria-label="AI Updates sections">/);
-  assert.match(html, /href="#papers" aria-current="page">Research library<\/a>/);
-  assert.match(html, /class="research-search-link" href="index.html#\/search"/);
-  assert.match(html, /@media\(max-width:700px\)[\s\S]*?\.shell>aside\{display:none\}/);
-  assert.match(html, /\.research-menu-panel a\{[^}]*min-height:44px/);
-  assert.match(html, /@media print\{\.research-mobile-topbar\{display:none\}\}/);
-  for (const route of ['overview','dictionary','technologies','games'])
-    assert.ok(html.includes('href="index.html#/'+route+'"'), 'Missing existing workspace route: '+route);
-  for (const anchor of ['papers','alerts','coverage'])
-    assert.ok(html.includes('href="#'+anchor+'"'), 'Missing research-section destination: '+anchor);
-  const publishedTechnologies = JSON.parse(read('publication.json')).published_counts.technologies;
-  assert.ok(html.includes(`Technologies <span>${publishedTechnologies} ↗</span>`), 'Sidebar must use the published count');
-  assert.ok(html.includes(`all ${publishedTechnologies} technologies`), 'Research notice must agree with the published catalog');
+  assert.match(html, /class="research-mobile-topbar site-mobile-chrome"/);
+  assert.match(html, /<details class="research-mobile-nav site-mobile-chrome__nav" id="research-mobile-nav">/);
+  assert.match(html, /class="research-menu-toggle site-mobile-chrome__toggle"/);
+  assert.match(html, /class="research-search-link site-mobile-chrome__search" href="index.html#\/search"/);
+  assert.match(html, /<link rel="stylesheet" href="site-chrome.css">/);
+  const nav=html.match(/<nav class="research-menu-panel site-mobile-chrome__menu" aria-label="AI Updates sections">([\s\S]*?)<\/nav>/)?.[1];
+  assert.ok(nav, 'Research must use the shared mobile menu');
+  const expected=[
+    ['index.html#/overview','Discover'],['whats-new.html','What’s New Today'],
+    ['index.html#/dictionary','Concept dictionary'],['index.html#/technologies','Technology profiles'],
+    ['index.html#/games','Games'],['playbooks.html','Playbooks'],['about.html','About']
+  ];
+  assert.deepEqual([...nav.matchAll(/<a href="([^"]+)">([^<]+)<\/a>/g)].map(x => [x[1],x[2]]),expected);
+  for (const route of ['papers','alerts','coverage'])
+    assert.ok(html.includes('href="#'+route+'" data-nav="'+route+'"'), 'Research view must remain reachable: '+route);
+  assert.match(html, /@media\(max-width:650px\)[\s\S]*?\.shell>aside\{display:none\}/);
+  assert.match(html, /@media\(min-width:651px\) and \(max-width:700px\)/);
+  assert.doesNotMatch(html, /\.research-menu-panel a\{/);
+  assert.match(read('site-chrome.css'), /\.site-mobile-chrome__menu a\{[^}]*min-height:44px/);
+  assert.match(html, /@media print\{\.research-mobile-topbar,\.research-local-nav\{display:none\}\}/);
+  const publishedTechnologies=JSON.parse(read('publication.json')).published_counts.technologies;
+  assert.ok(html.includes(`Technologies <span>${publishedTechnologies} ↗</span>`));
+  assert.ok(html.includes(`all ${publishedTechnologies} technologies`));
   assert.ok(html.includes('Automatic collection remains off.'));
   assert.ok(html.includes('id="loading-status" role="status"'));
 });

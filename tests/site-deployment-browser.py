@@ -371,8 +371,8 @@ with sync_playwright() as p:
           mobile_hardware.locator('#global-query').is_visible())
     mobile_hardware.close()
 
-    # Research still used a stacked legacy sidebar and horizontal link strip
-    # on phones; its navigation now matches Discover and the other static pages.
+    # Research uses the same mobile navigation classes and seven primary
+    # destinations as Games, while keeping its own three research-view tabs.
     mobile_research = browser.new_page(viewport={'width':320, 'height':720}, reduced_motion='reduce')
     mobile_research.goto(base + 'research.html')
     check('research uses the compact mobile navigation instead of the legacy sidebar',
@@ -381,20 +381,35 @@ with sync_playwright() as p:
           and mobile_research.locator('.research-search-link').is_visible())
     check('320px research page has no horizontal overflow',
           mobile_research.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'))
+    check('research primary mobile menu matches the other standalone pages',
+          mobile_research.locator('.site-mobile-chrome__menu a').all_inner_texts()
+          == ['Discover', 'What’s New Today', 'Concept dictionary', 'Technology profiles',
+              'Games', 'Playbooks', 'About'])
+    mobile_research.wait_for_function(
+        """document.querySelector('.research-local-nav a[href="#papers"]').getAttribute('aria-current') === 'page'""")
     mobile_research.locator('.research-menu-toggle').focus()
     mobile_research.keyboard.press('Enter')
-    check('research mobile navigation is keyboard operable and identifies the current section',
+    check('research mobile menu is keyboard operable and local view is identified',
           mobile_research.locator('#research-mobile-nav').evaluate('(el) => el.open')
-          and mobile_research.get_by_role('navigation', name='AI Updates sections')
-              .get_by_role('link', name='Research library', exact=True).get_attribute('aria-current') == 'page')
+          and mobile_research.locator('.research-local-nav a[href="#papers"]').get_attribute('aria-current') == 'page')
     check('research navigation links meet the 44px touch target minimum',
-          mobile_research.evaluate("""() => [...document.querySelectorAll('.research-menu-panel a')]
+          mobile_research.evaluate("""() => [...document.querySelectorAll('.site-mobile-chrome__menu a')]
               .every(a => a.getBoundingClientRect().height >= 44)"""))
     mobile_research.keyboard.press('Enter')
+    mobile_research.locator('.research-local-nav a[href="#alerts"]').click()
+    mobile_research.wait_for_function("location.hash === '#alerts'")
+    check('research view tabs switch the original catalog route and selected state',
+          mobile_research.locator('.research-local-nav a[href="#alerts"]').get_attribute('aria-current') == 'page'
+          and mobile_research.locator('#section-label').inner_text() == 'SAFETY OBSERVATORY')
+    mobile_research.locator('.research-local-nav a[href="#papers"]').click()
     mobile_research.screenshot(path=str(out / 'research-mobile-header.png'), full_page=False)
     mobile_research.set_viewport_size({'width':390, 'height':844})
     check('390px research page fits without horizontal overflow',
           mobile_research.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'))
+    mobile_research.set_viewport_size({'width':680, 'height':900})
+    check('intermediate tablet retains research section navigation without an empty gap',
+          mobile_research.locator('.shell > aside').is_visible()
+          and not mobile_research.locator('.research-mobile-topbar').is_visible())
     mobile_research.set_viewport_size({'width':1440, 'height':900})
     check('desktop research keeps the existing sidebar',
           mobile_research.locator('.shell > aside').is_visible()
