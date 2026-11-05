@@ -1530,3 +1530,14 @@ test('Verified v6 preserves collector provenance and records actual production p
  assert.deepEqual(receipt.accepted_catalog_addition_ids,['tech-proposal:tohoku-aisin:stt-mram-ai-soc:2026-11-03']);
  assert.equal(receipt.deferred_catalog_proposal_ids.length,3);
 });
+
+
+test('filtering an older verified edition cannot end a pending revision loading state',()=>{
+ const js=fs.readFileSync('whats-new.js','utf8');
+ const render=js.slice(js.indexOf('function render(){'),js.indexOf('async function request(path){'));
+ const switching=js.slice(js.indexOf('async function switchEdition(entry){'),js.indexOf('function populateArchive(selected){'));
+ assert.ok(render.includes('syncVerifiedUrl()'));
+ assert.doesNotMatch(render,/setAttribute\('aria-busy','false'\)/,'Filtering verified older content must not announce that pending revision verification is complete');
+ assert.match(switching,/\$\('edition-select'\)\.value=entry\.path;\s*\$\('edition-content'\)\.setAttribute\('aria-busy','false'\);/,'Only the successfully verified revision should clear the busy state');
+ assert.match(switching,/if\(requestEpoch!==switchEpoch\)return/,'Superseded revision loads must not update the page');
+});

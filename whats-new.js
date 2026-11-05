@@ -251,7 +251,8 @@ function render(){
  $('filter-results').textContent='Showing '+visible+' of '+total+' records in the selected collection'+(topic!=='all'||review!=='all'||source!=='all'||publication!=='all'||query.trim()?' matching your filters.':'.');
  if(!visible&&(topic!=='all'||review!=='all'||source!=='all'||publication!=='all'||query.trim()))content.append(element('div','No entries match those filters. Try a broader topic or search. This is not a claim that no AI news occurred.','empty'));
  syncVerifiedUrl();
- $('edition-content').setAttribute('aria-busy','false');
+ // An older verified edition may be filtered while a new revision is loading;
+ // only the current revision request may clear its loading announcement.
 }
 async function request(path){
  const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),18000);
@@ -292,6 +293,7 @@ async function switchEdition(entry){
   const caveat=e.coverage.status==='complete'?'':' · source coverage '+e.coverage.status;
   status(prefix+' · published '+stamp(entry.published_at)+caveat+'. AI coverage is curated, not exhaustive.');
   $('edition-select').value=entry.path;
+  $('edition-content').setAttribute('aria-busy','false');
   return true;
  }catch(err){
   if(requestEpoch!==switchEpoch)return false;

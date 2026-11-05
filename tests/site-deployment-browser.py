@@ -296,6 +296,40 @@ with sync_playwright() as p:
         check('manual revision change replaces URL only after verified selection',
               page.locator('#edition-select').input_value().endswith('-v7.json')
               and 'revision=7' in page.locator('#edition-permalink').get_attribute('href'))
+    # A filter interaction with the previously verified edition can happen while
+    # a newly selected revision is still downloading. It must not prematurely
+    # clear aria-busy and mislead assistive technology into announcing completion.
+    if any(e['date'] == '2026-11-02' and e['revision'] == 17 for e in index['editions']) and any(
+            e['date'] == '2026-11-02' and e['revision'] == 18 for e in index['editions']):
+        page.goto(base + 'whats-new.html?date=2026-11-02&revision=18')
+        page.wait_for_function(
+            "location.search.includes('revision=18') && document.getElementById('edition-content').getAttribute('aria-busy') === 'false'",
+            timeout=45000)
+        page.evaluate("""() => {
+            const originalFetch = window.fetch.bind(window);
+            window.fetch = (input, options) => {
+                if (String(input).includes('2026-11-02-v17.json')) {
+                    return new Promise(resolve => {
+                        window.__releaseRevisionRequest = () => resolve(originalFetch(input, options));
+                    });
+                }
+                return originalFetch(input, options);
+            };
+        }""")
+        page.locator('#edition-select').select_option('data/daily/editions/2026-11-02-v17.json')
+        page.wait_for_function("typeof window.__releaseRevisionRequest === 'function'")
+        check('archive announces revision verification in progress',
+              page.locator('#edition-content').get_attribute('aria-busy') == 'true')
+        page.locator('#edition-search').fill('Reuters')
+        check('filtering the previous edition does not end pending revision loading state',
+              page.locator('#edition-content').get_attribute('aria-busy') == 'true'
+              and 'revision=18' in page.url)
+        page.evaluate("window.__releaseRevisionRequest()")
+        page.wait_for_function(
+            "location.search.includes('revision=17') && document.getElementById('edition-content').getAttribute('aria-busy') === 'false'",
+            timeout=45000)
+        check('verified revision completes and clears loading state',
+              page.locator('#edition-select').input_value().endswith('-v17.json'))
     # Exercise actual browser downloads from a pinned, SHA-checked archive revision.
     # The test never assumes tomorrow's collection exists or updates these records.
     if any(e['date'] == '2026-11-02' and e['revision'] == 18 for e in index['editions']):
