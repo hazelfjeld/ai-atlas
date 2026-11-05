@@ -298,6 +298,10 @@ with sync_playwright() as p:
           mobile_review.locator('.review-mobile-topbar').is_visible()
           and not mobile_review.locator('.shell > .nav').is_visible()
           and mobile_review.locator('.review-mobile-topbar .site-mobile-chrome__search').is_visible())
+    check('review uses a level menu and search control row',
+          mobile_review.evaluate("""() => Math.abs(
+              document.querySelector('.review-mobile-topbar .site-mobile-chrome__toggle').getBoundingClientRect().top -
+              document.querySelector('.review-mobile-topbar .site-mobile-chrome__search').getBoundingClientRect().top) <= 2"""))
     check('320px catalog review has no page-wide horizontal overflow',
           mobile_review.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'))
     mobile_review.locator('.review-mobile-topbar .site-mobile-chrome__toggle').focus()
@@ -334,6 +338,10 @@ with sync_playwright() as p:
           mobile_hardware.locator('.hardware-mobile-topbar').is_visible()
           and not mobile_hardware.locator('.review-shell > .review-nav').is_visible()
           and mobile_hardware.locator('.hardware-mobile-topbar .site-mobile-chrome__search').is_visible())
+    check('hardware uses a level menu and search control row',
+          mobile_hardware.evaluate("""() => Math.abs(
+              document.querySelector('.hardware-mobile-topbar .site-mobile-chrome__toggle').getBoundingClientRect().top -
+              document.querySelector('.hardware-mobile-topbar .site-mobile-chrome__search').getBoundingClientRect().top) <= 2"""))
     check('320px hardware review has no page-wide horizontal overflow',
           mobile_hardware.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'))
     mobile_hardware.locator('.hardware-mobile-topbar .site-mobile-chrome__toggle').focus()

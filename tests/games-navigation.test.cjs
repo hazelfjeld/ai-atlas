@@ -169,6 +169,7 @@ test('editorial review pages reuse the canonical shared mobile chrome without ch
     assert.match(html, /@media print/, filename);
   }
   assert.match(read('site-chrome.css'), /\.site-mobile-chrome__menu a\{[^}]*min-height:44px/);
+  assert.match(read('site-chrome.css'), /\.site-mobile-chrome__nav\{margin:0;flex:0 0 44px\}/);
   const catalog=read('catalog-review.html'), hardware=read('hardware-review.html');
   assert.ok(catalog.includes('Seven proposals, not seven new entries.'));
   assert.ok(catalog.includes('data/catalog-candidate-decisions-2026-11-03.json'));
