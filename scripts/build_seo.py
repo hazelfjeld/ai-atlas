@@ -32,26 +32,10 @@ def nav(prefix=''):
 # Only the editorial-policy page receives the lightweight mobile header; every
 # generated term/technology URL and its existing layout remain byte-identical.
 ABOUT_MOBILE_CSS = '''
-/* Keep the editorial-policy page in the same compact mobile shell as Discover and the archive. */
-.about-mobile-topbar{display:none}
-@media(max-width:650px){
- .term-shell{padding:0 20px 65px}
- .term-shell .term-nav{display:none}
- .about-mobile-topbar{display:flex;align-items:center;gap:12px;position:relative;z-index:5;margin:0 -20px;padding:14px 20px;border-bottom:1px solid var(--line)}
- .about-mobile-nav{flex:0 0 44px}
- .about-menu-toggle{display:grid;place-items:center;min-height:44px;width:44px;list-style:none;cursor:pointer;background:var(--surface);border:1px solid var(--line);border-radius:9px;color:var(--ink);font-size:20px;line-height:1}
- .about-menu-toggle::-webkit-details-marker{display:none}
- .about-menu-toggle:focus-visible,.about-search-link:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
- .about-menu-panel{position:absolute;left:20px;top:calc(100% - 2px);width:min(310px,calc(100vw - 40px));max-height:calc(100vh - 96px);overflow-y:auto;padding:9px;background:var(--surface);border:1px solid var(--line);border-radius:10px;box-shadow:0 12px 26px #0002}
- .about-menu-panel a{display:block;min-height:44px;padding:10px 12px;border-radius:6px;color:var(--ink);text-decoration:none;font-size:15px;font-weight:600}
- .about-menu-panel a:hover,.about-menu-panel a[aria-current=page]{background:var(--soft);color:var(--green)}
- .about-search-link{display:flex;align-items:center;gap:12px;flex:1;min-width:0;min-height:44px;padding:8px 13px;border:1px solid var(--line);border-radius:9px;background:var(--surface);color:var(--muted);text-decoration:none;font-size:16px}
- .about-search-link:hover{border-color:var(--green);color:var(--ink)}
- .about-search-icon{flex-shrink:0;font-size:22px;line-height:1}
- .about-search-placeholder{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-}
+/* All mobile navigation controls and menu sizing are owned by site-chrome.css. */
+@media(max-width:650px){.term-shell{padding:0 20px 65px}.term-shell .term-nav{display:none}.about-mobile-topbar{margin:0 -20px;padding:14px 20px;border-bottom:1px solid var(--line)}}
 '''
-ABOUT_MOBILE_NAV = '''<div class="about-mobile-topbar"><details class="about-mobile-nav" id="about-mobile-nav"><summary class="about-menu-toggle" aria-label="Toggle navigation"><span aria-hidden="true">☰</span></summary><nav class="about-menu-panel" aria-label="AI Updates sections"><a href="index.html#/overview">Discover</a><a href="whats-new.html">What’s New Today</a><a href="index.html#/dictionary">Concept dictionary</a><a href="index.html#/technologies">Technology profiles</a><a href="index.html#/safety">AI safety</a><a href="index.html#/papers">Research library</a><a href="index.html#/games">Games</a><a href="demo.html">Guided demo</a><a href="about.html" aria-current="page">About</a></nav></details><a class="about-search-link" href="index.html#/search" aria-label="Search AI Updates in the main collection"><span class="about-search-icon" aria-hidden="true">⌕</span><span class="about-search-placeholder">Search tools, research, concepts…</span></a></div>'''
+ABOUT_MOBILE_NAV = '''<div class="about-mobile-topbar site-mobile-chrome" aria-label="AI Updates mobile header"><details class="about-mobile-nav site-mobile-chrome__nav" id="about-mobile-nav"><summary class="about-menu-toggle site-mobile-chrome__toggle" aria-label="Toggle navigation"><span aria-hidden="true">☰</span></summary><nav class="about-menu-panel site-mobile-chrome__menu" aria-label="AI Updates sections"><a href="index.html#/overview">Discover</a><a href="whats-new.html">What’s New Today</a><a href="index.html#/dictionary">Concept dictionary</a><a href="index.html#/technologies">Technology profiles</a><a href="index.html#/games">Games</a><a href="playbooks.html">Playbooks</a><a href="about.html" aria-current="page">About</a></nav></details><a class="about-search-link site-mobile-chrome__search" href="index.html#/search" aria-label="Search AI Updates in the main collection"><span class="about-search-icon site-mobile-chrome__search-icon" aria-hidden="true">⌕</span><span class="about-search-placeholder site-mobile-chrome__search-placeholder">Search tools, research, concepts…</span></a></div>'''
 
 # Same desktop navigation used by the existing editorial directories; rendered server-side.
 ABOUT_DESKTOP_NAV = '''<nav class="site-chrome term-nav" aria-label="AI Updates primary navigation"><a class="site-chrome__brand" href="index.html#/overview" aria-label="AI Updates home"><svg viewBox="0 0 36 36" fill="none" aria-hidden="true"><path d="M5 7h12v12H5zM21 17h10v12H21z" stroke="currentColor" stroke-width="2"/><path d="M21 6h10M26 1v10M5 25h12M5 30h8" stroke="currentColor" stroke-linecap="round" stroke-width="2"/></svg><span class="site-chrome__name">AI Updates<small>THE FRONTIER, IN CONTEXT</small></span></a><div class="site-chrome__links"><a href="index.html#/overview">Discover</a><a href="whats-new.html">What’s New Today</a><a href="index.html#/dictionary">Concept dictionary</a><a href="index.html#/technologies">Technology profiles</a><a href="index.html#/games">Games</a><a href="playbooks.html">Playbooks</a><a href="about.html" aria-current="page">About</a></div></nav>'''
