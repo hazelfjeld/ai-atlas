@@ -422,6 +422,7 @@ with sync_playwright() as p:
           == ['Discover', 'What’s New Today', 'Concept dictionary', 'Technology profiles',
               'Games', 'Playbooks', 'About']
           and mobile_research.locator('.research-local-nav').is_visible()
+          and mobile_research.locator('.research-site-chrome .site-chrome__links [aria-current]').count() == 0
           and mobile_research.locator('.shell > aside').count() == 0)
     published_counts = mobile_research.request.get(base + 'publication.json').json()['published_counts']
     check('research tabs retain accurate record counts and notice matches publication manifest',

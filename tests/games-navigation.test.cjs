@@ -203,6 +203,7 @@ test('research snapshot uses the shared mobile menu and retains contextual resea
   const titles=[...desktop.matchAll(/<a href="[^"]+"(?: aria-current="[^"]+")?>([^<]+)<\/a>/g)].map(x => x[1]);
   assert.deepEqual(titles, ['Discover','What’s New Today','Concept dictionary','Technology profiles','Games','Playbooks','About']);
   assert.ok(desktop.includes('class="site-chrome__brand" href="index.html#/overview"'));
+  assert.doesNotMatch(desktop, /aria-current=/, 'Research must not falsely select the news archive');
   assert.match(html, /href="#papers" data-nav="papers">Research library <span id="papers-count">/);
   assert.match(html, /href="#alerts" data-nav="alerts">Safety observatory <span id="alerts-count">/);
   assert.doesNotMatch(html, /\.research-menu-panel a\{/);
