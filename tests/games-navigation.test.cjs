@@ -143,38 +143,38 @@ test('About, technologies and playbooks reuse the Games and archive mobile chrom
   assert.match(css, /@media \(max-width:650px\)\{/);
 });
 
-test('catalog candidate review uses the compact mobile navigation without modifying its editorial content', () => {
-  const html=read('catalog-review.html');
-  assert.match(html, /class="review-mobile-topbar"/);
-  assert.match(html, /<details class="review-mobile-nav" id="review-mobile-nav">/);
-  assert.match(html, /<nav class="review-menu-panel" aria-label="AI Updates sections">/);
-  assert.match(html, /href="catalog-review.html" aria-current="page">Catalog review<\/a>/);
-  assert.match(html, /class="review-search-link" href="index.html#\/search"/);
-  assert.match(html, /@media\(max-width:650px\)[\s\S]*?\.shell>\.nav\{display:none\}/);
-  assert.match(html, /\.review-menu-panel a\{[^}]*min-height:44px/);
-  assert.match(html, /@media print\{\.review-mobile-topbar\{display:none\}\}/);
-  for(const route of ['overview','dictionary','safety','papers','games'])
-    assert.ok(html.includes('href="index.html#/'+route+'"'), 'Missing workspace destination: '+route);
-  assert.ok(html.includes('Seven proposals, not seven new entries.'));
-  assert.ok(html.includes('data/catalog-candidate-decisions-2026-11-03.json'));
-});
-
-
-test('hardware evidence review uses the same mobile navigation while retaining source-qualified research', () => {
-  const html=read('hardware-review.html');
-  assert.match(html, /class="hardware-mobile-topbar"/);
-  assert.match(html, /<details class="hardware-mobile-nav" id="hardware-mobile-nav">/);
-  assert.match(html, /<nav class="hardware-menu-panel" aria-label="AI Updates sections">/);
-  assert.match(html, /href="hardware-review.html" aria-current="page">Hardware evidence<\/a>/);
-  assert.match(html, /class="hardware-search-link" href="index.html#\/search"/);
-  assert.match(html, /@media\(max-width:650px\)[\s\S]*?\.review-shell>\.review-nav\{display:none\}/);
-  assert.match(html, /\.hardware-menu-panel a\{[^}]*min-height:44px/);
-  assert.match(html, /\.review-shell>header\{display:block;padding-top:20px\}/);
-  assert.match(html, /@media print\{\.review-nav,\.skip,\.hardware-mobile-topbar\{display:none\}/);
-  for (const route of ['overview','dictionary','safety','papers','games'])
-    assert.ok(html.includes('href="index.html#/'+route+'"'), 'Missing workspace destination: '+route);
-  assert.ok(html.includes('65.7 ms is OS boot, not the complete first detection'));
-  assert.ok(html.includes('Publisher measurements and derived ratios'));
+test('editorial review pages reuse the canonical shared mobile chrome without changing evidence', () => {
+  const expected = [
+    ['index.html#/overview','Discover'], ['whats-new.html','What’s New Today'],
+    ['index.html#/dictionary','Concept dictionary'], ['index.html#/technologies','Technology profiles'],
+    ['index.html#/games','Games'], ['playbooks.html','Playbooks'], ['about.html','About']
+  ];
+  const extract = html => {
+    const content = html.match(/<nav class="site-mobile-chrome__menu" aria-label="AI Updates sections">([\s\S]*?)<\/nav>/)?.[1];
+    assert.ok(content, 'Shared navigation is missing');
+    const links = [...content.matchAll(/<a href="([^"]+)"(?: aria-current="(?:page|location)")?>([^<]+)<\/a>/g)];
+    return links.map(m => [m[1],m[2]]);
+  };
+  assert.deepEqual(extract(read('games.html')), expected, 'Games is the canonical baseline');
+  for (const [filename,prefix] of [['catalog-review.html','review'],['hardware-review.html','hardware']]) {
+    const html=read(filename);
+    assert.match(html, new RegExp('class="'+prefix+'-mobile-topbar site-mobile-chrome"'), filename);
+    assert.match(html, new RegExp('id="'+prefix+'-mobile-nav"'), filename);
+    assert.match(html, /class="site-mobile-chrome__toggle"/, filename);
+    assert.match(html, /class="site-mobile-chrome__search" href="index.html#\/search"/, filename);
+    assert.deepEqual(extract(html), expected, filename + ' must match the same seven primary links');
+    assert.match(html, /href="whats-new.html" aria-current="location">What’s New Today<\/a>/, filename);
+    assert.doesNotMatch(html, new RegExp('\\.'+prefix+'-menu-(?:toggle|panel)\\{'), filename + ' must not duplicate the shared CSS');
+    assert.match(html, /@media\(max-width:650px\)/, filename);
+    assert.match(html, /@media print/, filename);
+  }
+  assert.match(read('site-chrome.css'), /\.site-mobile-chrome__menu a\{[^}]*min-height:44px/);
+  const catalog=read('catalog-review.html'), hardware=read('hardware-review.html');
+  assert.ok(catalog.includes('Seven proposals, not seven new entries.'));
+  assert.ok(catalog.includes('data/catalog-candidate-decisions-2026-11-03.json'));
+  assert.ok(hardware.includes('65.7 ms is OS boot, not the complete first detection'));
+  assert.ok(hardware.includes('Publisher measurements and derived ratios'));
+  assert.match(hardware, /\.review-shell>header\{display:block;padding-top:20px\}/);
 });
 
 test('standalone research snapshot uses compact mobile navigation without changing evidence records', () => {

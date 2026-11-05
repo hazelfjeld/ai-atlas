@@ -297,17 +297,19 @@ with sync_playwright() as p:
     check('catalog review uses the compact mobile site header',
           mobile_review.locator('.review-mobile-topbar').is_visible()
           and not mobile_review.locator('.shell > .nav').is_visible()
-          and mobile_review.locator('.review-search-link').is_visible())
+          and mobile_review.locator('.review-mobile-topbar .site-mobile-chrome__search').is_visible())
     check('320px catalog review has no page-wide horizontal overflow',
           mobile_review.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'))
-    mobile_review.locator('.review-menu-toggle').focus()
+    mobile_review.locator('.review-mobile-topbar .site-mobile-chrome__toggle').focus()
     mobile_review.keyboard.press('Enter')
+    check('catalog review mobile menu matches the primary navigation order',
+          mobile_review.locator('.review-mobile-topbar .site-mobile-chrome__menu a').all_inner_texts() == ['Discover', 'What’s New Today', 'Concept dictionary', 'Technology profiles', 'Games', 'Playbooks', 'About'])
     check('catalog review menu is keyboard operable with current-page indication',
           mobile_review.locator('#review-mobile-nav').evaluate('(el) => el.open')
           and mobile_review.get_by_role('navigation', name='AI Updates sections')
-              .get_by_role('link', name='Catalog review', exact=True).get_attribute('aria-current') == 'page')
+              .get_by_role('link', name='What’s New Today', exact=True).get_attribute('aria-current') == 'location')
     check('catalog review mobile links meet 44px touch minimum',
-          mobile_review.evaluate("""() => [...document.querySelectorAll('.review-menu-panel a')]
+          mobile_review.evaluate("""() => [...document.querySelectorAll('.review-mobile-topbar .site-mobile-chrome__menu a')]
               .every(a => a.getBoundingClientRect().height >= 44)"""))
     mobile_review.keyboard.press('Enter')
     mobile_review.screenshot(path=str(out / 'catalog-review-mobile-header.png'), full_page=False)
@@ -319,7 +321,7 @@ with sync_playwright() as p:
           mobile_review.locator('.shell > .nav').is_visible()
           and not mobile_review.locator('.review-mobile-topbar').is_visible())
     mobile_review.set_viewport_size({'width':320, 'height':720})
-    mobile_review.locator('.review-search-link').click()
+    mobile_review.locator('.review-mobile-topbar .site-mobile-chrome__search').click()
     mobile_review.wait_for_url('**/index.html#/search')
     check('catalog review search opens actual workspace search',
           mobile_review.locator('#global-query').is_visible())
@@ -331,17 +333,19 @@ with sync_playwright() as p:
     check('hardware review uses the compact mobile site header',
           mobile_hardware.locator('.hardware-mobile-topbar').is_visible()
           and not mobile_hardware.locator('.review-shell > .review-nav').is_visible()
-          and mobile_hardware.locator('.hardware-search-link').is_visible())
+          and mobile_hardware.locator('.hardware-mobile-topbar .site-mobile-chrome__search').is_visible())
     check('320px hardware review has no page-wide horizontal overflow',
           mobile_hardware.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'))
-    mobile_hardware.locator('.hardware-menu-toggle').focus()
+    mobile_hardware.locator('.hardware-mobile-topbar .site-mobile-chrome__toggle').focus()
     mobile_hardware.keyboard.press('Enter')
+    check('hardware mobile menu matches the primary navigation order',
+          mobile_hardware.locator('.hardware-mobile-topbar .site-mobile-chrome__menu a').all_inner_texts() == ['Discover', 'What’s New Today', 'Concept dictionary', 'Technology profiles', 'Games', 'Playbooks', 'About'])
     check('hardware review menu supports keyboard navigation and current-page indication',
           mobile_hardware.locator('#hardware-mobile-nav').evaluate('(el) => el.open')
           and mobile_hardware.get_by_role('navigation', name='AI Updates sections')
-              .get_by_role('link', name='Hardware evidence', exact=True).get_attribute('aria-current') == 'page')
+              .get_by_role('link', name='What’s New Today', exact=True).get_attribute('aria-current') == 'location')
     check('hardware review mobile links meet 44px touch minimum',
-          mobile_hardware.evaluate("""() => [...document.querySelectorAll('.hardware-menu-panel a')]
+          mobile_hardware.evaluate("""() => [...document.querySelectorAll('.hardware-mobile-topbar .site-mobile-chrome__menu a')]
               .every(a => a.getBoundingClientRect().height >= 44)"""))
     mobile_hardware.keyboard.press('Enter')
     mobile_hardware.screenshot(path=str(out / 'hardware-review-mobile-header.png'), full_page=False)
@@ -353,7 +357,7 @@ with sync_playwright() as p:
           mobile_hardware.locator('.review-shell > .review-nav').is_visible()
           and not mobile_hardware.locator('.hardware-mobile-topbar').is_visible())
     mobile_hardware.set_viewport_size({'width':320, 'height':720})
-    mobile_hardware.locator('.hardware-search-link').click()
+    mobile_hardware.locator('.hardware-mobile-topbar .site-mobile-chrome__search').click()
     mobile_hardware.wait_for_url('**/index.html#/search')
     check('hardware review search opens the actual workspace search',
           mobile_hardware.locator('#global-query').is_visible())
