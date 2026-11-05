@@ -397,7 +397,9 @@ with sync_playwright() as p:
               .every(a => a.getBoundingClientRect().height >= 44)"""))
     mobile_research.keyboard.press('Enter')
     mobile_research.locator('.research-local-nav a[href="#alerts"]').click()
-    mobile_research.wait_for_function("location.hash === '#alerts'")
+    mobile_research.wait_for_function("""() => location.hash === '#alerts'
+        && document.querySelector('.research-local-nav a[href="#alerts"]').getAttribute('aria-current') === 'page'
+        && document.querySelector('#section-label').textContent === 'SAFETY OBSERVATORY'""")
     check('research view tabs switch the original catalog route and selected state',
           mobile_research.locator('.research-local-nav a[href="#alerts"]').get_attribute('aria-current') == 'page'
           and mobile_research.locator('#section-label').inner_text() == 'SAFETY OBSERVATORY')
