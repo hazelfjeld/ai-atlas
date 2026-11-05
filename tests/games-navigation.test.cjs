@@ -247,6 +247,7 @@ test('editorial directories share one responsive primary navigation component', 
   }
   const css = read('site-chrome.css');
   assert.match(css, /\.site-chrome__links a\[aria-current=page\]/);
+  assert.match(css, /\.site-chrome__name\{color:inherit!important/);
   assert.match(css, /\.site-chrome a:focus-visible/);
   assert.match(css, /@media \(max-width:650px\)\{\.site-chrome\{display:none!important\}\}/);
   assert.ok(JSON.parse(read('deploy/public-files.json')).root_files.includes('site-chrome.css'));

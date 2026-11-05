@@ -86,6 +86,8 @@ with sync_playwright() as p:
         check('site navigation order and current page on ' + route,
               nav.locator('.site-chrome__links a').all_inner_texts() == primary_names
               and nav.locator('.site-chrome__links a[aria-current="page"]').inner_text() == active)
+        check('shared wordmark has legible inherited foreground on ' + route,
+              nav.locator('.site-chrome__name').evaluate('el => getComputedStyle(el).color === getComputedStyle(el.closest("a")).color'))
         page.screenshot(path=str(out / ('shared-nav-' + route + '.png')), full_page=False)
         for width in (320, 390, 768):
             page.set_viewport_size({'width':width, 'height':844})
