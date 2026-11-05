@@ -349,7 +349,7 @@ with sync_playwright() as p:
         mobile_reference.close()
     page.goto(base + 'whats-new.html')
     check('daily archive uses the same Atlas logo and quiet wordmark',
-          page.locator('.brand-wordmark small').inner_text() == 'THE FRONTIER, IN CONTEXT')
+          page.locator('.site-chrome__name small').inner_text() == 'THE FRONTIER, IN CONTEXT')
     check('daily archive places verified briefing and articles before reporting metrics',
           page.evaluate("""() => {
               const ids = ['edition-status','edition-summary','edition-content','edition-snapshot','edition-metadata'];
