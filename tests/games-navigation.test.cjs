@@ -169,6 +169,7 @@ test('hardware evidence review uses the same mobile navigation while retaining s
   assert.match(html, /class="hardware-search-link" href="index.html#\/search"/);
   assert.match(html, /@media\(max-width:650px\)[\s\S]*?\.review-shell>\.review-nav\{display:none\}/);
   assert.match(html, /\.hardware-menu-panel a\{[^}]*min-height:44px/);
+  assert.match(html, /\.review-shell>header\{display:block;padding-top:20px\}/);
   assert.match(html, /@media print\{\.review-nav,\.skip,\.hardware-mobile-topbar\{display:none\}/);
   for (const route of ['overview','dictionary','safety','papers','games'])
     assert.ok(html.includes('href="index.html#/'+route+'"'), 'Missing workspace destination: '+route);
