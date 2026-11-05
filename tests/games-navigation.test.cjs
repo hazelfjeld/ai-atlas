@@ -200,7 +200,7 @@ test('research snapshot uses the shared mobile menu and retains contextual resea
   assert.doesNotMatch(html, /<aside>/);
   const desktop=html.match(/<nav class="site-chrome research-site-chrome" aria-label="AI Updates primary navigation">([\s\S]*?)<\/nav>/)?.[1];
   assert.ok(desktop, 'Research must reuse the shared desktop chrome');
-  const titles=[...desktop.matchAll(/<a href="[^"]+">([^<]+)<\/a>/g)].map(x => x[1]);
+  const titles=[...desktop.matchAll(/<a href="[^"]+"(?: aria-current="[^"]+")?>([^<]+)<\/a>/g)].map(x => x[1]);
   assert.deepEqual(titles, ['Discover','What’s New Today','Concept dictionary','Technology profiles','Games','Playbooks','About']);
   assert.ok(desktop.includes('class="site-chrome__brand" href="index.html#/overview"'));
   assert.match(html, /href="#papers" data-nav="papers">Research library <span id="papers-count">/);
