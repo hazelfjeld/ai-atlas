@@ -87,7 +87,9 @@ with sync_playwright() as p:
     page.set_viewport_size({'width':390,'height':844});page.screenshot(path=str(out/'games-mobile.png'),full_page=True);check('mobile setup has no horizontal overflow',page.evaluate('document.documentElement.scrollWidth <= innerWidth'))
     page.locator('#start-match').click();page.screenshot(path=str(out/'match-mobile.png'),full_page=True);check('mobile match has no horizontal overflow',page.evaluate('document.documentElement.scrollWidth <= innerWidth'));check('mobile full definitions untruncated',page.locator('.tile').evaluate_all('(els)=>els.every(el=>el.scrollHeight<=el.clientHeight+1)'))
     page.locator('[data-action=menu]').click();page.locator('#theme-toggle').click();page.screenshot(path=str(out/'games-dark.png'),full_page=True)
-    # At 320px the old four-across header compressed the links into ~34px high targets.
+    # At 320px the old header compressed four links into tiny targets. Shared
+    # navigation now reveals all seven canonical sections via a native details
+    # menu; validate the actual rendered controls rather than the removed nav.
     page.set_viewport_size({'width':320,'height':700})
     for palette in ('dark','light'):
         if page.locator('html').get_attribute('data-theme') != palette:
@@ -96,8 +98,28 @@ with sync_playwright() as p:
               page.locator('#theme-toggle').get_attribute('aria-pressed') == str(palette == 'dark').lower())
         check(f'320px {palette} standalone theme toggle has a 44px touch target',
               page.locator('#theme-toggle').evaluate("el => { const r = el.getBoundingClientRect(); return r.width >= 44 && r.height >= 44 && r.left >= 15 && r.right <= innerWidth - 15; }"))
-        check(f'320px {palette} Games navigation has two rows of 44px targets inside gutters',
-              page.locator('.masthead nav a').evaluate_all("els => { const r = els.map(e => e.getBoundingClientRect()); return r.length === 4 && r.every(b => b.height >= 44 && b.left >= 15 && b.right <= innerWidth - 15) && Math.abs(r[0].top - r[1].top) < 1 && r[2].top >= r[1].bottom; }"))
+        check(f'320px {palette} standalone header has 44px menu and real search targets',
+              page.locator('.site-mobile-chrome').evaluate("""el => {
+                const toggle=el.querySelector('summary'), search=el.querySelector('.site-mobile-chrome__search');
+                return [toggle,search].every(node => {
+                    const r=node.getBoundingClientRect();
+                    return r.height>=44 && r.width>=44 && r.left>=14 && r.right<=innerWidth-14;
+                });
+              }"""))
+        page.locator('#games-mobile-nav summary').click()
+        check(f'320px {palette} Games menu exposes canonical labels and one current destination',
+              page.locator('#games-mobile-nav .site-mobile-chrome__menu a').all_inner_texts() ==
+              ['Discover','What’s New Today','Concept dictionary','Technology profiles','Games','Playbooks','About']
+              and page.locator('#games-mobile-nav .site-mobile-chrome__menu a[aria-current="page"]').inner_text() == 'Games')
+        check(f'320px {palette} every visible section target is at least 44px and stays inside gutters',
+              page.locator('#games-mobile-nav .site-mobile-chrome__menu a').evaluate_all("""els => els.length===7 && els.every(el => {
+                const r=el.getBoundingClientRect();
+                return r.height>=44 && r.width>=44 && r.left>=14 && r.right<=innerWidth-14;
+              })"""))
+        page.locator('#games-mobile-nav summary').click()
+        check(f'320px {palette} collapsed menu links are not exposed visually',
+              not page.locator('#games-mobile-nav .site-mobile-chrome__menu').is_visible()
+              and page.evaluate('document.documentElement.scrollWidth <= innerWidth'))
     check('no runtime errors',not errors)
     # An actual rejected catalog promise must give a recoverable UI, not a partial deck.
     fail=browser.new_page();open_page(fail,True);fail.get_by_role('button',name='Retry',exact=True).wait_for();check('load failure shows retry and hides deck',not fail.locator('#games').is_visible())
