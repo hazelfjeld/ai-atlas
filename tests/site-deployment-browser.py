@@ -218,6 +218,40 @@ with sync_playwright() as p:
     check('catalog review search opens actual workspace search',
           mobile_review.locator('#global-query').is_visible())
     mobile_review.close()
+
+    # Hardware evidence previously exposed a multirow legacy header on phones.
+    mobile_hardware = browser.new_page(viewport={'width':320, 'height':720}, reduced_motion='reduce')
+    mobile_hardware.goto(base + 'hardware-review.html')
+    check('hardware review uses the compact mobile site header',
+          mobile_hardware.locator('.hardware-mobile-topbar').is_visible()
+          and not mobile_hardware.locator('.review-shell > .review-nav').is_visible()
+          and mobile_hardware.locator('.hardware-search-link').is_visible())
+    check('320px hardware review has no page-wide horizontal overflow',
+          mobile_hardware.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'))
+    mobile_hardware.locator('.hardware-menu-toggle').focus()
+    mobile_hardware.keyboard.press('Enter')
+    check('hardware review menu supports keyboard navigation and current-page indication',
+          mobile_hardware.locator('#hardware-mobile-nav').evaluate('(el) => el.open')
+          and mobile_hardware.get_by_role('navigation', name='AI Updates sections')
+              .get_by_role('link', name='Hardware evidence', exact=True).get_attribute('aria-current') == 'page')
+    check('hardware review mobile links meet 44px touch minimum',
+          mobile_hardware.evaluate("""() => [...document.querySelectorAll('.hardware-menu-panel a')]
+              .every(a => a.getBoundingClientRect().height >= 44)"""))
+    mobile_hardware.keyboard.press('Enter')
+    mobile_hardware.screenshot(path=str(out / 'hardware-review-mobile-header.png'), full_page=False)
+    mobile_hardware.set_viewport_size({'width':390, 'height':844})
+    check('390px hardware review has no page-wide horizontal overflow',
+          mobile_hardware.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'))
+    mobile_hardware.set_viewport_size({'width':1440, 'height':900})
+    check('desktop hardware review retains original navigation',
+          mobile_hardware.locator('.review-shell > .review-nav').is_visible()
+          and not mobile_hardware.locator('.hardware-mobile-topbar').is_visible())
+    mobile_hardware.set_viewport_size({'width':320, 'height':720})
+    mobile_hardware.locator('.hardware-search-link').click()
+    mobile_hardware.wait_for_url('**/index.html#/search')
+    check('hardware review search opens the actual workspace search',
+          mobile_hardware.locator('#global-query').is_visible())
+    mobile_hardware.close()
     page.goto(base + 'whats-new.html')
     check('daily archive uses the same Atlas logo and quiet wordmark',
           page.locator('.brand-wordmark small').inner_text() == 'THE FRONTIER, IN CONTEXT')

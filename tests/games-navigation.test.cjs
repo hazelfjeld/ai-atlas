@@ -158,3 +158,20 @@ test('catalog candidate review uses the compact mobile navigation without modify
   assert.ok(html.includes('Seven proposals, not seven new entries.'));
   assert.ok(html.includes('data/catalog-candidate-decisions-2026-11-03.json'));
 });
+
+
+test('hardware evidence review uses the same mobile navigation while retaining source-qualified research', () => {
+  const html=read('hardware-review.html');
+  assert.match(html, /class="hardware-mobile-topbar"/);
+  assert.match(html, /<details class="hardware-mobile-nav" id="hardware-mobile-nav">/);
+  assert.match(html, /<nav class="hardware-menu-panel" aria-label="AI Updates sections">/);
+  assert.match(html, /href="hardware-review.html" aria-current="page">Hardware evidence<\/a>/);
+  assert.match(html, /class="hardware-search-link" href="index.html#\/search"/);
+  assert.match(html, /@media\(max-width:650px\)[\s\S]*?\.review-shell>\.review-nav\{display:none\}/);
+  assert.match(html, /\.hardware-menu-panel a\{[^}]*min-height:44px/);
+  assert.match(html, /@media print\{\.review-nav,\.skip,\.hardware-mobile-topbar\{display:none\}/);
+  for (const route of ['overview','dictionary','safety','papers','games'])
+    assert.ok(html.includes('href="index.html#/'+route+'"'), 'Missing workspace destination: '+route);
+  assert.ok(html.includes('65.7 ms is OS boot, not the complete first detection'));
+  assert.ok(html.includes('Publisher measurements and derived ratios'));
+});
