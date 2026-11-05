@@ -60,11 +60,11 @@ test('Only HTTPS source links and known internal record routes are accepted',()=
 
 test('daily archive uses the compact Discover-style mobile navigation and a real search destination',()=>{
  const html=fs.readFileSync('whats-new.html','utf8');
- assert.match(html,/<div class="mobile-topbar">/);
- assert.match(html,/<details class="archive-mobile-nav" id="archive-mobile-nav">/);
- assert.match(html,/<nav class="archive-menu-panel" aria-label="AI Updates sections">/);
+ assert.match(html,/<div class="mobile-topbar site-mobile-chrome">/);
+ assert.match(html,/<details class="archive-mobile-nav site-mobile-chrome__nav" id="archive-mobile-nav">/);
+ assert.match(html,/<nav class="archive-menu-panel site-mobile-chrome__menu" aria-label="AI Updates sections">/);
  assert.match(html,/<a href="whats-new\.html" aria-current="page">What’s New Today<\/a>/);
- assert.match(html,/<a class="archive-search-link" href="index\.html#\/search"/);
+ assert.match(html,/<a class="archive-search-link site-mobile-chrome__search" href="index\.html#\/search"/);
  assert.match(html,/@media\(max-width:650px\)\{\s*\.top\{display:none\}/);
 });
 
