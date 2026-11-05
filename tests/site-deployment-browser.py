@@ -382,7 +382,7 @@ with sync_playwright() as p:
     check('320px research page has no horizontal overflow',
           mobile_research.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'))
     check('research primary mobile menu matches the other standalone pages',
-          mobile_research.locator('.site-mobile-chrome__menu a').all_inner_texts()
+          mobile_research.locator('.site-mobile-chrome__menu a').all_text_contents()
           == ['Discover', 'What’s New Today', 'Concept dictionary', 'Technology profiles',
               'Games', 'Playbooks', 'About'])
     mobile_research.wait_for_function(
