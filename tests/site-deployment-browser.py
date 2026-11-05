@@ -803,6 +803,36 @@ with sync_playwright() as p:
                      .every(id => document.getElementById(id).value === 'all')
                   && document.querySelectorAll('#edition-content article.item').length > 0"""))
     page.screenshot(path=str(out / 'daily-mobile-320.png'), full_page=True)
+    # Reference documents have no JS theme switcher. Dark OS settings must
+    # therefore yield readable article surfaces, not pale boxes with light text.
+    page.emulate_media(color_scheme='dark')
+    for reference_path in ('terms/MLD-0002-ablation-study.html',
+                           'technology/TECH-0216-pytorch.html'):
+        page.goto(base + reference_path)
+        check('OS dark theme reaches script-free reference ' + reference_path,
+              page.evaluate("""() => {
+                  const root = getComputedStyle(document.documentElement);
+                  const notice = getComputedStyle(document.querySelector('.term-shell .notice'));
+                  return root.colorScheme === 'dark'
+                      && root.backgroundColor === 'rgb(24, 33, 30)'
+                      && notice.backgroundColor === 'rgb(45, 64, 51)'
+                      && document.documentElement.scrollWidth <= innerWidth + 1;
+              }"""))
+    page.goto(base + 'terms/MLD-0002-ablation-study.html')
+    check('dark concept cards, caveats and links avoid light-only colors',
+          page.evaluate("""() => {
+              const card = getComputedStyle(document.querySelector('.term-shell .detail-block'));
+              const caveat = getComputedStyle(document.querySelector('.term-shell .detail-block.caveat'));
+              const link = getComputedStyle(document.querySelector('.term-shell .detail-block a'));
+              return card.backgroundColor === 'rgb(34, 45, 39)'
+                  && caveat.backgroundColor === 'rgb(45, 64, 51)'
+                  && link.color === 'rgb(177, 213, 189)';
+          }"""))
+    page.emulate_media(color_scheme='light')
+    page.reload()
+    check('light OS preference restores original paper and white reference cards',
+          page.evaluate("""() => getComputedStyle(document.documentElement).backgroundColor === 'rgb(246, 246, 242)'
+              && getComputedStyle(document.querySelector('.term-shell .detail-block')).backgroundColor === 'rgb(255, 255, 255)'"""))
     # The workspace theme toggle persists in atlas.theme. Switching to the
     # standalone archive must not silently revert to OS colors.
     # The workspace theme button belongs to the desktop sidebar.

@@ -243,6 +243,22 @@ body{font-size:15px;line-height:1.6}h1,h2,h3{color:var(--ink)}a{text-underline-o
   .term-shell .term-nav>a:hover{background:var(--line)}
   .term-shell .term-nav>a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 }
+
+/* Script-free reference pages honor the OS dark palette without changing the SPA theme.
+   Use shared tokens for article cards and callouts instead of checkpoint.css's fixed white. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]):has(.term-shell) {
+    color-scheme: dark;
+    --bg:#18211E;--surface:#222D27;--ink:#F6F6F2;--muted:#AFBEB2;
+    --line:#3B4A40;--accent:#B1D5BD;--accent-soft:#2D4033;
+    --orange:#D9A16F;--sidebar:#111A15;--paper:#222D27;
+    --dark:#111A15;--green:#B1D5BD;--soft:#2D4033;
+  }
+}
+.term-shell .detail-block{background:var(--surface)}
+.term-shell .detail-block.caveat{background:var(--accent-soft);border-left-color:var(--orange)}
+.term-shell .notice{background:var(--accent-soft);border-color:var(--line)}
+.term-shell a{color:var(--accent)}
 </style>
 <!-- seo:start -->
 <title>AI Updates — AI Research, Tools &amp; Concepts</title>

@@ -212,3 +212,16 @@ test('generated concept and technology pages have accessible two-column mobile n
   assert.match(css, /\.term-shell \.term-nav>a:focus-visible\{outline:2px solid var\(--accent\)/);
   assert.ok(offline.includes('/* Native, script-free reference pages: readable two-column touch navigation on phones.'));
 });
+
+
+test('script-free reference pages honor dark OS preference with readable cards and links', () => {
+  const css = read('brand.css');
+  assert.match(css, /@media \(prefers-color-scheme: dark\) \{[\s\S]*?:root:not\(\[data-theme\]\):has\(\.term-shell\)/);
+  assert.match(css, /\.term-shell \.detail-block\{background:var\(--surface\)\}/);
+  assert.match(css, /\.term-shell \.detail-block\.caveat\{background:var\(--accent-soft\)/);
+  assert.match(css, /\.term-shell \.notice\{background:var\(--accent-soft\);border-color:var\(--line\)\}/);
+  assert.match(css, /\.term-shell a\{color:var\(--accent\)\}/);
+  for (const reference of ['terms/MLD-0002-ablation-study.html', 'technology/TECH-0216-pytorch.html'])
+    assert.match(read(reference), /<main class="term-shell" id="main">/);
+  assert.ok(read('downloads/Atlas_Demo_Offline.html').includes('Script-free reference pages honor the OS dark palette'));
+});
