@@ -313,7 +313,7 @@ with sync_playwright() as p:
               mobile_reference.evaluate('document.documentElement.scrollWidth <= window.innerWidth + 1'))
         mobile_reference.set_viewport_size({'width':1440, 'height':900})
         check(reference + ' preserves desktop navigation',
-              nav.evaluate("el => getComputedStyle(el).display === 'flex"))
+              nav.evaluate("el => getComputedStyle(el).display === 'flex'"))
         mobile_reference.close()
     page.goto(base + 'whats-new.html')
     check('daily archive uses the same Atlas logo and quiet wordmark',
