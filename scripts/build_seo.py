@@ -47,12 +47,13 @@ def shell(title, description, path, body, structured=None):
     print_nav = ',.about-mobile-topbar' if path == 'about.html' else ''
     desktop_nav = ABOUT_DESKTOP_NAV if path == 'about.html' else nav(prefix)
     chrome_css = '<link rel="stylesheet" href="site-chrome.css">\n' if path == 'about.html' else ''
+    theme_script = '<script src="site-theme.js"></script>' if path == 'about.html' else ''
     return f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 {metadata(title, description, path, structured)}
 <link rel="stylesheet" href="{prefix}checkpoint.css"><link rel="stylesheet" href="{prefix}brand.css">
 <style>.term-shell{{max-width:1000px;margin:auto;padding:32px 24px 70px}}.term-nav{{display:flex;flex-wrap:wrap;gap:18px;font-size:13px}}.term-shell h1{{font:400 clamp(34px,6vw,58px)/1.12 Georgia,serif;letter-spacing:-.04em}}.term-shell h2{{font-size:22px}}.term-shell p,.term-shell li{{font-size:15px;line-height:1.8}}.term-shell .hero{{margin:38px 0 24px}}.term-shell .hero .eyebrow{{font:600 11px/1.6 system-ui,sans-serif}}.term-shell .lead{{margin-top:18px}}{mobile_css}@media print{{.term-nav{print_nav},.skip{{display:none}}.term-shell{{padding:0}}}}</style>
-{chrome_css}</head><body><a class="skip" href="#main">Skip to content</a><main class="term-shell" id="main">{mobile_nav}{desktop_nav}{body}<footer>AI Updates is a curated learning and research project. Imported evidence labels are preserved. <a href="{prefix}about.html">Editorial policy & coverage</a> · <a href="{prefix}index.html#/sources">Source registers & downloads</a></footer></main></body></html>'''
+{chrome_css}{theme_script}</head><body><a class="skip" href="#main">Skip to content</a><main class="term-shell" id="main">{mobile_nav}{desktop_nav}{body}<footer>AI Updates is a curated learning and research project. Imported evidence labels are preserved. <a href="{prefix}about.html">Editorial policy & coverage</a> · <a href="{prefix}index.html#/sources">Source registers & downloads</a></footer></main></body></html>'''
 
 
 def main():

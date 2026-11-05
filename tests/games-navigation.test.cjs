@@ -287,3 +287,29 @@ test('editorial evidence reviews reuse the shared desktop site chrome and readab
   assert.ok(read('hardware-review.html').includes('.review-shell>header{display:block}'));
   assert.ok(read('site-chrome.css').includes('.site-chrome__links a[aria-current=location]'));
 });
+
+test('standalone editorial pages share Discover theme preference without rewriting storage', () => {
+  const script = read('site-theme.js');
+  const pages = ['about.html', 'research.html', 'technologies.html', 'playbooks.html', 'hardware-review.html'];
+  for (const file of pages) {
+    const html = read(file);
+    const scriptAt = html.indexOf('<script src="site-theme.js"></script>');
+    assert.ok(scriptAt > 0 && scriptAt < html.indexOf('<body'), file + ' restores the theme before its body renders');
+    assert.equal(html.split('<script src="site-theme.js"></script>').length, 2, file + ' loads the shared helper once');
+  }
+  assert.match(read('scripts/build_seo.py'), /theme_script = '<script src="site-theme\.js"><\\\/script>' if path == 'about\.html'/);
+  assert.ok(JSON.parse(read('deploy/public-files.json')).root_files.includes('site-theme.js'));
+  for (const chosen of ['dark', 'light', 'bogus']) {
+    const root = {dataset: {}, style: {}};
+    vm.runInNewContext(script, {
+      localStorage: {getItem: key => key === 'atlas.theme' ? chosen : null},
+      document: {documentElement: root},
+    });
+    assert.equal(root.dataset.theme, chosen === 'bogus' ? undefined : chosen);
+    assert.equal(root.style.colorScheme, chosen === 'bogus' ? undefined : chosen);
+  }
+  assert.doesNotThrow(() => vm.runInNewContext(script, {
+    localStorage: {getItem() { throw new Error('storage blocked'); }},
+    document: {documentElement: {dataset: {}, style: {}}},
+  }));
+});

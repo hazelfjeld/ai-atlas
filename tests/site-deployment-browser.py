@@ -158,6 +158,21 @@ with sync_playwright() as p:
 
     theme_ctx = browser.new_context(viewport={'width':390, 'height':844}, color_scheme='dark')
     theme_page = theme_ctx.new_page()
+    # Editorial standalone pages must honor the explicit Discover/Games theme.
+    # The shared script runs before the body and never overwrites the saved choice.
+    theme_page.goto(base + 'research.html')
+    theme_page.evaluate("localStorage.setItem('atlas.theme', 'dark')")
+    for route in ('research.html', 'playbooks.html', 'technologies.html',
+                  'hardware-review.html', 'about.html'):
+        theme_page.goto(base + route)
+        check('stored dark theme survives navigation to ' + route,
+              theme_page.evaluate("document.documentElement.dataset.theme === 'dark' && getComputedStyle(document.documentElement).colorScheme === 'dark'"))
+    theme_page.evaluate("localStorage.setItem('atlas.theme', 'light')")
+    for route in ('research.html', 'playbooks.html', 'technologies.html',
+                  'hardware-review.html', 'about.html'):
+        theme_page.goto(base + route)
+        check('stored light theme overrides dark OS preference on ' + route,
+              theme_page.evaluate("document.documentElement.dataset.theme === 'light' && getComputedStyle(document.documentElement).colorScheme === 'light'"))
     theme_page.goto(base + 'games.html')
     theme_page.evaluate("localStorage.setItem('atlas.theme', 'light')")
     theme_page.reload()
