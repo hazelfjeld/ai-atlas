@@ -29,14 +29,41 @@ def nav(prefix=''):
     return f'<nav class="term-nav" aria-label="Site navigation"><a href="{prefix}index.html">AI Updates</a><a href="{prefix}whats-new.html">Daily editions</a><a href="{prefix}terms/index.html">Concepts</a><a href="{prefix}technology/index.html">Technologies</a><a href="{prefix}index.html#/games">Games</a><a href="{prefix}about.html">About</a></nav>'
 
 
+# Only the editorial-policy page receives the lightweight mobile header; every
+# generated term/technology URL and its existing layout remain byte-identical.
+ABOUT_MOBILE_CSS = '''
+/* Keep the editorial-policy page in the same compact mobile shell as Discover and the archive. */
+.about-mobile-topbar{display:none}
+@media(max-width:650px){
+ .term-shell{padding:0 20px 65px}
+ .term-shell .term-nav{display:none}
+ .about-mobile-topbar{display:flex;align-items:center;gap:12px;position:relative;z-index:5;margin:0 -20px;padding:14px 20px;border-bottom:1px solid var(--line)}
+ .about-mobile-nav{flex:0 0 44px}
+ .about-menu-toggle{display:grid;place-items:center;min-height:44px;width:44px;list-style:none;cursor:pointer;background:var(--surface);border:1px solid var(--line);border-radius:9px;color:var(--ink);font-size:20px;line-height:1}
+ .about-menu-toggle::-webkit-details-marker{display:none}
+ .about-menu-toggle:focus-visible,.about-search-link:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
+ .about-menu-panel{position:absolute;left:20px;top:calc(100% - 2px);width:min(310px,calc(100vw - 40px));max-height:calc(100vh - 96px);overflow-y:auto;padding:9px;background:var(--surface);border:1px solid var(--line);border-radius:10px;box-shadow:0 12px 26px #0002}
+ .about-menu-panel a{display:block;min-height:44px;padding:10px 12px;border-radius:6px;color:var(--ink);text-decoration:none;font-size:15px;font-weight:600}
+ .about-menu-panel a:hover,.about-menu-panel a[aria-current=page]{background:var(--soft);color:var(--green)}
+ .about-search-link{display:flex;align-items:center;gap:12px;flex:1;min-width:0;min-height:44px;padding:8px 13px;border:1px solid var(--line);border-radius:9px;background:var(--surface);color:var(--muted);text-decoration:none;font-size:16px}
+ .about-search-link:hover{border-color:var(--green);color:var(--ink)}
+ .about-search-icon{flex-shrink:0;font-size:22px;line-height:1}
+ .about-search-placeholder{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+}
+'''
+ABOUT_MOBILE_NAV = '''<div class="about-mobile-topbar"><details class="about-mobile-nav" id="about-mobile-nav"><summary class="about-menu-toggle" aria-label="Toggle navigation"><span aria-hidden="true">☰</span></summary><nav class="about-menu-panel" aria-label="AI Updates sections"><a href="index.html#/overview">Discover</a><a href="whats-new.html">What’s New Today</a><a href="index.html#/dictionary">Concept dictionary</a><a href="index.html#/technologies">Technology profiles</a><a href="index.html#/safety">AI safety</a><a href="index.html#/papers">Research library</a><a href="index.html#/games">Games</a><a href="demo.html">Guided demo</a><a href="about.html" aria-current="page">About</a></nav></details><a class="about-search-link" href="index.html#/search" aria-label="Search AI Updates in the main collection"><span class="about-search-icon" aria-hidden="true">⌕</span><span class="about-search-placeholder">Search tools, research, concepts…</span></a></div>'''
+
 def shell(title, description, path, body, structured=None):
     prefix = '../' if '/' in path else ''
+    mobile_css = ABOUT_MOBILE_CSS if path == 'about.html' else ''
+    mobile_nav = ABOUT_MOBILE_NAV if path == 'about.html' else ''
+    print_nav = ',.about-mobile-topbar' if path == 'about.html' else ''
     return f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 {metadata(title, description, path, structured)}
 <link rel="stylesheet" href="{prefix}checkpoint.css"><link rel="stylesheet" href="{prefix}brand.css">
-<style>.term-shell{{max-width:1000px;margin:auto;padding:32px 24px 70px}}.term-nav{{display:flex;flex-wrap:wrap;gap:18px;font-size:13px}}.term-shell h1{{font:400 clamp(34px,6vw,58px)/1.12 Georgia,serif;letter-spacing:-.04em}}.term-shell h2{{font-size:22px}}.term-shell p,.term-shell li{{font-size:15px;line-height:1.8}}.term-shell .hero{{margin:38px 0 24px}}.term-shell .hero .eyebrow{{font:600 11px/1.6 system-ui,sans-serif}}.term-shell .lead{{margin-top:18px}}@media print{{.term-nav,.skip{{display:none}}.term-shell{{padding:0}}}}</style>
-</head><body><a class="skip" href="#main">Skip to content</a><main class="term-shell" id="main">{nav(prefix)}{body}<footer>AI Updates is a curated learning and research project. Imported evidence labels are preserved. <a href="{prefix}about.html">Editorial policy & coverage</a> · <a href="{prefix}index.html#/sources">Source registers & downloads</a></footer></main></body></html>'''
+<style>.term-shell{{max-width:1000px;margin:auto;padding:32px 24px 70px}}.term-nav{{display:flex;flex-wrap:wrap;gap:18px;font-size:13px}}.term-shell h1{{font:400 clamp(34px,6vw,58px)/1.12 Georgia,serif;letter-spacing:-.04em}}.term-shell h2{{font-size:22px}}.term-shell p,.term-shell li{{font-size:15px;line-height:1.8}}.term-shell .hero{{margin:38px 0 24px}}.term-shell .hero .eyebrow{{font:600 11px/1.6 system-ui,sans-serif}}.term-shell .lead{{margin-top:18px}}{mobile_css}@media print{{.term-nav{print_nav},.skip{{display:none}}.term-shell{{padding:0}}}}</style>
+</head><body><a class="skip" href="#main">Skip to content</a><main class="term-shell" id="main">{mobile_nav}{nav(prefix)}{body}<footer>AI Updates is a curated learning and research project. Imported evidence labels are preserved. <a href="{prefix}about.html">Editorial policy & coverage</a> · <a href="{prefix}index.html#/sources">Source registers & downloads</a></footer></main></body></html>'''
 
 
 def main():
