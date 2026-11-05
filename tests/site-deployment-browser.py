@@ -72,6 +72,29 @@ with sync_playwright() as p:
           failed_archive.locator('#edition-search').is_disabled()
           and 'Daily archive unavailable' in failed_archive.locator('#edition-status').inner_text())
     failed_archive.close()
+    # The archive formerly showed a multi-row legacy masthead on a 320px
+    # phone, unlike Discover's compact menu + search entry. Both should feel
+    # like the same site without pretending the archive has global search.
+    mobile_archive = browser.new_page(viewport={'width':320, 'height':720}, reduced_motion='reduce')
+    mobile_archive.goto(base + 'whats-new.html')
+    check('daily archive uses the compact mobile site header',
+          mobile_archive.locator('.mobile-topbar').is_visible()
+          and not mobile_archive.locator('.top').is_visible()
+          and mobile_archive.locator('.archive-search-link').is_visible())
+    check('daily archive mobile header fits a 320px viewport',
+          mobile_archive.evaluate('document.documentElement.scrollWidth <= window.innerWidth + 1'))
+    mobile_archive.locator('.archive-menu-toggle').click()
+    check('mobile archive menu exposes working site navigation and current location',
+          mobile_archive.locator('#archive-mobile-nav').evaluate('(el) => el.open')
+          and mobile_archive.get_by_role('navigation', name='AI Updates sections')
+              .get_by_role('link', name='What’s New Today').get_attribute('aria-current') == 'page')
+    mobile_archive.locator('.archive-menu-toggle').click()
+    mobile_archive.screenshot(path=str(out / 'archive-mobile-header.png'), full_page=False)
+    mobile_archive.locator('.archive-search-link').click()
+    mobile_archive.wait_for_url('**/index.html#/search')
+    check('mobile archive search entry opens the actual site search',
+          mobile_archive.locator('#global-query').is_visible())
+    mobile_archive.close()
     page.goto(base + 'whats-new.html')
     check('daily archive uses the same Atlas logo and quiet wordmark',
           page.locator('.brand-wordmark small').inner_text() == 'THE FRONTIER, IN CONTEXT')

@@ -57,6 +57,17 @@ test('Only HTTPS source links and known internal record routes are accepted',()=
  assert.equal(D.safeCatalogPath('https://evil.example'),'');
 });
 
+
+test('daily archive uses the compact Discover-style mobile navigation and a real search destination',()=>{
+ const html=fs.readFileSync('whats-new.html','utf8');
+ assert.match(html,/<div class="mobile-topbar">/);
+ assert.match(html,/<details class="archive-mobile-nav" id="archive-mobile-nav">/);
+ assert.match(html,/<nav class="archive-menu-panel" aria-label="AI Updates sections">/);
+ assert.match(html,/<a href="whats-new\.html" aria-current="page">What’s New Today<\/a>/);
+ assert.match(html,/<a class="archive-search-link" href="index\.html#\/search"/);
+ assert.match(html,/@media\(max-width:650px\)\{\s*\.top\{display:none\}/);
+});
+
 test('daily reader leads with verified briefing and stories before supplemental archive statistics',()=>{
  const html=fs.readFileSync('whats-new.html','utf8'),js=fs.readFileSync('whats-new.js','utf8');
  const order=['id="edition-status"','id="edition-summary"','class="panel"','id="edition-content"','id="edition-snapshot"','id="edition-metadata"','id="source-coverage"','id="revision-history"'];
