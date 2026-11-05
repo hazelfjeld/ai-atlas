@@ -185,6 +185,39 @@ with sync_playwright() as p:
     check('playbooks search opens the existing workspace search',
           mobile_playbooks.locator('#global-query').is_visible())
     mobile_playbooks.close()
+    # The candidate-review page also had legacy multirow links at 320px.
+    mobile_review = browser.new_page(viewport={'width':320, 'height':720}, reduced_motion='reduce')
+    mobile_review.goto(base + 'catalog-review.html')
+    check('catalog review uses the compact mobile site header',
+          mobile_review.locator('.review-mobile-topbar').is_visible()
+          and not mobile_review.locator('.shell > .nav').is_visible()
+          and mobile_review.locator('.review-search-link').is_visible())
+    check('320px catalog review has no page-wide horizontal overflow',
+          mobile_review.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'))
+    mobile_review.locator('.review-menu-toggle').focus()
+    mobile_review.keyboard.press('Enter')
+    check('catalog review menu is keyboard operable with current-page indication',
+          mobile_review.locator('#review-mobile-nav').evaluate('(el) => el.open')
+          and mobile_review.get_by_role('navigation', name='AI Updates sections')
+              .get_by_role('link', name='Catalog review', exact=True).get_attribute('aria-current') == 'page')
+    check('catalog review mobile links meet 44px touch minimum',
+          mobile_review.evaluate("""() => [...document.querySelectorAll('.review-menu-panel a')]
+              .every(a => a.getBoundingClientRect().height >= 44)"""))
+    mobile_review.keyboard.press('Enter')
+    mobile_review.screenshot(path=str(out / 'catalog-review-mobile-header.png'), full_page=False)
+    mobile_review.set_viewport_size({'width':390, 'height':844})
+    check('390px catalog review has no page-wide horizontal overflow',
+          mobile_review.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'))
+    mobile_review.set_viewport_size({'width':1440, 'height':900})
+    check('desktop catalog review keeps its original navigation',
+          mobile_review.locator('.shell > .nav').is_visible()
+          and not mobile_review.locator('.review-mobile-topbar').is_visible())
+    mobile_review.set_viewport_size({'width':320, 'height':720})
+    mobile_review.locator('.review-search-link').click()
+    mobile_review.wait_for_url('**/index.html#/search')
+    check('catalog review search opens actual workspace search',
+          mobile_review.locator('#global-query').is_visible())
+    mobile_review.close()
     page.goto(base + 'whats-new.html')
     check('daily archive uses the same Atlas logo and quiet wordmark',
           page.locator('.brand-wordmark small').inner_text() == 'THE FRONTIER, IN CONTEXT')

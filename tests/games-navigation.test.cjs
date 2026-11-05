@@ -141,3 +141,20 @@ test('editorial policy uses the same compact mobile menu and real collection sea
   for(const route of ['overview','dictionary','technologies','safety','papers','games'])
     assert.ok(html.includes('href="index.html#/'+route+'"'), 'Missing route: '+route);
 });
+
+
+test('catalog candidate review uses the compact mobile navigation without modifying its editorial content', () => {
+  const html=read('catalog-review.html');
+  assert.match(html, /class="review-mobile-topbar"/);
+  assert.match(html, /<details class="review-mobile-nav" id="review-mobile-nav">/);
+  assert.match(html, /<nav class="review-menu-panel" aria-label="AI Updates sections">/);
+  assert.match(html, /href="catalog-review.html" aria-current="page">Catalog review<\/a>/);
+  assert.match(html, /class="review-search-link" href="index.html#\/search"/);
+  assert.match(html, /@media\(max-width:650px\)[\s\S]*?\.shell>\.nav\{display:none\}/);
+  assert.match(html, /\.review-menu-panel a\{[^}]*min-height:44px/);
+  assert.match(html, /@media print\{\.review-mobile-topbar\{display:none\}\}/);
+  for(const route of ['overview','dictionary','safety','papers','games'])
+    assert.ok(html.includes('href="index.html#/'+route+'"'), 'Missing workspace destination: '+route);
+  assert.ok(html.includes('Seven proposals, not seven new entries.'));
+  assert.ok(html.includes('data/catalog-candidate-decisions-2026-11-03.json'));
+});
