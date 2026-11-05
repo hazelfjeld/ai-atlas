@@ -152,6 +152,39 @@ with sync_playwright() as p:
     check('technology directory search opens the actual workspace search',
           mobile_tech.locator('#global-query').is_visible())
     mobile_tech.close()
+    # Playbooks used a multirow legacy header, unlike Discover.
+    mobile_playbooks = browser.new_page(viewport={'width':320, 'height':720}, reduced_motion='reduce')
+    mobile_playbooks.goto(base + 'playbooks.html')
+    check('playbooks use the compact mobile site header',
+          mobile_playbooks.locator('.playbook-mobile-topbar').is_visible()
+          and not mobile_playbooks.locator('.playbook-top').is_visible()
+          and mobile_playbooks.locator('.playbook-search-link').is_visible())
+    check('320px playbooks fit without horizontal overflow',
+          mobile_playbooks.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'))
+    mobile_playbooks.locator('.playbook-menu-toggle').focus()
+    mobile_playbooks.keyboard.press('Enter')
+    check('playbooks menu keyboard access marks the current page',
+          mobile_playbooks.locator('#playbook-mobile-nav').evaluate('(el) => el.open')
+          and mobile_playbooks.get_by_role('navigation', name='AI Updates sections')
+              .get_by_role('link', name='Playbooks', exact=True).get_attribute('aria-current') == 'page')
+    check('playbooks mobile menu links have 44px touch targets',
+          mobile_playbooks.evaluate("""() => [...document.querySelectorAll('.playbook-menu-panel a')]
+              .every(a => a.getBoundingClientRect().height >= 44)"""))
+    mobile_playbooks.keyboard.press('Enter')
+    mobile_playbooks.screenshot(path=str(out / 'playbooks-mobile-header.png'), full_page=False)
+    mobile_playbooks.set_viewport_size({'width':390, 'height':844})
+    check('390px playbooks fit without horizontal overflow',
+          mobile_playbooks.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'))
+    mobile_playbooks.set_viewport_size({'width':1440, 'height':900})
+    check('desktop playbooks retain original navigation',
+          mobile_playbooks.locator('.playbook-top').is_visible()
+          and not mobile_playbooks.locator('.playbook-mobile-topbar').is_visible())
+    mobile_playbooks.set_viewport_size({'width':320, 'height':720})
+    mobile_playbooks.locator('.playbook-search-link').click()
+    mobile_playbooks.wait_for_url('**/index.html#/search')
+    check('playbooks search opens the existing workspace search',
+          mobile_playbooks.locator('#global-query').is_visible())
+    mobile_playbooks.close()
     page.goto(base + 'whats-new.html')
     check('daily archive uses the same Atlas logo and quiet wordmark',
           page.locator('.brand-wordmark small').inner_text() == 'THE FRONTIER, IN CONTEXT')

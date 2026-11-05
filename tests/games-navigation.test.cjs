@@ -114,6 +114,21 @@ test('standalone technology directory shares the compact mobile menu and real wo
     assert.ok(html.includes('href="index.html#/'+route+'"'), 'Missing workspace route: '+route);
 });
 
+
+test('standalone playbooks share the compact mobile menu and real collection search', () => {
+  const html=read('playbooks.html');
+  assert.match(html, /class="playbook-mobile-topbar"/);
+  assert.match(html, /<details class="playbook-mobile-nav" id="playbook-mobile-nav">/);
+  assert.match(html, /<nav class="playbook-menu-panel" aria-label="AI Updates sections">/);
+  assert.match(html, /href="playbooks.html" aria-current="page">Playbooks<\/a>/);
+  assert.match(html, /class="playbook-search-link" href="index.html#\/search"/);
+  assert.match(html, /@media\(max-width:650px\)[\s\S]*?\.playbook-top\{display:none\}/);
+  assert.match(html, /\.playbook-tools input,\.playbook-tools select\{min-height:44px;font-size:16px\}/);
+  assert.match(html, /@media print\{\.playbook-mobile-topbar\{display:none\}\}/);
+  for(const route of ['overview','dictionary','safety','papers','games'])
+    assert.ok(html.includes('href="index.html#/'+route+'"'), 'Missing workspace route: '+route);
+});
+
 test('editorial policy uses the same compact mobile menu and real collection search as the archive', () => {
   const html=read('about.html');
   assert.match(html, /class="about-mobile-topbar"/);
