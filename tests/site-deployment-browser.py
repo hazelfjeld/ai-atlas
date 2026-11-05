@@ -1037,6 +1037,19 @@ with sync_playwright() as p:
             page.set_viewport_size({'width':width, 'height':900})
             for route in ('about.html', 'technologies.html', 'research.html'):
                 page.goto(base + route)
+                if theme == 'light' and width == 651 and route == 'about.html':
+                    print('TABLET NAV DIAGNOSTICS', page.evaluate("""() => {
+                        const nav=document.querySelector('.site-chrome');
+                        const links=[...nav.querySelectorAll('.site-chrome__links a')];
+                        return {height:nav.getBoundingClientRect().height,
+                            direction:getComputedStyle(nav).flexDirection,
+                            display:getComputedStyle(nav).display,
+                            tops:links.map(x=>Math.round(x.getBoundingClientRect().top)),
+                            heights:links.map(x=>x.getBoundingClientRect().height),
+                            overflow:document.documentElement.scrollWidth-innerWidth,
+                            width:nav.getBoundingClientRect().width,
+                            linkWidth:nav.querySelector('.site-chrome__links').getBoundingClientRect().width};
+                    }"""), flush=True)
                 check(f'shared {theme} navigation has no orphan link at {width}px on {route}',
                       page.evaluate("""() => {
                           const nav = document.querySelector('.site-chrome');
