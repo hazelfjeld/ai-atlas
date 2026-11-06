@@ -24,3 +24,18 @@ document.addEventListener('pointerdown', (event) => {
     if (!menu.contains(event.target)) menu.open = false;
   });
 });
+
+
+/* Discover already supports / to search. Reuse the existing real search route
+   on standalone pages, without stealing typing or native menu interaction. */
+document.addEventListener('keydown', (event) => {
+  if (event.key !== '/' || event.defaultPrevented || event.repeat || event.isComposing ||
+      event.ctrlKey || event.metaKey || event.altKey) return;
+  const target = event.target;
+  if (target?.closest?.('input,textarea,select,[contenteditable],[role="textbox"]')) return;
+  if (document.querySelector('details.site-mobile-chrome__nav[open]')) return;
+  const search = document.querySelector('a.site-mobile-chrome__search[href]');
+  if (!search) return;
+  event.preventDefault();
+  search.click();
+});

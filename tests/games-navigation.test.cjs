@@ -535,3 +535,37 @@ test('all standalone page families share the Discover desktop sidebar frame', ()
   assert.ok(!css.includes('@media (min-width:651px) and (max-width:850px)'));
   assert.ok(css.includes('@media (max-width:650px){.site-chrome{display:none!important}}'));
 });
+
+
+test('standalone sections use Discover’s slash-to-search shortcut without stealing text input', () => {
+  const script = read('site-theme.js');
+  const listeners = {};
+  let searches = 0, openMenu = false;
+  const search = {click: () => {searches++;}};
+  const document = {
+    documentElement: {dataset: {}},
+    addEventListener: (name, handler) => (listeners[name] ??= []).push(handler),
+    querySelector: selector => selector === 'a.site-mobile-chrome__search[href]' ? search :
+      selector === 'details.site-mobile-chrome__nav[open]' && openMenu ? {} : null,
+  };
+  vm.runInNewContext(script, {document, localStorage: {getItem: () => null}});
+  const press = (overrides={}) => {
+    let prevented = false;
+    const e = {key:'/', defaultPrevented:false, repeat:false, isComposing:false,
+      ctrlKey:false, metaKey:false, altKey:false, target:{closest: () => null},
+      preventDefault: () => {prevented = true;}, ...overrides};
+    for(const handler of listeners.keydown) handler(e);
+    return prevented;
+  };
+  assert.equal(press(), true);
+  assert.equal(searches, 1);
+  assert.equal(press({target:{closest: () => ({tagName:'INPUT'})}}), false);
+  assert.equal(press({ctrlKey:true}), false);
+  assert.equal(press({metaKey:true}), false);
+  assert.equal(press({isComposing:true}), false);
+  assert.equal(press({repeat:true}), false);
+  openMenu = true;
+  assert.equal(press(), false);
+  assert.equal(searches, 1);
+  assert.match(script, /site-mobile-chrome__search\[href\]/);
+});
