@@ -55,7 +55,7 @@ function renderNav(){
   });
   // Direct links to secondary workspaces remain discoverable even when the list starts collapsed.
   const more=$('additional-navigation');
-  if(more && ['safety','papers','playbooks','compare','saved','sources'].includes(view)) more.open=true;
+  if(more && ['safety','papers','compare','saved','sources'].includes(view)) more.open=true;
   if(window.ATLAS_OFFLINE){
     for(const id of ['daily','offline'])nav.querySelector(`[data-static="${id}"]`)?.setAttribute('hidden','');
     const demo=nav.querySelector('[data-static="demo"]'), encyclopedia=nav.querySelector('[data-static="encyclopedia"]');

@@ -28,7 +28,7 @@ def main():
     html = html.replace('</body>', '<script>' + script + '</script></body>')
     count = sum(len(data[k]) for k in ('papers','alerts','terms','technologies','playbooks'))
     html = html.replace('<main id="main" tabindex="-1">', f'<main id="main" tabindex="-1"><p class="notice">Offline demonstration fallback: all {count:,} catalog records (1,705 preserved originals), search, comparisons, Games and JSON exports work without internet. Term explanations open as record dialogs here. Expanded web pages, original downloads and external citations require the served edition.</p>')
-    html = html.replace('href="about.html"', 'href="#/sources"').replace('href="technology/index.html"', 'href="#/technologies"')
+    html = html.replace('href="playbooks.html"', 'href="#/playbooks"').replace('href="about.html"', 'href="#/sources"').replace('href="technology/index.html"', 'href="#/technologies"')
     html = html.replace('href="demo.html"', 'href="#/overview"').replace('href="terms/index.html"', 'href="#/dictionary"')
     html = html.replace('<meta name="robots" content="index,follow,max-image-preview:large">', '<meta name="robots" content="noindex,follow">')
     (ROOT / 'downloads/Atlas_Demo_Offline.html').write_bytes(html.encode('utf-8'))

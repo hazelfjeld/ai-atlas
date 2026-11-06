@@ -101,6 +101,46 @@ def render_standalone_nav(path):
     return markup
 
 
+def normalize_discover_sidebar(html):
+    """Use the shared seven destinations in Discover's first-paint sidebar.
+
+    Preserve SVG icons, hydrated counts, legacy hash routes and secondary links.
+    Playbooks moves to the primary group rather than appearing twice.
+    """
+    import re
+    marker = '<nav id="navigation" aria-label="Main navigation">'
+    assert html.count(marker) == 1, 'Unexpected Discover navigation structure'
+    before, rest = html.split(marker, 1)
+    nav, after = rest.split('</nav>', 1)
+    assert nav.count('<details class="nav-more"') == 1
+    _, secondary = nav.split('<details class="nav-more"', 1)
+    anchors = re.compile(
+        r'<a class="nav-link(?: active)?" data-(?:view|static)="([^"]+)" href="[^"]+"[^>]*>.*?</a>',
+        re.S,
+    )
+    existing = {match.group(1): match.group(0) for match in anchors.finditer(nav)}
+    keys = ('overview', 'daily', 'dictionary', 'technologies', 'games', 'playbooks', 'about')
+    primary = []
+    for (route, label), key in zip(DESTINATIONS, keys, strict=True):
+        anchor = existing.get(key) or (existing.get('demo') if key == 'about' else None)
+        assert anchor is not None, 'Missing Discover icon/link template: ' + key
+        kind = 'static' if key in ('daily', 'about') else 'view'
+        anchor, count = re.subn(r'data-(?:view|static)="[^"]+"', f'data-{kind}="{key}"', anchor, count=1)
+        assert count == 1
+        anchor, count = re.subn(r'href="[^"]+"', f'href="{route.replace("index.html#/", "#/")}"', anchor, count=1)
+        assert count == 1
+        anchor, count = re.subn(r'<span>[^<>]*</span>', '<span>' + escape(label) + '</span>', anchor, count=1)
+        assert count == 1
+        primary.append(anchor)
+    secondary = '<details class="nav-more"' + secondary
+    secondary = re.sub(
+        r'<a class="nav-link" data-view="playbooks" href="#/playbooks">.*?</a>',
+        '', secondary, count=1, flags=re.S,
+    )
+    assert 'data-view="playbooks"' not in secondary, 'Playbooks must appear only once'
+    return before + marker + ''.join(primary) + secondary + '</nav>' + after
+
+
 def normalize_standalone_chrome(html, path):
     """Replace only the known navigation pair; fail if page markup drifts."""
     import re

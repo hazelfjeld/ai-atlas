@@ -11,7 +11,7 @@ import subprocess
 from xml.etree.ElementTree import Element, SubElement, tostring
 from site_seo import absolute, metadata, breadcrumbs, replace_head, technology_path, ORIGIN
 from build_term_pages import rows, term_path, external
-from site_chrome import render_directory_nav, DIRECTORY_MOBILE_CSS, STANDALONE_NAVS, normalize_standalone_chrome
+from site_chrome import render_directory_nav, DIRECTORY_MOBILE_CSS, STANDALONE_NAVS, normalize_standalone_chrome, normalize_discover_sidebar
 
 ROOT = Path(__file__).resolve().parents[1]
 PAGES = {
@@ -102,7 +102,7 @@ def main():
         page.write_bytes(normalize_standalone_chrome(page.read_text(encoding="utf-8"), route).encode())
     # Same view code on the server and in the browser: no crawler-only alternative.
     rendered = subprocess.check_output(['node', str(ROOT / 'scripts/render_discovery.cjs')], cwd=ROOT).decode('utf-8')
-    index = (ROOT / 'index.html').read_text(encoding='utf-8')
+    index = normalize_discover_sidebar((ROOT / 'index.html').read_text(encoding='utf-8'))
     index, count = re.subn(r'<!-- discovery:start -->.*?<!-- discovery:end -->', lambda _: '<!-- discovery:start -->' + rendered + '<!-- discovery:end -->', index, flags=re.S)
     assert count == 1
     # First-paint counts must match the verified catalog before JavaScript hydrates.

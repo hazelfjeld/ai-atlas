@@ -32,6 +32,24 @@ with sync_playwright() as p:
     page.goto(base)
     page.locator('#navigation a[href="#/games"]').wait_for()
     check('homepage retains original Atlas shell and native Games tab', page.locator('.app-shell').count() == 1)
+    # Check actual Discover-to-editorial transitions, not CSS similarity alone.
+    for width in (320, 390, 768, 1280):
+        page.set_viewport_size({'width':width, 'height':844})
+        page.goto(base + 'index.html#/overview')
+        if width <= 650:
+            page.locator('#menu-toggle').click()
+        primary_links = page.locator('#navigation > a.nav-link')
+        check('Discover shares seven-link primary order at ' + str(width),
+              primary_links.locator('span:not(.nav-count)').all_inner_texts() == [
+                  'Discover', 'What’s New Today', 'Concept dictionary',
+                  'Technology profiles', 'Games', 'Playbooks', 'About'])
+        page.locator('#navigation > a[data-static="about"]').click()
+        page.wait_for_url('**/about.html')
+        check('Discover-to-About uses shared navigation at ' + str(width),
+              page.locator('.site-chrome__links a[aria-current="page"]').inner_text() == 'About'
+              and page.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'))
+    page.set_viewport_size({'width':1440, 'height':1000})
+    page.goto(base + 'index.html#/overview')
     # Native disclosure makes the long secondary list opt-in without losing direct-link access.
     check('secondary sidebar destinations start collapsed on the homepage',
           not page.locator('#additional-navigation').evaluate('(el) => el.open'))

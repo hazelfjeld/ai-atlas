@@ -54,8 +54,8 @@ test('first-paint sidebar uses the same canonical workspace destinations as hydr
   }));
   assert.deepEqual(links,[
     ['overview','#/overview'],['daily','whats-new.html'],['dictionary','#/dictionary'],
-    ['technologies','#/technologies'],['games','#/games'],['safety','#/safety'],
-    ['papers','#/papers'],['playbooks','#/playbooks'],['compare','#/compare'],
+    ['technologies','#/technologies'],['games','#/games'],['playbooks','playbooks.html'],
+    ['about','about.html'],['safety','#/safety'],['papers','#/papers'],['compare','#/compare'],
     ['saved','#/saved'],['sources','#/sources'],['demo','demo.html'],
     ['encyclopedia','terms/index.html'],['offline','downloads/Atlas_Demo_Offline.html']
   ].map(([id,href])=>({id,href})));
@@ -64,6 +64,30 @@ test('first-paint sidebar uses the same canonical workspace destinations as hydr
   assert.ok(html.includes('<noscript>') && html.includes('href="terms/index.html"'));
 });
 
+
+
+test('Discover primary links reuse the seven canonical destinations without duplicate Playbooks', () => {
+  const online = read('index.html');
+  const primary = online.split('<nav id="navigation" aria-label="Main navigation">')[1]
+    .split('<details class="nav-more"')[0];
+  const links = [...primary.matchAll(/<a class="nav-link(?: active)?" ([^>]+)>[\s\S]*?<\/a>/g)];
+  assert.deepEqual(links.map(m => m[0].match(/<span>([^<>]+)<\/span>/)[1]),
+    ['Discover', 'What’s New Today', 'Concept dictionary', 'Technology profiles',
+     'Games', 'Playbooks', 'About']);
+  assert.deepEqual(links.map(m => m[1].match(/href="([^"]+)"/)[1]),
+    ['#/overview', 'whats-new.html', '#/dictionary', '#/technologies',
+     '#/games', 'playbooks.html', 'about.html']);
+  assert.equal((online.match(/data-view="playbooks"/g) || []).length, 1);
+  assert.ok(!online.split('<details class="nav-more"')[1].split('</details>')[0]
+    .includes('data-view="playbooks"'));
+  assert.match(read('scripts/site_chrome.py'), /def normalize_discover_sidebar\(html\):/);
+  assert.match(read('scripts/site_chrome.py'), /for \(route, label\), key in zip\(DESTINATIONS, keys, strict=True\)/);
+  assert.match(read('scripts/build_seo.py'), /index = normalize_discover_sidebar\(/);
+  assert.match(read('scripts/build_offline.py'), /href="playbooks.html".*href="#\/playbooks"/);
+  const offline = read('downloads/Atlas_Demo_Offline.html');
+  assert.ok(offline.includes('data-view="playbooks" href="#/playbooks"'));
+  assert.ok(offline.includes('data-static="about" href="#/sources"'));
+});
 
 test('progressive sidebar retains all canonical links and reveals deep-linked secondary views', () => {
   const html=read('index.html'), app=read('app.js'), css=read('brand.css');
@@ -75,7 +99,7 @@ test('progressive sidebar retains all canonical links and reveals deep-linked se
   assert.match(nav, /data-static="offline"[\s\S]*?<\/div><\/details>$/);
   for(const id of ['overview','dictionary','technologies','games','safety','papers','playbooks','compare','saved','sources'])
     assert.match(nav, new RegExp('data-view="'+id+'"'), 'Missing native workspace destination: '+id);
-  assert.match(app, /if\(more && \['safety','papers','playbooks','compare','saved','sources'\]\.includes\(view\)\) more\.open=true/);
+  assert.match(app, /if\(more && \['safety','papers','compare','saved','sources'\]\.includes\(view\)\) more\.open=true/);
   assert.match(css, /\.nav-more-toggle:focus-visible/);
   assert.match(css, /prefers-reduced-motion:reduce/);
 });
