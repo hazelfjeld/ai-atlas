@@ -37,7 +37,10 @@ with sync_playwright() as p:
     check('canonical points to the primary domain', page.locator('link[rel=canonical]').get_attribute('href')=='https://aiupdates.app/')
     page.get_by_role('link',name='Read PyTorch',exact=True).click()
     check('technology profile works without JavaScript', page.locator('h1').inner_text()=='PyTorch' and page.get_by_role('heading',name='Tradeoffs & cautions',exact=True).is_visible())
-    page.get_by_role('navigation',name='Site navigation').get_by_role('link',name='Technologies',exact=True).click()
+    check('profile uses shared accessible navigation without JavaScript',
+          page.locator('.site-chrome__links a').count() == 7
+          and page.locator('.site-chrome__links a[aria-current="page"]').inner_text() == 'Technology profiles')
+    page.locator('.breadcrumb-links').get_by_role('link',name='Technologies',exact=True).click()
     expected_profiles=json.loads((Path(__file__).resolve().parents[1]/'publication.json').read_text())['published_counts']['technologies']
     check('technology directory exposes every checksummed crawlable profile', expected_profiles>=300 and page.locator('.reference-grid a').count()==expected_profiles)
     static.close()
