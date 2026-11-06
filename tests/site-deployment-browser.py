@@ -1205,7 +1205,7 @@ with sync_playwright() as p:
                       }"""))
                 if width == 1280 and route in ('about.html', 'terms/index.html'):
                     page.screenshot(path=str(out / f'shared-rail-{theme}-{route.replace("/", "-")}.png'),
-                                    full_page=True)
+                                    full_page=False)
     page.set_viewport_size({'width': 1280, 'height': 900})
     page.goto(base + 'terms/index.html')
     page.locator('.site-chrome__links a[href="../playbooks.html"]').click()
