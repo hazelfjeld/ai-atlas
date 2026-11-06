@@ -369,18 +369,19 @@ test('standalone editorial pages share Discover theme preference without rewriti
   }));
 });
 
-test('shared standalone navigation keeps a single tablet link row despite legacy template wrapping', () => {
+test('standalone tablets use Discover’s fixed left navigation rail', () => {
   const css = read('site-chrome.css');
-  assert.match(css, /@media \(min-width:651px\) and \(max-width:850px\)/);
-  assert.match(css, /\.site-chrome\{flex-direction:column;align-items:stretch!important;flex-wrap:nowrap!important;gap:4px\}/);
-  // A flex row still wrapped the seventh link at 651px. Require seven
-  // equal tablet targets and allow each label to wrap inside its target.
-  assert.ok(css.includes('.site-chrome__links{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:2px}'));
-  assert.ok(css.includes('.site-chrome__links a{min-width:0;padding:6px 4px!important;white-space:normal;text-align:center}'));
-  for (const path of ['about.html','technologies.html','research.html','playbooks.html']) {
+  assert.ok(css.includes('@media (min-width:651px){'));
+  assert.ok(css.includes('@media (min-width:651px) and (max-width:1150px){'));
+  assert.ok(css.includes('body:has(.site-chrome){padding-left:224px}'));
+  assert.ok(css.includes('body:has(.site-chrome){padding-left:204px}'));
+  assert.ok(css.includes('position:fixed!important;inset:0 auto 0 0;width:224px'));
+  assert.ok(!css.includes('grid-template-columns:repeat(7,minmax(0,1fr))'));
+  for (const path of ['about.html','technologies.html','research.html','playbooks.html',
+                      'games.html','whats-new.html','terms/index.html','technology/index.html']) {
     const html = read(path);
-    assert.match(html, /<nav class="site-chrome [^\"]+" aria-label="AI Updates primary navigation">/, path);
-    assert.match(html, /<link rel="stylesheet" href="site-chrome.css">/, path);
+    assert.match(html, /<nav class="site-chrome [^"]+" aria-label="AI Updates primary navigation">/, path);
+    assert.ok(html.includes('site-chrome.css'),path);
   }
 });
 
@@ -481,7 +482,7 @@ test('standalone native mobile menus share Escape, outside-pointer and no-JS-saf
 
 test('all standalone page families share the Discover desktop sidebar frame', () => {
   const css = read('site-chrome.css');
-  assert.match(css, /@media \(min-width:1051px\)/);
+  assert.match(css, /@media \(min-width:651px\)/);
   assert.ok(css.includes('padding-left:224px'));
   assert.ok(css.includes('padding-left:204px'));
   assert.ok(css.includes('background:var(--sidebar,#202b28)!important'), 'rail follows Discover dark theme');
@@ -501,6 +502,6 @@ test('all standalone page families share the Discover desktop sidebar frame', ()
     assert.match(html, /class="site-chrome [^"]+" aria-label="AI Updates primary navigation"/, path);
     assert.match(html, /href="(?:\.\.\/)?index\.html#\/search"/, path);
   }
-  assert.ok(css.includes('@media (min-width:651px) and (max-width:850px)'));
+  assert.ok(!css.includes('@media (min-width:651px) and (max-width:850px)'));
   assert.ok(css.includes('@media (max-width:650px){.site-chrome{display:none!important}}'));
 });

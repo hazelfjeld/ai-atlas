@@ -39,30 +39,9 @@
 }
 @media print{.games-header{display:none}}
 
-/* At compact tablet widths the seven destinations cannot always fit as
-   unbroken flex items: About at 651px left one orphaned on a second row.
-   Share one evenly spaced navigation row, wrapping long labels *within*
-   their 44px targets instead of wrapping whole links. */
-@media (min-width:651px) and (max-width:850px){
-.site-chrome{flex-direction:column;align-items:stretch!important;flex-wrap:nowrap!important;gap:4px}
-.site-chrome__links{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:2px}
-.site-chrome__links a{min-width:0;padding:6px 4px!important;white-space:normal;text-align:center}
-}
-
-/* Narrow reading columns (notably About) previously wrapped the brand above
-   desktop links even on wide screens. Keep both on one row, allowing long link
-   labels to wrap inside their accessible targets rather than moving the
-   whole navigation into a second header row. */
-@media (min-width:851px){
-.site-chrome{flex-wrap:nowrap!important}
-.site-chrome__links{flex:1 1 auto;flex-wrap:nowrap;justify-content:space-between;gap:2px}
-.site-chrome__links a{min-width:0;padding:8px 5px!important;white-space:normal;text-align:center}
-}
-
-/* All standalone pages already share one seven-section nav component.
-   Render Discover's fixed desktop rail throughout daily, research, evidence,
-   reference and Games; preserve original tablet, mobile and content layouts. */
-@media (min-width:1051px){
+/* Use Discover's fixed rail from 651px upward instead of a detached
+   tablet header. The existing native mobile menu remains below 651px. */
+@media (min-width:651px){
 body:has(.site-chrome){padding-left:224px}
 .site-chrome{
  position:fixed!important;inset:0 auto 0 0;width:224px;height:100vh;height:100dvh;
@@ -92,7 +71,7 @@ body:has(.site-chrome){padding-left:224px}
 /* Keep the existing Games theme button within its content header. */
 .games-header__inner{justify-content:flex-end}
 }
-@media (min-width:1051px) and (max-width:1150px){
+@media (min-width:651px) and (max-width:1150px){
 body:has(.site-chrome){padding-left:204px}
 .site-chrome{width:204px}
 }

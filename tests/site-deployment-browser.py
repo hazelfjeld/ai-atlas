@@ -1081,8 +1081,8 @@ with sync_playwright() as p:
               && getComputedStyle(document.documentElement).colorScheme === 'light'
               && getComputedStyle(document.body).backgroundColor !== 'rgb(34, 45, 39)'"""))
     page.emulate_media(color_scheme='light')
-    # Tablets retain a single horizontal row; all desktop page families now
-    # use Discover's fixed vertical rail. Compare both themes and layouts.
+    # Discover and standalone pages now share a fixed left rail on tablets as
+    # well as desktop, while retaining the native mobile menu below 651px.
     for theme in ('light', 'dark'):
         page.evaluate("(chosen) => localStorage.setItem('atlas.theme', chosen)", theme)
         for width in (651, 768, 1280):
@@ -1108,7 +1108,7 @@ with sync_playwright() as p:
                           if (!nav) return false;
                           const links = [...nav.querySelectorAll('.site-chrome__links a')];
                           const tops = links.map(el => Math.round(el.getBoundingClientRect().top));
-                          const sidebar = innerWidth >= 1051;
+                          const sidebar = innerWidth >= 651;
                           const rect = nav.getBoundingClientRect();
                           if (sidebar) {
                               return getComputedStyle(nav).position === 'fixed'
@@ -1185,7 +1185,7 @@ with sync_playwright() as p:
                       page.evaluate("(chosen) => document.documentElement.dataset.theme === chosen", theme))
                 check(f'{route} uses one responsive navigation system at {width}px',
                       page.evaluate("""() => {
-                          const large = innerWidth >= 1051;
+                          const large = innerWidth >= 651;
                           const mobile = innerWidth <= 650;
                           const nav = document.querySelector(mobile
                               ? '.site-mobile-chrome__nav' : '.site-chrome');
@@ -1208,6 +1208,31 @@ with sync_playwright() as p:
                                                    'hardware-review.html', 'games.html'):
                     page.screenshot(path=str(out / f'shared-rail-{theme}-{route.replace("/", "-")}.png'),
                                     full_page=False)
+    # Exercise a real Discover -> archive -> About transition at tablet size.
+    # Match rail geometry and theme across page families, not only on reload.
+    for theme in ('light', 'dark'):
+        page.set_viewport_size({'width': 768, 'height': 900})
+        page.goto(base + 'index.html#/overview')
+        page.evaluate("(value) => localStorage.setItem('atlas.theme', value)", theme)
+        discover_width = page.locator('#sidebar').evaluate('el => el.getBoundingClientRect().width')
+        page.locator('#navigation a[href="whats-new.html"]').click()
+        page.wait_for_url('**/whats-new.html')
+        for route in ('whats-new.html', 'about.html'):
+            check(f'tablet {theme} retains Discover rail on {route}',
+                  page.evaluate("""(expected) => {
+                      const nav = document.querySelector('.site-chrome');
+                      const r = nav.getBoundingClientRect();
+                      return getComputedStyle(nav).position === 'fixed'
+                          && Math.abs(r.width - expected) <= 1 && r.left === 0
+                          && document.documentElement.scrollWidth <= innerWidth + 1;
+                  }""", discover_width))
+            check(f'tablet {theme} persists theme across navigation to {route}',
+                  page.evaluate("(value) => document.documentElement.dataset.theme === value", theme))
+            page.screenshot(path=str(out / f'tablet-rail-{theme}-{route}.png'), full_page=False)
+            if route == 'whats-new.html':
+                page.locator('.site-chrome__links a[href="about.html"]').click()
+                page.wait_for_url('**/about.html')
+
     # Cross the former horizontal-to-sidebar boundary through real navigation.
     page.set_viewport_size({'width': 1280, 'height': 900})
     page.goto(base + 'whats-new.html')
