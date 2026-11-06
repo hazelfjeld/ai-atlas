@@ -388,3 +388,25 @@ test('both generated catalog directories share Discover navigation and the nativ
   assert.ok(read('scripts/site_chrome.py').includes('DIRECTORY_MOBILE_CSS'));
   assert.match(read('site-chrome.css'), /\.site-mobile-chrome__menu a\{[^}]*min-height:44px/);
 });
+
+test('standalone page families share a build-time navigation source, including current-section semantics', () => {
+  const names = ['Discover','What’s New Today','Concept dictionary','Technology profiles','Games','Playbooks','About'];
+  const routes = ['research.html','catalog-review.html','hardware-review.html','games.html',
+                  'technologies.html','playbooks.html','whats-new.html'];
+  assert.match(read('scripts/build_seo.py'), /normalize_standalone_chrome\(page\.read_text/);
+  assert.match(read('scripts/site_chrome.py'), /return render_directory_nav\(/);
+  for (const path of routes) {
+    const html = read(path);
+    const desktop = html.match(/<nav class="site-chrome [^"]+" aria-label="AI Updates primary navigation">([\s\S]*?)<\/nav>/)?.[1];
+    const mobile = html.match(/<nav class="[^"]*site-mobile-chrome__menu" aria-label="AI Updates sections">([\s\S]*?)<\/nav>/)?.[1];
+    assert.ok(desktop && mobile, path);
+    for (const nav of [desktop,mobile]) {
+      const links = [...nav.matchAll(/<a href="[^"]+"(?: aria-current="(?:page|location)")?>([^<]+)<\/a>/g)];
+      assert.deepEqual(links.map(m=>m[1]), names, path);
+    }
+    assert.match(html, /href="index\.html#\/search" aria-label="Search AI Updates in the main collection"/);
+    assert.equal((mobile.match(/aria-current=/g)||[]).length,
+      path.includes('review') ? 1 : path==='research.html' ? 0 : 1, path);
+  }
+  assert.match(read('site-chrome.css'), /\.site-mobile-chrome__menu a\[aria-current=location\]/);
+});

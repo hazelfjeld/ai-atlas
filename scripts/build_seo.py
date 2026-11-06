@@ -11,7 +11,7 @@ import subprocess
 from xml.etree.ElementTree import Element, SubElement, tostring
 from site_seo import absolute, metadata, breadcrumbs, replace_head, technology_path, ORIGIN
 from build_term_pages import rows, term_path, external
-from site_chrome import render_directory_nav, DIRECTORY_MOBILE_CSS
+from site_chrome import render_directory_nav, DIRECTORY_MOBILE_CSS, STANDALONE_NAVS, normalize_standalone_chrome
 
 ROOT = Path(__file__).resolve().parents[1]
 PAGES = {
@@ -96,6 +96,10 @@ def main():
     demo = ROOT / 'demo.html'
     demo.write_bytes(re.sub(r'only \d+ guides are expanded', 'only ' + str(guide_count) + ' guides are expanded', demo.read_text(encoding='utf-8')).encode())
     (ROOT / 'about.html').write_bytes(shell(*PAGES['about.html'], 'about.html', about).encode())
+    # Normalize existing page headers from the shared site-chrome component.
+    for route in STANDALONE_NAVS:
+        page = ROOT / route
+        page.write_bytes(normalize_standalone_chrome(page.read_text(encoding="utf-8"), route).encode())
     # Same view code on the server and in the browser: no crawler-only alternative.
     rendered = subprocess.check_output(['node', str(ROOT / 'scripts/render_discovery.cjs')], cwd=ROOT).decode('utf-8')
     index = (ROOT / 'index.html').read_text(encoding='utf-8')

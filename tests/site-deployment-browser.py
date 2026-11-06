@@ -327,6 +327,11 @@ with sync_playwright() as p:
           mobile_review.locator('#review-mobile-nav').evaluate('(el) => el.open')
           and mobile_review.get_by_role('navigation', name='AI Updates sections')
               .get_by_role('link', name='What’s New Today', exact=True).get_attribute('aria-current') == 'location')
+    check('catalog review current mobile section is visibly highlighted',
+          mobile_review.evaluate("""() => {
+            const a = document.querySelectorAll('.review-mobile-topbar .site-mobile-chrome__menu a');
+            return getComputedStyle(a[1]).backgroundColor !== getComputedStyle(a[0]).backgroundColor;
+          }"""))
     check('catalog review mobile links meet 44px touch minimum',
           mobile_review.evaluate("""() => [...document.querySelectorAll('.review-mobile-topbar .site-mobile-chrome__menu a')]
               .every(a => a.getBoundingClientRect().height >= 44)"""))
@@ -367,6 +372,11 @@ with sync_playwright() as p:
           mobile_hardware.locator('#hardware-mobile-nav').evaluate('(el) => el.open')
           and mobile_hardware.get_by_role('navigation', name='AI Updates sections')
               .get_by_role('link', name='What’s New Today', exact=True).get_attribute('aria-current') == 'location')
+    check('hardware review current mobile section is visibly highlighted',
+          mobile_hardware.evaluate("""() => {
+            const a = document.querySelectorAll('.hardware-mobile-topbar .site-mobile-chrome__menu a');
+            return getComputedStyle(a[1]).backgroundColor !== getComputedStyle(a[0]).backgroundColor;
+          }"""))
     check('hardware review mobile links meet 44px touch minimum',
           mobile_hardware.evaluate("""() => [...document.querySelectorAll('.hardware-mobile-topbar .site-mobile-chrome__menu a')]
               .every(a => a.getBoundingClientRect().height >= 44)"""))
