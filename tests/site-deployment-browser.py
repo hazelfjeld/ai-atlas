@@ -1081,9 +1081,8 @@ with sync_playwright() as p:
               && getComputedStyle(document.documentElement).colorScheme === 'light'
               && getComputedStyle(document.body).backgroundColor !== 'rgb(34, 45, 39)'"""))
     page.emulate_media(color_scheme='light')
-    # A 651px tablet previously split About's seven-link header into two rows,
-    # with an orphaned About link. Compare page families in both themes: all
-    # retain the canonical brand and a single row of readable 44px targets.
+    # Tablets retain a single horizontal row; all desktop page families now
+    # use Discover's fixed vertical rail. Compare both themes and layouts.
     for theme in ('light', 'dark'):
         page.evaluate("(chosen) => localStorage.setItem('atlas.theme', chosen)", theme)
         for width in (651, 768, 1280):
@@ -1109,8 +1108,7 @@ with sync_playwright() as p:
                           if (!nav) return false;
                           const links = [...nav.querySelectorAll('.site-chrome__links a')];
                           const tops = links.map(el => Math.round(el.getBoundingClientRect().top));
-                          const sidebar = innerWidth >= 1051
-                              && !!nav.closest('.term-shell, .tech-shell, .playbook-shell');
+                          const sidebar = innerWidth >= 1051;
                           const rect = nav.getBoundingClientRect();
                           if (sidebar) {
                               return getComputedStyle(nav).position === 'fixed'
