@@ -502,9 +502,16 @@ test('standalone tablets use Discover’s fixed left navigation rail', () => {
   assert.ok(css.includes('@media (min-width:651px) and (max-width:1150px){'));
   assert.ok(css.includes('body:has(.site-chrome){padding-left:224px}'));
   assert.ok(css.includes('body:has(.site-chrome){padding-left:204px}'));
-  assert.ok(css.includes('padding:30px 12px 22px!important;'));
-  assert.ok(css.includes('.site-chrome .site-chrome__brand svg{width:30px;height:30px;color:#edbb87}'));
-  assert.ok(css.includes('.site-chrome .site-chrome__name small{font-size:8px;letter-spacing:.04em;color:#9cab9e}'));
+  assert.ok(css.includes('.site-chrome .site-chrome__links a{font-size:12px!important;padding-inline:9px!important}'));
+  assert.ok(css.includes('.site-chrome .site-chrome__links::before{content:"EXPLORE";'));
+  assert.ok(css.includes('width:min(260px,calc(100vw - 48px))'));
+  assert.ok(css.includes('padding:32px 17px 24px!important;'));
+  assert.ok(css.includes('.site-chrome .site-chrome__brand svg{width:35px;height:35px;color:#edbb87}'));
+  assert.ok(css.includes('.site-chrome .site-chrome__name{font-size:25px;font-weight:650;'));
+  assert.ok(css.includes('.site-chrome .site-chrome__links::before{content:"EXPLORE";'));
+  assert.ok(css.includes('color:#fff!important;background:#ffffff13!important'), 'same active rail surface as Discover');
+  assert.ok(css.includes('width:min(260px,calc(100vw - 48px))'), 'mobile drawer matches Discover width');
+  assert.ok(css.includes('.site-chrome .site-chrome__name small{font-size:8px;letter-spacing:.04em;margin-top:7px;color:#9cab9e}'));
   assert.ok(css.includes('position:fixed!important;inset:0 auto 0 0;width:224px'));
   assert.ok(!css.includes('grid-template-columns:repeat(7,minmax(0,1fr))'));
   for (const path of ['about.html','technologies.html','research.html','playbooks.html',

@@ -43,42 +43,48 @@
 }
 @media print{.games-header{display:none}}
 
-/* Use Discover's fixed rail from 651px upward instead of a detached
-   tablet header. The existing native mobile menu remains below 651px. */
+/* Keep the shared rail aligned to Discover's actual wordmark, section label,
+   active surface, link rhythm and 224px/204px breakpoint widths. Mobile still
+   uses native script-free menus below 651px. */
 @media (min-width:651px){
 body:has(.site-chrome){padding-left:224px}
 .site-chrome{
  position:fixed!important;inset:0 auto 0 0;width:224px;height:100vh;height:100dvh;
  z-index:25;box-sizing:border-box;overflow-x:hidden;overflow-y:auto;
  display:flex!important;flex-direction:column!important;flex-wrap:nowrap!important;
- align-items:stretch!important;justify-content:flex-start!important;gap:20px!important;
- padding:30px 12px 22px!important;margin:0!important;
+ align-items:stretch!important;justify-content:flex-start!important;gap:8px!important;
+ padding:32px 17px 24px!important;margin:0!important;
  background:var(--sidebar,#202b28)!important;color:#f4f5ed!important;
  border:0!important;border-right:1px solid #405043!important
 }
-.site-chrome .site-chrome__brand{width:100%;gap:8px!important;color:#f4f5ed!important;white-space:normal}
-.site-chrome .site-chrome__brand svg{width:30px;height:30px;color:#edbb87}
-.site-chrome .site-chrome__name small{font-size:8px;letter-spacing:.04em;color:#9cab9e}
+.site-chrome .site-chrome__brand{width:100%;gap:10px!important;padding:0 7px 36px!important;color:#f4f5ed!important;white-space:normal}
+.site-chrome .site-chrome__name{font-size:25px;font-weight:650;letter-spacing:-.05em;line-height:1.05}
+.site-chrome .site-chrome__brand svg{width:35px;height:35px;color:#edbb87}
+.site-chrome .site-chrome__name small{font-size:8px;letter-spacing:.04em;margin-top:7px;color:#9cab9e}
 .site-chrome .site-chrome__links{
  display:flex;flex:0 0 auto;flex-direction:column;align-items:stretch;
  justify-content:flex-start;flex-wrap:nowrap;gap:4px;width:100%;min-width:0
 }
+/* Discover's section heading and baseline are part of the same rail chrome. */
+.site-chrome .site-chrome__links::before{content:"EXPLORE";display:block;margin:0 13px 5px;font-size:10px;font-weight:700;letter-spacing:.13em;color:#87998b}
 .site-chrome .site-chrome__links a{
  width:100%;min-width:0;justify-content:flex-start!important;text-align:left;
- padding:11px 12px!important;white-space:normal;color:#c5cfc6!important;
- font-size:12px!important;font-weight:550!important
+ padding:12px 11px!important;white-space:normal;color:#c5cfc6!important;
+ font-size:13px!important;font-weight:540!important
 }
 .site-chrome .site-chrome__links a:hover,
 .site-chrome .site-chrome__links a[aria-current]{
- color:#f5f7ef!important;background:#374b3c!important
+ color:#fff!important;background:#ffffff13!important
 }
 /* Keep the existing Games theme button within its content header. */
 .games-header__inner{justify-content:flex-end}
 }
 @media (min-width:651px) and (max-width:1150px){
 body:has(.site-chrome){padding-left:204px}
-.site-chrome{width:204px}
-.site-chrome .site-chrome__name{font-size:21px}
+.site-chrome{width:204px;padding-inline:12px!important}
+.site-chrome .site-chrome__name{font-size:22px}
+.site-chrome .site-chrome__brand svg{width:30px;height:30px}
+.site-chrome .site-chrome__links a{font-size:12px!important;padding-inline:9px!important}
 }
 @media print{
 body:has(.site-chrome){padding-left:0!important}
@@ -101,7 +107,7 @@ body:has(.site-mobile-chrome__nav[open]){overflow:hidden}
  border-color:#435446;background:#374b3c;color:#f5f7ef
 }
 .site-mobile-chrome .site-mobile-chrome__menu{
- position:fixed;inset:0 auto 0 0;width:min(250px,calc(100vw - 48px));
+ position:fixed;inset:0 auto 0 0;width:min(260px,calc(100vw - 48px));
  height:100vh;height:100dvh;max-height:100vh;max-height:100dvh;
  box-sizing:border-box;display:grid;grid-template-columns:minmax(0,1fr);align-content:start;
  gap:4px;padding:70px 16px 22px;overflow:auto;overscroll-behavior:contain;

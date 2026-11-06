@@ -1278,6 +1278,48 @@ with sync_playwright() as p:
               const rect = document.querySelector('#sidebar').getBoundingClientRect();
               return rect.left === 0 && Math.abs(rect.width - (innerWidth <= 1150 ? 204 : 224)) <= 1;
           }"""))
+    # Regression: navigating between Discover and a standalone article must not
+    # shift the rail's wordmark, first link, active surface or drawer width.
+    # Inspect real computed styles, not only the shared CSS source.
+    for theme in ('light', 'dark'):
+        page.evaluate("(chosen) => localStorage.setItem('atlas.theme', chosen)", theme)
+        for width in (320, 390, 768, 1280):
+            page.set_viewport_size({'width':width, 'height':900})
+            page.goto(base + 'index.html#/overview')
+            page.locator('#catalog-loading').wait_for(state='detached', timeout=45000)
+            if width <= 650:
+                page.locator('#menu-toggle').click()
+                baseline = page.locator('#sidebar').evaluate('el => el.getBoundingClientRect().width')
+            else:
+                baseline = page.evaluate("""() => {
+                    const link = document.querySelector('#navigation > a.nav-link');
+                    return {
+                        width:document.querySelector('#sidebar').getBoundingClientRect().width,
+                        firstTop:link.getBoundingClientRect().top,
+                        linkFont:getComputedStyle(link).fontSize,
+                        brandFont:getComputedStyle(document.querySelector('.brand')).fontSize,
+                        activeBg:getComputedStyle(link).backgroundColor
+                    };
+                }""")
+            page.goto(base + 'about.html')
+            if width <= 650:
+                page.locator('.site-mobile-chrome__toggle').click()
+                check(f'{theme} {width}px shared drawer has Discover width',
+                      abs(page.locator('.site-mobile-chrome__menu').evaluate(
+                          'el => el.getBoundingClientRect().width') - baseline) <= 1)
+            else:
+                check(f'{theme} {width}px shared rail matches Discover geometry and type',
+                      page.evaluate("""(expected) => {
+                          const rail=document.querySelector('.site-chrome');
+                          const first=rail.querySelector('.site-chrome__links a');
+                          const active=rail.querySelector('[aria-current]');
+                          return Math.abs(rail.getBoundingClientRect().width-expected.width)<=1
+                              && Math.abs(first.getBoundingClientRect().top-expected.firstTop)<=12
+                              && getComputedStyle(first).fontSize===expected.linkFont
+                              && getComputedStyle(rail.querySelector('.site-chrome__name')).fontSize===expected.brandFont
+                              && getComputedStyle(active).backgroundColor===expected.activeBg
+                              && document.documentElement.scrollWidth<=innerWidth+1;
+                      }""", baseline))
     for theme in ('light', 'dark'):
         page.evaluate("(chosen) => localStorage.setItem('atlas.theme', chosen)", theme)
         for width in (320, 390, 768, 1080, 1280):
