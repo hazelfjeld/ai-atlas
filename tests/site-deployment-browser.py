@@ -209,7 +209,7 @@ with sync_playwright() as p:
     mobile_brand = mobile_games.locator('#games-mobile-nav .site-mobile-chrome__brand')
     check('mobile Games drawer visibly reuses the desktop logo and wordmark',
           mobile_brand.count() == 1 and mobile_brand.is_visible()
-          and mobile_brand.inner_text() == mobile_games.locator('.site-chrome__brand').inner_text()
+          and mobile_brand.inner_text() == mobile_games.locator('nav.site-chrome > a.site-chrome__brand').inner_text()
           and mobile_brand.locator('svg').count() == 1)
     menu_links = mobile_games.locator('#games-mobile-nav .site-mobile-chrome__menu a:not(.site-mobile-chrome__brand)')
     check('mobile games nav matches canonical labels, routes and active destination',
