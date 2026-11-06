@@ -80,8 +80,8 @@ test('Discover primary links reuse the seven canonical destinations without dupl
   assert.equal((online.match(/data-view="playbooks"/g) || []).length, 1);
   assert.ok(!online.split('<details class="nav-more"')[1].split('</details>')[0]
     .includes('data-view="playbooks"'));
-  assert.match(read('scripts/site_chrome.py'), /def normalize_discover_sidebar\\(html, term_count, tech_count\\):/);
-  assert.match(read('scripts/site_chrome.py'), /def render_discover_primary\\(term_count, tech_count\\):/);
+  assert.match(read('scripts/site_chrome.py'), /def normalize_discover_sidebar\(html, term_count, tech_count\):/);
+  assert.match(read('scripts/site_chrome.py'), /def render_discover_primary\(term_count, tech_count\):/);
   assert.match(read('scripts/site_chrome.py'), /for \(route, label\), \(key, kind, icon\) in zip\(DESTINATIONS, DISCOVER_LINKS, strict=True\)/);
   assert.match(read('scripts/build_seo.py'), /index = normalize_discover_sidebar\(/);
   assert.match(read('scripts/build_offline.py'), /href="playbooks.html".*href="#\/playbooks"/);
