@@ -106,6 +106,15 @@ test('progressive sidebar retains all canonical links and reveals deep-linked se
 });
 
 
+test('standalone workspace heading has a first-paint and no-script label across page families', () => {
+  const css=read('site-chrome.css'), script=read('site-theme.js');
+  const fallback=css.split('.site-mobile-chrome::before{')[1]?.split('}')[0];
+  assert.ok(fallback, 'Shared desktop workspace header must exist');
+  assert.match(fallback, /content:"AI Updates";/, 'No-script header cannot be empty');
+  assert.match(css, /\\.site-mobile-chrome\\[data-page-label\\]::before\\{content:attr\\(data-page-label\\)\\}/);
+  assert.match(script, /chrome\\.dataset\\.pageLabel = label;/, 'Enhanced pages should still show their section');
+});
+
 test('shared native mobile drawer reuses canonical desktop wordmark without duplicate links', () => {
   const script=read('site-theme.js'), css=read('site-chrome.css');
   new vm.Script(script);

@@ -1451,6 +1451,29 @@ with sync_playwright() as p:
           page.url.endswith('/index.html#/dictionary'))
     page.locator('#catalog-loading').wait_for(state='detached')
 
+    # The shared desktop topbar used to have no title until DOMContentLoaded:
+    # when JS was blocked, every editorial and reference family showed a blank bar.
+    # Suppress only the enhancer to inspect CSS first paint with real Chromium.
+    first_paint = browser.new_page(viewport={'width':1280, 'height':900}, reduced_motion='reduce')
+    first_paint.route('**/site-theme.js',
+                      lambda route: route.fulfill(status=200, content_type='application/javascript',
+                                                   body='/* intentionally suppressed for first-paint QA */'))
+    for route in ('whats-new.html', 'about.html', 'terms/index.html',
+                  'technology/TECH-0216-pytorch.html'):
+        first_paint.goto(base + route)
+        check('unenhanced shared topbar has a visible title on ' + route,
+              first_paint.locator('.site-mobile-chrome').is_visible()
+              and first_paint.locator('.site-mobile-chrome').evaluate('''el => {
+                  const title = getComputedStyle(el, '::before');
+                  return !el.hasAttribute('data-page-label') &&
+                         title.content === '"AI Updates"' &&
+                         title.display !== 'none' &&
+                         el.getBoundingClientRect().height >= 76;
+              }'''))
+        first_paint.screenshot(path=str(out / ('first-paint-' + route.replace('/', '-') + '.png')),
+                               full_page=False)
+    first_paint.close()
+
     script_free = browser.new_page(viewport={'width': 320, 'height': 720},
                                    java_script_enabled=False)
     script_free.goto(base + 'terms/index.html')

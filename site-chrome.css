@@ -165,10 +165,12 @@ body:has(.site-chrome){padding-top:78px}
   border-bottom:1px solid var(--line,#dce1d7)
 }
 .site-mobile-chrome::before{
-  content:attr(data-page-label);display:block;flex:1;min-width:0;
+  /* Keep the workspace title visible on first paint and without scripts. */
+  content:"AI Updates";display:block;flex:1;min-width:0;
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
   font-size:13px;font-weight:550;color:var(--ink,#18211e)
 }
+.site-mobile-chrome[data-page-label]::before{content:attr(data-page-label)}
 .site-mobile-chrome__nav{display:none}
 .site-mobile-chrome__search{
   display:flex;align-items:center;gap:10px;flex:0 1 365px;
