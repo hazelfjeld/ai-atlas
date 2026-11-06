@@ -71,7 +71,7 @@ body:has(> :is(.term-shell,.tech-shell,.playbook-shell) > .site-chrome){padding-
  display:flex!important;flex-direction:column!important;flex-wrap:nowrap!important;
  align-items:stretch!important;justify-content:flex-start!important;gap:20px!important;
  padding:30px 19px 22px!important;margin:0!important;
- background:#202b28!important;color:#f4f5ed!important;
+ background:var(--sidebar,#202b28)!important;color:#f4f5ed!important;
  border:0!important;border-right:1px solid #405043!important
 }
 :is(.term-shell,.tech-shell,.playbook-shell) > .site-chrome .site-chrome__brand{

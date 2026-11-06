@@ -1115,7 +1115,7 @@ with sync_playwright() as p:
                           if (sidebar) {
                               return getComputedStyle(nav).position === 'fixed'
                                   && getComputedStyle(nav).flexDirection === 'column'
-                                  && rect.left === 0 && Math.abs(rect.width - 224) <= 1
+                                  && rect.left === 0 && Math.abs(rect.width - (innerWidth <= 1150 ? 204 : 224)) <= 1
                                   && nav.closest('main').getBoundingClientRect().left >= (innerWidth <= 1150 ? 203 : 223)
                                   && getComputedStyle(nav.querySelector('.site-chrome__links')).flexDirection === 'column'
                                   && links.length === 7
@@ -1199,7 +1199,7 @@ with sync_playwright() as p:
                               && (mobile ? computed.display !== 'none'
                                   : large ? computed.position === 'fixed'
                                       && computed.flexDirection === 'column'
-                                      && Math.abs(rect.width - 242) <= 1
+                                      && Math.abs(rect.width - (innerWidth <= 1150 ? 204 : 224)) <= 1
                                       && rect.left === 0
                                       : computed.position !== 'fixed');
                       }"""))

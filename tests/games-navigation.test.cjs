@@ -484,6 +484,7 @@ test('reference, technology and playbook pages share the Discover desktop sideba
   assert.match(css, /@media \(min-width:1051px\)/);
   assert.ok(css.includes('padding-left:224px'));
   assert.ok(css.includes('padding-left:204px'));
+  assert.ok(css.includes('background:var(--sidebar,#202b28)!important'), 'rail follows Discover dark theme');
   assert.ok(css.includes('position:fixed!important;inset:0 auto 0 0;width:224px'));
   assert.ok(css.includes('flex-direction:column!important;flex-wrap:nowrap!important'));
   assert.ok(css.includes('> .site-chrome .site-chrome__links a[aria-current]'));
