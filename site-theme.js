@@ -115,15 +115,16 @@ document.addEventListener('DOMContentLoaded', () => {
     menu.prepend(mobileBrand);
   }
 
-  // Discover exposes its existing appearance switch from the sidebar.
-  // Give every other existing page family the same control in the shared
-  // desktop rail and native mobile drawer; Games already owns a theme toggle.
-  // No-script navigation is unaffected, and the two responsive placements
-  // are buttons, not duplicate navigation links.
-  if (typeof document.createElement === 'function' &&
-      !document.getElementById?.('theme-toggle')) {
+  // All page families use the shared appearance action in their native drawer.
+  // Discover retains its original desktop sidebar button; Games already has a
+  // visible theme button in its own header, so neither gets a duplicate rail action.
+  // Native links and no-JavaScript navigation remain untouched.
+  if (typeof document.createElement === 'function' && menu) {
     const rail = document.querySelector('.site-chrome');
-    if (rail && menu) {
+    const existing = document.getElementById?.('theme-toggle');
+    const containers = rail && !existing ? [rail, menu] :
+      existing && !rail ? [menu] : [];
+    if (containers.length && !menu.querySelector('.site-chrome__theme-toggle')) {
       const controls = [];
       const effectiveTheme = () => document.documentElement.dataset.theme ||
         (window.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
@@ -134,7 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
           button.textContent = '◐  ' + (theme === 'dark' ? 'Dark' : 'Light') + ' theme';
         });
       };
-      for (const container of [rail, menu]) {
+      for (const container of containers) {
         const button = document.createElement('button');
         button.type = 'button';
         button.className = 'site-chrome__theme-toggle';
@@ -149,6 +150,9 @@ document.addEventListener('DOMContentLoaded', () => {
         container.append(button);
         controls.push(button);
       }
+      // Discover's original desktop button can also change the saved theme.
+      // Synchronize the shared mobile label after that existing click handler.
+      if (existing && !rail) existing.addEventListener('click', syncThemeButtons);
       syncThemeButtons();
     }
   }

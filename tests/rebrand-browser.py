@@ -193,6 +193,31 @@ with sync_playwright() as p:
     page.locator('#discover-mobile-nav .site-mobile-chrome__menu a[href="#/games"]').click()
     page.locator('#start-quiz').wait_for()
     check('mobile navigation retains native Quiz and Match',page.locator('#start-match').is_visible() and page.locator('#discover-mobile-nav').evaluate('el => !el.open'))
+    # Discover used to hide its only theme button inside the desktop sidebar.
+    # Its shared native mobile drawer should expose the same functional action
+    # as the standalone pages, with persistence across direct page navigation.
+    page.evaluate("document.documentElement.dataset.theme='dark';localStorage.setItem('atlas.theme','dark')")
+    page.locator('#discover-mobile-nav summary').click()
+    discover_theme = page.locator('#discover-mobile-nav .site-chrome__theme-toggle')
+    check('Discover shares one visible mobile drawer theme action',
+          discover_theme.count() == 1 and discover_theme.is_visible())
+    discover_theme.click()
+    check('Discover native drawer switches and saves light theme',
+          page.evaluate("document.documentElement.dataset.theme==='light' && localStorage.getItem('atlas.theme')==='light'"))
+    page.goto(base+'about.html')
+    check('standalone About preserves Discover mobile appearance selection',
+          page.evaluate("document.documentElement.dataset.theme==='light'"))
+    page.locator('details.site-mobile-chrome__nav summary').click()
+    about_theme = page.locator('.site-mobile-chrome__menu .site-chrome__theme-toggle')
+    check('About exposes the same shared mobile appearance action',
+          about_theme.count() == 1 and about_theme.is_visible())
+    about_theme.click()
+    check('About switches back to dark and persists across pages',
+          page.evaluate("document.documentElement.dataset.theme==='dark' && localStorage.getItem('atlas.theme')==='dark'"))
+    page.goto(base+'index.html#/games')
+    page.locator('#start-quiz').wait_for()
+    check('returning to Discover retains the theme selected on About',
+          page.evaluate("document.documentElement.dataset.theme==='dark'"))
     page.goto(base+'terms/MLD-1039-reward-hacking.html')
     check('rebranded expanded guide retains primary citations',page.locator('h1').inner_text()=='Reward hacking' and page.get_by_role('heading',name='Sources for the expanded explanation',exact=True).is_visible())
     check('mobile term guide fits the viewport',page.evaluate('document.documentElement.scrollWidth<=innerWidth'))

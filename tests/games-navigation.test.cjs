@@ -142,6 +142,68 @@ test('shared native mobile drawer reuses canonical desktop wordmark without dupl
   assert.match(css,/\.site-mobile-chrome \.site-mobile-chrome__menu::before/);
 });
 
+test('Discover mobile uses the shared theme action while Games keeps its existing one', () => {
+  const script = read('site-theme.js');
+  new vm.Script(script);
+  const handlers = {};
+  const saved = [];
+  const root = {dataset:{}};
+  const buttons = [];
+  const brand = {};
+  const menu = {
+    querySelector(selector) {
+      return selector === '.site-mobile-chrome__brand' ? brand :
+        selector === '.site-chrome__theme-toggle' ? buttons[0] || null : null;
+    },
+    append(button) { buttons.push(button); }
+  };
+  const chrome = {dataset:{}, querySelector: () => menu};
+  const existing = {
+    listeners:{},
+    addEventListener(name, handler) { this.listeners[name] = handler; },
+    click() {
+      root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+      this.listeners.click?.();
+    }
+  };
+  const document = {
+    documentElement:root, title:'Discover · AI Updates',
+    addEventListener(name, handler) {handlers[name] = handler;},
+    querySelector(selector) {return selector === '.site-mobile-chrome' ? chrome : null;},
+    getElementById(id) {return id === 'theme-toggle' ? existing : null;},
+    createElement(tag) {
+      assert.equal(tag, 'button');
+      return {
+        attrs:{}, listeners:{},
+        setAttribute(name, value) {this.attrs[name] = value;},
+        addEventListener(name, handler) {this.listeners[name] = handler;}
+      };
+    }
+  };
+  const window = {innerWidth:390, addEventListener() {}, matchMedia:()=>({matches:false})};
+  vm.runInNewContext(script, {
+    document, window,
+    localStorage: {getItem:()=> 'dark',setItem:(key,value)=>saved.push([key,value])}
+  });
+  handlers.DOMContentLoaded();
+  assert.equal(buttons.length,1,'Discover adds one mobile control, not another desktop button');
+  assert.equal(buttons[0].className,'site-chrome__theme-toggle');
+  assert.equal(buttons[0].attrs['aria-pressed'],'true');
+  buttons[0].listeners.click();
+  assert.equal(root.dataset.theme,'light');
+  assert.deepEqual(saved,[['atlas.theme','light']]);
+  assert.equal(buttons[0].attrs['aria-pressed'],'false');
+  existing.click();
+  assert.equal(root.dataset.theme,'dark');
+  assert.equal(buttons[0].attrs['aria-pressed'],'true','desktop theme action keeps mobile label synchronized');
+  handlers.DOMContentLoaded();
+  assert.equal(buttons.length,1,'re-entering the shared initializer cannot duplicate the button');
+  document.querySelector = selector => selector === '.site-mobile-chrome' ? chrome :
+    selector === '.site-chrome' ? {} : null;
+  handlers.DOMContentLoaded();
+  assert.equal(buttons.length,1,'Games with its existing header button must not gain another');
+});
+
 test('shared native mobile drawer traps keyboard focus without replacing no-JS navigation', () => {
   const script = read('site-theme.js');
   new vm.Script(script);
