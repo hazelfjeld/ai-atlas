@@ -394,7 +394,7 @@ test('standalone page families share a build-time navigation source, including c
   const routes = ['research.html','catalog-review.html','hardware-review.html','games.html',
                   'technologies.html','playbooks.html','whats-new.html'];
   assert.match(read('scripts/build_seo.py'), /normalize_standalone_chrome\(page\.read_text/);
-  assert.match(read('scripts/site_chrome.py'), /return render_directory_nav\(/);
+  assert.match(read('scripts/site_chrome.py'), /markup = render_directory_nav\(/);
   for (const path of routes) {
     const html = read(path);
     const desktop = html.match(/<nav class="site-chrome [^"]+" aria-label="AI Updates primary navigation">([\s\S]*?)<\/nav>/)?.[1];
