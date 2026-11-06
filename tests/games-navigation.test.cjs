@@ -755,3 +755,18 @@ test('shared desktop workspace bar reuses one real search link across page famil
       path+' must not render duplicate search links');
   }
 });
+
+test('shared native mobile drawer preserves site branding when enhancement is unavailable', () => {
+  const css = read('site-chrome.css');
+  const script = read('site-theme.js');
+  assert.ok(css.includes('.site-mobile-chrome__menu:not(:has(> a.site-mobile-chrome__brand))::after{'));
+  assert.ok(css.includes('content:"AI Updates";position:absolute;top:10px;left:72px'));
+  assert.ok(css.includes('background:url("favicon.svg") left center/28px 28px no-repeat'));
+  assert.ok(script.includes('desktopBrand.cloneNode(true)'), 'enhanced state must reuse the actual desktop brand');
+  for (const route of ['games.html','whats-new.html','terms/index.html',
+                       'technology/index.html','about.html']) {
+    const html = read(route);
+    assert.match(html, /<nav class="[^"]*site-mobile-chrome__menu"/, route);
+    assert.match(html, /href="(?:\.\.\/)?site-chrome\.css"/, route);
+  }
+});

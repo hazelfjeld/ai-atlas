@@ -146,6 +146,16 @@ body:has(.site-mobile-chrome__nav[open]){overflow:hidden}
   color:#9cab9e;
 }
 .site-mobile-chrome__brand:focus-visible{outline:3px solid #edba87;outline-offset:3px}
+/* Match Discover even before enhancement: the native menu has an existing
+   real SVG brand once scripts run. Until then, reuse the shipped favicon and
+   site name in the same reserved space (no-JavaScript included). */
+.site-mobile-chrome .site-mobile-chrome__menu:not(:has(> a.site-mobile-chrome__brand))::after{
+  content:"AI Updates";position:absolute;top:10px;left:72px;right:10px;
+  min-height:48px;display:flex;align-items:center;box-sizing:border-box;
+  padding-left:36px;background:url("favicon.svg") left center/28px 28px no-repeat;
+  color:#f4f5ed;font-size:18px;font-weight:700;letter-spacing:-.05em;
+  pointer-events:none
+}
 }
 @media (prefers-reduced-motion:reduce){
 .site-mobile-chrome__menu{scroll-behavior:auto}
