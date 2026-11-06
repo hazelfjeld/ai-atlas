@@ -84,3 +84,37 @@ body:has(.site-chrome){padding-left:204px}
 body:has(.site-chrome){padding-left:0!important}
 .site-chrome{display:none!important}
 }
+
+
+/* The shared native mobile navigation uses Discover's existing off-canvas
+   frame. Keep <details> as the only menu source: it stays usable without JS,
+   while site-theme.js supplies Escape and outside-pointer dismissal. */
+@media (max-width:650px){
+.site-mobile-chrome:has(.site-mobile-chrome__nav[open]){z-index:100}
+.site-mobile-chrome:has(.site-mobile-chrome__nav[open])::before{
+ content:"";position:fixed;inset:0;background:#13291d77;z-index:99
+}
+.site-mobile-chrome .site-mobile-chrome__nav[open] > .site-mobile-chrome__toggle{
+ position:fixed;left:16px;top:16px;z-index:102;
+ border-color:#435446;background:#374b3c;color:#f5f7ef
+}
+.site-mobile-chrome .site-mobile-chrome__menu{
+ position:fixed;inset:0 auto 0 0;width:min(250px,calc(100vw - 48px));
+ height:100vh;height:100dvh;max-height:100vh;max-height:100dvh;
+ box-sizing:border-box;display:flex;flex-direction:column;align-items:stretch;
+ gap:4px;padding:70px 13px 22px;overflow:auto;overscroll-behavior:contain;
+ border:0;border-right:1px solid #405043;border-radius:0;
+ background:var(--sidebar,#202b28);color:#c5cfc6;box-shadow:0 8px 32px #0003;
+ z-index:101
+}
+.site-mobile-chrome .site-mobile-chrome__menu a{
+ flex:none;border-radius:8px;color:#c5cfc6;font-size:14px
+}
+.site-mobile-chrome .site-mobile-chrome__menu a:hover,
+.site-mobile-chrome .site-mobile-chrome__menu a[aria-current]{
+ background:#374b3c;color:#f5f7ef
+}
+}
+@media (prefers-reduced-motion:reduce){
+.site-mobile-chrome__menu{scroll-behavior:auto}
+}

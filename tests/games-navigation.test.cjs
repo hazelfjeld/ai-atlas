@@ -570,3 +570,21 @@ test('standalone sections use Discover’s slash-to-search shortcut without stea
   assert.equal(searches, 1);
   assert.match(script, /site-mobile-chrome__search\[href\]/);
 });
+
+
+test('shared native mobile menu adopts Discover off-canvas frame without duplicating navigation', () => {
+  const css = read('site-chrome.css');
+  const js = read('site-theme.js');
+  assert.match(css, /\.site-mobile-chrome:has\(\.site-mobile-chrome__nav\[open\]\)::before/);
+  assert.match(css, /\.site-mobile-chrome \.site-mobile-chrome__menu\{[^}]*position:fixed;inset:0 auto 0 0/);
+  assert.match(css, /\.site-mobile-chrome \.site-mobile-chrome__menu\{[^}]*width:min\(250px,calc\(100vw - 48px\)\)/);
+  assert.match(css, /\.site-mobile-chrome \.site-mobile-chrome__nav\[open\] > \.site-mobile-chrome__toggle/);
+  assert.match(css, /background:var\(--sidebar,#202b28\);color:#c5cfc6/);
+  assert.match(js, /details\.site-mobile-chrome__nav\[open\]/);
+  for (const route of ['about.html','games.html','whats-new.html','research.html','playbooks.html',
+                       'terms/MLD-0001-a-b-test.html','technology/index.html']) {
+    const page=read(route);
+    assert.equal((page.match(/<nav class="[^"]*site-mobile-chrome__menu"/g) || []).length, 1, route);
+    assert.match(page, /<details class="[^"]*site-mobile-chrome__nav/);
+  }
+});
