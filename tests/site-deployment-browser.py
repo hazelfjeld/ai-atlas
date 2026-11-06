@@ -488,14 +488,19 @@ with sync_playwright() as p:
                   .every(a => a.getBoundingClientRect().height >= 44)"""))
         check(reference + ' fits the 320px viewport',
               mobile_reference.evaluate('document.documentElement.scrollWidth <= window.innerWidth + 1'))
-        menu.locator('nav a').nth(1).focus()
+        # Test actual keyboard modality: programmatic .focus() after a
+        # mouse click need not activate the browser's :focus-visible state.
+        menu.locator('summary').focus()
+        mobile_reference.keyboard.press('Tab')
         check(reference + ' retains visible keyboard focus',
               mobile_reference.evaluate("""() => {
                   const a = document.activeElement;
                   return a.matches('#directory-mobile-nav nav a')
+                      && a.matches(':focus-visible')
                       && getComputedStyle(a).outlineStyle === 'solid'
                       && parseFloat(getComputedStyle(a).outlineWidth) >= 2;
               }"""))
+        mobile_reference.screenshot(path=str(out / ('concept-' + Path(reference).stem + '-mobile.png')), full_page=False)
         menu.locator('summary').click()
         mobile_reference.set_viewport_size({'width':390, 'height':844})
         check(reference + ' fits the 390px viewport',
@@ -508,6 +513,7 @@ with sync_playwright() as p:
         check(reference + ' preserves desktop wordmark and current-section navigation',
               mobile_reference.locator('.site-chrome__brand').is_visible()
               and mobile_reference.locator('.site-chrome__links a[aria-current="page"]').inner_text() == 'Concept dictionary')
+        mobile_reference.screenshot(path=str(out / ('concept-' + Path(reference).stem + '-desktop.png')), full_page=False)
         mobile_reference.close()
     page.goto(base + 'whats-new.html')
     check('daily archive uses the same Atlas logo and quiet wordmark',
