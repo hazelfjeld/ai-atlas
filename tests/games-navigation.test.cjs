@@ -111,8 +111,8 @@ test('standalone workspace heading has a first-paint and no-script label across 
   const fallback=css.split('.site-mobile-chrome::before{')[1]?.split('}')[0];
   assert.ok(fallback, 'Shared desktop workspace header must exist');
   assert.match(fallback, /content:"AI Updates";/, 'No-script header cannot be empty');
-  assert.match(css, /\\.site-mobile-chrome\\[data-page-label\\]::before\\{content:attr\\(data-page-label\\)\\}/);
-  assert.match(script, /chrome\\.dataset\\.pageLabel = label;/, 'Enhanced pages should still show their section');
+  assert.ok(css.includes('.site-mobile-chrome[data-page-label]::before{content:attr(data-page-label)}'));
+  assert.ok(script.includes('chrome.dataset.pageLabel = label;'), 'Enhanced pages should still show their section');
 });
 
 test('shared native mobile drawer reuses canonical desktop wordmark without duplicate links', () => {
@@ -738,7 +738,7 @@ test('shared desktop workspace bar reuses one real search link across page famil
   const js=read('site-theme.js');
   assert.match(css, /body:has\(\.site-chrome\)\{padding-top:78px\}/);
   assert.match(css, /\.site-mobile-chrome\{[\s\S]*?display:flex;[\s\S]*?position:fixed;inset:0 0 auto 224px/);
-  assert.match(css, /\.site-mobile-chrome::before\{[\s\S]*?content:attr\(data-page-label\)/);
+  assert.ok(css.includes('.site-mobile-chrome[data-page-label]::before{content:attr(data-page-label)}'));
   assert.match(css, /\.site-mobile-chrome\{left:204px;padding-inline:26px\}/);
   assert.match(css, /\.games-header__inner > \.icon-button\{[\s\S]*?position:fixed;top:17px/);
   assert.match(js, /chrome\.dataset\.pageLabel = label/);
