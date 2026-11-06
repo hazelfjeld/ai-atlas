@@ -39,6 +39,11 @@ with sync_playwright() as p:
         if width <= 650:
             page.locator('#menu-toggle').click()
         primary_links = page.locator('#navigation > a.nav-link')
+        print('DISCOVER NAV OBSERVED', width,
+              'count', primary_links.count(),
+              'visible', [a.is_visible() for a in primary_links.all()],
+              'labels', repr(primary_links.locator('span:not(.nav-count)').all_text_contents()),
+              flush=True)
         check('Discover shares seven-link primary order at ' + str(width),
               primary_links.count() == 7
               and all(link.is_visible() for link in primary_links.all())
