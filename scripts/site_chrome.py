@@ -101,11 +101,49 @@ def render_standalone_nav(path):
     return markup
 
 
-def normalize_discover_sidebar(html):
-    """Use the shared seven destinations in Discover's first-paint sidebar.
+# Discover has a distinct interactive sidebar, but uses the same canonical
+# destinations and labels as the standalone mobile/desktop header. The icons,
+# route semantics, and first-paint counts are generated here rather than copied
+# from another independent list of anchors in index.html.
+DISCOVER_LINKS = (
+    ("overview", "view", "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M3 3h7v7H3z M14 3h7v7h-7z M3 14h7v7H3z M14 14h7v7h-7z\"/></svg>"),
+    ("daily", "static", "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M6 3h9l4 4v14H6z M14 3v5h5 M9 12h7 M9 16h7\"/></svg>"),
+    ("dictionary", "view", "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M3 4h7l2 2 2-2h7v16h-7l-2 2-2-2H3z M12 6v16\"/></svg>"),
+    ("technologies", "view", "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 3 3 8l9 5 9-5-9-5z M3 12l9 5 9-5 M3 16l9 5 9-5\"/></svg>"),
+    ("games", "view", "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M7 7h10a3 3 0 0 1 3 3l1 7a2 2 0 0 1-3 2l-3-3H9l-3 3a2 2 0 0 1-3-2l1-7a3 3 0 0 1 3-3z M7 10v4 M5 12h4 M16 11h.01 M18 13h.01\"/></svg>"),
+    ("playbooks", "view", "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 4h16v16H4z M8 8h8 M8 12h5 M8 16h7\"/></svg>"),
+    ("about", "static", "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 4h16v16H4z M8 8h8 M8 12h5 M8 16h7\"/></svg>"),
+)
 
-    Preserve SVG icons, hydrated counts, legacy hash routes and secondary links.
-    Playbooks moves to the primary group rather than appearing twice.
+
+def render_discover_primary(term_count, tech_count):
+    """Render Discover's first-paint primary links from the same seven routes.
+
+    Hash navigation and data-view attributes are kept for app.js hydration.
+    Counts come from the verified catalog, not from stale page markup.
+    """
+    assert term_count >= 0 and tech_count >= 0
+    parts = []
+    for (route, label), (key, kind, icon) in zip(DESTINATIONS, DISCOVER_LINKS, strict=True):
+        href = route.removeprefix("index.html")
+        current = ' aria-current="page"' if key == "overview" else ""
+        cls = "nav-link active" if key == "overview" else "nav-link"
+        count = ('<span class="nav-count">' + format(term_count, ",") + '</span>'
+                 if key == "dictionary" else
+                 '<span class="nav-count">' + format(tech_count, ",") + '</span>'
+                 if key == "technologies" else "")
+        parts.append('<a class="' + cls + '" data-' + kind + '="' + key +
+                     '" href="' + href + '"' + current + '>' + icon +
+                     '<span>' + escape(label) + '</span>' + count + '</a>')
+    return "".join(parts)
+
+
+def normalize_discover_sidebar(html, term_count, tech_count):
+    """Generate canonical Discover primary navigation; preserve native extras.
+
+    Keep the existing sidebar shell, details/secondary routes, SVG icons and
+    hydration hooks. Fail on unexpected input instead of silently dropping
+    navigation during a rebuild.
     """
     import re
     marker = '<nav id="navigation" aria-label="Main navigation">'
@@ -113,32 +151,18 @@ def normalize_discover_sidebar(html):
     before, rest = html.split(marker, 1)
     nav, after = rest.split('</nav>', 1)
     assert nav.count('<details class="nav-more"') == 1
-    _, secondary = nav.split('<details class="nav-more"', 1)
-    anchors = re.compile(
-        r'<a class="nav-link(?: active)?" data-(?:view|static)="([^"]+)" href="[^"]+"[^>]*>.*?</a>',
-        re.S,
+    original_primary, secondary = nav.split('<details class="nav-more"', 1)
+    existing_keys = re.findall(
+        r'<a class="nav-link(?: active)?" data-(?:view|static)="([^"]+)"',
+        original_primary,
     )
-    existing = {match.group(1): match.group(0) for match in anchors.finditer(nav)}
-    keys = ('overview', 'daily', 'dictionary', 'technologies', 'games', 'playbooks', 'about')
-    primary = []
-    for (route, label), key in zip(DESTINATIONS, keys, strict=True):
-        anchor = existing.get(key) or (existing.get('demo') if key == 'about' else None)
-        assert anchor is not None, 'Missing Discover icon/link template: ' + key
-        kind = 'static' if key in ('daily', 'about') else 'view'
-        anchor, count = re.subn(r'data-(?:view|static)="[^"]+"', f'data-{kind}="{key}"', anchor, count=1)
-        assert count == 1
-        anchor, count = re.subn(r'href="[^"]+"', f'href="{route.replace("index.html#/", "#/")}"', anchor, count=1)
-        assert count == 1
-        anchor, count = re.subn(r'<span>[^<>]*</span>', '<span>' + escape(label) + '</span>', anchor, count=1)
-        assert count == 1
-        primary.append(anchor)
+    assert existing_keys == [key for key, _, _ in DISCOVER_LINKS], (
+        'Unexpected Discover primary links: ' + repr(existing_keys)
+    )
     secondary = '<details class="nav-more"' + secondary
-    secondary = re.sub(
-        r'<a class="nav-link" data-view="playbooks" href="#/playbooks">.*?</a>',
-        '', secondary, count=1, flags=re.S,
-    )
     assert 'data-view="playbooks"' not in secondary, 'Playbooks must appear only once'
-    return before + marker + ''.join(primary) + secondary + '</nav>' + after
+    return (before + marker + render_discover_primary(term_count, tech_count) +
+            secondary + '</nav>' + after)
 
 
 def normalize_standalone_chrome(html, path):

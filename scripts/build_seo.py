@@ -102,15 +102,9 @@ def main():
         page.write_bytes(normalize_standalone_chrome(page.read_text(encoding="utf-8"), route).encode())
     # Same view code on the server and in the browser: no crawler-only alternative.
     rendered = subprocess.check_output(['node', str(ROOT / 'scripts/render_discovery.cjs')], cwd=ROOT).decode('utf-8')
-    index = normalize_discover_sidebar((ROOT / 'index.html').read_text(encoding='utf-8'))
+    index = normalize_discover_sidebar((ROOT / 'index.html').read_text(encoding='utf-8'), len(terms), len(techs))
     index, count = re.subn(r'<!-- discovery:start -->.*?<!-- discovery:end -->', lambda _: '<!-- discovery:start -->' + rendered + '<!-- discovery:end -->', index, flags=re.S)
     assert count == 1
-    # First-paint counts must match the verified catalog before JavaScript hydrates.
-    index, count = re.subn(
-        r'(<a class="nav-link" data-view="technologies" href="#/technologies">.*?<span class="nav-count">)[0-9]+(</span></a>)',
-        lambda match: match.group(1) + str(len(techs)) + match.group(2), index, count=1, flags=re.S,
-    )
-    assert count == 1, 'Missing static technology navigation badge'
     (ROOT / 'index.html').write_bytes(index.encode())
     for path, (title, description) in PAGES.items():
         data = None

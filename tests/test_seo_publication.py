@@ -13,6 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts'))
 from site_seo import ORIGIN, absolute, technology_path
 from build_term_pages import rows, term_path
+from site_chrome import DESTINATIONS, render_discover_primary, normalize_discover_sidebar
 
 
 class Page(HTMLParser):
@@ -116,6 +117,22 @@ class SEOPublication(unittest.TestCase):
             self.assertEqual(term['url'], absolute(path))
             self.assertEqual(term['termCode'], row['id'])
             self.assertIn(row['reference_url'], page.links)
+
+    def test_discover_primary_nav_is_generated_from_the_shared_canonical_routes(self):
+        source = (ROOT / 'index.html').read_text(encoding='utf-8')
+        pub = json.loads((ROOT / 'publication.json').read_text(encoding='utf-8'))['published_counts']
+        begin = '<nav id="navigation" aria-label="Main navigation">'
+        primary = source.split(begin, 1)[1].split('<details class="nav-more"', 1)[0]
+        self.assertEqual(len(DESTINATIONS), 7)
+        self.assertEqual(primary, render_discover_primary(pub['terms'], pub['technologies']))
+        self.assertEqual(normalize_discover_sidebar(source, pub['terms'], pub['technologies']), source)
+        # Editing a stale first-paint label or URL must not create a second source
+        # of truth: rebuilding restores the generated canonical destinations.
+        drifted = source.replace('>What’s New Today</span>', '>Different news</span>', 1)
+        drifted = drifted.replace('href="whats-new.html"', 'href="incorrect.html"', 1)
+        self.assertNotEqual(drifted, source)
+        self.assertEqual(normalize_discover_sidebar(drifted, pub['terms'], pub['technologies']), source)
+        self.assertIn('<details class="nav-more" id="additional-navigation">', source)
 
     def test_discovery_is_in_the_initial_html_and_has_crawlable_content_links(self):
         source = (ROOT/'index.html').read_text(encoding='utf-8')
