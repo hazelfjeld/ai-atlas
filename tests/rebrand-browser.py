@@ -173,12 +173,20 @@ with sync_playwright() as p:
     check('Tab bypasses the closed mobile drawer',
           page.evaluate("!document.activeElement.closest('#sidebar')"))
     page.locator('#discover-mobile-nav summary').click()
+    # Native <details> toggle dispatch is queued after the click's default
+    # action. Wait for the shared isolation handler instead of racing that task;
+    # a broken handler still fails this assertion at the bounded timeout.
+    page.wait_for_function("""() => document.querySelector('#main').inert
+        && document.activeElement.matches('#discover-mobile-nav summary')""", timeout=3000)
     check('native drawer keeps its trigger focused and isolates background content',
           page.evaluate("document.activeElement.matches('#discover-mobile-nav summary') && document.querySelector('#main').inert"))
     page.keyboard.press('Shift+Tab')
     check('Shift-Tab wraps inside the open drawer',
           page.evaluate("!!document.activeElement.closest('#discover-mobile-nav')"))
     page.keyboard.press('Escape')
+    page.wait_for_function("""() => !document.getElementById('discover-mobile-nav').open
+        && !document.querySelector('#main').inert
+        && document.activeElement.matches('#discover-mobile-nav summary')""", timeout=3000)
     check('Escape closes shared native drawer and restores trigger focus',
           page.evaluate("document.activeElement.matches('#discover-mobile-nav summary') && !document.getElementById('discover-mobile-nav').open && !document.querySelector('#main').inert"))
     page.locator('#discover-mobile-nav summary').click()
