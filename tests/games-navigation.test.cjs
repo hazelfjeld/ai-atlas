@@ -696,3 +696,22 @@ test('shared native mobile menu adopts Discover off-canvas frame without duplica
     assert.match(page, /<details class="[^"]*site-mobile-chrome__nav/);
   }
 });
+
+test('shared desktop rail exposes the existing real site search anchor on every page family', () => {
+  const css=read('site-chrome.css');
+  assert.match(css, /@media \(min-width:651px\)\{[\s\S]*?\.site-mobile-chrome\{\s*display:block;position:fixed/);
+  assert.match(css, /\.site-chrome\{padding-bottom:94px!important\}/,
+    'Short-height sidebars must scroll their last links clear of fixed search');
+  assert.match(css, /\.site-mobile-chrome__nav\{display:none\}/,
+    'Do not duplicate the desktop section navigation');
+  assert.match(css, /@media print\{\.site-mobile-chrome\{display:none!important\}\}/);
+  for(const path of ['whats-new.html','games.html','research.html',
+      'technologies.html','playbooks.html','catalog-review.html',
+      'hardware-review.html','about.html','terms/index.html','technology/index.html']) {
+    const html=read(path);
+    assert.match(html, /site-mobile-chrome__search\" href=\"(?:\.\.\/)?index\.html#\/search\"/,
+      path+' must link to the real existing search view');
+    assert.equal((html.match(/site-mobile-chrome__search\" href=/g) || []).length,1,
+      path+' must not render duplicate search links');
+  }
+});

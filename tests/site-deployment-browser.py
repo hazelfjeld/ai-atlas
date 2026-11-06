@@ -116,6 +116,12 @@ with sync_playwright() as p:
               and nav.locator('.site-chrome__links a[aria-current="' + current_kind + '"]').inner_text() == active)
         check('shared wordmark has legible inherited foreground on ' + route,
               nav.locator('.site-chrome__name').evaluate('el => getComputedStyle(el).color === getComputedStyle(el.closest("a")).color'))
+        desktop_search = page.locator('a.site-mobile-chrome__search[href="index.html#/search"]')
+        check('desktop sidebar keeps the existing functional search destination on ' + route,
+              desktop_search.is_visible()
+              and desktop_search.evaluate('el => getComputedStyle(el).position === "fixed"')
+              and not page.locator('details.site-mobile-chrome__nav').is_visible())
+
         if route == 'hardware-review.html':
             check('hardware article header stacks heading, lead and evidence note on desktop',
                   page.locator('.review-shell > header').evaluate(
@@ -133,6 +139,13 @@ with sync_playwright() as p:
     page.wait_for_url('**/playbooks.html')
     check('desktop news to playbooks retains consistent site navigation',
           page.locator('.site-chrome__links a[aria-current="page"]').inner_text() == 'Playbooks')
+    # Search is already a first-class Discover control; standalone desktop
+    # pages must expose the same real destination without inventing a fake input.
+    page.locator('a.site-mobile-chrome__search').click()
+    page.wait_for_url('**/index.html#/search')
+    check('desktop shared search returns to live Discover search',
+          page.locator('#global-query').is_visible())
+
 
     # The archive formerly showed a multi-row legacy masthead on a 320px
     # phone, unlike Discover's compact menu + search entry. Both should feel

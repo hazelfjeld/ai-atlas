@@ -126,3 +126,33 @@ body:has(.site-mobile-chrome__nav[open]){overflow:hidden}
 @media (prefers-reduced-motion:reduce){
 .site-mobile-chrome__menu{scroll-behavior:auto}
 }
+
+/* A single working search affordance at every breakpoint: the existing
+   mobile search link doubles as Discover's desktop search entry. Keep the
+   native anchor (and its real #/search destination) usable without JS.
+   The rail reserves a scrollable end gutter so short screens cannot cover
+   the final section link. No duplicate header/search element is created. */
+@media (min-width:651px){
+.site-chrome{padding-bottom:94px!important}
+.site-mobile-chrome{
+  display:block;position:fixed;inset:auto auto 16px 17px;
+  z-index:26;width:190px;max-width:calc(100vw - 30px);margin:0
+}
+.site-mobile-chrome__nav{display:none}
+.site-mobile-chrome__search{
+  display:flex;align-items:center;gap:8px;min-height:44px;width:100%;
+  padding:9px 11px;border:1px solid #405043;border-radius:8px;
+  background:#ffffff13;color:#d3ddd5;text-decoration:none;
+  font-size:12px;font-weight:600;line-height:1.35
+}
+.site-mobile-chrome__search-icon{flex:none;font-size:21px;line-height:1}
+.site-mobile-chrome__search-placeholder{
+  min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis
+}
+.site-mobile-chrome__search:hover{background:#ffffff21;color:#fff}
+.site-mobile-chrome__search:focus-visible{outline:3px solid #d9a16f;outline-offset:3px}
+}
+@media (min-width:651px) and (max-width:1150px){
+.site-mobile-chrome{left:12px;width:180px}
+}
+@media print{.site-mobile-chrome{display:none!important}}
