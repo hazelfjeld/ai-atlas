@@ -82,7 +82,7 @@ test('Discover primary links reuse the seven canonical destinations without dupl
     .includes('data-view="playbooks"'));
   assert.match(read('scripts/site_chrome.py'), /def normalize_discover_sidebar\\(html, term_count, tech_count\\):/);
   assert.match(read('scripts/site_chrome.py'), /def render_discover_primary\\(term_count, tech_count\\):/);
-  assert.match(read('scripts/site_chrome.py'), /for \(route, label\), key in zip\(DESTINATIONS, keys, strict=True\)/);
+  assert.match(read('scripts/site_chrome.py'), /for \(route, label\), \(key, kind, icon\) in zip\(DESTINATIONS, DISCOVER_LINKS, strict=True\)/);
   assert.match(read('scripts/build_seo.py'), /index = normalize_discover_sidebar\(/);
   assert.match(read('scripts/build_offline.py'), /href="playbooks.html".*href="#\/playbooks"/);
   const offline = read('downloads/Atlas_Demo_Offline.html');
