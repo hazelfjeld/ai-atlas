@@ -1,9 +1,6 @@
 /* Native controls and scrollbars must follow the live theme, including after a toggle. */
 :root[data-theme="light"]{color-scheme:light}
 :root[data-theme="dark"]{color-scheme:dark}
-/* One desktop frame width for Discover and every native standalone page. */
-:root{--atlas-rail-width:242px}
-@media (min-width:651px) and (max-width:1200px){:root{--atlas-rail-width:215px}}
 
 /* Shared AI Updates desktop navigation across existing editorial directories. */
 .site-chrome{display:flex!important;align-items:center;justify-content:space-between;gap:22px;margin:0 0 8px;padding:8px 0 18px;border-bottom:1px solid var(--line,#dce1d7);font:inherit}
@@ -47,14 +44,12 @@
 @media print{.games-header{display:none}}
 
 /* Keep the shared rail aligned to Discover's actual wordmark, section label,
-   active surface, link rhythm and shared desktop rail width. Mobile still
+   active surface, link rhythm and 224px/204px breakpoint widths. Mobile still
    uses native script-free menus below 651px. */
 @media (min-width:651px){
-.app-shell{grid-template-columns:var(--atlas-rail-width) minmax(0,1fr)}
-.sidebar{width:var(--atlas-rail-width)}
-body:has(.site-chrome){padding-left:var(--atlas-rail-width)}
+body:has(.site-chrome){padding-left:224px}
 .site-chrome{
- position:fixed!important;inset:0 auto 0 0;width:var(--atlas-rail-width);height:100vh;height:100dvh;
+ position:fixed!important;inset:0 auto 0 0;width:224px;height:100vh;height:100dvh;
  z-index:25;box-sizing:border-box;overflow-x:hidden;overflow-y:auto;
  display:flex!important;flex-direction:column!important;flex-wrap:nowrap!important;
  align-items:stretch!important;justify-content:flex-start!important;gap:8px!important;
@@ -84,8 +79,9 @@ body:has(.site-chrome){padding-left:var(--atlas-rail-width)}
 /* Keep the existing Games theme button within its content header. */
 .games-header__inner{justify-content:flex-end}
 }
-@media (min-width:651px) and (max-width:1200px){
-.site-chrome{padding-inline:13px!important}
+@media (min-width:651px) and (max-width:1150px){
+body:has(.site-chrome){padding-left:204px}
+.site-chrome{width:204px;padding-inline:12px!important}
 .site-chrome .site-chrome__name{font-size:22px}
 .site-chrome .site-chrome__brand svg{width:30px;height:30px}
 .site-chrome .site-chrome__links a{font-size:12px!important;padding-inline:9px!important}
@@ -172,7 +168,7 @@ body:has(.site-mobile-chrome__nav[open]){overflow:hidden}
 body:has(.site-chrome){padding-top:78px}
 .site-mobile-chrome{
   display:flex;align-items:center;justify-content:space-between;gap:24px;
-  position:fixed;inset:0 0 auto var(--atlas-rail-width);
+  position:fixed;inset:0 0 auto 224px;
   height:78px;width:auto;max-width:none;box-sizing:border-box;
   padding:0 40px;margin:0;flex:none!important;
   z-index:24;background:var(--surface,#fff);
@@ -200,8 +196,8 @@ body:has(.site-chrome){padding-top:78px}
 .site-mobile-chrome__search:hover{border-color:var(--accent,#27664e);color:var(--ink,#18211e)}
 .site-mobile-chrome__search:focus-visible{outline:3px solid #d9a16f;outline-offset:3px}
 }
-@media (min-width:651px) and (max-width:1200px){
-.site-mobile-chrome{padding-inline:26px}
+@media (min-width:651px) and (max-width:1150px){
+.site-mobile-chrome{left:204px;padding-inline:26px}
 }
 /* Games keeps its existing theme control within the same desktop bar,
    rather than introducing a second horizontal header row. */
@@ -213,7 +209,7 @@ body:has(.site-chrome){padding-top:78px}
 }
 .games-header .site-mobile-chrome{padding-right:102px}
 }
-@media (min-width:651px) and (max-width:1200px){
+@media (min-width:651px) and (max-width:1150px){
 .games-header__inner > .icon-button{right:26px}
 }
 @media print{.site-mobile-chrome{display:none!important}}
