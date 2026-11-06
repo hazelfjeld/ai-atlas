@@ -204,12 +204,26 @@ with sync_playwright() as p:
     check('Games honors explicitly saved light theme despite dark OS mode',
           theme_page.evaluate("document.documentElement.dataset.theme === 'light'"))
     theme_page.locator('#theme-toggle').click()
-    check('standalone Games theme toggle saves user preference',
-          theme_page.evaluate("localStorage.getItem('atlas.theme') === 'dark'")
+    check('standalone Games theme toggle saves preference and switches native controls to dark',
+          theme_page.evaluate("localStorage.getItem('atlas.theme') === 'dark' && "
+                              "document.documentElement.dataset.theme === 'dark' && "
+                              "getComputedStyle(document.documentElement).colorScheme === 'dark' && "
+                              "document.documentElement.style.colorScheme === ''")
           and theme_page.locator('#theme-toggle').get_attribute('aria-pressed') == 'true')
     theme_page.goto(base + 'whats-new.html')
-    check('Games to archive preserves selected dark theme',
-          theme_page.evaluate("document.documentElement.dataset.theme === 'dark'"))
+    check('Games to archive preserves selected dark theme and native controls',
+          theme_page.evaluate("document.documentElement.dataset.theme === 'dark' && "
+                              "getComputedStyle(document.documentElement).colorScheme === 'dark'"))
+    theme_page.goto(base + 'games.html')
+    theme_page.locator('#theme-toggle').click()
+    check('switching back to light updates native controls without a reload',
+          theme_page.evaluate("localStorage.getItem('atlas.theme') === 'light' && "
+                              "document.documentElement.dataset.theme === 'light' && "
+                              "getComputedStyle(document.documentElement).colorScheme === 'light'"))
+    theme_page.goto(base + 'about.html')
+    check('About inherits the new light preference and native controls',
+          theme_page.evaluate("document.documentElement.dataset.theme === 'light' && "
+                              "getComputedStyle(document.documentElement).colorScheme === 'light'"))
     theme_ctx.close()
 
     # The editorial-policy page formerly exposed a multirow legacy nav on

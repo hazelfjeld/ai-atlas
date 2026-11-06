@@ -376,6 +376,9 @@ test('standalone editorial pages share Discover theme preference without rewriti
     assert.ok(scriptAt > 0 && scriptAt < html.indexOf('<body'), file + ' restores the theme before its body renders');
     assert.equal(html.split('<script src="site-theme.js"></script>').length, 2, file + ' loads the shared helper once');
   }
+  const chromeCss = read('site-chrome.css');
+  assert.match(chromeCss, /:root\[data-theme="light"\]\{color-scheme:light\}/);
+  assert.match(chromeCss, /:root\[data-theme="dark"\]\{color-scheme:dark\}/);
   assert.match(read('scripts/build_seo.py'), /theme_script = .*site-theme\.js/);
   assert.ok(JSON.parse(read('deploy/public-files.json')).root_files.includes('site-theme.js'));
   for (const chosen of ['dark', 'light', 'bogus']) {
@@ -385,7 +388,7 @@ test('standalone editorial pages share Discover theme preference without rewriti
       document: {documentElement: root, addEventListener() {}},
     });
     assert.equal(root.dataset.theme, chosen === 'bogus' ? undefined : chosen);
-    assert.equal(root.style.colorScheme, chosen === 'bogus' ? undefined : chosen);
+    assert.equal(root.style.colorScheme, undefined, 'do not pin the former theme inline after a toggle');
   }
   assert.doesNotThrow(() => vm.runInNewContext(script, {
     localStorage: {getItem() { throw new Error('storage blocked'); }},

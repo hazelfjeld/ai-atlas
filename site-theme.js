@@ -3,7 +3,7 @@ try {
   const savedTheme = localStorage.getItem('atlas.theme');
   if (savedTheme === 'dark' || savedTheme === 'light') {
     document.documentElement.dataset.theme = savedTheme;
-    document.documentElement.style.colorScheme = savedTheme;
+    // CSS keeps native widgets in sync when Games toggles the theme later.
   }
 } catch (_) {
   // Storage may be unavailable; preserve the stylesheet's normal fallback.
