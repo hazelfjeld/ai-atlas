@@ -34,10 +34,11 @@ def section(title, body, extra=''):
 
 
 def shell(title, body, path, description, structured=None):
-    directory = path == 'terms/index.html'
-    directory_nav = render_directory_nav('../', 'Concept dictionary') if directory else '<nav class="term-nav" aria-label="Site navigation"><a href="../index.html">AI Updates</a><a href="index.html">All term pages</a><a href="../index.html#/dictionary">Search dictionary</a><a href="../technology/index.html">Technologies</a><a href="../about.html">About</a></nav>'
-    directory_css = DIRECTORY_MOBILE_CSS if directory else ''
-    directory_assets = '<link rel="stylesheet" href="../site-chrome.css"><script src="../site-theme.js"></script>' if directory else ''
+    # Native concept detail URLs share the same script-free header source as
+    # the Concept and Technology directories. Never modify article content.
+    directory_nav = render_directory_nav('../', 'Concept dictionary')
+    directory_css = DIRECTORY_MOBILE_CSS
+    directory_assets = '<link rel="stylesheet" href="../site-chrome.css"><script src="../site-theme.js"></script>'
     return f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 {metadata(title + ' | AI Updates', description, path, structured)}

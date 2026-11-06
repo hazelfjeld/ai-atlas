@@ -238,8 +238,9 @@ test('research snapshot uses the shared mobile menu and retains contextual resea
 test('all generated technology profiles use shared directory chrome with native navigation', () => {
   const concept = read('terms/MLD-0002-ablation-study.html');
   const css = read('brand.css');
-  assert.match(concept, /<nav class="term-nav" aria-label="Site navigation">/);
-  assert.match(css, /@media\(max-width:650px\)\{\s*\.term-shell \.term-nav\{display:grid;grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/);
+  assert.match(concept, /<nav class="site-chrome term-nav" aria-label="AI Updates primary navigation">/);
+  assert.ok(concept.includes('<script src="../site-theme.js"></script>'));
+  assert.doesNotMatch(concept, /<nav class="term-nav" aria-label="Site navigation">/);
   const prefix = '<main class="term-shell" id="main">';
   const directory = read('technology/index.html').split(prefix)[1].split('<header class="hero">')[0];
   assert.match(directory, /class="directory-mobile-topbar site-mobile-chrome"/);
@@ -262,6 +263,27 @@ test('all generated technology profiles use shared directory chrome with native 
   assert.ok(read('downloads/Atlas_Demo_Offline.html').includes('/* Native, script-free reference pages: readable two-column touch navigation on phones.'));
 });
 
+
+test('all 1345 concept detail pages reuse the native seven-section shared navigation', () => {
+  const prefix = '<main class="term-shell" id="main">';
+  const dictionaryNav = read('terms/index.html').split(prefix)[1].split('<header class="hero">')[0];
+  const manifest = JSON.parse(read('terms/manifest.json'));
+  assert.equal(Object.keys(manifest).length, 1345);
+  const names = ['Discover', 'What’s New Today', 'Concept dictionary', 'Technology profiles', 'Games', 'Playbooks', 'About'];
+  for (const [id, info] of Object.entries(manifest)) {
+    const html = read(info.path);
+    assert.ok(html.includes('<link rel="stylesheet" href="../site-chrome.css">'), id);
+    assert.ok(html.includes('<script src="../site-theme.js"></script>'), id);
+    assert.equal(html.split(prefix)[1].split('<header class="hero">')[0], dictionaryNav, id);
+    const links = html.match(/<div class="site-chrome__links">([\s\S]*?)<\/div>/)?.[1];
+    assert.ok(links, id);
+    assert.deepEqual([...links.matchAll(/<a [^>]+>([^<]+)<\/a>/g)].map(x => x[1]), names, id);
+    assert.equal((links.match(/aria-current="page"/g) || []).length, 1, id);
+  }
+  const generator = read('scripts/build_term_pages.py');
+  assert.ok(generator.includes("directory_nav = render_directory_nav('../', 'Concept dictionary')"));
+  assert.ok(generator.includes('directory_css = DIRECTORY_MOBILE_CSS'));
+});
 
 test('script-free reference pages honor dark OS preference with readable cards and links', () => {
   const css = read('brand.css');
