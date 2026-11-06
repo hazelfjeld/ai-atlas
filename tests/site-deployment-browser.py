@@ -1102,6 +1102,14 @@ with sync_playwright() as p:
                             width:nav.getBoundingClientRect().width,
                             linkWidth:nav.querySelector('.site-chrome__links').getBoundingClientRect().width};
                     }"""), flush=True)
+                check(f'shared {theme} rail wordmark fits at {width}px on {route}',
+                      page.evaluate("""() => {
+                          const nav=document.querySelector('.site-chrome');
+                          const text=nav.querySelector('.site-chrome__name');
+                          const tagline=text.querySelector('small');
+                          return text.getBoundingClientRect().right <= nav.getBoundingClientRect().right - 4
+                              && tagline.scrollWidth <= tagline.clientWidth + 1;
+                      }"""))
                 check(f'shared {theme} navigation has no orphan link at {width}px on {route}',
                       page.evaluate("""() => {
                           const nav = document.querySelector('.site-chrome');

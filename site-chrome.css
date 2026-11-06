@@ -73,7 +73,11 @@ body:has(.site-chrome){padding-left:224px}
 }
 @media (min-width:651px) and (max-width:1150px){
 body:has(.site-chrome){padding-left:204px}
-.site-chrome{width:204px}
+.site-chrome{width:204px;padding-inline:12px!important}
+.site-chrome .site-chrome__brand{gap:8px!important}
+.site-chrome .site-chrome__brand svg{width:30px;height:30px}
+.site-chrome .site-chrome__name{font-size:21px}
+.site-chrome .site-chrome__name small{font-size:7px;letter-spacing:.06em}
 }
 @media print{
 body:has(.site-chrome){padding-left:0!important}
