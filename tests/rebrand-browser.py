@@ -28,7 +28,11 @@ with sync_playwright() as p:
     check('discovery content is readable without JavaScript', page.locator('h1').inner_text()=='Discover' and page.locator('.discovery-card').count()==6)
     initial_nav=page.locator('#navigation a.nav-link').evaluate_all(
         "(els)=>els.map(a=>[a.getAttribute('href'),a.textContent.replace(/\\s+/g,' ').trim()])")
-    check('all 14 sidebar destinations are present at first paint',len(initial_nav)==14)
+    check('all 15 sidebar destinations are present at first paint',
+          len(initial_nav)==15
+          and sum(href=='playbooks.html' for href, _ in initial_nav)==1
+          and sum(href=='about.html' for href, _ in initial_nav)==1
+          and len(set(href for href, _ in initial_nav))==15)
     check('dictionary, technology and Games links use workspace routes before hydration',
           page.locator('#navigation a[data-view="dictionary"]').get_attribute('href')=='#/dictionary'
           and page.locator('#navigation a[data-view="technologies"]').get_attribute('href')=='#/technologies'
