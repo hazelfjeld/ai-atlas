@@ -486,6 +486,20 @@ with sync_playwright() as p:
         check(reference + ' has keyboard-reachable 44px navigation links',
               mobile_reference.evaluate("""() => [...document.querySelectorAll('#directory-mobile-nav nav a')]
                   .every(a => a.getBoundingClientRect().height >= 44)"""))
+        # Check geometry, not merely the number of DOM links: checkpoint.css
+        # also styles generic navs and previously compressed this menu into a
+        # horizontally scrolling two-link strip.
+        check(reference + ' stacks all seven links in one visible vertical menu',
+              mobile_reference.evaluate("""() => {
+                  const menu = document.querySelector('#directory-mobile-nav nav');
+                  const links = [...menu.querySelectorAll('a')].map(a => a.getBoundingClientRect());
+                  const box = menu.getBoundingClientRect();
+                  return getComputedStyle(menu).display === 'grid'
+                      && box.left >= -1 && box.right <= innerWidth + 1
+                      && links.length === 7
+                      && links.every((r, i) => i === 0 ||
+                          (r.top >= links[i - 1].bottom - 1 && Math.abs(r.left - links[0].left) < 2));
+              }"""))
         check(reference + ' fits the 320px viewport',
               mobile_reference.evaluate('document.documentElement.scrollWidth <= window.innerWidth + 1'))
         # Test actual keyboard modality: programmatic .focus() after a
@@ -515,6 +529,15 @@ with sync_playwright() as p:
               and mobile_reference.locator('.site-chrome__links a[aria-current="page"]').inner_text() == 'Concept dictionary')
         mobile_reference.screenshot(path=str(out / ('concept-' + Path(reference).stem + '-desktop.png')), full_page=False)
         mobile_reference.close()
+    nojs_reference = browser.new_page(viewport={'width':320, 'height':720},
+                                      java_script_enabled=False, reduced_motion='reduce')
+    nojs_reference.goto(base + 'terms/MLD-0002-ablation-study.html')
+    nojs_reference.locator('#directory-mobile-nav summary').click()
+    check('concept detail remains readable and navigable without JavaScript',
+          nojs_reference.get_by_role('heading', name='Ablation study').is_visible()
+          and nojs_reference.locator('#directory-mobile-nav nav a').count() == 7
+          and nojs_reference.locator('#directory-mobile-nav nav a').last.is_visible())
+    nojs_reference.close()
     page.goto(base + 'whats-new.html')
     check('daily archive uses the same Atlas logo and quiet wordmark',
           page.locator('.site-chrome__name small').inner_text() == 'THE FRONTIER, IN CONTEXT')

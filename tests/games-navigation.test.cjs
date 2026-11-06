@@ -138,6 +138,8 @@ test('About, technologies and playbooks reuse the Games and archive mobile chrom
   assert.match(read('about.html'), /\.term-shell \.term-nav\{display:none\}/);
   const css=read('site-chrome.css');
   assert.match(css, /\.site-mobile-chrome__menu a\{[^}]*min-height:44px/);
+  // Checkpoint's global mobile nav selector must never force the shared menu into a horizontal strip.
+  assert.match(css, /\.site-mobile-chrome__menu\{[^}]*display:grid;grid-template-columns:minmax\(0,1fr\);gap:0;margin:0;overflow-x:hidden/);
   assert.match(css, /\.site-mobile-chrome a:focus-visible,\.site-mobile-chrome summary:focus-visible/);
   assert.match(css, /@media \(max-width:650px\)\{/);
 });
