@@ -375,8 +375,9 @@ test('standalone tablets use Discover’s fixed left navigation rail', () => {
   assert.ok(css.includes('@media (min-width:651px) and (max-width:1150px){'));
   assert.ok(css.includes('body:has(.site-chrome){padding-left:224px}'));
   assert.ok(css.includes('body:has(.site-chrome){padding-left:204px}'));
-  assert.ok(css.includes('.site-chrome{width:204px;padding-inline:12px!important}'));
-  assert.ok(css.includes('.site-chrome .site-chrome__name small{font-size:7px;letter-spacing:.06em}'));
+  assert.ok(css.includes('padding:30px 12px 22px!important;'));
+  assert.ok(css.includes('.site-chrome .site-chrome__brand svg{width:30px;height:30px;color:#edbb87}'));
+  assert.ok(css.includes('.site-chrome .site-chrome__name small{font-size:8px;letter-spacing:.04em;color:#9cab9e}'));
   assert.ok(css.includes('position:fixed!important;inset:0 auto 0 0;width:224px'));
   assert.ok(!css.includes('grid-template-columns:repeat(7,minmax(0,1fr))'));
   for (const path of ['about.html','technologies.html','research.html','playbooks.html',

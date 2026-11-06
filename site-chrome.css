@@ -48,13 +48,13 @@ body:has(.site-chrome){padding-left:224px}
  z-index:25;box-sizing:border-box;overflow-x:hidden;overflow-y:auto;
  display:flex!important;flex-direction:column!important;flex-wrap:nowrap!important;
  align-items:stretch!important;justify-content:flex-start!important;gap:20px!important;
- padding:30px 19px 22px!important;margin:0!important;
+ padding:30px 12px 22px!important;margin:0!important;
  background:var(--sidebar,#202b28)!important;color:#f4f5ed!important;
  border:0!important;border-right:1px solid #405043!important
 }
-.site-chrome .site-chrome__brand{width:100%;color:#f4f5ed!important;white-space:normal}
-.site-chrome .site-chrome__brand svg{color:#edbb87}
-.site-chrome .site-chrome__name small{color:#9cab9e}
+.site-chrome .site-chrome__brand{width:100%;gap:8px!important;color:#f4f5ed!important;white-space:normal}
+.site-chrome .site-chrome__brand svg{width:30px;height:30px;color:#edbb87}
+.site-chrome .site-chrome__name small{font-size:8px;letter-spacing:.04em;color:#9cab9e}
 .site-chrome .site-chrome__links{
  display:flex;flex:0 0 auto;flex-direction:column;align-items:stretch;
  justify-content:flex-start;flex-wrap:nowrap;gap:4px;width:100%;min-width:0
@@ -73,11 +73,8 @@ body:has(.site-chrome){padding-left:224px}
 }
 @media (min-width:651px) and (max-width:1150px){
 body:has(.site-chrome){padding-left:204px}
-.site-chrome{width:204px;padding-inline:12px!important}
-.site-chrome .site-chrome__brand{gap:8px!important}
-.site-chrome .site-chrome__brand svg{width:30px;height:30px}
+.site-chrome{width:204px}
 .site-chrome .site-chrome__name{font-size:21px}
-.site-chrome .site-chrome__name small{font-size:7px;letter-spacing:.06em}
 }
 @media print{
 body:has(.site-chrome){padding-left:0!important}
