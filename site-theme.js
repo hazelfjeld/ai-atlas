@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const desktopBrand = document.querySelector('.site-chrome__brand');
   if (menu && desktopBrand && !menu.querySelector('.site-mobile-chrome__brand')) {
     const mobileBrand = desktopBrand.cloneNode(true);
-    mobileBrand.classList.add('site-mobile-chrome__brand');
+    mobileBrand.className = 'site-mobile-chrome__brand';
     menu.prepend(mobileBrand);
   }
 });

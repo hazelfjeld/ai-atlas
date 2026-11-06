@@ -110,7 +110,7 @@ test('shared native mobile drawer reuses canonical desktop wordmark without dupl
   const script=read('site-theme.js'), css=read('site-chrome.css');
   new vm.Script(script);
   const handlers={}; let clones=0, inserts=0;
-  const copy={classList:{names:[],add(name){this.names.push(name);}}};
+  const copy={className:'site-chrome__brand'};
   const original={cloneNode(deep){assert.equal(deep,true);clones++;return copy;}};
   const menu={querySelector:()=>inserts?copy:null,prepend(el){assert.equal(el,copy);inserts++;}};
   const chrome={dataset:{},querySelector:()=>menu};
@@ -125,7 +125,7 @@ test('shared native mobile drawer reuses canonical desktop wordmark without dupl
   handlers.DOMContentLoaded();
   assert.equal(clones,1);
   assert.equal(inserts,1);
-  assert.ok(copy.classList.names.includes('site-mobile-chrome__brand'));
+  assert.equal(copy.className,'site-mobile-chrome__brand', 'The mobile clone must not masquerade as the desktop rail');
   assert.equal(chrome.dataset.pageLabel,'Games');
   handlers.DOMContentLoaded();
   assert.equal(inserts,1,'Repeated initialization must not duplicate mobile brand');
