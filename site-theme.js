@@ -12,23 +12,16 @@ try {
 /* The native details menu works without scripts; enhance it to match the
    Discover drawer's Escape and outside-click behavior when JS is available. */
 document.addEventListener('keydown', (event) => {
-  if (event.key !== 'Escape' || event.defaultPrevented) return;
-  const menus = document.querySelectorAll('details.site-mobile-chrome__nav[open]');
-  if (!menus.length) return;
-  menus.forEach(menu => { menu.open = false; });
-  menus[0].querySelector('summary')?.focus();
-  event.preventDefault();
-});
-document.addEventListener('pointerdown', (event) => {
-  document.querySelectorAll('details.site-mobile-chrome__nav[open]').forEach(menu => {
-    if (!menu.contains(event.target)) menu.open = false;
-  });
-});
-
-
-/* Discover already supports / to search. Reuse the existing real search route
-   on standalone pages, without stealing typing or native menu interaction. */
-document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') {
+    if (event.defaultPrevented) return;
+    const menus = document.querySelectorAll('details.site-mobile-chrome__nav[open]');
+    if (!menus.length) return;
+    menus.forEach(menu => { menu.open = false; });
+    menus[0].querySelector('summary')?.focus();
+    event.preventDefault();
+    return;
+  }
+  // Discover's / keyboard search should work on every standalone page too.
   if (event.key !== '/' || event.defaultPrevented || event.repeat || event.isComposing ||
       event.ctrlKey || event.metaKey || event.altKey) return;
   const target = event.target;
@@ -38,4 +31,9 @@ document.addEventListener('keydown', (event) => {
   if (!search) return;
   event.preventDefault();
   search.click();
+});
+document.addEventListener('pointerdown', (event) => {
+  document.querySelectorAll('details.site-mobile-chrome__nav[open]').forEach(menu => {
+    if (!menu.contains(event.target)) menu.open = false;
+  });
 });
