@@ -501,6 +501,10 @@ body:has(.site-chrome){padding-top:78px}
 @media (prefers-reduced-motion:reduce){
  .site-chrome__theme-toggle{transition:none}
 }
+
+/* Discover keeps its real desktop workspace topbar; the shared native disclosure
+   belongs inside that topbar on phones only. Avoid a duplicate fixed header. */
+@media (min-width:651px){.discover-mobile-chrome{display:none!important}}
 </style><script>/* Use Discover's saved choice on standalone editorial pages before rendering. */
 try {
   const savedTheme = localStorage.getItem('atlas.theme');
