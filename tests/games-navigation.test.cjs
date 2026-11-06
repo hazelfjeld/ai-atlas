@@ -439,7 +439,7 @@ test('standalone page families share a build-time navigation source, including c
 test('standalone native mobile menus share Escape, outside-pointer and no-JS-safe enhancement', () => {
   for (const file of [
     'terms/MLD-0001-a-b-test.html', 'technology/index.html', 'research.html',
-    'games.html', 'whats-new.html', 'about.html'
+    'games.html', 'whats-new.html', 'about.html', 'catalog-review.html'
   ]) {
     const html = read(file);
     assert.match(html, /<details class="[^"]*site-mobile-chrome__nav/);
