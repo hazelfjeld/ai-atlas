@@ -58,3 +58,29 @@ document.addEventListener('pointerdown', (event) => {
     if (!menu.contains(event.target)) menu.open = false;
   });
 });
+
+/* Discover makes its open drawer modal to assistive technology. The native
+   shared drawer already traps Tab and scroll; isolate its background as well.
+   Preserve any pre-existing inert state when the drawer closes or a device
+   rotates into desktop mode. No-JS native <details> remains usable. */
+const isolatedDrawerSiblings = new Map();
+function syncSharedDrawerIsolation() {
+  for (const [element, wasInert] of isolatedDrawerSiblings) element.inert = wasInert;
+  isolatedDrawerSiblings.clear();
+  const drawer = window.innerWidth <= 650
+    ? document.querySelector('details.site-mobile-chrome__nav[open]') : null;
+  if (!drawer) return;
+  for (let node = drawer; node && node !== document.body; node = node.parentElement) {
+    if (!node.parentElement) break;
+    for (const sibling of node.parentElement.children) {
+      if (sibling === node || /^(SCRIPT|STYLE|LINK)$/.test(sibling.tagName)) continue;
+      isolatedDrawerSiblings.set(sibling, sibling.inert);
+      sibling.inert = true;
+    }
+  }
+}
+// "toggle" is not reliably bubbling on <details>; capture it at the document.
+document.addEventListener('toggle', event => {
+  if (event.target?.matches?.('details.site-mobile-chrome__nav')) syncSharedDrawerIsolation();
+}, true);
+window.addEventListener('resize', syncSharedDrawerIsolation);

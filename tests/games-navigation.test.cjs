@@ -154,6 +154,51 @@ test('shared native mobile drawer traps keyboard focus without replacing no-JS n
   assert.match(read('site-chrome.css'), /body:has\(\.site-mobile-chrome__nav\[open\]\)\{overflow:hidden\}/);
 });
 
+
+test('shared mobile drawer makes background inert without leaving hidden controls disabled', () => {
+  const script = read('site-theme.js');
+  new vm.Script(script);
+  const events = {};
+  const el = (tag, inert = false) => ({tagName:tag, inert, children:[], parentElement:null});
+  const append = (parent, ...children) => {
+    parent.children.push(...children);
+    for (const child of children) child.parentElement = parent;
+  };
+  const body = el('BODY'), skip = el('A'), header = el('HEADER');
+  const main = el('MAIN'), preInert = el('DIV', true), chrome = el('DIV');
+  const themeButton = el('BUTTON'), drawer = el('DETAILS');
+  const search = el('A'), summary = el('SUMMARY');
+  drawer.matches = selector => selector === 'details.site-mobile-chrome__nav';
+  append(body, skip, header, main, preInert);
+  append(header, chrome, themeButton);
+  append(chrome, drawer, search);
+  append(drawer, summary);
+  const document = {
+    body, documentElement:{dataset:{}},
+    addEventListener:(type,handler,capture) => {events[type] = handler; if(type==='toggle') assert.equal(capture,true);},
+    querySelector:() => drawer.open ? drawer : null
+  };
+  const window = {innerWidth:390, addEventListener:(name,fn)=>{events[name]=fn;}};
+  vm.runInNewContext(script,{document,window,localStorage:{getItem:()=>null}});
+  drawer.open = true;
+  events.toggle({target:drawer});
+  assert.equal(main.inert,true, 'background main landmark is excluded from screen readers');
+  assert.equal(search.inert,true, 'search behind the drawer is not interactive');
+  assert.equal(themeButton.inert,true, 'header control behind the drawer is inert');
+  assert.equal(drawer.inert,undefined, 'drawer and its close control remain accessible');
+  drawer.open = false;
+  events.toggle({target:drawer});
+  assert.equal(main.inert,undefined, 'prior main state is restored');
+  assert.equal(search.inert,undefined, 'search is restored');
+  assert.equal(preInert.inert,true, 'pre-existing inert state is preserved');
+  drawer.open = true;
+  events.toggle({target:drawer});
+  window.innerWidth = 768;
+  events.resize();
+  assert.equal(main.inert,undefined, 'tablet resize clears mobile-only background isolation');
+  assert.equal(preInert.inert,true);
+});
+
 test('mobile drawer does not expose closed offscreen links and supports keyboard dismissal', () => {
   const html=read('index.html'),app=read('app.js'),css=read('app.css'),offline=read('downloads/Atlas_Demo_Offline.html');
   assert.match(html, /id="menu-toggle"[^>]+aria-controls="sidebar"/);

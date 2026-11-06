@@ -186,6 +186,13 @@ with sync_playwright() as p:
     # A tabbing user should not escape into obscured page controls.
     check('shared drawer locks the underlying mobile page while open',
           mobile_games.evaluate("getComputedStyle(document.body).overflow === 'hidden'"))
+    # Unlike scroll-lock alone, inert removes the obscured workspace and
+    # header controls from screen-reader and pointer interaction.
+    mobile_games.wait_for_function("document.querySelector('main').inert")
+    check('shared mobile drawer excludes background from assistive technology',
+          mobile_games.evaluate("""() => document.querySelector('main').inert
+              && document.querySelector('.site-mobile-chrome__search').inert
+              && !document.querySelector('#games-mobile-nav').inert"""))
     mobile_games.locator('#games-mobile-nav summary').focus()
     mobile_games.keyboard.press('Shift+Tab')
     check('Shift-Tab wraps inside the shared native drawer',
@@ -198,6 +205,10 @@ with sync_playwright() as p:
     mobile_games.mouse.click(310, 160)
     check('outside click dismisses the shared mobile drawer',
           not mobile_games.locator('#games-mobile-nav').evaluate('(el) => el.open'))
+    mobile_games.wait_for_function("!document.querySelector('main').inert")
+    check('outside click restores keyboard and screen-reader access',
+          mobile_games.evaluate("""() => !document.querySelector('main').inert
+              && !document.querySelector('.site-mobile-chrome__search').inert"""))
     mobile_games.locator('#games-mobile-nav summary').click()
     mobile_games.locator('#games-mobile-nav summary').click()
     mobile_games.locator('.site-mobile-chrome__search').click()
@@ -547,6 +558,10 @@ with sync_playwright() as p:
               and menu.locator('nav a').count() == 7
               and menu.locator('nav a[aria-current="page"]').count() == 1
               and menu.locator('nav a[aria-current="page"]').inner_text() == 'Concept dictionary')
+        mobile_reference.wait_for_function("document.querySelector('.site-mobile-chrome__search').inert")
+        check(reference + ' shares background isolation while drawer is open',
+              mobile_reference.evaluate("""() => document.querySelector('.site-mobile-chrome__search').inert
+                  && !document.querySelector('#directory-mobile-nav').inert"""))
         check(reference + ' has keyboard-reachable 44px navigation links',
               mobile_reference.evaluate("""() => [...document.querySelectorAll('#directory-mobile-nav nav a')]
                   .every(a => a.getBoundingClientRect().height >= 44)"""))
