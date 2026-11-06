@@ -84,5 +84,14 @@ document.addEventListener('toggle', event => {
   if (event.target?.matches?.('details.site-mobile-chrome__nav')) syncSharedDrawerIsolation();
 }, true);
 if (typeof window !== 'undefined' && window.addEventListener) {
-  window.addEventListener('resize', syncSharedDrawerIsolation);
+  window.addEventListener('resize', () => {
+    // A native menu left open on desktop would reopen unexpectedly on rotation
+    // back to mobile, trapping focus and locking the newly visible workspace.
+    // Close it as the breakpoint is crossed; keep no-JS details behavior intact.
+    if (window.innerWidth > 650) {
+      document.querySelectorAll('details.site-mobile-chrome__nav[open]')
+        .forEach(menu => { menu.open = false; });
+    }
+    syncSharedDrawerIsolation();
+  });
 }

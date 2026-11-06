@@ -176,7 +176,8 @@ test('shared mobile drawer makes background inert without leaving hidden control
   const document = {
     body, documentElement:{dataset:{}},
     addEventListener:(type,handler,capture) => {events[type] = handler; if(type==='toggle') assert.equal(capture,true);},
-    querySelector:() => drawer.open ? drawer : null
+    querySelector:() => drawer.open ? drawer : null,
+    querySelectorAll:(selector) => selector === 'details.site-mobile-chrome__nav[open]' && drawer.open ? [drawer] : []
   };
   const window = {innerWidth:390, addEventListener:(name,fn)=>{events[name]=fn;}};
   vm.runInNewContext(script,{document,window,localStorage:{getItem:()=>null}});
@@ -195,8 +196,13 @@ test('shared mobile drawer makes background inert without leaving hidden control
   events.toggle({target:drawer});
   window.innerWidth = 768;
   events.resize();
+  assert.equal(drawer.open,false, 'tablet resize dismisses the former mobile drawer');
   assert.equal(main.inert,false, 'tablet resize clears mobile-only background isolation');
   assert.equal(preInert.inert,true);
+  window.innerWidth = 390;
+  events.resize();
+  assert.equal(drawer.open,false, 'returning to mobile must not reopen a stale menu');
+  assert.equal(main.inert,false, 'workspace stays accessible after rotating back');
 });
 
 test('mobile drawer does not expose closed offscreen links and supports keyboard dismissal', () => {

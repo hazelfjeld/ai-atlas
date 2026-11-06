@@ -209,6 +209,20 @@ with sync_playwright() as p:
     check('outside click restores keyboard and screen-reader access',
           mobile_games.evaluate("""() => !document.querySelector('main').inert
               && !document.querySelector('.site-mobile-chrome__search').inert"""))
+    # Native details must not secretly remain open across a mobile/tablet
+    # breakpoint. Otherwise rotation back leaves the whole site blocked.
+    mobile_games.locator('#games-mobile-nav summary').click()
+    mobile_games.wait_for_function("document.querySelector('main').inert")
+    mobile_games.set_viewport_size({'width':768, 'height':720})
+    check('tablet resize closes a formerly open native mobile drawer',
+          not mobile_games.locator('#games-mobile-nav').evaluate('(el) => el.open')
+          and mobile_games.evaluate("!document.querySelector('main').inert")
+          and mobile_games.evaluate("getComputedStyle(document.body).overflow !== 'hidden'"))
+    mobile_games.set_viewport_size({'width':320, 'height':720})
+    check('return to phone does not restore a stale hidden menu',
+          not mobile_games.locator('#games-mobile-nav').evaluate('(el) => el.open')
+          and mobile_games.evaluate("!document.querySelector('main').inert")
+          and mobile_games.evaluate("document.documentElement.scrollWidth <= innerWidth + 1"))
     mobile_games.locator('#games-mobile-nav summary').click()
     mobile_games.locator('#games-mobile-nav summary').click()
     mobile_games.locator('.site-mobile-chrome__search').click()
