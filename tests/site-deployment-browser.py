@@ -40,7 +40,9 @@ with sync_playwright() as p:
             page.locator('#menu-toggle').click()
         primary_links = page.locator('#navigation > a.nav-link')
         check('Discover shares seven-link primary order at ' + str(width),
-              primary_links.locator('span:not(.nav-count)').all_inner_texts() == [
+              primary_links.count() == 7
+              and all(link.is_visible() for link in primary_links.all())
+              and primary_links.locator('span:not(.nav-count)').all_text_contents() == [
                   'Discover', 'What’s New Today', 'Concept dictionary',
                   'Technology profiles', 'Games', 'Playbooks', 'About'])
         page.locator('#navigation > a[data-static="about"]').click()
