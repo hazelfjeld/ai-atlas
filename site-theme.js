@@ -95,3 +95,14 @@ if (typeof window !== 'undefined' && window.addEventListener) {
     syncSharedDrawerIsolation();
   });
 }
+
+/* Use the existing canonical selected link as the standalone workspace
+   breadcrumb, matching Discover without introducing duplicate navigation. */
+document.addEventListener('DOMContentLoaded', () => {
+  const chrome = document.querySelector('.site-mobile-chrome');
+  if (!chrome) return;
+  const active = document.querySelector('.site-chrome__links a[aria-current]');
+  const heading = document.querySelector('main h1');
+  const label = active?.textContent?.trim() || heading?.textContent?.trim() || document.title.split('·')[0].trim();
+  chrome.dataset.pageLabel = label;
+});

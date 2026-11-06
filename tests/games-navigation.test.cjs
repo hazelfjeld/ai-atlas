@@ -697,21 +697,25 @@ test('shared native mobile menu adopts Discover off-canvas frame without duplica
   }
 });
 
-test('shared desktop rail exposes the existing real site search anchor on every page family', () => {
+test('shared desktop workspace bar reuses one real search link across page families', () => {
   const css=read('site-chrome.css');
-  assert.match(css, /@media \(min-width:651px\)\{[\s\S]*?\.site-mobile-chrome\{\s*display:block;position:fixed/);
-  assert.match(css, /\.site-chrome\{padding-bottom:94px!important\}/,
-    'Short-height sidebars must scroll their last links clear of fixed search');
+  const js=read('site-theme.js');
+  assert.match(css, /body:has\(\.site-chrome\)\{padding-top:78px\}/);
+  assert.match(css, /\.site-mobile-chrome\{[\s\S]*?display:flex;[\s\S]*?position:fixed;inset:0 0 auto 224px/);
+  assert.match(css, /\.site-mobile-chrome::before\{[\s\S]*?content:attr\(data-page-label\)/);
+  assert.match(css, /\.site-mobile-chrome\{left:204px;padding-inline:26px\}/);
+  assert.match(css, /\.games-header__inner > \.icon-button\{[\s\S]*?position:fixed;top:17px/);
+  assert.match(js, /chrome\.dataset\.pageLabel = label/);
   assert.match(css, /\.site-mobile-chrome__nav\{display:none\}/,
-    'Do not duplicate the desktop section navigation');
+    'Do not duplicate desktop section navigation');
   assert.match(css, /@media print\{\.site-mobile-chrome\{display:none!important\}\}/);
   for(const path of ['whats-new.html','games.html','research.html',
       'technologies.html','playbooks.html','catalog-review.html',
       'hardware-review.html','about.html','terms/index.html','technology/index.html']) {
     const html=read(path);
-    assert.match(html, /site-mobile-chrome__search\" href=\"(?:\.\.\/)?index\.html#\/search\"/,
+    assert.match(html, /site-mobile-chrome__search" href="(?:\.\.\/)?index\.html#\/search"/,
       path+' must link to the real existing search view');
-    assert.equal((html.match(/site-mobile-chrome__search\" href=/g) || []).length,1,
+    assert.equal((html.match(/site-mobile-chrome__search" href=/g) || []).length,1,
       path+' must not render duplicate search links');
   }
 });

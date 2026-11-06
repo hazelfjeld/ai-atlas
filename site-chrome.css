@@ -127,32 +127,53 @@ body:has(.site-mobile-chrome__nav[open]){overflow:hidden}
 .site-mobile-chrome__menu{scroll-behavior:auto}
 }
 
-/* A single working search affordance at every breakpoint: the existing
-   mobile search link doubles as Discover's desktop search entry. Keep the
-   native anchor (and its real #/search destination) usable without JS.
-   The rail reserves a scrollable end gutter so short screens cannot cover
-   the final section link. No duplicate header/search element is created. */
+/* Give standalone pages the same 78px desktop workspace bar as Discover.
+   Reuse the existing shared search link; no second menu/search is rendered.
+   Mobile keeps its compact native disclosure and no-JavaScript links. */
 @media (min-width:651px){
-.site-chrome{padding-bottom:94px!important}
+body:has(.site-chrome){padding-top:78px}
 .site-mobile-chrome{
-  display:block;position:fixed;inset:auto auto 16px 17px;
-  z-index:26;width:190px;max-width:calc(100vw - 30px);margin:0
+  display:flex;align-items:center;justify-content:space-between;gap:24px;
+  position:fixed;inset:0 0 auto 224px;
+  height:78px;width:auto;max-width:none;box-sizing:border-box;
+  padding:0 40px;margin:0;flex:none!important;
+  z-index:24;background:var(--surface,#fff);
+  border-bottom:1px solid var(--line,#dce1d7)
+}
+.site-mobile-chrome::before{
+  content:attr(data-page-label);display:block;flex:1;min-width:0;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  font-size:13px;font-weight:550;color:var(--ink,#18211e)
 }
 .site-mobile-chrome__nav{display:none}
 .site-mobile-chrome__search{
-  display:flex;align-items:center;gap:8px;min-height:44px;width:100%;
-  padding:9px 11px;border:1px solid #405043;border-radius:8px;
-  background:#ffffff13;color:#d3ddd5;text-decoration:none;
-  font-size:12px;font-weight:600;line-height:1.35
+  display:flex;align-items:center;gap:10px;flex:0 1 365px;
+  width:auto;min-width:130px;min-height:38px;
+  padding:9px 12px;border:1px solid var(--line,#dce1d7);
+  border-radius:9px;background:var(--surface,#fff);color:var(--muted,#5d6861);
+  text-decoration:none;font-size:12px;font-weight:550;line-height:1.35
 }
 .site-mobile-chrome__search-icon{flex:none;font-size:21px;line-height:1}
 .site-mobile-chrome__search-placeholder{
   min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis
 }
-.site-mobile-chrome__search:hover{background:#ffffff21;color:#fff}
+.site-mobile-chrome__search:hover{border-color:var(--accent,#27664e);color:var(--ink,#18211e)}
 .site-mobile-chrome__search:focus-visible{outline:3px solid #d9a16f;outline-offset:3px}
 }
 @media (min-width:651px) and (max-width:1150px){
-.site-mobile-chrome{left:12px;width:180px}
+.site-mobile-chrome{left:204px;padding-inline:26px}
+}
+/* Games keeps its existing theme control within the same desktop bar,
+   rather than introducing a second horizontal header row. */
+@media (min-width:651px){
+.games-header{height:0;border:0}
+.games-header__inner{height:0;padding:0!important}
+.games-header__inner > .icon-button{
+  position:fixed;top:17px;right:40px;z-index:26
+}
+.games-header .site-mobile-chrome{padding-right:102px}
+}
+@media (min-width:651px) and (max-width:1150px){
+.games-header__inner > .icon-button{right:26px}
 }
 @media print{.site-mobile-chrome{display:none!important}}

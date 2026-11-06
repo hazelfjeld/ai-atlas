@@ -129,9 +129,16 @@ with sync_playwright() as p:
         check('shared wordmark has legible inherited foreground on ' + route,
               nav.locator('.site-chrome__name').evaluate('el => getComputedStyle(el).color === getComputedStyle(el.closest("a")).color'))
         desktop_search = page.locator('a.site-mobile-chrome__search[href="index.html#/search"]')
-        check('desktop sidebar keeps the existing functional search destination on ' + route,
+        check('shared desktop workspace bar retains the real search destination on ' + route,
               desktop_search.is_visible()
-              and desktop_search.evaluate('el => getComputedStyle(el.closest(".site-mobile-chrome")).position === "fixed"')
+              and desktop_search.evaluate('''el => {
+                  const bar=el.closest('.site-mobile-chrome');
+                  const r=bar.getBoundingClientRect();
+                  return getComputedStyle(bar).position === 'fixed'
+                      && Math.abs(r.top) < 2 && r.height >= 76 && r.height <= 80
+                      && bar.dataset.pageLabel?.length > 0
+                      && getComputedStyle(bar).borderBottomWidth !== '0px';
+              }''')
               and not page.locator('details.site-mobile-chrome__nav').is_visible())
 
         if route == 'hardware-review.html':
