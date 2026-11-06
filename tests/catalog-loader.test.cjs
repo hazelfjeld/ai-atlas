@@ -58,8 +58,11 @@ test('offline fallback embeds all records and valid JavaScript without external 
   const html = fs.readFileSync(path.join(root, 'downloads/Atlas_Demo_Offline.html'), 'utf8');
   assert.doesNotMatch(html, /<script[^>]+src=/i);
   assert.doesNotMatch(html, /<link[^>]+rel="stylesheet"/i);
-  const script = html.match(/<script>([\s\S]*)<\/script>/)[1];
-  new vm.Script(script);
+  const scripts = [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(match => match[1]);
+  assert.ok(scripts.length >= 2, 'Offline archive inlines both shared navigation and workspace runtime');
+  for (const source of scripts) new vm.Script(source);
+  const script = scripts.find(source => source.includes('window.ATLAS_READY=Promise.resolve('));
+  assert.ok(script, 'Offline workspace must preserve the complete verified dataset');
   const value = script.split('window.ATLAS_READY=Promise.resolve(')[1].split(');\n')[0];
   const d = JSON.parse(value);
   assert.equal(['papers','alerts','playbooks','terms','technologies'].reduce((n,k) => n+d[k].length, 0), 1708);
