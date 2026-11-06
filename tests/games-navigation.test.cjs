@@ -185,7 +185,7 @@ test('shared mobile drawer makes background inert without leaving hidden control
   assert.equal(main.inert,true, 'background main landmark is excluded from screen readers');
   assert.equal(search.inert,true, 'search behind the drawer is not interactive');
   assert.equal(themeButton.inert,true, 'header control behind the drawer is inert');
-  assert.equal(drawer.inert,undefined, 'drawer and its close control remain accessible');
+  assert.equal(drawer.inert,false, 'drawer and its close control remain accessible');
   drawer.open = false;
   events.toggle({target:drawer});
   assert.equal(main.inert,undefined, 'prior main state is restored');

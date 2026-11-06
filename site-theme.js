@@ -83,4 +83,6 @@ function syncSharedDrawerIsolation() {
 document.addEventListener('toggle', event => {
   if (event.target?.matches?.('details.site-mobile-chrome__nav')) syncSharedDrawerIsolation();
 }, true);
-window.addEventListener('resize', syncSharedDrawerIsolation);
+if (typeof window !== 'undefined' && window.addEventListener) {
+  window.addEventListener('resize', syncSharedDrawerIsolation);
+}
