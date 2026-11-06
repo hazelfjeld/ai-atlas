@@ -174,12 +174,12 @@ with sync_playwright() as p:
           and menu_links.filter(has_text='Games').get_attribute('aria-current') == 'page'
           and all(h >= 44 for h in menu_links.evaluate_all(
               '(els) => els.map(el => el.getBoundingClientRect().height)')))
-    # This is the same fixed 250px mobile rail as Discover, not an
+    # This is the same fixed 260px mobile rail as Discover, not an
     # independent dropdown. Outside-pointer dismissal remains functional.
     check('shared native mobile menu uses the Discover off-canvas geometry',
           mobile_games.evaluate("""() => {
               const p=document.querySelector('#games-mobile-nav .site-mobile-chrome__menu').getBoundingClientRect();
-              return Math.abs(p.left)<1 && p.width>=240 && p.width<=250
+              return Math.abs(p.left)<1 && Math.abs(p.width-260)<=1
                   && p.height>=innerHeight-2
                   && getComputedStyle(document.querySelector('#games-mobile-nav .site-mobile-chrome__menu')).position==='fixed';
           }"""))
