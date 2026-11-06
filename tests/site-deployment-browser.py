@@ -1212,6 +1212,7 @@ with sync_playwright() as p:
     page.set_viewport_size({'width': 1280, 'height': 900})
     page.goto(base + 'whats-new.html')
     page.locator('.site-chrome__links a[href="about.html"]').click()
+    page.wait_for_url('**/about.html')
     check('archive to About retains the shared fixed sidebar',
           page.url.endswith('/about.html') and page.evaluate("""() => {
               const nav = document.querySelector('.site-chrome');
