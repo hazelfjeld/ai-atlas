@@ -12,6 +12,27 @@ try {
 /* The native details menu works without scripts; enhance it to match the
    Discover drawer's Escape and outside-click behavior when JS is available. */
 document.addEventListener('keydown', (event) => {
+  // Match Discover's mobile drawer: Tab must not escape behind an open rail.
+  // This is progressive enhancement; native <details> links work without JS.
+  if (event.key === 'Tab' && !event.defaultPrevented && window.innerWidth <= 650) {
+    const menu = document.querySelector('details.site-mobile-chrome__nav[open]');
+    if (menu) {
+      const stops = [menu.querySelector('summary'), ...menu.querySelectorAll('a[href]')]
+        .filter(el => el && el.getClientRects().length);
+      if (stops.length) {
+        const first = stops[0], last = stops[stops.length - 1];
+        const current = document.activeElement;
+        if (event.shiftKey && (current === first || !menu.contains(current))) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && (current === last || !menu.contains(current))) {
+          event.preventDefault();
+          first.focus();
+        }
+      }
+    }
+    return;
+  }
   if (event.key === 'Escape') {
     if (event.defaultPrevented) return;
     const menus = document.querySelectorAll('details.site-mobile-chrome__nav[open]');

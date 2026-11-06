@@ -183,6 +183,18 @@ with sync_playwright() as p:
                   && p.height>=innerHeight-2
                   && getComputedStyle(document.querySelector('#games-mobile-nav .site-mobile-chrome__menu')).position==='fixed';
           }"""))
+    # A tabbing user should not escape into obscured page controls.
+    check('shared drawer locks the underlying mobile page while open',
+          mobile_games.evaluate("getComputedStyle(document.body).overflow === 'hidden'"))
+    mobile_games.locator('#games-mobile-nav summary').focus()
+    mobile_games.keyboard.press('Shift+Tab')
+    check('Shift-Tab wraps inside the shared native drawer',
+          mobile_games.locator('#games-mobile-nav .site-mobile-chrome__menu a').last.evaluate(
+              '(el) => document.activeElement === el'))
+    mobile_games.keyboard.press('Tab')
+    check('Tab from final drawer link returns to its close control',
+          mobile_games.locator('#games-mobile-nav summary').evaluate(
+              '(el) => document.activeElement === el'))
     mobile_games.mouse.click(310, 160)
     check('outside click dismisses the shared mobile drawer',
           not mobile_games.locator('#games-mobile-nav').evaluate('(el) => el.open'))

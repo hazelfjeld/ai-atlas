@@ -90,6 +90,8 @@ body:has(.site-chrome){padding-left:0!important}
    frame. Keep <details> as the only menu source: it stays usable without JS,
    while site-theme.js supplies Escape and outside-pointer dismissal. */
 @media (max-width:650px){
+/* Keep the page behind the native drawer stationary, as Discover already does. */
+body:has(.site-mobile-chrome__nav[open]){overflow:hidden}
 .site-mobile-chrome:has(.site-mobile-chrome__nav[open]){z-index:100}
 .site-mobile-chrome:has(.site-mobile-chrome__nav[open])::before{
  content:"";position:fixed;inset:0;background:#13291d77;z-index:99

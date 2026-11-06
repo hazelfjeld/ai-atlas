@@ -106,6 +106,54 @@ test('progressive sidebar retains all canonical links and reveals deep-linked se
 });
 
 
+test('shared native mobile drawer traps keyboard focus without replacing no-JS navigation', () => {
+  const script = read('site-theme.js');
+  new vm.Script(script);
+  const handlers = {};
+  let focused;
+  const makeStop = () => ({
+    getClientRects: () => [{}],
+    focus() { focused = this; document.activeElement = this; }
+  });
+  const summary = makeStop(), firstLink = makeStop(), lastLink = makeStop();
+  const menu = {
+    querySelector: () => summary,
+    querySelectorAll: () => [firstLink, lastLink],
+    contains: el => [summary, firstLink, lastLink].includes(el)
+  };
+  let open = true;
+  const document = {
+    documentElement: {dataset: {}}, activeElement: lastLink,
+    addEventListener: (name, listener) => { handlers[name] = listener; },
+    querySelector: () => open ? menu : null,
+    querySelectorAll: () => []
+  };
+  const window = {innerWidth: 390};
+  vm.runInNewContext(script, {document, window, localStorage: {getItem: () => null}});
+  const tab = shiftKey => ({
+    key: 'Tab', shiftKey, defaultPrevented: false,
+    preventDefault() { this.defaultPrevented = true; }
+  });
+  const forward = tab(false);
+  handlers.keydown(forward);
+  assert.ok(forward.defaultPrevented);
+  assert.equal(focused, summary, 'Tab from final section returns to menu trigger');
+  const backward = tab(true);
+  handlers.keydown(backward);
+  assert.ok(backward.defaultPrevented);
+  assert.equal(focused, lastLink, 'Shift-Tab from trigger wraps to final section');
+  open = false;
+  const closed = tab(false);
+  handlers.keydown(closed);
+  assert.equal(closed.defaultPrevented, false, 'Closed native menu does not trap focus');
+  open = true;
+  window.innerWidth = 1280;
+  const desktop = tab(false);
+  handlers.keydown(desktop);
+  assert.equal(desktop.defaultPrevented, false, 'Desktop keyboard remains unrestricted');
+  assert.match(read('site-chrome.css'), /body:has\(\.site-mobile-chrome__nav\[open\]\)\{overflow:hidden\}/);
+});
+
 test('mobile drawer does not expose closed offscreen links and supports keyboard dismissal', () => {
   const html=read('index.html'),app=read('app.js'),css=read('app.css'),offline=read('downloads/Atlas_Demo_Offline.html');
   assert.match(html, /id="menu-toggle"[^>]+aria-controls="sidebar"/);
