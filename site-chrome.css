@@ -123,6 +123,30 @@ body:has(.site-mobile-chrome__nav[open]){overflow:hidden}
  background:#374b3c;color:#f5f7ef
 }
 }
+/* Reuse the exact desktop wordmark inside the shared native mobile drawer.
+   The seven script-free primary navigation links remain unchanged. */
+@media (max-width:650px){
+.site-mobile-chrome .site-mobile-chrome__menu::before{
+  content:"EXPLORE";display:block;margin:0 11px 6px;
+  color:#87998b;font-size:10px;font-weight:700;letter-spacing:.13em;
+}
+.site-mobile-chrome .site-mobile-chrome__menu > a.site-mobile-chrome__brand{
+  position:absolute;top:10px;left:72px;right:10px;z-index:1;
+  display:flex;align-items:center;justify-content:flex-start;gap:8px;
+  min-height:48px;width:auto;margin:0;padding:0!important;
+  background:transparent!important;color:#f4f5ed!important;
+  white-space:nowrap;text-decoration:none;
+}
+.site-mobile-chrome__brand svg{width:28px;height:28px;flex:none;color:#edbb87}
+.site-mobile-chrome__brand .site-chrome__name{
+  font-size:18px;font-weight:700;letter-spacing:-.05em;line-height:1.05;
+}
+.site-mobile-chrome__brand .site-chrome__name small{
+  display:block;margin-top:3px;font-size:7px;letter-spacing:.04em;
+  color:#9cab9e;
+}
+.site-mobile-chrome__brand:focus-visible{outline:3px solid #edba87;outline-offset:3px}
+}
 @media (prefers-reduced-motion:reduce){
 .site-mobile-chrome__menu{scroll-behavior:auto}
 }

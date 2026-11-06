@@ -105,4 +105,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const heading = document.querySelector('main h1');
   const label = active?.textContent?.trim() || heading?.textContent?.trim() || document.title.split('·')[0].trim();
   chrome.dataset.pageLabel = label;
+  // Reuse the canonical desktop brand in the native mobile drawer. Never
+  // maintain a second logo template; no-JS <details> navigation still works.
+  const menu = chrome.querySelector('.site-mobile-chrome__menu');
+  const desktopBrand = document.querySelector('.site-chrome__brand');
+  if (menu && desktopBrand && !menu.querySelector('.site-mobile-chrome__brand')) {
+    const mobileBrand = desktopBrand.cloneNode(true);
+    mobileBrand.classList.add('site-mobile-chrome__brand');
+    menu.prepend(mobileBrand);
+  }
 });

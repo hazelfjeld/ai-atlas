@@ -106,6 +106,33 @@ test('progressive sidebar retains all canonical links and reveals deep-linked se
 });
 
 
+test('shared native mobile drawer reuses canonical desktop wordmark without duplicate links', () => {
+  const script=read('site-theme.js'), css=read('site-chrome.css');
+  new vm.Script(script);
+  const handlers={}; let clones=0, inserts=0;
+  const copy={classList:{names:[],add(name){this.names.push(name);}}};
+  const original={cloneNode(deep){assert.equal(deep,true);clones++;return copy;}};
+  const menu={querySelector:()=>inserts?copy:null,prepend(el){assert.equal(el,copy);inserts++;}};
+  const chrome={dataset:{},querySelector:()=>menu};
+  const document={
+    documentElement:{dataset:{}},title:'Games · AI Updates',
+    addEventListener:(name,handler)=>{handlers[name]=handler;},
+    querySelector:(selector)=>selector==='.site-mobile-chrome'?chrome:
+      selector==='.site-chrome__brand'?original:null
+  };
+  const window={innerWidth:390,addEventListener(){}};
+  vm.runInNewContext(script,{document,window,localStorage:{getItem:()=>null}});
+  handlers.DOMContentLoaded();
+  assert.equal(clones,1);
+  assert.equal(inserts,1);
+  assert.ok(copy.classList.names.includes('site-mobile-chrome__brand'));
+  assert.equal(chrome.dataset.pageLabel,'Games');
+  handlers.DOMContentLoaded();
+  assert.equal(inserts,1,'Repeated initialization must not duplicate mobile brand');
+  assert.match(css,/\.site-mobile-chrome \.site-mobile-chrome__menu > a\.site-mobile-chrome__brand/);
+  assert.match(css,/\.site-mobile-chrome \.site-mobile-chrome__menu::before/);
+});
+
 test('shared native mobile drawer traps keyboard focus without replacing no-JS navigation', () => {
   const script = read('site-theme.js');
   new vm.Script(script);
