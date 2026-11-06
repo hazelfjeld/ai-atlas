@@ -214,6 +214,11 @@ with sync_playwright() as p:
     mobile_games.locator('#games-mobile-nav summary').click()
     mobile_games.wait_for_function("document.querySelector('main').inert")
     mobile_games.set_viewport_size({'width':768, 'height':720})
+    # A viewport resize event can arrive after Playwright's layout update.
+    # Wait for the actual enhanced disclosure state, not an animation delay.
+    mobile_games.wait_for_function("""() =>
+        !document.querySelector('#games-mobile-nav').open
+        && !document.querySelector('main').inert""", timeout=10000)
     check('tablet resize closes a formerly open native mobile drawer',
           not mobile_games.locator('#games-mobile-nav').evaluate('(el) => el.open')
           and mobile_games.evaluate("!document.querySelector('main').inert")
