@@ -434,3 +434,47 @@ test('standalone page families share a build-time navigation source, including c
   }
   assert.match(read('site-chrome.css'), /\.site-mobile-chrome__menu a\[aria-current=location\]/);
 });
+
+
+test('standalone native mobile menus share Escape, outside-pointer and no-JS-safe enhancement', () => {
+  for (const file of [
+    'terms/MLD-0001-a-b-test.html', 'technology/index.html', 'research.html',
+    'games.html', 'whats-new.html', 'about.html'
+  ]) {
+    const html = read(file);
+    assert.match(html, /<details class="[^"]*site-mobile-chrome__nav/);
+    assert.match(html, /<script src="(?:\.\.\/)?site-theme\.js"><\/script>/);
+  }
+  const listeners = {};
+  const summary = { focus() { summary.focused = true; } };
+  const inside = {};
+  const menu = {
+    open: true,
+    contains(target) { return target === inside; },
+    querySelector(selector) { assert.equal(selector, 'summary'); return summary; }
+  };
+  const document = {
+    documentElement: {dataset: {}, style: {}},
+    addEventListener(type, listener) { listeners[type] = listener; },
+    querySelectorAll(selector) {
+      assert.equal(selector, 'details.site-mobile-chrome__nav[open]');
+      return menu.open ? [menu] : [];
+    }
+  };
+  vm.runInNewContext(read('site-theme.js'), {document, localStorage: {getItem() { return null; }}});
+  assert.equal(typeof listeners.keydown, 'function');
+  assert.equal(typeof listeners.pointerdown, 'function');
+  let prevented = false;
+  listeners.keydown({key:'Escape', defaultPrevented:false, preventDefault() { prevented = true; }});
+  assert.equal(menu.open, false, 'Escape must close open native menu');
+  assert.equal(summary.focused, true, 'Escape must return focus to toggle');
+  assert.equal(prevented, true);
+  menu.open = true;
+  listeners.pointerdown({target:inside});
+  assert.equal(menu.open, true, 'pointer events inside the menu must not close it');
+  listeners.pointerdown({target:{}});
+  assert.equal(menu.open, false, 'outside pointer closes the menu');
+  menu.open = true;
+  listeners.keydown({key:'Escape', defaultPrevented:true});
+  assert.equal(menu.open, true, 'respect already-handled Escape events');
+});
