@@ -252,6 +252,7 @@ test('Discover shares the native script-free mobile drawer used by standalone pa
   assert.ok(!html.includes('id="menu-toggle"') && !html.includes('id="mobile-overlay"'));
   assert.match(css, /@media\(max-width:650px\)[\s\S]*?\.sidebar\{display:none\}/);
   assert.match(shared, /\.site-mobile-chrome \.site-mobile-chrome__menu\{/);
+  assert.match(shared, /\.discover-mobile-chrome\{display:none!important\}/);
   assert.match(app, /function closeMobileNavigation\(restoreFocus=false\)/);
   assert.match(app, /const fromMobileNav = \$\('discover-mobile-nav'\)\.open/);
   assert.match(app, /syncSharedDrawerIsolation\(\)/, 'Route changes release native drawer isolation before refocusing main');

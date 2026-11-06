@@ -88,6 +88,10 @@ with sync_playwright() as p:
     no_script.close()
     page.set_viewport_size({'width':1440, 'height':1000})
     page.goto(base + 'index.html#/overview')
+    check('Discover keeps one desktop topbar and hides the native mobile disclosure',
+          not page.locator('#discover-mobile-nav').is_visible()
+          and page.locator('header.topbar').count() == 1
+          and page.locator('#global-query').is_visible())
     # Native disclosure makes the long secondary list opt-in without losing direct-link access.
     check('secondary sidebar destinations start collapsed on the homepage',
           not page.locator('#additional-navigation').evaluate('(el) => el.open'))
@@ -1338,7 +1342,7 @@ with sync_playwright() as p:
     page.locator('#start-quiz').wait_for()
     check('mobile Games route fits original workspace', page.evaluate('document.documentElement.scrollWidth <= innerWidth'))
     page.locator('#discover-mobile-nav summary').click()
-    page.locator('#discover-mobile-nav .site-mobile-chrome__menu a[href="#/overview"]').click()
+    page.locator('#discover-mobile-nav .site-mobile-chrome__menu a:not(.site-mobile-chrome__brand)[href="#/overview"]').click()
     page.wait_for_function("location.hash === '#/overview' && !document.getElementById('discover-mobile-nav').open")
     check('mobile drawer navigates and closes', page.locator('#daily-panel-title').is_visible())
 
