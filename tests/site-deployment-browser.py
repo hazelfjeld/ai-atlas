@@ -1179,7 +1179,9 @@ with sync_playwright() as p:
         for width in (320, 390, 768, 1080, 1280):
             page.set_viewport_size({'width': width, 'height': 900})
             for route in ('about.html', 'terms/index.html',
-                          'technology/TECH-0216-pytorch.html', 'playbooks.html'):
+                          'technology/TECH-0216-pytorch.html', 'playbooks.html',
+                           'whats-new.html', 'research.html', 'catalog-review.html',
+                           'hardware-review.html', 'games.html'):
                 page.goto(base + route)
                 check(f'{route} retains saved {theme} mode at {width}px',
                       page.evaluate("(chosen) => document.documentElement.dataset.theme === chosen", theme))
@@ -1203,10 +1205,21 @@ with sync_playwright() as p:
                                       && rect.left === 0
                                       : computed.position !== 'fixed');
                       }"""))
-                if width == 1280 and route in ('about.html', 'terms/index.html'):
+                if width == 1280 and route in ('about.html', 'terms/index.html',
+                                                   'whats-new.html', 'research.html',
+                                                   'hardware-review.html', 'games.html'):
                     page.screenshot(path=str(out / f'shared-rail-{theme}-{route.replace("/", "-")}.png'),
                                     full_page=False)
+    # Cross the former horizontal-to-sidebar boundary through real navigation.
     page.set_viewport_size({'width': 1280, 'height': 900})
+    page.goto(base + 'whats-new.html')
+    page.locator('.site-chrome__links a[href="about.html"]').click()
+    check('archive to About retains the shared fixed sidebar',
+          page.url.endswith('/about.html') and page.evaluate("""() => {
+              const nav = document.querySelector('.site-chrome');
+              return nav && nav.getBoundingClientRect().left === 0
+                  && getComputedStyle(nav).position === 'fixed';
+          }"""))
     page.goto(base + 'terms/index.html')
     page.locator('.site-chrome__links a[href="../playbooks.html"]').click()
     check('shared sidebar preserves cross-page Playbooks navigation',

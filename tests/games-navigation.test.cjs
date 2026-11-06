@@ -479,7 +479,7 @@ test('standalone native mobile menus share Escape, outside-pointer and no-JS-saf
   assert.equal(menu.open, true, 'respect already-handled Escape events');
 });
 
-test('reference, technology and playbook pages share the Discover desktop sidebar frame', () => {
+test('all standalone page families share the Discover desktop sidebar frame', () => {
   const css = read('site-chrome.css');
   assert.match(css, /@media \(min-width:1051px\)/);
   assert.ok(css.includes('padding-left:224px'));
@@ -487,11 +487,15 @@ test('reference, technology and playbook pages share the Discover desktop sideba
   assert.ok(css.includes('background:var(--sidebar,#202b28)!important'), 'rail follows Discover dark theme');
   assert.ok(css.includes('position:fixed!important;inset:0 auto 0 0;width:224px'));
   assert.ok(css.includes('flex-direction:column!important;flex-wrap:nowrap!important'));
-  assert.ok(css.includes('> .site-chrome .site-chrome__links a[aria-current]'));
+  assert.ok(css.includes('.site-chrome .site-chrome__links a[aria-current]'));
+  assert.ok(css.includes('body:has(.site-chrome){padding-left:224px}'));
+  assert.ok(css.includes('.games-header__inner{justify-content:flex-end}'));
+  assert.ok(css.includes('@media print{'), 'print layouts must restore full article width');
   for (const path of [
     'about.html','terms/index.html','terms/MLD-0002-ablation-study.html',
     'technology/index.html','technology/TECH-0216-pytorch.html',
-    'technologies.html','playbooks.html'
+    'technologies.html','playbooks.html','whats-new.html','research.html',
+    'catalog-review.html','hardware-review.html','games.html'
   ]) {
     const html = read(path);
     assert.match(html, /class="site-chrome [^"]+" aria-label="AI Updates primary navigation"/, path);
