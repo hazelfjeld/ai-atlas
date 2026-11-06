@@ -683,7 +683,7 @@ test('shared native mobile menu adopts Discover off-canvas frame without duplica
   const js = read('site-theme.js');
   assert.match(css, /\.site-mobile-chrome:has\(\.site-mobile-chrome__nav\[open\]\)::before/);
   assert.match(css, /\.site-mobile-chrome \.site-mobile-chrome__menu\{[^}]*position:fixed;inset:0 auto 0 0/);
-  assert.match(css, /\.site-mobile-chrome \.site-mobile-chrome__menu\{[^}]*width:min\(250px,calc\(100vw - 48px\)\)/);
+  assert.match(css, /\.site-mobile-chrome \.site-mobile-chrome__menu\{[^}]*width:min\(260px,calc\(100vw - 48px\)\)/);
   assert.match(css, /\.site-mobile-chrome \.site-mobile-chrome__nav\[open\] > \.site-mobile-chrome__toggle/);
   assert.match(css, /display:grid;grid-template-columns:minmax\(0,1fr\);align-content:start/);
   assert.match(css, /gap:4px;padding:70px 16px 22px;overflow:auto/);
