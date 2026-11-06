@@ -36,14 +36,14 @@ with sync_playwright() as p:
     for width in (320, 390, 768, 1280):
         page.set_viewport_size({'width':width, 'height':844})
         page.goto(base + 'index.html#/overview')
+        # The menu handler is attached after the verified catalog hydrates.
+        # Opening it before that point can hit a static, not-yet-bound button.
+        page.locator('#catalog-loading').wait_for(state='detached', timeout=45000)
         if width <= 650:
             page.locator('#menu-toggle').click()
+            check('Discover mobile drawer opens at ' + str(width),
+                  page.locator('#sidebar').evaluate('(el) => el.classList.contains("open")'))
         primary_links = page.locator('#navigation > a.nav-link')
-        print('DISCOVER NAV OBSERVED', width,
-              'count', primary_links.count(),
-              'visible', [a.is_visible() for a in primary_links.all()],
-              'labels', repr(primary_links.locator('span:not(.nav-count)').all_text_contents()),
-              flush=True)
         check('Discover shares seven-link primary order at ' + str(width),
               primary_links.count() == 7
               and all(link.is_visible() for link in primary_links.all())
