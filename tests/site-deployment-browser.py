@@ -192,19 +192,19 @@ with sync_playwright() as p:
     mobile_about = browser.new_page(viewport={'width':320, 'height':720}, reduced_motion='reduce')
     mobile_about.goto(base + 'about.html')
     check('about page uses the same compact mobile navigation as the archive',
-          mobile_about.locator('.about-mobile-topbar').is_visible()
+          mobile_about.locator('.directory-mobile-topbar').is_visible()
           and not mobile_about.locator('.term-nav').is_visible()
-          and mobile_about.locator('.about-search-link').is_visible())
+          and mobile_about.locator('.site-mobile-chrome__search').is_visible())
     check('about mobile header fits a 320px viewport',
           mobile_about.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'))
-    mobile_about.locator('.about-menu-toggle').click()
+    mobile_about.locator('.site-mobile-chrome__toggle').click()
     check('about mobile menu exposes the current location',
-          mobile_about.locator('#about-mobile-nav').evaluate('(el) => el.open')
+          mobile_about.locator('#directory-mobile-nav').evaluate('(el) => el.open')
           and mobile_about.get_by_role('navigation', name='AI Updates sections')
               .get_by_role('link', name='About', exact=True).get_attribute('aria-current') == 'page')
-    mobile_about.locator('.about-menu-toggle').click()
+    mobile_about.locator('.site-mobile-chrome__toggle').click()
     mobile_about.screenshot(path=str(out / 'about-mobile-header.png'), full_page=False)
-    mobile_about.locator('.about-search-link').click()
+    mobile_about.locator('.site-mobile-chrome__search').click()
     mobile_about.wait_for_url('**/index.html#/search')
     check('about mobile search entry opens the real collection search',
           mobile_about.locator('#global-query').is_visible())
@@ -1078,6 +1078,7 @@ with sync_playwright() as p:
     # sites with inconsistent five/six-link navigation. Compare their shared
     # header with Discover's editorial navigation at mobile and desktop sizes.
     for route, selected in (('terms/index.html', 'Concept dictionary'),
+                            ('about.html', 'About'),
                             ('technology/index.html', 'Technology profiles'),
                             ('technology/TECH-0216-pytorch.html', 'Technology profiles')):
         for width in (320, 390, 768, 1280):
@@ -1104,6 +1105,11 @@ with sync_playwright() as p:
     check('catalog directory menu remains usable with JavaScript disabled',
           script_free.locator('.site-mobile-chrome__menu a').first.is_visible()
           and script_free.locator('.site-mobile-chrome__menu a').count() == 7)
+    script_free.goto(base + 'about.html')
+    script_free.locator('#directory-mobile-nav summary').click()
+    check('About uses the generated shared menu without JavaScript',
+          script_free.locator('.site-mobile-chrome__menu a').count() == 7
+          and script_free.locator('.site-mobile-chrome__menu a[aria-current="page"]').inner_text() == 'About')
     script_free.goto(base + 'technology/TECH-0216-pytorch.html')
     script_free.locator('#directory-mobile-nav summary').click()
     check('technology detail uses the shared mobile menu without JavaScript',

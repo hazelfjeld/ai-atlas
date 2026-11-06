@@ -119,8 +119,7 @@ test('About, technologies and playbooks reuse the Games and archive mobile chrom
   for (const path of ['games.html','whats-new.html']) navLinks(read(path),path);
   for (const [path,prefix,active] of [
     ['technologies.html','tech','Technology profiles'],
-    ['playbooks.html','playbook','Playbooks'],
-    ['about.html','about','About']]) {
+    ['playbooks.html','playbook','Playbooks']]) {
     const html=read(path);
     assert.match(html, new RegExp('class="'+prefix+'-mobile-topbar site-mobile-chrome"'), path);
     assert.match(html, new RegExp('class="'+prefix+'-mobile-nav site-mobile-chrome__nav"'), path);
@@ -141,6 +140,25 @@ test('About, technologies and playbooks reuse the Games and archive mobile chrom
   assert.match(css, /\.site-mobile-chrome__menu a\{[^}]*min-height:44px/);
   assert.match(css, /\.site-mobile-chrome a:focus-visible,\.site-mobile-chrome summary:focus-visible/);
   assert.match(css, /@media \(max-width:650px\)\{/);
+});
+
+
+test('About reuses the exact generated catalog navigation, not a parallel template', () => {
+  const about = read('about.html');
+  const built = read('scripts/build_seo.py');
+  const main = '<main class="term-shell" id="main">';
+  const ours = about.split(main)[1].split('<header class="hero">')[0];
+  const template = read('terms/index.html').split(main)[1].split('<header class="hero">')[0];
+  const expected = template.replaceAll('href="../','href="')
+    .replaceAll('href="index.html#/dictionary" aria-current="page">Concept dictionary','href="index.html#/dictionary">Concept dictionary')
+    .replaceAll('href="about.html">About','href="about.html" aria-current="page">About');
+  assert.equal(ours, expected);
+  assert.match(about, /class="directory-mobile-topbar site-mobile-chrome"/);
+  assert.match(about, /id="directory-mobile-nav"/);
+  assert.match(about, /href="index.html#\/search"/);
+  assert.match(built, /render_directory_nav\(prefix, 'About'\)/);
+  assert.doesNotMatch(built, /ABOUT_MOBILE_NAV|ABOUT_DESKTOP_NAV|ABOUT_MOBILE_CSS/);
+  assert.equal((ours.match(/aria-current="page"/g) || []).length, 2);
 });
 
 test('editorial review pages reuse the canonical shared mobile chrome without changing evidence', () => {

@@ -18,7 +18,7 @@ DIRECTORY_MOBILE_CSS = '@media(max-width:650px){.term-shell{padding:0 20px 65px}
 
 def render_directory_nav(prefix, selected):
     assert prefix in ("", "../")
-    assert selected in ("Concept dictionary", "Technology profiles")
+    assert selected in ("Concept dictionary", "Technology profiles", "About")
     links = "".join(
         '<a href="' + prefix + route + '"' + (' aria-current="page"' if name == selected else '') + '>' + escape(name) + '</a>'
         for route, name in DESTINATIONS

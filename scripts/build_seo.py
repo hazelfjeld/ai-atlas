@@ -30,23 +30,11 @@ def nav(prefix=''):
     return f'<nav class="term-nav" aria-label="Site navigation"><a href="{prefix}index.html">AI Updates</a><a href="{prefix}whats-new.html">Daily editions</a><a href="{prefix}terms/index.html">Concepts</a><a href="{prefix}technology/index.html">Technologies</a><a href="{prefix}index.html#/games">Games</a><a href="{prefix}about.html">About</a></nav>'
 
 
-# Only the editorial-policy page receives the lightweight mobile header; every
-# generated term/technology URL and its existing layout remain byte-identical.
-ABOUT_MOBILE_CSS = '''
-/* All mobile navigation controls and menu sizing are owned by site-chrome.css. */
-@media(max-width:650px){.term-shell{padding:0 20px 65px}.term-shell .term-nav{display:none}.about-mobile-topbar{margin:0 -20px;padding:14px 20px;border-bottom:1px solid var(--line)}}
-'''
-ABOUT_MOBILE_NAV = '''<div class="about-mobile-topbar site-mobile-chrome" aria-label="AI Updates mobile header"><details class="about-mobile-nav site-mobile-chrome__nav" id="about-mobile-nav"><summary class="about-menu-toggle site-mobile-chrome__toggle" aria-label="Toggle navigation"><span aria-hidden="true">☰</span></summary><nav class="about-menu-panel site-mobile-chrome__menu" aria-label="AI Updates sections"><a href="index.html#/overview">Discover</a><a href="whats-new.html">What’s New Today</a><a href="index.html#/dictionary">Concept dictionary</a><a href="index.html#/technologies">Technology profiles</a><a href="index.html#/games">Games</a><a href="playbooks.html">Playbooks</a><a href="about.html" aria-current="page">About</a></nav></details><a class="about-search-link site-mobile-chrome__search" href="index.html#/search" aria-label="Search AI Updates in the main collection"><span class="about-search-icon site-mobile-chrome__search-icon" aria-hidden="true">⌕</span><span class="about-search-placeholder site-mobile-chrome__search-placeholder">Search tools, research, concepts…</span></a></div>'''
-
-# Same desktop navigation used by the existing editorial directories; rendered server-side.
-ABOUT_DESKTOP_NAV = '''<nav class="site-chrome term-nav" aria-label="AI Updates primary navigation"><a class="site-chrome__brand" href="index.html#/overview" aria-label="AI Updates home"><svg viewBox="0 0 36 36" fill="none" aria-hidden="true"><path d="M5 7h12v12H5zM21 17h10v12H21z" stroke="currentColor" stroke-width="2"/><path d="M21 6h10M26 1v10M5 25h12M5 30h8" stroke="currentColor" stroke-linecap="round" stroke-width="2"/></svg><span class="site-chrome__name">AI Updates<small>THE FRONTIER, IN CONTEXT</small></span></a><div class="site-chrome__links"><a href="index.html#/overview">Discover</a><a href="whats-new.html">What’s New Today</a><a href="index.html#/dictionary">Concept dictionary</a><a href="index.html#/technologies">Technology profiles</a><a href="index.html#/games">Games</a><a href="playbooks.html">Playbooks</a><a href="about.html" aria-current="page">About</a></div></nav>'''
-
 def shell(title, description, path, body, structured=None):
     prefix = '../' if '/' in path else ''
-    mobile_css = ABOUT_MOBILE_CSS if path == 'about.html' else (DIRECTORY_MOBILE_CSS if path.startswith('technology/') else '')
-    mobile_nav = ABOUT_MOBILE_NAV if path == 'about.html' else ''
-    print_nav = ',.about-mobile-topbar' if path == 'about.html' else ''
-    desktop_nav = render_directory_nav(prefix, 'Technology profiles') if path.startswith('technology/') else (ABOUT_DESKTOP_NAV if path == 'about.html' else nav(prefix))
+    mobile_css = DIRECTORY_MOBILE_CSS if path.startswith('technology/') or path == 'about.html' else ''
+    print_nav = ',.directory-mobile-topbar' if path == 'about.html' else ''
+    desktop_nav = render_directory_nav(prefix, 'Technology profiles') if path.startswith('technology/') else (render_directory_nav(prefix, 'About') if path == 'about.html' else nav(prefix))
     chrome_css = f'<link rel="stylesheet" href="{prefix}site-chrome.css">\n' if path == 'about.html' or path.startswith('technology/') else ''
     theme_script = f'<script src="{prefix}site-theme.js"></script>' if path == 'about.html' or path.startswith('technology/') else ''
     return f'''<!doctype html>
@@ -54,7 +42,7 @@ def shell(title, description, path, body, structured=None):
 {metadata(title, description, path, structured)}
 <link rel="stylesheet" href="{prefix}checkpoint.css"><link rel="stylesheet" href="{prefix}brand.css">
 <style>.term-shell{{max-width:1000px;margin:auto;padding:32px 24px 70px}}.term-nav{{display:flex;flex-wrap:wrap;gap:18px;font-size:13px}}.term-shell h1{{font:400 clamp(34px,6vw,58px)/1.12 Georgia,serif;letter-spacing:-.04em}}.term-shell h2{{font-size:22px}}.term-shell p,.term-shell li{{font-size:15px;line-height:1.8}}.term-shell .hero{{margin:38px 0 24px}}.term-shell .hero .eyebrow{{font:600 11px/1.6 system-ui,sans-serif}}.term-shell .lead{{margin-top:18px}}{mobile_css}@media print{{.term-nav{print_nav},.skip{{display:none}}.term-shell{{padding:0}}}}</style>
-{chrome_css}{theme_script}</head><body><a class="skip" href="#main">Skip to content</a><main class="term-shell" id="main">{mobile_nav}{desktop_nav}{body}<footer>AI Updates is a curated learning and research project. Imported evidence labels are preserved. <a href="{prefix}about.html">Editorial policy & coverage</a> · <a href="{prefix}index.html#/sources">Source registers & downloads</a></footer></main></body></html>'''
+{chrome_css}{theme_script}</head><body><a class="skip" href="#main">Skip to content</a><main class="term-shell" id="main">{desktop_nav}{body}<footer>AI Updates is a curated learning and research project. Imported evidence labels are preserved. <a href="{prefix}about.html">Editorial policy & coverage</a> · <a href="{prefix}index.html#/sources">Source registers & downloads</a></footer></main></body></html>'''
 
 
 def main():
