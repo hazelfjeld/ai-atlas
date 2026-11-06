@@ -467,34 +467,77 @@ with sync_playwright() as p:
     check('research search opens the existing workspace search',
           mobile_research.locator('#global-query').is_visible())
     mobile_research.close()
-    # Concept references retain their native two-column fallback, while technology
-    # details use the shared native mobile menu exercised below.
-    for reference in ('terms/MLD-0002-ablation-study.html',):
+    # Direct concept detail pages share the same native, script-free menu
+    # and current-section indication as the dictionary and technology directories.
+    for reference in ('terms/MLD-0002-ablation-study.html', 'terms/MLD-0957-prompt-injection.html'):
         mobile_reference = browser.new_page(viewport={'width':320, 'height':720}, reduced_motion='reduce')
         mobile_reference.goto(base + reference)
-        nav = mobile_reference.locator('.term-shell .term-nav')
-        check(reference + ' uses a two-column compact mobile navigation',
-              nav.evaluate("""el => getComputedStyle(el).display === 'grid'
-                  && getComputedStyle(el).gridTemplateColumns.trim().split(/\\s+/).length === 2"""))
+        menu = mobile_reference.locator('#directory-mobile-nav')
+        check(reference + ' has the shared native mobile header and search',
+              mobile_reference.locator('.directory-mobile-topbar').is_visible()
+              and mobile_reference.locator('.site-mobile-chrome__search').is_visible()
+              and not mobile_reference.locator('.site-chrome').is_visible())
+        menu.locator('summary').click()
+        check(reference + ' exposes the seven shared navigation links with current section',
+              menu.evaluate('el => el.open')
+              and menu.locator('nav a').count() == 7
+              and menu.locator('nav a[aria-current="page"]').count() == 1
+              and menu.locator('nav a[aria-current="page"]').inner_text() == 'Concept dictionary')
         check(reference + ' has keyboard-reachable 44px navigation links',
-              mobile_reference.evaluate("""() => [...document.querySelectorAll('.term-shell .term-nav a')]
+              mobile_reference.evaluate("""() => [...document.querySelectorAll('#directory-mobile-nav nav a')]
                   .every(a => a.getBoundingClientRect().height >= 44)"""))
+        # Check geometry, not merely the number of DOM links: checkpoint.css
+        # also styles generic navs and previously compressed this menu into a
+        # horizontally scrolling two-link strip.
+        check(reference + ' stacks all seven links in one visible vertical menu',
+              mobile_reference.evaluate("""() => {
+                  const menu = document.querySelector('#directory-mobile-nav nav');
+                  const links = [...menu.querySelectorAll('a')].map(a => a.getBoundingClientRect());
+                  const box = menu.getBoundingClientRect();
+                  return getComputedStyle(menu).display === 'grid'
+                      && box.left >= -1 && box.right <= innerWidth + 1
+                      && links.length === 7
+                      && links.every((r, i) => i === 0 ||
+                          (r.top >= links[i - 1].bottom - 1 && Math.abs(r.left - links[0].left) < 2));
+              }"""))
         check(reference + ' fits the 320px viewport',
               mobile_reference.evaluate('document.documentElement.scrollWidth <= window.innerWidth + 1'))
-        mobile_reference.locator('.term-nav a').nth(1).focus()
-        check(reference + ' has a visible keyboard focus indication',
+        # Test actual keyboard modality: programmatic .focus() after a
+        # mouse click need not activate the browser's :focus-visible state.
+        menu.locator('summary').focus()
+        mobile_reference.keyboard.press('Tab')
+        check(reference + ' retains visible keyboard focus',
               mobile_reference.evaluate("""() => {
                   const a = document.activeElement;
-                  return a.matches('.term-nav a') && getComputedStyle(a).outlineStyle === 'solid'
+                  return a.matches('#directory-mobile-nav nav a')
+                      && a.matches(':focus-visible')
+                      && getComputedStyle(a).outlineStyle === 'solid'
                       && parseFloat(getComputedStyle(a).outlineWidth) >= 2;
               }"""))
+        mobile_reference.screenshot(path=str(out / ('concept-' + Path(reference).stem + '-mobile.png')), full_page=False)
+        menu.locator('summary').click()
         mobile_reference.set_viewport_size({'width':390, 'height':844})
         check(reference + ' fits the 390px viewport',
               mobile_reference.evaluate('document.documentElement.scrollWidth <= window.innerWidth + 1'))
+        mobile_reference.set_viewport_size({'width':768, 'height':900})
+        check(reference + ' has the shared tablet navigation',
+              mobile_reference.locator('.site-chrome').is_visible()
+              and mobile_reference.locator('.site-chrome__links a').count() == 7)
         mobile_reference.set_viewport_size({'width':1440, 'height':900})
-        check(reference + ' preserves desktop navigation',
-              nav.evaluate("el => getComputedStyle(el).display === 'flex'"))
+        check(reference + ' preserves desktop wordmark and current-section navigation',
+              mobile_reference.locator('.site-chrome__brand').is_visible()
+              and mobile_reference.locator('.site-chrome__links a[aria-current="page"]').inner_text() == 'Concept dictionary')
+        mobile_reference.screenshot(path=str(out / ('concept-' + Path(reference).stem + '-desktop.png')), full_page=False)
         mobile_reference.close()
+    nojs_reference = browser.new_page(viewport={'width':320, 'height':720},
+                                      java_script_enabled=False, reduced_motion='reduce')
+    nojs_reference.goto(base + 'terms/MLD-0002-ablation-study.html')
+    nojs_reference.locator('#directory-mobile-nav summary').click()
+    check('concept detail remains readable and navigable without JavaScript',
+          nojs_reference.get_by_role('heading', name='Ablation study').is_visible()
+          and nojs_reference.locator('#directory-mobile-nav nav a').count() == 7
+          and nojs_reference.locator('#directory-mobile-nav nav a').last.is_visible())
+    nojs_reference.close()
     page.goto(base + 'whats-new.html')
     check('daily archive uses the same Atlas logo and quiet wordmark',
           page.locator('.site-chrome__name small').inner_text() == 'THE FRONTIER, IN CONTEXT')
