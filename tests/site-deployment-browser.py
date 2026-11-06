@@ -119,7 +119,7 @@ with sync_playwright() as p:
         desktop_search = page.locator('a.site-mobile-chrome__search[href="index.html#/search"]')
         check('desktop sidebar keeps the existing functional search destination on ' + route,
               desktop_search.is_visible()
-              and desktop_search.evaluate('el => getComputedStyle(el).position === "fixed"')
+              and desktop_search.evaluate('el => getComputedStyle(el.closest(".site-mobile-chrome")).position === "fixed"')
               and not page.locator('details.site-mobile-chrome__nav').is_visible())
 
         if route == 'hardware-review.html':
