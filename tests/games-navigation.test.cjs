@@ -852,10 +852,10 @@ test('shared native mobile drawer preserves site branding when enhancement is un
 test('existing shared standalone chrome exposes the Discover appearance action without cloning navigation', () => {
   const js = read('site-theme.js'), css = read('site-chrome.css');
   new vm.Script(js);
-  assert.match(js, /!document\.getElementById\?\.\('theme-toggle'\)/,
-    'Games retains its existing theme control, not a duplicate');
-  assert.match(js, /for \(const container of \[rail, menu\]\)/,
-    'Desktop rail and mobile menu use one shared theme-button implementation');
+  assert.match(js, /const containers = rail && !existing \? \[rail, menu\] :[\s\S]*?existing && !rail \? \[menu\] : \[\];/,
+    'Games keeps its existing header action while Discover gets one mobile drawer action');
+  assert.match(js, /for \(const container of containers\)/,
+    'Standalone desktop and mobile actions share one implementation');
   assert.match(js, /localStorage\.setItem\('atlas\.theme', chosen\)/,
     'Cross-page theme preference uses Discover existing storage key');
   assert.match(js, /a\[href\],button:not\(\[disabled\]\)/,
