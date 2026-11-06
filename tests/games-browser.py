@@ -107,12 +107,20 @@ with sync_playwright() as p:
                 });
               }"""))
         page.locator('#games-mobile-nav summary').click()
+        check(f'320px {palette} drawer uses the canonical desktop wordmark',
+              page.locator('#games-mobile-nav .site-mobile-chrome__brand').count() == 1
+              and page.locator('#games-mobile-nav .site-mobile-chrome__brand').is_visible()
+              and page.locator('#games-mobile-nav .site-mobile-chrome__brand').get_attribute('href') == 'index.html#/overview'
+              and page.locator('#games-mobile-nav .site-mobile-chrome__brand').evaluate("""el => {
+                  const r=el.getBoundingClientRect();
+                  return r.height>=44 && r.left>=70 && r.right<=260;
+              }"""))
         check(f'320px {palette} Games menu exposes canonical labels and one current destination',
-              page.locator('#games-mobile-nav .site-mobile-chrome__menu a').all_inner_texts() ==
+              page.locator('#games-mobile-nav .site-mobile-chrome__menu a:not(.site-mobile-chrome__brand)').all_inner_texts() ==
               ['Discover','What’s New Today','Concept dictionary','Technology profiles','Games','Playbooks','About']
-              and page.locator('#games-mobile-nav .site-mobile-chrome__menu a[aria-current="page"]').inner_text() == 'Games')
+              and page.locator('#games-mobile-nav .site-mobile-chrome__menu a:not(.site-mobile-chrome__brand)[aria-current="page"]').inner_text() == 'Games')
         check(f'320px {palette} every visible section target is at least 44px and stays inside gutters',
-              page.locator('#games-mobile-nav .site-mobile-chrome__menu a').evaluate_all("""els => els.length===7 && els.every(el => {
+              page.locator('#games-mobile-nav .site-mobile-chrome__menu a:not(.site-mobile-chrome__brand)').evaluate_all("""els => els.length===7 && els.every(el => {
                 const r=el.getBoundingClientRect();
                 return r.height>=44 && r.width>=44 && r.left>=14 && r.right<=innerWidth-14;
               })"""))
