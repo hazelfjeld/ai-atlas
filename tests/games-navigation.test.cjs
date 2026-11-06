@@ -482,8 +482,9 @@ test('standalone native mobile menus share Escape, outside-pointer and no-JS-saf
 test('reference, technology and playbook pages share the Discover desktop sidebar frame', () => {
   const css = read('site-chrome.css');
   assert.match(css, /@media \(min-width:1051px\)/);
-  assert.ok(css.includes('padding-left:242px'));
-  assert.ok(css.includes('position:fixed!important;inset:0 auto 0 0;width:242px'));
+  assert.ok(css.includes('padding-left:224px'));
+  assert.ok(css.includes('padding-left:204px'));
+  assert.ok(css.includes('position:fixed!important;inset:0 auto 0 0;width:224px'));
   assert.ok(css.includes('flex-direction:column!important;flex-wrap:nowrap!important'));
   assert.ok(css.includes('> .site-chrome .site-chrome__links a[aria-current]'));
   for (const path of [

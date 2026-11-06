@@ -60,13 +60,13 @@
 }
 
 /* Reference directories, profiles and playbooks already share the canonical
-   seven-section markup. Match Discover's 242px desktop navigation rail instead
+   seven-section markup. Match Discover's 224px desktop navigation rail instead
    of giving these page families a different horizontal desktop frame. Keep
    their content layouts, tablet header and native no-JS mobile controls. */
 @media (min-width:1051px){
-body:has(> :is(.term-shell,.tech-shell,.playbook-shell) > .site-chrome){padding-left:242px}
+body:has(> :is(.term-shell,.tech-shell,.playbook-shell) > .site-chrome){padding-left:224px}
 :is(.term-shell,.tech-shell,.playbook-shell) > .site-chrome{
- position:fixed!important;inset:0 auto 0 0;width:242px;height:100vh;height:100dvh;
+ position:fixed!important;inset:0 auto 0 0;width:224px;height:100vh;height:100dvh;
  z-index:25;box-sizing:border-box;overflow-x:hidden;overflow-y:auto;
  display:flex!important;flex-direction:column!important;flex-wrap:nowrap!important;
  align-items:stretch!important;justify-content:flex-start!important;gap:20px!important;
@@ -92,4 +92,10 @@ body:has(> :is(.term-shell,.tech-shell,.playbook-shell) > .site-chrome){padding-
 :is(.term-shell,.tech-shell,.playbook-shell) > .site-chrome .site-chrome__links a[aria-current]{
  color:#f5f7ef!important;background:#374b3c!important
 }
+}
+
+/* Discover narrows its rail below 1151px; keep the same responsive frame. */
+@media (min-width:1051px) and (max-width:1150px){
+body:has(> :is(.term-shell,.tech-shell,.playbook-shell) > .site-chrome){padding-left:204px}
+:is(.term-shell,.tech-shell,.playbook-shell) > .site-chrome{width:204px}
 }

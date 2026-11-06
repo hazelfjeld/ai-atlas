@@ -1115,8 +1115,8 @@ with sync_playwright() as p:
                           if (sidebar) {
                               return getComputedStyle(nav).position === 'fixed'
                                   && getComputedStyle(nav).flexDirection === 'column'
-                                  && rect.left === 0 && Math.abs(rect.width - 242) <= 1
-                                  && nav.closest('main').getBoundingClientRect().left >= 241
+                                  && rect.left === 0 && Math.abs(rect.width - 224) <= 1
+                                  && nav.closest('main').getBoundingClientRect().left >= (innerWidth <= 1150 ? 203 : 223)
                                   && getComputedStyle(nav.querySelector('.site-chrome__links')).flexDirection === 'column'
                                   && links.length === 7
                                   && Math.max(...tops) - Math.min(...tops) > 200
@@ -1169,14 +1169,14 @@ with sync_playwright() as p:
     # same page families at mobile/tablet widths in both saved themes.
     page.set_viewport_size({'width': 1280, 'height': 900})
     page.goto(base + 'index.html#/overview')
-    check('Discover anchors the baseline 242px desktop sidebar',
+    check('Discover anchors the baseline 224px desktop sidebar',
           page.evaluate("""() => {
               const rect = document.querySelector('#sidebar').getBoundingClientRect();
-              return rect.left === 0 && Math.abs(rect.width - 242) <= 1;
+              return rect.left === 0 && Math.abs(rect.width - (innerWidth <= 1150 ? 204 : 224)) <= 1;
           }"""))
     for theme in ('light', 'dark'):
         page.evaluate("(chosen) => localStorage.setItem('atlas.theme', chosen)", theme)
-        for width in (320, 390, 768, 1280):
+        for width in (320, 390, 768, 1080, 1280):
             page.set_viewport_size({'width': width, 'height': 900})
             for route in ('about.html', 'terms/index.html',
                           'technology/TECH-0216-pytorch.html', 'playbooks.html'):
