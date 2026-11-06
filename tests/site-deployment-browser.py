@@ -45,12 +45,16 @@ with sync_playwright() as p:
     page.locator('#navigation a[href="#/games"]').wait_for()
     check('homepage retains original Atlas shell and native Games tab', page.locator('.app-shell').count() == 1)
     # Check actual Discover-to-editorial transitions, not CSS similarity alone.
-    for width in (320, 390, 768, 1280):
+    for width in (320, 390, 768, 1200, 1280):
         page.set_viewport_size({'width':width, 'height':844})
         page.goto(base + 'index.html#/overview')
         # The menu handler is attached after the verified catalog hydrates.
         # Opening it before that point can hit a static, not-yet-bound button.
         page.locator('#catalog-loading').wait_for(state='detached', timeout=45000)
+        discover_rail = page.locator('#sidebar').bounding_box() if width > 650 else None
+        discover_workspace = page.locator('.workspace').bounding_box() if width > 650 else None
+        if width == 1280:
+            page.screenshot(path=str(out / 'rail-discover-1280.png'))
         if width <= 650:
             page.locator('#discover-mobile-nav summary').click()
             check('Discover native mobile drawer opens at ' + str(width),
@@ -74,6 +78,15 @@ with sync_playwright() as p:
         check('Discover-to-About uses shared navigation at ' + str(width),
               page.locator('.site-chrome__links a[aria-current="page"]').inner_text() == 'About'
               and page.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'))
+        if width > 650:
+            editorial_rail = page.locator('nav.site-chrome').bounding_box()
+            editorial_topbar = page.locator('.site-mobile-chrome').bounding_box()
+            check('Discover and About retain the same desktop rail and workspace origin at ' + str(width),
+                  abs(discover_rail['width'] - editorial_rail['width']) < 1
+                  and abs(discover_workspace['x'] - editorial_topbar['x']) < 1
+                  and abs(editorial_rail['width'] - editorial_topbar['x']) < 1)
+            if width == 1280:
+                page.screenshot(path=str(out / 'rail-about-1280.png'))
     # Discover now exposes the very same native <details> structure as its
     # standalone neighbors, including when the JavaScript runtime is blocked.
     no_script = browser.new_context(java_script_enabled=False, viewport={'width':320, 'height':844})

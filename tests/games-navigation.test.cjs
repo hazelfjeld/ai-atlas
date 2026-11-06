@@ -106,6 +106,18 @@ test('progressive sidebar retains all canonical links and reveals deep-linked se
 });
 
 
+test('Discover and standalone pages use one desktop rail width at the same breakpoint', () => {
+  const css=read('site-chrome.css');
+  assert.match(css, /:root\{--atlas-rail-width:242px\}/);
+  assert.match(css, /max-width:1200px\)\{:root\{--atlas-rail-width:215px\}\}/);
+  assert.match(css, /\.app-shell\{grid-template-columns:var\(--atlas-rail-width\) minmax\(0,1fr\)\}/);
+  assert.match(css, /\.sidebar\{width:var\(--atlas-rail-width\)\}/);
+  assert.match(css, /body:has\(\.site-chrome\)\{padding-left:var\(--atlas-rail-width\)\}/);
+  assert.match(css, /\.site-chrome\{[\s\S]*?width:var\(--atlas-rail-width\)/);
+  assert.match(css, /inset:0 0 auto var\(--atlas-rail-width\)/);
+  assert.doesNotMatch(css, /(?:224|204)px/, 'Older, conflicting standalone rail dimensions cannot return');
+});
+
 test('standalone workspace heading has a first-paint and no-script label across page families', () => {
   const css=read('site-chrome.css'), script=read('site-theme.js');
   const fallback=css.split('.site-mobile-chrome::before{')[1]?.split('}')[0];
