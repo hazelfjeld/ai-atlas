@@ -1109,9 +1109,23 @@ with sync_playwright() as p:
                           if (!nav) return false;
                           const links = [...nav.querySelectorAll('.site-chrome__links a')];
                           const tops = links.map(el => Math.round(el.getBoundingClientRect().top));
+                          const sidebar = innerWidth >= 1051
+                              && !!nav.closest('.term-shell, .tech-shell, .playbook-shell');
+                          const rect = nav.getBoundingClientRect();
+                          if (sidebar) {
+                              return getComputedStyle(nav).position === 'fixed'
+                                  && getComputedStyle(nav).flexDirection === 'column'
+                                  && rect.left === 0 && Math.abs(rect.width - 242) <= 1
+                                  && nav.closest('main').getBoundingClientRect().left >= 241
+                                  && getComputedStyle(nav.querySelector('.site-chrome__links')).flexDirection === 'column'
+                                  && links.length === 7
+                                  && Math.max(...tops) - Math.min(...tops) > 200
+                                  && links.every(el => el.getBoundingClientRect().height >= 44)
+                                  && document.documentElement.scrollWidth <= innerWidth + 1;
+                          }
                           return getComputedStyle(nav).display !== 'none'
                               && getComputedStyle(nav).flexDirection === (innerWidth <= 850 ? 'column' : 'row')
-                              && nav.getBoundingClientRect().height <= (innerWidth <= 850 ? 140 : 100)
+                              && rect.height <= (innerWidth <= 850 ? 140 : 100)
                               && links.length === 7
                               && Math.max(...tops) - Math.min(...tops) <= 2
                               && links.every(el => el.getBoundingClientRect().height >= 44)
@@ -1151,6 +1165,60 @@ with sync_playwright() as p:
             else:
                 check(f'{route} keeps active desktop navigation at {width}px',
                       page.locator('.site-chrome__links a[aria-current="page"]').inner_text() == selected)
+    # Compare the anchored desktop frame with Discover while checking the
+    # same page families at mobile/tablet widths in both saved themes.
+    page.set_viewport_size({'width': 1280, 'height': 900})
+    page.goto(base + 'index.html#/overview')
+    check('Discover anchors the baseline 242px desktop sidebar',
+          page.evaluate("""() => {
+              const rect = document.querySelector('#sidebar').getBoundingClientRect();
+              return rect.left === 0 && Math.abs(rect.width - 242) <= 1;
+          }"""))
+    for theme in ('light', 'dark'):
+        page.evaluate("(chosen) => localStorage.setItem('atlas.theme', chosen)", theme)
+        for width in (320, 390, 768, 1280):
+            page.set_viewport_size({'width': width, 'height': 900})
+            for route in ('about.html', 'terms/index.html',
+                          'technology/TECH-0216-pytorch.html', 'playbooks.html'):
+                page.goto(base + route)
+                check(f'{route} retains saved {theme} mode at {width}px',
+                      page.evaluate("(chosen) => document.documentElement.dataset.theme === chosen", theme))
+                check(f'{route} uses one responsive navigation system at {width}px',
+                      page.evaluate("""() => {
+                          const large = innerWidth >= 1051;
+                          const mobile = innerWidth <= 650;
+                          const nav = document.querySelector(mobile
+                              ? '.site-mobile-chrome__nav' : '.site-chrome');
+                          if (!nav) return false;
+                          const links = nav.querySelectorAll(mobile
+                              ? '.site-mobile-chrome__menu a' : '.site-chrome__links a');
+                          const computed = getComputedStyle(nav);
+                          const rect = nav.getBoundingClientRect();
+                          return links.length === 7
+                              && document.documentElement.scrollWidth <= innerWidth + 1
+                              && (mobile ? computed.display !== 'none'
+                                  : large ? computed.position === 'fixed'
+                                      && computed.flexDirection === 'column'
+                                      && Math.abs(rect.width - 242) <= 1
+                                      && rect.left === 0
+                                      : computed.position !== 'fixed');
+                      }"""))
+                if width == 1280 and route in ('about.html', 'terms/index.html'):
+                    page.screenshot(path=str(out / f'shared-rail-{theme}-{route.replace("/", "-")}.png'),
+                                    full_page=True)
+    page.set_viewport_size({'width': 1280, 'height': 900})
+    page.goto(base + 'terms/index.html')
+    page.locator('.site-chrome__links a[href="../playbooks.html"]').click()
+    check('shared sidebar preserves cross-page Playbooks navigation',
+          page.url.split('?')[0].endswith('/playbooks.html'))
+    page.locator('.site-chrome__links a[href="about.html"]').click()
+    check('sidebar navigation continues across standalone page templates',
+          page.url.split('?')[0].endswith('/about.html'))
+    page.locator('.site-chrome__links a[href="index.html#/dictionary"]').click()
+    check('shared sidebar preserves the existing dictionary hash route',
+          page.url.endswith('/index.html#/dictionary'))
+    page.locator('#catalog-loading').wait_for(state='detached')
+
     script_free = browser.new_page(viewport={'width': 320, 'height': 720},
                                    java_script_enabled=False)
     script_free.goto(base + 'terms/index.html')

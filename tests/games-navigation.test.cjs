@@ -478,3 +478,23 @@ test('standalone native mobile menus share Escape, outside-pointer and no-JS-saf
   listeners.keydown({key:'Escape', defaultPrevented:true});
   assert.equal(menu.open, true, 'respect already-handled Escape events');
 });
+
+test('reference, technology and playbook pages share the Discover desktop sidebar frame', () => {
+  const css = read('site-chrome.css');
+  assert.match(css, /@media \(min-width:1051px\)/);
+  assert.ok(css.includes('padding-left:242px'));
+  assert.ok(css.includes('position:fixed!important;inset:0 auto 0 0;width:242px'));
+  assert.ok(css.includes('flex-direction:column!important;flex-wrap:nowrap!important'));
+  assert.ok(css.includes('> .site-chrome .site-chrome__links a[aria-current]'));
+  for (const path of [
+    'about.html','terms/index.html','terms/MLD-0002-ablation-study.html',
+    'technology/index.html','technology/TECH-0216-pytorch.html',
+    'technologies.html','playbooks.html'
+  ]) {
+    const html = read(path);
+    assert.match(html, /class="site-chrome [^"]+" aria-label="AI Updates primary navigation"/, path);
+    assert.match(html, /href="(?:\.\.\/)?index\.html#\/search"/, path);
+  }
+  assert.ok(css.includes('@media (min-width:651px) and (max-width:850px)'));
+  assert.ok(css.includes('@media (max-width:650px){.site-chrome{display:none!important}}'));
+});
