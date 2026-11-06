@@ -241,17 +241,32 @@ test('shared mobile drawer makes background inert without leaving hidden control
   assert.equal(main.inert,false, 'workspace stays accessible after rotating back');
 });
 
-test('mobile drawer does not expose closed offscreen links and supports keyboard dismissal', () => {
-  const html=read('index.html'),app=read('app.js'),css=read('app.css'),offline=read('downloads/Atlas_Demo_Offline.html');
-  assert.match(html, /id="menu-toggle"[^>]+aria-controls="sidebar"/);
-  assert.match(css, /@media\(max-width:650px\)[\s\S]*?\.sidebar\{[^}]*visibility:hidden/);
-  assert.match(css, /\.sidebar\.open\{[^}]*visibility:visible/);
+test('Discover shares the native script-free mobile drawer used by standalone pages', () => {
+  const html=read('index.html'), app=read('app.js'), css=read('app.css');
+  const offline=read('downloads/Atlas_Demo_Offline.html');
+  const shared=read('site-chrome.css'), generator=read('scripts/site_chrome.py');
+  assert.match(generator, /def render_discover_mobile\(\):/);
+  assert.match(generator, /links = render_primary_links\("", "Discover"\)/);
+  assert.match(html, /<details class="site-mobile-chrome__nav" id="discover-mobile-nav">/);
+  assert.match(html, /class="site-mobile-chrome__brand" href="#\/overview"/);
+  assert.ok(!html.includes('id="menu-toggle"') && !html.includes('id="mobile-overlay"'));
+  assert.match(css, /@media\(max-width:650px\)[\s\S]*?\.sidebar\{display:none\}/);
+  assert.match(shared, /\.site-mobile-chrome \.site-mobile-chrome__menu\{/);
   assert.match(app, /function closeMobileNavigation\(restoreFocus=false\)/);
-  assert.match(app, /document\.querySelector\('\.workspace'\)\.inert=open/);
-  assert.match(app, /e\.key==='Escape'/);
-  assert.match(app, /mobileNavTabStops\(\)/);
-  assert.match(offline, /aria-controls="sidebar"/);
-  assert.match(offline, /function closeMobileNavigation\(restoreFocus=false\)/);
+  assert.match(app, /const fromMobileNav = \$\('discover-mobile-nav'\)\.open/);
+  assert.match(app, /syncSharedDrawerIsolation\(\)/, 'Route changes release native drawer isolation before refocusing main');
+  assert.match(offline, /<details class="site-mobile-chrome__nav" id="discover-mobile-nav">/);
+  assert.ok(!offline.includes('id="mobile-overlay"'));
+  const original=[['#/overview','Discover'],['whats-new.html','What’s New Today'],
+      ['#/dictionary','Concept dictionary'],['#/technologies','Technology profiles'],
+      ['#/games','Games'],['playbooks.html','Playbooks'],['about.html','About']];
+  for(const [source, expected] of [[html,original],[offline,
+      original.map(([href,name])=>[name==='Playbooks'?'#/playbooks':name==='About'?'#/sources':href,name])]]) {
+    const nav=source.split('id="discover-mobile-nav"')[1]?.split('</nav>')[0];
+    assert.ok(nav, 'Shared native menu must survive the offline build');
+    const links=[...nav.matchAll(/<a href="([^"]+)"[^>]*>([^<]+)<\/a>/g)];
+    assert.deepEqual(links.map(m=>[m[1],m[2]]),expected);
+  }
 });
 test('standalone Games header provides 44px navigation targets on 320px phones', () => {
   const css = read('games.css');

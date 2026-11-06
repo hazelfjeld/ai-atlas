@@ -16,6 +16,24 @@ DESTINATIONS = (
 )
 DIRECTORY_MOBILE_CSS = '@media(max-width:650px){.term-shell{padding:0 20px 65px}.term-shell .term-nav{display:none}.directory-mobile-topbar{margin:0 -20px;padding:14px 20px;border-bottom:1px solid var(--line)}}'
 
+def render_primary_links(prefix, selected, current_kind="page"):
+    """One canonical seven-destination navigation list."""
+    return "".join(
+        '<a href="' + prefix + route + '"' +
+        (' aria-current="' + current_kind + '"' if name == selected else '') +
+        '>' + escape(name) + '</a>'
+        for route, name in DESTINATIONS
+    )
+
+def render_brand(prefix, classes="site-chrome__brand"):
+    """Reusable real SVG wordmark for desktop and native mobile navigation."""
+    return (
+        '<a class="' + classes + '" href="' + prefix + 'index.html#/overview" aria-label="AI Updates home">'
+        '<svg viewBox="0 0 36 36" fill="none" aria-hidden="true"><path d="M5 7h12v12H5zM21 17h10v12H21z" stroke="currentColor" stroke-width="2"/>'
+        '<path d="M21 6h10M26 1v10M5 25h12M5 30h8" stroke="currentColor" stroke-linecap="round" stroke-width="2"/></svg>'
+        '<span class="site-chrome__name">AI Updates<small>THE FRONTIER, IN CONTEXT</small></span></a>'
+    )
+
 def render_directory_nav(prefix, selected, *, mobile_classes="directory-mobile-topbar site-mobile-chrome",
                          details_classes="site-mobile-chrome__nav", details_id="directory-mobile-nav",
                          toggle_classes="site-mobile-chrome__toggle", menu_classes="site-mobile-chrome__menu",
@@ -26,18 +44,8 @@ def render_directory_nav(prefix, selected, *, mobile_classes="directory-mobile-t
     assert prefix in ("", "../")
     assert selected is None or selected in {name for _, name in DESTINATIONS}
     assert current_kind in ("page", "location")
-    links = "".join(
-        '<a href="' + prefix + route + '"' +
-        (' aria-current="' + current_kind + '"' if name == selected else '') +
-        '>' + escape(name) + '</a>'
-        for route, name in DESTINATIONS
-    )
-    brand = (
-        '<a class="site-chrome__brand" href="' + prefix + 'index.html#/overview" aria-label="AI Updates home">'
-        '<svg viewBox="0 0 36 36" fill="none" aria-hidden="true"><path d="M5 7h12v12H5zM21 17h10v12H21z" stroke="currentColor" stroke-width="2"/>'
-        '<path d="M21 6h10M26 1v10M5 25h12M5 30h8" stroke="currentColor" stroke-linecap="round" stroke-width="2"/></svg>'
-        '<span class="site-chrome__name">AI Updates<small>THE FRONTIER, IN CONTEXT</small></span></a>'
-    )
+    links = render_primary_links(prefix, selected, current_kind)
+    brand = render_brand(prefix)
     mobile = (
         '<div class="' + mobile_classes + '"' +
         (' aria-label="AI Updates mobile header"' if labeled else '') + '>'
@@ -138,6 +146,23 @@ def render_discover_primary(term_count, tech_count):
     return "".join(parts)
 
 
+def render_discover_mobile():
+    """Share the native script-free drawer with all other site pages.
+
+    Discover retains its existing desktop rail and working search input.
+    """
+    links = render_primary_links("", "Discover").replace('href="index.html#/', 'href="#/')
+    brand = render_brand("", "site-mobile-chrome__brand").replace('href="index.html#/', 'href="#/')
+    return (
+        '<div class="site-mobile-chrome discover-mobile-chrome" aria-label="AI Updates mobile header">'
+        '<details class="site-mobile-chrome__nav" id="discover-mobile-nav">'
+        '<summary class="site-mobile-chrome__toggle" aria-label="Toggle navigation">'
+        '<span aria-hidden="true">☰</span></summary>'
+        '<nav class="site-mobile-chrome__menu" aria-label="AI Updates sections">'
+        + brand + links + '</nav></details></div>'
+    )
+
+
 def normalize_discover_sidebar(html, term_count, tech_count):
     """Generate canonical Discover primary navigation; preserve native extras.
 
@@ -161,8 +186,21 @@ def normalize_discover_sidebar(html, term_count, tech_count):
     )
     secondary = '<details class="nav-more"' + secondary
     assert 'data-view="playbooks"' not in secondary, 'Playbooks must appear only once'
-    return (before + marker + render_discover_primary(term_count, tech_count) +
-            secondary + '</nav>' + after)
+    normalized = (before + marker + render_discover_primary(term_count, tech_count) +
+                  secondary + '</nav>' + after)
+    mobile = render_discover_mobile()
+    old_button = '<button id="menu-toggle" class="icon-button mobile-only" aria-label="Toggle navigation" aria-controls="sidebar" aria-expanded="false">☰</button>'
+    native_pattern = r'<div class="site-mobile-chrome discover-mobile-chrome"[^>]*>.*?</nav></details></div>'
+    if old_button in normalized:
+        normalized = normalized.replace(old_button, mobile, 1)
+    else:
+        normalized, count = re.subn(native_pattern, lambda _: mobile, normalized, count=1, flags=re.S)
+        assert count == 1, 'Discover native drawer missing during rebuild'
+    css_anchor = '<link rel="stylesheet" href="brand.css">'
+    if 'href="site-chrome.css"' not in normalized:
+        normalized = normalized.replace(css_anchor, css_anchor + '<link rel="stylesheet" href="site-chrome.css"><script src="site-theme.js"></script>', 1)
+    assert normalized.count('id="discover-mobile-nav"') == 1
+    return normalized
 
 
 def normalize_standalone_chrome(html, path):

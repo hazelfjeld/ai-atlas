@@ -52,21 +52,40 @@ with sync_playwright() as p:
         # Opening it before that point can hit a static, not-yet-bound button.
         page.locator('#catalog-loading').wait_for(state='detached', timeout=45000)
         if width <= 650:
-            page.locator('#menu-toggle').click()
-            check('Discover mobile drawer opens at ' + str(width),
-                  page.locator('#sidebar').evaluate('(el) => el.classList.contains("open")'))
-        primary_links = page.locator('#navigation > a.nav-link')
+            page.locator('#discover-mobile-nav summary').click()
+            check('Discover native mobile drawer opens at ' + str(width),
+                  page.locator('#discover-mobile-nav').evaluate('(el) => el.open')
+                  and page.locator('#discover-mobile-nav .site-mobile-chrome__menu').is_visible()
+                  and not page.locator('#sidebar').is_visible())
+            primary_links = page.locator('#discover-mobile-nav .site-mobile-chrome__menu > a:not(.site-mobile-chrome__brand)')
+            labels = primary_links.all_text_contents()
+            about_link = primary_links.last
+        else:
+            primary_links = page.locator('#navigation > a.nav-link')
+            labels = primary_links.locator('span:not(.nav-count)').all_text_contents()
+            about_link = page.locator('#navigation > a[data-static="about"]')
         check('Discover shares seven-link primary order at ' + str(width),
               primary_links.count() == 7
               and all(link.is_visible() for link in primary_links.all())
-              and primary_links.locator('span:not(.nav-count)').all_text_contents() == [
-                  'Discover', 'What’s New Today', 'Concept dictionary',
-                  'Technology profiles', 'Games', 'Playbooks', 'About'])
-        page.locator('#navigation > a[data-static="about"]').click()
+              and labels == ['Discover', 'What’s New Today', 'Concept dictionary',
+                             'Technology profiles', 'Games', 'Playbooks', 'About'])
+        about_link.click()
         page.wait_for_url('**/about.html')
         check('Discover-to-About uses shared navigation at ' + str(width),
               page.locator('.site-chrome__links a[aria-current="page"]').inner_text() == 'About'
               and page.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'))
+    # Discover now exposes the very same native <details> structure as its
+    # standalone neighbors, including when the JavaScript runtime is blocked.
+    no_script = browser.new_context(java_script_enabled=False, viewport={'width':320, 'height':844})
+    scriptless = no_script.new_page()
+    scriptless.goto(base + 'index.html#/overview')
+    scriptless.locator('#discover-mobile-nav summary').click()
+    check('Discover keeps seven script-free native drawer links',
+          scriptless.locator('#discover-mobile-nav').evaluate('(el) => el.open')
+          and scriptless.locator('#discover-mobile-nav .site-mobile-chrome__menu > a:not(.site-mobile-chrome__brand)').count() == 7)
+    check('Discover no-script drawer preserves a real home wordmark link',
+          scriptless.locator('#discover-mobile-nav a.site-mobile-chrome__brand').get_attribute('href') == '#/overview')
+    no_script.close()
     page.set_viewport_size({'width':1440, 'height':1000})
     page.goto(base + 'index.html#/overview')
     # Native disclosure makes the long secondary list opt-in without losing direct-link access.
@@ -1318,9 +1337,9 @@ with sync_playwright() as p:
     page.goto(base + 'index.html#/games')
     page.locator('#start-quiz').wait_for()
     check('mobile Games route fits original workspace', page.evaluate('document.documentElement.scrollWidth <= innerWidth'))
-    page.locator('#menu-toggle').click()
-    page.locator('#navigation a[href="#/overview"]').click()
-    page.wait_for_function("location.hash === '#/overview' && document.getElementById('menu-toggle').getAttribute('aria-expanded') === 'false'")
+    page.locator('#discover-mobile-nav summary').click()
+    page.locator('#discover-mobile-nav .site-mobile-chrome__menu a[href="#/overview"]').click()
+    page.wait_for_function("location.hash === '#/overview' && !document.getElementById('discover-mobile-nav').open")
     check('mobile drawer navigates and closes', page.locator('#daily-panel-title').is_visible())
 
     # The two large generated directories previously looked like separate
@@ -1367,8 +1386,8 @@ with sync_playwright() as p:
             page.goto(base + 'index.html#/overview')
             page.locator('#catalog-loading').wait_for(state='detached', timeout=45000)
             if width <= 650:
-                page.locator('#menu-toggle').click()
-                baseline = page.locator('#sidebar').evaluate('el => el.getBoundingClientRect().width')
+                page.locator('#discover-mobile-nav summary').click()
+                baseline = page.locator('#discover-mobile-nav .site-mobile-chrome__menu').evaluate('el => el.getBoundingClientRect().width')
             else:
                 baseline = page.evaluate("""() => {
                     const link = document.querySelector('#navigation > a.nav-link');

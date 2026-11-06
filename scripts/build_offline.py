@@ -19,6 +19,8 @@ def main():
     html = html.replace('<link rel="stylesheet" href="app.css">', '<style>' + (ROOT / 'app.css').read_text(encoding='utf-8') + '</style>')
     html = html.replace('<link rel="stylesheet" href="games-tab.css">', '<style>' + (ROOT / 'games-tab.css').read_text(encoding='utf-8') + '</style>')
     html = html.replace('<link rel="stylesheet" href="brand.css">', '<style>' + (ROOT / 'brand.css').read_text(encoding='utf-8') + '</style>')
+    html = html.replace('<link rel="stylesheet" href="site-chrome.css">', '<style>' + (ROOT / 'site-chrome.css').read_text(encoding='utf-8') + '</style>')
+    html = html.replace('<script src="site-theme.js"></script>', '<script>' + (ROOT / 'site-theme.js').read_text(encoding='utf-8').replace('</script', '<\\/script') + '</script>')
     for name in ('catalog-loader.js', 'core.js', 'games-core.js', 'games-tab.js', 'discovery.js', 'app.js'):
         html = html.replace(f'<script defer src="{name}"></script>', '')
     script = 'window.ATLAS_OFFLINE=true;window.ATLAS_READY=Promise.resolve(' + json.dumps(data, ensure_ascii=False, separators=(',', ':')) + ');\n'

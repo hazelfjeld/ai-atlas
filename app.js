@@ -53,6 +53,14 @@ function renderNav(){
     const counter=link.querySelector('.nav-count');
     if(counter)counter.textContent=Number(key==='saved'?notebook.saved.length:(sets[key]?.length||0)).toLocaleString();
   });
+  // Keep the shared mobile drawer's active link synchronized with Discover's
+  // existing canonical workspace navigation, without rerendering either list.
+  const mobileLinks=document.querySelectorAll('#discover-mobile-nav .site-mobile-chrome__menu > a:not(.site-mobile-chrome__brand)');
+  const currentHref=nav.querySelector('a.nav-link[aria-current="page"]')?.getAttribute('href');
+  mobileLinks.forEach(link=>{
+    if(link.getAttribute('href')===currentHref)link.setAttribute('aria-current','page');
+    else link.removeAttribute('aria-current');
+  });
   // Direct links to secondary workspaces remain discoverable even when the list starts collapsed.
   const more=$('additional-navigation');
   if(more && ['safety','papers','compare','saved','sources'].includes(view)) more.open=true;
@@ -153,7 +161,7 @@ function route(){
   parse();
   const changedSection = routeInitialized && previousView !== view;
   renderNav();
-  const fromMobileNav = $('sidebar').classList.contains('open');
+  const fromMobileNav = $('discover-mobile-nav').open;
   closeMobileNavigation();
   if(view==='overview')page.innerHTML=overview();
   else if(view==='games'){page.innerHTML=window.AtlasGamesTab.html();disposeGames=window.AtlasGamesTab.mount(page.querySelector('.atlas-games'),D,{openConcept:openRecord});}
@@ -190,37 +198,22 @@ $('global-search').addEventListener('submit',e=>{e.preventDefault();goto('search
 $('theme-toggle').addEventListener('click',()=>{const theme=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=theme;try{if(!SHARED_HOST)localStorage.setItem('atlas.theme',theme);}catch{};});
 // Keep the off-canvas navigation out of the keyboard order when closed, and modal while open.
 function setMobileNavOpen(open,restoreFocus=false){
- const sidebar=$('sidebar'),wasOpen=sidebar.classList.contains('open');
- sidebar.classList.toggle('open',open);
- $('mobile-overlay').hidden=!open;
- $('menu-toggle').setAttribute('aria-expanded',String(open));
- document.querySelector('.workspace').inert=open;
- document.body.classList.toggle('mobile-nav-open',open);
- if(open)sidebar.querySelector('.brand').focus();
- else if(restoreFocus&&wasOpen)$('menu-toggle').focus();
+ const details=$('discover-mobile-nav'),wasOpen=details.open;
+ details.open=!!open;
+ // Release background inertness before routing focuses the newly visible main.
+ if(typeof syncSharedDrawerIsolation==='function')syncSharedDrawerIsolation();
+ if(!open&&restoreFocus&&wasOpen)details.querySelector('summary')?.focus();
 }
 function closeMobileNavigation(restoreFocus=false){setMobileNavOpen(false,restoreFocus);}
-function mobileNavTabStops(){
- return [...$('sidebar').querySelectorAll('a[href],button:not([disabled]),summary,[tabindex]:not([tabindex="-1"])')]
-   .filter(el=>el.getClientRects().length&&getComputedStyle(el).visibility!=='hidden');
-}
-$('menu-toggle').addEventListener('click',()=>setMobileNavOpen(!$('sidebar').classList.contains('open')));
-$('mobile-overlay').addEventListener('click',()=>closeMobileNavigation(true));
-$('sidebar').addEventListener('keydown',e=>{
- if(!$('sidebar').classList.contains('open')||window.innerWidth>650)return;
- if(e.key==='Escape'){e.preventDefault();closeMobileNavigation(true);return;}
- if(e.key!=='Tab')return;
- const stops=mobileNavTabStops();
- if(!stops.length)return;
- if(e.shiftKey&&document.activeElement===stops[0]){e.preventDefault();stops.at(-1).focus();}
- else if(!e.shiftKey&&document.activeElement===stops.at(-1)){e.preventDefault();stops[0].focus();}
-});
-$('sidebar').addEventListener('click',e=>{
+// The shared native drawer uses site-theme.js for Escape, focus containment,
+// background inertness, outside dismissal and orientation changes.
+$('discover-mobile-nav').addEventListener('click',e=>{
  const link=e.target.closest('a[href^="#/"]');
- if(link&&link.getAttribute('href')===location.hash&&$('sidebar').classList.contains('open'))closeMobileNavigation(true);
+ if(link&&link.getAttribute('href')===location.hash&&$('discover-mobile-nav').open){
+   closeMobileNavigation(true);
+ }
 });
-window.addEventListener('resize',()=>{if(window.innerWidth>650&&$('sidebar').classList.contains('open'))closeMobileNavigation();});
 dialog.addEventListener('cancel',e=>{e.preventDefault();closeRecord();});dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)closeRecord();}});
-document.addEventListener('keydown',e=>{const typing=/INPUT|TEXTAREA|SELECT/.test(document.activeElement?.tagName);if(e.key==='/'&&!typing&&!dialog.open&&!$('sidebar').classList.contains('open')){e.preventDefault();$('global-query').focus();}});
+document.addEventListener('keydown',e=>{const typing=/INPUT|TEXTAREA|SELECT/.test(document.activeElement?.tagName);if(e.key==='/'&&!typing&&!dialog.open&&!$('discover-mobile-nav').open){e.preventDefault();$('global-query').focus();}});
 window.addEventListener('hashchange',route);route();
 })();

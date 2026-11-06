@@ -168,23 +168,23 @@ with sync_playwright() as p:
     page.screenshot(path=str(out/'mobile.png'),full_page=True)
     check('closed mobile drawer is hidden from keyboard and accessibility tree',
           not page.locator('#sidebar').is_visible())
-    page.locator('#menu-toggle').focus()
+    page.locator('#discover-mobile-nav summary').focus()
     page.keyboard.press('Tab')
     check('Tab bypasses the closed mobile drawer',
           page.evaluate("!document.activeElement.closest('#sidebar')"))
-    page.locator('#menu-toggle').click()
-    check('opening the drawer focuses its first navigation link and isolates the page',
-          page.evaluate("document.activeElement.matches('#sidebar .brand') && document.querySelector('.workspace').inert"))
+    page.locator('#discover-mobile-nav summary').click()
+    check('native drawer keeps its trigger focused and isolates background content',
+          page.evaluate("document.activeElement.matches('#discover-mobile-nav summary') && document.querySelector('#main').inert"))
     page.keyboard.press('Shift+Tab')
     check('Shift-Tab wraps inside the open drawer',
-          page.evaluate("!!document.activeElement.closest('#sidebar')"))
+          page.evaluate("!!document.activeElement.closest('#discover-mobile-nav')"))
     page.keyboard.press('Escape')
-    check('Escape closes drawer and returns focus to the menu button',
-          page.evaluate("document.activeElement.id==='menu-toggle' && document.getElementById('mobile-overlay').hidden && !document.querySelector('.workspace').inert && document.getElementById('menu-toggle').getAttribute('aria-expanded')==='false'"))
-    page.locator('#menu-toggle').click()
-    page.locator('#navigation a[href="#/games"]').click()
+    check('Escape closes shared native drawer and restores trigger focus',
+          page.evaluate("document.activeElement.matches('#discover-mobile-nav summary') && !document.getElementById('discover-mobile-nav').open && !document.querySelector('#main').inert"))
+    page.locator('#discover-mobile-nav summary').click()
+    page.locator('#discover-mobile-nav .site-mobile-chrome__menu a[href="#/games"]').click()
     page.locator('#start-quiz').wait_for()
-    check('mobile navigation retains native Quiz and Match',page.locator('#start-match').is_visible() and page.locator('#menu-toggle').get_attribute('aria-expanded')=='false')
+    check('mobile navigation retains native Quiz and Match',page.locator('#start-match').is_visible() and page.locator('#discover-mobile-nav').evaluate('el => !el.open'))
     page.goto(base+'terms/MLD-1039-reward-hacking.html')
     check('rebranded expanded guide retains primary citations',page.locator('h1').inner_text()=='Reward hacking' and page.get_by_role('heading',name='Sources for the expanded explanation',exact=True).is_visible())
     check('mobile term guide fits the viewport',page.evaluate('document.documentElement.scrollWidth<=innerWidth'))
