@@ -358,14 +358,14 @@ test('standalone editorial pages share Discover theme preference without rewriti
     const root = {dataset: {}, style: {}};
     vm.runInNewContext(script, {
       localStorage: {getItem: key => key === 'atlas.theme' ? chosen : null},
-      document: {documentElement: root},
+      document: {documentElement: root, addEventListener() {}},
     });
     assert.equal(root.dataset.theme, chosen === 'bogus' ? undefined : chosen);
     assert.equal(root.style.colorScheme, chosen === 'bogus' ? undefined : chosen);
   }
   assert.doesNotThrow(() => vm.runInNewContext(script, {
     localStorage: {getItem() { throw new Error('storage blocked'); }},
-    document: {documentElement: {dataset: {}, style: {}}},
+    document: {documentElement: {dataset: {}, style: {}}, addEventListener() {}},
   }));
 });
 
