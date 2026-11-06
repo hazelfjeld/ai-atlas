@@ -25,6 +25,18 @@ def check(name, condition):
     print('PASS', name, flush=True)
 
 
+def desktop_shared_navigation(page):
+    """The native search wrapper remains visible on desktop, but its
+    mobile disclosure must be hidden; only the shared sidebar is navigation."""
+    nav = page.locator('nav.site-chrome')
+    search = page.locator('a.site-mobile-chrome__search[href="index.html#/search"]')
+    return (nav.count() == 1 and nav.is_visible()
+            and nav.locator('.site-chrome__links a').count() == 7
+            and search.count() == 1 and search.is_visible()
+            and search.evaluate('el => getComputedStyle(el.closest(".site-mobile-chrome")).position === "fixed"')
+            and not page.locator('details.site-mobile-chrome__nav').is_visible())
+
+
 with sync_playwright() as p:
     browser = p.chromium.launch(executable_path=os.environ.get('CHROMIUM_PATH'), headless=True)
     page = browser.new_page(viewport={'width':1440, 'height':1000}, reduced_motion='reduce')
@@ -341,9 +353,9 @@ with sync_playwright() as p:
     check('390px technology directory remains within viewport',
           mobile_tech.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'))
     mobile_tech.set_viewport_size({'width':1440,'height':900})
-    check('desktop technology directory keeps its existing navigation',
-          mobile_tech.locator('.tech-top').is_visible()
-          and not mobile_tech.locator('.tech-mobile-topbar').is_visible())
+    check('desktop technology directory retains shared navigation and functional search',
+          desktop_shared_navigation(mobile_tech)
+          and mobile_tech.locator('.tech-top').is_visible())
     mobile_tech.set_viewport_size({'width':320,'height':720})
     mobile_tech.locator('.tech-search-link').click()
     mobile_tech.wait_for_url('**/index.html#/search')
@@ -374,9 +386,9 @@ with sync_playwright() as p:
     check('390px playbooks fit without horizontal overflow',
           mobile_playbooks.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'))
     mobile_playbooks.set_viewport_size({'width':1440, 'height':900})
-    check('desktop playbooks retain original navigation',
-          mobile_playbooks.locator('.playbook-top').is_visible()
-          and not mobile_playbooks.locator('.playbook-mobile-topbar').is_visible())
+    check('desktop playbooks retain shared navigation and functional search',
+          desktop_shared_navigation(mobile_playbooks)
+          and mobile_playbooks.locator('.playbook-top').is_visible())
     mobile_playbooks.set_viewport_size({'width':320, 'height':720})
     mobile_playbooks.locator('.playbook-search-link').click()
     mobile_playbooks.wait_for_url('**/index.html#/search')
@@ -448,9 +460,9 @@ with sync_playwright() as p:
     check('390px catalog review has no page-wide horizontal overflow',
           mobile_review.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'))
     mobile_review.set_viewport_size({'width':1440, 'height':900})
-    check('desktop catalog review keeps its original navigation',
-          mobile_review.locator('.shell > .nav').is_visible()
-          and not mobile_review.locator('.review-mobile-topbar').is_visible())
+    check('desktop catalog review has shared navigation and functional search',
+          desktop_shared_navigation(mobile_review)
+          and mobile_review.locator('.shell > .nav').is_visible())
     mobile_review.set_viewport_size({'width':320, 'height':720})
     mobile_review.locator('.review-mobile-topbar .site-mobile-chrome__search').click()
     mobile_review.wait_for_url('**/index.html#/search')
@@ -493,9 +505,9 @@ with sync_playwright() as p:
     check('390px hardware review has no page-wide horizontal overflow',
           mobile_hardware.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'))
     mobile_hardware.set_viewport_size({'width':1440, 'height':900})
-    check('desktop hardware review retains original navigation',
-          mobile_hardware.locator('.review-shell > .review-nav').is_visible()
-          and not mobile_hardware.locator('.hardware-mobile-topbar').is_visible())
+    check('desktop hardware review has shared navigation and functional search',
+          desktop_shared_navigation(mobile_hardware)
+          and mobile_hardware.locator('.review-shell > .review-nav').is_visible())
     mobile_hardware.set_viewport_size({'width':320, 'height':720})
     mobile_hardware.locator('.hardware-mobile-topbar .site-mobile-chrome__search').click()
     mobile_hardware.wait_for_url('**/index.html#/search')
@@ -541,11 +553,11 @@ with sync_playwright() as p:
     check('390px research page fits without horizontal overflow',
           mobile_research.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'))
     mobile_research.set_viewport_size({'width':680, 'height':900})
-    check('tablet research uses shared desktop header and contextual research tabs',
-          mobile_research.locator('.research-site-chrome').is_visible()
+    check('tablet research uses shared sidebar, working search and contextual tabs',
+          desktop_shared_navigation(mobile_research)
+          and mobile_research.locator('.research-site-chrome').is_visible()
           and mobile_research.locator('.research-local-nav').is_visible()
           and mobile_research.locator('.shell > aside').count() == 0
-          and not mobile_research.locator('.research-mobile-topbar').is_visible()
           and mobile_research.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'))
     mobile_research.set_viewport_size({'width':1440, 'height':900})
     check('desktop research primary navigation matches AI Updates sections',
