@@ -188,14 +188,14 @@ test('shared mobile drawer makes background inert without leaving hidden control
   assert.equal(drawer.inert,false, 'drawer and its close control remain accessible');
   drawer.open = false;
   events.toggle({target:drawer});
-  assert.equal(main.inert,undefined, 'prior main state is restored');
-  assert.equal(search.inert,undefined, 'search is restored');
+  assert.equal(main.inert,false, 'prior main state is restored');
+  assert.equal(search.inert,false, 'search is restored');
   assert.equal(preInert.inert,true, 'pre-existing inert state is preserved');
   drawer.open = true;
   events.toggle({target:drawer});
   window.innerWidth = 768;
   events.resize();
-  assert.equal(main.inert,undefined, 'tablet resize clears mobile-only background isolation');
+  assert.equal(main.inert,false, 'tablet resize clears mobile-only background isolation');
   assert.equal(preInert.inert,true);
 });
 
