@@ -217,18 +217,31 @@ test('research snapshot uses the shared mobile menu and retains contextual resea
 });
 
 
-test('generated concept and technology pages have accessible two-column mobile navigation', () => {
+test('all generated technology profiles use shared directory chrome with native navigation', () => {
+  const concept = read('terms/MLD-0002-ablation-study.html');
   const css = read('brand.css');
-  const offline = read('downloads/Atlas_Demo_Offline.html');
-  for (const page of ['terms/MLD-0002-ablation-study.html','technology/TECH-0216-pytorch.html']) {
-    const html = read(page);
-    assert.match(html, /<nav class="term-nav" aria-label="Site navigation">/);
-    assert.match(html, /href="\.\.\/index\.html"/);
-  }
+  assert.match(concept, /<nav class="term-nav" aria-label="Site navigation">/);
   assert.match(css, /@media\(max-width:650px\)\{\s*\.term-shell \.term-nav\{display:grid;grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/);
-  assert.match(css, /\.term-shell \.term-nav>a\{[^}]*min-height:44px/);
-  assert.match(css, /\.term-shell \.term-nav>a:focus-visible\{outline:2px solid var\(--accent\)/);
-  assert.ok(offline.includes('/* Native, script-free reference pages: readable two-column touch navigation on phones.'));
+  const prefix = '<main class="term-shell" id="main">';
+  const directory = read('technology/index.html').split(prefix)[1].split('<header class="hero">')[0];
+  assert.match(directory, /class="directory-mobile-topbar site-mobile-chrome"/);
+  assert.match(directory, /<nav class="site-chrome term-nav" aria-label="AI Updates primary navigation">/);
+  const labels = ['Discover','What’s New Today','Concept dictionary','Technology profiles','Games','Playbooks','About'];
+  const links = directory.match(/<div class="site-chrome__links">([\s\S]*?)<\/div>/)[1];
+  assert.deepEqual([...links.matchAll(/<a [^>]+>([^<]+)<\/a>/g)].map(x => x[1]), labels);
+  assert.equal((links.match(/aria-current="page"/g) || []).length, 1);
+  const profiles = fs.readdirSync(path.join(__dirname, '..', 'technology')).filter(name => /^TECH-\d{4}-.*\.html$/.test(name));
+  assert.equal(profiles.length, 303);
+  for (const file of profiles) {
+    const html = read('technology/' + file);
+    assert.ok(html.includes('<link rel="stylesheet" href="../site-chrome.css">'), file);
+    assert.ok(html.includes('<script src="../site-theme.js"></script>'), file);
+    assert.equal(html.split(prefix)[1].split('<p class="breadcrumb-links">')[0], directory, file);
+  }
+  const generator = read('scripts/build_seo.py');
+  assert.ok(generator.includes("render_directory_nav(prefix, 'Technology profiles') if path.startswith('technology/')"));
+  assert.ok(generator.includes("DIRECTORY_MOBILE_CSS if path.startswith('technology/')"));
+  assert.ok(read('downloads/Atlas_Demo_Offline.html').includes('/* Native, script-free reference pages: readable two-column touch navigation on phones.'));
 });
 
 

@@ -457,9 +457,9 @@ with sync_playwright() as p:
     check('research search opens the existing workspace search',
           mobile_research.locator('#global-query').is_visible())
     mobile_research.close()
-    # Individual term/technology references are still script-free. Their formerly
-    # tiny inline links now share a usable compact, two-column mobile nav.
-    for reference in ('terms/MLD-0002-ablation-study.html', 'technology/TECH-0216-pytorch.html'):
+    # Concept references retain their native two-column fallback, while technology
+    # details use the shared native mobile menu exercised below.
+    for reference in ('terms/MLD-0002-ablation-study.html',):
         mobile_reference = browser.new_page(viewport={'width':320, 'height':720}, reduced_motion='reduce')
         mobile_reference.goto(base + reference)
         nav = mobile_reference.locator('.term-shell .term-nav')
@@ -1078,7 +1078,8 @@ with sync_playwright() as p:
     # sites with inconsistent five/six-link navigation. Compare their shared
     # header with Discover's editorial navigation at mobile and desktop sizes.
     for route, selected in (('terms/index.html', 'Concept dictionary'),
-                            ('technology/index.html', 'Technology profiles')):
+                            ('technology/index.html', 'Technology profiles'),
+                            ('technology/TECH-0216-pytorch.html', 'Technology profiles')):
         for width in (320, 390, 768, 1280):
             page.set_viewport_size({'width': width, 'height': 844})
             page.goto(base + route)
@@ -1103,6 +1104,11 @@ with sync_playwright() as p:
     check('catalog directory menu remains usable with JavaScript disabled',
           script_free.locator('.site-mobile-chrome__menu a').first.is_visible()
           and script_free.locator('.site-mobile-chrome__menu a').count() == 7)
+    script_free.goto(base + 'technology/TECH-0216-pytorch.html')
+    script_free.locator('#directory-mobile-nav summary').click()
+    check('technology detail uses the shared mobile menu without JavaScript',
+          script_free.locator('.site-mobile-chrome__menu a').count() == 7
+          and script_free.locator('.site-mobile-chrome__menu a[aria-current="page"]').inner_text() == 'Technology profiles')
     script_free.close()
     check('no application runtime exceptions', not errors)
     browser.close()

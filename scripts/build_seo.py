@@ -43,12 +43,12 @@ ABOUT_DESKTOP_NAV = '''<nav class="site-chrome term-nav" aria-label="AI Updates 
 
 def shell(title, description, path, body, structured=None):
     prefix = '../' if '/' in path else ''
-    mobile_css = ABOUT_MOBILE_CSS if path == 'about.html' else (DIRECTORY_MOBILE_CSS if path == 'technology/index.html' else '')
+    mobile_css = ABOUT_MOBILE_CSS if path == 'about.html' else (DIRECTORY_MOBILE_CSS if path.startswith('technology/') else '')
     mobile_nav = ABOUT_MOBILE_NAV if path == 'about.html' else ''
     print_nav = ',.about-mobile-topbar' if path == 'about.html' else ''
-    desktop_nav = render_directory_nav(prefix, 'Technology profiles') if path == 'technology/index.html' else (ABOUT_DESKTOP_NAV if path == 'about.html' else nav(prefix))
-    chrome_css = f'<link rel="stylesheet" href="{prefix}site-chrome.css">\n' if path in ('about.html', 'technology/index.html') else ''
-    theme_script = f'<script src="{prefix}site-theme.js"></script>' if path in ('about.html', 'technology/index.html') else ''
+    desktop_nav = render_directory_nav(prefix, 'Technology profiles') if path.startswith('technology/') else (ABOUT_DESKTOP_NAV if path == 'about.html' else nav(prefix))
+    chrome_css = f'<link rel="stylesheet" href="{prefix}site-chrome.css">\n' if path == 'about.html' or path.startswith('technology/') else ''
+    theme_script = f'<script src="{prefix}site-theme.js"></script>' if path == 'about.html' or path.startswith('technology/') else ''
     return f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 {metadata(title, description, path, structured)}
