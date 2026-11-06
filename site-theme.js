@@ -17,7 +17,7 @@ document.addEventListener('keydown', (event) => {
   if (event.key === 'Tab' && !event.defaultPrevented && window.innerWidth <= 650) {
     const menu = document.querySelector('details.site-mobile-chrome__nav[open]');
     if (menu) {
-      const stops = [menu.querySelector('summary'), ...menu.querySelectorAll('a[href]')]
+      const stops = [menu.querySelector('summary'), ...menu.querySelectorAll('a[href],button:not([disabled])')]
         .filter(el => el && el.getClientRects().length);
       if (stops.length) {
         const first = stops[0], last = stops[stops.length - 1];
@@ -113,5 +113,43 @@ document.addEventListener('DOMContentLoaded', () => {
     const mobileBrand = desktopBrand.cloneNode(true);
     mobileBrand.className = 'site-mobile-chrome__brand';
     menu.prepend(mobileBrand);
+  }
+
+  // Discover exposes its existing appearance switch from the sidebar.
+  // Give every other existing page family the same control in the shared
+  // desktop rail and native mobile drawer; Games already owns a theme toggle.
+  // No-script navigation is unaffected, and the two responsive placements
+  // are buttons, not duplicate navigation links.
+  if (typeof document.createElement === 'function' &&
+      !document.getElementById?.('theme-toggle')) {
+    const rail = document.querySelector('.site-chrome');
+    if (rail && menu) {
+      const controls = [];
+      const effectiveTheme = () => document.documentElement.dataset.theme ||
+        (window.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      const syncThemeButtons = () => {
+        const theme = effectiveTheme();
+        controls.forEach(button => {
+          button.setAttribute('aria-pressed', String(theme === 'dark'));
+          button.textContent = '◐  ' + (theme === 'dark' ? 'Dark' : 'Light') + ' theme';
+        });
+      };
+      for (const container of [rail, menu]) {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'site-chrome__theme-toggle';
+        button.setAttribute('aria-label', 'Toggle color theme');
+        button.addEventListener('click', () => {
+          const chosen = effectiveTheme() === 'dark' ? 'light' : 'dark';
+          document.documentElement.dataset.theme = chosen;
+          try { localStorage.setItem('atlas.theme', chosen); }
+          catch (_) { /* Theme still changes when persistence is unavailable. */ }
+          syncThemeButtons();
+        });
+        container.append(button);
+        controls.push(button);
+      }
+      syncThemeButtons();
+    }
   }
 });

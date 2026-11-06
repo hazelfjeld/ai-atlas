@@ -324,6 +324,38 @@ with sync_playwright() as p:
     check('About inherits the new light preference and native controls',
           theme_page.evaluate("document.documentElement.dataset.theme === 'light' && "
                               "getComputedStyle(document.documentElement).colorScheme === 'light'"))
+
+    # One shared appearance action, in the same rail/drawer positions used by
+    # Discover. Standalone articles previously had no way to change themes.
+    theme_page.set_viewport_size({'width':1280, 'height':844})
+    theme_page.goto(base + 'about.html')
+    rail_theme = theme_page.locator('.site-chrome > .site-chrome__theme-toggle')
+    check('editorial desktop rail exposes the existing theme action',
+          rail_theme.is_visible() and
+          rail_theme.get_attribute('aria-label') == 'Toggle color theme' and
+          rail_theme.get_attribute('aria-pressed') == 'false')
+    rail_theme.click()
+    check('shared desktop theme switch saves dark choice',
+          theme_page.evaluate("document.documentElement.dataset.theme === 'dark' && localStorage.getItem('atlas.theme') === 'dark'") and
+          rail_theme.get_attribute('aria-pressed') == 'true')
+    theme_page.goto(base + 'technologies.html')
+    check('technology directory preserves the theme chosen on About',
+          theme_page.evaluate("document.documentElement.dataset.theme === 'dark'"))
+    theme_page.set_viewport_size({'width':390, 'height':844})
+    theme_page.locator('#tech-mobile-nav summary').click()
+    mobile_theme = theme_page.locator('.site-mobile-chrome__menu > .site-chrome__theme-toggle')
+    check('mobile native drawer contains one keyboard-focusable appearance action',
+          mobile_theme.is_visible() and
+          mobile_theme.get_attribute('aria-pressed') == 'true' and
+          theme_page.locator('.site-mobile-chrome__menu a:not(.site-mobile-chrome__brand)').count() == 7)
+    mobile_theme.click()
+    check('native mobile appearance action persists light choice',
+          theme_page.evaluate("document.documentElement.dataset.theme === 'light' && localStorage.getItem('atlas.theme') === 'light'") and
+          mobile_theme.get_attribute('aria-pressed') == 'false')
+    theme_page.goto(base + 'research.html')
+    check('research retains the mobile theme choice across page families',
+          theme_page.evaluate("document.documentElement.dataset.theme === 'light'"))
+
     theme_ctx.close()
 
     # The editorial-policy page formerly exposed a multirow legacy nav on

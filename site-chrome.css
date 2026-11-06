@@ -213,3 +213,30 @@ body:has(.site-chrome){padding-top:78px}
 .games-header__inner > .icon-button{right:26px}
 }
 @media print{.site-mobile-chrome{display:none!important}}
+
+/* The appearance action is part of the shared page chrome on every existing
+   standalone family, as in Discover. One visible action per viewport; the
+   native seven-link navigation remains script-free. */
+.site-chrome__theme-toggle{
+ display:flex;align-items:center;min-height:44px;width:100%;
+ font-size:13px;font-weight:600;line-height:1.4;cursor:pointer;text-align:left;
+ border-radius:8px;transition:background-color .15s
+}
+.site-chrome__theme-toggle:focus-visible{outline:3px solid #edba87;outline-offset:2px}
+@media (min-width:651px){
+ .site-chrome > .site-chrome__theme-toggle{
+  margin-top:auto;padding:11px 12px;border:1px solid #405043;
+  background:#ffffff0c;color:#c5cfc6
+ }
+ .site-chrome > .site-chrome__theme-toggle:hover{background:#374b3c;color:#fff}
+}
+@media (max-width:650px){
+ .site-mobile-chrome__menu > .site-chrome__theme-toggle{
+  flex:none;margin-top:14px;padding:10px 12px;
+  border:1px solid #405043;background:#ffffff0c;color:#c5cfc6
+ }
+ .site-mobile-chrome__menu > .site-chrome__theme-toggle:hover{background:#374b3c;color:#fff}
+}
+@media (prefers-reduced-motion:reduce){
+ .site-chrome__theme-toggle{transition:none}
+}

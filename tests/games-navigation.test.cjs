@@ -770,3 +770,19 @@ test('shared native mobile drawer preserves site branding when enhancement is un
     assert.match(html, /href="(?:\.\.\/)?site-chrome\.css"/, route);
   }
 });
+
+test('existing shared standalone chrome exposes the Discover appearance action without cloning navigation', () => {
+  const js = read('site-theme.js'), css = read('site-chrome.css');
+  new vm.Script(js);
+  assert.match(js, /!document\.getElementById\?\.\('theme-toggle'\)/,
+    'Games retains its existing theme control, not a duplicate');
+  assert.match(js, /for \(const container of \[rail, menu\]\)/,
+    'Desktop rail and mobile menu use one shared theme-button implementation');
+  assert.match(js, /localStorage\.setItem\('atlas\.theme', chosen\)/,
+    'Cross-page theme preference uses Discover existing storage key');
+  assert.match(js, /a\[href\],button:not\(\[disabled\]\)/,
+    'A new drawer action must join the keyboard focus trap');
+  assert.match(css, /\.site-chrome > \.site-chrome__theme-toggle/);
+  assert.match(css, /\.site-mobile-chrome__menu > \.site-chrome__theme-toggle/);
+  assert.match(js, /'aria-pressed', String\(theme === 'dark'\)/);
+});
