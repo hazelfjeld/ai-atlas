@@ -755,6 +755,17 @@ with sync_playwright() as p:
                     note.scroll_into_view_if_needed()
                     page.screenshot(path=str(out/f'info-note-{route}-{width}-{theme}.png'))
 
+    # Generated directory footnotes contain one longer search link. It must
+    # wrap rather than widen the document after adopting the shared info panel.
+    page.set_viewport_size({'width':320,'height':700})
+    for directory in ('terms/index.html','technology/index.html'):
+        page.goto(base+directory)
+        link=page.locator('.term-shell .notice a').first
+        check(f'{directory} long notice link wraps without mobile overflow',
+              link.count()==1
+              and link.evaluate("el=>getComputedStyle(el).whiteSpace")=='normal'
+              and page.evaluate('document.documentElement.scrollWidth<=innerWidth'))
+
     check('no application runtime exceptions',not errors)
     browser.close()
 (out/'results.json').write_text(json.dumps({'checks_passed':len(checks),'checks':checks,'base':base},indent=2))

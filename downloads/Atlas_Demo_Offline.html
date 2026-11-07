@@ -772,6 +772,9 @@ body:has(.site-chrome) :is(.tech-controls,.playbook-tools,.controls,.search-cont
   line-height:1.65;
   overflow-wrap:anywhere;
 }
+/* Preserve wrapping for directory notices: checkpoint.css originally
+   forces .notice a to nowrap, overflowing 320px after shared note padding. */
+.term-shell .notice a{white-space:normal;overflow-wrap:anywhere}
 /* atlas-info-callouts:end */
 </style><script>/* Use Discover's saved choice on standalone editorial pages before rendering. */
 try {

@@ -1197,5 +1197,6 @@ test('shared informational callouts are one accessible theme-aware surface acros
     ['terms/MLD-0002-ablation-study.html','class="notice"'],
     ['technology/TECH-0216-pytorch.html','class="notice"']
   ])assert.ok(read(route).includes(cls),route+' retains the real shared note');
+  assert.ok(rule.includes('.term-shell .notice a{white-space:normal'),'directory notice links may wrap on 320px mobile');
   assert.ok(!rule.includes('.detail-block.caveat'),'specialized research warnings unchanged');
 });
