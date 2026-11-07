@@ -5,7 +5,7 @@ const vm=require('node:vm');
 const D=require('../daily-core.js');
 function verifiedPublicationClock(){
  const receipts=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8')).receipts;
- return receipts.at(-1).production_verified_at || receipts[0].production_verified_at;
+ return [...receipts].reverse().find(r=>r.production_verified_at)?.production_verified_at || null;
 }
 function index(entries=[]){return {schema:1,timezone:'America/Chicago',editions:entries,last_successful_publish_at:null};}
 const entry=(date,revision=1)=>({date,revision,path:'data/daily/editions/'+date+'-v'+revision+'.json',sha256:'a'.repeat(64),bytes:900,published_at:date+'T15:00:00Z'});
@@ -489,7 +489,7 @@ test('Revision 9 indexes only the accessible sidebar update, preserving immutabl
  for(const kind of ['news','technologies','terms','corrections'])assert.equal(diff[kind].added.length+diff[kind].updated.length+diff[kind].removed.length,0);
  assert.match(after.site_changes.at(-1).summary,/not a new real-world AI event/i);
  const ledger=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8'));
- assert.equal(ledger.receipts.length,2,'Genuine Nov 3 batch receipt joins the historical Nov 2 receipt');
+ assert.equal(ledger.receipts.length,3,'Retain both historical batch receipts alongside the new Nov 7 receipt');
  assert.ok(ledger.receipts[0].publication_history.some(h=>h.edition==='2026-11-02-v9'));
  assert.equal(ledger.receipts[0].publication_edition,ledger.receipts[0].publication_history.at(-1).edition);
  assert.equal(ledger.receipts[0].deferred_catalog_proposal_ids.length,5);
@@ -1209,7 +1209,7 @@ test('Source-reviewed November 3 daily edition is immutable, deduplicated, dated
  assert.ok(today.news.some(n=>/prototype_results_unreplicated/.test(n.review_status)));
  assert.equal(idx.last_successful_publish_at,verifiedPublicationClock(),'Last successful publication must match latest independently verified batch');
  const ledger=JSON.parse(fs.readFileSync(path.join(root,'data/daily/published-batches.json'),'utf8'));
- assert.equal(ledger.receipts.length,2);
+ assert.equal(ledger.receipts.length,3);
  const receipt=ledger.receipts[1];
  assert.equal(receipt.batch_id,'atlas-daily-20261103-0824ct-recovery-a');
  assert.equal(receipt.source_batch_sha256,'f6d155caec1fda714b8fdd456ec47cc886dd10856159b65b9745c69d64b9adb3');
@@ -1249,7 +1249,7 @@ test('November 3 v2 records actual Atlas guide expansions, without rewriting rev
   assert.equal(x.source_url,'https://github.com/hazelfjeld/ai-atlas/pull/39');
  }
  const ledger=JSON.parse(fs.readFileSync(path.join(root,'data/daily/published-batches.json'),'utf8'));
- const receipt=ledger.receipts.at(-1);
+ const receipt=ledger.receipts.find(r=>r.batch_id==='atlas-daily-20261103-0824ct-recovery-a');
  assert.equal(receipt.publication_edition,'2026-11-03-v6');
  assert.equal(receipt.publication_history.at(-1).edition,'2026-11-03-v6');
  assert.equal(receipt.production_verified_revision>=1,true,'Prior verified v1 must remain in history');
@@ -1289,7 +1289,7 @@ test('November 3 v3 archives only already-published hardware research site chang
  assert.equal(D.safeCatalogPath('hardware-review.html'),'hardware-review.html');
  assert.equal(D.safeCatalogPath('hardware-review.html?spoof=1'),'');
  assert.equal(D.safeCatalogPath('../hardware-review.html'),'');
- const receipt=JSON.parse(fs.readFileSync(path.join(root,'data/daily/published-batches.json'),'utf8')).receipts.at(-1);
+ const receipt=JSON.parse(fs.readFileSync(path.join(root,'data/daily/published-batches.json'),'utf8')).receipts.find(r=>r.batch_id==='atlas-daily-20261103-0824ct-recovery-a');
  assert.equal(receipt.publication_edition,'2026-11-03-v6');
  const archivedV3=receipt.publication_history.find(h=>h.edition==='2026-11-03-v3');
  assert.ok(archivedV3,'Immutable prior verification history missing');
@@ -1335,8 +1335,8 @@ test('Immutable November 3 revision 4 indexes two previously verified guides and
  assert.equal(D.safeCatalogPath('whats-new.html'),'whats-new.html');
  for(const bad of ['whats-new.html?evil=1','../whats-new.html','whats-new.html#unsafe'])assert.equal(D.safeCatalogPath(bad),'');
  const ledger=JSON.parse(fs.readFileSync(path.join(root,'data/daily/published-batches.json'),'utf8'));
- assert.equal(ledger.receipts.length,2);
- const receipt=ledger.receipts.at(-1);
+ assert.equal(ledger.receipts.length,3);
+ const receipt=ledger.receipts.find(r=>r.batch_id==='atlas-daily-20261103-0824ct-recovery-a');
  assert.equal(receipt.publication_edition,'2026-11-03-v6');
  assert.equal(receipt.publication_history.at(-1).edition,'2026-11-03-v6');
  assert.equal(receipt.publication_history.find(x=>x.edition==='2026-11-03-v3').status,'cloudflare_http_browser_and_githack_verified');
@@ -1468,11 +1468,11 @@ test('November 3 v5 archives one real canonical technology without changing orig
 test('November 3 v5 verification receipts retain historical v4 proof and source provenance',()=>{
  const ledger=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8'));
  const idx=JSON.parse(fs.readFileSync('data/daily/index.json','utf8'));
- const receipt=ledger.receipts.at(-1),arch=idx.editions.at(-1);
+ const receipt=ledger.receipts.find(r=>r.batch_id==='atlas-daily-20261103-0824ct-recovery-a'),arch=idx.editions.find(e=>e.date==='2026-11-03'&&e.revision===6);
  assert.equal(arch.date,'2026-11-03');
  assert.equal(arch.revision,6);
  assert.equal(receipt.publication_edition,'2026-11-03-v6');
- assert.equal(idx.status,'edition_revision_6_production_verified');
+ assert.equal(idx.status,'edition_revision_1_pending_production_verification');
  assert.equal(idx.last_successful_publish_at,receipt.production_verified_at);
  assert.equal(receipt.production_commit,'e549b579d413e717e4784ed942a20ad4c06529bc');
  assert.equal(receipt.production_workflow_run_id,41767787139);
@@ -1529,8 +1529,8 @@ test('November 3 v6 indexes exactly two already-live educational guides without 
 test('Verified v6 preserves collector provenance and records actual production proof',()=>{
  const ledger=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8'));
  const idx=JSON.parse(fs.readFileSync('data/daily/index.json','utf8'));
- const receipt=ledger.receipts.at(-1);
- assert.equal(ledger.receipts.length,2,'No duplicate immutable collector batch');
+ const receipt=ledger.receipts.find(r=>r.batch_id==='atlas-daily-20261103-0824ct-recovery-a');
+ assert.equal(ledger.receipts.length,3,'No duplicate immutable collector batch');
  assert.equal(receipt.source_batch_sha256,'f6d155caec1fda714b8fdd456ec47cc886dd10856159b65b9745c69d64b9adb3');
  assert.equal(receipt.source_commit,'9a2d9a0f21551737b041a49e398ebf08793272ae');
  assert.equal(receipt.publication_edition,'2026-11-03-v6');
@@ -1561,4 +1561,31 @@ test('Failed archive selection explains rollback beside the picker without steal
  assert.match(js,/Still showing the previously verified edition/);
  assert.match(js,/note\.hidden=!message/);
  assert.match(js,/\$\('edition-select'\)\.value=active\.path/);
+});
+
+
+test('November 7 publisher reviews eleven source-dated catch-up reports without inventing catalog entries',()=>{
+ const crypto=require('node:crypto'); const ledger=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8'));
+ const idx=JSON.parse(fs.readFileSync('data/daily/index.json','utf8'));
+ assert.equal(ledger.receipts.length,3);
+ const r=ledger.receipts.find(x=>x.batch_id==='atlas-daily-20261107-recovery-20261107T142133z');
+ assert.ok(r,'durable batch receipt');assert.equal(r.source_batch_sha256,'9560ee475c10351e4ff0b64de236a320d084383685e52d92ff67bc61d4899f2b');
+ assert.equal(r.source_batch_bytes,37216);assert.equal(r.accepted_news_ids.length,11);
+ assert.equal(r.deferred_catalog_proposal_ids.length,8);
+ assert.deepEqual([r.counts.technology_added,r.counts.term_added,r.counts.corrections],[0,0,0]);
+ const entry=idx.editions.find(x=>x.date==='2026-11-07'&&x.revision===1);
+ assert.ok(entry);const raw=fs.readFileSync(entry.path);
+ assert.equal(raw.length,entry.bytes);
+ assert.equal(crypto.createHash('sha256').update(raw).digest('hex'),entry.sha256);
+ const e=JSON.parse(raw);D.validateEdition(e,entry);
+ assert.equal(e.news.length,11);assert.equal(e.technologies.length,0);assert.equal(e.terms.length,0);
+ assert.equal(e.coverage.status,'partial');assert.equal(e.coverage.sources_checked.length,11);
+ assert.ok(e.news.every(x=>x.review_status.startsWith('publisher_checked_')&&x.publication_date<'2026-11-07'));
+ assert.ok(e.news.every(x=>x.added_to_atlas_at===e.published_at));
+ assert.equal(new Set(e.news.map(x=>x.id)).size,11);
+ assert.deepEqual(e.news.map(x=>x.id),r.accepted_news_ids);
+ assert.ok(idx.editions.some(x=>x.date==='2026-11-03'&&x.revision===6),'historical edition retained');
+ assert.ok(ledger.receipts.some(x=>x.batch_id==='atlas-daily-20261103-0824ct-recovery-a'),'older receipt retained');
+ assert.equal(idx.status,'edition_revision_1_pending_production_verification');
+ assert.equal(idx.last_successful_publish_at,'2026-11-04T03:35:50Z','do not advance verified clock before deployment');
 });

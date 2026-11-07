@@ -1,0 +1,347 @@
+{
+  "schema": 1,
+  "edition_date": "2026-11-07",
+  "timezone": "America/Chicago",
+  "published_at": "2026-11-07T14:39:59.877Z",
+  "coverage": {
+    "start": "2026-11-03T00:00:00Z",
+    "end": "2026-11-07T14:21:33.611Z",
+    "status": "partial",
+    "note": "Partial November 3–7 recovery collection. All eleven items were published by their original sources November 3–6; no story is presented as a November 7 launch. Eleven original sources checked. Unchecked research, release and model feeds are not negative results. Developer benchmarks were not independently reproduced; technology/term proposals remain pending catalog-specific deduplication and licensing review.",
+    "sources_checked": [
+      {
+        "name": "occ",
+        "url": "https://www.occ.gov/news-issuances/news-releases/2026/nr-occ-2026-97.html",
+        "checked_at": "2026-11-07T14:21:33.611Z",
+        "status": "success",
+        "note": "Opened original author or primary source and verified stated publication date"
+      },
+      {
+        "name": "dharma",
+        "url": "https://huggingface.co/blog/Dharma-AI/dharma-field-extractor",
+        "checked_at": "2026-11-07T14:21:33.611Z",
+        "status": "success",
+        "note": "Opened original author or primary source and verified stated publication date"
+      },
+      {
+        "name": "omni",
+        "url": "https://blog.google/innovation-and-ai/technology/developers-tools/introducing-gemini-omni-1-2-flash/",
+        "checked_at": "2026-11-07T14:21:33.611Z",
+        "status": "success",
+        "note": "Opened original author or primary source and verified stated publication date"
+      },
+      {
+        "name": "cyber",
+        "url": "https://openai.com/index/introducing-gpt-6-cyber/",
+        "checked_at": "2026-11-07T14:21:33.611Z",
+        "status": "success",
+        "note": "Opened original author or primary source and verified stated publication date"
+      },
+      {
+        "name": "cosmos",
+        "url": "https://huggingface.co/blog/nvidia/cosmos-interactive-world-simulation",
+        "checked_at": "2026-11-07T14:21:33.611Z",
+        "status": "success",
+        "note": "Opened original author or primary source and verified stated publication date"
+      },
+      {
+        "name": "lerobot",
+        "url": "https://huggingface.co/blog/lerobot/lerobot-release-v070",
+        "checked_at": "2026-11-07T14:21:33.611Z",
+        "status": "success",
+        "note": "Opened original author or primary source and verified stated publication date"
+      },
+      {
+        "name": "phonon",
+        "url": "https://huggingface.co/blog/phonon-tts",
+        "checked_at": "2026-11-07T14:21:33.611Z",
+        "status": "success",
+        "note": "Nov 5 follow-up article, original release earlier"
+      },
+      {
+        "name": "harness",
+        "url": "https://huggingface.co/blog/harness-hub/harness-adapters",
+        "checked_at": "2026-11-07T14:21:33.611Z",
+        "status": "success",
+        "note": "Opened original author or primary source and verified stated publication date"
+      },
+      {
+        "name": "asr",
+        "url": "https://huggingface.co/blog/open-asr-leaderboard-liva",
+        "checked_at": "2026-11-07T14:21:33.611Z",
+        "status": "success",
+        "note": "Opened original author or primary source and verified stated publication date"
+      },
+      {
+        "name": "usda",
+        "url": "https://www.reuters.com/technology/usda-launch-ai-tool-check-crop-production-data-after-errors-2026-11-06/",
+        "checked_at": "2026-11-07T14:21:33.611Z",
+        "status": "success",
+        "note": "Reuters Nov 6 18:23 UTC report; planned Nov 10 deployment"
+      },
+      {
+        "name": "cwe",
+        "url": "https://huggingface.co/blog/cwe-bench",
+        "checked_at": "2026-11-07T14:21:33.611Z",
+        "status": "success",
+        "note": "Nov 3 publication; late discovery included as catch-up"
+      }
+    ],
+    "sources_failed": []
+  },
+  "tldr": [
+    "This November 7 Atlas edition reviews eleven source-linked reports originally released November 3–6, including new model, security, robotics and speech developments; it is a partial catch-up, not a complete scan of today’s news.",
+    "The model capabilities and benchmark scores cited are primarily publisher-reported; one government AI quality-control deployment is planned, not yet confirmed.",
+    "Five technology proposals and three terminology proposals remain deferred for independent canonical review, so this edition adds no new catalog IDs."
+  ],
+  "news": [
+    {
+      "id": "ai-news:occ-si-bank-supervision:2026-11-07",
+      "title": "OCC outlines bank examination standards for agentic super intelligence",
+      "category": "governance",
+      "tags": [
+        "AI",
+        "agents",
+        "finance",
+        "governance"
+      ],
+      "summary": "The US OCC issued a supervisory framework for bank use of super intelligence and agentic systems, directing examiners to consider existing risk-management principles rather than inventing a separate AI risk category.",
+      "why_it_matters": "Technology-neutral supervision can help banks evaluate agent autonomy, control and accountability in context.",
+      "caveat": "This is supervisory guidance rather than proof of safety or a new binding statute.",
+      "review_status": "publisher_checked_original_source_claims_qualified",
+      "release_status": "issued_guidance",
+      "source_url": "https://www.occ.gov/news-issuances/news-releases/2026/nr-occ-2026-97.html",
+      "publication_date": "2026-11-04",
+      "event_date": "2026-11-04",
+      "discovered_at": "2026-11-07T14:21:33.611Z",
+      "added_to_atlas_at": "2026-11-07T14:39:59.877Z",
+      "collection_classification": "catch_up_prior_uncovered_interval"
+    },
+    {
+      "id": "ai-news:dharma-document-field-extractor:2026-11-07",
+      "title": "Dharma reports a 2B model for structured field extraction from documents",
+      "category": "document-ai",
+      "tags": [
+        "AI",
+        "SLM",
+        "vision",
+        "extraction"
+      ],
+      "summary": "Dharma-AI described a 2B document-image model with LoRA post-training on 43,384 examples that returns schema-directed JSON fields and nested tables.",
+      "why_it_matters": "Specialized small models may reduce the complexity and expense of repeated document intake relative to OCR plus a general model.",
+      "caveat": "Author-selected benchmark comparisons are not independently replicated; weights, licensing and API access for this exact extractor remain unverified.",
+      "review_status": "publisher_checked_original_source_claims_qualified",
+      "release_status": "author_report",
+      "source_url": "https://huggingface.co/blog/Dharma-AI/dharma-field-extractor",
+      "publication_date": "2026-11-04",
+      "event_date": "2026-11-04",
+      "discovered_at": "2026-11-07T14:21:33.611Z",
+      "added_to_atlas_at": "2026-11-07T14:39:59.877Z",
+      "collection_classification": "catch_up_prior_uncovered_interval"
+    },
+    {
+      "id": "ai-news:google-gemini-omni-1-2-flash:2026-11-07",
+      "title": "Gemini Omni 1.2 Flash expands video length and interactive editing",
+      "category": "multimodal",
+      "tags": [
+        "AI",
+        "video",
+        "API",
+        "generative-models"
+      ],
+      "summary": "Google announced a generative video model supporting 15-second clips, multi-turn revisions and stronger reference following, stating general availability through its API and enterprise offerings.",
+      "why_it_matters": "Iterative edits can be more practical than regenerating whole clips for production workflows.",
+      "caveat": "Performance claims are Google-reported; the announced 720p cost of $0.07 per generated second may change.",
+      "review_status": "publisher_checked_original_source_claims_qualified",
+      "release_status": "announced_available",
+      "source_url": "https://blog.google/innovation-and-ai/technology/developers-tools/introducing-gemini-omni-1-2-flash/",
+      "publication_date": "2026-11-05",
+      "event_date": "2026-11-05",
+      "discovered_at": "2026-11-07T14:21:33.611Z",
+      "added_to_atlas_at": "2026-11-07T14:39:59.877Z",
+      "collection_classification": "catch_up_prior_uncovered_interval"
+    },
+    {
+      "id": "ai-news:openai-gpt6-cyber:2026-11-07",
+      "title": "OpenAI introduces GPT-6 Cyber with security-task scope testing",
+      "category": "cybersecurity",
+      "tags": [
+        "AI",
+        "security",
+        "agents",
+        "alignment"
+      ],
+      "summary": "OpenAI announced a cyber-specialized model and reports a 48.5% ExploitGym score against 32.1% for GPT-5.6 Cyber, alongside evaluations of avoiding out-of-scope targets.",
+      "why_it_matters": "Demonstrates the importance of assessing both agent capability and obedience to authorized task boundaries.",
+      "caveat": "Benchmark figures and reports of Firefox and Linux findings are developer claims; guarded defender access does not imply unrestricted availability.",
+      "review_status": "publisher_checked_original_source_claims_qualified",
+      "release_status": "restricted_release",
+      "source_url": "https://openai.com/index/introducing-gpt-6-cyber/",
+      "publication_date": "2026-11-05",
+      "event_date": "2026-11-05",
+      "discovered_at": "2026-11-07T14:21:33.611Z",
+      "added_to_atlas_at": "2026-11-07T14:39:59.877Z",
+      "collection_classification": "catch_up_prior_uncovered_interval"
+    },
+    {
+      "id": "ai-news:nvidia-cosmos3-interactive:2026-11-07",
+      "title": "NVIDIA releases Cosmos 3 checkpoints for interactive simulation",
+      "category": "robotics",
+      "tags": [
+        "AI",
+        "DL",
+        "world-models",
+        "robotics",
+        "video"
+      ],
+      "summary": "NVIDIA detailed four open-weight Cosmos3-Nano checkpoints for controlled video, streaming driving-camera and LiDAR observations, and bimanual robot action prediction.",
+      "why_it_matters": "Interactive sensory prediction can support simulation research for embodied AI and robotics.",
+      "caveat": "The 16B-parameter checkpoints require substantial computation; physical realism and downstream policy benefits remain unproven by the release.",
+      "review_status": "publisher_checked_original_source_claims_qualified",
+      "release_status": "open_weights",
+      "source_url": "https://huggingface.co/blog/nvidia/cosmos-interactive-world-simulation",
+      "publication_date": "2026-11-05",
+      "event_date": "2026-11-05",
+      "discovered_at": "2026-11-07T14:21:33.611Z",
+      "added_to_atlas_at": "2026-11-07T14:39:59.877Z",
+      "collection_classification": "catch_up_prior_uncovered_interval"
+    },
+    {
+      "id": "ai-news:lerobot-v0-7-0:2026-11-07",
+      "title": "LeRobot v0.7 adds language-controlled rollouts and streaming datasets",
+      "category": "robotics",
+      "tags": [
+        "AI",
+        "robotics",
+        "VLA",
+        "training"
+      ],
+      "summary": "LeRobot's v0.7.0 developer notes describe interactive policy sessions, remote inference, streamed training datasets and distributed checkpoints for larger robot models.",
+      "why_it_matters": "Improves workflows for robotics teams limited by onboard compute and very large demonstration datasets.",
+      "caveat": "Compatibility varies across supported hardware, and developer-reported training speedups are workload-specific.",
+      "review_status": "publisher_checked_original_source_claims_qualified",
+      "release_status": "software_release",
+      "source_url": "https://huggingface.co/blog/lerobot/lerobot-release-v070",
+      "publication_date": "2026-11-05",
+      "event_date": "2026-11-05",
+      "discovered_at": "2026-11-07T14:21:33.611Z",
+      "added_to_atlas_at": "2026-11-07T14:39:59.877Z",
+      "collection_classification": "catch_up_prior_uncovered_interval"
+    },
+    {
+      "id": "ai-news:phonon-nov5-followup:2026-11-07",
+      "title": "Gradium details local Phonon speech models and license differences",
+      "category": "audio",
+      "tags": [
+        "AI",
+        "SLM",
+        "TTS",
+        "on-device"
+      ],
+      "summary": "A November 5 article explains Phonon 31m and 40m, compact flow-matching on-device TTS models for private offline use.",
+      "why_it_matters": "Local speech can reduce network dependence and keep input text on the device.",
+      "caveat": "Phonon first launched earlier, not November 5; English 31m is Apache-2.0, while the multilingual 40m has non-commercial restrictions.",
+      "review_status": "publisher_checked_original_source_claims_qualified",
+      "release_status": "technical_followup",
+      "source_url": "https://huggingface.co/blog/phonon-tts",
+      "publication_date": "2026-11-05",
+      "event_date": "2026-11-05",
+      "discovered_at": "2026-11-07T14:21:33.611Z",
+      "added_to_atlas_at": "2026-11-07T14:39:59.877Z",
+      "collection_classification": "catch_up_prior_uncovered_interval"
+    },
+    {
+      "id": "ai-news:harnesshub-rl-adapters:2026-11-07",
+      "title": "Harness Hub studies per-harness LoRA training with anti-reward-hacking checks",
+      "category": "agents",
+      "tags": [
+        "AI",
+        "LLM",
+        "LoRA",
+        "RL",
+        "agents"
+      ],
+      "summary": "An author research release reports RL-trained LoRA adapters specific to pi, opencode and hermes, with verifiable tasks and a rule-based tool-call safety proxy.",
+      "why_it_matters": "Training inside the actual agent harness can expose tool-use failure modes missed by generic instruction tuning.",
+      "caveat": "Reported wins are early held-out smoke-run results; rule-based blocking is not comprehensive security.",
+      "review_status": "publisher_checked_original_source_claims_qualified",
+      "release_status": "research_release",
+      "source_url": "https://huggingface.co/blog/harness-hub/harness-adapters",
+      "publication_date": "2026-11-06",
+      "event_date": "2026-11-06",
+      "discovered_at": "2026-11-07T14:21:33.611Z",
+      "added_to_atlas_at": "2026-11-07T14:39:59.877Z",
+      "collection_classification": "catch_up_prior_uncovered_interval"
+    },
+    {
+      "id": "ai-news:hf-private-asr-accent-tests:2026-11-07",
+      "title": "Open ASR Leaderboard gains Egyptian and Nigerian English test splits",
+      "category": "evaluation",
+      "tags": [
+        "AI",
+        "ASR",
+        "speech",
+        "evaluation"
+      ],
+      "summary": "Hugging Face and Liva AI added private conversational speech splits of 1.34 hours of Egyptian-accented and 1.55 hours of Nigerian-accented English.",
+      "why_it_matters": "Accent-specific tests help reveal performance differences hidden by global ASR averages.",
+      "caveat": "These short private samples are not a representative population study and do not establish a new model winner.",
+      "review_status": "publisher_checked_original_source_claims_qualified",
+      "release_status": "benchmark_expansion",
+      "source_url": "https://huggingface.co/blog/open-asr-leaderboard-liva",
+      "publication_date": "2026-11-06",
+      "event_date": "2026-11-06",
+      "discovered_at": "2026-11-07T14:21:33.611Z",
+      "added_to_atlas_at": "2026-11-07T14:39:59.877Z",
+      "collection_classification": "catch_up_prior_uncovered_interval"
+    },
+    {
+      "id": "ai-news:usda-crop-anomaly-check:2026-11-07",
+      "title": "USDA plans AI checks for November 10 agricultural report",
+      "category": "applications",
+      "tags": [
+        "AI",
+        "agriculture",
+        "data-quality",
+        "government"
+      ],
+      "summary": "Reuters reported that USDA intends to use an internally built AI anomaly checker as an additional validation step for its November 10 crop-production release.",
+      "why_it_matters": "An example of AI quality assurance applied to economically important government statistics.",
+      "caveat": "Use on November 10 was planned but not verified at collection, and the system is a supplement to existing validation.",
+      "review_status": "publisher_checked_original_reporting_planned_use",
+      "release_status": "planned_deployment",
+      "source_url": "https://www.reuters.com/technology/usda-launch-ai-tool-check-crop-production-data-after-errors-2026-11-06/",
+      "publication_date": "2026-11-06",
+      "event_date": "2026-11-06",
+      "discovered_at": "2026-11-07T14:21:33.611Z",
+      "added_to_atlas_at": "2026-11-07T14:39:59.877Z",
+      "collection_classification": "catch_up_prior_uncovered_interval"
+    },
+    {
+      "id": "ai-news:collinear-cwebenc-v2:2026-11-07",
+      "title": "CWE-bench v2 exposes 100 verifiable security-repair tasks",
+      "category": "evaluation",
+      "tags": [
+        "AI",
+        "agents",
+        "cybersecurity",
+        "benchmarks"
+      ],
+      "summary": "Collinear AI published 100 public repository-based vulnerability-repair tasks covering 91 CWE categories with programmatic verification and a separate held-out set.",
+      "why_it_matters": "Reproducible agent coding environments offer a stronger evaluation signal than isolated anecdotal repairs.",
+      "caveat": "The public set is access-gated; author-reported model results depend on harness and sampling, and hidden-test content is not public.",
+      "review_status": "publisher_checked_original_source_claims_qualified",
+      "release_status": "benchmark_release",
+      "source_url": "https://huggingface.co/blog/cwe-bench",
+      "publication_date": "2026-11-03",
+      "event_date": "2026-11-03",
+      "discovered_at": "2026-11-07T14:21:33.611Z",
+      "added_to_atlas_at": "2026-11-07T14:39:59.877Z",
+      "collection_classification": "catch_up_prior_uncovered_interval"
+    }
+  ],
+  "technologies": [],
+  "terms": [],
+  "site_changes": [],
+  "corrections": []
+}

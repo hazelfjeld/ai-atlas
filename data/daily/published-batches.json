@@ -674,6 +674,74 @@
       "accepted_catalog_addition_ids": [
         "tech-proposal:tohoku-aisin:stt-mram-ai-soc:2026-11-03"
       ]
+    },
+    {
+      "batch_id": "atlas-daily-20261107-recovery-20261107T142133z",
+      "source_branch": "atlas-daily-staging",
+      "source_commit": "17f1b0ac5d90e0bf3848fce1ec8e1c90e7883a24",
+      "source_batch_path": "daily-queue/batches/2026-11-07-atlas-daily-20261107-recovery-20261107T142133z.json",
+      "source_batch_sha256": "9560ee475c10351e4ff0b64de236a320d084383685e52d92ff67bc61d4899f2b",
+      "source_batch_bytes": 37216,
+      "edition_date": "2026-11-07",
+      "validation_result": "batch_sha256_bytes_schema_unique_ids_dates_checked_11_original_sources_and_deduplicated_earlier_editions",
+      "status": "partially_published_with_8_deferred_catalog_proposals",
+      "publication_outcome": "pending_production_verification",
+      "publication_edition": "2026-11-07-v1",
+      "accepted_news_ids": [
+        "ai-news:occ-si-bank-supervision:2026-11-07",
+        "ai-news:dharma-document-field-extractor:2026-11-07",
+        "ai-news:google-gemini-omni-1-2-flash:2026-11-07",
+        "ai-news:openai-gpt6-cyber:2026-11-07",
+        "ai-news:nvidia-cosmos3-interactive:2026-11-07",
+        "ai-news:lerobot-v0-7-0:2026-11-07",
+        "ai-news:phonon-nov5-followup:2026-11-07",
+        "ai-news:harnesshub-rl-adapters:2026-11-07",
+        "ai-news:hf-private-asr-accent-tests:2026-11-07",
+        "ai-news:usda-crop-anomaly-check:2026-11-07",
+        "ai-news:collinear-cwebenc-v2:2026-11-07"
+      ],
+      "deferred_news_ids": [],
+      "deferred_catalog_proposal_ids": [
+        "tech-proposal:gemini-omni12-flash:2026-11-07",
+        "tech-proposal:cosmos3-nano-sim-auto:2026-11-07",
+        "tech-proposal:phonon31m:2026-11-07",
+        "tech-proposal:dharma-field-extractor:2026-11-07",
+        "tech-proposal:harnesshub-rl-lora:2026-11-07",
+        "term-proposal:harness-adapter:2026-11-07",
+        "term-proposal:self-forcing:2026-11-07",
+        "term-proposal:schema-directed-extraction:2026-11-07"
+      ],
+      "rejected_ids": [],
+      "counts": {
+        "news_published": 11,
+        "technology_added": 0,
+        "term_added": 0,
+        "corrections": 0,
+        "news_deferred": 0,
+        "catalog_deferred": 8
+      },
+      "review_notes": "The November 7 collection is a bounded November 3–7 catch-up; all 11 original source dates are November 3–6. Publisher independently checked ten original websites and Reuters report via a contemporaneous Reuters syndication. Claims, benchmark limits and planned deployments are explicitly qualified. All eight canonical proposals remain deferred for duplicate, availability and licensing reviews. No historic archive rewritten.",
+      "publication_history": [
+        {
+          "edition": "2026-11-07-v1",
+          "source_batch_sha256": "9560ee475c10351e4ff0b64de236a320d084383685e52d92ff67bc61d4899f2b",
+          "news_published": 11,
+          "technology_added": 0,
+          "term_added": 0,
+          "corrections": 0,
+          "catalog_deferred": 8,
+          "published_at": "2026-11-07T14:39:59.877Z",
+          "status": "pending_production_verification",
+          "note": "Staged content integrated; CI, hosted page rendering and exact commit verification still pending."
+        }
+      ],
+      "production_verified_at": null,
+      "production_verified_revision": null,
+      "last_verified_at": null,
+      "last_verified_public_url": null,
+      "production_commit": null,
+      "production_workflow_run_id": null,
+      "githack_workflow_run_id": null
     }
   ]
 }

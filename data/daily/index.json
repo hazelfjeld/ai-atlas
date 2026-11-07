@@ -249,9 +249,17 @@
       "sha256": "4984d9d56bc429fcff48097257e067f9a7d87ea085f94c7be17c0971d3b7ef49",
       "bytes": 33473,
       "published_at": "2026-11-04T03:24:34Z"
+    },
+    {
+      "date": "2026-11-07",
+      "revision": 1,
+      "path": "data/daily/editions/2026-11-07-v1.json",
+      "sha256": "c41173afd54704190d48f86228cbe89cd321c7ee235d13cd292ca3b68b0b0f8c",
+      "bytes": 17838,
+      "published_at": "2026-11-07T14:39:59.877Z"
     }
   ],
   "last_successful_publish_at": "2026-11-04T03:35:50Z",
-  "status": "edition_revision_6_production_verified",
-  "coverage_note": "November 3 revision 6 independently verified on exact main e549b579d413e717e4784ed942a20ad4c06529bc. Catalog/GitHack run 41767787275 passed 159 Node tests and exact served-byte checks; Cloudflare deploy/hosted-browser run 41767787139 passed on all required jobs, 493 exact public assets on each of 3 hostnames, 34 site-browser and 41 Games-browser checks. Two previously published Structured output and Exact match guides were indexed as Atlas-only site improvements. Original 8 news reports (4 November 3 and 4 catch-up), 14 checked source URLs, 3 source failures, partial coverage and 3 deferred proposals unchanged. No new-world events, new term IDs or new corrections; older immutable archives and professor demo preserved."
+  "status": "edition_revision_1_pending_production_verification",
+  "coverage_note": "November 7 partial catch-up from November 3–6 source dates: eleven independently opened original reports, five technology and three term proposals deferred. SHA-validated staging batch; hosted publication proof pending. Prior November 3 verified edition retained as production fallback."
 }
