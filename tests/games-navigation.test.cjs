@@ -929,7 +929,7 @@ test('Research retains a concise shared workspace label before and after enhance
   const html = read('research.html');
   const script = read('site-theme.js');
   const stylesheet = read('site-chrome.css');
-  assert.match(generator, /page_label="Research library" if path == "research.html" else selected/);
+  assert.match(generator, /"research.html": "Research library"/);
   assert.match(html, /class="research-mobile-topbar site-mobile-chrome" aria-label="AI Updates mobile header" data-page-label="Research library"/);
   assert.match(script, /active\?\.textContent\?\.trim\(\) \|\| chrome\.dataset\.pageLabel \|\| heading\?\.textContent/);
   assert.match(stylesheet, /\.site-mobile-chrome\[data-page-label\]::before\{content:attr\(data-page-label\)\}/);
