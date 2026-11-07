@@ -1024,14 +1024,14 @@ test('shared standalone rails reuse the seven Discover SVG icon geometries at de
   assert.equal(css.split(start).length, 2);
   assert.equal(css.split(end).length, 2);
   const block = css.slice(css.indexOf(start), css.indexOf(end) + end.length);
-  const rules = [...block.matchAll(/\\.site-chrome \\.site-chrome__links a\\[href\\$="([^"]+)"\\]\\{--atlas-rail-icon:url\\("(data:image\\/svg\\+xml,[^"]+)"\\)\\}/g)];
+  const rules = [...block.matchAll(/\.site-chrome \.site-chrome__links a\[href\$="([^"]+)"\]\{--atlas-rail-icon:url\("(data:image\/svg\+xml,[^"]+)"\)\}/g)];
   assert.deepEqual(rules.map(m=>m[1]), ['index.html#/overview', 'whats-new.html', 'index.html#/dictionary', 'index.html#/technologies', 'index.html#/games', 'playbooks.html', 'about.html']);
   for (const rule of rules) {
     const icon = decodeURIComponent(rule[2].split(',')[1]);
     assert.ok(icon.startsWith('<svg viewBox="0 0 24 24"'));
     assert.ok(icon.includes('aria-hidden="true"') && icon.includes('<path d='));
   }
-  assert.match(source, /for \\(route, _\\), \\(_, _, icon\\) in zip\\(DESTINATIONS, DISCOVER_LINKS, strict=True\\)/);
-  assert.match(read('scripts/build_seo.py'), /sync_desktop_rail_icons_css\\(previous_css\\)/);
+  assert.match(source, /for \(route, _\), \(_, _, icon\) in zip\(DESTINATIONS, DISCOVER_LINKS, strict=True\)/);
+  assert.match(read('scripts/build_seo.py'), /sync_desktop_rail_icons_css\(previous_css\)/);
   assert.ok(offline.includes(block), 'offline fallback embeds the same shared stylesheet');
 });

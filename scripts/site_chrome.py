@@ -149,7 +149,7 @@ def render_desktop_rail_icons_css():
         uri = 'data:image/svg+xml,' + quote(icon.replace('currentColor', 'black'), safe='')
         parts.append('.site-chrome .site-chrome__links a[href$="' + route + '"]{--atlas-rail-icon:url("' + uri + '")}')
     parts.extend(('}', RAIL_ICON_END))
-    return '\\n'.join(parts)
+    return '\n'.join(parts)
 
 def sync_desktop_rail_icons_css(css):
     """Replace exactly one generated CSS block; never append duplicate rails."""
