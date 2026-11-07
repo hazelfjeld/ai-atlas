@@ -1200,3 +1200,21 @@ test('shared informational callouts are one accessible theme-aware surface acros
   assert.ok(rule.includes('.term-shell .notice a{white-space:normal'),'directory notice links may wrap on 320px mobile');
   assert.ok(!rule.includes('.detail-block.caveat'),'specialized research warnings unchanged');
 });
+
+test('Discover mobile live search shares the native search frame used across the site',()=>{
+  const css=read('site-chrome.css'),offline=read('downloads/Atlas_Demo_Offline.html');
+  const begin='/* atlas-mobile-search-frame:begin */',end='/* atlas-mobile-search-frame:end */';
+  assert.equal(css.split(begin).length,2,'one shared mobile search frame source');
+  const block=css.slice(css.indexOf(begin),css.indexOf(end)+end.length);
+  assert.ok(offline.includes(block),'offline fallback reuses the precise shared frame');
+  for(const s of [':is(.site-mobile-chrome__search,','.topbar:has(.discover-mobile-chrome) .global-search',
+      'min-height:44px;','border-radius:9px;','font-size:16px;','color:var(--ink,#202b28);'])
+    assert.ok(block.includes(s),'shared mobile search missing '+s);
+  const home=read('index.html');
+  assert.match(home,/<form class="global-search" id="global-search" role="search">/);
+  assert.match(home,/<input id="global-query" type="search"/);
+  assert.match(read('app.js'),/\$\('global-search'\)\.addEventListener\('submit'/);
+  for(const page of ['about.html','whats-new.html','games.html','technologies.html']){
+    assert.ok(read(page).includes('site-mobile-chrome__search'),page+' retains its working search destination');
+  }
+});

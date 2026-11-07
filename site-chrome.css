@@ -515,3 +515,29 @@ body:has(.site-chrome) :is(.tech-controls,.playbook-tools,.controls,.search-cont
    forces .notice a to nowrap, overflowing 320px after shared note padding. */
 .term-shell .notice a{white-space:normal;overflow-wrap:anywhere}
 /* atlas-info-callouts:end */
+
+/* atlas-mobile-search-frame:begin */
+/* Discover's real search form and the other pages' working search link share
+   the same mobile frame. Keep the native input (and its submit handler), with
+   16px text to avoid focus zoom on iOS. No extra or decorative search field. */
+@media(max-width:650px){
+  :is(.site-mobile-chrome__search,
+      .topbar:has(.discover-mobile-chrome) .global-search){
+    box-sizing:border-box;
+    min-width:0;
+    min-height:44px;
+    gap:12px;
+    padding:8px 13px;
+    border:1px solid var(--line,#dce1d7);
+    border-radius:9px;
+    background:var(--surface,#fff);
+  }
+  .topbar:has(.discover-mobile-chrome) .global-search input{
+    min-width:0;
+    font-size:16px;
+    line-height:1.4;
+    color:var(--ink,#202b28);
+  }
+  .topbar:has(.discover-mobile-chrome) .global-search > span{font-size:22px}
+}
+/* atlas-mobile-search-frame:end */

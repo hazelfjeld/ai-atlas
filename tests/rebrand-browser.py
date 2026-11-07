@@ -768,6 +768,48 @@ with sync_playwright() as p:
           and link.evaluate("el=>getComputedStyle(el).whiteSpace")=='normal'
           and page.evaluate('document.documentElement.scrollWidth<=innerWidth'))
 
+
+
+    # The actual Discover input was only 12px on narrow phones, unlike the
+    # 16px mobile search control elsewhere. Match the native frame without
+    # replacing the real search form with a fake link.
+    for width,height in ((320,700),(390,844)):
+        page.set_viewport_size({'width':width,'height':height})
+        for theme in ('light','dark'):
+            page.goto(base+'about.html')
+            page.evaluate("(t) => localStorage.setItem('atlas.theme',t)",theme)
+            page.reload()
+            search_link=page.locator('.site-mobile-chrome__search').first
+            search_link.wait_for(state='visible')
+            reference=search_link.evaluate("""el=>{
+                const s=getComputedStyle(el),r=el.getBoundingClientRect();
+                return {height:r.height,padding:s.paddingLeft,
+                        border:s.borderTopWidth,radius:s.borderTopLeftRadius,
+                        background:s.backgroundColor};
+            }""")
+            page.goto(base+'index.html#/overview')
+            field=page.locator('#global-query')
+            field.wait_for(state='visible')
+            live=page.locator('.topbar .global-search').evaluate("""el=>{
+                const s=getComputedStyle(el),r=el.getBoundingClientRect();
+                const input=el.querySelector('input');
+                return {height:r.height,padding:s.paddingLeft,
+                        border:s.borderTopWidth,radius:s.borderTopLeftRadius,
+                        background:s.backgroundColor,
+                        inputFont:getComputedStyle(input).fontSize};
+            }""")
+            check(f'Discover and About share mobile search framing at {width}px {theme}',
+                  live['height']>=44 and reference['height']>=44
+                  and all(live[k]==reference[k] for k in ('padding','border','radius','background'))
+                  and live['inputFont']=='16px'
+                  and page.evaluate('document.documentElement.scrollWidth<=innerWidth'))
+            field.fill('reward hacking')
+            field.press('Enter')
+            page.wait_for_function("location.hash.startsWith('#/search')")
+            check(f'Discover live search still submits at {width}px {theme}',
+                  'reward' in page.evaluate('location.hash').lower()
+                  and 'hacking' in page.evaluate('location.hash').lower())
+
     check('no application runtime exceptions',not errors)
     browser.close()
 (out/'results.json').write_text(json.dumps({'checks_passed':len(checks),'checks':checks,'base':base},indent=2))

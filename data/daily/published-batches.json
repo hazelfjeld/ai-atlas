@@ -685,7 +685,7 @@
       "edition_date": "2026-11-07",
       "validation_result": "batch_sha256_bytes_schema_unique_ids_dates_checked_11_original_sources_and_deduplicated_earlier_editions",
       "status": "partially_published_with_8_deferred_catalog_proposals",
-      "publication_outcome": "pending_production_verification",
+      "publication_outcome": "immutable_revision_1_cloudflare_http_browser_and_githack_verified_at_51941a5ad6e562a6e9a846cbdaecdf22a589f6a3_runs_42383633377_42383633217",
       "publication_edition": "2026-11-07-v1",
       "accepted_news_ids": [
         "ai-news-occ-si-bank-supervision-2026-11-07",
