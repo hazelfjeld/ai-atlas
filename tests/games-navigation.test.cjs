@@ -799,6 +799,31 @@ test('standalone sections use Discover’s slash-to-search shortcut without stea
   assert.equal(press(), false);
   assert.equal(searches, 1);
   assert.match(script, /site-mobile-chrome__search\[href\]/);
+  // The native mobile search link uses the same one-shot focus handoff
+  // whether activated by touch or keyboard, without changing its href.
+  const activateSearch = overrides => {
+    const event = {
+      button:0, defaultPrevented:false, ctrlKey:false, metaKey:false,
+      altKey:false, shiftKey:false,
+      target:{closest: selector => selector === 'a.site-mobile-chrome__search[href]' ? search : null},
+      ...overrides,
+    };
+    for(const handler of listeners.click) handler(event);
+  };
+  stored.delete('atlas.searchShortcutPending');
+  activateSearch();
+  assert.equal(stored.get('atlas.searchShortcutPending'), '1',
+    'Following the visible search link should focus the real Discover input');
+  for (const modified of [{ctrlKey:true},{metaKey:true},{altKey:true},
+                          {shiftKey:true},{button:1},{defaultPrevented:true},
+                          {target:{closest: () => null}}]) {
+    stored.delete('atlas.searchShortcutPending');
+    activateSearch(modified);
+    assert.equal(stored.has('atlas.searchShortcutPending'), false,
+      'Other interactions must not leave stale focus intent');
+  }
+  assert.equal(searches, 1, 'Click enhancement must leave native link navigation alone');
+
 });
 
 

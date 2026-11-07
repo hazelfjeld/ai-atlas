@@ -320,6 +320,22 @@ with sync_playwright() as p:
                     check('cross-page slash handoff submits an actual catalog query',
                           page.locator('#page h1').inner_text()=='Search the whole atlas.')
                     page.screenshot(path=str(out/'cross-page-slash-search-390-dark.png'))
+    # Activating the existing mobile search link must focus the hydrated
+    # Discover input, not merely navigate to the Search workspace.
+    for width,height in ((320,700),(390,844)):
+        page.set_viewport_size({'width':width,'height':height})
+        for theme in ('light','dark'):
+            for route in ('about.html','technology/TECH-0216-pytorch.html'):
+                page.goto(base+route)
+                page.evaluate("t => {localStorage.setItem('atlas.theme',t);document.documentElement.dataset.theme=t}",theme)
+                page.locator('.site-mobile-chrome__search').click()
+                page.wait_for_url('**/index.html#/search')
+                page.wait_for_function("() => document.activeElement?.id === 'global-query'", timeout=10000)
+                check(f'{route} {width}px {theme} search-link click focuses actual input',
+                      page.locator('#global-query').is_visible()
+                      and page.evaluate("document.documentElement.dataset.theme") == theme
+                      and page.evaluate("sessionStorage.getItem('atlas.searchShortcutPending') === null"))
+
     page.goto(base+'terms/MLD-1039-reward-hacking.html')
     check('rebranded expanded guide retains primary citations',page.locator('h1').inner_text()=='Reward hacking' and page.get_by_role('heading',name='Sources for the expanded explanation',exact=True).is_visible())
     check('mobile term guide fits the viewport',page.evaluate('document.documentElement.scrollWidth<=innerWidth'))
