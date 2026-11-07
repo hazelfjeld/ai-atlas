@@ -146,7 +146,7 @@ def render_desktop_rail_icons_css():
         '.site-chrome .site-chrome__links a[aria-current]::before{background:#d9a16f}',
     ]
     for (route, _), (_, _, icon) in zip(DESTINATIONS, DISCOVER_LINKS, strict=True):
-        uri = 'data:image/svg+xml,' + quote(icon.replace('currentColor', 'black'), safe='')
+        uri = 'data:image/svg+xml,' + quote(icon.replace('<svg ', '<svg xmlns="http://www.w3.org/2000/svg" ', 1).replace('currentColor', 'black'), safe='')
         parts.append('.site-chrome .site-chrome__links a[href$="' + route + '"]{--atlas-rail-icon:url("' + uri + '")}')
     parts.extend(('}', RAIL_ICON_END))
     return '\n'.join(parts)

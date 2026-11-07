@@ -449,8 +449,18 @@ with sync_playwright() as p:
                             icon:s.webkitMaskImage||s.maskImage,
                             current:a.hasAttribute('aria-current')};
                 })""")
-                check(f'{route} {width}px {theme} shares the seven desktop SVG icons',
-                      len(icons)==7
+                # A declared mask URL can still render a blank icon if its
+                # external SVG lacks an XML namespace. Decode every real image.
+                decoded=page.locator('.site-chrome .site-chrome__links a').evaluate_all("""async els => Promise.all(els.map(async a => {
+                    const s=getComputedStyle(a,'::before');
+                    const uri=(s.webkitMaskImage||s.maskImage).match(/data:image\\/svg\\+xml,[^")]+/)?.[0];
+                    if(!uri)return false;
+                    const img=new Image();img.src=uri;
+                    try {await img.decode();return img.naturalWidth>0 && img.naturalHeight>0;}
+                    catch {return false;}
+                }))""")
+                check(f'{route} {width}px {theme} shares seven rendered desktop SVG icons',
+                      len(icons)==7 and all(decoded)
                       and all(icon['width']=='16px' and icon['height']=='16px'
                               and 'data:image/svg+xml,' in icon['icon'] for icon in icons)
                       and sum(icon['current'] for icon in icons)<=1

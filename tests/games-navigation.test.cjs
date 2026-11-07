@@ -1028,7 +1028,7 @@ test('shared standalone rails reuse the seven Discover SVG icon geometries at de
   assert.deepEqual(rules.map(m=>m[1]), ['index.html#/overview', 'whats-new.html', 'index.html#/dictionary', 'index.html#/technologies', 'index.html#/games', 'playbooks.html', 'about.html']);
   for (const rule of rules) {
     const icon = decodeURIComponent(rule[2].split(',')[1]);
-    assert.ok(icon.startsWith('<svg viewBox="0 0 24 24"'));
+    assert.ok(icon.startsWith('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"'), 'SVG CSS image must carry the XML namespace');
     assert.ok(icon.includes('aria-hidden="true"') && icon.includes('<path d='));
   }
   assert.match(source, /for \(route, _\), \(_, _, icon\) in zip\(DESTINATIONS, DISCOVER_LINKS, strict=True\)/);
