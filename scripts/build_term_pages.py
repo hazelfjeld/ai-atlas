@@ -36,7 +36,7 @@ def section(title, body, extra=''):
 def shell(title, body, path, description, structured=None):
     # Native concept detail URLs share the same script-free header source as
     # the Concept and Technology directories. Never modify article content.
-    directory_nav = render_directory_nav('../', 'Concept dictionary')
+    directory_nav = render_directory_nav('../', 'Concept dictionary', mobile_brand=path == 'terms/index.html')
     directory_css = DIRECTORY_MOBILE_CSS
     directory_assets = '<link rel="stylesheet" href="../site-chrome.css"><script src="../site-theme.js"></script>'
     return f'''<!doctype html>

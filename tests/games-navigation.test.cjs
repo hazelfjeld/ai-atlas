@@ -933,3 +933,30 @@ test('editorial and reference hero headings reuse Discover rather than page-spec
     assert.ok(html.includes('<link rel="stylesheet" href="brand.css">'), route+' must load the shared source of typography');
   }
 });
+
+test('standalone and directory mobile drawers share the real Discover wordmark before JavaScript', () => {
+  const generator = read('scripts/site_chrome.py');
+  const theme = read('site-theme.js');
+  assert.match(generator, /mobile_wordmark = render_brand\(prefix, "site-mobile-chrome__brand"\)/);
+  assert.match(generator, /mobile_brand=True/);
+  assert.match(theme, /!menu\.querySelector\('\.site-mobile-chrome__brand'\)/,
+    'hydration must not duplicate an already-shipped brand link');
+  for (const route of [
+    'about.html', 'catalog-review.html', 'hardware-review.html',
+    'research.html', 'playbooks.html', 'technologies.html', 'whats-new.html',
+    'games.html', 'terms/index.html', 'technology/index.html'
+  ]) {
+    const html = read(route);
+    const menu = html.match(/<nav class="[^"]*site-mobile-chrome__menu[^"]*" aria-label="AI Updates sections">([\s\S]*?)<\/nav>/)?.[1];
+    assert.ok(menu, route+' keeps its native drawer');
+    const brand = menu.match(/^<a class="site-mobile-chrome__brand" href="([^"]+)" aria-label="AI Updates home">/);
+    assert.ok(brand, route+' has a real keyboard-accessible logo on first paint');
+    const expected = route.includes('/') ? '../index.html#/overview' : 'index.html#/overview';
+    assert.equal(brand[1], expected, route+' logo goes to Discover');
+    assert.equal((menu.match(/<a /g) || []).length, 8, route+' has one logo and seven section links');
+    assert.equal((menu.match(/class="site-mobile-chrome__brand"/g) || []).length, 1);
+    assert.match(menu, /<svg viewBox="0 0 36 36"/, route+' uses the same SVG wordmark');
+  }
+  assert.match(read('scripts/build_seo.py'), /mobile_brand=True/);
+  assert.match(read('scripts/build_term_pages.py'), /mobile_brand=path == 'terms\/index.html'/);
+});

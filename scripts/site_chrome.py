@@ -39,20 +39,21 @@ def render_directory_nav(prefix, selected, *, mobile_classes="directory-mobile-t
                          toggle_classes="site-mobile-chrome__toggle", menu_classes="site-mobile-chrome__menu",
                          search_classes="site-mobile-chrome__search", icon_classes="site-mobile-chrome__search-icon",
                          search_label_classes="site-mobile-chrome__search-placeholder",
-                         desktop_classes="site-chrome term-nav", labeled=True, current_kind="page", page_label=None):
+                         desktop_classes="site-chrome term-nav", labeled=True, current_kind="page", page_label=None, mobile_brand=False):
     """One script-free site header, with only page-specific shell classes configurable."""
     assert prefix in ("", "../")
     assert selected is None or selected in {name for _, name in DESTINATIONS}
     assert current_kind in ("page", "location")
     links = render_primary_links(prefix, selected, current_kind)
     brand = render_brand(prefix)
+    mobile_wordmark = render_brand(prefix, "site-mobile-chrome__brand") if mobile_brand else ""
     mobile = (
         '<div class="' + mobile_classes + '"' +
         (' aria-label="AI Updates mobile header"' if labeled else '') +
         (' data-page-label="' + escape(page_label) + '"' if page_label else '') + '>'
         '<details class="' + details_classes + '" id="' + details_id + '">'
         '<summary class="' + toggle_classes + '" aria-label="Toggle navigation"><span aria-hidden="true">☰</span></summary>'
-        '<nav class="' + menu_classes + '" aria-label="AI Updates sections">' + links + '</nav></details>'
+        '<nav class="' + menu_classes + '" aria-label="AI Updates sections">' + mobile_wordmark + links + '</nav></details>'
         '<a class="' + search_classes + '" href="' + prefix + 'index.html#/search" aria-label="Search AI Updates in the main collection">'
         '<span class="' + icon_classes + '" aria-hidden="true">⌕</span>'
         '<span class="' + search_label_classes + '">Search tools, research, concepts…</span></a></div>'
@@ -104,6 +105,7 @@ def render_standalone_nav(path):
         search_label_classes=classes(label, "site-mobile-chrome__search-placeholder"),
         desktop_classes="site-chrome " + desktop, labeled=labeled, current_kind=kind,
         page_label="Research library" if path == "research.html" else None,
+        mobile_brand=True,
     )
     # Research's main landmark intentionally starts between the two headers.
     if path == "research.html":

@@ -55,6 +55,30 @@ with sync_playwright() as p:
           page.locator('.research-mobile-topbar').get_attribute('data-page-label')=='Research library'
           and 'Research library' in page.locator('.research-mobile-topbar').evaluate(
               "el => getComputedStyle(el, '::before').content"))
+
+    # The standalone native drawer must expose the same *real*, clickable
+    # wordmark as Discover even before hydration or with scripts disabled.
+    # A CSS ::after fallback looks branded but is not a navigable home link.
+    for width in (320, 390):
+        page.set_viewport_size({'width': width, 'height': 844})
+        for route in ('about.html', 'whats-new.html', 'playbooks.html',
+                      'terms/index.html', 'technology/index.html'):
+            page.goto(base + route)
+            page.locator('details.site-mobile-chrome__nav summary').click()
+            brand = page.locator('details.site-mobile-chrome__nav .site-mobile-chrome__brand')
+            check(f'{route} {width}px no-JS drawer has one clickable Discover wordmark',
+                  brand.count() == 1 and brand.is_visible()
+                  and brand.get_attribute('href') ==
+                      ('../index.html#/overview' if '/' in route else 'index.html#/overview')
+                  and brand.locator('svg').count() == 1
+                  and page.locator('details.site-mobile-chrome__nav nav a').count() == 8)
+            if width == 390 and route in ('about.html', 'terms/index.html'):
+                page.screenshot(path=str(out / f'no-script-wordmark-{route.replace("/", "-")}.png'))
+            brand.click()
+            check(f'{route} {width}px logo opens Discover without scripts',
+                  page.url.endswith('index.html#/overview')
+                  and page.locator('main h1').first.inner_text() == 'Discover')
+
     static.close()
     context=browser.new_context(viewport={'width':1440,'height':1050},reduced_motion='reduce')
     page=context.new_page()
@@ -335,6 +359,28 @@ with sync_playwright() as p:
                       and page.evaluate('document.documentElement.dataset.theme') == theme)
                 if (width,theme) in ((390,'dark'),(1280,'light')):
                     page.screenshot(path=str(out/f'editorial-heading-{route}-{width}-{theme}.png'))
+
+
+    # Every migrated page uses one real SVG brand rather than waiting for
+    # DOMContentLoaded to clone it or rendering a second dynamic logo.
+    for width in (320, 390):
+        page.set_viewport_size({'width':width,'height':844})
+        for theme in ('light','dark'):
+            page.goto(base+'index.html#/overview')
+            page.evaluate("t => {localStorage.setItem('atlas.theme',t);document.documentElement.dataset.theme=t}",theme)
+            for route in ('about.html','whats-new.html','research.html',
+                          'technologies.html','playbooks.html',
+                          'terms/index.html','technology/index.html'):
+                page.goto(base+route)
+                menu=page.locator('details.site-mobile-chrome__nav .site-mobile-chrome__menu')
+                check(f'{route} {width}px {theme} drawer reuses one brand after hydration',
+                      menu.locator('a.site-mobile-chrome__brand').count()==1
+                      and menu.locator('a[href]').count()==8
+                      and page.evaluate('document.documentElement.dataset.theme')==theme
+                      and page.evaluate('document.documentElement.scrollWidth <= innerWidth'))
+                if width==390 and theme=='dark' and route in ('about.html','terms/index.html'):
+                    page.locator('details.site-mobile-chrome__nav summary').click()
+                    page.screenshot(path=str(out/f'mobile-brand-{route.replace("/", "-")}-390-dark.png'))
 
     check('no application runtime exceptions',not errors)
     browser.close()
