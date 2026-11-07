@@ -506,6 +506,46 @@ with sync_playwright() as p:
                 if width == 1280 and theme == 'light' and route in ('about.html','catalog-review.html'):
                     page.screenshot(path=str(out / f'editorial-heading-{route}.png'),full_page=True)
 
+
+    # One editorial reading frame is used across existing page families, while
+    # the daily archive and playable Games retain their own content layouts.
+    # Compare first-content position to Discover at real phone/tablet/desktop
+    # sizes and verify that theme/navigation survive every page transition.
+    reading_routes = (
+        ('about.html', '.term-shell'),
+        ('terms/MLD-0002-ablation-study.html', '.term-shell'),
+        ('technology/TECH-0216-pytorch.html', '.term-shell'),
+        ('technologies.html', '.tech-shell'),
+        ('playbooks.html', '.playbook-shell'),
+        ('hardware-review.html', '.review-shell'),
+        ('catalog-review.html', '.shell:has(> .site-chrome.nav)'),
+        ('research.html', '.shell:has(> .site-chrome.research-site-chrome)'),
+    )
+    for width, height in ((320,700),(390,844),(768,900),(1280,900)):
+        page.set_viewport_size({'width':width,'height':height})
+        for theme in ('light','dark'):
+            page.goto(base+'index.html#/overview')
+            page.locator('.discover-heading h1').wait_for()
+            page.evaluate("t => {localStorage.setItem('atlas.theme',t);document.documentElement.dataset.theme=t}",theme)
+            discover_x = page.locator('.discover-heading h1').evaluate('el => el.getBoundingClientRect().left')
+            for route, selector in reading_routes:
+                page.goto(base+route)
+                el = page.locator(selector).first
+                metrics = el.evaluate("""el => {
+                    const r=el.getBoundingClientRect(), s=getComputedStyle(el);
+                    return {max:s.maxWidth,padding:parseFloat(s.paddingLeft),
+                            contentLeft:r.left+parseFloat(s.paddingLeft)};
+                }""")
+                aligned = (width < 651 or
+                           (metrics['max']=='1120px' and
+                            24 <= metrics['padding'] <= 36 and
+                            abs(metrics['contentLeft']-discover_x) <= 16))
+                check(f'{route} {width}px {theme} shares Discover reading frame without overflow',
+                      aligned and page.evaluate('document.documentElement.scrollWidth <= innerWidth') and
+                      page.evaluate('document.documentElement.dataset.theme')==theme)
+                if (width,theme)==(1280,'light') and route in ('about.html','playbooks.html','hardware-review.html','catalog-review.html'):
+                    page.screenshot(path=str(out/f'reading-frame-{route}-1280-light.png'))
+
     check('no application runtime exceptions',not errors)
     browser.close()
 (out/'results.json').write_text(json.dumps({'checks_passed':len(checks),'checks':checks,'base':base},indent=2))

@@ -1054,3 +1054,26 @@ test('reference and editorial section headings reuse Discover reading-desk typog
     ['technology/TECH-0216-pytorch.html', 'class="profile-section']
   ]) assert.ok(read(page).includes(heading), page + ' remains covered by the shared selector');
 });
+
+test('one shared editorial workspace reading frame aligns existing page families, not news or Games', () => {
+  const css=read('site-chrome.css'), offline=read('downloads/Atlas_Demo_Offline.html');
+  const block=css.split('/* One desktop reading frame shared by existing editorial and reference families.')[1]?.split('/* atlas-rail-icons:begin */')[0];
+  assert.ok(block, 'shared frame must be present in the source stylesheet');
+  assert.match(block, /@media \(min-width:651px\)/);
+  assert.match(block, /max-width:1120px!important/);
+  assert.match(block, /padding-inline:clamp\(24px,3vw,36px\)!important/);
+  assert.match(block, /max-width:74ch/);
+  for (const selector of ['.term-shell','.tech-shell','.playbook-shell','.review-shell',
+    '.shell:has(> .site-chrome.nav)', '.shell:has(> .site-chrome.research-site-chrome)']) {
+    assert.ok(block.includes(selector), 'shared frame missing '+selector);
+  }
+  assert.ok(!block.includes('.discover-layout') && !block.includes('.games-body') &&
+    !block.includes('.shell{'), 'news and playable Games must keep distinct layouts');
+  assert.ok(offline.includes('/* One desktop reading frame shared by existing editorial and reference families.') &&
+    offline.includes(block), 'offline build embeds the exact current shared frame');
+  for (const route of ['about.html','technologies.html','playbooks.html','hardware-review.html',
+    'catalog-review.html','research.html','terms/MLD-0002-ablation-study.html',
+    'technology/TECH-0216-pytorch.html']) {
+    assert.match(read(route), /site-chrome\.css/, route+' reuses shared CSS');
+  }
+});
