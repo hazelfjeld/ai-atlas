@@ -297,6 +297,50 @@ with sync_playwright() as p:
     page.locator('#start-quiz').wait_for()
     check('returning to Discover retains the theme selected on About',
           page.evaluate("document.documentElement.dataset.theme==='dark'"))
+    # Native mobile drawers used to leave focused links hidden after tapping
+    # outside; BFCache could also restore an open menu with inert surroundings.
+    # Exercise the actual shared chrome on editorial and generated pages.
+    for width,height in ((320,700),(390,844)):
+        page.set_viewport_size({'width':width,'height':height})
+        for theme in ('light','dark'):
+            for route in ('about.html','technology/TECH-0216-pytorch.html'):
+                page.goto(base+route)
+                page.evaluate("t => {localStorage.setItem('atlas.theme',t);document.documentElement.dataset.theme=t}",theme)
+                drawer=page.locator('details.site-mobile-chrome__nav')
+                trigger=drawer.locator('summary')
+                trigger.click()
+                page.wait_for_function("document.querySelector('.site-mobile-chrome__search').inert")
+                drawer.locator('.site-mobile-chrome__menu a[href]').last.focus()
+                # Dispatch on the document outside the modal; real background
+                # nodes are inert and browser hit testing retargets their events.
+                page.evaluate("document.dispatchEvent(new PointerEvent('pointerdown',{bubbles:true}))")
+                check(f'{route} {width}px {theme} outside dismissal restores visible trigger and content',
+                      not drawer.evaluate('el=>el.open')
+                      and page.evaluate("document.activeElement.matches('details.site-mobile-chrome__nav summary')")
+                      and not page.locator('.site-mobile-chrome__search').evaluate('el=>el.inert')
+                      and page.evaluate('document.documentElement.scrollWidth<=innerWidth'))
+                trigger.click()
+                page.wait_for_function("document.querySelector('.site-mobile-chrome__search').inert")
+                page.evaluate("window.dispatchEvent(new PageTransitionEvent('pageshow',{persisted:true}))")
+                check(f'{route} {width}px {theme} restored page clears stale modal isolation',
+                      not drawer.evaluate('el=>el.open')
+                      and not page.locator('.site-mobile-chrome__search').evaluate('el=>el.inert')
+                      and page.evaluate("document.activeElement.matches('details.site-mobile-chrome__nav summary')"))
+                if width==390 and theme=='dark':
+                    page.screenshot(path=str(out/f'drawer-dismissed-{route.replace("/", "-")}.png'))
+    # Real Back/Forward navigation must preserve the canonical destination and
+    # leave the returning page navigable, regardless of BFCache eligibility.
+    page.set_viewport_size({'width':390,'height':844})
+    page.goto(base+'about.html')
+    page.locator('details.site-mobile-chrome__nav summary').click()
+    page.locator('details.site-mobile-chrome__nav nav a[href$="playbooks.html"]').click()
+    page.wait_for_url('**/playbooks.html')
+    page.go_back()
+    page.wait_for_url('**/about.html')
+    check('browser Back restores a usable standalone workspace after drawer navigation',
+          not page.locator('details.site-mobile-chrome__nav').evaluate('el=>el.open')
+          and not page.locator('.site-mobile-chrome__search').evaluate('el=>el.inert'))
+
     # On standalone and reference routes, / used to navigate to Search but
     # leave focus behind. Compare its real input handoff across screen sizes.
     for width, height in ((320,700),(390,844),(768,900),(1280,900)):

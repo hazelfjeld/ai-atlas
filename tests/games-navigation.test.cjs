@@ -1237,6 +1237,23 @@ test('shared informational callouts are one accessible theme-aware surface acros
   assert.ok(!rule.includes('.detail-block.caveat'),'specialized research warnings unchanged');
 });
 
+test('shared native drawers restore keyboard focus and inert state after dismissal and BFCache', () => {
+  const source=read('site-theme.js'), offline=read('downloads/Atlas_Demo_Offline.html');
+  new vm.Script(source);
+  assert.match(source,/function closeSharedDrawers\(\{restoreFocus = false\} = \{\}\)/);
+  assert.match(source,/const hadFocus = menu\.contains\(document\.activeElement\)/);
+  assert.match(source,/menu\.querySelector\('summary'\)\?\.focus\(\{preventScroll:true\}\)/);
+  assert.match(source,/closeSharedDrawers\(\{restoreFocus:true\}\)/);
+  assert.match(source,/window\.addEventListener\('pageshow', \(event\) =>/);
+  assert.match(source,/if \(event\.persisted\) closeSharedDrawers\(\)/);
+  assert.ok(offline.includes(source),'offline demo must embed the exact shared drawer behavior');
+  for(const route of ['index.html','about.html','whats-new.html','technologies.html',
+    'playbooks.html','research.html','games.html','terms/index.html',
+    'technology/TECH-0216-pytorch.html']) {
+    assert.match(read(route),/site-theme\.js/,route+' must use the shared drawer helper');
+  }
+});
+
 test('Discover mobile live search shares the native search frame used across the site',()=>{
   const css=read('site-chrome.css'),offline=read('downloads/Atlas_Demo_Offline.html');
   const begin='/* atlas-mobile-search-frame:begin */',end='/* atlas-mobile-search-frame:end */';

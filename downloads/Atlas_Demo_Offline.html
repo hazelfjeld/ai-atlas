@@ -820,6 +820,21 @@ function rememberSearchFocus() {
   catch (_) { /* The native search link still works without storage. */ }
 }
 
+
+// Close a native shared drawer and release its background immediately, rather
+// than leaving an invisible focused link or an inert workspace until the
+// asynchronous <details> toggle event runs. Used on outside dismissal and
+// BFCache restoration across editorial, reference and Discover routes.
+function closeSharedDrawers({restoreFocus = false} = {}) {
+  const menus = document.querySelectorAll('details.site-mobile-chrome__nav[open]');
+  menus.forEach(menu => {
+    const hadFocus = menu.contains(document.activeElement);
+    menu.open = false;
+    if (restoreFocus || hadFocus) menu.querySelector('summary')?.focus({preventScroll:true});
+  });
+  syncSharedDrawerIsolation();
+}
+
 /* The native details menu works without scripts; enhance it to match the
    Discover drawer's Escape and outside-click behavior when JS is available. */
 document.addEventListener('keydown', (event) => {
@@ -846,10 +861,8 @@ document.addEventListener('keydown', (event) => {
   }
   if (event.key === 'Escape') {
     if (event.defaultPrevented) return;
-    const menus = document.querySelectorAll('details.site-mobile-chrome__nav[open]');
-    if (!menus.length) return;
-    menus.forEach(menu => { menu.open = false; });
-    menus[0].querySelector('summary')?.focus();
+    if (!document.querySelector('details.site-mobile-chrome__nav[open]')) return;
+    closeSharedDrawers({restoreFocus:true});
     event.preventDefault();
     return;
   }
@@ -876,9 +889,12 @@ document.addEventListener('click', event => {
   rememberSearchFocus();
 });
 document.addEventListener('pointerdown', (event) => {
-  document.querySelectorAll('details.site-mobile-chrome__nav[open]').forEach(menu => {
-    if (!menu.contains(event.target)) menu.open = false;
-  });
+  // A modal drawer deliberately makes the background inert. An outside tap
+  // dismisses it first; return keyboard/AT focus to the still-visible toggle.
+  if ([...document.querySelectorAll('details.site-mobile-chrome__nav[open]')]
+      .some(menu => !menu.contains(event.target))) {
+    closeSharedDrawers({restoreFocus:true});
+  }
 });
 
 /* Discover makes its open drawer modal to assistive technology. The native
@@ -917,6 +933,12 @@ if (typeof window !== 'undefined' && window.addEventListener) {
     syncSharedDrawerIsolation();
   });
 }
+
+// Restoring a page from the back/forward cache must not resurrect a modal
+// drawer with stale inert siblings or hidden keyboard focus.
+window.addEventListener('pageshow', (event) => {
+  if (event.persisted) closeSharedDrawers();
+});
 
 /* Use the existing canonical selected link as the standalone workspace
    breadcrumb, matching Discover without introducing duplicate navigation. */
