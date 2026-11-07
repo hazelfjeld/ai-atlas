@@ -803,6 +803,10 @@ with sync_playwright() as p:
                   and all(live[k]==reference[k] for k in ('padding','border','radius','background'))
                   and live['inputFont']=='16px'
                   and page.evaluate('document.documentElement.scrollWidth<=innerWidth'))
+            # Search is initialized asynchronously after the catalog verifies.
+            # Wait for the existing ready marker, then exercise real submission;
+            # merely finding the painted input does not prove it is hydrated.
+            page.locator('#catalog-loading').wait_for(state='detached', timeout=20000)
             field.fill('reward hacking')
             field.press('Enter')
             page.wait_for_function("location.hash.startsWith('#/search')")
