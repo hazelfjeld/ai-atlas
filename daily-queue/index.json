@@ -33,6 +33,22 @@
         "terms": 2,
         "corrections": 0
       }
+    },
+    {
+      "path": "daily-queue/batches/2026-11-07-atlas-daily-20261107-recovery-20261107T142133z.json",
+      "sha256": "9560ee475c10351e4ff0b64de236a320d084383685e52d92ff67bc61d4899f2b",
+      "batch_id": "atlas-daily-20261107-recovery-20261107T142133z",
+      "local_date": "2026-11-07",
+      "collected_at": "2026-11-07T14:21:33.611Z",
+      "coverage_start": "2026-11-03T00:00:00Z",
+      "coverage_end": "2026-11-07T14:21:33.611Z",
+      "coverage_status": "partial",
+      "counts": {
+        "news": 11,
+        "technologies": 5,
+        "terms": 3,
+        "corrections": 0
+      }
     }
   ],
   "last_successful_coverage_end": null,
