@@ -301,7 +301,9 @@ test('shared mobile drawer makes background inert without leaving hidden control
   assert.equal(drawer.open,false, 'tablet resize dismisses the former mobile drawer');
   assert.equal(main.inert,false, 'tablet resize clears mobile-only background isolation');
   assert.equal(document.activeElement,desktopLink,
-    'keyboard focus returns to visible desktop navigation, not the hidden mobile summary');
+    'keyboard focus returns to the selected desktop section, not the earlier brand or hidden toggle');
+  assert.ok(script.includes("document.querySelector('.site-chrome__links a[aria-current]') ||"),
+    'active section must take priority over DOM-earlier brand link');
   assert.equal(preInert.inert,true);
   window.innerWidth = 390;
   events.resize();

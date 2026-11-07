@@ -34,8 +34,13 @@ function closeSharedDrawers({restoreFocus = false, desktopFocus = false} = {}) {
   syncSharedDrawerIsolation();
   if (desktopFocus && moveFocusToDesktop) {
     // Both Discover and standalone routes already have a visible rail link.
-    document.querySelector('.site-chrome__links a[aria-current], #navigation a[aria-current], .site-chrome__brand, #navigation a')
-      ?.focus({preventScroll:true});
+    // querySelector with a comma-list returns DOM order, not selector priority:
+    // the brand appears first in standalone rails. Prefer the active section.
+    const destination = document.querySelector('.site-chrome__links a[aria-current]') ||
+      document.querySelector('#navigation a[aria-current]') ||
+      document.querySelector('.site-chrome__brand') ||
+      document.querySelector('#navigation a');
+    destination?.focus({preventScroll:true});
   }
 }
 
