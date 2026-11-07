@@ -306,6 +306,33 @@ with sync_playwright() as p:
                 if width==1280 and theme=='light':
                     page.screenshot(path=str(out/f'heading-{route.replace(".html","")}-{width}-{theme}.png'))
 
+    # Three remaining editorial/reference pages previously used independent h1
+    # sizing; keep their first-paint hero typography aligned with Discover.
+    editorial_titles = (
+        ('about.html', 'header.hero .discover-heading h1'),
+        ('hardware-review.html', 'header .discover-heading h1'),
+        ('catalog-review.html', 'main > header .discover-heading h1'),
+    )
+    for width, height in ((320, 700), (390, 844), (768, 900), (1280, 900)):
+        page.set_viewport_size({'width':width, 'height':height})
+        for theme in ('light','dark'):
+            page.goto(base+'index.html#/overview')
+            page.evaluate("t => {localStorage.setItem('atlas.theme',t);document.documentElement.dataset.theme=t}",theme)
+            baseline = page.locator('.discover-heading h1').evaluate(
+                "el => {const s=getComputedStyle(el);return {family:s.fontFamily,weight:s.fontWeight,size:s.fontSize,lineHeight:s.lineHeight}}")
+            for route, selector in editorial_titles:
+                page.goto(base+route)
+                title = page.locator(selector)
+                title.wait_for()
+                actual = title.evaluate(
+                    "el => {const s=getComputedStyle(el);return {family:s.fontFamily,weight:s.fontWeight,size:s.fontSize,lineHeight:s.lineHeight}}")
+                check(f'{route} {width}px {theme} editorial hero matches Discover and fits',
+                      actual == baseline and title.is_visible()
+                      and page.evaluate('document.documentElement.scrollWidth <= innerWidth')
+                      and page.evaluate('document.documentElement.dataset.theme') == theme)
+                if (width,theme) in ((390,'dark'),(1280,'light')):
+                    page.screenshot(path=str(out/f'editorial-heading-{route}-{width}-{theme}.png'))
+
     check('no application runtime exceptions',not errors)
     browser.close()
 (out/'results.json').write_text(json.dumps({'checks_passed':len(checks),'checks':checks,'base':base},indent=2))

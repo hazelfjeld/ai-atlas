@@ -913,3 +913,21 @@ test('Research, Technology and Playbooks reuse Discover editorial heading typogr
     assert.match(html, /<link rel="stylesheet" href="brand.css">/);
   }
 });
+
+
+test('editorial and reference hero headings reuse Discover rather than page-specific type rules', () => {
+  const brand = read('brand.css');
+  assert.match(brand, /\\.discover-heading h1\\{font:400 clamp\\(40px,4\\.2vw,56px\\)\\/1\\.08 Georgia/);
+  for (const [route, heading, formerRule] of [
+    ['about.html', 'The frontier, in context.', '.term-shell h1{font:'],
+    ['hardware-review.html', 'What did the STT-MRAM AI chip actually demonstrate?', '.review-shell h1{font:'],
+    ['catalog-review.html', 'Seven proposals, not seven new entries.', 'h1{font:400 clamp(38px'],
+  ]) {
+    const html = read(route);
+    assert.equal((html.match(/class="discover-heading"/g) || []).length, 1, route+' must reuse one shared hero heading');
+    assert.match(html, /<div class="discover-heading"><div><p class="eyebrow">[^<]+<\\/p><h1>[^<]+<\\/h1><\\/div><\\/div>/);
+    assert.ok(html.includes('<h1>'+heading+'</h1>'), route+' retains its unchanged public title');
+    assert.ok(!html.includes(formerRule), route+' must not preserve obsolete independent h1 sizing');
+    assert.ok(html.includes('<link rel="stylesheet" href="brand.css">'), route+' must load the shared source of typography');
+  }
+});
