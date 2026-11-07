@@ -1516,18 +1516,23 @@ with sync_playwright() as p:
     first_paint.route('**/site-theme.js',
                       lambda route: route.fulfill(status=200, content_type='application/javascript',
                                                    body='/* intentionally suppressed for first-paint QA */'))
-    for route in ('whats-new.html', 'about.html', 'terms/index.html',
-                  'technology/TECH-0216-pytorch.html'):
+    for route, expected in (
+        ('whats-new.html', 'What’s New Today'),
+        ('about.html', 'About'),
+        ('terms/index.html', 'AI Updates'),
+        ('technology/TECH-0216-pytorch.html', 'AI Updates'),
+    ):
         first_paint.goto(base + route)
-        check('unenhanced shared topbar has a visible title on ' + route,
+        check('unenhanced shared topbar has its expected visible title on ' + route,
               first_paint.locator('.site-mobile-chrome').is_visible()
-              and first_paint.locator('.site-mobile-chrome').evaluate('''el => {
+              and first_paint.locator('.site-mobile-chrome').evaluate('''(el, expected) => {
                   const title = getComputedStyle(el, '::before');
-                  return !el.hasAttribute('data-page-label') &&
-                         title.content === '"AI Updates"' &&
+                  return (el.getAttribute('data-page-label') ===
+                          (expected === 'AI Updates' ? null : expected)) &&
+                         title.content === JSON.stringify(expected) &&
                          title.display !== 'none' &&
                          el.getBoundingClientRect().height >= 76;
-              }'''))
+              }''', expected))
         first_paint.screenshot(path=str(out / ('first-paint-' + route.replace('/', '-') + '.png')),
                                full_page=False)
     first_paint.close()
