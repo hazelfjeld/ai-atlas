@@ -519,7 +519,7 @@ with sync_playwright() as p:
         ('playbooks.html', '.playbook-shell'),
         ('hardware-review.html', '.review-shell'),
         ('catalog-review.html', '.shell:has(> .site-chrome.nav)'),
-        ('research.html', '.shell:has(> .site-chrome.research-site-chrome)'),
+        ('research.html', '.shell:has(> main > .site-chrome.research-site-chrome)'),
     )
     for width, height in ((320,700),(390,844),(768,900),(1280,900)):
         page.set_viewport_size({'width':width,'height':height})

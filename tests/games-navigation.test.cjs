@@ -1064,7 +1064,7 @@ test('one shared editorial workspace reading frame aligns existing page families
   assert.match(block, /padding-inline:clamp\(24px,3vw,36px\)!important/);
   assert.match(block, /max-width:74ch/);
   for (const selector of ['.term-shell','.tech-shell','.playbook-shell','.review-shell',
-    '.shell:has(> .site-chrome.nav)', '.shell:has(> .site-chrome.research-site-chrome)']) {
+    '.shell:has(> .site-chrome.nav)', '.shell:has(> main > .site-chrome.research-site-chrome)']) {
     assert.ok(block.includes(selector), 'shared frame missing '+selector);
   }
   assert.ok(!block.includes('.discover-layout') && !block.includes('.games-body') &&

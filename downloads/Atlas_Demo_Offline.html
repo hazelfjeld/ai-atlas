@@ -538,7 +538,7 @@ body:has(.site-chrome){padding-top:78px}
 @media (min-width:651px){
 :is(.term-shell,.tech-shell,.playbook-shell,.review-shell,
     .shell:has(> .site-chrome.nav),
-    .shell:has(> .site-chrome.research-site-chrome)){
+    .shell:has(> main > .site-chrome.research-site-chrome)){
   box-sizing:border-box;width:100%;max-width:1120px!important;
   padding-inline:clamp(24px,3vw,36px)!important;
 }
@@ -546,7 +546,7 @@ body:has(.site-chrome){padding-top:78px}
 :is(.term-shell .profile-section > p,.term-shell .detail-block > p,
     .review-shell > section > p,
     .shell:has(> .site-chrome.nav) > main > section > p,
-    .shell:has(> .site-chrome.research-site-chrome) > main > section > p){
+    .shell:has(> main > .site-chrome.research-site-chrome) > main > section > p){
   max-width:74ch;
 }
 }
