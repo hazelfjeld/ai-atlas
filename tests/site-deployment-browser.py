@@ -844,7 +844,16 @@ with sync_playwright() as p:
               }"""))
         # The revision diff previously repeated 'Source' and 'Catalog record'
         # for every changed entry; link-list navigation could not distinguish them.
-        if any(e['date'] == '2026-11-03' and e['revision'] > 1 for e in index['editions']):
+        newest = index['editions'][-1]
+        if not any(e['date'] == newest['date'] and e['revision'] < newest['revision']
+                   for e in index['editions']):
+            check('a first dated revision cannot fabricate previous revision links',
+                  page.locator('#revision-history').is_hidden()
+                  and page.locator('#revision-history-content .revision-group li a').count() == 0)
+        # Verify previous-release comparisons on a real multi-revision date.
+        if any(e['date'] == '2026-11-03' and e['revision'] == 6 for e in index['editions']):
+            page.goto(base + 'whats-new.html?date=2026-11-03&revision=6')
+            page.wait_for_function("!document.getElementById('edition-select').disabled", timeout=45000)
             page.locator('#revision-history-content .revision-group li a').first.wait_for(timeout=45000)
             check('revision comparison links identify changed records in screen-reader link lists',
                   page.evaluate("""() => {
