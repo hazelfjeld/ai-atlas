@@ -1278,7 +1278,7 @@ test('Discover mobile live search shares the native search frame used across the
 test('editorial subpage identity wins over the selected daily navigation section', () => {
   const script = read('site-theme.js');
   const offline = read('downloads/Atlas_Demo_Offline.html');
-  assert.match(script, /const label = chrome\\.dataset\\.pageLabel \\|\\| active\\?\\.textContent\\?\\.trim\\(\\)/);
+  assert.match(script, /const label = chrome\.dataset\.pageLabel \|\| active\?\.textContent\?\.trim\(\)/);
   assert.ok(offline.includes(script), 'single-file fallback includes updated shared theme helper');
   for (const [route, identity] of [
     ['catalog-review.html', 'Catalog review'],
@@ -1286,7 +1286,7 @@ test('editorial subpage identity wins over the selected daily navigation section
   ]) {
     const html = read(route);
     assert.ok(html.includes('data-page-label="' + identity + '"'), route + ' has its real subpage label');
-    assert.match(html, /href="whats-new\\.html" aria-current="location">What’s New Today<\\/a>/,
+    assert.match(html, /href="whats-new\.html" aria-current="location">What’s New Today<\/a>/,
       route + ' keeps the correct selected parent section');
     assert.equal((html.match(/data-page-label=/g) || []).length, 1, route + ' owns one label');
   }
