@@ -293,9 +293,15 @@ body:has(.site-chrome){padding-top:78px}
 
 /* Shared editorial card surfaces across existing page families.
    Discover's .discovery-card defines the 11px surface/border vocabulary.
-   Keep the news feed, Games controls, and specialized evidence callouts intact. */
+   Keep the news feed, Games controls, and specialized evidence callouts intact.
+   Independent page-local legacy theme variables must not tint card surfaces. */
+:root{--atlas-card-surface:#FFFFFF;--atlas-card-line:#DFE3DC}
+:root[data-theme="dark"]{--atlas-card-surface:#222D27;--atlas-card-line:#3B4A40}
+@media (prefers-color-scheme:dark){
+ :root:not([data-theme="light"]){--atlas-card-surface:#222D27;--atlas-card-line:#3B4A40}
+}
 :is(.term-shell > .profile-section,
-    .term-shell > .detail-block,
+    .term-shell > .detail-block:not(.caveat),
     .playbook-shell .playbook,
     .tech-shell .tech-card,
     .shell:has(> .site-chrome.nav) article.card,
@@ -303,8 +309,8 @@ body:has(.site-chrome){padding-top:78px}
     .shell:has(> .site-chrome.top) .panel){
   box-sizing:border-box;
   min-width:0;
-  background:var(--surface);
-  border:1px solid var(--line);
+  background:var(--atlas-card-surface);
+  border:1px solid var(--atlas-card-line);
   border-radius:11px;
   padding:clamp(18px,2vw,24px);
 }

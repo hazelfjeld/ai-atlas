@@ -1085,14 +1085,16 @@ test('shared editorial cards adopt Discover surface geometry without touching Ga
   const rule=marker+css.split(marker)[1].split('/* atlas-rail-icons:begin */')[0];
   assert.ok(offline.includes(rule),'offline fallback embeds exact shared card rule');
   for (const fragment of [
-    '.term-shell > .profile-section', '.term-shell > .detail-block',
+    '.term-shell > .profile-section', '.term-shell > .detail-block:not(.caveat)',
     '.playbook-shell .playbook', '.tech-shell .tech-card',
     '.shell:has(> .site-chrome.nav) article.card',
     '.shell:has(> main > .site-chrome.research-site-chrome) .cards > .card',
     '.shell:has(> .site-chrome.top) .panel',
-    'background:var(--surface);', 'border:1px solid var(--line);',
+    'background:var(--atlas-card-surface);', 'border:1px solid var(--atlas-card-line);',
     'border-radius:11px;', 'padding:clamp(18px,2vw,24px);'
   ]) assert.ok(rule.includes(fragment),'missing shared card contract '+fragment);
+  assert.ok(rule.includes(':root:not([data-theme="light"])') && rule.includes(':root[data-theme="dark"]'),
+    'OS and explicit dark themes must match the shared card palette');
   assert.ok(!rule.includes('.games-body') && !rule.includes('.discovery-card{'),
     'do not override Games or redefine Discover cards');
   for (const route of ['about.html','whats-new.html','technologies.html','playbooks.html',
