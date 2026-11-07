@@ -909,7 +909,7 @@ test('Research, Technology and Playbooks reuse Discover editorial heading typogr
     assert.ok(section, route+' intro must exist');
     assert.match(section, /<div class="discover-heading"><div><p class="eyebrow"/);
     assert.match(section, heading);
-    assert.match(section, /<\/h1><\/div><\/div><p/, route+' descriptive text must remain outside the heading component');
+    assert.match(section, /<\/h1>\s*<\/div>\s*<\/div>\s*<p/, route+' descriptive text must remain outside the heading component');
     assert.match(html, /<link rel="stylesheet" href="brand.css">/);
   }
 });
