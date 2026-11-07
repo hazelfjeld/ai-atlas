@@ -704,8 +704,20 @@ test('standalone page families share a build-time navigation source, including c
       assert.deepEqual(links.map(m=>m[1]), names, path);
     }
     assert.match(html, /href="index\.html#\/search" aria-label="Search AI Updates in the main collection"/);
-    assert.equal((mobile.match(/aria-current=/g)||[]).length,
-      path.includes('review') ? 1 : path==='research.html' ? 0 : 1, path);
+    const expectedCurrent = {
+      'research.html': ['location', 'Discover'],
+      'catalog-review.html': ['location', 'What’s New Today'],
+      'hardware-review.html': ['location', 'What’s New Today'],
+      'games.html': ['page', 'Games'],
+      'technologies.html': ['page', 'Technology profiles'],
+      'playbooks.html': ['page', 'Playbooks'],
+      'whats-new.html': ['page', 'What’s New Today'],
+    }[path];
+    for (const nav of [desktop, mobile]) {
+      const selected = [...nav.matchAll(/<a href="[^"]+" aria-current="(page|location)">([^<]+)<\/a>/g)];
+      assert.deepEqual(selected.map(m => [m[1],m[2]]), [expectedCurrent],
+        path+' must identify exactly one correct shared section in both layouts');
+    }
   }
   assert.match(read('site-chrome.css'), /\.site-mobile-chrome__menu a\[aria-current=location\]/);
 });
