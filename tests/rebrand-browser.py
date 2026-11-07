@@ -966,6 +966,42 @@ with sync_playwright() as p:
                   'reward' in page.evaluate('location.hash').lower()
                   and 'hacking' in page.evaluate('location.hash').lower())
 
+    # Crossing from an open phone drawer to a desktop rail must restore visible
+    # keyboard focus on every shared page family, without stale inert content.
+    for theme in ('light', 'dark'):
+        page.set_viewport_size({'width':390,'height':844})
+        page.goto(base+'index.html#/overview')
+        page.evaluate("(t)=>localStorage.setItem('atlas.theme',t)",theme)
+        for route in ('index.html#/overview','about.html','whats-new.html',
+                      'technology/TECH-0216-pytorch.html','games.html'):
+            page.set_viewport_size({'width':390,'height':844})
+            page.goto(base+route)
+            drawer=page.locator('details.site-mobile-chrome__nav').first
+            drawer.locator('summary').click()
+            drawer.locator('.site-mobile-chrome__menu a[href]').last.focus()
+            check(f'{route} {theme} menu holds focus before viewport change',
+                  drawer.evaluate('el=>el.open && el.contains(document.activeElement)'))
+            if theme=='dark' and route in ('about.html','technology/TECH-0216-pytorch.html'):
+                page.screenshot(path=str(out/f'drawer-before-resize-{route.split("/")[-1]}-390-dark.png'))
+            page.set_viewport_size({'width':768,'height':900})
+            page.wait_for_function("""() => {
+                const drawer=document.querySelector('details.site-mobile-chrome__nav');
+                return drawer && !drawer.open;
+            }""")
+            check(f'{route} {theme} desktop rail restores visible keyboard focus',
+                  page.evaluate("""() => {
+                      const selected=document.querySelector(
+                        '.site-chrome__links a[aria-current], #navigation a[aria-current]');
+                      const main=document.querySelector('main');
+                      return selected && document.activeElement===selected &&
+                        getComputedStyle(selected).display!=='none' &&
+                        selected.getClientRects().length>0 &&
+                        (!main || !main.inert) &&
+                        document.documentElement.scrollWidth<=innerWidth;
+                  }"""))
+            if theme=='dark' and route in ('about.html','technology/TECH-0216-pytorch.html'):
+                page.screenshot(path=str(out/f'drawer-after-resize-{route.split("/")[-1]}-768-dark.png'))
+
     check('no application runtime exceptions',not errors)
     browser.close()
 (out/'results.json').write_text(json.dumps({'checks_passed':len(checks),'checks':checks,'base':base},indent=2))

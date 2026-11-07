@@ -21,14 +21,22 @@ function rememberSearchFocus() {
 // than leaving an invisible focused link or an inert workspace until the
 // asynchronous <details> toggle event runs. Used on outside dismissal and
 // BFCache restoration across editorial, reference and Discover routes.
-function closeSharedDrawers({restoreFocus = false} = {}) {
+function closeSharedDrawers({restoreFocus = false, desktopFocus = false} = {}) {
   const menus = document.querySelectorAll('details.site-mobile-chrome__nav[open]');
+  let moveFocusToDesktop = false;
   menus.forEach(menu => {
     const hadFocus = menu.contains(document.activeElement);
     menu.open = false;
-    if (restoreFocus || hadFocus) menu.querySelector('summary')?.focus({preventScroll:true});
+    // The mobile summary becomes hidden at the desktop breakpoint.
+    if (desktopFocus) moveFocusToDesktop ||= hadFocus;
+    else if (restoreFocus || hadFocus) menu.querySelector('summary')?.focus({preventScroll:true});
   });
   syncSharedDrawerIsolation();
+  if (desktopFocus && moveFocusToDesktop) {
+    // Both Discover and standalone routes already have a visible rail link.
+    document.querySelector('.site-chrome__links a[aria-current], #navigation a[aria-current], .site-chrome__brand, #navigation a')
+      ?.focus({preventScroll:true});
+  }
 }
 
 /* The native details menu works without scripts; enhance it to match the
@@ -124,10 +132,10 @@ if (typeof window !== 'undefined' && window.addEventListener) {
     // back to mobile, trapping focus and locking the newly visible workspace.
     // Close it as the breakpoint is crossed; keep no-JS details behavior intact.
     if (window.innerWidth > 650) {
-      document.querySelectorAll('details.site-mobile-chrome__nav[open]')
-        .forEach(menu => { menu.open = false; });
+      closeSharedDrawers({desktopFocus:true});
+    } else {
+      syncSharedDrawerIsolation();
     }
-    syncSharedDrawerIsolation();
   });
 }
 
