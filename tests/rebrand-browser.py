@@ -62,7 +62,8 @@ with sync_playwright() as p:
     for width in (320, 390):
         page.set_viewport_size({'width': width, 'height': 844})
         for route in ('about.html', 'whats-new.html', 'playbooks.html',
-                      'terms/index.html', 'technology/index.html'):
+                      'terms/index.html', 'technology/index.html',
+                      'terms/MLD-0002-ablation-study.html', 'technology/TECH-0216-pytorch.html'):
             page.goto(base + route)
             page.locator('details.site-mobile-chrome__nav summary').click()
             brand = page.locator('details.site-mobile-chrome__nav .site-mobile-chrome__brand')

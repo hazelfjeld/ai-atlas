@@ -484,9 +484,9 @@ test('all generated technology profiles use shared directory chrome with native 
   const prefix = '<main class="term-shell" id="main">';
   const directory = read('technology/index.html').split(prefix)[1].split('<header class="hero">')[0];
   assert.equal((directory.match(/class="site-mobile-chrome__brand"/g)||[]).length,1);
-  // Detail content and its seven routes remain byte-identical; the index now
-  // adds one real, clickable first-paint logo, previously a CSS-only fallback.
-  const detailNav = directory.replace(/<a class="site-mobile-chrome__brand"[\s\S]*?<\/a>/,'');
+  // Detail and directory pages must share the same eight-link drawer:
+  // one real home wordmark and seven unchanged section links.
+  const detailNav = directory;
   assert.match(directory, /class="directory-mobile-topbar site-mobile-chrome"/);
   assert.match(directory, /<nav class="site-chrome term-nav" aria-label="AI Updates primary navigation">/);
   const labels = ['Discover','What’s New Today','Concept dictionary','Technology profiles','Games','Playbooks','About'];
@@ -502,7 +502,7 @@ test('all generated technology profiles use shared directory chrome with native 
     assert.equal(html.split(prefix)[1].split('<p class="breadcrumb-links">')[0], detailNav, file);
   }
   const generator = read('scripts/build_seo.py');
-  assert.ok(generator.includes("render_directory_nav(prefix, 'Technology profiles', mobile_brand=path == 'technology/index.html') if path.startswith('technology/')"));
+  assert.ok(generator.includes("render_directory_nav(prefix, 'Technology profiles', mobile_brand=True) if path.startswith('technology/')"));
   assert.ok(generator.includes("DIRECTORY_MOBILE_CSS if path.startswith('technology/')"));
   assert.ok(read('downloads/Atlas_Demo_Offline.html').includes('/* Native, script-free reference pages: readable two-column touch navigation on phones.'));
 });
@@ -512,7 +512,7 @@ test('all 1345 concept detail pages reuse the native seven-section shared naviga
   const prefix = '<main class="term-shell" id="main">';
   const dictionaryNav = read('terms/index.html').split(prefix)[1].split('<header class="hero">')[0];
   assert.equal((dictionaryNav.match(/class="site-mobile-chrome__brand"/g)||[]).length,1);
-  const detailNav = dictionaryNav.replace(/<a class="site-mobile-chrome__brand"[\s\S]*?<\/a>/,'');
+  const detailNav = dictionaryNav;
   const manifest = JSON.parse(read('terms/manifest.json'));
   assert.equal(Object.keys(manifest).length, 1345);
   const names = ['Discover', 'What’s New Today', 'Concept dictionary', 'Technology profiles', 'Games', 'Playbooks', 'About'];
@@ -527,7 +527,7 @@ test('all 1345 concept detail pages reuse the native seven-section shared naviga
     assert.equal((links.match(/aria-current="page"/g) || []).length, 1, id);
   }
   const generator = read('scripts/build_term_pages.py');
-  assert.ok(generator.includes("directory_nav = render_directory_nav('../', 'Concept dictionary', mobile_brand=path == 'terms/index.html')"));
+  assert.ok(generator.includes("directory_nav = render_directory_nav('../', 'Concept dictionary', mobile_brand=True)"));
   assert.ok(generator.includes('directory_css = DIRECTORY_MOBILE_CSS'));
 });
 
@@ -665,8 +665,8 @@ test('both generated catalog directories share Discover navigation and the nativ
     assert.ok(html.includes('THE FRONTIER, IN CONTEXT'), route);
   }
   const termGenerator=read('scripts/build_term_pages.py'), techGenerator=read('scripts/build_seo.py');
-  assert.ok(termGenerator.includes("render_directory_nav('../', 'Concept dictionary', mobile_brand=path == 'terms/index.html')"));
-  assert.ok(techGenerator.includes("render_directory_nav(prefix, 'Technology profiles', mobile_brand=path == 'technology/index.html')"));
+  assert.ok(termGenerator.includes("render_directory_nav('../', 'Concept dictionary', mobile_brand=True)"));
+  assert.ok(techGenerator.includes("render_directory_nav(prefix, 'Technology profiles', mobile_brand=True)"));
   assert.ok(read('scripts/site_chrome.py').includes('DIRECTORY_MOBILE_CSS'));
   assert.match(read('site-chrome.css'), /\.site-mobile-chrome__menu a\{[^}]*min-height:44px/);
 });
@@ -940,7 +940,7 @@ test('editorial and reference hero headings reuse Discover rather than page-spec
   }
 });
 
-test('standalone and directory mobile drawers share the real Discover wordmark before JavaScript', () => {
+test('all page families share the real Discover wordmark before JavaScript', () => {
   const generator = read('scripts/site_chrome.py');
   const theme = read('site-theme.js');
   assert.match(generator, /mobile_wordmark = render_brand\(prefix, "site-mobile-chrome__brand"\)/);
@@ -950,7 +950,8 @@ test('standalone and directory mobile drawers share the real Discover wordmark b
   for (const route of [
     'about.html', 'catalog-review.html', 'hardware-review.html',
     'research.html', 'playbooks.html', 'technologies.html', 'whats-new.html',
-    'games.html', 'terms/index.html', 'technology/index.html'
+    'games.html', 'terms/index.html', 'technology/index.html',
+    'terms/MLD-0002-ablation-study.html', 'technology/TECH-0216-pytorch.html'
   ]) {
     const html = read(route);
     const menu = html.match(/<nav class="[^"]*site-mobile-chrome__menu[^"]*" aria-label="AI Updates sections">([\s\S]*?)<\/nav>/)?.[1];
@@ -964,5 +965,5 @@ test('standalone and directory mobile drawers share the real Discover wordmark b
     assert.match(menu, /<svg viewBox="0 0 36 36"/, route+' uses the same SVG wordmark');
   }
   assert.match(read('scripts/build_seo.py'), /mobile_brand=True/);
-  assert.match(read('scripts/build_term_pages.py'), /mobile_brand=path == 'terms\/index.html'/);
+  assert.match(read('scripts/build_term_pages.py'), /mobile_brand=True/);
 });
