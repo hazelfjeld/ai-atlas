@@ -132,9 +132,11 @@ if (typeof window !== 'undefined' && window.addEventListener) {
 
 // Restoring a page from the back/forward cache must not resurrect a modal
 // drawer with stale inert siblings or hidden keyboard focus.
-window.addEventListener('pageshow', (event) => {
-  if (event.persisted) closeSharedDrawers();
-});
+if (typeof window !== 'undefined' && window.addEventListener) {
+  window.addEventListener('pageshow', (event) => {
+    if (event.persisted) closeSharedDrawers();
+  });
+}
 
 /* Use the existing canonical selected link as the standalone workspace
    breadcrumb, matching Discover without introducing duplicate navigation. */
