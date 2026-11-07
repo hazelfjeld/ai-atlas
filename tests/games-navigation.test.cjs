@@ -1247,7 +1247,8 @@ test('shared native drawers restore keyboard focus and inert state after dismiss
   assert.match(source,/menu\.querySelector\('summary'\)\?\.focus\(\{preventScroll:true\}\)/);
   assert.match(source,/closeSharedDrawers\(\{restoreFocus:true\}\)/);
   assert.match(source,/window\.addEventListener\('pageshow', \(event\) =>/);
-  assert.match(source,/if \(event\.persisted\) closeSharedDrawers\(\)/);
+  assert.match(source,/if \(event\.persisted\) \{/);
+  assert.match(source,/closeSharedDrawers\(\);\s*restoreSharedThemeAfterHistory\(\)/);
   assert.ok(offline.includes(source),'offline demo must embed the exact shared drawer behavior');
   for(const route of ['index.html','about.html','whats-new.html','technologies.html',
     'playbooks.html','research.html','games.html','terms/index.html',
