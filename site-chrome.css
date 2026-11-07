@@ -449,6 +449,7 @@ body:has(.site-chrome) :is(.tech-controls,.playbook-tools,.controls,.search-cont
   }
   body:has(.site-chrome) :is(.tech-controls,.playbook-tools,.controls,.search-controls) > button{
     min-height:44px;
+    font-size:16px; /* keep Reset/Export legible and avoid iOS focus zoom */
   }
 }
 /* atlas-filter-controls:end */
