@@ -19,7 +19,8 @@ test('Demo stays printable, accessible, and honest about the published baseline'
   assert.match(html,/@media print/);
   const count=Object.keys(JSON.parse(fs.readFileSync(path.join(__dirname,'..','content/term-guides.json')))).length;
   assert.ok(html.includes('1,345 concepts have stable pages, but only '+count+' guides are expanded'));
-  assert.match(html,/An empty news archive means the first reviewed edition is pending/);
+  assert.match(html,/A missed daily edition is not evidence that nothing happened in AI/);
+  assert.match(html,/latest verified edition by its actual date/);
   assert.match(html,/imported review labels are not newly audited/i);
   assert.match(html,/no AI grades free-form paraphrases/i);
   const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);
