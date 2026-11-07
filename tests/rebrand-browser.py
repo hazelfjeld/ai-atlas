@@ -713,6 +713,48 @@ with sync_playwright() as p:
                     card.scroll_into_view_if_needed()
                     page.screenshot(path=str(out/f'scope-note-{route}-{width}-{theme}.png'))
 
+
+    # Compare semantic information notices across actual rendered page families.
+    # Research's old fixed light-gold background made dark-theme body text nearly
+    # unreadable; the shared tokens must render consistently in both themes.
+    info_notes=(
+        ('research.html','.shell .notice'),
+        ('catalog-review.html','.shell .notice'),
+        ('hardware-review.html','.review-shell .review-callout'),
+        ('terms/MLD-0002-ablation-study.html','.term-shell .notice'),
+        ('technology/TECH-0216-pytorch.html','.term-shell .notice'),
+    )
+    for width,height in ((320,700),(390,844),(768,900),(1280,900)):
+        page.set_viewport_size({'width':width,'height':height})
+        for theme in ('light','dark'):
+            page.goto(base+'index.html#/overview')
+            page.evaluate("(t) => localStorage.setItem('atlas.theme',t)",theme)
+            for route,selector in info_notes:
+                page.goto(base+route)
+                note=page.locator(selector).first
+                note.wait_for(state='visible',timeout=20000)
+                computed=note.evaluate("""el=>{
+                    const s=getComputedStyle(el), box=el.getBoundingClientRect();
+                    const rgb=text=>[...text.matchAll(/[0-9]+/g)].slice(0,3).map(x=>Number(x[0]));
+                    const lum=arr=>arr.reduce((v,c,i)=>{
+                        const n=c/255,z=n<=.04045?n/12.92:((n+.055)/1.055)**2.4;
+                        return v+z*[.2126,.7152,.0722][i]},0);
+                    const a=lum(rgb(s.color)),b=lum(rgb(s.backgroundColor));
+                    return {background:s.backgroundColor,
+                            contrast:(Math.max(a,b)+.05)/(Math.min(a,b)+.05),
+                            border:s.borderLeftWidth,width:box.width};
+                }""")
+                check(f'{route} {width}px {theme} shares readable information note',
+                      computed['background']==('rgb(45, 64, 51)' if theme=='dark'
+                                                else 'rgb(233, 238, 231)')
+                      and computed['contrast']>=7
+                      and computed['border']=='4px'
+                      and computed['width']>0
+                      and page.evaluate('document.documentElement.scrollWidth<=innerWidth'))
+                if (width,theme) in ((390,'dark'),(1280,'light')) and route in ('research.html','catalog-review.html','hardware-review.html'):
+                    note.scroll_into_view_if_needed()
+                    page.screenshot(path=str(out/f'info-note-{route}-{width}-{theme}.png'))
+
     check('no application runtime exceptions',not errors)
     browser.close()
 (out/'results.json').write_text(json.dumps({'checks_passed':len(checks),'checks':checks,'base':base},indent=2))

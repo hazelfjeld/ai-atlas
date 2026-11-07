@@ -1175,3 +1175,27 @@ test('shared dark note surfaces keep existing research caveats readable', () => 
   assert.ok(read('technologies.html').includes('class="tech-warning"'));
   assert.ok(read('playbooks.html').includes('class="playbook-note"'));
 });
+
+
+test('shared informational callouts are one accessible theme-aware surface across research and reference families',()=>{
+  const css=read('site-chrome.css'),offline=read('downloads/Atlas_Demo_Offline.html');
+  const start='/* atlas-info-callouts:begin */',end='/* atlas-info-callouts:end */';
+  assert.equal(css.split(start).length,2);
+  const rule=css.slice(css.indexOf(start),css.indexOf(end)+end.length);
+  assert.ok(offline.includes(rule),'single-file offline demo contains identical shared note treatment');
+  for(const token of ['.term-shell .notice','.site-chrome.research-site-chrome',
+       '.site-chrome.nav','.review-shell .review-callout',
+       ':root[data-theme="dark"]','--atlas-info-bg:#2d4033',
+       '--atlas-info-text:#edf4ee','--atlas-info-border:#577261',
+       'border-left:4px solid var(--atlas-info-accent)']){
+    assert.ok(rule.includes(token),'missing common information-note rule '+token);
+  }
+  for(const [route,cls] of [
+    ['research.html','class="notice"'],
+    ['catalog-review.html','class="notice"'],
+    ['hardware-review.html','class="review-callout"'],
+    ['terms/MLD-0002-ablation-study.html','class="notice"'],
+    ['technology/TECH-0216-pytorch.html','class="notice"']
+  ])assert.ok(read(route).includes(cls),route+' retains the real shared note');
+  assert.ok(!rule.includes('.detail-block.caveat'),'specialized research warnings unchanged');
+});

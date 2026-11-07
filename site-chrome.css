@@ -470,3 +470,45 @@ body:has(.site-chrome) :is(.tech-controls,.playbook-tools,.controls,.search-cont
   }
 }
 /* atlas-note-contrast:end */
+
+/* atlas-info-callouts:begin */
+/* Align research, candidate-review, evidence and generated reference notes
+   to a single semantic info surface. Research previously inherited the pale
+   checkpoint.css notice even with white text in dark mode. Keep distinct
+   warning/caveat treatments and all article content untouched. */
+:root{
+  --atlas-info-bg:#e9eee7;
+  --atlas-info-border:#b7cabe;
+  --atlas-info-text:#202b28;
+  --atlas-info-accent:#27664e;
+}
+:root[data-theme="dark"]{
+  --atlas-info-bg:#2d4033;
+  --atlas-info-border:#577261;
+  --atlas-info-text:#edf4ee;
+  --atlas-info-accent:#b1d5bd;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --atlas-info-bg:#2d4033;
+    --atlas-info-border:#577261;
+    --atlas-info-text:#edf4ee;
+    --atlas-info-accent:#b1d5bd;
+  }
+}
+:is(.term-shell .notice,
+    .shell:has(> main > .site-chrome.research-site-chrome) .notice,
+    .shell:has(> .site-chrome.nav) .notice,
+    .review-shell .review-callout){
+  box-sizing:border-box;
+  min-width:0;
+  padding:16px 18px;
+  border:1px solid var(--atlas-info-border);
+  border-left:4px solid var(--atlas-info-accent);
+  border-radius:9px;
+  background:var(--atlas-info-bg);
+  color:var(--atlas-info-text);
+  line-height:1.65;
+  overflow-wrap:anywhere;
+}
+/* atlas-info-callouts:end */
