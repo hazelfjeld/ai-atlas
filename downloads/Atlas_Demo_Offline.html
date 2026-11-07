@@ -905,7 +905,8 @@ const isolatedDrawerSiblings = new Map();
 function syncSharedDrawerIsolation() {
   for (const [element, wasInert] of isolatedDrawerSiblings) element.inert = wasInert;
   isolatedDrawerSiblings.clear();
-  const drawer = window.innerWidth <= 650
+  const drawer = typeof window !== 'undefined' && window.innerWidth <= 650 &&
+    typeof document.querySelector === 'function'
     ? document.querySelector('details.site-mobile-chrome__nav[open]') : null;
   if (!drawer) return;
   for (let node = drawer; node && node !== document.body; node = node.parentElement) {
