@@ -277,6 +277,35 @@ with sync_playwright() as p:
                       and page.evaluate('document.documentElement.dataset.theme') == theme)
                 if width==1280 and theme=='light' and route in ('about.html','playbooks.html','whats-new.html'):
                     page.screenshot(path=str(out/('intro-'+route.replace('.html','')+'-1280-light.png')),full_page=False)
+
+    # Three standalone page families now adopt Discover's existing heading
+    # component rather than copying its type rules into page-specific CSS.
+    # Check computed typography and lack of horizontal clipping in both themes.
+    heading_routes = (
+        ('research.html', 'section.hero h1'),
+        ('technologies.html', 'section.tech-hero h1'),
+        ('playbooks.html', 'section.playbook-hero h1'),
+    )
+    for width, height in ((320, 700), (390, 844), (768, 900), (1280, 900)):
+        page.set_viewport_size({'width':width,'height':height})
+        for theme in ('light','dark'):
+            page.goto(base+'index.html#/overview')
+            page.evaluate("(t) => {localStorage.setItem('atlas.theme',t);document.documentElement.dataset.theme=t}",theme)
+            baseline=page.locator('.discover-heading h1').evaluate(
+                "el => ({family:getComputedStyle(el).fontFamily,weight:getComputedStyle(el).fontWeight})")
+            for route, heading in heading_routes:
+                page.goto(base+route)
+                title=page.locator(heading)
+                title.wait_for()
+                actual=title.evaluate(
+                    "el => ({family:getComputedStyle(el).fontFamily,weight:getComputedStyle(el).fontWeight})")
+                check(f'{route} {width}px {theme} reuses Discover heading typography without clipping',
+                      actual==baseline
+                      and page.evaluate('document.documentElement.scrollWidth <= innerWidth')
+                      and page.evaluate('document.documentElement.dataset.theme')==theme)
+                if width==1280 and theme=='light':
+                    page.screenshot(path=str(out/f'heading-{route.replace(".html","")}-{width}-{theme}.png'))
+
     check('no application runtime exceptions',not errors)
     browser.close()
 (out/'results.json').write_text(json.dumps({'checks_passed':len(checks),'checks':checks,'base':base},indent=2))

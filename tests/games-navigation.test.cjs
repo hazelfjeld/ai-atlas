@@ -893,3 +893,23 @@ test('Research retains a concise shared workspace label before and after enhance
   assert.ok(!html.includes('aria-current="page">Research library</a>'), 'Research does not invent a canonical primary destination');
   assert.ok(read('downloads/Atlas_Demo_Offline.html').includes(script), 'Offline fallback reuses the exact enhanced theme script');
 });
+
+test('Research, Technology and Playbooks reuse Discover editorial heading typography', () => {
+  const home = read('index.html'), brand = read('brand.css');
+  assert.match(home, /class="discover-heading"><div><p class="eyebrow"/);
+  assert.match(brand, /\.discover-heading h1\{font:400 clamp\(40px,4\.2vw,56px\)\/1\.08 Georgia/);
+  const pages = [
+    ['playbooks.html', '<section class="playbook-hero">', /<h1>Start with the problem, not the framework\.<\/h1>/],
+    ['technologies.html', '<section class="tech-hero">', /<h1>Choose tools for their actual edge\.<\/h1>/],
+    ['research.html', '<section class="hero">', /<h1 id="view-title">Follow the evidence\.<\/h1>/],
+  ];
+  for (const [route, sectionStart, heading] of pages) {
+    const html = read(route);
+    const section = html.split(sectionStart)[1]?.split('</section>')[0];
+    assert.ok(section, route+' intro must exist');
+    assert.match(section, /<div class="discover-heading"><div><p class="eyebrow"/);
+    assert.match(section, heading);
+    assert.match(section, /<\/h1><\/div><\/div><p/, route+' descriptive text must remain outside the heading component');
+    assert.match(html, /<link rel="stylesheet" href="brand.css">/);
+  }
+});
