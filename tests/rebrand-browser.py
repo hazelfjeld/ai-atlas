@@ -349,12 +349,16 @@ with sync_playwright() as p:
                     window.dispatchEvent(new PageTransitionEvent('pageshow', {persisted:true}));
                 }""", saved)
                 buttons=page.locator('.site-chrome__theme-toggle')
-                check(f'{route} {width}px cached page restores {saved} appearance',
-                      page.evaluate('document.documentElement.dataset.theme') == saved
-                      and buttons.count() >= 1
-                      and all(b.get_attribute('aria-pressed') == str(saved == 'dark').lower()
-                              and saved.title() + ' theme' in b.inner_text()
-                              for b in buttons.all()))
+                observed_theme = page.evaluate('document.documentElement.dataset.theme')
+                observed_buttons = [(b.get_attribute('aria-pressed'), b.text_content())
+                                    for b in buttons.all()]
+                correct = (observed_theme == saved and len(observed_buttons) >= 1
+                           and all(pressed == str(saved == 'dark').lower()
+                                   and saved.title() + ' theme' in (label or '')
+                                   for pressed, label in observed_buttons))
+                if not correct:
+                    print(f'BFCache theme diagnostic: {route} {width}px expected={saved} got={observed_theme}, controls={observed_buttons}', flush=True)
+                check(f'{route} {width}px cached page restores {saved} appearance', correct)
     # Real Back/Forward navigation must preserve the canonical destination and
     # leave the returning page navigable, regardless of BFCache eligibility.
     page.set_viewport_size({'width':390,'height':844})
