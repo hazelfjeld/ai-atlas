@@ -827,13 +827,14 @@ function rememberSearchFocus() {
 // BFCache restoration across editorial, reference and Discover routes.
 function closeSharedDrawers({restoreFocus = false, desktopFocus = false} = {}) {
   const menus = document.querySelectorAll('details.site-mobile-chrome__nav[open]');
-  let moveFocusToDesktop = false;
+  // Browsers can blur links as soon as the mobile drawer becomes display:none.
+  // Track the open drawer itself, not only a focus state already lost to reflow.
+  const moveFocusToDesktop = desktopFocus && menus.length > 0;
   menus.forEach(menu => {
     const hadFocus = menu.contains(document.activeElement);
     menu.open = false;
-    // The mobile summary becomes hidden at the desktop breakpoint.
-    if (desktopFocus) moveFocusToDesktop ||= hadFocus;
-    else if (restoreFocus || hadFocus) menu.querySelector('summary')?.focus({preventScroll:true});
+    if (!desktopFocus && (restoreFocus || hadFocus))
+      menu.querySelector('summary')?.focus({preventScroll:true});
   });
   syncSharedDrawerIsolation();
   if (desktopFocus && moveFocusToDesktop) {

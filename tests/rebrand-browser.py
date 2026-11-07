@@ -988,17 +988,22 @@ with sync_playwright() as p:
                 const drawer=document.querySelector('details.site-mobile-chrome__nav');
                 return drawer && !drawer.open;
             }""")
+            focus=page.evaluate("""() => {
+                const selected=document.querySelector(
+                    '.site-chrome__links a[aria-current], #navigation a[aria-current]');
+                const main=document.querySelector('main');
+                return {selected: selected?.textContent.trim() || null,
+                        active: document.activeElement?.outerHTML.slice(0,160) || null,
+                        activeMatch: !!selected && document.activeElement===selected,
+                        visible: !!selected && getComputedStyle(selected).display!=='none' &&
+                                 selected.getClientRects().length>0,
+                        mainInert: !!main && main.inert,
+                        overflow:document.documentElement.scrollWidth>innerWidth};
+            }""")
+            print('RESIZE-FOCUS',route,theme,json.dumps(focus),flush=True)
             check(f'{route} {theme} desktop rail restores visible keyboard focus',
-                  page.evaluate("""() => {
-                      const selected=document.querySelector(
-                        '.site-chrome__links a[aria-current], #navigation a[aria-current]');
-                      const main=document.querySelector('main');
-                      return selected && document.activeElement===selected &&
-                        getComputedStyle(selected).display!=='none' &&
-                        selected.getClientRects().length>0 &&
-                        (!main || !main.inert) &&
-                        document.documentElement.scrollWidth<=innerWidth;
-                  }"""))
+                  focus['activeMatch'] and focus['visible'] and
+                  not focus['mainInert'] and not focus['overflow'])
             if theme=='dark' and route in ('about.html','technology/TECH-0216-pytorch.html'):
                 page.screenshot(path=str(out/f'drawer-after-resize-{route.split("/")[-1]}-768-dark.png'))
 

@@ -296,6 +296,8 @@ test('shared mobile drawer makes background inert without leaving hidden control
   assert.equal(preInert.inert,true, 'pre-existing inert state is preserved');
   drawer.open = true;
   events.toggle({target:drawer});
+  // A browser may blur the link before the resize handler runs.
+  document.activeElement = body;
   window.innerWidth = 768;
   events.resize();
   assert.equal(drawer.open,false, 'tablet resize dismisses the former mobile drawer');
