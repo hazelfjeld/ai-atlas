@@ -1040,6 +1040,40 @@ with sync_playwright() as p:
                 check(f'{route} 390->320px {theme} leaves mobile toggle focus undisturbed',
                       toggle.evaluate('el=>document.activeElement===el && el.getClientRects().length>0'))
 
+    # A closed mobile drawer's toggle is still a focusable navigation control.
+    # Desktop CSS hides it after rotation; focus must move to the visible rail
+    # even if Chromium has already blurred the summary to <body>.
+    for mobile_width, desktop_width in ((320,768),(390,1280)):
+        for theme in ('light','dark'):
+            for route in ('index.html#/overview','about.html',
+                          'technology/TECH-0216-pytorch.html'):
+                page.set_viewport_size({'width':mobile_width,'height':844})
+                page.goto(base+route)
+                page.evaluate("""t => {
+                    localStorage.setItem('atlas.theme',t);
+                    document.documentElement.dataset.theme=t;
+                }""",theme)
+                toggle=page.locator('details.site-mobile-chrome__nav summary').first
+                toggle.focus()
+                check(f'{route} {mobile_width}px {theme} closed mobile toggle takes focus',
+                      toggle.evaluate('el=>document.activeElement===el && el.getClientRects().length>0'))
+                page.set_viewport_size({'width':desktop_width,'height':900})
+                page.wait_for_function("""() => {
+                    const rail=document.querySelector('.site-chrome__links a[aria-current]') ||
+                        document.querySelector('#navigation a[aria-current]');
+                    return !!rail && document.activeElement===rail;
+                }""")
+                check(f'{route} {mobile_width}->{desktop_width}px {theme} closed drawer focus handoff',
+                      page.evaluate("""() => {
+                          const rail=document.querySelector('.site-chrome__links a[aria-current]') ||
+                              document.querySelector('#navigation a[aria-current]');
+                          return !!rail && document.activeElement===rail &&
+                              rail.getClientRects().length>0 &&
+                              document.documentElement.scrollWidth<=innerWidth;
+                      }"""))
+                if mobile_width==390 and theme=='dark' and route=='about.html':
+                    page.screenshot(path=str(out/'closed-mobile-to-desktop-about-1280-dark.png'))
+
     # Resizing while editing real content must not unexpectedly move focus.
     page.set_viewport_size({'width':768,'height':900})
     page.goto(base+'about.html')

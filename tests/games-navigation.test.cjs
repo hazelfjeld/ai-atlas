@@ -1343,6 +1343,58 @@ test('BFCache restoration synchronizes saved theme and shared controls', () => {
   assert.equal(document.documentElement.dataset.theme, 'light');
 });
 
+test('closed shared mobile toggle restores focus to the selected desktop rail', () => {
+  const handlers={};
+  const body={};
+  const root={dataset:{}};
+  let window;
+  const summary={
+    matches(selector){return selector==='details.site-mobile-chrome__nav summary';},
+    getClientRects(){return window.innerWidth<=650?[{}]:[];},
+    focus(){document.activeElement=summary;}
+  };
+  const railLink={
+    getClientRects(){return window.innerWidth>650?[{}]:[];},
+    focus(){document.activeElement=railLink;},
+    closest(selector){return selector.includes('.site-chrome')?{}:null;}
+  };
+  const contentInput={matches(){return false;},closest(){return null;}};
+  const document={
+    body,documentElement:root,activeElement:summary,
+    addEventListener(name,fn){handlers[name]=fn;},
+    querySelectorAll(selector){
+      assert.equal(selector,'details.site-mobile-chrome__nav[open]');
+      return [];
+    },
+    querySelector(selector){
+      if(selector==='details.site-mobile-chrome__nav[open]')return null;
+      if(selector==='details.site-mobile-chrome__nav summary')return summary;
+      if(selector==='.site-chrome__links a[aria-current]')return railLink;
+      throw new Error('Unexpected selector '+selector);
+    }
+  };
+  window={innerWidth:390,addEventListener(name,fn){handlers[name]=fn;}};
+  const source=read('site-theme.js');
+  vm.runInNewContext(source,{document,window,localStorage:{getItem(){return null;}}});
+  handlers.focusin({target:summary});
+  // A browser can blur the closed toggle before firing the resize event.
+  document.activeElement=body;
+  window.innerWidth=768;
+  handlers.resize();
+  assert.strictEqual(document.activeElement,railLink,
+    'hidden closed mobile toggle must restore focus to the visible desktop section');
+  window.innerWidth=390;
+  handlers.resize();
+  handlers.focusin({target:contentInput});
+  document.activeElement=contentInput;
+  window.innerWidth=768;
+  handlers.resize();
+  assert.strictEqual(document.activeElement,contentInput,
+    'responsive navigation must not steal focus from unrelated content');
+  assert.ok(read('downloads/Atlas_Demo_Offline.html').includes(source),
+    'offline fallback must embed the same shared navigation handoff');
+});
+
 test('shared rail restores keyboard focus to visible mobile toggle after responsive shrink', () => {
   const handlers = {};
   const body = {};

@@ -821,6 +821,16 @@ function rememberSearchFocus() {
 }
 
 
+// Prefer the selected desktop section rather than the standalone brand, whose
+// anchor appears first in DOM order. All responsive focus handoffs use this.
+function focusSharedDesktopRail() {
+  const destination = document.querySelector('.site-chrome__links a[aria-current]') ||
+    document.querySelector('#navigation a[aria-current]') ||
+    document.querySelector('.site-chrome__brand') ||
+    document.querySelector('#navigation a');
+  destination?.focus({preventScroll:true});
+}
+
 // Close a native shared drawer and release its background immediately, rather
 // than leaving an invisible focused link or an inert workspace until the
 // asynchronous <details> toggle event runs. Used on outside dismissal and
@@ -837,16 +847,7 @@ function closeSharedDrawers({restoreFocus = false, desktopFocus = false} = {}) {
       menu.querySelector('summary')?.focus({preventScroll:true});
   });
   syncSharedDrawerIsolation();
-  if (desktopFocus && moveFocusToDesktop) {
-    // Both Discover and standalone routes already have a visible rail link.
-    // querySelector with a comma-list returns DOM order, not selector priority:
-    // the brand appears first in standalone rails. Prefer the active section.
-    const destination = document.querySelector('.site-chrome__links a[aria-current]') ||
-      document.querySelector('#navigation a[aria-current]') ||
-      document.querySelector('.site-chrome__brand') ||
-      document.querySelector('#navigation a');
-    destination?.focus({preventScroll:true});
-  }
+  if (desktopFocus && moveFocusToDesktop) focusSharedDesktopRail();
 }
 
 /* The native details menu works without scripts; enhance it to match the
@@ -940,8 +941,11 @@ document.addEventListener('toggle', event => {
 // desktop-to-mobile resize. Remember actual keyboard focus before the browser
 // blurs it, so it never gets stranded on <body> behind the mobile header.
 let lastDesktopRailFocus = null;
+let lastMobileToggleFocus = null;
 document.addEventListener('focusin', event => {
   lastDesktopRailFocus = event.target?.closest?.('.site-chrome,#navigation') ? event.target : null;
+  lastMobileToggleFocus = event.target?.matches?.('details.site-mobile-chrome__nav summary')
+    ? event.target : null;
 });
 let lastViewportWasDesktop = typeof window !== 'undefined' && window.innerWidth > 650;
 if (typeof window !== 'undefined' && window.addEventListener) {
@@ -949,7 +953,14 @@ if (typeof window !== 'undefined' && window.addEventListener) {
     const desktopNow = window.innerWidth > 650;
     // Close a native menu before it becomes hidden by desktop CSS.
     if (desktopNow) {
+      // A closed mobile drawer's focused toggle also becomes hidden on resize.
+      // An open drawer is handled by closeSharedDrawers; avoid double focus.
+      const restoreClosedToggle = !lastViewportWasDesktop && lastMobileToggleFocus &&
+        !lastMobileToggleFocus.getClientRects().length &&
+        [document.body, document.documentElement, lastMobileToggleFocus].includes(document.activeElement);
+      const drawerWasOpen = !!document.querySelector('details.site-mobile-chrome__nav[open]');
       closeSharedDrawers({desktopFocus:true});
+      if (restoreClosedToggle && !drawerWasOpen) focusSharedDesktopRail();
     } else {
       syncSharedDrawerIsolation();
       // Only restore focus if a previously focused rail item just became
