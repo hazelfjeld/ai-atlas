@@ -734,7 +734,10 @@ with sync_playwright() as p:
     nojs_reference.locator('#directory-mobile-nav summary').click()
     check('concept detail remains readable and navigable without JavaScript',
           nojs_reference.get_by_role('heading', name='Ablation study').is_visible()
-          and nojs_reference.locator('#directory-mobile-nav nav a').count() == 7
+          and nojs_reference.locator('#directory-mobile-nav nav a.site-mobile-chrome__brand').count() == 1
+          and nojs_reference.locator('#directory-mobile-nav nav a.site-mobile-chrome__brand').get_attribute('href') == '../index.html#/overview'
+          and nojs_reference.locator('#directory-mobile-nav nav a:not(.site-mobile-chrome__brand)').count() == 7
+          and nojs_reference.locator('#directory-mobile-nav nav a').count() == 8
           and nojs_reference.locator('#directory-mobile-nav nav a').last.is_visible())
     nojs_reference.close()
     page.goto(base + 'whats-new.html')
@@ -1536,10 +1539,8 @@ with sync_playwright() as p:
     check('catalog directory menu remains usable with JavaScript disabled',
           script_free.locator('.site-mobile-chrome__menu a:not(.site-mobile-chrome__brand)').first.is_visible()
           and script_free.locator('.site-mobile-chrome__menu a:not(.site-mobile-chrome__brand)').count() == 7)
-    # New standalone/directory pages render the actual SVG wordmark and home
-    # link at build time, without needing JavaScript to clone the desktop logo.
-    # Historical detail pages intentionally retain the CSS-only favicon fallback
-    # until their separately generated HTML changes; validate both honestly.
+    # Standalone, directory and generated detail pages all render the same
+    # real SVG home link at build time. Verify every family without scripts;
     def check_no_script_brand(label, *, real_link):
         menu = script_free.locator('.site-mobile-chrome__menu')
         check(label + ' keeps the shared AI Updates wordmark without scripts',
@@ -1576,7 +1577,10 @@ with sync_playwright() as p:
     check('technology detail uses the shared mobile menu without JavaScript',
           script_free.locator('.site-mobile-chrome__menu a:not(.site-mobile-chrome__brand)').count() == 7
           and script_free.locator('.site-mobile-chrome__menu a:not(.site-mobile-chrome__brand)[aria-current="page"]').inner_text() == 'Technology profiles')
-    check_no_script_brand('Technology profile', real_link=False)
+    check_no_script_brand('Technology profile', real_link=True)
+    script_free.goto(base + 'terms/MLD-0002-ablation-study.html')
+    script_free.locator('#directory-mobile-nav summary').click()
+    check_no_script_brand('Concept detail', real_link=True)
     script_free.close()
     check('no application runtime exceptions', not errors)
     browser.close()
