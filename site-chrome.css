@@ -241,6 +241,17 @@ body:has(.site-chrome){padding-top:78px}
  .site-chrome__theme-toggle{transition:none}
 }
 
+/* Match Discover's first-content position beneath the 78px workspace bar.
+   These existing landing pages previously stacked 38-56px of legacy hero
+   whitespace on top of their shell padding. Apply one shared 8px rhythm
+   without changing detailed articles, mobile layouts, or news content. */
+@media (min-width:651px){
+ .term-shell > .site-chrome + .hero,
+ .playbook-shell > .site-chrome + .playbook-hero{margin-top:8px}
+ .tech-shell > .site-chrome + .tech-hero{padding-top:8px}
+ .shell > .site-chrome + main > header{padding-top:8px}
+}
+
 /* Discover keeps its real desktop workspace topbar; the shared native disclosure
    belongs inside that topbar on phones only. Avoid a duplicate fixed header. */
 @media (min-width:651px){.discover-mobile-chrome{display:none!important}}

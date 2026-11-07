@@ -866,6 +866,21 @@ test('existing shared standalone chrome exposes the Discover appearance action w
 });
 
 
+test('shared desktop landing intros use Discover\'s workspace content rhythm', () => {
+  const css = read('site-chrome.css');
+  const scoped = css.split('/* Match Discover\'s first-content position')[1]?.split('/* Discover keeps its real desktop workspace topbar')[0];
+  assert.ok(scoped, 'Shared desktop landing intro style must exist');
+  assert.match(scoped, /@media \(min-width:651px\)/);
+  for (const selector of [
+    '.term-shell > .site-chrome + .hero',
+    '.playbook-shell > .site-chrome + .playbook-hero',
+    '.tech-shell > .site-chrome + .tech-hero',
+    '.shell > .site-chrome + main > header',
+  ]) assert.ok(scoped.includes(selector), selector+' must share the workspace rhythm');
+  assert.equal((scoped.match(/8px/g)||[]).length,3, 'Use one 8px intro offset for all landing families');
+  assert.ok(!scoped.includes('max-width:650px'), 'Keep the established mobile content spacing unchanged');
+});
+
 test('Research retains a concise shared workspace label before and after enhancement', () => {
   const generator = read('scripts/site_chrome.py');
   const html = read('research.html');

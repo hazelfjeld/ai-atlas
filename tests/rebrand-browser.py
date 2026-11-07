@@ -245,6 +245,38 @@ with sync_playwright() as p:
             check(f'About {width}px {theme} keeps the shared section and saved appearance',
                   page.locator('.directory-mobile-topbar').get_attribute('data-page-label')=='About'
                   and page.evaluate("document.documentElement.dataset.theme") == theme)
+    # Existing landing-page hero spacing used unrelated 38-56px offsets, so
+    # moving between Discover and the archive/directories changed the vertical
+    # reading frame. Compare actual first content, not just CSS declarations.
+    landing_intros = (
+        ('about.html', 'main.term-shell > header.hero .eyebrow'),
+        ('terms/index.html', 'main.term-shell > header.hero .eyebrow'),
+        ('technology/index.html', 'main.term-shell > header.hero .eyebrow'),
+        ('technologies.html', '.tech-shell > section.tech-hero .eyebrow'),
+        ('playbooks.html', '.playbook-shell > section.playbook-hero .eyebrow'),
+        ('whats-new.html', '.shell > main > header .eyebrow'),
+    )
+    for width, height in ((768, 900), (1280, 900)):
+        page.set_viewport_size({'width':width,'height':height})
+        for theme in ('light','dark'):
+            page.goto(base+'index.html#/overview')
+            page.locator('.discover-heading .eyebrow').wait_for()
+            page.evaluate("(theme) => { localStorage.setItem('atlas.theme', theme); document.documentElement.dataset.theme = theme; }",theme)
+            discover_top=page.locator('.discover-heading .eyebrow').evaluate(
+                'el => el.getBoundingClientRect().top')
+            if (width,theme) == (1280,'light'):
+                page.screenshot(path=str(out/'intro-discover-1280-light.png'),full_page=False)
+            for route, selector in landing_intros:
+                page.goto(base+route)
+                intro=page.locator(selector)
+                intro.wait_for()
+                intro_top=intro.evaluate('el => el.getBoundingClientRect().top')
+                check(f'{route} {width}px {theme} intro aligns with Discover workspace',
+                      abs(intro_top-discover_top) <= 36
+                      and page.evaluate('document.documentElement.scrollWidth <= innerWidth')
+                      and page.evaluate('document.documentElement.dataset.theme') == theme)
+                if width==1280 and theme=='light' and route in ('about.html','playbooks.html','whats-new.html'):
+                    page.screenshot(path=str(out/('intro-'+route.replace('.html','')+'-1280-light.png')),full_page=False)
     check('no application runtime exceptions',not errors)
     browser.close()
 (out/'results.json').write_text(json.dumps({'checks_passed':len(checks),'checks':checks,'base':base},indent=2))
