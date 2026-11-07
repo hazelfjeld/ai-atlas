@@ -813,6 +813,13 @@ try {
   // Storage may be unavailable; preserve the stylesheet's normal fallback.
 }
 
+// The main workspace consumes this one-shot intent after catalog hydration.
+// Use the same handoff for the slash shortcut and the visible search link.
+function rememberSearchFocus() {
+  try { sessionStorage.setItem('atlas.searchShortcutPending', '1'); }
+  catch (_) { /* The native search link still works without storage. */ }
+}
+
 /* The native details menu works without scripts; enhance it to match the
    Discover drawer's Escape and outside-click behavior when JS is available. */
 document.addEventListener('keydown', (event) => {
@@ -857,9 +864,16 @@ document.addEventListener('keydown', (event) => {
   event.preventDefault();
   // After a cross-page / shortcut, make the real Discover search input ready
   // for typing, rather than requiring a second tap. No-JS links still work.
-  try { sessionStorage.setItem('atlas.searchShortcutPending', '1'); }
-  catch (_) { /* The search route still works without session storage. */ }
+  rememberSearchFocus();
   search.click();
+});
+// A tap or keyboard activation of the existing search link must have the same
+// one-step focus behavior as /. Do not affect modified/new-tab navigation.
+document.addEventListener('click', event => {
+  if (event.defaultPrevented || event.button !== 0 || event.ctrlKey ||
+      event.metaKey || event.altKey || event.shiftKey) return;
+  if (!event.target?.closest?.('a.site-mobile-chrome__search[href]')) return;
+  rememberSearchFocus();
 });
 document.addEventListener('pointerdown', (event) => {
   document.querySelectorAll('details.site-mobile-chrome__nav[open]').forEach(menu => {
