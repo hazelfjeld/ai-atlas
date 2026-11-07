@@ -1301,7 +1301,8 @@ test('November 3 v3 archives only already-published hardware research site chang
  assert.equal(receipt.publication_history.find(h=>h.edition==='2026-11-03-v3').status,'cloudflare_http_browser_and_githack_verified');
  assert.ok(['pending_production_verification','cloudflare_http_browser_and_githack_verified'].includes(receipt.publication_history.at(-1).status));
  assert.equal(receipt.deferred_catalog_proposal_ids.length,3);
- assert.equal(idx.last_successful_publish_at,receipt.production_verified_at,'Never imply a pending edition has passed production');
+ assert.equal(receipt.production_verified_at,'2026-11-04T03:35:50Z','November 3 verification proof is immutable');
+ assert.equal(idx.last_successful_publish_at,verifiedPublicationClock(),'The newest verified publication, not this historic receipt, controls the clock');
 });
 
 
@@ -1472,8 +1473,9 @@ test('November 3 v5 verification receipts retain historical v4 proof and source 
  assert.equal(arch.date,'2026-11-03');
  assert.equal(arch.revision,6);
  assert.equal(receipt.publication_edition,'2026-11-03-v6');
- assert.equal(idx.status,'edition_revision_1_pending_production_verification');
- assert.equal(idx.last_successful_publish_at,receipt.production_verified_at);
+ assert.equal(idx.status,'edition_revision_1_production_verified');
+ assert.equal(receipt.production_verified_at,'2026-11-04T03:35:50Z','Historical November 3 verification timestamp is unchanged');
+ assert.equal(idx.last_successful_publish_at,verifiedPublicationClock());
  assert.equal(receipt.production_commit,'e549b579d413e717e4784ed942a20ad4c06529bc');
  assert.equal(receipt.production_workflow_run_id,41767787139);
  assert.equal(receipt.githack_workflow_run_id,41767787275);
@@ -1536,7 +1538,8 @@ test('Verified v6 preserves collector provenance and records actual production p
  assert.equal(receipt.publication_edition,'2026-11-03-v6');
  assert.equal(receipt.publication_history.at(-1).status,'cloudflare_http_browser_and_githack_verified');
  assert.equal(receipt.production_verified_revision,6);
- assert.equal(idx.last_successful_publish_at,'2026-11-04T03:35:50Z');
+ assert.equal(receipt.production_verified_at,'2026-11-04T03:35:50Z','Keep historical November 3 verification intact');
+ assert.equal(idx.last_successful_publish_at,verifiedPublicationClock());
  assert.equal(receipt.last_verified_public_url,'https://aiupdates.app/whats-new.html?date=2026-11-03&revision=6');
  assert.deepEqual(receipt.accepted_catalog_addition_ids,['tech-proposal:tohoku-aisin:stt-mram-ai-soc:2026-11-03']);
  assert.equal(receipt.deferred_catalog_proposal_ids.length,3);
@@ -1586,6 +1589,13 @@ test('November 7 publisher reviews eleven source-dated catch-up reports without 
  assert.deepEqual(e.news.map(x=>x.id),r.accepted_news_ids);
  assert.ok(idx.editions.some(x=>x.date==='2026-11-03'&&x.revision===6),'historical edition retained');
  assert.ok(ledger.receipts.some(x=>x.batch_id==='atlas-daily-20261103-0824ct-recovery-a'),'older receipt retained');
- assert.equal(idx.status,'edition_revision_1_pending_production_verification');
- assert.equal(idx.last_successful_publish_at,'2026-11-04T03:35:50Z','do not advance verified clock before deployment');
+ assert.equal(idx.status,'edition_revision_1_production_verified');
+ assert.equal(r.production_verified_at,'2026-11-07T14:57:55Z','November 7 verification requires a completed public run');
+ assert.equal(r.production_verified_revision,1);
+ assert.equal(r.publication_history.at(-1).status,'cloudflare_http_browser_and_githack_verified');
+ assert.equal(r.production_commit,'51941a5ad6e562a6e9a846cbdaecdf22a589f6a3');
+ assert.equal(r.production_workflow_run_id,42383633377);
+ assert.equal(r.githack_workflow_run_id,42383633217);
+ assert.equal(r.last_verified_public_url,'https://aiupdates.app/whats-new.html?date=2026-11-07&revision=1');
+ assert.equal(idx.last_successful_publish_at,r.production_verified_at,'Publication clock must agree with independently verified Nov 7 receipt');
 });

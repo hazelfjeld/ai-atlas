@@ -260,6 +260,6 @@
     }
   ],
   "last_successful_publish_at": "2026-11-07T14:57:55Z",
-  "status": "edition_revision_1_pending_production_verification",
+  "status": "edition_revision_1_production_verified",
   "coverage_note": "November 7 v1 pending production verification: partial recovery edition with eleven independently source-checked November 3–6 catch-up reports and eight deferred catalog proposals. Source SHA-256 verified. November 3 revision 6 remains latest independently verified production archive."
 }
