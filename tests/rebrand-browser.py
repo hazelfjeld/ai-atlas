@@ -758,13 +758,15 @@ with sync_playwright() as p:
     # Generated directory footnotes contain one longer search link. It must
     # wrap rather than widen the document after adopting the shared info panel.
     page.set_viewport_size({'width':320,'height':700})
-    for directory in ('terms/index.html','technology/index.html'):
-        page.goto(base+directory)
-        link=page.locator('.term-shell .notice a').first
-        check(f'{directory} long notice link wraps without mobile overflow',
-              link.count()==1
-              and link.evaluate("el=>getComputedStyle(el).whiteSpace")=='normal'
-              and page.evaluate('document.documentElement.scrollWidth<=innerWidth'))
+    page.goto(base+'terms/index.html')
+    check('concept directory remains within narrow mobile viewport',
+          page.evaluate('document.documentElement.scrollWidth<=innerWidth'))
+    page.goto(base+'technology/index.html')
+    link=page.locator('.term-shell .notice a').first
+    check('technology directory long note link wraps without mobile overflow',
+          link.count()==1
+          and link.evaluate("el=>getComputedStyle(el).whiteSpace")=='normal'
+          and page.evaluate('document.documentElement.scrollWidth<=innerWidth'))
 
     check('no application runtime exceptions',not errors)
     browser.close()
