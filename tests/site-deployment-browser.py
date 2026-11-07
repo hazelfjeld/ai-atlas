@@ -1536,33 +1536,47 @@ with sync_playwright() as p:
     check('catalog directory menu remains usable with JavaScript disabled',
           script_free.locator('.site-mobile-chrome__menu a:not(.site-mobile-chrome__brand)').first.is_visible()
           and script_free.locator('.site-mobile-chrome__menu a:not(.site-mobile-chrome__brand)').count() == 7)
-    # Unlike the enhanced menu, the no-script menu used to show an empty
-    # brand slot. Its fallback must use the existing favicon, remain visible
-    # in the same rail position, and never create a duplicate navigation link.
-    def check_no_script_brand(label):
+    # New standalone/directory pages render the actual SVG wordmark and home
+    # link at build time, without needing JavaScript to clone the desktop logo.
+    # Historical detail pages intentionally retain the CSS-only favicon fallback
+    # until their separately generated HTML changes; validate both honestly.
+    def check_no_script_brand(label, *, real_link):
         menu = script_free.locator('.site-mobile-chrome__menu')
         check(label + ' keeps the shared AI Updates wordmark without scripts',
-              menu.count() == 1 and menu.evaluate("""el => {
-                  const brand = getComputedStyle(el, '::after');
-                  return !el.querySelector('a.site-mobile-chrome__brand')
-                      && brand.content === '"AI Updates"'
-                      && brand.position === 'absolute'
-                      && brand.backgroundImage.includes('favicon.svg');
-              }"""))
-    check_no_script_brand('Concept directory')
+              menu.count() == 1 and menu.evaluate("""(el, realLink) => {
+                  const anchors = [...el.querySelectorAll('a.site-mobile-chrome__brand')];
+                  const fallback = getComputedStyle(el, '::after');
+                  const sections = el.querySelectorAll('a:not(.site-mobile-chrome__brand)');
+                  if (sections.length !== 7) return false;
+                  if (realLink) {
+                      if (anchors.length !== 1) return false;
+                      const anchor = anchors[0];
+                      return anchor.textContent.includes('AI Updates')
+                          && anchor.getAttribute('aria-label') === 'AI Updates home'
+                          && anchor.getAttribute('href').endsWith('index.html#/overview')
+                          && anchor.querySelector('svg') !== null
+                          && anchor.getBoundingClientRect().height > 0
+                          && fallback.content === 'none';
+                  }
+                  return anchors.length === 0
+                      && fallback.content === '"AI Updates"'
+                      && fallback.position === 'absolute'
+                      && fallback.backgroundImage.includes('favicon.svg');
+              }""", real_link))
+    check_no_script_brand('Concept directory', real_link=True)
     script_free.goto(base + 'about.html')
     script_free.locator('#directory-mobile-nav summary').click()
     check('About uses the generated shared menu without JavaScript',
           script_free.locator('.site-mobile-chrome__menu a:not(.site-mobile-chrome__brand)').count() == 7
           and script_free.locator('.site-mobile-chrome__menu a:not(.site-mobile-chrome__brand)[aria-current="page"]').inner_text() == 'About')
-    check_no_script_brand('About')
+    check_no_script_brand('About', real_link=True)
     script_free.screenshot(path=str(out / 'no-script-about-branded-mobile.png'), full_page=False)
     script_free.goto(base + 'technology/TECH-0216-pytorch.html')
     script_free.locator('#directory-mobile-nav summary').click()
     check('technology detail uses the shared mobile menu without JavaScript',
           script_free.locator('.site-mobile-chrome__menu a:not(.site-mobile-chrome__brand)').count() == 7
           and script_free.locator('.site-mobile-chrome__menu a:not(.site-mobile-chrome__brand)[aria-current="page"]').inner_text() == 'Technology profiles')
-    check_no_script_brand('Technology profile')
+    check_no_script_brand('Technology profile', real_link=False)
     script_free.close()
     check('no application runtime exceptions', not errors)
     browser.close()
