@@ -96,7 +96,7 @@
   ],
   "news": [
     {
-      "id": "ai-news:occ-si-bank-supervision:2026-11-07",
+      "id": "ai-news-occ-si-bank-supervision-2026-11-07",
       "title": "OCC outlines bank examination standards for agentic super intelligence",
       "category": "governance",
       "tags": [
@@ -118,7 +118,7 @@
       "collection_classification": "catch_up_prior_uncovered_interval"
     },
     {
-      "id": "ai-news:dharma-document-field-extractor:2026-11-07",
+      "id": "ai-news-dharma-document-field-extractor-2026-11-07",
       "title": "Dharma reports a 2B model for structured field extraction from documents",
       "category": "document-ai",
       "tags": [
@@ -140,7 +140,7 @@
       "collection_classification": "catch_up_prior_uncovered_interval"
     },
     {
-      "id": "ai-news:google-gemini-omni-1-2-flash:2026-11-07",
+      "id": "ai-news-google-gemini-omni-1-2-flash-2026-11-07",
       "title": "Gemini Omni 1.2 Flash expands video length and interactive editing",
       "category": "multimodal",
       "tags": [
@@ -162,7 +162,7 @@
       "collection_classification": "catch_up_prior_uncovered_interval"
     },
     {
-      "id": "ai-news:openai-gpt6-cyber:2026-11-07",
+      "id": "ai-news-openai-gpt6-cyber-2026-11-07",
       "title": "OpenAI introduces GPT-6 Cyber with security-task scope testing",
       "category": "cybersecurity",
       "tags": [
@@ -184,7 +184,7 @@
       "collection_classification": "catch_up_prior_uncovered_interval"
     },
     {
-      "id": "ai-news:nvidia-cosmos3-interactive:2026-11-07",
+      "id": "ai-news-nvidia-cosmos3-interactive-2026-11-07",
       "title": "NVIDIA releases Cosmos 3 checkpoints for interactive simulation",
       "category": "robotics",
       "tags": [
@@ -207,7 +207,7 @@
       "collection_classification": "catch_up_prior_uncovered_interval"
     },
     {
-      "id": "ai-news:lerobot-v0-7-0:2026-11-07",
+      "id": "ai-news-lerobot-v0-7-0-2026-11-07",
       "title": "LeRobot v0.7 adds language-controlled rollouts and streaming datasets",
       "category": "robotics",
       "tags": [
@@ -229,7 +229,7 @@
       "collection_classification": "catch_up_prior_uncovered_interval"
     },
     {
-      "id": "ai-news:phonon-nov5-followup:2026-11-07",
+      "id": "ai-news-phonon-nov5-followup-2026-11-07",
       "title": "Gradium details local Phonon speech models and license differences",
       "category": "audio",
       "tags": [
@@ -251,7 +251,7 @@
       "collection_classification": "catch_up_prior_uncovered_interval"
     },
     {
-      "id": "ai-news:harnesshub-rl-adapters:2026-11-07",
+      "id": "ai-news-harnesshub-rl-adapters-2026-11-07",
       "title": "Harness Hub studies per-harness LoRA training with anti-reward-hacking checks",
       "category": "agents",
       "tags": [
@@ -274,7 +274,7 @@
       "collection_classification": "catch_up_prior_uncovered_interval"
     },
     {
-      "id": "ai-news:hf-private-asr-accent-tests:2026-11-07",
+      "id": "ai-news-hf-private-asr-accent-tests-2026-11-07",
       "title": "Open ASR Leaderboard gains Egyptian and Nigerian English test splits",
       "category": "evaluation",
       "tags": [
@@ -296,7 +296,7 @@
       "collection_classification": "catch_up_prior_uncovered_interval"
     },
     {
-      "id": "ai-news:usda-crop-anomaly-check:2026-11-07",
+      "id": "ai-news-usda-crop-anomaly-check-2026-11-07",
       "title": "USDA plans AI checks for November 10 agricultural report",
       "category": "applications",
       "tags": [
@@ -318,7 +318,7 @@
       "collection_classification": "catch_up_prior_uncovered_interval"
     },
     {
-      "id": "ai-news:collinear-cwebenc-v2:2026-11-07",
+      "id": "ai-news-collinear-cwebenc-v2-2026-11-07",
       "title": "CWE-bench v2 exposes 100 verifiable security-repair tasks",
       "category": "evaluation",
       "tags": [

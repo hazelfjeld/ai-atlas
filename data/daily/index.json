@@ -254,12 +254,12 @@
       "date": "2026-11-07",
       "revision": 1,
       "path": "data/daily/editions/2026-11-07-v1.json",
-      "sha256": "c41173afd54704190d48f86228cbe89cd321c7ee235d13cd292ca3b68b0b0f8c",
+      "sha256": "ab2f03c6e0321f83ca718dfa7896f8dc4ecdb44618ad24619f3caa83ed95274e",
       "bytes": 17838,
       "published_at": "2026-11-07T14:39:59.877Z"
     }
   ],
   "last_successful_publish_at": "2026-11-04T03:35:50Z",
   "status": "edition_revision_1_pending_production_verification",
-  "coverage_note": "November 7 partial catch-up from November 3–6 source dates: eleven independently opened original reports, five technology and three term proposals deferred. SHA-validated staging batch; hosted publication proof pending. Prior November 3 verified edition retained as production fallback."
+  "coverage_note": "November 7 v1 pending production verification: partial recovery edition with eleven independently source-checked November 3–6 catch-up reports and eight deferred catalog proposals. Source SHA-256 verified. November 3 revision 6 remains latest independently verified production archive."
 }

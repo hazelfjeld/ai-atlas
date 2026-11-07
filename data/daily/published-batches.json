@@ -688,17 +688,17 @@
       "publication_outcome": "pending_production_verification",
       "publication_edition": "2026-11-07-v1",
       "accepted_news_ids": [
-        "ai-news:occ-si-bank-supervision:2026-11-07",
-        "ai-news:dharma-document-field-extractor:2026-11-07",
-        "ai-news:google-gemini-omni-1-2-flash:2026-11-07",
-        "ai-news:openai-gpt6-cyber:2026-11-07",
-        "ai-news:nvidia-cosmos3-interactive:2026-11-07",
-        "ai-news:lerobot-v0-7-0:2026-11-07",
-        "ai-news:phonon-nov5-followup:2026-11-07",
-        "ai-news:harnesshub-rl-adapters:2026-11-07",
-        "ai-news:hf-private-asr-accent-tests:2026-11-07",
-        "ai-news:usda-crop-anomaly-check:2026-11-07",
-        "ai-news:collinear-cwebenc-v2:2026-11-07"
+        "ai-news-occ-si-bank-supervision-2026-11-07",
+        "ai-news-dharma-document-field-extractor-2026-11-07",
+        "ai-news-google-gemini-omni-1-2-flash-2026-11-07",
+        "ai-news-openai-gpt6-cyber-2026-11-07",
+        "ai-news-nvidia-cosmos3-interactive-2026-11-07",
+        "ai-news-lerobot-v0-7-0-2026-11-07",
+        "ai-news-phonon-nov5-followup-2026-11-07",
+        "ai-news-harnesshub-rl-adapters-2026-11-07",
+        "ai-news-hf-private-asr-accent-tests-2026-11-07",
+        "ai-news-usda-crop-anomaly-check-2026-11-07",
+        "ai-news-collinear-cwebenc-v2-2026-11-07"
       ],
       "deferred_news_ids": [],
       "deferred_catalog_proposal_ids": [
@@ -720,7 +720,7 @@
         "news_deferred": 0,
         "catalog_deferred": 8
       },
-      "review_notes": "The November 7 collection is a bounded November 3–7 catch-up; all 11 original source dates are November 3–6. Publisher independently checked ten original websites and Reuters report via a contemporaneous Reuters syndication. Claims, benchmark limits and planned deployments are explicitly qualified. All eight canonical proposals remain deferred for duplicate, availability and licensing reviews. No historic archive rewritten.",
+      "review_notes": "The November 7 collection is a bounded November 3–7 catch-up; all 11 original source dates are November 3–6. Publisher independently checked ten original websites and Reuters report via a contemporaneous Reuters syndication. Claims, benchmark limits and planned deployments are explicitly qualified. All eight canonical proposals remain deferred for duplicate, availability and licensing reviews. No historic archive rewritten. Staging colon-delimited item identifiers were deterministically normalized to safe public archive IDs; source_accepted_news_ids preserves the original mapping.",
       "publication_history": [
         {
           "edition": "2026-11-07-v1",
@@ -741,7 +741,20 @@
       "last_verified_public_url": null,
       "production_commit": null,
       "production_workflow_run_id": null,
-      "githack_workflow_run_id": null
+      "githack_workflow_run_id": null,
+      "source_accepted_news_ids": [
+        "ai-news:occ-si-bank-supervision:2026-11-07",
+        "ai-news:dharma-document-field-extractor:2026-11-07",
+        "ai-news:google-gemini-omni-1-2-flash:2026-11-07",
+        "ai-news:openai-gpt6-cyber:2026-11-07",
+        "ai-news:nvidia-cosmos3-interactive:2026-11-07",
+        "ai-news:lerobot-v0-7-0:2026-11-07",
+        "ai-news:phonon-nov5-followup:2026-11-07",
+        "ai-news:harnesshub-rl-adapters:2026-11-07",
+        "ai-news:hf-private-asr-accent-tests:2026-11-07",
+        "ai-news:usda-crop-anomaly-check:2026-11-07",
+        "ai-news:collinear-cwebenc-v2:2026-11-07"
+      ]
     }
   ]
 }
