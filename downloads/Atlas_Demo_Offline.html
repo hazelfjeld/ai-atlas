@@ -522,6 +522,16 @@ body:has(.site-chrome){padding-top:78px}
    belongs inside that topbar on phones only. Avoid a duplicate fixed header. */
 @media (min-width:651px){.discover-mobile-chrome{display:none!important}}
 
+/* Editorial/reference subsections use Discover's existing reading-desk type.
+   Keep article-specific spacing and card layouts; share only the narrative
+   heading treatment across About, directories, detail pages and evidence reviews. */
+:is(.term-shell > .profile-section, .term-shell > .detail-block,
+    .review-shell > section, .shell > main > section) > h2{
+  font:400 clamp(21px,2.2vw,25px)/1.25 Georgia,'Times New Roman',serif;
+  letter-spacing:-.025em;
+  color:var(--ink);
+}
+
 /* atlas-rail-icons:begin */
 /* Generated from the very same DISCOVER_LINKS SVG paths as the Discover rail. */
 @media (min-width:651px){

@@ -474,6 +474,38 @@ with sync_playwright() as p:
                 check('shared desktop rail returns from About to actual Discover',
                       page.locator('.discover-heading h1').inner_text()=='Discover')
 
+    # Compare actual editorial subsection type against the existing Discover
+    # reading desk; navigation, reading widths and content remain untouched.
+    for width in (320, 390, 768, 1280):
+        page.set_viewport_size({'width': width, 'height': 900})
+        for theme in ('light', 'dark'):
+            page.goto(base)
+            page.evaluate("(theme) => { localStorage.setItem('atlas.theme', theme); document.documentElement.dataset.theme = theme; }", theme)
+            discover_type = page.locator('.reading-link h2').evaluate(
+                "el => ({family:getComputedStyle(el).fontFamily,weight:getComputedStyle(el).fontWeight})")
+            for route, selector in (
+                ('about.html', '.term-shell > .profile-section > h2'),
+                ('catalog-review.html', '.shell > main > section > h2'),
+                ('hardware-review.html', '.review-shell > section > h2'),
+                ('terms/MLD-0002-ablation-study.html', '.term-shell > .detail-block > h2'),
+                ('technology/TECH-0216-pytorch.html', '.term-shell > .profile-section > h2'),
+            ):
+                page.goto(base + route)
+                heading = page.locator(selector).first
+                styling = heading.evaluate("""el => {
+                    const s=getComputedStyle(el);
+                    return {family:s.fontFamily,weight:s.fontWeight,size:parseFloat(s.fontSize),color:s.color};
+                }""")
+                check(f'{route} {width}px {theme} uses shared editorial section typography',
+                      heading.is_visible() and styling['family'].lower().startswith('georgia')
+                      and discover_type['family'].lower().startswith('georgia')
+                      and styling['weight'] == discover_type['weight'] == '400'
+                      and 21 <= styling['size'] <= 25.1
+                      and page.evaluate('document.documentElement.dataset.theme') == theme
+                      and page.evaluate('document.documentElement.scrollWidth <= innerWidth'))
+                if width == 1280 and theme == 'light' and route in ('about.html','catalog-review.html'):
+                    page.screenshot(path=str(out / f'editorial-heading-{route}.png'),full_page=True)
+
     check('no application runtime exceptions',not errors)
     browser.close()
 (out/'results.json').write_text(json.dumps({'checks_passed':len(checks),'checks':checks,'base':base},indent=2))

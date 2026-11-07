@@ -1035,3 +1035,22 @@ test('shared standalone rails reuse the seven Discover SVG icon geometries at de
   assert.match(read('scripts/build_seo.py'), /sync_desktop_rail_icons_css\(previous_css\)/);
   assert.ok(offline.includes(block), 'offline fallback embeds the same shared stylesheet');
 });
+
+
+test('reference and editorial section headings reuse Discover reading-desk typography', () => {
+  const css = read('site-chrome.css'), brand = read('brand.css');
+  const offline = read('downloads/Atlas_Demo_Offline.html');
+  assert.match(brand, /\.reading-link h2\{font:400 25px\/1\.25 Georgia,serif/);
+  assert.match(css, /:is\(\.term-shell > \.profile-section, \.term-shell > \.detail-block,/);
+  assert.match(css, /\.review-shell > section, \.shell > main > section\) > h2\{/);
+  assert.match(css, /font:400 clamp\(21px,2\.2vw,25px\)\/1\.25 Georgia,'Times New Roman',serif/);
+  assert.match(css, /color:var\(--ink\)/);
+  assert.ok(offline.includes('Editorial/reference subsections use Discover'), 'single-file demo embeds the same source CSS');
+  for (const [page, heading] of [
+    ['about.html', 'class="profile-section"><h2>'],
+    ['catalog-review.html', '<h2 id="tools">'],
+    ['hardware-review.html', '<section>'],
+    ['terms/MLD-0002-ablation-study.html', 'class="detail-block'],
+    ['technology/TECH-0216-pytorch.html', 'class="profile-section']
+  ]) assert.ok(read(page).includes(heading), page + ' remains covered by the shared selector');
+});
