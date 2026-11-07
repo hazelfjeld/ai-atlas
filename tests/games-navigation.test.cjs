@@ -769,6 +769,8 @@ test('standalone sections use Discover’s slash-to-search shortcut without stea
   const script = read('site-theme.js');
   const listeners = {};
   let searches = 0, openMenu = false;
+  const stored = new Map();
+  const sessionStorage = {setItem: (k,v) => stored.set(k,v)};
   const search = {click: () => {searches++;}};
   const document = {
     documentElement: {dataset: {}},
@@ -776,7 +778,7 @@ test('standalone sections use Discover’s slash-to-search shortcut without stea
     querySelector: selector => selector === 'a.site-mobile-chrome__search[href]' ? search :
       selector === 'details.site-mobile-chrome__nav[open]' && openMenu ? {} : null,
   };
-  vm.runInNewContext(script, {document, localStorage: {getItem: () => null}});
+  vm.runInNewContext(script, {document, localStorage: {getItem: () => null}, sessionStorage});
   const press = (overrides={}) => {
     let prevented = false;
     const e = {key:'/', defaultPrevented:false, repeat:false, isComposing:false,
@@ -787,6 +789,7 @@ test('standalone sections use Discover’s slash-to-search shortcut without stea
   };
   assert.equal(press(), true);
   assert.equal(searches, 1);
+  assert.equal(stored.get('atlas.searchShortcutPending'),'1', 'Slash marks a one-shot search focus handoff');
   assert.equal(press({target:{closest: () => ({tagName:'INPUT'})}}), false);
   assert.equal(press({ctrlKey:true}), false);
   assert.equal(press({metaKey:true}), false);
@@ -798,6 +801,14 @@ test('standalone sections use Discover’s slash-to-search shortcut without stea
   assert.match(script, /site-mobile-chrome__search\[href\]/);
 });
 
+
+test('Discover consumes a shared slash shortcut only at the real search route', () => {
+  const app = read('app.js');
+  assert.match(app, /sessionStorage\.getItem\('atlas\.searchShortcutPending'\)/);
+  assert.match(app, /sessionStorage\.removeItem\('atlas\.searchShortcutPending'\)/);
+  assert.match(app, /shortcutFocus && view === 'search'/);
+  assert.match(app, /\$\('global-query'\)\.focus/);
+});
 
 test('shared native mobile menu adopts Discover off-canvas frame without duplicating navigation', () => {
   const css = read('site-chrome.css');

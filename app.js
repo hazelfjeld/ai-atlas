@@ -216,4 +216,11 @@ $('discover-mobile-nav').addEventListener('click',e=>{
 dialog.addEventListener('cancel',e=>{e.preventDefault();closeRecord();});dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)closeRecord();}});
 document.addEventListener('keydown',e=>{const typing=/INPUT|TEXTAREA|SELECT/.test(document.activeElement?.tagName);if(e.key==='/'&&!typing&&!dialog.open&&!$('discover-mobile-nav').open){e.preventDefault();$('global-query').focus();}});
 window.addEventListener('hashchange',route);route();
+// Finish a slash-to-search journey only after catalog hydration. Consume the
+// one-shot hint on any arrival so a later unrelated visit cannot steal focus.
+try {
+  const shortcutFocus = sessionStorage.getItem('atlas.searchShortcutPending') === '1';
+  sessionStorage.removeItem('atlas.searchShortcutPending');
+  if (shortcutFocus && view === 'search') $('global-query').focus({preventScroll:true});
+} catch (_) { /* Restricted storage does not block searching. */ }
 })();

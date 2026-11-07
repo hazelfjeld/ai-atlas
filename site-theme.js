@@ -51,6 +51,10 @@ document.addEventListener('keydown', (event) => {
   const search = document.querySelector('a.site-mobile-chrome__search[href]');
   if (!search) return;
   event.preventDefault();
+  // After a cross-page / shortcut, make the real Discover search input ready
+  // for typing, rather than requiring a second tap. No-JS links still work.
+  try { sessionStorage.setItem('atlas.searchShortcutPending', '1'); }
+  catch (_) { /* The search route still works without session storage. */ }
   search.click();
 });
 document.addEventListener('pointerdown', (event) => {
