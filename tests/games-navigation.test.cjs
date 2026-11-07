@@ -1453,25 +1453,29 @@ test('Guided demo inherits the actual shared navigation instead of an independen
   const html=read('demo.html');
   const about=read('about.html');
   const generated=read('scripts/site_chrome.py');
-  assert.match(generated, /"demo.html": \("", "", "demo-mobile-nav"/);
-  assert.match(generated, /"demo.html": "Guided demo"/);
-  assert.match(html, /<link rel="stylesheet" href="site-chrome.css">/);
-  assert.match(html, /<script src="site-theme.js"><\\/script>/);
-  assert.match(html, /<details class="site-mobile-chrome__nav" id="demo-mobile-nav">/);
-  assert.match(html, /data-page-label="Guided demo"/);
-  assert.match(html, /<nav class="site-chrome demo-site-chrome" aria-label="AI Updates primary navigation">/);
-  assert.doesNotMatch(html, /Demo navigation|index\\.html#coverage/);
+  assert.ok(generated.includes('"demo.html": ("", "", "demo-mobile-nav"'));
+  assert.ok(generated.includes('"demo.html": "Guided demo"'));
+  assert.ok(html.includes('<link rel="stylesheet" href="site-chrome.css">'));
+  assert.ok(html.includes('<script src="site-theme.js"></script>'));
+  assert.ok(html.includes('<details class="site-mobile-chrome__nav" id="demo-mobile-nav">'));
+  assert.ok(html.includes('data-page-label="Guided demo"'));
+  assert.ok(html.includes('<nav class="site-chrome demo-site-chrome" aria-label="AI Updates primary navigation">'));
+  assert.ok(!html.includes('Demo navigation') && !html.includes('index.html#coverage'));
   const extractLinks=(source)=>{
-    const links=source.match(/<div class="site-chrome__links">([\\s\\S]*?)<\\/div>/)?.[1];
-    assert.ok(links,'Missing shared desktop link list');
-    return [...links.matchAll(/<a href="([^"]+)"(?: aria-current="[^"]+")?>([^<]+)<\\/a>/g)]
-      .map(match=>[match[1],match[2]]);
+    const raw=source.split('<div class="site-chrome__links">')[1];
+    assert.ok(raw,'Missing shared desktop link list');
+    const links=raw.split('</div>')[0];
+    return links.split('<a href="').slice(1).map(anchor=>[
+      anchor.split('"')[0],
+      anchor.split('>')[1].split('<')[0]
+    ]);
   };
-  assert.deepEqual(extractLinks(html),extractLinks(about),'Demo and About must share the same seven primary destinations and order');
-  assert.equal((html.match(/aria-current="location"/g)||[]).length,2,
+  assert.deepEqual(extractLinks(html),extractLinks(about),
+    'Demo and About must share the same seven primary destinations and order');
+  assert.equal(html.split('aria-current="location"').length-1,2,
     'Discover is the parent section in both mobile and desktop navigation');
-  assert.match(html, /href="index.html#\\/sources">Inspect published inventory/);
-  assert.match(html, /:root\\[data-theme="dark"\\]/);
-  assert.match(html, /article\\{padding:26px;background:var\\(--demo-card\\)/);
-  assert.match(html, /<a class="go" href="terms\\/MLD-0691-machine-learning.html">/);
+  assert.ok(html.includes('href="index.html#/sources">Inspect published inventory'));
+  assert.ok(html.includes(':root[data-theme="dark"]'));
+  assert.ok(html.includes('article{padding:26px;background:var(--demo-card)'));
+  assert.ok(html.includes('<a class="go" href="terms/MLD-0691-machine-learning.html">'));
 });
