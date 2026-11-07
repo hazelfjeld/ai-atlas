@@ -1109,7 +1109,7 @@ test('shared static-page footers follow Discover rhythm without replacing sectio
   assert.equal(css.split(marker).length,2,'one shared footer treatment');
   const rule=marker+css.split(marker)[1].split('/* atlas-rail-icons:begin */')[0];
   assert.ok(offline.includes(rule),'offline fallback embeds the exact footer treatment');
-  assert.match(rule,/body:has\\(\\.site-chrome\\) footer\\{/);
+  assert.ok(rule.includes('body:has(.site-chrome) footer{'), 'real shared footer selector');
   for (const expected of ['margin-top:42px;','padding:20px 0 0;',
     'border-top:1px solid var(--line,#dfe3dc);','font-size:11px;',
     'line-height:1.8;','overflow-wrap:anywhere;','footer a:focus-visible']) {
@@ -1122,7 +1122,7 @@ test('shared static-page footers follow Discover rhythm without replacing sectio
     'technology/TECH-0216-pytorch.html','research.html','playbooks.html',
     'catalog-review.html','hardware-review.html','games.html']) {
     const html=read(route);
-    assert.match(html,/<footer(?:\\s|>)/,route+' retains its actual content footer');
-    assert.match(html,/site-chrome\\.css/,route+' loads the same footer source');
+    assert.ok(html.includes('<footer'),route+' retains its actual content footer');
+    assert.ok(html.includes('site-chrome.css'),route+' loads the same footer source');
   }
 });
