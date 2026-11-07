@@ -995,3 +995,22 @@ test('shared workspace topbar has the correct no-script section label on every s
     assert.equal((html.match(/class="site-chrome__links"/g) || []).length, 1, route);
   }
 });
+
+test('generated reference workspace labels use the selected canonical rail on first paint', () => {
+  const css = read('site-chrome.css');
+  const offline = read('downloads/Atlas_Demo_Offline.html');
+  for (const [view, label, routes] of [
+    ['dictionary', 'Concept dictionary', ['terms/index.html', 'terms/MLD-0002-ablation-study.html']],
+    ['technologies', 'Technology profiles', ['technology/index.html', 'technology/TECH-0216-pytorch.html']]
+  ]) {
+    const rule = '.term-shell > .site-mobile-chrome:not([data-page-label]):has(+ .site-chrome .site-chrome__links a[href$="#/' + view + '"][aria-current="page"])::before{content:"' + label + '"}';
+    assert.ok(css.includes(rule), 'shared desktop no-script title for ' + view);
+    assert.ok(offline.includes(rule), 'offline fallback was rebuilt with the shared stylesheet');
+    for (const route of routes) {
+      const html = read(route);
+      assert.match(html, /class="directory-mobile-topbar site-mobile-chrome"/, route);
+      assert.ok(html.includes('href="../index.html#/' + view + '" aria-current="page">' + label + '</a>'), route);
+      assert.equal((html.match(/class="site-chrome__links"/g) || []).length, 1, route);
+    }
+  }
+});

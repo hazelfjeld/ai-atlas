@@ -181,6 +181,11 @@ body:has(.site-chrome){padding-top:78px}
   font-size:13px;font-weight:550;color:var(--ink,#18211e)
 }
 .site-mobile-chrome[data-page-label]::before{content:attr(data-page-label)}
+/* Generated concept and technology references share the selected rail link as
+   the no-JavaScript desktop title source. This covers their existing static
+   pages without copying another header or changing direct article URLs. */
+.term-shell > .site-mobile-chrome:not([data-page-label]):has(+ .site-chrome .site-chrome__links a[href$="#/dictionary"][aria-current="page"])::before{content:"Concept dictionary"}
+.term-shell > .site-mobile-chrome:not([data-page-label]):has(+ .site-chrome .site-chrome__links a[href$="#/technologies"][aria-current="page"])::before{content:"Technology profiles"}
 .site-mobile-chrome__nav{display:none}
 .site-mobile-chrome__search{
   display:flex;align-items:center;gap:10px;flex:0 1 365px;

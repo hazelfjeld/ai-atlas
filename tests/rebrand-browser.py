@@ -100,6 +100,32 @@ with sync_playwright() as p:
               and expected in header.evaluate("el => getComputedStyle(el,'::before').content")
               and page.locator('.site-chrome__links a').count() == 7)
 
+    # The generated directories and 1,648 detail pages already mark their
+    # canonical desktop rail section. Before hydration (or with JS disabled),
+    # the fixed topbar must display that section rather than "AI Updates".
+    for width in (768, 1280):
+        page.set_viewport_size({'width': width, 'height': 900})
+        for theme in ('light', 'dark'):
+            page.emulate_media(color_scheme=theme)
+            for route, expected in (
+                ('terms/index.html', 'Concept dictionary'),
+                ('terms/MLD-0002-ablation-study.html', 'Concept dictionary'),
+                ('technology/index.html', 'Technology profiles'),
+                ('technology/TECH-0216-pytorch.html', 'Technology profiles'),
+            ):
+                page.goto(base + route)
+                header = page.locator('main.term-shell > .site-mobile-chrome')
+                active = page.locator('main.term-shell > .site-chrome .site-chrome__links a[aria-current="page"]')
+                label = header.evaluate("el => getComputedStyle(el, '::before').content")
+                check(f'{route} {width}px {theme} uses the selected no-JS section title',
+                      header.is_visible() and expected in label
+                      and active.count() == 1 and active.inner_text() == expected)
+                if width == 1280 and theme == 'light' and route in (
+                        'terms/MLD-0002-ablation-study.html',
+                        'technology/TECH-0216-pytorch.html'):
+                    page.screenshot(path=str(out / f'no-script-detail-label-{route.replace("/", "-")}.png'))
+    page.emulate_media(color_scheme='light')
+
     static.close()
     context=browser.new_context(viewport={'width':1440,'height':1050},reduced_motion='reduce')
     page=context.new_page()
