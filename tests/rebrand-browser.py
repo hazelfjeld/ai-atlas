@@ -47,6 +47,14 @@ with sync_playwright() as p:
     page.locator('.breadcrumb-links').get_by_role('link',name='Technologies',exact=True).click()
     expected_profiles=json.loads((Path(__file__).resolve().parents[1]/'publication.json').read_text())['published_counts']['technologies']
     check('technology directory exposes every checksummed crawlable profile', expected_profiles>=300 and page.locator('.reference-grid a').count()==expected_profiles)
+    # Research has no seven-item primary selection; its workspace label must
+    # still be meaningful before JavaScript, not the editorial hero headline.
+    page.set_viewport_size({'width':768,'height':900})
+    page.goto(base+'research.html')
+    check('Research section label is present without JavaScript',
+          page.locator('.research-mobile-topbar').get_attribute('data-page-label')=='Research library'
+          and 'Research library' in page.locator('.research-mobile-topbar').evaluate(
+              "el => getComputedStyle(el, '::before').content"))
     static.close()
     context=browser.new_context(viewport={'width':1440,'height':1050},reduced_motion='reduce')
     page=context.new_page()
@@ -221,6 +229,22 @@ with sync_playwright() as p:
     page.goto(base+'terms/MLD-1039-reward-hacking.html')
     check('rebranded expanded guide retains primary citations',page.locator('h1').inner_text()=='Reward hacking' and page.get_by_role('heading',name='Sources for the expanded explanation',exact=True).is_visible())
     check('mobile term guide fits the viewport',page.evaluate('document.documentElement.scrollWidth<=innerWidth'))
+    # Shared desktop header comparisons must survive cross-page navigation at
+    # representative phone, tablet, and desktop widths in both saved themes.
+    for width, height in ((320, 700), (390, 844), (768, 900), (1280, 900)):
+        page.set_viewport_size({'width':width,'height':height})
+        for theme in ('light','dark'):
+            page.goto(base+'research.html')
+            page.evaluate("(theme) => { localStorage.setItem('atlas.theme', theme); document.documentElement.dataset.theme = theme; }",theme)
+            check(f'Research {width}px {theme} header keeps its section identity',
+                  page.locator('.research-mobile-topbar').get_attribute('data-page-label')=='Research library'
+                  and page.evaluate("document.documentElement.dataset.theme") == theme)
+            if (width,theme) in ((390,'dark'),(1280,'light')):
+                page.screenshot(path=str(out/f'research-{width}-{theme}.png'))
+            page.goto(base+'about.html')
+            check(f'About {width}px {theme} keeps the shared section and saved appearance',
+                  page.locator('.directory-mobile-topbar').get_attribute('data-page-label')=='About'
+                  and page.evaluate("document.documentElement.dataset.theme") == theme)
     check('no application runtime exceptions',not errors)
     browser.close()
 (out/'results.json').write_text(json.dumps({'checks_passed':len(checks),'checks':checks,'base':base},indent=2))

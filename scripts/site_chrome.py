@@ -39,7 +39,7 @@ def render_directory_nav(prefix, selected, *, mobile_classes="directory-mobile-t
                          toggle_classes="site-mobile-chrome__toggle", menu_classes="site-mobile-chrome__menu",
                          search_classes="site-mobile-chrome__search", icon_classes="site-mobile-chrome__search-icon",
                          search_label_classes="site-mobile-chrome__search-placeholder",
-                         desktop_classes="site-chrome term-nav", labeled=True, current_kind="page"):
+                         desktop_classes="site-chrome term-nav", labeled=True, current_kind="page", page_label=None):
     """One script-free site header, with only page-specific shell classes configurable."""
     assert prefix in ("", "../")
     assert selected is None or selected in {name for _, name in DESTINATIONS}
@@ -48,7 +48,8 @@ def render_directory_nav(prefix, selected, *, mobile_classes="directory-mobile-t
     brand = render_brand(prefix)
     mobile = (
         '<div class="' + mobile_classes + '"' +
-        (' aria-label="AI Updates mobile header"' if labeled else '') + '>'
+        (' aria-label="AI Updates mobile header"' if labeled else '') +
+        (' data-page-label="' + escape(page_label) + '"' if page_label else '') + '>'
         '<details class="' + details_classes + '" id="' + details_id + '">'
         '<summary class="' + toggle_classes + '" aria-label="Toggle navigation"><span aria-hidden="true">☰</span></summary>'
         '<nav class="' + menu_classes + '" aria-label="AI Updates sections">' + links + '</nav></details>'
@@ -102,6 +103,7 @@ def render_standalone_nav(path):
         icon_classes=classes(icon, "site-mobile-chrome__search-icon"),
         search_label_classes=classes(label, "site-mobile-chrome__search-placeholder"),
         desktop_classes="site-chrome " + desktop, labeled=labeled, current_kind=kind,
+        page_label="Research library" if path == "research.html" else None,
     )
     # Research's main landmark intentionally starts between the two headers.
     if path == "research.html":
