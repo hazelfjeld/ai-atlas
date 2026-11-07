@@ -1128,3 +1128,36 @@ test('shared static-page footers follow Discover rhythm without replacing sectio
     assert.ok(html.includes('site-chrome.css'),route+' loads the same footer source');
   }
 });
+
+
+test('shared filter fields use Discover-style native controls across existing workspaces', () => {
+  const css=read('site-chrome.css');
+  const offline=read('downloads/Atlas_Demo_Offline.html');
+  const begin='/* atlas-filter-controls:begin */', end='/* atlas-filter-controls:end */';
+  assert.equal(css.split(begin).length,2,'one shared filter control source');
+  assert.equal(css.split(end).length,2,'one closing filter control marker');
+  const shared=css.slice(css.indexOf(begin),css.indexOf(end)+end.length);
+  assert.ok(offline.includes(shared),'offline fallback contains identical shared control CSS');
+  for (const required of [
+    '.tech-controls,.playbook-tools,.controls,.filters,.search-controls',
+    'input[type="search"],select', 'min-height:42px;', 'border-radius:7px;',
+    'font-size:16px;', 'min-height:44px;', ':focus-visible',
+    '--atlas-control-surface:#222d27;', '--atlas-control-ink:#f1f5ef;',
+    ':root:not([data-theme="light"])'
+  ]) assert.ok(shared.includes(required),'missing shared behavior: '+required);
+  const families=[
+    ['technologies.html','tech-controls','tech-search'],
+    ['playbooks.html','playbook-tools','id="search"'],
+    ['research.html','class="controls"','id="query"'],
+    ['games.html','class="filters"','id="query"'],
+    ['whats-new.html','search-controls','id="edition-search"']
+  ];
+  for (const [path,wrapper,field] of families) {
+    const html=read(path);
+    assert.ok(html.includes('href="site-chrome.css"'),path+' must load the shared component');
+    assert.ok(html.includes(wrapper) && html.includes(field),path+' has a real native filter field');
+    assert.ok(html.includes('type="search"'),path+' has a functional search input');
+  }
+  assert.ok(!shared.includes('pointer-events:none') && !shared.includes('display:none'),
+    'never hide or fake an existing search control');
+});

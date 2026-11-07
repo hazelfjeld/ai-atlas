@@ -370,3 +370,85 @@ body:has(.site-chrome) footer a:focus-visible{
 .site-chrome .site-chrome__links a[href$="about.html"]{--atlas-rail-icon:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20aria-hidden%3D%22true%22%3E%3Cpath%20d%3D%22M4%204h16v16H4z%20M8%208h8%20M8%2012h5%20M8%2016h7%22%2F%3E%3C%2Fsvg%3E")}
 }
 /* atlas-rail-icons:end */
+
+/* atlas-filter-controls:begin */
+/* Discover's compact toolbar is the source for real native search and filter
+   fields in existing standalone workspaces. Preserve each section's grid and
+   behavior; share field shape, font, focus and explicit theme contrast. */
+:root{
+  --atlas-control-surface:#fff;
+  --atlas-control-line:#dfe3dc;
+  --atlas-control-ink:#202b28;
+  --atlas-control-muted:#5d6861;
+}
+:root[data-theme="dark"]{
+  --atlas-control-surface:#222d27;
+  --atlas-control-line:#3b4a40;
+  --atlas-control-ink:#f1f5ef;
+  --atlas-control-muted:#afbeb2;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --atlas-control-surface:#222d27;
+    --atlas-control-line:#3b4a40;
+    --atlas-control-ink:#f1f5ef;
+    --atlas-control-muted:#afbeb2;
+  }
+}
+body:has(.site-chrome) :is(.tech-controls,.playbook-tools,.controls,.filters,.search-controls) label{
+  color:var(--atlas-control-muted);
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.06em;
+  line-height:1.35;
+  text-transform:uppercase;
+}
+body:has(.site-chrome) :is(.tech-controls,.playbook-tools,.controls,.filters,.search-controls) :is(input[type="search"],select){
+  display:block;
+  box-sizing:border-box;
+  width:100%;
+  min-width:0;
+  min-height:42px;
+  margin:6px 0 0;
+  padding:9px 12px;
+  border:1px solid var(--atlas-control-line);
+  border-radius:7px;
+  background:var(--atlas-control-surface);
+  color:var(--atlas-control-ink);
+  font:500 13px/1.4 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+body:has(.site-chrome) :is(.tech-controls,.playbook-tools,.controls,.filters,.search-controls) input[type="search"]::placeholder{
+  color:var(--atlas-control-muted);
+  opacity:1;
+}
+body:has(.site-chrome) :is(.tech-controls,.playbook-tools,.controls,.filters,.search-controls) :is(input[type="search"],select):focus-visible{
+  outline:3px solid #b76d32;
+  outline-offset:2px;
+}
+body:has(.site-chrome) :is(.tech-controls,.playbook-tools,.controls,.search-controls) > button{
+  box-sizing:border-box;
+  min-height:42px;
+  padding:9px 13px;
+  border:1px solid var(--atlas-control-line);
+  border-radius:7px;
+  background:var(--atlas-control-surface);
+  color:var(--atlas-control-ink);
+  font:600 12px/1.35 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+body:has(.site-chrome) :is(.tech-controls,.playbook-tools,.controls,.search-controls) > button:hover:not(:disabled){
+  border-color:var(--atlas-footer-accent,#27664e);
+}
+body:has(.site-chrome) :is(.tech-controls,.playbook-tools,.controls,.search-controls) > button:focus-visible{
+  outline:3px solid #b76d32;
+  outline-offset:2px;
+}
+@media (max-width:650px){
+  body:has(.site-chrome) :is(.tech-controls,.playbook-tools,.controls,.filters,.search-controls) :is(input[type="search"],select){
+    min-height:44px;
+    font-size:16px; /* avoid iOS auto-zoom while retaining native controls */
+  }
+  body:has(.site-chrome) :is(.tech-controls,.playbook-tools,.controls,.search-controls) > button{
+    min-height:44px;
+  }
+}
+/* atlas-filter-controls:end */

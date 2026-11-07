@@ -635,6 +635,50 @@ with sync_playwright() as p:
                     foot.scroll_into_view_if_needed()
                     page.screenshot(path=str(out/f'shared-footer-{route}-{width}-{theme}.png'))
 
+
+    # Shared cross-page search/filter fields: native controls, not fake search
+    # decorations. Compare each page family at the same viewport and theme,
+    # and exercise existing Reset behavior rather than merely checking CSS text.
+    filter_routes = (
+        ('technologies.html', '.tech-controls #tech-search', '#tech-reset'),
+        ('playbooks.html', '.playbook-tools #search', '#reset'),
+        ('research.html', '.controls #query', '#reset'),
+        ('games.html', '.filters #query', '#reset-filters'),
+        ('whats-new.html', '.search-controls #edition-search', '#reset-filters'),
+    )
+    for width, height in ((320,700),(390,844),(768,900),(1280,900)):
+        page.set_viewport_size({'width':width,'height':height})
+        for theme in ('light','dark'):
+            page.goto(base+'index.html#/overview')
+            page.evaluate("(t) => localStorage.setItem('atlas.theme',t)",theme)
+            for route, selector, reset_selector in filter_routes:
+                page.goto(base+route)
+                field=page.locator(selector).first
+                field.wait_for(state='visible', timeout=20000)
+                appearance=field.evaluate("""el => {
+                    const style=getComputedStyle(el), rect=el.getBoundingClientRect();
+                    return {height:rect.height, width:rect.width,
+                      radius:style.borderTopLeftRadius, border:style.borderTopStyle,
+                      font:style.fontSize, background:style.backgroundColor,
+                      color:style.color, margin:style.marginTop};
+                }""")
+                expected_bg='rgb(34, 45, 39)' if theme=='dark' else 'rgb(255, 255, 255)'
+                check(f'{route} {width}px {theme} shares native filter controls',
+                      appearance['radius']=='7px' and appearance['border']=='solid'
+                      and appearance['width']>0 and appearance['height'] >= (44 if width<=650 else 42)
+                      and appearance['background']==expected_bg
+                      and float(appearance['font'].replace('px','')) >= (16 if width<=650 else 13)
+                      and page.evaluate('document.documentElement.dataset.theme')==theme
+                      and page.evaluate('document.documentElement.scrollWidth <= innerWidth'))
+                if width==1280 and theme=='light' and route!='whats-new.html':
+                    field.fill('atlas-qa-unfindable-term')
+                    page.locator(reset_selector).click()
+                    check(f'{route} original Reset clears search after filtering',
+                          field.input_value()=='')
+                if (width,theme) in ((1280,'light'),(390,'dark')):
+                    field.scroll_into_view_if_needed()
+                    page.screenshot(path=str(out/f'shared-filters-{route}-{width}-{theme}.png'))
+
     check('no application runtime exceptions',not errors)
     browser.close()
 (out/'results.json').write_text(json.dumps({'checks_passed':len(checks),'checks':checks,'base':base},indent=2))
