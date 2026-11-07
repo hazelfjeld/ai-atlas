@@ -434,6 +434,13 @@ with sync_playwright() as p:
                       page.url.split('?')[0].endswith('/whats-new.html')
                       and page.locator('.site-mobile-chrome').get_attribute('data-page-label')=='What’s New Today')
                 page.go_back()
+                # Back/Forward Cache can restore the history entry before the
+                # browser has committed the old document's visible frame.
+                # Wait for the same observable route and header, not a timeout.
+                page.wait_for_function("""([target, name]) =>
+                    location.pathname.endsWith('/' + target) &&
+                    document.querySelector('.site-mobile-chrome')?.dataset.pageLabel === name
+                """, arg=[route, label], timeout=10000)
                 check(f'{route} {width}px {theme} Back restores editorial identity',
                       page.url.split('?')[0].endswith('/'+route)
                       and page.locator('.site-mobile-chrome').get_attribute('data-page-label')==label)
