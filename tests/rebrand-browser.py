@@ -1121,7 +1121,7 @@ with sync_playwright() as p:
                 page.screenshot(path=str(out/f'guided-demo-{width}-{theme}.png'))
             if width<=650:
                 page.locator('#demo-mobile-nav summary').click()
-                page.locator('#demo-mobile-nav .site-mobile-chrome__menu a[href="index.html#/overview"]').click()
+                page.locator('#demo-mobile-nav .site-mobile-chrome__menu > a:not(.site-mobile-chrome__brand)[href="index.html#/overview"]').click()
             else:
                 page.locator('.demo-site-chrome .site-chrome__links a[href="index.html#/overview"]').click()
             page.wait_for_url('**/index.html#/overview')
