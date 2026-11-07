@@ -315,6 +315,29 @@ body:has(.site-chrome){padding-top:78px}
   padding:clamp(18px,2vw,24px);
 }
 
+/* Shared editorial footer rhythm: the same quiet divider, spacing and type
+   as Discover's .main-footer. Keep each section's own evidence/coverage text
+   and real links; only site chrome is shared across static reference pages,
+   daily archive, editorial pages and standalone Games. */
+body:has(.site-chrome) footer{
+  box-sizing:border-box;
+  margin-top:42px;
+  padding:20px 0 0;
+  border-top:1px solid var(--line,#dfe3dc);
+  color:var(--muted,#5d6861);
+  font-size:11px;
+  line-height:1.8;
+  overflow-wrap:anywhere;
+}
+body:has(.site-chrome) footer a{
+  color:var(--accent,#27664e);
+  text-underline-offset:3px;
+}
+body:has(.site-chrome) footer a:focus-visible{
+  outline:3px solid var(--orange,#b76d32);
+  outline-offset:3px;
+}
+
 /* atlas-rail-icons:begin */
 /* Generated from the very same DISCOVER_LINKS SVG paths as the Discover rail. */
 @media (min-width:651px){

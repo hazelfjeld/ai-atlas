@@ -1102,3 +1102,27 @@ test('shared editorial cards adopt Discover surface geometry without touching Ga
     'technology/TECH-0216-pytorch.html'])
     assert.match(read(route),/site-chrome\.css/,route+' must load the shared stylesheet');
 });
+
+test('shared static-page footers follow Discover rhythm without replacing section links', () => {
+  const css=read('site-chrome.css'), offline=read('downloads/Atlas_Demo_Offline.html');
+  const marker='/* Shared editorial footer rhythm:';
+  assert.equal(css.split(marker).length,2,'one shared footer treatment');
+  const rule=marker+css.split(marker)[1].split('/* atlas-rail-icons:begin */')[0];
+  assert.ok(offline.includes(rule),'offline fallback embeds the exact footer treatment');
+  assert.match(rule,/body:has\\(\\.site-chrome\\) footer\\{/);
+  for (const expected of ['margin-top:42px;','padding:20px 0 0;',
+    'border-top:1px solid var(--line,#dfe3dc);','font-size:11px;',
+    'line-height:1.8;','overflow-wrap:anywhere;','footer a:focus-visible']) {
+    assert.ok(rule.includes(expected),'shared footer missing '+expected);
+  }
+  assert.ok(!rule.includes('.main-footer{') && !rule.includes('footer{display:none'),
+    'never override Discover or suppress a real footer');
+  for (const route of ['about.html','whats-new.html','terms/index.html',
+    'terms/MLD-0002-ablation-study.html','technologies.html',
+    'technology/TECH-0216-pytorch.html','research.html','playbooks.html',
+    'catalog-review.html','hardware-review.html','games.html']) {
+    const html=read(route);
+    assert.match(html,/<footer(?:\\s|>)/,route+' retains its actual content footer');
+    assert.match(html,/site-chrome\\.css/,route+' loads the same footer source');
+  }
+});

@@ -592,6 +592,49 @@ with sync_playwright() as p:
                 if (width,theme) in ((1280,'light'),(390,'dark')) and route in ('about.html','playbooks.html','catalog-review.html','whats-new.html'):
                     page.screenshot(path=str(out/f'editorial-cards-{route}-{width}-{theme}.png'))
 
+
+    # A single real footer rhythm should carry across the standalone families.
+    # Compare Discover's computed footer, not just class names or CSS text.
+    # Section-specific copy and links remain intact and functional.
+    footer_routes = (
+        'about.html','whats-new.html','terms/index.html',
+        'terms/MLD-0002-ablation-study.html','technologies.html',
+        'technology/TECH-0216-pytorch.html','research.html',
+        'playbooks.html','catalog-review.html','hardware-review.html',
+        'games.html',
+    )
+    for width, height in ((320,700),(390,844),(768,900),(1280,900)):
+        page.set_viewport_size({'width':width,'height':height})
+        for theme in ('light','dark'):
+            page.goto(base+'index.html#/overview')
+            page.locator('.main-footer').wait_for(state='attached')
+            page.evaluate("t => {localStorage.setItem('atlas.theme',t);document.documentElement.dataset.theme=t}",theme)
+            reference=page.locator('.main-footer').evaluate("""el => {
+                const s=getComputedStyle(el);
+                return {border:s.borderTopWidth,padding:s.paddingTop,margin:s.marginTop,
+                        font:s.fontSize,line:s.lineHeight,color:s.color,rule:s.borderTopColor};
+            }""")
+            for route in footer_routes:
+                page.goto(base+route)
+                foot=page.locator('footer').last
+                foot.wait_for(state='attached',timeout=15000)
+                values=foot.evaluate("""el => {
+                    const s=getComputedStyle(el);
+                    return {border:s.borderTopWidth,padding:s.paddingTop,margin:s.marginTop,
+                            font:s.fontSize,line:s.lineHeight,color:s.color,rule:s.borderTopColor,
+                            linkCount:el.querySelectorAll('a[href]').length,
+                            width:el.getBoundingClientRect().width};
+                }""")
+                check(f'{route} {width}px {theme} shares Discover footer rhythm',
+                      all(values[k]==reference[k] for k in ('border','padding','margin','font','line','color','rule'))
+                      and values['border']=='1px' and values['linkCount'] >= (0 if route=='research.html' else 1)
+                      and values['width']>0
+                      and page.evaluate('document.documentElement.dataset.theme')==theme
+                      and page.evaluate('document.documentElement.scrollWidth <= innerWidth'))
+                if (width,theme) in ((1280,'light'),(390,'dark')) and route in ('about.html','whats-new.html','games.html'):
+                    foot.scroll_into_view_if_needed()
+                    page.screenshot(path=str(out/f'shared-footer-{route}-{width}-{theme}.png'))
+
     check('no application runtime exceptions',not errors)
     browser.close()
 (out/'results.json').write_text(json.dumps({'checks_passed':len(checks),'checks':checks,'base':base},indent=2))
