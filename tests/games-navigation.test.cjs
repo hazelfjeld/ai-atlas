@@ -897,7 +897,7 @@ test('Research retains a concise shared workspace label before and after enhance
 test('Research, Technology and Playbooks reuse Discover editorial heading typography', () => {
   const home = read('index.html'), brand = read('brand.css');
   assert.match(home, /class="discover-heading"><div><p class="eyebrow"/);
-  assert.match(brand, /\.discover-heading h1\{font:400 clamp\(40px,4\.2vw,56px\)\/1\.08 Georgia/);
+  assert.ok(brand.includes('.discover-heading h1{font:400 clamp(40px,4.2vw,56px)/1.08 Georgia'));
   const pages = [
     ['playbooks.html', '<section class="playbook-hero">', /<h1>Start with the problem, not the framework\.<\/h1>/],
     ['technologies.html', '<section class="tech-hero">', /<h1>Choose tools for their actual edge\.<\/h1>/],
@@ -925,7 +925,9 @@ test('editorial and reference hero headings reuse Discover rather than page-spec
   ]) {
     const html = read(route);
     assert.equal((html.match(/class="discover-heading"/g) || []).length, 1, route+' must reuse one shared hero heading');
-    assert.match(html, /<div class="discover-heading"><div><p class="eyebrow">[^<]+<\\/p><h1>[^<]+<\\/h1><\\/div><\\/div>/);
+    const hero = html.split('<div class="discover-heading"><div>')[1]?.split('</div></div>')[0];
+    assert.ok(hero?.startsWith('<p class="eyebrow">') && hero.includes('</p><h1>') && hero.includes('</h1>'),
+      route+' must preserve one heading and its editorial eyebrow inside the shared component');
     assert.ok(html.includes('<h1>'+heading+'</h1>'), route+' retains its unchanged public title');
     assert.ok(!html.includes(formerRule), route+' must not preserve obsolete independent h1 sizing');
     assert.ok(html.includes('<link rel="stylesheet" href="brand.css">'), route+' must load the shared source of typography');
