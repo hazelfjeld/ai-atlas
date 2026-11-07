@@ -47,21 +47,27 @@ with sync_playwright() as p:
     page.locator('.breadcrumb-links').get_by_role('link',name='Technologies',exact=True).click()
     expected_profiles=json.loads((Path(__file__).resolve().parents[1]/'publication.json').read_text())['published_counts']['technologies']
     check('technology directory exposes every checksummed crawlable profile', expected_profiles>=300 and page.locator('.reference-grid a').count()==expected_profiles)
-    # Research has no seven-item primary selection; its workspace label must
-    # still be meaningful before JavaScript, not the editorial hero headline.
+    # Research is a secondary Discover route: the parent should be selected
+    # on first paint, while the page's own label still identifies the library.
     page.set_viewport_size({'width':768,'height':900})
     page.goto(base+'research.html')
     check('Research section label is present without JavaScript',
           page.locator('.research-mobile-topbar').get_attribute('data-page-label')=='Research library'
           and 'Research library' in page.locator('.research-mobile-topbar').evaluate(
               "el => getComputedStyle(el, '::before').content"))
+    check('Research identifies Discover as its selected shared parent with no JavaScript',
+          page.locator('.site-chrome__links a').count()==7
+          and page.locator('.site-chrome__links a[aria-current="location"]').count()==1
+          and page.locator('.site-chrome__links a[aria-current="location"]').inner_text()=='Discover'
+          and page.locator('.research-menu-panel a[aria-current="location"]').count()==1
+          and page.locator('.research-menu-panel a[aria-current="location"]').text_content()=='Discover')
 
     # The standalone native drawer must expose the same *real*, clickable
     # wordmark as Discover even before hydration or with scripts disabled.
     # A CSS ::after fallback looks branded but is not a navigable home link.
     for width in (320, 390):
         page.set_viewport_size({'width': width, 'height': 844})
-        for route in ('about.html', 'whats-new.html', 'playbooks.html',
+        for route in ('about.html', 'whats-new.html', 'playbooks.html', 'research.html',
                       'terms/index.html', 'technology/index.html',
                       'terms/MLD-0002-ablation-study.html', 'technology/TECH-0216-pytorch.html'):
             page.goto(base + route)

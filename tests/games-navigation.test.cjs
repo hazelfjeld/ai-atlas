@@ -461,7 +461,7 @@ test('research snapshot uses the shared mobile menu and retains contextual resea
     ['index.html#/dictionary','Concept dictionary'],['index.html#/technologies','Technology profiles'],
     ['index.html#/games','Games'],['playbooks.html','Playbooks'],['about.html','About']
   ];
-  assert.deepEqual([...nav.matchAll(/<a href="([^"]+)">([^<]+)<\/a>/g)].map(x => [x[1],x[2]]),expected);
+  assert.deepEqual([...nav.matchAll(/<a href="([^"]+)"(?: aria-current="[^"]+")?>([^<]+)<\/a>/g)].map(x => [x[1],x[2]]),expected);
   for (const route of ['papers','alerts','coverage'])
     assert.ok(html.includes('href="#'+route+'" data-nav="'+route+'"'), 'Research view must remain reachable: '+route);
   assert.match(html, /\.shell\{display:block\}/);
@@ -472,7 +472,13 @@ test('research snapshot uses the shared mobile menu and retains contextual resea
   const titles=[...desktop.matchAll(/<a href="[^"]+"(?: aria-current="[^"]+")?>([^<]+)<\/a>/g)].map(x => x[1]);
   assert.deepEqual(titles, ['Discover','What’s New Today','Concept dictionary','Technology profiles','Games','Playbooks','About']);
   assert.ok(desktop.includes('class="site-chrome__brand" href="index.html#/overview"'));
-  assert.doesNotMatch(desktop, /aria-current=/, 'Research must not falsely select the news archive');
+  assert.match(desktop, /href="index\.html#\/overview" aria-current="location">Discover<\/a>/,
+    'Research is a secondary Discover destination, not an unselected orphan section');
+  assert.equal((desktop.match(/aria-current=/g) || []).length, 1, 'exactly one desktop parent');
+  assert.equal((nav.match(/aria-current=/g) || []).length, 1, 'exactly one mobile parent');
+  assert.match(nav, /href="index\.html#\/overview" aria-current="location">Discover<\/a>/);
+  assert.ok(read('scripts/site_chrome.py').includes('"research-site-chrome", "Discover", "location", True)'),
+    'canonical header generator must own the active parent, not a hand-edited page');
   assert.match(html, /href="#papers" data-nav="papers">Research library <span id="papers-count">/);
   assert.match(html, /href="#alerts" data-nav="alerts">Safety observatory <span id="alerts-count">/);
   assert.doesNotMatch(html, /\.research-menu-panel a\{/);

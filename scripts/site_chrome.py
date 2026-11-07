@@ -76,7 +76,7 @@ STANDALONE_NAVS = {
                   "demo-site-chrome", "Discover", "location", True),
     "research.html": ("research-mobile-topbar", "research-mobile-nav", "research-mobile-nav", "research-menu-toggle",
                       "research-menu-panel", "research-search-link", "research-search-icon",
-                      "research-search-placeholder", "research-site-chrome", None, "page", True),
+                      "research-search-placeholder", "research-site-chrome", "Discover", "location", True),
     "catalog-review.html": ("review-mobile-topbar", "", "review-mobile-nav", "", "", "", "", "",
                             "nav", "What’s New Today", "location", True),
     "hardware-review.html": ("hardware-mobile-topbar", "", "hardware-mobile-nav", "", "", "", "", "",
