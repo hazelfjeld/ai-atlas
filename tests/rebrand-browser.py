@@ -1086,6 +1086,52 @@ with sync_playwright() as p:
     check('responsive shrink does not steal focus from the main content',
           page.evaluate('document.activeElement===document.querySelector("main")'))
 
+    # The existing guided-demo reference used its own wordmark/navigation and
+    # forced light-theme cards. It now inherits the canonical Discover rail,
+    # mobile menu/search and saved appearance without replacing tour links.
+    page.set_viewport_size({'width':1280,'height':900})
+    page.goto(base+'index.html#/overview')
+    canonical=[s.strip() for s in page.locator('#navigation > a.nav-link').all_text_contents()]
+    for width in (320,390,768,1280):
+        for theme in ('light','dark'):
+            page.set_viewport_size({'width':width,'height':844})
+            page.goto(base+'demo.html')
+            page.evaluate('(theme)=>localStorage.setItem("atlas.theme",theme)',theme)
+            page.reload()
+            frame=page.evaluate("""() => ({
+                desktop: [...document.querySelectorAll('.site-chrome__links a')].map(a=>a.textContent.trim()),
+                activeDesktop: document.querySelector('.site-chrome__links a[aria-current]')?.textContent.trim(),
+                activeMobile: document.querySelector('.site-mobile-chrome__menu a[aria-current]')?.textContent.trim(),
+                pageLabel: document.querySelector('.site-mobile-chrome')?.dataset.pageLabel,
+                theme: document.documentElement.dataset.theme,
+                card: getComputedStyle(document.querySelector('#quick-tour article')).backgroundColor,
+                body: getComputedStyle(document.body).backgroundColor,
+                menuVisible: !!document.querySelector('.site-mobile-chrome__nav summary')?.getClientRects().length,
+                railVisible: !!document.querySelector('.site-chrome')?.getClientRects().length,
+                overflow: document.documentElement.scrollWidth>innerWidth
+            })""")
+            check(f'guided demo {width}px {theme} reuses Discover primary navigation',
+                  frame['desktop']==canonical and frame['activeDesktop']=='Discover'
+                  and frame['activeMobile']=='Discover' and frame['pageLabel']=='Guided demo'
+                  and frame['theme']==theme and frame['menuVisible']==(width<=650)
+                  and frame['railVisible']==(width>650) and not frame['overflow'])
+            check(f'guided demo {width}px {theme} honors saved theme on real content',
+                  frame['card']!=frame['body'])
+            if (width==390 and theme=='dark') or (width==1280 and theme=='light'):
+                page.screenshot(path=str(out/f'guided-demo-{width}-{theme}.png'))
+            if width<=650:
+                page.locator('#demo-mobile-nav summary').click()
+                page.locator('#demo-mobile-nav .site-mobile-chrome__menu a[href="index.html#/overview"]').click()
+            else:
+                page.locator('.demo-site-chrome .site-chrome__links a[href="index.html#/overview"]').click()
+            page.wait_for_url('**/index.html#/overview')
+            check(f'guided demo {width}px {theme} navigates into Discover',
+                  page.evaluate('document.documentElement.dataset.theme')==theme)
+            page.go_back()
+            check(f'guided demo {width}px {theme} browser Back keeps page identity',
+                  page.locator('.site-mobile-chrome').get_attribute('data-page-label')=='Guided demo'
+                  and page.evaluate('document.documentElement.dataset.theme')==theme)
+
     check('no application runtime exceptions',not errors)
     browser.close()
 (out/'results.json').write_text(json.dumps({'checks_passed':len(checks),'checks':checks,'base':base},indent=2))

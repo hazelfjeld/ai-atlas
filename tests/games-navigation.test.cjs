@@ -1447,3 +1447,31 @@ test('shared rail restores keyboard focus to visible mobile toggle after respons
   assert.ok(read('downloads/Atlas_Demo_Offline.html').includes(script),
     'the offline fallback must contain the exact responsive focus helper');
 });
+
+
+test('Guided demo inherits the actual shared navigation instead of an independent header', () => {
+  const html=read('demo.html');
+  const about=read('about.html');
+  const generated=read('scripts/site_chrome.py');
+  assert.match(generated, /"demo.html": \("", "", "demo-mobile-nav"/);
+  assert.match(generated, /"demo.html": "Guided demo"/);
+  assert.match(html, /<link rel="stylesheet" href="site-chrome.css">/);
+  assert.match(html, /<script src="site-theme.js"><\\/script>/);
+  assert.match(html, /<details class="site-mobile-chrome__nav" id="demo-mobile-nav">/);
+  assert.match(html, /data-page-label="Guided demo"/);
+  assert.match(html, /<nav class="site-chrome demo-site-chrome" aria-label="AI Updates primary navigation">/);
+  assert.doesNotMatch(html, /Demo navigation|index\\.html#coverage/);
+  const extractLinks=(source)=>{
+    const links=source.match(/<div class="site-chrome__links">([\\s\\S]*?)<\\/div>/)?.[1];
+    assert.ok(links,'Missing shared desktop link list');
+    return [...links.matchAll(/<a href="([^"]+)"(?: aria-current="[^"]+")?>([^<]+)<\\/a>/g)]
+      .map(match=>[match[1],match[2]]);
+  };
+  assert.deepEqual(extractLinks(html),extractLinks(about),'Demo and About must share the same seven primary destinations and order');
+  assert.equal((html.match(/aria-current="location"/g)||[]).length,2,
+    'Discover is the parent section in both mobile and desktop navigation');
+  assert.match(html, /href="index.html#\\/sources">Inspect published inventory/);
+  assert.match(html, /:root\\[data-theme="dark"\\]/);
+  assert.match(html, /article\\{padding:26px;background:var\\(--demo-card\\)/);
+  assert.match(html, /<a class="go" href="terms\\/MLD-0691-machine-learning.html">/);
+});

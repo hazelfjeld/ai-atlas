@@ -70,6 +70,10 @@ def render_directory_nav(prefix, selected, *, mobile_classes="directory-mobile-t
 # tuple: mobile extra, details extra/id, toggle, menu, search, icon, label,
 #        desktop extra, selected label, aria-current kind, mobile aria-label
 STANDALONE_NAVS = {
+    # The guided demo is an existing secondary Discover destination; retain its
+    # page identity while showing Discover as the parent shared section.
+    "demo.html": ("", "", "demo-mobile-nav", "", "", "", "", "",
+                  "demo-site-chrome", "Discover", "location", True),
     "research.html": ("research-mobile-topbar", "research-mobile-nav", "research-mobile-nav", "research-menu-toggle",
                       "research-menu-panel", "research-search-link", "research-search-icon",
                       "research-search-placeholder", "research-site-chrome", None, "page", True),
@@ -106,6 +110,7 @@ def render_standalone_nav(path):
         desktop_classes="site-chrome " + desktop, labeled=labeled, current_kind=kind,
         page_label={
             "research.html": "Research library",
+            "demo.html": "Guided demo",
             "catalog-review.html": "Catalog review",
             "hardware-review.html": "Hardware evidence",
         }.get(path, selected),
