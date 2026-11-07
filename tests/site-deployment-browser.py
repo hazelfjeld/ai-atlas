@@ -1516,23 +1516,28 @@ with sync_playwright() as p:
     first_paint.route('**/site-theme.js',
                       lambda route: route.fulfill(status=200, content_type='application/javascript',
                                                    body='/* intentionally suppressed for first-paint QA */'))
-    for route, expected in (
-        ('whats-new.html', 'What’s New Today'),
-        ('about.html', 'About'),
-        ('terms/index.html', 'AI Updates'),
-        ('technology/TECH-0216-pytorch.html', 'AI Updates'),
+    for route, expected, from_selected_link in (
+        ('whats-new.html', 'What’s New Today', False),
+        ('about.html', 'About', False),
+        ('terms/index.html', 'Concept dictionary', True),
+        ('technology/TECH-0216-pytorch.html', 'Technology profiles', True),
     ):
         first_paint.goto(base + route)
         check('unenhanced shared topbar has its expected visible title on ' + route,
               first_paint.locator('.site-mobile-chrome').is_visible()
-              and first_paint.locator('.site-mobile-chrome').evaluate('''(el, expected) => {
+              and first_paint.locator('.site-mobile-chrome').evaluate('''(el, data) => {
+                  const {expected, fromSelectedLink} = data;
                   const title = getComputedStyle(el, '::before');
-                  return (el.getAttribute('data-page-label') ===
-                          (expected === 'AI Updates' ? null : expected)) &&
-                         title.content === JSON.stringify(expected) &&
+                  const active = el.parentElement?.querySelector(
+                      '.site-chrome__links a[aria-current="page"]');
+                  const sourceMatches = fromSelectedLink
+                      ? (!el.hasAttribute('data-page-label') &&
+                         active?.textContent.trim() === expected)
+                      : el.getAttribute('data-page-label') === expected;
+                  return sourceMatches && title.content === JSON.stringify(expected) &&
                          title.display !== 'none' &&
                          el.getBoundingClientRect().height >= 76;
-              }''', expected))
+              }''', {'expected': expected, 'fromSelectedLink': from_selected_link}))
         first_paint.screenshot(path=str(out / ('first-paint-' + route.replace('/', '-') + '.png')),
                                full_page=False)
     first_paint.close()
