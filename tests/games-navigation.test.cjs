@@ -877,7 +877,7 @@ test('shared desktop landing intros use Discover\'s workspace content rhythm', (
     '.tech-shell > .site-chrome + .tech-hero',
     '.shell > .site-chrome + main > header',
   ]) assert.ok(scoped.includes(selector), selector+' must share the workspace rhythm');
-  assert.equal((scoped.match(/8px/g)||[]).length,3, 'Use one 8px intro offset for all landing families');
+  assert.equal((scoped.match(/(?:margin-top|padding-top):8px/g)||[]).length,3, 'Use one 8px intro offset for all landing families');
   assert.ok(!scoped.includes('max-width:650px'), 'Keep the established mobile content spacing unchanged');
 });
 
