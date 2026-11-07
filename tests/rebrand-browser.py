@@ -429,6 +429,41 @@ with sync_playwright() as p:
                     page.locator('details.site-mobile-chrome__nav summary').click()
                     page.screenshot(path=str(out/f'mobile-brand-{route.replace("/", "-")}-390-dark.png'))
 
+
+    # The prior screenshots revealed iconless standalone desktop navigation
+    # beside Discover's icon-led rail. Verify the SAME seven visible icons
+    # on reference, editorial, news and Games pages in both saved themes.
+    for width in (768, 1280):
+        page.set_viewport_size({'width':width,'height':900})
+        for theme in ('light','dark'):
+            page.goto(base+'index.html#/overview')
+            page.evaluate("t => {localStorage.setItem('atlas.theme',t);document.documentElement.dataset.theme=t}",theme)
+            check(f'Discover {width}px {theme} keeps native SVG primary icons',
+                  page.locator('#navigation a.nav-link svg').count() >= 7)
+            for route in ('about.html','whats-new.html','terms/index.html',
+                          'technology/TECH-0216-pytorch.html','games.html'):
+                page.goto(base+route)
+                icons=page.locator('.site-chrome .site-chrome__links a').evaluate_all("""els => els.map(a => {
+                    const s=getComputedStyle(a,'::before');
+                    return {width:s.width, height:s.height,
+                            icon:s.webkitMaskImage||s.maskImage,
+                            current:a.hasAttribute('aria-current')};
+                })""")
+                check(f'{route} {width}px {theme} shares the seven desktop SVG icons',
+                      len(icons)==7
+                      and all(icon['width']=='16px' and icon['height']=='16px'
+                              and 'data:image/svg+xml,' in icon['icon'] for icon in icons)
+                      and sum(icon['current'] for icon in icons)<=1
+                      and page.evaluate('document.documentElement.dataset.theme')==theme
+                      and page.evaluate('document.documentElement.scrollWidth <= innerWidth'))
+                if width==1280 and theme=='light' and route in ('about.html','whats-new.html','terms/index.html'):
+                    page.screenshot(path=str(out/f'rail-icons-{route.replace("/", "-")}.png'))
+            if width==1280 and theme=='light':
+                page.goto(base+'about.html')
+                page.locator('.site-chrome .site-chrome__links a[href$="#/overview"]').click()
+                check('shared desktop rail returns from About to actual Discover',
+                      page.locator('.discover-heading h1').inner_text()=='Discover')
+
     check('no application runtime exceptions',not errors)
     browser.close()
 (out/'results.json').write_text(json.dumps({'checks_passed':len(checks),'checks':checks,'base':base},indent=2))

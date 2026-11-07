@@ -128,6 +128,38 @@ DISCOVER_LINKS = (
 )
 
 
+
+# The desktop rail reuses Discover's SVG geometries rather than maintaining
+# seven separately drawn symbols in another stylesheet or page template.
+RAIL_ICON_START = "/* atlas-rail-icons:begin */"
+RAIL_ICON_END = "/* atlas-rail-icons:end */"
+
+def render_desktop_rail_icons_css():
+    """Generate the existing standalone rail icons from Discover's canonical SVGs."""
+    from urllib.parse import quote
+    parts = [
+        RAIL_ICON_START,
+        '/* Generated from the very same DISCOVER_LINKS SVG paths as the Discover rail. */',
+        '@media (min-width:651px){',
+        '.site-chrome .site-chrome__links a{gap:10px}',
+        '.site-chrome .site-chrome__links a::before{content:"";display:block;flex:0 0 16px;width:16px;height:16px;background:currentColor;-webkit-mask:var(--atlas-rail-icon) center/contain no-repeat;mask:var(--atlas-rail-icon) center/contain no-repeat}',
+        '.site-chrome .site-chrome__links a[aria-current]::before{background:#d9a16f}',
+    ]
+    for (route, _), (_, _, icon) in zip(DESTINATIONS, DISCOVER_LINKS, strict=True):
+        uri = 'data:image/svg+xml,' + quote(icon.replace('currentColor', 'black'), safe='')
+        parts.append('.site-chrome .site-chrome__links a[href$="' + route + '"]{--atlas-rail-icon:url("' + uri + '")}')
+    parts.extend(('}', RAIL_ICON_END))
+    return '\\n'.join(parts)
+
+def sync_desktop_rail_icons_css(css):
+    """Replace exactly one generated CSS block; never append duplicate rails."""
+    assert css.count(RAIL_ICON_START) == css.count(RAIL_ICON_END) == 1
+    first = css.index(RAIL_ICON_START)
+    last = css.index(RAIL_ICON_END) + len(RAIL_ICON_END)
+    return css[:first] + render_desktop_rail_icons_css() + css[last:]
+
+
+
 def render_discover_primary(term_count, tech_count):
     """Render Discover's first-paint primary links from the same seven routes.
 

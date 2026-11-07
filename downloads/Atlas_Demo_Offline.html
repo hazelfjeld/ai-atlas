@@ -521,6 +521,22 @@ body:has(.site-chrome){padding-top:78px}
 /* Discover keeps its real desktop workspace topbar; the shared native disclosure
    belongs inside that topbar on phones only. Avoid a duplicate fixed header. */
 @media (min-width:651px){.discover-mobile-chrome{display:none!important}}
+
+/* atlas-rail-icons:begin */
+/* Generated from the very same DISCOVER_LINKS SVG paths as the Discover rail. */
+@media (min-width:651px){
+.site-chrome .site-chrome__links a{gap:10px}
+.site-chrome .site-chrome__links a::before{content:"";display:block;flex:0 0 16px;width:16px;height:16px;background:currentColor;-webkit-mask:var(--atlas-rail-icon) center/contain no-repeat;mask:var(--atlas-rail-icon) center/contain no-repeat}
+.site-chrome .site-chrome__links a[aria-current]::before{background:#d9a16f}
+.site-chrome .site-chrome__links a[href$="index.html#/overview"]{--atlas-rail-icon:url("data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20aria-hidden%3D%22true%22%3E%3Cpath%20d%3D%22M3%203h7v7H3z%20M14%203h7v7h-7z%20M3%2014h7v7H3z%20M14%2014h7v7h-7z%22%2F%3E%3C%2Fsvg%3E")}
+.site-chrome .site-chrome__links a[href$="whats-new.html"]{--atlas-rail-icon:url("data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20aria-hidden%3D%22true%22%3E%3Cpath%20d%3D%22M6%203h9l4%204v14H6z%20M14%203v5h5%20M9%2012h7%20M9%2016h7%22%2F%3E%3C%2Fsvg%3E")}
+.site-chrome .site-chrome__links a[href$="index.html#/dictionary"]{--atlas-rail-icon:url("data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20aria-hidden%3D%22true%22%3E%3Cpath%20d%3D%22M3%204h7l2%202%202-2h7v16h-7l-2%202-2-2H3z%20M12%206v16%22%2F%3E%3C%2Fsvg%3E")}
+.site-chrome .site-chrome__links a[href$="index.html#/technologies"]{--atlas-rail-icon:url("data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20aria-hidden%3D%22true%22%3E%3Cpath%20d%3D%22M12%203%203%208l9%205%209-5-9-5z%20M3%2012l9%205%209-5%20M3%2016l9%205%209-5%22%2F%3E%3C%2Fsvg%3E")}
+.site-chrome .site-chrome__links a[href$="index.html#/games"]{--atlas-rail-icon:url("data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20aria-hidden%3D%22true%22%3E%3Cpath%20d%3D%22M7%207h10a3%203%200%200%201%203%203l1%207a2%202%200%200%201-3%202l-3-3H9l-3%203a2%202%200%200%201-3-2l1-7a3%203%200%200%201%203-3z%20M7%2010v4%20M5%2012h4%20M16%2011h.01%20M18%2013h.01%22%2F%3E%3C%2Fsvg%3E")}
+.site-chrome .site-chrome__links a[href$="playbooks.html"]{--atlas-rail-icon:url("data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20aria-hidden%3D%22true%22%3E%3Cpath%20d%3D%22M4%204h16v16H4z%20M8%208h8%20M8%2012h5%20M8%2016h7%22%2F%3E%3C%2Fsvg%3E")}
+.site-chrome .site-chrome__links a[href$="about.html"]{--atlas-rail-icon:url("data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20aria-hidden%3D%22true%22%3E%3Cpath%20d%3D%22M4%204h16v16H4z%20M8%208h8%20M8%2012h5%20M8%2016h7%22%2F%3E%3C%2Fsvg%3E")}
+}
+/* atlas-rail-icons:end */
 </style><script>/* Use Discover's saved choice on standalone editorial pages before rendering. */
 try {
   const savedTheme = localStorage.getItem('atlas.theme');

@@ -11,7 +11,7 @@ import subprocess
 from xml.etree.ElementTree import Element, SubElement, tostring
 from site_seo import absolute, metadata, breadcrumbs, replace_head, technology_path, ORIGIN
 from build_term_pages import rows, term_path, external
-from site_chrome import render_directory_nav, DIRECTORY_MOBILE_CSS, STANDALONE_NAVS, normalize_standalone_chrome, normalize_discover_sidebar
+from site_chrome import render_directory_nav, DIRECTORY_MOBILE_CSS, STANDALONE_NAVS, normalize_standalone_chrome, normalize_discover_sidebar, sync_desktop_rail_icons_css
 
 ROOT = Path(__file__).resolve().parents[1]
 PAGES = {
@@ -50,6 +50,12 @@ def shell(title, description, path, body, structured=None):
 
 
 def main():
+    # Persist one icon set derived from Discover into the shared desktop rail.
+    chrome_css = ROOT / 'site-chrome.css'
+    previous_css = chrome_css.read_text(encoding='utf-8')
+    synced_css = sync_desktop_rail_icons_css(previous_css)
+    if previous_css != synced_css:
+        chrome_css.write_text(synced_css, encoding='utf-8')
     terms, techs = rows('terms'), rows('technologies')
     new_count = len(techs) - 300
     assert new_count >= 0
