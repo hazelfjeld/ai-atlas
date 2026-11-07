@@ -734,7 +734,10 @@ with sync_playwright() as p:
     nojs_reference.locator('#directory-mobile-nav summary').click()
     check('concept detail remains readable and navigable without JavaScript',
           nojs_reference.get_by_role('heading', name='Ablation study').is_visible()
-          and nojs_reference.locator('#directory-mobile-nav nav a').count() == 7
+          and nojs_reference.locator('#directory-mobile-nav nav a.site-mobile-chrome__brand').count() == 1
+          and nojs_reference.locator('#directory-mobile-nav nav a.site-mobile-chrome__brand').get_attribute('href') == '../index.html#/overview'
+          and nojs_reference.locator('#directory-mobile-nav nav a:not(.site-mobile-chrome__brand)').count() == 7
+          and nojs_reference.locator('#directory-mobile-nav nav a').count() == 8
           and nojs_reference.locator('#directory-mobile-nav nav a').last.is_visible())
     nojs_reference.close()
     page.goto(base + 'whats-new.html')
