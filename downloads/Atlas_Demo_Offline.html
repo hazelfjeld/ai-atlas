@@ -936,16 +936,31 @@ function syncSharedDrawerIsolation() {
 document.addEventListener('toggle', event => {
   if (event.target?.matches?.('details.site-mobile-chrome__nav')) syncSharedDrawerIsolation();
 }, true);
+// A desktop rail link can lose DOM focus when CSS hides the rail during a
+// desktop-to-mobile resize. Remember actual keyboard focus before the browser
+// blurs it, so it never gets stranded on <body> behind the mobile header.
+let lastDesktopRailFocus = null;
+document.addEventListener('focusin', event => {
+  lastDesktopRailFocus = event.target?.closest?.('.site-chrome,#navigation') ? event.target : null;
+});
+let lastViewportWasDesktop = typeof window !== 'undefined' && window.innerWidth > 650;
 if (typeof window !== 'undefined' && window.addEventListener) {
   window.addEventListener('resize', () => {
-    // A native menu left open on desktop would reopen unexpectedly on rotation
-    // back to mobile, trapping focus and locking the newly visible workspace.
-    // Close it as the breakpoint is crossed; keep no-JS details behavior intact.
-    if (window.innerWidth > 650) {
+    const desktopNow = window.innerWidth > 650;
+    // Close a native menu before it becomes hidden by desktop CSS.
+    if (desktopNow) {
       closeSharedDrawers({desktopFocus:true});
     } else {
       syncSharedDrawerIsolation();
+      // Only restore focus if a previously focused rail item just became
+      // hidden, and no other visible control has taken focus in the meantime.
+      if (lastViewportWasDesktop && lastDesktopRailFocus &&
+          !lastDesktopRailFocus.getClientRects().length &&
+          [document.body, document.documentElement, lastDesktopRailFocus].includes(document.activeElement)) {
+        document.querySelector('details.site-mobile-chrome__nav summary')?.focus({preventScroll:true});
+      }
     }
+    lastViewportWasDesktop = desktopNow;
   });
 }
 

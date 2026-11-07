@@ -1342,3 +1342,56 @@ test('BFCache restoration synchronizes saved theme and shared controls', () => {
   events.pageshow({persisted:true});
   assert.equal(document.documentElement.dataset.theme, 'light');
 });
+
+test('shared rail restores keyboard focus to visible mobile toggle after responsive shrink', () => {
+  const handlers = {};
+  const body = {};
+  const root = {dataset:{}};
+  const summary = {focus() { document.activeElement = summary; }};
+  const railLink = {
+    getClientRects() { return []; },
+    closest(selector) { return selector.includes('.site-chrome') ? {} : null; }
+  };
+  const contentInput = {closest() { return null; }};
+  const document = {
+    body, documentElement:root, activeElement:body,
+    addEventListener(name, fn) { handlers[name] = fn; },
+    querySelectorAll(selector) {
+      assert.equal(selector,'details.site-mobile-chrome__nav[open]');
+      return [];
+    },
+    querySelector(selector) {
+      if(selector==='details.site-mobile-chrome__nav[open]')return null;
+      if(selector==='details.site-mobile-chrome__nav summary')return summary;
+      throw new Error('Unexpected selector '+selector);
+    }
+  };
+  const window = {
+    innerWidth:768,
+    addEventListener(name, fn) { handlers[name] = fn; }
+  };
+  const script = read('site-theme.js');
+  vm.runInNewContext(script, {window, document, localStorage:{getItem(){return null;}}});
+  assert.equal(typeof handlers.focusin,'function');
+  handlers.focusin({target:railLink});
+  document.activeElement=body; // Chromium blurs a hidden link before resize.
+  window.innerWidth=390;
+  handlers.resize();
+  assert.strictEqual(document.activeElement,summary,
+    'a hidden desktop link must hand keyboard focus to the visible toggle');
+  document.activeElement=body;
+  window.innerWidth=320;
+  handlers.resize();
+  assert.strictEqual(document.activeElement,body,
+    'resizing within mobile must not steal focus again');
+  window.innerWidth=768;
+  handlers.resize();
+  handlers.focusin({target:contentInput});
+  document.activeElement=contentInput;
+  window.innerWidth=390;
+  handlers.resize();
+  assert.strictEqual(document.activeElement,contentInput,
+    'main content focus must remain unchanged on the same transition');
+  assert.ok(read('downloads/Atlas_Demo_Offline.html').includes(script),
+    'the offline fallback must contain the exact responsive focus helper');
+});

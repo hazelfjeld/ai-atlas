@@ -1007,6 +1007,51 @@ with sync_playwright() as p:
             if theme=='dark' and route in ('about.html','technology/TECH-0216-pytorch.html'):
                 page.screenshot(path=str(out/f'drawer-after-resize-{route.split("/")[-1]}-768-dark.png'))
 
+    # When desktop CSS hides its focused rail, Chromium blurs it before the
+    # resize event. The shared helper must restore focus to a visible mobile
+    # toggle rather than marooning keyboard users on the document body.
+    for desktop_width in (768,1280):
+        for theme in ('light','dark'):
+            for route in ('index.html#/overview','about.html',
+                          'technology/TECH-0216-pytorch.html'):
+                page.set_viewport_size({'width':desktop_width,'height':900})
+                page.goto(base+route)
+                page.evaluate("""t => {
+                    localStorage.setItem('atlas.theme',t);
+                    document.documentElement.dataset.theme=t;
+                }""",theme)
+                rail=page.locator('#navigation a[aria-current="page"]') if route.startswith('index.html') else page.locator('.site-chrome__links a[aria-current]')
+                rail.first.wait_for(state='visible')
+                rail.first.focus()
+                check(f'{route} {desktop_width}px {theme} rail is focused before shrink',
+                      rail.first.evaluate('(el)=>document.activeElement===el'))
+                page.set_viewport_size({'width':390,'height':844})
+                page.wait_for_function("""() =>
+                    document.activeElement === document.querySelector('details.site-mobile-chrome__nav summary')""")
+                toggle=page.locator('details.site-mobile-chrome__nav summary').first
+                check(f'{route} {desktop_width}->390px {theme} restores visible mobile toggle focus',
+                      toggle.evaluate("""el => document.activeElement===el &&
+                          el.getClientRects().length>0""")
+                      and page.evaluate('document.documentElement.scrollWidth <= innerWidth')
+                      and page.evaluate('document.documentElement.dataset.theme')==theme)
+                if desktop_width==1280 and theme=='dark':
+                    page.screenshot(path=str(out/f'rail-to-mobile-{route.split("/")[-1]}-390-dark.png'))
+                page.set_viewport_size({'width':320,'height':700})
+                check(f'{route} 390->320px {theme} leaves mobile toggle focus undisturbed',
+                      toggle.evaluate('el=>document.activeElement===el && el.getClientRects().length>0'))
+
+    # Resizing while editing real content must not unexpectedly move focus.
+    page.set_viewport_size({'width':768,'height':900})
+    page.goto(base+'about.html')
+    page.evaluate("""() => {
+        const main=document.querySelector('main');
+        main.setAttribute('tabindex','-1');
+        main.focus();
+    }""")
+    page.set_viewport_size({'width':390,'height':844})
+    check('responsive shrink does not steal focus from the main content',
+          page.evaluate('document.activeElement===document.querySelector("main")'))
+
     check('no application runtime exceptions',not errors)
     browser.close()
 (out/'results.json').write_text(json.dumps({'checks_passed':len(checks),'checks':checks,'base':base},indent=2))
