@@ -390,13 +390,14 @@ test('About reuses the exact generated catalog navigation, not a parallel templa
   const ours = about.split(main)[1].split('<header class="hero">')[0];
   const template = read('terms/index.html').split(main)[1].split('<header class="hero">')[0];
   const expected = template.replaceAll('href="../','href="')
+    .replace('<div class="directory-mobile-topbar site-mobile-chrome" aria-label="AI Updates mobile header">', '<div class="directory-mobile-topbar site-mobile-chrome" aria-label="AI Updates mobile header" data-page-label="About">')
     .replaceAll('href="index.html#/dictionary" aria-current="page">Concept dictionary','href="index.html#/dictionary">Concept dictionary')
     .replaceAll('href="about.html">About','href="about.html" aria-current="page">About');
   assert.equal(ours, expected);
   assert.match(about, /class="directory-mobile-topbar site-mobile-chrome"/);
   assert.match(about, /id="directory-mobile-nav"/);
   assert.match(about, /href="index.html#\/search"/);
-  assert.match(built, /render_directory_nav\(prefix, 'About', mobile_brand=True\)/);
+  assert.match(built, /render_directory_nav\(prefix, 'About', mobile_brand=True, page_label='About'\)/);
   assert.doesNotMatch(built, /ABOUT_MOBILE_NAV|ABOUT_DESKTOP_NAV|ABOUT_MOBILE_CSS/);
   assert.equal((ours.match(/aria-current="page"/g) || []).length, 2);
 });
