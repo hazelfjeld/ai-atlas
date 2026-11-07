@@ -1009,14 +1009,16 @@ test('shared workspace topbar has the correct no-script section label on every s
   const source = read('scripts/site_chrome.py');
   const seo = read('scripts/build_seo.py');
   const stylesheet = read('site-chrome.css');
-  assert.match(source, /page_label="Research library" if path == "research.html" else selected/);
+  assert.match(source, /"research.html": "Research library"/);
+  assert.match(source, /"catalog-review.html": "Catalog review"/);
+  assert.match(source, /"hardware-review.html": "Hardware evidence"/);
   assert.ok(seo.includes("render_directory_nav(prefix, 'About', mobile_brand=True, page_label='About')"));
   assert.ok(stylesheet.includes('.site-mobile-chrome[data-page-label]::before{content:attr(data-page-label)}'));
   const labels = {
     'about.html': 'About',
     'research.html': 'Research library',
-    'catalog-review.html': 'What’s New Today',
-    'hardware-review.html': 'What’s New Today',
+    'catalog-review.html': 'Catalog review',
+    'hardware-review.html': 'Hardware evidence',
     'games.html': 'Games',
     'technologies.html': 'Technology profiles',
     'playbooks.html': 'Playbooks',
@@ -1269,5 +1271,23 @@ test('Discover mobile live search shares the native search frame used across the
   assert.match(read('app.js'),/\$\('global-search'\)\.addEventListener\('submit'/);
   for(const page of ['about.html','whats-new.html','games.html','technologies.html']){
     assert.ok(read(page).includes('site-mobile-chrome__search'),page+' retains its working search destination');
+  }
+});
+
+
+test('editorial subpage identity wins over the selected daily navigation section', () => {
+  const script = read('site-theme.js');
+  const offline = read('downloads/Atlas_Demo_Offline.html');
+  assert.match(script, /const label = chrome\\.dataset\\.pageLabel \\|\\| active\\?\\.textContent\\?\\.trim\\(\\)/);
+  assert.ok(offline.includes(script), 'single-file fallback includes updated shared theme helper');
+  for (const [route, identity] of [
+    ['catalog-review.html', 'Catalog review'],
+    ['hardware-review.html', 'Hardware evidence'],
+  ]) {
+    const html = read(route);
+    assert.ok(html.includes('data-page-label="' + identity + '"'), route + ' has its real subpage label');
+    assert.match(html, /href="whats-new\\.html" aria-current="location">What’s New Today<\\/a>/,
+      route + ' keeps the correct selected parent section');
+    assert.equal((html.match(/data-page-label=/g) || []).length, 1, route + ' owns one label');
   }
 });

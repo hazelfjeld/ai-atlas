@@ -146,7 +146,9 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!chrome) return;
   const active = document.querySelector('.site-chrome__links a[aria-current]');
   const heading = document.querySelector('main h1');
-  const label = active?.textContent?.trim() || chrome.dataset.pageLabel || heading?.textContent?.trim() || document.title.split('·')[0].trim();
+  // A selected primary section is not the identity of an editorial subpage.
+  // Respect the server-rendered page label on first paint and after hydration.
+  const label = chrome.dataset.pageLabel || active?.textContent?.trim() || heading?.textContent?.trim() || document.title.split('·')[0].trim();
   chrome.dataset.pageLabel = label;
   // Reuse the canonical desktop brand in the native mobile drawer. Never
   // maintain a second logo template; no-JS <details> navigation still works.

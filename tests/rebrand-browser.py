@@ -86,8 +86,8 @@ with sync_playwright() as p:
     for route, expected in (
         ('about.html', 'About'),
         ('research.html', 'Research library'),
-        ('catalog-review.html', 'What’s New Today'),
-        ('hardware-review.html', 'What’s New Today'),
+        ('catalog-review.html', 'Catalog review'),
+        ('hardware-review.html', 'Hardware evidence'),
         ('games.html', 'Games'),
         ('technologies.html', 'Technology profiles'),
         ('playbooks.html', 'Playbooks'),
@@ -99,6 +99,14 @@ with sync_playwright() as p:
               header.get_attribute('data-page-label') == expected
               and expected in header.evaluate("el => getComputedStyle(el,'::before').content")
               and page.locator('.site-chrome__links a').count() == 7)
+
+    # Editorial subpages belong to the daily section without inheriting the
+    # daily archive's workspace title. This is a single shared header mapping.
+    for route in ('catalog-review.html', 'hardware-review.html'):
+        page.goto(base + route)
+        check(f'{route} retains the canonical selected parent section',
+              page.locator('.site-chrome__links a[aria-current="location"]').count() == 1
+              and page.locator('.site-chrome__links a[aria-current="location"]').text_content() == 'What’s New Today')
 
     # The generated directories and 1,648 detail pages already mark their
     # canonical desktop rail section. Before hydration (or with JS disabled),
@@ -399,6 +407,37 @@ with sync_playwright() as p:
             check(f'About {width}px {theme} keeps the shared section and saved appearance',
                   page.locator('.directory-mobile-topbar').get_attribute('data-page-label')=='About'
                   and page.evaluate("document.documentElement.dataset.theme") == theme)
+    # Cross-page interaction check in both themes and at phone/tablet/desktop
+    # sizes: real archive links must still work and return to the right subpage.
+    for width, height in ((320, 700), (390, 844), (768, 900), (1280, 900)):
+        page.set_viewport_size({'width':width,'height':height})
+        for theme in ('light','dark'):
+            page.goto(base+'about.html')
+            page.evaluate('(t) => localStorage.setItem("atlas.theme", t)', theme)
+            for route, label in (('catalog-review.html','Catalog review'),
+                                 ('hardware-review.html','Hardware evidence')):
+                page.goto(base+route)
+                header=page.locator('.site-mobile-chrome')
+                check(f'{route} {width}px {theme} shows its own identity under the daily section',
+                      header.get_attribute('data-page-label')==label
+                      and page.locator('.site-chrome__links a[aria-current="location"]').text_content()=='What’s New Today'
+                      and page.evaluate('document.documentElement.dataset.theme')==theme
+                      and page.evaluate('document.documentElement.scrollWidth<=innerWidth'))
+                if (width,theme)==(1280,'light'):
+                    page.screenshot(path=str(out/f'editorial-subpage-{route}-desktop-light.png'))
+                if width<=650:
+                    page.locator('details.site-mobile-chrome__nav summary').click()
+                    page.locator('details.site-mobile-chrome__nav a[href="whats-new.html"]').click()
+                else:
+                    page.locator('.site-chrome__links a[aria-current="location"]').click()
+                check(f'{route} {width}px {theme} navigates to the actual daily archive',
+                      page.url.split('?')[0].endswith('/whats-new.html')
+                      and page.locator('.site-mobile-chrome').get_attribute('data-page-label')=='What’s New Today')
+                page.go_back()
+                check(f'{route} {width}px {theme} Back restores editorial identity',
+                      page.url.split('?')[0].endswith('/'+route)
+                      and page.locator('.site-mobile-chrome').get_attribute('data-page-label')==label)
+
     # Existing landing-page hero spacing used unrelated 38-56px offsets, so
     # moving between Discover and the archive/directories changed the vertical
     # reading frame. Compare actual first content, not just CSS declarations.

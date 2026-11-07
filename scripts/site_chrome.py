@@ -104,7 +104,11 @@ def render_standalone_nav(path):
         icon_classes=classes(icon, "site-mobile-chrome__search-icon"),
         search_label_classes=classes(label, "site-mobile-chrome__search-placeholder"),
         desktop_classes="site-chrome " + desktop, labeled=labeled, current_kind=kind,
-        page_label="Research library" if path == "research.html" else selected,
+        page_label={
+            "research.html": "Research library",
+            "catalog-review.html": "Catalog review",
+            "hardware-review.html": "Hardware evidence",
+        }.get(path, selected),
         mobile_brand=True,
     )
     # Research's main landmark intentionally starts between the two headers.
