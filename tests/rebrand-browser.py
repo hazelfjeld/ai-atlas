@@ -679,6 +679,40 @@ with sync_playwright() as p:
                     field.scroll_into_view_if_needed()
                     page.screenshot(path=str(out/f'shared-filters-{route}-{width}-{theme}.png'))
 
+
+    # Actual dark-theme screenshot audit exposed unreadable pale research-scope
+    # callouts on Technology and Playbooks. Contrast-test their original content
+    # in both themes without replacing or hiding the caveats.
+    for width, height in ((390,844),(1280,900)):
+        page.set_viewport_size({'width':width,'height':height})
+        for theme in ('light','dark'):
+            page.goto(base+'index.html#/overview')
+            page.evaluate("(t) => localStorage.setItem('atlas.theme',t)",theme)
+            for route, selector in (('technologies.html','.tech-warning'),
+                                    ('playbooks.html','.playbook-note')):
+                page.goto(base+route)
+                card=page.locator(selector)
+                card.wait_for(state='visible')
+                contrast=card.evaluate("""el => {
+                    const s=getComputedStyle(el);
+                    const rgb=t => [...t.matchAll(/[0-9]+(?:\\.[0-9]+)?/g)].slice(0,3).map(v=>Number(v[0]));
+                    const lum=values => values.reduce((sum,x,i) => {
+                        const u=x/255, linear=u<=0.04045?u/12.92:((u+0.055)/1.055)**2.4;
+                        return sum+linear*[0.2126,0.7152,0.0722][i];
+                    },0);
+                    const a=lum(rgb(s.color)), b=lum(rgb(s.backgroundColor));
+                    return {ratio:(Math.max(a,b)+0.05)/(Math.min(a,b)+0.05),
+                            bg:s.backgroundColor,text:s.color};
+                }""")
+                check(f'{route} {width}px {theme} keeps scope note readable',
+                      contrast['ratio']>=7
+                      and (contrast['bg']=='rgb(49, 65, 56)' if theme=='dark'
+                           else contrast['bg'] in ('rgb(246, 238, 224)','rgb(247, 239, 223)'))
+                      and page.evaluate('document.documentElement.scrollWidth <= innerWidth'))
+                if theme=='dark':
+                    card.scroll_into_view_if_needed()
+                    page.screenshot(path=str(out/f'scope-note-{route}-{width}-{theme}.png'))
+
     check('no application runtime exceptions',not errors)
     browser.close()
 (out/'results.json').write_text(json.dumps({'checks_passed':len(checks),'checks':checks,'base':base},indent=2))

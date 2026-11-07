@@ -1161,3 +1161,17 @@ test('shared filter fields use Discover-style native controls across existing wo
   assert.ok(!shared.includes('pointer-events:none') && !shared.includes('display:none'),
     'never hide or fake an existing search control');
 });
+
+
+test('shared dark note surfaces keep existing research caveats readable', () => {
+  const css=read('site-chrome.css'), offline=read('downloads/Atlas_Demo_Offline.html');
+  const marker='/* atlas-note-contrast:begin */', end='/* atlas-note-contrast:end */';
+  assert.equal(css.split(marker).length,2);
+  const rule=css.slice(css.indexOf(marker),css.indexOf(end)+end.length);
+  assert.ok(offline.includes(rule),'offline uses the same contrast rule');
+  for (const token of ['.tech-warning,.playbook-note',
+    ':root[data-theme="dark"]', ':root:not([data-theme="light"])',
+    'background:#314138;', 'color:#edf4ee;']) assert.ok(rule.includes(token));
+  assert.ok(read('technologies.html').includes('class="tech-warning"'));
+  assert.ok(read('playbooks.html').includes('class="playbook-note"'));
+});

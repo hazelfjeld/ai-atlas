@@ -453,3 +453,20 @@ body:has(.site-chrome) :is(.tech-controls,.playbook-tools,.controls,.search-cont
   }
 }
 /* atlas-filter-controls:end */
+
+/* atlas-note-contrast:begin */
+/* Dark-mode research scope notes must not retain pale, light-only backgrounds
+   while inheriting the workspace's light text. Keep their light design intact. */
+:root[data-theme="dark"] :is(.tech-warning,.playbook-note){
+  background:#314138;
+  border-color:#577261;
+  color:#edf4ee;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) :is(.tech-warning,.playbook-note){
+    background:#314138;
+    border-color:#577261;
+    color:#edf4ee;
+  }
+}
+/* atlas-note-contrast:end */
