@@ -57,7 +57,7 @@ document.addEventListener('keydown', (event) => {
   }
   if (event.key === 'Escape') {
     if (event.defaultPrevented) return;
-    if (!document.querySelector('details.site-mobile-chrome__nav[open]')) return;
+    if (!document.querySelectorAll('details.site-mobile-chrome__nav[open]').length) return;
     closeSharedDrawers({restoreFocus:true});
     event.preventDefault();
     return;
