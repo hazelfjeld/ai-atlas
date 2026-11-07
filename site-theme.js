@@ -131,11 +131,29 @@ if (typeof window !== 'undefined' && window.addEventListener) {
   });
 }
 
+// Restore a saved appearance changed on another page when this one comes back
+// from BFCache. Reuse the same generated theme buttons and accessibility state;
+// do not override an unsaved choice or blocked storage.
+function restoreSharedThemeAfterHistory() {
+  let savedTheme;
+  try { savedTheme = localStorage.getItem('atlas.theme'); }
+  catch (_) { return; }
+  if (savedTheme !== 'dark' && savedTheme !== 'light') return;
+  document.documentElement.dataset.theme = savedTheme;
+  document.querySelectorAll('.site-chrome__theme-toggle').forEach(button => {
+    button.setAttribute('aria-pressed', String(savedTheme === 'dark'));
+    button.textContent = '◐  ' + (savedTheme === 'dark' ? 'Dark' : 'Light') + ' theme';
+  });
+}
+
 // Restoring a page from the back/forward cache must not resurrect a modal
 // drawer with stale inert siblings or hidden keyboard focus.
 if (typeof window !== 'undefined' && window.addEventListener) {
   window.addEventListener('pageshow', (event) => {
-    if (event.persisted) closeSharedDrawers();
+    if (event.persisted) {
+      closeSharedDrawers();
+      restoreSharedThemeAfterHistory();
+    }
   });
 }
 

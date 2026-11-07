@@ -1291,3 +1291,43 @@ test('editorial subpage identity wins over the selected daily navigation section
     assert.equal((html.match(/data-page-label=/g) || []).length, 1, route + ' owns one label');
   }
 });
+
+test('BFCache restoration synchronizes saved theme and shared controls', () => {
+  const events = {};
+  let storedTheme = 'light';
+  const buttons = Array.from({length: 2}, () => ({
+    attrs:{}, textContent:'',
+    setAttribute(name, value) { this.attrs[name] = value; }
+  }));
+  const document = {
+    documentElement: {dataset: {theme:'light'}},
+    addEventListener() {},
+    querySelectorAll(selector) {
+      if (selector === 'details.site-mobile-chrome__nav[open]') return [];
+      if (selector === '.site-chrome__theme-toggle') return buttons;
+      throw new Error('Unexpected selector ' + selector);
+    }
+  };
+  const window = {innerWidth:1280, addEventListener(name, listener) { events[name] = listener; }};
+  vm.runInNewContext(read('site-theme.js'), {
+    document, window, localStorage: {getItem: () => storedTheme}
+  });
+  storedTheme = 'dark';
+  events.pageshow({persisted:true});
+  assert.equal(document.documentElement.dataset.theme, 'dark');
+  for (const b of buttons) {
+    assert.equal(b.attrs['aria-pressed'], 'true');
+    assert.equal(b.textContent, '◐  Dark theme');
+  }
+  storedTheme = 'light';
+  events.pageshow({persisted:true});
+  assert.equal(document.documentElement.dataset.theme, 'light');
+  assert.equal(buttons[0].attrs['aria-pressed'], 'false');
+  assert.equal(buttons[0].textContent, '◐  Light theme');
+  storedTheme = 'dark';
+  events.pageshow({persisted:false});
+  assert.equal(document.documentElement.dataset.theme, 'light');
+  storedTheme = null;
+  events.pageshow({persisted:true});
+  assert.equal(document.documentElement.dataset.theme, 'light');
+});

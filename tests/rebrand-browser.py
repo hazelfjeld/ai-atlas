@@ -336,6 +336,25 @@ with sync_playwright() as p:
                       and page.evaluate("document.activeElement.matches('details.site-mobile-chrome__nav summary')"))
                 if width==390 and theme=='dark':
                     page.screenshot(path=str(out/f'drawer-dismissed-{route.replace("/", "-")}.png'))
+    # BFCache may resurrect a stale theme after a visitor changes appearance
+    # elsewhere. Verify shared buttons and the restored theme in both modes.
+    for width,height in ((320,700),(390,844),(768,900),(1280,900)):
+        page.set_viewport_size({'width':width,'height':height})
+        for route in ('about.html','technology/TECH-0216-pytorch.html'):
+            page.goto(base+route)
+            for saved in ('dark','light'):
+                page.evaluate("""(saved) => {
+                    document.documentElement.dataset.theme = saved === 'dark' ? 'light' : 'dark';
+                    localStorage.setItem('atlas.theme', saved);
+                    window.dispatchEvent(new PageTransitionEvent('pageshow', {persisted:true}));
+                }""", saved)
+                buttons=page.locator('.site-chrome__theme-toggle')
+                check(f'{route} {width}px cached page restores {saved} appearance',
+                      page.evaluate('document.documentElement.dataset.theme') == saved
+                      and buttons.count() >= 1
+                      and all(b.get_attribute('aria-pressed') == str(saved == 'dark').lower()
+                              and saved.title() + ' theme' in b.inner_text()
+                              for b in buttons.all()))
     # Real Back/Forward navigation must preserve the canonical destination and
     # leave the returning page navigable, regardless of BFCache eligibility.
     page.set_viewport_size({'width':390,'height':844})
