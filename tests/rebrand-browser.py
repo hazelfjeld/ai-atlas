@@ -546,6 +546,52 @@ with sync_playwright() as p:
                 if (width,theme)==(1280,'light') and route in ('about.html','playbooks.html','hardware-review.html','catalog-review.html'):
                     page.screenshot(path=str(out/f'reading-frame-{route}-1280-light.png'))
 
+
+    # Cards from seven established page families should read as one workspace,
+    # rather than alternating between independent white/cream panels and radii.
+    # Use Discover's actual computed surface/border as the reference.
+    card_routes = (
+        ('about.html', '.term-shell > .profile-section'),
+        ('terms/MLD-0002-ablation-study.html', '.term-shell > .detail-block'),
+        ('technology/TECH-0216-pytorch.html', '.term-shell > .profile-section'),
+        ('playbooks.html', '.playbook-shell .playbook'),
+        ('technologies.html', '.tech-shell .tech-card'),
+        ('catalog-review.html', '.shell:has(> .site-chrome.nav) article.card'),
+        ('whats-new.html', '.shell:has(> .site-chrome.top) .panel'),
+    )
+    for width, height in ((320,700),(390,844),(768,900),(1280,900)):
+        page.set_viewport_size({'width':width,'height':height})
+        for theme in ('light','dark'):
+            page.goto(base+'index.html#/overview')
+            page.locator('.discovery-card').first.wait_for(state='visible')
+            page.evaluate("t => {localStorage.setItem('atlas.theme',t);document.documentElement.dataset.theme=t}",theme)
+            discover_surface=page.locator('.discovery-card').first.evaluate("""el => {
+                const s=getComputedStyle(el);
+                return {background:s.backgroundColor,border:s.borderTopColor,
+                        width:s.borderTopWidth,radius:s.borderTopLeftRadius};
+            }""")
+            for route, selector in card_routes:
+                page.goto(base+route)
+                card=page.locator(selector).first
+                card.wait_for(state='visible',timeout=15000)
+                style=card.evaluate("""el => {
+                    const s=getComputedStyle(el);
+                    return {background:s.backgroundColor,border:s.borderTopColor,
+                            width:s.borderTopWidth,radius:s.borderTopLeftRadius,
+                            padding:parseFloat(s.paddingLeft),borderStyle:s.borderTopStyle};
+                }""")
+                check(f'{route} {width}px {theme} shares Discover editorial card surface',
+                      style['background']==discover_surface['background']
+                      and style['border']==discover_surface['border']
+                      and style['width']==discover_surface['width']=='1px'
+                      and style['radius']==discover_surface['radius']=='11px'
+                      and style['borderStyle']=='solid'
+                      and 18<=style['padding']<=24.1
+                      and page.evaluate('document.documentElement.dataset.theme')==theme
+                      and page.evaluate('document.documentElement.scrollWidth <= innerWidth'))
+                if (width,theme) in ((1280,'light'),(390,'dark')) and route in ('about.html','playbooks.html','catalog-review.html','whats-new.html'):
+                    page.screenshot(path=str(out/f'editorial-cards-{route}-{width}-{theme}.png'))
+
     check('no application runtime exceptions',not errors)
     browser.close()
 (out/'results.json').write_text(json.dumps({'checks_passed':len(checks),'checks':checks,'base':base},indent=2))

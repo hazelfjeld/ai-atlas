@@ -1077,3 +1077,26 @@ test('one shared editorial workspace reading frame aligns existing page families
     assert.match(read(route), /site-chrome\.css/, route+' reuses shared CSS');
   }
 });
+
+test('shared editorial cards adopt Discover surface geometry without touching Games', () => {
+  const css=read('site-chrome.css'), offline=read('downloads/Atlas_Demo_Offline.html');
+  const marker='/* Shared editorial card surfaces across existing page families.';
+  assert.equal(css.split(marker).length,2,'only one canonical shared editorial surface rule');
+  const rule=marker+css.split(marker)[1].split('/* atlas-rail-icons:begin */')[0];
+  assert.ok(offline.includes(rule),'offline fallback embeds exact shared card rule');
+  for (const fragment of [
+    '.term-shell > .profile-section', '.term-shell > .detail-block',
+    '.playbook-shell .playbook', '.tech-shell .tech-card',
+    '.shell:has(> .site-chrome.nav) article.card',
+    '.shell:has(> main > .site-chrome.research-site-chrome) .cards > .card',
+    '.shell:has(> .site-chrome.top) .panel',
+    'background:var(--surface);', 'border:1px solid var(--line);',
+    'border-radius:11px;', 'padding:clamp(18px,2vw,24px);'
+  ]) assert.ok(rule.includes(fragment),'missing shared card contract '+fragment);
+  assert.ok(!rule.includes('.games-body') && !rule.includes('.discovery-card{'),
+    'do not override Games or redefine Discover cards');
+  for (const route of ['about.html','whats-new.html','technologies.html','playbooks.html',
+    'research.html','catalog-review.html','terms/MLD-0002-ablation-study.html',
+    'technology/TECH-0216-pytorch.html'])
+    assert.match(read(route),/site-chrome\.css/,route+' must load the shared stylesheet');
+});

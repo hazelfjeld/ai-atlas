@@ -290,6 +290,25 @@ body:has(.site-chrome){padding-top:78px}
 }
 }
 
+
+/* Shared editorial card surfaces across existing page families.
+   Discover's .discovery-card defines the 11px surface/border vocabulary.
+   Keep the news feed, Games controls, and specialized evidence callouts intact. */
+:is(.term-shell > .profile-section,
+    .term-shell > .detail-block,
+    .playbook-shell .playbook,
+    .tech-shell .tech-card,
+    .shell:has(> .site-chrome.nav) article.card,
+    .shell:has(> main > .site-chrome.research-site-chrome) .cards > .card,
+    .shell:has(> .site-chrome.top) .panel){
+  box-sizing:border-box;
+  min-width:0;
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:11px;
+  padding:clamp(18px,2vw,24px);
+}
+
 /* atlas-rail-icons:begin */
 /* Generated from the very same DISCOVER_LINKS SVG paths as the Discover rail. */
 @media (min-width:651px){
