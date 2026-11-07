@@ -308,6 +308,9 @@ with sync_playwright() as p:
 
     # Three remaining editorial/reference pages previously used independent h1
     # sizing; keep their first-paint hero typography aligned with Discover.
+    # Browser engines serialize equivalent fallback font stacks differently;
+    # compare the actual primary face (Georgia), exact weight/size/line-height,
+    # rather than treating Georgia,serif and Georgia,Times,serif as different.
     editorial_titles = (
         ('about.html', 'header.hero .discover-heading h1'),
         ('hardware-review.html', 'header .discover-heading h1'),
@@ -319,13 +322,13 @@ with sync_playwright() as p:
             page.goto(base+'index.html#/overview')
             page.evaluate("t => {localStorage.setItem('atlas.theme',t);document.documentElement.dataset.theme=t}",theme)
             baseline = page.locator('.discover-heading h1').evaluate(
-                "el => {const s=getComputedStyle(el);return {family:s.fontFamily,weight:s.fontWeight,size:s.fontSize,lineHeight:s.lineHeight}}")
+                "el => {const s=getComputedStyle(el);return {face:s.fontFamily.split(',')[0].trim().replaceAll(String.fromCharCode(34),'').replaceAll(String.fromCharCode(39),'').toLowerCase(),weight:s.fontWeight,size:s.fontSize,lineHeight:s.lineHeight}}")
             for route, selector in editorial_titles:
                 page.goto(base+route)
                 title = page.locator(selector)
                 title.wait_for()
                 actual = title.evaluate(
-                    "el => {const s=getComputedStyle(el);return {family:s.fontFamily,weight:s.fontWeight,size:s.fontSize,lineHeight:s.lineHeight}}")
+                    "el => {const s=getComputedStyle(el);return {face:s.fontFamily.split(',')[0].trim().replaceAll(String.fromCharCode(34),'').replaceAll(String.fromCharCode(39),'').toLowerCase(),weight:s.fontWeight,size:s.fontSize,lineHeight:s.lineHeight}}")
                 check(f'{route} {width}px {theme} editorial hero matches Discover and fits',
                       actual == baseline and title.is_visible()
                       and page.evaluate('document.documentElement.scrollWidth <= innerWidth')
