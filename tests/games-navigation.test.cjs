@@ -1111,8 +1111,10 @@ test('shared static-page footers follow Discover rhythm without replacing sectio
   assert.ok(offline.includes(rule),'offline fallback embeds the exact footer treatment');
   assert.ok(rule.includes('body:has(.site-chrome) footer{'), 'real shared footer selector');
   for (const expected of ['margin-top:42px;','padding:20px 0 0;',
-    'border-top:1px solid var(--line,#dfe3dc);','font-size:11px;',
-    'line-height:1.8;','overflow-wrap:anywhere;','footer a:focus-visible']) {
+    'border-top:1px solid var(--atlas-footer-line);','font-size:11px;',
+    'line-height:1.8;','overflow-wrap:anywhere;','footer a:focus-visible',
+    '--atlas-footer-muted:#5d6861;','--atlas-footer-line:#3b4a40;',
+    ':root:not([data-theme="light"])']) {
     assert.ok(rule.includes(expected),'shared footer missing '+expected);
   }
   assert.ok(!rule.includes('.main-footer{') && !rule.includes('footer{display:none'),

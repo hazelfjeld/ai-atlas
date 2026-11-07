@@ -319,18 +319,35 @@ body:has(.site-chrome){padding-top:78px}
    as Discover's .main-footer. Keep each section's own evidence/coverage text
    and real links; only site chrome is shared across static reference pages,
    daily archive, editorial pages and standalone Games. */
+:root{
+  --atlas-footer-line:#dfe3dc;
+  --atlas-footer-muted:#5d6861;
+  --atlas-footer-accent:#27664e;
+}
+:root[data-theme="dark"]{
+  --atlas-footer-line:#3b4a40;
+  --atlas-footer-muted:#afbeb2;
+  --atlas-footer-accent:#b1d5bd;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --atlas-footer-line:#3b4a40;
+    --atlas-footer-muted:#afbeb2;
+    --atlas-footer-accent:#b1d5bd;
+  }
+}
 body:has(.site-chrome) footer{
   box-sizing:border-box;
   margin-top:42px;
   padding:20px 0 0;
-  border-top:1px solid var(--line,#dfe3dc);
-  color:var(--muted,#5d6861);
+  border-top:1px solid var(--atlas-footer-line);
+  color:var(--atlas-footer-muted);
   font-size:11px;
   line-height:1.8;
   overflow-wrap:anywhere;
 }
 body:has(.site-chrome) footer a{
-  color:var(--accent,#27664e);
+  color:var(--atlas-footer-accent);
   text-underline-offset:3px;
 }
 body:has(.site-chrome) footer a:focus-visible{
