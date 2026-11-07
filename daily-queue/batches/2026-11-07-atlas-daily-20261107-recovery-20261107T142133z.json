@@ -1,0 +1,834 @@
+{
+  "schema": 1,
+  "batch_id": "atlas-daily-20261107-recovery-20261107T142133z",
+  "edition_date": "2026-11-07",
+  "timezone": "America/Chicago",
+  "collected_at": "2026-11-07T14:21:33.611Z",
+  "coverage_start": "2026-11-03T00:00:00Z",
+  "coverage_end": "2026-11-07T14:21:33.611Z",
+  "coverage_status": "partial",
+  "coverage_note": "Bounded catch-up for Nov 3-7 after a gap in staging. No confirmed successful prior coverage cutoff. Source publication dates are Nov 3-6, not misrepresented as Nov 7 news. Substantial provider and paper feeds remain unchecked.",
+  "overlap_lookback_start": "2026-11-03T00:00:00Z",
+  "sources_checked": [
+    {
+      "id": "occ",
+      "url": "https://www.occ.gov/news-issuances/news-releases/2026/nr-occ-2026-97.html",
+      "checked_at": "2026-11-07T14:21:33.611Z",
+      "status": "success",
+      "note": "Opened original author or primary source and verified stated publication date"
+    },
+    {
+      "id": "dharma",
+      "url": "https://huggingface.co/blog/Dharma-AI/dharma-field-extractor",
+      "checked_at": "2026-11-07T14:21:33.611Z",
+      "status": "success",
+      "note": "Opened original author or primary source and verified stated publication date"
+    },
+    {
+      "id": "omni",
+      "url": "https://blog.google/innovation-and-ai/technology/developers-tools/introducing-gemini-omni-1-2-flash/",
+      "checked_at": "2026-11-07T14:21:33.611Z",
+      "status": "success",
+      "note": "Opened original author or primary source and verified stated publication date"
+    },
+    {
+      "id": "cyber",
+      "url": "https://openai.com/index/introducing-gpt-6-cyber/",
+      "checked_at": "2026-11-07T14:21:33.611Z",
+      "status": "success",
+      "note": "Opened original author or primary source and verified stated publication date"
+    },
+    {
+      "id": "cosmos",
+      "url": "https://huggingface.co/blog/nvidia/cosmos-interactive-world-simulation",
+      "checked_at": "2026-11-07T14:21:33.611Z",
+      "status": "success",
+      "note": "Opened original author or primary source and verified stated publication date"
+    },
+    {
+      "id": "lerobot",
+      "url": "https://huggingface.co/blog/lerobot/lerobot-release-v070",
+      "checked_at": "2026-11-07T14:21:33.611Z",
+      "status": "success",
+      "note": "Opened original author or primary source and verified stated publication date"
+    },
+    {
+      "id": "phonon",
+      "url": "https://huggingface.co/blog/phonon-tts",
+      "checked_at": "2026-11-07T14:21:33.611Z",
+      "status": "success",
+      "note": "Nov 5 follow-up article, original release earlier"
+    },
+    {
+      "id": "harness",
+      "url": "https://huggingface.co/blog/harness-hub/harness-adapters",
+      "checked_at": "2026-11-07T14:21:33.611Z",
+      "status": "success",
+      "note": "Opened original author or primary source and verified stated publication date"
+    },
+    {
+      "id": "asr",
+      "url": "https://huggingface.co/blog/open-asr-leaderboard-liva",
+      "checked_at": "2026-11-07T14:21:33.611Z",
+      "status": "success",
+      "note": "Opened original author or primary source and verified stated publication date"
+    },
+    {
+      "id": "usda",
+      "url": "https://www.reuters.com/technology/usda-launch-ai-tool-check-crop-production-data-after-errors-2026-11-06/",
+      "checked_at": "2026-11-07T14:21:33.611Z",
+      "status": "success",
+      "note": "Reuters Nov 6 18:23 UTC report; planned Nov 10 deployment"
+    },
+    {
+      "id": "cwe",
+      "url": "https://huggingface.co/blog/cwe-bench",
+      "checked_at": "2026-11-07T14:21:33.611Z",
+      "status": "success",
+      "note": "Nov 3 publication; late discovery included as catch-up"
+    }
+  ],
+  "sources_failed": [],
+  "source_health_note": "11 accessible original pages checked. No failed opens among included sources; unchecked feeds are not negative checks.",
+  "coverage_backlog": [
+    {
+      "scope": "arXiv new/revised Nov 4-7 and small independent research blogs",
+      "status": "not_checked_this_run"
+    },
+    {
+      "scope": "Specialist inference library release tags and model card versions",
+      "status": "not_checked_this_run"
+    },
+    {
+      "scope": "Independently reproduce model benchmarks and confirm Dharma artifact licenses",
+      "status": "deferred_review"
+    }
+  ],
+  "tldr": [
+    "Recent source-checked launches and research include Gemini Omni 1.2 Flash, GPT-6 Cyber, NVIDIA Cosmos 3 interactive models, and LeRobot robotics infrastructure.",
+    "Smaller projects are advancing per-harness agent RL, local speech synthesis and schema-directed document extraction; ASR accent testing and bank supervision show continued work on evaluation and governance.",
+    "This is a partial November 3-7 catch-up edition: model performance figures are developer-reported, older news is labeled catch-up, and nothing is public until the production publisher validates it."
+  ],
+  "news": [
+    {
+      "id": "ai-news:occ-si-bank-supervision:2026-11-07",
+      "title": "OCC outlines bank examination standards for agentic super intelligence",
+      "category": "governance",
+      "tags": [
+        "AI",
+        "agents",
+        "finance",
+        "governance"
+      ],
+      "summary": "The US OCC issued a supervisory framework for bank use of super intelligence and agentic systems, directing examiners to consider existing risk-management principles rather than inventing a separate AI risk category.",
+      "why_it_matters": "Technology-neutral supervision can help banks evaluate agent autonomy, control and accountability in context.",
+      "caveat": "This is supervisory guidance rather than proof of safety or a new binding statute.",
+      "canonical_url": "https://www.occ.gov/news-issuances/news-releases/2026/nr-occ-2026-97.html",
+      "source_url": "https://www.occ.gov/news-issuances/news-releases/2026/nr-occ-2026-97.html",
+      "publication_date": "2026-11-04",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-04",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-07T14:21:33.611Z",
+      "checked_at": "2026-11-07T14:21:33.611Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "developer_or_primary_announcement",
+      "release_status": "issued_guidance",
+      "collection_classification": "catch_up_prior_uncovered_interval",
+      "sources": [
+        {
+          "url": "https://www.occ.gov/news-issuances/news-releases/2026/nr-occ-2026-97.html",
+          "publisher": "Office of the Comptroller of the Currency",
+          "type": "primary_or_original_author"
+        }
+      ],
+      "related_catalog_ids": []
+    },
+    {
+      "id": "ai-news:dharma-document-field-extractor:2026-11-07",
+      "title": "Dharma reports a 2B model for structured field extraction from documents",
+      "category": "document-ai",
+      "tags": [
+        "AI",
+        "SLM",
+        "vision",
+        "extraction"
+      ],
+      "summary": "Dharma-AI described a 2B document-image model with LoRA post-training on 43,384 examples that returns schema-directed JSON fields and nested tables.",
+      "why_it_matters": "Specialized small models may reduce the complexity and expense of repeated document intake relative to OCR plus a general model.",
+      "caveat": "Author-selected benchmark comparisons are not independently replicated; weights, licensing and API access for this exact extractor remain unverified.",
+      "canonical_url": "https://huggingface.co/blog/Dharma-AI/dharma-field-extractor",
+      "source_url": "https://huggingface.co/blog/Dharma-AI/dharma-field-extractor",
+      "publication_date": "2026-11-04",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-04",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-07T14:21:33.611Z",
+      "checked_at": "2026-11-07T14:21:33.611Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "developer_or_primary_announcement",
+      "release_status": "author_report",
+      "collection_classification": "catch_up_prior_uncovered_interval",
+      "sources": [
+        {
+          "url": "https://huggingface.co/blog/Dharma-AI/dharma-field-extractor",
+          "publisher": "Dharma-AI",
+          "type": "primary_or_original_author"
+        }
+      ],
+      "related_catalog_ids": []
+    },
+    {
+      "id": "ai-news:google-gemini-omni-1-2-flash:2026-11-07",
+      "title": "Gemini Omni 1.2 Flash expands video length and interactive editing",
+      "category": "multimodal",
+      "tags": [
+        "AI",
+        "video",
+        "API",
+        "generative-models"
+      ],
+      "summary": "Google announced a generative video model supporting 15-second clips, multi-turn revisions and stronger reference following, stating general availability through its API and enterprise offerings.",
+      "why_it_matters": "Iterative edits can be more practical than regenerating whole clips for production workflows.",
+      "caveat": "Performance claims are Google-reported; the announced 720p cost of $0.07 per generated second may change.",
+      "canonical_url": "https://blog.google/innovation-and-ai/technology/developers-tools/introducing-gemini-omni-1-2-flash/",
+      "source_url": "https://blog.google/innovation-and-ai/technology/developers-tools/introducing-gemini-omni-1-2-flash/",
+      "publication_date": "2026-11-05",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-05",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-07T14:21:33.611Z",
+      "checked_at": "2026-11-07T14:21:33.611Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "developer_or_primary_announcement",
+      "release_status": "announced_available",
+      "collection_classification": "catch_up_prior_uncovered_interval",
+      "sources": [
+        {
+          "url": "https://blog.google/innovation-and-ai/technology/developers-tools/introducing-gemini-omni-1-2-flash/",
+          "publisher": "Google",
+          "type": "primary_or_original_author"
+        }
+      ],
+      "related_catalog_ids": []
+    },
+    {
+      "id": "ai-news:openai-gpt6-cyber:2026-11-07",
+      "title": "OpenAI introduces GPT-6 Cyber with security-task scope testing",
+      "category": "cybersecurity",
+      "tags": [
+        "AI",
+        "security",
+        "agents",
+        "alignment"
+      ],
+      "summary": "OpenAI announced a cyber-specialized model and reports a 48.5% ExploitGym score against 32.1% for GPT-5.6 Cyber, alongside evaluations of avoiding out-of-scope targets.",
+      "why_it_matters": "Demonstrates the importance of assessing both agent capability and obedience to authorized task boundaries.",
+      "caveat": "Benchmark figures and reports of Firefox and Linux findings are developer claims; guarded defender access does not imply unrestricted availability.",
+      "canonical_url": "https://openai.com/index/introducing-gpt-6-cyber/",
+      "source_url": "https://openai.com/index/introducing-gpt-6-cyber/",
+      "publication_date": "2026-11-05",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-05",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-07T14:21:33.611Z",
+      "checked_at": "2026-11-07T14:21:33.611Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "developer_or_primary_announcement",
+      "release_status": "restricted_release",
+      "collection_classification": "catch_up_prior_uncovered_interval",
+      "sources": [
+        {
+          "url": "https://openai.com/index/introducing-gpt-6-cyber/",
+          "publisher": "OpenAI",
+          "type": "primary_or_original_author"
+        }
+      ],
+      "related_catalog_ids": []
+    },
+    {
+      "id": "ai-news:nvidia-cosmos3-interactive:2026-11-07",
+      "title": "NVIDIA releases Cosmos 3 checkpoints for interactive simulation",
+      "category": "robotics",
+      "tags": [
+        "AI",
+        "DL",
+        "world-models",
+        "robotics",
+        "video"
+      ],
+      "summary": "NVIDIA detailed four open-weight Cosmos3-Nano checkpoints for controlled video, streaming driving-camera and LiDAR observations, and bimanual robot action prediction.",
+      "why_it_matters": "Interactive sensory prediction can support simulation research for embodied AI and robotics.",
+      "caveat": "The 16B-parameter checkpoints require substantial computation; physical realism and downstream policy benefits remain unproven by the release.",
+      "canonical_url": "https://huggingface.co/blog/nvidia/cosmos-interactive-world-simulation",
+      "source_url": "https://huggingface.co/blog/nvidia/cosmos-interactive-world-simulation",
+      "publication_date": "2026-11-05",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-05",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-07T14:21:33.611Z",
+      "checked_at": "2026-11-07T14:21:33.611Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "developer_or_primary_announcement",
+      "release_status": "open_weights",
+      "collection_classification": "catch_up_prior_uncovered_interval",
+      "sources": [
+        {
+          "url": "https://huggingface.co/blog/nvidia/cosmos-interactive-world-simulation",
+          "publisher": "NVIDIA",
+          "type": "primary_or_original_author"
+        }
+      ],
+      "related_catalog_ids": []
+    },
+    {
+      "id": "ai-news:lerobot-v0-7-0:2026-11-07",
+      "title": "LeRobot v0.7 adds language-controlled rollouts and streaming datasets",
+      "category": "robotics",
+      "tags": [
+        "AI",
+        "robotics",
+        "VLA",
+        "training"
+      ],
+      "summary": "LeRobot's v0.7.0 developer notes describe interactive policy sessions, remote inference, streamed training datasets and distributed checkpoints for larger robot models.",
+      "why_it_matters": "Improves workflows for robotics teams limited by onboard compute and very large demonstration datasets.",
+      "caveat": "Compatibility varies across supported hardware, and developer-reported training speedups are workload-specific.",
+      "canonical_url": "https://huggingface.co/blog/lerobot/lerobot-release-v070",
+      "source_url": "https://huggingface.co/blog/lerobot/lerobot-release-v070",
+      "publication_date": "2026-11-05",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-05",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-07T14:21:33.611Z",
+      "checked_at": "2026-11-07T14:21:33.611Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "developer_or_primary_announcement",
+      "release_status": "software_release",
+      "collection_classification": "catch_up_prior_uncovered_interval",
+      "sources": [
+        {
+          "url": "https://huggingface.co/blog/lerobot/lerobot-release-v070",
+          "publisher": "Hugging Face LeRobot",
+          "type": "primary_or_original_author"
+        }
+      ],
+      "related_catalog_ids": []
+    },
+    {
+      "id": "ai-news:phonon-nov5-followup:2026-11-07",
+      "title": "Gradium details local Phonon speech models and license differences",
+      "category": "audio",
+      "tags": [
+        "AI",
+        "SLM",
+        "TTS",
+        "on-device"
+      ],
+      "summary": "A November 5 article explains Phonon 31m and 40m, compact flow-matching on-device TTS models for private offline use.",
+      "why_it_matters": "Local speech can reduce network dependence and keep input text on the device.",
+      "caveat": "Phonon first launched earlier, not November 5; English 31m is Apache-2.0, while the multilingual 40m has non-commercial restrictions.",
+      "canonical_url": "https://huggingface.co/blog/phonon-tts",
+      "source_url": "https://huggingface.co/blog/phonon-tts",
+      "publication_date": "2026-11-05",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-05",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-07T14:21:33.611Z",
+      "checked_at": "2026-11-07T14:21:33.611Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "developer_or_primary_announcement",
+      "release_status": "technical_followup",
+      "collection_classification": "catch_up_prior_uncovered_interval",
+      "sources": [
+        {
+          "url": "https://huggingface.co/blog/phonon-tts",
+          "publisher": "Gradium",
+          "type": "primary_or_original_author"
+        }
+      ],
+      "related_catalog_ids": []
+    },
+    {
+      "id": "ai-news:harnesshub-rl-adapters:2026-11-07",
+      "title": "Harness Hub studies per-harness LoRA training with anti-reward-hacking checks",
+      "category": "agents",
+      "tags": [
+        "AI",
+        "LLM",
+        "LoRA",
+        "RL",
+        "agents"
+      ],
+      "summary": "An author research release reports RL-trained LoRA adapters specific to pi, opencode and hermes, with verifiable tasks and a rule-based tool-call safety proxy.",
+      "why_it_matters": "Training inside the actual agent harness can expose tool-use failure modes missed by generic instruction tuning.",
+      "caveat": "Reported wins are early held-out smoke-run results; rule-based blocking is not comprehensive security.",
+      "canonical_url": "https://huggingface.co/blog/harness-hub/harness-adapters",
+      "source_url": "https://huggingface.co/blog/harness-hub/harness-adapters",
+      "publication_date": "2026-11-06",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-06",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-07T14:21:33.611Z",
+      "checked_at": "2026-11-07T14:21:33.611Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "developer_or_primary_announcement",
+      "release_status": "research_release",
+      "collection_classification": "catch_up_prior_uncovered_interval",
+      "sources": [
+        {
+          "url": "https://huggingface.co/blog/harness-hub/harness-adapters",
+          "publisher": "Harness Hub",
+          "type": "primary_or_original_author"
+        }
+      ],
+      "related_catalog_ids": []
+    },
+    {
+      "id": "ai-news:hf-private-asr-accent-tests:2026-11-07",
+      "title": "Open ASR Leaderboard gains Egyptian and Nigerian English test splits",
+      "category": "evaluation",
+      "tags": [
+        "AI",
+        "ASR",
+        "speech",
+        "evaluation"
+      ],
+      "summary": "Hugging Face and Liva AI added private conversational speech splits of 1.34 hours of Egyptian-accented and 1.55 hours of Nigerian-accented English.",
+      "why_it_matters": "Accent-specific tests help reveal performance differences hidden by global ASR averages.",
+      "caveat": "These short private samples are not a representative population study and do not establish a new model winner.",
+      "canonical_url": "https://huggingface.co/blog/open-asr-leaderboard-liva",
+      "source_url": "https://huggingface.co/blog/open-asr-leaderboard-liva",
+      "publication_date": "2026-11-06",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-06",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-07T14:21:33.611Z",
+      "checked_at": "2026-11-07T14:21:33.611Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "developer_or_primary_announcement",
+      "release_status": "benchmark_expansion",
+      "collection_classification": "catch_up_prior_uncovered_interval",
+      "sources": [
+        {
+          "url": "https://huggingface.co/blog/open-asr-leaderboard-liva",
+          "publisher": "Hugging Face / Liva AI",
+          "type": "primary_or_original_author"
+        }
+      ],
+      "related_catalog_ids": []
+    },
+    {
+      "id": "ai-news:usda-crop-anomaly-check:2026-11-07",
+      "title": "USDA plans AI checks for November 10 agricultural report",
+      "category": "applications",
+      "tags": [
+        "AI",
+        "agriculture",
+        "data-quality",
+        "government"
+      ],
+      "summary": "Reuters reported that USDA intends to use an internally built AI anomaly checker as an additional validation step for its November 10 crop-production release.",
+      "why_it_matters": "An example of AI quality assurance applied to economically important government statistics.",
+      "caveat": "Use on November 10 was planned but not verified at collection, and the system is a supplement to existing validation.",
+      "canonical_url": "https://www.reuters.com/technology/usda-launch-ai-tool-check-crop-production-data-after-errors-2026-11-06/",
+      "source_url": "https://www.reuters.com/technology/usda-launch-ai-tool-check-crop-production-data-after-errors-2026-11-06/",
+      "publication_date": "2026-11-06",
+      "publication_date_precision": "day",
+      "publication_time_utc": "2026-11-06T18:23:00Z",
+      "event_date": "2026-11-06",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-07T14:21:33.611Z",
+      "checked_at": "2026-11-07T14:21:33.611Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "original_independent_reporting",
+      "release_status": "planned_deployment",
+      "collection_classification": "catch_up_prior_uncovered_interval",
+      "sources": [
+        {
+          "url": "https://www.reuters.com/technology/usda-launch-ai-tool-check-crop-production-data-after-errors-2026-11-06/",
+          "publisher": "Reuters",
+          "type": "original_reporting"
+        }
+      ],
+      "related_catalog_ids": []
+    },
+    {
+      "id": "ai-news:collinear-cwebenc-v2:2026-11-07",
+      "title": "CWE-bench v2 exposes 100 verifiable security-repair tasks",
+      "category": "evaluation",
+      "tags": [
+        "AI",
+        "agents",
+        "cybersecurity",
+        "benchmarks"
+      ],
+      "summary": "Collinear AI published 100 public repository-based vulnerability-repair tasks covering 91 CWE categories with programmatic verification and a separate held-out set.",
+      "why_it_matters": "Reproducible agent coding environments offer a stronger evaluation signal than isolated anecdotal repairs.",
+      "caveat": "The public set is access-gated; author-reported model results depend on harness and sampling, and hidden-test content is not public.",
+      "canonical_url": "https://huggingface.co/blog/cwe-bench",
+      "source_url": "https://huggingface.co/blog/cwe-bench",
+      "publication_date": "2026-11-03",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-03",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-07T14:21:33.611Z",
+      "checked_at": "2026-11-07T14:21:33.611Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "developer_or_primary_announcement",
+      "release_status": "benchmark_release",
+      "collection_classification": "catch_up_prior_uncovered_interval",
+      "sources": [
+        {
+          "url": "https://huggingface.co/blog/cwe-bench",
+          "publisher": "Collinear AI",
+          "type": "primary_or_original_author"
+        }
+      ],
+      "related_catalog_ids": []
+    }
+  ],
+  "technologies": [
+    {
+      "id": "tech-proposal:gemini-omni12-flash:2026-11-07",
+      "name": "Gemini Omni 1.2 Flash",
+      "aliases": [
+        "Omni 1.2 Flash"
+      ],
+      "usage_tags": [
+        "AI",
+        "Video",
+        "API"
+      ],
+      "explanation": "Google API model for generating and iteratively editing videos up to 15 seconds.",
+      "conditional_advantage": "Follow-up edits may save rerendering when refining short clips.",
+      "best_fit_uses": [
+        "Short branded video",
+        "Iterative storyboarding"
+      ],
+      "tradeoffs": [
+        "Cloud dependency",
+        "Pricing per generated second",
+        "Reference and motion errors require human checks"
+      ],
+      "alternatives": [
+        "Earlier Gemini Omni versions",
+        "Other cloud video models"
+      ],
+      "hardware_runtime_constraints": "Hosted Gemini API; no local weights or consumer VRAM requirement documented.",
+      "license_uncertainty": "Proprietary service; applicable account terms need review.",
+      "availability_uncertainty": "Google reports general availability, but regional/account restrictions were not checked.",
+      "pricing_uncertainty": "Developer quoted $0.07 per 720p second on Nov 5; changes and secondary costs possible.",
+      "source_key": "omni",
+      "official_documentation_url": "https://blog.google/innovation-and-ai/technology/developers-tools/introducing-gemini-omni-1-2-flash/",
+      "date_checked": "2026-11-07",
+      "checked_at": "2026-11-07T14:21:33.611Z",
+      "source_links": [
+        {
+          "url": "https://blog.google/innovation-and-ai/technology/developers-tools/introducing-gemini-omni-1-2-flash/",
+          "publisher": "Google",
+          "type": "original author documentation"
+        }
+      ],
+      "existing_profile_id": null,
+      "review_status": "source_checked_pending_publisher_catalog_dedup"
+    },
+    {
+      "id": "tech-proposal:cosmos3-nano-sim-auto:2026-11-07",
+      "name": "Cosmos3-Nano-Sim-Auto",
+      "aliases": [
+        "Cosmos 3 Nano Sim-Auto"
+      ],
+      "usage_tags": [
+        "AI",
+        "DL",
+        "World Models",
+        "Robotics"
+      ],
+      "explanation": "Causally distilled model producing successive camera and LiDAR observations from controls and its own generated history.",
+      "conditional_advantage": "Conditional synthetic sensory rollouts can support testing driving-policy behavior in changing simulated worlds.",
+      "best_fit_uses": [
+        "Interactive autonomous-driving simulations",
+        "Sensor-rig adaptation research"
+      ],
+      "tradeoffs": [
+        "Error accumulation",
+        "Requires external controls and runtime",
+        "Not verified as physically faithful"
+      ],
+      "alternatives": [
+        "Cosmos3-Nano-Transfer-Auto",
+        "Physics simulators"
+      ],
+      "hardware_runtime_constraints": "16B trainable parameters; NVIDIA GPU/Linux/container setup; published GB200 use is not a minimum VRAM spec.",
+      "license_uncertainty": "NVIDIA identifies OpenMDW1.1; model-specific conditions must be checked.",
+      "availability_uncertainty": "Open weights linked in official article; support and minimum hardware not confirmed.",
+      "pricing_uncertainty": "No per-call price asserted; local GPU costs vary.",
+      "source_key": "cosmos",
+      "official_documentation_url": "https://huggingface.co/blog/nvidia/cosmos-interactive-world-simulation",
+      "date_checked": "2026-11-07",
+      "checked_at": "2026-11-07T14:21:33.611Z",
+      "source_links": [
+        {
+          "url": "https://huggingface.co/blog/nvidia/cosmos-interactive-world-simulation",
+          "publisher": "NVIDIA",
+          "type": "original author documentation"
+        }
+      ],
+      "existing_profile_id": null,
+      "review_status": "source_checked_pending_publisher_catalog_dedup"
+    },
+    {
+      "id": "tech-proposal:phonon31m:2026-11-07",
+      "name": "Phonon 31m",
+      "aliases": [
+        "Phonon TTS 31m"
+      ],
+      "usage_tags": [
+        "AI",
+        "SLM",
+        "TTS",
+        "On-device"
+      ],
+      "explanation": "Small English flow-matching speech synthesizer intended for offline local inference.",
+      "conditional_advantage": "May be effective when speech must work without network access or server text uploads.",
+      "best_fit_uses": [
+        "Offline narration",
+        "Embedded voice UI"
+      ],
+      "tradeoffs": [
+        "English-only in 31m variant",
+        "Voice naturalness must be evaluated on target hardware"
+      ],
+      "alternatives": [
+        "Pocket TTS",
+        "Phonon 40m",
+        "Cloud TTS"
+      ],
+      "hardware_runtime_constraints": "Author reports approximately 65 MB and phone/browser support; speed varies by hardware.",
+      "license_uncertainty": "Developer says 31m is Apache-2.0; 40m is separately non-commercial.",
+      "availability_uncertainty": "Previously released open weights, not a new Nov 5 launch.",
+      "pricing_uncertainty": "No service charge required for local 31m use; user hardware costs apply.",
+      "source_key": "phonon",
+      "official_documentation_url": "https://huggingface.co/blog/phonon-tts",
+      "date_checked": "2026-11-07",
+      "checked_at": "2026-11-07T14:21:33.611Z",
+      "source_links": [
+        {
+          "url": "https://huggingface.co/blog/phonon-tts",
+          "publisher": "Gradium",
+          "type": "original author documentation"
+        }
+      ],
+      "existing_profile_id": null,
+      "review_status": "source_checked_pending_publisher_catalog_dedup"
+    },
+    {
+      "id": "tech-proposal:dharma-field-extractor:2026-11-07",
+      "name": "Dharma Field Extractor",
+      "aliases": [
+        "DharmaAI document field extractor"
+      ],
+      "usage_tags": [
+        "AI",
+        "SLM",
+        "Vision",
+        "Document AI"
+      ],
+      "explanation": "Developer-described 2B visual model trained with a LoRA adapter for typed, nested JSON field extraction from document images.",
+      "conditional_advantage": "Potentially simpler than OCR plus general LLM when repeatedly extracting a fixed schema.",
+      "best_fit_uses": [
+        "Invoices",
+        "Forms",
+        "Document intake"
+      ],
+      "tradeoffs": [
+        "Unreplicated in-house benchmark",
+        "Document privacy handling",
+        "Needs semantic validation"
+      ],
+      "alternatives": [
+        "OCR plus LLM",
+        "Specialized document parsers"
+      ],
+      "hardware_runtime_constraints": "Authors evaluated on an L40S; minimum VRAM and edge suitability are not documented.",
+      "license_uncertainty": "No exact deployable adapter license verified.",
+      "availability_uncertainty": "Published technical report, but public checkpoint for this exact adapter not verified.",
+      "pricing_uncertainty": "Reported savings are author-modeled, not verified market pricing.",
+      "source_key": "dharma",
+      "official_documentation_url": "https://huggingface.co/blog/Dharma-AI/dharma-field-extractor",
+      "date_checked": "2026-11-07",
+      "checked_at": "2026-11-07T14:21:33.611Z",
+      "source_links": [
+        {
+          "url": "https://huggingface.co/blog/Dharma-AI/dharma-field-extractor",
+          "publisher": "Dharma-AI",
+          "type": "original author documentation"
+        }
+      ],
+      "existing_profile_id": null,
+      "review_status": "source_checked_pending_publisher_catalog_dedup"
+    },
+    {
+      "id": "tech-proposal:harnesshub-rl-lora:2026-11-07",
+      "name": "Harness Hub RL harness adapters",
+      "aliases": [
+        "Agent harness adapters",
+        "Per-harness LoRA"
+      ],
+      "usage_tags": [
+        "AI",
+        "LLM",
+        "LoRA",
+        "RL",
+        "Agents"
+      ],
+      "explanation": "Training technique and released adapters fitting a base model to the exact prompts and tools of a given coding-agent harness.",
+      "conditional_advantage": "Can improve tool-call efficiency on a stable harness without training a wholly separate full model.",
+      "best_fit_uses": [
+        "Agent RL experiments",
+        "Coding agent adaptation"
+      ],
+      "tradeoffs": [
+        "Results sensitive to task mix and harness version",
+        "Rule-based guard incomplete"
+      ],
+      "alternatives": [
+        "Generic instruction LoRA",
+        "Prompt engineering",
+        "Full RL fine-tuning"
+      ],
+      "hardware_runtime_constraints": "Depends on base-model size and chosen RL trainer; no universal VRAM floor.",
+      "license_uncertainty": "Verify checkpoint and training-code licenses separately.",
+      "availability_uncertainty": "Experimental research artifacts and source links, not a maintained managed service.",
+      "pricing_uncertainty": "Compute cost varies; no set product price stated.",
+      "source_key": "harness",
+      "related_existing_ids": [
+        "MLD-0688"
+      ],
+      "official_documentation_url": "https://huggingface.co/blog/harness-hub/harness-adapters",
+      "date_checked": "2026-11-07",
+      "checked_at": "2026-11-07T14:21:33.611Z",
+      "source_links": [
+        {
+          "url": "https://huggingface.co/blog/harness-hub/harness-adapters",
+          "publisher": "Harness Hub",
+          "type": "original author documentation"
+        }
+      ],
+      "existing_profile_id": null,
+      "review_status": "source_checked_pending_publisher_catalog_dedup"
+    }
+  ],
+  "terms": [
+    {
+      "id": "term-proposal:harness-adapter:2026-11-07",
+      "name": "Harness adapter",
+      "aliases": [
+        "Agent harness adapter",
+        "Per-harness LoRA"
+      ],
+      "usage_tags": [
+        "AI",
+        "LLM",
+        "Agents",
+        "LoRA"
+      ],
+      "definition": "A parameter-efficient model update fitted to one agent runtime's prompts, tools and execution conventions.",
+      "mechanism": "Train a LoRA adapter with task feedback while the underlying model interacts with that specific harness.",
+      "example": "Train the same base model separately for pi and opencode, then evaluate each on held-out coding tasks.",
+      "caveat": "Better performance in one harness does not imply cross-harness transfer or protection against all reward hacking.",
+      "related_existing_ids": [
+        "MLD-0688",
+        "MLD-0680"
+      ],
+      "newness": "new_to_atlas_not_claimed_newly_coined",
+      "source_key": "harness",
+      "proposed_at": "2026-11-07T14:21:33.611Z",
+      "primary_references": [
+        {
+          "url": "https://huggingface.co/blog/harness-hub/harness-adapters",
+          "publisher": "Harness Hub",
+          "type": "original research or documentation"
+        }
+      ],
+      "review_status": "source_checked_terminology_proposal_pending_publisher_dedup"
+    },
+    {
+      "id": "term-proposal:self-forcing:2026-11-07",
+      "name": "Self-forcing",
+      "aliases": [
+        "Training on model-generated history"
+      ],
+      "usage_tags": [
+        "AI",
+        "DL",
+        "Video",
+        "World Models"
+      ],
+      "definition": "Sequence-model training in which later predictions use some of the model's own generated earlier states rather than always clean reference history.",
+      "mechanism": "Run student rollouts from model-generated context while a teacher or auxiliary signal guides the student to recover from accumulating prediction errors.",
+      "example": "In interactive video simulation, predict the next video chunk from prior generated frames and current steering controls.",
+      "caveat": "Does not guarantee stable physics or solve long-range consistency by itself.",
+      "related_existing_ids": [
+        "MLD-1213",
+        "MLD-0399"
+      ],
+      "newness": "new_to_atlas_existing_research_usage",
+      "source_key": "cosmos",
+      "proposed_at": "2026-11-07T14:21:33.611Z",
+      "primary_references": [
+        {
+          "url": "https://huggingface.co/blog/nvidia/cosmos-interactive-world-simulation",
+          "publisher": "NVIDIA",
+          "type": "original research or documentation"
+        }
+      ],
+      "review_status": "source_checked_terminology_proposal_pending_publisher_dedup"
+    },
+    {
+      "id": "term-proposal:schema-directed-extraction:2026-11-07",
+      "name": "Schema-directed document field extraction",
+      "aliases": [
+        "Schema-guided extraction",
+        "Schema-conditioned extraction"
+      ],
+      "usage_tags": [
+        "AI",
+        "SLM",
+        "Vision",
+        "Information Extraction"
+      ],
+      "definition": "Extracting a user-specified set of typed fields from a document, rather than reproducing all text as OCR.",
+      "mechanism": "The model conditions on requested keys/types, reading page layout and producing corresponding JSON with nested entries and missing values where appropriate.",
+      "example": "Return invoice_number, due_date, total and an array of line_items from a document photo.",
+      "caveat": "Valid JSON can still carry wrong field values; high-stakes use requires validation.",
+      "related_existing_ids": [
+        "MLD-1179",
+        "MLD-0386"
+      ],
+      "newness": "new_to_atlas_established_method",
+      "source_key": "dharma",
+      "proposed_at": "2026-11-07T14:21:33.611Z",
+      "primary_references": [
+        {
+          "url": "https://huggingface.co/blog/Dharma-AI/dharma-field-extractor",
+          "publisher": "Dharma-AI",
+          "type": "original research or documentation"
+        }
+      ],
+      "review_status": "source_checked_terminology_proposal_pending_publisher_dedup"
+    }
+  ],
+  "corrections": []
+}
