@@ -931,7 +931,7 @@ test('Research retains a concise shared workspace label before and after enhance
   const stylesheet = read('site-chrome.css');
   assert.match(generator, /"research.html": "Research library"/);
   assert.match(html, /class="research-mobile-topbar site-mobile-chrome" aria-label="AI Updates mobile header" data-page-label="Research library"/);
-  assert.match(script, /active\?\.textContent\?\.trim\(\) \|\| chrome\.dataset\.pageLabel \|\| heading\?\.textContent/);
+  assert.match(script, /chrome\.dataset\.pageLabel \|\| active\?\.textContent\?\.trim\(\) \|\| heading\?\.textContent/);
   assert.match(stylesheet, /\.site-mobile-chrome\[data-page-label\]::before\{content:attr\(data-page-label\)\}/);
   assert.ok(!html.includes('aria-current="page">Research library</a>'), 'Research does not invent a canonical primary destination');
   assert.ok(read('downloads/Atlas_Demo_Offline.html').includes(script), 'Offline fallback reuses the exact enhanced theme script');
