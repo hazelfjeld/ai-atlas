@@ -104,7 +104,10 @@ def main():
     about = about.replace('Sixteen concept guides', str(guide_count) + ' concept guides')
     about = about.replace('The other references clearly mark their detailed expansion as pending.', f'The other references clearly mark their detailed expansion as pending. {new_count} technology profile(s) were source-reviewed and added after the original snapshot.')
     demo = ROOT / 'demo.html'
-    demo.write_bytes(re.sub(r'only \d+ guides are expanded', 'only ' + str(guide_count) + ' guides are expanded', demo.read_text(encoding='utf-8')).encode())
+    demo_text = demo.read_text(encoding='utf-8')
+    demo_text = re.sub(r'only \d+ guides are expanded', 'only ' + str(guide_count) + ' guides are expanded', demo_text)
+    demo_text = re.sub(r'\d+ now have expanded explanations', str(guide_count) + ' now have expanded explanations', demo_text)
+    demo.write_bytes(demo_text.encode())
     (ROOT / 'about.html').write_bytes(shell(*PAGES['about.html'], 'about.html', about).encode())
     # Normalize existing page headers from the shared site-chrome component.
     for route in STANDALONE_NAVS:

@@ -1460,7 +1460,10 @@ test('Guided demo inherits the actual shared navigation instead of an independen
   assert.ok(html.includes('<details class="site-mobile-chrome__nav" id="demo-mobile-nav">'));
   assert.ok(html.includes('data-page-label="Guided demo"'));
   assert.ok(html.includes('<nav class="site-chrome demo-site-chrome" aria-label="AI Updates primary navigation">'));
-  assert.ok(!html.includes('Demo navigation') && !html.includes('index.html#coverage'));
+  assert.ok(!html.includes('Demo navigation'));
+  for (const obsolete of ['index.html#coverage','index.html#alerts','index.html#papers']) {
+    assert.ok(!html.includes(obsolete),'Demo must use canonical hash routes: '+obsolete);
+  }
   const extractLinks=(source)=>{
     const raw=source.split('<div class="site-chrome__links">')[1];
     assert.ok(raw,'Missing shared desktop link list');
@@ -1478,4 +1481,7 @@ test('Guided demo inherits the actual shared navigation instead of an independen
   assert.ok(html.includes(':root[data-theme="dark"]'));
   assert.ok(html.includes('article{padding:26px;background:var(--demo-card)'));
   assert.ok(html.includes('<a class="go" href="terms/MLD-0691-machine-learning.html">'));
+  assert.ok(html.includes('index.html#/papers?q=reward'));
+  assert.ok(html.includes('index.html#/safety'));
+  assert.ok(read('scripts/build_seo.py').includes("str(guide_count) + ' now have expanded explanations'"));
 });
