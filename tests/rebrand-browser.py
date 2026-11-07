@@ -254,7 +254,7 @@ with sync_playwright() as p:
         ('technology/index.html', 'main.term-shell > header.hero .eyebrow'),
         ('technologies.html', '.tech-shell > section.tech-hero .eyebrow'),
         ('playbooks.html', '.playbook-shell > section.playbook-hero .eyebrow'),
-        ('whats-new.html', '.shell > main > header .eyebrow'),
+        ('whats-new.html', '.shell > main > header > div:first-child > .eyebrow'),
     )
     for width, height in ((768, 900), (1280, 900)):
         page.set_viewport_size({'width':width,'height':height})
