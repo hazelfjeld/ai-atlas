@@ -80,6 +80,26 @@ with sync_playwright() as p:
                   page.url.endswith('index.html#/overview')
                   and page.locator('main h1').first.inner_text() == 'Discover')
 
+    # These desktop workspace labels were previously the generic "AI Updates"
+    # until hydration; compare first paint with JavaScript disabled at 768px.
+    page.set_viewport_size({'width': 768, 'height': 900})
+    for route, expected in (
+        ('about.html', 'About'),
+        ('research.html', 'Research library'),
+        ('catalog-review.html', 'What’s New Today'),
+        ('hardware-review.html', 'What’s New Today'),
+        ('games.html', 'Games'),
+        ('technologies.html', 'Technology profiles'),
+        ('playbooks.html', 'Playbooks'),
+        ('whats-new.html', 'What’s New Today'),
+    ):
+        page.goto(base + route)
+        header = page.locator('.site-mobile-chrome')
+        check(f'{route} no-JS desktop title matches shared navigation',
+              header.get_attribute('data-page-label') == expected
+              and expected in header.evaluate("el => getComputedStyle(el,'::before').content")
+              and page.locator('.site-chrome__links a').count() == 7)
+
     static.close()
     context=browser.new_context(viewport={'width':1440,'height':1050},reduced_motion='reduce')
     page=context.new_page()

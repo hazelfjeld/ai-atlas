@@ -892,7 +892,7 @@ test('Research retains a concise shared workspace label before and after enhance
   const html = read('research.html');
   const script = read('site-theme.js');
   const stylesheet = read('site-chrome.css');
-  assert.match(generator, /page_label="Research library" if path == "research.html" else None/);
+  assert.match(generator, /page_label="Research library" if path == "research.html" else selected/);
   assert.match(html, /class="research-mobile-topbar site-mobile-chrome" aria-label="AI Updates mobile header" data-page-label="Research library"/);
   assert.match(script, /active\?\.textContent\?\.trim\(\) \|\| chrome\.dataset\.pageLabel \|\| heading\?\.textContent/);
   assert.match(stylesheet, /\.site-mobile-chrome\[data-page-label\]::before\{content:attr\(data-page-label\)\}/);
@@ -966,4 +966,31 @@ test('all page families share the real Discover wordmark before JavaScript', () 
   }
   assert.match(read('scripts/build_seo.py'), /mobile_brand=True/);
   assert.match(read('scripts/build_term_pages.py'), /mobile_brand=True/);
+});
+
+test('shared workspace topbar has the correct no-script section label on every standalone family', () => {
+  const source = read('scripts/site_chrome.py');
+  const seo = read('scripts/build_seo.py');
+  const stylesheet = read('site-chrome.css');
+  assert.match(source, /page_label="Research library" if path == "research.html" else selected/);
+  assert.ok(seo.includes("render_directory_nav(prefix, 'About', mobile_brand=True, page_label='About')"));
+  assert.ok(stylesheet.includes('.site-mobile-chrome[data-page-label]::before{content:attr(data-page-label)}'));
+  const labels = {
+    'about.html': 'About',
+    'research.html': 'Research library',
+    'catalog-review.html': 'What’s New Today',
+    'hardware-review.html': 'What’s New Today',
+    'games.html': 'Games',
+    'technologies.html': 'Technology profiles',
+    'playbooks.html': 'Playbooks',
+    'whats-new.html': 'What’s New Today',
+  };
+  for (const [route, label] of Object.entries(labels)) {
+    const html = read(route);
+    const headers = [...html.matchAll(/<div class="[^"]*site-mobile-chrome[^"]*"[^>]*>/g)];
+    assert.equal(headers.length, 1, route + ': exactly one shared workspace header');
+    assert.ok(headers[0][0].includes(' data-page-label="' + label + '"'), route + ': no-script title');
+    assert.equal((headers[0][0].match(/data-page-label=/g) || []).length, 1, route);
+    assert.equal((html.match(/class="site-chrome__links"/g) || []).length, 1, route);
+  }
 });
