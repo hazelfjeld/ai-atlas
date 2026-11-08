@@ -602,6 +602,28 @@ body:has(.site-chrome) :is(.tech-controls,.playbook-tools,.controls,.search-cont
 }
 /* atlas-mobile-sticky-frame:end */
 
+/* atlas-mobile-chrome-rhythm:begin */
+/* Discover's real 68px mobile topbar is the reference for the shared native
+   menu/search row. Legacy standalone templates used 14px block padding,
+   producing a visibly taller 73px header on every cross-page transition.
+   Share one compact rhythm, retaining their existing horizontal gutters.
+   Games already supplies the padding in its containing header: do not stack
+   another 24px around its real menu/search controls. */
+@media(max-width:650px){
+  body:has(.site-chrome) .site-mobile-chrome:not(.discover-mobile-chrome){
+    min-height:68px;
+    padding-block:12px!important;
+    border-bottom:1px solid var(--line,#dce1d7);
+  }
+  body:has(.site-chrome) .games-header .site-mobile-chrome{
+    min-height:44px;
+    padding-block:0!important;
+    border-bottom:0;
+  }
+}
+/* atlas-mobile-chrome-rhythm:end */
+
+
 /* atlas-shared-headlines:begin */
 /* Existing standalone editorial headlines already use Discover's component.
    Align generated concept/technology articles and A-Z directories with it,

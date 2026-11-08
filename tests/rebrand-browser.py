@@ -1468,6 +1468,41 @@ with sync_playwright() as p:
                 if width == 390 and theme == 'dark':
                     page.screenshot(path=str(out / f'editorial-card-{route}-390-dark.png'))
 
+
+    # Discover is the source for the shared 68px mobile menu/search bar.
+    # Measure actual rendered frames while crossing distinct site families,
+    # not just checking duplicated CSS declarations or one page alone.
+    for width in (320, 390):
+        page.set_viewport_size({'width':width,'height':844})
+        for theme in ('light', 'dark'):
+            baseline=None
+            for route, selector in (
+                ('index.html','.topbar'),
+                ('terms/index.html','.site-mobile-chrome'),
+                ('technology/index.html','.site-mobile-chrome'),
+                ('whats-new.html','.site-mobile-chrome'),
+                ('playbooks.html','.site-mobile-chrome'),
+                ('research.html','.site-mobile-chrome'),
+                ('about.html','.site-mobile-chrome'),
+                ('games.html','.games-header__inner'),
+            ):
+                page.goto(base+route)
+                page.evaluate('(t)=>localStorage.setItem("atlas.theme",t)',theme)
+                page.reload()
+                box=page.locator(selector).first
+                box.wait_for(state='visible',timeout=10000)
+                metrics=box.evaluate("""el=>({
+                    height:el.getBoundingClientRect().height,
+                    overflow:document.documentElement.scrollWidth>innerWidth,
+                    theme:document.documentElement.dataset.theme
+                })""")
+                if baseline is None: baseline=metrics['height']
+                check(f'{route} {width}px {theme} shared mobile header frame',
+                      abs(metrics['height']-baseline)<=2.5 and
+                      not metrics['overflow'] and metrics['theme']==theme)
+                if width==390 and theme=='dark' and route in ('index.html','whats-new.html','terms/index.html','games.html'):
+                    page.screenshot(path=str(out / f'mobile-frame-{route.replace("/", "-")}-390-dark.png'))
+
     check('no application runtime exceptions',not errors)
     browser.close()
 (out/'results.json').write_text(json.dumps({'checks_passed':len(checks),'checks':checks,'base':base},indent=2))

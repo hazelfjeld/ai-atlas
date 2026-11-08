@@ -61,3 +61,22 @@ test('generated concept and technology article headlines reuse Discover typograp
   const offline=fs.readFileSync(path.join(__dirname, '..', 'downloads/Atlas_Demo_Offline.html'), 'utf8');
   assert.ok(offline.includes(css), 'Offline fallback must embed the exact shared CSS');
 });
+
+test('native mobile header shares Discover height across directories, news, editorials and Games', () => {
+  const block = css.split('/* atlas-mobile-chrome-rhythm:begin */')[1]
+    ?.split('/* atlas-mobile-chrome-rhythm:end */')[0];
+  assert.ok(block, 'Shared native mobile header rhythm missing');
+  assert.match(block, /@media\(max-width:650px\)/);
+  assert.ok(block.includes('.site-mobile-chrome:not(.discover-mobile-chrome)'));
+  assert.ok(block.includes('padding-block:12px!important'));
+  assert.ok(block.includes('min-height:68px'));
+  assert.ok(block.includes('.games-header .site-mobile-chrome') && block.includes('padding-block:0!important'),
+    'Do not duplicate Games containing-header padding');
+  for (const route of ['terms/index.html','technology/index.html','whats-new.html',
+                       'research.html','playbooks.html','games.html','about.html']) {
+    const html = fs.readFileSync(path.join(__dirname, '..', route), 'utf8');
+    assert.match(html, /class="[^"]*site-mobile-chrome/);
+  }
+  const offline = fs.readFileSync(path.join(__dirname,'..','downloads/Atlas_Demo_Offline.html'),'utf8');
+  assert.ok(offline.includes(css),'Offline workspace must carry exact shared styling');
+});
