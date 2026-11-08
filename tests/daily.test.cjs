@@ -7,6 +7,12 @@ function verifiedPublicationClock(){
  const receipts=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8')).receipts;
  return [...receipts].reverse().find(r=>r.production_verified_at)?.production_verified_at || null;
 }
+function assertBatchReceipts(ledger){
+ const ids=ledger.receipts.map(r=>r.batch_id);
+ assert.equal(new Set(ids).size,ids.length,'No duplicate immutable collector batch');
+ for(const id of ['atlas-daily-20261102-first-0850ct-a','atlas-daily-20261103-0824ct-recovery-a','atlas-daily-20261107-recovery-20261107T142133z','atlas-daily-20261108-0817ct-bounded-recovery-a'])
+  assert.ok(ids.includes(id),'Historical or new publication receipt missing: '+id);
+}
 function index(entries=[]){return {schema:1,timezone:'America/Chicago',editions:entries,last_successful_publish_at:null};}
 const entry=(date,revision=1)=>({date,revision,path:'data/daily/editions/'+date+'-v'+revision+'.json',sha256:'a'.repeat(64),bytes:900,published_at:date+'T15:00:00Z'});
 function edition(){
@@ -489,7 +495,7 @@ test('Revision 9 indexes only the accessible sidebar update, preserving immutabl
  for(const kind of ['news','technologies','terms','corrections'])assert.equal(diff[kind].added.length+diff[kind].updated.length+diff[kind].removed.length,0);
  assert.match(after.site_changes.at(-1).summary,/not a new real-world AI event/i);
  const ledger=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8'));
- assert.equal(ledger.receipts.length,3,'Retain both historical batch receipts alongside the new Nov 7 receipt');
+ assertBatchReceipts(ledger);
  assert.ok(ledger.receipts[0].publication_history.some(h=>h.edition==='2026-11-02-v9'));
  assert.equal(ledger.receipts[0].publication_edition,ledger.receipts[0].publication_history.at(-1).edition);
  assert.equal(ledger.receipts[0].deferred_catalog_proposal_ids.length,5);
@@ -1209,7 +1215,7 @@ test('Source-reviewed November 3 daily edition is immutable, deduplicated, dated
  assert.ok(today.news.some(n=>/prototype_results_unreplicated/.test(n.review_status)));
  assert.equal(idx.last_successful_publish_at,verifiedPublicationClock(),'Last successful publication must match latest independently verified batch');
  const ledger=JSON.parse(fs.readFileSync(path.join(root,'data/daily/published-batches.json'),'utf8'));
- assert.equal(ledger.receipts.length,3);
+ assertBatchReceipts(ledger);
  const receipt=ledger.receipts[1];
  assert.equal(receipt.batch_id,'atlas-daily-20261103-0824ct-recovery-a');
  assert.equal(receipt.source_batch_sha256,'f6d155caec1fda714b8fdd456ec47cc886dd10856159b65b9745c69d64b9adb3');
@@ -1336,7 +1342,7 @@ test('Immutable November 3 revision 4 indexes two previously verified guides and
  assert.equal(D.safeCatalogPath('whats-new.html'),'whats-new.html');
  for(const bad of ['whats-new.html?evil=1','../whats-new.html','whats-new.html#unsafe'])assert.equal(D.safeCatalogPath(bad),'');
  const ledger=JSON.parse(fs.readFileSync(path.join(root,'data/daily/published-batches.json'),'utf8'));
- assert.equal(ledger.receipts.length,3);
+ assertBatchReceipts(ledger);
  const receipt=ledger.receipts.find(r=>r.batch_id==='atlas-daily-20261103-0824ct-recovery-a');
  assert.equal(receipt.publication_edition,'2026-11-03-v6');
  assert.equal(receipt.publication_history.at(-1).edition,'2026-11-03-v6');
@@ -1473,7 +1479,7 @@ test('November 3 v5 verification receipts retain historical v4 proof and source 
  assert.equal(arch.date,'2026-11-03');
  assert.equal(arch.revision,6);
  assert.equal(receipt.publication_edition,'2026-11-03-v6');
- assert.equal(idx.status,'edition_revision_1_production_verified');
+ assert.ok(idx.editions.some(e=>e.date==='2026-11-07'&&e.revision===1),'Verified November 7 archive remains indexed');
  assert.equal(receipt.production_verified_at,'2026-11-04T03:35:50Z','Historical November 3 verification timestamp is unchanged');
  assert.equal(idx.last_successful_publish_at,verifiedPublicationClock());
  assert.equal(receipt.production_commit,'e549b579d413e717e4784ed942a20ad4c06529bc');
@@ -1532,7 +1538,7 @@ test('Verified v6 preserves collector provenance and records actual production p
  const ledger=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8'));
  const idx=JSON.parse(fs.readFileSync('data/daily/index.json','utf8'));
  const receipt=ledger.receipts.find(r=>r.batch_id==='atlas-daily-20261103-0824ct-recovery-a');
- assert.equal(ledger.receipts.length,3,'No duplicate immutable collector batch');
+ assertBatchReceipts(ledger);
  assert.equal(receipt.source_batch_sha256,'f6d155caec1fda714b8fdd456ec47cc886dd10856159b65b9745c69d64b9adb3');
  assert.equal(receipt.source_commit,'9a2d9a0f21551737b041a49e398ebf08793272ae');
  assert.equal(receipt.publication_edition,'2026-11-03-v6');
@@ -1570,7 +1576,7 @@ test('Failed archive selection explains rollback beside the picker without steal
 test('November 7 publisher reviews eleven source-dated catch-up reports without inventing catalog entries',()=>{
  const crypto=require('node:crypto'); const ledger=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8'));
  const idx=JSON.parse(fs.readFileSync('data/daily/index.json','utf8'));
- assert.equal(ledger.receipts.length,3);
+ assertBatchReceipts(ledger);
  const r=ledger.receipts.find(x=>x.batch_id==='atlas-daily-20261107-recovery-20261107T142133z');
  assert.ok(r,'durable batch receipt');assert.equal(r.source_batch_sha256,'9560ee475c10351e4ff0b64de236a320d084383685e52d92ff67bc61d4899f2b');
  assert.equal(r.source_batch_bytes,37216);assert.equal(r.accepted_news_ids.length,11);
@@ -1589,7 +1595,7 @@ test('November 7 publisher reviews eleven source-dated catch-up reports without 
  assert.deepEqual(e.news.map(x=>x.id),r.accepted_news_ids);
  assert.ok(idx.editions.some(x=>x.date==='2026-11-03'&&x.revision===6),'historical edition retained');
  assert.ok(ledger.receipts.some(x=>x.batch_id==='atlas-daily-20261103-0824ct-recovery-a'),'older receipt retained');
- assert.equal(idx.status,'edition_revision_1_production_verified');
+ assert.ok(idx.editions.some(e=>e.date==='2026-11-07'&&e.revision===1),'Verified November 7 archive remains indexed');
  assert.equal(r.production_verified_at,'2026-11-07T14:57:55Z','November 7 verification requires a completed public run');
  assert.equal(r.production_verified_revision,1);
  assert.equal(r.publication_history.at(-1).status,'cloudflare_http_browser_and_githack_verified');
