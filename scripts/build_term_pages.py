@@ -33,14 +33,14 @@ def section(title, body, extra=''):
     return f'<section class="detail-block {extra}"><h2>{e(title)}</h2>{body}</section>'
 
 
-def shell(title, body, path, description, structured=None):
+def shell(title, body, path, description, structured=None, *, native_concept_article=False):
     # Native concept detail URLs share the same script-free header source as
     # the Concept and Technology directories. Never modify article content.
     directory_nav = render_directory_nav('../', 'Concept dictionary', mobile_brand=True)
     directory_css = DIRECTORY_MOBILE_CSS
     directory_assets = '<link rel="stylesheet" href="../site-chrome.css"><script src="../site-theme.js"></script>'
     heading_css = '' if path == 'terms/index.html' else '.term-shell h1{font-size:clamp(32px,6vw,58px)}'
-    body, main_id = native_directory_article_skip(body, path)
+    body, main_id = native_directory_article_skip(body, path, native_concept_article=native_concept_article)
     return f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 {metadata(title + ' | AI Updates', description, path, structured)}
@@ -85,7 +85,7 @@ def main():
         body += f'<p><a href="../index.html#/dictionary?record={quote(r["id"])}">Open original record, export or annotate →</a></p>'
         path = term_path(r)
         structured = [{'@context':'https://schema.org', '@type':'DefinedTerm', '@id':absolute(path)+'#term', 'name':r['term'], 'termCode':r['id'], 'description':r['definition'], 'url':absolute(path), 'inDefinedTermSet':{'@type':'DefinedTermSet', 'name':'AI Updates Concept Dictionary', 'url':absolute('terms/index.html')}}, breadcrumbs([('AI Updates','index.html'), ('Concept dictionary','terms/index.html'), (r['term'],path)])]
-        blob = shell(r['term'], body, path, (r['term'] + ': ' + r['definition'])[:170], structured).encode('utf-8')
+        blob = shell(r['term'], body, path, (r['term'] + ': ' + r['definition'])[:170], structured, native_concept_article=bool(guide)).encode('utf-8')
         (ROOT / path).write_bytes(blob)
         manifest[r['id']] = {'path': path, 'sha256': hashlib.sha256(blob).hexdigest(), 'expanded': bool(guide)}
     (out / 'manifest.json').write_bytes((json.dumps(manifest, indent=2) + '\n').encode())

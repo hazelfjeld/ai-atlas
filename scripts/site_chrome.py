@@ -25,17 +25,19 @@ def render_primary_links(prefix, selected, current_kind="page"):
         for route, name in DESTINATIONS
     )
 
-def native_directory_article_skip(body, path):
+def native_directory_article_skip(body, path, *, native_concept_article=False):
     """Put native skip focus on directory content, not the shared navigation.
 
     Both A–Z directories and individual technology profiles now reach the
-    article with JavaScript disabled. Concept detail pages retain their old
-    fallback until that separate generated family receives the same migration.
+    article with JavaScript disabled. Expanded concept guides use the same native article target. Remaining
+    reference-depth concept pages retain their fallback until migrated.
     Keep the main landmark and place the fragment ID on the real hero.
     """
     is_directory = path in ("terms/index.html", "technology/index.html")
     is_technology_detail = path.startswith("technology/TECH-") and path.endswith(".html")
-    if not (is_directory or is_technology_detail):
+    is_concept_detail = path.startswith("terms/MLD-") and path.endswith(".html")
+    if not (is_directory or is_technology_detail or
+            (native_concept_article and is_concept_detail)):
         return body, ' id="main"'
     heading = '<header class="hero">'
     assert body.count(heading) == 1, 'Missing or repeated article hero: ' + path

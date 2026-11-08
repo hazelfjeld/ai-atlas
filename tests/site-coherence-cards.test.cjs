@@ -150,3 +150,24 @@ test('script-free daily archive and catalog review skip links focus the editoria
     assert.match(html, /<header id="main" tabindex="-1">[\s\S]*?<h1[\s>]/);
   }
 });
+
+
+test('all expanded concept guides use the technology-profile native article skip, without duplicating navigation', () => {
+  const manifest = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'terms/manifest.json'), 'utf8'));
+  const publication = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'publication.json'), 'utf8'));
+  const entries = Object.values(manifest).filter(entry => entry.expanded);
+  assert.equal(Object.keys(manifest).length, publication.published_counts.terms);
+  assert.equal(entries.length, publication.encyclopedia.detailed_page_count);
+  for (const entry of entries) {
+    const html = fs.readFileSync(path.join(__dirname, '..', entry.path), 'utf8');
+    assert.match(html, /<a class="skip" href="#main">/, entry.path);
+    assert.match(html, /<main class="term-shell">/, entry.path);
+    assert.doesNotMatch(html, /<main class="term-shell" id="main"/, entry.path);
+    assert.match(html, /<header class="hero" id="main" tabindex="-1"><p class="eyebrow">/, entry.path);
+    assert.equal((html.match(/id="main"/g) || []).length, 1, entry.path);
+    assert.ok(html.indexOf('<nav class="site-chrome term-nav"') <
+              html.indexOf('<header class="hero" id="main" tabindex="-1">'), entry.path);
+    assert.equal((html.match(/aria-label="AI Updates primary navigation"/g) || []).length, 1,
+                 entry.path + ' must not duplicate desktop navigation');
+  }
+});

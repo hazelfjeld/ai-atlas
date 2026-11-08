@@ -254,6 +254,32 @@ with sync_playwright() as p:
                       page.evaluate("""() => !document.activeElement.closest('.site-chrome,.site-mobile-chrome')"""))
                 if width == 390 and theme == 'dark' and route in ('about.html','research.html'):
                     page.screenshot(path=str(out / f'native-skip-{route}-390-dark.png'))
+
+    # Expanded concept guides now place #main on their actual hero, as native
+    # technology profiles do. This context has JavaScript disabled, so skip
+    # navigation cannot be repaired by client-side hydration.
+    for width in (320, 390, 768, 1280):
+        page.set_viewport_size({'width': width, 'height': 844 if width <= 650 else 900})
+        for theme in ('light', 'dark'):
+            page.emulate_media(color_scheme=theme)
+            for route in ('terms/MLD-0002-ablation-study.html',
+                          'terms/MLD-0691-machine-learning.html'):
+                page.goto(base + route)
+                check(f'{route} {width}px {theme} article skip target follows the shared rail',
+                      page.locator('main.term-shell:not([id]) > header.hero#main[tabindex="-1"]').count() == 1
+                      and page.locator('.site-chrome__links a').count() == 7)
+                page.locator('a.skip').focus()
+                page.keyboard.press('Enter')
+                check(f'{route} {width}px {theme} no-JS skip focuses the article',
+                      page.evaluate("""() => location.hash === '#main' &&
+                          document.activeElement === document.querySelector('main.term-shell > header.hero#main')"""))
+                page.keyboard.press('Tab')
+                check(f'{route} {width}px {theme} next Tab bypasses shared navigation',
+                      page.evaluate("""() => !document.activeElement.closest('.site-chrome,.site-mobile-chrome')"""))
+                if width == 390 and theme == 'dark':
+                    page.screenshot(path=str(out / f'native-concept-guide-{route.replace("/", "-")}-390-dark.png'))
+    page.emulate_media(color_scheme='light')
+
     # Profile destinations must work natively, without a hydration script.
     for width in (390, 1280):
         page.set_viewport_size({'width':width, 'height':844 if width <= 650 else 900})
