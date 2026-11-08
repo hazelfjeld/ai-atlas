@@ -11,7 +11,7 @@ import subprocess
 from xml.etree.ElementTree import Element, SubElement, tostring
 from site_seo import absolute, metadata, breadcrumbs, replace_head, technology_path, ORIGIN
 from build_term_pages import rows, term_path, external
-from site_chrome import render_directory_nav, DIRECTORY_MOBILE_CSS, STANDALONE_NAVS, normalize_standalone_chrome, normalize_discover_sidebar, sync_desktop_rail_icons_css, ensure_skip_destination_focusable
+from site_chrome import render_directory_nav, DIRECTORY_MOBILE_CSS, STANDALONE_NAVS, normalize_standalone_chrome, normalize_discover_sidebar, sync_desktop_rail_icons_css, ensure_skip_destination_focusable, native_directory_article_skip
 
 ROOT = Path(__file__).resolve().parents[1]
 PAGES = {
@@ -41,12 +41,13 @@ def shell(title, description, path, body, structured=None):
     # typography unchanged for the 303 existing technology profiles.
     heading_rule = '' if path == 'about.html' else '.term-shell h1{font:400 clamp(34px,6vw,58px)/1.12 Georgia,serif;letter-spacing:-.04em}'
     eyebrow_rule = '' if path == 'about.html' else '.term-shell .hero .eyebrow{font:600 11px/1.6 system-ui,sans-serif}'
+    body, main_id = native_directory_article_skip(body, path)
     return f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 {metadata(title, description, path, structured)}
 <link rel="stylesheet" href="{prefix}checkpoint.css"><link rel="stylesheet" href="{prefix}brand.css">
 <style>.term-shell{{max-width:1000px;margin:auto;padding:32px 24px 70px}}.term-nav{{display:flex;flex-wrap:wrap;gap:18px;font-size:13px}}{heading_rule}.term-shell h2{{font-size:22px}}.term-shell p,.term-shell li{{font-size:15px;line-height:1.8}}.term-shell .hero{{margin:38px 0 24px}}{eyebrow_rule}.term-shell .lead{{margin-top:18px}}{mobile_css}@media print{{.term-nav{print_nav},.skip{{display:none}}.term-shell{{padding:0}}}}</style>
-{chrome_css}{theme_script}</head><body><a class="skip" href="#main">Skip to content</a><main class="term-shell" id="main">{desktop_nav}{body}<footer>AI Updates is a curated learning and research project. Imported evidence labels are preserved. <a href="{prefix}about.html">Editorial policy & coverage</a> · <a href="{prefix}index.html#/sources">Source registers & downloads</a></footer></main></body></html>'''
+{chrome_css}{theme_script}</head><body><a class="skip" href="#main">Skip to content</a><main class="term-shell"{main_id}>{desktop_nav}{body}<footer>AI Updates is a curated learning and research project. Imported evidence labels are preserved. <a href="{prefix}about.html">Editorial policy & coverage</a> · <a href="{prefix}index.html#/sources">Source registers & downloads</a></footer></main></body></html>'''
 
 
 def main():

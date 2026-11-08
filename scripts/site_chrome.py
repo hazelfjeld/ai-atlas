@@ -25,6 +25,19 @@ def render_primary_links(prefix, selected, current_kind="page"):
         for route, name in DESTINATIONS
     )
 
+def native_directory_article_skip(body, path):
+    """Put native skip focus on directory content, not the shared navigation.
+
+    Only the two A–Z index pages move #main. Detailed reference pages retain
+    their existing landmark and progressively enhanced article skip behavior.
+    Both generators use this same helper to avoid divergent templates.
+    """
+    if path not in ("terms/index.html", "technology/index.html"):
+        return body, ' id="main"'
+    heading = '<header class="hero">'
+    assert body.startswith(heading), 'Directory must start with the article heading: ' + path
+    return body.replace(heading, '<header class="hero" id="main" tabindex="-1">', 1), ''
+
 def render_brand(prefix, classes="site-chrome__brand"):
     """Reusable real SVG wordmark for desktop and native mobile navigation."""
     return (

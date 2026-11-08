@@ -398,7 +398,7 @@ test('About reuses the exact generated catalog navigation, not a parallel templa
   const built = read('scripts/build_seo.py');
   const main = '<main class="term-shell" id="main" tabindex="-1">';
   const ours = about.split(main)[1].split('<header class="hero">')[0];
-  const template = read('terms/index.html').split('<main class="term-shell" id="main">')[1].split('<header class="hero">')[0];
+  const template = read('terms/index.html').split('<main class="term-shell">')[1].split('<header class="hero" id="main" tabindex="-1">')[0];
   const expected = template.replaceAll('href="../','href="')
     .replace('<div class="directory-mobile-topbar site-mobile-chrome" aria-label="AI Updates mobile header">', '<div class="directory-mobile-topbar site-mobile-chrome" aria-label="AI Updates mobile header" data-page-label="About">')
     .replaceAll('href="index.html#/dictionary" aria-current="page">Concept dictionary','href="index.html#/dictionary">Concept dictionary')
@@ -499,7 +499,7 @@ test('all generated technology profiles use shared directory chrome with native 
   assert.ok(concept.includes('<script src="../site-theme.js"></script>'));
   assert.doesNotMatch(concept, /<nav class="term-nav" aria-label="Site navigation">/);
   const prefix = '<main class="term-shell" id="main">';
-  const directory = read('technology/index.html').split(prefix)[1].split('<header class="hero">')[0];
+  const directory = read('technology/index.html').split('<main class="term-shell">')[1].split('<header class="hero" id="main" tabindex="-1">')[0];
   assert.equal((directory.match(/class="site-mobile-chrome__brand"/g)||[]).length,1);
   // Detail and directory pages must share the same eight-link drawer:
   // one real home wordmark and seven unchanged section links.
@@ -527,7 +527,7 @@ test('all generated technology profiles use shared directory chrome with native 
 
 test('all 1345 concept detail pages reuse the native seven-section shared navigation', () => {
   const prefix = '<main class="term-shell" id="main">';
-  const dictionaryNav = read('terms/index.html').split(prefix)[1].split('<header class="hero">')[0];
+  const dictionaryNav = read('terms/index.html').split('<main class="term-shell">')[1].split('<header class="hero" id="main" tabindex="-1">')[0];
   assert.equal((dictionaryNav.match(/class="site-mobile-chrome__brand"/g)||[]).length,1);
   const detailNav = dictionaryNav;
   const manifest = JSON.parse(read('terms/manifest.json'));
@@ -1556,12 +1556,22 @@ test('generated dictionary and technology skip links target article content afte
   assert.ok(theme.includes("hero.setAttribute('tabindex', '-1');"));
   assert.ok(css.includes('html:has(.site-chrome){scroll-padding-top:96px}'));
   assert.ok(!css.includes('scroll-margin-top:96px'), 'root offset must not double-stack with article scroll margins');
-  for (const route of ['terms/index.html', 'technology/index.html',
-    'terms/MLD-0691-machine-learning.html', 'technology/TECH-0216-pytorch.html']) {
-    const html=read(route);
+  const helper = read('scripts/site_chrome.py');
+  assert.ok(helper.includes('def native_directory_article_skip(body, path):'));
+  for (const generator of ['scripts/build_term_pages.py', 'scripts/build_seo.py'])
+    assert.ok(read(generator).includes('native_directory_article_skip(body, path)'));
+  for (const route of ['terms/index.html', 'technology/index.html']) {
+    const html = read(route);
     assert.ok(html.includes('<a class="skip" href="#main">'), route+' preserves native skip');
-    assert.ok(html.includes('<main class="term-shell" id="main">'), route+' no-JS fallback');
-    assert.ok(html.includes('<header class="hero">'), route+' has one article start');
+    assert.ok(html.includes('<main class="term-shell">'), route+' retains main landmark');
+    assert.ok(html.includes('<header class="hero" id="main" tabindex="-1">'),
+      route+' skips the shared rail even with JavaScript disabled');
+    assert.equal((html.match(/id="main"/g) || []).length, 1, route+' unique skip target');
+  }
+  for (const route of ['terms/MLD-0691-machine-learning.html', 'technology/TECH-0216-pytorch.html']) {
+    const html = read(route);
+    assert.ok(html.includes('<main class="term-shell" id="main">'), route+' retains existing no-JS fallback');
+    assert.ok(html.includes('<header class="hero">'), route+' retains progressive-enhancement target');
   }
   const offline = read('downloads/Atlas_Demo_Offline.html');
   assert.ok(offline.includes(theme) && offline.includes(css),

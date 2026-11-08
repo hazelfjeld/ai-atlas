@@ -1609,13 +1609,16 @@ with sync_playwright() as p:
     for width in (390, 1280):
         skip_page.set_viewport_size({'width':width, 'height':844})
         for route, destination in [('about.html', 'main'), ('research.html', 'main'),
-                                    ('demo.html', 'quick-tour')]:
+                                    ('demo.html', 'quick-tour'), ('terms/index.html', 'main'),
+                                    ('technology/index.html', 'main')]:
             skip_page.goto(base + route)
             skip_page.locator('a.skip').focus()
             skip_page.keyboard.press('Enter')
             check('native skip focuses content: ' + route + ' at ' + str(width),
                   skip_page.evaluate('document.activeElement.id') == destination
-                  and skip_page.evaluate('window.location.hash') == '#' + destination)
+                  and skip_page.evaluate('window.location.hash') == '#' + destination
+                  and (route not in ('terms/index.html', 'technology/index.html')
+                       or skip_page.evaluate('document.activeElement.tagName') == 'HEADER'))
     skip_ctx.close()
     check('no application runtime exceptions', not errors)
     browser.close()
