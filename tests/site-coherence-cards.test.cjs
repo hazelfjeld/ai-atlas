@@ -80,3 +80,27 @@ test('native mobile header shares Discover height across directories, news, edit
   const offline = fs.readFileSync(path.join(__dirname,'..','downloads/Atlas_Demo_Offline.html'),'utf8');
   assert.ok(offline.includes(css),'Offline workspace must carry exact shared styling');
 });
+
+test('Discover first paint keeps its useful content stable without perpetual loading', () => {
+  const home = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+  const app = fs.readFileSync(path.join(__dirname, '..', 'app.js'), 'utf8');
+  const theme = fs.readFileSync(path.join(__dirname, '..', 'site-theme.js'), 'utf8');
+  const block = css.split('/* atlas-discover-first-paint:begin */')[1]
+    ?.split('/* atlas-discover-first-paint:end */')[0];
+  assert.ok(block, 'Missing shared first-paint correction');
+  assert.match(home, /id="catalog-loading" class="catalog-loading" role="status"/,
+    'Preserve the hydration sentinel for readiness tests and assistive technology');
+  assert.match(home, /<div id="page"><!-- discovery:start -->/,
+    'Preserve the server-rendered Discover preview');
+  assert.ok(block.includes('#catalog-loading{display:none}'),
+    'Without JavaScript, never present a perpetual loading notice');
+  assert.ok(block.includes('html.atlas-enhanced #catalog-loading') &&
+    block.includes('position:absolute') && block.includes('clip-path:inset(50%)'),
+    'Scripted status must announce loading without moving the article');
+  assert.ok(theme.includes("classList?.add('atlas-enhanced')"),
+    'Only enhanced pages announce pending catalog loading');
+  assert.ok(app.includes("document.getElementById('catalog-loading').remove()"),
+    'Remove the status when catalog hydration succeeds');
+  const offline = fs.readFileSync(path.join(__dirname, '..', 'downloads/Atlas_Demo_Offline.html'), 'utf8');
+  assert.ok(offline.includes(css), 'Offline demo must embed the exact shared stylesheet');
+});

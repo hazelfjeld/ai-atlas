@@ -661,3 +661,16 @@ body:has(.site-chrome) :is(.tech-controls,.playbook-tools,.controls,.search-cont
 .playbook-shell .playbook > p,
 .playbook-shell .playbook .tech-list{color:var(--muted)}
 /* atlas-editorial-card-copy:end */
+
+/* atlas-discover-first-paint:begin */
+/* Discover already renders six useful cards before data hydration.
+   Keep the accessible status in the DOM for scripted readers and browser
+   readiness checks, but let the article retain its position on first paint.
+   Without JavaScript, the pending status must not persist indefinitely. */
+#catalog-loading{display:none}
+html.atlas-enhanced #catalog-loading{
+ display:block;position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+ border:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);
+ white-space:nowrap
+}
+/* atlas-discover-first-paint:end */

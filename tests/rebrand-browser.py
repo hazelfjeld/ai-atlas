@@ -26,6 +26,22 @@ with sync_playwright() as p:
     page=static.new_page()
     page.goto(base)
     check('discovery content is readable without JavaScript', page.locator('h1').inner_text()=='Discover' and page.locator('.discovery-card').count()==6)
+    # Discover ships real article cards in HTML; pending catalog status must
+    # never cause a visible first-paint shift or mislead script-free readers.
+    for width in (320, 390, 768, 1280):
+        page.set_viewport_size({'width':width,'height':844 if width<=650 else 900})
+        for theme in ('light','dark'):
+            page.emulate_media(color_scheme=theme)
+            page.goto(base)
+            check(f'Discover {width}px {theme} static first paint has no loading layout shift',
+                  page.locator('#catalog-loading').count()==1
+                  and not page.locator('#catalog-loading').is_visible()
+                  and page.locator('.discover-heading h1').is_visible()
+                  and page.locator('.discovery-card').count()==6)
+            if width==390 and theme=='dark':
+                page.screenshot(path=str(out/'discover-firstpaint-nojs-390-dark.png'))
+    page.emulate_media(color_scheme='light')
+    page.set_viewport_size({'width':1280,'height':900})
     initial_nav=page.locator('#navigation a.nav-link').evaluate_all(
         "(els)=>els.map(a=>[a.getAttribute('href'),a.textContent.replace(/\\s+/g,' ').trim()])")
     check('all 15 sidebar destinations are present at first paint',
