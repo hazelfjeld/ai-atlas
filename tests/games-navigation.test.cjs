@@ -535,7 +535,7 @@ test('all generated technology profiles use shared directory chrome with native 
 
 
 test('all 1345 concept detail pages reuse the native seven-section shared navigation', () => {
-  // Expanded guide pages use the same native article target as technology profiles.
+  // Every concept detail page targets its article natively, like technology profiles.
   const dictionaryNav = read('terms/index.html').split('<main class="term-shell">')[1].split('<header class="hero" id="main" tabindex="-1">')[0];
   assert.equal((dictionaryNav.match(/class="site-mobile-chrome__brand"/g)||[]).length,1);
   const detailNav = dictionaryNav;
@@ -546,9 +546,11 @@ test('all 1345 concept detail pages reuse the native seven-section shared naviga
     const html = read(info.path);
     assert.ok(html.includes('<link rel="stylesheet" href="../site-chrome.css">'), id);
     assert.ok(html.includes('<script src="../site-theme.js"></script>'), id);
-    const mainOpen = info.expanded ? '<main class="term-shell">' : '<main class="term-shell" id="main">';
-    const heroOpen = info.expanded ? '<header class="hero" id="main" tabindex="-1">' : '<header class="hero">';
+    const mainOpen = '<main class="term-shell">';
+    const heroOpen = '<header class="hero" id="main" tabindex="-1">';
     assert.equal(html.split(mainOpen)[1]?.split(heroOpen)[0], detailNav, id);
+    assert.ok(html.includes('<a class="skip" href="#main">'), id + ' keeps native skip');
+    assert.ok(html.indexOf(heroOpen) > html.indexOf('<nav class="site-chrome term-nav"'), id + ' bypasses shared navigation');
     assert.equal((html.match(/id="main"/g) || []).length, 1, id);
     const links = html.match(/<div class="site-chrome__links">([\s\S]*?)<\/div>/)?.[1];
     assert.ok(links, id);
@@ -1610,8 +1612,10 @@ test('generated dictionary and technology skip links target article content afte
             concept.includes('<header class="hero" id="main" tabindex="-1">'),
     'Expanded concept guides must focus the article natively, as profiles do');
   const referenceDepth = read('terms/MLD-0001-a-b-test.html');
-  assert.ok(referenceDepth.includes('<main class="term-shell" id="main">'),
-    'Unexpanded reference pages preserve their original fallback until migrated');
+  assert.ok(referenceDepth.includes('<main class="term-shell">') &&
+            referenceDepth.includes('<header class="hero" id="main" tabindex="-1">') &&
+            !referenceDepth.includes('<main class="term-shell" id="main">'),
+    'Unexpanded references natively skip the shared rail to the article heading');
   const technologyPages = fs.readdirSync(path.join(__dirname, '..', 'technology'))
     .filter(name => /^TECH-\d{4}-[^/]+\.html$/.test(name));
   assert.equal(technologyPages.length, 303, 'All published technology URLs must remain stable');
