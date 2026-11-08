@@ -45,6 +45,19 @@ class Page(HTMLParser):
 
 
 class SEOPublication(unittest.TestCase):
+    def test_community_discussion_invite_is_crawlable_and_generator_owned(self):
+        invite = 'https://discord.gg/mvRJjgdM4R'
+        html = (ROOT/'about.html').read_text(encoding='utf-8')
+        source = (ROOT/'scripts/build_seo.py').read_text(encoding='utf-8')
+        readme = (ROOT/'README.md').read_text(encoding='utf-8')
+        self.assertEqual(Page(html).links.count(invite), 1)
+        self.assertIn('<h2>Continue the conversation.</h2>', html)
+        self.assertIn('href="' + invite + '" rel="noopener noreferrer"', html)
+        self.assertIn('href="' + invite + '" rel="noopener noreferrer"', source)
+        self.assertIn(invite, readme)
+        # Visible editorial content, not an AI-only instruction or fake search control.
+        self.assertLess(html.index('Continue the conversation.'), html.index('Corrections and limitations'))
+
     def test_sitemap_only_lists_real_canonical_pages_with_unique_metadata(self):
         urls = [node.text for node in ET.parse(ROOT/'sitemap.xml').findall('{*}url/{*}loc')]
         self.assertEqual(len(urls), len(set(urls)))
