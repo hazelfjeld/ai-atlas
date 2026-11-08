@@ -182,6 +182,8 @@ test('Discover and Games primary appearance controls share pressed state with ed
   assert.match(games, /id="theme-toggle"[^>]*aria-pressed="false"/);
   assert.ok(script.includes("document.getElementById?.('theme-toggle')?.setAttribute('aria-pressed'"));
   assert.ok(script.includes('syncPrimaryThemeButton(theme);'));
+  assert.ok(fs.readFileSync(path.join(__dirname, '..', 'app.js'), 'utf8').includes("if(typeof syncSharedStoredTheme==='function')syncSharedStoredTheme(theme)"),
+    'Discover invokes the shared theme synchronizer after its own click handler changes the theme');
   assert.ok(script.includes('queueMicrotask(syncThemeButtons)'),
     'Shared controls must read final state after the existing app click handler');
   assert.ok(offline.includes(script), 'The offline workspace must embed the exact current shared theme behavior');
