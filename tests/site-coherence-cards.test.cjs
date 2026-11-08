@@ -92,6 +92,8 @@ test('Discover first paint keeps its useful content stable without perpetual loa
     'Preserve the hydration sentinel for readiness tests and assistive technology');
   assert.match(home, /<div id="page"><!-- discovery:start -->/,
     'Preserve the server-rendered Discover preview');
+  assert.ok(css.includes('.shell:has(> .site-chrome.top){padding-top:0!important}'),
+    'Archive and Discover should share the same first-content workspace frame');
   assert.ok(block.includes('#catalog-loading{display:none}'),
     'Without JavaScript, never present a perpetual loading notice');
   assert.ok(block.includes('html.atlas-enhanced #catalog-loading') &&

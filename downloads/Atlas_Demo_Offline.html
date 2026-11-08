@@ -519,6 +519,10 @@ body:has(.site-chrome){padding-top:78px}
  .playbook-shell > .site-chrome + .playbook-hero{margin-top:8px}
  .tech-shell > .site-chrome + .tech-hero{padding-top:8px}
  .shell > .site-chrome + main > header{padding-top:8px}
+ /* The archive also retains 22px of legacy shell padding above the shared
+    workspace. Remove that extra row so its intro aligns with Discover after
+    the already-rendered home preview no longer shifts during hydration. */
+ .shell:has(> .site-chrome.top){padding-top:0!important}
 }
 
 /* Discover keeps its real desktop workspace topbar; the shared native disclosure
