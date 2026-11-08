@@ -15,7 +15,8 @@ test('Three-minute tour links real, existing Atlas features without a second app
   assert.equal((html.match(/class="step">0[0-3]:/g)||[]).length,4);
 });
 test('Demo stays printable, accessible, and honest about the published baseline',()=>{
-  assert.match(html,/<a class="skip" href="#quick-tour">/);
+  assert.match(html,/<a class="skip" href="#main">Skip to content<\/a>/);
+  assert.match(html,/<header id="main" tabindex="-1"><div class="discover-heading">/);
   assert.match(html,/@media print/);
   const count=Object.keys(JSON.parse(fs.readFileSync(path.join(__dirname,'..','content/term-guides.json')))).length;
   assert.ok(html.includes('1,345 concepts have stable pages, but only '+count+' guides are expanded'));

@@ -237,6 +237,34 @@ with sync_playwright() as p:
                     page.screenshot(path=str(out / 'native-skip-profile-390-dark.png'))
     page.emulate_media(color_scheme='light')
 
+
+    # The guided demo formerly used its own large heading and skipped the
+    # article heading entirely. Compare it directly with About, including
+    # native no-JavaScript keyboard traversal at phone/tablet/desktop sizes.
+    for width in (320,390,768,1280):
+        for theme in ('light','dark'):
+            page.set_viewport_size({'width':width,'height':844 if width<=650 else 900})
+            page.goto(base+'about.html')
+            page.evaluate('(t)=>document.documentElement.dataset.theme=t', theme)
+            editorial_font=page.locator('.discover-heading h1').evaluate('el=>getComputedStyle(el).fontFamily')
+            page.goto(base+'demo.html')
+            page.evaluate('(t)=>document.documentElement.dataset.theme=t', theme)
+            hero=page.locator('main > header#main')
+            check(f'Guided demo {width}px {theme} inherits shared editorial heading',
+                  hero.count()==1 and hero.get_attribute('tabindex')=='-1'
+                  and hero.locator('.discover-heading h1').count()==1
+                  and hero.locator('h1').evaluate('el=>getComputedStyle(el).fontFamily')==editorial_font
+                  and page.locator('nav.site-chrome .site-chrome__links a').count()==7
+                  and page.locator('#quick-tour article').count()==4
+                  and page.evaluate('document.documentElement.scrollWidth<=innerWidth'))
+            page.locator('a.skip').focus()
+            page.keyboard.press('Enter')
+            check(f'Guided demo {width}px {theme} no-JS skip reaches article before walkthrough',
+                  page.evaluate('location.hash==="#main" && document.activeElement===document.querySelector("main > header#main")'))
+            if width==390 and theme=='dark':
+                page.screenshot(path=str(out/'demo-shared-heading-390-dark.png'))
+    page.emulate_media(color_scheme='light')
+
     static.close()
     context=browser.new_context(viewport={'width':1440,'height':1050},reduced_motion='reduce')
     page=context.new_page()

@@ -1746,3 +1746,19 @@ test('Games and daily archive share Discover editorial heading without replacing
   assert.ok(daily.includes('id="edition-select"') && daily.includes('id="edition-content"') &&
             daily.includes('id="edition-search"'));
 });
+
+test('Guided demo uses Discover editorial chrome and native article skipping while preserving tour links', () => {
+  const html=read('demo.html'), about=read('about.html'), styles=read('brand.css');
+  assert.equal((html.match(/<div class="discover-heading">/g) || []).length, 1);
+  assert.match(about, /<div class="discover-heading">/);
+  assert.match(styles, /\.discover-heading h1\{font:400 clamp\(40px,4\.2vw,56px\)/);
+  assert.match(html, /<a class="skip" href="#main">Skip to content<\/a>/);
+  assert.match(html, /<header id="main" tabindex="-1"><div class="discover-heading">/);
+  assert.ok(html.indexOf('class="site-chrome demo-site-chrome"') < html.indexOf('<header id="main"'));
+  assert.equal((html.match(/\bid="main"/g) || []).length, 1);
+  assert.equal((html.match(/<h1\b/g) || []).length, 1);
+  assert.match(html, /id="quick-tour" class="grid"/);
+  assert.match(html, /Explore 1,345 concepts, 303 technology profiles/);
+  assert.match(html, /class="site-mobile-chrome__search" href="index.html#\/search"/);
+  assert.match(html, /href="index.html#\/games"/);
+});
