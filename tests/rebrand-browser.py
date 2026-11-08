@@ -1448,6 +1448,23 @@ with sync_playwright() as p:
                       'Georgia' in result['family'] and
                       result['color'] == result['bodyColor'] and
                       not result['overflow'])
+                # Discover highlights a card on pointer hover. The shared
+                # editorial surfaces now expose the same border response
+                # and keep it while a real link inside holds keyboard focus.
+                card = headline.locator('xpath=..')
+                page.mouse.move(1, 1)
+                neutral = card.evaluate('el => getComputedStyle(el).borderColor')
+                card.hover()
+                hovered = card.evaluate('el => getComputedStyle(el).borderColor')
+                check(f'{route} {width}px {theme} shared card exposes hover',
+                      neutral != hovered)
+                link = card.locator('a[href]').first
+                if link.count():
+                    page.mouse.move(1, 1)
+                    link.focus()
+                    focused = card.evaluate('el => getComputedStyle(el).borderColor')
+                    check(f'{route} {width}px {theme} card retains visible keyboard focus',
+                          focused == hovered)
                 if width == 390 and theme == 'dark':
                     page.screenshot(path=str(out / f'editorial-card-{route}-390-dark.png'))
 
