@@ -1424,6 +1424,33 @@ with sync_playwright() as p:
                       page.locator('details.site-mobile-chrome__nav[open]').count()==0
                       and page.evaluate("getComputedStyle(document.documentElement).overflow != 'hidden'"))
 
+
+    # Existing page families must feel like the same reading desk while their
+    # cards keep their own content, links and interactive controls. Compare
+    # rendered editorial card headings in two independent page templates.
+    for width in (320, 390, 768, 1280):
+        page.set_viewport_size({'width': width, 'height': 844 if width <= 650 else 900})
+        for theme in ('light', 'dark'):
+            for route, selector in (('catalog-review.html', 'article.card > h3'),
+                                    ('playbooks.html', '.playbook > h2')):
+                page.goto(base + route)
+                page.evaluate('(t) => localStorage.setItem("atlas.theme", t)', theme)
+                page.reload()
+                headline = page.locator(selector).first
+                headline.wait_for(state='visible', timeout=10000)
+                result = headline.evaluate("""el => ({
+                    family:getComputedStyle(el).fontFamily,
+                    color:getComputedStyle(el).color,
+                    bodyColor:getComputedStyle(document.body).color,
+                    overflow:document.documentElement.scrollWidth > innerWidth
+                })""")
+                check(f'{route} {width}px {theme} shares editorial card typography',
+                      'Georgia' in result['family'] and
+                      result['color'] == result['bodyColor'] and
+                      not result['overflow'])
+                if width == 390 and theme == 'dark':
+                    page.screenshot(path=str(out / f'editorial-card-{route}-390-dark.png'))
+
     check('no application runtime exceptions',not errors)
     browser.close()
 (out/'results.json').write_text(json.dumps({'checks_passed':len(checks),'checks':checks,'base':base},indent=2))

@@ -597,3 +597,22 @@ body:has(.site-chrome) :is(.tech-controls,.playbook-tools,.controls,.search-cont
 }
 /* atlas-shared-headlines:end */
 
+
+/* atlas-editorial-card-copy:begin */
+/* Discover's editorial cards are the typography reference. Existing Playbook,
+   Technology and Research cards keep their own grids and interactions, while
+   using one title treatment rather than separate page-local headline fonts. */
+:is(.playbook-shell .playbook > h2,
+    .tech-shell .tech-card > h3,
+    .shell:has(> .site-chrome.nav) article.card > h3,
+    .shell:has(> main > .site-chrome.research-site-chrome) .cards > .card > h3){
+  font:400 clamp(20px,2vw,23px)/1.25 Georgia,'Times New Roman',serif;
+  letter-spacing:-.025em;
+  color:var(--ink);
+  overflow-wrap:anywhere;
+}
+/* The old Playbook stylesheet hard-codes light-theme grey on its summaries;
+   inherit the same muted reading contrast as Discover in both themes. */
+.playbook-shell .playbook > p,
+.playbook-shell .playbook .tech-list{color:var(--muted)}
+/* atlas-editorial-card-copy:end */
