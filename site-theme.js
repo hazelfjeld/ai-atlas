@@ -211,9 +211,16 @@ if (typeof window !== 'undefined' && window.addEventListener) {
 // Restore a saved appearance changed on another page when this one comes back
 // from BFCache. Reuse the same generated theme buttons and accessibility state;
 // do not override an unsaved choice or blocked storage.
+// Discover's sidebar action and Games' existing header action must expose
+// the same pressed state as the native theme actions on standalone pages.
+// Keep their existing accessible names and click handlers intact.
+function syncPrimaryThemeButton(theme) {
+  document.getElementById?.('theme-toggle')?.setAttribute('aria-pressed', String(theme === 'dark'));
+}
 function syncSharedStoredTheme(theme) {
   if (theme !== 'dark' && theme !== 'light') return;
   document.documentElement.dataset.theme = theme;
+  syncPrimaryThemeButton(theme);
   document.querySelectorAll('.site-chrome__theme-toggle').forEach(button => {
     button.setAttribute('aria-pressed', String(theme === 'dark'));
     button.textContent = '◐  ' + (theme === 'dark' ? 'Dark' : 'Light') + ' theme';
@@ -281,6 +288,7 @@ document.addEventListener('DOMContentLoaded', () => {
         (window.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
       const syncThemeButtons = () => {
         const theme = effectiveTheme();
+        syncPrimaryThemeButton(theme);
         controls.forEach(button => {
           button.setAttribute('aria-pressed', String(theme === 'dark'));
           button.textContent = '◐  ' + (theme === 'dark' ? 'Dark' : 'Light') + ' theme';

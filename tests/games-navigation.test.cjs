@@ -159,7 +159,8 @@ test('Discover mobile uses the shared theme action while Games keeps its existin
   };
   const chrome = {dataset:{}, querySelector: () => menu};
   const existing = {
-    listeners:{},
+    listeners:{}, attrs:{},
+    setAttribute(name, value) { this.attrs[name] = value; },
     addEventListener(name, handler) { this.listeners[name] = handler; },
     click() {
       root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
@@ -189,13 +190,16 @@ test('Discover mobile uses the shared theme action while Games keeps its existin
   assert.equal(buttons.length,1,'Discover adds one mobile control, not another desktop button');
   assert.equal(buttons[0].className,'site-chrome__theme-toggle');
   assert.equal(buttons[0].attrs['aria-pressed'],'true');
+  assert.equal(existing.attrs['aria-pressed'],'true', 'Discover sidebar mirrors the saved dark state');
   buttons[0].listeners.click();
   assert.equal(root.dataset.theme,'light');
   assert.deepEqual(saved,[['atlas.theme','light']]);
   assert.equal(buttons[0].attrs['aria-pressed'],'false');
+  assert.equal(existing.attrs['aria-pressed'],'false', 'Mobile theme change updates Discover sidebar state');
   existing.click();
   assert.equal(root.dataset.theme,'dark');
   assert.equal(buttons[0].attrs['aria-pressed'],'true','desktop theme action keeps mobile label synchronized');
+  assert.equal(existing.attrs['aria-pressed'],'true', 'Desktop theme change updates its own accessible state');
   handlers.DOMContentLoaded();
   assert.equal(buttons.length,1,'re-entering the shared initializer cannot duplicate the button');
   document.querySelector = selector => selector === '.site-mobile-chrome' ? chrome :

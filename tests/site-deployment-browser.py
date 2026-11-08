@@ -406,6 +406,30 @@ with sync_playwright() as p:
           theme_page.evaluate("document.documentElement.dataset.theme === 'light' && "
                               "getComputedStyle(document.documentElement).colorScheme === 'light'"))
 
+    # Discover's original sidebar toggle must announce its selected state,
+    # just as native editorial and Games theme controls do across routes.
+    theme_page.set_viewport_size({'width':1280, 'height':844})
+    theme_page.goto(base + 'index.html#/overview')
+    theme_page.locator('#catalog-loading').wait_for(state='detached')
+    check('Discover sidebar theme announces the saved light selection',
+          theme_page.locator('#theme-toggle').get_attribute('aria-pressed') == 'false')
+    theme_page.locator('#theme-toggle').click()
+    check('Discover sidebar theme announces newly selected dark state',
+          theme_page.locator('#theme-toggle').get_attribute('aria-pressed') == 'true'
+          and theme_page.evaluate("localStorage.getItem('atlas.theme') === 'dark'"))
+    theme_page.goto(base + 'games.html')
+    check('Games inherits Discover dark preference and pressed state',
+          theme_page.locator('#theme-toggle').get_attribute('aria-pressed') == 'true'
+          and theme_page.evaluate("document.documentElement.dataset.theme === 'dark'"))
+    theme_page.goto(base + 'index.html#/overview')
+    theme_page.locator('#catalog-loading').wait_for(state='detached')
+    check('Discover restores dark pressed state after Games navigation',
+          theme_page.locator('#theme-toggle').get_attribute('aria-pressed') == 'true')
+    theme_page.locator('#theme-toggle').click()
+    check('Discover returns to light pressed state without reloading',
+          theme_page.locator('#theme-toggle').get_attribute('aria-pressed') == 'false'
+          and theme_page.evaluate("localStorage.getItem('atlas.theme') === 'light'"))
+
     # One shared appearance action, in the same rail/drawer positions used by
     # Discover. Standalone articles previously had no way to change themes.
     theme_page.set_viewport_size({'width':1280, 'height':844})

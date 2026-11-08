@@ -171,3 +171,16 @@ test('all expanded concept guides use the technology-profile native article skip
                  entry.path + ' must not duplicate desktop navigation');
   }
 });
+
+
+test('Discover and Games primary appearance controls share pressed state with editorial theme buttons', () => {
+  const script = fs.readFileSync(path.join(__dirname, '..', 'site-theme.js'), 'utf8');
+  const home = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+  const games = fs.readFileSync(path.join(__dirname, '..', 'games.html'), 'utf8');
+  const offline = fs.readFileSync(path.join(__dirname, '..', 'downloads/Atlas_Demo_Offline.html'), 'utf8');
+  assert.match(home, /id="theme-toggle"/);
+  assert.match(games, /id="theme-toggle"[^>]*aria-pressed="false"/);
+  assert.ok(script.includes("document.getElementById?.('theme-toggle')?.setAttribute('aria-pressed'"));
+  assert.ok(script.includes('syncPrimaryThemeButton(theme);'));
+  assert.ok(offline.includes(script), 'The offline workspace must embed the exact current shared theme behavior');
+});
