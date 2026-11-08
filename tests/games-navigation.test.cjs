@@ -1691,12 +1691,10 @@ test('existing editorial and reference page titles share Discover headline typog
   assert.ok(block, 'A single shared headline rule must exist');
   assert.equal(css.split('/* atlas-shared-headlines:begin */').length - 1, 1);
   for (const selector of [
-    '.term-shell > .hero',
+    '.term-shell:has(> .site-chrome.term-nav) > .hero',
     '.tech-shell > .tech-hero',
     '.playbook-shell > .playbook-hero',
-    '.review-shell > header',
     '.shell:has(> .site-chrome.top) > main > header',
-    '.shell:has(> .site-chrome.nav) > main > header',
     '.shell:has(> main > .site-chrome.research-site-chrome) > main > header',
   ]) assert.ok(block.includes(selector), 'Missing shared page family: ' + selector);
   assert.ok(block.includes('font:400 clamp(36px,4.2vw,56px)/1.1 Georgia'));

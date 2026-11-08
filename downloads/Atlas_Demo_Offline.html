@@ -851,12 +851,10 @@ body:has(.site-chrome) :is(.tech-controls,.playbook-tools,.controls,.search-cont
    replaces their diverging standalone h1 scales without changing Games,
    news cards, the navigation or any article content. */
 :is(
-  .term-shell > .hero,
+  .term-shell:has(> .site-chrome.term-nav) > .hero,
   .tech-shell > .tech-hero,
   .playbook-shell > .playbook-hero,
-  .review-shell > header,
   .shell:has(> .site-chrome.top) > main > header,
-  .shell:has(> .site-chrome.nav) > main > header,
   .shell:has(> main > .site-chrome.research-site-chrome) > main > header
 ) h1{
   font:400 clamp(36px,4.2vw,56px)/1.1 Georgia,"Times New Roman",serif;
