@@ -585,17 +585,11 @@ body:has(.site-chrome) :is(.tech-controls,.playbook-tools,.controls,.search-cont
 /* atlas-mobile-sticky-frame:end */
 
 /* atlas-shared-headlines:begin */
-/* Discover's reading-desk display type is the visual source for existing
-   editorial, directory and reference title blocks. The single shared rule
-   replaces their diverging standalone h1 scales without changing Games,
-   news cards, the navigation or any article content. */
-:is(
-  .term-shell:has(> .site-chrome.term-nav) > .hero,
-  .tech-shell > .tech-hero,
-  .playbook-shell > .playbook-hero,
-  .shell:has(> .site-chrome.top) > main > header,
-  .shell:has(> main > .site-chrome.research-site-chrome) > main > header
-) h1{
+/* Existing standalone editorial headlines already use Discover's component.
+   Align generated concept/technology articles and A-Z directories with it,
+   without overriding original .discover-heading sizes or changing Games,
+   daily news cards, navigation or content. */
+.term-shell > .hero:not(:has(.discover-heading)) h1{
   font:400 clamp(36px,4.2vw,56px)/1.1 Georgia,"Times New Roman",serif;
   letter-spacing:-.045em;
   text-wrap:balance;

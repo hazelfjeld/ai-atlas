@@ -1214,11 +1214,10 @@ with sync_playwright() as p:
         for theme in ('light','dark'):
             page.set_viewport_size({'width':width,'height':844 if width<=650 else 900})
             for route, selector in (
-                ('about.html','.term-shell > .hero h1'),
+                ('terms/index.html','.term-shell > .hero h1'),
+                ('technology/index.html','.term-shell > .hero h1'),
                 ('terms/MLD-0002-ablation-study.html','.term-shell > .hero h1'),
                 ('technology/TECH-0216-pytorch.html','.term-shell > .hero h1'),
-                ('technologies.html','.tech-hero h1'),
-                ('playbooks.html','.playbook-hero h1'),
             ):
                 page.goto(base+route)
                 page.evaluate('(t)=>localStorage.setItem("atlas.theme",t)',theme)
@@ -1234,7 +1233,7 @@ with sync_playwright() as p:
                           document.documentElement.scrollWidth<=innerWidth+1;
                       }""",selector))
                 if width in (390,1280) and theme=='dark' and route in (
-                    'about.html','technologies.html','terms/MLD-0002-ablation-study.html'):
+                    'terms/index.html','technology/index.html','terms/MLD-0002-ablation-study.html'):
                     page.screenshot(path=str(out/f'coherent-heading-{route.replace("/", "-")}-{width}-dark.png'))
 
     # Reference detail pages used to show only the generic parent section

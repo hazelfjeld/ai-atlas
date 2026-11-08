@@ -1690,13 +1690,8 @@ test('existing editorial and reference page titles share Discover headline typog
   const block = css.split('/* atlas-shared-headlines:begin */')[1]?.split('/* atlas-shared-headlines:end */')[0];
   assert.ok(block, 'A single shared headline rule must exist');
   assert.equal(css.split('/* atlas-shared-headlines:begin */').length - 1, 1);
-  for (const selector of [
-    '.term-shell:has(> .site-chrome.term-nav) > .hero',
-    '.tech-shell > .tech-hero',
-    '.playbook-shell > .playbook-hero',
-    '.shell:has(> .site-chrome.top) > main > header',
-    '.shell:has(> main > .site-chrome.research-site-chrome) > main > header',
-  ]) assert.ok(block.includes(selector), 'Missing shared page family: ' + selector);
+  assert.ok(block.includes('.term-shell > .hero:not(:has(.discover-heading)) h1'), 'Generated references and directories share one rule');
+  assert.ok(!block.includes('.review-shell > header'), 'Preserve previously calibrated editorial headings');
   assert.ok(block.includes('font:400 clamp(36px,4.2vw,56px)/1.1 Georgia'));
   assert.ok(block.includes('overflow-wrap:break-word'));
   assert.ok(!block.includes('.games-header'), 'Games retains its own compact header');
