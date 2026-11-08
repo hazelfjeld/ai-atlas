@@ -9,7 +9,7 @@ test('Deferred proposal review is linked and clearly not catalog publication',()
  const page=read('catalog-review.html');
  const archive=read('whats-new.html');
  assert.match(archive,/href="catalog-review.html"/);
- assert.match(page,/<main id="main" tabindex="-1">/);
+ assert.match(page,/<main><header id="main" tabindex="-1">/);
  assert.match(page,/<a class="skip" href="#main">/);
  assert.match(page,/Seven proposals, not seven new entries/);
  assert.match(page,/2 new canonical technology records/);
