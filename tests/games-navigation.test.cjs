@@ -498,7 +498,7 @@ test('all generated technology profiles use shared directory chrome with native 
   assert.match(concept, /<nav class="site-chrome term-nav" aria-label="AI Updates primary navigation">/);
   assert.ok(concept.includes('<script src="../site-theme.js"></script>'));
   assert.doesNotMatch(concept, /<nav class="term-nav" aria-label="Site navigation">/);
-  const prefix = '<main class="term-shell" id="main">';
+  const prefix = '<main class="term-shell">';
   const directory = read('technology/index.html').split('<main class="term-shell">')[1].split('<header class="hero" id="main" tabindex="-1">')[0];
   assert.equal((directory.match(/class="site-mobile-chrome__brand"/g)||[]).length,1);
   // Detail and directory pages must share the same eight-link drawer:
@@ -555,8 +555,8 @@ test('script-free reference pages honor dark OS preference with readable cards a
   assert.match(css, /\.term-shell \.detail-block\.caveat\{background:var\(--accent-soft\)/);
   assert.match(css, /\.term-shell \.notice\{background:var\(--accent-soft\);border-color:var\(--line\)\}/);
   assert.match(css, /\.term-shell a\{color:var\(--accent\)\}/);
-  for (const reference of ['terms/MLD-0002-ablation-study.html', 'technology/TECH-0216-pytorch.html'])
-    assert.match(read(reference), /<main class="term-shell" id="main">/);
+  assert.match(read('terms/MLD-0002-ablation-study.html'), /<main class="term-shell" id="main">/);
+  assert.match(read('technology/TECH-0216-pytorch.html'), /<main class="term-shell">[\s\S]*?<header class="hero" id="main" tabindex="-1">/);
   assert.ok(read('downloads/Atlas_Demo_Offline.html').includes('Script-free reference pages honor the OS dark palette'));
 });
 
