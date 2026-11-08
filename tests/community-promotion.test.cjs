@@ -11,9 +11,12 @@ test('Discord invitation is a discoverable, descriptive link in existing site co
   assert.equal(occurrences(home, invite), 1, 'Discover first paint must contain exactly one invite');
   assert.equal(occurrences(about, invite), 1, 'About must contain exactly one invite');
   assert.equal(occurrences(readme, invite), 1, 'GitHub README must expose the invite');
-  assert.match(home, /<section class="rail-section" id="community" aria-labelledby="community-title">/);
-  assert.match(home, /<h2 id="community-title">Continue the conversation\.<\/h2>/);
-  assert.match(home, /<a href="https:\/\/discord\.gg\/mvRJjgdM4R" rel="noopener noreferrer">Join the AI Updates Discord discussion/);
+  assert.match(home, /<aside class="discover-community" id="community" aria-label="AI Updates Discord community">/);
+  assert.match(home, /<strong>Discuss AI with the community\.<\/strong>/);
+  assert.match(home, /<a href="https:\/\/discord\.gg\/mvRJjgdM4R" rel="noopener noreferrer">Join the AI Updates Discord/);
+  assert.ok(home.indexOf('id="community"') > home.indexOf('<h1>Discover</h1>'));
+  assert.ok(home.indexOf('id="community"') < home.indexOf('<nav class="discovery-topics"'));
+  assert.doesNotMatch(home, /<section class="rail-section" id="community"/);
   assert.match(about, /Join the AI Updates Discord discussion/);
 });
 
@@ -22,6 +25,7 @@ test('Community invitation remains available in the dynamic and offline Discover
   assert.equal(occurrences(script, invite), 1, 'Only one source invitation in the Discover renderer');
   assert.equal(occurrences(offline, invite), 2,
     'The offline file includes the pre-rendered HTML and the embedded Discover renderer');
-  assert.equal(occurrences(offline, 'id="community-title"'), 2);
+  assert.equal(occurrences(offline, 'class="discover-community" id="community"'), 2);
   assert.match(offline, /<meta name="robots" content="noindex,follow">/);
+  assert.match(read('brand.css'), /\.discover-community a:focus-visible/);
 });

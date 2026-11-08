@@ -61,3 +61,12 @@ body{font-size:15px;line-height:1.6}h1,h2,h3{color:var(--ink)}a{text-underline-o
 .term-shell .detail-block.caveat{background:var(--accent-soft);border-left-color:var(--orange)}
 .term-shell .notice{background:var(--accent-soft);border-color:var(--line)}
 .term-shell a{color:var(--accent)}
+
+/* Discover: show the community invitation above the feed, not deep in the rail. */
+.discover-community{display:flex;align-items:center;justify-content:space-between;gap:12px 24px;flex-wrap:wrap;margin:-8px 0 20px;padding:12px 16px;border:1px solid var(--line);border-radius:9px;background:var(--accent-soft)}
+.discover-community div{display:flex;align-items:baseline;gap:4px 10px;flex-wrap:wrap;min-width:0}
+.discover-community strong{font-size:13px;font-weight:700;color:var(--ink)}
+.discover-community span{font-size:12px;line-height:1.5;color:var(--muted)}
+.discover-community a{display:inline-flex;align-items:center;min-height:44px;font-size:13px;font-weight:700;color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+.discover-community a:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
+@media(max-width:650px){.discover-community{margin:-6px 0 17px;padding:10px 14px;gap:3px}.discover-community div{display:block;flex-basis:100%}.discover-community strong,.discover-community span{display:block}.discover-community span{margin-top:2px}.discover-community a{min-height:44px}}

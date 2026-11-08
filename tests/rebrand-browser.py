@@ -46,6 +46,14 @@ with sync_playwright() as p:
                   and not page.locator('#catalog-loading').is_visible()
                   and page.locator('.discover-heading h1').is_visible()
                   and page.locator('.discovery-card').count()==6)
+            community_box = page.locator('#community').bounding_box()
+            invite_box = page.locator('#community a').bounding_box()
+            topic_box = page.locator('.discovery-topics').bounding_box()
+            check(f'Discord community link visible above Discover topics at {width}px {theme}',
+                  community_box is not None and invite_box is not None and topic_box is not None
+                  and community_box['y'] < topic_box['y']
+                  and invite_box['y'] + invite_box['height'] <= (844 if width <= 650 else 900)
+                  and page.locator('#community a').get_attribute('href') == 'https://discord.gg/mvRJjgdM4R')
             if width==390 and theme=='dark':
                 page.screenshot(path=str(out/'discover-firstpaint-nojs-390-dark.png'))
     page.emulate_media(color_scheme='light')
