@@ -786,6 +786,12 @@ body:has(.site-chrome) :is(.tech-controls,.playbook-tools,.controls,.search-cont
      Apply the offset at the root scroller for all shared-chrome routes. */
   html:has(.site-chrome){scroll-padding-top:96px}
 }
+/* The same fixed-header clearance is necessary below 651px now that the
+   shared mobile menu/search frame remains sticky while scrolling. Native
+   hash links and keyboard skips must land below it even without scripts. */
+@media (max-width:650px){
+  html:has(.site-chrome){scroll-padding-top:80px}
+}
 
 /* atlas-mobile-search-frame:begin */
 /* Discover's real search form and the other pages' working search link share

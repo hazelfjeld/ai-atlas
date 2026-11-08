@@ -1644,3 +1644,18 @@ test('shared mobile navigation remains a native dropdown without JavaScript', ()
   assert.ok(fallback.includes(css) && fallback.includes(script),
     'single-file offline fallback embeds the exact progressive enhancement code');
 });
+
+
+test('shared sticky mobile header clears native hash targets without JavaScript', () => {
+  const css = read('site-chrome.css');
+  assert.match(css, /@media \(max-width:650px\)\{\s*html:has\(\.site-chrome\)\{scroll-padding-top:80px\}\s*\}/);
+  assert.match(css, /@media \(min-width:651px\)\{[\s\S]*?html:has\(\.site-chrome\)\{scroll-padding-top:96px\}/);
+  for (const route of ['catalog-review.html', 'terms/index.html', 'technology/index.html']) {
+    const html = read(route);
+    assert.match(html, /<a class="skip" href="#main">/);
+    assert.match(html, /class="[^"]*site-mobile-chrome__search"/);
+    assert.match(html, /<nav class="site-chrome [^"]*"/);
+  }
+  assert.ok(read('downloads/Atlas_Demo_Offline.html').includes(css),
+    'Offline fallback must embed the same responsive scroll offset');
+});

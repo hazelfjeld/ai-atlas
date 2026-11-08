@@ -1265,6 +1265,10 @@ with sync_playwright() as p:
             })""")
             check(f'catalog review {width}px {theme} deep link remains responsive',
                   not position['overflow'] and position['theme']==theme)
+            if width<=650:
+                check(f'catalog review {width}px {theme} anchor clears sticky mobile header',
+                      position['pad']=='80px' and
+                      77<=position['top']<=105)
             if width>650:
                 check(f'catalog review {width}px {theme} anchor clears desktop workspace bar',
                       position['pad']=='96px' and
