@@ -1719,3 +1719,30 @@ test('both reference directories reuse Discover editorial headings from one gene
   assert.match(read('terms/MLD-0002-ablation-study.html'), /<main class="term-shell" id="main">/);
   assert.match(read('technology/TECH-0216-pytorch.html'), /<header class="hero" id="main" tabindex="-1">/);
 });
+
+
+test('Games and daily archive share Discover editorial heading without replacing functional content', () => {
+  const workspace = read('index.html');
+  const styles = read('brand.css');
+  assert.ok(workspace.includes('class="discover-heading"'));
+  assert.match(styles, /\.discover-heading h1\{font:400 clamp\(40px,4\.2vw,56px\)/);
+  for (const [route, eyebrow] of [
+    ['games.html', 'THE PRACTICE ROOM'],
+    ['whats-new.html', 'DAILY INTELLIGENCE · EVIDENCE FIRST'],
+  ]) {
+    const html = read(route);
+    assert.equal((html.match(/<div class="discover-heading">/g) || []).length, 1, route);
+    assert.ok(html.includes('<div class="discover-heading"><div><p class="eyebrow">') ||
+              html.includes('<div class="discover-heading"><div><p class="eyebrow"><span'), route);
+    assert.ok(html.includes(eyebrow), route);
+    assert.ok(html.includes('<link rel="stylesheet" href="brand.css">'), route);
+    assert.equal((html.match(/<h1\b/g) || []).length, 1, route);
+    assert.ok(html.includes('class="site-chrome__links"'), route);
+  }
+  const games = read('games.html');
+  assert.ok(games.includes('id="start-quiz"') && games.includes('id="start-match"') &&
+            games.includes('id="start-flashcards"'));
+  const daily = read('whats-new.html');
+  assert.ok(daily.includes('id="edition-select"') && daily.includes('id="edition-content"') &&
+            daily.includes('id="edition-search"'));
+});

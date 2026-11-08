@@ -580,7 +580,7 @@ with sync_playwright() as p:
         ('technology/index.html', 'main.term-shell > header.hero .eyebrow'),
         ('technologies.html', '.tech-shell > section.tech-hero .eyebrow'),
         ('playbooks.html', '.playbook-shell > section.playbook-hero .eyebrow'),
-        ('whats-new.html', '.shell > main > header > div:first-child > .eyebrow'),
+        ('whats-new.html', '.shell > main > header .discover-heading .eyebrow'),
     )
     for width, height in ((768, 900), (1280, 900)):
         page.set_viewport_size({'width':width,'height':height})
@@ -611,6 +611,8 @@ with sync_playwright() as p:
         ('research.html', 'section.hero h1'),
         ('technologies.html', 'section.tech-hero h1'),
         ('playbooks.html', 'section.playbook-hero h1'),
+        ('games.html', 'section.hero .discover-heading h1'),
+        ('whats-new.html', 'main > header .discover-heading h1'),
     )
     for width, height in ((320, 700), (390, 844), (768, 900), (1280, 900)):
         page.set_viewport_size({'width':width,'height':height})
