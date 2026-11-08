@@ -526,7 +526,7 @@ test('all generated technology profiles use shared directory chrome with native 
 
 
 test('all 1345 concept detail pages reuse the native seven-section shared navigation', () => {
-  const prefix = '<main class="term-shell" id="main">';
+  // Expanded guide pages use the same native article target as technology profiles.
   const dictionaryNav = read('terms/index.html').split('<main class="term-shell">')[1].split('<header class="hero" id="main" tabindex="-1">')[0];
   assert.equal((dictionaryNav.match(/class="site-mobile-chrome__brand"/g)||[]).length,1);
   const detailNav = dictionaryNav;
@@ -537,7 +537,10 @@ test('all 1345 concept detail pages reuse the native seven-section shared naviga
     const html = read(info.path);
     assert.ok(html.includes('<link rel="stylesheet" href="../site-chrome.css">'), id);
     assert.ok(html.includes('<script src="../site-theme.js"></script>'), id);
-    assert.equal(html.split(prefix)[1].split('<header class="hero">')[0], detailNav, id);
+    const mainOpen = info.expanded ? '<main class="term-shell">' : '<main class="term-shell" id="main">';
+    const heroOpen = info.expanded ? '<header class="hero" id="main" tabindex="-1">' : '<header class="hero">';
+    assert.equal(html.split(mainOpen)[1]?.split(heroOpen)[0], detailNav, id);
+    assert.equal((html.match(/id="main"/g) || []).length, 1, id);
     const links = html.match(/<div class="site-chrome__links">([\s\S]*?)<\/div>/)?.[1];
     assert.ok(links, id);
     assert.deepEqual([...links.matchAll(/<a [^>]+>([^<]+)<\/a>/g)].map(x => x[1]), names, id);
@@ -555,7 +558,7 @@ test('script-free reference pages honor dark OS preference with readable cards a
   assert.match(css, /\.term-shell \.detail-block\.caveat\{background:var\(--accent-soft\)/);
   assert.match(css, /\.term-shell \.notice\{background:var\(--accent-soft\);border-color:var\(--line\)\}/);
   assert.match(css, /\.term-shell a\{color:var\(--accent\)\}/);
-  assert.match(read('terms/MLD-0002-ablation-study.html'), /<main class="term-shell" id="main">/);
+  assert.match(read('terms/MLD-0002-ablation-study.html'), /<main class="term-shell">[\s\S]*?<header class="hero" id="main" tabindex="-1">/);
   assert.match(read('technology/TECH-0216-pytorch.html'), /<main class="term-shell">[\s\S]*?<header class="hero" id="main" tabindex="-1">/);
   assert.ok(read('downloads/Atlas_Demo_Offline.html').includes('Script-free reference pages honor the OS dark palette'));
 });
@@ -1716,8 +1719,8 @@ test('both reference directories reuse Discover editorial headings from one gene
   }
   assert.match(read('scripts/build_term_pages.py'), /intro = render_directory_hero\(/);
   assert.match(read('scripts/build_seo.py'), /body = render_directory_hero\(/);
-  // The published individual reference templates and links are intentionally unchanged.
-  assert.match(read('terms/MLD-0002-ablation-study.html'), /<main class="term-shell" id="main">/);
+  // Expanded concept guides and technology profiles keep one shared native article-skip destination.
+  assert.match(read('terms/MLD-0002-ablation-study.html'), /<main class="term-shell">[\s\S]*?<header class="hero" id="main" tabindex="-1">/);
   assert.match(read('technology/TECH-0216-pytorch.html'), /<header class="hero" id="main" tabindex="-1">/);
 });
 
