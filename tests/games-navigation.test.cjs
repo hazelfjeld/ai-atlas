@@ -1698,3 +1698,24 @@ test('existing editorial and reference page titles share Discover headline typog
   assert.ok(offline.includes('/* atlas-shared-headlines:begin */'),
     'Single-file fallback must embed the shared style');
 });
+
+test('both reference directories reuse Discover editorial headings from one generated component', () => {
+  const shared = read('scripts/site_chrome.py');
+  assert.match(shared, /def render_directory_hero\(eyebrow, title, summary, \*, lead=False\):/);
+  for (const [route, heading] of [
+    ['terms/index.html', 'Follow the connections.'],
+    ['technology/index.html', 'Tools, with context.']
+  ]) {
+    const html = read(route);
+    assert.match(html, /<header class="hero" id="main" tabindex="-1"><div class="discover-heading"><div><p class="eyebrow">/);
+    assert.ok(html.includes('<h1>' + heading + '</h1></div></div>'), route);
+    assert.equal((html.match(/class="discover-heading"/g) || []).length, 1, route);
+    assert.ok(!html.includes('.term-shell h1{font:'), 'directory must inherit Discover headline font: ' + route);
+    assert.ok(!html.includes('.term-shell h1{font-size:'), 'directory must inherit Discover headline size: ' + route);
+  }
+  assert.match(read('scripts/build_term_pages.py'), /intro = render_directory_hero\(/);
+  assert.match(read('scripts/build_seo.py'), /body = render_directory_hero\(/);
+  // The published individual reference templates and links are intentionally unchanged.
+  assert.match(read('terms/MLD-0002-ablation-study.html'), /<main class="term-shell" id="main">/);
+  assert.match(read('technology/TECH-0216-pytorch.html'), /<header class="hero" id="main" tabindex="-1">/);
+});

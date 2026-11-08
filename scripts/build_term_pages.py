@@ -8,7 +8,7 @@ import re
 import unicodedata
 from urllib.parse import quote, urlsplit
 from site_seo import metadata, breadcrumbs, absolute, technology_path
-from site_chrome import render_directory_nav, DIRECTORY_MOBILE_CSS, native_directory_article_skip
+from site_chrome import render_directory_nav, render_directory_hero, DIRECTORY_MOBILE_CSS, native_directory_article_skip
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -39,11 +39,12 @@ def shell(title, body, path, description, structured=None):
     directory_nav = render_directory_nav('../', 'Concept dictionary', mobile_brand=True)
     directory_css = DIRECTORY_MOBILE_CSS
     directory_assets = '<link rel="stylesheet" href="../site-chrome.css"><script src="../site-theme.js"></script>'
+    heading_css = '' if path == 'terms/index.html' else '.term-shell h1{font-size:clamp(32px,6vw,58px)}'
     body, main_id = native_directory_article_skip(body, path)
     return f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 {metadata(title + ' | AI Updates', description, path, structured)}
-<link rel="stylesheet" href="../checkpoint.css"><link rel="stylesheet" href="../brand.css"><style>.term-shell{{max-width:1000px;margin:auto;padding:30px 24px 70px}}.term-nav{{display:flex;flex-wrap:wrap;gap:18px;font-size:13px}}.term-shell h1{{font-size:clamp(32px,6vw,58px)}}.term-shell h2{{font-size:20px;margin:0 0 12px}}.term-shell p,.term-shell li{{font-size:15px;line-height:1.75}}.term-shell .lead{{font-size:20px;max-width:850px}}.term-shell li{{margin:7px 0}}.term-shell a{{overflow-wrap:anywhere}}.term-shell .hero{{margin:38px 0 24px}}{directory_css}@media print{{.term-nav,.skip{{display:none}}.term-shell{{padding:0}}.detail-block{{break-inside:avoid}}}}</style>{directory_assets}</head><body><a class="skip" href="#main">Skip to content</a><main class="term-shell"{main_id}>{directory_nav}{body}<footer>Prepared catalog snapshot: November 1, 2026. Imported references retain their prior review labels. These pages work without JavaScript; external references require internet. <a href="../about.html">Editorial policy</a> · <a href="../index.html#/sources">Sources & downloads</a></footer></main></body></html>'''
+<link rel="stylesheet" href="../checkpoint.css"><link rel="stylesheet" href="../brand.css"><style>.term-shell{{max-width:1000px;margin:auto;padding:30px 24px 70px}}.term-nav{{display:flex;flex-wrap:wrap;gap:18px;font-size:13px}}{heading_css}.term-shell h2{{font-size:20px;margin:0 0 12px}}.term-shell p,.term-shell li{{font-size:15px;line-height:1.75}}.term-shell .lead{{font-size:20px;max-width:850px}}.term-shell li{{margin:7px 0}}.term-shell a{{overflow-wrap:anywhere}}.term-shell .hero{{margin:38px 0 24px}}{directory_css}@media print{{.term-nav,.skip{{display:none}}.term-shell{{padding:0}}.detail-block{{break-inside:avoid}}}}</style>{directory_assets}</head><body><a class="skip" href="#main">Skip to content</a><main class="term-shell"{main_id}>{directory_nav}{body}<footer>Prepared catalog snapshot: November 1, 2026. Imported references retain their prior review labels. These pages work without JavaScript; external references require internet. <a href="../about.html">Editorial policy</a> · <a href="../index.html#/sources">Sources & downloads</a></footer></main></body></html>'''
 
 
 def main():
@@ -88,7 +89,7 @@ def main():
         (ROOT / path).write_bytes(blob)
         manifest[r['id']] = {'path': path, 'sha256': hashlib.sha256(blob).hexdigest(), 'expanded': bool(guide)}
     (out / 'manifest.json').write_bytes((json.dumps(manifest, indent=2) + '\n').encode())
-    intro = f'<header class="hero"><p class="eyebrow">CONCEPT ENCYCLOPEDIA</p><h1>Follow the connections.</h1><p>{len(terms):,} permanent reference pages · {len(guides)} expanded guides. Every reference page preserves its original definition, example, caveat, context and sources. The remaining detailed expansions are visibly pending.</p></header>'
+    intro = render_directory_hero('CONCEPT ENCYCLOPEDIA', 'Follow the connections.', f'{len(terms):,} permanent reference pages · {len(guides)} expanded guides. Every reference page preserves its original definition, example, caveat, context and sources. The remaining detailed expansions are visibly pending.')
     intro += section('Start with an expanded guide', links(list(guides)))
     intro += section('All concepts, A–Z', links([t['id'] for t in sorted(terms, key=lambda r: r['term'].casefold())]))
     (out / 'index.html').write_bytes(shell('AI Concept Dictionary: 1,345 Terms', intro, 'terms/index.html', 'Explore 1,345 AI, machine learning and language-model concepts with definitions, examples, caveats, sources and connected technology profiles.', {'@context':'https://schema.org','@type':'DefinedTermSet','name':'AI Updates Concept Dictionary','url':absolute('terms/index.html'),'description':f'{len(terms):,} preserved concept references and {len(guides)} expanded educational guides.'}).encode())

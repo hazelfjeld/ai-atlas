@@ -11,7 +11,7 @@ import subprocess
 from xml.etree.ElementTree import Element, SubElement, tostring
 from site_seo import absolute, metadata, breadcrumbs, replace_head, technology_path, ORIGIN
 from build_term_pages import rows, term_path, external
-from site_chrome import render_directory_nav, DIRECTORY_MOBILE_CSS, STANDALONE_NAVS, normalize_standalone_chrome, normalize_discover_sidebar, sync_desktop_rail_icons_css, ensure_skip_destination_focusable, native_directory_article_skip
+from site_chrome import render_directory_nav, DIRECTORY_MOBILE_CSS, STANDALONE_NAVS, normalize_standalone_chrome, normalize_discover_sidebar, sync_desktop_rail_icons_css, ensure_skip_destination_focusable, native_directory_article_skip, render_directory_hero
 
 ROOT = Path(__file__).resolve().parents[1]
 PAGES = {
@@ -39,8 +39,8 @@ def shell(title, description, path, body, structured=None):
     theme_script = f'<script src="{prefix}site-theme.js"></script>' if path == 'about.html' or path.startswith('technology/') else ''
     # About reuses the same Discover hero component. Keep legacy detail-page
     # typography unchanged for the 303 existing technology profiles.
-    heading_rule = '' if path == 'about.html' else '.term-shell h1{font:400 clamp(34px,6vw,58px)/1.12 Georgia,serif;letter-spacing:-.04em}'
-    eyebrow_rule = '' if path == 'about.html' else '.term-shell .hero .eyebrow{font:600 11px/1.6 system-ui,sans-serif}'
+    heading_rule = '' if path in ('about.html', 'technology/index.html') else '.term-shell h1{font:400 clamp(34px,6vw,58px)/1.12 Georgia,serif;letter-spacing:-.04em}'
+    eyebrow_rule = '' if path in ('about.html', 'technology/index.html') else '.term-shell .hero .eyebrow{font:600 11px/1.6 system-ui,sans-serif}'
     body, main_id = native_directory_article_skip(body, path)
     return f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -93,7 +93,7 @@ def main():
         data = [{'@context': 'https://schema.org', '@type': 'WebPage', 'name': r['name'] + ' technology profile', 'description': r['what'], 'url': absolute(path), 'isPartOf': {'@type': 'WebSite', 'name': 'AI Updates', 'url': ORIGIN + '/'}, 'about': {'@type': 'Thing', 'name': r['name']}}, breadcrumbs([('AI Updates','index.html'), ('Technologies','technology/index.html'), (r['name'],path)])]
         description = (r['name'] + ': ' + r['what'] + ' Explore uses, tradeoffs and linked concepts.')[:170]
         (ROOT / path).write_bytes(shell(r['name'] + ' — Uses & Tradeoffs | AI Updates', description, path, body, data).encode())
-    body = f'<header class="hero"><p class="eyebrow">THE TECHNOLOGY FIELD GUIDE</p><h1>Tools, with context.</h1><p class="lead">{len(techs)} AI technology profiles. Explore what each does, where it fits, its tradeoffs and the ideas behind it.</p></header><p class="notice">The original 300 profiles are preserved; added profiles are separately source-reviewed, not independently benchmarked. <a href="../technologies.html">Open searchable technology filters →</a></p><div class="reference-grid">' + ''.join(f'<a href="{Path(technology_path(r)).name}">{e(r["name"])}</a>' for r in sorted(techs,key=lambda r:r['name'].casefold())) + '</div>'
+    body = render_directory_hero('THE TECHNOLOGY FIELD GUIDE', 'Tools, with context.', f'{len(techs)} AI technology profiles. Explore what each does, where it fits, its tradeoffs and the ideas behind it.', lead=True) + '<p class="notice">The original 300 profiles are preserved; added profiles are separately source-reviewed, not independently benchmarked. <a href="../technologies.html">Open searchable technology filters →</a></p><div class="reference-grid">' + ''.join(f'<a href="{Path(technology_path(r)).name}">{e(r["name"])}</a>' for r in sorted(techs,key=lambda r:r['name'].casefold())) + '</div>'
     (out / 'index.html').write_bytes(shell(f'AI Technology Directory: {len(techs)} Profiles | AI Updates', f'Browse {len(techs)} profiles: 300 preserved originals plus {new_count} source-reviewed addition(s), with context and limitations.', 'technology/index.html', body).encode())
     about = '''<header class="hero"><div class="discover-heading"><div><p class="eyebrow">ABOUT AI UPDATES</p><h1>The frontier, in context.</h1></div></div><p class="lead">AI is easier to understand when the explanation comes with its evidence, connections and limits.</p></header>
 <section class="profile-section"><h2>A place to learn, investigate and build.</h2><p>AI Updates brings together an AI concept dictionary, technology field guide, research library, safety observatory and practical project playbooks. It began as Atlas; the original catalog, permanent IDs, citations and downloadable workbooks are retained.</p><p>The prepared November 1, 2026 snapshot contains 1,345 concepts, 300 technologies, 30 papers, 10 safety report records and 20 playbooks. Sixteen concept guides have expanded editorial explanations. The other references clearly mark their detailed expansion as pending.</p></section>

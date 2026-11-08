@@ -43,6 +43,20 @@ def native_directory_article_skip(body, path):
         assert body.startswith(heading), 'Directory must start with the article heading: ' + path
     return body.replace(heading, '<header class="hero" id="main" tabindex="-1">', 1), ''
 
+def render_directory_hero(eyebrow, title, summary, *, lead=False):
+    """One Discover-style heading component for both A-Z reference directories.
+
+    Use the existing .discover-heading styles from brand.css. This is only
+    for directory landing pages; individual profiles keep their own layouts.
+    """
+    suffix = ' class="lead"' if lead else ''
+    return (
+        '<header class="hero"><div class="discover-heading"><div>'
+        '<p class="eyebrow">' + escape(eyebrow) + '</p>'
+        '<h1>' + escape(title) + '</h1></div></div>'
+        '<p' + suffix + '>' + escape(summary) + '</p></header>'
+    )
+
 def render_brand(prefix, classes="site-chrome__brand"):
     """Reusable real SVG wordmark for desktop and native mobile navigation."""
     return (

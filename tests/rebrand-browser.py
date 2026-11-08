@@ -150,6 +150,33 @@ with sync_playwright() as p:
                     page.screenshot(path=str(out / f'no-script-detail-label-{route.replace("/", "-")}.png'))
     page.emulate_media(color_scheme='light')
 
+
+    # The Concept and Technology A-Z directories used separate inline title
+    # styles and a different hero hierarchy from About/Discover. They now reuse
+    # the same server-rendered .discover-heading component, even with JS off.
+    for width in (320, 390, 768, 1280):
+        page.set_viewport_size({'width': width, 'height': 844 if width <= 650 else 900})
+        for theme in ('light', 'dark'):
+            page.emulate_media(color_scheme=theme)
+            page.goto(base + 'about.html')
+            reference_style = page.locator('.hero .discover-heading h1').evaluate("""el => {
+                const s = getComputedStyle(el);
+                return [s.fontFamily, s.fontSize, s.fontWeight, s.lineHeight, s.letterSpacing];
+            }""")
+            for route in ('terms/index.html', 'technology/index.html'):
+                page.goto(base + route)
+                hero = page.locator('main.term-shell > header.hero#main')
+                actual_style = hero.locator('.discover-heading h1').evaluate("""el => {
+                    const s = getComputedStyle(el);
+                    return [s.fontFamily, s.fontSize, s.fontWeight, s.lineHeight, s.letterSpacing];
+                }""")
+                check(f'{route} {width}px {theme} uses About and Discover headline component',
+                      hero.count() == 1 and actual_style == reference_style
+                      and page.locator('nav.site-chrome .site-chrome__links a').count() == 7
+                      and page.locator('main.term-shell #main').count() == 1)
+                if width == 390 and theme == 'dark':
+                    page.screenshot(path=str(out / f'shared-heading-{route.replace("/", "-")}-390-dark.png'))
+
     # Shared standalone rail is inside <main> on five existing workspaces.
     # Verify native skip focus at article content with scripts disabled.
     for width in (320, 390, 768, 1280):
