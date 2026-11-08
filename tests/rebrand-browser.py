@@ -26,6 +26,14 @@ with sync_playwright() as p:
     page=static.new_page()
     page.goto(base)
     check('discovery content is readable without JavaScript', page.locator('h1').inner_text()=='Discover' and page.locator('.discovery-card').count()==6)
+    check('Discover exposes a crawlable, human-readable Discord invite without JavaScript',
+          page.locator('#community a[href="https://discord.gg/mvRJjgdM4R"]').count() == 1
+          and 'AI research' in page.locator('#community').inner_text())
+    page.goto(base + 'about.html')
+    check('About provides context and the same public Discord invitation without JavaScript',
+          page.locator('a[href="https://discord.gg/mvRJjgdM4R"]').count() == 1
+          and 'Discord' in page.locator('main').inner_text())
+    page.goto(base)
     # Discover ships real article cards in HTML; pending catalog status must
     # never cause a visible first-paint shift or mislead script-free readers.
     for width in (320, 390, 768, 1280):
