@@ -228,9 +228,11 @@ function restoreSharedThemeAfterHistory() {
 // The same saved appearance must stay consistent across already-open Atlas
 // workspaces too. Storage notifications fire in other tabs, not the source tab.
 // Ignore unrelated/invalid values and preserve script-free rendering.
-window.addEventListener('storage', (event) => {
-  if (event.key === 'atlas.theme') syncSharedStoredTheme(event.newValue);
-});
+if (typeof window !== 'undefined' && window.addEventListener) {
+  window.addEventListener('storage', (event) => {
+    if (event.key === 'atlas.theme') syncSharedStoredTheme(event.newValue);
+  });
+}
 
 // Restoring a page from the back/forward cache must not resurrect a modal
 // drawer with stale inert siblings or hidden keyboard focus.
