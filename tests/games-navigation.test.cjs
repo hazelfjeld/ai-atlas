@@ -1683,3 +1683,25 @@ test('enhanced shared mobile drawer locks root and body without breaking native 
   assert.ok(offline.includes('html.atlas-enhanced:has(.site-mobile-chrome__nav[open]){overflow:hidden}'),
     'offline fallback embeds the same shared root-scroll lock');
 });
+
+test('existing editorial and reference page titles share Discover headline typography', () => {
+  const css = read('site-chrome.css');
+  const offline = read('downloads/Atlas_Demo_Offline.html');
+  const block = css.split('/* atlas-shared-headlines:begin */')[1]?.split('/* atlas-shared-headlines:end */')[0];
+  assert.ok(block, 'A single shared headline rule must exist');
+  assert.equal(css.split('/* atlas-shared-headlines:begin */').length - 1, 1);
+  for (const selector of [
+    '.term-shell > .hero',
+    '.tech-shell > .tech-hero',
+    '.playbook-shell > .playbook-hero',
+    '.review-shell > header',
+    '.shell:has(> .site-chrome.top) > main > header',
+    '.shell:has(> .site-chrome.nav) > main > header',
+    '.shell:has(> main > .site-chrome.research-site-chrome) > main > header',
+  ]) assert.ok(block.includes(selector), 'Missing shared page family: ' + selector);
+  assert.ok(block.includes('font:400 clamp(36px,4.2vw,56px)/1.1 Georgia'));
+  assert.ok(block.includes('overflow-wrap:break-word'));
+  assert.ok(!block.includes('.games-header'), 'Games retains its own compact header');
+  assert.ok(offline.includes('/* atlas-shared-headlines:begin */'),
+    'Single-file fallback must embed the shared style');
+});

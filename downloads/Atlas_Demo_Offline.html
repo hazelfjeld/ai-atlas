@@ -844,6 +844,28 @@ body:has(.site-chrome) :is(.tech-controls,.playbook-tools,.controls,.search-cont
   }
 }
 /* atlas-mobile-sticky-frame:end */
+
+/* atlas-shared-headlines:begin */
+/* Discover's reading-desk display type is the visual source for existing
+   editorial, directory and reference title blocks. The single shared rule
+   replaces their diverging standalone h1 scales without changing Games,
+   news cards, the navigation or any article content. */
+:is(
+  .term-shell > .hero,
+  .tech-shell > .tech-hero,
+  .playbook-shell > .playbook-hero,
+  .review-shell > header,
+  .shell:has(> .site-chrome.top) > main > header,
+  .shell:has(> .site-chrome.nav) > main > header,
+  .shell:has(> main > .site-chrome.research-site-chrome) > main > header
+) h1{
+  font:400 clamp(36px,4.2vw,56px)/1.1 Georgia,"Times New Roman",serif;
+  letter-spacing:-.045em;
+  text-wrap:balance;
+  overflow-wrap:break-word;
+}
+/* atlas-shared-headlines:end */
+
 </style><script>/* Enhance the native dropdown only when scripts can make its drawer modal.
    Without JavaScript, keep the accessible, nonmodal <details> fallback. */
 document.documentElement.classList?.add('atlas-enhanced');

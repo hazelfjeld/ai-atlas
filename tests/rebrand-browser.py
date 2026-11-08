@@ -1208,6 +1208,35 @@ with sync_playwright() as p:
                   page.locator('.site-mobile-chrome').get_attribute('data-page-label')=='Guided demo'
                   and page.evaluate('document.documentElement.dataset.theme')==theme)
 
+    # Discover-derived display heading shared across existing article families.
+    # Check computed styles at 320, 390, tablet and desktop in both themes.
+    for width in (320,390,768,1280):
+        for theme in ('light','dark'):
+            page.set_viewport_size({'width':width,'height':844 if width<=650 else 900})
+            for route, selector in (
+                ('about.html','.term-shell > .hero h1'),
+                ('terms/MLD-0002-ablation-study.html','.term-shell > .hero h1'),
+                ('technology/TECH-0216-pytorch.html','.term-shell > .hero h1'),
+                ('technologies.html','.tech-hero h1'),
+                ('playbooks.html','.playbook-hero h1'),
+            ):
+                page.goto(base+route)
+                page.evaluate('(t)=>localStorage.setItem("atlas.theme",t)',theme)
+                page.reload()
+                check(f'{route} {width}px {theme} matches shared Discover headline',
+                      page.evaluate("""selector => {
+                        const node=document.querySelector(selector);
+                        if(!node) return false;
+                        const cs=getComputedStyle(node), size=parseFloat(cs.fontSize);
+                        return cs.fontFamily.includes('Georgia') &&
+                          cs.fontWeight==='400' && size>=36 && size<=56.1 &&
+                          cs.lineHeight!=='normal' &&
+                          document.documentElement.scrollWidth<=innerWidth+1;
+                      }""",selector))
+                if width in (390,1280) and theme=='dark' and route in (
+                    'about.html','technologies.html','terms/MLD-0002-ablation-study.html'):
+                    page.screenshot(path=str(out/f'coherent-heading-{route.replace("/", "-")}-{width}-dark.png'))
+
     # Reference detail pages used to show only the generic parent section
     # in the shared 78px topbar. They now identify the actual detail while
     # preserving the seven navigation links and correct selected parent.
