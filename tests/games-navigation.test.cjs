@@ -1692,7 +1692,8 @@ test('existing editorial and reference page titles share Discover headline typog
   assert.equal(css.split('/* atlas-shared-headlines:begin */').length - 1, 1);
   assert.ok(block.includes('.term-shell > .hero:not(:has(.discover-heading)) h1'), 'Generated references and directories share one rule');
   assert.ok(!block.includes('.review-shell > header'), 'Preserve previously calibrated editorial headings');
-  assert.ok(block.includes('font:400 clamp(36px,4.2vw,56px)/1.1 Georgia'));
+  assert.ok(block.includes('font:400 clamp(40px,4.2vw,56px)/1.08 Georgia'));
+  assert.ok(block.includes('h1{font-size:43px}'), 'Mobile reference headline matches Discover');
   assert.ok(block.includes('overflow-wrap:break-word'));
   assert.ok(!block.includes('.games-header'), 'Games retains its own compact header');
   assert.ok(offline.includes('/* atlas-shared-headlines:begin */'),
