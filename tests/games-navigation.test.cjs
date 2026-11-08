@@ -396,8 +396,8 @@ test('About, technologies and playbooks reuse the Games and archive mobile chrom
 test('About reuses the exact generated catalog navigation, not a parallel template', () => {
   const about = read('about.html');
   const built = read('scripts/build_seo.py');
-  const main = '<main class="term-shell" id="main" tabindex="-1">';
-  const ours = about.split(main)[1].split('<header class="hero">')[0];
+  const main = '<main class="term-shell">';
+  const ours = about.split(main)[1].split('<header class="hero" id="main" tabindex="-1">')[0];
   const template = read('terms/index.html').split('<main class="term-shell">')[1].split('<header class="hero" id="main" tabindex="-1">')[0];
   const expected = template.replaceAll('href="../','href="')
     .replace('<div class="directory-mobile-topbar site-mobile-chrome" aria-label="AI Updates mobile header">', '<div class="directory-mobile-topbar site-mobile-chrome" aria-label="AI Updates mobile header" data-page-label="About">')
@@ -970,9 +970,9 @@ test('Research, Technology and Playbooks reuse Discover editorial heading typogr
   assert.match(home, /class="discover-heading"><div><p class="eyebrow"/);
   assert.match(brand, /\.discover-heading h1\{font:400 clamp\(40px,4\.2vw,56px\)\/1\.08 Georgia/);
   const pages = [
-    ['playbooks.html', '<section class="playbook-hero">', /<h1>Start with the problem, not the framework\.<\/h1>/],
-    ['technologies.html', '<section class="tech-hero">', /<h1>Choose tools for their actual edge\.<\/h1>/],
-    ['research.html', '<section class="hero">', /<h1 id="view-title">Follow the evidence\.<\/h1>/],
+    ['playbooks.html', '<section class="playbook-hero" id="main" tabindex="-1">', /<h1>Start with the problem, not the framework\.<\/h1>/],
+    ['technologies.html', '<section class="tech-hero" id="main" tabindex="-1">', /<h1>Choose tools for their actual edge\.<\/h1>/],
+    ['research.html', '<section class="hero" id="main" tabindex="-1">', /<h1 id="view-title">Follow the evidence\.<\/h1>/],
   ];
   for (const [route, sectionStart, heading] of pages) {
     const html = read(route);
@@ -1546,6 +1546,30 @@ test('all standalone skip links move keyboard focus to a unique native destinati
   }
 });
 
+
+test('standalone native article skips bypass the shared rail before JavaScript', () => {
+  const helper = read('scripts/site_chrome.py');
+  assert.ok(helper.includes('def ensure_skip_destination_focusable(html, path=None):'));
+  assert.ok(helper.includes('return ensure_skip_destination_focusable(normalized, path)'));
+  assert.ok(read('scripts/build_seo.py').includes("about), 'about.html')"));
+  for (const [route, marker] of [
+    ['about.html', '<header class="hero" id="main" tabindex="-1">'],
+    ['research.html', '<section class="hero" id="main" tabindex="-1">'],
+    ['playbooks.html', '<section class="playbook-hero" id="main" tabindex="-1">'],
+    ['technologies.html', '<section class="tech-hero" id="main" tabindex="-1">'],
+    ['hardware-review.html', '<header id="main" tabindex="-1">']
+  ]) {
+    const html = read(route);
+    assert.equal((html.match(/id="main"/g) || []).length, 1, route + ' has one target');
+    assert.ok(html.includes('<a class="skip" href="#main">'), route + ' keeps native skip');
+    assert.ok(html.includes(marker), route + ' targets the real article heading');
+    const main = html.match(/<main\b[^>]*>/)?.[0];
+    assert.ok(main && !main.includes('id="main"'), route + ' retains an independent main landmark');
+    const nav = html.indexOf('<nav class="site-chrome ');
+    const navEnd = html.indexOf('</nav>', nav);
+    assert.ok(nav >= 0 && html.indexOf(marker) > navEnd, route + ' target follows shared navigation');
+  }
+});
 
 test('generated dictionary and technology skip links target article content after the shared rail', () => {
   const theme = read('site-theme.js');

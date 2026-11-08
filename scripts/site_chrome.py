@@ -262,13 +262,34 @@ def normalize_discover_sidebar(html, term_count, tech_count):
 
 
 
-def ensure_skip_destination_focusable(html):
+def ensure_skip_destination_focusable(html, path=None):
     """Keep script-free skip links keyboard-focusable across page families.
 
     A fragment scroll alone need not move focus. Preserve the existing
     destination, native link, and page-specific text; never add a duplicate.
     """
     import re
+    # Keep native article skips out of the shared rail nested in <main>.
+    # This is a build-time change, so it also works without JavaScript.
+    article_targets = {
+        "about.html": '<header class="hero">',
+        "research.html": '<section class="hero">',
+        "playbooks.html": '<section class="playbook-hero">',
+        "technologies.html": '<section class="tech-hero">',
+        "hardware-review.html": '<header>',
+    }
+    if path in article_targets:
+        main = re.search(r'<main\b[^>]*>', html)
+        assert main, 'Missing main landmark: ' + path
+        marker = article_targets[path]
+        if ' id="main"' in main.group(0):
+            assert html.count(marker) == 1, 'Ambiguous article target: ' + path
+            assert html.index(marker) > html.index('</nav>', main.end()), 'Article precedes shared rail: ' + path
+            bare_main = main.group(0).replace(' id="main"', '').replace(' tabindex="-1"', '')
+            html = html[:main.start()] + bare_main + html[main.end():]
+            html = html.replace(marker, marker[:-1] + ' id="main" tabindex="-1">', 1)
+        else:
+            assert marker[:-1] + ' id="main" tabindex="-1">' in html, 'Missing native article target: ' + path
     skip = re.search(r'<a\b[^>]*\bclass="skip"[^>]*\bhref="#([^"]+)"', html)
     assert skip, 'Missing native skip link'
     target = re.compile(r'<[a-z][a-z0-9]*\b[^>]*\bid="' + re.escape(skip.group(1)) + r'"[^>]*>', re.I)
@@ -289,9 +310,9 @@ def normalize_standalone_chrome(html, path):
     desktop = rest[7]
     start = '<div class="' + ((mobile + " ") if mobile else "") + 'site-mobile-chrome"'
     end = '<nav class="site-chrome ' + desktop + '" aria-label="AI Updates primary navigation">'
-    middle = r'(?:<main id="main"(?: tabindex="-1")?>)?\s*' if path == "research.html" else r'\s*'
+    middle = r'(?:<main(?: id="main")?(?: tabindex="-1")?>)?\s*' if path == "research.html" else r'\s*'
     pattern = re.compile(re.escape(start) + r'[^>]*>.*?</div>' + middle +
                          re.escape(end) + r'.*?</nav>', re.S)
     normalized, count = pattern.subn(lambda _: render_standalone_nav(path), html)
     assert count == 1, 'Unexpected shared header structure on ' + path
-    return ensure_skip_destination_focusable(normalized)
+    return ensure_skip_destination_focusable(normalized, path)

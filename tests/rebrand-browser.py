@@ -140,6 +140,39 @@ with sync_playwright() as p:
                     page.screenshot(path=str(out / f'no-script-detail-label-{route.replace("/", "-")}.png'))
     page.emulate_media(color_scheme='light')
 
+    # Shared standalone rail is inside <main> on five existing workspaces.
+    # Verify native skip focus at article content with scripts disabled.
+    for width in (320, 390, 768, 1280):
+        page.set_viewport_size({'width': width, 'height': 844 if width <= 650 else 900})
+        for theme in ('light', 'dark'):
+            page.emulate_media(color_scheme=theme)
+            for route in ('about.html', 'research.html', 'playbooks.html',
+                          'technologies.html', 'hardware-review.html'):
+                page.goto(base + route)
+                check(f'{route} {width}px {theme} native skip follows primary navigation',
+                      page.evaluate("""() => {
+                          const main = document.querySelector('main');
+                          const target = document.querySelector('#main');
+                          const rail = document.querySelector('nav.site-chrome');
+                          return !!main && !!target && !!rail &&
+                            main.contains(target) && !main.hasAttribute('id') &&
+                            target.tabIndex === -1 && !!target.querySelector('h1') &&
+                            !!(rail.compareDocumentPosition(target) & Node.DOCUMENT_POSITION_FOLLOWING) &&
+                            document.querySelectorAll('#main').length === 1 &&
+                            document.documentElement.scrollWidth <= innerWidth;
+                      }"""))
+                page.locator('a.skip').focus()
+                page.keyboard.press('Enter')
+                check(f'{route} {width}px {theme} no-JS keyboard skip focuses article',
+                      page.evaluate("""() => location.hash === '#main' &&
+                          document.activeElement === document.querySelector('#main')"""))
+                page.keyboard.press('Tab')
+                check(f'{route} {width}px {theme} next Tab bypasses shared navigation',
+                      page.evaluate("""() => !document.activeElement.closest('.site-chrome,.site-mobile-chrome')"""))
+                if width == 390 and theme == 'dark' and route in ('about.html','research.html'):
+                    page.screenshot(path=str(out / f'native-skip-{route}-390-dark.png'))
+    page.emulate_media(color_scheme='light')
+
     static.close()
     context=browser.new_context(viewport={'width':1440,'height':1050},reduced_motion='reduce')
     page=context.new_page()

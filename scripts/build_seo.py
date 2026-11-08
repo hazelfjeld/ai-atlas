@@ -109,7 +109,7 @@ def main():
     demo_text = re.sub(r'only \d+ guides are expanded', 'only ' + str(guide_count) + ' guides are expanded', demo_text)
     demo_text = re.sub(r'\d+ now have expanded explanations', str(guide_count) + ' now have expanded explanations', demo_text)
     demo.write_bytes(demo_text.encode())
-    (ROOT / 'about.html').write_bytes(ensure_skip_destination_focusable(shell(*PAGES['about.html'], 'about.html', about)).encode())
+    (ROOT / 'about.html').write_bytes(ensure_skip_destination_focusable(shell(*PAGES['about.html'], 'about.html', about), 'about.html').encode())
     # Normalize existing page headers from the shared site-chrome component.
     for route in STANDALONE_NAVS:
         page = ROOT / route
