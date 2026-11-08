@@ -1153,7 +1153,7 @@ with sync_playwright() as p:
                 page.reload()
                 page.wait_for_function("""expected => 
                     document.querySelector('main.term-shell > .site-mobile-chrome')?.dataset.pageLabel===expected
-                """,title)
+                """,arg=title)
                 check(f'{route} {width}px {theme} shared workspace identifies its detail page',
                       page.locator('.site-mobile-chrome').get_attribute('data-page-label')==title
                       and page.locator('.site-chrome__links a').count()==7
