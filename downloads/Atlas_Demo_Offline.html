@@ -579,6 +579,24 @@ body:has(.site-chrome){padding-top:78px}
   padding:clamp(18px,2vw,24px);
 }
 
+/* atlas-card-interactions:begin */
+/* Discover's .discovery-card:hover is the shared pointer affordance. Use the
+   same interaction on existing Playbooks, Technology, Research and editorial
+   review cards, with :focus-within for keyboard navigation. No card becomes
+   a fake link; border width stays fixed to prevent layout shift. */
+:root{--atlas-card-interactive-line:#9AAD9C}
+:root[data-theme="dark"]{--atlas-card-interactive-line:#91BCA3}
+@media(prefers-color-scheme:dark){
+ :root:not([data-theme="light"]){--atlas-card-interactive-line:#91BCA3}
+}
+:is(.playbook-shell .playbook,
+    .tech-shell .tech-card,
+    .shell:has(> .site-chrome.nav) article.card,
+    .shell:has(> main > .site-chrome.research-site-chrome) .cards > .card):is(:hover,:focus-within){
+ border-color:var(--atlas-card-interactive-line);
+}
+/* atlas-card-interactions:end */
+
 /* Shared editorial footer rhythm: the same quiet divider, spacing and type
    as Discover's .main-footer. Keep each section's own evidence/coverage text
    and real links; only site chrome is shared across static reference pages,

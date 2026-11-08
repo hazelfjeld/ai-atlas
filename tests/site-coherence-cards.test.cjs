@@ -21,6 +21,25 @@ test('Playbooks, Technology, Research and editorial reviews reuse Discover card 
   assert.ok(!block.includes('display:none'), 'Do not hide page navigation or cards');
 });
 
+test('shared editorial cards match Discover hover and expose keyboard focus in either theme', () => {
+  const brand = fs.readFileSync(path.join(__dirname, '..', 'brand.css'), 'utf8');
+  const block = css.split('/* atlas-card-interactions:begin */')[1]
+    ?.split('/* atlas-card-interactions:end */')[0];
+  assert.ok(block, 'Missing single shared card interaction rule');
+  assert.ok(brand.includes('.discovery-card:hover{border-color:#9AAD9C}'));
+  for (const selector of [
+    '.playbook-shell .playbook',
+    '.tech-shell .tech-card',
+    '.shell:has(> .site-chrome.nav) article.card',
+    '.shell:has(> main > .site-chrome.research-site-chrome) .cards > .card'
+  ]) assert.ok(block.includes(selector), 'Missing card family: ' + selector);
+  assert.ok(block.includes(':is(:hover,:focus-within)'));
+  assert.ok(block.includes(':root[data-theme="dark"]') && block.includes('prefers-color-scheme:dark'));
+  assert.ok(!block.includes('pointer-events:none') && !block.includes('display:none'));
+  const offline = fs.readFileSync(path.join(__dirname, '..', 'downloads/Atlas_Demo_Offline.html'), 'utf8');
+  assert.ok(offline.includes(css), 'Offline demo must embed the exact updated CSS');
+});
+
 test('generated concept and technology article headlines reuse Discover typography in both themes and mobile widths', () => {
   const css = fs.readFileSync(path.join(__dirname, '..', 'site-chrome.css'), 'utf8');
   const brand = fs.readFileSync(path.join(__dirname, '..', 'brand.css'), 'utf8');
