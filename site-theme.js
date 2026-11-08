@@ -309,9 +309,10 @@ document.addEventListener('DOMContentLoaded', () => {
         container.append(button);
         controls.push(button);
       }
-      // Discover's original desktop button can also change the saved theme.
-      // Synchronize the shared mobile label after that existing click handler.
-      if (existing && !rail) existing.addEventListener('click', syncThemeButtons);
+      // Discover's app-level click handler may be registered after this head
+      // script's DOMContentLoaded callback. Read its final palette after all
+      // synchronous click listeners finish, not before the app toggles it.
+      if (existing && !rail) existing.addEventListener('click', () => queueMicrotask(syncThemeButtons));
       syncThemeButtons();
     }
   }

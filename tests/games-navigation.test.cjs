@@ -163,8 +163,9 @@ test('Discover mobile uses the shared theme action while Games keeps its existin
     setAttribute(name, value) { this.attrs[name] = value; },
     addEventListener(name, handler) { this.listeners[name] = handler; },
     click() {
-      root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+      // Shared listener can run before the app's later click listener.
       this.listeners.click?.();
+      root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
     }
   };
   const document = {
@@ -182,8 +183,9 @@ test('Discover mobile uses the shared theme action while Games keeps its existin
     }
   };
   const window = {innerWidth:390, addEventListener() {}, matchMedia:()=>({matches:false})};
+  const microtasks = [];
   vm.runInNewContext(script, {
-    document, window,
+    document, window, queueMicrotask: task => microtasks.push(task),
     localStorage: {getItem:()=> 'dark',setItem:(key,value)=>saved.push([key,value])}
   });
   handlers.DOMContentLoaded();
@@ -197,6 +199,9 @@ test('Discover mobile uses the shared theme action while Games keeps its existin
   assert.equal(buttons[0].attrs['aria-pressed'],'false');
   assert.equal(existing.attrs['aria-pressed'],'false', 'Mobile theme change updates Discover sidebar state');
   existing.click();
+  assert.equal(existing.attrs['aria-pressed'],'false',
+    'The early listener must wait rather than report a stale palette');
+  for (const task of microtasks.splice(0)) task();
   assert.equal(root.dataset.theme,'dark');
   assert.equal(buttons[0].attrs['aria-pressed'],'true','desktop theme action keeps mobile label synchronized');
   assert.equal(existing.attrs['aria-pressed'],'true', 'Desktop theme change updates its own accessible state');
