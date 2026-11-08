@@ -819,7 +819,7 @@ try {
 // keep the static parent title available without JavaScript.
 document.addEventListener('DOMContentLoaded', () => {
   const path = typeof window !== 'undefined' ? (window.location?.pathname || '') : '';
-  if (!/(?:^|\\/)(?:terms\\/MLD-\\d+|technology\\/TECH-\\d+)-[^/]+\\.html$/.test(path)) return;
+  if (!/(?:^|\/)(?:terms\/MLD-\d+|technology\/TECH-\d+)-[^/]+\.html$/.test(path)) return;
   const bar = document.querySelector('main.term-shell > .site-mobile-chrome:not([data-page-label])');
   const title = document.querySelector('main.term-shell h1')?.textContent?.trim();
   if (bar && title && title.length <= 90) bar.dataset.pageLabel = title;
