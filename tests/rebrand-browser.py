@@ -645,6 +645,10 @@ with sync_playwright() as p:
                 intro=page.locator(selector)
                 intro.wait_for()
                 intro_top=intro.evaluate('el => el.getBoundingClientRect().top')
+                if abs(intro_top-discover_top) > 36:
+                    print('INTRO ALIGNMENT DIAGNOSTIC', route, width, theme,
+                          'discover_top', discover_top, 'intro_top', intro_top,
+                          'delta', intro_top-discover_top, flush=True)
                 check(f'{route} {width}px {theme} intro aligns with Discover workspace',
                       abs(intro_top-discover_top) <= 36
                       and page.evaluate('document.documentElement.scrollWidth <= innerWidth')
