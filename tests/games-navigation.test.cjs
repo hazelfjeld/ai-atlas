@@ -1532,8 +1532,8 @@ test('all standalone skip links move keyboard focus to a unique native destinati
   const pages = ['about.html','research.html','catalog-review.html','hardware-review.html',
     'games.html','technologies.html','playbooks.html','whats-new.html','demo.html'];
   const generator = read('scripts/site_chrome.py');
-  assert.match(generator, /def ensure_skip_destination_focusable\(html\):/);
-  assert.match(generator, /return ensure_skip_destination_focusable\(normalized\)/);
+  assert.match(generator, /def ensure_skip_destination_focusable\(html, path=None\):/);
+  assert.match(generator, /return ensure_skip_destination_focusable\(normalized, path\)/);
   assert.match(read('scripts/build_seo.py'), /ensure_skip_destination_focusable\(shell\(/);
   for (const route of pages) {
     const html = read(route);
