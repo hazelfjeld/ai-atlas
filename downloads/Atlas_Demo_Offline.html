@@ -354,20 +354,21 @@ body:has(.site-chrome){padding-left:0!important}
 
 
 /* The shared native mobile navigation uses Discover's existing off-canvas
-   frame. Keep <details> as the only menu source: it stays usable without JS,
-   while site-theme.js supplies Escape and outside-pointer dismissal. */
+   frame only after site-theme.js enables keyboard trapping and inert isolation.
+   Without scripts, the native <details> menu stays an anchored, nonmodal
+   dropdown, so keyboard focus never travels behind a fake modal backdrop. */
 @media (max-width:650px){
 /* Keep the page behind the native drawer stationary, as Discover already does. */
-body:has(.site-mobile-chrome__nav[open]){overflow:hidden}
-.site-mobile-chrome:has(.site-mobile-chrome__nav[open]){z-index:100}
-.site-mobile-chrome:has(.site-mobile-chrome__nav[open])::before{
+html.atlas-enhanced body:has(.site-mobile-chrome__nav[open]){overflow:hidden}
+html.atlas-enhanced .site-mobile-chrome:has(.site-mobile-chrome__nav[open]){z-index:100}
+html.atlas-enhanced .site-mobile-chrome:has(.site-mobile-chrome__nav[open])::before{
  content:"";position:fixed;inset:0;background:#13291d77;z-index:99
 }
-.site-mobile-chrome .site-mobile-chrome__nav[open] > .site-mobile-chrome__toggle{
+html.atlas-enhanced .site-mobile-chrome .site-mobile-chrome__nav[open] > .site-mobile-chrome__toggle{
  position:fixed;left:16px;top:16px;z-index:102;
  border-color:#435446;background:#374b3c;color:#f5f7ef
 }
-.site-mobile-chrome .site-mobile-chrome__menu{
+html.atlas-enhanced .site-mobile-chrome .site-mobile-chrome__menu{
  position:fixed;inset:0 auto 0 0;width:min(260px,calc(100vw - 48px));
  height:100vh;height:100dvh;max-height:100vh;max-height:100dvh;
  box-sizing:border-box;display:grid;grid-template-columns:minmax(0,1fr);align-content:start;
@@ -376,22 +377,22 @@ body:has(.site-mobile-chrome__nav[open]){overflow:hidden}
  background:var(--sidebar,#202b28);color:#c5cfc6;box-shadow:0 8px 32px #0003;
  z-index:101
 }
-.site-mobile-chrome .site-mobile-chrome__menu a{
+html.atlas-enhanced .site-mobile-chrome .site-mobile-chrome__menu a{
  flex:none;border-radius:8px;color:#c5cfc6;font-size:14px
 }
-.site-mobile-chrome .site-mobile-chrome__menu a:hover,
-.site-mobile-chrome .site-mobile-chrome__menu a[aria-current]{
+html.atlas-enhanced .site-mobile-chrome .site-mobile-chrome__menu a:hover,
+html.atlas-enhanced .site-mobile-chrome .site-mobile-chrome__menu a[aria-current]{
  background:#374b3c;color:#f5f7ef
 }
 }
 /* Reuse the exact desktop wordmark inside the shared native mobile drawer.
    The seven script-free primary navigation links remain unchanged. */
 @media (max-width:650px){
-.site-mobile-chrome .site-mobile-chrome__menu::before{
+html.atlas-enhanced .site-mobile-chrome .site-mobile-chrome__menu::before{
   content:"EXPLORE";display:block;margin:0 11px 6px;
   color:#87998b;font-size:10px;font-weight:700;letter-spacing:.13em;
 }
-.site-mobile-chrome .site-mobile-chrome__menu > a.site-mobile-chrome__brand{
+html.atlas-enhanced .site-mobile-chrome .site-mobile-chrome__menu > a.site-mobile-chrome__brand{
   position:absolute;top:10px;left:72px;right:10px;z-index:1;
   display:flex;align-items:center;justify-content:flex-start;gap:8px;
   min-height:48px;width:auto;margin:0;padding:0!important;
@@ -410,7 +411,7 @@ body:has(.site-mobile-chrome__nav[open]){overflow:hidden}
 /* Match Discover even before enhancement: the native menu has an existing
    real SVG brand once scripts run. Until then, reuse the shipped favicon and
    site name in the same reserved space (no-JavaScript included). */
-.site-mobile-chrome .site-mobile-chrome__menu:not(:has(> a.site-mobile-chrome__brand))::after{
+html.atlas-enhanced .site-mobile-chrome .site-mobile-chrome__menu:not(:has(> a.site-mobile-chrome__brand))::after{
   content:"AI Updates";position:absolute;top:10px;left:72px;right:10px;
   min-height:48px;display:flex;align-items:center;box-sizing:border-box;
   padding-left:36px;background:url("favicon.svg") left center/28px 28px no-repeat;
@@ -811,7 +812,11 @@ body:has(.site-chrome) :is(.tech-controls,.playbook-tools,.controls,.search-cont
   .topbar:has(.discover-mobile-chrome) .global-search > span{font-size:22px}
 }
 /* atlas-mobile-search-frame:end */
-</style><script>/* Use Discover's saved choice on standalone editorial pages before rendering. */
+</style><script>/* Enhance the native dropdown only when scripts can make its drawer modal.
+   Without JavaScript, keep the accessible, nonmodal <details> fallback. */
+document.documentElement.classList?.add('atlas-enhanced');
+
+/* Use Discover's saved choice on standalone editorial pages before rendering. */
 try {
   const savedTheme = localStorage.getItem('atlas.theme');
   if (savedTheme === 'dark' || savedTheme === 'light') {

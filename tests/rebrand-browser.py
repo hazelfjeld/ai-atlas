@@ -72,6 +72,16 @@ with sync_playwright() as p:
                       'terms/MLD-0002-ablation-study.html', 'technology/TECH-0216-pytorch.html'):
             page.goto(base + route)
             page.locator('details.site-mobile-chrome__nav summary').click()
+            # With JS off, never paint a modal-style drawer while the rest
+            # of the page remains keyboard-focusable. Use the native dropdown.
+            fallback = page.locator('details.site-mobile-chrome__nav .site-mobile-chrome__menu').evaluate("""el => ({
+                position:getComputedStyle(el).position,
+                overflow:getComputedStyle(document.body).overflow,
+                enhanced:document.documentElement.classList.contains('atlas-enhanced')
+            })""")
+            check(f'{route} {width}px no-JS menu is visibly nonmodal',
+                  fallback['position']=='absolute' and fallback['overflow']!='hidden'
+                  and not fallback['enhanced'])
             brand = page.locator('details.site-mobile-chrome__nav .site-mobile-chrome__brand')
             check(f'{route} {width}px no-JS drawer has one clickable Discover wordmark',
                   brand.count() == 1 and brand.is_visible()
@@ -1265,6 +1275,32 @@ with sync_playwright() as p:
                 top=hero.evaluate('el=>el.getBoundingClientRect().top')
                 check(f'generated PyTorch {width}px {theme} anchor has one shared header offset',
                       77<=top<=103)
+
+    # The identical shared menu becomes a real modal drawer only with JS,
+    # when Escape, focus trapping and inert isolation are available.
+    for width in (320, 390):
+        page.set_viewport_size({'width':width,'height':844})
+        for theme in ('light','dark'):
+            for route in ('about.html','terms/MLD-0691-machine-learning.html',
+                          'technology/TECH-0216-pytorch.html'):
+                page.goto(base+route)
+                page.evaluate('(t)=>localStorage.setItem("atlas.theme",t)',theme)
+                page.reload()
+                page.locator('details.site-mobile-chrome__nav summary').click()
+                enhanced = page.locator('details.site-mobile-chrome__nav .site-mobile-chrome__menu').evaluate("""el => ({
+                    position:getComputedStyle(el).position,
+                    overflow:getComputedStyle(document.body).overflow,
+                    enhanced:document.documentElement.classList.contains('atlas-enhanced')
+                })""")
+                check(f'{route} {width}px {theme} JS-enhanced menu is modal',
+                      enhanced['position']=='fixed' and enhanced['overflow']=='hidden'
+                      and enhanced['enhanced'])
+                if width==390 and theme=='dark' and route in ('about.html',
+                                                               'technology/TECH-0216-pytorch.html'):
+                    page.screenshot(path=str(out / f'enhanced-menu-{route.replace("/", "-")}-390-dark.png'))
+                page.keyboard.press('Escape')
+                check(f'{route} {width}px {theme} Escape restores the page',
+                      page.locator('details.site-mobile-chrome__nav[open]').count()==0)
 
     check('no application runtime exceptions',not errors)
     browser.close()

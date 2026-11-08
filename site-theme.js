@@ -1,3 +1,7 @@
+/* Enhance the native dropdown only when scripts can make its drawer modal.
+   Without JavaScript, keep the accessible, nonmodal <details> fallback. */
+document.documentElement.classList?.add('atlas-enhanced');
+
 /* Use Discover's saved choice on standalone editorial pages before rendering. */
 try {
   const savedTheme = localStorage.getItem('atlas.theme');

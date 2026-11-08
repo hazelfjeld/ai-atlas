@@ -1613,3 +1613,20 @@ test('shared desktop hash navigation clears the fixed workspace bar on editorial
   assert.ok(read('downloads/Atlas_Demo_Offline.html').includes(css),
     'offline fallback must embed the matching shared frame styling');
 });
+
+
+test('shared mobile navigation remains a native dropdown without JavaScript', () => {
+  const css = read('site-chrome.css');
+  const script = read('site-theme.js');
+  const drawer = css.split('/* The shared native mobile navigation uses')[1]
+    .split('/* Give standalone pages the same 78px')[0];
+  assert.match(script, /document\.documentElement\.classList\?\.add\('atlas-enhanced'\)/);
+  assert.match(drawer, /html\.atlas-enhanced body:has\(\.site-mobile-chrome__nav\[open\]\)/);
+  assert.match(drawer, /html\.atlas-enhanced \.site-mobile-chrome \.site-mobile-chrome__menu\{/);
+  assert.match(drawer, /html\.atlas-enhanced \.site-mobile-chrome:has\(\.site-mobile-chrome__nav\[open\]\)::before/);
+  assert.ok(!drawer.includes('\nbody:has(.site-mobile-chrome__nav[open])'));
+  assert.ok(!drawer.includes('\n.site-mobile-chrome .site-mobile-chrome__menu{'));
+  const fallback = read('downloads/Atlas_Demo_Offline.html');
+  assert.ok(fallback.includes(css) && fallback.includes(script),
+    'single-file offline fallback embeds the exact progressive enhancement code');
+});
