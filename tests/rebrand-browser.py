@@ -1138,6 +1138,45 @@ with sync_playwright() as p:
                   page.locator('.site-mobile-chrome').get_attribute('data-page-label')=='Guided demo'
                   and page.evaluate('document.documentElement.dataset.theme')==theme)
 
+    # The desktop rails originally hid their only search link with the
+    # mobile header. Verify that the ONE native link remains visible in the
+    # shared left rail and opens/focuses the real Discover search.
+    for width in (768,1280):
+        for theme in ('light','dark'):
+            page.set_viewport_size({'width':width,'height':900})
+            for route in ('about.html','whats-new.html',
+                          'technology/TECH-0216-pytorch.html'):
+                page.goto(base+route)
+                page.evaluate("(t) => localStorage.setItem('atlas.theme',t)",theme)
+                page.reload()
+                search_link=page.locator('.site-mobile-chrome__search').first
+                check(f'{route} {width}px {theme} shared desktop search is visible in rail',
+                      search_link.evaluate("""el => {
+                        const r=el.getBoundingClientRect();
+                        const rail=document.querySelector('.site-chrome').getBoundingClientRect();
+                        return getComputedStyle(el).display!=='none' &&
+                          r.width>=160 && r.height>=44 && r.x>=0 &&
+                          r.right<=rail.right && r.bottom<=innerHeight &&
+                          !document.documentElement.scrollWidth>innerWidth;
+                      }""") and
+                      page.locator('.site-chrome__links a').count()==7 and
+                      not page.locator('.site-mobile-chrome__nav').is_visible())
+                if width==1280 and theme=='light' and route=='about.html':
+                    page.screenshot(path=str(out/'desktop-shared-search-about-1280-light.png'))
+                search_link.click()
+                page.wait_for_url('**/index.html#/search')
+                page.wait_for_function("() => document.activeElement?.id==='global-query'")
+                check(f'{route} {width}px {theme} desktop search opens focused real input',
+                      page.locator('#global-query').is_visible() and
+                      page.evaluate("document.documentElement.dataset.theme")==theme)
+                page.locator('#global-query').fill('reward hacking')
+                check(f'{route} {width}px {theme} desktop search accepts actual query',
+                      page.locator('#global-query').input_value()=='reward hacking')
+                page.go_back()
+                check(f'{route} {width}px {theme} Back restores shared rail',
+                      page.locator('.site-mobile-chrome__search').is_visible() and
+                      page.evaluate("document.documentElement.dataset.theme")==theme)
+
     check('no application runtime exceptions',not errors)
     browser.close()
 (out/'results.json').write_text(json.dumps({'checks_passed':len(checks),'checks':checks,'base':base},indent=2))

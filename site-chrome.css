@@ -92,6 +92,42 @@ body:has(.site-chrome){padding-left:0!important}
 }
 
 
+/* atlas-desktop-search:begin */
+/* Desktop pages already ship the same real Discover-search link as mobile.
+   Make that single accessible anchor available in the shared rail instead of
+   hiding search whenever a standalone or generated page leaves mobile view.
+   The native link remains functional without JS; site-theme.js upgrades it
+   to focus Discover's hydrated search input. No second form or navigation. */
+@media (min-width:651px){
+body:has(.site-chrome) .site-mobile-chrome{display:contents!important}
+body:has(.site-chrome) .site-mobile-chrome__nav{display:none!important}
+body:has(.site-chrome) .site-mobile-chrome__search{
+  position:fixed;left:17px;bottom:18px;z-index:26;box-sizing:border-box;
+  display:flex!important;align-items:center;gap:8px;width:190px;min-width:0;
+  min-height:44px;padding:9px 10px;border:1px solid #506252;border-radius:8px;
+  background:#2c3e33;color:#e5eee6;font-size:13px;font-weight:600;
+  line-height:1.25;text-decoration:none;
+}
+body:has(.site-chrome) .site-mobile-chrome__search-icon{font-size:20px;line-height:1}
+body:has(.site-chrome) .site-mobile-chrome__search-placeholder{
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+body:has(.site-chrome) .site-mobile-chrome__search:hover{
+  background:#3a5142;color:#fff;border-color:#a4bcab;
+}
+body:has(.site-chrome) .site-mobile-chrome__search:focus-visible{
+  outline:3px solid #edba87;outline-offset:3px;
+}
+/* A short browser viewport must scroll its rail instead of hiding a link
+   under the fixed search action. */
+.site-chrome{padding-bottom:92px!important}
+}
+@media (min-width:651px) and (max-width:1150px){
+body:has(.site-chrome) .site-mobile-chrome__search{left:12px;width:180px}
+}
+@media print{body:has(.site-chrome) .site-mobile-chrome{display:none!important}}
+/* atlas-desktop-search:end */
+
 /* The shared native mobile navigation uses Discover's existing off-canvas
    frame. Keep <details> as the only menu source: it stays usable without JS,
    while site-theme.js supplies Escape and outside-pointer dismissal. */

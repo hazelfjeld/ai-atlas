@@ -1503,3 +1503,23 @@ test('Guided demo inherits the actual shared navigation instead of an independen
   assert.ok(html.includes('index.html#/safety'));
   assert.ok(read('scripts/build_seo.py').includes("str(guide_count) + ' now have expanded explanations'"));
 });
+
+
+test('shared standalone and generated desktop rails expose the existing functional search link', () => {
+  const css=read('site-chrome.css');
+  assert.ok(css.includes('/* atlas-desktop-search:begin */'));
+  assert.ok(css.includes('body:has(.site-chrome) .site-mobile-chrome{display:contents!important}'));
+  assert.ok(css.includes('body:has(.site-chrome) .site-mobile-chrome__nav{display:none!important}'));
+  assert.ok(css.includes('body:has(.site-chrome) .site-mobile-chrome__search{'));
+  assert.ok(css.includes('@media print{body:has(.site-chrome) .site-mobile-chrome{display:none!important}}'));
+  for (const path of ['about.html', 'research.html', 'whats-new.html', 'games.html',
+                     'playbooks.html', 'technologies.html', 'terms/MLD-0691-machine-learning.html',
+                     'technology/TECH-0216-pytorch.html']) {
+    const html=read(path);
+    const matching=html.match(/<a class="[^"]*site-mobile-chrome__search[^"]*" href="[^"]*#\/search"[^>]*>/g)||[];
+    assert.equal(matching.length,1,path+' must reuse exactly one native Discover-search link');
+    assert.ok(html.includes('site-chrome__links'),path+' must retain the shared desktop rail');
+  }
+  assert.ok(read('site-theme.js').includes("rememberSearchFocus();"),
+    'search link must hand off focus to the real, hydrated Discover input');
+});
