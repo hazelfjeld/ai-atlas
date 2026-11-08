@@ -1603,5 +1603,35 @@ test('November 7 publisher reviews eleven source-dated catch-up reports without 
  assert.equal(r.production_workflow_run_id,42383633377);
  assert.equal(r.githack_workflow_run_id,42383633217);
  assert.equal(r.last_verified_public_url,'https://aiupdates.app/whats-new.html?date=2026-11-07&revision=1');
- assert.equal(idx.last_successful_publish_at,r.production_verified_at,'Publication clock must agree with independently verified Nov 7 receipt');
+ assert.equal(idx.last_successful_publish_at,verifiedPublicationClock(),'Current clock follows latest independently verified receipt; November 7 history remains immutable');
+});
+
+
+test('November 8 published edition has its own byte-verified, deduplicated and deployment-verified receipt',()=>{
+ const crypto=require('node:crypto');
+ const idx=JSON.parse(fs.readFileSync('data/daily/index.json','utf8'));
+ const ledger=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8'));
+ assertBatchReceipts(ledger);
+ const entry=idx.editions.at(-1),receipt=ledger.receipts.at(-1);
+ assert.equal(entry.date,'2026-11-08');assert.equal(entry.revision,1);
+ const raw=fs.readFileSync(entry.path);
+ assert.equal(raw.length,entry.bytes);
+ assert.equal(crypto.createHash('sha256').update(raw).digest('hex'),entry.sha256);
+ const edition=D.validateEdition(JSON.parse(raw),entry);
+ assert.equal(receipt.batch_id,'atlas-daily-20261108-0817ct-bounded-recovery-a');
+ assert.equal(receipt.source_batch_sha256,'2ea4ac94a32a63d0fe4c7cea8231c44d45d02be84e21b76b211e39cc98cb8db2');
+ assert.equal(receipt.source_batch_bytes,33852);
+ assert.deepEqual(edition.news.map(x=>x.id),receipt.accepted_news_ids);
+ assert.deepEqual([edition.news.length,edition.technologies.length,edition.terms.length,edition.corrections.length],[9,0,0,0]);
+ assert.deepEqual(receipt.counts,{news_published:9,technology_added:0,term_added:0,corrections:0,news_deferred:0,catalog_deferred:6});
+ assert.equal(receipt.deferred_catalog_proposal_ids.length,6);
+ assert.equal(new Set(receipt.deferred_catalog_proposal_ids).size,6);
+ assert.equal(receipt.publication_edition,'2026-11-08-v1');
+ assert.equal(receipt.production_verified_revision,1);
+ assert.equal(receipt.publication_history.at(-1).status,'cloudflare_http_browser_and_githack_verified');
+ assert.equal(receipt.last_verified_public_url,'https://aiupdates.app/whats-new.html?date=2026-11-08&revision=1');
+ assert.equal(receipt.production_workflow_run_id,42490577341);
+ assert.equal(receipt.githack_workflow_run_id,42490577323);
+ assert.equal(idx.last_successful_publish_at,receipt.production_verified_at);
+ assert.equal(idx.status,'edition_revision_1_production_verified');
 });

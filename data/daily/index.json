@@ -267,7 +267,7 @@
       "published_at": "2026-11-08T14:32:43.542Z"
     }
   ],
-  "last_successful_publish_at": "2026-11-07T14:57:55Z",
-  "status": "edition_revision_1_pending_production_verification",
-  "coverage_note": "November 8 revision 1 is an indexed, source-reviewed partial edition awaiting independent production verification. Nine dated reports (two from Nov 8, seven earlier), six unresolved catalog proposals, zero new canonical IDs. November 7 revision 1 remains the latest production-verified edition until current deployment and browser checks pass."
+  "last_successful_publish_at": "2026-11-08T14:43:03Z",
+  "status": "edition_revision_1_production_verified",
+  "coverage_note": "November 8 revision 1: nine source-reviewed reports (two from November 8; seven from November 4–6) published from the validated partial collector batch; all four technology and two terminology proposals remain deferred, zero canonical additions. Exact Cloudflare production assets, hosted browser archive and GitHack checks verified on 7aaba861a42845118342e4cb8a598e93f83b0d37. Older immutable editions and source dates preserved."
 }

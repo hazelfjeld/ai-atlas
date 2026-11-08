@@ -770,7 +770,7 @@
       "edition_date": "2026-11-08",
       "validation_result": "staging_sha256_bytes_schema_ids_dates_original_source_checks_and_prior_edition_dedup_reviewed",
       "status": "partially_published_with_6_deferred_catalog_proposals",
-      "publication_outcome": "production_public_site_verification_pending",
+      "publication_outcome": "immutable_revision_1_cloudflare_http_browser_and_githack_verified",
       "publication_edition": "2026-11-08-v1",
       "accepted_news_ids": [
         "ai-news-metr-ai-rd-acceleration-2026-11-05",
@@ -823,9 +823,21 @@
           "corrections": 0,
           "catalog_deferred": 6,
           "published_at": "2026-11-08T14:32:43.542Z",
-          "status": "commit_and_production_verification_pending"
+          "status": "cloudflare_http_browser_and_githack_verified",
+          "verified_at": "2026-11-08T14:43:03Z",
+          "production_commit": "7aaba861a42845118342e4cb8a598e93f83b0d37",
+          "production_workflow_run_id": 42490577341,
+          "githack_workflow_run_id": 42490577323
         }
-      ]
+      ],
+      "production_verified_at": "2026-11-08T14:43:03Z",
+      "production_verified_revision": 1,
+      "last_verified_at": "2026-11-08T14:43:03Z",
+      "last_verified_public_url": "https://aiupdates.app/whats-new.html?date=2026-11-08&revision=1",
+      "production_commit": "7aaba861a42845118342e4cb8a598e93f83b0d37",
+      "production_workflow_run_id": 42490577341,
+      "githack_workflow_run_id": 42490577323,
+      "verification_scope": "Exact main 7aaba861a42845118342e4cb8a598e93f83b0d37 passed catalog/Node (237 checks), reproducibility, GitHack, Cloudflare 497 exact HTTP assets on each of 3 hosts, and hosted Chromium navigation/archive/Games/offline tests; production workflow 42490577341, GitHack workflow 42490577323. Direct standalone dated query permalink not independently reopened, but latest edition rendered in production archive and its checksummed immutable asset passed exact HTTP verification."
     }
   ]
 }
