@@ -29,8 +29,7 @@ def native_directory_article_skip(body, path, *, native_concept_article=False):
     """Put native skip focus on directory content, not the shared navigation.
 
     Both A–Z directories and individual technology profiles now reach the
-    article with JavaScript disabled. Expanded concept guides use the same native article target. Remaining
-    reference-depth concept pages retain their fallback until migrated.
+    article with JavaScript disabled. Every concept article uses the same native article target.
     Keep the main landmark and place the fragment ID on the real hero.
     """
     is_directory = path in ("terms/index.html", "technology/index.html")

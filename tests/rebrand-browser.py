@@ -255,14 +255,16 @@ with sync_playwright() as p:
                 if width == 390 and theme == 'dark' and route in ('about.html','research.html'):
                     page.screenshot(path=str(out / f'native-skip-{route}-390-dark.png'))
 
-    # Expanded concept guides now place #main on their actual hero, as native
+    # All concept pages now place #main on their actual hero, as native
     # technology profiles do. This context has JavaScript disabled, so skip
     # navigation cannot be repaired by client-side hydration.
     for width in (320, 390, 768, 1280):
         page.set_viewport_size({'width': width, 'height': 844 if width <= 650 else 900})
         for theme in ('light', 'dark'):
             page.emulate_media(color_scheme=theme)
-            for route in ('terms/MLD-0002-ablation-study.html',
+            for route in ('terms/MLD-0001-a-b-test.html',
+                          'terms/MLD-0010-action-space.html',
+                          'terms/MLD-0002-ablation-study.html',
                           'terms/MLD-0691-machine-learning.html'):
                 page.goto(base + route)
                 check(f'{route} {width}px {theme} article skip target follows the shared rail',

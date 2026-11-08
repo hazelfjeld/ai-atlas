@@ -152,12 +152,12 @@ test('script-free daily archive and catalog review skip links focus the editoria
 });
 
 
-test('all expanded concept guides use the technology-profile native article skip, without duplicating navigation', () => {
+test('all concept pages use the technology-profile native article skip, without duplicating navigation', () => {
   const manifest = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'terms/manifest.json'), 'utf8'));
   const publication = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'publication.json'), 'utf8'));
-  const entries = Object.values(manifest).filter(entry => entry.expanded);
+  const entries = Object.values(manifest);
   assert.equal(Object.keys(manifest).length, publication.published_counts.terms);
-  assert.equal(entries.length, publication.encyclopedia.detailed_page_count);
+  assert.equal(entries.filter(entry => entry.expanded).length, publication.encyclopedia.detailed_page_count);
   for (const entry of entries) {
     const html = fs.readFileSync(path.join(__dirname, '..', entry.path), 'utf8');
     assert.match(html, /<a class="skip" href="#main">/, entry.path);

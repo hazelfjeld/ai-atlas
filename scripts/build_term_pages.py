@@ -85,7 +85,7 @@ def main():
         body += f'<p><a href="../index.html#/dictionary?record={quote(r["id"])}">Open original record, export or annotate →</a></p>'
         path = term_path(r)
         structured = [{'@context':'https://schema.org', '@type':'DefinedTerm', '@id':absolute(path)+'#term', 'name':r['term'], 'termCode':r['id'], 'description':r['definition'], 'url':absolute(path), 'inDefinedTermSet':{'@type':'DefinedTermSet', 'name':'AI Updates Concept Dictionary', 'url':absolute('terms/index.html')}}, breadcrumbs([('AI Updates','index.html'), ('Concept dictionary','terms/index.html'), (r['term'],path)])]
-        blob = shell(r['term'], body, path, (r['term'] + ': ' + r['definition'])[:170], structured, native_concept_article=bool(guide)).encode('utf-8')
+        blob = shell(r['term'], body, path, (r['term'] + ': ' + r['definition'])[:170], structured, native_concept_article=True).encode('utf-8')
         (ROOT / path).write_bytes(blob)
         manifest[r['id']] = {'path': path, 'sha256': hashlib.sha256(blob).hexdigest(), 'expanded': bool(guide)}
     (out / 'manifest.json').write_bytes((json.dumps(manifest, indent=2) + '\n').encode())
