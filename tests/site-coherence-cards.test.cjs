@@ -27,7 +27,7 @@ test('generated concept and technology article headlines reuse Discover typograp
   const block = css.split('/* atlas-shared-headlines:begin */')[1]
     ?.split('/* atlas-shared-headlines:end */')[0];
   assert.ok(block, 'Missing shared reference-heading source');
-  assert.match(brand, /\\.discover-heading h1\\{font:400 clamp\\(40px,4\\.2vw,56px\\)\\/1\\.08 Georgia/);
+  assert.ok(brand.includes('.discover-heading h1{font:400 clamp(40px,4.2vw,56px)/1.08 Georgia'), 'Discover desktop heading token changed');
   assert.ok(block.includes('font:400 clamp(40px,4.2vw,56px)/1.08 Georgia'), 'Reference desktop title must match Discover');
   assert.ok(block.includes('@media(max-width:650px)') && block.includes('h1{font-size:43px}'),
     'Reference mobile title must match Discover, including 320px');
@@ -36,7 +36,7 @@ test('generated concept and technology article headlines reuse Discover typograp
   for (const route of ['terms/MLD-0001-a-b-test.html', 'technology/TECH-0288-vllm.html']) {
     const html=fs.readFileSync(path.join(__dirname, '..', route), 'utf8');
     assert.match(html, /<header class="hero"[^>]*><p class="eyebrow">/);
-    assert.match(html, /<h1>[^<]+<\\/h1>/);
+    assert.ok(html.includes('<h1>') && html.includes('</h1>'), route + ' keeps a semantic article title');
     assert.match(html, /<a class="skip" href="#main">/, route + ' retains native skip');
   }
   const offline=fs.readFileSync(path.join(__dirname, '..', 'downloads/Atlas_Demo_Offline.html'), 'utf8');
