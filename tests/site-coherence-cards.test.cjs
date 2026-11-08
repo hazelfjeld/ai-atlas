@@ -120,3 +120,22 @@ test('theme preference stays synchronized across open editorial and reference ta
   assert.ok(offline.includes("window.addEventListener('storage', (event) =>"),
     'The offline fallback must embed the current shared theme script');
 });
+
+
+test('mobile news intro uses the same editorial content-start rhythm as directory landings',()=>{
+  const block=css.split('/* atlas-mobile-news-intro-rhythm:begin */')[1]
+    ?.split('/* atlas-mobile-news-intro-rhythm:end */')[0];
+  assert.ok(block,'Shared news landing intro rhythm missing');
+  assert.match(block,/@media \(max-width:650px\)/);
+  assert.match(block,/\.shell:has\(> \.site-chrome\.top\) > main > header\{padding-top:8px\}/);
+  const archive=fs.readFileSync(path.join(__dirname,'..','whats-new.html'),'utf8');
+  const terms=fs.readFileSync(path.join(__dirname,'..','terms/index.html'),'utf8');
+  const playbooks=fs.readFileSync(path.join(__dirname,'..','playbooks.html'),'utf8');
+  assert.match(archive,/<nav class="site-chrome top"/);
+  assert.match(archive,/<main id="main" tabindex="-1">\s*<header>/);
+  assert.match(terms,/<header class="hero" id="main" tabindex="-1">/);
+  assert.match(playbooks,/<section class="playbook-hero"/);
+  assert.ok(!block.includes('display:none')&&!block.includes('pointer-events:none'));
+  const offline=fs.readFileSync(path.join(__dirname,'..','downloads/Atlas_Demo_Offline.html'),'utf8');
+  assert.ok(offline.includes(css),'Offline snapshot must embed the exact shared chrome CSS');
+});

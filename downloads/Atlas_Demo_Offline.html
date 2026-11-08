@@ -939,6 +939,17 @@ html.atlas-enhanced #catalog-loading{
  white-space:nowrap
 }
 /* atlas-discover-first-paint:end */
+
+/* atlas-mobile-news-intro-rhythm:begin */
+/* Discover and the Concept/Technology/Playbook landings begin their mobile
+   introductions just below the shared 68px header. The dated news archive
+   retained an extra 30px legacy hero pad on top of its mobile shell, moving
+   its eyebrow lower during cross-page navigation. Preserve the archive's
+   actual edition panel, date selector and news filters. */
+@media (max-width:650px){
+  .shell:has(> .site-chrome.top) > main > header{padding-top:8px}
+}
+/* atlas-mobile-news-intro-rhythm:end */
 </style><script>/* Enhance the native dropdown only when scripts can make its drawer modal.
    Without JavaScript, keep the accessible, nonmodal <details> fallback. */
 document.documentElement.classList?.add('atlas-enhanced');
