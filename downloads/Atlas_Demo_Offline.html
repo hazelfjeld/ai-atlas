@@ -812,6 +812,30 @@ body:has(.site-chrome) :is(.tech-controls,.playbook-tools,.controls,.search-cont
   .topbar:has(.discover-mobile-chrome) .global-search > span{font-size:22px}
 }
 /* atlas-mobile-search-frame:end */
+
+/* atlas-mobile-sticky-frame:begin */
+/* Discover keeps its compact menu/search header in view while browsing.
+   Reuse that behavior on existing articles, directories, news and Games.
+   Keep the native nonmodal <details> fallback usable without JavaScript;
+   Games must stick its containing header, not its nested control row. */
+@media(max-width:650px){
+  body:has(.site-chrome) .site-mobile-chrome{
+    position:sticky;
+    top:0;
+    z-index:26;
+    background:var(--surface,#fff);
+  }
+  body:has(.site-chrome) .games-header{
+    position:sticky;
+    top:0;
+    z-index:26;
+    background:var(--surface,#fff);
+  }
+  body:has(.site-chrome) .games-header .site-mobile-chrome{
+    position:relative;
+  }
+}
+/* atlas-mobile-sticky-frame:end */
 </style><script>/* Enhance the native dropdown only when scripts can make its drawer modal.
    Without JavaScript, keep the accessible, nonmodal <details> fallback. */
 document.documentElement.classList?.add('atlas-enhanced');

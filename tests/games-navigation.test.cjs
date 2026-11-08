@@ -1615,6 +1615,20 @@ test('shared desktop hash navigation clears the fixed workspace bar on editorial
 });
 
 
+test('shared mobile menu and real search stay within reach while scrolling long pages', () => {
+  const css = read('site-chrome.css');
+  const block = css.split('/* atlas-mobile-sticky-frame:begin */')[1]
+    ?.split('/* atlas-mobile-sticky-frame:end */')[0];
+  assert.ok(block, 'one shared sticky mobile header rule');
+  assert.match(block, /@media\(max-width:650px\)/);
+  assert.match(block, /body:has\(\.site-chrome\) \.site-mobile-chrome\{\s*position:sticky;/);
+  assert.match(block, /body:has\(\.site-chrome\) \.games-header\{\s*position:sticky;/);
+  assert.match(block, /\.games-header \.site-mobile-chrome\{\s*position:relative;/);
+  assert.ok(!block.includes('atlas-enhanced'), 'native sticky navigation also works without JS');
+  assert.ok(read('downloads/Atlas_Demo_Offline.html').includes(css),
+    'the offline fallback carries the exact shared navigation frame');
+});
+
 test('shared mobile navigation remains a native dropdown without JavaScript', () => {
   const css = read('site-chrome.css');
   const script = read('site-theme.js');

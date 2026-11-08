@@ -180,6 +180,64 @@ with sync_playwright() as p:
             check('shared navigation responsive ' + route + ' ' + str(width),
                   page.evaluate('document.documentElement.scrollWidth <= innerWidth + 1')
                   and nav.is_visible() == (width > 650))
+    # Discover's topbar stays visible while scrolling; shared article chrome
+    # must now do the same without losing its real search link or mobile menu.
+    # Exercise the existing page families rather than opening one mock header.
+    sticky_routes = ('about.html', 'whats-new.html', 'terms/index.html',
+                     'technology/TECH-0216-pytorch.html', 'games.html')
+    for mobile_width in (320, 390):
+        for chosen_theme in ('light', 'dark'):
+            sticky_context = browser.new_context(
+                viewport={'width':mobile_width, 'height':600}, reduced_motion='reduce')
+            sticky_context.add_init_script(
+                "try { localStorage.setItem('atlas.theme', '" + chosen_theme +
+                "'); } catch (_) {}")
+            sticky_page = sticky_context.new_page()
+            for route in sticky_routes:
+                sticky_page.goto(base + route, wait_until='domcontentloaded')
+                sticky_page.evaluate('window.scrollTo(0, document.documentElement.scrollHeight)')
+                sticky_page.wait_for_timeout(80)
+                check(f'{route} {mobile_width}px {chosen_theme} retains its shared mobile header after scrolling',
+                      sticky_page.evaluate("""() => {
+                          const bar = document.querySelector('.site-mobile-chrome');
+                          const frame = document.querySelector('.games-header') || bar;
+                          if (!bar || !frame || scrollY < 30) return false;
+                          const rect = frame.getBoundingClientRect();
+                          return getComputedStyle(frame).position === 'sticky' &&
+                              Math.abs(rect.top) < 3 && rect.bottom >= 44 &&
+                              bar.querySelector('.site-mobile-chrome__search')?.getClientRects().length > 0 &&
+                              document.documentElement.scrollWidth <= innerWidth + 1;
+                      }"""))
+                menu = sticky_page.locator('details.site-mobile-chrome__nav')
+                menu.locator('summary').click()
+                check(f'{route} {mobile_width}px {chosen_theme} can navigate from the pinned mobile header',
+                      menu.evaluate('el => el.open') and
+                      menu.locator('.site-mobile-chrome__menu a[href]').count() >= 7)
+                sticky_page.keyboard.press('Escape')
+                check(f'{route} {mobile_width}px {chosen_theme} closes the pinned navigation accessibly',
+                      not menu.evaluate('el => el.open'))
+                if mobile_width == 390 and chosen_theme == 'dark' and route in ('about.html', 'terms/index.html'):
+                    sticky_page.screenshot(
+                        path=str(out / ('pinned-mobile-' + route.replace('/', '-') + '.png')),
+                        full_page=False)
+            sticky_context.close()
+    # Progressive enhancement must never make the script-free fallback depend on JS.
+    scriptless_sticky = browser.new_page(viewport={'width':390, 'height':600},
+                                        java_script_enabled=False)
+    scriptless_sticky.goto(base + 'terms/index.html')
+    scriptless_sticky.evaluate('window.scrollTo(0, document.documentElement.scrollHeight)')
+    check('script-free concept directory retains its pinned nonmodal menu',
+          scriptless_sticky.evaluate("""() => {
+              const bar = document.querySelector('.site-mobile-chrome');
+              return scrollY > 30 && getComputedStyle(bar).position === 'sticky' &&
+                  Math.abs(bar.getBoundingClientRect().top) < 3;
+          }"""))
+    scriptless_sticky.locator('details.site-mobile-chrome__nav summary').click()
+    check('script-free pinned directory menu opens as a native dropdown',
+          scriptless_sticky.locator('details.site-mobile-chrome__nav').evaluate('el => el.open') and
+          scriptless_sticky.locator('.site-mobile-chrome__menu a[href]').count() >= 7)
+    scriptless_sticky.close()
+
     page.set_viewport_size({'width':1440,'height':900})
     page.goto(base + 'whats-new.html')
     page.get_by_role('navigation', name='AI Updates primary navigation').get_by_role(
