@@ -1602,6 +1602,21 @@ with sync_playwright() as p:
     script_free.locator('#directory-mobile-nav summary').click()
     check_no_script_brand('Concept detail', real_link=True)
     script_free.close()
+    # Native keyboard skip must focus content, not only scroll beneath the rail.
+    # Keep this usable with JavaScript off in both mobile and desktop layouts.
+    skip_ctx = browser.new_context(java_script_enabled=False, viewport={'width':390, 'height':844})
+    skip_page = skip_ctx.new_page()
+    for width in (390, 1280):
+        skip_page.set_viewport_size({'width':width, 'height':844})
+        for route, destination in [('about.html', 'main'), ('research.html', 'main'),
+                                    ('demo.html', 'quick-tour')]:
+            skip_page.goto(base + route)
+            skip_page.locator('a.skip').focus()
+            skip_page.keyboard.press('Enter')
+            check('native skip focuses content: ' + route + ' at ' + str(width),
+                  skip_page.evaluate('document.activeElement.id') == destination
+                  and skip_page.evaluate('window.location.hash') == '#' + destination)
+    skip_ctx.close()
     check('no application runtime exceptions', not errors)
     browser.close()
 (out / 'report.json').write_text(json.dumps({'base':base, 'checks':checks, 'checks_passed':len(checks), 'errors':errors}, indent=2), encoding='utf-8')

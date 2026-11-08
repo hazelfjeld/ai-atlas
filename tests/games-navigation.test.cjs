@@ -396,9 +396,9 @@ test('About, technologies and playbooks reuse the Games and archive mobile chrom
 test('About reuses the exact generated catalog navigation, not a parallel template', () => {
   const about = read('about.html');
   const built = read('scripts/build_seo.py');
-  const main = '<main class="term-shell" id="main">';
+  const main = '<main class="term-shell" id="main" tabindex="-1">';
   const ours = about.split(main)[1].split('<header class="hero">')[0];
-  const template = read('terms/index.html').split(main)[1].split('<header class="hero">')[0];
+  const template = read('terms/index.html').split('<main class="term-shell" id="main">')[1].split('<header class="hero">')[0];
   const expected = template.replaceAll('href="../','href="')
     .replace('<div class="directory-mobile-topbar site-mobile-chrome" aria-label="AI Updates mobile header">', '<div class="directory-mobile-topbar site-mobile-chrome" aria-label="AI Updates mobile header" data-page-label="About">')
     .replaceAll('href="index.html#/dictionary" aria-current="page">Concept dictionary','href="index.html#/dictionary">Concept dictionary')
@@ -1526,4 +1526,22 @@ test('generated reference page identity uses one shared workspace title without 
     'native desktop search remains in the existing 78px shared workspace bar');
   assert.ok(read('downloads/Atlas_Demo_Offline.html').includes(theme),
     'offline fallback must still embed the complete shared theme helper');
+});
+
+test('all standalone skip links move keyboard focus to a unique native destination', () => {
+  const pages = ['about.html','research.html','catalog-review.html','hardware-review.html',
+    'games.html','technologies.html','playbooks.html','whats-new.html','demo.html'];
+  const generator = read('scripts/site_chrome.py');
+  assert.match(generator, /def ensure_skip_destination_focusable\(html\):/);
+  assert.match(generator, /return ensure_skip_destination_focusable\(normalized\)/);
+  assert.match(read('scripts/build_seo.py'), /ensure_skip_destination_focusable\(shell\(/);
+  for (const route of pages) {
+    const html = read(route);
+    const skip = html.match(/<a class="skip" href="#([a-z0-9-]+)"/);
+    assert.ok(skip, route + ' native skip link');
+    const targets = [...html.matchAll(/<[a-z][a-z0-9]*\b[^>]*\bid="([^"]+)"[^>]*>/gi)]
+      .filter(match => match[1] === skip[1]);
+    assert.equal(targets.length, 1, route + ' unique target');
+    assert.match(targets[0][0], /\btabindex="-1"/, route + ' focusable target');
+  }
 });

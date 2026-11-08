@@ -11,7 +11,7 @@ import subprocess
 from xml.etree.ElementTree import Element, SubElement, tostring
 from site_seo import absolute, metadata, breadcrumbs, replace_head, technology_path, ORIGIN
 from build_term_pages import rows, term_path, external
-from site_chrome import render_directory_nav, DIRECTORY_MOBILE_CSS, STANDALONE_NAVS, normalize_standalone_chrome, normalize_discover_sidebar, sync_desktop_rail_icons_css
+from site_chrome import render_directory_nav, DIRECTORY_MOBILE_CSS, STANDALONE_NAVS, normalize_standalone_chrome, normalize_discover_sidebar, sync_desktop_rail_icons_css, ensure_skip_destination_focusable
 
 ROOT = Path(__file__).resolve().parents[1]
 PAGES = {
@@ -108,7 +108,7 @@ def main():
     demo_text = re.sub(r'only \d+ guides are expanded', 'only ' + str(guide_count) + ' guides are expanded', demo_text)
     demo_text = re.sub(r'\d+ now have expanded explanations', str(guide_count) + ' now have expanded explanations', demo_text)
     demo.write_bytes(demo_text.encode())
-    (ROOT / 'about.html').write_bytes(shell(*PAGES['about.html'], 'about.html', about).encode())
+    (ROOT / 'about.html').write_bytes(ensure_skip_destination_focusable(shell(*PAGES['about.html'], 'about.html', about)).encode())
     # Normalize existing page headers from the shared site-chrome component.
     for route in STANDALONE_NAVS:
         page = ROOT / route

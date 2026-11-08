@@ -248,6 +248,27 @@ def normalize_discover_sidebar(html, term_count, tech_count):
     return normalized
 
 
+
+def ensure_skip_destination_focusable(html):
+    """Keep script-free skip links keyboard-focusable across page families.
+
+    A fragment scroll alone need not move focus. Preserve the existing
+    destination, native link, and page-specific text; never add a duplicate.
+    """
+    import re
+    skip = re.search(r'<a\b[^>]*\bclass="skip"[^>]*\bhref="#([^"]+)"', html)
+    assert skip, 'Missing native skip link'
+    target = re.compile(r'<[a-z][a-z0-9]*\b[^>]*\bid="' + re.escape(skip.group(1)) + r'"[^>]*>', re.I)
+
+    def focusable(match):
+        tag = match.group(0)
+        return tag if re.search(r'\btabindex=', tag) else tag[:-1] + ' tabindex="-1">'
+
+    result, count = target.subn(focusable, html, count=1)
+    assert count == 1, 'Missing skip destination: ' + skip.group(1)
+    return result
+
+
 def normalize_standalone_chrome(html, path):
     """Replace only the known navigation pair; fail if page markup drifts."""
     import re
@@ -260,4 +281,4 @@ def normalize_standalone_chrome(html, path):
                          re.escape(end) + r'.*?</nav>', re.S)
     normalized, count = pattern.subn(lambda _: render_standalone_nav(path), html)
     assert count == 1, 'Unexpected shared header structure on ' + path
-    return normalized
+    return ensure_skip_destination_focusable(normalized)
