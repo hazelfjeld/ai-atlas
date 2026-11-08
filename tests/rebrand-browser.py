@@ -239,12 +239,12 @@ with sync_playwright() as p:
 
 
     # The guided demo formerly used its own large heading and skipped the
-    # article heading entirely. Compare it directly with About, including
+    # article heading entirely. Compare it directly with Discover, including
     # native no-JavaScript keyboard traversal at phone/tablet/desktop sizes.
     for width in (320,390,768,1280):
         for theme in ('light','dark'):
             page.set_viewport_size({'width':width,'height':844 if width<=650 else 900})
-            page.goto(base+'about.html')
+            page.goto(base+'index.html')
             page.evaluate('(t)=>document.documentElement.dataset.theme=t', theme)
             editorial_font=page.locator('.discover-heading h1').evaluate('el=>getComputedStyle(el).fontFamily')
             page.goto(base+'demo.html')
