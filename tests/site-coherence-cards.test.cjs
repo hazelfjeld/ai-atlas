@@ -132,10 +132,21 @@ test('mobile news intro uses the same editorial content-start rhythm as director
   const terms=fs.readFileSync(path.join(__dirname,'..','terms/index.html'),'utf8');
   const playbooks=fs.readFileSync(path.join(__dirname,'..','playbooks.html'),'utf8');
   assert.match(archive,/<nav class="site-chrome top"/);
-  assert.match(archive,/<main id="main" tabindex="-1">\s*<header>/);
+  assert.match(archive,/<main>\s*<header id="main" tabindex="-1">/);
   assert.match(terms,/<header class="hero" id="main" tabindex="-1">/);
   assert.match(playbooks,/<section class="playbook-hero"/);
   assert.ok(!block.includes('display:none')&&!block.includes('pointer-events:none'));
   const offline=fs.readFileSync(path.join(__dirname,'..','downloads/Atlas_Demo_Offline.html'),'utf8');
   assert.ok(offline.includes(css),'Offline snapshot must embed the exact shared chrome CSS');
+});
+
+test('script-free daily archive and catalog review skip links focus the editorial heading, not the main wrapper', () => {
+  for (const route of ['whats-new.html', 'catalog-review.html']) {
+    const html = fs.readFileSync(path.join(__dirname, '..', route), 'utf8');
+    assert.match(html, /<a class="skip" href="#main">/);
+    assert.match(html, /<main>\s*<header id="main" tabindex="-1">/);
+    assert.doesNotMatch(html, /<main id="main"/);
+    assert.equal((html.match(/id="main"/g) || []).length, 1, route + ' has one skip target');
+    assert.match(html, /<header id="main" tabindex="-1">[\s\S]*?<h1[\s>]/);
+  }
 });

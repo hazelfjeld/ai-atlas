@@ -197,6 +197,32 @@ with sync_playwright() as p:
                 if width == 390 and theme == 'dark':
                     page.screenshot(path=str(out / f'shared-heading-{route.replace("/", "-")}-390-dark.png'))
 
+    # News and editorial-review pages previously put the native skip target on
+    # their outer main wrapper. Match About/Research/Technology: the first
+    # keyboard destination is the article heading, with scripts disabled.
+    for width in (320, 390, 768, 1280):
+        page.set_viewport_size({'width':width,'height':844 if width<=650 else 900})
+        for theme in ('light','dark'):
+            page.emulate_media(color_scheme=theme)
+            for route in ('whats-new.html', 'catalog-review.html'):
+                page.goto(base + route)
+                check(f'{route} {width}px {theme} has a native heading skip destination',
+                      page.locator('main > header#main[tabindex="-1"] h1').count()==1
+                      and page.locator('main#main').count()==0
+                      and page.locator('#main').count()==1
+                      and page.locator('nav.site-chrome .site-chrome__links a').count()==7)
+                page.locator('a.skip').focus()
+                page.keyboard.press('Enter')
+                check(f'{route} {width}px {theme} no-JS skip focuses editorial heading',
+                      page.evaluate("""() => location.hash==='#main' &&
+                          document.activeElement===document.querySelector('main > header#main')"""))
+                page.keyboard.press('Tab')
+                check(f'{route} {width}px {theme} next Tab bypasses primary navigation',
+                      page.evaluate("""() => !document.activeElement.closest('.site-chrome,.site-mobile-chrome')"""))
+                if width==390 and theme=='dark':
+                    page.screenshot(path=str(out / f'native-skip-{route}-390-dark.png'))
+    page.emulate_media(color_scheme='light')
+
     # Shared standalone rail is inside <main> on five existing workspaces.
     # Verify native skip focus at article content with scripts disabled.
     for width in (320, 390, 768, 1280):
