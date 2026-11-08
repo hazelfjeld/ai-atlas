@@ -28,14 +28,19 @@ def render_primary_links(prefix, selected, current_kind="page"):
 def native_directory_article_skip(body, path):
     """Put native skip focus on directory content, not the shared navigation.
 
-    Only the two A–Z index pages move #main. Detailed reference pages retain
-    their existing landmark and progressively enhanced article skip behavior.
-    Both generators use this same helper to avoid divergent templates.
+    Both A–Z directories and individual technology profiles now reach the
+    article with JavaScript disabled. Concept detail pages retain their old
+    fallback until that separate generated family receives the same migration.
+    Keep the main landmark and place the fragment ID on the real hero.
     """
-    if path not in ("terms/index.html", "technology/index.html"):
+    is_directory = path in ("terms/index.html", "technology/index.html")
+    is_technology_detail = path.startswith("technology/TECH-") and path.endswith(".html")
+    if not (is_directory or is_technology_detail):
         return body, ' id="main"'
     heading = '<header class="hero">'
-    assert body.startswith(heading), 'Directory must start with the article heading: ' + path
+    assert body.count(heading) == 1, 'Missing or repeated article hero: ' + path
+    if is_directory:
+        assert body.startswith(heading), 'Directory must start with the article heading: ' + path
     return body.replace(heading, '<header class="hero" id="main" tabindex="-1">', 1), ''
 
 def render_brand(prefix, classes="site-chrome__brand"):

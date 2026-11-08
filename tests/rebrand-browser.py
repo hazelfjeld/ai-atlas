@@ -181,6 +181,33 @@ with sync_playwright() as p:
                       page.evaluate("""() => !document.activeElement.closest('.site-chrome,.site-mobile-chrome')"""))
                 if width == 390 and theme == 'dark' and route in ('about.html','research.html'):
                     page.screenshot(path=str(out / f'native-skip-{route}-390-dark.png'))
+    # Profile destinations must work natively, without a hydration script.
+    for width in (390, 1280):
+        page.set_viewport_size({'width':width, 'height':844 if width <= 650 else 900})
+        for theme in ('light', 'dark'):
+            page.emulate_media(color_scheme=theme)
+            for route in ('technology/TECH-0001-adversarial-robustness-toolbox.html',
+                          'technology/TECH-0216-pytorch.html'):
+                page.goto(base + route)
+                check(f'{route} {width}px {theme} native article target follows shared rail',
+                      page.evaluate("""() => {
+                          const main=document.querySelector('main.term-shell');
+                          const target=main?.querySelector(':scope > header.hero');
+                          const rail=main?.querySelector('nav.site-chrome');
+                          return !!main && !!target && !!rail && !main.hasAttribute('id') &&
+                            target.id==='main' && target.tabIndex===-1 &&
+                            !!(rail.compareDocumentPosition(target) & Node.DOCUMENT_POSITION_FOLLOWING);
+                      }"""))
+                page.locator('a.skip').focus()
+                page.keyboard.press('Enter')
+                check(f'{route} {width}px {theme} native skip focuses content',
+                      page.evaluate("""() => location.hash==='#main' &&
+                        document.activeElement===document.querySelector('main.term-shell > header.hero')"""))
+                page.keyboard.press('Tab')
+                check(f'{route} {width}px {theme} next Tab bypasses navigation',
+                      page.evaluate("""() => !document.activeElement.closest('.site-chrome,.site-mobile-chrome')"""))
+                if width == 390 and theme == 'dark' and route.endswith('pytorch.html'):
+                    page.screenshot(path=str(out / 'native-skip-profile-390-dark.png'))
     page.emulate_media(color_scheme='light')
 
     static.close()

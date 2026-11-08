@@ -1592,10 +1592,22 @@ test('generated dictionary and technology skip links target article content afte
       route+' skips the shared rail even with JavaScript disabled');
     assert.equal((html.match(/id="main"/g) || []).length, 1, route+' unique skip target');
   }
-  for (const route of ['terms/MLD-0691-machine-learning.html', 'technology/TECH-0216-pytorch.html']) {
-    const html = read(route);
-    assert.ok(html.includes('<main class="term-shell" id="main">'), route+' retains existing no-JS fallback');
-    assert.ok(html.includes('<header class="hero">'), route+' retains progressive-enhancement target');
+  const concept = read('terms/MLD-0691-machine-learning.html');
+  assert.ok(concept.includes('<main class="term-shell" id="main">'),
+    'Concept details retain their original fallback until their generator migration');
+  const technologyPages = fs.readdirSync(path.join(__dirname, '..', 'technology'))
+    .filter(name => /^TECH-\d{4}-[^/]+\.html$/.test(name));
+  assert.equal(technologyPages.length, 303, 'All published technology URLs must remain stable');
+  for (const name of technologyPages) {
+    const route = 'technology/' + name, html = read(route);
+    assert.ok(html.includes('<a class="skip" href="#main">'), route+' retains native skip');
+    assert.ok(html.includes('<main class="term-shell">'), route+' retains the main landmark');
+    assert.ok(!html.includes('<main class="term-shell" id="main">'), route+' bypasses navigation');
+    assert.ok(html.includes('<header class="hero" id="main" tabindex="-1">'),
+      route+' has a focusable article heading with JavaScript disabled');
+    assert.equal((html.match(/id="main"/g) || []).length, 1, route+' unique fragment');
+    assert.ok(html.indexOf('<header class="hero" id="main"') > html.indexOf('</nav>'),
+      route+' fragment follows the shared rail');
   }
   const offline = read('downloads/Atlas_Demo_Offline.html');
   assert.ok(offline.includes(theme) && offline.includes(css),
