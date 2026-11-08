@@ -1584,9 +1584,10 @@ test('generated dictionary and technology skip links target article content afte
   assert.ok(css.includes('html:has(.site-chrome){scroll-padding-top:96px}'));
   assert.ok(!css.includes('scroll-margin-top:96px'), 'root offset must not double-stack with article scroll margins');
   const helper = read('scripts/site_chrome.py');
-  assert.ok(helper.includes('def native_directory_article_skip(body, path):'));
-  for (const generator of ['scripts/build_term_pages.py', 'scripts/build_seo.py'])
-    assert.ok(read(generator).includes('native_directory_article_skip(body, path)'));
+  assert.ok(helper.includes('def native_directory_article_skip(body, path, *, native_concept_article=False):'));
+  assert.ok(read('scripts/build_term_pages.py').includes(
+    'native_directory_article_skip(body, path, native_concept_article=native_concept_article)'));
+  assert.ok(read('scripts/build_seo.py').includes('native_directory_article_skip(body, path)'));
   for (const route of ['terms/index.html', 'technology/index.html']) {
     const html = read(route);
     assert.ok(html.includes('<a class="skip" href="#main">'), route+' preserves native skip');
@@ -1596,8 +1597,12 @@ test('generated dictionary and technology skip links target article content afte
     assert.equal((html.match(/id="main"/g) || []).length, 1, route+' unique skip target');
   }
   const concept = read('terms/MLD-0691-machine-learning.html');
-  assert.ok(concept.includes('<main class="term-shell" id="main">'),
-    'Concept details retain their original fallback until their generator migration');
+  assert.ok(concept.includes('<main class="term-shell">') &&
+            concept.includes('<header class="hero" id="main" tabindex="-1">'),
+    'Expanded concept guides must focus the article natively, as profiles do');
+  const referenceDepth = read('terms/MLD-0001-a-b-test.html');
+  assert.ok(referenceDepth.includes('<main class="term-shell" id="main">'),
+    'Unexpanded reference pages preserve their original fallback until migrated');
   const technologyPages = fs.readdirSync(path.join(__dirname, '..', 'technology'))
     .filter(name => /^TECH-\d{4}-[^/]+\.html$/.test(name));
   assert.equal(technologyPages.length, 303, 'All published technology URLs must remain stable');
