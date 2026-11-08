@@ -1226,6 +1226,12 @@ with sync_playwright() as p:
                 check(f'catalog review {width}px {theme} anchor clears desktop workspace bar',
                       position['pad']=='96px' and
                       77<=position['top']<=101)
+                page.goto(base+'technology/TECH-0216-pytorch.html#main')
+                hero=page.locator('main.term-shell > header.hero#main')
+                hero.evaluate("el=>el.scrollIntoView({block:'start',behavior:'instant'})")
+                top=hero.evaluate('el=>el.getBoundingClientRect().top')
+                check(f'generated PyTorch {width}px {theme} anchor has one shared header offset',
+                      77<=top<=103)
 
     check('no application runtime exceptions',not errors)
     browser.close()

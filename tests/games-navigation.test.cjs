@@ -1554,7 +1554,8 @@ test('generated dictionary and technology skip links target article content afte
   assert.ok(theme.includes("main.querySelector(':scope > header.hero')"));
   assert.ok(theme.includes("main.removeAttribute('id');"));
   assert.ok(theme.includes("hero.setAttribute('tabindex', '-1');"));
-  assert.ok(css.includes('.term-shell > .hero#main{scroll-margin-top:96px}'));
+  assert.ok(css.includes('html:has(.site-chrome){scroll-padding-top:96px}'));
+  assert.ok(!css.includes('scroll-margin-top:96px'), 'root offset must not double-stack with article scroll margins');
   for (const route of ['terms/index.html', 'technology/index.html',
     'terms/MLD-0691-machine-learning.html', 'technology/TECH-0216-pytorch.html']) {
     const html=read(route);
