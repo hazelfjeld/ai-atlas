@@ -129,9 +129,10 @@ def render_standalone_nav(path):
         }.get(path, selected),
         mobile_brand=True,
     )
-    # Research's main landmark intentionally starts between the two headers.
+    # Research's main landmark starts between its two headers, but the native
+    # skip destination belongs on the subsequent article hero.
     if path == "research.html":
-        markup = markup.replace('</div><nav class="site-chrome', '</div><main id="main"><nav class="site-chrome', 1)
+        markup = markup.replace('</div><nav class="site-chrome', '</div><main><nav class="site-chrome', 1)
     return markup
 
 
