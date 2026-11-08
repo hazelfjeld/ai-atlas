@@ -1550,7 +1550,7 @@ test('all standalone skip links move keyboard focus to a unique native destinati
 test('generated dictionary and technology skip links target article content after the shared rail', () => {
   const theme = read('site-theme.js');
   const css = read('site-chrome.css');
-  assert.match(theme, /main\\.term-shell#main/);
+  assert.ok(theme.includes("main.term-shell#main"));
   assert.ok(theme.includes("main.querySelector(':scope > header.hero')"));
   assert.ok(theme.includes("main.removeAttribute('id');"));
   assert.ok(theme.includes("hero.setAttribute('tabindex', '-1');"));
