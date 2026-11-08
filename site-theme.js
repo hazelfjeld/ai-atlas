@@ -9,6 +9,18 @@ try {
   // Storage may be unavailable; preserve the stylesheet's normal fallback.
 }
 
+// Generated term and technology details previously showed only their parent
+// section in the shared desktop workspace title, unlike named editorial pages.
+// Reuse the existing data-page-label slot; never create a second header, and
+// keep the static parent title available without JavaScript.
+document.addEventListener('DOMContentLoaded', () => {
+  const path = typeof window !== 'undefined' ? (window.location?.pathname || '') : '';
+  if (!/(?:^|\\/)(?:terms\\/MLD-\\d+|technology\\/TECH-\\d+)-[^/]+\\.html$/.test(path)) return;
+  const bar = document.querySelector('main.term-shell > .site-mobile-chrome:not([data-page-label])');
+  const title = document.querySelector('main.term-shell h1')?.textContent?.trim();
+  if (bar && title && title.length <= 90) bar.dataset.pageLabel = title;
+});
+
 // The main workspace consumes this one-shot intent after catalog hydration.
 // Use the same handoff for the slash shortcut and the visible search link.
 function rememberSearchFocus() {

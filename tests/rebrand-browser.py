@@ -1138,44 +1138,34 @@ with sync_playwright() as p:
                   page.locator('.site-mobile-chrome').get_attribute('data-page-label')=='Guided demo'
                   and page.evaluate('document.documentElement.dataset.theme')==theme)
 
-    # The desktop rails originally hid their only search link with the
-    # mobile header. Verify that the ONE native link remains visible in the
-    # shared left rail and opens/focuses the real Discover search.
-    for width in (768,1280):
+    # Reference detail pages used to show only the generic parent section
+    # in the shared 78px topbar. They now identify the actual detail while
+    # preserving the seven navigation links and correct selected parent.
+    for width in (320,390,768,1280):
         for theme in ('light','dark'):
-            page.set_viewport_size({'width':width,'height':900})
-            for route in ('about.html','whats-new.html',
-                          'technology/TECH-0216-pytorch.html'):
+            page.set_viewport_size({'width':width,'height':844 if width<651 else 900})
+            for route,title,parent in (
+                ('terms/MLD-0691-machine-learning.html','Machine learning','Concept dictionary'),
+                ('technology/TECH-0216-pytorch.html','PyTorch','Technology profiles')
+            ):
                 page.goto(base+route)
-                page.evaluate("(t) => localStorage.setItem('atlas.theme',t)",theme)
+                page.evaluate('(t) => localStorage.setItem("atlas.theme",t)',theme)
                 page.reload()
-                search_link=page.locator('.site-mobile-chrome__search').first
-                check(f'{route} {width}px {theme} shared desktop search is visible in rail',
-                      search_link.evaluate("""el => {
-                        const r=el.getBoundingClientRect();
-                        const rail=document.querySelector('.site-chrome').getBoundingClientRect();
-                        return getComputedStyle(el).display!=='none' &&
-                          r.width>=160 && r.height>=44 && r.x>=0 &&
-                          r.right<=rail.right && r.bottom<=innerHeight &&
-                          !document.documentElement.scrollWidth>innerWidth;
-                      }""") and
-                      page.locator('.site-chrome__links a').count()==7 and
-                      not page.locator('.site-mobile-chrome__nav').is_visible())
-                if width==1280 and theme=='light' and route=='about.html':
-                    page.screenshot(path=str(out/'desktop-shared-search-about-1280-light.png'))
-                search_link.click()
-                page.wait_for_url('**/index.html#/search')
-                page.wait_for_function("() => document.activeElement?.id==='global-query'")
-                check(f'{route} {width}px {theme} desktop search opens focused real input',
-                      page.locator('#global-query').is_visible() and
-                      page.evaluate("document.documentElement.dataset.theme")==theme)
-                page.locator('#global-query').fill('reward hacking')
-                check(f'{route} {width}px {theme} desktop search accepts actual query',
-                      page.locator('#global-query').input_value()=='reward hacking')
-                page.go_back()
-                check(f'{route} {width}px {theme} Back restores shared rail',
-                      page.locator('.site-mobile-chrome__search').is_visible() and
-                      page.evaluate("document.documentElement.dataset.theme")==theme)
+                page.wait_for_function("""expected => 
+                    document.querySelector('main.term-shell > .site-mobile-chrome')?.dataset.pageLabel===expected
+                """,title)
+                check(f'{route} {width}px {theme} shared workspace identifies its detail page',
+                      page.locator('.site-mobile-chrome').get_attribute('data-page-label')==title
+                      and page.locator('.site-chrome__links a').count()==7
+                      and page.locator('.site-chrome__links a[aria-current]').inner_text()==parent
+                      and page.evaluate('document.documentElement.scrollWidth<=innerWidth')
+                      and page.evaluate('document.documentElement.dataset.theme')==theme)
+                if width==1280:
+                    check(f'{route} {theme} desktop workspace title renders actual detail',
+                          page.locator('.site-mobile-chrome').evaluate(
+                            """el => getComputedStyle(el,'::before').content.includes(el.dataset.pageLabel)"""))
+                if width==1280 and theme=='dark':
+                    page.screenshot(path=str(out/f'reference-title-{title.lower().replace(" ","-")}-1280-dark.png'))
 
     check('no application runtime exceptions',not errors)
     browser.close()

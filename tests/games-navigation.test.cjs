@@ -1505,21 +1505,25 @@ test('Guided demo inherits the actual shared navigation instead of an independen
 });
 
 
-test('shared standalone and generated desktop rails expose the existing functional search link', () => {
-  const css=read('site-chrome.css');
-  assert.ok(css.includes('/* atlas-desktop-search:begin */'));
-  assert.ok(css.includes('body:has(.site-chrome) .site-mobile-chrome{display:contents!important}'));
-  assert.ok(css.includes('body:has(.site-chrome) .site-mobile-chrome__nav{display:none!important}'));
-  assert.ok(css.includes('body:has(.site-chrome) .site-mobile-chrome__search{'));
-  assert.ok(css.includes('@media print{body:has(.site-chrome) .site-mobile-chrome{display:none!important}}'));
-  for (const path of ['about.html', 'research.html', 'whats-new.html', 'games.html',
-                     'playbooks.html', 'technologies.html', 'terms/MLD-0691-machine-learning.html',
-                     'technology/TECH-0216-pytorch.html']) {
-    const html=read(path);
-    const matching=html.match(/<a class="[^"]*site-mobile-chrome__search[^"]*" href="[^"]*#\/search"[^>]*>/g)||[];
-    assert.equal(matching.length,1,path+' must reuse exactly one native Discover-search link');
-    assert.ok(html.includes('site-chrome__links'),path+' must retain the shared desktop rail');
+
+
+test('generated reference page identity uses one shared workspace title without duplicating chrome', () => {
+  const theme=read('site-theme.js');
+  assert.ok(theme.includes("main.term-shell > .site-mobile-chrome:not([data-page-label])"));
+  assert.ok(theme.includes("bar.dataset.pageLabel = title;"));
+  assert.ok(theme.includes("document.addEventListener('DOMContentLoaded'"));
+  for (const [page, title] of [
+    ['terms/MLD-0691-machine-learning.html','Machine learning'],
+    ['technology/TECH-0216-pytorch.html','PyTorch']
+  ]) {
+    const html=read(page);
+    assert.ok(html.includes('<h1>'+title+'</h1>'));
+    assert.ok(html.includes('class="directory-mobile-topbar site-mobile-chrome"'));
+    assert.ok(html.includes('site-chrome__links'));
   }
-  assert.ok(read('site-theme.js').includes("rememberSearchFocus();"),
-    'search link must hand off focus to the real, hydrated Discover input');
+  assert.ok(read('site-chrome.css').includes('.site-mobile-chrome[data-page-label]::before{content:attr(data-page-label)}'));
+  assert.ok(!read('site-chrome.css').includes('atlas-desktop-search:begin'),
+    'native desktop search remains in the existing 78px shared workspace bar');
+  assert.ok(read('downloads/Atlas_Demo_Offline.html').includes(theme),
+    'offline fallback must still embed the complete shared theme helper');
 });
