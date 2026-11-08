@@ -1671,3 +1671,15 @@ test('shared sticky mobile header clears native hash targets without JavaScript'
   assert.ok(read('downloads/Atlas_Demo_Offline.html').includes(css),
     'Offline fallback must embed the same responsive scroll offset');
 });
+
+
+test('enhanced shared mobile drawer locks root and body without breaking native dropdowns', () => {
+  const css = read('site-chrome.css');
+  const offline = read('downloads/Atlas_Demo_Offline.html');
+  assert.match(css, /html\.atlas-enhanced:has\(\.site-mobile-chrome__nav\[open\]\)\{overflow:hidden\}/);
+  assert.match(css, /html\.atlas-enhanced body:has\(\.site-mobile-chrome__nav\[open\]\)\{overflow:hidden\}/);
+  assert.ok(!css.includes('\nhtml:has(.site-mobile-chrome__nav[open]){overflow:hidden}'),
+    'native no-JavaScript dropdown must not lock the document');
+  assert.ok(offline.includes('html.atlas-enhanced:has(.site-mobile-chrome__nav[open]){overflow:hidden}'),
+    'offline fallback embeds the same shared root-scroll lock');
+});

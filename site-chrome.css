@@ -97,7 +97,9 @@ body:has(.site-chrome){padding-left:0!important}
    Without scripts, the native <details> menu stays an anchored, nonmodal
    dropdown, so keyboard focus never travels behind a fake modal backdrop. */
 @media (max-width:650px){
-/* Keep the page behind the native drawer stationary, as Discover already does. */
+/* Lock the root scroller as well as the body while the enhanced drawer is
+   modal. Native script-free <details> menus remain nonmodal and scrollable. */
+html.atlas-enhanced:has(.site-mobile-chrome__nav[open]){overflow:hidden}
 html.atlas-enhanced body:has(.site-mobile-chrome__nav[open]){overflow:hidden}
 html.atlas-enhanced .site-mobile-chrome:has(.site-mobile-chrome__nav[open]){z-index:100}
 html.atlas-enhanced .site-mobile-chrome:has(.site-mobile-chrome__nav[open])::before{

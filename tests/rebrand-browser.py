@@ -1321,17 +1321,19 @@ with sync_playwright() as p:
                 enhanced = page.locator('details.site-mobile-chrome__nav .site-mobile-chrome__menu').evaluate("""el => ({
                     position:getComputedStyle(el).position,
                     overflow:getComputedStyle(document.body).overflow,
+                    rootOverflow:getComputedStyle(document.documentElement).overflow,
                     enhanced:document.documentElement.classList.contains('atlas-enhanced')
                 })""")
                 check(f'{route} {width}px {theme} JS-enhanced menu is modal',
                       enhanced['position']=='fixed' and enhanced['overflow']=='hidden'
-                      and enhanced['enhanced'])
+                      and enhanced['rootOverflow']=='hidden' and enhanced['enhanced'])
                 if width==390 and theme=='dark' and route in ('about.html',
                                                                'technology/TECH-0216-pytorch.html'):
                     page.screenshot(path=str(out / f'enhanced-menu-{route.replace("/", "-")}-390-dark.png'))
                 page.keyboard.press('Escape')
                 check(f'{route} {width}px {theme} Escape restores the page',
-                      page.locator('details.site-mobile-chrome__nav[open]').count()==0)
+                      page.locator('details.site-mobile-chrome__nav[open]').count()==0
+                      and page.evaluate("getComputedStyle(document.documentElement).overflow != 'hidden'"))
 
     check('no application runtime exceptions',not errors)
     browser.close()
