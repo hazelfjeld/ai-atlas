@@ -276,7 +276,7 @@ def normalize_standalone_chrome(html, path):
     desktop = rest[7]
     start = '<div class="' + ((mobile + " ") if mobile else "") + 'site-mobile-chrome"'
     end = '<nav class="site-chrome ' + desktop + '" aria-label="AI Updates primary navigation">'
-    middle = r'(?:<main id="main">)?\s*' if path == "research.html" else r'\s*'
+    middle = r'(?:<main id="main"(?: tabindex="-1")?>)?\s*' if path == "research.html" else r'\s*'
     pattern = re.compile(re.escape(start) + r'[^>]*>.*?</div>' + middle +
                          re.escape(end) + r'.*?</nav>', re.S)
     normalized, count = pattern.subn(lambda _: render_standalone_nav(path), html)
