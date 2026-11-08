@@ -59,3 +59,14 @@ test('Snapshot refuses invalid dates and stays hidden before checksum-verified e
  assert.match(js,/This is a dated archive, not today/);
  assert.match(js,/Failed source lookups/);
 });
+
+// The publisher must not convert partial catch-up into same-day launches.
+test('November 8 source-reviewed edition separates same-day reporting from older discoveries',()=>{
+ const item=JSON.parse(fs.readFileSync(path.join(root,'data/daily/editions/2026-11-08-v1.json'),'utf8'));
+ const snapshot=D.editionSnapshot(item);
+ assert.deepEqual([snapshot.newsReports,snapshot.publishedOnEditionDate,snapshot.earlierReports,snapshot.coverageStatus],[9,2,7,'partial']);
+ assert.equal(item.technologies.length+item.terms.length,0);
+ assert.equal(item.news.filter(x=>x.summary.includes('948 working local privilege-escalation exploits')).length,1);
+ assert.equal(item.news.filter(x=>x.summary.includes('948 distinct patches')).length,0);
+ assert.ok(item.news.every(x=>x.review_status.startsWith('publisher_checked_')));
+});

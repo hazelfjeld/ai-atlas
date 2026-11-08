@@ -257,6 +257,14 @@
       "sha256": "ab2f03c6e0321f83ca718dfa7896f8dc4ecdb44618ad24619f3caa83ed95274e",
       "bytes": 17838,
       "published_at": "2026-11-07T14:39:59.877Z"
+    },
+    {
+      "date": "2026-11-08",
+      "revision": 1,
+      "path": "data/daily/editions/2026-11-08-v1.json",
+      "sha256": "59d713a6f330c4edeae82369d2d4c1ae0125bbe655d4b2dc83fe74dab84cacff",
+      "bytes": 17015,
+      "published_at": "2026-11-08T14:32:43.542Z"
     }
   ],
   "last_successful_publish_at": "2026-11-07T14:57:55Z",

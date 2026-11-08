@@ -51,6 +51,10 @@ with sync_playwright() as p:
     # on first paint, while the page's own label still identifies the library.
     page.set_viewport_size({'width':768,'height':900})
     page.goto(base+'research.html')
+    check('Research uses a single Discover-style article heading, without a stale legacy masthead',
+          page.locator('main > header').count() == 0
+          and page.locator('main > section.hero#main .discover-heading h1').count() == 1
+          and page.locator('main > section.hero#main').get_attribute('tabindex') == '-1')
     check('Research section label is present without JavaScript',
           page.locator('.research-mobile-topbar').get_attribute('data-page-label')=='Research library'
           and 'Research library' in page.locator('.research-mobile-topbar').evaluate(

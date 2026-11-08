@@ -1,0 +1,300 @@
+{
+  "schema": 1,
+  "edition_date": "2026-11-08",
+  "timezone": "America/Chicago",
+  "published_at": "2026-11-08T14:32:43.542Z",
+  "coverage": {
+    "start": "2026-11-07T14:17:00Z",
+    "end": "2026-11-08T14:20:49.457Z",
+    "status": "partial",
+    "note": "Bounded November 7–8 scan plus November 4–6 catch-up; nine checked source reports, two originally published November 8 and seven earlier. Source coverage is incomplete. Vendor results and third-party reported financial commitments were not independently replicated or confirmed, and AP's reported informal reporting line is attributed to former officials. Research and release feeds were not exhaustively searched.",
+    "sources_checked": [
+      {
+        "name": "metr",
+        "url": "https://metr.org/blog/2026-11-05-anthropic-ai-rd-acceleration-assessment/",
+        "checked_at": "2026-11-08T14:20:49.457Z",
+        "status": "success",
+        "note": "METR original independent assessment dated November 5; redacted underlying evidence"
+      },
+      {
+        "name": "ap-metr",
+        "url": "https://apnews.com/article/anthropic-metr-ai-claude-acceleration-9cf8c590ffc1abdb489179bdccc69c23",
+        "checked_at": "2026-11-08T14:20:49.457Z",
+        "status": "success",
+        "note": "Associated Press independent reporting on assessment; same underlying event"
+      },
+      {
+        "name": "openai-images",
+        "url": "https://openai.com/index/introducing-images-2-6/",
+        "checked_at": "2026-11-08T14:20:49.457Z",
+        "status": "success",
+        "note": "OpenAI original November 4 product release; speed and consistency are vendor claims"
+      },
+      {
+        "name": "openai-kernel",
+        "url": "https://openai.com/index/a-thousand-fewer-paths-to-root/",
+        "checked_at": "2026-11-08T14:20:49.457Z",
+        "status": "success",
+        "note": "OpenAI original November 4 controlled security-research report; no proof of fully deployed patches"
+      },
+      {
+        "name": "aws-web-answer",
+        "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/web-answer-amazon-bedrock/",
+        "checked_at": "2026-11-08T14:20:49.457Z",
+        "status": "success",
+        "note": "AWS original November 5 general-availability announcement"
+      },
+      {
+        "name": "mistral-studio",
+        "url": "https://docs.mistral.ai/resources/release-notes",
+        "checked_at": "2026-11-08T14:20:49.457Z",
+        "status": "success",
+        "note": "Mistral original November 5 dated release notes; managed agents are public preview"
+      },
+      {
+        "name": "firecrawl-sec",
+        "url": "https://www.firecrawl.dev/changelog/sec-filings",
+        "checked_at": "2026-11-08T14:20:49.457Z",
+        "status": "success",
+        "note": "Firecrawl original November 6 release note; coverage counts vendor reported"
+      },
+      {
+        "name": "firecrawl-life",
+        "url": "https://www.firecrawl.dev/changelog/life-sciences-research",
+        "checked_at": "2026-11-08T14:20:49.457Z",
+        "status": "success",
+        "note": "Firecrawl original November 5 release note; 41M+ source count vendor reported"
+      },
+      {
+        "name": "ap-caissi",
+        "url": "https://apnews.com/article/d3318eb2cf011df53e9ddb3e03d25f13",
+        "checked_at": "2026-11-08T14:20:49.457Z",
+        "status": "success",
+        "note": "Associated Press original November 8 investigation; informal reporting line based on anonymous sources"
+      },
+      {
+        "name": "reuters-power",
+        "url": "https://www.reuters.com/business/energy/anthropic-secures-34-billion-generator-deal-ai-data-centers-ft-reports-2026-11-08/",
+        "checked_at": "2026-11-08T14:20:49.457Z",
+        "status": "success",
+        "note": "Reuters November 8 12:54 UTC report based on FT; Reuters explicitly could not independently verify"
+      }
+    ],
+    "sources_failed": []
+  },
+  "tldr": [
+    "This November 8 edition contains two same-day reports—an AP investigation of federal AI safety-evaluation independence and Reuters coverage of an unverified Anthropic generator commitment—alongside seven dated catch-up reports.",
+    "Earlier source releases include METR's redaction-limited Anthropic assessment, OpenAI image and controlled security research, AWS and Mistral agent tools, and Firecrawl's specialized retrieval features.",
+    "All four technology and two terminology proposals remain deferred for catalog deduplication, so no new canonical profile or concept ID is claimed."
+  ],
+  "news": [
+    {
+      "id": "ai-news-metr-ai-rd-acceleration-2026-11-05",
+      "title": "METR reports faster AI R&D progress in a high-access Anthropic assessment",
+      "category": "research",
+      "tags": [
+        "AI",
+        "LLM",
+        "evaluation",
+        "safety",
+        "research"
+      ],
+      "summary": "METR's November 5 assessment of August 12 to October 29 internal evidence estimates that benchmark-measured capability progress on well-specified tasks accelerated about 1.9x relative to an earlier period, with a 95% interval of 1.5-2.8x. METR judges AI assistance a major contributor.",
+      "why_it_matters": "A rare external review with internal-model data sharpens debate over how quickly model-development feedback loops could compound.",
+      "caveat": "METR says Anthropic redacted most of the evidence it considered most informative. The 1.9x benchmark-growth estimate is subject to methodological uncertainty and does not establish the same acceleration in autonomous AI R&D or real-world progress.",
+      "review_status": "publisher_checked_external_assessment_with_major_redactions",
+      "release_status": "published_research",
+      "source_url": "https://metr.org/blog/2026-11-05-anthropic-ai-rd-acceleration-assessment/",
+      "publication_date": "2026-11-05",
+      "event_date": null,
+      "discovered_at": "2026-11-08T14:20:49.457Z",
+      "added_to_atlas_at": "2026-11-08T14:32:43.542Z",
+      "collection_classification": "catch_up_prior_uncovered_interval"
+    },
+    {
+      "id": "ai-news-openai-images26-2026-11-04",
+      "title": "OpenAI releases Images 2.6 with two API model options and GIF creation",
+      "category": "multimodal",
+      "tags": [
+        "AI",
+        "vision",
+        "image generation",
+        "API"
+      ],
+      "summary": "OpenAI announced Images 2.6 for ChatGPT, Codex and API on November 4. The developer models Flare and Sunburst emphasize a speed-versus-detail choice, with GIF workflows, editing markup and SVG export described.",
+      "why_it_matters": "New editing and animation controls expand production workflows beyond one-shot image generation.",
+      "caveat": "The claimed 50% speed improvement, six-second low-quality generation and edit consistency are OpenAI-reported; outputs, pricing and access should be checked by users.",
+      "review_status": "publisher_checked_original_source_claims_attributed",
+      "release_status": "launched",
+      "source_url": "https://openai.com/index/introducing-images-2-6/",
+      "publication_date": "2026-11-04",
+      "event_date": "2026-11-04",
+      "discovered_at": "2026-11-08T14:20:49.457Z",
+      "added_to_atlas_at": "2026-11-08T14:32:43.542Z",
+      "collection_classification": "catch_up_prior_uncovered_interval"
+    },
+    {
+      "id": "ai-news-openai-linux-lpe-pipeline-2026-11-04",
+      "title": "OpenAI reports large-scale Linux vulnerability triage in a controlled research run",
+      "category": "security",
+      "tags": [
+        "AI",
+        "cybersecurity",
+        "agents",
+        "evaluation"
+      ],
+      "summary": "OpenAI described a November 4 report on a controlled mid-October Linux kernel study. Its pipeline dynamically reproduced 1,724 vulnerabilities and generated 948 working local privilege-escalation exploits, with candidate patches prepared for human maintainer review, at about $1.21 million in API credits.",
+      "why_it_matters": "It illustrates why autonomous security pipelines need independent path verification and human maintainer review, not just apparent success.",
+      "caveat": "The exploit counts are OpenAI-reported controlled findings, not 948 merged security patches, not 948 unique root causes, and not evidence that every affected Linux deployment was exploitable.",
+      "review_status": "publisher_checked_controlled_research_not_independently_reproduced",
+      "release_status": "controlled_research_not_public_incident",
+      "source_url": "https://openai.com/index/a-thousand-fewer-paths-to-root/",
+      "publication_date": "2026-11-04",
+      "event_date": null,
+      "discovered_at": "2026-11-08T14:20:49.457Z",
+      "added_to_atlas_at": "2026-11-08T14:32:43.542Z",
+      "collection_classification": "catch_up_prior_uncovered_interval"
+    },
+    {
+      "id": "ai-news-aws-bedrock-agentcore-web-answer-2026-11-05",
+      "title": "AWS launches cited web-answer tool for Bedrock agents",
+      "category": "developer_tools",
+      "tags": [
+        "AI",
+        "agents",
+        "RAG",
+        "API",
+        "evaluation"
+      ],
+      "summary": "AWS announced general availability of AgentCore Web Answer on November 5. It takes a question, performs scoped web retrieval, and returns a synthesized answer with citations through an AgentCore Gateway target.",
+      "why_it_matters": "This can reduce bespoke search-retrieve-summarize plumbing in cloud-based agent applications.",
+      "caveat": "Citations do not prove every assertion correct; AWS lists US East (N. Virginia) availability and per-call pricing, with IAM, regional and cloud dependencies.",
+      "review_status": "publisher_checked_original_source_claims_attributed",
+      "release_status": "general_availability",
+      "source_url": "https://aws.amazon.com/about-aws/whats-new/2026/11/web-answer-amazon-bedrock/",
+      "publication_date": "2026-11-05",
+      "event_date": "2026-11-05",
+      "discovered_at": "2026-11-08T14:20:49.457Z",
+      "added_to_atlas_at": "2026-11-08T14:32:43.542Z",
+      "collection_classification": "catch_up_prior_uncovered_interval"
+    },
+    {
+      "id": "ai-news-mistral-managed-agents-2026-11-05",
+      "title": "Mistral previews durable managed agents and tracing",
+      "category": "developer_tools",
+      "tags": [
+        "AI",
+        "LLM",
+        "agents",
+        "workflow",
+        "observability"
+      ],
+      "summary": "Mistral's November 5 release notes describe Python Managed Agents that can run locally, self-hosted or on Mistral-managed infrastructure, resume after crashes, and pause for human approval. Studio captures agent and tool traces.",
+      "why_it_matters": "Durable sessions and observability target long-running agent workflows without forcing teams to build every worker and checkpoint system.",
+      "caveat": "These capabilities are marked public preview, not a guarantee of reliability or permanent pricing; managed mode depends on Mistral services.",
+      "review_status": "publisher_checked_original_source_claims_attributed",
+      "release_status": "public_preview",
+      "source_url": "https://docs.mistral.ai/resources/release-notes",
+      "publication_date": "2026-11-05",
+      "event_date": "2026-11-05",
+      "discovered_at": "2026-11-08T14:20:49.457Z",
+      "added_to_atlas_at": "2026-11-08T14:32:43.542Z",
+      "collection_classification": "catch_up_prior_uncovered_interval"
+    },
+    {
+      "id": "ai-news-firecrawl-alexandria-sec-filings-2026-11-06",
+      "title": "Firecrawl adds SEC filing retrieval to its Alexandria agent data offering",
+      "category": "data_tools",
+      "tags": [
+        "AI",
+        "agents",
+        "retrieval",
+        "finance",
+        "documents"
+      ],
+      "summary": "Firecrawl's November 6 release note says its Alexandria data tools now expose 10-K, 8-K, Forms 3-5, and 13F materials for more than 8,000 public companies to connected AI agents.",
+      "why_it_matters": "Specialized structured retrieval may help agents ground financial-document analysis in filings rather than search snippets.",
+      "caveat": "The company-reported coverage figure, freshness, completeness and access terms were not independently audited; filings still require source-level checks.",
+      "review_status": "publisher_checked_original_source_claims_attributed",
+      "release_status": "provider_feature_released",
+      "source_url": "https://www.firecrawl.dev/changelog/sec-filings",
+      "publication_date": "2026-11-06",
+      "event_date": "2026-11-06",
+      "discovered_at": "2026-11-08T14:20:49.457Z",
+      "added_to_atlas_at": "2026-11-08T14:32:43.542Z",
+      "collection_classification": "catch_up_prior_uncovered_interval"
+    },
+    {
+      "id": "ai-news-firecrawl-life-sciences-research-2026-11-05",
+      "title": "Firecrawl expands agent research retrieval to life-sciences literature",
+      "category": "data_tools",
+      "tags": [
+        "AI",
+        "research",
+        "retrieval",
+        "biomedicine",
+        "agents"
+      ],
+      "summary": "Firecrawl's November 5 note promotes access through its agent tools to a life-sciences index it says covers more than 41 million papers relevant to drugs, diseases and genes.",
+      "why_it_matters": "Domain-specific literature retrieval can support evidence discovery without manual abstract copying across many databases.",
+      "caveat": "The volume is provider-reported; full-text access, coverage quality, citations and clinical suitability must be checked separately. This is not a medical decision-support validation.",
+      "review_status": "publisher_checked_original_source_claims_attributed",
+      "release_status": "provider_feature_released",
+      "source_url": "https://www.firecrawl.dev/changelog/life-sciences-research",
+      "publication_date": "2026-11-05",
+      "event_date": "2026-11-05",
+      "discovered_at": "2026-11-08T14:20:49.457Z",
+      "added_to_atlas_at": "2026-11-08T14:32:43.542Z",
+      "collection_classification": "catch_up_prior_uncovered_interval"
+    },
+    {
+      "id": "ai-news-ap-caissi-oversight-independence-2026-11-08",
+      "title": "AP reports concerns about US government AI safety evaluation independence",
+      "category": "governance",
+      "tags": [
+        "AI",
+        "safety",
+        "governance",
+        "evaluation",
+        "policy"
+      ],
+      "summary": "An Associated Press investigation published November 8 says the federal CAISSI evaluation office lacks a permanent director and has stopped publishing its research. AP reports that staff were asked to report informally to a White House office.",
+      "why_it_matters": "The reporting raises concrete questions about independent testing capacity, public transparency, and how governmental evaluation relates to company-led oversight.",
+      "caveat": "The informal reporting arrangement comes from anonymous former officials; concerns about influence are interpretations, not established wrongdoing. The article also quotes arguments that executive coordination could improve visibility.",
+      "review_status": "publisher_checked_reported_investigation_with_attribution",
+      "release_status": "reported_investigation",
+      "source_url": "https://apnews.com/article/d3318eb2cf011df53e9ddb3e03d25f13",
+      "publication_date": "2026-11-08",
+      "event_date": null,
+      "discovered_at": "2026-11-08T14:20:49.457Z",
+      "added_to_atlas_at": "2026-11-08T14:32:43.542Z",
+      "collection_classification": "same_day_report"
+    },
+    {
+      "id": "ai-news-reuters-anthropic-generator-commitments-2026-11-08",
+      "title": "Reuters relays unverified report of Anthropic power-generation commitments",
+      "category": "infrastructure",
+      "tags": [
+        "AI",
+        "compute",
+        "energy",
+        "industry"
+      ],
+      "summary": "Reuters reported on November 8 that the Financial Times says Anthropic agreed in late September to about $3.4 billion of commitments for 1.7 GW of gas-fired generators from OnePWR Solutions, without acquiring that company.",
+      "why_it_matters": "The reported transaction illustrates how power sourcing and construction capacity may constrain scaling AI data centers.",
+      "caveat": "Reuters explicitly could not independently verify the FT report; neither Anthropic nor OnePWR had commented, and a reported agreement is not evidence the generators are installed.",
+      "review_status": "publisher_checked_reuters_attributed_unverified_ft_report",
+      "release_status": "unverified_third_party_report",
+      "source_url": "https://www.reuters.com/business/energy/anthropic-secures-34-billion-generator-deal-ai-data-centers-ft-reports-2026-11-08/",
+      "publication_date": "2026-11-08",
+      "event_date": null,
+      "discovered_at": "2026-11-08T14:20:49.457Z",
+      "added_to_atlas_at": "2026-11-08T14:32:43.542Z",
+      "collection_classification": "same_day_report"
+    }
+  ],
+  "technologies": [],
+  "terms": [],
+  "site_changes": [],
+  "corrections": []
+}

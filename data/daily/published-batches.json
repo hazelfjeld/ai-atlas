@@ -759,6 +759,73 @@
         "ai-news:usda-crop-anomaly-check:2026-11-07",
         "ai-news:collinear-cwebenc-v2:2026-11-07"
       ]
+    },
+    {
+      "batch_id": "atlas-daily-20261108-0817ct-bounded-recovery-a",
+      "source_branch": "atlas-daily-staging",
+      "source_commit": "9c49bb2442ea0eb3599799074814e3cea56898df",
+      "source_batch_path": "daily-queue/batches/2026-11-08-atlas-daily-20261108-0817ct-bounded-recovery-a.json",
+      "source_batch_sha256": "2ea4ac94a32a63d0fe4c7cea8231c44d45d02be84e21b76b211e39cc98cb8db2",
+      "source_batch_bytes": 33852,
+      "edition_date": "2026-11-08",
+      "validation_result": "staging_sha256_bytes_schema_ids_dates_original_source_checks_and_prior_edition_dedup_reviewed",
+      "status": "partially_published_with_6_deferred_catalog_proposals",
+      "publication_outcome": "production_public_site_verification_pending",
+      "publication_edition": "2026-11-08-v1",
+      "accepted_news_ids": [
+        "ai-news-metr-ai-rd-acceleration-2026-11-05",
+        "ai-news-openai-images26-2026-11-04",
+        "ai-news-openai-linux-lpe-pipeline-2026-11-04",
+        "ai-news-aws-bedrock-agentcore-web-answer-2026-11-05",
+        "ai-news-mistral-managed-agents-2026-11-05",
+        "ai-news-firecrawl-alexandria-sec-filings-2026-11-06",
+        "ai-news-firecrawl-life-sciences-research-2026-11-05",
+        "ai-news-ap-caissi-oversight-independence-2026-11-08",
+        "ai-news-reuters-anthropic-generator-commitments-2026-11-08"
+      ],
+      "source_accepted_news_ids": [
+        "ai-news:metr:ai-rd-acceleration:2026-11-05",
+        "ai-news:openai:images26:2026-11-04",
+        "ai-news:openai:linux-lpe-pipeline:2026-11-04",
+        "ai-news:aws:bedrock-agentcore-web-answer:2026-11-05",
+        "ai-news:mistral:managed-agents:2026-11-05",
+        "ai-news:firecrawl:alexandria-sec-filings:2026-11-06",
+        "ai-news:firecrawl:life-sciences-research:2026-11-05",
+        "ai-news:ap:caissi-oversight-independence:2026-11-08",
+        "ai-news:reuters:anthropic-generator-commitments:2026-11-08"
+      ],
+      "deferred_news_ids": [],
+      "deferred_catalog_proposal_ids": [
+        "tech-proposal:openai-images26:2026-11-08",
+        "tech-proposal:aws-agentcore-web-answer:2026-11-08",
+        "tech-proposal:mistral-managed-agents:2026-11-08",
+        "tech-proposal:firecrawl-alexandria-research:2026-11-08",
+        "term-proposal:ai-rd-capability-acceleration-factor:2026-11-08",
+        "term-proposal:local-privilege-escalation:2026-11-08"
+      ],
+      "rejected_ids": [],
+      "counts": {
+        "news_published": 9,
+        "technology_added": 0,
+        "term_added": 0,
+        "corrections": 0,
+        "news_deferred": 0,
+        "catalog_deferred": 6
+      },
+      "review_notes": "Independently reopened/checked original METR, OpenAI, AWS, Mistral and Firecrawl documentation and Reuters report, plus AP contemporaneous reporting. All source dates and vendor/methodological caveats retained. OpenAI Linux story corrected before publication: 948 reported LPE exploits, not 948 confirmed upstream patches. AP story labeled attributed investigation; Reuters story labeled unverified third-party FT report. Existing canonical profiles TECH-0004 and TECH-0158 noted for duplicate review; none of the 6 proposals added to permanent catalogs. Publication verification pending; prior verified last_successful_publish_at intentionally retained.",
+      "publication_history": [
+        {
+          "edition": "2026-11-08-v1",
+          "source_batch_sha256": "2ea4ac94a32a63d0fe4c7cea8231c44d45d02be84e21b76b211e39cc98cb8db2",
+          "news_published": 9,
+          "technology_added": 0,
+          "term_added": 0,
+          "corrections": 0,
+          "catalog_deferred": 6,
+          "published_at": "2026-11-08T14:32:43.542Z",
+          "status": "commit_and_production_verification_pending"
+        }
+      ]
     }
   ]
 }
