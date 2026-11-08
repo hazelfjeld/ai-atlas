@@ -20,3 +20,25 @@ test('Playbooks, Technology, Research and editorial reviews reuse Discover card 
   assert.match(block, /\.playbook-shell \.playbook > p,[\s\S]*?color:var\(--muted\)/);
   assert.ok(!block.includes('display:none'), 'Do not hide page navigation or cards');
 });
+
+test('generated concept and technology article headlines reuse Discover typography in both themes and mobile widths', () => {
+  const css = fs.readFileSync(path.join(__dirname, '..', 'site-chrome.css'), 'utf8');
+  const brand = fs.readFileSync(path.join(__dirname, '..', 'brand.css'), 'utf8');
+  const block = css.split('/* atlas-shared-headlines:begin */')[1]
+    ?.split('/* atlas-shared-headlines:end */')[0];
+  assert.ok(block, 'Missing shared reference-heading source');
+  assert.match(brand, /\\.discover-heading h1\\{font:400 clamp\\(40px,4\\.2vw,56px\\)\\/1\\.08 Georgia/);
+  assert.ok(block.includes('font:400 clamp(40px,4.2vw,56px)/1.08 Georgia'), 'Reference desktop title must match Discover');
+  assert.ok(block.includes('@media(max-width:650px)') && block.includes('h1{font-size:43px}'),
+    'Reference mobile title must match Discover, including 320px');
+  assert.ok(block.includes(':not(:has(.discover-heading))'), 'Do not override existing directory landing headings');
+  assert.ok(!block.includes('display:none'), 'Do not conceal native article headings');
+  for (const route of ['terms/MLD-0001-a-b-test.html', 'technology/TECH-0288-vllm.html']) {
+    const html=fs.readFileSync(path.join(__dirname, '..', route), 'utf8');
+    assert.match(html, /<header class="hero"[^>]*><p class="eyebrow">/);
+    assert.match(html, /<h1>[^<]+<\\/h1>/);
+    assert.match(html, /<a class="skip" href="#main">/, route + ' retains native skip');
+  }
+  const offline=fs.readFileSync(path.join(__dirname, '..', 'downloads/Atlas_Demo_Offline.html'), 'utf8');
+  assert.ok(offline.includes(css), 'Offline fallback must embed the exact shared CSS');
+});

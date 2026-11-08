@@ -851,10 +851,15 @@ body:has(.site-chrome) :is(.tech-controls,.playbook-tools,.controls,.search-cont
    without overriding original .discover-heading sizes or changing Games,
    daily news cards, navigation or content. */
 .term-shell > .hero:not(:has(.discover-heading)) h1{
-  font:400 clamp(36px,4.2vw,56px)/1.1 Georgia,"Times New Roman",serif;
+  /* Same desktop type scale as Discover; preserve each article's native heading. */
+  font:400 clamp(40px,4.2vw,56px)/1.08 Georgia,"Times New Roman",serif;
   letter-spacing:-.045em;
   text-wrap:balance;
   overflow-wrap:break-word;
+}
+@media(max-width:650px){
+  /* Discover's 43px mobile title, shared by concept and technology articles. */
+  .term-shell > .hero:not(:has(.discover-heading)) h1{font-size:43px}
 }
 /* atlas-shared-headlines:end */
 
