@@ -519,6 +519,10 @@ body:has(.site-chrome) :is(.tech-controls,.playbook-tools,.controls,.search-cont
 /* A reference skip now lands beyond the shared rail; leave enough room
    below the fixed Discover-style 78px desktop workspace bar. */
 @media (min-width:651px){
+  /* The 78px Discover-style fixed workspace bar otherwise covers native
+     in-page hash destinations on editorial, reference and review pages.
+     Apply the offset at the root scroller for all shared-chrome routes. */
+  html:has(.site-chrome){scroll-padding-top:96px}
   .term-shell > .hero#main{scroll-margin-top:96px}
 }
 

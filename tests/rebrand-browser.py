@@ -1203,6 +1203,30 @@ with sync_playwright() as p:
     check('direct legacy reference #main bookmarks reach the article after hydration',
           page.evaluate("""() => document.activeElement===document.querySelector('main.term-shell > header.hero#main')"""))
 
+    # Deep links were previously covered by the 78px fixed workspace bar
+    # on standalone reference/editorial pages, although the page was reachable.
+    # Use the native scroll container, not custom per-page click handlers.
+    for width in (320,390,768,1280):
+        for theme in ('light','dark'):
+            page.set_viewport_size({'width':width,'height':844 if width<=650 else 900})
+            page.goto(base+'catalog-review.html#terms')
+            page.evaluate('(t)=>localStorage.setItem("atlas.theme",t)',theme)
+            page.reload()
+            page.locator('#terms').evaluate(
+                "el=>el.scrollIntoView({block:'start',behavior:'instant'})")
+            position = page.evaluate("""() => ({
+                top:document.querySelector('#terms').getBoundingClientRect().top,
+                pad:getComputedStyle(document.documentElement).scrollPaddingTop,
+                overflow:document.documentElement.scrollWidth>innerWidth,
+                theme:document.documentElement.dataset.theme
+            })""")
+            check(f'catalog review {width}px {theme} deep link remains responsive',
+                  not position['overflow'] and position['theme']==theme)
+            if width>650:
+                check(f'catalog review {width}px {theme} anchor clears desktop workspace bar',
+                      position['pad']=='96px' and
+                      77<=position['top']<=101)
+
     check('no application runtime exceptions',not errors)
     browser.close()
 (out/'results.json').write_text(json.dumps({'checks_passed':len(checks),'checks':checks,'base':base},indent=2))

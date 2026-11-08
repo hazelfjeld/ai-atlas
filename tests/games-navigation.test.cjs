@@ -1566,3 +1566,15 @@ test('generated dictionary and technology skip links target article content afte
   assert.ok(offline.includes(theme) && offline.includes(css),
     'offline fallback embeds the exact updated shared assets');
 });
+
+test('shared desktop hash navigation clears the fixed workspace bar on editorial and reference pages', () => {
+  const css = read('site-chrome.css');
+  assert.match(css, /html:has\(\.site-chrome\)\{scroll-padding-top:96px\}/);
+  assert.match(css, /height:78px/);
+  for (const route of ['catalog-review.html','hardware-review.html',
+    'research.html','terms/index.html','technology/index.html']) {
+    assert.ok(read(route).includes('site-chrome.css'), route+' loads the shared anchor offset');
+  }
+  assert.ok(read('downloads/Atlas_Demo_Offline.html').includes(css),
+    'offline fallback must embed the matching shared frame styling');
+});
