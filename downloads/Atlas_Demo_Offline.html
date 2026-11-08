@@ -777,6 +777,12 @@ body:has(.site-chrome) :is(.tech-controls,.playbook-tools,.controls,.search-cont
 .term-shell .notice a{white-space:normal;overflow-wrap:anywhere}
 /* atlas-info-callouts:end */
 
+/* A reference skip now lands beyond the shared rail; leave enough room
+   below the fixed Discover-style 78px desktop workspace bar. */
+@media (min-width:651px){
+  .term-shell > .hero#main{scroll-margin-top:96px}
+}
+
 /* atlas-mobile-search-frame:begin */
 /* Discover's real search form and the other pages' working search link share
    the same mobile frame. Keep the native input (and its submit handler), with
@@ -823,6 +829,27 @@ document.addEventListener('DOMContentLoaded', () => {
   const bar = document.querySelector('main.term-shell > .site-mobile-chrome:not([data-page-label])');
   const title = document.querySelector('main.term-shell h1')?.textContent?.trim();
   if (bar && title && title.length <= 90) bar.dataset.pageLabel = title;
+});
+
+// A generated reference puts its shared navigation before the article inside
+// <main>. A native #main skip would therefore take keyboard users back through
+// the entire rail. After hydration, move only that fragment destination to the
+// existing article hero, leaving the <main> landmark and no-JS hash fallback
+// intact. No extra header, link, dependency, or page-specific template is added.
+document.addEventListener('DOMContentLoaded', () => {
+  const main = document.querySelector('main.term-shell#main');
+  if (!main || !document.querySelector('a.skip[href="#main"]')) return;
+  const hero = main.querySelector(':scope > header.hero');
+  if (!hero) return;
+  main.removeAttribute('id');
+  hero.id = 'main';
+  hero.setAttribute('tabindex', '-1');
+  // Direct old #main bookmarks remain useful even if the browser initially
+  // resolved the fragment against the pre-hydration main element.
+  if (window.location.hash === '#main') {
+    hero.scrollIntoView();
+    hero.focus({preventScroll:true});
+  }
 });
 
 // The main workspace consumes this one-shot intent after catalog hydration.

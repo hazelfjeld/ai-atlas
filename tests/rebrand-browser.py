@@ -1167,6 +1167,42 @@ with sync_playwright() as p:
                 if width==1280 and theme=='dark':
                     page.screenshot(path=str(out/f'reference-title-{title.lower().replace(" ","-")}-1280-dark.png'))
 
+    # On generated references the shared rail is structurally inside <main>.
+    # Skip must land on the actual article, rather than tabbing through all seven
+    # primary links again. Exercise both directory and detail page families.
+    for width in (320,390,768,1280):
+        for theme in ('light','dark'):
+            page.set_viewport_size({'width':width,'height':844 if width<=650 else 900})
+            for route in ('terms/index.html','technology/index.html',
+                          'terms/MLD-0691-machine-learning.html',
+                          'technology/TECH-0216-pytorch.html'):
+                page.goto(base+route)
+                page.evaluate('(t)=>localStorage.setItem("atlas.theme",t)',theme)
+                page.reload()
+                check(f'{route} {width}px {theme} has one real article skip target',
+                      page.evaluate("""() => {
+                          const hero=document.querySelector('main.term-shell > header.hero#main');
+                          return !!hero && hero.tabIndex===-1 &&
+                            !document.querySelector('main.term-shell').hasAttribute('id') &&
+                            document.querySelectorAll('#main').length===1 &&
+                            document.querySelectorAll('.site-chrome__links a').length===7 &&
+                            document.documentElement.scrollWidth<=innerWidth;
+                      }"""))
+                page.locator('a.skip').focus()
+                page.keyboard.press('Enter')
+                check(f'{route} {width}px {theme} skip moves keyboard focus after the rail',
+                      page.evaluate("""() => location.hash==='#main' &&
+                          document.activeElement===document.querySelector('main.term-shell > header.hero')"""))
+                page.keyboard.press('Tab')
+                check(f'{route} {width}px {theme} next Tab remains in article',
+                      page.evaluate("""() => !!document.activeElement.closest('main.term-shell') &&
+                          !document.activeElement.closest('.site-chrome,.site-mobile-chrome')"""))
+                if width==390 and theme=='dark' and route=='technology/TECH-0216-pytorch.html':
+                    page.screenshot(path=str(out/'reference-skip-pytorch-390-dark.png'))
+    page.goto(base+'terms/MLD-0691-machine-learning.html#main')
+    check('direct legacy reference #main bookmarks reach the article after hydration',
+          page.evaluate("""() => document.activeElement===document.querySelector('main.term-shell > header.hero#main')"""))
+
     check('no application runtime exceptions',not errors)
     browser.close()
 (out/'results.json').write_text(json.dumps({'checks_passed':len(checks),'checks':checks,'base':base},indent=2))

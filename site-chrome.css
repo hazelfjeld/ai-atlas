@@ -516,6 +516,12 @@ body:has(.site-chrome) :is(.tech-controls,.playbook-tools,.controls,.search-cont
 .term-shell .notice a{white-space:normal;overflow-wrap:anywhere}
 /* atlas-info-callouts:end */
 
+/* A reference skip now lands beyond the shared rail; leave enough room
+   below the fixed Discover-style 78px desktop workspace bar. */
+@media (min-width:651px){
+  .term-shell > .hero#main{scroll-margin-top:96px}
+}
+
 /* atlas-mobile-search-frame:begin */
 /* Discover's real search form and the other pages' working search link share
    the same mobile frame. Keep the native input (and its submit handler), with

@@ -1545,3 +1545,24 @@ test('all standalone skip links move keyboard focus to a unique native destinati
     assert.match(targets[0][0], /\btabindex="-1"/, route + ' focusable target');
   }
 });
+
+
+test('generated dictionary and technology skip links target article content after the shared rail', () => {
+  const theme = read('site-theme.js');
+  const css = read('site-chrome.css');
+  assert.match(theme, /main\\.term-shell#main/);
+  assert.ok(theme.includes("main.querySelector(':scope > header.hero')"));
+  assert.ok(theme.includes("main.removeAttribute('id');"));
+  assert.ok(theme.includes("hero.setAttribute('tabindex', '-1');"));
+  assert.ok(css.includes('.term-shell > .hero#main{scroll-margin-top:96px}'));
+  for (const route of ['terms/index.html', 'technology/index.html',
+    'terms/MLD-0691-machine-learning.html', 'technology/TECH-0216-pytorch.html']) {
+    const html=read(route);
+    assert.ok(html.includes('<a class="skip" href="#main">'), route+' preserves native skip');
+    assert.ok(html.includes('<main class="term-shell" id="main">'), route+' no-JS fallback');
+    assert.ok(html.includes('<header class="hero">'), route+' has one article start');
+  }
+  const offline = read('downloads/Atlas_Demo_Offline.html');
+  assert.ok(offline.includes(theme) && offline.includes(css),
+    'offline fallback embeds the exact updated shared assets');
+});

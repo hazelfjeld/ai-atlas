@@ -21,6 +21,27 @@ document.addEventListener('DOMContentLoaded', () => {
   if (bar && title && title.length <= 90) bar.dataset.pageLabel = title;
 });
 
+// A generated reference puts its shared navigation before the article inside
+// <main>. A native #main skip would therefore take keyboard users back through
+// the entire rail. After hydration, move only that fragment destination to the
+// existing article hero, leaving the <main> landmark and no-JS hash fallback
+// intact. No extra header, link, dependency, or page-specific template is added.
+document.addEventListener('DOMContentLoaded', () => {
+  const main = document.querySelector('main.term-shell#main');
+  if (!main || !document.querySelector('a.skip[href="#main"]')) return;
+  const hero = main.querySelector(':scope > header.hero');
+  if (!hero) return;
+  main.removeAttribute('id');
+  hero.id = 'main';
+  hero.setAttribute('tabindex', '-1');
+  // Direct old #main bookmarks remain useful even if the browser initially
+  // resolved the fragment against the pre-hydration main element.
+  if (window.location.hash === '#main') {
+    hero.scrollIntoView();
+    hero.focus({preventScroll:true});
+  }
+});
+
 // The main workspace consumes this one-shot intent after catalog hydration.
 // Use the same handoff for the slash shortcut and the visible search link.
 function rememberSearchFocus() {
