@@ -305,7 +305,7 @@ with sync_playwright() as p:
         toggle = source.locator('button.site-chrome__theme-toggle:visible')
         for expected in ('dark', 'light'):
             toggle.click()
-            target.wait_for_function("(t) => document.documentElement.dataset.theme === t", expected)
+            target.wait_for_function("(t) => document.documentElement.dataset.theme === t", arg=expected)
             check(f'{width}px cross-tab theme follows shared controls ({expected})',
                   target.locator('.site-chrome__theme-toggle').evaluate_all(
                       "(els, dark) => els.length === 2 && els.every(e => e.getAttribute('aria-pressed') === String(dark))",
