@@ -286,6 +286,31 @@ with sync_playwright() as p:
     page.emulate_media(color_scheme='light')
 
     static.close()
+    # Open pages from different existing site families should not retain a
+    # stale palette after a saved choice changes in another tab. Exercise the
+    # real native theme controls, not just a synthetic CSS class swap.
+    for width in (320, 390, 768, 1280):
+        shared = browser.new_context(viewport={'width':width,'height':844 if width <= 650 else 900})
+        source = shared.new_page()
+        target = shared.new_page()
+        source.goto(base + 'about.html')
+        target.goto(base + 'technology/index.html')
+        source.evaluate("""() => {
+            document.documentElement.dataset.theme = 'light';
+            localStorage.setItem('atlas.theme','light');
+        }""")
+        target.wait_for_function("document.documentElement.dataset.theme === 'light'")
+        if width <= 650:
+            source.locator('details.site-mobile-chrome__nav summary').click()
+        toggle = source.locator('button.site-chrome__theme-toggle:visible')
+        for expected in ('dark', 'light'):
+            toggle.click()
+            target.wait_for_function("(t) => document.documentElement.dataset.theme === t", expected)
+            check(f'{width}px cross-tab theme follows shared controls ({expected})',
+                  target.locator('.site-chrome__theme-toggle').evaluate_all(
+                      "(els, dark) => els.length === 2 && els.every(e => e.getAttribute('aria-pressed') === String(dark))",
+                      expected == 'dark'))
+        shared.close()
     context=browser.new_context(viewport={'width':1440,'height':1050},reduced_motion='reduce')
     page=context.new_page()
     errors=[];page.on('pageerror',lambda e:errors.append(str(e)))

@@ -106,3 +106,17 @@ test('Discover first paint keeps its useful content stable without perpetual loa
   const offline = fs.readFileSync(path.join(__dirname, '..', 'downloads/Atlas_Demo_Offline.html'), 'utf8');
   assert.ok(offline.includes(css), 'Offline demo must embed the exact shared stylesheet');
 });
+
+test('theme preference stays synchronized across open editorial and reference tabs', () => {
+  const theme = fs.readFileSync(path.join(__dirname, '..', 'site-theme.js'), 'utf8');
+  assert.ok(theme.includes("window.addEventListener('storage', (event) =>"));
+  assert.ok(theme.includes("event.key === 'atlas.theme'"));
+  assert.ok(theme.includes('syncSharedStoredTheme(event.newValue)'));
+  assert.ok(theme.includes('syncSharedStoredTheme(savedTheme)'),
+    'BFCache restoration and cross-tab updates must reuse the same theme state');
+  assert.ok(theme.includes("button.setAttribute('aria-pressed'"),
+    'Cross-tab updates must synchronize the visible theme controls');
+  const offline = fs.readFileSync(path.join(__dirname, '..', 'downloads/Atlas_Demo_Offline.html'), 'utf8');
+  assert.ok(offline.includes("window.addEventListener('storage', (event) =>"),
+    'The offline fallback must embed the current shared theme script');
+});
