@@ -134,7 +134,7 @@ with sync_playwright() as p:
 
     # The A-Z concept and technology directory pages must share Discover's
     # secondary destinations with JavaScript disabled, not only after hydration.
-    for route in ('terms/index.html', 'technology/index.html'):
+    for route in ('terms/index.html', 'technology/index.html', 'technology/TECH-0216-pytorch.html'):
         scriptless.goto(base + route)
         scriptless.locator('#directory-mobile-nav > summary').click()
         scriptless.locator('#directory-mobile-nav .site-mobile-chrome__more > summary').click()
@@ -1825,7 +1825,7 @@ with sync_playwright() as p:
                                      java_script_enabled=False, reduced_motion='reduce')
     for theme in ('light', 'dark'):
         reference_nav.emulate_media(color_scheme=theme)
-        for route in ('terms/index.html', 'technology/index.html'):
+        for route in ('terms/index.html', 'technology/index.html', 'technology/TECH-0216-pytorch.html'):
             for width in (320, 390, 768, 1280):
                 reference_nav.set_viewport_size({'width':width, 'height':844})
                 reference_nav.goto(base + route)
@@ -1855,6 +1855,14 @@ with sync_playwright() as p:
                     check('reference directory mobile search remains a real route ' + route + ' ' + theme + ' ' + str(width),
                           not rail.is_visible() and
                           reference_nav.locator('a.site-mobile-chrome__search').get_attribute('href') == '../index.html#/search')
+                    mobile.locator('> summary').click()
+                    secondary = mobile.locator('.site-mobile-chrome__more')
+                    check('reference mobile disclosure exists before JS ' + route + ' ' + theme + ' ' + str(width),
+                          secondary.count() == 1 and secondary.locator('summary').is_visible())
+                    secondary.locator('summary').click()
+                    check('reference native mobile secondary routes before JS ' + route + ' ' + theme + ' ' + str(width),
+                          secondary.locator('a').count() == 8 and
+                          secondary.locator('a[href="../index.html#/papers"]').is_visible())
     reference_nav.close()
     # Native keyboard skip must focus content, not only scroll beneath the rail.
     # Keep this usable with JavaScript off in both mobile and desktop layouts.

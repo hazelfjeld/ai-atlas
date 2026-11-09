@@ -5,7 +5,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
-from site_chrome import SECONDARY_DESTINATIONS, sync_secondary_navigation_script, sync_discover_secondary
+from site_chrome import SECONDARY_DESTINATIONS, sync_secondary_navigation_script, sync_discover_secondary, render_mobile_secondary_nav
 
 class SecondaryNavigationTests(unittest.TestCase):
     def test_native_generator_and_offline_source(self):
@@ -35,6 +35,9 @@ class SecondaryNavigationTests(unittest.TestCase):
             with self.subTest(path=page.name):
                 self.assertEqual(source.count('<details class="site-chrome__more">'), 1)
                 self.assertIn(expected, source)
+                self.assertEqual(source.count('<details class="site-mobile-chrome__more">'), 1)
+                self.assertIn(render_mobile_secondary_nav("../"), source)
+                self.assertEqual(source.count('<div class="site-mobile-chrome__more-links">'), 1)
                 self.assertEqual(source.count('aria-label="AI Updates primary navigation"'), 1)
                 self.assertIn('href="../index.html#/search"', source)
                 self.assertEqual(source.count('id="main"'), 1)
