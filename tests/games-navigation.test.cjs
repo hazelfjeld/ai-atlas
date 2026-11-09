@@ -112,7 +112,10 @@ test('progressive sidebar retains all canonical links and reveals deep-linked se
   assert.match(nav, /data-static="offline"[\s\S]*?<\/div><\/details>$/);
   for(const id of ['overview','dictionary','technologies','games','safety','papers','playbooks','compare','saved','sources'])
     assert.match(nav, new RegExp('data-view="'+id+'"'), 'Missing native workspace destination: '+id);
-  assert.match(app, /if\(more && \['safety','papers','compare','saved','sources'\]\.includes\(view\)\) more\.open=true/);
+  assert.match(app, /syncAutomaticDisclosure\(more,\['safety','papers','compare','saved','sources'\]\.includes\(view\)\)/);
+  assert.match(app, /syncAutomaticDisclosure\(mobileMore,!!mobileMore\?\.querySelector/);
+  assert.match(app, /if\(selected && !disclosure\.open\)/);
+  assert.match(app, /!selected && disclosure\.dataset\.atlasAutoOpened==='true'/);
   assert.match(css, /\.nav-more-toggle:focus-visible/);
   assert.match(css, /prefers-reduced-motion:reduce/);
 });
