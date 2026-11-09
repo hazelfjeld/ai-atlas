@@ -278,8 +278,12 @@ test('Discover and all standalone families share footer flow while preserving ev
     const html=fs.readFileSync(path.join(__dirname, '..', page), 'utf8');
     assert.match(html, /<footer\b[^>]*>[\s\S]*?<\/footer>/, page + ' must keep its native footer');
     const footer = html.match(/<footer\b[^>]*>([\s\S]*?)<\/footer>/)?.[1] || '';
-    if (page === 'research.html') assert.match(footer, /Curated snapshot.*not every paper or incident/, 'Research keeps its existing coverage disclaimer');
-    else assert.match(footer, /<a\b[^>]*href=/, page + ' retains its real source/policy links');
+    assert.match(footer, /<a\b[^>]*href=/, page + ' retains real source/policy links');
+    if (page === 'research.html') {
+      assert.match(footer, /Curated snapshot.*not every paper or incident/, 'Research keeps its existing coverage disclaimer');
+      assert.match(footer, /href="about\.html"/, 'Research shares the editorial policy destination');
+      assert.match(footer, /href="index\.html#\/sources"/, 'Research shares the working source-register destination');
+    }
     assert.match(html, /href="(?:\.\/|\.\.\/)?site-chrome\.css"/,
       page + ' must load shared footer styling');
   }
