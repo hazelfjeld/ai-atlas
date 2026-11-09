@@ -133,7 +133,8 @@ with sync_playwright() as p:
                       (page.locator('details.site-mobile-chrome__nav .site-mobile-chrome__more').count() == 1
                        and page.locator('details.site-mobile-chrome__nav .site-mobile-chrome__more-links > a').count() == 8)
                       if route in ('about.html', 'whats-new.html', 'playbooks.html', 'research.html',
-                                   'terms/index.html', 'technology/index.html')
+                                   'terms/index.html', 'technology/index.html',
+                                   'technology/TECH-0216-pytorch.html')
                       else page.locator('details.site-mobile-chrome__nav .site-mobile-chrome__more').count() == 0
                   ))
             if width == 390 and route in ('about.html', 'terms/index.html'):
