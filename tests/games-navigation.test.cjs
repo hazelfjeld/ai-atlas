@@ -1513,6 +1513,8 @@ test('closed shared mobile toggle restores focus to the selected desktop rail', 
     querySelector(selector){
       if(selector==='details.site-mobile-chrome__nav[open]')return null;
       if(selector==='details.site-mobile-chrome__nav summary')return summary;
+      // This primary-only fixture intentionally has no selected secondary link.
+      if(selector==='.site-chrome__more a[aria-current]')return null;
       if(selector==='.site-chrome__links a[aria-current]')return railLink;
       throw new Error('Unexpected selector '+selector);
     }
