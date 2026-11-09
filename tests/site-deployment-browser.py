@@ -164,6 +164,23 @@ with sync_playwright() as p:
               }''')
               and not page.locator('details.site-mobile-chrome__nav').is_visible())
 
+        # Native content pages now retain Discover's lower-priority desktop
+        # destinations inside the same sidebar, not another floating header.
+        more = nav.locator('details.site-chrome__more')
+        check('shared secondary sidebar exists on ' + route,
+              more.count() == 1 and more.locator('summary').is_visible())
+        more.locator('summary').click()
+        check('shared secondary sidebar matches Discover on ' + route,
+              more.evaluate('(el) => el.open')
+              and more.locator('a').all_inner_texts() == [
+                  'Safety observatory', 'Research library', 'Compare tools',
+                  'Your notebook', 'Sources & coverage', 'Guided professor demo',
+                  'Concept encyclopedia', 'Offline demo download ↓'])
+        check('secondary destinations navigate to real workspace routes on ' + route,
+              more.locator('a').first.get_attribute('href') == 'index.html#/safety'
+              and more.locator('a').last.get_attribute('href') == 'downloads/Atlas_Demo_Offline.html')
+        more.locator('summary').click()
+
         if route == 'hardware-review.html':
             check('hardware article header stacks heading, lead and evidence note on desktop',
                   page.locator('.review-shell > header').evaluate(

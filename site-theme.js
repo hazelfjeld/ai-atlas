@@ -276,6 +276,46 @@ document.addEventListener('DOMContentLoaded', () => {
     menu.prepend(mobileBrand);
   }
 
+  // Match Discover's existing "More sections" rail on every native page.
+  // This is one progressive desktop enhancement; the original seven primary
+  // links, mobile drawer and script-free navigation remain unchanged.
+  const desktopRail = document.querySelector('.site-chrome');
+  const desktopPrimary = desktopRail?.querySelector('.site-chrome__links');
+  if (desktopPrimary && !desktopRail.querySelector('.site-chrome__more')) {
+    // The brand is the canonical relative-root link for both root and nested
+    // concept/technology routes. Never guess the deployment's base pathname.
+    const homeLink = desktopRail.querySelector('.site-chrome__brand')?.getAttribute('href') || '';
+    if (homeLink.endsWith('index.html#/overview')) {
+      const prefix = homeLink.slice(0, -'index.html#/overview'.length);
+      const sharedSecondarySections = [
+        ['index.html#/safety', 'Safety observatory'],
+        ['index.html#/papers', 'Research library'],
+        ['index.html#/compare', 'Compare tools'],
+        ['index.html#/saved', 'Your notebook'],
+        ['index.html#/sources', 'Sources & coverage'],
+        ['demo.html', 'Guided professor demo'],
+        ['terms/index.html', 'Concept encyclopedia'],
+        ['downloads/Atlas_Demo_Offline.html', 'Offline demo download ↓']
+      ];
+      const more = document.createElement('details');
+      more.className = 'site-chrome__more';
+      const trigger = document.createElement('summary');
+      trigger.textContent = 'More sections';
+      more.append(trigger);
+      const links = document.createElement('div');
+      links.className = 'site-chrome__more-links';
+      sharedSecondarySections.forEach(([route, label]) => {
+        const a = document.createElement('a');
+        a.href = prefix + route;
+        a.textContent = label;
+        if (route === 'downloads/Atlas_Demo_Offline.html') a.download = '';
+        links.append(a);
+      });
+      more.append(links);
+      desktopPrimary.insertAdjacentElement('afterend', more);
+    }
+  }
+
   // All page families use the shared appearance action in their native drawer.
   // Discover retains its original desktop sidebar button; Games retains its
   // desktop header action, but uses this same control inside the mobile drawer.

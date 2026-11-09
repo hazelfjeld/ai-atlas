@@ -1045,6 +1045,29 @@ html.atlas-enhanced #catalog-loading{
    content while giving that notice the identical four-pixel accent edge. */
 .shell:has(> .site-chrome.top) .notice{border-left:4px solid var(--accent,#27664e)!important}
 /* atlas-shared-evidence-callouts:end */
+
+/* atlas-secondary-navigation:begin */
+/* Discover's seven primary rail links were already shared, but its existing
+   eight lower-priority destinations disappeared on native article pages.
+   Keep one compact native disclosure in that same rail, without replacing the
+   real mobile menu or covering article content. */
+@media(min-width:651px){
+  .site-chrome__more{width:100%;min-width:0;margin-top:5px;padding-top:8px;border-top:1px solid #405043}
+  .site-chrome__more > summary{display:flex;align-items:center;min-height:44px;
+    padding:10px 11px;border-radius:7px;list-style:none;cursor:pointer;
+    color:#c5cfc6;font-size:12px;font-weight:650}
+  .site-chrome__more > summary::-webkit-details-marker{display:none}
+  .site-chrome__more > summary:hover,.site-chrome__more[open] > summary{background:#ffffff13;color:#fff}
+  .site-chrome__more > summary:focus-visible,.site-chrome__more a:focus-visible{outline:3px solid #d9a16f;outline-offset:2px}
+  .site-chrome__more-links{display:grid;grid-template-columns:minmax(0,1fr);gap:3px}
+  .site-chrome__more-links a{display:flex;align-items:center;min-height:44px;
+    min-width:0;padding:9px 11px 9px 17px;border-radius:7px;
+    color:#c5cfc6;text-decoration:none;font-size:12px;line-height:1.3;
+    overflow-wrap:anywhere}
+  .site-chrome__more-links a:hover{background:#ffffff13;color:#fff}
+}
+@media print{.site-chrome__more{display:none!important}}
+/* atlas-secondary-navigation:end */
 </style><script>/* Enhance the native dropdown only when scripts can make its drawer modal.
    Without JavaScript, keep the accessible, nonmodal <details> fallback. */
 document.documentElement.classList?.add('atlas-enhanced');
@@ -1321,6 +1344,46 @@ document.addEventListener('DOMContentLoaded', () => {
     const mobileBrand = desktopBrand.cloneNode(true);
     mobileBrand.className = 'site-mobile-chrome__brand';
     menu.prepend(mobileBrand);
+  }
+
+  // Match Discover's existing "More sections" rail on every native page.
+  // This is one progressive desktop enhancement; the original seven primary
+  // links, mobile drawer and script-free navigation remain unchanged.
+  const desktopRail = document.querySelector('.site-chrome');
+  const desktopPrimary = desktopRail?.querySelector('.site-chrome__links');
+  if (desktopPrimary && !desktopRail.querySelector('.site-chrome__more')) {
+    // The brand is the canonical relative-root link for both root and nested
+    // concept/technology routes. Never guess the deployment's base pathname.
+    const homeLink = desktopRail.querySelector('.site-chrome__brand')?.getAttribute('href') || '';
+    if (homeLink.endsWith('index.html#/overview')) {
+      const prefix = homeLink.slice(0, -'index.html#/overview'.length);
+      const sharedSecondarySections = [
+        ['index.html#/safety', 'Safety observatory'],
+        ['index.html#/papers', 'Research library'],
+        ['index.html#/compare', 'Compare tools'],
+        ['index.html#/saved', 'Your notebook'],
+        ['index.html#/sources', 'Sources & coverage'],
+        ['demo.html', 'Guided professor demo'],
+        ['terms/index.html', 'Concept encyclopedia'],
+        ['downloads/Atlas_Demo_Offline.html', 'Offline demo download ↓']
+      ];
+      const more = document.createElement('details');
+      more.className = 'site-chrome__more';
+      const trigger = document.createElement('summary');
+      trigger.textContent = 'More sections';
+      more.append(trigger);
+      const links = document.createElement('div');
+      links.className = 'site-chrome__more-links';
+      sharedSecondarySections.forEach(([route, label]) => {
+        const a = document.createElement('a');
+        a.href = prefix + route;
+        a.textContent = label;
+        if (route === 'downloads/Atlas_Demo_Offline.html') a.download = '';
+        links.append(a);
+      });
+      more.append(links);
+      desktopPrimary.insertAdjacentElement('afterend', more);
+    }
   }
 
   // All page families use the shared appearance action in their native drawer.
