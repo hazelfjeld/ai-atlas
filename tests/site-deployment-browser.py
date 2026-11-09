@@ -1948,6 +1948,32 @@ with sync_playwright() as p:
                       encyclopedia_heading.is_visible())
     detail_mobile.close()
 
+    # Discover's nested secondary navigation must reflect the current hash
+    # workspace. Primary and secondary mobile links share one active indication.
+    secondary_active = browser.new_page(viewport={'width':390,'height':844},
+                                        reduced_motion='reduce')
+    secondary_active.on('pageerror', lambda e: errors.append(str(e)))
+    for section in ('safety','papers','compare','saved','sources'):
+        secondary_active.goto(base+'index.html#/'+section)
+        secondary_active.locator(
+            '#navigation a.nav-link[data-view="'+section+'"][aria-current="page"]'
+        ).wait_for(state='attached',timeout=20000)
+        nested = secondary_active.locator('#discover-mobile-nav details.site-mobile-chrome__more')
+        selected = nested.locator('a[href="#/'+section+'"]')
+        check('Discover secondary mobile active '+section,
+              selected.get_attribute('aria-current') == 'page'
+              and nested.evaluate('(el) => el.open')
+              and nested.locator('a[aria-current="page"]').count() == 1)
+    secondary_active.goto(base+'index.html#/overview')
+    secondary_active.locator(
+        '#navigation a.nav-link[data-view="overview"][aria-current="page"]'
+    ).wait_for(state='attached',timeout=20000)
+    check('Discover clears stale secondary active after returning home',
+          secondary_active.locator(
+              '#discover-mobile-nav .site-mobile-chrome__more-links a[aria-current="page"]'
+          ).count() == 0)
+    secondary_active.close()
+
     check('no application runtime exceptions', not errors)
     browser.close()
 (out / 'report.json').write_text(json.dumps({'base':base, 'checks':checks, 'checks_passed':len(checks), 'errors':errors}, indent=2), encoding='utf-8')

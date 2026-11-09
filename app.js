@@ -53,14 +53,17 @@ function renderNav(){
     const counter=link.querySelector('.nav-count');
     if(counter)counter.textContent=Number(key==='saved'?notebook.saved.length:(sets[key]?.length||0)).toLocaleString();
   });
-  // Keep the shared mobile drawer's active link synchronized with Discover's
-  // existing canonical workspace navigation, without rerendering either list.
-  const mobileLinks=document.querySelectorAll('#discover-mobile-nav .site-mobile-chrome__menu > a:not(.site-mobile-chrome__brand)');
+  // Keep both primary AND secondary mobile destinations synchronized with the
+  // canonical desktop rail. A deep-linked secondary section must not look like
+  // Discover is still selected or hide its active destination in More sections.
+  const mobileLinks=document.querySelectorAll('#discover-mobile-nav .site-mobile-chrome__menu a[href]:not(.site-mobile-chrome__brand)');
   const currentHref=nav.querySelector('a.nav-link[aria-current="page"]')?.getAttribute('href');
   mobileLinks.forEach(link=>{
     if(link.getAttribute('href')===currentHref)link.setAttribute('aria-current','page');
     else link.removeAttribute('aria-current');
   });
+  const mobileMore=document.querySelector('#discover-mobile-nav details.site-mobile-chrome__more');
+  if(mobileMore?.querySelector('a[aria-current="page"]')) mobileMore.open=true;
   // Direct links to secondary workspaces remain discoverable even when the list starts collapsed.
   const more=$('additional-navigation');
   if(more && ['safety','papers','compare','saved','sources'].includes(view)) more.open=true;
