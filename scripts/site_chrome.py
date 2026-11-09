@@ -57,6 +57,7 @@ def sync_discover_secondary(secondary):
     pattern = re.compile(r'<a class="nav-link" data-(view|static)="([^"]+)" href="([^"]+)"([^>]*)>(.*?)</a>', re.S)
     matches = list(pattern.finditer(secondary))
     assert len(matches) == len(SECONDARY_DESTINATIONS), "Unexpected Discover secondary link count"
+    assert all("<" not in label and ">" not in label for _, _, _, label in SECONDARY_DESTINATIONS)
     n = 0
     def replace(match):
         nonlocal n
@@ -64,7 +65,7 @@ def sync_discover_secondary(secondary):
         n += 1
         assert (match.group(1), match.group(2)) == (kind, key), "Unexpected Discover secondary key/order"
         inner, changed = re.subn(r"<span>[^<]*</span>",
-                                 lambda _: "<span>" + escape(label) + "</span>",
+                                 lambda _: "<span>" + label + "</span>",
                                  match.group(5), count=1)
         assert changed == 1, "Missing Discover secondary label"
         return ('<a class="nav-link" data-' + kind + '="' + key +
