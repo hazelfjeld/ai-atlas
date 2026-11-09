@@ -397,7 +397,7 @@ test('Discover shares the native script-free mobile drawer used by standalone pa
       original.map(([href,name])=>[name==='Playbooks'?'#/playbooks':name==='About'?'#/sources':href,name])]]) {
     const nav=source.split('id="discover-mobile-nav"')[1]?.split('</nav>')[0];
     assert.ok(nav, 'Shared native menu must survive the offline build');
-    const links=[...nav.matchAll(/<a href="([^"]+)"[^>]*>([^<]+)<\/a>/g)];
+    const links=[...primaryMobile(nav).matchAll(/<a href="([^"]+)"[^>]*>([^<]+)<\/a>/g)];
     assert.deepEqual(links.map(m=>[m[1],m[2]]),expected);
   }
 });

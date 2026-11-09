@@ -406,7 +406,7 @@ test('Discover mobile drawer exposes the canonical eight secondary destinations 
     assert.ok(drawer, route + ' has the native drawer and brand');
     assert.equal((drawer.match(/<details class="site-mobile-chrome__more">/g) || []).length, 1,
       route + ' must have exactly one script-free secondary disclosure');
-    assert.equal((drawer.match(/<a href="[^"]+"(?: aria-current="page")?>/g) || []).length, 7,
+    assert.equal((drawer.split('<details class="site-mobile-chrome__more">')[0].match(/<a href="[^"]+"(?: aria-current="page")?>/g) || []).length, 7,
       route + ' keeps the seven top-level primary links');
     const secondary = drawer.match(/<details class="site-mobile-chrome__more"><summary>More sections<\/summary><div class="site-mobile-chrome__more-links">([\s\S]*?)<\/div><\/details>/)?.[1];
     assert.ok(secondary, route + ' retains native nested keyboard disclosure');
