@@ -849,7 +849,7 @@
       "edition_date": "2026-11-09",
       "validation_result": "batch_sha256_bytes_schema_unique_ids_dates_sources_and_existing_archive_checked",
       "status": "partially_published_with_6_deferred_catalog_proposals",
-      "publication_outcome": "pending_cloudflare_http_browser_and_githack_validation",
+      "publication_outcome": "immutable_revision_1_cloudflare_http_browser_and_githack_verified",
       "publication_edition": "2026-11-09-v1",
       "accepted_news_ids": [
         "ai-news:amazon-hope-nov9",
@@ -884,14 +884,25 @@
         "technology_updated": 0
       },
       "review_notes": "Eight Nov 9 and three Nov 5–6 reports; source- and date-checked with qualified author/Reuters evidence. Regulatory inquiries are not findings, research benchmarks unreplicated. Partial coverage, six deferred canonical proposals, historical immutable editions unchanged.",
-      "production_verified_at": null,
+      "production_verified_at": "2026-11-09T16:46:11Z",
       "publication_history": [
         {
           "edition": "2026-11-09-v1",
-          "status": "pending_production_verification",
-          "note": "New source-checked partial edition and mobile directory QA pending Cloudflare HTTP/browser/GitHack verification"
+          "status": "cloudflare_http_browser_and_githack_verified",
+          "note": "New source-checked partial edition and mobile directory QA pending Cloudflare HTTP/browser/GitHack verification",
+          "verified_at": "2026-11-09T16:46:11Z",
+          "production_commit": "d8cc4b498a058fbb5e74485c5656f09079b5080d",
+          "production_workflow_run_id": 42656089198,
+          "githack_workflow_run_id": 42656089268
         }
-      ]
+      ],
+      "production_verified_revision": 1,
+      "last_verified_at": "2026-11-09T16:46:11Z",
+      "last_verified_public_url": "https://aiupdates.app/whats-new.html?date=2026-11-09&revision=1",
+      "production_commit": "d8cc4b498a058fbb5e74485c5656f09079b5080d",
+      "production_workflow_run_id": 42656089198,
+      "githack_workflow_run_id": 42656089268,
+      "verification_scope": "Exact main d8cc4b498a058fbb5e74485c5656f09079b5080d passed catalog/reproducibility/GitHack, local Chromium, exact 498 HTTP assets per each of workers.dev, apex and www, and production Chromium archive/navigation/responsive/themes/Games checks in Cloudflare workflow 42656089198. The dated archive was rendered and immutable edition asset verified; its exact date/revision query URL was not separately opened in an independent browser."
     }
   ]
 }
