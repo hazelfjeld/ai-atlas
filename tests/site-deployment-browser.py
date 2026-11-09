@@ -1850,6 +1850,29 @@ with sync_playwright() as p:
                   and (route not in ('demo.html', 'terms/index.html', 'technology/index.html')
                        or skip_page.evaluate('document.activeElement.tagName') == 'HEADER'))
     skip_ctx.close()
+    # Existing standalone families expose their secondary mobile destinations
+    # at build time. Verify script-free disclosure and working download links.
+    script_free_more = browser.new_page(viewport={'width':390, 'height':844},
+                                        java_script_enabled=False, reduced_motion='reduce')
+    for color in ('light', 'dark'):
+        script_free_more.emulate_media(color_scheme=color)
+        for width in (320, 390):
+            script_free_more.set_viewport_size({'width':width, 'height':844})
+            for route in ('whats-new.html', 'research.html', 'playbooks.html', 'games.html'):
+                script_free_more.goto(base + route)
+                menu = script_free_more.locator('details.site-mobile-chrome__nav')
+                menu.locator(':scope > summary').click()
+                more = menu.locator('details.site-mobile-chrome__more')
+                check('script-free secondary mobile disclosure '+route+' '+color+' '+str(width),
+                      more.count() == 1 and more.locator('summary').is_visible())
+                more.locator('summary').click()
+                check('script-free secondary routes and download '+route+' '+color+' '+str(width),
+                      more.evaluate("""(el) => el.open
+                          && el.querySelectorAll('a').length === 8
+                          && [...el.querySelectorAll('a')].map(a => a.textContent.trim()).join('|') ===
+                            'Safety observatory|Research library|Compare tools|Your notebook|Sources & coverage|Guided professor demo|Concept encyclopedia|Offline demo download ↓'
+                          && el.querySelector('a[download]')?.getAttribute('href') === 'downloads/Atlas_Demo_Offline.html'"""))
+    script_free_more.close()
     check('no application runtime exceptions', not errors)
     browser.close()
 (out / 'report.json').write_text(json.dumps({'base':base, 'checks':checks, 'checks_passed':len(checks), 'errors':errors}, indent=2), encoding='utf-8')

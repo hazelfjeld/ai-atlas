@@ -457,3 +457,32 @@ test('generated concept and technology directories expose shared secondary route
       route + ' preserves native mobile navigation');
   }
 });
+
+
+test('standalone mobile drawers expose eight shared secondary routes without JavaScript', () => {
+  const builder = fs.readFileSync(path.join(__dirname, '..', 'scripts/site_chrome.py'), 'utf8');
+  assert.match(builder, /def render_mobile_secondary_nav\(prefix\):/);
+  assert.match(builder, /mobile_brand=True, native_secondary=True, mobile_secondary=True/);
+  assert.match(builder, /for _, _, route, label in SECONDARY_DESTINATIONS/);
+  const source = fs.readFileSync(path.join(__dirname, '..', 'site-theme.js'), 'utf8');
+  const data = source.split('const sharedSecondarySections = [')[1]?.split('];')[0];
+  const expected = [...data.matchAll(/\["([^"]+)", "([^"]+)"\]/g)].map(m => [m[1], m[2]]);
+  assert.equal(expected.length, 8);
+  for (const route of ['about.html', 'demo.html', 'research.html', 'catalog-review.html',
+                       'hardware-review.html', 'games.html', 'technologies.html',
+                       'playbooks.html', 'whats-new.html']) {
+    const html = fs.readFileSync(path.join(__dirname, '..', route), 'utf8');
+    const menu = html.match(/<nav class="[^"]*site-mobile-chrome__menu"[^>]*>([\s\S]*?)<\/nav><\/details>/)?.[1];
+    assert.ok(menu, route + ' keeps native primary links and mobile drawer');
+    assert.equal((menu.match(/<details class="site-mobile-chrome__more">/g) || []).length, 1,
+                 route + ' has exactly one static secondary disclosure');
+    const secondaries = menu.match(/<details class="site-mobile-chrome__more"><summary>More sections<\/summary><div class="site-mobile-chrome__more-links">([\s\S]*?)<\/div><\/details>/)?.[1];
+    assert.ok(secondaries, route + ' preserves the shared native disclosure');
+    const found = [...secondaries.matchAll(/<a href="([^"]+)"( download)?>([^<]+)<\/a>/g)]
+      .map(m => [m[1], m[3].replaceAll('&amp;', '&')]);
+    assert.deepEqual(found, expected, route + ' uses shared canonical destinations');
+    assert.match(secondaries, /href="downloads\/Atlas_Demo_Offline\.html" download>/);
+    assert.equal((menu.match(/<a href="/g) || []).length, 15,
+                 route + ' keeps seven primary and eight secondary links without duplicates');
+  }
+});

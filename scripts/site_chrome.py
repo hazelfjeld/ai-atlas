@@ -88,6 +88,21 @@ def render_secondary_nav(prefix):
         '</div></details>'
     )
 
+def render_mobile_secondary_nav(prefix):
+    """Render the same eight desktop secondary routes inside script-free mobile drawers."""
+    assert prefix in ("", "../")
+    return (
+        '<details class="site-mobile-chrome__more"><summary>More sections</summary>'
+        '<div class="site-mobile-chrome__more-links">'
+        + "".join(
+            '<a href="' + prefix + route + '"' +
+            (' download' if route == "downloads/Atlas_Demo_Offline.html" else '') +
+            '>' + escape(label) + '</a>'
+            for _, _, route, label in SECONDARY_DESTINATIONS
+        ) +
+        '</div></details>'
+    )
+
 DIRECTORY_MOBILE_CSS = '@media(max-width:650px){.term-shell{padding:0 20px 65px}.term-shell .term-nav{display:none}.directory-mobile-topbar{margin:0 -20px;padding:14px 20px;border-bottom:1px solid var(--line)}}'
 
 def render_primary_links(prefix, selected, current_kind="page"):
@@ -146,7 +161,7 @@ def render_directory_nav(prefix, selected, *, mobile_classes="directory-mobile-t
                          toggle_classes="site-mobile-chrome__toggle", menu_classes="site-mobile-chrome__menu",
                          search_classes="site-mobile-chrome__search", icon_classes="site-mobile-chrome__search-icon",
                          search_label_classes="site-mobile-chrome__search-placeholder",
-                         desktop_classes="site-chrome term-nav", labeled=True, current_kind="page", page_label=None, mobile_brand=False, native_secondary=False):
+                         desktop_classes="site-chrome term-nav", labeled=True, current_kind="page", page_label=None, mobile_brand=False, native_secondary=False, mobile_secondary=False):
     """One script-free site header, with only page-specific shell classes configurable."""
     assert prefix in ("", "../")
     assert selected is None or selected in {name for _, name in DESTINATIONS}
@@ -160,7 +175,8 @@ def render_directory_nav(prefix, selected, *, mobile_classes="directory-mobile-t
         (' data-page-label="' + escape(page_label) + '"' if page_label else '') + '>'
         '<details class="' + details_classes + '" id="' + details_id + '">'
         '<summary class="' + toggle_classes + '" aria-label="Toggle navigation"><span aria-hidden="true">☰</span></summary>'
-        '<nav class="' + menu_classes + '" aria-label="AI Updates sections">' + mobile_wordmark + links + '</nav></details>'
+        '<nav class="' + menu_classes + '" aria-label="AI Updates sections">' + mobile_wordmark + links +
+        (render_mobile_secondary_nav(prefix) if mobile_secondary else '') + '</nav></details>'
         '<a class="' + search_classes + '" href="' + prefix + 'index.html#/search" aria-label="Search AI Updates in the main collection">'
         '<span class="' + icon_classes + '" aria-hidden="true">⌕</span>'
         '<span class="' + search_label_classes + '">Search tools, research, concepts…</span></a></div>'
@@ -222,7 +238,7 @@ def render_standalone_nav(path):
             "catalog-review.html": "Catalog review",
             "hardware-review.html": "Hardware evidence",
         }.get(path, selected),
-        mobile_brand=True, native_secondary=True,
+        mobile_brand=True, native_secondary=True, mobile_secondary=True,
     )
     # Research's main landmark starts between its two headers, but the native
     # skip destination belongs on the subsequent article hero.
