@@ -1977,6 +1977,9 @@ with sync_playwright() as p:
     for width in (390, 1280):
         secondary_active.set_viewport_size({'width':width,'height':844})
         secondary_active.goto(base+'index.html#/safety')
+        # A hash-only goto can reuse the previous width's manually expanded
+        # disclosure. Each width must begin with a fresh, unmodified page.
+        secondary_active.reload()
         secondary_active.locator(
             '#navigation a.nav-link[data-view="safety"][aria-current="page"]'
         ).wait_for(state='attached',timeout=20000)
