@@ -1618,6 +1618,32 @@ with sync_playwright() as p:
                 if width==390 and theme=='dark' and route in ('index.html','whats-new.html','terms/index.html','games.html'):
                     page.screenshot(path=str(out / f'mobile-frame-{route.replace("/", "-")}-390-dark.png'))
 
+    # One footer frame across Discover, dated news, reference directories and
+    # Games. Verify the actual computed layout with scripts unavailable: static
+    # policy/evidence links must work without a hydration-only replacement.
+    for width in (320, 390, 768, 1280):
+        page.set_viewport_size({'width':width,'height':844 if width <= 650 else 900})
+        for theme in ('light', 'dark'):
+            page.emulate_media(color_scheme=theme)
+            for route in ('index.html', 'whats-new.html', 'about.html', 'research.html',
+                          'playbooks.html', 'technologies.html', 'terms/index.html',
+                          'technology/index.html', 'games.html'):
+                page.goto(base + route)
+                page.evaluate('(value) => document.documentElement.dataset.theme = value', theme)
+                footer=page.locator('footer').last
+                footer.wait_for(state='attached', timeout=10000)
+                frame=footer.evaluate("""el => ({
+                    display:getComputedStyle(el).display,
+                    border:getComputedStyle(el).borderTopStyle,
+                    overflow:document.documentElement.scrollWidth > innerWidth
+                })""")
+                expected='block' if width <= 650 else 'flex'
+                check(f'{route} {width}px {theme} uses Discover footer layout',
+                      frame['display']==expected and frame['border']=='solid'
+                      and not frame['overflow'])
+                if width==1280 and theme=='light' and route in ('index.html','terms/index.html','games.html'):
+                    footer.screenshot(path=str(out / f'footer-{route.replace("/", "-")}-1280-light.png'))
+
     check('no application runtime exceptions',not errors)
     browser.close()
 (out/'results.json').write_text(json.dumps({'checks_passed':len(checks),'checks':checks,'base':base},indent=2))
