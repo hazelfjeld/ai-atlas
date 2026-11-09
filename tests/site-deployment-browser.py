@@ -64,7 +64,7 @@ with sync_playwright() as p:
             ):
                 page.evaluate("(section) => { location.hash = '#/' + section; }", section)
                 page.wait_for_function(
-                    "(label) => document.querySelector('.discover-mobile-chrome')?.dataset.pageLabel === label",
+                    "(label) => document.querySelector('#discover-mobile-nav > summary')?.getAttribute('aria-label') === 'Toggle navigation · ' + label",
                     arg=expected_label)
                 check('Discover compact workspace title follows ' + section + ' at ' + str(width),
                       page.locator('#discover-mobile-nav > summary').get_attribute('aria-label') == 'Toggle navigation · ' + expected_label
