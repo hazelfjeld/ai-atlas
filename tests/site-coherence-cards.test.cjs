@@ -559,8 +559,13 @@ test('generated detail mobile More sections clones the completed shared desktop 
     const html = fs.readFileSync(path.join(__dirname, '..', detail), 'utf8');
     assert.match(html, /class="site-mobile-chrome__menu"/);
     assert.match(html, /class="site-chrome__links"/);
-    assert.ok(!html.includes('site-mobile-chrome__more'),
-      'This regression exercises detail pages without pre-rendered mobile extras');
+    if (detail.startsWith('terms/')) {
+      assert.ok(!html.includes('site-mobile-chrome__more'),
+        'Concept details need the dynamically cloned mobile links');
+    } else {
+      assert.ok(html.includes('site-mobile-chrome__more'),
+        'Technology details retain their build-time script-free mobile links');
+    }
   }
   const offline = fs.readFileSync(path.join(__dirname, '..', 'downloads/Atlas_Demo_Offline.html'), 'utf8');
   assert.ok(offline.includes(script), 'Offline fallback must embed the identical shared interaction script');
