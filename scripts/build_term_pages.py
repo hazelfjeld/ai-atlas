@@ -36,7 +36,7 @@ def section(title, body, extra=''):
 def shell(title, body, path, description, structured=None, *, native_concept_article=False):
     # Every concept detail URL shares the native, script-free article skip
     # and navigation source used by the technology directories and profiles.
-    directory_nav = render_directory_nav('../', 'Concept dictionary', mobile_brand=True)
+    directory_nav = render_directory_nav('../', 'Concept dictionary', mobile_brand=True, native_secondary=(path == 'terms/index.html'))
     directory_css = DIRECTORY_MOBILE_CSS
     directory_assets = '<link rel="stylesheet" href="../site-chrome.css"><script src="../site-theme.js"></script>'
     heading_css = '' if path == 'terms/index.html' else '.term-shell h1{font-size:clamp(32px,6vw,58px)}'

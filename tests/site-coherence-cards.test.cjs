@@ -405,3 +405,36 @@ test('native editorial, archive, technology, research and Games pages keep Disco
   assert.ok(js.includes("!desktopRail.querySelector('.site-chrome__more')"),
     'JS enhancement must not insert a second disclosure over static navigation');
 });
+
+test('generated concept and technology directories expose shared secondary routes without JavaScript', () => {
+  const js = fs.readFileSync(path.join(__dirname, '..', 'site-theme.js'), 'utf8');
+  const data = js.split('const sharedSecondarySections = [')[1]?.split('];')[0];
+  assert.ok(data, 'Canonical Discover secondary routes must exist');
+  const expected = [...data.matchAll(/\["([^"]+)", "([^"]+)"\]/g)]
+    .map(m => ['../' + m[1], m[2]]);
+  assert.equal(expected.length, 8);
+  const termBuild = fs.readFileSync(path.join(__dirname, '..', 'scripts/build_term_pages.py'), 'utf8');
+  const seoBuild = fs.readFileSync(path.join(__dirname, '..', 'scripts/build_seo.py'), 'utf8');
+  assert.ok(termBuild.includes("native_secondary=(path == 'terms/index.html')"));
+  assert.ok(seoBuild.includes("native_secondary=(path == 'technology/index.html')"));
+  for (const route of ['terms/index.html', 'technology/index.html']) {
+    const html = fs.readFileSync(path.join(__dirname, '..', route), 'utf8');
+    const rail = html.match(/<nav class="site-chrome term-nav" aria-label="AI Updates primary navigation">[\s\S]*?<\/nav>/)?.[0];
+    assert.ok(rail, route + ' keeps its shared primary navigation');
+    assert.equal((rail.match(/class="site-chrome__more"/g) || []).length, 1,
+      route + ' must have exactly one script-free secondary disclosure');
+    const menu = rail.match(/<details class="site-chrome__more"><summary>More sections<\/summary><div class="site-chrome__more-links">([\s\S]*?)<\/div><\/details>/)?.[1];
+    assert.ok(menu, route + ' uses the shared native disclosure');
+    const links = [...menu.matchAll(/<a href="([^"]+)"( download)?>([^<]+)<\/a>/g)]
+      .map(m => [m[1], m[3].replaceAll('&amp;', '&')]);
+    assert.deepEqual(links, expected, route + ' must match Discover including nested URL prefixes');
+    assert.ok(menu.includes('href="../downloads/Atlas_Demo_Offline.html" download>'),
+      route + ' retains the real offline download');
+    assert.equal((rail.match(/class="site-chrome__links"/g) || []).length, 1,
+      route + ' retains one primary link group');
+    assert.match(html, /href="\.\.\/index\.html#\/search"/,
+      route + ' keeps working shared search navigation');
+    assert.match(html, /id="directory-mobile-nav"/,
+      route + ' preserves native mobile navigation');
+  }
+});

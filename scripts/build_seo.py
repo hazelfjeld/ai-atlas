@@ -34,7 +34,7 @@ def shell(title, description, path, body, structured=None):
     prefix = '../' if '/' in path else ''
     mobile_css = DIRECTORY_MOBILE_CSS if path.startswith('technology/') or path == 'about.html' else ''
     print_nav = ',.directory-mobile-topbar' if path == 'about.html' else ''
-    desktop_nav = render_directory_nav(prefix, 'Technology profiles', mobile_brand=True) if path.startswith('technology/') else (render_directory_nav(prefix, 'About', mobile_brand=True, page_label='About', native_secondary=True) if path == 'about.html' else nav(prefix))
+    desktop_nav = render_directory_nav(prefix, 'Technology profiles', mobile_brand=True, native_secondary=(path == 'technology/index.html')) if path.startswith('technology/') else (render_directory_nav(prefix, 'About', mobile_brand=True, page_label='About', native_secondary=True) if path == 'about.html' else nav(prefix))
     chrome_css = f'<link rel="stylesheet" href="{prefix}site-chrome.css">\n' if path == 'about.html' or path.startswith('technology/') else ''
     theme_script = f'<script src="{prefix}site-theme.js"></script>' if path == 'about.html' or path.startswith('technology/') else ''
     # About reuses the same Discover hero component. Keep legacy detail-page

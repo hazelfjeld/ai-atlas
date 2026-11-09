@@ -1728,6 +1728,44 @@ with sync_playwright() as p:
     script_free.locator('#directory-mobile-nav summary').click()
     check_no_script_brand('Concept detail', real_link=True)
     script_free.close()
+
+    # Generated A-Z directories must expose the same eight secondary destinations
+    # before hydration. JS must not be needed to open the native disclosure.
+    reference_nav = browser.new_page(viewport={'width':1280, 'height':844},
+                                     java_script_enabled=False, reduced_motion='reduce')
+    for theme in ('light', 'dark'):
+        reference_nav.emulate_media(color_scheme=theme)
+        for route in ('terms/index.html', 'technology/index.html'):
+            for width in (320, 390, 768, 1280):
+                reference_nav.set_viewport_size({'width':width, 'height':844})
+                reference_nav.goto(base + route)
+                rail = reference_nav.locator('nav.site-chrome')
+                more = rail.locator('details.site-chrome__more')
+                mobile = reference_nav.locator('#directory-mobile-nav')
+                check('reference directory shared navigation before JS ' + route + ' ' + theme + ' ' + str(width),
+                      more.count() == 1 and mobile.count() == 1 and
+                      (rail.is_visible() if width >= 768 else mobile.is_visible()))
+                if width >= 768:
+                    check('reference directory More sections is available without JS ' + route + ' ' + theme + ' ' + str(width),
+                          more.locator('summary').is_visible() and not more.evaluate('el => el.open'))
+                    more.locator('summary').click()
+                    check('reference directory keeps all eight destinations ' + route + ' ' + theme + ' ' + str(width),
+                          more.evaluate('el => el.open') and
+                          more.locator('a').all_inner_texts() == [
+                              'Safety observatory', 'Research library', 'Compare tools',
+                              'Your notebook', 'Sources & coverage', 'Guided professor demo',
+                              'Concept encyclopedia', 'Offline demo download ↓'] and
+                          more.locator('a').first.get_attribute('href') == '../index.html#/safety')
+                    if width == 1280:
+                        reference_nav.screenshot(
+                            path=str(out / ('no-js-reference-nav-' + route.replace('/', '-') + '-' + theme + '.png')),
+                            full_page=False)
+                    more.locator('summary').click()
+                else:
+                    check('reference directory mobile search remains a real route ' + route + ' ' + theme + ' ' + str(width),
+                          not rail.is_visible() and
+                          reference_nav.locator('a.site-mobile-chrome__search').get_attribute('href') == '../index.html#/search')
+    reference_nav.close()
     # Native keyboard skip must focus content, not only scroll beneath the rail.
     # Keep this usable with JavaScript off in both mobile and desktop layouts.
     skip_ctx = browser.new_context(java_script_enabled=False, viewport={'width':390, 'height':844})
