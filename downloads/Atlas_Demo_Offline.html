@@ -2042,6 +2042,15 @@ function renderNav(){
     if(demo)demo.setAttribute('href','#/overview');
     if(encyclopedia)encyclopedia.setAttribute('href','#/dictionary');
   }
+  // The compact mobile workspace title must follow hash navigation, not stay
+  // on Discover after a Research, Safety or catalog section is selected.
+  // Read the currently selected canonical rail label instead of duplicating
+  // another set of navigation names or changing native/no-script links.
+  const mobileHeading=document.querySelector('.discover-mobile-chrome');
+  if(mobileHeading){
+    const selectedName=nav.querySelector('a.nav-link[aria-current="page"] span:not(.nav-count)');
+    mobileHeading.dataset.pageLabel=selectedName?.textContent?.trim()||labels[view];
+  }
   $('breadcrumb').textContent=labels[view];
   document.title=view==='overview'?'AI Updates — AI research, tools & concepts':labels[view]+' · AI Updates';
   $('snapshot-date').textContent=date(D.meta.research_checked_on);

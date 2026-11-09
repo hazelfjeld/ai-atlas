@@ -52,6 +52,25 @@ with sync_playwright() as p:
         # Opening it before that point can hit a static, not-yet-bound button.
         page.locator('#catalog-loading').wait_for(state='detached', timeout=45000)
         if width <= 650:
+            # The visible compact workspace title is shared with standalone
+            # pages; Discover must update it on SPA navigation and back links,
+            # not show a stale "Discover" label for Research or Your notebook.
+            for section, expected_label in (
+                ('overview', 'Discover'),
+                ('papers', 'Research library'),
+                ('technologies', 'Technology profiles'),
+                ('saved', 'Your notebook'),
+                ('overview', 'Discover'),
+            ):
+                page.evaluate("(section) => { location.hash = '#/' + section; }", section)
+                page.wait_for_function(
+                    "(label) => document.querySelector('.discover-mobile-chrome')?.dataset.pageLabel === label",
+                    arg=expected_label)
+                check('Discover compact workspace title follows ' + section + ' at ' + str(width),
+                      page.locator('.discover-mobile-chrome').evaluate(
+                          "el => getComputedStyle(el, '::before').content") == json.dumps(expected_label)
+                      and page.locator('#navigation a.nav-link[aria-current="page"] span:not(.nav-count)').first.inner_text() == expected_label)
+        if width <= 650:
             page.locator('#discover-mobile-nav > summary').click()
             check('Discover native mobile drawer opens at ' + str(width),
                   page.locator('#discover-mobile-nav').evaluate('(el) => el.open')
