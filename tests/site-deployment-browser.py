@@ -1845,9 +1845,14 @@ with sync_playwright() as p:
                       more.count() == 1 and mobile.count() == 1 and
                       (rail.is_visible() if width >= 768 else mobile.is_visible()))
                 if width >= 768:
-                    check('reference directory More sections is available without JS ' + route + ' ' + theme + ' ' + str(width),
-                          more.locator('summary').is_visible() and not more.evaluate('el => el.open'))
-                    more.locator('summary').click()
+                    # The selected encyclopedia secondary page starts expanded.
+                    # All other native reference routes start closed.
+                    expected_open = route == 'terms/index.html'
+                    check('reference directory More sections has the correct script-free state ' + route + ' ' + theme + ' ' + str(width),
+                          more.locator('summary').is_visible() and
+                          more.evaluate('el => el.open') == expected_open)
+                    if not expected_open:
+                        more.locator('summary').click()
                     check('reference directory keeps all eight destinations ' + route + ' ' + theme + ' ' + str(width),
                           more.evaluate('el => el.open') and
                           more.locator('a').all_inner_texts() == [
@@ -1868,7 +1873,12 @@ with sync_playwright() as p:
                     secondary = mobile.locator('.site-mobile-chrome__more')
                     check('reference mobile disclosure exists before JS ' + route + ' ' + theme + ' ' + str(width),
                           secondary.count() == 1 and secondary.locator('summary').is_visible())
-                    secondary.locator('summary').click()
+                    if route == 'terms/index.html':
+                        check('reference encyclopedia is the active native mobile secondary destination',
+                              secondary.locator('a[href="../terms/index.html"][aria-current="location"]').count() == 1
+                              and secondary.evaluate('el => el.open'))
+                    else:
+                        secondary.locator('summary').click()
                     check('reference native mobile secondary routes before JS ' + route + ' ' + theme + ' ' + str(width),
                           secondary.locator('a').count() == 8 and
                           secondary.locator('a[href="../index.html#/papers"]').is_visible())
