@@ -666,6 +666,30 @@ body:has(.site-chrome) :is(.tech-controls,.playbook-tools,.controls,.search-cont
 .playbook-shell .playbook .tech-list{color:var(--muted)}
 /* atlas-editorial-card-copy:end */
 
+/* atlas-card-copy-contrast:begin */
+/* Reuse Discover's live foreground palette for existing editorial cards.
+   Legacy fixed dark-green links and detail text become nearly invisible on
+   dark surfaces; these selectors fix all three families without altering
+   cards, links, native disclosures or their underlying interactions. */
+:is(.playbook-shell .playbook a,
+    .tech-shell .tech-card .card-actions a,
+    .tech-shell .tech-card details a,
+    .shell:has(> main > .site-chrome.research-site-chrome) .cards .card a){
+  color:var(--accent,#27664e);
+}
+:is(.playbook-shell .playbook summary,
+    .tech-shell .tech-card details > summary){
+  color:var(--accent,#27664e);
+}
+:is(.playbook-shell .playbook p,
+    .playbook-shell .playbook .tech-list,
+    .tech-shell .tech-card dd,
+    .shell:has(> main > .site-chrome.research-site-chrome) .cards .card p){
+  color:var(--muted,#5d6861);
+}
+/* atlas-card-copy-contrast:end */
+
+
 /* atlas-discover-first-paint:begin */
 /* Discover already renders six useful cards before data hydration.
    Keep the accessible status in the DOM for scripted readers and browser

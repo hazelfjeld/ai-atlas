@@ -188,3 +188,35 @@ test('Discover and Games primary appearance controls share pressed state with ed
     'Shared controls must read final state after the existing app click handler');
   assert.ok(offline.includes(script), 'The offline workspace must embed the exact current shared theme behavior');
 });
+
+
+test('shared editorial card links, disclosures and descriptions follow Discover in both color schemes', () => {
+  const block = css.split('/* atlas-card-copy-contrast:begin */')[1]
+    ?.split('/* atlas-card-copy-contrast:end */')[0];
+  assert.ok(block, 'Shared editorial contrast block missing');
+  for (const selector of [
+    '.playbook-shell .playbook a',
+    '.playbook-shell .playbook summary',
+    '.playbook-shell .playbook p',
+    '.tech-shell .tech-card .card-actions a',
+    '.tech-shell .tech-card details > summary',
+    '.tech-shell .tech-card dd',
+    '.shell:has(> main > .site-chrome.research-site-chrome) .cards .card a',
+    '.shell:has(> main > .site-chrome.research-site-chrome) .cards .card p'
+  ]) assert.ok(block.includes(selector), 'Uncovered card copy: ' + selector);
+  assert.match(block, /color:var\(--accent,#27664e\)/);
+  assert.match(block, /color:var\(--muted,#5d6861\)/);
+  const brand = fs.readFileSync(path.join(__dirname, '..', 'brand.css'), 'utf8');
+  assert.match(brand, /--accent:#B1D5BD/, 'Dark mode needs a legible interactive foreground');
+  assert.match(brand, /--muted:#AFBEB2/, 'Dark mode needs a legible body foreground');
+  assert.match(brand, /--accent:#27664E/, 'Light mode must retain its original foreground');
+  for (const page of ['playbooks.html', 'technologies.html', 'research.html']) {
+    const html = fs.readFileSync(path.join(__dirname, '..', page), 'utf8');
+    assert.match(html, /href="site-chrome\.css"/, page + ' must share live contrast tokens');
+    assert.match(html, /site-chrome/, page + ' must keep the canonical navigation');
+  }
+  assert.ok(!block.includes('display:none') && !block.includes('pointer-events:none'),
+    'Contrast fixes must not hide cards or disable links');
+  const offline = fs.readFileSync(path.join(__dirname, '..', 'downloads/Atlas_Demo_Offline.html'), 'utf8');
+  assert.ok(offline.includes(css), 'Offline fallback must embed the same shared CSS');
+});
