@@ -67,8 +67,8 @@ with sync_playwright() as p:
                     "(label) => document.querySelector('.discover-mobile-chrome')?.dataset.pageLabel === label",
                     arg=expected_label)
                 check('Discover compact workspace title follows ' + section + ' at ' + str(width),
-                      page.locator('.discover-mobile-chrome').evaluate(
-                          "el => getComputedStyle(el, '::before').content") == json.dumps(expected_label)
+                      page.locator('#discover-mobile-nav > summary').get_attribute('aria-label') == 'Toggle navigation · ' + expected_label
+                      and page.locator('.discover-mobile-chrome').get_attribute('aria-label') == 'AI Updates mobile header · ' + expected_label
                       and page.locator('#navigation a.nav-link[aria-current="page"] span:not(.nav-count)').first.inner_text() == expected_label)
         if width <= 650:
             page.locator('#discover-mobile-nav > summary').click()

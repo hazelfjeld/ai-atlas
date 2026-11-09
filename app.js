@@ -100,7 +100,12 @@ function renderNav(){
   const mobileHeading=document.querySelector('.discover-mobile-chrome');
   if(mobileHeading){
     const selectedName=nav.querySelector('a.nav-link[aria-current="page"] span:not(.nav-count)');
-    mobileHeading.dataset.pageLabel=selectedName?.textContent?.trim()||labels[view];
+    const currentName=selectedName?.textContent?.trim()||labels[view];
+    mobileHeading.dataset.pageLabel=currentName;
+    // The breadcrumb is intentionally hidden in the narrow search-first topbar.
+    // Announce its current section on the visible menu trigger instead.
+    mobileHeading.setAttribute('aria-label','AI Updates mobile header · '+currentName);
+    mobileHeading.querySelector('#discover-mobile-nav > summary')?.setAttribute('aria-label','Toggle navigation · '+currentName);
   }
   $('breadcrumb').textContent=labels[view];
   document.title=view==='overview'?'AI Updates — AI research, tools & concepts':labels[view]+' · AI Updates';
