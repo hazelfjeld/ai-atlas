@@ -1,0 +1,773 @@
+{
+  "schema": 1,
+  "batch_id": "atlas-daily-20261109-0846ct-source-checked-a",
+  "edition_date": "2026-11-09",
+  "timezone": "America/Chicago",
+  "collected_at": "2026-11-09T14:46:52Z",
+  "coverage_start": "2026-11-08T14:20:49.457Z",
+  "coverage_end": "2026-11-09T14:46:52Z",
+  "coverage_status": "partial",
+  "coverage_note": "Incremental coverage since last indexed partial batch; no prior successful editorial cutoff exists. Earlier unchecked periods remain a recovery backlog; November 5–6 specialist items are explicitly catch-up.",
+  "overlap_lookback_start": "2026-11-07T14:20:49.457Z",
+  "sources_checked": [
+    {
+      "url": "https://huggingface.co/blog/amazon/higher-order-pruning-experts",
+      "status": "opened",
+      "checked_at": "2026-11-09T14:46:52Z"
+    },
+    {
+      "url": "https://arxiv.org/abs/2609.18916",
+      "status": "opened",
+      "checked_at": "2026-11-09T14:46:52Z"
+    },
+    {
+      "url": "https://github.com/awslabs/HOPE",
+      "status": "opened",
+      "checked_at": "2026-11-09T14:46:52Z"
+    },
+    {
+      "url": "https://www.reuters.com/business/energy/norways-statnett-pauses-new-grid-capacity-data-centres-protect-power-system-2026-11-09/",
+      "status": "opened",
+      "checked_at": "2026-11-09T14:46:52Z"
+    },
+    {
+      "url": "https://www.reuters.com/business/aerospace-defense/ai-power-rush-sends-data-centres-hunting-used-turbines-jet-engines-2026-11-09/",
+      "status": "opened",
+      "checked_at": "2026-11-09T14:46:52Z"
+    },
+    {
+      "url": "https://www.reuters.com/world/trump-says-ai-risks-can-be-managed-signals-openness-guardrails-2026-11-09/",
+      "status": "opened",
+      "checked_at": "2026-11-09T14:46:52Z"
+    },
+    {
+      "url": "https://www.reuters.com/business/media-telecom/disney-adobe-co-develop-custom-ai-models-tailored-media-giant-2026-11-09/",
+      "status": "opened",
+      "checked_at": "2026-11-09T14:46:52Z"
+    },
+    {
+      "url": "https://www.reuters.com/business/retail-consumer/apple-intelligence-ai-service-registers-with-chinese-regulator-use-tablets-2026-11-09/",
+      "status": "opened",
+      "checked_at": "2026-11-09T14:46:52Z"
+    },
+    {
+      "url": "https://www.reuters.com/legal/litigation/us-opens-probe-into-2895-waymo-vehicles-over-school-bus-safety-violations-2026-11-09/",
+      "status": "opened",
+      "checked_at": "2026-11-09T14:46:52Z"
+    },
+    {
+      "url": "https://www.reuters.com/world/asia-pacific/taiwans-october-exports-surge-again-strong-ai-demand-2026-11-09/",
+      "status": "opened",
+      "checked_at": "2026-11-09T14:46:52Z"
+    },
+    {
+      "url": "https://huggingface.co/blog/LingYu-Robotics/lingyu-real-world-robotics-dataset-bimanual-first",
+      "status": "opened",
+      "checked_at": "2026-11-09T14:46:52Z"
+    },
+    {
+      "url": "https://huggingface.co/datasets/LingYu-Robotics/lingyu-realworld-robotics-dataset",
+      "status": "opened",
+      "checked_at": "2026-11-09T14:46:52Z"
+    },
+    {
+      "url": "https://huggingface.co/blog/Sandflow/sand3d-106094-3d-objects-in-one-code-substrate-for",
+      "status": "opened",
+      "checked_at": "2026-11-09T14:46:52Z"
+    },
+    {
+      "url": "https://github.com/Sandflow-ai/sand3d",
+      "status": "opened",
+      "checked_at": "2026-11-09T14:46:52Z"
+    },
+    {
+      "url": "https://arxiv.org/abs/2611.09573",
+      "status": "opened",
+      "checked_at": "2026-11-09T14:46:52Z"
+    }
+  ],
+  "sources_failed": [],
+  "source_health_note": "Direct sources reopened via web or GitHub connector; source diversity limited. Zero failed opens does not establish exhaustive coverage. Broader arXiv and specialist release feeds not fully swept.",
+  "coverage_backlog": [
+    "Search complete arXiv cs.AI/cs.LG/cs.RO weekday listing after Nov 9 posting.",
+    "Finish focused release-note checks for vLLM, Transformers, llama.cpp and specialist projects.",
+    "Check original Norwegian regulator/Statnett, NHTSA and Shanghai regulator documents independently; Reuters attributions retained.",
+    "Deduplicate new technology and terminology proposals against complete canonical IDs before assigning final catalog IDs.",
+    "Revisit earlier partial missed-interval coverage; do not advance null last_successful_coverage_end."
+  ],
+  "tldr": [
+    "A new Amazon technical walkthrough shows why preserving cooperating experts may matter for aggressive MoE pruning, while catch-up research adds robotics demonstrations, 3D construction code and mixed-precision weather inference.",
+    "Today's news also highlights AI data-center power constraints, private enterprise models and regulatory attention to autonomous vehicles; vendor claims and reported policy developments remain qualified."
+  ],
+  "news": [
+    {
+      "id": "ai-news:amazon-hope-nov9",
+      "title": "Amazon details HOPE pruning that preserves cooperating MoE experts",
+      "category": "research",
+      "tags": [
+        "ML",
+        "LLM",
+        "MoE",
+        "compression"
+      ],
+      "summary": "Amazon's November 9 technical walkthrough describes its open-source HOPE implementation, which chooses experts to prune using pairwise interactions rather than independent importance ranks. The research paper itself was first posted September 16.",
+      "why_it_matters": "Aggressive MoE compression may better retain long-horizon coding behavior when co-activated experts are pruned together carefully.",
+      "caveat": "Up-to-6.1% agentic-coding gains are author-reported on selected models and benchmarks; no independent replication; smaller pruning fractions may offer less benefit.",
+      "canonical_url": "https://huggingface.co/blog/amazon/higher-order-pruning-experts",
+      "source_url": "https://huggingface.co/blog/amazon/higher-order-pruning-experts",
+      "publication_date": "2026-11-09",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-09",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-09T14:46:52Z",
+      "checked_at": "2026-11-09T14:46:52Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "author_research_followup",
+      "release_status": "author_research_followup",
+      "collection_classification": "current_window",
+      "sources": [
+        {
+          "url": "https://huggingface.co/blog/amazon/higher-order-pruning-experts",
+          "publisher": "Amazon AWS",
+          "type": "primary_author_or_research"
+        },
+        {
+          "url": "https://arxiv.org/abs/2609.18916",
+          "publisher": "arXiv",
+          "type": "original research preprint (Sep 16)"
+        },
+        {
+          "url": "https://github.com/awslabs/HOPE",
+          "publisher": "AWS Labs",
+          "type": "official source code"
+        }
+      ],
+      "related_catalog_ids": []
+    },
+    {
+      "id": "ai-news:norway-grid-data-centres-nov9",
+      "title": "Norway pauses new data-center grid reservations pending licensing",
+      "category": "infrastructure",
+      "tags": [
+        "AI",
+        "datacenters",
+        "energy",
+        "governance"
+      ],
+      "summary": "Reuters reports that Norway's grid operator Statnett paused new data-center connection reservations while a licensing scheme prioritizing essential infrastructure is developed.",
+      "why_it_matters": "Grid capacity and approvals can constrain where AI clusters are built as much as hardware availability.",
+      "caveat": "A pause on new reservations is not a shutdown of existing centers; 26,000 MW in reported grid requests is not realized electricity demand.",
+      "canonical_url": "https://www.reuters.com/business/energy/norways-statnett-pauses-new-grid-capacity-data-centres-protect-power-system-2026-11-09/",
+      "source_url": "https://www.reuters.com/business/energy/norways-statnett-pauses-new-grid-capacity-data-centres-protect-power-system-2026-11-09/",
+      "publication_date": "2026-11-09",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-09",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-09T14:46:52Z",
+      "checked_at": "2026-11-09T14:46:52Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "reported_policy_action",
+      "release_status": "reported_policy_action",
+      "collection_classification": "current_window",
+      "sources": [
+        {
+          "url": "https://www.reuters.com/business/energy/norways-statnett-pauses-new-grid-capacity-data-centres-protect-power-system-2026-11-09/",
+          "publisher": "Reuters",
+          "type": "original_reporting"
+        }
+      ],
+      "related_catalog_ids": []
+    },
+    {
+      "id": "ai-news:used-turbine-ai-power-nov9",
+      "title": "AI developers look to used turbines and retired jet engines for electricity",
+      "category": "infrastructure",
+      "tags": [
+        "AI",
+        "power",
+        "datacenters",
+        "supply-chain"
+      ],
+      "summary": "Reuters interviews equipment suppliers and analysts who describe AI data-center developers sourcing refurbished turbines and converted aircraft engines amid multiyear new-equipment backlogs.",
+      "why_it_matters": "Energy infrastructure supply chains may determine practical AI compute expansion.",
+      "caveat": "Capacity and delivery-time estimates are attributed to industry analysts, while used-equipment reliability and permitting remain unresolved.",
+      "canonical_url": "https://www.reuters.com/business/aerospace-defense/ai-power-rush-sends-data-centres-hunting-used-turbines-jet-engines-2026-11-09/",
+      "source_url": "https://www.reuters.com/business/aerospace-defense/ai-power-rush-sends-data-centres-hunting-used-turbines-jet-engines-2026-11-09/",
+      "publication_date": "2026-11-09",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-09",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-09T14:46:52Z",
+      "checked_at": "2026-11-09T14:46:52Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "original_independent_reporting",
+      "release_status": "original_independent_reporting",
+      "collection_classification": "current_window",
+      "sources": [
+        {
+          "url": "https://www.reuters.com/business/aerospace-defense/ai-power-rush-sends-data-centres-hunting-used-turbines-jet-engines-2026-11-09/",
+          "publisher": "Reuters",
+          "type": "original_reporting"
+        }
+      ],
+      "related_catalog_ids": []
+    },
+    {
+      "id": "ai-news:trump-ai-guardrails-nov9",
+      "title": "US president signals conditional openness to AI guardrails",
+      "category": "governance",
+      "tags": [
+        "AI",
+        "safety",
+        "policy"
+      ],
+      "summary": "In a November 8 television interview reported by Reuters on November 9 UTC, President Trump described AI risks as manageable and said he would consider some safeguards.",
+      "why_it_matters": "Signals possible policy positioning as lawmakers debate AI rules.",
+      "caveat": "Remarks are not legislation, a formal regulatory proposal, or a confirmed bipartisan agreement.",
+      "canonical_url": "https://www.reuters.com/world/trump-says-ai-risks-can-be-managed-signals-openness-guardrails-2026-11-09/",
+      "source_url": "https://www.reuters.com/world/trump-says-ai-risks-can-be-managed-signals-openness-guardrails-2026-11-09/",
+      "publication_date": "2026-11-09",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-08",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-09T14:46:52Z",
+      "checked_at": "2026-11-09T14:46:52Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "attributed_political_remarks",
+      "release_status": "attributed_political_remarks",
+      "collection_classification": "current_window",
+      "sources": [
+        {
+          "url": "https://www.reuters.com/world/trump-says-ai-risks-can-be-managed-signals-openness-guardrails-2026-11-09/",
+          "publisher": "Reuters",
+          "type": "original_reporting"
+        }
+      ],
+      "related_catalog_ids": []
+    },
+    {
+      "id": "ai-news:disney-adobe-private-genai-nov9",
+      "title": "Disney and Adobe agree to develop private creative AI models",
+      "category": "applications",
+      "tags": [
+        "AI",
+        "image",
+        "enterprise",
+        "media"
+      ],
+      "summary": "Reuters reports a multi-year Disney–Adobe agreement to develop Disney-specific generative models through Firefly Foundry for concept development and other media uses.",
+      "why_it_matters": "Illustrates enterprise demand for IP-specific model customization rather than generic public generation tools.",
+      "caveat": "Workflow acceleration is attributed to participating companies; resulting models are proprietary and not independently benchmarked.",
+      "canonical_url": "https://www.reuters.com/business/media-telecom/disney-adobe-co-develop-custom-ai-models-tailored-media-giant-2026-11-09/",
+      "source_url": "https://www.reuters.com/business/media-telecom/disney-adobe-co-develop-custom-ai-models-tailored-media-giant-2026-11-09/",
+      "publication_date": "2026-11-09",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-09",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-09T14:46:52Z",
+      "checked_at": "2026-11-09T14:46:52Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "reported_business_agreement",
+      "release_status": "reported_business_agreement",
+      "collection_classification": "current_window",
+      "sources": [
+        {
+          "url": "https://www.reuters.com/business/media-telecom/disney-adobe-co-develop-custom-ai-models-tailored-media-giant-2026-11-09/",
+          "publisher": "Reuters",
+          "type": "original_reporting"
+        }
+      ],
+      "related_catalog_ids": []
+    },
+    {
+      "id": "ai-news:apple-china-ai-registration-nov9",
+      "title": "Apple Intelligence gets regulatory registration for laptops and tablets in China",
+      "category": "policy",
+      "tags": [
+        "AI",
+        "consumer",
+        "LLM",
+        "regulation"
+      ],
+      "summary": "Reuters reports that Shanghai's cyberspace regulator has registered Apple Intelligence for use on tablets and laptops, following earlier iPhone approval.",
+      "why_it_matters": "Market-specific regulation and local model partnerships affect the actual rollout of consumer AI.",
+      "caveat": "Registration does not establish that services are already live on all devices; rollout details are separately attributed.",
+      "canonical_url": "https://www.reuters.com/business/retail-consumer/apple-intelligence-ai-service-registers-with-chinese-regulator-use-tablets-2026-11-09/",
+      "source_url": "https://www.reuters.com/business/retail-consumer/apple-intelligence-ai-service-registers-with-chinese-regulator-use-tablets-2026-11-09/",
+      "publication_date": "2026-11-09",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-09",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-09T14:46:52Z",
+      "checked_at": "2026-11-09T14:46:52Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "reported_registration",
+      "release_status": "reported_registration",
+      "collection_classification": "current_window",
+      "sources": [
+        {
+          "url": "https://www.reuters.com/business/retail-consumer/apple-intelligence-ai-service-registers-with-chinese-regulator-use-tablets-2026-11-09/",
+          "publisher": "Reuters",
+          "type": "original_reporting"
+        }
+      ],
+      "related_catalog_ids": []
+    },
+    {
+      "id": "ai-news:waymo-nhtsa-recall-query-nov9",
+      "title": "US safety regulator opens follow-up query on Waymo school-bus behavior",
+      "category": "safety",
+      "tags": [
+        "AI",
+        "robotics",
+        "autonomous-vehicles",
+        "safety"
+      ],
+      "summary": "Reuters reports that NHTSA opened a recall query covering 2,895 Waymo vehicles to assess a prior software remedy involving stopped school buses.",
+      "why_it_matters": "Deployed autonomous-system fixes require evidence of effectiveness after release.",
+      "caveat": "An opened regulatory inquiry is not a determination that the remedy failed or that every listed vehicle committed a violation.",
+      "canonical_url": "https://www.reuters.com/legal/litigation/us-opens-probe-into-2895-waymo-vehicles-over-school-bus-safety-violations-2026-11-09/",
+      "source_url": "https://www.reuters.com/legal/litigation/us-opens-probe-into-2895-waymo-vehicles-over-school-bus-safety-violations-2026-11-09/",
+      "publication_date": "2026-11-09",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-09",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-09T14:46:52Z",
+      "checked_at": "2026-11-09T14:46:52Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "regulatory_inquiry_report",
+      "release_status": "regulatory_inquiry_report",
+      "collection_classification": "current_window",
+      "sources": [
+        {
+          "url": "https://www.reuters.com/legal/litigation/us-opens-probe-into-2895-waymo-vehicles-over-school-bus-safety-violations-2026-11-09/",
+          "publisher": "Reuters",
+          "type": "original_reporting"
+        }
+      ],
+      "related_catalog_ids": []
+    },
+    {
+      "id": "ai-news:taiwan-oct-exports-ai-demand-nov9",
+      "title": "Taiwan reports October export record amid demand for AI hardware",
+      "category": "industry",
+      "tags": [
+        "AI",
+        "chips",
+        "supply-chain",
+        "economy"
+      ],
+      "summary": "Taiwan's finance ministry reported October exports up 58.9% year on year to $96.76 billion, with electronic components up 61.4%, according to Reuters on November 9.",
+      "why_it_matters": "A quantifiable signal of hardware supply-chain expansion amid AI and broader technology demand.",
+      "caveat": "October trade figures are not November sales and include non-AI products; correlation with AI investment is not a precise AI-revenue measure.",
+      "canonical_url": "https://www.reuters.com/world/asia-pacific/taiwans-october-exports-surge-again-strong-ai-demand-2026-11-09/",
+      "source_url": "https://www.reuters.com/world/asia-pacific/taiwans-october-exports-surge-again-strong-ai-demand-2026-11-09/",
+      "publication_date": "2026-11-09",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-10-01",
+      "event_date_precision": "month",
+      "discovered_at": "2026-11-09T14:46:52Z",
+      "checked_at": "2026-11-09T14:46:52Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "official_statistics_reported",
+      "release_status": "official_statistics_reported",
+      "collection_classification": "current_window",
+      "sources": [
+        {
+          "url": "https://www.reuters.com/world/asia-pacific/taiwans-october-exports-surge-again-strong-ai-demand-2026-11-09/",
+          "publisher": "Reuters",
+          "type": "original_reporting"
+        }
+      ],
+      "related_catalog_ids": []
+    },
+    {
+      "id": "ai-news:lingyu-first-person-robot-data-nov5",
+      "title": "LingYu shares 139-hour first-person dual-arm robot demonstration dataset",
+      "category": "robotics",
+      "tags": [
+        "AI",
+        "robotics",
+        "dataset",
+        "imitation-learning"
+      ],
+      "summary": "LingYu Robotics reports 139.4 hours of synchronized first-person videos, state signals and teleoperation commands across 13,263 successful episodes from 22 tabletop subsets.",
+      "why_it_matters": "Offers robot-view demonstration data aligned with action outputs for embodied policy research.",
+      "caveat": "Success-only episodes omit failures and recovery; the public dataset is CC BY-NC-SA 4.0 and restricted to noncommercial uses.",
+      "canonical_url": "https://huggingface.co/blog/LingYu-Robotics/lingyu-real-world-robotics-dataset-bimanual-first",
+      "source_url": "https://huggingface.co/blog/LingYu-Robotics/lingyu-real-world-robotics-dataset-bimanual-first",
+      "publication_date": "2026-11-05",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-05",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-09T14:46:52Z",
+      "checked_at": "2026-11-09T14:46:52Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "original_developer_dataset_release",
+      "release_status": "original_developer_dataset_release",
+      "collection_classification": "catch_up_prior_uncovered_interval",
+      "sources": [
+        {
+          "url": "https://huggingface.co/blog/LingYu-Robotics/lingyu-real-world-robotics-dataset-bimanual-first",
+          "publisher": "LingYu Robotics",
+          "type": "primary_author_or_research"
+        },
+        {
+          "url": "https://huggingface.co/datasets/LingYu-Robotics/lingyu-realworld-robotics-dataset",
+          "publisher": "LingYu Robotics",
+          "type": "official dataset card"
+        }
+      ],
+      "related_catalog_ids": []
+    },
+    {
+      "id": "ai-news:sandflow-sand3d-code-dataset-nov5",
+      "title": "Sand3D publishes 106,094 objects as short procedural Python programs",
+      "category": "3d",
+      "tags": [
+        "AI",
+        "3D",
+        "program-synthesis",
+        "datasets"
+      ],
+      "summary": "Sandflow describes a Python/Blender 3D modeling library and a dataset of 106,094 objects represented as construction programs, including 10,456 articulated examples.",
+      "why_it_matters": "A consistent code representation could support editable 3D generation by language models.",
+      "caveat": "Mainly hard-surface assets, no verified real-world robotics accuracy; source-object license obligations remain despite the dataset umbrella.",
+      "canonical_url": "https://huggingface.co/blog/Sandflow/sand3d-106094-3d-objects-in-one-code-substrate-for",
+      "source_url": "https://huggingface.co/blog/Sandflow/sand3d-106094-3d-objects-in-one-code-substrate-for",
+      "publication_date": "2026-11-05",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-05",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-09T14:46:52Z",
+      "checked_at": "2026-11-09T14:46:52Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "original_developer_dataset_release",
+      "release_status": "original_developer_dataset_release",
+      "collection_classification": "catch_up_prior_uncovered_interval",
+      "sources": [
+        {
+          "url": "https://huggingface.co/blog/Sandflow/sand3d-106094-3d-objects-in-one-code-substrate-for",
+          "publisher": "Sandflow",
+          "type": "primary_author_or_research"
+        },
+        {
+          "url": "https://github.com/Sandflow-ai/sand3d",
+          "publisher": "Sandflow",
+          "type": "official code repository"
+        }
+      ],
+      "related_catalog_ids": []
+    },
+    {
+      "id": "ai-news:weather-fp16-state-fp32-arxiv261109573",
+      "title": "Weather-model study tests FP16 compute with FP32 physical state",
+      "category": "research",
+      "tags": [
+        "AI",
+        "DL",
+        "inference",
+        "mixed-precision",
+        "weather"
+      ],
+      "summary": "A November 6 arXiv preprint tests five weather-prediction networks, reporting 1.3–3.5x faster ten-day forecasts when model layers use FP16 but physical state and conversions stay FP32.",
+      "why_it_matters": "Separating network arithmetic precision from numerical state can reduce inference costs in weather applications.",
+      "caveat": "Author-reported study uses 52 initialization dates and one 16 GB GPU; performance and error bounds are not general guarantees or peer-reviewed replication.",
+      "canonical_url": "https://arxiv.org/abs/2611.09573",
+      "source_url": "https://arxiv.org/abs/2611.09573",
+      "publication_date": "2026-11-06",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-06",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-09T14:46:52Z",
+      "checked_at": "2026-11-09T14:46:52Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "research_preprint",
+      "release_status": "research_preprint",
+      "collection_classification": "catch_up_prior_uncovered_interval",
+      "sources": [
+        {
+          "url": "https://arxiv.org/abs/2611.09573",
+          "publisher": "arXiv / paper author",
+          "type": "primary_author_or_research"
+        }
+      ],
+      "related_catalog_ids": []
+    }
+  ],
+  "technologies": [
+    {
+      "id": "tech-proposal:hope-moe-expert-pruning:2026-11-09",
+      "name": "HOPE (Higher-Order Pruning of Experts)",
+      "aliases": [
+        "HOPE",
+        "Higher-Order Pruning of Experts"
+      ],
+      "usage_tags": [
+        "ML",
+        "DL",
+        "LLM",
+        "MoE"
+      ],
+      "explanation": "Open PyTorch tool for MoE pruning based on a matrix of expert pairwise gate-weighted output interactions and quadratic optimization.",
+      "conditional_advantage": "At high pruning rates, can better preserve cooperating experts than standalone importance scoring on tested models.",
+      "best_fit_uses": [
+        "MoE memory compression",
+        "Comparing high-rate pruning algorithms"
+      ],
+      "tradeoffs": [
+        "Calibration forward pass and quadratic solve",
+        "No complete cross-layer interaction accounting",
+        "Quality may deteriorate as experts are removed"
+      ],
+      "alternatives": [
+        "REAP",
+        "MAN",
+        "EAN",
+        "Frequency pruning"
+      ],
+      "hardware_runtime_constraints": "Runs calibration on original MoE checkpoints under PyTorch; the 35B–122B studied models have substantial VRAM/memory needs. Minimum requirements not verified.",
+      "license_uncertainty": "Tool repository Apache-2.0 verified; base model licenses differ.",
+      "availability_uncertainty": "Public repository; tested on Qwen3, Qwen3.5 and GLM-4.5 families. Compatibility with other architectures uncertain.",
+      "pricing_uncertainty": "Public code free; compute and model licensing may cost money.",
+      "official_documentation_url": "https://github.com/awslabs/HOPE",
+      "date_checked": "2026-11-09",
+      "checked_at": "2026-11-09T14:46:52Z",
+      "source_links": [
+        {
+          "url": "https://github.com/awslabs/HOPE",
+          "publisher": "AWS Labs",
+          "type": "official repository"
+        },
+        {
+          "url": "https://huggingface.co/blog/amazon/higher-order-pruning-experts",
+          "publisher": "Amazon",
+          "type": "primary technical walkthrough"
+        },
+        {
+          "url": "https://arxiv.org/abs/2609.18916",
+          "publisher": "research authors",
+          "type": "primary September research paper"
+        }
+      ],
+      "existing_profile_id": null,
+      "review_status": "source_checked_pending_publisher_catalog_dedup"
+    },
+    {
+      "id": "tech-proposal:sand3d-python-library:2026-11-09",
+      "name": "sand3d",
+      "aliases": [
+        "Sand3D",
+        "Sandflow sand3d"
+      ],
+      "usage_tags": [
+        "AI",
+        "3D",
+        "programmatic-modeling",
+        "robotics"
+      ],
+      "explanation": "Python-based geometry construction and articulated-assembly representation built on Blender bpy, paired with 106,094 programmatic objects.",
+      "conditional_advantage": "Short readable construction programs may be easier for code-generation agents to edit than raw vertex lists.",
+      "best_fit_uses": [
+        "Editable generated 3D assets",
+        "Agent-oriented geometry program synthesis"
+      ],
+      "tradeoffs": [
+        "Concentrated on hard-surface objects",
+        "Needs Blender compatible environment",
+        "Source asset license checks"
+      ],
+      "alternatives": [
+        "Blender Python API",
+        "OpenSCAD",
+        "Mesh-based text-to-3D systems"
+      ],
+      "hardware_runtime_constraints": "Python and Blender bpy required; renderer/storage requirements depend on use. Python 3.11/3.13 mentioned in repository.",
+      "license_uncertainty": "Apache-2.0 for library; dataset says CC BY 4.0 with per-object original licenses preserved.",
+      "availability_uncertainty": "Public code and data; exact Blender version and runtime support should be checked.",
+      "pricing_uncertainty": "Open software; compute/storage can cost money.",
+      "official_documentation_url": "https://github.com/Sandflow-ai/sand3d",
+      "date_checked": "2026-11-09",
+      "checked_at": "2026-11-09T14:46:52Z",
+      "source_links": [
+        {
+          "url": "https://github.com/Sandflow-ai/sand3d",
+          "publisher": "Sandflow",
+          "type": "official repository"
+        },
+        {
+          "url": "https://huggingface.co/blog/Sandflow/sand3d-106094-3d-objects-in-one-code-substrate-for",
+          "publisher": "Sandflow",
+          "type": "official release article"
+        }
+      ],
+      "existing_profile_id": null,
+      "review_status": "source_checked_pending_publisher_catalog_dedup"
+    },
+    {
+      "id": "tech-proposal:lingyu-bimanual-dataset:2026-11-09",
+      "name": "LingYu Real-World Robotics Dataset",
+      "aliases": [
+        "LingYu first-person bimanual dataset"
+      ],
+      "usage_tags": [
+        "AI",
+        "ML",
+        "robotics",
+        "dataset"
+      ],
+      "explanation": "LeRobot-format dataset of 139.4 hours of synchronized robot-perspective camera, proprioception and action recordings at 45 Hz.",
+      "conditional_advantage": "Robot-view synchronized demonstrations support policy learning closer to deployment-time observation conditions.",
+      "best_fit_uses": [
+        "Bimanual imitation learning",
+        "Long-horizon robot manipulation research"
+      ],
+      "tradeoffs": [
+        "Successful examples only",
+        "One platform and limited tasks",
+        "Session-level split metadata not yet available"
+      ],
+      "alternatives": [
+        "DROID",
+        "BridgeData V2",
+        "Other LeRobot collections"
+      ],
+      "hardware_runtime_constraints": "Dataset has high-resolution video and action data; preprocessing/storage and model training needs vary and are not fixed by the provider.",
+      "license_uncertainty": "CC BY-NC-SA 4.0; noncommercial and share-alike constraints.",
+      "availability_uncertainty": "Public tabletop subsets; separately mentioned retail subset requires application and is not part of public data.",
+      "pricing_uncertainty": "Public download; storage and compute may incur costs.",
+      "official_documentation_url": "https://huggingface.co/datasets/LingYu-Robotics/lingyu-realworld-robotics-dataset",
+      "date_checked": "2026-11-09",
+      "checked_at": "2026-11-09T14:46:52Z",
+      "source_links": [
+        {
+          "url": "https://huggingface.co/blog/LingYu-Robotics/lingyu-real-world-robotics-dataset-bimanual-first",
+          "publisher": "LingYu Robotics",
+          "type": "author release article"
+        },
+        {
+          "url": "https://huggingface.co/datasets/LingYu-Robotics/lingyu-realworld-robotics-dataset",
+          "publisher": "LingYu Robotics",
+          "type": "official data card"
+        }
+      ],
+      "existing_profile_id": null,
+      "review_status": "source_checked_pending_publisher_catalog_dedup"
+    }
+  ],
+  "terms": [
+    {
+      "id": "term-proposal:expert-coactivation:2026-11-09",
+      "name": "Expert co-activation",
+      "aliases": [
+        "Expert co-selection"
+      ],
+      "definition": "The tendency of particular mixture-of-experts subnetworks to be routed to jointly on the same tokens.",
+      "mechanism": "A router selects multiple experts per token; joint-selection and gate/output statistics reveal pairs that repeatedly cooperate.",
+      "usage_tags": [
+        "ML",
+        "LLM",
+        "MoE",
+        "interpretability"
+      ],
+      "example": "Two experts are repeatedly selected for tool-using code prompts; removing either may disrupt a jointly useful pattern.",
+      "caveat": "Correlated activation alone is not evidence of causal dependency.",
+      "related_existing_ids": [
+        "MLD-0392",
+        "MLD-0742",
+        "MLD-0962"
+      ],
+      "primary_references": [
+        {
+          "url": "https://huggingface.co/blog/amazon/higher-order-pruning-experts",
+          "publisher": "original project",
+          "type": "primary_reference"
+        },
+        {
+          "url": "https://arxiv.org/abs/2609.18916",
+          "publisher": "research paper",
+          "type": "primary_reference"
+        }
+      ],
+      "term_origin": "established_concept_new_to_atlas_not_newly_coined",
+      "date_checked": "2026-11-09",
+      "checked_at": "2026-11-09T14:46:52Z",
+      "review_status": "source_checked_pending_publisher_canonical_dedup"
+    },
+    {
+      "id": "term-proposal:bimanual-teleoperation:2026-11-09",
+      "name": "Bimanual teleoperation",
+      "aliases": [
+        "Dual-arm teleoperation"
+      ],
+      "definition": "Human remote control of two robotic manipulators simultaneously to perform coordinated physical tasks.",
+      "mechanism": "A remote operator drives both arms while onboard cameras, joint states and commands may be recorded as synchronized demonstrations.",
+      "usage_tags": [
+        "AI",
+        "robotics",
+        "imitation-learning"
+      ],
+      "example": "A VR operator guides a dual-arm robot folding a box while recording wrist views and motor actions.",
+      "caveat": "Successful human demonstration does not establish autonomous success or safe recovery.",
+      "related_existing_ids": [
+        "MLD-0371"
+      ],
+      "primary_references": [
+        {
+          "url": "https://huggingface.co/blog/LingYu-Robotics/lingyu-real-world-robotics-dataset-bimanual-first",
+          "publisher": "original project",
+          "type": "primary_reference"
+        }
+      ],
+      "term_origin": "established_concept_new_to_atlas_not_newly_coined",
+      "date_checked": "2026-11-09",
+      "checked_at": "2026-11-09T14:46:52Z",
+      "review_status": "source_checked_pending_publisher_canonical_dedup"
+    },
+    {
+      "id": "term-proposal:procedural-3d-representation:2026-11-09",
+      "name": "Procedural 3D representation",
+      "aliases": [
+        "Programmatic 3D object representation"
+      ],
+      "definition": "Describing a 3D object through parameterized construction steps rather than only storing final geometry.",
+      "mechanism": "Solids, transformations, profiles and joints are composed as executable operations that reconstruct editable parts.",
+      "usage_tags": [
+        "AI",
+        "3D",
+        "program-synthesis"
+      ],
+      "example": "A script creates a table from a top and four parametric legs rather than a single triangle mesh.",
+      "caveat": "A valid program need not be physically accurate, watertight or compatible across geometry engines.",
+      "related_existing_ids": [],
+      "primary_references": [
+        {
+          "url": "https://huggingface.co/blog/Sandflow/sand3d-106094-3d-objects-in-one-code-substrate-for",
+          "publisher": "original project",
+          "type": "primary_reference"
+        },
+        {
+          "url": "https://github.com/Sandflow-ai/sand3d",
+          "publisher": "original project",
+          "type": "primary_reference"
+        }
+      ],
+      "term_origin": "established_concept_new_to_atlas_not_newly_coined",
+      "date_checked": "2026-11-09",
+      "checked_at": "2026-11-09T14:46:52Z",
+      "review_status": "source_checked_pending_publisher_canonical_dedup"
+    }
+  ],
+  "corrections": []
+}
