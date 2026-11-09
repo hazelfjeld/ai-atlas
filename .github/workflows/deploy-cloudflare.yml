@@ -76,8 +76,9 @@ jobs:
       - name: Preserve the exact tested deployment artifact
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: atlas-assets-${{ steps.revision.outputs.sha }}-${{ github.run_attempt }}
+          name: atlas-assets-${{ steps.revision.outputs.sha }}-${{ github.run_id }}
           path: dist/cloudflare/
+          overwrite: true
           if-no-files-found: error
           retention-days: 7
       - name: Preserve pre-deployment verification
@@ -108,7 +109,7 @@ jobs:
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
         with:
-          name: atlas-assets-${{ needs.validate.outputs.revision }}-${{ github.run_attempt }}
+          name: atlas-assets-${{ needs.validate.outputs.revision }}-${{ github.run_id }}
           path: dist/cloudflare/
       - id: current
         name: Reject superseded runs immediately before deployment
@@ -141,9 +142,10 @@ jobs:
       - name: Verify actual production assets, caching, navigation, Quiz and Match
         if: steps.current.outputs.deploy == 'true'
         run: |
+          # Probe the Worker itself before custom domains to distinguish stale routing from a failed upload.
+          python3 scripts/verify_cloudflare.py --base https://ai-atlas.airheadhazelnut.workers.dev/ --revision '${{ needs.validate.outputs.revision }}' --output deployment-validation/production-workers-http.json
           python3 scripts/verify_cloudflare.py --base "$PRODUCTION_URL/" --revision '${{ needs.validate.outputs.revision }}' --output deployment-validation/production-http.json
           python3 scripts/verify_cloudflare.py --base https://www.aiupdates.app/ --revision '${{ needs.validate.outputs.revision }}' --output deployment-validation/production-www-http.json
-          python3 scripts/verify_cloudflare.py --base https://ai-atlas.airheadhazelnut.workers.dev/ --revision '${{ needs.validate.outputs.revision }}' --output deployment-validation/production-workers-http.json
           python3 tests/site-deployment-browser.py --base "$PRODUCTION_URL/" --output deployment-validation/production-site
           python3 tests/rebrand-browser.py --base "$PRODUCTION_URL/" --output deployment-validation/production-rebrand
           python3 tests/games-workspace-browser.py --base "$PRODUCTION_URL/" --output deployment-validation/production-native-games

@@ -150,6 +150,28 @@ class Packaging(unittest.TestCase):
                                      attempts=3, pause=lambda _: None, opener=missing)
         self.assertEqual(len(failures), 1)
 
+    def test_production_rerun_uses_original_validated_artifact(self):
+        # A production-only rerun increments run_attempt, but the earlier
+        # successful validation artifact retains its original attempt number.
+        workflow = (ROOT / '.github/workflows/deploy-cloudflare.yml').read_text()
+        upload = workflow.split('name: Preserve the exact tested deployment artifact', 1)[1].split(
+            'name: Preserve pre-deployment verification', 1)[0]
+        download = workflow.split('uses: actions/download-artifact@', 1)[1].split(
+            '- id: current', 1)[0]
+        self.assertIn('name: atlas-assets-${{ steps.revision.outputs.sha }}-${{ github.run_id }}', upload)
+        self.assertIn('name: atlas-assets-${{ needs.validate.outputs.revision }}-${{ github.run_id }}', download)
+        self.assertIn('overwrite: true', upload)
+        self.assertNotIn('github.run_attempt', upload + download)
+
+    def test_production_checks_worker_then_both_custom_domains(self):
+        workflow = (ROOT / '.github/workflows/deploy-cloudflare.yml').read_text()
+        block = workflow.split('name: Verify actual production assets, caching, navigation, Quiz and Match', 1)[1]
+        worker = block.index('python3 scripts/verify_cloudflare.py --base https://ai-atlas.airheadhazelnut.workers.dev/')
+        apex = block.index('python3 scripts/verify_cloudflare.py --base "$PRODUCTION_URL/"')
+        www = block.index('python3 scripts/verify_cloudflare.py --base https://www.aiupdates.app/')
+        self.assertLess(worker, apex)
+        self.assertLess(apex, www)
+
     def test_config_is_static_only_and_keeps_literal_html_routes(self):
         config = json.loads((ROOT / 'wrangler.json').read_bytes())
         self.assertEqual(config['assets']['directory'], './dist/cloudflare')
