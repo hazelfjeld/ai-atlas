@@ -528,7 +528,10 @@ test('both generated A-Z directories share native script-free secondary mobile n
     ['technology/index.html','scripts/build_seo.py']
   ]) {
     const source=fs.readFileSync(path.join(__dirname,'..',sourceFile),'utf8');
-    assert.ok(source.includes("mobile_secondary=(path == '"+page+"')"), page+' has build-time shared navigation');
+    const generatedMobileSecondary = page === 'technology/index.html'
+      ? source.includes("mobile_secondary=True")
+      : source.includes("mobile_secondary=(path == '"+page+"')");
+    assert.ok(generatedMobileSecondary, page+' has build-time shared navigation');
     const html=fs.readFileSync(path.join(__dirname,'..',page),'utf8');
     const menu=html.match(/<nav class="site-mobile-chrome__menu" aria-label="AI Updates sections">([\s\S]*?)<\/nav><\/details>/)?.[1];
     const rail=html.match(/<div class="site-chrome__more-links">([\s\S]*?)<\/div><\/details>/)?.[1];

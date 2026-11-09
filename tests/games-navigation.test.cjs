@@ -579,7 +579,7 @@ test('all generated technology profiles use shared directory chrome with native 
   assert.equal((directory.match(/class="site-chrome__more"/g) || []).length, 1);
   const mobileExtra = directory.match(/<details class="site-mobile-chrome__more">[\s\S]*?<\/details>/)?.[0];
   assert.ok(mobileExtra, 'Directory carries the eight script-free mobile extras');
-  const detailNav = directory.replace(mobileExtra, '');
+  assert.equal((mobileExtra.match(/<a href=/g)||[]).length, 8, 'All eight Discover secondary destinations are present on the directory');
   assert.match(directory, /class="directory-mobile-topbar site-mobile-chrome"/);
   assert.match(directory, /<nav class="site-chrome term-nav" aria-label="AI Updates primary navigation">/);
   const labels = ['Discover','What’s New Today','Concept dictionary','Technology profiles','Games','Playbooks','About'];
@@ -592,11 +592,13 @@ test('all generated technology profiles use shared directory chrome with native 
     const html = read('technology/' + file);
     assert.ok(html.includes('<link rel="stylesheet" href="../site-chrome.css">'), file);
     assert.ok(html.includes('<script src="../site-theme.js"></script>'), file);
-    assert.equal(html.split(prefix)[1].split('<p class="breadcrumb-links">')[0], detailNav, file);
+    assert.equal(html.split(prefix)[1].split('<p class="breadcrumb-links">')[0], directory, file);
+    assert.equal((html.match(/class="site-mobile-chrome__more"/g)||[]).length, 1, file+' retains exactly one native mobile secondary disclosure');
+    assert.equal((html.match(/class="site-mobile-chrome__more-links"/g)||[]).length, 1, file+' keeps one eight-link mobile secondary list');
     assert.equal((html.match(/class="site-chrome__more"/g) || []).length, 1, file);
   }
   const generator = read('scripts/build_seo.py');
-  assert.ok(generator.includes("render_directory_nav(prefix, 'Technology profiles', mobile_brand=True, native_secondary=True, mobile_secondary=(path == 'technology/index.html')) if path.startswith('technology/')"));
+  assert.ok(generator.includes("render_directory_nav(prefix, 'Technology profiles', mobile_brand=True, native_secondary=True, mobile_secondary=True) if path.startswith('technology/')"));
   assert.ok(generator.includes("DIRECTORY_MOBILE_CSS if path.startswith('technology/')"));
   assert.ok(read('downloads/Atlas_Demo_Offline.html').includes('/* Native, script-free reference pages: readable two-column touch navigation on phones.'));
 });
@@ -783,7 +785,7 @@ test('both generated catalog directories share Discover navigation and the nativ
   }
   const termGenerator=read('scripts/build_term_pages.py'), techGenerator=read('scripts/build_seo.py');
   assert.ok(termGenerator.includes("render_directory_nav('../', 'Concept dictionary', mobile_brand=True, native_secondary=True, mobile_secondary=(path == 'terms/index.html'))"));
-  assert.ok(techGenerator.includes("render_directory_nav(prefix, 'Technology profiles', mobile_brand=True, native_secondary=True, mobile_secondary=(path == 'technology/index.html'))"));
+  assert.ok(techGenerator.includes("render_directory_nav(prefix, 'Technology profiles', mobile_brand=True, native_secondary=True, mobile_secondary=True)"));
   assert.ok(read('scripts/site_chrome.py').includes('DIRECTORY_MOBILE_CSS'));
   assert.match(read('site-chrome.css'), /\.site-mobile-chrome__menu a\{[^}]*min-height:44px/);
 });
