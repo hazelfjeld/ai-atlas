@@ -570,3 +570,24 @@ test('generated detail mobile More sections clones the completed shared desktop 
   const offline = fs.readFileSync(path.join(__dirname, '..', 'downloads/Atlas_Demo_Offline.html'), 'utf8');
   assert.ok(offline.includes(script), 'Offline fallback must embed the identical shared interaction script');
 });
+
+
+test('shared native skip links have a visible focus layer above the desktop and mobile chrome', () => {
+  const block = css.split('/* atlas-skip-focus-layer:begin */')[1]
+    ?.split('/* atlas-skip-focus-layer:end */')[0];
+  assert.ok(block, 'Missing common skip-link focus treatment');
+  assert.match(block, /body:has\(\.site-chrome\) > a\.skip:focus/);
+  assert.match(block, /position:fixed/);
+  assert.match(block, /z-index:120/);
+  assert.match(block, /background:var\(--surface/);
+  assert.ok(!block.includes('display:none'), 'Never conceal the first keyboard target');
+  for (const route of [
+    'whats-new.html', 'about.html', 'research.html', 'games.html',
+    'playbooks.html', 'terms/MLD-0001-a-b-test.html',
+    'technology/TECH-0001-adversarial-robustness-toolbox.html'
+  ]) {
+    const html = fs.readFileSync(path.join(__dirname, '..', route), 'utf8');
+    assert.ok(html.includes('<a class="skip" href="#main">'), route + ' has the real skip link');
+    assert.ok(html.includes('site-chrome'), route + ' loads common navigation');
+  }
+});

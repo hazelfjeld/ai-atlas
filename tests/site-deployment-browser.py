@@ -44,6 +44,36 @@ with sync_playwright() as p:
     page.goto(base)
     page.locator('#navigation a[href="#/games"]').wait_for()
     check('homepage retains original Atlas shell and native Games tab', page.locator('.app-shell').count() == 1)
+    # Native reference/editorial skip links were stacked below the shared 68px
+    # mobile or 78px desktop chrome. Verify the first keyboard target really
+    # receives pointer hit-testing above that header, even without JavaScript.
+    # Compare against Discover's original visible skip-link at every breakpoint.
+    for scheme in ('light', 'dark'):
+        no_script = browser.new_context(java_script_enabled=False, color_scheme=scheme)
+        skip_page = no_script.new_page()
+        for width in (320, 390, 768, 1280):
+            skip_page.set_viewport_size({'width':width, 'height':844})
+            for route in (
+                'index.html', 'whats-new.html', 'about.html',
+                'terms/MLD-0001-a-b-test.html',
+                'technology/TECH-0001-adversarial-robustness-toolbox.html',
+                'games.html'
+            ):
+                skip_page.goto(base + route)
+                selector = 'a.skip-link' if route == 'index.html' else 'body > a.skip'
+                target = skip_page.locator(selector)
+                target.focus()
+                visible = target.evaluate("""link => {
+                    const r = link.getBoundingClientRect();
+                    const x = Math.round(r.left + r.width / 2);
+                    const y = Math.round(r.top + r.height / 2);
+                    return r.width > 0 && r.height > 0 && r.top >= 0
+                        && x >= 0 && x < innerWidth && y >= 0 && y < innerHeight
+                        && document.elementFromPoint(x,y) === link;
+                }""")
+                check('script-free skip above shared chrome '
+                      + scheme + ' ' + str(width) + ' ' + route, visible)
+        no_script.close()
     # Check actual Discover-to-editorial transitions, not CSS similarity alone.
     for width in (320, 390, 768, 1280):
         page.set_viewport_size({'width':width, 'height':844})
