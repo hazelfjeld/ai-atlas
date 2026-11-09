@@ -404,13 +404,13 @@ test('Discover mobile drawer exposes the canonical eight secondary destinations 
     const html = fs.readFileSync(path.join(__dirname, '..', route), 'utf8');
     const drawer = html.match(/<nav class="site-mobile-chrome__menu" aria-label="AI Updates sections">([\s\S]*?)<\/nav><\/details><\/div>/)?.[1];
     assert.ok(drawer, route + ' has the native drawer and brand');
-    assert.equal((drawer.match(/<details class="site-mobile-chrome__more">/g) || []).length, 1,
+    assert.equal((drawer.match(/<details class="site-mobile-chrome__more"(?: open)?>/g) || []).length, 1,
       route + ' must have exactly one script-free secondary disclosure');
     assert.equal((drawer.split('<details class="site-mobile-chrome__more">')[0].match(/<a href="[^"]+"(?: aria-current="page")?>/g) || []).length, 7,
       route + ' keeps the seven top-level primary links');
-    const secondary = drawer.match(/<details class="site-mobile-chrome__more"><summary>More sections<\/summary><div class="site-mobile-chrome__more-links">([\s\S]*?)<\/div><\/details>/)?.[1];
+    const secondary = drawer.match(/<details class="site-mobile-chrome__more"(?: open)?><summary>More sections<\/summary><div class="site-mobile-chrome__more-links">([\s\S]*?)<\/div><\/details>/)?.[1];
     assert.ok(secondary, route + ' retains native nested keyboard disclosure');
-    const actual = [...secondary.matchAll(/<a href="([^"]+)"( download)?>([^<]+)<\/a>/g)]
+    const actual = [...secondary.matchAll(/<a href="([^"]+)"(?: aria-current="location")?( download)?>([^<]+)<\/a>/g)]
       .map(m => [m[1], m[3].replaceAll('&amp;', '&')]);
     const expected = canonical.map(([href, label]) => {
       let local = href.replace(/^index\.html(?=#\/)/, '');
@@ -434,7 +434,7 @@ test('native editorial, archive, technology, research and Games pages keep Disco
   const expected = [...data.matchAll(/\["([^"]+)", "([^"]+)"\]/g)].map(m => [m[1], m[2]]);
   assert.equal(expected.length, 8);
   assert.match(home, /<details class="nav-more" id="additional-navigation">/);
-  assert.match(py, /def render_secondary_nav\(prefix\):/);
+  assert.match(py, /def render_secondary_nav\(prefix, current=None\):/);
   assert.match(py, /native_secondary=True/);
   assert.match(build, /page_label='About', native_secondary=True, mobile_secondary=True/);
   for (const name of ['about.html', 'demo.html', 'research.html', 'catalog-review.html',
@@ -444,9 +444,9 @@ test('native editorial, archive, technology, research and Games pages keep Disco
     assert.ok(rail, name + ' has the shared native desktop rail');
     assert.equal((rail.match(/class="site-chrome__more"/g) || []).length, 1,
       name + ' must have one script-free disclosure, not a duplicate');
-    const details = rail.match(/<details class="site-chrome__more"><summary>More sections<\/summary><div class="site-chrome__more-links">([\s\S]*?)<\/div><\/details>/);
+    const details = rail.match(/<details class="site-chrome__more"(?: open)?><summary>More sections<\/summary><div class="site-chrome__more-links">([\s\S]*?)<\/div><\/details>/);
     assert.ok(details, name + ' exposes the same native disclosure as Discover');
-    const anchors = [...details[1].matchAll(/<a href="([^"]+)"( download)?>([^<]+)<\/a>/g)]
+    const anchors = [...details[1].matchAll(/<a href="([^"]+)"(?: aria-current="location")?( download)?>([^<]+)<\/a>/g)]
       .map(m => [m[1], m[3].replaceAll('&amp;', '&')]);
     assert.deepEqual(anchors, expected, name + ' secondary routes and labels must not drift');
     assert.ok(details[1].includes('href="downloads/Atlas_Demo_Offline.html" download>'),
@@ -477,9 +477,9 @@ test('generated concept and technology directories expose shared secondary route
     assert.ok(rail, route + ' keeps its shared primary navigation');
     assert.equal((rail.match(/class="site-chrome__more"/g) || []).length, 1,
       route + ' must have exactly one script-free secondary disclosure');
-    const menu = rail.match(/<details class="site-chrome__more"><summary>More sections<\/summary><div class="site-chrome__more-links">([\s\S]*?)<\/div><\/details>/)?.[1];
+    const menu = rail.match(/<details class="site-chrome__more"(?: open)?><summary>More sections<\/summary><div class="site-chrome__more-links">([\s\S]*?)<\/div><\/details>/)?.[1];
     assert.ok(menu, route + ' uses the shared native disclosure');
-    const links = [...menu.matchAll(/<a href="([^"]+)"( download)?>([^<]+)<\/a>/g)]
+    const links = [...menu.matchAll(/<a href="([^"]+)"(?: aria-current="location")?( download)?>([^<]+)<\/a>/g)]
       .map(m => [m[1], m[3].replaceAll('&amp;', '&')]);
     assert.deepEqual(links, expected, route + ' must match Discover including nested URL prefixes');
     assert.ok(menu.includes('href="../downloads/Atlas_Demo_Offline.html" download>'),
@@ -496,9 +496,9 @@ test('generated concept and technology directories expose shared secondary route
 
 test('standalone mobile drawers expose eight shared secondary routes without JavaScript', () => {
   const builder = fs.readFileSync(path.join(__dirname, '..', 'scripts/site_chrome.py'), 'utf8');
-  assert.match(builder, /def render_mobile_secondary_nav\(prefix\):/);
+  assert.match(builder, /def render_mobile_secondary_nav\(prefix, current=None\):/);
   assert.match(builder, /mobile_brand=True, native_secondary=True, mobile_secondary=True/);
-  assert.match(builder, /for _, _, route, label in SECONDARY_DESTINATIONS/);
+  assert.match(builder, /for key, _, route, label in SECONDARY_DESTINATIONS/);
   const source = fs.readFileSync(path.join(__dirname, '..', 'site-theme.js'), 'utf8');
   const data = source.split('const sharedSecondarySections = [')[1]?.split('];')[0];
   const expected = [...data.matchAll(/\["([^"]+)", "([^"]+)"\]/g)].map(m => [m[1], m[2]]);
@@ -509,11 +509,11 @@ test('standalone mobile drawers expose eight shared secondary routes without Jav
     const html = fs.readFileSync(path.join(__dirname, '..', route), 'utf8');
     const menu = html.match(/<nav class="[^"]*site-mobile-chrome__menu"[^>]*>([\s\S]*?)<\/nav><\/details>/)?.[1];
     assert.ok(menu, route + ' keeps native primary links and mobile drawer');
-    assert.equal((menu.match(/<details class="site-mobile-chrome__more">/g) || []).length, 1,
+    assert.equal((menu.match(/<details class="site-mobile-chrome__more"(?: open)?>/g) || []).length, 1,
                  route + ' has exactly one static secondary disclosure');
-    const secondaries = menu.match(/<details class="site-mobile-chrome__more"><summary>More sections<\/summary><div class="site-mobile-chrome__more-links">([\s\S]*?)<\/div><\/details>/)?.[1];
+    const secondaries = menu.match(/<details class="site-mobile-chrome__more"(?: open)?><summary>More sections<\/summary><div class="site-mobile-chrome__more-links">([\s\S]*?)<\/div><\/details>/)?.[1];
     assert.ok(secondaries, route + ' preserves the shared native disclosure');
-    const found = [...secondaries.matchAll(/<a href="([^"]+)"( download)?>([^<]+)<\/a>/g)]
+    const found = [...secondaries.matchAll(/<a href="([^"]+)"(?: aria-current="location")?( download)?>([^<]+)<\/a>/g)]
       .map(m => [m[1], m[3].replaceAll('&amp;', '&')]);
     assert.deepEqual(found, expected, route + ' uses shared canonical destinations');
     assert.match(secondaries, /href="downloads\/Atlas_Demo_Offline\.html" download>/);
@@ -536,10 +536,10 @@ test('both generated A-Z directories share native script-free secondary mobile n
     const menu=html.match(/<nav class="site-mobile-chrome__menu" aria-label="AI Updates sections">([\s\S]*?)<\/nav><\/details>/)?.[1];
     const rail=html.match(/<div class="site-chrome__more-links">([\s\S]*?)<\/div><\/details>/)?.[1];
     assert.ok(menu && rail, page+' has native mobile and desktop sections');
-    assert.equal((menu.match(/<details class="site-mobile-chrome__more">/g)||[]).length,1);
+    assert.equal((menu.match(/<details class="site-mobile-chrome__more"(?: open)?>/g)||[]).length,1);
     const mobile=menu.match(/<div class="site-mobile-chrome__more-links">([\s\S]*?)<\/div><\/details>/)?.[1];
     assert.ok(mobile,page+' retains the nested disclosure without scripts');
-    const links = markup => [...markup.matchAll(/<a href="([^"]+)"( download)?>([^<]+)<\/a>/g)]
+    const links = markup => [...markup.matchAll(/<a href="([^"]+)"(?: aria-current="location")?( download)?>([^<]+)<\/a>/g)]
       .map(m=>[m[1],m[3]]);
     assert.deepEqual(links(mobile),links(rail),page+' has identical mobile/desktop secondary links');
     assert.equal(links(mobile).length,8);
