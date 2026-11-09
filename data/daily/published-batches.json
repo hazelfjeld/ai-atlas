@@ -883,7 +883,15 @@
         "catalog_deferred": 6,
         "technology_updated": 0
       },
-      "review_notes": "Eight Nov 9 and three Nov 5–6 reports; source- and date-checked with qualified author/Reuters evidence. Regulatory inquiries are not findings, research benchmarks unreplicated. Partial coverage, six deferred canonical proposals, historical immutable editions unchanged."
+      "review_notes": "Eight Nov 9 and three Nov 5–6 reports; source- and date-checked with qualified author/Reuters evidence. Regulatory inquiries are not findings, research benchmarks unreplicated. Partial coverage, six deferred canonical proposals, historical immutable editions unchanged.",
+      "production_verified_at": null,
+      "publication_history": [
+        {
+          "edition": "2026-11-09-v1",
+          "status": "pending_production_verification",
+          "note": "New source-checked partial edition and mobile directory QA pending Cloudflare HTTP/browser/GitHack verification"
+        }
+      ]
     }
   ]
 }

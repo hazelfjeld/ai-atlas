@@ -1612,7 +1612,8 @@ test('November 8 published edition has its own byte-verified, deduplicated and d
  const idx=JSON.parse(fs.readFileSync('data/daily/index.json','utf8'));
  const ledger=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8'));
  assertBatchReceipts(ledger);
- const entry=idx.editions.at(-1),receipt=ledger.receipts.at(-1);
+ const entry=idx.editions.find(e=>e.date==='2026-11-08'&&e.revision===1),receipt=ledger.receipts.find(r=>r.batch_id==='atlas-daily-20261108-0817ct-bounded-recovery-a');
+ assert.ok(entry && receipt, 'Immutable November 8 edition and receipt remain accessible');
  assert.equal(entry.date,'2026-11-08');assert.equal(entry.revision,1);
  const raw=fs.readFileSync(entry.path);
  assert.equal(raw.length,entry.bytes);
@@ -1632,8 +1633,10 @@ test('November 8 published edition has its own byte-verified, deduplicated and d
  assert.equal(receipt.last_verified_public_url,'https://aiupdates.app/whats-new.html?date=2026-11-08&revision=1');
  assert.equal(receipt.production_workflow_run_id,42490577341);
  assert.equal(receipt.githack_workflow_run_id,42490577323);
- assert.equal(idx.last_successful_publish_at,receipt.production_verified_at);
- assert.equal(idx.status,'edition_revision_1_production_verified');
+ assert.equal(idx.last_successful_publish_at,verifiedPublicationClock(), 'Newest verified receipt determines the publication clock');
+ const active=ledger.receipts.at(-1), newest=idx.editions.at(-1);
+ const isVerified=active.production_verified_at!==null&&active.publication_edition===newest.date+'-v'+newest.revision&&active.publication_history.at(-1).status==='cloudflare_http_browser_and_githack_verified';
+ assert.equal(idx.status,'edition_revision_'+newest.revision+(isVerified?'_production_verified':'_pending_production_verification'), 'Active edition status must never impersonate prior production verification');
 });
 
 

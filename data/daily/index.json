@@ -276,6 +276,6 @@
     }
   ],
   "last_successful_publish_at": "2026-11-08T14:43:03Z",
-  "status": "2026-11-09-v1_pending_production_verification",
+  "status": "edition_revision_1_pending_production_verification",
   "coverage_note": "November 9 source-reviewed partial edition: 11 attributed reports (8 same-day, 3 catch-up), 6 deferred catalog proposals, no canonical additions. Pending Cloudflare HTTP/browser/GitHack verification; earlier verified release remains intact."
 }

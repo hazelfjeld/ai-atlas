@@ -461,7 +461,9 @@ test('About reuses the exact generated catalog navigation, not a parallel templa
   const template = read('terms/index.html').split('<main class="term-shell">')[1].split('<header class="hero" id="main" tabindex="-1">')[0];
   const directorySecondary = template.match(/<details class="site-chrome__more">[\s\S]*?<\/details>/)?.[0];
   assert.ok(directorySecondary, 'Reference directory must expose its own secondary navigation');
-  const expected = template.replace(directorySecondary, '').replaceAll('href="../','href="')
+  const directoryMobileSecondary = template.match(/<details class="site-mobile-chrome__more">[\s\S]*?<\/details>/)?.[0];
+  assert.ok(directoryMobileSecondary, 'Directory has the canonical script-free mobile secondary links');
+  const expected = template.replace(directorySecondary, '').replace(directoryMobileSecondary, '').replaceAll('href="../','href="')
     .replace('<div class="directory-mobile-topbar site-mobile-chrome" aria-label="AI Updates mobile header">', '<div class="directory-mobile-topbar site-mobile-chrome" aria-label="AI Updates mobile header" data-page-label="About">')
     .replaceAll('href="index.html#/dictionary" aria-current="page">Concept dictionary','href="index.html#/dictionary">Concept dictionary')
     .replaceAll('href="about.html">About','href="about.html" aria-current="page">About');
@@ -575,7 +577,9 @@ test('all generated technology profiles use shared directory chrome with native 
   const secondary = directory.match(/<details class="site-chrome__more">[\s\S]*?<\/details>/)?.[0];
   assert.ok(secondary, 'Technology directory keeps its static secondary disclosure');
   assert.equal((directory.match(/class="site-chrome__more"/g) || []).length, 1);
-  const detailNav = directory;
+  const mobileExtra = directory.match(/<details class="site-mobile-chrome__more">[\s\S]*?<\/details>/)?.[0];
+  assert.ok(mobileExtra, 'Directory carries the eight script-free mobile extras');
+  const detailNav = directory.replace(mobileExtra, '');
   assert.match(directory, /class="directory-mobile-topbar site-mobile-chrome"/);
   assert.match(directory, /<nav class="site-chrome term-nav" aria-label="AI Updates primary navigation">/);
   const labels = ['Discover','What’s New Today','Concept dictionary','Technology profiles','Games','Playbooks','About'];
@@ -592,7 +596,7 @@ test('all generated technology profiles use shared directory chrome with native 
     assert.equal((html.match(/class="site-chrome__more"/g) || []).length, 1, file);
   }
   const generator = read('scripts/build_seo.py');
-  assert.ok(generator.includes("render_directory_nav(prefix, 'Technology profiles', mobile_brand=True, native_secondary=True) if path.startswith('technology/')"));
+  assert.ok(generator.includes("render_directory_nav(prefix, 'Technology profiles', mobile_brand=True, native_secondary=True, mobile_secondary=(path == 'technology/index.html')) if path.startswith('technology/')"));
   assert.ok(generator.includes("DIRECTORY_MOBILE_CSS if path.startswith('technology/')"));
   assert.ok(read('downloads/Atlas_Demo_Offline.html').includes('/* Native, script-free reference pages: readable two-column touch navigation on phones.'));
 });
@@ -606,7 +610,9 @@ test('all 1345 concept detail pages reuse seven primary and eight static seconda
   assert.ok(secondary, 'Concept directory keeps its static secondary disclosure');
   assert.equal((dictionaryNav.match(/class="site-chrome__more"/g) || []).length, 1);
   assert.equal((secondary.match(/<a href=/g) || []).length, 8, 'Preserve all eight Discover secondary routes');
-  const detailNav = dictionaryNav; // Every concept detail now matches the directory, including all eight static secondary routes.
+  const mobileExtra = dictionaryNav.match(/<details class="site-mobile-chrome__more">[\s\S]*?<\/details>/)?.[0];
+  assert.ok(mobileExtra, 'Directory carries eight static mobile secondary destinations');
+  const detailNav = dictionaryNav.replace(mobileExtra, ''); // Detail pages retain exactly the same seven primary and eight desktop secondary routes.
   const manifest = JSON.parse(read('terms/manifest.json'));
   assert.equal(Object.keys(manifest).length, 1345);
   const names = ['Discover', 'What’s New Today', 'Concept dictionary', 'Technology profiles', 'Games', 'Playbooks', 'About'];
@@ -626,7 +632,7 @@ test('all 1345 concept detail pages reuse seven primary and eight static seconda
     assert.equal((links.match(/aria-current="page"/g) || []).length, 1, id);
   }
   const generator = read('scripts/build_term_pages.py');
-  assert.ok(generator.includes("directory_nav = render_directory_nav('../', 'Concept dictionary', mobile_brand=True, native_secondary=True)"));
+  assert.ok(generator.includes("directory_nav = render_directory_nav('../', 'Concept dictionary', mobile_brand=True, native_secondary=True, mobile_secondary=(path == 'terms/index.html'))"));
   assert.ok(generator.includes('directory_css = DIRECTORY_MOBILE_CSS'));
 });
 
@@ -764,7 +770,9 @@ test('both generated catalog directories share Discover navigation and the nativ
     assert.ok(secondary, route + ' exposes Discover secondary routes without JS');
     assert.equal((desktop.match(/class="site-chrome__more"/g) || []).length, 1,
       route + ' must not have duplicate desktop disclosures');
-    for (const markup of [menus[0][1], desktopPrimary]) {
+    assert.match(menus[0][1], /<details class="site-mobile-chrome__more">/, route+' has eight additional script-free mobile destinations');
+    const mobilePrimary = menus[0][1].split('<details class="site-mobile-chrome__more">')[0];
+    for (const markup of [mobilePrimary, desktopPrimary]) {
       const labels = [...markup.matchAll(/<a href="\.\.\/[^"]+"(?: aria-current="page")?>([^<]+)<\/a>/g)].map(m=>m[1]);
       assert.deepEqual(labels, canonical, route);
       const selected = markup.match(/<a href="\.\.\/[^"]+" aria-current="page">([^<]+)<\/a>/g) || [];
