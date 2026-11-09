@@ -650,6 +650,31 @@ body:has(.site-chrome) footer a:focus-visible{
   outline-offset:3px;
 }
 
+/* atlas-shared-footer-layout:begin */
+/* Discover's footer wraps its policy/evidence links across one quiet desktop
+   row and stacks them on phones. Bring existing standalone footers into that
+   same frame without replacing their source notes, anchors or Games guidance. */
+@media (min-width:651px){
+  body:has(.site-chrome) footer{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:8px 20px;
+  }
+  /* Games has multiple independent paragraphs; never compress them into
+     small side-by-side columns when the common footer becomes a flex row. */
+  body:has(.site-chrome) footer > p{
+    flex:1 1 100%;
+    min-width:0;
+    margin:0 0 4px;
+  }
+}
+@media (max-width:650px){
+  body:has(.site-chrome) footer{display:block}
+}
+/* atlas-shared-footer-layout:end */
+
 /* atlas-rail-icons:begin */
 /* Generated from the very same DISCOVER_LINKS SVG paths as the Discover rail. */
 @media (min-width:651px){

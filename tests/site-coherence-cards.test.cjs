@@ -259,3 +259,31 @@ test('Research, Playbooks, news, editorial reviews and reference directories reu
   const offline=fs.readFileSync(path.join(__dirname,'..','downloads/Atlas_Demo_Offline.html'),'utf8');
   assert.ok(offline.includes(css), 'Offline fallback must embed the exact shared stylesheet');
 });
+
+test('Discover and all standalone families share footer flow while preserving evidence and Games content', () => {
+  const block = css.split('/* atlas-shared-footer-layout:begin */')[1]
+    ?.split('/* atlas-shared-footer-layout:end */')[0];
+  assert.ok(block, 'Missing shared footer layout');
+  for (const rule of ['@media (min-width:651px)', 'display:flex', 'flex-wrap:wrap',
+    'justify-content:space-between', 'gap:8px 20px', 'footer > p',
+    'flex:1 1 100%', '@media (max-width:650px)', 'display:block'])
+    assert.ok(block.includes(rule), 'Shared footer is missing ' + rule);
+  assert.ok(!block.includes('display:none') && !block.includes('pointer-events:none'));
+  const appCss = fs.readFileSync(path.join(__dirname, '..', 'app.css'), 'utf8');
+  assert.match(appCss, /\\.main-footer\\{[^}]*display:flex;justify-content:space-between/);
+  for (const page of ['whats-new.html', 'research.html', 'about.html',
+    'technologies.html', 'playbooks.html', 'games.html', 'catalog-review.html',
+    'hardware-review.html', 'terms/index.html', 'technology/index.html',
+    'terms/MLD-0001-a-b-test.html', 'technology/TECH-0288-vllm.html']) {
+    const html=fs.readFileSync(path.join(__dirname, '..', page), 'utf8');
+    assert.match(html, /<footer\\b[^>]*>[\\s\\S]*?<\\/footer>/, page + ' must keep its native footer');
+    const footer = html.match(/<footer\\b[^>]*>([\\s\\S]*?)<\\/footer>/)?.[1] || '';
+    assert.match(footer, /<a\\b[^>]*href=/, page + ' retains its real source/policy links');
+    assert.match(html, /href="(?:\\.\\/|\\.\\.\\/)?site-chrome\\.css"/,
+      page + ' must load shared footer styling');
+  }
+  const games=fs.readFileSync(path.join(__dirname, '..', 'games.html'), 'utf8');
+  assert.match(games, /<footer>[\\s\\S]*?<p>[\\s\\S]*?<p>/);
+  const offline=fs.readFileSync(path.join(__dirname, '..', 'downloads/Atlas_Demo_Offline.html'), 'utf8');
+  assert.ok(offline.includes(css), 'Offline edition must use the exact shared footer component');
+});
