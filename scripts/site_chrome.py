@@ -73,32 +73,42 @@ def sync_discover_secondary(secondary):
                 match.group(4) + '>' + inner + '</a>')
     return pattern.sub(replace, secondary)
 
-def render_secondary_nav(prefix):
-    """Script-free native desktop disclosure, sharing Discover's eight routes."""
+def render_secondary_nav(prefix, current=None):
+    """Script-free desktop disclosure using Discover's canonical secondary routes.
+
+    On a page that is itself a secondary destination, expose its current
+    location on first paint without JavaScript or a duplicate navigation list.
+    """
     assert prefix in ("", "../")
+    assert current is None or current in {key for key, _, _, _ in SECONDARY_DESTINATIONS}
     return (
-        '<details class="site-chrome__more"><summary>More sections</summary>'
+        '<details class="site-chrome__more"' + (' open' if current else '') +
+        '><summary>More sections</summary>'
         '<div class="site-chrome__more-links">'
         + "".join(
             '<a href="' + prefix + route + '"' +
+            (' aria-current="location"' if key == current else '') +
             (' download' if route == "downloads/Atlas_Demo_Offline.html" else '') +
             '>' + escape(label) + '</a>'
-            for _, _, route, label in SECONDARY_DESTINATIONS
+            for key, _, route, label in SECONDARY_DESTINATIONS
         ) +
         '</div></details>'
     )
 
-def render_mobile_secondary_nav(prefix):
-    """Render the same eight desktop secondary routes inside script-free mobile drawers."""
+def render_mobile_secondary_nav(prefix, current=None):
+    """The same eight script-free links in the native mobile drawer."""
     assert prefix in ("", "../")
+    assert current is None or current in {key for key, _, _, _ in SECONDARY_DESTINATIONS}
     return (
-        '<details class="site-mobile-chrome__more"><summary>More sections</summary>'
+        '<details class="site-mobile-chrome__more"' + (' open' if current else '') +
+        '><summary>More sections</summary>'
         '<div class="site-mobile-chrome__more-links">'
         + "".join(
             '<a href="' + prefix + route + '"' +
+            (' aria-current="location"' if key == current else '') +
             (' download' if route == "downloads/Atlas_Demo_Offline.html" else '') +
             '>' + escape(label) + '</a>'
-            for _, _, route, label in SECONDARY_DESTINATIONS
+            for key, _, route, label in SECONDARY_DESTINATIONS
         ) +
         '</div></details>'
     )
@@ -161,7 +171,7 @@ def render_directory_nav(prefix, selected, *, mobile_classes="directory-mobile-t
                          toggle_classes="site-mobile-chrome__toggle", menu_classes="site-mobile-chrome__menu",
                          search_classes="site-mobile-chrome__search", icon_classes="site-mobile-chrome__search-icon",
                          search_label_classes="site-mobile-chrome__search-placeholder",
-                         desktop_classes="site-chrome term-nav", labeled=True, current_kind="page", page_label=None, mobile_brand=False, native_secondary=False, mobile_secondary=False):
+                         desktop_classes="site-chrome term-nav", labeled=True, current_kind="page", page_label=None, mobile_brand=False, native_secondary=False, mobile_secondary=False, secondary_current=None):
     """One script-free site header, with only page-specific shell classes configurable."""
     assert prefix in ("", "../")
     assert selected is None or selected in {name for _, name in DESTINATIONS}
@@ -176,7 +186,7 @@ def render_directory_nav(prefix, selected, *, mobile_classes="directory-mobile-t
         '<details class="' + details_classes + '" id="' + details_id + '">'
         '<summary class="' + toggle_classes + '" aria-label="Toggle navigation"><span aria-hidden="true">☰</span></summary>'
         '<nav class="' + menu_classes + '" aria-label="AI Updates sections">' + mobile_wordmark + links +
-        (render_mobile_secondary_nav(prefix) if mobile_secondary else '') + '</nav></details>'
+        (render_mobile_secondary_nav(prefix, secondary_current) if mobile_secondary else '') + '</nav></details>'
         '<a class="' + search_classes + '" href="' + prefix + 'index.html#/search" aria-label="Search AI Updates in the main collection">'
         '<span class="' + icon_classes + '" aria-hidden="true">⌕</span>'
         '<span class="' + search_label_classes + '">Search tools, research, concepts…</span></a></div>'
@@ -184,7 +194,7 @@ def render_directory_nav(prefix, selected, *, mobile_classes="directory-mobile-t
     desktop = (
         '<nav class="' + desktop_classes + '" aria-label="AI Updates primary navigation">'
         + brand + '<div class="site-chrome__links">' + links + '</div>' +
-        (render_secondary_nav(prefix) if native_secondary else '') + '</nav>'
+        (render_secondary_nav(prefix, secondary_current) if native_secondary else '') + '</nav>'
     )
     return mobile + desktop
 
@@ -239,6 +249,7 @@ def render_standalone_nav(path):
             "hardware-review.html": "Hardware evidence",
         }.get(path, selected),
         mobile_brand=True, native_secondary=True, mobile_secondary=True,
+        secondary_current='demo' if path == 'demo.html' else None,
     )
     # Research's main landmark starts between its two headers, but the native
     # skip destination belongs on the subsequent article hero.

@@ -48,3 +48,19 @@ test('standalone Games participates in the workspace theme choice without depend
   assert.match(html,/if \(saved === 'dark' \|\| saved === 'light'\)/);
   assert.ok(html.indexOf('localStorage.getItem')<html.indexOf('href="games.css"'), 'saved theme is applied before CSS paint');
 });
+
+test('secondary static destinations are identified in the shared rail before hydration', () => {
+  for (const [file, href, name] of [
+    ['demo.html', 'demo.html', 'Guided professor demo'],
+    ['terms/index.html', '../terms/index.html', 'Concept encyclopedia']
+  ]) {
+    const html = read(file);
+    const current = '<a href="' + href + '" aria-current="location">' + name + '</a>';
+    assert.equal(html.split(current).length - 1, 2, file + ' marks desktop and mobile current location');
+    assert.match(html, /<details class="site-chrome__more" open>/, file + ' expands the desktop secondary group');
+    assert.match(html, /<details class="site-mobile-chrome__more" open>/, file + ' expands native mobile More sections');
+  }
+  const css=read('site-chrome.css');
+  assert.ok(css.includes('.site-chrome__more-links a:hover,.site-chrome__more-links a[aria-current]'), 'active secondary rail uses the shared visible selection');
+  assert.ok(read('downloads/Atlas_Demo_Offline.html').includes(css), 'offline chrome remains the exact shared stylesheet');
+});

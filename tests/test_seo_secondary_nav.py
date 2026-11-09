@@ -42,6 +42,26 @@ class SecondaryNavigationTests(unittest.TestCase):
                 self.assertIn('href="../index.html#/search"', source)
                 self.assertEqual(source.count('id="main"'), 1)
 
+    def test_secondary_pages_expose_their_own_active_location_without_scripts(self):
+        """Secondary destinations match Discover's expanded current section."""
+        from site_chrome import render_secondary_nav, render_mobile_secondary_nav
+        for route, prefix, key in (
+            ("demo.html", "", "demo"),
+            ("terms/index.html", "../", "encyclopedia"),
+        ):
+            with self.subTest(route=route):
+                html = (ROOT / route).read_text(encoding="utf-8")
+                desktop = render_secondary_nav(prefix, key)
+                mobile = render_mobile_secondary_nav(prefix, key)
+                self.assertIn(desktop, html)
+                self.assertIn(mobile, html)
+                self.assertIn('<details class="site-chrome__more" open>', desktop)
+                self.assertIn('<details class="site-mobile-chrome__more" open>', mobile)
+                self.assertEqual(desktop.count('aria-current="location"'), 1)
+                self.assertEqual(mobile.count('aria-current="location"'), 1)
+                self.assertIn('href="' + prefix + 'index.html#/search"', html)
+                self.assertEqual(html.count('aria-label="AI Updates primary navigation"'), 1)
+
     def test_unexpected_key_and_bad_markers_fail_closed(self):
         html = (ROOT / "index.html").read_text(encoding="utf-8")
         nav = html[html.index('<details class="nav-more"'):].split("</details>", 1)[0]

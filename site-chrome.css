@@ -805,7 +805,7 @@ html.atlas-enhanced #catalog-loading{
     min-width:0;padding:9px 11px 9px 17px;border-radius:7px;
     color:#c5cfc6;text-decoration:none;font-size:12px;line-height:1.3;
     overflow-wrap:anywhere}
-  .site-chrome__more-links a:hover{background:#ffffff13;color:#fff}
+  .site-chrome__more-links a:hover,.site-chrome__more-links a[aria-current]{background:#ffffff13;color:#fff}
 }
 @media print{.site-chrome__more{display:none!important}}
 /* atlas-secondary-navigation:end */
