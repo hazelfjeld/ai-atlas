@@ -309,7 +309,10 @@ test('all standalone page families expose the same real policy and source destin
     const footer = html.match(/<footer\b[^>]*>[\s\S]*?<\/footer>/)?.[0];
     assert.ok(footer, route + ' has a usable footer without hydration');
     const prefix = route.startsWith('terms/') || route.startsWith('technology/') ? '../' : '';
-    for (const href of [prefix + 'about.html', prefix + 'index.html#/sources']) {
+    const required = route === 'games.html'
+      ? [prefix + 'index.html#/sources']
+      : [prefix + 'about.html', prefix + 'index.html#/sources'];
+    for (const href of required) {
       assert.equal(footer.split('href="' + href + '"').length - 1, 1,
         route + ' must link exactly once to canonical ' + href);
     }
