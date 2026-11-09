@@ -474,7 +474,7 @@ test('About reuses the exact generated catalog navigation, not a parallel templa
   assert.match(about, /class="directory-mobile-topbar site-mobile-chrome"/);
   assert.match(about, /id="directory-mobile-nav"/);
   assert.match(about, /href="index.html#\/search"/);
-  assert.match(built, /render_directory_nav\(prefix, 'About', mobile_brand=True, page_label='About', native_secondary=True\)/);
+  assert.match(built, /render_directory_nav\(prefix, 'About', mobile_brand=True, page_label='About', native_secondary=True, mobile_secondary=True\)/);
   assert.doesNotMatch(built, /ABOUT_MOBILE_NAV|ABOUT_DESKTOP_NAV|ABOUT_MOBILE_CSS/);
   assert.equal((ours.match(/aria-current="page"/g) || []).length, 2);
 });
@@ -1138,7 +1138,7 @@ test('shared workspace topbar has the correct no-script section label on every s
   assert.match(source, /"research.html": "Research library"/);
   assert.match(source, /"catalog-review.html": "Catalog review"/);
   assert.match(source, /"hardware-review.html": "Hardware evidence"/);
-  assert.ok(seo.includes("render_directory_nav(prefix, 'About', mobile_brand=True, page_label='About', native_secondary=True)"));
+  assert.ok(seo.includes("render_directory_nav(prefix, 'About', mobile_brand=True, page_label='About', native_secondary=True, mobile_secondary=True)"));
   assert.ok(stylesheet.includes('.site-mobile-chrome[data-page-label]::before{content:attr(data-page-label)}'));
   const labels = {
     'about.html': 'About',

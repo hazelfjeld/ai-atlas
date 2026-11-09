@@ -401,7 +401,7 @@ test('native editorial, archive, technology, research and Games pages keep Disco
   assert.match(home, /<details class="nav-more" id="additional-navigation">/);
   assert.match(py, /def render_secondary_nav\(prefix\):/);
   assert.match(py, /native_secondary=True/);
-  assert.match(build, /page_label='About', native_secondary=True/);
+  assert.match(build, /page_label='About', native_secondary=True, mobile_secondary=True/);
   for (const name of ['about.html', 'demo.html', 'research.html', 'catalog-review.html',
     'hardware-review.html', 'games.html', 'technologies.html', 'playbooks.html', 'whats-new.html']) {
     const html = fs.readFileSync(path.join(__dirname, '..', name), 'utf8');
