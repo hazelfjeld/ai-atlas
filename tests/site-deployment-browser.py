@@ -1906,6 +1906,40 @@ with sync_playwright() as p:
                             'Safety observatory|Research library|Compare tools|Your notebook|Sources & coverage|Guided professor demo|Concept encyclopedia|Offline demo download ↓'
                           && el.querySelector('a[download]')?.getAttribute('href') === 'downloads/Atlas_Demo_Offline.html'"""))
     script_free_more.close()
+
+    # Generated individual references render the shared desktop rail at
+    # DOMContentLoaded. Their mobile drawer must clone it AFTER it exists:
+    # earlier ordering silently omitted all eight routes on both families.
+    detail_mobile = browser.new_page(viewport={'width':390, 'height':844},
+                                     reduced_motion='reduce')
+    detail_mobile.on('pageerror', lambda e: errors.append(str(e)))
+    for color in ('light', 'dark'):
+        detail_mobile.emulate_media(color_scheme=color)
+        for width in (320, 390):
+            detail_mobile.set_viewport_size({'width':width, 'height':844})
+            for route in ('terms/MLD-0002-ablation-study.html',
+                          'technology/TECH-0288-vllm.html'):
+                detail_mobile.goto(base + route)
+                menu = detail_mobile.locator('details.site-mobile-chrome__nav')
+                menu.locator(':scope > summary').click()
+                more = menu.locator('details.site-mobile-chrome__more')
+                check('generated detail mobile More exists ' + route + ' ' + color + ' ' + str(width),
+                      more.count() == 1 and more.locator('summary').is_visible())
+                more.locator('summary').click()
+                links = more.locator('a')
+                check('generated detail secondary routes complete ' + route + ' ' + color + ' ' + str(width),
+                      links.count() == 8 and
+                      links.all_inner_texts() == [
+                          'Safety observatory', 'Research library', 'Compare tools',
+                          'Your notebook', 'Sources & coverage', 'Guided professor demo',
+                          'Concept encyclopedia', 'Offline demo download ↓'] and
+                      more.locator('a[href="../terms/index.html"]').is_visible())
+                more.locator('a[href="../terms/index.html"]').click()
+                check('generated detail secondary links navigate ' + route + ' ' + color + ' ' + str(width),
+                      detail_mobile.url.split('?')[0].endswith('/terms/index.html') and
+                      detail_mobile.locator('h1').count() >= 1)
+    detail_mobile.close()
+
     check('no application runtime exceptions', not errors)
     browser.close()
 (out / 'report.json').write_text(json.dumps({'base':base, 'checks':checks, 'checks_passed':len(checks), 'errors':errors}, indent=2), encoding='utf-8')

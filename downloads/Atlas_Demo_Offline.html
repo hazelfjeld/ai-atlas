@@ -1360,35 +1360,6 @@ document.addEventListener('DOMContentLoaded', () => {
     menu.prepend(mobileBrand);
   }
 
-  // The desktop rail already owns the eight secondary destinations.
-  // Expose those same working routes in every mobile drawer without maintaining
-  // a second list or altering the seven script-free primary links.
-  if (menu && !menu.querySelector('.site-mobile-chrome__more')) {
-    const sourceLinks = document.querySelector(
-      '#additional-navigation .nav-more-links, .site-chrome__more-links');
-    if (sourceLinks) {
-      const more = document.createElement('details');
-      more.className = 'site-mobile-chrome__more';
-      const summary = document.createElement('summary');
-      summary.textContent = 'More sections';
-      const links = document.createElement('div');
-      links.className = 'site-mobile-chrome__more-links';
-      sourceLinks.querySelectorAll('a[href]').forEach(source => {
-        const link = document.createElement('a');
-        link.setAttribute('href', source.getAttribute('href'));
-        link.textContent = (source.querySelector('span:not(.nav-count)')?.textContent ||
-          source.textContent).trim();
-        if (source.hasAttribute('download'))
-          link.setAttribute('download', source.getAttribute('download') || '');
-        links.append(link);
-      });
-      if (links.children.length === 8) {
-        more.append(summary, links);
-        menu.append(more);
-      }
-    }
-  }
-
   // Match Discover's existing "More sections" rail on every native page.
   // This is one progressive desktop enhancement; the original seven primary
   // links, mobile drawer and script-free navigation remain unchanged.
@@ -1428,6 +1399,35 @@ document.addEventListener('DOMContentLoaded', () => {
       });
       more.append(links);
       desktopPrimary.insertAdjacentElement('afterend', more);
+    }
+  }
+
+  // The desktop rail already owns the eight secondary destinations.
+  // Expose those same working routes in every mobile drawer without maintaining
+  // a second list or altering the seven script-free primary links.
+  if (menu && !menu.querySelector('.site-mobile-chrome__more')) {
+    const sourceLinks = document.querySelector(
+      '#additional-navigation .nav-more-links, .site-chrome__more-links');
+    if (sourceLinks) {
+      const more = document.createElement('details');
+      more.className = 'site-mobile-chrome__more';
+      const summary = document.createElement('summary');
+      summary.textContent = 'More sections';
+      const links = document.createElement('div');
+      links.className = 'site-mobile-chrome__more-links';
+      sourceLinks.querySelectorAll('a[href]').forEach(source => {
+        const link = document.createElement('a');
+        link.setAttribute('href', source.getAttribute('href'));
+        link.textContent = (source.querySelector('span:not(.nav-count)')?.textContent ||
+          source.textContent).trim();
+        if (source.hasAttribute('download'))
+          link.setAttribute('download', source.getAttribute('download') || '');
+        links.append(link);
+      });
+      if (links.children.length === 8) {
+        more.append(summary, links);
+        menu.append(more);
+      }
     }
   }
 

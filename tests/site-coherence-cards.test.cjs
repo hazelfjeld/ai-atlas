@@ -547,3 +547,21 @@ test('both generated A-Z directories share native script-free secondary mobile n
     assert.match(html,/href="\.\.\/index\.html#\/search"/,'Real search route stays usable');
   }
 });
+
+
+test('generated detail mobile More sections clones the completed shared desktop rail', () => {
+  const script = fs.readFileSync(path.join(__dirname, '..', 'site-theme.js'), 'utf8');
+  const created = script.indexOf("desktopPrimary.insertAdjacentElement('afterend', more);");
+  const cloned = script.indexOf("if (menu && !menu.querySelector('.site-mobile-chrome__more'))");
+  assert.ok(created !== -1 && cloned > created,
+    'Build the missing detail-page secondary rail before its mobile disclosure copies links');
+  for (const detail of ['terms/MLD-0002-ablation-study.html', 'technology/TECH-0288-vllm.html']) {
+    const html = fs.readFileSync(path.join(__dirname, '..', detail), 'utf8');
+    assert.match(html, /class="site-mobile-chrome__menu"/);
+    assert.match(html, /class="site-chrome__links"/);
+    assert.ok(!html.includes('site-mobile-chrome__more'),
+      'This regression exercises detail pages without pre-rendered mobile extras');
+  }
+  const offline = fs.readFileSync(path.join(__dirname, '..', 'downloads/Atlas_Demo_Offline.html'), 'utf8');
+  assert.ok(offline.includes(script), 'Offline fallback must embed the identical shared interaction script');
+});
