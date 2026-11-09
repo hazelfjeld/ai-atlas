@@ -220,3 +220,41 @@ test('shared editorial card links, disclosures and descriptions follow Discover 
   const offline = fs.readFileSync(path.join(__dirname, '..', 'downloads/Atlas_Demo_Offline.html'), 'utf8');
   assert.ok(offline.includes(css), 'Offline fallback must embed the same shared CSS');
 });
+
+
+test('Research, Playbooks, news, editorial reviews and reference directories reuse one evidence callout', () => {
+  const block = css.split('/* atlas-shared-evidence-callouts:begin */')[1]
+    ?.split('/* atlas-shared-evidence-callouts:end */')[0];
+  assert.ok(block, 'Missing shared evidence callout component');
+  for (const sel of ['.shell .notice', '.playbook-shell .playbook-note',
+    '.review-shell .review-callout', '.term-shell .notice']) {
+    assert.ok(block.includes(sel), 'Missing callout family: ' + sel);
+  }
+  for (const property of ['background:var(--accent-soft', 'border:1px solid var(--line',
+    'box-shadow:inset 4px 0 0 var(--accent', 'color:var(--ink',
+    'a:focus-visible', 'white-space:normal', '@media (max-width:650px)']) {
+    assert.ok(block.includes(property), 'Missing shared surface/accessibility treatment: ' + property);
+  }
+  assert.ok(!block.includes('display:none') && !block.includes('pointer-events:none'),
+    'All evidence notes and links must remain usable');
+  const pages = {
+    'research.html': 'class="notice"',
+    'playbooks.html': 'class="playbook-note"',
+    'hardware-review.html': 'class="review-callout"',
+    'catalog-review.html': 'class="notice"',
+    'whats-new.html': 'class="notice"',
+    'technology/index.html': 'class="notice"'
+  };
+  for (const [route, marker] of Object.entries(pages)) {
+    const html = fs.readFileSync(path.join(__dirname, '..', route), 'utf8');
+    assert.ok(html.includes(marker), route + ' retains real evidence copy');
+    assert.ok(html.includes('href="site-chrome.css"') || html.includes('href="../site-chrome.css"'),
+      route + ' loads the shared callout');
+    assert.ok(/<a href=/.test(html), route + ' retains source navigation');
+  }
+  const brand=fs.readFileSync(path.join(__dirname,'..','brand.css'),'utf8');
+  assert.ok(brand.includes(':root[data-theme=dark]') && brand.includes('--accent:#B1D5BD'),
+    'Shared callouts inherit the readable dark-theme accent');
+  const offline=fs.readFileSync(path.join(__dirname,'..','downloads/Atlas_Demo_Offline.html'),'utf8');
+  assert.ok(offline.includes(css), 'Offline fallback must embed the exact shared stylesheet');
+});

@@ -713,3 +713,47 @@ html.atlas-enhanced #catalog-loading{
   .shell:has(> .site-chrome.top) > main > header{padding-top:8px}
 }
 /* atlas-mobile-news-intro-rhythm:end */
+
+
+/* atlas-shared-evidence-callouts:begin */
+/* The same evidence-first note component across Research, Playbooks,
+   editorial reviews, dated news and the static reference directories.
+   Preserve existing text, real links and page-specific spacing while
+   replacing light-only tan boxes and isolated border treatments. */
+:is(.shell .notice,
+    .playbook-shell .playbook-note,
+    .review-shell .review-callout,
+    .term-shell .notice){
+  background:var(--accent-soft,var(--soft,#e9eee7));
+  color:var(--ink,#18211e);
+  border:1px solid var(--line,#dfe3dc);
+  border-radius:10px;
+  box-shadow:inset 4px 0 0 var(--accent,#27664e);
+  padding:16px 20px;
+  font-size:14px;
+  line-height:1.65;
+  overflow-wrap:anywhere;
+}
+:is(.shell .notice,
+    .playbook-shell .playbook-note,
+    .review-shell .review-callout,
+    .term-shell .notice) a{
+  color:var(--accent,#27664e);
+  white-space:normal;
+  text-underline-offset:3px;
+  overflow-wrap:anywhere;
+}
+:is(.shell .notice,
+    .playbook-shell .playbook-note,
+    .review-shell .review-callout,
+    .term-shell .notice) a:focus-visible{
+  outline:3px solid var(--orange,#b76d32);
+  outline-offset:3px;
+}
+@media (max-width:650px){
+  :is(.shell .notice,
+      .playbook-shell .playbook-note,
+      .review-shell .review-callout,
+      .term-shell .notice){padding:14px 16px}
+}
+/* atlas-shared-evidence-callouts:end */
