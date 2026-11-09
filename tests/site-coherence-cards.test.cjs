@@ -345,9 +345,13 @@ test('native desktop rails expose Discover secondary destinations from one share
   const block = styles.split('/* atlas-secondary-navigation:begin */')[1]?.split('/* atlas-secondary-navigation:end */')[0];
   assert.ok(block && block.includes('@media(min-width:651px)'), 'Enhance desktop rail only');
   assert.ok(block.includes('min-height:44px') && block.includes('focus-visible'));
-  assert.ok(!block.split('@media print')[0].includes('display:none') &&
-    !block.includes('pointer-events:none'),
-    'Screen navigation must remain visible and keyboard-interactive');
+  const linkRule = block.split('.site-chrome__more-links a{')[1]?.split('}')[0];
+  const triggerRule = block.split('.site-chrome__more > summary{')[1]?.split('}')[0];
+  assert.ok(linkRule && triggerRule && !linkRule.includes('display:none') &&
+    !triggerRule.includes('display:none') && !block.includes('pointer-events:none'),
+    'Visible links and disclosure toggle remain keyboard-interactive');
+  assert.ok(block.includes('summary::-webkit-details-marker{display:none}'),
+    'Only the duplicate browser marker may be hidden');
   assert.ok(block.includes('@media print{.site-chrome__more{display:none!important}}'),
     'Print must not include navigation chrome');
   assert.ok(offline.includes(styles) && offline.includes(script),
