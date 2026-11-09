@@ -2011,6 +2011,28 @@ with sync_playwright() as p:
         check('Manually opened More survives primary route at '+str(width),
               mobile_more.evaluate('(el) => el.open')
               and desktop_more.evaluate('(el) => el.open'))
+        # Auto-revealed More is different from More deliberately re-opened
+        # by a person. The second must survive leaving a secondary section.
+        secondary_active.goto(base+'index.html#/safety')
+        secondary_active.reload()
+        secondary_active.locator(
+            '#navigation a.nav-link[data-view="safety"][aria-current="page"]'
+        ).wait_for(state='attached',timeout=20000)
+        selected_more = mobile_more if width <= 650 else desktop_more
+        if width <= 650:
+            secondary_active.locator('#discover-mobile-nav > summary').click()
+        check('Auto-reveal marks its own disclosure at '+str(width),
+              selected_more.evaluate('(el) => el.open && el.dataset.atlasAutoOpened === "true"'))
+        selected_more.locator('summary').first.click()
+        selected_more.locator('summary').first.click()
+        check('Explicit re-open clears auto state at '+str(width),
+              selected_more.evaluate('(el) => el.open && !el.dataset.atlasAutoOpened'))
+        secondary_active.evaluate("location.hash='#/overview'")
+        secondary_active.locator(
+            '#navigation a.nav-link[data-view="overview"][aria-current="page"]'
+        ).wait_for(state='attached',timeout=20000)
+        check('Explicitly re-opened More persists on primary route at '+str(width),
+              selected_more.evaluate('(el) => el.open'))
     secondary_active.close()
 
     check('no application runtime exceptions', not errors)

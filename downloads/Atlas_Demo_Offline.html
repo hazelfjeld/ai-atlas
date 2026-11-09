@@ -1991,6 +1991,14 @@ function saveButton(r){const yes=notebook.saved.includes(r.id);return `<button c
 function paperSort(rows){return [...rows].sort((a,b)=>(b.published_at||'').localeCompare(a.published_at||'')||a.title.localeCompare(b.title));}
 function reportSort(rows){return [...rows].sort((a,b)=>(b.updated_at||b.published_at||'').localeCompare(a.updated_at||a.published_at||''));}
 function plainStatus(r){const status=r.evidence_status||r.review_status||r.level||r.status||'';return status.replace(' — not reviewed this edition','').replace('Core capability verified','Core capability checked');}
+// When a user takes control of an auto-revealed More sections disclosure,
+// preserve that deliberate state on later hash navigation. Both pointer
+// activation and keyboard Enter/Space dispatch a summary click.
+document.addEventListener('click', event => {
+  const summary = event.target.closest?.(
+    '#additional-navigation > summary, #discover-mobile-nav .site-mobile-chrome__more > summary');
+  if (summary) delete summary.parentElement.dataset.atlasAutoOpened;
+});
 function renderNav(){
   // The first-render navigation is canonical; enhance it in place without rerouting links.
   const nav=$('navigation');
