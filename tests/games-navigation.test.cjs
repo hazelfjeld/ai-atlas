@@ -641,7 +641,7 @@ test('all 1345 concept detail pages reuse seven primary and eight static seconda
     assert.equal((links.match(/aria-current="page"/g) || []).length, 1, id);
   }
   const generator = read('scripts/build_term_pages.py');
-  assert.ok(generator.includes("directory_nav = render_directory_nav('../', 'Concept dictionary', mobile_brand=True, native_secondary=True, mobile_secondary=(path == 'terms/index.html'))"));
+  assert.ok(generator.includes("directory_nav = render_directory_nav('../', 'Concept dictionary', mobile_brand=True, native_secondary=True, mobile_secondary=(path == 'terms/index.html'), secondary_current=('encyclopedia' if path == 'terms/index.html' else None))"));
   assert.ok(generator.includes('directory_css = DIRECTORY_MOBILE_CSS'));
 });
 
