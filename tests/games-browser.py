@@ -92,9 +92,9 @@ with sync_playwright() as p:
     else:
         # Use the same mobile drawer appearance control as Discover, rather
         # than the desktop button that no longer occupies a third header slot.
-        page.locator('#games-mobile-nav summary').click()
+        page.locator('#games-mobile-nav > summary').click()
         page.locator('#games-mobile-nav .site-chrome__theme-toggle').click()
-        page.locator('#games-mobile-nav summary').click()
+        page.locator('#games-mobile-nav > summary').click()
     page.screenshot(path=str(out/'games-dark.png'),full_page=True)
     # At 320px the old header compressed four links into tiny targets. Shared
     # navigation now reveals all seven canonical sections via a native details
@@ -105,9 +105,9 @@ with sync_playwright() as p:
             if args.fixture:
                 page.locator('#theme-toggle').click()
             else:
-                page.locator('#games-mobile-nav summary').click()
+                page.locator('#games-mobile-nav > summary').click()
                 page.locator('#games-mobile-nav .site-chrome__theme-toggle').click()
-                page.locator('#games-mobile-nav summary').click()
+                page.locator('#games-mobile-nav > summary').click()
         check(f'320px {palette} Games theme toggle state is accurate',
               page.locator('#theme-toggle').get_attribute('aria-pressed') == str(palette == 'dark').lower())
         if args.fixture:
@@ -125,7 +125,7 @@ with sync_playwright() as p:
                     return r.height>=44 && r.width>=44 && r.left>=14 && r.right<=innerWidth-14;
                 });
               }"""))
-        page.locator('#games-mobile-nav summary').click()
+        page.locator('#games-mobile-nav > summary').click()
         if not args.fixture:
             shared_theme=page.locator('#games-mobile-nav .site-chrome__theme-toggle')
             check(f'320px {palette} Games mobile drawer retains real keyboard-friendly theme control',
@@ -150,7 +150,7 @@ with sync_playwright() as p:
                 const r=el.getBoundingClientRect();
                 return r.height>=44 && r.width>=44 && r.left>=14 && r.right<=innerWidth-14;
               })"""))
-        page.locator('#games-mobile-nav summary').click()
+        page.locator('#games-mobile-nav > summary').click()
         check(f'320px {palette} collapsed menu links are not exposed visually',
               not page.locator('#games-mobile-nav .site-mobile-chrome__menu').is_visible()
               and page.evaluate('document.documentElement.scrollWidth <= innerWidth'))

@@ -138,7 +138,7 @@ with sync_playwright() as p:
     page.screenshot(path=str(out/'games-native-mobile.png'),full_page=True)
     check('mobile matching fits original workspace', page.evaluate('document.documentElement.scrollWidth<=innerWidth'))
     check('mobile definitions untruncated', page.locator('.tile').evaluate_all('(els)=>els.every(e=>e.scrollHeight<=e.clientHeight+1)'))
-    page.locator('#discover-mobile-nav summary').click()
+    page.locator('#discover-mobile-nav > summary').click()
     page.locator('#discover-mobile-nav .site-mobile-chrome__menu a:not(.site-mobile-chrome__brand)[href="#/overview"]').click()
     page.wait_for_function("location.hash === '#/overview' && !document.getElementById('discover-mobile-nav').open && !document.querySelector('.atlas-games')")
     check('mobile drawer exits game and closes', page.locator('#discover-mobile-nav').evaluate('el => !el.open') and page.url.endswith('#/overview'))

@@ -52,7 +52,7 @@ with sync_playwright() as p:
         # Opening it before that point can hit a static, not-yet-bound button.
         page.locator('#catalog-loading').wait_for(state='detached', timeout=45000)
         if width <= 650:
-            page.locator('#discover-mobile-nav summary').click()
+            page.locator('#discover-mobile-nav > summary').click()
             check('Discover native mobile drawer opens at ' + str(width),
                   page.locator('#discover-mobile-nav').evaluate('(el) => el.open')
                   and page.locator('#discover-mobile-nav .site-mobile-chrome__menu').is_visible()
@@ -115,7 +115,7 @@ with sync_playwright() as p:
     no_script = browser.new_context(java_script_enabled=False, viewport={'width':320, 'height':844})
     scriptless = no_script.new_page()
     scriptless.goto(base + 'index.html#/overview')
-    scriptless.locator('#discover-mobile-nav summary').click()
+    scriptless.locator('#discover-mobile-nav > summary').click()
     check('Discover keeps seven script-free native drawer links',
           scriptless.locator('#discover-mobile-nav').evaluate('(el) => el.open')
           and scriptless.locator('#discover-mobile-nav .site-mobile-chrome__menu > a:not(.site-mobile-chrome__brand)').count() == 7)
@@ -262,7 +262,7 @@ with sync_playwright() as p:
                               document.documentElement.scrollWidth <= innerWidth + 1;
                       }"""))
                 menu = sticky_page.locator('details.site-mobile-chrome__nav')
-                menu.locator('summary').click()
+                menu.locator(':scope > summary').click()
                 check(f'{route} {mobile_width}px {chosen_theme} can navigate from the pinned mobile header',
                       menu.evaluate('el => el.open') and
                       menu.locator('.site-mobile-chrome__menu a[href]').count() >= 7)
@@ -287,7 +287,7 @@ with sync_playwright() as p:
               return scrollY > 30 && getComputedStyle(bar).position === 'sticky' &&
                   Math.abs(bar.getBoundingClientRect().top) < 3;
           }"""))
-    scriptless_sticky.locator('details.site-mobile-chrome__nav summary').click()
+    scriptless_sticky.locator('details.site-mobile-chrome__nav > summary').click()
     check('script-free pinned directory menu opens as a native dropdown',
           scriptless_sticky.locator('details.site-mobile-chrome__nav').evaluate('el => el.open') and
           scriptless_sticky.locator('.site-mobile-chrome__menu a[href]').count() >= 7)
@@ -341,7 +341,7 @@ with sync_playwright() as p:
           and mobile_games.locator('.site-mobile-chrome__search').is_visible()
           and not mobile_games.locator('.games-site-chrome').is_visible()
           and mobile_games.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'))
-    mobile_games.locator('#games-mobile-nav summary').click()
+    mobile_games.locator('#games-mobile-nav > summary').click()
     mobile_brand = mobile_games.locator('#games-mobile-nav .site-mobile-chrome__brand')
     check('mobile Games drawer visibly reuses the desktop logo and wordmark',
           mobile_brand.count() == 1 and mobile_brand.is_visible()
@@ -374,14 +374,14 @@ with sync_playwright() as p:
           mobile_games.evaluate("""() => document.querySelector('main').inert
               && document.querySelector('.site-mobile-chrome__search').inert
               && !document.querySelector('#games-mobile-nav').inert"""))
-    mobile_games.locator('#games-mobile-nav summary').focus()
+    mobile_games.locator('#games-mobile-nav > summary').focus()
     mobile_games.keyboard.press('Shift+Tab')
     check('Shift-Tab wraps to the shared drawer appearance action',
           mobile_games.locator('#games-mobile-nav .site-chrome__theme-toggle').evaluate(
               '(el) => document.activeElement === el && el.getBoundingClientRect().height >= 44'))
     mobile_games.keyboard.press('Tab')
     check('Tab from final drawer action returns to its close control',
-          mobile_games.locator('#games-mobile-nav summary').evaluate(
+          mobile_games.locator('#games-mobile-nav > summary').evaluate(
               '(el) => document.activeElement === el'))
     mobile_games.mouse.click(310, 160)
     check('outside click dismisses the shared mobile drawer',
@@ -392,7 +392,7 @@ with sync_playwright() as p:
               && !document.querySelector('.site-mobile-chrome__search').inert"""))
     # Native details must not secretly remain open across a mobile/tablet
     # breakpoint. Otherwise rotation back leaves the whole site blocked.
-    mobile_games.locator('#games-mobile-nav summary').click()
+    mobile_games.locator('#games-mobile-nav > summary').click()
     mobile_games.wait_for_function("document.querySelector('main').inert")
     mobile_games.set_viewport_size({'width':768, 'height':720})
     # A viewport resize event can arrive after Playwright's layout update.
@@ -411,7 +411,7 @@ with sync_playwright() as p:
           and mobile_games.evaluate("document.documentElement.scrollWidth <= innerWidth + 1"))
     # Cached restoration can occur after focus is blurred by the browser.
     # Exercise the shared pageshow behavior on the native Games drawer.
-    mobile_games.locator('#games-mobile-nav summary').click()
+    mobile_games.locator('#games-mobile-nav > summary').click()
     mobile_games.wait_for_function("document.querySelector('main').inert")
     mobile_games.evaluate("""() => {
         document.activeElement.blur();
@@ -421,10 +421,10 @@ with sync_playwright() as p:
         !document.querySelector('#games-mobile-nav').open
         && !document.querySelector('main').inert""")
     check('restoring cached page closes drawer and restores visible keyboard focus',
-          mobile_games.locator('#games-mobile-nav summary').evaluate(
+          mobile_games.locator('#games-mobile-nav > summary').evaluate(
               '(el) => document.activeElement === el'))
-    mobile_games.locator('#games-mobile-nav summary').click()
-    mobile_games.locator('#games-mobile-nav summary').click()
+    mobile_games.locator('#games-mobile-nav > summary').click()
+    mobile_games.locator('#games-mobile-nav > summary').click()
     mobile_games.locator('.site-mobile-chrome__search').click()
     mobile_games.wait_for_url('**/index.html#/search')
     check('standalone Games search points into the actual workspace',
@@ -455,15 +455,15 @@ with sync_playwright() as p:
           theme_page.evaluate("document.documentElement.dataset.theme === 'light'"))
     check('Games uses the same two-control mobile header as Discover without dropping appearance settings',
           not theme_page.locator('#theme-toggle').is_visible()
-          and theme_page.locator('#games-mobile-nav summary').is_visible()
+          and theme_page.locator('#games-mobile-nav > summary').is_visible()
           and theme_page.locator('.site-mobile-chrome__search').is_visible())
-    theme_page.locator('#games-mobile-nav summary').click()
+    theme_page.locator('#games-mobile-nav > summary').click()
     games_drawer_theme = theme_page.locator('#games-mobile-nav .site-chrome__theme-toggle')
     check('Games drawer exposes the existing theme action with correct initial state',
           games_drawer_theme.is_visible()
           and games_drawer_theme.get_attribute('aria-pressed') == 'false')
     games_drawer_theme.click()
-    theme_page.locator('#games-mobile-nav summary').click()
+    theme_page.locator('#games-mobile-nav > summary').click()
     check('standalone Games mobile drawer theme action saves preference and switches native controls to dark',
           theme_page.evaluate("localStorage.getItem('atlas.theme') === 'dark' && "
                               "document.documentElement.dataset.theme === 'dark' && "
@@ -476,9 +476,9 @@ with sync_playwright() as p:
           theme_page.evaluate("document.documentElement.dataset.theme === 'dark' && "
                               "getComputedStyle(document.documentElement).colorScheme === 'dark'"))
     theme_page.goto(base + 'games.html')
-    theme_page.locator('#games-mobile-nav summary').click()
+    theme_page.locator('#games-mobile-nav > summary').click()
     theme_page.locator('#games-mobile-nav .site-chrome__theme-toggle').click()
-    theme_page.locator('#games-mobile-nav summary').click()
+    theme_page.locator('#games-mobile-nav > summary').click()
     check('switching back to light through the shared drawer updates native controls without a reload',
           theme_page.evaluate("localStorage.getItem('atlas.theme') === 'light' && "
                               "document.documentElement.dataset.theme === 'light' && "
@@ -529,7 +529,7 @@ with sync_playwright() as p:
     check('technology directory preserves the theme chosen on About',
           theme_page.evaluate("document.documentElement.dataset.theme === 'dark'"))
     theme_page.set_viewport_size({'width':390, 'height':844})
-    theme_page.locator('#tech-mobile-nav summary').click()
+    theme_page.locator('#tech-mobile-nav > summary').click()
     mobile_theme = theme_page.locator('.site-mobile-chrome__menu > .site-chrome__theme-toggle')
     check('mobile native drawer contains one keyboard-focusable appearance action',
           mobile_theme.is_visible() and
@@ -849,7 +849,7 @@ with sync_playwright() as p:
               mobile_reference.locator('.directory-mobile-topbar').is_visible()
               and mobile_reference.locator('.site-mobile-chrome__search').is_visible()
               and not mobile_reference.locator('.site-chrome').is_visible())
-        menu.locator('summary').click()
+        menu.locator(':scope > summary').click()
         check(reference + ' exposes the seven shared navigation links with current section',
               menu.evaluate('el => el.open')
               and menu.locator('nav a:not(.site-mobile-chrome__brand)').count() == 7
@@ -881,7 +881,7 @@ with sync_playwright() as p:
               mobile_reference.evaluate('document.documentElement.scrollWidth <= window.innerWidth + 1'))
         # Test actual keyboard modality: programmatic .focus() after a
         # mouse click need not activate the browser's :focus-visible state.
-        menu.locator('summary').focus()
+        menu.locator(':scope > summary').focus()
         mobile_reference.keyboard.press('Tab')
         check(reference + ' retains visible keyboard focus',
               mobile_reference.evaluate("""() => {
@@ -892,7 +892,7 @@ with sync_playwright() as p:
                       && parseFloat(getComputedStyle(a).outlineWidth) >= 2;
               }"""))
         mobile_reference.screenshot(path=str(out / ('concept-' + Path(reference).stem + '-mobile.png')), full_page=False)
-        menu.locator('summary').click()
+        menu.locator(':scope > summary').click()
         mobile_reference.set_viewport_size({'width':390, 'height':844})
         check(reference + ' fits the 390px viewport',
               mobile_reference.evaluate('document.documentElement.scrollWidth <= window.innerWidth + 1'))
@@ -909,7 +909,7 @@ with sync_playwright() as p:
     nojs_reference = browser.new_page(viewport={'width':320, 'height':720},
                                       java_script_enabled=False, reduced_motion='reduce')
     nojs_reference.goto(base + 'terms/MLD-0002-ablation-study.html')
-    nojs_reference.locator('#directory-mobile-nav summary').click()
+    nojs_reference.locator('#directory-mobile-nav > summary').click()
     check('concept detail remains readable and navigable without JavaScript',
           nojs_reference.get_by_role('heading', name='Ablation study').is_visible()
           and nojs_reference.locator('#directory-mobile-nav nav a.site-mobile-chrome__brand').count() == 1
@@ -1531,7 +1531,7 @@ with sync_playwright() as p:
     page.goto(base + 'index.html#/games')
     page.locator('#start-quiz').wait_for()
     check('mobile Games route fits original workspace', page.evaluate('document.documentElement.scrollWidth <= innerWidth'))
-    page.locator('#discover-mobile-nav summary').click()
+    page.locator('#discover-mobile-nav > summary').click()
     page.locator('#discover-mobile-nav .site-mobile-chrome__menu a:not(.site-mobile-chrome__brand)[href="#/overview"]').click()
     page.wait_for_function("location.hash === '#/overview' && !document.getElementById('discover-mobile-nav').open")
     check('mobile drawer navigates and closes', page.locator('#daily-panel-title').is_visible())
@@ -1555,7 +1555,7 @@ with sync_playwright() as p:
                           && document.documentElement.scrollWidth <= innerWidth + 1;
                   }"""))
             if width <= 650:
-                page.locator('#directory-mobile-nav summary').click()
+                page.locator('#directory-mobile-nav > summary').click()
                 check(f'{route} exposes the selected mobile section at {width}px',
                       page.locator('.site-mobile-chrome__menu a:not(.site-mobile-chrome__brand)[aria-current="page"]').inner_text() == selected)
             else:
@@ -1580,7 +1580,7 @@ with sync_playwright() as p:
             page.goto(base + 'index.html#/overview')
             page.locator('#catalog-loading').wait_for(state='detached', timeout=45000)
             if width <= 650:
-                page.locator('#discover-mobile-nav summary').click()
+                page.locator('#discover-mobile-nav > summary').click()
                 baseline = page.locator('#discover-mobile-nav .site-mobile-chrome__menu').evaluate('el => el.getBoundingClientRect().width')
             else:
                 baseline = page.evaluate("""() => {
@@ -1732,7 +1732,7 @@ with sync_playwright() as p:
     script_free = browser.new_page(viewport={'width': 320, 'height': 720},
                                    java_script_enabled=False)
     script_free.goto(base + 'terms/index.html')
-    script_free.locator('#directory-mobile-nav summary').click()
+    script_free.locator('#directory-mobile-nav > summary').click()
     check('catalog directory menu remains usable with JavaScript disabled',
           script_free.locator('.site-mobile-chrome__menu a:not(.site-mobile-chrome__brand)').first.is_visible()
           and script_free.locator('.site-mobile-chrome__menu a:not(.site-mobile-chrome__brand)').count() == 7)
@@ -1763,20 +1763,20 @@ with sync_playwright() as p:
               }""", real_link))
     check_no_script_brand('Concept directory', real_link=True)
     script_free.goto(base + 'about.html')
-    script_free.locator('#directory-mobile-nav summary').click()
+    script_free.locator('#directory-mobile-nav > summary').click()
     check('About uses the generated shared menu without JavaScript',
           script_free.locator('.site-mobile-chrome__menu a:not(.site-mobile-chrome__brand)').count() == 7
           and script_free.locator('.site-mobile-chrome__menu a:not(.site-mobile-chrome__brand)[aria-current="page"]').inner_text() == 'About')
     check_no_script_brand('About', real_link=True)
     script_free.screenshot(path=str(out / 'no-script-about-branded-mobile.png'), full_page=False)
     script_free.goto(base + 'technology/TECH-0216-pytorch.html')
-    script_free.locator('#directory-mobile-nav summary').click()
+    script_free.locator('#directory-mobile-nav > summary').click()
     check('technology detail uses the shared mobile menu without JavaScript',
           script_free.locator('.site-mobile-chrome__menu a:not(.site-mobile-chrome__brand)').count() == 7
           and script_free.locator('.site-mobile-chrome__menu a:not(.site-mobile-chrome__brand)[aria-current="page"]').inner_text() == 'Technology profiles')
     check_no_script_brand('Technology profile', real_link=True)
     script_free.goto(base + 'terms/MLD-0002-ablation-study.html')
-    script_free.locator('#directory-mobile-nav summary').click()
+    script_free.locator('#directory-mobile-nav > summary').click()
     check_no_script_brand('Concept detail', real_link=True)
     script_free.close()
 

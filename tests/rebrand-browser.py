@@ -107,7 +107,7 @@ with sync_playwright() as p:
                       'terms/index.html', 'technology/index.html',
                       'terms/MLD-0002-ablation-study.html', 'technology/TECH-0216-pytorch.html'):
             page.goto(base + route)
-            page.locator('details.site-mobile-chrome__nav summary').click()
+            page.locator('details.site-mobile-chrome__nav > summary').click()
             # With JS off, never paint a modal-style drawer while the rest
             # of the page remains keyboard-focusable. Use the native dropdown.
             fallback = page.locator('details.site-mobile-chrome__nav .site-mobile-chrome__menu').evaluate("""el => ({
@@ -371,7 +371,7 @@ with sync_playwright() as p:
         }""")
         target.wait_for_function("document.documentElement.dataset.theme === 'light'")
         if width <= 650:
-            source.locator('details.site-mobile-chrome__nav summary').click()
+            source.locator('details.site-mobile-chrome__nav > summary').click()
         toggle = source.locator('button.site-chrome__theme-toggle:visible')
         for expected in ('dark', 'light'):
             toggle.click()
@@ -501,28 +501,28 @@ with sync_playwright() as p:
     page.screenshot(path=str(out/'mobile.png'),full_page=True)
     check('closed mobile drawer is hidden from keyboard and accessibility tree',
           not page.locator('#sidebar').is_visible())
-    page.locator('#discover-mobile-nav summary').focus()
+    page.locator('#discover-mobile-nav > summary').focus()
     page.keyboard.press('Tab')
     check('Tab bypasses the closed mobile drawer',
           page.evaluate("!document.activeElement.closest('#sidebar')"))
-    page.locator('#discover-mobile-nav summary').click()
+    page.locator('#discover-mobile-nav > summary').click()
     # Native <details> toggle dispatch is queued after the click's default
     # action. Wait for the shared isolation handler instead of racing that task;
     # a broken handler still fails this assertion at the bounded timeout.
     page.wait_for_function("""() => document.querySelector('#main').inert
-        && document.activeElement.matches('#discover-mobile-nav summary')""", timeout=3000)
+        && document.activeElement.matches('#discover-mobile-nav > summary')""", timeout=3000)
     check('native drawer keeps its trigger focused and isolates background content',
-          page.evaluate("document.activeElement.matches('#discover-mobile-nav summary') && document.querySelector('#main').inert"))
+          page.evaluate("document.activeElement.matches('#discover-mobile-nav > summary') && document.querySelector('#main').inert"))
     page.keyboard.press('Shift+Tab')
     check('Shift-Tab wraps inside the open drawer',
           page.evaluate("!!document.activeElement.closest('#discover-mobile-nav')"))
     page.keyboard.press('Escape')
     page.wait_for_function("""() => !document.getElementById('discover-mobile-nav').open
         && !document.querySelector('#main').inert
-        && document.activeElement.matches('#discover-mobile-nav summary')""", timeout=3000)
+        && document.activeElement.matches('#discover-mobile-nav > summary')""", timeout=3000)
     check('Escape closes shared native drawer and restores trigger focus',
-          page.evaluate("document.activeElement.matches('#discover-mobile-nav summary') && !document.getElementById('discover-mobile-nav').open && !document.querySelector('#main').inert"))
-    page.locator('#discover-mobile-nav summary').click()
+          page.evaluate("document.activeElement.matches('#discover-mobile-nav > summary') && !document.getElementById('discover-mobile-nav').open && !document.querySelector('#main').inert"))
+    page.locator('#discover-mobile-nav > summary').click()
     page.locator('#discover-mobile-nav .site-mobile-chrome__menu a[href="#/games"]').click()
     page.locator('#start-quiz').wait_for()
     check('mobile navigation retains native Quiz and Match',page.locator('#start-match').is_visible() and page.locator('#discover-mobile-nav').evaluate('el => !el.open'))
@@ -530,7 +530,7 @@ with sync_playwright() as p:
     # Its shared native mobile drawer should expose the same functional action
     # as the standalone pages, with persistence across direct page navigation.
     page.evaluate("document.documentElement.dataset.theme='dark';localStorage.setItem('atlas.theme','dark')")
-    page.locator('#discover-mobile-nav summary').click()
+    page.locator('#discover-mobile-nav > summary').click()
     discover_theme = page.locator('#discover-mobile-nav .site-chrome__theme-toggle')
     check('Discover shares one visible mobile drawer theme action',
           discover_theme.count() == 1 and discover_theme.is_visible())
@@ -540,7 +540,7 @@ with sync_playwright() as p:
     page.goto(base+'about.html')
     check('standalone About preserves Discover mobile appearance selection',
           page.evaluate("document.documentElement.dataset.theme==='light'"))
-    page.locator('details.site-mobile-chrome__nav summary').click()
+    page.locator('details.site-mobile-chrome__nav > summary').click()
     about_theme = page.locator('.site-mobile-chrome__menu .site-chrome__theme-toggle')
     check('About exposes the same shared mobile appearance action',
           about_theme.count() == 1 and about_theme.is_visible())
@@ -561,7 +561,7 @@ with sync_playwright() as p:
                 page.goto(base+route)
                 page.evaluate("t => {localStorage.setItem('atlas.theme',t);document.documentElement.dataset.theme=t}",theme)
                 drawer=page.locator('details.site-mobile-chrome__nav')
-                trigger=drawer.locator('summary')
+                trigger=drawer.locator(':scope > summary')
                 trigger.click()
                 page.wait_for_function("document.querySelector('.site-mobile-chrome__search').inert")
                 drawer.locator('.site-mobile-chrome__menu a[href]').last.focus()
@@ -570,7 +570,7 @@ with sync_playwright() as p:
                 page.evaluate("document.dispatchEvent(new PointerEvent('pointerdown',{bubbles:true}))")
                 check(f'{route} {width}px {theme} outside dismissal restores visible trigger and content',
                       not drawer.evaluate('el=>el.open')
-                      and page.evaluate("document.activeElement.matches('details.site-mobile-chrome__nav summary')")
+                      and page.evaluate("document.activeElement.matches('details.site-mobile-chrome__nav > summary')")
                       and not page.locator('.site-mobile-chrome__search').evaluate('el=>el.inert')
                       and page.evaluate('document.documentElement.scrollWidth<=innerWidth'))
                 trigger.click()
@@ -579,7 +579,7 @@ with sync_playwright() as p:
                 check(f'{route} {width}px {theme} restored page clears stale modal isolation',
                       not drawer.evaluate('el=>el.open')
                       and not page.locator('.site-mobile-chrome__search').evaluate('el=>el.inert')
-                      and page.evaluate("document.activeElement.matches('details.site-mobile-chrome__nav summary')"))
+                      and page.evaluate("document.activeElement.matches('details.site-mobile-chrome__nav > summary')"))
                 if width==390 and theme=='dark':
                     page.screenshot(path=str(out/f'drawer-dismissed-{route.replace("/", "-")}.png'))
     # BFCache may resurrect a stale theme after a visitor changes appearance
@@ -609,7 +609,7 @@ with sync_playwright() as p:
     # leave the returning page navigable, regardless of BFCache eligibility.
     page.set_viewport_size({'width':390,'height':844})
     page.goto(base+'about.html')
-    page.locator('details.site-mobile-chrome__nav summary').click()
+    page.locator('details.site-mobile-chrome__nav > summary').click()
     page.locator('details.site-mobile-chrome__nav nav a[href$="playbooks.html"]').click()
     page.wait_for_url('**/playbooks.html')
     page.go_back()
@@ -695,7 +695,7 @@ with sync_playwright() as p:
                 if (width,theme)==(1280,'light'):
                     page.screenshot(path=str(out/f'editorial-subpage-{route}-desktop-light.png'))
                 if width<=650:
-                    page.locator('details.site-mobile-chrome__nav summary').click()
+                    page.locator('details.site-mobile-chrome__nav > summary').click()
                     page.locator('details.site-mobile-chrome__nav a[href="whats-new.html"]').click()
                 else:
                     page.locator('.site-chrome__links a[aria-current="location"]').click()
@@ -830,7 +830,7 @@ with sync_playwright() as p:
                       and page.evaluate('document.documentElement.dataset.theme')==theme
                       and page.evaluate('document.documentElement.scrollWidth <= innerWidth'))
                 if width==390 and theme=='dark' and route in ('about.html','terms/index.html'):
-                    page.locator('details.site-mobile-chrome__nav summary').click()
+                    page.locator('details.site-mobile-chrome__nav > summary').click()
                     page.screenshot(path=str(out/f'mobile-brand-{route.replace("/", "-")}-390-dark.png'))
 
 
@@ -1229,7 +1229,7 @@ with sync_playwright() as p:
             page.set_viewport_size({'width':390,'height':844})
             page.goto(base+route)
             drawer=page.locator('details.site-mobile-chrome__nav').first
-            drawer.locator('summary').click()
+            drawer.locator(':scope > summary').click()
             drawer.locator('.site-mobile-chrome__menu a[href]').last.focus()
             check(f'{route} {theme} menu holds focus before viewport change',
                   drawer.evaluate('el=>el.open && el.contains(document.activeElement)'))
@@ -1279,8 +1279,8 @@ with sync_playwright() as p:
                       rail.first.evaluate('(el)=>document.activeElement===el'))
                 page.set_viewport_size({'width':390,'height':844})
                 page.wait_for_function("""() =>
-                    document.activeElement === document.querySelector('details.site-mobile-chrome__nav summary')""")
-                toggle=page.locator('details.site-mobile-chrome__nav summary').first
+                    document.activeElement === document.querySelector('details.site-mobile-chrome__nav > summary')""")
+                toggle=page.locator('details.site-mobile-chrome__nav > summary').first
                 check(f'{route} {desktop_width}->390px {theme} restores visible mobile toggle focus',
                       toggle.evaluate("""el => document.activeElement===el &&
                           el.getClientRects().length>0""")
@@ -1305,7 +1305,7 @@ with sync_playwright() as p:
                     localStorage.setItem('atlas.theme',t);
                     document.documentElement.dataset.theme=t;
                 }""",theme)
-                toggle=page.locator('details.site-mobile-chrome__nav summary').first
+                toggle=page.locator('details.site-mobile-chrome__nav > summary').first
                 toggle.focus()
                 check(f'{route} {mobile_width}px {theme} closed mobile toggle takes focus',
                       toggle.evaluate('el=>document.activeElement===el && el.getClientRects().length>0'))
@@ -1358,7 +1358,7 @@ with sync_playwright() as p:
                 theme: document.documentElement.dataset.theme,
                 card: getComputedStyle(document.querySelector('#quick-tour article')).backgroundColor,
                 body: getComputedStyle(document.body).backgroundColor,
-                menuVisible: !!document.querySelector('.site-mobile-chrome__nav summary')?.getClientRects().length,
+                menuVisible: !!document.querySelector('.site-mobile-chrome__nav > summary')?.getClientRects().length,
                 railVisible: !!document.querySelector('.site-chrome')?.getClientRects().length,
                 overflow: document.documentElement.scrollWidth>innerWidth
             })""")
@@ -1372,7 +1372,7 @@ with sync_playwright() as p:
             if (width==390 and theme=='dark') or (width==1280 and theme=='light'):
                 page.screenshot(path=str(out/f'guided-demo-{width}-{theme}.png'))
             if width<=650:
-                page.locator('#demo-mobile-nav summary').click()
+                page.locator('#demo-mobile-nav > summary').click()
                 page.locator('#demo-mobile-nav .site-mobile-chrome__menu > a:not(.site-mobile-chrome__brand)[href="index.html#/overview"]').click()
             else:
                 page.locator('.demo-site-chrome .site-chrome__links a[href="index.html#/overview"]').click()
@@ -1521,7 +1521,7 @@ with sync_playwright() as p:
                 page.goto(base+route)
                 page.evaluate('(t)=>localStorage.setItem("atlas.theme",t)',theme)
                 page.reload()
-                page.locator('details.site-mobile-chrome__nav summary').click()
+                page.locator('details.site-mobile-chrome__nav > summary').click()
                 enhanced = page.locator('details.site-mobile-chrome__nav .site-mobile-chrome__menu').evaluate("""el => ({
                     position:getComputedStyle(el).position,
                     overflow:getComputedStyle(document.body).overflow,
