@@ -398,20 +398,33 @@ with sync_playwright() as p:
     theme_page.reload()
     check('Games honors explicitly saved light theme despite dark OS mode',
           theme_page.evaluate("document.documentElement.dataset.theme === 'light'"))
-    theme_page.locator('#theme-toggle').click()
-    check('standalone Games theme toggle saves preference and switches native controls to dark',
+    check('Games uses the same two-control mobile header as Discover without dropping appearance settings',
+          not theme_page.locator('#theme-toggle').is_visible()
+          and theme_page.locator('#games-mobile-nav summary').is_visible()
+          and theme_page.locator('.site-mobile-chrome__search').is_visible())
+    theme_page.locator('#games-mobile-nav summary').click()
+    games_drawer_theme = theme_page.locator('#games-mobile-nav .site-chrome__theme-toggle')
+    check('Games drawer exposes the existing theme action with correct initial state',
+          games_drawer_theme.is_visible()
+          and games_drawer_theme.get_attribute('aria-pressed') == 'false')
+    games_drawer_theme.click()
+    theme_page.locator('#games-mobile-nav summary').click()
+    check('standalone Games mobile drawer theme action saves preference and switches native controls to dark',
           theme_page.evaluate("localStorage.getItem('atlas.theme') === 'dark' && "
                               "document.documentElement.dataset.theme === 'dark' && "
                               "getComputedStyle(document.documentElement).colorScheme === 'dark' && "
                               "document.documentElement.style.colorScheme === ''")
-          and theme_page.locator('#theme-toggle').get_attribute('aria-pressed') == 'true')
+          and theme_page.locator('#theme-toggle').get_attribute('aria-pressed') == 'true'
+          and games_drawer_theme.get_attribute('aria-pressed') == 'true')
     theme_page.goto(base + 'whats-new.html')
     check('Games to archive preserves selected dark theme and native controls',
           theme_page.evaluate("document.documentElement.dataset.theme === 'dark' && "
                               "getComputedStyle(document.documentElement).colorScheme === 'dark'"))
     theme_page.goto(base + 'games.html')
-    theme_page.locator('#theme-toggle').click()
-    check('switching back to light updates native controls without a reload',
+    theme_page.locator('#games-mobile-nav summary').click()
+    theme_page.locator('#games-mobile-nav .site-chrome__theme-toggle').click()
+    theme_page.locator('#games-mobile-nav summary').click()
+    check('switching back to light through the shared drawer updates native controls without a reload',
           theme_page.evaluate("localStorage.getItem('atlas.theme') === 'light' && "
                               "document.documentElement.dataset.theme === 'light' && "
                               "getComputedStyle(document.documentElement).colorScheme === 'light'"))
