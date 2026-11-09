@@ -389,6 +389,41 @@ test('one shared mobile disclosure exposes the existing secondary routes with ke
     'The single-file offline demo must include both updated shared components');
 });
 
+
+test('Discover mobile drawer exposes the canonical eight secondary destinations without JavaScript', () => {
+  const generator = fs.readFileSync(path.join(__dirname, '..', 'scripts/site_chrome.py'), 'utf8');
+  const theme = fs.readFileSync(path.join(__dirname, '..', 'site-theme.js'), 'utf8');
+  assert.ok(generator.includes('render_mobile_secondary_nav("").replace('),
+    'Discover must reuse the existing shared mobile link generator, not maintain a copied list');
+  assert.ok(theme.includes("if (menu && !menu.querySelector('.site-mobile-chrome__more'))"),
+    'Hydration must not add a duplicate disclosure to the script-free drawer');
+  const raw = theme.split('const sharedSecondarySections = [')[1]?.split('];')[0];
+  const canonical = [...raw.matchAll(/\["([^"]+)", "([^"]+)"\]/g)].map(m => [m[1], m[2]]);
+  assert.equal(canonical.length, 8);
+  for (const [route, offline] of [['index.html', false], ['downloads/Atlas_Demo_Offline.html', true]]) {
+    const html = fs.readFileSync(path.join(__dirname, '..', route), 'utf8');
+    const drawer = html.match(/<nav class="site-mobile-chrome__menu" aria-label="AI Updates sections">([\s\S]*?)<\/nav><\/details><\/div>/)?.[1];
+    assert.ok(drawer, route + ' has the native drawer and brand');
+    assert.equal((drawer.match(/<details class="site-mobile-chrome__more">/g) || []).length, 1,
+      route + ' must have exactly one script-free secondary disclosure');
+    assert.equal((drawer.match(/<a href="[^"]+"(?: aria-current="page")?>/g) || []).length, 7,
+      route + ' keeps the seven top-level primary links');
+    const secondary = drawer.match(/<details class="site-mobile-chrome__more"><summary>More sections<\/summary><div class="site-mobile-chrome__more-links">([\s\S]*?)<\/div><\/details>/)?.[1];
+    assert.ok(secondary, route + ' retains native nested keyboard disclosure');
+    const actual = [...secondary.matchAll(/<a href="([^"]+)"( download)?>([^<]+)<\/a>/g)]
+      .map(m => [m[1], m[3].replaceAll('&amp;', '&')]);
+    const expected = canonical.map(([href, label]) => {
+      let local = href.replace(/^index\.html(?=#\/)/, '');
+      if (offline && local === 'demo.html') local = '#/overview';
+      if (offline && local === 'terms/index.html') local = '#/dictionary';
+      return [local, label];
+    });
+    assert.deepEqual(actual, expected, route + ' retains working canonical destinations');
+    assert.match(secondary, /href="downloads\/Atlas_Demo_Offline\.html" download>/,
+      'Keep the original downloadable offline fallback');
+  }
+});
+
 test('native editorial, archive, technology, research and Games pages keep Discover secondary navigation without JS', () => {
   const home = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
   const js = fs.readFileSync(path.join(__dirname, '..', 'site-theme.js'), 'utf8');

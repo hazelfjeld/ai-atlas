@@ -317,7 +317,7 @@ def render_discover_primary(term_count, tech_count):
 
 
 def render_discover_mobile():
-    """Share the native script-free drawer with all other site pages.
+    """Share the native script-free drawer and canonical secondary routes with other pages.
 
     Discover retains its existing desktop rail and working search input.
     """
@@ -329,7 +329,7 @@ def render_discover_mobile():
         '<summary class="site-mobile-chrome__toggle" aria-label="Toggle navigation">'
         '<span aria-hidden="true">☰</span></summary>'
         '<nav class="site-mobile-chrome__menu" aria-label="AI Updates sections">'
-        + brand + links + '</nav></details></div>'
+        + brand + links + render_mobile_secondary_nav("").replace('href="index.html#/', 'href="#/') + '</nav></details></div>'
     )
 
 

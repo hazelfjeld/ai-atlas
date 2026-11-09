@@ -121,6 +121,16 @@ with sync_playwright() as p:
           and scriptless.locator('#discover-mobile-nav .site-mobile-chrome__menu > a:not(.site-mobile-chrome__brand)').count() == 7)
     check('Discover no-script drawer preserves a real home wordmark link',
           scriptless.locator('#discover-mobile-nav a.site-mobile-chrome__brand').get_attribute('href') == '#/overview')
+    scriptless.locator('#discover-mobile-nav .site-mobile-chrome__more > summary').click()
+    check('Discover exposes eight secondary destinations even when scripts are disabled',
+          scriptless.locator('#discover-mobile-nav .site-mobile-chrome__more-links a').count() == 8
+          and scriptless.locator('#discover-mobile-nav .site-mobile-chrome__more-links a[href="#/safety"]').is_visible()
+          and scriptless.locator('#discover-mobile-nav .site-mobile-chrome__more-links a[href="terms/index.html"]').is_visible())
+    scriptless.locator('#discover-mobile-nav .site-mobile-chrome__menu > a[href="about.html"]').click()
+    scriptless.wait_for_url('**/about.html')
+    scriptless.locator('#about-mobile-nav > summary').click() if scriptless.locator('#about-mobile-nav > summary').count() else scriptless.locator('.site-mobile-chrome__nav > summary').click()
+    check('No-JavaScript Discover to About transition preserves secondary navigation',
+          scriptless.locator('.site-mobile-chrome__more-links a[href="index.html#/papers"]').count() == 1)
     no_script.close()
     page.set_viewport_size({'width':1440, 'height':1000})
     page.goto(base + 'index.html#/overview')
