@@ -393,7 +393,7 @@ test('native editorial, archive, technology, research and Games pages keep Disco
     const details = rail.match(/<details class="site-chrome__more"><summary>More sections<\/summary><div class="site-chrome__more-links">([\s\S]*?)<\/div><\/details>/);
     assert.ok(details, name + ' exposes the same native disclosure as Discover');
     const anchors = [...details[1].matchAll(/<a href="([^"]+)"( download)?>([^<]+)<\/a>/g)]
-      .map(m => [m[1], m[3]]);
+      .map(m => [m[1], m[3].replaceAll('&amp;', '&')]);
     assert.deepEqual(anchors, expected, name + ' secondary routes and labels must not drift');
     assert.ok(details[1].includes('href="downloads/Atlas_Demo_Offline.html" download>'),
       name + ' must preserve the native offline download');
