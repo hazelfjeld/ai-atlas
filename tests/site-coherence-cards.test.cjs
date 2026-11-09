@@ -415,7 +415,7 @@ test('generated concept and technology directories expose shared secondary route
   assert.equal(expected.length, 8);
   const termBuild = fs.readFileSync(path.join(__dirname, '..', 'scripts/build_term_pages.py'), 'utf8');
   const seoBuild = fs.readFileSync(path.join(__dirname, '..', 'scripts/build_seo.py'), 'utf8');
-  assert.ok(termBuild.includes("native_secondary=(path == 'terms/index.html')"));
+  assert.ok(termBuild.includes("native_secondary=True"));
   assert.ok(seoBuild.includes("native_secondary=True"));
   for (const route of ['terms/index.html', 'technology/index.html']) {
     const html = fs.readFileSync(path.join(__dirname, '..', route), 'utf8');

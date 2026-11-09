@@ -584,14 +584,15 @@ test('all generated technology profiles use shared directory chrome with native 
 });
 
 
-test('all 1345 concept detail pages reuse the native seven-section shared navigation', () => {
+test('all 1345 concept detail pages reuse seven primary and eight static secondary routes', () => {
   // Every concept detail page targets its article natively, like technology profiles.
   const dictionaryNav = read('terms/index.html').split('<main class="term-shell">')[1].split('<header class="hero" id="main" tabindex="-1">')[0];
   assert.equal((dictionaryNav.match(/class="site-mobile-chrome__brand"/g)||[]).length,1);
   const secondary = dictionaryNav.match(/<details class="site-chrome__more">[\s\S]*?<\/details>/)?.[0];
   assert.ok(secondary, 'Concept directory keeps its static secondary disclosure');
   assert.equal((dictionaryNav.match(/class="site-chrome__more"/g) || []).length, 1);
-  const detailNav = dictionaryNav.replace(secondary, '');
+  assert.equal((secondary.match(/<a href=/g) || []).length, 8, 'Preserve all eight Discover secondary routes');
+  const detailNav = dictionaryNav; // Every concept detail now matches the directory, including all eight static secondary routes.
   const manifest = JSON.parse(read('terms/manifest.json'));
   assert.equal(Object.keys(manifest).length, 1345);
   const names = ['Discover', 'What’s New Today', 'Concept dictionary', 'Technology profiles', 'Games', 'Playbooks', 'About'];
@@ -611,7 +612,7 @@ test('all 1345 concept detail pages reuse the native seven-section shared naviga
     assert.equal((links.match(/aria-current="page"/g) || []).length, 1, id);
   }
   const generator = read('scripts/build_term_pages.py');
-  assert.ok(generator.includes("directory_nav = render_directory_nav('../', 'Concept dictionary', mobile_brand=True, native_secondary=(path == 'terms/index.html'))"));
+  assert.ok(generator.includes("directory_nav = render_directory_nav('../', 'Concept dictionary', mobile_brand=True, native_secondary=True)"));
   assert.ok(generator.includes('directory_css = DIRECTORY_MOBILE_CSS'));
 });
 
@@ -759,7 +760,7 @@ test('both generated catalog directories share Discover navigation and the nativ
     assert.ok(html.includes('THE FRONTIER, IN CONTEXT'), route);
   }
   const termGenerator=read('scripts/build_term_pages.py'), techGenerator=read('scripts/build_seo.py');
-  assert.ok(termGenerator.includes("render_directory_nav('../', 'Concept dictionary', mobile_brand=True, native_secondary=(path == 'terms/index.html'))"));
+  assert.ok(termGenerator.includes("render_directory_nav('../', 'Concept dictionary', mobile_brand=True, native_secondary=True)"));
   assert.ok(techGenerator.includes("render_directory_nav(prefix, 'Technology profiles', mobile_brand=True, native_secondary=True)"));
   assert.ok(read('scripts/site_chrome.py').includes('DIRECTORY_MOBILE_CSS'));
   assert.match(read('site-chrome.css'), /\.site-mobile-chrome__menu a\{[^}]*min-height:44px/);
