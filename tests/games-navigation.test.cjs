@@ -451,11 +451,14 @@ test('About reuses the exact generated catalog navigation, not a parallel templa
     .replace('<div class="directory-mobile-topbar site-mobile-chrome" aria-label="AI Updates mobile header">', '<div class="directory-mobile-topbar site-mobile-chrome" aria-label="AI Updates mobile header" data-page-label="About">')
     .replaceAll('href="index.html#/dictionary" aria-current="page">Concept dictionary','href="index.html#/dictionary">Concept dictionary')
     .replaceAll('href="about.html">About','href="about.html" aria-current="page">About');
-  assert.equal(ours, expected);
+  const secondary = ours.match(/<details class="site-chrome__more">[\\s\\S]*?<\\/details>/)?.[0];
+  assert.ok(secondary, 'About must expose secondary destinations before JS loads');
+  assert.equal(ours.replace(secondary, ''), expected,
+    'Primary About nav must remain identical to generated directory nav');
   assert.match(about, /class="directory-mobile-topbar site-mobile-chrome"/);
   assert.match(about, /id="directory-mobile-nav"/);
   assert.match(about, /href="index.html#\/search"/);
-  assert.match(built, /render_directory_nav\(prefix, 'About', mobile_brand=True, page_label='About'\)/);
+  assert.match(built, /render_directory_nav\(prefix, 'About', mobile_brand=True, page_label='About', native_secondary=True\)/);
   assert.doesNotMatch(built, /ABOUT_MOBILE_NAV|ABOUT_DESKTOP_NAV|ABOUT_MOBILE_CSS/);
   assert.equal((ours.match(/aria-current="page"/g) || []).length, 2);
 });
@@ -517,7 +520,9 @@ test('research snapshot uses the shared mobile menu and retains contextual resea
   assert.doesNotMatch(html, /<aside>/);
   const desktop=html.match(/<nav class="site-chrome research-site-chrome" aria-label="AI Updates primary navigation">([\s\S]*?)<\/nav>/)?.[1];
   assert.ok(desktop, 'Research must reuse the shared desktop chrome');
-  const titles=[...desktop.matchAll(/<a href="[^"]+"(?: aria-current="[^"]+")?>([^<]+)<\/a>/g)].map(x => x[1]);
+  const primary=desktop.match(/<div class="site-chrome__links">([\s\S]*?)<\/div>/)?.[1];
+  assert.ok(primary, 'Research retains the canonical seven primary links');
+  const titles=[...primary.matchAll(/<a href="[^"]+"(?: aria-current="[^"]+")?>([^<]+)<\/a>/g)].map(x => x[1]);
   assert.deepEqual(titles, ['Discover','What’s New Today','Concept dictionary','Technology profiles','Games','Playbooks','About']);
   assert.ok(desktop.includes('class="site-chrome__brand" href="index.html#/overview"'));
   assert.match(desktop, /href="index\.html#\/overview" aria-current="location">Discover<\/a>/,
@@ -626,7 +631,9 @@ test('editorial directories share one responsive primary navigation component', 
     const nav = html.match(/<nav class="site-chrome [^"]+" aria-label="AI Updates primary navigation">([\s\S]*?)<\/nav>/);
     assert.ok(nav, path);
     assert.match(nav[1], /class="site-chrome__brand" href="index.html#\/overview"/);
-    const links = [...nav[1].matchAll(/<a href="[^"]+"(?: aria-current="page")?>([^<]+)<\/a>/g)];
+    const primary = nav[1].match(/<div class="site-chrome__links">([\\s\\S]*?)<\\/div>/)?.[1];
+    assert.ok(primary, path + ' must retain the seven canonical primary links');
+    const links = [...primary.matchAll(/<a href="[^"]+"(?: aria-current="page")?>([^<]+)<\/a>/g)];
     assert.deepEqual(links.map(link => link[1]), names, path);
     const selected = nav[1].match(/<a href="[^"]+" aria-current="page">([^<]+)<\/a>/g) || [];
     assert.equal(selected.length, 1, path);
@@ -648,7 +655,9 @@ test('editorial evidence reviews reuse the shared desktop site chrome and readab
     const nav=html.split('<nav class="site-chrome '+cls+'" aria-label="AI Updates primary navigation">')[1]?.split('</nav>')[0];
     assert.ok(nav, route);
     assert.ok(nav.includes('class="site-chrome__brand" href="index.html#/overview"'), route);
-    const links=[...nav.matchAll(/<a href="[^"]+"(?: aria-current="location")?>([^<]+)<[/]a>/g)];
+    const primary=nav.match(/<div class="site-chrome__links">([\\s\\S]*?)<\\/div>/)?.[1];
+    assert.ok(primary, route + ' must retain the seven canonical primary links');
+    const links=[...primary.matchAll(/<a href="[^"]+"(?: aria-current="location")?>([^<]+)<[/]a>/g)];
     assert.deepEqual(links.map(x => x[1]), labels, route);
     assert.ok(nav.includes('href="whats-new.html" aria-current="location">What’s New Today</a>'), route);
     assert.ok(!nav.includes('aria-current="page"'), route);
@@ -752,7 +761,9 @@ test('standalone page families share a build-time navigation source, including c
     const desktop = html.match(/<nav class="site-chrome [^"]+" aria-label="AI Updates primary navigation">([\s\S]*?)<\/nav>/)?.[1];
     const mobile = html.match(/<nav class="[^"]*site-mobile-chrome__menu" aria-label="AI Updates sections">([\s\S]*?)<\/nav>/)?.[1];
     assert.ok(desktop && mobile, path);
-    for (const nav of [desktop,mobile]) {
+    const desktopPrimary=desktop.match(/<div class="site-chrome__links">([\\s\\S]*?)<\\/div>/)?.[1];
+    assert.ok(desktopPrimary, path + ' retains the canonical primary group');
+    for (const nav of [desktopPrimary,mobile]) {
       const links = [...nav.matchAll(/<a href="[^"]+"(?: aria-current="(?:page|location)")?>([^<]+)<\/a>/g)];
       assert.deepEqual(links.map(m=>m[1]), names, path);
     }
