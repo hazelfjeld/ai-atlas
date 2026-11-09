@@ -1635,3 +1635,25 @@ test('November 8 published edition has its own byte-verified, deduplicated and d
  assert.equal(idx.last_successful_publish_at,receipt.production_verified_at);
  assert.equal(idx.status,'edition_revision_1_production_verified');
 });
+
+
+test('November 9 edition retains source dates, idempotent receipt, and six deferred catalog proposals', () => {
+  const archive=JSON.parse(fs.readFileSync('data/daily/index.json','utf8'));
+  const ledger=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8'));
+  const latest=archive.editions.find(e=>e.date==='2026-11-09'&&e.revision===1);
+  const receipt=ledger.receipts.find(r=>r.batch_id==='atlas-daily-20261109-0846ct-source-checked-a');
+  assert.ok(latest&&receipt);
+  assert.equal(ledger.receipts.filter(r=>r.batch_id===receipt.batch_id).length,1);
+  const bytes=fs.readFileSync(latest.path);
+  assert.equal(bytes.length,latest.bytes);
+  assert.equal(require('node:crypto').createHash('sha256').update(bytes).digest('hex'),latest.sha256);
+  const e=D.validateEdition(JSON.parse(bytes),latest);
+  assert.equal(e.news.length,11);
+  assert.equal(e.news.filter(n=>n.publication_date===e.edition_date).length,8);
+  assert.equal(e.news.filter(n=>n.publication_date<e.edition_date).length,3);
+  assert.equal(receipt.deferred_catalog_proposal_ids.length,6);
+  assert.equal(receipt.counts.catalog_deferred,6);
+  assert.deepEqual([e.technologies.length,e.terms.length,e.corrections.length],[0,0,0]);
+  assert.ok(e.news.every(n=>n.source_url.startsWith('https://')&&n.review_status&&n.caveat&&n.why_it_matters));
+  assert.ok(archive.last_successful_publish_at&&Date.parse(archive.last_successful_publish_at)>=Date.parse('2026-11-08T14:43:03Z'));
+});

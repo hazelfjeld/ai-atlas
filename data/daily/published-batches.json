@@ -838,6 +838,52 @@
       "production_workflow_run_id": 42490577341,
       "githack_workflow_run_id": 42490577323,
       "verification_scope": "Exact main 7aaba861a42845118342e4cb8a598e93f83b0d37 passed catalog/Node (237 checks), reproducibility, GitHack, Cloudflare 497 exact HTTP assets on each of 3 hosts, and hosted Chromium navigation/archive/Games/offline tests; production workflow 42490577341, GitHack workflow 42490577323. Direct standalone dated query permalink not independently reopened, but latest edition rendered in production archive and its checksummed immutable asset passed exact HTTP verification."
+    },
+    {
+      "batch_id": "atlas-daily-20261109-0846ct-source-checked-a",
+      "source_branch": "atlas-daily-staging",
+      "source_commit": "edaedf47d7de865f30206c541a364fae9aeaaff5",
+      "source_batch_path": "daily-queue/batches/2026-11-09-atlas-daily-20261109-0846ct-source-checked-a.json",
+      "source_batch_sha256": "0bd4d50eb8a3d9aafbedaaf81227ef87594f96651cafcc4470818f5b8b273f29",
+      "source_batch_bytes": 36392,
+      "edition_date": "2026-11-09",
+      "validation_result": "batch_sha256_bytes_schema_unique_ids_dates_sources_and_existing_archive_checked",
+      "status": "partially_published_with_6_deferred_catalog_proposals",
+      "publication_outcome": "pending_cloudflare_http_browser_and_githack_validation",
+      "publication_edition": "2026-11-09-v1",
+      "accepted_news_ids": [
+        "ai-news:amazon-hope-nov9",
+        "ai-news:norway-grid-data-centres-nov9",
+        "ai-news:used-turbine-ai-power-nov9",
+        "ai-news:trump-ai-guardrails-nov9",
+        "ai-news:disney-adobe-private-genai-nov9",
+        "ai-news:apple-china-ai-registration-nov9",
+        "ai-news:waymo-nhtsa-recall-query-nov9",
+        "ai-news:taiwan-oct-exports-ai-demand-nov9",
+        "ai-news:lingyu-first-person-robot-data-nov5",
+        "ai-news:sandflow-sand3d-code-dataset-nov5",
+        "ai-news:weather-fp16-state-fp32-arxiv261109573"
+      ],
+      "deferred_news_ids": [],
+      "deferred_catalog_proposal_ids": [
+        "tech-proposal:hope-moe-expert-pruning:2026-11-09",
+        "tech-proposal:sand3d-python-library:2026-11-09",
+        "tech-proposal:lingyu-bimanual-dataset:2026-11-09",
+        "term-proposal:expert-coactivation:2026-11-09",
+        "term-proposal:bimanual-teleoperation:2026-11-09",
+        "term-proposal:procedural-3d-representation:2026-11-09"
+      ],
+      "rejected_ids": [],
+      "counts": {
+        "news_published": 11,
+        "technology_added": 0,
+        "term_added": 0,
+        "corrections": 0,
+        "news_deferred": 0,
+        "catalog_deferred": 6,
+        "technology_updated": 0
+      },
+      "review_notes": "Eight Nov 9 and three Nov 5–6 reports; source- and date-checked with qualified author/Reuters evidence. Regulatory inquiries are not findings, research benchmarks unreplicated. Partial coverage, six deferred canonical proposals, historical immutable editions unchanged."
     }
   ]
 }
