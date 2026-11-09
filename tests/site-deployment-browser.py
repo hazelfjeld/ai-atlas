@@ -1564,7 +1564,7 @@ with sync_playwright() as p:
                   page.evaluate("""() => {
                       const nav=document.querySelector(innerWidth <= 650
                           ? '.site-mobile-chrome__menu' : '.site-chrome__links');
-                      return !!nav && nav.querySelectorAll(mobile ? ':scope > a:not(.site-mobile-chrome__brand)' : 'a:not(.site-mobile-chrome__brand)').length === 7
+                      return !!nav && nav.querySelectorAll(innerWidth <= 650 ? ':scope > a:not(.site-mobile-chrome__brand)' : 'a:not(.site-mobile-chrome__brand)').length === 7
                           && (innerWidth > 650 || nav.querySelectorAll('a.site-mobile-chrome__brand').length === 1)
                           && document.documentElement.scrollWidth <= innerWidth + 1;
                   }"""))
