@@ -1312,7 +1312,8 @@ test('shared native drawers restore keyboard focus and inert state after dismiss
   assert.match(source,/closeSharedDrawers\(\{restoreFocus:true\}\)/);
   assert.match(source,/window\.addEventListener\('pageshow', \(event\) =>/);
   assert.match(source,/if \(event\.persisted\) \{/);
-  assert.match(source,/closeSharedDrawers\(\);\s*restoreSharedThemeAfterHistory\(\)/);
+  assert.match(source,/closeSharedDrawers\(\{restoreFocus:true\}\);\s*restoreSharedThemeAfterHistory\(\)/,
+    'BFCache restoration must focus the native menu toggle even if the browser blurred its links');
   assert.ok(offline.includes(source),'offline demo must embed the exact shared drawer behavior');
   for(const route of ['index.html','about.html','whats-new.html','technologies.html',
     'playbooks.html','research.html','games.html','terms/index.html',
