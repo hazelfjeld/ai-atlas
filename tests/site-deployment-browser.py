@@ -321,11 +321,11 @@ with sync_playwright() as p:
               && !document.querySelector('#games-mobile-nav').inert"""))
     mobile_games.locator('#games-mobile-nav summary').focus()
     mobile_games.keyboard.press('Shift+Tab')
-    check('Shift-Tab wraps inside the shared native drawer',
-          mobile_games.locator('#games-mobile-nav .site-mobile-chrome__menu a:not(.site-mobile-chrome__brand)').last.evaluate(
-              '(el) => document.activeElement === el'))
+    check('Shift-Tab wraps to the shared drawer appearance action',
+          mobile_games.locator('#games-mobile-nav .site-chrome__theme-toggle').evaluate(
+              '(el) => document.activeElement === el && el.getBoundingClientRect().height >= 44'))
     mobile_games.keyboard.press('Tab')
-    check('Tab from final drawer link returns to its close control',
+    check('Tab from final drawer action returns to its close control',
           mobile_games.locator('#games-mobile-nav summary').evaluate(
               '(el) => document.activeElement === el'))
     mobile_games.mouse.click(310, 160)
