@@ -561,7 +561,7 @@ test('all generated technology profiles use shared directory chrome with native 
   const secondary = directory.match(/<details class="site-chrome__more">[\s\S]*?<\/details>/)?.[0];
   assert.ok(secondary, 'Technology directory keeps its static secondary disclosure');
   assert.equal((directory.match(/class="site-chrome__more"/g) || []).length, 1);
-  const detailNav = directory.replace(secondary, '');
+  const detailNav = directory;
   assert.match(directory, /class="directory-mobile-topbar site-mobile-chrome"/);
   assert.match(directory, /<nav class="site-chrome term-nav" aria-label="AI Updates primary navigation">/);
   const labels = ['Discover','What’s New Today','Concept dictionary','Technology profiles','Games','Playbooks','About'];
@@ -575,9 +575,10 @@ test('all generated technology profiles use shared directory chrome with native 
     assert.ok(html.includes('<link rel="stylesheet" href="../site-chrome.css">'), file);
     assert.ok(html.includes('<script src="../site-theme.js"></script>'), file);
     assert.equal(html.split(prefix)[1].split('<p class="breadcrumb-links">')[0], detailNav, file);
+    assert.equal((html.match(/class="site-chrome__more"/g) || []).length, 1, file);
   }
   const generator = read('scripts/build_seo.py');
-  assert.ok(generator.includes("render_directory_nav(prefix, 'Technology profiles', mobile_brand=True, native_secondary=(path == 'technology/index.html')) if path.startswith('technology/')"));
+  assert.ok(generator.includes("render_directory_nav(prefix, 'Technology profiles', mobile_brand=True, native_secondary=True) if path.startswith('technology/')"));
   assert.ok(generator.includes("DIRECTORY_MOBILE_CSS if path.startswith('technology/')"));
   assert.ok(read('downloads/Atlas_Demo_Offline.html').includes('/* Native, script-free reference pages: readable two-column touch navigation on phones.'));
 });

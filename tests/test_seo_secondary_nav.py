@@ -23,6 +23,22 @@ class SecondaryNavigationTests(unittest.TestCase):
         changed = nav.replace(">Research library</span>", ">Outdated label</span>", 1)
         self.assertEqual(sync_discover_secondary(changed), nav)
 
+    def test_every_technology_profile_has_native_secondary_navigation(self):
+        """All published technology detail links work even with JavaScript off."""
+        from site_chrome import render_secondary_nav
+        expected = render_secondary_nav("../")
+        self.assertEqual(expected.count("<a "), len(SECONDARY_DESTINATIONS))
+        pages = sorted((ROOT / "technology").glob("TECH-*.html"))
+        self.assertEqual(len(pages), 303)
+        for page in pages:
+            source = page.read_text(encoding="utf-8")
+            with self.subTest(path=page.name):
+                self.assertEqual(source.count('<details class="site-chrome__more">'), 1)
+                self.assertIn(expected, source)
+                self.assertEqual(source.count('aria-label="AI Updates primary navigation"'), 1)
+                self.assertIn('href="../index.html#/search"', source)
+                self.assertEqual(source.count('id="main"'), 1)
+
     def test_unexpected_key_and_bad_markers_fail_closed(self):
         html = (ROOT / "index.html").read_text(encoding="utf-8")
         nav = html[html.index('<details class="nav-more"'):].split("</details>", 1)[0]
