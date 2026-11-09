@@ -231,7 +231,7 @@ test('Research, Playbooks, news, editorial reviews and reference directories reu
     assert.ok(block.includes(sel), 'Missing callout family: ' + sel);
   }
   for (const property of ['background:var(--accent-soft', 'border:1px solid var(--line',
-    'box-shadow:inset 4px 0 0 var(--accent', 'color:var(--ink',
+    'border-left:4px solid var(--accent', 'color:var(--ink',
     'a:focus-visible', 'white-space:normal', '@media (max-width:650px)']) {
     assert.ok(block.includes(property), 'Missing shared surface/accessibility treatment: ' + property);
   }

@@ -727,8 +727,8 @@ html.atlas-enhanced #catalog-loading{
   background:var(--accent-soft,var(--soft,#e9eee7));
   color:var(--ink,#18211e);
   border:1px solid var(--line,#dfe3dc);
+  border-left:4px solid var(--accent,#27664e);
   border-radius:10px;
-  box-shadow:inset 4px 0 0 var(--accent,#27664e);
   padding:16px 20px;
   font-size:14px;
   line-height:1.65;
@@ -756,4 +756,7 @@ html.atlas-enhanced #catalog-loading{
       .review-shell .review-callout,
       .term-shell .notice){padding:14px 16px}
 }
+/* The archive retains one historical inline border declaration; preserve its
+   content while giving that notice the identical four-pixel accent edge. */
+.shell:has(> .site-chrome.top) .notice{border-left:4px solid var(--accent,#27664e)!important}
 /* atlas-shared-evidence-callouts:end */

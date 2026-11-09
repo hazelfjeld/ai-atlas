@@ -1084,9 +1084,9 @@ with sync_playwright() as p:
                     page.screenshot(path=str(out/f'shared-filters-{route}-{width}-{theme}.png'))
 
 
-    # Actual dark-theme screenshot audit exposed unreadable pale research-scope
-    # callouts on Technology and Playbooks. Contrast-test their original content
-    # in both themes without replacing or hiding the caveats.
+    # The evidence callout is now the shared Discover-style component on Playbooks.
+    # Keep the exact palette + >=7:1 contrast contract at phone and desktop widths;
+    # do not preserve legacy tan/dark-green values in the visual assertion.
     for width, height in ((390,844),(1280,900)):
         page.set_viewport_size({'width':width,'height':height})
         for theme in ('light','dark'):
@@ -1110,8 +1110,8 @@ with sync_playwright() as p:
                 }""")
                 check(f'{route} {width}px {theme} keeps scope note readable',
                       contrast['ratio']>=7
-                      and (contrast['bg']=='rgb(49, 65, 56)' if theme=='dark'
-                           else contrast['bg'] in ('rgb(246, 238, 224)','rgb(247, 239, 223)'))
+                      and contrast['bg']==('rgb(45, 64, 51)' if theme=='dark'
+                                          else 'rgb(233, 238, 231)')
                       and page.evaluate('document.documentElement.scrollWidth <= innerWidth'))
                 if theme=='dark':
                     card.scroll_into_view_if_needed()
