@@ -1357,16 +1357,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const homeLink = desktopRail.querySelector('.site-chrome__brand')?.getAttribute('href') || '';
     if (homeLink.endsWith('index.html#/overview')) {
       const prefix = homeLink.slice(0, -'index.html#/overview'.length);
+      /* atlas-secondary-data:begin */
       const sharedSecondarySections = [
-        ['index.html#/safety', 'Safety observatory'],
-        ['index.html#/papers', 'Research library'],
-        ['index.html#/compare', 'Compare tools'],
-        ['index.html#/saved', 'Your notebook'],
-        ['index.html#/sources', 'Sources & coverage'],
-        ['demo.html', 'Guided professor demo'],
-        ['terms/index.html', 'Concept encyclopedia'],
-        ['downloads/Atlas_Demo_Offline.html', 'Offline demo download ↓']
+        ["index.html#/safety", "Safety observatory"],
+        ["index.html#/papers", "Research library"],
+        ["index.html#/compare", "Compare tools"],
+        ["index.html#/saved", "Your notebook"],
+        ["index.html#/sources", "Sources & coverage"],
+        ["demo.html", "Guided professor demo"],
+        ["terms/index.html", "Concept encyclopedia"],
+        ["downloads/Atlas_Demo_Offline.html", "Offline demo download ↓"],
       ];
+      /* atlas-secondary-data:end */
       const more = document.createElement('details');
       more.className = 'site-chrome__more';
       const trigger = document.createElement('summary');

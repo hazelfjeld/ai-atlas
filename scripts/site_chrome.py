@@ -14,6 +14,64 @@ DESTINATIONS = (
     ("playbooks.html", "Playbooks"),
     ("about.html", "About"),
 )
+# Build-time source of truth for Discover and native desktop secondary destinations.
+# Existing Discover icons and dynamic counts are preserved; this adds no routes.
+SECONDARY_DESTINATIONS = (
+    ("safety", "view", "index.html#/safety", "Safety observatory"),
+    ("papers", "view", "index.html#/papers", "Research library"),
+    ("compare", "view", "index.html#/compare", "Compare tools"),
+    ("saved", "view", "index.html#/saved", "Your notebook"),
+    ("sources", "view", "index.html#/sources", "Sources & coverage"),
+    ("demo", "static", "demo.html", "Guided professor demo"),
+    ("encyclopedia", "static", "terms/index.html", "Concept encyclopedia"),
+    ("offline", "static", "downloads/Atlas_Demo_Offline.html", "Offline demo download ↓"),
+)
+
+def render_secondary_script_data():
+    """Generate only the existing native desktop enhancement destinations."""
+    import json
+    lines = ["      /* atlas-secondary-data:begin */", "      const sharedSecondarySections = ["]
+    for _, _, route, label in SECONDARY_DESTINATIONS:
+        lines.append("        [" + json.dumps(route, ensure_ascii=False) + ", " +
+                     json.dumps(label, ensure_ascii=False) + "],")
+    lines.extend(["      ];", "      /* atlas-secondary-data:end */"])
+    return "\n".join(lines)
+
+def sync_secondary_navigation_script(script):
+    """Update generated JS data, rejecting duplicated or missing markers."""
+    import re
+    block = render_secondary_script_data()
+    start, end = "      /* atlas-secondary-data:begin */", "      /* atlas-secondary-data:end */"
+    if start in script or end in script:
+        assert script.count(start) == script.count(end) == 1, "Ambiguous secondary navigation markers"
+        first, last = script.index(start), script.index(end) + len(end)
+        return script[:first] + block + script[last:]
+    original = re.compile(r"      const sharedSecondarySections = \[\n(?:[^\n]*\n)*?      \];")
+    replaced, count = original.subn(lambda _: block, script, count=1)
+    assert count == 1, "Missing secondary navigation data block"
+    return replaced
+
+def sync_discover_secondary(secondary):
+    """Use the same canonical links and labels but preserve icon SVGs and counts."""
+    import re
+    pattern = re.compile(r'<a class="nav-link" data-(view|static)="([^"]+)" href="([^"]+)"([^>]*)>(.*?)</a>', re.S)
+    matches = list(pattern.finditer(secondary))
+    assert len(matches) == len(SECONDARY_DESTINATIONS), "Unexpected Discover secondary link count"
+    n = 0
+    def replace(match):
+        nonlocal n
+        key, kind, route, label = SECONDARY_DESTINATIONS[n]
+        n += 1
+        assert (match.group(1), match.group(2)) == (kind, key), "Unexpected Discover secondary key/order"
+        inner, changed = re.subn(r"<span>[^<]*</span>",
+                                 lambda _: "<span>" + escape(label) + "</span>",
+                                 match.group(5), count=1)
+        assert changed == 1, "Missing Discover secondary label"
+        return ('<a class="nav-link" data-' + kind + '="' + key +
+                '" href="' + route.removeprefix("index.html") + '"' +
+                match.group(4) + '>' + inner + '</a>')
+    return pattern.sub(replace, secondary)
+
 DIRECTORY_MOBILE_CSS = '@media(max-width:650px){.term-shell{padding:0 20px 65px}.term-shell .term-nav{display:none}.directory-mobile-topbar{margin:0 -20px;padding:14px 20px;border-bottom:1px solid var(--line)}}'
 
 def render_primary_links(prefix, selected, current_kind="page"):
@@ -264,6 +322,7 @@ def normalize_discover_sidebar(html, term_count, tech_count):
         'Unexpected Discover primary links: ' + repr(existing_keys)
     )
     secondary = '<details class="nav-more"' + secondary
+    secondary = sync_discover_secondary(secondary)
     assert 'data-view="playbooks"' not in secondary, 'Playbooks must appear only once'
     normalized = (before + marker + render_discover_primary(term_count, tech_count) +
                   secondary + '</nav>' + after)

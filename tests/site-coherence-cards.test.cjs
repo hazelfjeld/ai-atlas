@@ -334,7 +334,19 @@ test('native desktop rails expose Discover secondary destinations from one share
     .map(match => [match[1].startsWith('#/') ? 'index.html' + match[1] : match[1], match[2]]);
   const generated = script.split('const sharedSecondarySections = [')[1]?.split('];')[0];
   assert.ok(generated, 'Every native page must share one secondary source');
-  const rendered = [...generated.matchAll(/\['([^']+)', '([^']+)'\]/g)].map(m => [m[1], m[2]]);
+  const rendered = [...generated.matchAll(/\["([^"]+)", "([^"]+)"\]/g)].map(m => [m[1], m[2]]);
+  const generator = fs.readFileSync(path.join(__dirname, '..', 'scripts/site_chrome.py'), 'utf8');
+  const source = generator.split('SECONDARY_DESTINATIONS = (')[1]?.split('\n)')[0];
+  assert.ok(source, 'Canonical secondary navigation definitions must be present');
+  const canonical = [...source.matchAll(/\("([^"]+)", "(?:view|static)", "([^"]+)", "([^"]+)"\),/g)]
+    .map(m => [m[2], m[3]]);
+  assert.equal(canonical.length, 8, 'Do not invent or remove secondary destinations');
+  assert.deepEqual(rendered, canonical, 'Native desktop rails must use the Python build-time source');
+  const seoBuild = fs.readFileSync(path.join(__dirname, '..', 'scripts/build_seo.py'), 'utf8');
+  assert.match(seoBuild, /sync_secondary_navigation_script\(theme\)/);
+  assert.match(generator, /secondary = sync_discover_secondary\(secondary\)/);
+  assert.match(script, /atlas-secondary-data:begin/);
+  assert.match(script, /atlas-secondary-data:end/);
   assert.equal(rendered.length, 8, 'Keep existing eight destinations, without expanding the catalog');
   assert.deepEqual(rendered, existing, 'Secondary destinations and order must match Discover');
   assert.ok(script.includes("desktopRail?.querySelector?.('.site-chrome__links')"));
