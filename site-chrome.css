@@ -40,6 +40,9 @@
 @media(max-width:650px){
 .games-header__inner{padding:12px 16px}
 .games-header__inner > .site-mobile-chrome{flex:1;min-width:0}
+/* On mobile, Games uses the same drawer appearance action as the rest of
+   Atlas; its original native button remains available on desktop. */
+.games-header__inner > #theme-toggle{display:none}
 }
 @media print{.games-header{display:none}}
 

@@ -277,14 +277,14 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // All page families use the shared appearance action in their native drawer.
-  // Discover retains its original desktop sidebar button; Games already has a
-  // visible theme button in its own header, so neither gets a duplicate rail action.
+  // Discover retains its original desktop sidebar button; Games retains its
+  // desktop header action, but uses this same control inside the mobile drawer.
   // Native links and no-JavaScript navigation remain untouched.
   if (typeof document.createElement === 'function' && menu) {
     const rail = document.querySelector('.site-chrome');
     const existing = document.getElementById?.('theme-toggle');
     const containers = rail && !existing ? [rail, menu] :
-      existing && !rail ? [menu] : [];
+      existing ? [menu] : [];
     if (containers.length && !menu.querySelector('.site-chrome__theme-toggle')) {
       const controls = [];
       const effectiveTheme = () => document.documentElement.dataset.theme ||
@@ -315,7 +315,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Discover's app-level click handler may be registered after this head
       // script's DOMContentLoaded callback. Read its final palette after all
       // synchronous click listeners finish, not before the app toggles it.
-      if (existing && !rail) existing.addEventListener('click', () => queueMicrotask(syncThemeButtons));
+      if (existing) existing.addEventListener('click', () => queueMicrotask(syncThemeButtons));
       syncThemeButtons();
     }
   }

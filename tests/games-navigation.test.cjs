@@ -142,7 +142,7 @@ test('shared native mobile drawer reuses canonical desktop wordmark without dupl
   assert.match(css,/\.site-mobile-chrome \.site-mobile-chrome__menu::before/);
 });
 
-test('Discover mobile uses the shared theme action while Games keeps its existing one', () => {
+test('Discover and standalone Games share the mobile drawer appearance action while preserving their original desktop controls', () => {
   const script = read('site-theme.js');
   new vm.Script(script);
   const handlers = {};
@@ -207,10 +207,27 @@ test('Discover mobile uses the shared theme action while Games keeps its existin
   assert.equal(existing.attrs['aria-pressed'],'true', 'Desktop theme change updates its own accessible state');
   handlers.DOMContentLoaded();
   assert.equal(buttons.length,1,'re-entering the shared initializer cannot duplicate the button');
+  // Enter Games with both its own theme button and a desktop rail. The Games
+  // header must no longer grow a third mobile control, while its menu gets the
+  // same real appearance action available on Discover and editorial pages.
+  buttons.length=0;
   document.querySelector = selector => selector === '.site-mobile-chrome' ? chrome :
     selector === '.site-chrome' ? {} : null;
   handlers.DOMContentLoaded();
-  assert.equal(buttons.length,1,'Games with its existing header button must not gain another');
+  assert.equal(buttons.length,1,'Games must have one shared mobile drawer appearance action');
+  assert.equal(buttons[0].attrs['aria-pressed'],'true');
+  buttons[0].listeners.click();
+  assert.equal(root.dataset.theme,'light');
+  assert.equal(existing.attrs['aria-pressed'],'false');
+  assert.deepEqual(saved.at(-1),['atlas.theme','light'],'Mobile Games persists the selected appearance');
+  existing.click();
+  for (const task of microtasks.splice(0)) task();
+  assert.equal(root.dataset.theme,'dark');
+  assert.equal(buttons[0].attrs['aria-pressed'],'true','Games desktop action synchronizes its drawer');
+  handlers.DOMContentLoaded();
+  assert.equal(buttons.length,1,'Repeated Games initialization must not create another action');
+  assert.match(read('site-chrome.css'), /\.games-header__inner > #theme-toggle\{display:none\}/,
+    'Games must not show its original desktop theme control beside the mobile search');
 });
 
 test('shared native mobile drawer traps keyboard focus without replacing no-JS navigation', () => {

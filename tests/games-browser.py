@@ -86,18 +86,37 @@ with sync_playwright() as p:
     page.locator('[data-action=match-again]').click();page.locator('.tile').first.click();check('fresh board resets selection and score','0 / 6' in page.locator('#pairs-count').inner_text());page.locator('[data-action=menu]').click()
     page.set_viewport_size({'width':390,'height':844});page.screenshot(path=str(out/'games-mobile.png'),full_page=True);check('mobile setup has no horizontal overflow',page.evaluate('document.documentElement.scrollWidth <= innerWidth'))
     page.locator('#start-match').click();page.screenshot(path=str(out/'match-mobile.png'),full_page=True);check('mobile match has no horizontal overflow',page.evaluate('document.documentElement.scrollWidth <= innerWidth'));check('mobile full definitions untruncated',page.locator('.tile').evaluate_all('(els)=>els.every(el=>el.scrollHeight<=el.clientHeight+1)'))
-    page.locator('[data-action=menu]').click();page.locator('#theme-toggle').click();page.screenshot(path=str(out/'games-dark.png'),full_page=True)
+    page.locator('[data-action=menu]').click()
+    if args.fixture:
+        page.locator('#theme-toggle').click()
+    else:
+        # Use the same mobile drawer appearance control as Discover, rather
+        # than the desktop button that no longer occupies a third header slot.
+        page.locator('#games-mobile-nav summary').click()
+        page.locator('#games-mobile-nav .site-chrome__theme-toggle').click()
+        page.locator('#games-mobile-nav summary').click()
+    page.screenshot(path=str(out/'games-dark.png'),full_page=True)
     # At 320px the old header compressed four links into tiny targets. Shared
     # navigation now reveals all seven canonical sections via a native details
     # menu; validate the actual rendered controls rather than the removed nav.
     page.set_viewport_size({'width':320,'height':700})
     for palette in ('dark','light'):
         if page.locator('html').get_attribute('data-theme') != palette:
-            page.locator('#theme-toggle').click()
+            if args.fixture:
+                page.locator('#theme-toggle').click()
+            else:
+                page.locator('#games-mobile-nav summary').click()
+                page.locator('#games-mobile-nav .site-chrome__theme-toggle').click()
+                page.locator('#games-mobile-nav summary').click()
         check(f'320px {palette} Games theme toggle state is accurate',
               page.locator('#theme-toggle').get_attribute('aria-pressed') == str(palette == 'dark').lower())
-        check(f'320px {palette} standalone theme toggle has a 44px touch target',
-              page.locator('#theme-toggle').evaluate("el => { const r = el.getBoundingClientRect(); return r.width >= 44 && r.height >= 44 && r.left >= 15 && r.right <= innerWidth - 15; }"))
+        if args.fixture:
+            check(f'320px {palette} fixture theme button retains a touch-sized control',
+                  page.locator('#theme-toggle').evaluate("el => el.getBoundingClientRect().height >= 44"))
+        else:
+            check(f'320px {palette} Games now has the same two-control mobile header as Discover',
+                  not page.locator('#theme-toggle').is_visible()
+                  and page.locator('#games-mobile-nav .site-chrome__theme-toggle').count() == 1)
         check(f'320px {palette} standalone header has 44px menu and real search targets',
               page.locator('.site-mobile-chrome').evaluate("""el => {
                 const toggle=el.querySelector('summary'), search=el.querySelector('.site-mobile-chrome__search');
@@ -107,6 +126,13 @@ with sync_playwright() as p:
                 });
               }"""))
         page.locator('#games-mobile-nav summary').click()
+        if not args.fixture:
+            shared_theme=page.locator('#games-mobile-nav .site-chrome__theme-toggle')
+            check(f'320px {palette} Games mobile drawer retains real keyboard-friendly theme control',
+                  shared_theme.is_visible()
+                  and shared_theme.get_attribute('aria-label') == 'Toggle color theme'
+                  and shared_theme.get_attribute('aria-pressed') == str(palette == 'dark').lower()
+                  and shared_theme.evaluate("el => el.getBoundingClientRect().height >= 44"))
         check(f'320px {palette} drawer uses the canonical desktop wordmark',
               page.locator('#games-mobile-nav .site-mobile-chrome__brand').count() == 1
               and page.locator('#games-mobile-nav .site-mobile-chrome__brand').is_visible()
