@@ -866,7 +866,7 @@ with sync_playwright() as p:
         menu.locator(':scope > summary').click()
         check(reference + ' exposes the seven shared navigation links with current section',
               menu.evaluate('el => el.open')
-              and menu.locator('nav a:not(.site-mobile-chrome__brand)').count() == 7
+              and menu.locator('nav > a:not(.site-mobile-chrome__brand)').count() == 7
               and menu.locator('nav > a.site-mobile-chrome__brand').count() == 1
               and menu.locator('nav a[aria-current="page"]').count() == 1
               and menu.locator('nav a[aria-current="page"]').inner_text() == 'Concept dictionary')
@@ -875,7 +875,7 @@ with sync_playwright() as p:
               mobile_reference.evaluate("""() => document.querySelector('.site-mobile-chrome__search').inert
                   && !document.querySelector('#directory-mobile-nav').inert"""))
         check(reference + ' has keyboard-reachable 44px navigation links',
-              mobile_reference.evaluate("""() => [...document.querySelectorAll('#directory-mobile-nav nav a:not(.site-mobile-chrome__brand)')]
+              mobile_reference.evaluate("""() => [...document.querySelectorAll('#directory-mobile-nav nav > a:not(.site-mobile-chrome__brand)')]
                   .every(a => a.getBoundingClientRect().height >= 44)"""))
         # Check geometry, not merely the number of DOM links: checkpoint.css
         # also styles generic navs and previously compressed this menu into a
@@ -883,7 +883,7 @@ with sync_playwright() as p:
         check(reference + ' stacks all seven links in one visible vertical menu',
               mobile_reference.evaluate("""() => {
                   const menu = document.querySelector('#directory-mobile-nav nav');
-                  const links = [...menu.querySelectorAll('a:not(.site-mobile-chrome__brand)')].map(a => a.getBoundingClientRect());
+                  const links = [...menu.querySelectorAll(':scope > a:not(.site-mobile-chrome__brand)')].map(a => a.getBoundingClientRect());
                   const box = menu.getBoundingClientRect();
                   return getComputedStyle(menu).display === 'grid'
                       && box.left >= -1 && box.right <= innerWidth + 1
@@ -928,7 +928,7 @@ with sync_playwright() as p:
           nojs_reference.get_by_role('heading', name='Ablation study').is_visible()
           and nojs_reference.locator('#directory-mobile-nav nav a.site-mobile-chrome__brand').count() == 1
           and nojs_reference.locator('#directory-mobile-nav nav a.site-mobile-chrome__brand').get_attribute('href') == '../index.html#/overview'
-          and nojs_reference.locator('#directory-mobile-nav nav a:not(.site-mobile-chrome__brand)').count() == 7
+          and nojs_reference.locator('#directory-mobile-nav nav > a:not(.site-mobile-chrome__brand)').count() == 7
           and nojs_reference.locator('#directory-mobile-nav nav a').count() == 8
           and nojs_reference.locator('#directory-mobile-nav nav a').last.is_visible())
     nojs_reference.close()
@@ -1758,7 +1758,7 @@ with sync_playwright() as p:
               menu.count() == 1 and menu.evaluate("""(el, realLink) => {
                   const anchors = [...el.querySelectorAll('a.site-mobile-chrome__brand')];
                   const fallback = getComputedStyle(el, '::after');
-                  const sections = el.querySelectorAll('a:not(.site-mobile-chrome__brand)');
+                  const sections = el.querySelectorAll(':scope > a:not(.site-mobile-chrome__brand)');
                   if (sections.length !== 7) return false;
                   if (realLink) {
                       if (anchors.length !== 1) return false;
