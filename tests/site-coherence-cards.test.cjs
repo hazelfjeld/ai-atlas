@@ -232,7 +232,7 @@ test('Research, Playbooks, news, editorial reviews and reference directories reu
   }
   for (const property of ['background:var(--accent-soft', 'border:1px solid var(--line',
     'border-left:4px solid var(--accent', 'color:var(--ink',
-    'a:focus-visible', 'white-space:normal', '@media (max-width:650px)']) {
+    'a:focus-visible', 'white-space:normal', '@media (max-width:850px)']) {
     assert.ok(block.includes(property), 'Missing shared surface/accessibility treatment: ' + property);
   }
   assert.ok(!block.includes('display:none') && !block.includes('pointer-events:none'),
@@ -264,7 +264,7 @@ test('Discover and all standalone families share footer flow while preserving ev
   const block = css.split('/* atlas-shared-footer-layout:begin */')[1]
     ?.split('/* atlas-shared-footer-layout:end */')[0];
   assert.ok(block, 'Missing shared footer layout');
-  for (const rule of ['@media (min-width:651px)', 'display:flex', 'flex-wrap:wrap',
+  for (const rule of ['@media (min-width:851px)', 'display:flex', 'flex-wrap:wrap',
     'justify-content:space-between', 'gap:8px 20px', 'footer > p',
     'flex:1 1 100%', '@media (max-width:650px)', 'display:block'])
     assert.ok(block.includes(rule), 'Shared footer is missing ' + rule);

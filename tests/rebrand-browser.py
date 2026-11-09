@@ -1637,7 +1637,7 @@ with sync_playwright() as p:
                     border:getComputedStyle(el).borderTopStyle,
                     overflow:document.documentElement.scrollWidth > innerWidth
                 })""")
-                expected='block' if width <= 650 else 'flex'
+                expected='block' if width <= 850 else 'flex'
                 check(f'{route} {width}px {theme} uses Discover footer layout',
                       frame['display']==expected and frame['border']=='solid'
                       and not frame['overflow'])
