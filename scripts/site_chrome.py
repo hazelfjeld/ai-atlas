@@ -73,6 +73,21 @@ def sync_discover_secondary(secondary):
                 match.group(4) + '>' + inner + '</a>')
     return pattern.sub(replace, secondary)
 
+def render_secondary_nav(prefix):
+    """Script-free native desktop disclosure, sharing Discover's eight routes."""
+    assert prefix in ("", "../")
+    return (
+        '<details class="site-chrome__more"><summary>More sections</summary>'
+        '<div class="site-chrome__more-links">'
+        + "".join(
+            '<a href="' + prefix + route + '"' +
+            (' download' if route == "downloads/Atlas_Demo_Offline.html" else '') +
+            '>' + escape(label) + '</a>'
+            for _, _, route, label in SECONDARY_DESTINATIONS
+        ) +
+        '</div></details>'
+    )
+
 DIRECTORY_MOBILE_CSS = '@media(max-width:650px){.term-shell{padding:0 20px 65px}.term-shell .term-nav{display:none}.directory-mobile-topbar{margin:0 -20px;padding:14px 20px;border-bottom:1px solid var(--line)}}'
 
 def render_primary_links(prefix, selected, current_kind="page"):
@@ -131,7 +146,7 @@ def render_directory_nav(prefix, selected, *, mobile_classes="directory-mobile-t
                          toggle_classes="site-mobile-chrome__toggle", menu_classes="site-mobile-chrome__menu",
                          search_classes="site-mobile-chrome__search", icon_classes="site-mobile-chrome__search-icon",
                          search_label_classes="site-mobile-chrome__search-placeholder",
-                         desktop_classes="site-chrome term-nav", labeled=True, current_kind="page", page_label=None, mobile_brand=False):
+                         desktop_classes="site-chrome term-nav", labeled=True, current_kind="page", page_label=None, mobile_brand=False, native_secondary=False):
     """One script-free site header, with only page-specific shell classes configurable."""
     assert prefix in ("", "../")
     assert selected is None or selected in {name for _, name in DESTINATIONS}
@@ -152,7 +167,8 @@ def render_directory_nav(prefix, selected, *, mobile_classes="directory-mobile-t
     )
     desktop = (
         '<nav class="' + desktop_classes + '" aria-label="AI Updates primary navigation">'
-        + brand + '<div class="site-chrome__links">' + links + '</div></nav>'
+        + brand + '<div class="site-chrome__links">' + links + '</div>' +
+        (render_secondary_nav(prefix) if native_secondary else '') + '</nav>'
     )
     return mobile + desktop
 
@@ -206,7 +222,7 @@ def render_standalone_nav(path):
             "catalog-review.html": "Catalog review",
             "hardware-review.html": "Hardware evidence",
         }.get(path, selected),
-        mobile_brand=True,
+        mobile_brand=True, native_secondary=True,
     )
     # Research's main landmark starts between its two headers, but the native
     # skip destination belongs on the subsequent article hero.

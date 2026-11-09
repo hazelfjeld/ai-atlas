@@ -369,3 +369,39 @@ test('native desktop rails expose Discover secondary destinations from one share
   assert.ok(offline.includes(styles) && offline.includes(script),
     'Single-file demo must carry the exact same shared styles and enhancement');
 });
+
+test('native editorial, archive, technology, research and Games pages keep Discover secondary navigation without JS', () => {
+  const home = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+  const js = fs.readFileSync(path.join(__dirname, '..', 'site-theme.js'), 'utf8');
+  const py = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'site_chrome.py'), 'utf8');
+  const build = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'build_seo.py'), 'utf8');
+  const data = js.split('const sharedSecondarySections = [')[1]?.split('];')[0];
+  assert.ok(data, 'Shared secondary destinations must exist');
+  const expected = [...data.matchAll(/\["([^"]+)", "([^"]+)"\]/g)].map(m => [m[1], m[2]]);
+  assert.equal(expected.length, 8);
+  assert.match(home, /<details class="nav-more" id="additional-navigation">/);
+  assert.match(py, /def render_secondary_nav\(prefix\):/);
+  assert.match(py, /native_secondary=True/);
+  assert.match(build, /page_label='About', native_secondary=True/);
+  for (const name of ['about.html', 'demo.html', 'research.html', 'catalog-review.html',
+    'hardware-review.html', 'games.html', 'technologies.html', 'playbooks.html', 'whats-new.html']) {
+    const html = fs.readFileSync(path.join(__dirname, '..', name), 'utf8');
+    const rail = html.match(/<nav class="site-chrome [^"]+" aria-label="AI Updates primary navigation">[\s\S]*?<\/nav>/)?.[0];
+    assert.ok(rail, name + ' has the shared native desktop rail');
+    assert.equal((rail.match(/class="site-chrome__more"/g) || []).length, 1,
+      name + ' must have one script-free disclosure, not a duplicate');
+    const details = rail.match(/<details class="site-chrome__more"><summary>More sections<\/summary><div class="site-chrome__more-links">([\s\S]*?)<\/div><\/details>/);
+    assert.ok(details, name + ' exposes the same native disclosure as Discover');
+    const anchors = [...details[1].matchAll(/<a href="([^"]+)"( download)?>([^<]+)<\/a>/g)]
+      .map(m => [m[1], m[3]]);
+    assert.deepEqual(anchors, expected, name + ' secondary routes and labels must not drift');
+    assert.ok(details[1].includes('href="downloads/Atlas_Demo_Offline.html" download>'),
+      name + ' must preserve the native offline download');
+    assert.equal((rail.match(/class="site-chrome__links"/g) || []).length, 1,
+      name + ' retains its original primary navigation');
+    assert.match(html, /class="[^"]*site-mobile-chrome__nav"/,
+      name + ' retains its native keyboard-usable mobile menu');
+  }
+  assert.ok(js.includes("!desktopRail.querySelector('.site-chrome__more')"),
+    'JS enhancement must not insert a second disclosure over static navigation');
+});
