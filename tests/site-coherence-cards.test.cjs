@@ -226,7 +226,7 @@ test('Research, Playbooks, news, editorial reviews and reference directories reu
   const block = css.split('/* atlas-shared-evidence-callouts:begin */')[1]
     ?.split('/* atlas-shared-evidence-callouts:end */')[0];
   assert.ok(block, 'Missing shared evidence callout component');
-  for (const sel of ['.shell .notice', '.playbook-shell .playbook-note',
+  for (const sel of ['.shell .notice', '.tech-shell .tech-warning', '.playbook-shell .playbook-note',
     '.review-shell .review-callout', '.term-shell .notice']) {
     assert.ok(block.includes(sel), 'Missing callout family: ' + sel);
   }
@@ -240,6 +240,7 @@ test('Research, Playbooks, news, editorial reviews and reference directories reu
   const pages = {
     'research.html': 'class="notice"',
     'playbooks.html': 'class="playbook-note"',
+    'technologies.html': 'class="tech-warning"',
     'hardware-review.html': 'class="review-callout"',
     'catalog-review.html': 'class="notice"',
     'whats-new.html': 'class="notice"',

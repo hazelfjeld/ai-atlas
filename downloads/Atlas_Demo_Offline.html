@@ -749,23 +749,6 @@ body:has(.site-chrome) :is(.tech-controls,.playbook-tools,.controls,.search-cont
 }
 /* atlas-filter-controls:end */
 
-/* atlas-note-contrast:begin */
-/* Dark-mode research scope notes must not retain pale, light-only backgrounds
-   while inheriting the workspace's light text. Keep their light design intact. */
-:root[data-theme="dark"] :is(.tech-warning,.playbook-note){
-  background:#314138;
-  border-color:#577261;
-  color:#edf4ee;
-}
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]) :is(.tech-warning,.playbook-note){
-    background:#314138;
-    border-color:#577261;
-    color:#edf4ee;
-  }
-}
-/* atlas-note-contrast:end */
-
 /* atlas-info-callouts:begin */
 /* Align research, candidate-review, evidence and generated reference notes
    to a single semantic info surface. Research previously inherited the pale
@@ -986,11 +969,12 @@ html.atlas-enhanced #catalog-loading{
 
 
 /* atlas-shared-evidence-callouts:begin */
-/* The same evidence-first note component across Research, Playbooks,
-   editorial reviews, dated news and the static reference directories.
+/* The same evidence-first note component across Research, Technology,
+   Playbooks, editorial reviews, dated news and the static reference directories.
    Preserve existing text, real links and page-specific spacing while
    replacing light-only tan boxes and isolated border treatments. */
 :is(.shell .notice,
+    .tech-shell .tech-warning,
     .playbook-shell .playbook-note,
     .review-shell .review-callout,
     .term-shell .notice){
@@ -1005,6 +989,7 @@ html.atlas-enhanced #catalog-loading{
   overflow-wrap:anywhere;
 }
 :is(.shell .notice,
+    .tech-shell .tech-warning,
     .playbook-shell .playbook-note,
     .review-shell .review-callout,
     .term-shell .notice) a{
@@ -1014,6 +999,7 @@ html.atlas-enhanced #catalog-loading{
   overflow-wrap:anywhere;
 }
 :is(.shell .notice,
+    .tech-shell .tech-warning,
     .playbook-shell .playbook-note,
     .review-shell .review-callout,
     .term-shell .notice) a:focus-visible{
@@ -1022,6 +1008,7 @@ html.atlas-enhanced #catalog-loading{
 }
 @media (max-width:650px){
   :is(.shell .notice,
+      .tech-shell .tech-warning,
       .playbook-shell .playbook-note,
       .review-shell .review-callout,
       .term-shell .notice){padding:14px 16px}
