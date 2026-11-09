@@ -1243,15 +1243,25 @@ test('shared filter fields use Discover-style native controls across existing wo
 });
 
 
-test('shared dark note surfaces keep existing research caveats readable', () => {
+test('technology and playbook evidence notes share the Discover palette in both themes', () => {
   const css=read('site-chrome.css'), offline=read('downloads/Atlas_Demo_Offline.html');
-  const marker='/* atlas-note-contrast:begin */', end='/* atlas-note-contrast:end */';
+  const marker='/* atlas-shared-evidence-callouts:begin */';
+  const end='/* atlas-shared-evidence-callouts:end */';
   assert.equal(css.split(marker).length,2);
   const rule=css.slice(css.indexOf(marker),css.indexOf(end)+end.length);
-  assert.ok(offline.includes(rule),'offline uses the same contrast rule');
-  for (const token of ['.tech-warning,.playbook-note',
-    ':root[data-theme="dark"]', ':root:not([data-theme="light"])',
-    'background:#314138;', 'color:#edf4ee;']) assert.ok(rule.includes(token));
+  assert.ok(offline.includes(rule),'offline uses the same shared evidence component');
+  for (const token of ['.tech-shell .tech-warning', '.playbook-shell .playbook-note',
+    'background:var(--accent-soft', 'color:var(--ink',
+    'border-left:4px solid var(--accent', 'a:focus-visible']) {
+    assert.ok(rule.includes(token),'missing accessible shared evidence treatment: '+token);
+  }
+  assert.ok(!css.includes('/* atlas-note-contrast:begin */'),
+    'legacy dark-only overrides must not conflict with the theme-aware component');
+  const brand=read('brand.css');
+  for (const token of ['--accent-soft:#E9EEE7', '--accent-soft:#2D4033',
+    '--ink:#18211E', '--ink:#F6F6F2']) {
+    assert.ok(brand.includes(token),'missing shared light/dark contrast token: '+token);
+  }
   assert.ok(read('technologies.html').includes('class="tech-warning"'));
   assert.ok(read('playbooks.html').includes('class="playbook-note"'));
 });
