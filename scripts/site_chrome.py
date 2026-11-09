@@ -361,4 +361,4 @@ def normalize_standalone_chrome(html, path):
                          re.escape(end) + r'.*?</nav>', re.S)
     normalized, count = pattern.subn(lambda _: render_standalone_nav(path), html)
     assert count == 1, 'Unexpected shared header structure on ' + path
-    return ensure_footer_resources(ensure_skip_destination_focusable(normalized, path), path)
+    return ensure_skip_destination_focusable(normalized, path)

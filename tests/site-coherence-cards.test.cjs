@@ -296,7 +296,9 @@ test('Discover and all standalone families share footer flow while preserving ev
 test('all standalone page families expose the same real policy and source destinations without scripts', () => {
   const builder = fs.readFileSync(path.join(__dirname, '..', 'scripts/site_chrome.py'), 'utf8');
   assert.match(builder, /def ensure_footer_resources\(html, path\):/);
-  assert.match(builder, /return ensure_footer_resources\(ensure_skip_destination_focusable\(normalized, path\), path\)/);
+  assert.match(builder, /return ensure_skip_destination_focusable\(normalized, path\)/);
+  const build = fs.readFileSync(path.join(__dirname, '..', 'scripts/build_seo.py'), 'utf8');
+  assert.match(build, /ensure_footer_resources\(normalize_standalone_chrome\(page.read_text\(encoding="utf-8"\), route\), route\)/);
   for (const route of [
     'demo.html', 'research.html', 'catalog-review.html', 'hardware-review.html',
     'games.html', 'technologies.html', 'playbooks.html', 'whats-new.html',
