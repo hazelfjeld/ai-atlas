@@ -324,6 +324,31 @@ def ensure_skip_destination_focusable(html, path=None):
     return result
 
 
+def ensure_footer_resources(html, path):
+    """Keep existing footer caveats and links while making resources universal.
+
+    As with the primary navigation, these are static links: a reader without
+    JavaScript can reach policy and source coverage from every standalone page.
+    Rebuilding an already-normalized page must not duplicate either link.
+    """
+    import re
+    assert path in STANDALONE_NAVS
+    match = re.search(r"<footer\b[^>]*>[\s\S]*?</footer>", html)
+    assert match, "Missing standalone footer: " + path
+    footer = match.group(0)
+    extra = ""
+    for url, label in (
+        ("about.html", "Editorial policy & coverage"),
+        ("index.html#/sources", "Sources & downloads"),
+    ):
+        if ('href="' + url + '"') not in footer:
+            extra += ' · <a href="' + url + '">' + label + "</a>"
+    if not extra:
+        return html
+    before_close = match.end() - len("</footer>")
+    return html[:before_close] + extra + html[before_close:]
+
+
 def normalize_standalone_chrome(html, path):
     """Replace only the known navigation pair; fail if page markup drifts."""
     import re
@@ -336,4 +361,4 @@ def normalize_standalone_chrome(html, path):
                          re.escape(end) + r'.*?</nav>', re.S)
     normalized, count = pattern.subn(lambda _: render_standalone_nav(path), html)
     assert count == 1, 'Unexpected shared header structure on ' + path
-    return ensure_skip_destination_focusable(normalized, path)
+    return ensure_footer_resources(ensure_skip_destination_focusable(normalized, path), path)

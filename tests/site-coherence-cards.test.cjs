@@ -292,3 +292,28 @@ test('Discover and all standalone families share footer flow while preserving ev
   const offline=fs.readFileSync(path.join(__dirname, '..', 'downloads/Atlas_Demo_Offline.html'), 'utf8');
   assert.ok(offline.includes(css), 'Offline edition must use the exact shared footer component');
 });
+
+test('all standalone page families expose the same real policy and source destinations without scripts', () => {
+  const builder = fs.readFileSync(path.join(__dirname, '..', 'scripts/site_chrome.py'), 'utf8');
+  assert.match(builder, /def ensure_footer_resources\(html, path\):/);
+  assert.match(builder, /return ensure_footer_resources\(ensure_skip_destination_focusable\(normalized, path\), path\)/);
+  for (const route of [
+    'demo.html', 'research.html', 'catalog-review.html', 'hardware-review.html',
+    'games.html', 'technologies.html', 'playbooks.html', 'whats-new.html',
+    'about.html', 'terms/index.html', 'technology/index.html',
+    'terms/MLD-0001-a-b-test.html', 'technology/TECH-0288-vllm.html'
+  ]) {
+    const html = fs.readFileSync(path.join(__dirname, '..', route), 'utf8');
+    const footer = html.match(/<footer\b[^>]*>[\s\S]*?<\/footer>/)?.[0];
+    assert.ok(footer, route + ' has a usable footer without hydration');
+    const prefix = route.startsWith('terms/') || route.startsWith('technology/') ? '../' : '';
+    for (const href of [prefix + 'about.html', prefix + 'index.html#/sources']) {
+      assert.equal(footer.split('href="' + href + '"').length - 1, 1,
+        route + ' must link exactly once to canonical ' + href);
+    }
+    assert.ok(!/onclick\s*=/.test(footer), route + ' resources require no script');
+  }
+  const games = fs.readFileSync(path.join(__dirname, '..', 'games.html'), 'utf8');
+  assert.match(games, /<footer><p>Built from AI Updates/);
+  assert.match(games, /Scores and missed concepts stay in this tab/);
+});
