@@ -5,6 +5,18 @@ const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
 const read = name => fs.readFileSync(path.join(__dirname, '..', name), 'utf8');
+// Keep the seven direct primary destinations separate from the one native
+// secondary disclosure. Verify all eight secondary links instead of
+// silently ignoring or counting them as duplicate primary navigation.
+const primaryMobile = menu => {
+  const extras = [...menu.matchAll(/<details class="site-mobile-chrome__more">[\s\S]*?<\/details>/g)];
+  assert.ok(extras.length <= 1, 'mobile secondary navigation must not be duplicated');
+  if (extras.length) {
+    assert.equal((extras[0][0].match(/<a href=/g) || []).length, 8,
+                 'mobile secondary navigation retains exactly eight destinations');
+  }
+  return menu.replace(/<details class="site-mobile-chrome__more">[\s\S]*?<\/details>/, '');
+};
 
 test('Games is an original workspace hash route, not a second website link', () => {
   const html = read('index.html'), app = read('app.js');
@@ -406,7 +418,7 @@ test('About, technologies and playbooks reuse the Games and archive mobile chrom
   const navLinks = (html,path) => {
     const menu = html.match(/<nav class="[^"]*site-mobile-chrome__menu" aria-label="AI Updates sections">([\s\S]*?)<\/nav>/)?.[1];
     assert.ok(menu, 'Missing actual shared mobile navigation in '+path);
-    const links = [...menu.matchAll(/<a href="([^"]+)"(?: aria-current="page")?>([^<]+)<\/a>/g)];
+    const links = [...primaryMobile(menu).matchAll(/<a href="([^"]+)"(?: aria-current="page")?>([^<]+)<\/a>/g)];
     assert.equal(links.length, 7, path);
     assert.deepEqual(links.map(m => [m[1],m[2]]), expected, path);
     return menu;
@@ -455,7 +467,9 @@ test('About reuses the exact generated catalog navigation, not a parallel templa
     .replaceAll('href="about.html">About','href="about.html" aria-current="page">About');
   const secondary = ours.match(/<details class="site-chrome__more">[\s\S]*?<\/details>/)?.[0];
   assert.ok(secondary, 'About must expose secondary destinations before JS loads');
-  assert.equal(ours.replace(secondary, ''), expected,
+  const mobileSecondary = ours.match(/<details class="site-mobile-chrome__more">[\s\S]*?<\/details>/)?.[0];
+  assert.ok(mobileSecondary, 'About retains the exact native mobile secondary component');
+  assert.equal(ours.replace(secondary, '').replace(mobileSecondary, ''), expected,
     'Primary About nav must remain identical to generated directory nav');
   assert.match(about, /class="directory-mobile-topbar site-mobile-chrome"/);
   assert.match(about, /id="directory-mobile-nav"/);
@@ -474,7 +488,7 @@ test('editorial review pages reuse the canonical shared mobile chrome without ch
   const extract = html => {
     const content = html.match(/<nav class="site-mobile-chrome__menu" aria-label="AI Updates sections">([\s\S]*?)<\/nav>/)?.[1];
     assert.ok(content, 'Shared navigation is missing');
-    const links = [...content.matchAll(/<a href="([^"]+)"(?: aria-current="(?:page|location)")?>([^<]+)<\/a>/g)];
+    const links = [...primaryMobile(content).matchAll(/<a href="([^"]+)"(?: aria-current="(?:page|location)")?>([^<]+)<\/a>/g)];
     return links.map(m => [m[1],m[2]]);
   };
   assert.deepEqual(extract(read('games.html')), expected, 'Games is the canonical baseline');
@@ -514,7 +528,7 @@ test('research snapshot uses the shared mobile menu and retains contextual resea
     ['index.html#/dictionary','Concept dictionary'],['index.html#/technologies','Technology profiles'],
     ['index.html#/games','Games'],['playbooks.html','Playbooks'],['about.html','About']
   ];
-  assert.deepEqual([...nav.matchAll(/<a href="([^"]+)"(?: aria-current="[^"]+")?>([^<]+)<\/a>/g)].map(x => [x[1],x[2]]),expected);
+  assert.deepEqual([...primaryMobile(nav).matchAll(/<a href="([^"]+)"(?: aria-current="[^"]+")?>([^<]+)<\/a>/g)].map(x => [x[1],x[2]]),expected);
   for (const route of ['papers','alerts','coverage'])
     assert.ok(html.includes('href="#'+route+'" data-nav="'+route+'"'), 'Research view must remain reachable: '+route);
   assert.match(html, /\.shell\{display:block\}/);
@@ -779,7 +793,7 @@ test('standalone page families share a build-time navigation source, including c
     assert.ok(desktop && mobile, path);
     const desktopPrimary=desktop.match(/<div class="site-chrome__links">([\s\S]*?)<\/div>/)?.[1];
     assert.ok(desktopPrimary, path + ' retains the canonical primary group');
-    for (const nav of [desktopPrimary,mobile]) {
+    for (const nav of [desktopPrimary,primaryMobile(mobile)]) {
       const links = [...nav.matchAll(/<a href="[^"]+"(?: aria-current="(?:page|location)")?>([^<]+)<\/a>/g)];
       assert.deepEqual(links.map(m=>m[1]), names, path);
     }
@@ -1109,7 +1123,7 @@ test('all page families share the real Discover wordmark before JavaScript', () 
     assert.ok(brand, route+' has a real keyboard-accessible logo on first paint');
     const expected = route.includes('/') ? '../index.html#/overview' : 'index.html#/overview';
     assert.equal(brand[1], expected, route+' logo goes to Discover');
-    assert.equal((menu.match(/<a /g) || []).length, 8, route+' has one logo and seven section links');
+    assert.equal((primaryMobile(menu).match(/<a /g) || []).length, 8, route+' has one logo and seven section links');
     assert.equal((menu.match(/class="site-mobile-chrome__brand"/g) || []).length, 1);
     assert.match(menu, /<svg viewBox="0 0 36 36"/, route+' uses the same SVG wordmark');
   }
@@ -1138,7 +1152,7 @@ test('shared workspace topbar has the correct no-script section label on every s
   };
   for (const [route, label] of Object.entries(labels)) {
     const html = read(route);
-    const headers = [...html.matchAll(/<div class="[^"]*site-mobile-chrome[^"]*"[^>]*>/g)];
+    const headers = [...html.matchAll(/<div class="[^"]*\bsite-mobile-chrome\b[^"]*"[^>]*>/g)];
     assert.equal(headers.length, 1, route + ': exactly one shared workspace header');
     assert.ok(headers[0][0].includes(' data-page-label="' + label + '"'), route + ': no-script title');
     assert.equal((headers[0][0].match(/data-page-label=/g) || []).length, 1, route);

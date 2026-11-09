@@ -16,7 +16,11 @@ test('standalone Games and daily archive reuse the same primary desktop and mobi
     const d=desktop(html),m=mobile(html);
     assert.ok(d&&m,route+' must expose desktop and mobile menus before JavaScript');
     assert.deepEqual(links(d).map(x=>x[1]),primary);
-    assert.deepEqual(links(m).map(x=>x[1]),primary);
+    const nested = m.match(/<details class="site-mobile-chrome__more">[\s\S]*?<\/details>/g) || [];
+    assert.equal(nested.length, 1, route+' ships one script-free secondary menu');
+    assert.equal((nested[0].match(/<a href=/g) || []).length, 8,
+                 route+' ships eight secondary links without duplicates');
+    assert.deepEqual(links(m.replace(nested[0], '')).map(x=>x[1]),primary);
     assert.equal((m.match(/aria-current="page"/g)||[]).length,1);
     assert.match(m,new RegExp('aria-current="page">'+active+'<\\/a>'));
     assert.match(html, /href="index\.html#\/search"/,route+' search must navigate to a real feature');
