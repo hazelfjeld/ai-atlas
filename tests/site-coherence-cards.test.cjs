@@ -345,8 +345,11 @@ test('native desktop rails expose Discover secondary destinations from one share
   const block = styles.split('/* atlas-secondary-navigation:begin */')[1]?.split('/* atlas-secondary-navigation:end */')[0];
   assert.ok(block && block.includes('@media(min-width:651px)'), 'Enhance desktop rail only');
   assert.ok(block.includes('min-height:44px') && block.includes('focus-visible'));
-  assert.ok(!block.includes('display:none') && !block.includes('pointer-events:none'),
-    'Do not conceal destinations or disable keyboard interaction');
+  assert.ok(!block.split('@media print')[0].includes('display:none') &&
+    !block.includes('pointer-events:none'),
+    'Screen navigation must remain visible and keyboard-interactive');
+  assert.ok(block.includes('@media print{.site-chrome__more{display:none!important}}'),
+    'Print must not include navigation chrome');
   assert.ok(offline.includes(styles) && offline.includes(script),
     'Single-file demo must carry the exact same shared styles and enhancement');
 });
