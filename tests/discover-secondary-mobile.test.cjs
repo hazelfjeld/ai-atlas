@@ -24,9 +24,10 @@ test('Discover nested mobile More reflects the selected secondary workspace',()=
   const sections=['overview','dictionary','technologies','games','safety','papers','compare','saved','sources'];
   const desktop=sections.map(s=>navLink('#/'+s,s));
   const mobile=sections.map(s=>navLink('#/'+s,s));
-  const more={open:false,querySelector:()=>mobile.slice(4).find(a=>a.current())||null};
+  const more={open:false,dataset:{},querySelector:()=>mobile.slice(4).find(a=>a.current())||null};
+  const desktopMore={open:false,dataset:{}};
   const rail={querySelectorAll:()=>desktop,querySelector:()=>desktop.find(a=>a.current())||null};
-  const elements={navigation:rail,'additional-navigation':{open:false},breadcrumb:{textContent:''},
+  const elements={navigation:rail,'additional-navigation':desktopMore,breadcrumb:{textContent:''},
     'snapshot-date':{textContent:''}};
   const context={document:{title:'',querySelectorAll:()=>mobile,
       querySelector:()=>more},window:{ATLAS_OFFLINE:false},$:name=>elements[name],
@@ -39,10 +40,18 @@ test('Discover nested mobile More reflects the selected secondary workspace',()=
     assert.equal(mobile.filter(a=>a.current()).length,1,section);
     assert.equal(mobile.find(a=>a.getAttribute('href')==='#/'+section).current(),true,section);
     assert.equal(more.open,true,section+' is visible within More');
+    assert.equal(desktopMore.open,true,section+' is visible in desktop More');
   }
   context.view='overview';context.renderNav();
   assert.equal(mobile.filter(a=>a.current()).length,1,'No stale secondary state');
   assert.equal(mobile[0].current(),true);
+  assert.equal(more.open,false,'Auto-opened mobile disclosure closes on primary navigation');
+  assert.equal(desktopMore.open,false,'Auto-opened desktop disclosure closes on primary navigation');
+  // User-expanded disclosures must stay open across primary hash changes.
+  more.open=true;desktopMore.open=true;
+  context.view='dictionary';context.renderNav();
+  assert.equal(more.open,true,'Manual mobile expansion preserved');
+  assert.equal(desktopMore.open,true,'Manual desktop expansion preserved');
 });
 
 test('single-file fallback embeds the shared navigation implementation',()=>{

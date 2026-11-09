@@ -1972,6 +1972,36 @@ with sync_playwright() as p:
           secondary_active.locator(
               '#discover-mobile-nav .site-mobile-chrome__more-links a[aria-current="page"]'
           ).count() == 0)
+    # Route changes inside the same document must not leave an automatically
+    # expanded More section open when the active destination is primary.
+    for width in (390, 1280):
+        secondary_active.set_viewport_size({'width':width,'height':844})
+        secondary_active.goto(base+'index.html#/safety')
+        secondary_active.locator(
+            '#navigation a.nav-link[data-view="safety"][aria-current="page"]'
+        ).wait_for(state='attached',timeout=20000)
+        mobile_more = secondary_active.locator(
+            '#discover-mobile-nav details.site-mobile-chrome__more')
+        desktop_more = secondary_active.locator('#additional-navigation')
+        check('Secondary disclosure auto-revealed at '+str(width),
+              mobile_more.evaluate('(el) => el.open')
+              and desktop_more.evaluate('(el) => el.open'))
+        secondary_active.evaluate("location.hash='#/overview'")
+        secondary_active.locator(
+            '#navigation a.nav-link[data-view="overview"][aria-current="page"]'
+        ).wait_for(state='attached',timeout=20000)
+        check('Secondary disclosure resets on primary hash route at '+str(width),
+              not mobile_more.evaluate('(el) => el.open')
+              and not desktop_more.evaluate('(el) => el.open'))
+        mobile_more.evaluate('(el) => {el.open=true}')
+        desktop_more.evaluate('(el) => {el.open=true}')
+        secondary_active.evaluate("location.hash='#/dictionary'")
+        secondary_active.locator(
+            '#navigation a.nav-link[data-view="dictionary"][aria-current="page"]'
+        ).wait_for(state='attached',timeout=20000)
+        check('Manually opened More survives primary route at '+str(width),
+              mobile_more.evaluate('(el) => el.open')
+              and desktop_more.evaluate('(el) => el.open'))
     secondary_active.close()
 
     check('no application runtime exceptions', not errors)

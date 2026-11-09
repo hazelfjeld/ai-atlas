@@ -63,10 +63,22 @@ function renderNav(){
     else link.removeAttribute('aria-current');
   });
   const mobileMore=document.querySelector('#discover-mobile-nav details.site-mobile-chrome__more');
-  if(mobileMore?.querySelector('a[aria-current="page"]')) mobileMore.open=true;
-  // Direct links to secondary workspaces remain discoverable even when the list starts collapsed.
   const more=$('additional-navigation');
-  if(more && ['safety','papers','compare','saved','sources'].includes(view)) more.open=true;
+  // Auto-reveal the active secondary route in both rails. A later primary
+  // hash navigation must collapse ONLY disclosures opened automatically,
+  // leaving an explicitly opened More sections menu untouched.
+  const syncAutomaticDisclosure=(disclosure,selected)=>{
+    if(!disclosure)return;
+    if(selected && !disclosure.open){
+      disclosure.open=true;
+      disclosure.dataset.atlasAutoOpened='true';
+    }else if(!selected && disclosure.dataset.atlasAutoOpened==='true'){
+      disclosure.open=false;
+      delete disclosure.dataset.atlasAutoOpened;
+    }
+  };
+  syncAutomaticDisclosure(mobileMore,!!mobileMore?.querySelector('a[aria-current="page"]'));
+  syncAutomaticDisclosure(more,['safety','papers','compare','saved','sources'].includes(view));
   if(window.ATLAS_OFFLINE){
     for(const id of ['daily','offline'])nav.querySelector(`[data-static="${id}"]`)?.setAttribute('hidden','');
     const demo=nav.querySelector('[data-static="demo"]'), encyclopedia=nav.querySelector('[data-static="encyclopedia"]');
