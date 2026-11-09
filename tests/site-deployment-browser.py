@@ -584,8 +584,15 @@ with sync_playwright() as p:
           and mobile_tech.get_by_role('navigation', name='AI Updates sections')
               .get_by_role('link', name='Technology profiles').get_attribute('aria-current') == 'page')
     check('technology directory menu links offer 44px touch targets',
-          mobile_tech.evaluate("""() => [...document.querySelectorAll('.tech-menu-panel a')]
+          mobile_tech.evaluate("""() => [...document.querySelectorAll('.tech-menu-panel > a')]
               .every(a => a.getBoundingClientRect().height >= 44)"""))
+    mobile_tech.locator('#tech-mobile-nav .site-mobile-chrome__more > summary').click()
+    check('technology directory exposes eight touch-sized mobile secondary routes',
+          mobile_tech.evaluate("""() => {
+              const links = [...document.querySelectorAll('.tech-menu-panel .site-mobile-chrome__more-links a')];
+              return links.length === 8 && links.every(a => a.getBoundingClientRect().height >= 44);
+          }"""))
+    mobile_tech.locator('.tech-menu-toggle').focus()
     mobile_tech.keyboard.press('Enter')
     mobile_tech.screenshot(path=str(out / 'technology-directory-mobile-header.png'), full_page=False)
     mobile_tech.set_viewport_size({'width':390,'height':844})
@@ -617,8 +624,15 @@ with sync_playwright() as p:
           and mobile_playbooks.get_by_role('navigation', name='AI Updates sections')
               .get_by_role('link', name='Playbooks', exact=True).get_attribute('aria-current') == 'page')
     check('playbooks mobile menu links have 44px touch targets',
-          mobile_playbooks.evaluate("""() => [...document.querySelectorAll('.playbook-menu-panel a')]
+          mobile_playbooks.evaluate("""() => [...document.querySelectorAll('.playbook-menu-panel > a')]
               .every(a => a.getBoundingClientRect().height >= 44)"""))
+    mobile_playbooks.locator('#playbook-mobile-nav .site-mobile-chrome__more > summary').click()
+    check('playbooks expose eight touch-sized secondary routes in the mobile drawer',
+          mobile_playbooks.evaluate("""() => {
+              const links = [...document.querySelectorAll('.playbook-menu-panel .site-mobile-chrome__more-links a')];
+              return links.length === 8 && links.every(a => a.getBoundingClientRect().height >= 44);
+          }"""))
+    mobile_playbooks.locator('.playbook-menu-toggle').focus()
     mobile_playbooks.keyboard.press('Enter')
     mobile_playbooks.screenshot(path=str(out / 'playbooks-mobile-header.png'), full_page=False)
     mobile_playbooks.set_viewport_size({'width':390, 'height':844})
@@ -1355,7 +1369,7 @@ with sync_playwright() as p:
         if (!menu || !toggle || !search) return false;
         const wasOpen = menu.open;
         menu.open = true;
-        const links = [...menu.querySelectorAll('.archive-menu-panel a')];
+        const links = [...menu.querySelectorAll('.archive-menu-panel > a')];
         const valid = links.length >= 5 && [toggle, search, ...links].every(el => {
             const rect = el.getBoundingClientRect();
             return rect.height >= 44 && rect.width >= 44;
