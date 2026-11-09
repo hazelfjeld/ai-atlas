@@ -1350,7 +1350,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // This is one progressive desktop enhancement; the original seven primary
   // links, mobile drawer and script-free navigation remain unchanged.
   const desktopRail = document.querySelector('.site-chrome');
-  const desktopPrimary = desktopRail?.querySelector('.site-chrome__links');
+  const desktopPrimary = desktopRail?.querySelector?.('.site-chrome__links');
   if (desktopPrimary && !desktopRail.querySelector('.site-chrome__more')) {
     // The brand is the canonical relative-root link for both root and nested
     // concept/technology routes. Never guess the deployment's base pathname.

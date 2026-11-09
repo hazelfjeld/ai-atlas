@@ -330,15 +330,15 @@ test('native desktop rails expose Discover secondary destinations from one share
   const offline = fs.readFileSync(path.join(__dirname, '..', 'downloads/Atlas_Demo_Offline.html'), 'utf8');
   const discoverMore = home.split('<details class="nav-more" id="additional-navigation">')[1]?.split('</details>')[0];
   assert.ok(discoverMore, 'Discover must retain its script-free secondary menu');
-  const existing = [...discoverMore.matchAll(/<a class="nav-link" data-(?:view|static)="[^"]+" href="([^"]+)"[^>]*>[\\s\\S]*?<span>([^<]+)<\\/span>/g)]
+  const existing = [...discoverMore.matchAll(/<a class="nav-link" data-(?:view|static)="[^"]+" href="([^"]+)"[^>]*>[\s\S]*?<span>([^<]+)<\/span>/g)]
     .map(match => [match[1].startsWith('#/') ? 'index.html' + match[1] : match[1], match[2]]);
   const generated = script.split('const sharedSecondarySections = [')[1]?.split('];')[0];
   assert.ok(generated, 'Every native page must share one secondary source');
-  const rendered = [...generated.matchAll(/\\['([^']+)', '([^']+)'\\]/g)].map(m => [m[1], m[2]]);
+  const rendered = [...generated.matchAll(/\['([^']+)', '([^']+)'\]/g)].map(m => [m[1], m[2]]);
   assert.equal(rendered.length, 8, 'Keep existing eight destinations, without expanding the catalog');
   assert.deepEqual(rendered, existing, 'Secondary destinations and order must match Discover');
-  assert.match(script, /desktopRail\\?\\.querySelector\\('\\.site-chrome__links'\\)/);
-  assert.match(script, /!desktopRail\\.querySelector\\('\\.site-chrome__more'\\)/,
+  assert.ok(script.includes("desktopRail?.querySelector?.('.site-chrome__links')"));
+  assert.ok(script.includes("!desktopRail.querySelector('.site-chrome__more')"),
     'Do not duplicate disclosure on repeated enhancement');
   assert.ok(script.includes("homeLink.endsWith('index.html#/overview')"),
     'Use actual native brand link for nested catalog path prefixes');
