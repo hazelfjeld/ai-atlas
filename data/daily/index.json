@@ -276,6 +276,6 @@
     }
   ],
   "last_successful_publish_at": "2026-11-09T16:46:11Z",
-  "status": "edition_revision_1_cloudflare_http_browser_and_githack_verified",
+  "status": "edition_revision_1_production_verified",
   "coverage_note": "November 9 revision 1 source-reviewed partial edition: 11 attributed reports (8 same-day, 3 catch-up), 6 deferred catalog proposals and no canonical additions. Exact production Cloudflare HTTP/browser and GitHack checks passed November 9 at 16:46 UTC; collection coverage remains partial."
 }
