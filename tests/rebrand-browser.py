@@ -564,7 +564,7 @@ with sync_playwright() as p:
                 trigger=drawer.locator(':scope > summary')
                 trigger.click()
                 page.wait_for_function("document.querySelector('.site-mobile-chrome__search').inert")
-                drawer.locator('.site-mobile-chrome__menu a[href]').last.focus()
+                drawer.locator('.site-mobile-chrome__menu > a[href]').last.focus()
                 # Dispatch on the document outside the modal; real background
                 # nodes are inert and browser hit testing retargets their events.
                 page.evaluate("document.dispatchEvent(new PointerEvent('pointerdown',{bubbles:true}))")
@@ -826,7 +826,7 @@ with sync_playwright() as p:
                 menu=page.locator('details.site-mobile-chrome__nav .site-mobile-chrome__menu')
                 check(f'{route} {width}px {theme} drawer reuses one brand after hydration',
                       menu.locator('a.site-mobile-chrome__brand').count()==1
-                      and menu.locator('a[href]').count()==8
+                      and menu.locator(':scope > a[href]').count()==8
                       and page.evaluate('document.documentElement.dataset.theme')==theme
                       and page.evaluate('document.documentElement.scrollWidth <= innerWidth'))
                 if width==390 and theme=='dark' and route in ('about.html','terms/index.html'):
@@ -1230,7 +1230,7 @@ with sync_playwright() as p:
             page.goto(base+route)
             drawer=page.locator('details.site-mobile-chrome__nav').first
             drawer.locator(':scope > summary').click()
-            drawer.locator('.site-mobile-chrome__menu a[href]').last.focus()
+            drawer.locator('.site-mobile-chrome__menu > a[href]').last.focus()
             check(f'{route} {theme} menu holds focus before viewport change',
                   drawer.evaluate('el=>el.open && el.contains(document.activeElement)'))
             if theme=='dark' and route in ('about.html','technology/TECH-0216-pytorch.html'):

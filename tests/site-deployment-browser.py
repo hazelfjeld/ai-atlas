@@ -265,7 +265,7 @@ with sync_playwright() as p:
                 menu.locator(':scope > summary').click()
                 check(f'{route} {mobile_width}px {chosen_theme} can navigate from the pinned mobile header',
                       menu.evaluate('el => el.open') and
-                      menu.locator('.site-mobile-chrome__menu a[href]').count() >= 7)
+                      menu.locator('.site-mobile-chrome__menu > a[href]').count() >= 7)
                 check(f'{route} {mobile_width}px {chosen_theme} has the same nested secondary menu',
                       menu.locator('.site-mobile-chrome__more > summary').count() == 1)
                 sticky_page.keyboard.press('Escape')
@@ -290,7 +290,7 @@ with sync_playwright() as p:
     scriptless_sticky.locator('details.site-mobile-chrome__nav > summary').click()
     check('script-free pinned directory menu opens as a native dropdown',
           scriptless_sticky.locator('details.site-mobile-chrome__nav').evaluate('el => el.open') and
-          scriptless_sticky.locator('.site-mobile-chrome__menu a[href]').count() >= 7)
+          scriptless_sticky.locator('.site-mobile-chrome__menu > a[href]').count() >= 7)
     scriptless_sticky.close()
 
     page.set_viewport_size({'width':1440,'height':900})
@@ -349,7 +349,7 @@ with sync_playwright() as p:
               el.innerHTML === document.querySelector('nav.site-chrome > a.site-chrome__brand').innerHTML""")
           and mobile_brand.locator('svg').count() == 1)
     mobile_games.screenshot(path=str(out / 'mobile-shared-wordmark.png'), full_page=False)
-    menu_links = mobile_games.locator('#games-mobile-nav .site-mobile-chrome__menu a:not(.site-mobile-chrome__brand)')
+    menu_links = mobile_games.locator('#games-mobile-nav .site-mobile-chrome__menu > a:not(.site-mobile-chrome__brand)')
     check('mobile games nav matches canonical labels, routes and active destination',
           menu_links.all_inner_texts() == primary_names
           and menu_links.filter(has_text='Games').get_attribute('aria-current') == 'page'
@@ -534,7 +534,7 @@ with sync_playwright() as p:
     check('mobile native drawer contains one keyboard-focusable appearance action',
           mobile_theme.is_visible() and
           mobile_theme.get_attribute('aria-pressed') == 'true' and
-          theme_page.locator('.site-mobile-chrome__menu a:not(.site-mobile-chrome__brand)').count() == 7)
+          theme_page.locator('.site-mobile-chrome__menu > a:not(.site-mobile-chrome__brand)').count() == 7)
     mobile_theme.click()
     check('native mobile appearance action persists light choice',
           theme_page.evaluate("document.documentElement.dataset.theme === 'light' && localStorage.getItem('atlas.theme') === 'light'") and
@@ -656,7 +656,7 @@ with sync_playwright() as p:
                   and toggle.evaluate('(el) => el.getBoundingClientRect().height >= 44')
                   and search.evaluate('(el) => el.getBoundingClientRect().height >= 44'))
             toggle.click()
-            menu_links = shared_mobile.locator('.site-mobile-chrome__menu a:not(.site-mobile-chrome__brand)')
+            menu_links = shared_mobile.locator('.site-mobile-chrome__menu > a:not(.site-mobile-chrome__brand)')
             check(f'{route} follows shared seven-link order at {width}px ({theme})',
                   menu_links.all_inner_texts() == canonical_mobile
                   and sum(x == 'page' for x in
@@ -680,18 +680,18 @@ with sync_playwright() as p:
     mobile_review.locator('.review-mobile-topbar .site-mobile-chrome__toggle').focus()
     mobile_review.keyboard.press('Enter')
     check('catalog review mobile menu matches the primary navigation order',
-          mobile_review.locator('.review-mobile-topbar .site-mobile-chrome__menu a:not(.site-mobile-chrome__brand)').all_inner_texts() == ['Discover', 'What’s New Today', 'Concept dictionary', 'Technology profiles', 'Games', 'Playbooks', 'About'])
+          mobile_review.locator('.review-mobile-topbar .site-mobile-chrome__menu > a:not(.site-mobile-chrome__brand)').all_inner_texts() == ['Discover', 'What’s New Today', 'Concept dictionary', 'Technology profiles', 'Games', 'Playbooks', 'About'])
     check('catalog review menu is keyboard operable with current-page indication',
           mobile_review.locator('#review-mobile-nav').evaluate('(el) => el.open')
           and mobile_review.get_by_role('navigation', name='AI Updates sections')
               .get_by_role('link', name='What’s New Today', exact=True).get_attribute('aria-current') == 'location')
     check('catalog review current mobile section is visibly highlighted',
           mobile_review.evaluate("""() => {
-            const a = document.querySelectorAll('.review-mobile-topbar .site-mobile-chrome__menu a:not(.site-mobile-chrome__brand)');
+            const a = document.querySelectorAll('.review-mobile-topbar .site-mobile-chrome__menu > a:not(.site-mobile-chrome__brand)');
             return getComputedStyle(a[1]).backgroundColor !== getComputedStyle(a[0]).backgroundColor;
           }"""))
     check('catalog review mobile links meet 44px touch minimum',
-          mobile_review.evaluate("""() => [...document.querySelectorAll('.review-mobile-topbar .site-mobile-chrome__menu a:not(.site-mobile-chrome__brand)')]
+          mobile_review.evaluate("""() => [...document.querySelectorAll('.review-mobile-topbar .site-mobile-chrome__menu > a:not(.site-mobile-chrome__brand)')]
               .every(a => a.getBoundingClientRect().height >= 44)"""))
     mobile_review.keyboard.press('Enter')
     mobile_review.screenshot(path=str(out / 'catalog-review-mobile-header.png'), full_page=False)
@@ -725,18 +725,18 @@ with sync_playwright() as p:
     mobile_hardware.locator('.hardware-mobile-topbar .site-mobile-chrome__toggle').focus()
     mobile_hardware.keyboard.press('Enter')
     check('hardware mobile menu matches the primary navigation order',
-          mobile_hardware.locator('.hardware-mobile-topbar .site-mobile-chrome__menu a:not(.site-mobile-chrome__brand)').all_inner_texts() == ['Discover', 'What’s New Today', 'Concept dictionary', 'Technology profiles', 'Games', 'Playbooks', 'About'])
+          mobile_hardware.locator('.hardware-mobile-topbar .site-mobile-chrome__menu > a:not(.site-mobile-chrome__brand)').all_inner_texts() == ['Discover', 'What’s New Today', 'Concept dictionary', 'Technology profiles', 'Games', 'Playbooks', 'About'])
     check('hardware review menu supports keyboard navigation and current-page indication',
           mobile_hardware.locator('#hardware-mobile-nav').evaluate('(el) => el.open')
           and mobile_hardware.get_by_role('navigation', name='AI Updates sections')
               .get_by_role('link', name='What’s New Today', exact=True).get_attribute('aria-current') == 'location')
     check('hardware review current mobile section is visibly highlighted',
           mobile_hardware.evaluate("""() => {
-            const a = document.querySelectorAll('.hardware-mobile-topbar .site-mobile-chrome__menu a:not(.site-mobile-chrome__brand)');
+            const a = document.querySelectorAll('.hardware-mobile-topbar .site-mobile-chrome__menu > a:not(.site-mobile-chrome__brand)');
             return getComputedStyle(a[1]).backgroundColor !== getComputedStyle(a[0]).backgroundColor;
           }"""))
     check('hardware review mobile links meet 44px touch minimum',
-          mobile_hardware.evaluate("""() => [...document.querySelectorAll('.hardware-mobile-topbar .site-mobile-chrome__menu a:not(.site-mobile-chrome__brand)')]
+          mobile_hardware.evaluate("""() => [...document.querySelectorAll('.hardware-mobile-topbar .site-mobile-chrome__menu > a:not(.site-mobile-chrome__brand)')]
               .every(a => a.getBoundingClientRect().height >= 44)"""))
     mobile_hardware.keyboard.press('Enter')
     mobile_hardware.screenshot(path=str(out / 'hardware-review-mobile-header.png'), full_page=False)
@@ -765,7 +765,7 @@ with sync_playwright() as p:
     check('320px research page has no horizontal overflow',
           mobile_research.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'))
     check('research primary mobile menu matches the other standalone pages',
-          mobile_research.locator('.site-mobile-chrome__menu a:not(.site-mobile-chrome__brand)').all_text_contents()
+          mobile_research.locator('.site-mobile-chrome__menu > a:not(.site-mobile-chrome__brand)').all_text_contents()
           == ['Discover', 'What’s New Today', 'Concept dictionary', 'Technology profiles',
               'Games', 'Playbooks', 'About'])
     mobile_research.wait_for_function(
@@ -776,7 +776,7 @@ with sync_playwright() as p:
           mobile_research.locator('#research-mobile-nav').evaluate('(el) => el.open')
           and mobile_research.locator('.research-local-nav a[href="#papers"]').get_attribute('aria-current') == 'page')
     check('research navigation links meet the 44px touch target minimum',
-          mobile_research.evaluate("""() => [...document.querySelectorAll('.site-mobile-chrome__menu a:not(.site-mobile-chrome__brand)')]
+          mobile_research.evaluate("""() => [...document.querySelectorAll('.site-mobile-chrome__menu > a:not(.site-mobile-chrome__brand)')]
               .every(a => a.getBoundingClientRect().height >= 44)"""))
     mobile_research.keyboard.press('Enter')
     mobile_research.locator('.research-local-nav a[href="#alerts"]').click()
@@ -1532,7 +1532,7 @@ with sync_playwright() as p:
     page.locator('#start-quiz').wait_for()
     check('mobile Games route fits original workspace', page.evaluate('document.documentElement.scrollWidth <= innerWidth'))
     page.locator('#discover-mobile-nav > summary').click()
-    page.locator('#discover-mobile-nav .site-mobile-chrome__menu a:not(.site-mobile-chrome__brand)[href="#/overview"]').click()
+    page.locator('#discover-mobile-nav .site-mobile-chrome__menu > a:not(.site-mobile-chrome__brand)[href="#/overview"]').click()
     page.wait_for_function("location.hash === '#/overview' && !document.getElementById('discover-mobile-nav').open")
     check('mobile drawer navigates and closes', page.locator('#daily-panel-title').is_visible())
 
@@ -1550,14 +1550,14 @@ with sync_playwright() as p:
                   page.evaluate("""() => {
                       const nav=document.querySelector(innerWidth <= 650
                           ? '.site-mobile-chrome__menu' : '.site-chrome__links');
-                      return !!nav && nav.querySelectorAll('a:not(.site-mobile-chrome__brand)').length === 7
+                      return !!nav && nav.querySelectorAll(mobile ? ':scope > a:not(.site-mobile-chrome__brand)' : 'a:not(.site-mobile-chrome__brand)').length === 7
                           && (innerWidth > 650 || nav.querySelectorAll('a.site-mobile-chrome__brand').length === 1)
                           && document.documentElement.scrollWidth <= innerWidth + 1;
                   }"""))
             if width <= 650:
                 page.locator('#directory-mobile-nav > summary').click()
                 check(f'{route} exposes the selected mobile section at {width}px',
-                      page.locator('.site-mobile-chrome__menu a:not(.site-mobile-chrome__brand)[aria-current="page"]').inner_text() == selected)
+                      page.locator('.site-mobile-chrome__menu > a:not(.site-mobile-chrome__brand)[aria-current="page"]').inner_text() == selected)
             else:
                 check(f'{route} keeps active desktop navigation at {width}px',
                       page.locator('.site-chrome__links a[aria-current="page"]').inner_text() == selected)
@@ -1631,7 +1631,7 @@ with sync_playwright() as p:
                               ? '.site-mobile-chrome__nav' : '.site-chrome');
                           if (!nav) return false;
                           const links = nav.querySelectorAll(mobile
-                              ? '.site-mobile-chrome__menu a:not(.site-mobile-chrome__brand)' : '.site-chrome__links a');
+                              ? '.site-mobile-chrome__menu > a:not(.site-mobile-chrome__brand)' : '.site-chrome__links a');
                           const computed = getComputedStyle(nav);
                           const rect = nav.getBoundingClientRect();
                           return links.length === 7
@@ -1734,8 +1734,8 @@ with sync_playwright() as p:
     script_free.goto(base + 'terms/index.html')
     script_free.locator('#directory-mobile-nav > summary').click()
     check('catalog directory menu remains usable with JavaScript disabled',
-          script_free.locator('.site-mobile-chrome__menu a:not(.site-mobile-chrome__brand)').first.is_visible()
-          and script_free.locator('.site-mobile-chrome__menu a:not(.site-mobile-chrome__brand)').count() == 7)
+          script_free.locator('.site-mobile-chrome__menu > a:not(.site-mobile-chrome__brand)').first.is_visible()
+          and script_free.locator('.site-mobile-chrome__menu > a:not(.site-mobile-chrome__brand)').count() == 7)
     # Standalone, directory and generated detail pages all render the same
     # real SVG home link at build time. Verify every family without scripts;
     def check_no_script_brand(label, *, real_link):
@@ -1765,15 +1765,15 @@ with sync_playwright() as p:
     script_free.goto(base + 'about.html')
     script_free.locator('#directory-mobile-nav > summary').click()
     check('About uses the generated shared menu without JavaScript',
-          script_free.locator('.site-mobile-chrome__menu a:not(.site-mobile-chrome__brand)').count() == 7
-          and script_free.locator('.site-mobile-chrome__menu a:not(.site-mobile-chrome__brand)[aria-current="page"]').inner_text() == 'About')
+          script_free.locator('.site-mobile-chrome__menu > a:not(.site-mobile-chrome__brand)').count() == 7
+          and script_free.locator('.site-mobile-chrome__menu > a:not(.site-mobile-chrome__brand)[aria-current="page"]').inner_text() == 'About')
     check_no_script_brand('About', real_link=True)
     script_free.screenshot(path=str(out / 'no-script-about-branded-mobile.png'), full_page=False)
     script_free.goto(base + 'technology/TECH-0216-pytorch.html')
     script_free.locator('#directory-mobile-nav > summary').click()
     check('technology detail uses the shared mobile menu without JavaScript',
-          script_free.locator('.site-mobile-chrome__menu a:not(.site-mobile-chrome__brand)').count() == 7
-          and script_free.locator('.site-mobile-chrome__menu a:not(.site-mobile-chrome__brand)[aria-current="page"]').inner_text() == 'Technology profiles')
+          script_free.locator('.site-mobile-chrome__menu > a:not(.site-mobile-chrome__brand)').count() == 7
+          and script_free.locator('.site-mobile-chrome__menu > a:not(.site-mobile-chrome__brand)[aria-current="page"]').inner_text() == 'Technology profiles')
     check_no_script_brand('Technology profile', real_link=True)
     script_free.goto(base + 'terms/MLD-0002-ablation-study.html')
     script_free.locator('#directory-mobile-nav > summary').click()
