@@ -54,10 +54,12 @@ function rememberSearchFocus() {
 }
 
 
-// Prefer the selected desktop section rather than the standalone brand, whose
-// anchor appears first in DOM order. All responsive focus handoffs use this.
+// On a secondary destination, focus the actual active link after a phone-to-
+// desktop transition, not its primary parent or the brand. The shared native
+// markup already exposes aria-current before JavaScript; do not infer routes.
 function focusSharedDesktopRail() {
-  const destination = document.querySelector('.site-chrome__links a[aria-current]') ||
+  const destination = document.querySelector('.site-chrome__more a[aria-current]') ||
+    document.querySelector('.site-chrome__links a[aria-current]') ||
     document.querySelector('#navigation a[aria-current]') ||
     document.querySelector('.site-chrome__brand') ||
     document.querySelector('#navigation a');

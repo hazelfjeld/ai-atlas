@@ -2073,6 +2073,34 @@ with sync_playwright() as p:
               selected_more.evaluate('(el) => el.open'))
     secondary_active.close()
 
+    # A rotated mobile drawer must focus its actual active secondary destination
+    # on the shared desktop rail, not the primary parent. This catches keyboard
+    # context loss across the guided-demo and concept-encyclopedia page families.
+    secondary_resize = browser.new_page(viewport={'width':390,'height':844},
+                                        reduced_motion='reduce')
+    secondary_resize.on('pageerror', lambda e: errors.append(str(e)))
+    for route, active_href in (
+        ('demo.html', 'demo.html'),
+        ('terms/index.html', '../terms/index.html'),
+    ):
+        secondary_resize.set_viewport_size({'width':390,'height':844})
+        secondary_resize.goto(base + route)
+        drawer = secondary_resize.locator('details.site-mobile-chrome__nav')
+        drawer.locator(':scope > summary').click()
+        check('active secondary drawer opens on ' + route,
+              drawer.evaluate('(el) => el.open'))
+        secondary_resize.set_viewport_size({'width':768,'height':844})
+        secondary_resize.wait_for_function("""() => {
+          const active = document.querySelector('.site-chrome__more a[aria-current="location"]');
+          return active && document.activeElement === active;
+        }""", timeout=10000)
+        active = secondary_resize.locator('.site-chrome__more a[aria-current="location"]')
+        check('desktop focus follows actual secondary destination on ' + route,
+              active.get_attribute('href') == active_href
+              and active.is_visible()
+              and not drawer.evaluate('(el) => el.open'))
+    secondary_resize.close()
+
     check('no application runtime exceptions', not errors)
     browser.close()
 (out / 'report.json').write_text(json.dumps({'base':base, 'checks':checks, 'checks_passed':len(checks), 'errors':errors}, indent=2), encoding='utf-8')
