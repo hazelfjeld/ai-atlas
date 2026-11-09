@@ -131,6 +131,21 @@ with sync_playwright() as p:
     scriptless.locator('#about-mobile-nav > summary').click() if scriptless.locator('#about-mobile-nav > summary').count() else scriptless.locator('.site-mobile-chrome__nav > summary').click()
     check('No-JavaScript Discover to About transition preserves secondary navigation',
           scriptless.locator('.site-mobile-chrome__more-links a[href="index.html#/papers"]').count() == 1)
+
+    # The A-Z concept and technology directory pages must share Discover's
+    # secondary destinations with JavaScript disabled, not only after hydration.
+    for route in ('terms/index.html', 'technology/index.html'):
+        scriptless.goto(base + route)
+        scriptless.locator('#directory-mobile-nav > summary').click()
+        scriptless.locator('#directory-mobile-nav .site-mobile-chrome__more > summary').click()
+        check('A-Z directory script-free mobile secondary navigation: ' + route,
+              scriptless.locator('#directory-mobile-nav .site-mobile-chrome__more-links a').count() == 8
+              and scriptless.locator('#directory-mobile-nav .site-mobile-chrome__more-links a[href="../index.html#/papers"]').is_visible()
+              and scriptless.locator('.site-mobile-chrome__search[href="../index.html#/search"]').count() == 1)
+    scriptless.locator('#directory-mobile-nav .site-mobile-chrome__more-links a[href="../terms/index.html"]').click()
+    scriptless.wait_for_url('**/terms/index.html')
+    check('Technology-to-Concept script-free secondary route resolves',
+          scriptless.locator('#directory-mobile-nav .site-mobile-chrome__more-links a[href="../index.html#/sources"]').count() == 1)
     no_script.close()
     page.set_viewport_size({'width':1440, 'height':1000})
     page.goto(base + 'index.html#/overview')
