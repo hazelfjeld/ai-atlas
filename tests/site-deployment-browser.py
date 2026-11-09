@@ -137,7 +137,16 @@ with sync_playwright() as p:
     for route in ('terms/index.html', 'technology/index.html', 'technology/TECH-0216-pytorch.html'):
         scriptless.goto(base + route)
         scriptless.locator('#directory-mobile-nav > summary').click()
-        scriptless.locator('#directory-mobile-nav .site-mobile-chrome__more > summary').click()
+        more_menu = scriptless.locator('#directory-mobile-nav .site-mobile-chrome__more')
+        # The encyclopedia is an actual secondary destination, so its shared
+        # More sections disclosure starts open with aria-current even without JS.
+        # Other reference pages keep the normal closed disclosure.
+        if not more_menu.evaluate('(el) => el.open'):
+            more_menu.locator('summary').click()
+        if route == 'terms/index.html':
+            check('Concept Encyclopedia is identified as the script-free active secondary section',
+                  more_menu.locator('a[href="../terms/index.html"][aria-current="location"]').count() == 1
+                  and more_menu.evaluate('(el) => el.open'))
         check('A-Z directory script-free mobile secondary navigation: ' + route,
               scriptless.locator('#directory-mobile-nav .site-mobile-chrome__more-links a').count() == 8
               and scriptless.locator('#directory-mobile-nav .site-mobile-chrome__more-links a[href="../index.html#/papers"]').is_visible()
