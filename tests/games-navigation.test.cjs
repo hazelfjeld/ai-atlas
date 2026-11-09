@@ -332,6 +332,16 @@ test('shared mobile drawer makes background inert without leaving hidden control
   assert.equal(main.inert,false, 'BFCache restoration restores interaction with the page');
   assert.equal(document.activeElement,summary,
     'BFCache restoration returns keyboard focus to the visible native toggle');
+  // A cached mobile drawer restored in desktop layout must never focus the
+  // now-hidden mobile toggle. Use the selected desktop rail destination.
+  drawer.open = true;
+  window.innerWidth = 768;
+  document.activeElement = body;
+  events.pageshow({persisted:true});
+  assert.equal(drawer.open,false, 'BFCache closes mobile drawer after viewport changes');
+  assert.equal(main.inert,false);
+  assert.equal(document.activeElement,desktopLink,
+    'BFCache focuses the visible desktop destination, not a hidden mobile control');
 });
 
 test('Discover shares the native script-free mobile drawer used by standalone pages', () => {
@@ -1312,7 +1322,7 @@ test('shared native drawers restore keyboard focus and inert state after dismiss
   assert.match(source,/closeSharedDrawers\(\{restoreFocus:true\}\)/);
   assert.match(source,/window\.addEventListener\('pageshow', \(event\) =>/);
   assert.match(source,/if \(event\.persisted\) \{/);
-  assert.match(source,/closeSharedDrawers\(\{restoreFocus:true\}\);\s*restoreSharedThemeAfterHistory\(\)/,
+  assert.match(source,/closeSharedDrawers\(desktopNow \? \{desktopFocus:true\} : \{restoreFocus:true\}\);\s*restoreSharedThemeAfterHistory\(\)/,
     'BFCache restoration must focus the native menu toggle even if the browser blurred its links');
   assert.ok(offline.includes(source),'offline demo must embed the exact shared drawer behavior');
   for(const route of ['index.html','about.html','whats-new.html','technologies.html',

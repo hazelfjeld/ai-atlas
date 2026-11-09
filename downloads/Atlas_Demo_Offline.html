@@ -1292,7 +1292,8 @@ if (typeof window !== 'undefined' && window.addEventListener) {
     if (event.persisted) {
       // Browsers may blur a focused menu link before restoring a cached page.
       // Return focus to the visible toggle before hiding the restored drawer.
-      closeSharedDrawers({restoreFocus:true});
+      const desktopNow = window.innerWidth > 650;
+      closeSharedDrawers(desktopNow ? {desktopFocus:true} : {restoreFocus:true});
       restoreSharedThemeAfterHistory();
     }
   });
