@@ -1990,6 +1990,12 @@ with sync_playwright() as p:
         secondary_active.locator(
             '#navigation a.nav-link[data-view="overview"][aria-current="page"]'
         ).wait_for(state='attached',timeout=20000)
+        # aria-current updates before both disclosures in the same renderNav()
+        # call; synchronize on the completed transition, not the first mutation.
+        secondary_active.wait_for_function("""() =>
+            !document.querySelector('#discover-mobile-nav details.site-mobile-chrome__more').open
+            && !document.querySelector('#additional-navigation').open
+        """, timeout=5000)
         check('Secondary disclosure resets on primary hash route at '+str(width),
               not mobile_more.evaluate('(el) => el.open')
               and not desktop_more.evaluate('(el) => el.open'))
