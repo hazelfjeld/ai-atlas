@@ -1935,9 +1935,17 @@ with sync_playwright() as p:
                           'Concept encyclopedia', 'Offline demo download ↓'] and
                       more.locator('a[href="../terms/index.html"]').is_visible())
                 more.locator('a[href="../terms/index.html"]').click()
+                # The production edge may canonicalize /terms/index.html to
+                # /terms/. Wait for the actual encyclopedia heading, rather
+                # than accepting any unrelated <h1> at the clicked destination.
+                encyclopedia_heading = detail_mobile.get_by_role(
+                    'heading', name='Follow the connections.', exact=True)
+                encyclopedia_heading.wait_for(state='visible', timeout=20000)
+                destination = detail_mobile.evaluate('location.pathname')
                 check('generated detail secondary links navigate ' + route + ' ' + color + ' ' + str(width),
-                      detail_mobile.url.split('?')[0].endswith('/terms/index.html') and
-                      detail_mobile.locator('h1').count() >= 1)
+                      (destination.endswith('/terms/index.html') or
+                       destination.endswith('/terms/')) and
+                      encyclopedia_heading.is_visible())
     detail_mobile.close()
 
     check('no application runtime exceptions', not errors)
