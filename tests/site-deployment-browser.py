@@ -783,10 +783,23 @@ with sync_playwright() as p:
           and mobile_research.locator('.site-chrome__brand').is_visible())
     mobile_research.goto(base + 'research.html')
     mobile_research.set_viewport_size({'width':320, 'height':720})
+    # Research exposes native modal record details. The shared '/' shortcut
+    # must not leave that dialog or create a stale focus handoff.
+    mobile_research.locator('button.title-button').first.click(timeout=45000)
+    check('Research details open as a native modal',
+          mobile_research.locator('#detail').evaluate('el => el.open'))
+    mobile_research.keyboard.press('/')
+    check('shared search shortcut respects Research modal keyboard scope',
+          mobile_research.locator('#detail').evaluate('el => el.open')
+          and mobile_research.evaluate("location.pathname.endsWith('/research.html')")
+          and mobile_research.evaluate("sessionStorage.getItem('atlas.searchShortcutPending') !== '1'"))
+    mobile_research.locator('#close-detail').click()
     mobile_research.locator('.research-search-link').click()
     mobile_research.wait_for_url('**/index.html#/search')
-    check('research search opens the existing workspace search',
-          mobile_research.locator('#global-query').is_visible())
+    mobile_research.locator('#catalog-loading').wait_for(state='detached', timeout=45000)
+    check('research search opens the existing workspace and focuses its real input',
+          mobile_research.locator('#global-query').is_visible()
+          and mobile_research.evaluate("document.activeElement?.id === 'global-query'"))
     mobile_research.close()
     # Direct concept detail pages share the same native, script-free menu
     # and current-section indication as the dictionary and technology directories.

@@ -119,6 +119,9 @@ document.addEventListener('keydown', (event) => {
       event.ctrlKey || event.metaKey || event.altKey) return;
   const target = event.target;
   if (target?.closest?.('input,textarea,select,[contenteditable],[role="textbox"]')) return;
+  // An open native or ARIA-modal record belongs to its own keyboard scope.
+  // Do not leave Research detail dialogs for the site-wide search route.
+  if (document.querySelector('dialog[open],[role="dialog"][aria-modal="true"]')) return;
   if (document.querySelector('details.site-mobile-chrome__nav[open]')) return;
   const search = document.querySelector('a.site-mobile-chrome__search[href]');
   if (!search) return;
