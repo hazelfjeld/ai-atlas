@@ -530,17 +530,17 @@ test('both generated A-Z directories share native script-free secondary mobile n
     const source=fs.readFileSync(path.join(__dirname,'..',sourceFile),'utf8');
     assert.ok(source.includes("mobile_secondary=(path == '"+page+"')"), page+' has build-time shared navigation');
     const html=fs.readFileSync(path.join(__dirname,'..',page),'utf8');
-    const menu=html.match(/<nav class="site-mobile-chrome__menu" aria-label="AI Updates sections">([\\s\\S]*?)<\\/nav><\\/details>/)?.[1];
-    const rail=html.match(/<div class="site-chrome__more-links">([\\s\\S]*?)<\\/div><\\/details>/)?.[1];
+    const menu=html.match(/<nav class="site-mobile-chrome__menu" aria-label="AI Updates sections">([\s\S]*?)<\/nav><\/details>/)?.[1];
+    const rail=html.match(/<div class="site-chrome__more-links">([\s\S]*?)<\/div><\/details>/)?.[1];
     assert.ok(menu && rail, page+' has native mobile and desktop sections');
     assert.equal((menu.match(/<details class="site-mobile-chrome__more">/g)||[]).length,1);
-    const mobile=menu.match(/<div class="site-mobile-chrome__more-links">([\\s\\S]*?)<\\/div><\\/details>/)?.[1];
+    const mobile=menu.match(/<div class="site-mobile-chrome__more-links">([\s\S]*?)<\/div><\/details>/)?.[1];
     assert.ok(mobile,page+' retains the nested disclosure without scripts');
-    const links = markup => [...markup.matchAll(/<a href="([^"]+)"( download)?>([^<]+)<\\/a>/g)]
+    const links = markup => [...markup.matchAll(/<a href="([^"]+)"( download)?>([^<]+)<\/a>/g)]
       .map(m=>[m[1],m[3]]);
     assert.deepEqual(links(mobile),links(rail),page+' has identical mobile/desktop secondary links');
     assert.equal(links(mobile).length,8);
     assert.equal((menu.match(/<a href="/g)||[]).length,15,'Seven primary + eight secondary links, no duplicates');
-    assert.match(html,/href="\\.\\.\\/index\\.html#\\/search"/,'Real search route stays usable');
+    assert.match(html,/href="\.\.\/index\.html#\/search"/,'Real search route stays usable');
   }
 });
