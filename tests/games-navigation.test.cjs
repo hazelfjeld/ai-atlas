@@ -320,6 +320,18 @@ test('shared mobile drawer makes background inert without leaving hidden control
   events.resize();
   assert.equal(drawer.open,false, 'returning to mobile must not reopen a stale menu');
   assert.equal(main.inert,false, 'workspace stays accessible after rotating back');
+  // BFCache restores can blur a menu link before the pageshow handler runs.
+  // The shared drawer must close, release inert and put focus on its visible toggle.
+  summary.focus = () => { document.activeElement = summary; };
+  drawer.querySelector = selector => selector === 'summary' ? summary : null;
+  drawer.open = true;
+  events.toggle({target:drawer});
+  document.activeElement = body;
+  events.pageshow({persisted:true});
+  assert.equal(drawer.open,false, 'BFCache restoration closes the previously open drawer');
+  assert.equal(main.inert,false, 'BFCache restoration restores interaction with the page');
+  assert.equal(document.activeElement,summary,
+    'BFCache restoration returns keyboard focus to the visible native toggle');
 });
 
 test('Discover shares the native script-free mobile drawer used by standalone pages', () => {

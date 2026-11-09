@@ -354,6 +354,20 @@ with sync_playwright() as p:
           not mobile_games.locator('#games-mobile-nav').evaluate('(el) => el.open')
           and mobile_games.evaluate("!document.querySelector('main').inert")
           and mobile_games.evaluate("document.documentElement.scrollWidth <= innerWidth + 1"))
+    # Cached restoration can occur after focus is blurred by the browser.
+    # Exercise the shared pageshow behavior on the native Games drawer.
+    mobile_games.locator('#games-mobile-nav summary').click()
+    mobile_games.wait_for_function("document.querySelector('main').inert")
+    mobile_games.evaluate("""() => {
+        document.activeElement.blur();
+        window.dispatchEvent(new PageTransitionEvent('pageshow', {persisted:true}));
+    }""")
+    mobile_games.wait_for_function("""() =>
+        !document.querySelector('#games-mobile-nav').open
+        && !document.querySelector('main').inert""")
+    check('restoring cached page closes drawer and restores visible keyboard focus',
+          mobile_games.locator('#games-mobile-nav summary').evaluate(
+              '(el) => document.activeElement === el'))
     mobile_games.locator('#games-mobile-nav summary').click()
     mobile_games.locator('#games-mobile-nav summary').click()
     mobile_games.locator('.site-mobile-chrome__search').click()
