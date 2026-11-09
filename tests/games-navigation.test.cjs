@@ -783,7 +783,7 @@ test('both generated catalog directories share Discover navigation and the nativ
   }
   const termGenerator=read('scripts/build_term_pages.py'), techGenerator=read('scripts/build_seo.py');
   assert.ok(termGenerator.includes("render_directory_nav('../', 'Concept dictionary', mobile_brand=True, native_secondary=True, mobile_secondary=(path == 'terms/index.html'))"));
-  assert.ok(techGenerator.includes("render_directory_nav(prefix, 'Technology profiles', mobile_brand=True, native_secondary=True)"));
+  assert.ok(techGenerator.includes("render_directory_nav(prefix, 'Technology profiles', mobile_brand=True, native_secondary=True, mobile_secondary=(path == 'technology/index.html'))"));
   assert.ok(read('scripts/site_chrome.py').includes('DIRECTORY_MOBILE_CSS'));
   assert.match(read('site-chrome.css'), /\.site-mobile-chrome__menu a\{[^}]*min-height:44px/);
 });
