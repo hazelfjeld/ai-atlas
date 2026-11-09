@@ -69,11 +69,47 @@ with sync_playwright() as p:
               and all(link.is_visible() for link in primary_links.all())
               and labels == ['Discover', 'What’s New Today', 'Concept dictionary',
                              'Technology profiles', 'Games', 'Playbooks', 'About'])
+        if width <= 650:
+            # The existing eight desktop secondary routes are available in
+            # the same mobile drawer, not a second separate menu.
+            mobile_more = page.locator('#discover-mobile-nav .site-mobile-chrome__more')
+            check('Discover mobile secondary disclosure at ' + str(width),
+                  mobile_more.count() == 1 and mobile_more.locator('summary').is_visible())
+            mobile_more.locator('summary').click()
+            check('Discover mobile secondary routes match desktop at ' + str(width),
+                  mobile_more.locator('a').all_inner_texts() == [
+                      'Safety observatory', 'Research library', 'Compare tools',
+                      'Your notebook', 'Sources & coverage', 'Guided professor demo',
+                      'Concept encyclopedia', 'Offline demo download ↓']
+                  and mobile_more.locator('a[href="#/safety"]').is_visible())
+            mobile_more.locator('summary').focus()
+            page.keyboard.press('Tab')
+            check('Discover nested More summary keeps its first link keyboard reachable at ' + str(width),
+                  mobile_more.locator('a').first.evaluate('el => document.activeElement === el'))
+            mobile_more.locator('summary').click()
         about_link.click()
         page.wait_for_url('**/about.html')
         check('Discover-to-About uses shared navigation at ' + str(width),
               page.locator('.site-chrome__links a[aria-current="page"]').inner_text() == 'About'
               and page.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'))
+        if width <= 650:
+            page.locator('.site-mobile-chrome__nav > summary').click()
+            native_more = page.locator('.site-mobile-chrome__menu .site-mobile-chrome__more')
+            native_more.locator('summary').click()
+            check('About mobile drawer reuses the same secondary destinations at ' + str(width),
+                  native_more.locator('a').all_inner_texts() == [
+                      'Safety observatory', 'Research library', 'Compare tools',
+                      'Your notebook', 'Sources & coverage', 'Guided professor demo',
+                      'Concept encyclopedia', 'Offline demo download ↓']
+                  and native_more.locator('a[href="index.html#/papers"]').is_visible())
+            if width == 390:
+                native_more.locator('a[href="index.html#/papers"]').click()
+                page.wait_for_url('**/index.html#/papers')
+                page.wait_for_function(
+                    "document.querySelector('#navigation a[data-view=papers]')?.getAttribute('aria-current') === 'page'")
+                check('About mobile secondary navigation reaches live Research library',
+                      page.locator('#navigation a[data-view="papers"][aria-current="page"]').count() == 1)
+
     # Discover now exposes the very same native <details> structure as its
     # standalone neighbors, including when the JavaScript runtime is blocked.
     no_script = browser.new_context(java_script_enabled=False, viewport={'width':320, 'height':844})
@@ -230,6 +266,8 @@ with sync_playwright() as p:
                 check(f'{route} {mobile_width}px {chosen_theme} can navigate from the pinned mobile header',
                       menu.evaluate('el => el.open') and
                       menu.locator('.site-mobile-chrome__menu a[href]').count() >= 7)
+                check(f'{route} {mobile_width}px {chosen_theme} has the same nested secondary menu',
+                      menu.locator('.site-mobile-chrome__more > summary').count() == 1)
                 sticky_page.keyboard.press('Escape')
                 check(f'{route} {mobile_width}px {chosen_theme} closes the pinned navigation accessibly',
                       not menu.evaluate('el => el.open'))

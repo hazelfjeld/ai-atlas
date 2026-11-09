@@ -91,7 +91,7 @@ document.addEventListener('keydown', (event) => {
   if (event.key === 'Tab' && !event.defaultPrevented && window.innerWidth <= 650) {
     const menu = document.querySelector('details.site-mobile-chrome__nav[open]');
     if (menu) {
-      const stops = [menu.querySelector('summary'), ...menu.querySelectorAll('a[href],button:not([disabled])')]
+      const stops = [menu.querySelector('summary'), ...menu.querySelectorAll('a[href],button:not([disabled]),summary')]
         .filter(el => el && el.getClientRects().length);
       if (stops.length) {
         const first = stops[0], last = stops[stops.length - 1];
@@ -277,6 +277,35 @@ document.addEventListener('DOMContentLoaded', () => {
     const mobileBrand = desktopBrand.cloneNode(true);
     mobileBrand.className = 'site-mobile-chrome__brand';
     menu.prepend(mobileBrand);
+  }
+
+  // The desktop rail already owns the eight secondary destinations.
+  // Expose those same working routes in every mobile drawer without maintaining
+  // a second list or altering the seven script-free primary links.
+  if (menu && !menu.querySelector('.site-mobile-chrome__more')) {
+    const sourceLinks = document.querySelector(
+      '#additional-navigation .nav-more-links, .site-chrome__more-links');
+    if (sourceLinks) {
+      const more = document.createElement('details');
+      more.className = 'site-mobile-chrome__more';
+      const summary = document.createElement('summary');
+      summary.textContent = 'More sections';
+      const links = document.createElement('div');
+      links.className = 'site-mobile-chrome__more-links';
+      sourceLinks.querySelectorAll('a[href]').forEach(source => {
+        const link = document.createElement('a');
+        link.setAttribute('href', source.getAttribute('href'));
+        link.textContent = (source.querySelector('span:not(.nav-count)')?.textContent ||
+          source.textContent).trim();
+        if (source.hasAttribute('download'))
+          link.setAttribute('download', source.getAttribute('download') || '');
+        links.append(link);
+      });
+      if (links.children.length === 8) {
+        more.append(summary, links);
+        menu.append(more);
+      }
+    }
   }
 
   // Match Discover's existing "More sections" rail on every native page.

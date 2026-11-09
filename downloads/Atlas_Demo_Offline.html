@@ -295,6 +295,17 @@ body{font-size:15px;line-height:1.6}h1,h2,h3{color:var(--ink)}a{text-underline-o
 .site-mobile-chrome__menu{position:absolute;top:calc(100% - 2px);left:0;width:min(310px,calc(100vw - 36px));max-height:calc(100dvh - 96px);display:grid;grid-template-columns:minmax(0,1fr);gap:0;margin:0;overflow-x:hidden;overflow-y:auto;padding:9px;background:var(--surface,#fff);border:1px solid var(--line,#dce1d7);border-radius:10px;box-shadow:0 12px 26px #0002;z-index:10}
 .site-mobile-chrome__menu a{display:flex;align-items:center;min-height:44px;padding:10px 12px;border-radius:6px;color:var(--ink,#202b28);white-space:normal;overflow-wrap:anywhere;text-decoration:none;font-size:15px;font-weight:600}
 .site-mobile-chrome__menu a:hover,.site-mobile-chrome__menu a[aria-current=page],.site-mobile-chrome__menu a[aria-current=location]{background:var(--soft,#eaf1ea);color:var(--green,#28664f)}
+/* The same eight desktop secondary routes remain discoverable in the mobile
+   drawer as one nested disclosure, rather than growing another primary list. */
+.site-mobile-chrome__more{min-width:0;margin:7px 0 2px;padding-top:6px;border-top:1px solid var(--line,#dce1d7)}
+.site-mobile-chrome__more>summary{display:flex;align-items:center;min-height:44px;padding:10px 12px;border-radius:7px;list-style:none;cursor:pointer;color:var(--ink,#202b28);font-size:15px;font-weight:650}
+.site-mobile-chrome__more>summary::-webkit-details-marker{display:none}
+.site-mobile-chrome__more>summary::after{content:"⌄";margin-left:auto;font-size:16px}
+.site-mobile-chrome__more[open]>summary::after{transform:rotate(180deg)}
+.site-mobile-chrome__more-links a{padding-left:22px}
+html.atlas-enhanced .site-mobile-chrome__more{border-top-color:#405043}
+html.atlas-enhanced .site-mobile-chrome__more>summary{color:#c5cfc6;font-size:14px}
+html.atlas-enhanced .site-mobile-chrome__more>summary:hover,html.atlas-enhanced .site-mobile-chrome__more[open]>summary{background:#374b3c;color:#fff}
 .site-mobile-chrome__search{display:flex;align-items:center;gap:12px;flex:1;min-width:0;min-height:44px;padding:8px 13px;border:1px solid var(--line,#dce1d7);border-radius:9px;background:var(--surface,#fff);color:var(--muted,#627067);text-decoration:none;font-size:16px}
 .site-mobile-chrome__search-icon{flex-shrink:0;font-size:22px;line-height:1}
 .site-mobile-chrome__search-placeholder{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -1161,7 +1172,7 @@ document.addEventListener('keydown', (event) => {
   if (event.key === 'Tab' && !event.defaultPrevented && window.innerWidth <= 650) {
     const menu = document.querySelector('details.site-mobile-chrome__nav[open]');
     if (menu) {
-      const stops = [menu.querySelector('summary'), ...menu.querySelectorAll('a[href],button:not([disabled])')]
+      const stops = [menu.querySelector('summary'), ...menu.querySelectorAll('a[href],button:not([disabled]),summary')]
         .filter(el => el && el.getClientRects().length);
       if (stops.length) {
         const first = stops[0], last = stops[stops.length - 1];
@@ -1347,6 +1358,35 @@ document.addEventListener('DOMContentLoaded', () => {
     const mobileBrand = desktopBrand.cloneNode(true);
     mobileBrand.className = 'site-mobile-chrome__brand';
     menu.prepend(mobileBrand);
+  }
+
+  // The desktop rail already owns the eight secondary destinations.
+  // Expose those same working routes in every mobile drawer without maintaining
+  // a second list or altering the seven script-free primary links.
+  if (menu && !menu.querySelector('.site-mobile-chrome__more')) {
+    const sourceLinks = document.querySelector(
+      '#additional-navigation .nav-more-links, .site-chrome__more-links');
+    if (sourceLinks) {
+      const more = document.createElement('details');
+      more.className = 'site-mobile-chrome__more';
+      const summary = document.createElement('summary');
+      summary.textContent = 'More sections';
+      const links = document.createElement('div');
+      links.className = 'site-mobile-chrome__more-links';
+      sourceLinks.querySelectorAll('a[href]').forEach(source => {
+        const link = document.createElement('a');
+        link.setAttribute('href', source.getAttribute('href'));
+        link.textContent = (source.querySelector('span:not(.nav-count)')?.textContent ||
+          source.textContent).trim();
+        if (source.hasAttribute('download'))
+          link.setAttribute('download', source.getAttribute('download') || '');
+        links.append(link);
+      });
+      if (links.children.length === 8) {
+        more.append(summary, links);
+        menu.append(more);
+      }
+    }
   }
 
   // Match Discover's existing "More sections" rail on every native page.

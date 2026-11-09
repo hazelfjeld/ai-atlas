@@ -370,6 +370,25 @@ test('native desktop rails expose Discover secondary destinations from one share
     'Single-file demo must carry the exact same shared styles and enhancement');
 });
 
+test('one shared mobile disclosure exposes the existing secondary routes with keyboard access', () => {
+  const js = fs.readFileSync(path.join(__dirname, '..', 'site-theme.js'), 'utf8');
+  const css = fs.readFileSync(path.join(__dirname, '..', 'site-chrome.css'), 'utf8');
+  const offline = fs.readFileSync(path.join(__dirname, '..', 'downloads/Atlas_Demo_Offline.html'), 'utf8');
+  assert.match(js, /#additional-navigation \.nav-more-links, \.site-chrome__more-links/,
+    'Mobile More sections must reuse actual desktop links rather than duplicate route definitions');
+  assert.match(js, /sourceLinks\.querySelectorAll\('a\[href\]'\)/);
+  assert.match(js, /source\.hasAttribute\('download'\)/,
+    'Offline download must retain its native download behavior');
+  assert.match(js, /querySelectorAll\('a\[href\],button:not\(\[disabled\]\),summary'\)/,
+    'Keyboard trapping must include the nested More sections summary');
+  assert.match(css, /\.site-mobile-chrome__more>summary:focus-visible|\.site-mobile-chrome summary:focus-visible/,
+    'Nested disclosure has visible keyboard focus');
+  assert.match(css, /\.site-mobile-chrome__more>summary\{[^}]*min-height:44px/,
+    'Nested summary needs a touch-sized target');
+  assert.ok(offline.includes(js) && offline.includes(css),
+    'The single-file offline demo must include both updated shared components');
+});
+
 test('native editorial, archive, technology, research and Games pages keep Discover secondary navigation without JS', () => {
   const home = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
   const js = fs.readFileSync(path.join(__dirname, '..', 'site-theme.js'), 'utf8');
