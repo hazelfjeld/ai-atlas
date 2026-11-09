@@ -124,7 +124,17 @@ with sync_playwright() as p:
                   and brand.get_attribute('href') ==
                       ('../index.html#/overview' if '/' in route else 'index.html#/overview')
                   and brand.locator('svg').count() == 1
-                  and page.locator('details.site-mobile-chrome__nav nav a').count() == 8)
+                  and page.locator('details.site-mobile-chrome__nav nav > a').count() == 8
+                  and (
+                      # Standalone pages have eight more links within one native
+                      # nested disclosure. Direct primary links remain exactly
+                      # seven plus the brand; generated references are still
+                      # progressively enhanced without duplicating navigation.
+                      (page.locator('details.site-mobile-chrome__nav .site-mobile-chrome__more').count() == 1
+                       and page.locator('details.site-mobile-chrome__nav .site-mobile-chrome__more-links > a').count() == 8)
+                      if route in ('about.html', 'whats-new.html', 'playbooks.html', 'research.html')
+                      else page.locator('details.site-mobile-chrome__nav .site-mobile-chrome__more').count() == 0
+                  ))
             if width == 390 and route in ('about.html', 'terms/index.html'):
                 page.screenshot(path=str(out / f'no-script-wordmark-{route.replace("/", "-")}.png'))
             brand.click()
