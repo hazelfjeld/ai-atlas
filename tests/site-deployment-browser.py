@@ -1823,6 +1823,17 @@ with sync_playwright() as p:
         for width in (320, 390, 768, 1280):
             page.set_viewport_size({'width': width, 'height': 844})
             page.goto(base + route)
+            if route in ('terms/index.html', 'about.html', 'technology/index.html'):
+                check(f'{route} separates navigation from main landmark at {width}px',
+                      page.evaluate("""() => {
+                          const main=document.querySelector('main.term-shell');
+                          const desktop=document.querySelector('nav.site-chrome.term-nav');
+                          const mobile=document.querySelector('.directory-mobile-topbar.site-mobile-chrome');
+                          return !!main && !!desktop && !!mobile
+                            && !main.contains(desktop) && !main.contains(mobile)
+                            && !!main.querySelector('header.hero#main')
+                            && document.querySelectorAll('main').length === 1;
+                      }"""))
             check(f'{route} has seven shared navigation links without overflow at {width}px',
                   page.evaluate("""() => {
                       const nav=document.querySelector(innerWidth <= 650

@@ -286,6 +286,29 @@ test('script-free daily archive and catalog review skip links focus the editoria
 });
 
 
+test('About and both A-Z landing pages separate shared navigation from the main landmark', () => {
+  const shared = fs.readFileSync(path.join(__dirname, '..', 'scripts/site_chrome.py'), 'utf8');
+  assert.ok(shared.includes('def wrap_reference_shell(nav, content, path, main_id):'));
+  for (const route of ['about.html', 'terms/index.html', 'technology/index.html']) {
+    const html = fs.readFileSync(path.join(__dirname, '..', route), 'utf8');
+    const desktop = html.indexOf('<nav class="site-chrome term-nav"');
+    const mobile = html.indexOf('class="directory-mobile-topbar site-mobile-chrome"');
+    const main = html.indexOf('<main class="term-shell">');
+    const hero = html.indexOf('<header class="hero" id="main" tabindex="-1">');
+    assert.ok(desktop > 0 && mobile > 0 && desktop < main && mobile < main && hero > main, route);
+    assert.equal((html.match(/<main[^>]*>/g) || []).length, 1, route);
+    assert.equal((html.match(/id="main"/g) || []).length, 1, route);
+    assert.equal((html.match(/aria-label="AI Updates primary navigation"/g) || []).length, 1, route);
+    assert.ok(html.indexOf('</nav>', desktop) < main, route + ' nests site navigation within main');
+    assert.ok(html.includes('href="#main"') && html.includes('@media(min-width:651px){.term-shell>.hero{margin-top:8px}}@media(max-width:650px){.term-shell>.hero{margin-top:18px}}'), route);
+  }
+  // Detailed articles remain unchanged until a future complete generated build.
+  for (const route of ['terms/MLD-0001-a-b-test.html', 'technology/TECH-0001-adversarial-robustness-toolbox.html']) {
+    const html = fs.readFileSync(path.join(__dirname, '..', route), 'utf8');
+    assert.ok(html.indexOf('<main class="term-shell">') < html.indexOf('<nav class="site-chrome term-nav"'), route);
+  }
+});
+
 test('all concept pages use the technology-profile native article skip, without duplicating navigation', () => {
   const manifest = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'terms/manifest.json'), 'utf8'));
   const publication = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'publication.json'), 'utf8'));
