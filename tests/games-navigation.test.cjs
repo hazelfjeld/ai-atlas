@@ -35,7 +35,7 @@ const primaryMobile = menu => {
 test('Games is an original workspace hash route, not a second website link', () => {
   const html = read('index.html'), app = read('app.js');
   assert.ok(!html.includes('href="games.html"'));
-  assert.match(app, /games:'Games'/);
+  assert.match(app, /"games":"Games"/);
   assert.match(app, /nav\.querySelectorAll\('a\[data-view\]'\)/);
   assert.ok(app.includes("else if(view==='games')"));
   assert.ok(app.includes('AtlasGamesTab.mount'));
