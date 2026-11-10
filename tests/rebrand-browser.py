@@ -34,6 +34,41 @@ with sync_playwright() as p:
           page.locator('a[href="https://discord.gg/mvRJjgdM4R"]').count() == 1
           and 'Discord' in page.locator('main').inner_text())
     page.goto(base)
+
+    # All native page families must use the same readable OS-dark palette even
+    # without site-theme.js. Previously dark cards met light backgrounds and
+    # dark text on Research/Playbooks/Technology, making content low contrast.
+    # Exercise real CSS computed styles across routes, widths and both schemes.
+    for width in (320, 390, 768, 1280):
+        page.set_viewport_size({'width':width,'height':844 if width<=650 else 900})
+        for scheme in ('light', 'dark'):
+            page.emulate_media(color_scheme=scheme)
+            for route in ('whats-new.html', 'research.html', 'technologies.html',
+                          'playbooks.html', 'games.html',
+                          'technology/TECH-0216-pytorch.html'):
+                page.goto(base + route)
+                palette = page.evaluate("""() => {
+                    const root=document.documentElement;
+                    const style=getComputedStyle(root);
+                    const get=(name)=>style.getPropertyValue(name).trim().toLowerCase();
+                    return {hasChrome:!!document.querySelector('.site-chrome'),
+                        hasExplicitTheme:root.hasAttribute('data-theme'),
+                        bg:get('--bg'),surface:get('--surface'),
+                        ink:get('--ink'),scheme:style.colorScheme};
+                }""")
+                dark = scheme == 'dark'
+                check(f'{route} {width}px script-free {scheme} uses coherent native palette',
+                      palette['hasChrome'] and not palette['hasExplicitTheme']
+                      and ((palette['bg']=='#18211e'
+                            and palette['surface']=='#222d27'
+                            and palette['ink']=='#f6f6f2'
+                            and palette['scheme']=='dark') if dark
+                           else (palette['bg']!='#18211e'
+                                 and palette['ink']!='#f6f6f2')))
+                if width==390 and scheme=='dark' and route in ('research.html','playbooks.html'):
+                    page.screenshot(path=str(out / f'scriptfree-os-dark-{route}-390.png'))
+    page.emulate_media(color_scheme='light')
+
     # Discover ships real article cards in HTML; pending catalog status must
     # never cause a visible first-paint shift or mislead script-free readers.
     for width in (320, 390, 768, 1280):

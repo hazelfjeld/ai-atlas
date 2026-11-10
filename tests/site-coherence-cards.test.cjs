@@ -21,6 +21,25 @@ test('Playbooks, Technology, Research and editorial reviews reuse Discover card 
   assert.ok(!block.includes('display:none'), 'Do not hide page navigation or cards');
 });
 
+test('script-free dark OS palette is shared across every native navigation family', () => {
+  const block = css.split('/* atlas-scriptfree-dark-chrome:begin */')[1]
+    ?.split('/* atlas-scriptfree-dark-chrome:end */')[0];
+  assert.ok(block, 'Missing shared no-JavaScript OS theme fallback');
+  assert.ok(block.includes(':root:not([data-theme]):has(.site-chrome)'),
+    'Explicit saved light/dark must win; do not scope the fallback to one article type');
+  for (const variable of ['--bg:#18211E','--surface:#222D27','--ink:#F6F6F2',
+                          '--line:#3B4A40','--paper:#222D27','color-scheme:dark'])
+    assert.ok(block.includes(variable), 'Incomplete shared dark palette: ' + variable);
+  assert.ok(!block.includes('display:none'), 'Do not hide content to fix dark contrast');
+  for (const route of ['whats-new.html','research.html','technologies.html',
+                       'playbooks.html','games.html','technology/TECH-0216-pytorch.html']) {
+    const html=fs.readFileSync(path.join(__dirname,'..',route),'utf8');
+    assert.ok(html.includes('site-chrome.css'), route + ' must share the theme source');
+  }
+  const offline=fs.readFileSync(path.join(__dirname,'..','downloads/Atlas_Demo_Offline.html'),'utf8');
+  assert.ok(offline.includes(css),'Offline fallback must embed the exact shared CSS');
+});
+
 test('shared editorial cards match Discover hover and expose keyboard focus in either theme', () => {
   const brand = fs.readFileSync(path.join(__dirname, '..', 'brand.css'), 'utf8');
   const block = css.split('/* atlas-card-interactions:begin */')[1]

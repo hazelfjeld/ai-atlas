@@ -2,6 +2,24 @@
 :root[data-theme="light"]{color-scheme:light}
 :root[data-theme="dark"]{color-scheme:dark}
 
+/* atlas-scriptfree-dark-chrome:begin */
+/* Standalone page families used Discover's dark cards when the OS requested
+   dark mode, but several still kept their light page background and dark ink
+   without JavaScript. Use the same shared palette as the saved dark theme for
+   every native page (news, research, playbooks, Games, and both catalogs).
+   Explicit light/dark choices always take precedence. */
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme]):has(.site-chrome){
+    color-scheme:dark;
+    --bg:#18211E;--surface:#222D27;--ink:#F6F6F2;
+    --muted:#AFBEB2;--line:#3B4A40;--accent:#B1D5BD;
+    --accent-soft:#2D4033;--orange:#D9A16F;--sidebar:#111A15;
+    --paper:#222D27;--dark:#111A15;--green:#B1D5BD;
+    --soft:#2D4033;
+  }
+}
+/* atlas-scriptfree-dark-chrome:end */
+
 /* Shared AI Updates desktop navigation across existing editorial directories. */
 .site-chrome{display:flex!important;align-items:center;justify-content:space-between;gap:22px;margin:0 0 8px;padding:8px 0 18px;border-bottom:1px solid var(--line,#dce1d7);font:inherit}
 .site-chrome__brand{display:inline-flex!important;align-items:center!important;justify-content:flex-start!important;gap:10px!important;flex:0 0 auto;min-height:48px;padding:0!important;border-radius:0!important;background:transparent!important;color:var(--ink,#202b28)!important;text-decoration:none!important;line-height:1.1}
