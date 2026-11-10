@@ -547,17 +547,14 @@ test('research snapshot uses the shared mobile menu and retains contextual resea
   const titles=[...primary.matchAll(/<a href="[^"]+"(?: aria-current="[^"]+")?>([^<]+)<\/a>/g)].map(x => x[1]);
   assert.deepEqual(titles, ['Discover','What’s New Today','Concept dictionary','Technology profiles','Games','Playbooks','About']);
   assert.ok(desktop.includes('class="site-chrome__brand" href="index.html#/overview"'));
-  assert.match(desktop, /href="index\.html#\/overview" aria-current="location">Discover<\/a>/,
-    'Research is a secondary Discover destination, not an unselected orphan section');
   for (const region of [desktop, nav]) {
-    assert.equal((region.match(/aria-current=/g) || []).length, 2,
-      'Research must identify exactly its Discover parent and selected secondary destination');
-    assert.equal(region.split('href="index.html#/overview" aria-current="location">Discover</a>').length - 1, 1,
-      'Discover is selected as the canonical parent exactly once');
+    assert.equal((region.match(/aria-current=/g) || []).length, 1,
+      'Research must identify exactly one current destination per native navigation landmark');
+    assert.equal(region.split('href="index.html#/overview">Discover</a>').length - 1, 1,
+      'Discover remains reachable as an ordinary parent link');
     assert.equal(region.split('href="index.html#/papers" aria-current="location">Research library</a>').length - 1, 1,
-      'Research library is selected in the shared secondary disclosure exactly once');
+      'Research library is the current secondary destination in each navigation landmark');
   }
-  assert.match(nav, /href="index\.html#\/overview" aria-current="location">Discover<\/a>/);
   assert.ok(read('scripts/site_chrome.py').includes('"research-site-chrome", "Discover", "location", True)'),
     'canonical header generator must own the active parent, not a hand-edited page');
   assert.match(html, /href="#papers" data-nav="papers">Research library <span id="papers-count">/);
@@ -840,7 +837,7 @@ test('standalone page families share a build-time navigation source, including c
     }
     assert.match(html, /href="index\.html#\/search" aria-label="Search AI Updates in the main collection"/);
     const expectedCurrent = {
-      'research.html': ['location', 'Discover'],
+      'research.html': ['location', 'Research library'],
       'catalog-review.html': ['location', 'What’s New Today'],
       'hardware-review.html': ['location', 'What’s New Today'],
       'games.html': ['page', 'Games'],
@@ -848,12 +845,11 @@ test('standalone page families share a build-time navigation source, including c
       'playbooks.html': ['page', 'Playbooks'],
       'whats-new.html': ['page', 'What’s New Today'],
     }[path];
-    const expectedSelections = path === 'research.html'
-      ? [expectedCurrent, ['location', 'Research library']] : [expectedCurrent];
+    const expectedSelections = [expectedCurrent];
     for (const nav of [desktop, mobile]) {
       const selected = [...nav.matchAll(/<a href="[^"]+" aria-current="(page|location)">([^<]+)<\/a>/g)];
       assert.deepEqual(selected.map(m => [m[1],m[2]]), expectedSelections,
-        path+' must identify its canonical parent and current secondary destination');
+        path+' must expose one canonical current destination per navigation landmark');
     }
     if (path === 'research.html') {
       assert.match(desktop, /<details class="site-chrome__more" open>/);
@@ -1651,8 +1647,8 @@ test('Guided demo inherits the actual shared navigation instead of an independen
   };
   assert.deepEqual(extractLinks(html),extractLinks(about),
     'Demo and About must share the same seven primary destinations and order');
-  assert.equal((html.match(/href="index.html#\/overview" aria-current="location">Discover<\/a>/g)||[]).length,2,
-    'Discover remains the parent section in both mobile and desktop navigation');
+  assert.equal((html.match(/href="index.html#\/overview">Discover<\/a>/g)||[]).length,2,
+    'Discover remains a real parent link, but is not incorrectly marked current');
   assert.equal((html.match(/href="demo.html" aria-current="location">Guided professor demo<\/a>/g)||[]).length,2,
     'Demo is the current secondary destination in both mobile and desktop navigation');
   assert.ok(html.includes('href="index.html#/sources">Inspect published inventory'));
