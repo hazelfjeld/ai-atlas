@@ -667,6 +667,23 @@ body:has(.site-chrome) :is(.tech-controls,.playbook-tools,.controls,.search-cont
 }
 /* atlas-mobile-chrome-rhythm:end */
 
+/* atlas-reference-intro-rhythm:begin */
+/* Discover begins content close beneath its 68px mobile workspace header.
+   Reference pages and About still inherited a 38px top margin from their
+   pre-shared navigation shells; after changing pages the headline visibly
+   jumped down. Keep article headings, breadcrumbs and their real routes,
+   but give both generated reference families and About the same compact
+   first-content spacing. The shared rule works before hydration and in both
+   themes; desktop's existing 8px rhythm is untouched. */
+@media(max-width:650px){
+  .term-shell > .site-chrome + .hero,
+  .term-shell > .site-chrome + .breadcrumb-links + .hero{
+    margin-top:18px;
+  }
+}
+/* atlas-reference-intro-rhythm:end */
+
+
 
 /* atlas-shared-headlines:begin */
 /* Existing standalone editorial headlines already use Discover's component.

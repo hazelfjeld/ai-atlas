@@ -44,6 +44,31 @@ with sync_playwright() as p:
     page.goto(base)
     page.locator('#navigation a[href="#/games"]').wait_for()
     check('homepage retains original Atlas shell and native Games tab', page.locator('.app-shell').count() == 1)
+    # Discover keeps its 68px mobile header followed by a compact article
+    # intro. Both generated reference families and About previously left a
+    # 38px legacy gap after the same shared navigation. Check actual computed
+    # geometry with scripts disabled and both OS theme preferences.
+    for scheme in ('light', 'dark'):
+        intro_context = browser.new_context(java_script_enabled=False, color_scheme=scheme)
+        intro_page = intro_context.new_page()
+        for width in (320, 390):
+            intro_page.set_viewport_size({'width': width, 'height': 844})
+            intro_page.goto(base + 'index.html')
+            for route in (
+                'about.html',
+                'terms/index.html',
+                'terms/MLD-0001-a-b-test.html',
+                'technology/index.html',
+                'technology/TECH-0001-adversarial-robustness-toolbox.html'
+            ):
+                intro_page.goto(base + route)
+                measurement = intro_page.locator('.term-shell > .hero').evaluate(
+                    'el => ({margin: getComputedStyle(el).marginTop, '
+                    'visible: el.getBoundingClientRect().height > 0})')
+                check('script-free reference article intro matches Discover mobile spacing '
+                      + scheme + ' ' + str(width) + ' ' + route,
+                      measurement['margin'] == '18px' and measurement['visible'])
+        intro_context.close()
     # Native reference/editorial skip links were stacked below the shared 68px
     # mobile or 78px desktop chrome. Verify the first keyboard target really
     # receives pointer hit-testing above that header, even without JavaScript.

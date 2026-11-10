@@ -607,3 +607,33 @@ test('shared native skip links have a visible focus layer above the desktop and 
     assert.ok(html.includes('site-chrome'), route + ' loads common navigation');
   }
 });
+
+test('mobile reference introductions share the Discover first-content rhythm without JavaScript', () => {
+  const block = css.split('/* atlas-reference-intro-rhythm:begin */')[1]
+    ?.split('/* atlas-reference-intro-rhythm:end */')[0];
+  assert.ok(block, 'Missing shared mobile article introduction treatment');
+  assert.match(block, /@media\(max-width:650px\)/);
+  assert.ok(block.includes('.term-shell > .site-chrome + .hero'));
+  assert.ok(block.includes('.term-shell > .site-chrome + .breadcrumb-links + .hero'));
+  assert.match(block, /margin-top:18px/);
+  assert.ok(!block.includes('display:none'), 'Do not hide the hero or breadcrumbs');
+  for (const route of [
+    'about.html',
+    'terms/index.html',
+    'terms/MLD-0001-a-b-test.html',
+    'technology/index.html',
+    'technology/TECH-0001-adversarial-robustness-toolbox.html'
+  ]) {
+    const html = fs.readFileSync(path.join(__dirname, '..', route), 'utf8');
+    assert.ok(html.includes('site-chrome.css'), route + ' must use the shared CSS');
+    assert.match(html, /<nav class="site-chrome[^"]*"[^>]*>/, route + ' needs the shared rail');
+    assert.match(html, /<header class="hero"/, route + ' retains the original article heading');
+  }
+  const technology = fs.readFileSync(path.join(__dirname, '..',
+    'technology/TECH-0001-adversarial-robustness-toolbox.html'), 'utf8');
+  assert.match(technology, /<\/nav><p class="breadcrumb-links">/,
+    'The technology breadcrumb must remain between navigation and the hero');
+  const offline = fs.readFileSync(path.join(__dirname, '..',
+    'downloads/Atlas_Demo_Offline.html'), 'utf8');
+  assert.ok(offline.includes(css), 'Offline fallback must embed the exact rebuilt shared CSS');
+});
