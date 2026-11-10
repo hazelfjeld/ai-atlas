@@ -20,6 +20,21 @@ def check(name, condition):
     print('PASS', name, flush=True)
 
 
+def has_visible_workspace_title(header, expected):
+    """Read actual accessible DOM text on native pages; keep CSS first-paint
+    checks for generated references that have no explicit title node."""
+    return header.evaluate("""(el, expected) => {
+        const real = el.querySelector(':scope > .site-mobile-chrome__title');
+        const pseudo = getComputedStyle(el,'::before');
+        if (real) {
+            return real.textContent.trim() === expected &&
+                getComputedStyle(real).display !== 'none' &&
+                pseudo.display === 'none';
+        }
+        return pseudo.display !== 'none' && pseudo.content.includes(expected);
+    }""", expected)
+
+
 with sync_playwright() as p:
     browser=p.chromium.launch(executable_path=os.environ.get('CHROMIUM_PATH'),headless=True)
     static=browser.new_context(java_script_enabled=False)
@@ -124,8 +139,7 @@ with sync_playwright() as p:
           and page.locator('main > section.hero#main').get_attribute('tabindex') == '-1')
     check('Research section label is present without JavaScript',
           page.locator('.research-mobile-topbar').get_attribute('data-page-label')=='Research library'
-          and 'Research library' in page.locator('.research-mobile-topbar').evaluate(
-              "el => getComputedStyle(el, '::before').content"))
+          and has_visible_workspace_title(page.locator('.research-mobile-topbar'), 'Research library'))
     check('Research identifies its canonical Discover parent and active secondary link without JavaScript',
           page.locator('.site-chrome__links a').count()==7
           and page.locator('.site-chrome__links a[aria-current="location"]').count()==1
@@ -191,7 +205,7 @@ with sync_playwright() as p:
         header = page.locator('.site-mobile-chrome')
         check(f'{route} no-JS desktop title matches shared navigation',
               header.get_attribute('data-page-label') == expected
-              and expected in header.evaluate("el => getComputedStyle(el,'::before').content")
+              and has_visible_workspace_title(header, expected)
               and page.locator('.site-chrome__links a').count() == 7)
 
     # Editorial subpages belong to the daily section without inheriting the
