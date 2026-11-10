@@ -903,6 +903,58 @@
       "production_workflow_run_id": 42656089198,
       "githack_workflow_run_id": 42656089268,
       "verification_scope": "Exact main d8cc4b498a058fbb5e74485c5656f09079b5080d passed catalog/reproducibility/GitHack, local Chromium, exact 498 HTTP assets per each of workers.dev, apex and www, and production Chromium archive/navigation/responsive/themes/Games checks in Cloudflare workflow 42656089198. The dated archive was rendered and immutable edition asset verified; its exact date/revision query URL was not separately opened in an independent browser."
+    },
+    {
+      "batch_id": "atlas-daily-20261110-20261110141757944-a",
+      "source_branch": "atlas-daily-staging",
+      "source_commit": "34d005a5553e654007145d7982d8db100cc375aa",
+      "source_batch_path": "daily-queue/batches/2026-11-10-atlas-daily-20261110-20261110141757944-a.json",
+      "source_batch_sha256": "8c2ac34c15f9bacb9a0b7981188f32796696cf90c941f43ae4c3eac0b152a1b0",
+      "source_batch_bytes": 32020,
+      "edition_date": "2026-11-10",
+      "validation_result": "batch_sha256_bytes_schema_unique_ids_source_dates_qualified_sources_and_archive_dedup_checked",
+      "status": "partially_published_with_6_deferred_catalog_proposals",
+      "publication_outcome": "immutable_revision_1_pending_cloudflare_http_browser_and_githack_verification",
+      "publication_edition": "2026-11-10-v1",
+      "accepted_news_ids": [
+        "ai-news-google-alphaproof-code",
+        "ai-news-evolving-infra-2611-12304",
+        "ai-news-shibboleth-agent-fingerprint-2611-12386",
+        "ai-news-paris-review-agents-2611-12222",
+        "ai-news-scale-small-model-learning-2611-12120",
+        "ai-news-ai-chip-auto-supply-20261110",
+        "ai-news-impossible-metals-deep-sea-robot-20261109",
+        "ai-news-uk-undersea-ai-sensors-funding-20261110",
+        "ai-news-france-ai-assistant-safeguards-20261110"
+      ],
+      "deferred_news_ids": [],
+      "deferred_catalog_proposal_ids": [
+        "tech-proposal:alphaproof-code:2026-11-10",
+        "tech-proposal:evolving-infra:2611.12304",
+        "tech-proposal:paris-agentic-reviews:2611.12222",
+        "term-proposal:shibboleth-trap:2026-11-10",
+        "term-proposal:agent-aware-kv-retention:2026-11-10",
+        "term-proposal:binary-level-formal-verification:2026-11-10"
+      ],
+      "rejected_ids": [],
+      "counts": {
+        "news_published": 9,
+        "technology_added": 0,
+        "term_added": 0,
+        "corrections": 0,
+        "news_deferred": 0,
+        "catalog_deferred": 6,
+        "technology_updated": 0
+      },
+      "review_notes": "Four November 10 and five November 9 reports, independently cross-checked with original DeepMind, arXiv and attributed Reuters/Le Monde sources. Partial coverage and two failed source opens preserved. Six catalog proposals are withheld pending canonical and availability review.",
+      "production_verified_at": null,
+      "publication_history": [
+        {
+          "edition": "2026-11-10-v1",
+          "status": "pending_cloudflare_http_browser_and_githack_verification",
+          "note": "Prepared as an atomic publisher commit; immutable bytes and pending state do not assert hosted verification."
+        }
+      ]
     }
   ]
 }

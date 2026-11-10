@@ -1660,3 +1660,33 @@ test('November 9 edition retains source dates, idempotent receipt, and six defer
   assert.ok(e.news.every(n=>n.source_url.startsWith('https://')&&n.review_status&&n.caveat&&n.why_it_matters));
   assert.ok(archive.last_successful_publish_at&&Date.parse(archive.last_successful_publish_at)>=Date.parse('2026-11-08T14:43:03Z'));
 });
+
+test('November 10 edition checks collector hashes, review scope, and newest script-free links', () => {
+ const archive=JSON.parse(fs.readFileSync('data/daily/index.json','utf8'));
+ const ledger=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8'));
+ const entry=archive.editions.find(e=>e.date==='2026-11-10'&&e.revision===1);
+ const receipt=ledger.receipts.find(r=>r.batch_id==='atlas-daily-20261110-20261110141757944-a');
+ assert.ok(entry&&receipt);
+ assert.equal(ledger.receipts.filter(r=>r.batch_id===receipt.batch_id).length,1);
+ assert.equal(receipt.source_batch_sha256,'8c2ac34c15f9bacb9a0b7981188f32796696cf90c941f43ae4c3eac0b152a1b0');
+ assert.equal(receipt.source_batch_bytes,32020);
+ const raw=fs.readFileSync(entry.path);
+ assert.equal(raw.length,entry.bytes);
+ assert.equal(require('node:crypto').createHash('sha256').update(raw).digest('hex'),entry.sha256);
+ const e=D.validateEdition(JSON.parse(raw),entry);
+ assert.equal(e.news.length,9);
+ assert.equal(e.news.filter(n=>n.publication_date===e.edition_date).length,4);
+ assert.equal(e.news.filter(n=>n.publication_date<e.edition_date).length,5);
+ assert.equal(e.coverage.status,'partial');
+ assert.equal(e.coverage.sources_failed.length,2);
+ assert.deepEqual(e.news.map(n=>n.id),receipt.accepted_news_ids);
+ assert.ok(e.news.every(n=>n.review_status.startsWith('publisher_checked_')&&n.caveat&&n.source_url.startsWith('https://')));
+ assert.deepEqual([e.technologies.length,e.terms.length,e.corrections.length,receipt.counts.catalog_deferred],[0,0,0,6]);
+ assert.equal(receipt.deferred_catalog_proposal_ids.length,6);
+ const html=fs.readFileSync('whats-new.html','utf8');
+ const start=html.indexOf('id="scriptfree-daily-archive"');
+ assert.ok(start>0&&html.slice(start,start+2200).includes('data/daily/editions/2026-11-10-v1.json'));
+ const last=ledger.receipts.at(-1), isVerified=!!last.production_verified_at;
+ assert.equal(archive.status,'edition_revision_1_'+(isVerified?'production_verified':'pending_production_verification'));
+ assert.equal(archive.last_successful_publish_at,verifiedPublicationClock());
+});

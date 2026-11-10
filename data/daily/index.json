@@ -273,9 +273,17 @@
       "sha256": "edda0451b0e32983d7b6a39969518cae76afd11e3456b5d45e35869307ce8c67",
       "bytes": 20018,
       "published_at": "2026-11-09T15:00:53.157Z"
+    },
+    {
+      "date": "2026-11-10",
+      "revision": 1,
+      "path": "data/daily/editions/2026-11-10-v1.json",
+      "sha256": "fd20cd766838fe5812271b4ef339279677720d9e369426c899f733199368d219",
+      "bytes": 17121,
+      "published_at": "2026-11-10T14:33:21.130Z"
     }
   ],
   "last_successful_publish_at": "2026-11-09T16:46:11Z",
-  "status": "edition_revision_1_production_verified",
-  "coverage_note": "November 9 revision 1 source-reviewed partial edition: 11 attributed reports (8 same-day, 3 catch-up), 6 deferred catalog proposals and no canonical additions. Exact production Cloudflare HTTP/browser and GitHack checks passed November 9 at 16:46 UTC; collection coverage remains partial."
+  "status": "edition_revision_1_pending_production_verification",
+  "coverage_note": "November 10 partial source-reviewed edition staged for publication: nine qualified reports (four November 10, five November 9), six deferred canonical proposals, two failed source opens. Public verification is pending and last_successful_publish_at remains the previous verified release."
 }

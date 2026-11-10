@@ -1,0 +1,312 @@
+{
+  "schema": 1,
+  "edition_date": "2026-11-10",
+  "timezone": "America/Chicago",
+  "published_at": "2026-11-10T14:33:21.130Z",
+  "coverage": {
+    "start": "2026-11-09T14:46:52Z",
+    "end": "2026-11-10T14:17:57.944Z",
+    "status": "partial",
+    "note": "Partial incremental November 9–10 sweep: four reports dated November 10 and five dated November 9. Seven author/official/reporter evidence sources underpin nine reports; claims are explicitly attributed, not independently replicated. Prior partial intervals and a broad specialist sweep remain incomplete. Three technology and three terminology proposals remain deferred pending canonical/catalog checks; an OpenAI article and PARIS repository were unavailable.",
+    "sources_checked": [
+      {
+        "name": "source-01",
+        "url": "https://deepmind.google/blog/introducing-alphaproof-code/",
+        "checked_at": "2026-11-10T14:17:57.944Z",
+        "status": "opened",
+        "note": "Collector opened source; publisher cross-checked material claims and caveats."
+      },
+      {
+        "name": "source-02",
+        "url": "https://google-deepmind.github.io/code-verification/",
+        "checked_at": "2026-11-10T14:17:57.944Z",
+        "status": "opened",
+        "note": "Collector opened source; publisher cross-checked material claims and caveats."
+      },
+      {
+        "name": "source-03",
+        "url": "https://www.wired.com/story/a-new-ai-tool-from-google-deepmind-formally-verified-the-signal-protocol/",
+        "checked_at": "2026-11-10T14:17:57.944Z",
+        "status": "opened",
+        "note": "Collector opened source; publisher cross-checked material claims and caveats."
+      },
+      {
+        "name": "source-04",
+        "url": "https://arxiv.org/abs/2611.12304",
+        "checked_at": "2026-11-10T14:17:57.944Z",
+        "status": "opened",
+        "note": "Collector opened source; publisher cross-checked material claims and caveats."
+      },
+      {
+        "name": "source-05",
+        "url": "https://arxiv.org/abs/2611.12386",
+        "checked_at": "2026-11-10T14:17:57.944Z",
+        "status": "opened",
+        "note": "Collector opened source; publisher cross-checked material claims and caveats."
+      },
+      {
+        "name": "source-06",
+        "url": "https://github.com/SayShibboleth/Shibboleth",
+        "checked_at": "2026-11-10T14:17:57.944Z",
+        "status": "opened_empty_repository",
+        "note": "Collector opened source; publisher cross-checked material claims and caveats."
+      },
+      {
+        "name": "source-07",
+        "url": "https://arxiv.org/abs/2611.12222",
+        "checked_at": "2026-11-10T14:17:57.944Z",
+        "status": "opened",
+        "note": "Collector opened source; publisher cross-checked material claims and caveats."
+      },
+      {
+        "name": "source-08",
+        "url": "https://arxiv.org/abs/2611.12120",
+        "checked_at": "2026-11-10T14:17:57.944Z",
+        "status": "opened",
+        "note": "Collector opened source; publisher cross-checked material claims and caveats."
+      },
+      {
+        "name": "source-09",
+        "url": "https://www.reuters.com/business/autos-transportation/chipmakers-warn-ai-demand-is-creating-bottlenecks-automotive-supply-chain-2026-11-10/",
+        "checked_at": "2026-11-10T14:17:57.944Z",
+        "status": "opened",
+        "note": "Collector opened source; publisher cross-checked material claims and caveats."
+      },
+      {
+        "name": "source-10",
+        "url": "https://www.reuters.com/technology/impossible-metals-says-it-has-successfully-tested-ai-seabed-mining-robot-2026-11-09/",
+        "checked_at": "2026-11-10T14:17:57.944Z",
+        "status": "opened",
+        "note": "Collector opened source; publisher cross-checked material claims and caveats."
+      },
+      {
+        "name": "source-11",
+        "url": "https://www.reuters.com/world/uk/britain-invest-90-million-drones-sensors-counter-russian-undersea-threats-2026-11-10/",
+        "checked_at": "2026-11-10T14:17:57.944Z",
+        "status": "opened",
+        "note": "Collector opened source; publisher cross-checked material claims and caveats."
+      },
+      {
+        "name": "source-12",
+        "url": "https://www.lemonde.fr/en/economy/article/2026/11/10/commission-calls-for-stricter-regulation-of-ai-assistants-in-france_6776832_19.html",
+        "checked_at": "2026-11-10T14:17:57.944Z",
+        "status": "opened",
+        "note": "Collector opened source; publisher cross-checked material claims and caveats."
+      }
+    ],
+    "sources_failed": [
+      {
+        "url": "https://openai.com/index/introducing-control-room/",
+        "checked_at": "2026-11-10T14:17:57.944Z",
+        "status": "failed",
+        "reason": "Official article returned HTTP 404 on direct open; indexed snippets insufficient for detailed claims."
+      },
+      {
+        "url": "https://github.com/ChristopheCruz/PARIS",
+        "checked_at": "2026-11-10T14:17:57.944Z",
+        "status": "failed",
+        "reason": "Author-listed repository returned HTTP 404; code/license unverified."
+      }
+    ]
+  },
+  "tldr": [
+    "Google DeepMind released a substantial human-guided, machine-checked Signal verification study, while fresh agent-infrastructure, security-fingerprinting, research-review and small-model-learning preprints propose new techniques.",
+    "Reports on semiconductor bottlenecks, deep-sea robot trials, UK surveillance funding and French chatbot-regulation proposals broaden the picture; author results, company claims and advisory recommendations remain explicitly qualified.",
+    "Four source reports date to November 10 and five to November 9; catalog proposals (three tools, three concepts) remain deferred until canonical review."
+  ],
+  "news": [
+    {
+      "id": "ai-news-google-alphaproof-code",
+      "title": "DeepMind releases AlphaProof Code proofs for Signal's core cryptography",
+      "category": "research",
+      "tags": [
+        "LLM",
+        "security",
+        "formal verification"
+      ],
+      "summary": "Google DeepMind presented AlphaProof Code, a human-guided multi-agent framework using Lean-checked proof artifacts to connect defined cryptographic guarantees with compiled AArch64 libsignal code, covering PQXDH and Triple Ratchet properties.",
+      "why_it_matters": "A notable demonstration of scaling verification beyond abstract protocol design into executable code.",
+      "caveat": "It does not certify the entire Signal app or unspecified properties. The proofs depend on trusted human-approved specifications, model assumptions and the Lean kernel.",
+      "review_status": "publisher_checked_primary_technical_source_qualified",
+      "release_status": "author_research_release",
+      "source_url": "https://deepmind.google/blog/introducing-alphaproof-code/",
+      "publication_date": "2026-11-10",
+      "discovered_at": "2026-11-10T14:17:57.944Z",
+      "added_to_atlas_at": "2026-11-10T14:33:21.130Z",
+      "collection_classification": "current_window",
+      "event_date": "2026-11-10"
+    },
+    {
+      "id": "ai-news-evolving-infra-2611-12304",
+      "title": "Evolving Infra proposes workload-adaptive prefill, decode and KV-cache management",
+      "category": "research",
+      "tags": [
+        "LLM",
+        "agents",
+        "inference"
+      ],
+      "summary": "A November 9 preprint introduces dynamic prefill/decode GPU role switching and context-aware cache retention for agent workloads. Authors report up to 4.1x lower mean latency and 14x lower P95 time-to-first-token than their selected NVIDIA Dynamo setups.",
+      "why_it_matters": "Long-running agent tasks often reuse prefixes after subagent work or pauses that recency-only cache eviction cannot anticipate.",
+      "caveat": "These are unreplicated preprint maxima on selected workloads with up to 256 GB300 GPUs; a downloadable release was not verified.",
+      "review_status": "publisher_checked_original_preprint_claims_qualified",
+      "release_status": "research_preprint",
+      "source_url": "https://arxiv.org/abs/2611.12304",
+      "publication_date": "2026-11-09",
+      "discovered_at": "2026-11-10T14:17:57.944Z",
+      "added_to_atlas_at": "2026-11-10T14:33:21.130Z",
+      "collection_classification": "catch_up",
+      "event_date": "2026-11-09"
+    },
+    {
+      "id": "ai-news-shibboleth-agent-fingerprint-2611-12386",
+      "title": "Shibboleth research fingerprints attacking agent models and harnesses",
+      "category": "research",
+      "tags": [
+        "LLM",
+        "cybersecurity",
+        "agents"
+      ],
+      "summary": "Researchers describe honeypot services that elicit characteristic language, command timeouts and tool-call behavior from an autonomous attacker. In controlled experiments they report 90% top-1 model classification across 15 candidates and 92% harness identification across four harnesses.",
+      "why_it_matters": "Defenders may infer which tools or models drive an attack without direct access to the attacker's prompts or agent logs.",
+      "caveat": "Controlled testing is not evidence of a real incident or universal attribution; the linked code repository was empty when checked.",
+      "review_status": "publisher_checked_original_preprint_claims_qualified",
+      "release_status": "research_preprint",
+      "source_url": "https://arxiv.org/abs/2611.12386",
+      "publication_date": "2026-11-09",
+      "discovered_at": "2026-11-10T14:17:57.944Z",
+      "added_to_atlas_at": "2026-11-10T14:33:21.130Z",
+      "collection_classification": "catch_up",
+      "event_date": "2026-11-09"
+    },
+    {
+      "id": "ai-news-paris-review-agents-2611-12222",
+      "title": "PARIS research proposes a human-gated agent workflow for systematic reviews",
+      "category": "research",
+      "tags": [
+        "LLM",
+        "agents",
+        "research"
+      ],
+      "summary": "The PARIS preprint describes specialized review agents coordinated through persisted artifacts, three human checkpoints and a pre-synthesis corpus-quality measure. Two case studies reveal both useful workflows and retrieval/count-tracking failures.",
+      "why_it_matters": "Auditable study selection and human oversight matter more than presenting an AI-generated research summary as a completed systematic review.",
+      "caveat": "Unreviewed preprint: only eight of 27 PRISMA items fully supported, manuscripts judged internally, and the referenced public repository returned 404.",
+      "review_status": "publisher_checked_original_preprint_claims_qualified",
+      "release_status": "research_preprint",
+      "source_url": "https://arxiv.org/abs/2611.12222",
+      "publication_date": "2026-11-09",
+      "discovered_at": "2026-11-10T14:17:57.944Z",
+      "added_to_atlas_at": "2026-11-10T14:33:21.130Z",
+      "collection_classification": "catch_up",
+      "event_date": "2026-11-09"
+    },
+    {
+      "id": "ai-news-scale-small-model-learning-2611-12120",
+      "title": "SCALE tests small-model-first learning from selectively triggered LLM reflection",
+      "category": "research",
+      "tags": [
+        "SLM",
+        "LLM",
+        "agents"
+      ],
+      "summary": "A November 9 preprint proposes a small model for routine agent decisions, using larger-model reflection on failures to create reusable conceptual knowledge and archive old experiences.",
+      "why_it_matters": "Selectively internalizing experience could reduce recurring large-model calls in long-running agents.",
+      "caveat": "Author-controlled experiments only; model generalization, deployed resource costs and independent reproducibility remain unverified.",
+      "review_status": "publisher_checked_original_preprint_claims_qualified",
+      "release_status": "research_preprint",
+      "source_url": "https://arxiv.org/abs/2611.12120",
+      "publication_date": "2026-11-09",
+      "discovered_at": "2026-11-10T14:17:57.944Z",
+      "added_to_atlas_at": "2026-11-10T14:33:21.130Z",
+      "collection_classification": "catch_up",
+      "event_date": "2026-11-09"
+    },
+    {
+      "id": "ai-news-ai-chip-auto-supply-20261110",
+      "title": "Chipmakers say AI investment is squeezing mature automotive chip supply",
+      "category": "industry",
+      "tags": [
+        "hardware",
+        "infrastructure",
+        "industry"
+      ],
+      "summary": "Reuters reports remarks by Nexperia and STMicroelectronics executives at Munich's Electronica conference about capacity shifting toward AI data centers and robotics, constraining automotive and industrial semiconductors.",
+      "why_it_matters": "AI compute expansion affects manufacturing capacity outside the accelerator market.",
+      "caveat": "These are named executives' observations, not a global quantitative inventory audit; remarks span November 9–10.",
+      "review_status": "publisher_checked_reuters_reporting_attributed",
+      "release_status": "industry_reporting",
+      "source_url": "https://www.reuters.com/business/autos-transportation/chipmakers-warn-ai-demand-is-creating-bottlenecks-automotive-supply-chain-2026-11-10/",
+      "publication_date": "2026-11-10",
+      "discovered_at": "2026-11-10T14:17:57.944Z",
+      "added_to_atlas_at": "2026-11-10T14:33:21.130Z",
+      "collection_classification": "current_window",
+      "event_date": "2026-11-10"
+    },
+    {
+      "id": "ai-news-impossible-metals-deep-sea-robot-20261109",
+      "title": "Impossible Metals reports trial of autonomous deep-sea mineral retrieval",
+      "category": "robotics",
+      "tags": [
+        "robotics",
+        "environment",
+        "AI"
+      ],
+      "summary": "Reuters reports the company's claim that its autonomous robotic collector retrieved about 450 grams of nodules at over 4,000 meters depth during a September 2026 Pacific test.",
+      "why_it_matters": "An early example of AI-guided autonomy in a challenging underwater environment, with significant environmental oversight issues.",
+      "caveat": "Company-reported controlled test; claims of reduced environmental harm are not independently verified, and commercial operations require approval.",
+      "review_status": "publisher_checked_reuters_reporting_attributed",
+      "release_status": "company_demo_reported",
+      "source_url": "https://www.reuters.com/technology/impossible-metals-says-it-has-successfully-tested-ai-seabed-mining-robot-2026-11-09/",
+      "publication_date": "2026-11-09",
+      "discovered_at": "2026-11-10T14:17:57.944Z",
+      "added_to_atlas_at": "2026-11-10T14:33:21.130Z",
+      "collection_classification": "current_window",
+      "event_date_month": "2026-09"
+    },
+    {
+      "id": "ai-news-uk-undersea-ai-sensors-funding-20261110",
+      "title": "UK announces £90 million for AI-enabled undersea surveillance",
+      "category": "policy",
+      "tags": [
+        "autonomy",
+        "AI",
+        "security"
+      ],
+      "summary": "Reuters reports a British plan for AI, drones and sensors to monitor threats to North Atlantic undersea infrastructure.",
+      "why_it_matters": "Autonomous detection and sensor fusion are being pursued for security of critical infrastructure.",
+      "caveat": "Funding announcement only; not evidence of completed fielding or measured effectiveness.",
+      "review_status": "publisher_checked_reuters_reporting_attributed",
+      "release_status": "government_plan_reported",
+      "source_url": "https://www.reuters.com/world/uk/britain-invest-90-million-drones-sensors-counter-russian-undersea-threats-2026-11-10/",
+      "publication_date": "2026-11-10",
+      "discovered_at": "2026-11-10T14:17:57.944Z",
+      "added_to_atlas_at": "2026-11-10T14:33:21.130Z",
+      "collection_classification": "current_window",
+      "event_date": "2026-11-10"
+    },
+    {
+      "id": "ai-news-france-ai-assistant-safeguards-20261110",
+      "title": "French AI council urges stronger protections for chatbot users",
+      "category": "governance",
+      "tags": [
+        "LLM",
+        "consumer AI",
+        "safety"
+      ],
+      "summary": "Le Monde reports CIANum's November 10 advisory recommendations for stronger protections for minors, transparency about commercial influence and user profiling, and pre-market vulnerability assessments.",
+      "why_it_matters": "Policy debate is moving toward how personalized conversational assistants affect users, not just training-data or model-level controls.",
+      "caveat": "Advisory proposals are not law; original council report was not accessed independently.",
+      "review_status": "publisher_checked_lemonde_reporting_attributed",
+      "release_status": "advisory_recommendation_reported",
+      "source_url": "https://www.lemonde.fr/en/economy/article/2026/11/10/commission-calls-for-stricter-regulation-of-ai-assistants-in-france_6776832_19.html",
+      "publication_date": "2026-11-10",
+      "discovered_at": "2026-11-10T14:17:57.944Z",
+      "added_to_atlas_at": "2026-11-10T14:33:21.130Z",
+      "collection_classification": "current_window",
+      "event_date": "2026-11-10"
+    }
+  ],
+  "technologies": [],
+  "terms": [],
+  "site_changes": [],
+  "corrections": []
+}
