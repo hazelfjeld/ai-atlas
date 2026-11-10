@@ -6,6 +6,27 @@ const path = require('node:path');
 const css = fs.readFileSync(path.join(__dirname, '..', 'site-chrome.css'), 'utf8');
 
 
+test('Research uses the same separate site navigation and content landmark as editorial landings', () => {
+  const html = fs.readFileSync(path.join(__dirname, '..', 'research.html'), 'utf8');
+  const generator = fs.readFileSync(path.join(__dirname, '..', 'scripts/site_chrome.py'), 'utf8');
+  const siteNav = html.indexOf('<nav class="site-chrome research-site-chrome"');
+  const siteNavEnd = html.indexOf('</nav>', siteNav);
+  const main = html.indexOf('<main>', siteNav);
+  const hero = html.indexOf('<section class="hero" id="main" tabindex="-1">', siteNav);
+  assert.ok(siteNav > 0 && siteNavEnd > siteNav && main > siteNavEnd && hero > main,
+    'Research navigation must precede, not live inside, the content landmark');
+  assert.equal(html.match(/<main>/g)?.length, 1);
+  assert.ok(!html.slice(main, hero).includes('site-chrome'),
+    'The main landmark should not contain a second navigation rail');
+  assert.ok(!generator.includes("markup.replace('</div><nav class=\"site-chrome', '</div><main><nav class=\"site-chrome'"),
+    'Build-time shared chrome must not insert the article landmark inside navigation');
+  assert.ok(css.includes('.shell:has(> .site-chrome.research-site-chrome)'),
+    'Shared reading-frame styles must continue to cover Research after landmark migration');
+  const news = fs.readFileSync(path.join(__dirname, '..', 'whats-new.html'), 'utf8');
+  assert.ok(news.indexOf('<nav class="site-chrome top"') < news.indexOf('<main>'),
+    'Daily archive remains the existing sibling-nav pattern');
+});
+
 test('standalone workspace headings are real shared DOM text, not CSS-only labels', () => {
   const source = fs.readFileSync(path.join(__dirname, '..', 'scripts/site_chrome.py'), 'utf8');
   assert.ok(source.includes('page_label=page_title, topbar_title=page_title'),
@@ -128,7 +149,7 @@ test('Playbooks, Technology, Research and editorial reviews reuse Discover card 
     '.playbook-shell .playbook > h2',
     '.tech-shell .tech-card > h3',
     '.shell:has(> .site-chrome.nav) article.card > h3',
-    '.shell:has(> main > .site-chrome.research-site-chrome) .cards > .card > h3'
+    '.shell:has(> .site-chrome.research-site-chrome) .cards > .card > h3'
   ]) assert.ok(block.includes(selector), 'Missing card family: ' + selector);
   assert.match(block, /font:400 clamp\(20px,2vw,23px\)\/1\.25 Georgia/);
   assert.match(block, /color:var\(--ink\)/);
@@ -165,7 +186,7 @@ test('shared editorial cards match Discover hover and expose keyboard focus in e
     '.playbook-shell .playbook',
     '.tech-shell .tech-card',
     '.shell:has(> .site-chrome.nav) article.card',
-    '.shell:has(> main > .site-chrome.research-site-chrome) .cards > .card'
+    '.shell:has(> .site-chrome.research-site-chrome) .cards > .card'
   ]) assert.ok(block.includes(selector), 'Missing card family: ' + selector);
   assert.ok(block.includes(':is(:hover,:focus-within)'));
   assert.ok(block.includes(':root[data-theme="dark"]') && block.includes('prefers-color-scheme:dark'));
@@ -358,8 +379,8 @@ test('shared editorial card links, disclosures and descriptions follow Discover 
     '.tech-shell .tech-card .card-actions a',
     '.tech-shell .tech-card details > summary',
     '.tech-shell .tech-card dd',
-    '.shell:has(> main > .site-chrome.research-site-chrome) .cards .card a',
-    '.shell:has(> main > .site-chrome.research-site-chrome) .cards .card p'
+    '.shell:has(> .site-chrome.research-site-chrome) .cards .card a',
+    '.shell:has(> .site-chrome.research-site-chrome) .cards .card p'
   ]) assert.ok(block.includes(selector), 'Uncovered card copy: ' + selector);
   assert.match(block, /color:var\(--accent,#27664e\)/);
   assert.match(block, /color:var\(--muted,#5d6861\)/);
@@ -780,7 +801,7 @@ test('Research, Playbooks, Technology and daily news share one introduction comp
   const block=css.split('/* atlas-shared-introduction-copy:begin */')[1]
     ?.split('/* atlas-shared-introduction-copy:end */')[0];
   assert.ok(block, 'Missing shared intro typography');
-  for(const family of [".playbook-shell > .playbook-hero > p",".tech-shell > .tech-hero > p",".shell:has(> main > .site-chrome.research-site-chrome) > main > .hero > p",".shell:has(> .site-chrome.top) > main > header .lead"])
+  for(const family of [".playbook-shell > .playbook-hero > p",".tech-shell > .tech-hero > p",".shell:has(> .site-chrome.research-site-chrome) > main > .hero > p",".shell:has(> .site-chrome.top) > main > header .lead"])
     assert.ok(block.includes(family), 'Missing shared introduction: '+family);
   assert.match(block,/max-width:70ch/);
   assert.match(block,/font-size:17px/);

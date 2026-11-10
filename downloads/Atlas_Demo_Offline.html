@@ -587,13 +587,23 @@ body:has(.site-chrome){padding-top:78px}
   color:var(--ink);
 }
 
+/* Research's shared desktop rail is a sibling of the article landmark, as on
+   the daily archive and reference directories. Match its inner gutters to
+   the existing article padding; hide/show remains governed by shared CSS. */
+@media (min-width:1101px){
+ .shell > .site-chrome.research-site-chrome{margin-inline:44px;width:calc(100% - 88px)}
+}
+@media (min-width:651px) and (max-width:1100px){
+ .shell > .site-chrome.research-site-chrome{margin-inline:26px;width:calc(100% - 52px)}
+}
+
 /* One desktop reading frame shared by existing editorial and reference families.
    Discover remains the shell reference; the wider daily edition and playable
    Games layouts retain their distinct content widths. Mobile stays unchanged. */
 @media (min-width:651px){
 :is(.term-shell,.tech-shell,.playbook-shell,.review-shell,
     .shell:has(> .site-chrome.nav),
-    .shell:has(> main > .site-chrome.research-site-chrome)){
+    .shell:has(> .site-chrome.research-site-chrome)){
   box-sizing:border-box;width:100%;max-width:1120px!important;
   padding-inline:clamp(24px,3vw,36px)!important;
 }
@@ -601,7 +611,7 @@ body:has(.site-chrome){padding-top:78px}
 :is(.term-shell .profile-section > p,.term-shell .detail-block > p,
     .review-shell > section > p,
     .shell:has(> .site-chrome.nav) > main > section > p,
-    .shell:has(> main > .site-chrome.research-site-chrome) > main > section > p){
+    .shell:has(> .site-chrome.research-site-chrome) > main > section > p){
   max-width:74ch;
 }
 }
@@ -621,7 +631,7 @@ body:has(.site-chrome){padding-top:78px}
     .playbook-shell .playbook,
     .tech-shell .tech-card,
     .shell:has(> .site-chrome.nav) article.card,
-    .shell:has(> main > .site-chrome.research-site-chrome) .cards > .card,
+    .shell:has(> .site-chrome.research-site-chrome) .cards > .card,
     .shell:has(> .site-chrome.top) .panel){
   box-sizing:border-box;
   min-width:0;
@@ -644,7 +654,7 @@ body:has(.site-chrome){padding-top:78px}
 :is(.playbook-shell .playbook,
     .tech-shell .tech-card,
     .shell:has(> .site-chrome.nav) article.card,
-    .shell:has(> main > .site-chrome.research-site-chrome) .cards > .card):is(:hover,:focus-within){
+    .shell:has(> .site-chrome.research-site-chrome) .cards > .card):is(:hover,:focus-within){
  border-color:var(--atlas-card-interactive-line);
 }
 /* atlas-card-interactions:end */
@@ -839,7 +849,7 @@ body:has(.site-chrome) :is(.tech-controls,.playbook-tools,.controls,.search-cont
   }
 }
 :is(.term-shell .notice,
-    .shell:has(> main > .site-chrome.research-site-chrome) .notice,
+    .shell:has(> .site-chrome.research-site-chrome) .notice,
     .shell:has(> .site-chrome.nav) .notice,
     .review-shell .review-callout){
   box-sizing:border-box;
@@ -988,7 +998,7 @@ body:has(.site-chrome) :is(.tech-controls,.playbook-tools,.controls,.search-cont
 :is(.playbook-shell .playbook > h2,
     .tech-shell .tech-card > h3,
     .shell:has(> .site-chrome.nav) article.card > h3,
-    .shell:has(> main > .site-chrome.research-site-chrome) .cards > .card > h3){
+    .shell:has(> .site-chrome.research-site-chrome) .cards > .card > h3){
   font:400 clamp(20px,2vw,23px)/1.25 Georgia,'Times New Roman',serif;
   letter-spacing:-.025em;
   color:var(--ink);
@@ -1008,7 +1018,7 @@ body:has(.site-chrome) :is(.tech-controls,.playbook-tools,.controls,.search-cont
 :is(.playbook-shell .playbook a,
     .tech-shell .tech-card .card-actions a,
     .tech-shell .tech-card details a,
-    .shell:has(> main > .site-chrome.research-site-chrome) .cards .card a){
+    .shell:has(> .site-chrome.research-site-chrome) .cards .card a){
   color:var(--accent,#27664e);
 }
 :is(.playbook-shell .playbook summary,
@@ -1018,7 +1028,7 @@ body:has(.site-chrome) :is(.tech-controls,.playbook-tools,.controls,.search-cont
 :is(.playbook-shell .playbook p,
     .playbook-shell .playbook .tech-list,
     .tech-shell .tech-card dd,
-    .shell:has(> main > .site-chrome.research-site-chrome) .cards .card p){
+    .shell:has(> .site-chrome.research-site-chrome) .cards .card p){
   color:var(--muted,#5d6861);
 }
 /* atlas-card-copy-contrast:end */
@@ -1152,7 +1162,7 @@ body:has(.site-chrome) > a.skip:focus{
    editorial reading rhythm without changing their cards, controls or routes. */
 :is(.playbook-shell > .playbook-hero > p,
     .tech-shell > .tech-hero > p,
-    .shell:has(> main > .site-chrome.research-site-chrome) > main > .hero > p,
+    .shell:has(> .site-chrome.research-site-chrome) > main > .hero > p,
     .shell:has(> .site-chrome.top) > main > header .lead){
   max-width:70ch;
   font-size:17px;
@@ -1162,7 +1172,7 @@ body:has(.site-chrome) > a.skip:focus{
 @media(max-width:650px){
 :is(.playbook-shell > .playbook-hero > p,
     .tech-shell > .tech-hero > p,
-    .shell:has(> main > .site-chrome.research-site-chrome) > main > .hero > p,
+    .shell:has(> .site-chrome.research-site-chrome) > main > .hero > p,
     .shell:has(> .site-chrome.top) > main > header .lead){font-size:16px}
 }
 /* atlas-shared-introduction-copy:end */

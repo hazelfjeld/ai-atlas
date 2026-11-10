@@ -273,10 +273,8 @@ def render_standalone_nav(path):
         mobile_brand=True, native_secondary=True, mobile_secondary=True,
         secondary_current=secondary_current,
     )
-    # Research's main landmark starts between its two headers, but the native
-    # skip destination belongs on the subsequent article hero.
-    if path == "research.html":
-        markup = markup.replace('</div><nav class="site-chrome', '</div><main><nav class="site-chrome', 1)
+    # Each page owns its article landmark. Keep navigation outside <main>,
+    # matching the existing editorial and reference landing pages.
     return markup
 
 

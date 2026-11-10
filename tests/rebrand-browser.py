@@ -137,6 +137,10 @@ with sync_playwright() as p:
           page.locator('main > header').count() == 0
           and page.locator('main > section.hero#main .discover-heading h1').count() == 1
           and page.locator('main > section.hero#main').get_attribute('tabindex') == '-1')
+    check('Research uses the same separate navigation and article landmarks as the daily archive',
+          page.locator('.shell > nav.site-chrome.research-site-chrome').count() == 1
+          and page.locator('.shell > main > section.hero#main').count() == 1
+          and page.locator('main nav.site-chrome').count() == 0)
     check('Research section label is present without JavaScript',
           page.locator('.research-mobile-topbar').get_attribute('data-page-label')=='Research library'
           and has_visible_workspace_title(page.locator('.research-mobile-topbar'), 'Research library'))
@@ -991,7 +995,7 @@ with sync_playwright() as p:
         ('playbooks.html', '.playbook-shell'),
         ('hardware-review.html', '.review-shell'),
         ('catalog-review.html', '.shell:has(> .site-chrome.nav)'),
-        ('research.html', '.shell:has(> main > .site-chrome.research-site-chrome)'),
+        ('research.html', '.shell:has(> .site-chrome.research-site-chrome)'),
     )
     for width, height in ((320,700),(390,844),(768,900),(1280,900)):
         page.set_viewport_size({'width':width,'height':height})

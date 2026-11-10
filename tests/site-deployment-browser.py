@@ -1073,6 +1073,10 @@ with sync_playwright() as p:
           and mobile_research.locator('.research-site-chrome .site-chrome__links [aria-current]').count() == 0
           and mobile_research.locator('.research-site-chrome .site-chrome__more a[aria-current="location"]').inner_text() == 'Research library'
           and mobile_research.locator('.shell > aside').count() == 0)
+    check('Research global rail remains outside the article landmark at desktop width',
+          mobile_research.locator('.shell > nav.site-chrome.research-site-chrome').count() == 1
+          and mobile_research.locator('.shell > main > section.hero#main').count() == 1
+          and mobile_research.locator('main nav.site-chrome').count() == 0)
     published_counts = mobile_research.request.get(base + 'publication.json').json()['published_counts']
     check('research tabs retain accurate record counts and notice matches publication manifest',
           mobile_research.locator('#papers-count').inner_text() == str(published_counts['papers'])
