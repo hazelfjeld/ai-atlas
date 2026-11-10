@@ -285,5 +285,5 @@
   ],
   "last_successful_publish_at": "2026-11-09T16:46:11Z",
   "status": "edition_revision_1_pending_production_verification",
-  "coverage_note": "November 10 partial source-reviewed edition staged for publication: nine qualified reports (four November 10, five November 9), six deferred canonical proposals, two failed source opens. Public verification is pending and last_successful_publish_at remains the previous verified release."
+  "coverage_note": "November 10 revision 1 partial source-reviewed edition staged for publication: nine qualified reports (four November 10, five November 9), six deferred canonical proposals, two failed source opens. Public verification is pending and last_successful_publish_at remains the previous verified release."
 }
