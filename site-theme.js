@@ -27,25 +27,22 @@ document.addEventListener('DOMContentLoaded', () => {
   if (bar && title && title.length <= 90) bar.dataset.pageLabel = title;
 });
 
-// A legacy concept reference can put shared navigation before the article inside
-// <main>. A native #main skip would therefore take keyboard users back through
-// the entire rail. After hydration, move only that fragment destination to the
-// existing article hero, leaving the <main> landmark and no-JS hash fallback
-// intact. No extra header, link, dependency, or page-specific template is added.
+// Concept detail articles still have their shared rail *inside* <main> in
+// the preserved static HTML, unlike technology profiles and Discover. Move the
+// existing nodes, never clone them, once the page enhances: screen-reader
+// landmarks and the desktop/mobile reading order now match technology pages.
+// Without JavaScript, the original full native navigation and #main skip still
+// work. The source generator remains unchanged until the full catalog can be
+// rebuilt atomically rather than leaving published pages out of sync.
 document.addEventListener('DOMContentLoaded', () => {
-  const main = document.querySelector('main.term-shell#main');
-  if (!main || !document.querySelector('a.skip[href="#main"]')) return;
-  const hero = main.querySelector(':scope > header.hero');
-  if (!hero) return;
-  main.removeAttribute('id');
-  hero.id = 'main';
-  hero.setAttribute('tabindex', '-1');
-  // Direct old #main bookmarks remain useful even if the browser initially
-  // resolved the fragment against the pre-hydration main element.
-  if (window.location.hash === '#main') {
-    hero.scrollIntoView();
-    hero.focus({preventScroll:true});
-  }
+  if (!/(?:^|\/)terms\/MLD-\d+-[^/]+\.html$/.test(window.location.pathname)) return;
+  const main = document.querySelector('body > main.term-shell');
+  const mobile = main?.querySelector(':scope > .directory-mobile-topbar.site-mobile-chrome');
+  const rail = main?.querySelector(':scope > nav.site-chrome.term-nav');
+  const hero = main?.querySelector(':scope > header.hero#main[tabindex="-1"]');
+  if (!mobile || !rail || !hero || !document.querySelector('a.skip[href="#main"]')) return;
+  if (main.firstElementChild !== mobile || mobile.nextElementSibling !== rail) return;
+  main.before(mobile, rail);
 });
 
 // The main workspace consumes this one-shot intent after catalog hydration.

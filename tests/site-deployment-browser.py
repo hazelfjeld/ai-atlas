@@ -2162,6 +2162,44 @@ with sync_playwright() as p:
                           secondary.locator('a').count() == 8 and
                           secondary.locator('a[href="../index.html#/papers"]').is_visible())
     reference_nav.close()
+    # Generated concepts retain usable script-free navigation, but enhanced
+    # article landmarks must match technology profiles without extra controls.
+    enhanced_concept = browser.new_page(viewport={'width':390, 'height':844},
+                                        reduced_motion='reduce')
+    for color in ('light', 'dark'):
+        enhanced_concept.emulate_media(color_scheme=color)
+        for width in (320, 390, 768, 1280):
+            enhanced_concept.set_viewport_size({'width':width, 'height':844})
+            for route in ('terms/MLD-0001-a-b-test.html', 'technology/TECH-0216-pytorch.html'):
+                enhanced_concept.goto(base + route)
+                check('generated detail shared sibling landmarks ' + route + ' ' + color + ' ' + str(width),
+                      enhanced_concept.evaluate("""() => {
+                          const mobile = document.querySelector('body > .directory-mobile-topbar.site-mobile-chrome');
+                          const rail = document.querySelector('body > nav.site-chrome.term-nav');
+                          const main = document.querySelector('body > main.term-shell');
+                          const hero = main?.querySelector(':scope > header.hero#main[tabindex="-1"]');
+                          return !!(mobile && rail && main && hero) &&
+                              mobile.nextElementSibling === rail &&
+                              rail.nextElementSibling === main &&
+                              main.querySelector('.site-chrome,.site-mobile-chrome') === null &&
+                              document.querySelectorAll('nav.site-chrome.term-nav').length === 1 &&
+                              document.querySelectorAll('details.site-mobile-chrome__nav').length === 1;
+                      }"""))
+                if width <= 390:
+                    check('generated detail mobile header stays within viewport '
+                          + route + ' ' + color + ' ' + str(width),
+                          enhanced_concept.evaluate("""() => {
+                              const header = document.querySelector('body > .directory-mobile-topbar.site-mobile-chrome');
+                              const box = header?.getBoundingClientRect();
+                              return !!box && box.left >= -1 && box.right <= innerWidth + 1 &&
+                                  box.height >= 44 && getComputedStyle(header).display !== 'none';
+                          }"""))
+                if width == 390:
+                    enhanced_concept.screenshot(
+                        path=str(out / ('generated-sibling-' + route.replace('/', '-') + '-' + color + '.png')),
+                        full_page=False)
+    enhanced_concept.close()
+
     # Native keyboard skip must focus content, not only scroll beneath the rail.
     # Keep this usable with JavaScript off in both mobile and desktop layouts.
     skip_ctx = browser.new_context(java_script_enabled=False, viewport={'width':390, 'height':844})

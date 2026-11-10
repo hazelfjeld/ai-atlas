@@ -1023,3 +1023,26 @@ test('all technology profiles put shared navigation outside the content landmark
    assert.equal((html.match(/id="main"/g)||[]).length,1,name);
  }
 });
+
+
+test('enhanced concept details reuse technology sibling navigation without changing script-free HTML', () => {
+  const concept = fs.readFileSync(path.join(__dirname, '..', 'terms/MLD-0001-a-b-test.html'), 'utf8');
+  const technology = fs.readFileSync(path.join(__dirname, '..', 'technology/TECH-0216-pytorch.html'), 'utf8');
+  const script = fs.readFileSync(path.join(__dirname, '..', 'site-theme.js'), 'utf8');
+  const style = fs.readFileSync(path.join(__dirname, '..', 'site-chrome.css'), 'utf8');
+  const offline = fs.readFileSync(path.join(__dirname, '..', 'downloads/Atlas_Demo_Offline.html'), 'utf8');
+  assert.ok(concept.indexOf('<main class="term-shell">') < concept.indexOf('<nav class="site-chrome term-nav"'),
+    'Unenhanced concept details retain usable native navigation');
+  assert.ok(concept.includes('<header class="hero" id="main" tabindex="-1">'),
+    'Native skip still targets the real article');
+  assert.ok(technology.indexOf('<nav class="site-chrome term-nav"') < technology.indexOf('<main class="term-shell">'),
+    'Technology detail remains the sibling-nav reference');
+  assert.ok(script.includes('main.before(mobile, rail);'),
+    'Enhancement moves rather than duplicates the existing rail and drawer');
+  assert.ok(script.includes('main.firstElementChild !== mobile || mobile.nextElementSibling !== rail'),
+    'Migration is narrowly guarded against changing unrelated pages');
+  assert.ok(style.includes('body > .directory-mobile-topbar.site-mobile-chrome:has(+ nav.site-chrome + main.term-shell)'),
+    'Moved header must not inherit the legacy negative mobile gutters');
+  assert.ok(offline.includes(script) && offline.includes(style),
+    'Offline demo embeds the exact current shared theme script and stylesheet');
+});
