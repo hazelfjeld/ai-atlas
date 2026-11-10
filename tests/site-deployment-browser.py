@@ -2288,7 +2288,8 @@ with sync_playwright() as p:
                 check('Published script-free fallback '+route+' '+scheme+' '+str(width),
                       fallback.count()==1 and fallback.is_visible()
                       and not static_page.locator('.site-js-only').first.is_visible()
-                      and static_page.locator('.site-chrome__brand').is_visible()
+                      and (static_page.locator('.site-chrome__brand').is_visible() if width>650
+                           else static_page.locator('details.site-mobile-chrome__nav > summary').is_visible())
                       and fallback.locator('a[href="'+linked_resource+'"]').is_visible()
                       and fallback.evaluate("""el => {
                         const r=el.getBoundingClientRect(), body=document.documentElement.clientWidth;
