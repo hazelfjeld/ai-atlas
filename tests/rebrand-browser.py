@@ -253,7 +253,7 @@ with sync_playwright() as p:
         for theme in ('light', 'dark'):
             page.emulate_media(color_scheme=theme)
             for route, title, active_label in (
-                ('terms/index.html', 'Concept encyclopedia', 'Concept dictionary'),
+                ('terms/index.html', 'Concept encyclopedia', 'Concept encyclopedia'),
                 ('terms/MLD-0002-ablation-study.html', 'Concept dictionary', 'Concept dictionary'),
                 ('technology/index.html', 'Technology profiles', 'Technology profiles'),
                 ('technology/TECH-0216-pytorch.html', 'Technology profiles', 'Technology profiles'),
@@ -264,9 +264,9 @@ with sync_playwright() as p:
                 landing = route.endswith('/index.html') or route.startswith('technology/TECH-')
                 header = page.locator('body > .site-mobile-chrome' if landing else
                                       'main.term-shell > .site-mobile-chrome')
-                active = page.locator('body > .site-chrome .site-chrome__links a[aria-current="page"]'
-                                      if landing else
-                                      'main.term-shell > .site-chrome .site-chrome__links a[aria-current="page"]')
+                active = page.locator('body > .site-chrome .site-chrome__more a[aria-current="location"]') if route == 'terms/index.html' else page.locator(
+                    'body > .site-chrome .site-chrome__links a[aria-current="page"]' if landing else
+                    'main.term-shell > .site-chrome .site-chrome__links a[aria-current="page"]')
                 real_title = header.locator(':scope > .site-mobile-chrome__title')
                 label = header.evaluate("el => getComputedStyle(el, '::before').content")
                 if route.endswith('/index.html'):
@@ -275,7 +275,7 @@ with sync_playwright() as p:
                                      and header.evaluate("el => getComputedStyle(el, '::before').display === 'none'"))
                 else:
                     visible_title = (real_title.count() == 0 and title in label)
-                check(f'{route} {width}px {theme} keeps its visible title and selected parent',
+                check(f'{route} {width}px {theme} keeps its visible title and single selected destination',
                       header.is_visible() and visible_title
                       and active.count() == 1 and active.inner_text() == active_label)
                 if width == 1280 and theme == 'light' and route in (

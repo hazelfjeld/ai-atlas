@@ -197,6 +197,9 @@ def render_directory_nav(prefix, selected, *, mobile_classes="directory-mobile-t
     assert prefix in ("", "../")
     assert selected is None or selected in {name for _, name in DESTINATIONS}
     assert current_kind in ("page", "location")
+    # An encyclopedia subdestination is the current page, not its parent
+    # dictionary workspace. Announcing both as current confuses navigation.
+    assert not (selected and secondary_current), "Only one current navigation destination"
     links = render_primary_links(prefix, selected, current_kind)
     brand = render_brand(prefix)
     mobile_wordmark = render_brand(prefix, "site-mobile-chrome__brand") if mobile_brand else ""

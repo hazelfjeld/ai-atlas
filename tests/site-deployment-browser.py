@@ -1849,7 +1849,7 @@ with sync_playwright() as p:
     # The two large generated directories previously looked like separate
     # sites with inconsistent five/six-link navigation. Compare their shared
     # header with Discover's editorial navigation at mobile and desktop sizes.
-    for route, selected in (('terms/index.html', 'Concept dictionary'),
+    for route, selected in (('terms/index.html', 'Concept encyclopedia'),
                             ('about.html', 'About'),
                             ('technology/index.html', 'Technology profiles'),
                             ('technology/TECH-0216-pytorch.html', 'Technology profiles')):
@@ -1877,11 +1877,13 @@ with sync_playwright() as p:
                   }"""))
             if width <= 650:
                 page.locator('#directory-mobile-nav > summary').click()
-                check(f'{route} exposes the selected mobile section at {width}px',
-                      page.locator('.site-mobile-chrome__menu > a:not(.site-mobile-chrome__brand)[aria-current="page"]').inner_text() == selected)
+                active = page.locator('.site-mobile-chrome__menu a[aria-current]')
+                check(f'{route} exposes one selected mobile section at {width}px',
+                      active.count() == 1 and active.inner_text() == selected)
             else:
-                check(f'{route} keeps active desktop navigation at {width}px',
-                      page.locator('.site-chrome__links a[aria-current="page"]').inner_text() == selected)
+                active = page.locator('.site-chrome a[aria-current]')
+                check(f'{route} keeps one active desktop destination at {width}px',
+                      active.count() == 1 and active.inner_text() == selected)
     # Compare the anchored desktop frame with Discover while checking the
     # same page families at mobile/tablet widths in both saved themes.
     page.set_viewport_size({'width': 1280, 'height': 900})

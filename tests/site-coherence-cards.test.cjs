@@ -1046,3 +1046,26 @@ test('enhanced concept details reuse technology sibling navigation without chang
   assert.ok(offline.includes(script) && offline.includes(style),
     'Offline demo embeds the exact current shared theme script and stylesheet');
 });
+
+test('the Concept encyclopedia has one current navigation destination per shared landmark', () => {
+  const html = fs.readFileSync(path.join(__dirname, '..', 'terms/index.html'), 'utf8');
+  const generator = fs.readFileSync(path.join(__dirname, '..', 'scripts/build_term_pages.py'), 'utf8');
+  const shared = fs.readFileSync(path.join(__dirname, '..', 'scripts/site_chrome.py'), 'utf8');
+  assert.ok(generator.includes("(None if path == 'terms/index.html' else 'Concept dictionary')"),
+    'the canonical generator must select the encyclopedia, not two destinations');
+  assert.ok(shared.includes('assert not (selected and secondary_current)'),
+    'the shared nav component must prevent duplicate active destinations');
+  for (const [name, pattern] of [
+    ['desktop', /<nav class="site-chrome term-nav"[^>]*>[\s\S]*?<\/nav>/],
+    ['mobile', /<nav class="site-mobile-chrome__menu"[^>]*>[\s\S]*?<\/nav>/],
+  ]) {
+    const nav = html.match(pattern)?.[0];
+    assert.ok(nav, 'Missing ' + name + ' navigation');
+    assert.equal((nav.match(/<a\b[^>]*aria-current="/g) || []).length, 1,
+      name + ' must not announce two simultaneous current pages');
+    assert.match(nav, /href="\.\.\/terms\/index\.html" aria-current="location"/);
+    assert.doesNotMatch(nav, /href="\.\.\/index\.html#\/dictionary" aria-current=/);
+    assert.match(nav, /href="\.\.\/index\.html#\/dictionary"/,
+      'the dictionary navigation destination must remain available');
+  }
+});
