@@ -1683,7 +1683,8 @@ test('Guided demo inherits the actual shared navigation instead of an independen
 
 test('generated reference page identity uses one shared workspace title without duplicating chrome', () => {
   const theme=read('site-theme.js');
-  assert.ok(theme.includes("main.term-shell > .site-mobile-chrome:not([data-page-label])"));
+  assert.ok(theme.includes(".site-mobile-chrome:not([data-page-label])"),
+    'the shared title lookup must work for both sibling- and nested-chrome reference pages');
   assert.ok(theme.includes("bar.dataset.pageLabel = title;"));
   assert.ok(theme.includes("document.addEventListener('DOMContentLoaded'"));
   for (const [page, title] of [
