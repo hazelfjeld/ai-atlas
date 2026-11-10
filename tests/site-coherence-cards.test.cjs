@@ -300,7 +300,7 @@ test('About and both A-Z landing pages separate shared navigation from the main 
     assert.equal((html.match(/id="main"/g) || []).length, 1, route);
     assert.equal((html.match(/aria-label="AI Updates primary navigation"/g) || []).length, 1, route);
     assert.ok(html.indexOf('</nav>', desktop) < main, route + ' nests site navigation within main');
-    assert.ok(html.includes('href="#main"') && html.includes('@media(min-width:651px){.term-shell>.hero{margin-top:8px}}@media(max-width:650px){.term-shell>.hero{margin-top:18px}}'), route);
+    assert.ok(html.includes('href="#main"') && html.includes('@media(min-width:651px){.term-shell>.hero{margin-top:8px}}@media(max-width:650px){.term-shell>.hero{margin-top:18px}body>.directory-mobile-topbar{margin:0;padding-inline:20px}}'), route);
   }
   // Detailed articles remain unchanged until a future complete generated build.
   for (const route of ['terms/MLD-0001-a-b-test.html', 'technology/TECH-0001-adversarial-robustness-toolbox.html']) {

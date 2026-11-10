@@ -116,7 +116,7 @@ def render_mobile_secondary_nav(prefix, current=None):
 # Reference directory landings and About use the same outer site chrome.
 # Preserve the existing detail-page markup pending a separately verified migration.
 REFERENCE_LANDING_PATHS = frozenset(("about.html", "terms/index.html", "technology/index.html"))
-REFERENCE_LANDING_HERO_CSS = '@media(min-width:651px){.term-shell>.hero{margin-top:8px}}@media(max-width:650px){.term-shell>.hero{margin-top:18px}}'
+REFERENCE_LANDING_HERO_CSS = '@media(min-width:651px){.term-shell>.hero{margin-top:8px}}@media(max-width:650px){.term-shell>.hero{margin-top:18px}body>.directory-mobile-topbar{margin:0;padding-inline:20px}}'
 
 def wrap_reference_shell(nav, content, path, main_id):
     """Keep the canonical shared navigation outside the main landmark on migrated pages."""
