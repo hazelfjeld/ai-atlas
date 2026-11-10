@@ -1,3 +1,34 @@
+
+test('Guided demo and hardware evidence use Discover\'s sibling navigation landmarks', () => {
+  const generator = fs.readFileSync(path.join(__dirname, '..', 'scripts/site_chrome.py'), 'utf8');
+  assert.ok(generator.includes('migrate_legacy_article_landmark(normalized, path)'),
+    'The shared builder must preserve the migration on repeat builds');
+  for (const [route, mainTag, mobileClass, railClass, cssClass] of [
+    ['demo.html', '<main>', 'site-mobile-chrome', 'demo-site-chrome', '.site-mobile-chrome'],
+    ['hardware-review.html', '<main class="review-shell">', 'hardware-mobile-topbar site-mobile-chrome', 'review-nav', '.hardware-mobile-topbar'],
+  ]) {
+    const html = fs.readFileSync(path.join(__dirname, '..', route), 'utf8');
+    const mobile = html.indexOf('<div class="' + mobileClass + '"');
+    const rail = html.indexOf('<nav class="site-chrome ' + railClass + '"');
+    const railEnd = html.indexOf('</nav>', rail) + '</nav>'.length;
+    const main = html.indexOf(mainTag);
+    const article = html.indexOf('<header id="main" tabindex="-1">', main);
+    const footer = html.indexOf('<footer>', article);
+    const mainEnd = html.indexOf('</main>', main);
+    assert.ok(mobile > 0 && mobile < rail && rail < railEnd && railEnd < main &&
+      main < article && article < footer && footer < mainEnd,
+      route + ' must separate the native navigation from the article landmark');
+    assert.equal((html.match(/<main\\b/g) || []).length, 1, route + ' must retain one main');
+    assert.equal((html.match(/<nav class="site-chrome /g) || []).length, 1, route + ' must retain one desktop rail');
+    assert.ok(!html.slice(main, mainEnd).includes('site-chrome__links'),
+      route + ' must not nest the global rail inside main');
+    assert.ok(html.includes('<a class="skip" href="#main">'),
+      route + ' must preserve the native skip link');
+    assert.ok(html.includes(cssClass + '{margin:0;padding:14px 20px'),
+      route + ' must not overflow at mobile widths after moving the header out of the shell');
+  }
+});
+
 'use strict';
 const test = require('node:test');
 const assert = require('node:assert/strict');

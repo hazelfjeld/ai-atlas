@@ -481,6 +481,39 @@ def ensure_footer_resources(html, path):
     return html[:before_close] + extra + html[before_close:]
 
 
+
+def migrate_legacy_article_landmark(html, path):
+    """Place the existing native chrome before the article on two legacy pages.
+
+    Keep the exact shared nav output and content in place; change only the
+    landmark boundary. Idempotent on subsequent deterministic rebuilds.
+    """
+    targets = {
+        "demo.html": ("<main>", '<div class="site-mobile-chrome"',
+                      '<nav class="site-chrome demo-site-chrome"'),
+        "hardware-review.html": ('<main class="review-shell">',
+                                 '<div class="hardware-mobile-topbar site-mobile-chrome"',
+                                 '<nav class="site-chrome review-nav"'),
+    }
+    if path not in targets:
+        return html
+    main_tag, mobile_tag, rail_tag = targets[path]
+    assert html.count(main_tag) == html.count(mobile_tag) == html.count(rail_tag) == 1, path
+    main_at, mobile_at, rail_at = (html.index(mark) for mark in (main_tag, mobile_tag, rail_tag))
+    rail_end = html.index('</nav>', rail_at) + len('</nav>')
+    article_at = html.index('<header id="main" tabindex="-1">', rail_end)
+    if rail_end < main_at < article_at:
+        assert mobile_at < rail_at, path
+        return html
+    assert main_at < mobile_at < rail_at < rail_end < article_at, path
+    assert not html[main_at + len(main_tag):mobile_at].strip(), path
+    # Remove the old opening tag and the empty gap before the existing
+    # mobile header, then restore the identical opening after the shared rail.
+    html = html[:main_at] + html[mobile_at:]
+    rail_end -= mobile_at - main_at
+    return html[:rail_end] + '\n' + main_tag + html[rail_end:]
+
+
 def normalize_standalone_chrome(html, path):
     """Replace only the known navigation pair; fail if page markup drifts."""
     import re
@@ -493,4 +526,4 @@ def normalize_standalone_chrome(html, path):
                          re.escape(end) + r'.*?</nav>', re.S)
     normalized, count = pattern.subn(lambda _: render_standalone_nav(path), html)
     assert count == 1, 'Unexpected shared header structure on ' + path
-    return ensure_skip_destination_focusable(normalized, path)
+    return ensure_skip_destination_focusable(migrate_legacy_article_landmark(normalized, path), path)

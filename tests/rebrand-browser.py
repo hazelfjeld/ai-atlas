@@ -210,6 +210,32 @@ with sync_playwright() as p:
               and has_visible_workspace_title(header, expected)
               and page.locator('.site-chrome__links a').count() == 7)
 
+    # Guided demo and evidence review now share Discover's navigation-as-sibling
+    # structure, including with JavaScript disabled. Check the actual reading
+    # landmark, mobile overflow and first paint in both native themes.
+    for width in (320, 390, 768, 1280):
+        page.set_viewport_size({'width': width, 'height': 844 if width <= 650 else 900})
+        for theme in ('light', 'dark'):
+            page.emulate_media(color_scheme=theme)
+            for route in ('demo.html', 'hardware-review.html'):
+                page.goto(base + route)
+                layout = page.evaluate("""() => {
+                    const mobile = document.querySelector('body > .site-mobile-chrome');
+                    const rail = document.querySelector('body > .site-chrome');
+                    const main = document.querySelector('body > main');
+                    const hero = main?.querySelector(':scope > header#main[tabindex="-1"]');
+                    return {landmarks:!!(mobile && rail && main && hero &&
+                        !main.contains(mobile) && !main.contains(rail) &&
+                        (rail.compareDocumentPosition(main) & Node.DOCUMENT_POSITION_FOLLOWING)),
+                        overflow:document.documentElement.scrollWidth > innerWidth + 1,
+                        navCount:document.querySelectorAll('nav.site-chrome').length};
+                }""")
+                check(f'{route} {width}px {theme} shares sibling navigation and readable article',
+                      layout['landmarks'] and not layout['overflow'] and layout['navCount'] == 1)
+                if width == 390 and theme == 'dark':
+                    page.screenshot(path=str(out / f'editorial-sibling-nav-{route}-390-dark.png'))
+    page.emulate_media(color_scheme='light')
+
     # Editorial subpages belong to the daily section without inheriting the
     # daily archive's workspace title. This is a single shared header mapping.
     for route in ('catalog-review.html', 'hardware-review.html'):
