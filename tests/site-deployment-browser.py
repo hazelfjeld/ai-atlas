@@ -2393,8 +2393,8 @@ with sync_playwright() as p:
     # widths in both OS themes, before any JavaScript can apply a patch.
     lead_routes = (
         ('research.html', '.shell > main > section.hero > p'),
-        ('playbooks.html', '.playbook-shell > section.playbook-hero > p'),
-        ('technologies.html', '.tech-shell > section.tech-hero > p'),
+        ('playbooks.html', '.playbook-shell > main > section.playbook-hero > p'),
+        ('technologies.html', '.tech-shell > main > section.tech-hero > p'),
         ('whats-new.html', '.shell > main > header .lead'),
     )
     for scheme in ('light','dark'):
@@ -2410,7 +2410,7 @@ with sync_playwright() as p:
                 lead_page.goto(base+'playbooks.html')
             check('Discover to Playbooks shared frame '+scheme+' '+str(width),
                   lead_page.locator('.playbook-shell .site-chrome__links a').count()==7
-                  and lead_page.locator('.playbook-shell > section.playbook-hero > p').is_visible())
+                  and lead_page.locator('.playbook-shell > main > section.playbook-hero > p').is_visible())
             for route, selector in lead_routes:
                 lead_page.goto(base+route)
                 paragraph = lead_page.locator(selector).first
