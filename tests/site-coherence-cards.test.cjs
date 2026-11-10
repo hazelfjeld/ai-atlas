@@ -1,3 +1,9 @@
+'use strict';
+const test = require('node:test');
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const path = require('node:path');
+const css = fs.readFileSync(path.join(__dirname, '..', 'site-chrome.css'), 'utf8');
 
 test('Guided demo and hardware evidence use Discover\'s sibling navigation landmarks', () => {
   const generator = fs.readFileSync(path.join(__dirname, '..', 'scripts/site_chrome.py'), 'utf8');
@@ -18,7 +24,7 @@ test('Guided demo and hardware evidence use Discover\'s sibling navigation landm
     assert.ok(mobile > 0 && mobile < rail && rail < railEnd && railEnd < main &&
       main < article && article < footer && footer < mainEnd,
       route + ' must separate the native navigation from the article landmark');
-    assert.equal((html.match(/<main\\b/g) || []).length, 1, route + ' must retain one main');
+    assert.equal((html.match(/<main\b/g) || []).length, 1, route + ' must retain one main');
     assert.equal((html.match(/<nav class="site-chrome /g) || []).length, 1, route + ' must retain one desktop rail');
     assert.ok(!html.slice(main, mainEnd).includes('site-chrome__links'),
       route + ' must not nest the global rail inside main');
@@ -29,12 +35,7 @@ test('Guided demo and hardware evidence use Discover\'s sibling navigation landm
   }
 });
 
-'use strict';
-const test = require('node:test');
-const assert = require('node:assert/strict');
-const fs = require('node:fs');
-const path = require('node:path');
-const css = fs.readFileSync(path.join(__dirname, '..', 'site-chrome.css'), 'utf8');
+
 
 test('Playbooks and Technology separate the shared navigation from main', () => {
   // Both native directories share Discover's build-time rail but previously
