@@ -333,6 +333,27 @@ def sync_desktop_rail_icons_css(css):
 
 
 
+APP_LABELS_START = "/* atlas-app-primary-labels:begin */"
+APP_LABELS_END = "/* atlas-app-primary-labels:end */"
+
+def render_app_primary_labels_js():
+    """Keep hydrated workspace names identical to the native seven-link rail."""
+    import json
+    entries = [(key, label) for (_, label), (key, kind, _) in
+               zip(DESTINATIONS, DISCOVER_LINKS, strict=True) if kind == "view"]
+    assert {key for key, _ in entries} == {"overview", "dictionary", "technologies", "games", "playbooks"}
+    return (APP_LABELS_START + "\n" +
+            "".join(json.dumps(key) + ":" + json.dumps(label, ensure_ascii=False) + ",\n"
+                    for key, label in entries) + APP_LABELS_END)
+
+def sync_app_primary_labels_js(script):
+    """Replace only the tagged primary labels, leaving secondary routes intact."""
+    assert script.count(APP_LABELS_START) == script.count(APP_LABELS_END) == 1
+    start = script.index(APP_LABELS_START)
+    end = script.index(APP_LABELS_END) + len(APP_LABELS_END)
+    return script[:start] + render_app_primary_labels_js() + script[end:]
+
+
 def render_discover_primary(term_count, tech_count):
     """Render Discover's first-paint primary links from the same seven routes.
 

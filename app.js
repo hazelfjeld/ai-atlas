@@ -24,7 +24,13 @@ const TECHNIQUE_IDS=window.AtlasGames.techniqueIds;
 let notebook={schema:1,saved:[],notes:{},compare:[]},persist=!SHARED_HOST;
 try{if(!SHARED_HOST){const raw=localStorage.getItem(STORE);if(raw)notebook=C.validateNotebook(JSON.parse(raw),validIDs);if(localStorage.getItem('atlas.theme')==='dark')document.documentElement.dataset.theme='dark';}}catch{persist=false;}
 let state={}, view='overview', currentRows=[], timer, toastTimer;
-const labels={overview:'Discover',games:'Games',technologies:'Technology profiles',dictionary:'Concept dictionary',safety:'Safety observatory',papers:'Research library',playbooks:'Problem playbooks',compare:'Compare tools',saved:'Your notebook',sources:'Sources & coverage',search:'Search AI Updates',queue:'Review queue'};
+const labels={/* atlas-app-primary-labels:begin */
+"overview":"Discover",
+"dictionary":"Concept dictionary",
+"technologies":"Technology profiles",
+"games":"Games",
+"playbooks":"Playbooks",
+/* atlas-app-primary-labels:end */safety:'Safety observatory',papers:'Research library',compare:'Compare tools',saved:'Your notebook',sources:'Sources & coverage',search:'Search AI Updates',queue:'Review queue'};
 function saveNotebook(){if(SHARED_HOST){persist=false;toast(STORAGE_NOTICE);return false;}try{localStorage.setItem(STORE,JSON.stringify(notebook));persist=true;return true;}catch{persist=false;toast('Storage is unavailable. Export your notebook to keep changes.');return false;}}
 function toast(message){$('toast').textContent=message;$('toast').hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').hidden=true,3800);}
 function href(v,params={}){const q=new URLSearchParams(Object.entries(params).filter(([,val])=>val!==''&&val!==undefined));return '#/'+v+(q.size?'?'+q:'');}

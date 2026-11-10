@@ -13,7 +13,7 @@ import subprocess
 from xml.etree.ElementTree import Element, SubElement, tostring
 from site_seo import absolute, metadata, breadcrumbs, replace_head, technology_path, ORIGIN
 from build_term_pages import rows, term_path, external
-from site_chrome import render_directory_nav, DIRECTORY_MOBILE_CSS, STANDALONE_NAVS, normalize_standalone_chrome, ensure_footer_resources, normalize_discover_sidebar, sync_desktop_rail_icons_css, ensure_skip_destination_focusable, native_directory_article_skip, render_directory_hero, sync_secondary_navigation_script, REFERENCE_LANDING_PATHS, REFERENCE_LANDING_HERO_CSS, wrap_reference_shell
+from site_chrome import render_directory_nav, DIRECTORY_MOBILE_CSS, STANDALONE_NAVS, normalize_standalone_chrome, ensure_footer_resources, normalize_discover_sidebar, sync_desktop_rail_icons_css, sync_app_primary_labels_js, ensure_skip_destination_focusable, native_directory_article_skip, render_directory_hero, sync_secondary_navigation_script, REFERENCE_LANDING_PATHS, REFERENCE_LANDING_HERO_CSS, wrap_reference_shell
 
 ROOT = Path(__file__).resolve().parents[1]
 PAGES = {
@@ -103,6 +103,12 @@ def main():
     synced_css = sync_desktop_rail_icons_css(previous_css)
     if previous_css != synced_css:
         chrome_css.write_text(synced_css, encoding='utf-8')
+    # Keep hydrated Discover hash-route titles aligned with the same native rail.
+    app_path = ROOT / 'app.js'
+    previous_app = app_path.read_text(encoding='utf-8')
+    synced_app = sync_app_primary_labels_js(previous_app)
+    if synced_app != previous_app:
+        app_path.write_text(synced_app, encoding='utf-8')
     # Build the native rail from the same definitions used by Discover.
     theme_path = ROOT / 'site-theme.js'
     theme = theme_path.read_text(encoding='utf-8')

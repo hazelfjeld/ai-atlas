@@ -1090,3 +1090,29 @@ test('the Concept encyclopedia has one current navigation destination per shared
       'the dictionary navigation destination must remain available');
   }
 });
+
+test('hydrated Discover route titles share native primary navigation labels', () => {
+  const app = fs.readFileSync(path.join(__dirname, '..', 'app.js'), 'utf8');
+  const source = fs.readFileSync(path.join(__dirname, '..', 'scripts/site_chrome.py'), 'utf8');
+  const builder = fs.readFileSync(path.join(__dirname, '..', 'scripts/build_seo.py'), 'utf8');
+  const offline = fs.readFileSync(path.join(__dirname, '..', 'downloads/Atlas_Demo_Offline.html'), 'utf8');
+  const start = '/* atlas-app-primary-labels:begin */';
+  const end = '/* atlas-app-primary-labels:end */';
+  assert.equal(app.split(start).length - 1, 1);
+  assert.equal(app.split(end).length - 1, 1);
+  const block = app.split(start)[1].split(end)[0];
+  const labels = Object.fromEntries([...block.matchAll(/"([^"]+)":"([^"]+)",/g)]
+    .map(([,key,value]) => [key,value]));
+  assert.deepEqual(labels, {
+    overview:'Discover', dictionary:'Concept dictionary',
+    technologies:'Technology profiles', games:'Games', playbooks:'Playbooks'
+  });
+  const native = fs.readFileSync(path.join(__dirname, '..', 'playbooks.html'), 'utf8');
+  assert.ok(native.includes('href="index.html#/games">Games</a>'));
+  assert.ok(native.includes('href="playbooks.html" aria-current="page">Playbooks</a>'));
+  assert.ok(source.includes('zip(DESTINATIONS, DISCOVER_LINKS, strict=True)'));
+  assert.ok(builder.includes('synced_app = sync_app_primary_labels_js(previous_app)'),
+    'The build must regenerate app labels from the canonical nav routes');
+  assert.ok(offline.includes(block),
+    'Offline must embed the same canonical hydrated labels');
+});
