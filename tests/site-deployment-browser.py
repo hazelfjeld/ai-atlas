@@ -1785,10 +1785,14 @@ with sync_playwright() as p:
                           const sidebar = innerWidth >= 651;
                           const rect = nav.getBoundingClientRect();
                           if (sidebar) {
+                              const main=document.querySelector('main');
                               return getComputedStyle(nav).position === 'fixed'
                                   && getComputedStyle(nav).flexDirection === 'column'
                                   && rect.left === 0 && Math.abs(rect.width - (innerWidth <= 1150 ? 204 : 224)) <= 1
-                                  && nav.closest('main').getBoundingClientRect().left >= (innerWidth <= 1150 ? 203 : 223)
+                                  && !!main && main.getBoundingClientRect().left >= (innerWidth <= 1150 ? 203 : 223)
+                                  && (location.pathname.endsWith('/about.html')
+                                      ? (nav.parentElement === document.body && !main.contains(nav))
+                                      : nav.closest('main') === main)
                                   && getComputedStyle(nav.querySelector('.site-chrome__links')).flexDirection === 'column'
                                   && links.length === 7
                                   && Math.max(...tops) - Math.min(...tops) > 200
