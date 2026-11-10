@@ -1541,11 +1541,15 @@ with sync_playwright() as p:
                       and page.locator('.site-chrome__links a').count()==7
                       and page.locator('.site-chrome__links a[aria-current]').inner_text()==parent
                       and page.evaluate('document.documentElement.scrollWidth<=innerWidth')
-                      and page.evaluate('document.documentElement.dataset.theme')==theme)
+                      and page.evaluate('document.documentElement.dataset.theme')==theme
+                      and page.locator('body > .site-mobile-chrome > .site-mobile-chrome__title').count()==1
+                      and page.locator('body > .site-mobile-chrome > .site-mobile-chrome__title').inner_text()==title
+                      and page.locator('body > .site-mobile-chrome > .site-mobile-chrome__title').is_visible()==(width>650))
                 if width==1280:
                     check(f'{route} {theme} desktop workspace title renders actual detail',
-                          page.locator('.site-mobile-chrome').evaluate(
-                            """el => getComputedStyle(el,'::before').content.includes(el.dataset.pageLabel)"""))
+                          page.locator('body > .site-mobile-chrome').evaluate(
+                            """el => getComputedStyle(el,'::before').display==='none' &&
+                               el.querySelector(':scope > .site-mobile-chrome__title')?.textContent.trim()===el.dataset.pageLabel"""))
                 if width==1280 and theme=='dark':
                     page.screenshot(path=str(out/f'reference-title-{title.lower().replace(" ","-")}-1280-dark.png'))
 

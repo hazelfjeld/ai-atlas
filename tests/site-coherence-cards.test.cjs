@@ -5,6 +5,27 @@ const fs = require('node:fs');
 const path = require('node:path');
 const css = fs.readFileSync(path.join(__dirname, '..', 'site-chrome.css'), 'utf8');
 
+test('generated reference profiles expose real workspace title text after enhancement', () => {
+  const runtime = fs.readFileSync(path.join(__dirname, '..', 'site-theme.js'), 'utf8');
+  const offline = fs.readFileSync(path.join(__dirname, '..', 'downloads/Atlas_Demo_Offline.html'), 'utf8');
+  assert.ok(runtime.includes("titleNode.className = 'site-mobile-chrome__title'"),
+    'Details must use the existing accessible shared workspace title class');
+  assert.ok(runtime.includes("drawer.insertAdjacentElement('afterend', titleNode)"),
+    'The real heading must occupy the same slot as directory and Discover headings');
+  assert.ok(runtime.includes('titleNode.textContent = title'),
+    'The heading must be DOM text, not interpolated HTML or a CSS pseudo-element');
+  assert.ok(offline.includes(runtime.replaceAll('</script', '<\\/script')),
+    'The offline fallback must embed exactly the updated shared runtime');
+  for (const route of ['terms/MLD-1179-structured-output.html',
+                       'technology/TECH-0216-pytorch.html']) {
+    const html = fs.readFileSync(path.join(__dirname, '..', route), 'utf8');
+    assert.ok(html.includes('src="../site-theme.js"'), route + ' must run the shared enhancement');
+    assert.ok(html.includes('id="main" tabindex="-1"'),
+      route + ' must preserve the native article skip target');
+  }
+});
+
+
 test('Guided demo and hardware evidence use Discover\'s sibling navigation landmarks', () => {
   const generator = fs.readFileSync(path.join(__dirname, '..', 'scripts/site_chrome.py'), 'utf8');
   assert.ok(generator.includes('migrate_legacy_article_landmark(normalized, path)'),

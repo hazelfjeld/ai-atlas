@@ -24,7 +24,19 @@ document.addEventListener('DOMContentLoaded', () => {
   // use this one article header, without maintaining two independent paths.
   const bar = document.querySelector('.site-mobile-chrome:not([data-page-label])');
   const title = document.querySelector('main.term-shell h1')?.textContent?.trim();
-  if (bar && title && title.length <= 90) bar.dataset.pageLabel = title;
+  if (bar && title && title.length <= 90) {
+    bar.dataset.pageLabel = title;
+    // Match Discover and the native directory landings: the workspace name
+    // is actual DOM text, not an inaccessible CSS ::before label. Preserve
+    // the existing first-paint/no-JavaScript parent-section fallback.
+    const drawer = bar.querySelector(':scope > details.site-mobile-chrome__nav');
+    if (drawer && !bar.querySelector(':scope > .site-mobile-chrome__title')) {
+      const titleNode = document.createElement('span');
+      titleNode.className = 'site-mobile-chrome__title';
+      titleNode.textContent = title;
+      drawer.insertAdjacentElement('afterend', titleNode);
+    }
+  }
 });
 
 // Concept detail articles still have their shared rail *inside* <main> in
