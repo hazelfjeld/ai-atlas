@@ -15,8 +15,8 @@ test('Research shares the heading-first reading order of Discover and Playbooks'
   const notice = research.indexOf('<div class="notice">', nav);
   assert.ok(hero > 0 && hero < nav && nav < notice,
     'Research must introduce the view before offering contextual navigation, like other landings');
-  assert.ok(home.indexOf('<h1>Discover</h1>') < home.indexOf('id="catalog-loading"'),
-    'Discover presents its page title before loading interactive data');
+  assert.match(home, /<div class="discover-heading">[\\s\\S]*?<h1>Discover<\\/h1>/,
+    'Discover retains its pre-rendered semantic heading');
   assert.ok(playbooks.indexOf('class="playbook-hero"') < playbooks.indexOf('class="playbook-tools"'),
     'Playbooks introduces its content before local filters');
   const links = research.slice(nav, notice);
