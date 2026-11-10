@@ -67,8 +67,21 @@ function route() {
  if (!manifest) return;
  const state = routeState(); view = state.name;
  document.querySelectorAll('[data-nav]').forEach(a => { const active = a.dataset.nav === view; a.classList.toggle('active', active); if (active) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
+ // Match Discover's current-section indication when the Research hash changes.
+ // Before hydration, the shared generated navigation still identifies papers.
+ const currentSection = view === 'alerts' ? 'index.html#/safety' : 'index.html#/papers';
+ document.querySelectorAll('.site-chrome__more-links a, .site-mobile-chrome__more-links a').forEach(a => {
+  const target = a.getAttribute('href');
+  if (target !== 'index.html#/safety' && target !== 'index.html#/papers') return;
+  if (target === currentSection) a.setAttribute('aria-current', 'location');
+  else a.removeAttribute('aria-current');
+ });
+ const workspaceName = view === 'alerts' ? 'Safety observatory' : view === 'coverage' ? 'Publication progress' : 'Research library';
+ const mobileChrome = document.querySelector('.research-mobile-topbar');
+ mobileChrome.dataset.pageLabel = workspaceName;
+ mobileChrome.querySelector('.site-mobile-chrome__title').textContent = workspaceName;
  const names = {papers:['RESEARCH LIBRARY','Follow the evidence.','Search the research, inspect the caveats, and go straight to the original source.'],alerts:['SAFETY OBSERVATORY','Signals, with context.','Real-world reports, controlled tests, and mitigations — kept distinct, with their limitations attached.'],coverage:['PUBLICATION PROGRESS','Small steps. Real progress.','A transparent inventory of what is published, what is prepared, and what is not running.']};
- const [label,title,desc] = names[view]; $('section-label').textContent = label; $('view-title').textContent = title; $('view-description').textContent = desc; document.title = label.toLowerCase() + ' · Atlas';
+ const [label,title,desc] = names[view]; $('section-label').textContent = label; $('view-title').textContent = title; $('view-description').textContent = desc; document.title = workspaceName + ' | AI Updates';
  $('collection').hidden = view === 'coverage'; $('coverage').hidden = view !== 'coverage';
  if ($('detail').open) $('detail').close();
  if (view === 'coverage') { coverage(); return; }

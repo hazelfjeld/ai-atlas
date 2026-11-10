@@ -830,3 +830,21 @@ test('research contextual views reuse Discover horizontal topic navigation', () 
     assert.ok(research.includes('href="' + href + '"'), 'Preserve deep link ' + href);
   }
 });
+
+
+test('Research hash views update both shared navigation landmarks and the real workspace title', () => {
+  const script = fs.readFileSync(path.join(__dirname, '..', 'checkpoint.js'), 'utf8');
+  const html = fs.readFileSync(path.join(__dirname, '..', 'research.html'), 'utf8');
+  assert.match(script, /view === 'alerts' \\? 'index\\.html#\\/safety' : 'index\\.html#\\/papers'/,
+    'Safety and research hash views must select the corresponding shared rail link');
+  assert.match(script, /\\.site-chrome__more-links a, \\.site-mobile-chrome__more-links a/,
+    'Desktop and mobile must share the same active-section update');
+  assert.match(script, /a\\.removeAttribute\\('aria-current'\\)/,
+    'Do not leave two active secondary destinations');
+  assert.match(script, /mobileChrome\\.dataset\\.pageLabel = workspaceName/);
+  assert.match(script, /\\.site-mobile-chrome__title'\\)\\.textContent = workspaceName/);
+  assert.match(script, /document\\.title = workspaceName \\+ ' \\| AI Updates'/,
+    'Research route changes must keep the AI Updates site identity');
+  assert.ok(html.includes('class="site-chrome__more-links"') &&
+    html.includes('class="site-mobile-chrome__more-links"'), 'Shared navigation landmarks are present');
+});

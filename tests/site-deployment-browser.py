@@ -1022,7 +1022,24 @@ with sync_playwright() as p:
     check('research view tabs switch the original catalog route and selected state',
           mobile_research.locator('.research-local-nav a[href="#alerts"]').get_attribute('aria-current') == 'page'
           and mobile_research.locator('#section-label').inner_text() == 'SAFETY OBSERVATORY')
+    # The shared rail and script-free mobile drawer must agree with the
+    # Research hash route, rather than keeping Papers selected on Safety.
+    for width in (320, 390, 768, 1280):
+        mobile_research.set_viewport_size({'width': width, 'height': 844 if width <= 650 else 900})
+        check('Research safety hash synchronizes shared chrome '+str(width),
+              mobile_research.locator('.site-chrome__more a[aria-current="location"][href="index.html#/safety"]').count() == 1
+              and mobile_research.locator('.site-mobile-chrome__more a[aria-current="location"][href="index.html#/safety"]').count() == 1
+              and mobile_research.locator('.site-chrome__more a[aria-current="location"][href="index.html#/papers"]').count() == 0
+              and mobile_research.locator('.site-mobile-chrome__more a[aria-current="location"][href="index.html#/papers"]').count() == 0
+              and mobile_research.locator('.research-mobile-topbar .site-mobile-chrome__title').inner_text() == 'Safety observatory'
+              and mobile_research.evaluate("document.title === 'Safety observatory | AI Updates' && document.documentElement.scrollWidth <= innerWidth + 1"))
     mobile_research.locator('.research-local-nav a[href="#papers"]').click()
+    mobile_research.wait_for_function("""() => document.querySelector('.site-chrome__more a[href="index.html#/papers"]').getAttribute('aria-current') === 'location'""")
+    check('Research return restores shared section and site title',
+          mobile_research.locator('.site-chrome__more a[aria-current="location"][href="index.html#/safety"]').count() == 0
+          and mobile_research.locator('.site-mobile-chrome__more a[aria-current="location"][href="index.html#/papers"]').count() == 1
+          and mobile_research.locator('.research-mobile-topbar .site-mobile-chrome__title').inner_text() == 'Research library'
+          and mobile_research.evaluate("document.title === 'Research library | AI Updates'"))
     mobile_research.screenshot(path=str(out / 'research-mobile-header.png'), full_page=False)
     mobile_research.set_viewport_size({'width':390, 'height':844})
     check('390px research page fits without horizontal overflow',
