@@ -538,7 +538,8 @@ test('research snapshot uses the shared mobile menu and retains contextual resea
   for (const route of ['papers','alerts','coverage'])
     assert.ok(html.includes('href="#'+route+'" data-nav="'+route+'"'), 'Research view must remain reachable: '+route);
   assert.match(html, /\.shell\{display:block\}/);
-  assert.match(html, /\.research-local-nav\{display:flex/);
+  assert.match(html, /<nav class="research-local-nav discovery-topics" aria-label="Research views">/);
+  assert.match(html, /\.research-local-nav a\{[^}]*flex:0 0 auto/);
   assert.doesNotMatch(html, /<aside>/);
   const desktop=html.match(/<nav class="site-chrome research-site-chrome" aria-label="AI Updates primary navigation">([\s\S]*?)<\/nav>/)?.[1];
   assert.ok(desktop, 'Research must reuse the shared desktop chrome');

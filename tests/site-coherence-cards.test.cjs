@@ -826,7 +826,7 @@ test('research contextual views reuse Discover horizontal topic navigation', () 
   assert.match(research, /\.research-local-nav a\{[^}]*min-height:44px/);
   assert.ok(!research.includes('flex-wrap:wrap;gap:8px;margin:16px 0 24px;overflow:visible'),
     'Avoid a separate multirow Research navigation design');
-  for (const href of ['#papers', '#alerts', '#progress']) {
+  for (const href of ['#papers', '#alerts', '#coverage']) {
     assert.ok(research.includes('href="' + href + '"'), 'Preserve deep link ' + href);
   }
 });
