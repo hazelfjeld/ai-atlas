@@ -498,6 +498,7 @@ body:has(.site-chrome){padding-top:78px}
    pages without copying another header or changing direct article URLs. */
 .term-shell > .site-mobile-chrome:not([data-page-label]):has(+ .site-chrome .site-chrome__links a[href$="#/dictionary"][aria-current="page"])::before{content:"Concept dictionary"}
 .term-shell > .site-mobile-chrome:not([data-page-label]):has(+ .site-chrome .site-chrome__links a[href$="#/technologies"][aria-current="page"])::before{content:"Technology profiles"}
+body > .site-mobile-chrome:not([data-page-label]):has(+ .site-chrome .site-chrome__links a[href$="#/technologies"][aria-current="page"])::before{content:"Technology profiles"}
 .site-mobile-chrome__nav{display:none}
 .site-mobile-chrome__search{
   display:flex;align-items:center;gap:10px;flex:0 1 365px;
@@ -945,6 +946,16 @@ body:has(.site-chrome) :is(.tech-controls,.playbook-tools,.controls,.search-cont
 /* atlas-mobile-chrome-rhythm:end */
 
 /* atlas-reference-intro-rhythm:begin */
+/* The shared rail and header precede technology-profile article content,
+   preserving Discover-style reading rhythm and mobile gutters. */
+@media(min-width:651px){
+ body:has(> .site-chrome.term-nav) > .term-shell > .breadcrumb-links + .hero{margin-top:8px}
+}
+@media(max-width:650px){
+ body > .directory-mobile-topbar{margin:0;padding-inline:20px}
+ body:has(> .site-chrome.term-nav) > .term-shell > .breadcrumb-links + .hero{margin-top:18px}
+}
+
 /* Discover begins content close beneath its 68px mobile workspace header.
    Reference pages and About still inherited a 38px top margin from their
    pre-shared navigation shells; after changing pages the headline visibly

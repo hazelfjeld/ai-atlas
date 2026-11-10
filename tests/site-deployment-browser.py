@@ -100,6 +100,27 @@ with sync_playwright() as p:
                       + scheme + ' ' + str(width) + ' ' + route,
                       measurement['margin'] == '18px' and measurement['visible'])
         intro_context.close()
+    # Every profile should have separate site and article landmarks, even when
+    # scripts are disabled and the viewport is just 320 pixels wide.
+    for scheme in ('light', 'dark'):
+        ctx = browser.new_context(java_script_enabled=False, color_scheme=scheme)
+        profile = ctx.new_page()
+        for width in (320, 390, 768, 1280):
+            profile.set_viewport_size({'width': width, 'height': 844})
+            profile.goto(base + 'technology/TECH-0216-pytorch.html')
+            valid = profile.evaluate("""() => {
+                const main=document.querySelector('main.term-shell');
+                const nav=document.querySelector('nav.site-chrome.term-nav');
+                const bar=document.querySelector('body > .site-mobile-chrome');
+                const breadcrumb=main?.querySelector(':scope > .breadcrumb-links');
+                const hero=main?.querySelector(':scope > .hero#main');
+                return !!main && !!nav && !!bar && !!breadcrumb && !!hero &&
+                    !main.contains(nav) && !main.contains(bar) &&
+                    !!(nav.compareDocumentPosition(main) & Node.DOCUMENT_POSITION_FOLLOWING) &&
+                    document.documentElement.scrollWidth <= innerWidth + 1;
+            }""")
+            check('technology profile nav landmarks ' + scheme + ' ' + str(width), valid)
+        ctx.close()
     # Native reference/editorial skip links were stacked below the shared 68px
     # mobile or 78px desktop chrome. Verify the first keyboard target really
     # receives pointer hit-testing above that header, even without JavaScript.

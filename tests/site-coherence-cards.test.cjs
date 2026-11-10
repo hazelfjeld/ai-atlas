@@ -324,7 +324,7 @@ test('About and both A-Z landing pages separate shared navigation from the main 
     assert.ok(html.includes('href="#main"') && html.includes('@media(min-width:651px){.term-shell>.hero{margin-top:8px}}@media(max-width:650px){.term-shell>.hero{margin-top:18px}body>.directory-mobile-topbar{margin:0;padding-inline:20px}}'), route);
   }
   // Detailed articles remain unchanged until a future complete generated build.
-  for (const route of ['terms/MLD-0001-a-b-test.html', 'technology/TECH-0001-adversarial-robustness-toolbox.html']) {
+  for (const route of ['terms/MLD-0001-a-b-test.html']) {
     const html = fs.readFileSync(path.join(__dirname, '..', route), 'utf8');
     assert.ok(html.indexOf('<main class="term-shell">') < html.indexOf('<nav class="site-chrome term-nav"'), route);
   }
@@ -920,4 +920,23 @@ test('Research shares the one global slash-to-search keyboard route without a co
     'Keep the Research-local filter functional when people use its field');
   assert.ok(html.includes('href="index.html#/search"'),
     'Research search link must reach the canonical real search view');
+});
+
+test('all technology profiles put shared navigation outside the content landmark', () => {
+ const dir=path.join(__dirname,'..','technology');
+ const pages=fs.readdirSync(dir).filter(name=>/^TECH-[0-9]{4}-.+\.html$/.test(name));
+ const expected=JSON.parse(fs.readFileSync(path.join(__dirname,'..','publication.json'),'utf8')).published_counts.technologies;
+ assert.equal(pages.length,expected);
+ for(const name of pages){
+   const html=fs.readFileSync(path.join(dir,name),'utf8');
+   const mobile=html.indexOf('<div class="directory-mobile-topbar site-mobile-chrome"');
+   const nav=html.indexOf('<nav class="site-chrome term-nav"');
+   const main=html.indexOf('<main class="term-shell">');
+   const breadcrumb=html.indexOf('<p class="breadcrumb-links">');
+   const hero=html.indexOf('<header class="hero" id="main" tabindex="-1">');
+   assert.ok(mobile>0 && mobile<nav && nav<main && main<breadcrumb && breadcrumb<hero,name);
+   assert.ok(html.indexOf('</nav>',nav)<main,name);
+   assert.equal((html.match(/<main class="term-shell">/g)||[]).length,1,name);
+   assert.equal((html.match(/id="main"/g)||[]).length,1,name);
+ }
 });

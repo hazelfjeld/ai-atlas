@@ -120,12 +120,17 @@ REFERENCE_LANDING_HERO_CSS = '@media(min-width:651px){.term-shell>.hero{margin-t
 
 def wrap_reference_shell(nav, content, path, main_id):
     """Keep the canonical shared navigation outside the main landmark on migrated pages."""
-    if path in REFERENCE_LANDING_PATHS:
+    is_tech_detail = path.startswith('technology/TECH-') and path.endswith('.html')
+    if path in REFERENCE_LANDING_PATHS or is_tech_detail:
         if path == "about.html" and main_id == ' id="main"':
             marker = '<header class="hero">'
             assert content.count(marker) == 1, path
             content = content.replace(marker, '<header class="hero" id="main" tabindex="-1">', 1)
-        assert content.startswith('<header class="hero" id="main" tabindex="-1">'), path
+        if is_tech_detail:
+            assert content.startswith('<p class="breadcrumb-links">'), path
+            assert content.count('<header class="hero" id="main" tabindex="-1">') == 1, path
+        else:
+            assert content.startswith('<header class="hero" id="main" tabindex="-1">'), path
         return nav + '<main class="term-shell">' + content + '</main>'
     return '<main class="term-shell"' + main_id + '>' + nav + content + '</main>'
 
