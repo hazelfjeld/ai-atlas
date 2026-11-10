@@ -790,8 +790,11 @@ test('mobile reference introductions share the Discover first-content rhythm wit
   }
   const technology = fs.readFileSync(path.join(__dirname, '..',
     'technology/TECH-0001-adversarial-robustness-toolbox.html'), 'utf8');
-  assert.match(technology, /<\/nav><p class="breadcrumb-links">/,
-    'The technology breadcrumb must remain between navigation and the hero');
+  assert.match(technology, /<\/nav><main class="term-shell"><p class="breadcrumb-links">/,
+    'The technology breadcrumb must remain inside the content landmark, after shared navigation');
+  assert.ok(technology.indexOf('<main class="term-shell">') <
+    technology.indexOf('<header class="hero" id="main" tabindex="-1">'),
+    'The profile heading remains inside the main content landmark');
   const offline = fs.readFileSync(path.join(__dirname, '..',
     'downloads/Atlas_Demo_Offline.html'), 'utf8');
   assert.ok(offline.includes(css), 'Offline fallback must embed the exact rebuilt shared CSS');

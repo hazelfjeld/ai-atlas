@@ -619,7 +619,11 @@ test('all generated technology profiles use shared directory chrome with native 
     const detailFrame = directory
       .replace(' data-page-label="Technology profiles"', '')
       .replace('<span class="site-mobile-chrome__title">Technology profiles</span>', '');
-    assert.equal(html.split(prefix)[1].split('<p class="breadcrumb-links">')[0], detailFrame, file);
+    assert.equal(landingNav(html), detailFrame, file);
+    assert.ok(html.indexOf('<nav class="site-chrome term-nav"') < html.indexOf(prefix),
+      file + ' must keep the shared rail outside the content landmark');
+    assert.ok(html.indexOf(prefix) < html.indexOf('<p class="breadcrumb-links">'),
+      file + ' must retain breadcrumbs inside main');
     assert.equal((html.match(/class="site-mobile-chrome__more"/g)||[]).length, 1, file+' retains exactly one native mobile secondary disclosure');
     assert.equal((html.match(/class="site-mobile-chrome__more-links"/g)||[]).length, 1, file+' keeps one eight-link mobile secondary list');
     assert.equal((html.match(/class="site-chrome__more"/g) || []).length, 1, file);
