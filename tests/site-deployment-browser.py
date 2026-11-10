@@ -58,7 +58,10 @@ with sync_playwright() as p:
                 ('playbooks.html','Playbooks'),
                 ('technologies.html','Technology profiles'),
                 ('whats-new.html','What’s New Today'),
-                ('games.html','Games')
+                ('games.html','Games'),
+                ('about.html','About'),
+                ('terms/index.html','Concept encyclopedia'),
+                ('technology/index.html','Technology profiles')
             ):
                 title_page.goto(base+route)
                 title = title_page.locator('.site-mobile-chrome > .site-mobile-chrome__title')

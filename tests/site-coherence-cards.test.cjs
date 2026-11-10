@@ -761,3 +761,29 @@ test('script-free native catalogs offer source links instead of inert search and
   }
   assert.match(css, /site-static-fallback__links a:focus-visible/);
 });
+
+test('About and both generated catalog directories share real desktop workspace titles', () => {
+  const generator = fs.readFileSync(path.join(__dirname, '..', 'scripts/build_seo.py'), 'utf8');
+  const termsGenerator = fs.readFileSync(path.join(__dirname, '..', 'scripts/build_term_pages.py'), 'utf8');
+  assert.ok(generator.includes("topbar_title='About'"), 'About must be generated with the shared title');
+  assert.ok(generator.includes("topbar_title=('Technology profiles' if path == 'technology/index.html' else None)"),
+    'Technology directory title must not propagate to individual technology profiles');
+  assert.ok(termsGenerator.includes("topbar_title=('Concept encyclopedia' if path == 'terms/index.html' else None)"),
+    'Concept directory title must not propagate to 1,345 separate articles');
+  for (const [route, title] of [
+    ['about.html', 'About'],
+    ['terms/index.html', 'Concept encyclopedia'],
+    ['technology/index.html', 'Technology profiles']
+  ]) {
+    const html = fs.readFileSync(path.join(__dirname, '..', route), 'utf8');
+    const span = '<span class="site-mobile-chrome__title">' + title + '</span>';
+    assert.equal(html.split(span).length - 1, 1, route + ': exactly one real desktop heading');
+    assert.ok(html.includes('data-page-label="' + title + '"'), route + ': script-free label agrees');
+    const menuEnd = html.indexOf('</nav></details>');
+    const headingAt = html.indexOf(span);
+    const searchAt = html.indexOf('site-mobile-chrome__search', headingAt);
+    assert.ok(menuEnd >= 0 && menuEnd < headingAt && headingAt < searchAt,
+      route + ': heading follows mobile menu and precedes real search link');
+    assert.ok(html.includes('<nav class="site-chrome'), route + ': shared desktop rail retained');
+  }
+});
