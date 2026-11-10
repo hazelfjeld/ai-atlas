@@ -799,8 +799,8 @@ with sync_playwright() as p:
         ('about.html', 'main.term-shell > header.hero .eyebrow'),
         ('terms/index.html', 'main.term-shell > header.hero .eyebrow'),
         ('technology/index.html', 'main.term-shell > header.hero .eyebrow'),
-        ('technologies.html', '.tech-shell > section.tech-hero .eyebrow'),
-        ('playbooks.html', '.playbook-shell > section.playbook-hero .eyebrow'),
+        ('technologies.html', '.tech-shell > main > section.tech-hero .eyebrow'),
+        ('playbooks.html', '.playbook-shell > main > section.playbook-hero .eyebrow'),
         ('whats-new.html', '.shell > main > header .discover-heading .eyebrow'),
     )
     for width, height in ((768, 900), (1280, 900)):
