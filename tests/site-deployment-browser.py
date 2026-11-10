@@ -1990,7 +1990,15 @@ with sync_playwright() as p:
                 more = menu.locator('details.site-mobile-chrome__more')
                 check('script-free secondary mobile disclosure '+route+' '+color+' '+str(width),
                       more.count() == 1 and more.locator('summary').is_visible())
-                more.locator('summary').click()
+                if route == 'research.html':
+                    check('Research script-free current secondary link '+color+' '+str(width),
+                          more.evaluate("""el => el.open &&
+                              el.querySelectorAll('a[aria-current="location"]').length === 1 &&
+                              el.querySelector('a[aria-current="location"]')?.textContent.trim() === 'Research library'"""))
+                else:
+                    check('non-secondary pages keep More collapsed '+route+' '+color+' '+str(width),
+                          not more.evaluate('el => el.open'))
+                    more.locator('summary').click()
                 check('script-free secondary routes and download '+route+' '+color+' '+str(width),
                       more.evaluate("""(el) => el.open
                           && el.querySelectorAll('a').length === 8
