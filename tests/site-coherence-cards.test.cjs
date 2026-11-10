@@ -41,10 +41,10 @@ test('Playbooks and Technology separate the shared navigation from main', () => 
   }
   // The shell already owns page gutters. After migrating <main>, generic
   // Discover main padding used to add a second inset at every breakpoint.
-  assert.match(css, /:is\\(\\.tech-shell,\\.playbook-shell\\)>main\\{padding:0\\}/,
+  assert.ok(css.includes(':is(.tech-shell,.playbook-shell)>main{padding:0}'),
     'standalone workspace content does not double Discover main padding');
   const brand = fs.readFileSync(path.join(__dirname, '..', 'brand.css'), 'utf8');
-  assert.match(brand, /main\\{padding:/,
+  assert.ok(brand.includes('main{padding:'),
     'guard against silently removing the Discover baseline instead');
 
   const builder = fs.readFileSync(path.join(__dirname, '..', 'scripts/build_seo.py'), 'utf8');
