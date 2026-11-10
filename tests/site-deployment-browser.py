@@ -1796,6 +1796,9 @@ with sync_playwright() as p:
                                   && !!main && main.getBoundingClientRect().left >= (innerWidth <= 1150 ? 203 : 223)
                                   && (location.pathname.endsWith('/about.html')
                                       ? (nav.parentElement === document.body && !main.contains(nav))
+                                      : location.pathname.endsWith('/research.html')
+                                      ? (nav.parentElement === document.querySelector('.shell')
+                                         && main.parentElement === nav.parentElement && !main.contains(nav))
                                       : nav.closest('main') === main)
                                   && getComputedStyle(nav.querySelector('.site-chrome__links')).flexDirection === 'column'
                                   && links.length === 7
