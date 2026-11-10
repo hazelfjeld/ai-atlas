@@ -1285,7 +1285,7 @@ test('one shared editorial workspace reading frame aligns existing page families
   assert.match(block, /padding-inline:clamp\(24px,3vw,36px\)!important/);
   assert.match(block, /max-width:74ch/);
   for (const selector of ['.term-shell','.tech-shell','.playbook-shell','.review-shell',
-    '.shell:has(> .site-chrome.nav)', '.shell:has(> main > .site-chrome.research-site-chrome)']) {
+    '.shell:has(> .site-chrome.nav)', '.shell:has(> .site-chrome.research-site-chrome)']) {
     assert.ok(block.includes(selector), 'shared frame missing '+selector);
   }
   assert.ok(!block.includes('.discover-layout') && !block.includes('.games-body') &&
@@ -1309,7 +1309,7 @@ test('shared editorial cards adopt Discover surface geometry without touching Ga
     '.term-shell > .profile-section', '.term-shell > .detail-block:not(.caveat)',
     '.playbook-shell .playbook', '.tech-shell .tech-card',
     '.shell:has(> .site-chrome.nav) article.card',
-    '.shell:has(> main > .site-chrome.research-site-chrome) .cards > .card',
+    '.shell:has(> .site-chrome.research-site-chrome) .cards > .card',
     '.shell:has(> .site-chrome.top) .panel',
     'background:var(--atlas-card-surface);', 'border:1px solid var(--atlas-card-line);',
     'border-radius:11px;', 'padding:clamp(18px,2vw,24px);'
