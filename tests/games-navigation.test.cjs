@@ -1708,7 +1708,7 @@ test('all standalone skip links move keyboard focus to a unique native destinati
     'games.html','technologies.html','playbooks.html','whats-new.html','demo.html'];
   const generator = read('scripts/site_chrome.py');
   assert.match(generator, /def ensure_skip_destination_focusable\(html, path=None\):/);
-  assert.match(generator, /return ensure_skip_destination_focusable\(normalized, path\)/);
+  assert.match(generator, /return ensure_skip_destination_focusable\(migrate_legacy_article_landmark\(normalized, path\), path\)/);
   assert.match(read('scripts/build_seo.py'), /ensure_skip_destination_focusable\(shell\(/);
   for (const route of pages) {
     const html = read(route);
@@ -1725,7 +1725,7 @@ test('all standalone skip links move keyboard focus to a unique native destinati
 test('standalone native article skips bypass the shared rail before JavaScript', () => {
   const helper = read('scripts/site_chrome.py');
   assert.ok(helper.includes('def ensure_skip_destination_focusable(html, path=None):'));
-  assert.ok(helper.includes('return ensure_skip_destination_focusable(normalized, path)'));
+  assert.ok(helper.includes('return ensure_skip_destination_focusable(migrate_legacy_article_landmark(normalized, path), path)'));
   assert.ok(read('scripts/build_seo.py').includes("about), 'about.html')"));
   for (const [route, marker] of [
     ['about.html', '<header class="hero" id="main" tabindex="-1">'],
