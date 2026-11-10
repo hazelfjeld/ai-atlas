@@ -1938,14 +1938,20 @@ with sync_playwright() as p:
               and first_paint.locator('.site-mobile-chrome').evaluate('''(el, data) => {
                   const {expected, fromSelectedLink} = data;
                   const title = getComputedStyle(el, '::before');
+                  const realTitle = el.querySelector(':scope > .site-mobile-chrome__title');
                   const active = el.parentElement?.querySelector(
                       '.site-chrome__links a[aria-current="page"]');
                   const sourceMatches = fromSelectedLink
                       ? (!el.hasAttribute('data-page-label') &&
                          active?.textContent.trim() === expected)
                       : el.getAttribute('data-page-label') === expected;
-                  return sourceMatches && title.content === JSON.stringify(expected) &&
-                         title.display !== 'none' &&
+                  const visualMatches = realTitle
+                      ? (realTitle.textContent.trim() === expected &&
+                         getComputedStyle(realTitle).display !== 'none' &&
+                         title.display === 'none')
+                      : (title.content === JSON.stringify(expected) &&
+                         title.display !== 'none');
+                  return sourceMatches && visualMatches &&
                          el.getBoundingClientRect().height >= 76;
               }''', {'expected': expected, 'fromSelectedLink': from_selected_link}))
         first_paint.screenshot(path=str(out / ('first-paint-' + route.replace('/', '-') + '.png')),
