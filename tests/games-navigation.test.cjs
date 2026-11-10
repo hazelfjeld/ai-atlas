@@ -607,7 +607,7 @@ test('all generated technology profiles use shared directory chrome with native 
 });
 
 
-test('all 1345 concept detail pages retain primary and desktop routes while expanded guides gain script-free mobile routes', () => {
+test('all 1345 concept details share the same script-free primary and secondary mobile routes', () => {
   // Every concept detail page targets its article natively, like technology profiles.
   const dictionaryNav = read('terms/index.html').split('<main class="term-shell">')[1].split('<header class="hero" id="main" tabindex="-1">')[0];
   assert.equal((dictionaryNav.match(/class="site-mobile-chrome__brand"/g)||[]).length,1);
@@ -617,17 +617,13 @@ test('all 1345 concept detail pages retain primary and desktop routes while expa
   assert.equal((secondary.match(/<a href=/g) || []).length, 8, 'Preserve all eight Discover secondary routes');
   const mobileExtra = dictionaryNav.match(/<details class="site-mobile-chrome__more"(?: open)?>[\s\S]*?<\/details>/)?.[0];
   assert.ok(mobileExtra, 'Directory carries eight static mobile secondary destinations');
-  const detailNav = dictionaryNav.replace(mobileExtra, '')
+  // The directory alone is the active secondary destination. Detail pages
+  // reuse its exact mobile and desktop link lists with no current-location marker.
+  const detailNav = dictionaryNav
     .replace('<details class="site-chrome__more" open>', '<details class="site-chrome__more">')
-    .replace('href="../terms/index.html" aria-current="location">Concept encyclopedia',
-             'href="../terms/index.html">Concept encyclopedia');
-  // Detail pages retain canonical primary and desktop routes. The 57 authored
-  // expanded guides additionally render eight mobile secondary links before JS.
-  const mobileGuideExtra = mobileExtra.replace('<details class="site-mobile-chrome__more" open>', '<details class="site-mobile-chrome__more">')
-    .replace('href="../terms/index.html" aria-current="location">Concept encyclopedia',
-             'href="../terms/index.html">Concept encyclopedia');
-  const expandedDetailNav = detailNav.replace('</nav></details><a class="site-mobile-chrome__search"',
-    mobileGuideExtra + '</nav></details><a class="site-mobile-chrome__search"');
+    .replace('<details class="site-mobile-chrome__more" open>', '<details class="site-mobile-chrome__more">')
+    .replaceAll('href="../terms/index.html" aria-current="location">Concept encyclopedia',
+                'href="../terms/index.html">Concept encyclopedia');
   const guides = JSON.parse(read('content/term-guides.json'));
   assert.equal(Object.keys(guides).length, 57);
   const manifest = JSON.parse(read('terms/manifest.json'));
@@ -639,14 +635,12 @@ test('all 1345 concept detail pages retain primary and desktop routes while expa
     assert.ok(html.includes('<script src="../site-theme.js"></script>'), id);
     const mainOpen = '<main class="term-shell">';
     const heroOpen = '<header class="hero" id="main" tabindex="-1">';
-    const expanded = Object.prototype.hasOwnProperty.call(guides, id);
-    assert.equal(html.split(mainOpen)[1]?.split(heroOpen)[0], expanded ? expandedDetailNav : detailNav, id);
-    if (expanded) {
-      const extras = html.match(/<details class="site-mobile-chrome__more">[\s\S]*?<\/details>/)?.[0];
-      assert.ok(extras, id + ' has native script-free mobile secondary navigation');
-      assert.equal((extras.match(/<a href=/g) || []).length, 8, id + ' keeps all eight secondary routes');
-      assert.equal((html.match(/class="site-mobile-chrome__more"/g) || []).length, 1, id);
-    }
+    assert.equal(html.split(mainOpen)[1]?.split(heroOpen)[0], detailNav, id);
+    const extras = html.match(/<details class="site-mobile-chrome__more">[\s\S]*?<\/details>/)?.[0];
+    assert.ok(extras, id + ' has native script-free mobile secondary navigation');
+    assert.equal((extras.match(/<a href=/g) || []).length, 8, id + ' keeps all eight secondary routes');
+    assert.equal((html.match(/class="site-mobile-chrome__more"/g) || []).length, 1, id);
+    assert.equal((html.match(/class="site-mobile-chrome__more-links"/g) || []).length, 1, id);
     assert.ok(html.includes('<a class="skip" href="#main">'), id + ' keeps native skip');
     assert.ok(html.indexOf(heroOpen) > html.indexOf('<nav class="site-chrome term-nav"'), id + ' bypasses shared navigation');
     assert.equal((html.match(/id="main"/g) || []).length, 1, id);
@@ -656,7 +650,7 @@ test('all 1345 concept detail pages retain primary and desktop routes while expa
     assert.equal((links.match(/aria-current="page"/g) || []).length, 1, id);
   }
   const generator = read('scripts/build_term_pages.py');
-  assert.ok(generator.includes("directory_nav = render_directory_nav('../', 'Concept dictionary', mobile_brand=True, native_secondary=True, mobile_secondary=(path == 'terms/index.html' or static_mobile_more), secondary_current=('encyclopedia' if path == 'terms/index.html' else None))"));
+  assert.ok(generator.includes("directory_nav = render_directory_nav('../', 'Concept dictionary', mobile_brand=True, native_secondary=True, mobile_secondary=True, secondary_current=('encyclopedia' if path == 'terms/index.html' else None))"));
   assert.ok(generator.includes('directory_css = DIRECTORY_MOBILE_CSS'));
 });
 
@@ -806,7 +800,7 @@ test('both generated catalog directories share Discover navigation and the nativ
     assert.ok(html.includes('THE FRONTIER, IN CONTEXT'), route);
   }
   const termGenerator=read('scripts/build_term_pages.py'), techGenerator=read('scripts/build_seo.py');
-  assert.ok(termGenerator.includes("render_directory_nav('../', 'Concept dictionary', mobile_brand=True, native_secondary=True, mobile_secondary=(path == 'terms/index.html' or static_mobile_more), secondary_current=('encyclopedia' if path == 'terms/index.html' else None))"));
+  assert.ok(termGenerator.includes("render_directory_nav('../', 'Concept dictionary', mobile_brand=True, native_secondary=True, mobile_secondary=True, secondary_current=('encyclopedia' if path == 'terms/index.html' else None))"));
   assert.ok(techGenerator.includes("render_directory_nav(prefix, 'Technology profiles', mobile_brand=True, native_secondary=True, mobile_secondary=True)"));
   assert.ok(read('scripts/site_chrome.py').includes('DIRECTORY_MOBILE_CSS'));
   assert.match(read('site-chrome.css'), /\.site-mobile-chrome__menu a\{[^}]*min-height:44px/);

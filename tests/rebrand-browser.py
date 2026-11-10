@@ -105,7 +105,8 @@ with sync_playwright() as p:
         page.set_viewport_size({'width': width, 'height': 844})
         for route in ('about.html', 'whats-new.html', 'playbooks.html', 'research.html',
                       'terms/index.html', 'technology/index.html',
-                      'terms/MLD-0002-ablation-study.html', 'technology/TECH-0216-pytorch.html'):
+                      'terms/MLD-0001-a-b-test.html', 'terms/MLD-0002-ablation-study.html',
+                      'technology/TECH-0216-pytorch.html'):
             page.goto(base + route)
             page.locator('details.site-mobile-chrome__nav > summary').click()
             # With JS off, never paint a modal-style drawer while the rest
@@ -125,19 +126,8 @@ with sync_playwright() as p:
                       ('../index.html#/overview' if '/' in route else 'index.html#/overview')
                   and brand.locator('svg').count() == 1
                   and page.locator('details.site-mobile-chrome__nav nav > a').count() == 8
-                  and (
-                      # Standalone pages and generated expanded concept guides
-                      # render the same eight canonical secondary destinations
-                      # in one native disclosure. Direct primary links remain
-                      # exactly seven plus the brand, with no duplicate nav.
-                      (page.locator('details.site-mobile-chrome__nav .site-mobile-chrome__more').count() == 1
-                       and page.locator('details.site-mobile-chrome__nav .site-mobile-chrome__more-links > a').count() == 8)
-                      if route in ('about.html', 'whats-new.html', 'playbooks.html', 'research.html',
-                                   'terms/index.html', 'technology/index.html',
-                                   'terms/MLD-0002-ablation-study.html',
-                                   'technology/TECH-0216-pytorch.html')
-                      else page.locator('details.site-mobile-chrome__nav .site-mobile-chrome__more').count() == 0
-                  ))
+                  and page.locator('details.site-mobile-chrome__nav .site-mobile-chrome__more').count() == 1
+                  and page.locator('details.site-mobile-chrome__nav .site-mobile-chrome__more-links > a').count() == 8)
             if width == 390 and route in ('about.html', 'terms/index.html'):
                 page.screenshot(path=str(out / f'no-script-wordmark-{route.replace("/", "-")}.png'))
             brand.click()
