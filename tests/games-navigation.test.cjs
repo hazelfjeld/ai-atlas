@@ -5,6 +5,20 @@ const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
 const read = name => fs.readFileSync(path.join(__dirname, '..', name), 'utf8');
+// Reference landing pages intentionally keep the real site navigation outside
+// the main landmark, while retaining the exact shared component/links.
+const landingNav = html => {
+  const skip = '<a class="skip" href="#main">Skip to content</a>';
+  const main = '<main class="term-shell">';
+  const start = html.indexOf(skip), article = html.indexOf(main, start);
+  const hero = html.indexOf('<header class="hero" id="main" tabindex="-1">', article);
+  assert.ok(start >= 0 && article > start && hero > article, 'Invalid native article landmark');
+  const nav = html.slice(start + skip.length, article);
+  assert.ok(nav.includes('<nav class="site-chrome term-nav"'), 'Missing shared navigation');
+  assert.ok(nav.includes('site-mobile-chrome'), 'Missing mobile site navigation');
+  return nav;
+};
+
 // Keep the seven direct primary destinations separate from the one native
 // secondary disclosure. Verify all eight secondary links instead of
 // silently ignoring or counting them as duplicate primary navigation.
@@ -459,9 +473,8 @@ test('About, technologies and playbooks reuse the Games and archive mobile chrom
 test('About reuses the exact generated catalog navigation, not a parallel template', () => {
   const about = read('about.html');
   const built = read('scripts/build_seo.py');
-  const main = '<main class="term-shell">';
-  const ours = about.split(main)[1].split('<header class="hero" id="main" tabindex="-1">')[0];
-  const template = read('terms/index.html').split('<main class="term-shell">')[1].split('<header class="hero" id="main" tabindex="-1">')[0];
+  const ours = landingNav(about);
+  const template = landingNav(read('terms/index.html'));
   const directorySecondary = template.match(/<details class="site-chrome__more"(?: open)?>[\s\S]*?<\/details>/)?.[0];
   assert.ok(directorySecondary, 'Reference directory must expose its own secondary navigation');
   const directoryMobileSecondary = template.match(/<details class="site-mobile-chrome__more"(?: open)?>[\s\S]*?<\/details>/)?.[0];
@@ -581,7 +594,7 @@ test('all generated technology profiles use shared directory chrome with native 
   assert.ok(concept.includes('<script src="../site-theme.js"></script>'));
   assert.doesNotMatch(concept, /<nav class="term-nav" aria-label="Site navigation">/);
   const prefix = '<main class="term-shell">';
-  const directory = read('technology/index.html').split('<main class="term-shell">')[1].split('<header class="hero" id="main" tabindex="-1">')[0];
+  const directory = landingNav(read('technology/index.html'));
   assert.equal((directory.match(/class="site-mobile-chrome__brand"/g)||[]).length,1);
   // Detail and directory pages must share the same eight-link drawer:
   // one real home wordmark and seven unchanged section links.
@@ -620,7 +633,7 @@ test('all generated technology profiles use shared directory chrome with native 
 
 test('all 1345 concept details share the same script-free primary and secondary mobile routes', () => {
   // Every concept detail page targets its article natively, like technology profiles.
-  const dictionaryNav = read('terms/index.html').split('<main class="term-shell">')[1].split('<header class="hero" id="main" tabindex="-1">')[0];
+  const dictionaryNav = landingNav(read('terms/index.html'));
   assert.equal((dictionaryNav.match(/class="site-mobile-chrome__brand"/g)||[]).length,1);
   const secondary = dictionaryNav.match(/<details class="site-chrome__more"(?: open)?>[\s\S]*?<\/details>/)?.[0];
   assert.ok(secondary, 'Concept directory keeps its static secondary disclosure');

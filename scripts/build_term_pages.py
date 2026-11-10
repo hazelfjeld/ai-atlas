@@ -8,7 +8,7 @@ import re
 import unicodedata
 from urllib.parse import quote, urlsplit
 from site_seo import metadata, breadcrumbs, absolute, technology_path
-from site_chrome import render_directory_nav, render_directory_hero, DIRECTORY_MOBILE_CSS, native_directory_article_skip, REFERENCE_LANDING_PATHS, REFERENCE_LANDING_HERO_CSS, wrap_reference_shell
+from site_chrome import render_directory_nav, render_directory_hero, DIRECTORY_MOBILE_CSS, native_directory_article_skip
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -46,13 +46,10 @@ def shell(title, body, path, description, structured=None, *, native_concept_art
     directory_assets = '<link rel="stylesheet" href="../site-chrome.css"><script src="../site-theme.js"></script>'
     heading_css = '' if path == 'terms/index.html' else '.term-shell h1{font-size:clamp(32px,6vw,58px)}'
     body, main_id = native_directory_article_skip(body, path, native_concept_article=native_concept_article)
-    landing_css = REFERENCE_LANDING_HERO_CSS if path in REFERENCE_LANDING_PATHS else ''
-    footer = '<footer>Prepared catalog snapshot: November 1, 2026. Imported references retain their prior review labels. These pages work without JavaScript; external references require internet. <a href="../about.html">Editorial policy</a> · <a href="../index.html#/sources">Sources & downloads</a></footer>'
-    article = wrap_reference_shell(directory_nav, body + footer, path, main_id)
     return f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 {metadata(title + ' | AI Updates', description, path, structured)}
-<link rel="stylesheet" href="../checkpoint.css"><link rel="stylesheet" href="../brand.css"><style>.term-shell{{max-width:1000px;margin:auto;padding:30px 24px 70px}}.term-nav{{display:flex;flex-wrap:wrap;gap:18px;font-size:13px}}{heading_css}.term-shell h2{{font-size:20px;margin:0 0 12px}}.term-shell p,.term-shell li{{font-size:15px;line-height:1.75}}.term-shell .lead{{font-size:20px;max-width:850px}}.term-shell li{{margin:7px 0}}.term-shell a{{overflow-wrap:anywhere}}.term-shell .hero{{margin:38px 0 24px}}{directory_css}{landing_css}@media print{{.term-nav,.skip{{display:none}}.term-shell{{padding:0}}.detail-block{{break-inside:avoid}}}}</style>{directory_assets}</head><body><a class="skip" href="#main">Skip to content</a>{article}</body></html>'''
+<link rel="stylesheet" href="../checkpoint.css"><link rel="stylesheet" href="../brand.css"><style>.term-shell{{max-width:1000px;margin:auto;padding:30px 24px 70px}}.term-nav{{display:flex;flex-wrap:wrap;gap:18px;font-size:13px}}{heading_css}.term-shell h2{{font-size:20px;margin:0 0 12px}}.term-shell p,.term-shell li{{font-size:15px;line-height:1.75}}.term-shell .lead{{font-size:20px;max-width:850px}}.term-shell li{{margin:7px 0}}.term-shell a{{overflow-wrap:anywhere}}.term-shell .hero{{margin:38px 0 24px}}{directory_css}@media print{{.term-nav,.skip{{display:none}}.term-shell{{padding:0}}.detail-block{{break-inside:avoid}}}}</style>{directory_assets}</head><body><a class="skip" href="#main">Skip to content</a><main class="term-shell"{main_id}>{directory_nav}{body}<footer>Prepared catalog snapshot: November 1, 2026. Imported references retain their prior review labels. These pages work without JavaScript; external references require internet. <a href="../about.html">Editorial policy</a> · <a href="../index.html#/sources">Sources & downloads</a></footer></main></body></html>'''
 
 
 def main():
