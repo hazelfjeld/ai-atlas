@@ -869,3 +869,24 @@ body:has(.site-chrome) > a.skip:focus{
 }
 /* atlas-skip-focus-layer:end */
 
+/* atlas-shared-introduction-copy:begin */
+/* The existing Research, Playbooks, Technology and daily-edition landings used
+   unrelated introduction sizes and line lengths. Share Discover's restrained
+   editorial reading rhythm without changing their cards, controls or routes. */
+:is(.playbook-shell > .playbook-hero > p,
+    .tech-shell > .tech-hero > p,
+    .shell:has(> main > .site-chrome.research-site-chrome) > main > .hero > p,
+    .shell:has(> .site-chrome.top) > main > header .lead){
+  max-width:70ch;
+  font-size:17px;
+  line-height:1.65;
+  color:var(--muted,#5d6861);
+}
+@media(max-width:650px){
+:is(.playbook-shell > .playbook-hero > p,
+    .tech-shell > .tech-hero > p,
+    .shell:has(> main > .site-chrome.research-site-chrome) > main > .hero > p,
+    .shell:has(> .site-chrome.top) > main > header .lead){font-size:16px}
+}
+/* atlas-shared-introduction-copy:end */
+

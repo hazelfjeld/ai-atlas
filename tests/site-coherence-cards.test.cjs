@@ -637,3 +637,26 @@ test('mobile reference introductions share the Discover first-content rhythm wit
     'downloads/Atlas_Demo_Offline.html'), 'utf8');
   assert.ok(offline.includes(css), 'Offline fallback must embed the exact rebuilt shared CSS');
 });
+
+test('Research, Playbooks, Technology and daily news share one introduction component', () => {
+  const block=css.split('/* atlas-shared-introduction-copy:begin */')[1]
+    ?.split('/* atlas-shared-introduction-copy:end */')[0];
+  assert.ok(block, 'Missing shared intro typography');
+  for(const family of [".playbook-shell > .playbook-hero > p",".tech-shell > .tech-hero > p",".shell:has(> main > .site-chrome.research-site-chrome) > main > .hero > p",".shell:has(> .site-chrome.top) > main > header .lead"])
+    assert.ok(block.includes(family), 'Missing shared introduction: '+family);
+  assert.match(block,/max-width:70ch/);
+  assert.match(block,/font-size:17px/);
+  assert.match(block,/@media\(max-width:650px\)/);
+  assert.match(block,/font-size:16px/);
+  assert.ok(!block.includes('display:none')&&!block.includes('pointer-events:none'));
+  for(const [page,hero] of [
+    ['research.html','class="hero"'],
+    ['playbooks.html','class="playbook-hero"'],
+    ['technologies.html','class="tech-hero"'],
+    ['whats-new.html','class="lead"']
+  ]) {
+    const html=fs.readFileSync(path.join(__dirname,'..',page),'utf8');
+    assert.ok(html.includes(hero)&&html.includes('site-chrome.css'), page+' retains its native shared layout');
+  }
+  assert.ok(fs.readFileSync(path.join(__dirname,'..','downloads/Atlas_Demo_Offline.html'),'utf8').includes(css));
+});

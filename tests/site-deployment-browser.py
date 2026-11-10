@@ -2209,6 +2209,45 @@ with sync_playwright() as p:
               and not drawer.evaluate('(el) => el.open'))
     secondary_resize.close()
 
+    # Verify actual cross-page introduction rhythm at mobile and desktop
+    # widths in both OS themes, before any JavaScript can apply a patch.
+    lead_routes = (
+        ('research.html', '.shell > main > section.hero > p'),
+        ('playbooks.html', '.playbook-shell > section.playbook-hero > p'),
+        ('technologies.html', '.tech-shell > section.tech-hero > p'),
+        ('whats-new.html', '.shell > main > header .lead'),
+    )
+    for scheme in ('light','dark'):
+        lead_context = browser.new_context(java_script_enabled=False, color_scheme=scheme)
+        lead_page = lead_context.new_page()
+        for width in (320,390,768,1280):
+            lead_page.set_viewport_size({'width':width,'height':844})
+            lead_page.goto(base+'index.html')
+            if width <= 650:
+                lead_page.locator('#discover-mobile-nav > summary').click()
+                lead_page.locator('#discover-mobile-nav a[href="playbooks.html"]').click()
+            else:
+                lead_page.goto(base+'playbooks.html')
+            check('Discover to Playbooks shared frame '+scheme+' '+str(width),
+                  lead_page.locator('.playbook-shell .site-chrome__links a').count()==7
+                  and lead_page.locator('.playbook-shell > section.playbook-hero > p').is_visible())
+            for route, selector in lead_routes:
+                lead_page.goto(base+route)
+                paragraph = lead_page.locator(selector).first
+                check('Shared introduction '+route+' '+scheme+' '+str(width),
+                      paragraph.count()==1 and paragraph.is_visible()
+                      and paragraph.evaluate("""el => {
+                        const s=getComputedStyle(el), w=document.documentElement.clientWidth;
+                        const target=w<=650?16:17;
+                        return Math.abs(parseFloat(s.fontSize)-target)<.2
+                          && parseFloat(s.lineHeight)>=target*1.6
+                          && s.maxWidth!=='none'
+                          && el.getBoundingClientRect().width<=w
+                      }"""))
+                if width in (390,1280):
+                    lead_page.screenshot(path=str(out/('intro-'+route.split('.')[0]+'-'+scheme+'-'+str(width)+'.png')))
+        lead_context.close()
+
     check('no application runtime exceptions', not errors)
     browser.close()
 (out / 'report.json').write_text(json.dumps({'base':base, 'checks':checks, 'checks_passed':len(checks), 'errors':errors}, indent=2), encoding='utf-8')
