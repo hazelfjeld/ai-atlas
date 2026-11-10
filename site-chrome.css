@@ -289,6 +289,13 @@ body > .site-mobile-chrome:not([data-page-label]):has(+ .site-chrome .site-chrom
  .site-chrome__theme-toggle{transition:none}
 }
 
+/* Standalone directory shells already own their horizontal and vertical gutters.
+   After moving the shared rail outside <main>, the generic Discover main
+   padding was still stacked on top (30/37px on desktop, 29px on mobile).
+   Keep both directories on the same content baseline as Discover while
+   leaving the real workspace nav and shell widths unchanged. */
+:is(.tech-shell,.playbook-shell)>main{padding:0}
+
 /* Match Discover's first-content position beneath the 78px workspace bar.
    These existing landing pages previously stacked 38-56px of legacy hero
    whitespace on top of their shell padding. Apply one shared 8px rhythm
