@@ -233,9 +233,9 @@ with sync_playwright() as p:
                 ('technology/TECH-0216-pytorch.html', 'Technology profiles', 'Technology profiles'),
             ):
                 page.goto(base + route)
-                # Landing directories use navigation outside the article landmark;
-                # detailed concept/technology pages retain their original structure.
-                landing = route.endswith('/index.html')
+                # Directories and technology profiles share sibling navigation;
+                # concept details retain their nested original layout.
+                landing = route.endswith('/index.html') or route.startswith('technology/TECH-')
                 header = page.locator('body > .site-mobile-chrome' if landing else
                                       'main.term-shell > .site-mobile-chrome')
                 active = page.locator('body > .site-chrome .site-chrome__links a[aria-current="page"]'
@@ -1497,9 +1497,12 @@ with sync_playwright() as p:
                 page.goto(base+route)
                 page.evaluate('(t) => localStorage.setItem("atlas.theme",t)',theme)
                 page.reload()
-                page.wait_for_function("""expected => 
-                    document.querySelector('main.term-shell > .site-mobile-chrome')?.dataset.pageLabel===expected
-                """,arg=title)
+                header_selector = ('body > .site-mobile-chrome'
+                                   if route.startswith('technology/TECH-')
+                                   else 'main.term-shell > .site-mobile-chrome')
+                page.wait_for_function("""params =>
+                    document.querySelector(params.selector)?.dataset.pageLabel===params.title
+                """,arg={'selector':header_selector,'title':title})
                 check(f'{route} {width}px {theme} shared workspace identifies its detail page',
                       page.locator('.site-mobile-chrome').get_attribute('data-page-label')==title
                       and page.locator('.site-chrome__links a').count()==7
@@ -1513,8 +1516,8 @@ with sync_playwright() as p:
                 if width==1280 and theme=='dark':
                     page.screenshot(path=str(out/f'reference-title-{title.lower().replace(" ","-")}-1280-dark.png'))
 
-    # On directory landings navigation is outside <main>; detailed references
-    # retain their original wrapper. Skip must still reach the article without
+    # Directories and technology profiles keep navigation outside <main>;
+    # concept details retain their original wrapper. Skip must still reach the article without
     # tabbing through the seven primary links. Exercise both page families.
     for width in (320,390,768,1280):
         for theme in ('light','dark'):

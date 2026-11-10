@@ -1220,12 +1220,14 @@ try {
 document.addEventListener('DOMContentLoaded', () => {
   const path = typeof window !== 'undefined' ? (window.location?.pathname || '') : '';
   if (!/(?:^|\/)(?:terms\/MLD-\d+|technology\/TECH-\d+)-[^/]+\.html$/.test(path)) return;
-  const bar = document.querySelector('main.term-shell > .site-mobile-chrome:not([data-page-label])');
+  // Both sibling-chrome technology profiles and nested-chrome concept pages
+  // use this one article header, without maintaining two independent paths.
+  const bar = document.querySelector('.site-mobile-chrome:not([data-page-label])');
   const title = document.querySelector('main.term-shell h1')?.textContent?.trim();
   if (bar && title && title.length <= 90) bar.dataset.pageLabel = title;
 });
 
-// A generated reference puts its shared navigation before the article inside
+// A legacy concept reference can put shared navigation before the article inside
 // <main>. A native #main skip would therefore take keyboard users back through
 // the entire rail. After hydration, move only that fragment destination to the
 // existing article hero, leaving the <main> landmark and no-JS hash fallback
