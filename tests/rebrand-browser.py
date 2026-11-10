@@ -229,8 +229,14 @@ with sync_playwright() as p:
                 ('technology/TECH-0216-pytorch.html', 'Technology profiles', 'Technology profiles'),
             ):
                 page.goto(base + route)
-                header = page.locator('main.term-shell > .site-mobile-chrome')
-                active = page.locator('main.term-shell > .site-chrome .site-chrome__links a[aria-current="page"]')
+                # Landing directories use navigation outside the article landmark;
+                # detailed concept/technology pages retain their original structure.
+                landing = route.endswith('/index.html')
+                header = page.locator('body > .site-mobile-chrome' if landing else
+                                      'main.term-shell > .site-mobile-chrome')
+                active = page.locator('body > .site-chrome .site-chrome__links a[aria-current="page"]'
+                                      if landing else
+                                      'main.term-shell > .site-chrome .site-chrome__links a[aria-current="page"]')
                 real_title = header.locator(':scope > .site-mobile-chrome__title')
                 label = header.evaluate("el => getComputedStyle(el, '::before').content")
                 if route.endswith('/index.html'):
@@ -1503,9 +1509,9 @@ with sync_playwright() as p:
                 if width==1280 and theme=='dark':
                     page.screenshot(path=str(out/f'reference-title-{title.lower().replace(" ","-")}-1280-dark.png'))
 
-    # On generated references the shared rail is structurally inside <main>.
-    # Skip must land on the actual article, rather than tabbing through all seven
-    # primary links again. Exercise both directory and detail page families.
+    # On directory landings navigation is outside <main>; detailed references
+    # retain their original wrapper. Skip must still reach the article without
+    # tabbing through the seven primary links. Exercise both page families.
     for width in (320,390,768,1280):
         for theme in ('light','dark'):
             page.set_viewport_size({'width':width,'height':844 if width<=650 else 900})
