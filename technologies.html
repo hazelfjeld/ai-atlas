@@ -93,7 +93,7 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,s
 <p>Search technologies by what they do, where they help, and the tradeoffs to test before committing. Compare up to three profiles side by side, inspect the original evidence labels and follow the documentation.</p>
 </section>
 <p class="tech-warning"><strong>Research caveat:</strong> These are preserved editorial profiles from the prepared November 1, 2026 AI Updates edition, not recent independent product audits or head-to-head benchmarks. <span id="coverage-note">The original catalog contains 300 prepared profiles; only verified published batches are shown.</span> No website-side automatic refresh is active.</p>
-<section aria-label="Technology search">
+<div class="site-js-only"><section aria-label="Technology search">
 <div class="tech-controls">
 <label>SEARCH<input id="tech-search" type="search" placeholder="Try CUDA, agents, low-rank fine-tuning…" autocomplete="off"></label>
 <label>SECTION<select id="tech-section"><option value="">All sections</option></select></label>
@@ -104,10 +104,11 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,s
 <div class="tech-actions"><span id="tech-status" class="tech-status" role="status" aria-live="polite">Loading and verifying profiles…</span><div><button id="compare-button" type="button" disabled>Compare selected (0)</button> <button id="tech-export" type="button" disabled>Export matches ↓</button></div></div>
 <div id="tech-results" class="tech-grid" aria-label="Technology profiles"></div>
 <button id="show-more" type="button" hidden>Show more profiles ↓</button>
-</section>
+</section></div>
+<noscript><section class="site-static-fallback" aria-label="Browse published records without JavaScript"><h2>Browse without JavaScript</h2><p>Search and comparison need JavaScript. The static technology directory and individual profile pages are available without it.</p><div class="site-static-fallback__links"><a href="technology/index.html">Browse all technology profile pages</a><a href="terms/index.html">Explore the concept encyclopedia</a><a href="publication.json">Published catalog manifest</a></div></section></noscript>
 <footer>Preserved source fields · verified content checksums · partial publication. Always consult linked documentation for current API, pricing, security, licensing and support details. <a href="https://github.com/hazelfjeld/ai-atlas">Inspect the source repository</a>. · <a href="about.html">Editorial policy & coverage</a> · <a href="index.html#/sources">Sources & downloads</a></footer>
 </main>
 <dialog id="compare-dialog" aria-labelledby="compare-heading"><div class="compare-head"><h2 id="compare-heading">Compare technologies</h2><button id="compare-close" type="button">Close ✕</button></div><p>Editorial problem-fit considerations, not measured winners.</p><div id="compare-content" class="compare-scroll"></div></dialog>
-<noscript><p>JavaScript is required for search and comparison. Published datasets remain inspectable in the public repository.</p></noscript>
+
 </body>
 </html>

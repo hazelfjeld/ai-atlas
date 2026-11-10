@@ -890,3 +890,23 @@ body:has(.site-chrome) > a.skip:focus{
 }
 /* atlas-shared-introduction-copy:end */
 
+
+/* atlas-scriptless-catalog-fallback:begin */
+/* site-theme.js marks an enhanced document before the body is parsed. When
+   scripts are unavailable, don't leave dead search controls or a loading
+   spinner on Research, Playbooks or the Technology Directory. This fallback
+   reuses one presentation style while preserving genuine static record links. */
+:root:not(.atlas-enhanced) .site-js-only{display:none!important}
+.site-static-fallback{margin:20px 0 26px;padding:18px 20px;border:1px solid var(--line,#dce1d7);
+  border-radius:12px;background:var(--surface,#fff);color:var(--ink,#202b28)}
+.site-static-fallback h2{margin:0 0 8px;font:400 21px/1.3 Georgia,serif;color:inherit}
+.site-static-fallback p{max-width:70ch;margin:0 0 14px;color:var(--muted,#5d6861);line-height:1.6}
+.site-static-fallback__links{display:flex;flex-wrap:wrap;gap:8px}
+.site-static-fallback__links a{display:inline-flex;align-items:center;min-height:44px;box-sizing:border-box;
+  border:1px solid var(--line,#dce1d7);border-radius:8px;padding:8px 12px;
+  background:var(--accent-soft,#e8f0e8);color:var(--ink,#202b28);
+  font-weight:600;font-size:13px;text-decoration:none}
+.site-static-fallback__links a:hover{border-color:var(--accent,#47715a);text-decoration:underline}
+.site-static-fallback__links a:focus-visible{outline:3px solid #b77833;outline-offset:2px}
+@media(max-width:650px){.site-static-fallback{padding:14px 16px}.site-static-fallback__links a{flex:1 1 100%}}
+/* atlas-scriptless-catalog-fallback:end */

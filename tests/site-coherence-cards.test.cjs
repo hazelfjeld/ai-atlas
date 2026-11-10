@@ -681,3 +681,30 @@ test('Research, Playbooks, Technology and daily news share one introduction comp
   }
   assert.ok(fs.readFileSync(path.join(__dirname,'..','downloads/Atlas_Demo_Offline.html'),'utf8').includes(css));
 });
+
+
+test('script-free native catalogs offer source links instead of inert search and loading UI', () => {
+  const block=css.split('/* atlas-scriptless-catalog-fallback:begin */')[1]
+    ?.split('/* atlas-scriptless-catalog-fallback:end */')[0];
+  assert.ok(block, 'Shared script-free card styling is required');
+  assert.match(block, /:root:not\(\.atlas-enhanced\) \.site-js-only\{display:none!important\}/);
+  const routes = {
+    'research.html':['data/papers-01.json','data/papers-06.json','data/alerts-01.json','data/alerts-02.json'],
+    'playbooks.html':['data/playbooks-01.json','data/playbooks-04.json'],
+    'technologies.html':['technology/index.html','terms/index.html']
+  };
+  for(const [route,required] of Object.entries(routes)){
+    const html=fs.readFileSync(path.join(__dirname,'..',route),'utf8');
+    assert.ok(html.includes('<script src="site-theme.js"></script>'),route+' must set shared enhancement state');
+    assert.match(html, /<noscript><section class="site-static-fallback"/,route+' needs native visible fallback');
+    assert.ok(html.includes('class="site-js-only"'),route+' must hide controls when scripts are absent');
+    const fallback=html.match(/<noscript><section class="site-static-fallback"[\s\S]*?<\/section><\/noscript>/);
+    assert.ok(fallback,route+' must expose published source links');
+    for(const href of required){
+      assert.ok(fallback[0].includes('href="'+href+'"'),route+' missing '+href);
+      assert.ok(fs.existsSync(path.join(__dirname,'..',href)),route+' fallback target missing '+href);
+    }
+    assert.ok(!/<noscript><p>JavaScript is (?:needed|required)/.test(html),route+' must not duplicate the fallback');
+  }
+  assert.match(css, /site-static-fallback__links a:focus-visible/);
+});

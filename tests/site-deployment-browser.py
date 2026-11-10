@@ -2268,6 +2268,55 @@ with sync_playwright() as p:
                     lead_page.screenshot(path=str(out/('intro-'+route.split('.')[0]+'-'+scheme+'-'+str(width)+'.png')))
         lead_context.close()
 
+
+    # Without scripting, the same shared native catalogs must never present
+    # an indefinite loading state or controls that cannot work. Readable
+    # source links remain available at 320px through desktop in both themes.
+    for scheme in ('light','dark'):
+        static_context = browser.new_context(java_script_enabled=False, color_scheme=scheme)
+        static_page = static_context.new_page()
+        for width in (320,390,768,1280):
+            static_page.set_viewport_size({'width':width,'height':844})
+            static_page.goto(base+'index.html')
+            for route, linked_resource in (
+                ('research.html','data/papers-01.json'),
+                ('playbooks.html','data/playbooks-01.json'),
+                ('technologies.html','technology/index.html'),
+            ):
+                static_page.goto(base+route)
+                fallback=static_page.locator('section.site-static-fallback')
+                check('Published script-free fallback '+route+' '+scheme+' '+str(width),
+                      fallback.count()==1 and fallback.is_visible()
+                      and not static_page.locator('.site-js-only').first.is_visible()
+                      and static_page.locator('.site-chrome__brand').is_visible()
+                      and fallback.locator('a[href="'+linked_resource+'"]').is_visible()
+                      and fallback.evaluate("""el => {
+                        const r=el.getBoundingClientRect(), body=document.documentElement.clientWidth;
+                        return r.width>0 && r.left>=-1 && r.right<=body+1;
+                      }"""))
+                if width in (390,1280):
+                    static_page.screenshot(path=str(out/('scriptless-'+route.split('.')[0]+'-'+scheme+'-'+str(width)+'.png')))
+                if width==390:
+                    response=static_page.goto(base+linked_resource)
+                    check('Script-free published resource reachable '+route+' '+scheme,
+                          response is not None and response.status < 400)
+        static_context.close()
+
+    # Enhancement must still expose fully functional search interfaces.
+    for route, search_control in (
+        ('research.html','.controls #query'),
+        ('playbooks.html','.playbook-tools #search'),
+        ('technologies.html','.tech-controls #tech-search'),
+    ):
+        live_page=browser.new_page(viewport={'width':390,'height':844})
+        live_page.goto(base+route)
+        live_page.locator(search_control).wait_for(state='visible')
+        check('Enhanced catalog keeps real search '+route,
+              live_page.locator('html.atlas-enhanced').count()==1
+              and live_page.locator(search_control).is_visible()
+              and live_page.locator('section.site-static-fallback').count()==0)
+        live_page.close()
+
     check('no application runtime exceptions', not errors)
     browser.close()
 (out / 'report.json').write_text(json.dumps({'base':base, 'checks':checks, 'checks_passed':len(checks), 'errors':errors}, indent=2), encoding='utf-8')
