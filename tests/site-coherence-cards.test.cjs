@@ -92,7 +92,7 @@ test('Research shares the heading-first reading order of Discover and Playbooks'
   const home = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
   const playbooks = fs.readFileSync(path.join(__dirname, '..', 'playbooks.html'), 'utf8');
   const hero = research.indexOf('<section class="hero" id="main" tabindex="-1">');
-  const nav = research.indexOf('<nav class="research-local-nav" aria-label="Research views">');
+  const nav = research.indexOf('<nav class="research-local-nav discovery-topics" aria-label="Research views">');
   const notice = research.indexOf('<div class="notice">', nav);
   assert.ok(hero > 0 && hero < nav && nav < notice,
     'Research must introduce the view before offering contextual navigation, like other landings');
@@ -813,5 +813,20 @@ test('About and both generated catalog directories share real desktop workspace 
     assert.ok(menuEnd >= 0 && menuEnd < headingAt && headingAt < searchAt,
       route + ': heading follows mobile menu and precedes real search link');
     assert.ok(html.includes('<nav class="site-chrome'), route + ': shared desktop rail retained');
+  }
+});
+
+test('research contextual views reuse Discover horizontal topic navigation', () => {
+  const research = fs.readFileSync(path.join(__dirname, '..', 'research.html'), 'utf8');
+  const brand = fs.readFileSync(path.join(__dirname, '..', 'brand.css'), 'utf8');
+  assert.ok(research.includes('<nav class="research-local-nav discovery-topics" aria-label="Research views">'),
+    'Research should share the actual Discover topic-strip component');
+  assert.match(brand, /\.discovery-topics\{[^}]*overflow:auto/);
+  assert.match(research, /\.research-local-nav a\{[^}]*flex:0 0 auto/);
+  assert.match(research, /\.research-local-nav a\{[^}]*min-height:44px/);
+  assert.ok(!research.includes('flex-wrap:wrap;gap:8px;margin:16px 0 24px;overflow:visible'),
+    'Avoid a separate multirow Research navigation design');
+  for (const href of ['#papers', '#alerts', '#progress']) {
+    assert.ok(research.includes('href="' + href + '"'), 'Preserve deep link ' + href);
   }
 });

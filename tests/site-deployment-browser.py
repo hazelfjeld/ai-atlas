@@ -989,6 +989,17 @@ with sync_playwright() as p:
           and mobile_research.locator('.research-search-link').is_visible())
     check('320px research page has no horizontal overflow',
           mobile_research.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'))
+    check('research views reuse the single-row Discover topic strip at 320px',
+          mobile_research.evaluate("""() => {
+            const tabs = document.querySelector('nav.research-local-nav.discovery-topics');
+            if (!tabs) return false;
+            const links = [...tabs.querySelectorAll('a[href]')];
+            return links.length === 3 &&
+              getComputedStyle(tabs).overflowX === 'auto' &&
+              tabs.scrollWidth > tabs.clientWidth &&
+              new Set(links.map(a => Math.round(a.getBoundingClientRect().top))).size === 1 &&
+              links.every(a => a.getBoundingClientRect().height >= 44);
+          }"""))
     check('research primary mobile menu matches the other standalone pages',
           mobile_research.locator('.site-mobile-chrome__menu > a:not(.site-mobile-chrome__brand)').all_text_contents()
           == ['Discover', 'What’s New Today', 'Concept dictionary', 'Technology profiles',
