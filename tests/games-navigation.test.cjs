@@ -653,7 +653,10 @@ test('all 1345 concept details share the same script-free primary and secondary 
     .replace('<details class="site-chrome__more" open>', '<details class="site-chrome__more">')
     .replace('<details class="site-mobile-chrome__more" open>', '<details class="site-mobile-chrome__more">')
     .replaceAll('href="../terms/index.html" aria-current="location">Concept encyclopedia',
-                'href="../terms/index.html">Concept encyclopedia');
+                'href="../terms/index.html">Concept encyclopedia')
+    // Detail pages remain members of the parent dictionary workspace.
+    .replaceAll('href="../index.html#/dictionary">Concept dictionary',
+                'href="../index.html#/dictionary" aria-current="page">Concept dictionary');
   const guides = JSON.parse(read('content/term-guides.json'));
   assert.equal(Object.keys(guides).length, 57);
   const manifest = JSON.parse(read('terms/manifest.json'));
@@ -680,7 +683,7 @@ test('all 1345 concept details share the same script-free primary and secondary 
     assert.equal((links.match(/aria-current="page"/g) || []).length, 1, id);
   }
   const generator = read('scripts/build_term_pages.py');
-  assert.ok(generator.includes("directory_nav = render_directory_nav('../', 'Concept dictionary', mobile_brand=True, native_secondary=True, mobile_secondary=True, secondary_current=('encyclopedia' if path == 'terms/index.html' else None), page_label=('Concept encyclopedia' if path == 'terms/index.html' else None), topbar_title=('Concept encyclopedia' if path == 'terms/index.html' else None))"));
+  assert.ok(generator.includes("directory_nav = render_directory_nav('../', (None if path == 'terms/index.html' else 'Concept dictionary'), mobile_brand=True, native_secondary=True, mobile_secondary=True, secondary_current=('encyclopedia' if path == 'terms/index.html' else None), page_label=('Concept encyclopedia' if path == 'terms/index.html' else None), topbar_title=('Concept encyclopedia' if path == 'terms/index.html' else None))"));
   assert.ok(generator.includes('directory_css = DIRECTORY_MOBILE_CSS'));
 });
 
@@ -801,7 +804,7 @@ test('standalone tablets use Discover’s fixed left navigation rail', () => {
 
 test('both generated catalog directories share Discover navigation and the native mobile menu', () => {
   const canonical = ['Discover','What’s New Today','Concept dictionary','Technology profiles','Games','Playbooks','About'];
-  for (const [route,active] of [['terms/index.html','Concept dictionary'],['technology/index.html','Technology profiles']]) {
+  for (const [route,active] of [['terms/index.html','Concept encyclopedia'],['technology/index.html','Technology profiles']]) {
     const html = read(route);
     assert.match(html, /<link rel="stylesheet" href="\.\.\/site-chrome\.css">/);
     assert.match(html, /<script src="\.\.\/site-theme\.js"><\/script>/);
@@ -824,13 +827,22 @@ test('both generated catalog directories share Discover navigation and the nativ
       const labels = [...markup.matchAll(/<a href="\.\.\/[^"]+"(?: aria-current="page")?>([^<]+)<\/a>/g)].map(m=>m[1]);
       assert.deepEqual(labels, canonical, route);
       const selected = markup.match(/<a href="\.\.\/[^"]+" aria-current="page">([^<]+)<\/a>/g) || [];
-      assert.equal(selected.length, 1, route);
-      assert.ok(selected[0].endsWith('>' + active + '</a>'), route);
+      assert.equal(selected.length, route === 'terms/index.html' ? 0 : 1, route);
+      if (route === 'terms/index.html') {
+        const fullNav = markup === desktopPrimary ? desktop : menus[0][1];
+        assert.equal((fullNav.match(/aria-current="/g) || []).length, 1,
+          'Only the active encyclopedia destination may be current');
+        assert.match(fullNav, /href="\.\.\/terms\/index\.html" aria-current="location">Concept encyclopedia<\/a>/);
+        assert.ok(markup.includes('href="../index.html#/dictionary">Concept dictionary</a>'),
+          'The canonical dictionary parent link stays navigable');
+      } else {
+        assert.ok(selected[0].endsWith('>' + active + '</a>'), route);
+      }
     }
     assert.ok(html.includes('THE FRONTIER, IN CONTEXT'), route);
   }
   const termGenerator=read('scripts/build_term_pages.py'), techGenerator=read('scripts/build_seo.py');
-  assert.ok(termGenerator.includes("render_directory_nav('../', 'Concept dictionary', mobile_brand=True, native_secondary=True, mobile_secondary=True, secondary_current=('encyclopedia' if path == 'terms/index.html' else None), page_label=('Concept encyclopedia' if path == 'terms/index.html' else None), topbar_title=('Concept encyclopedia' if path == 'terms/index.html' else None))"));
+  assert.ok(termGenerator.includes("render_directory_nav('../', (None if path == 'terms/index.html' else 'Concept dictionary'), mobile_brand=True, native_secondary=True, mobile_secondary=True, secondary_current=('encyclopedia' if path == 'terms/index.html' else None), page_label=('Concept encyclopedia' if path == 'terms/index.html' else None), topbar_title=('Concept encyclopedia' if path == 'terms/index.html' else None))"));
   assert.ok(techGenerator.includes("render_directory_nav(prefix, 'Technology profiles', mobile_brand=True, native_secondary=True, mobile_secondary=True, page_label=('Technology profiles' if path == 'technology/index.html' else None), topbar_title=('Technology profiles' if path == 'technology/index.html' else None))"));
   assert.ok(read('scripts/site_chrome.py').includes('DIRECTORY_MOBILE_CSS'));
   assert.match(read('site-chrome.css'), /\.site-mobile-chrome__menu a\{[^}]*min-height:44px/);
@@ -1234,7 +1246,15 @@ test('generated reference workspace labels use the selected canonical rail on fi
     for (const route of routes) {
       const html = read(route);
       assert.match(html, /class="directory-mobile-topbar site-mobile-chrome"/, route);
-      assert.ok(html.includes('href="../index.html#/' + view + '" aria-current="page">' + label + '</a>'), route);
+      if (route === 'terms/index.html') {
+        assert.ok(html.includes('href="../index.html#/dictionary">Concept dictionary</a>'),
+          'The primary dictionary link stays available');
+        assert.equal((html.match(/href="\.\.\/index\.html#\/dictionary" aria-current="page"/g) || []).length, 0);
+        assert.equal((html.match(/href="\.\.\/terms\/index\.html" aria-current="location"/g) || []).length, 2,
+          'Both native navigation landmarks must identify the encyclopedia only');
+      } else {
+        assert.ok(html.includes('href="../index.html#/' + view + '" aria-current="page">' + label + '</a>'), route);
+      }
       assert.equal((html.match(/class="site-chrome__links"/g) || []).length, 1, route);
     }
   }
