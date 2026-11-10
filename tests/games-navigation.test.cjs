@@ -548,8 +548,14 @@ test('research snapshot uses the shared mobile menu and retains contextual resea
   assert.ok(desktop.includes('class="site-chrome__brand" href="index.html#/overview"'));
   assert.match(desktop, /href="index\.html#\/overview" aria-current="location">Discover<\/a>/,
     'Research is a secondary Discover destination, not an unselected orphan section');
-  assert.equal((desktop.match(/aria-current=/g) || []).length, 1, 'exactly one desktop parent');
-  assert.equal((nav.match(/aria-current=/g) || []).length, 1, 'exactly one mobile parent');
+  for (const region of [desktop, nav]) {
+    assert.equal((region.match(/aria-current=/g) || []).length, 2,
+      'Research must identify exactly its Discover parent and selected secondary destination');
+    assert.equal((region.match(/href="index.html#\\/overview" aria-current="location">Discover<\\/a>/g) || []).length, 1,
+      'Discover is selected as the canonical parent exactly once');
+    assert.equal((region.match(/href="index.html#\\/papers" aria-current="location">Research library<\\/a>/g) || []).length, 1,
+      'Research library is selected in the shared secondary disclosure exactly once');
+  }
   assert.match(nav, /href="index\.html#\/overview" aria-current="location">Discover<\/a>/);
   assert.ok(read('scripts/site_chrome.py').includes('"research-site-chrome", "Discover", "location", True)'),
     'canonical header generator must own the active parent, not a hand-edited page');
