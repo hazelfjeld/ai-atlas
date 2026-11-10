@@ -99,6 +99,35 @@ with sync_playwright() as p:
                 check('script-free skip above shared chrome '
                       + scheme + ' ' + str(width) + ' ' + route, visible)
         no_script.close()
+    # The daily archive used to display an endless "Checking editions" message
+    # and disabled filters to script-free visitors, unlike Research/Playbooks/Tech.
+    # Its native fallback must retain the same shared site navigation and point
+    # at immutable source records rather than pretending there is a live feed.
+    for scheme in ('light','dark'):
+        archive_context = browser.new_context(java_script_enabled=False, color_scheme=scheme)
+        archive_page = archive_context.new_page()
+        for width in (320,390,768,1280):
+            archive_page.set_viewport_size({'width':width,'height':844})
+            archive_page.goto(base+'index.html')
+            # Cross-page navigation is deliberately a real click, not just a URL probe.
+            if width <= 650:
+                archive_page.locator('#discover-mobile-nav > summary').click()
+                archive_page.locator('#discover-mobile-nav .site-mobile-chrome__menu a[href="whats-new.html"]').click()
+            else:
+                archive_page.locator('#navigation a[href="whats-new.html"]').click()
+            fallback = archive_page.locator('#scriptfree-daily-archive')
+            check('script-free archive has published records '+scheme+' '+str(width),
+                  fallback.is_visible()
+                  and fallback.locator('a[href="data/daily/index.json"]').is_visible()
+                  and fallback.locator('a[href="data/daily/editions/2026-11-09-v1.json"]').is_visible())
+            check('script-free archive hides misleading loaders and dead filters '+scheme+' '+str(width),
+                  archive_page.locator('#edition-status').is_hidden()
+                  and archive_page.locator('#edition-content').is_hidden()
+                  and archive_page.locator('main > .panel').is_hidden()
+                  and archive_page.locator('.site-chrome__links a[href="whats-new.html"]').count()==1
+                  and archive_page.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'))
+            archive_page.screenshot(path=str(out / ('daily-scriptfree-'+scheme+'-'+str(width)+'.png')), full_page=False)
+        archive_context.close()
     # Check actual Discover-to-editorial transitions, not CSS similarity alone.
     for width in (320, 390, 768, 1280):
         page.set_viewport_size({'width':width, 'height':844})

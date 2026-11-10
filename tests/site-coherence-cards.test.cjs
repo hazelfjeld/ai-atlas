@@ -6,6 +6,28 @@ const path = require('node:path');
 const css = fs.readFileSync(path.join(__dirname, '..', 'site-chrome.css'), 'utf8');
 
 
+test('daily archive shares script-free collection fallback instead of trapping readers in loading states', () => {
+  const archive=fs.readFileSync(path.join(__dirname,'..','whats-new.html'),'utf8');
+  const published=JSON.parse(fs.readFileSync(path.join(__dirname,'..','data/daily/index.json'),'utf8'));
+  const block=archive.match(/<noscript><section class="site-static-fallback" id="scriptfree-daily-archive"[\\s\\S]*?<\\/section><\\/noscript>/)?.[0];
+  assert.ok(block,'Archive must expose the shared script-free collection fallback');
+  assert.match(block,/href="data\\/daily\\/index\\.json"/,'Always-current edition register is available');
+  assert.match(block,/not a live news feed/,'Do not present older snapshots as fresh news');
+  assert.match(block,/href="about\\.html"/,'Coverage and editorial policy stay available');
+  for (const date of ['2026-11-07','2026-11-08','2026-11-09']) {
+    assert.ok(published.editions.some(e=>e.date===date && e.revision===1),
+      'No fabricated archived edition link: '+date);
+    assert.ok(block.includes('href="data/daily/editions/'+date+'-v1.json"'),
+      'Missing immutable archive link: '+date);
+  }
+  const style=archive.match(/<noscript><style>([\\s\\S]*?)<\\/style><\\/noscript>/)?.[1];
+  assert.ok(style && style.includes('#edition-status') && style.includes('#edition-content')
+    && style.includes('main > .panel') && style.includes('.edition-footnotes'),
+    'Only without scripts, hide misleading checking statuses and nonfunctional controls');
+  assert.ok(!style.includes('.site-chrome') && !style.includes('.site-mobile-chrome'),
+    'Keep real shared navigation and search routes reachable in no-JS mode');
+});
+
 test('Research shares the heading-first reading order of Discover and Playbooks', () => {
   const research = fs.readFileSync(path.join(__dirname, '..', 'research.html'), 'utf8');
   const home = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
