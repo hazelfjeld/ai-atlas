@@ -239,8 +239,12 @@ def render_standalone_nav(path):
         "catalog-review.html": "Catalog review",
         "hardware-review.html": "Hardware evidence",
     }.get(path, selected)
+    # A secondary destination is the current page, not Discover itself.
+    # Keep the canonical Discover link, but never announce two current links
+    # inside the same native mobile or desktop navigation landmark.
+    secondary_current = {"demo.html": "demo", "research.html": "papers"}.get(path)
     markup = render_directory_nav(
-        "", selected,
+        "", (None if secondary_current else selected),
         mobile_classes=classes(mobile, "site-mobile-chrome"),
         details_classes=classes(details, "site-mobile-chrome__nav"), details_id=details_id,
         toggle_classes=classes(toggle, "site-mobile-chrome__toggle"),
@@ -251,7 +255,7 @@ def render_standalone_nav(path):
         desktop_classes="site-chrome " + desktop, labeled=labeled, current_kind=kind,
         page_label=page_title, topbar_title=page_title,
         mobile_brand=True, native_secondary=True, mobile_secondary=True,
-        secondary_current={"demo.html": "demo", "research.html": "papers"}.get(path),
+        secondary_current=secondary_current,
     )
     # Research's main landmark starts between its two headers, but the native
     # skip destination belongs on the subsequent article hero.

@@ -129,8 +129,8 @@ with sync_playwright() as p:
     page.locator('.breadcrumb-links').get_by_role('link',name='Technologies',exact=True).click()
     expected_profiles=json.loads((Path(__file__).resolve().parents[1]/'publication.json').read_text())['published_counts']['technologies']
     check('technology directory exposes every checksummed crawlable profile', expected_profiles>=300 and page.locator('.reference-grid a').count()==expected_profiles)
-    # Research is a secondary Discover route: the parent should be selected
-    # on first paint, while the page's own label still identifies the library.
+    # Research is a secondary Discover route: the parent remains a live link,
+    # but only the Research destination should be announced as current.
     page.set_viewport_size({'width':768,'height':900})
     page.goto(base+'research.html')
     check('Research uses a single Discover-style article heading, without a stale legacy masthead',
@@ -140,14 +140,12 @@ with sync_playwright() as p:
     check('Research section label is present without JavaScript',
           page.locator('.research-mobile-topbar').get_attribute('data-page-label')=='Research library'
           and has_visible_workspace_title(page.locator('.research-mobile-topbar'), 'Research library'))
-    check('Research identifies its canonical Discover parent and active secondary link without JavaScript',
+    check('Research has one current native section per navigation landmark without JavaScript',
           page.locator('.site-chrome__links a').count()==7
-          and page.locator('.site-chrome__links a[aria-current="location"]').count()==1
-          and page.locator('.site-chrome__links a[aria-current="location"]').inner_text()=='Discover'
+          and page.locator('.site-chrome__links a[aria-current]').count()==0
           and page.locator('.site-chrome__more[open] a[aria-current="location"]').count()==1
           and page.locator('.site-chrome__more[open] a[aria-current="location"]').inner_text()=='Research library'
-          and page.locator('.research-menu-panel > a[aria-current="location"]').count()==1
-          and page.locator('.research-menu-panel > a[aria-current="location"]').inner_text()=='Discover'
+          and page.locator('.research-menu-panel > a[aria-current]').count()==0
           and page.locator('.research-menu-panel .site-mobile-chrome__more[open] a[aria-current="location"]').count()==1
           and page.locator('.research-menu-panel .site-mobile-chrome__more[open] a[aria-current="location"]').inner_text()=='Research library')
 
@@ -1427,8 +1425,8 @@ with sync_playwright() as p:
                 overflow: document.documentElement.scrollWidth>innerWidth
             })""")
             check(f'guided demo {width}px {theme} reuses Discover primary navigation',
-                  frame['desktop']==canonical and frame['activeDesktop']=='Discover'
-                  and frame['activeMobile']=='Discover' and frame['pageLabel']=='Guided demo'
+                  frame['desktop']==canonical and frame['activeDesktop']=='Guided professor demo'
+                  and frame['activeMobile']=='Guided professor demo' and frame['pageLabel']=='Guided demo'
                   and frame['theme']==theme and frame['menuVisible']==(width<=650)
                   and frame['railVisible']==(width>650) and not frame['overflow'])
             check(f'guided demo {width}px {theme} honors saved theme on real content',

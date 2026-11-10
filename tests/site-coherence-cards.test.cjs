@@ -59,6 +59,34 @@ test('daily archive shares script-free collection fallback instead of trapping r
     'Keep shared navigation and its real search route usable');
 });
 
+
+test('native Research and demo navigation expose one current secondary route, not two competing active links', () => {
+  const generator = fs.readFileSync(path.join(__dirname, '..', 'scripts/site_chrome.py'), 'utf8');
+  assert.ok(generator.includes('secondary_current = {"demo.html": "demo", "research.html": "papers"}.get(path)'));
+  assert.ok(generator.includes('None if secondary_current else selected'),
+    'The common generator must leave Discover clickable, not mark it current on secondary destinations');
+  for (const [route, label, href] of [
+    ['research.html', 'Research library', 'index.html#/papers'],
+    ['demo.html', 'Guided professor demo', 'demo.html']
+  ]) {
+    const html = fs.readFileSync(path.join(__dirname, '..', route), 'utf8');
+    for (const navClass of ['site-chrome', 'site-mobile-chrome__menu']) {
+      const start = navClass === 'site-chrome'
+        ? html.indexOf('<nav class="site-chrome ')
+        : html.indexOf('site-mobile-chrome__menu" aria-label="AI Updates sections">');
+      assert.ok(start > 0, route + ' missing ' + navClass);
+      const end = html.indexOf('</nav>', start);
+      const nav = html.slice(start, end);
+      const currents = [...nav.matchAll(/<a href="([^"]+)" aria-current="([^"]+)">([^<]+)<\/a>/g)];
+      assert.equal(currents.length, 1, route + ' ' + navClass + ' must expose exactly one current destination');
+      assert.deepEqual([currents[0][1], currents[0][2], currents[0][3]],
+        [href, 'location', label], route + ' current section mismatch');
+      assert.match(nav, /<a href="index\.html#\/overview">Discover<\/a>/,
+        'Discover must remain a usable parent link');
+    }
+  }
+});
+
 test('Research shares the heading-first reading order of Discover and Playbooks', () => {
   const research = fs.readFileSync(path.join(__dirname, '..', 'research.html'), 'utf8');
   const home = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');

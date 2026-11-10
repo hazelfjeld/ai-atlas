@@ -244,14 +244,14 @@ with sync_playwright() as p:
                 check('About mobile secondary navigation reaches live Research library',
                       page.locator('#navigation a[data-view="papers"][aria-current="page"]').count() == 1)
 
-    # A native Research URL is a real destination, not merely the Discover
-    # parent. Its existing shared desktop/mobile rail should identify both
-    # the parent workspace and its selected secondary section on first paint.
+    # A native Research URL is a real secondary destination. Both native
+    # navigation landmarks should mark only that destination as current,
+    # preserving the Discover parent as an ordinary usable link.
     for width in (320, 390, 768, 1280):
         page.set_viewport_size({'width': width, 'height': 844 if width <= 650 else 900})
         page.goto(base + 'research.html')
         check('Research canonical secondary identity at ' + str(width),
-              page.locator('.site-chrome__links a[aria-current="location"][href="index.html#/overview"]').count() == 1
+              page.locator('.site-chrome__links a[aria-current]').count() == 0
               and page.locator('.site-chrome__more[open] a[aria-current="location"][href="index.html#/papers"]').count() == 1
               and page.locator('.site-mobile-chrome__more[open] a[aria-current="location"][href="index.html#/papers"]').count() == 1
               and page.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'))
@@ -1030,8 +1030,8 @@ with sync_playwright() as p:
           == ['Discover', 'What’s New Today', 'Concept dictionary', 'Technology profiles',
               'Games', 'Playbooks', 'About']
           and mobile_research.locator('.research-local-nav').is_visible()
-          and mobile_research.locator('.research-site-chrome .site-chrome__links [aria-current="location"]').count() == 1
-          and mobile_research.locator('.research-site-chrome .site-chrome__links [aria-current="location"]').inner_text() == 'Discover'
+          and mobile_research.locator('.research-site-chrome .site-chrome__links [aria-current]').count() == 0
+          and mobile_research.locator('.research-site-chrome .site-chrome__more a[aria-current="location"]').inner_text() == 'Research library'
           and mobile_research.locator('.shell > aside').count() == 0)
     published_counts = mobile_research.request.get(base + 'publication.json').json()['published_counts']
     check('research tabs retain accurate record counts and notice matches publication manifest',
