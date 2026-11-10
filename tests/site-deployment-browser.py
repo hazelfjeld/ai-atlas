@@ -1932,7 +1932,7 @@ with sync_playwright() as p:
     for route, expected, from_selected_link in (
         ('whats-new.html', 'What’s New Today', False),
         ('about.html', 'About', False),
-        ('terms/index.html', 'Concept dictionary', True),
+        ('terms/index.html', 'Concept encyclopedia', False),
         ('technology/TECH-0216-pytorch.html', 'Technology profiles', True),
     ):
         first_paint.goto(base + route)
