@@ -1778,7 +1778,7 @@ with sync_playwright() as p:
         page.evaluate("(chosen) => localStorage.setItem('atlas.theme', chosen)", theme)
         for width in (651, 768, 1280):
             page.set_viewport_size({'width':width, 'height':900})
-            for route in ('about.html', 'technologies.html', 'research.html'):
+            for route in ('about.html', 'technologies.html', 'playbooks.html', 'research.html'):
                 page.goto(base + route)
                 if theme == 'light' and width == 651 and route == 'about.html':
                     print('TABLET NAV DIAGNOSTICS', page.evaluate("""() => {
@@ -1820,7 +1820,7 @@ with sync_playwright() as p:
                                       : location.pathname.endsWith('/research.html')
                                       ? (nav.parentElement === document.querySelector('.shell')
                                          && main.parentElement === nav.parentElement && !main.contains(nav))
-                                      : nav.closest('main') === main)
+                                      : (nav.parentElement === main.parentElement && !main.contains(nav)))
                                   && getComputedStyle(nav.querySelector('.site-chrome__links')).flexDirection === 'column'
                                   && links.length === 7
                                   && Math.max(...tops) - Math.min(...tops) > 200
