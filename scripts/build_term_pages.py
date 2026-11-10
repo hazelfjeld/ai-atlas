@@ -33,10 +33,13 @@ def section(title, body, extra=''):
     return f'<section class="detail-block {extra}"><h2>{e(title)}</h2>{body}</section>'
 
 
-def shell(title, body, path, description, structured=None, *, native_concept_article=False):
+def shell(title, body, path, description, structured=None, *, native_concept_article=False, static_mobile_more=False):
     # Every concept detail URL shares the native, script-free article skip
     # and navigation source used by the technology directories and profiles.
-    directory_nav = render_directory_nav('../', 'Concept dictionary', mobile_brand=True, native_secondary=True, mobile_secondary=(path == 'terms/index.html'), secondary_current=('encyclopedia' if path == 'terms/index.html' else None))
+    # Expanded authored guides now ship the same mobile secondary disclosure
+    # without scripts. Preserve unchanged basic records during this bounded
+    # migration; their remaining pages are the next build rollout target.
+    directory_nav = render_directory_nav('../', 'Concept dictionary', mobile_brand=True, native_secondary=True, mobile_secondary=(path == 'terms/index.html' or static_mobile_more), secondary_current=('encyclopedia' if path == 'terms/index.html' else None))
     directory_css = DIRECTORY_MOBILE_CSS
     directory_assets = '<link rel="stylesheet" href="../site-chrome.css"><script src="../site-theme.js"></script>'
     heading_css = '' if path == 'terms/index.html' else '.term-shell h1{font-size:clamp(32px,6vw,58px)}'
@@ -85,7 +88,7 @@ def main():
         body += f'<p><a href="../index.html#/dictionary?record={quote(r["id"])}">Open original record, export or annotate →</a></p>'
         path = term_path(r)
         structured = [{'@context':'https://schema.org', '@type':'DefinedTerm', '@id':absolute(path)+'#term', 'name':r['term'], 'termCode':r['id'], 'description':r['definition'], 'url':absolute(path), 'inDefinedTermSet':{'@type':'DefinedTermSet', 'name':'AI Updates Concept Dictionary', 'url':absolute('terms/index.html')}}, breadcrumbs([('AI Updates','index.html'), ('Concept dictionary','terms/index.html'), (r['term'],path)])]
-        blob = shell(r['term'], body, path, (r['term'] + ': ' + r['definition'])[:170], structured, native_concept_article=True).encode('utf-8')
+        blob = shell(r['term'], body, path, (r['term'] + ': ' + r['definition'])[:170], structured, native_concept_article=True, static_mobile_more=bool(guide)).encode('utf-8')
         (ROOT / path).write_bytes(blob)
         manifest[r['id']] = {'path': path, 'sha256': hashlib.sha256(blob).hexdigest(), 'expanded': bool(guide)}
     (out / 'manifest.json').write_bytes((json.dumps(manifest, indent=2) + '\n').encode())

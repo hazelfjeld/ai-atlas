@@ -1975,6 +1975,27 @@ with sync_playwright() as p:
                           && el.querySelector('a[download]')?.getAttribute('href') === 'downloads/Atlas_Demo_Offline.html'"""))
     script_free_more.close()
 
+    # Expanded concept guides now have the same eight native mobile links as
+    # technology profiles and directories, with no JavaScript whatsoever.
+    for color in ('light', 'dark'):
+        for width in (320, 390):
+            guide_context = browser.new_context(java_script_enabled=False,
+                color_scheme=color, viewport={'width':width, 'height':844},
+                reduced_motion='reduce')
+            guide_page = guide_context.new_page()
+            guide_page.goto(base + 'terms/MLD-0002-ablation-study.html')
+            menu = guide_page.locator('details.site-mobile-chrome__nav')
+            menu.locator(':scope > summary').click()
+            extras = menu.locator('details.site-mobile-chrome__more')
+            check('expanded guide script-free More at ' + color + ' ' + str(width),
+                  extras.count() == 1 and extras.locator('summary').is_visible())
+            extras.locator('summary').click()
+            check('expanded guide script-free eight secondary routes at ' + color + ' ' + str(width),
+                  extras.evaluate("(el) => el.open && el.querySelectorAll('a').length === 8")
+                  and extras.locator('a[href="../terms/index.html"]').is_visible())
+            guide_page.screenshot(path=str(out / ('guide-static-more-' + color + '-' + str(width) + '.png')))
+            guide_context.close()
+
     # Generated individual references render the shared desktop rail at
     # DOMContentLoaded. Their mobile drawer must clone it AFTER it exists:
     # earlier ordering silently omitted all eight routes on both families.
