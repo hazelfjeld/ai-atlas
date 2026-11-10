@@ -561,7 +561,7 @@ test('generated detail mobile More sections clones the completed shared desktop 
     const html = fs.readFileSync(path.join(__dirname, '..', detail), 'utf8');
     assert.match(html, /class="site-mobile-chrome__menu"/);
     assert.match(html, /class="site-chrome__links"/);
-    const extras = html.match(/<details class="site-mobile-chrome__more">([\\s\\S]*?)<\\/details>/g) || [];
+    const extras = html.match(/<details class="site-mobile-chrome__more">([\s\S]*?)<\/details>/g) || [];
     assert.equal(extras.length, 1, detail + ' includes exactly one native mobile disclosure');
     assert.equal((extras[0].match(/<a href=/g) || []).length, 8,
       detail + ' keeps all eight canonical secondary destinations without scripts');
