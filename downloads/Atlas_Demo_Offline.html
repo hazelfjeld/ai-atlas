@@ -587,16 +587,6 @@ body:has(.site-chrome){padding-top:78px}
   color:var(--ink);
 }
 
-/* Research's shared desktop rail is a sibling of the article landmark, as on
-   the daily archive and reference directories. Match its inner gutters to
-   the existing article padding; hide/show remains governed by shared CSS. */
-@media (min-width:1101px){
- .shell > .site-chrome.research-site-chrome{margin-inline:44px;width:calc(100% - 88px)}
-}
-@media (min-width:651px) and (max-width:1100px){
- .shell > .site-chrome.research-site-chrome{margin-inline:26px;width:calc(100% - 52px)}
-}
-
 /* One desktop reading frame shared by existing editorial and reference families.
    Discover remains the shell reference; the wider daily edition and playable
    Games layouts retain their distinct content widths. Mobile stays unchanged. */
