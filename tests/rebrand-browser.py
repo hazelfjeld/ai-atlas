@@ -380,12 +380,18 @@ with sync_playwright() as p:
                 page.goto(base + route)
                 check(f'{route} {width}px {theme} native article target follows shared rail',
                       page.evaluate("""() => {
-                          const main=document.querySelector('main.term-shell');
+                          const main=document.querySelector('body > main.term-shell');
                           const target=main?.querySelector(':scope > header.hero');
-                          const rail=main?.querySelector('nav.site-chrome');
-                          return !!main && !!target && !!rail && !main.hasAttribute('id') &&
+                          const rail=document.querySelector('body > nav.site-chrome');
+                          const mobile=document.querySelector('body > .site-mobile-chrome');
+                          return !!main && !!target && !!rail && !!mobile &&
+                            !main.hasAttribute('id') && !main.contains(rail) &&
+                            document.querySelectorAll('main.term-shell').length===1 &&
+                            document.querySelectorAll('nav.site-chrome').length===1 &&
+                            document.querySelectorAll('.site-mobile-chrome').length===1 &&
                             target.id==='main' && target.tabIndex===-1 &&
-                            !!(rail.compareDocumentPosition(target) & Node.DOCUMENT_POSITION_FOLLOWING);
+                            !!(rail.compareDocumentPosition(main) & Node.DOCUMENT_POSITION_FOLLOWING) &&
+                            !!(mobile.compareDocumentPosition(main) & Node.DOCUMENT_POSITION_FOLLOWING);
                       }"""))
                 page.locator('a.skip').focus()
                 page.keyboard.press('Enter')
