@@ -37,6 +37,8 @@
 .site-mobile-chrome{display:none}
 @media (max-width:650px){
 .site-mobile-chrome{display:flex;align-items:center;gap:12px;position:relative;z-index:5}
+/* Accessible desktop-only workspace titles are real text, not visual pseudo-content. */
+.site-mobile-chrome__title{display:none}
 .site-mobile-chrome__nav{margin:0;flex:0 0 44px}
 .site-mobile-chrome__toggle{display:grid;place-items:center;list-style:none;width:44px;min-height:44px;cursor:pointer;background:var(--surface,#fff);border:1px solid var(--line,#dce1d7);border-radius:9px;color:var(--ink,#202b28);font-size:20px;line-height:1}
 .site-mobile-chrome__toggle::-webkit-details-marker{display:none}
@@ -214,6 +216,11 @@ body:has(.site-chrome){padding-top:78px}
   content:"AI Updates";display:block;flex:1;min-width:0;
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
   font-size:13px;font-weight:550;color:var(--ink,#18211e)
+}
+.site-mobile-chrome:has(> .site-mobile-chrome__title)::before{display:none}
+.site-mobile-chrome__title{
+  display:block;flex:1;min-width:0;white-space:nowrap;overflow:hidden;
+  text-overflow:ellipsis;font-size:13px;font-weight:550;color:var(--ink,#18211e)
 }
 .site-mobile-chrome[data-page-label]::before{content:attr(data-page-label)}
 /* Generated concept and technology references share the selected rail link as

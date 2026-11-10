@@ -44,6 +44,34 @@ with sync_playwright() as p:
     page.goto(base)
     page.locator('#navigation a[href="#/games"]').wait_for()
     check('homepage retains original Atlas shell and native Games tab', page.locator('.app-shell').count() == 1)
+    # Discover's desktop workspace title is a real text node. Native article
+    # families must provide the same accessible heading instead of a CSS-only
+    # pseudo-element; the compact mobile drawer retains its original layout.
+    for scheme in ('light','dark'):
+        title_context = browser.new_context(java_script_enabled=False, color_scheme=scheme)
+        title_page = title_context.new_page()
+        for width in (320,390,768,1280):
+            title_page.set_viewport_size({'width':width,'height':844})
+            title_page.goto(base+'index.html')
+            for route, expected in (
+                ('research.html','Research library'),
+                ('playbooks.html','Playbooks'),
+                ('technologies.html','Technology profiles'),
+                ('whats-new.html','What’s New Today'),
+                ('games.html','Games')
+            ):
+                title_page.goto(base+route)
+                title = title_page.locator('.site-mobile-chrome > .site-mobile-chrome__title')
+                chrome = title_page.locator('.site-mobile-chrome')
+                check('Native DOM workspace title '+route+' '+scheme+' '+str(width),
+                      title.count()==1 and title.inner_text()==expected
+                      and title.is_visible()==(width>650)
+                      and (width<=650 or chrome.evaluate(
+                          "el => getComputedStyle(el,'::before').display === 'none'"))
+                      and title_page.locator('.site-mobile-chrome__search').is_visible())
+                if width in (390,1280) and route in ('research.html','whats-new.html'):
+                    title_page.screenshot(path=str(out/('workspace-title-'+route.split('.')[0]+'-'+scheme+'-'+str(width)+'.png')))
+        title_context.close()
     # Discover keeps its 68px mobile header followed by a compact article
     # intro. Both generated reference families and About previously left a
     # 38px legacy gap after the same shared navigation. Check actual computed

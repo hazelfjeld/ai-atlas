@@ -6,6 +6,33 @@ const path = require('node:path');
 const css = fs.readFileSync(path.join(__dirname, '..', 'site-chrome.css'), 'utf8');
 
 
+test('standalone workspace headings are real shared DOM text, not CSS-only labels', () => {
+  const source = fs.readFileSync(path.join(__dirname, '..', 'scripts/site_chrome.py'), 'utf8');
+  assert.ok(source.includes('page_label=page_title, topbar_title=page_title'),
+    'Visible and accessible workspace titles must share one build-time source');
+  const titles = {
+    'demo.html':'Guided demo', 'research.html':'Research library',
+    'catalog-review.html':'Catalog review', 'hardware-review.html':'Hardware evidence',
+    'games.html':'Games', 'technologies.html':'Technology profiles',
+    'playbooks.html':'Playbooks', 'whats-new.html':'What’s New Today'
+  };
+  for (const [route, expected] of Object.entries(titles)) {
+    const html = fs.readFileSync(path.join(__dirname, '..', route), 'utf8');
+    const title = '<span class="site-mobile-chrome__title">' + expected + '</span>';
+    assert.equal(html.split(title).length - 1, 1, route + ' needs one real workspace title');
+    const searchAt = html.indexOf('site-mobile-chrome__search');
+    assert.ok(html.indexOf(title) > html.indexOf('site-mobile-chrome__nav')
+      && html.indexOf(title) < searchAt, route + ' title must precede functional search');
+    assert.ok(html.includes('data-page-label="' + expected + '"'), route + ' label drift');
+    assert.ok(html.includes('site-chrome__links'), route + ' lost primary navigation');
+  }
+  assert.match(css, /\.site-mobile-chrome:has\(> \.site-mobile-chrome__title\)::before\{display:none\}/);
+  assert.match(css, /\.site-mobile-chrome__title\{[\s\S]*?display:block;flex:1/);
+  assert.match(css, /@media \(max-width:650px\)\{[\s\S]*?\.site-mobile-chrome__title\{display:none\}/);
+  const offline = fs.readFileSync(path.join(__dirname, '..', 'downloads/Atlas_Demo_Offline.html'), 'utf8');
+  assert.ok(offline.includes(css), 'Update the exact offline shared stylesheet');
+});
+
 test('daily archive shares script-free collection fallback instead of trapping readers in loading states', () => {
   const archive = fs.readFileSync(path.join(__dirname, '..', 'whats-new.html'), 'utf8');
   const published = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data/daily/index.json'), 'utf8'));

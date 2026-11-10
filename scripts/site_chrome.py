@@ -171,7 +171,7 @@ def render_directory_nav(prefix, selected, *, mobile_classes="directory-mobile-t
                          toggle_classes="site-mobile-chrome__toggle", menu_classes="site-mobile-chrome__menu",
                          search_classes="site-mobile-chrome__search", icon_classes="site-mobile-chrome__search-icon",
                          search_label_classes="site-mobile-chrome__search-placeholder",
-                         desktop_classes="site-chrome term-nav", labeled=True, current_kind="page", page_label=None, mobile_brand=False, native_secondary=False, mobile_secondary=False, secondary_current=None):
+                         desktop_classes="site-chrome term-nav", labeled=True, current_kind="page", page_label=None, mobile_brand=False, native_secondary=False, mobile_secondary=False, secondary_current=None, topbar_title=None):
     """One script-free site header, with only page-specific shell classes configurable."""
     assert prefix in ("", "../")
     assert selected is None or selected in {name for _, name in DESTINATIONS}
@@ -179,6 +179,7 @@ def render_directory_nav(prefix, selected, *, mobile_classes="directory-mobile-t
     links = render_primary_links(prefix, selected, current_kind)
     brand = render_brand(prefix)
     mobile_wordmark = render_brand(prefix, "site-mobile-chrome__brand") if mobile_brand else ""
+    title = ('<span class="site-mobile-chrome__title">' + escape(topbar_title) + '</span>') if topbar_title else ''
     mobile = (
         '<div class="' + mobile_classes + '"' +
         (' aria-label="AI Updates mobile header"' if labeled else '') +
@@ -186,7 +187,7 @@ def render_directory_nav(prefix, selected, *, mobile_classes="directory-mobile-t
         '<details class="' + details_classes + '" id="' + details_id + '">'
         '<summary class="' + toggle_classes + '" aria-label="Toggle navigation"><span aria-hidden="true">☰</span></summary>'
         '<nav class="' + menu_classes + '" aria-label="AI Updates sections">' + mobile_wordmark + links +
-        (render_mobile_secondary_nav(prefix, secondary_current) if mobile_secondary else '') + '</nav></details>'
+        (render_mobile_secondary_nav(prefix, secondary_current) if mobile_secondary else '') + '</nav></details>' + title +
         '<a class="' + search_classes + '" href="' + prefix + 'index.html#/search" aria-label="Search AI Updates in the main collection">'
         '<span class="' + icon_classes + '" aria-hidden="true">⌕</span>'
         '<span class="' + search_label_classes + '">Search tools, research, concepts…</span></a></div>'
@@ -232,6 +233,12 @@ def render_standalone_nav(path):
     (mobile, details, details_id, toggle, menu, search, icon, label, desktop, selected, kind, labeled) = STANDALONE_NAVS[path]
     def classes(extra, core):
         return (extra + " " if extra else "") + core
+    page_title = {
+        "research.html": "Research library",
+        "demo.html": "Guided demo",
+        "catalog-review.html": "Catalog review",
+        "hardware-review.html": "Hardware evidence",
+    }.get(path, selected)
     markup = render_directory_nav(
         "", selected,
         mobile_classes=classes(mobile, "site-mobile-chrome"),
@@ -242,12 +249,7 @@ def render_standalone_nav(path):
         icon_classes=classes(icon, "site-mobile-chrome__search-icon"),
         search_label_classes=classes(label, "site-mobile-chrome__search-placeholder"),
         desktop_classes="site-chrome " + desktop, labeled=labeled, current_kind=kind,
-        page_label={
-            "research.html": "Research library",
-            "demo.html": "Guided demo",
-            "catalog-review.html": "Catalog review",
-            "hardware-review.html": "Hardware evidence",
-        }.get(path, selected),
+        page_label=page_title, topbar_title=page_title,
         mobile_brand=True, native_secondary=True, mobile_secondary=True,
         secondary_current={"demo.html": "demo", "research.html": "papers"}.get(path),
     )
