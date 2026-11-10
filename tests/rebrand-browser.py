@@ -1529,9 +1529,10 @@ with sync_playwright() as p:
                 page.goto(base+route)
                 page.evaluate('(t) => localStorage.setItem("atlas.theme",t)',theme)
                 page.reload()
-                header_selector = ('body > .site-mobile-chrome'
-                                   if route.startswith('technology/TECH-')
-                                   else 'main.term-shell > .site-mobile-chrome')
+                # Both generated detail families now enhance the *same* native
+                # header to a sibling of main. Do not target the legacy nested
+                # concept rail: it would conceal a real landmark regression.
+                header_selector = 'body > .site-mobile-chrome'
                 page.wait_for_function("""params =>
                     document.querySelector(params.selector)?.dataset.pageLabel===params.title
                 """,arg={'selector':header_selector,'title':title})
@@ -1548,9 +1549,9 @@ with sync_playwright() as p:
                 if width==1280 and theme=='dark':
                     page.screenshot(path=str(out/f'reference-title-{title.lower().replace(" ","-")}-1280-dark.png'))
 
-    # Directories and technology profiles keep navigation outside <main>;
-    # concept details retain their original wrapper. Skip must still reach the article without
-    # tabbing through the seven primary links. Exercise both page families.
+    # All enhanced reference families keep one shared nav outside <main>.
+    # Generated concept details still have a native script-free nested fallback.
+    # Skip must reach the article without tabbing through the seven primary links.
     for width in (320,390,768,1280):
         for theme in ('light','dark'):
             page.set_viewport_size({'width':width,'height':844 if width<=650 else 900})
