@@ -134,6 +134,15 @@ with sync_playwright() as p:
     # and disabled filters to script-free visitors, unlike Research/Playbooks/Tech.
     # Its native fallback must retain the same shared site navigation and point
     # at immutable source records rather than pretending there is a live feed.
+    published_dates = {}
+    for edition in json.loads((ROOT / 'data/daily/index.json').read_text(encoding='utf-8'))['editions']:
+        old = published_dates.get(edition['date'])
+        if old is None or edition['revision'] > old['revision']:
+            published_dates[edition['date']] = edition
+    newest_archive_paths = [
+        published_dates[day]['path']
+        for day in sorted(published_dates, reverse=True)[:3]
+    ]
     for scheme in ('light','dark'):
         archive_context = browser.new_context(java_script_enabled=False, color_scheme=scheme)
         archive_page = archive_context.new_page()
@@ -150,7 +159,9 @@ with sync_playwright() as p:
             check('script-free archive has published records '+scheme+' '+str(width),
                   fallback.is_visible()
                   and fallback.locator('a[href="data/daily/index.json"]').is_visible()
-                  and fallback.locator('a[href="data/daily/editions/2026-11-09-v1.json"]').is_visible())
+                  and len(newest_archive_paths) == 3
+                  and all(fallback.locator('a[href="' + path + '"]').is_visible()
+                          for path in newest_archive_paths))
             check('script-free archive hides misleading loaders and dead filters '+scheme+' '+str(width),
                   archive_page.locator('#edition-status').is_hidden()
                   and archive_page.locator('#edition-content').is_hidden()

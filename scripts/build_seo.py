@@ -4,6 +4,8 @@
 No new catalog writer: read only the completed publication and original records.
 """
 from html import escape as e
+from datetime import date
+from hashlib import sha256
 import json
 from pathlib import Path
 import re
@@ -24,6 +26,47 @@ PAGES = {
     'demo.html': ('A Guided Tour of AI Updates', 'Take a guided tour of AI Updates: concept guides, technology comparisons, safety evidence, Quiz and Match, and the reviewed daily edition archive.'),
     'about.html': ('About & Editorial Policy | AI Updates', 'How AI Updates selects, explains and labels AI research, tools and concepts. Read our source policy, review levels, coverage limits and correction process.'),
 }
+
+
+
+def sync_scriptfree_daily_archive(html):
+    """Mirror the three newest immutable edition dates in the no-JS archive.
+
+    The live reader already uses data/daily/index.json; reuse that same
+    reviewed index instead of leaving a separately maintained list frozen
+    at November 7–9. Never link a missing or checksum-mismatched edition.
+    """
+    index = json.loads((ROOT / 'data/daily/index.json').read_text(encoding='utf-8'))
+    assert index['schema'] == 1
+    latest = {}
+    for edition in index['editions']:
+        day = edition['date']
+        parsed = date.fromisoformat(day)
+        assert parsed.isoformat() == day
+        revision = edition['revision']
+        assert isinstance(revision, int) and revision > 0
+        assert edition['path'] == f'data/daily/editions/{day}-v{revision}.json'
+        if day not in latest or revision > latest[day]['revision']:
+            latest[day] = edition
+    links = []
+    for day in sorted(latest, reverse=True)[:3]:
+        entry = latest[day]
+        path = entry['path']
+        data = (ROOT / path).read_bytes()
+        assert len(data) == entry['bytes'] and sha256(data).hexdigest() == entry['sha256'], path
+        parsed = date.fromisoformat(day)
+        label = f"{parsed.strftime('%B')} {parsed.day}, {parsed.year} · reviewed edition JSON"
+        links.append(f'<a href="{path}">{label}</a>')
+
+    marker = '<section class="site-static-fallback" id="scriptfree-daily-archive"'
+    start = html.index(marker)
+    opening = '<div class="site-static-fallback__links">'
+    closing = '<a href="about.html">Editorial policy and coverage limitations</a>'
+    begin = html.index(opening, start) + len(opening)
+    end = html.index(closing, begin)
+    assert re.fullmatch(r'(?:<a href="data/daily/editions/[^"]+">[^<]+</a>)*',
+                        html[begin:end]), 'Unexpected script-free edition markup'
+    return html[:begin] + ''.join(links) + html[end:]
 
 
 def nav(prefix=''):
@@ -120,7 +163,10 @@ def main():
     # Normalize existing page headers from the shared site-chrome component.
     for route in STANDALONE_NAVS:
         page = ROOT / route
-        page.write_bytes(ensure_footer_resources(normalize_standalone_chrome(page.read_text(encoding="utf-8"), route), route).encode())
+        html = ensure_footer_resources(normalize_standalone_chrome(page.read_text(encoding="utf-8"), route), route)
+        if route == 'whats-new.html':
+            html = sync_scriptfree_daily_archive(html)
+        page.write_bytes(html.encode())
     # Same view code on the server and in the browser: no crawler-only alternative.
     rendered = subprocess.check_output(['node', str(ROOT / 'scripts/render_discovery.cjs')], cwd=ROOT).decode('utf-8')
     index = normalize_discover_sidebar((ROOT / 'index.html').read_text(encoding='utf-8'), len(terms), len(techs))

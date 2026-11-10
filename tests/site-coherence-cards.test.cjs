@@ -43,12 +43,25 @@ test('daily archive shares script-free collection fallback instead of trapping r
   assert.ok(block.includes('href="data/daily/index.json"'), 'Always-current edition register is available');
   assert.ok(block.includes('not a live news feed'), 'Do not present older snapshots as fresh news');
   assert.ok(block.includes('href="about.html"'), 'Coverage and editorial policy stay available');
-  for (const date of ['2026-11-07', '2026-11-08', '2026-11-09']) {
-    assert.ok(published.editions.some(e => e.date === date && e.revision === 1),
-      'No fabricated archived edition link: ' + date);
-    assert.ok(block.includes('href="data/daily/editions/' + date + '-v1.json"'),
-      'Missing immutable archive link: ' + date);
+  // The static fallback must follow the actual immutable register after each
+  // future daily publication, not freeze on the November 7–9 examples.
+  const newestByDate = new Map();
+  for (const edition of published.editions) {
+    const old = newestByDate.get(edition.date);
+    if (!old || edition.revision > old.revision) newestByDate.set(edition.date, edition);
   }
+  const expected = [...newestByDate.values()]
+    .sort((a,b) => b.date.localeCompare(a.date)).slice(0, 3).map(e => e.path);
+  const links = [...block.matchAll(/<a href="(data\/daily\/editions\/[^"]+)"[^>]*>/g)]
+    .map(match => match[1]);
+  assert.deepEqual(links, expected, 'No-JS links must be the latest three published dates');
+  for (const item of expected) {
+    assert.ok(fs.existsSync(path.join(__dirname, '..', item)),
+      'Script-free edition cannot point at a missing immutable file: ' + item);
+  }
+  assert.ok(fs.readFileSync(path.join(__dirname, '..', 'scripts/build_seo.py'), 'utf8')
+    .includes('def sync_scriptfree_daily_archive(html):'),
+    'The latest dated links must have a shared build-time source of truth');
   const styleStart = archive.indexOf('<noscript><style>');
   const styleEnd = archive.indexOf('</style></noscript>', styleStart);
   assert.ok(styleStart >= 0 && styleEnd > styleStart, 'No-JS styles must have a native noscript boundary');
