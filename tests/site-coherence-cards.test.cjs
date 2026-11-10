@@ -5,6 +5,46 @@ const fs = require('node:fs');
 const path = require('node:path');
 const css = fs.readFileSync(path.join(__dirname, '..', 'site-chrome.css'), 'utf8');
 
+test('Playbooks and Technology separate the shared navigation from main', () => {
+  // Both native directories share Discover's build-time rail but previously
+  // announced their entire navigation as part of the article landmark.
+  for (const [route, shell, hero, rail] of [
+    ['playbooks.html', 'playbook', 'playbook-hero', 'playbook-top'],
+    ['technologies.html', 'tech', 'tech-hero', 'tech-top'],
+  ]) {
+    const html = fs.readFileSync(path.join(__dirname, '..', route), 'utf8');
+    const shellAt = html.indexOf('<div class="' + shell + '-shell">');
+    const mobile = html.indexOf('class="' + shell + '-mobile-topbar');
+    const railAt = html.indexOf('<nav class="site-chrome ' + rail + '"');
+    const railEnd = html.indexOf('</nav>', railAt);
+    const main = html.indexOf('<main class="' + shell + '-content">');
+    const heroAt = html.indexOf('<section class="' + hero + '" id="main" tabindex="-1">');
+    const footerAt = html.indexOf('<footer>', heroAt);
+    const mainEnd = html.indexOf('</main>', main);
+    assert.ok(shellAt > 0 && shellAt < mobile && mobile < railAt &&
+      railEnd < main && main < heroAt && heroAt < footerAt && footerAt < mainEnd,
+      route + ' must place shared navigation before the article landmark');
+    assert.equal((html.match(/<main\\b/g) || []).length, 1, route + ' must have one main landmark');
+    assert.equal((html.match(/<nav class="site-chrome /g) || []).length, 1,
+      route + ' must retain one desktop rail');
+    assert.ok(!html.slice(main, mainEnd).includes('site-chrome__links'),
+      route + ' must not nest shared navigation in main');
+    assert.ok(html.slice(main, mainEnd).includes('site-static-fallback'),
+      route + ' must retain native script-free record access in main');
+    assert.ok(html.includes('<a class="skip" href="#main">'),
+      route + ' must keep native keyboard skip links');
+    const intro = '.' + shell + '-shell>main>.' + hero + '>p';
+    assert.ok(html.includes(intro + '{max-width:70ch;font-size:17px;line-height:1.65'),
+      route + ' must preserve the shared desktop reading rhythm');
+    assert.ok(html.includes(intro + '{font-size:16px}'),
+      route + ' must preserve the shared mobile reading scale');
+  }
+  const builder = fs.readFileSync(path.join(__dirname, '..', 'scripts/build_seo.py'), 'utf8');
+  assert.ok(builder.includes('normalize_standalone_chrome(page.read_text('),
+    'Build must still normalize navigation from the canonical generator');
+});
+
+
 
 test('Research uses the same separate site navigation and content landmark as editorial landings', () => {
   const html = fs.readFileSync(path.join(__dirname, '..', 'research.html'), 'utf8');
