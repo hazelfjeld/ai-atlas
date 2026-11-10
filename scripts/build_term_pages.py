@@ -39,6 +39,9 @@ def shell(title, body, path, description, structured=None, *, native_concept_art
     # All concept detail pages now ship the same eight mobile secondary links
     # as the A-Z directory and technology profiles, even without JavaScript.
     directory_nav = render_directory_nav('../', 'Concept dictionary', mobile_brand=True, native_secondary=True, mobile_secondary=True, secondary_current=('encyclopedia' if path == 'terms/index.html' else None))
+    # Fail during generation if the common native mobile disclosure disappears.
+    assert directory_nav.count('class="site-mobile-chrome__more"') == 1, path
+    assert directory_nav.count('class="site-mobile-chrome__more-links"') == 1, path
     directory_css = DIRECTORY_MOBILE_CSS
     directory_assets = '<link rel="stylesheet" href="../site-chrome.css"><script src="../site-theme.js"></script>'
     heading_css = '' if path == 'terms/index.html' else '.term-shell h1{font-size:clamp(32px,6vw,58px)}'
