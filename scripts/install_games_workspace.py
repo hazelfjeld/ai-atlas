@@ -126,7 +126,9 @@ def integrate():
     index.write_text(html, encoding='utf-8')
     app_path = ROOT / 'app.js'
     app = app_path.read_text(encoding='utf-8')
-    if "games:'Games'" not in app:
+    # Accept the shared, generated primary-label map as an already-installed
+    # native Games route. Do not try to reinject a legacy Overview label.
+    if "games:'Games'" not in app and '"games":"Games"' not in app:
         app = replace_once(app, "const labels={overview:'Overview',", "const labels={overview:'Overview',games:'Games',")
     if "games:'M7 7h10" not in app:
         app = replace_once(app, 'const icons={overview:', "const icons={games:'M7 7h10a3 3 0 0 1 3 3l1 7a2 2 0 0 1-3 2l-3-3H9l-3 3a2 2 0 0 1-3-2l1-7a3 3 0 0 1 3-3z M7 10v4 M5 12h4 M16 11h.01 M18 13h.01',overview:")
