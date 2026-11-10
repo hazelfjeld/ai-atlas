@@ -861,3 +861,19 @@ test('Research hash views update both shared navigation landmarks and the real w
   assert.ok(html.includes('class="site-chrome__more-links"') &&
     html.includes('class="site-mobile-chrome__more-links"'), 'Shared navigation landmarks are present');
 });
+
+test('Research shares the one global slash-to-search keyboard route without a competing local handler', () => {
+  const research = fs.readFileSync(path.join(__dirname, '..', 'checkpoint.js'), 'utf8');
+  const shared = fs.readFileSync(path.join(__dirname, '..', 'site-theme.js'), 'utf8');
+  const html = fs.readFileSync(path.join(__dirname, '..', 'research.html'), 'utf8');
+  assert.ok(!research.includes("document.addEventListener('keydown'"),
+    'Research must not race the shared slash navigation handler');
+  assert.ok(shared.includes("if (event.key !== '/' || event.defaultPrevented"),
+    'Shared keyboard route must remain guarded and prevent duplicate handlers');
+  assert.ok(shared.includes("document.querySelector('a.site-mobile-chrome__search[href]')"),
+    'Shortcut must use the same real search destination as the visible control');
+  assert.ok(research.includes("$('query').addEventListener('input', render)"),
+    'Keep the Research-local filter functional when people use its field');
+  assert.ok(html.includes('href="index.html#/search"'),
+    'Research search link must reach the canonical real search view');
+});

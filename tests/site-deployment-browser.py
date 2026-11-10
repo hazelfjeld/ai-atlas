@@ -1103,6 +1103,17 @@ with sync_playwright() as p:
     check('research search opens the existing workspace and focuses its real input',
           mobile_research.locator('#global-query').is_visible()
           and mobile_research.evaluate("document.activeElement?.id === 'global-query'"))
+    # After leaving a Research modal, '/' must behave the same as on other
+    # native pages: enter the real Discover search and focus its input once.
+    # Research previously had a second document handler that also focused its
+    # local filter during this navigation.
+    mobile_research.goto(base + 'research.html')
+    mobile_research.keyboard.press('/')
+    mobile_research.wait_for_url('**/index.html#/search')
+    mobile_research.locator('#catalog-loading').wait_for(state='detached', timeout=45000)
+    check('Research slash uses the single shared global search route',
+          mobile_research.locator('#global-query').is_visible()
+          and mobile_research.evaluate("document.activeElement?.id === 'global-query'"))
     mobile_research.close()
     # Direct concept detail pages share the same native, script-free menu
     # and current-section indication as the dictionary and technology directories.

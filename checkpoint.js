@@ -127,6 +127,9 @@ $('reset').onclick = () => { $('query').value = ''; $('topic').value = ''; $('ki
 $('export').onclick = () => download('atlas-' + view + '.json', current);
 $('close-detail').onclick = () => $('detail').close();
 window.addEventListener('hashchange', route);
-document.addEventListener('keydown', e => { if (e.key === '/' && !/INPUT|TEXTAREA|SELECT/.test(document.activeElement?.tagName) && !$('detail').open && view !== 'coverage' && manifest) { e.preventDefault(); $('query').focus(); } });
+// The shared site-theme.js owns '/' on every page: it opens the real Discover
+// search and focuses its input after navigation. Do not attach a second Research
+// handler that races the shared route by focusing this page's local filter.
+// The visible Research filter remains fully functional via input and reset.
 start();
 })();
