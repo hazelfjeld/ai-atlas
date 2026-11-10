@@ -551,9 +551,9 @@ test('research snapshot uses the shared mobile menu and retains contextual resea
   for (const region of [desktop, nav]) {
     assert.equal((region.match(/aria-current=/g) || []).length, 2,
       'Research must identify exactly its Discover parent and selected secondary destination');
-    assert.equal((region.match(/href="index.html#\\/overview" aria-current="location">Discover<\\/a>/g) || []).length, 1,
+    assert.equal(region.split('href="index.html#/overview" aria-current="location">Discover</a>').length - 1, 1,
       'Discover is selected as the canonical parent exactly once');
-    assert.equal((region.match(/href="index.html#\\/papers" aria-current="location">Research library<\\/a>/g) || []).length, 1,
+    assert.equal(region.split('href="index.html#/papers" aria-current="location">Research library</a>').length - 1, 1,
       'Research library is selected in the shared secondary disclosure exactly once');
   }
   assert.match(nav, /href="index\.html#\/overview" aria-current="location">Discover<\/a>/);
