@@ -104,6 +104,9 @@ async function start() {
  } catch (error) {
   $('loading-status').textContent = 'Catalog could not load: ' + error.message + ' No incomplete catalog is being presented as complete.';
   const retry = element('button', 'Retry loading'); retry.type = 'button'; retry.onclick = () => location.reload(); $('loading-status').append(document.createTextNode(' '), retry);
+  const raw = element('a', 'Open preserved research records (raw JSON; not verified in this session)');
+  raw.href = 'data/papers-01.json';
+  $('loading-status').append(document.createTextNode(' '), raw);
  }
 }
 $('query').addEventListener('input', render); $('topic').addEventListener('change', render); $('kind').addEventListener('change', render);

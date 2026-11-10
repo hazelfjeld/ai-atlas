@@ -60,6 +60,9 @@ async function load() {
   render();
  } catch(error) {
   $('status').textContent = 'The published playbook catalog could not be verified: ' + error.message + ' No partial data is shown.';
+  const retry = el('button', 'Retry loading'); retry.type = 'button'; retry.onclick = () => location.reload();
+  const raw = el('a', 'Open preserved playbook records (raw JSON; not verified in this session)'); raw.href = 'data/playbooks-01.json';
+  $('status').append(document.createTextNode(' '), retry, document.createTextNode(' '), raw);
  }
 }
 $('search').addEventListener('input', render);

@@ -139,6 +139,9 @@ async function start() {
   render(); anchor();
  } catch(error) {
   $('tech-status').textContent = 'Technology catalog unavailable: ' + error.message + ' No unverified partial data is displayed.';
+  const retry = el('button', 'Retry loading'); retry.type = 'button'; retry.onclick = () => location.reload();
+  const archive = el('a', 'Browse static technology profiles'); archive.href = 'technology/index.html';
+  $('tech-status').append(document.createTextNode(' '), retry, document.createTextNode(' '), archive);
  }
 }
 $('tech-search').addEventListener('input',()=>render());
