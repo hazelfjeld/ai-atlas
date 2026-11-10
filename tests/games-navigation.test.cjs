@@ -567,7 +567,10 @@ test('research snapshot uses the shared mobile menu and retains contextual resea
   const publishedTechnologies=JSON.parse(read('publication.json')).published_counts.technologies;
   assert.ok(desktop.includes('href="index.html#/technologies">Technology profiles</a>'));
   assert.ok(html.includes(`all ${publishedTechnologies} technologies`));
-  assert.ok(html.includes('Automatic collection remains off.'));
+  assert.ok(html.includes('href="whats-new.html">dated What’s New archive</a>'),
+    'Research contextual navigation must link to the reviewed daily archive');
+  assert.ok(html.includes('not a continuously live news feed'),
+    'Editorial pages must distinguish scheduled review from a real-time crawler');
   assert.ok(html.includes('id="loading-status" role="status"'));
 });
 
