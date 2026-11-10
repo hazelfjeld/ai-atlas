@@ -951,7 +951,7 @@ with sync_playwright() as p:
     mobile_hardware.goto(base + 'hardware-review.html')
     check('hardware review uses the compact mobile site header',
           mobile_hardware.locator('.hardware-mobile-topbar').is_visible()
-          and not mobile_hardware.locator('.review-shell > .review-nav').is_visible()
+          and not mobile_hardware.locator('body > .review-nav').is_visible()
           and mobile_hardware.locator('.hardware-mobile-topbar .site-mobile-chrome__search').is_visible())
     check('hardware uses a level menu and search control row',
           mobile_hardware.evaluate("""() => Math.abs(
@@ -983,7 +983,8 @@ with sync_playwright() as p:
     mobile_hardware.set_viewport_size({'width':1440, 'height':900})
     check('desktop hardware review has shared navigation and functional search',
           desktop_shared_navigation(mobile_hardware)
-          and mobile_hardware.locator('.review-shell > .review-nav').is_visible())
+          and mobile_hardware.locator('body > .review-nav').is_visible()
+          and mobile_hardware.locator('main.review-shell nav.site-chrome').count() == 0)
     mobile_hardware.set_viewport_size({'width':320, 'height':720})
     mobile_hardware.locator('.hardware-mobile-topbar .site-mobile-chrome__search').click()
     mobile_hardware.wait_for_url('**/index.html#/search')
