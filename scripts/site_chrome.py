@@ -249,7 +249,7 @@ def render_standalone_nav(path):
             "hardware-review.html": "Hardware evidence",
         }.get(path, selected),
         mobile_brand=True, native_secondary=True, mobile_secondary=True,
-        secondary_current='demo' if path == 'demo.html' else None,
+        secondary_current={"demo.html": "demo", "research.html": "papers"}.get(path),
     )
     # Research's main landmark starts between its two headers, but the native
     # skip destination belongs on the subsequent article hero.

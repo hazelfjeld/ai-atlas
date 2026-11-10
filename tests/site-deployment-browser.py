@@ -159,6 +159,29 @@ with sync_playwright() as p:
                 check('About mobile secondary navigation reaches live Research library',
                       page.locator('#navigation a[data-view="papers"][aria-current="page"]').count() == 1)
 
+    # A native Research URL is a real destination, not merely the Discover
+    # parent. Its existing shared desktop/mobile rail should identify both
+    # the parent workspace and its selected secondary section on first paint.
+    for width in (320, 390, 768, 1280):
+        page.set_viewport_size({'width': width, 'height': 844 if width <= 650 else 900})
+        page.goto(base + 'research.html')
+        check('Research canonical secondary identity at ' + str(width),
+              page.locator('.site-chrome__links a[aria-current="location"][href="index.html#/overview"]').count() == 1
+              and page.locator('.site-chrome__more[open] a[aria-current="location"][href="index.html#/papers"]').count() == 1
+              and page.locator('.site-mobile-chrome__more[open] a[aria-current="location"][href="index.html#/papers"]').count() == 1
+              and page.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'))
+        if width <= 650:
+            page.locator('.site-mobile-chrome__nav > summary').click()
+            check('Research opens with selected mobile secondary section at ' + str(width),
+                  page.locator('.site-mobile-chrome__more a[aria-current="location"]').is_visible())
+        else:
+            check('Research shows selected desktop secondary section at ' + str(width),
+                  page.locator('.site-chrome__more a[aria-current="location"]').is_visible())
+        if width in (390, 1280):
+            for theme in ('light', 'dark'):
+                page.evaluate('(value) => { document.documentElement.dataset.theme = value; }', theme)
+                page.screenshot(path=str(out / f'research-secondary-{width}-{theme}.png'))
+
     # Discover now exposes the very same native <details> structure as its
     # standalone neighbors, including when the JavaScript runtime is blocked.
     no_script = browser.new_context(java_script_enabled=False, viewport={'width':320, 'height':844})

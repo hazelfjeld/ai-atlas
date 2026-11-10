@@ -833,10 +833,16 @@ test('standalone page families share a build-time navigation source, including c
       'playbooks.html': ['page', 'Playbooks'],
       'whats-new.html': ['page', 'What’s New Today'],
     }[path];
+    const expectedSelections = path === 'research.html'
+      ? [expectedCurrent, ['location', 'Research library']] : [expectedCurrent];
     for (const nav of [desktop, mobile]) {
       const selected = [...nav.matchAll(/<a href="[^"]+" aria-current="(page|location)">([^<]+)<\/a>/g)];
-      assert.deepEqual(selected.map(m => [m[1],m[2]]), [expectedCurrent],
-        path+' must identify exactly one correct shared section in both layouts');
+      assert.deepEqual(selected.map(m => [m[1],m[2]]), expectedSelections,
+        path+' must identify its canonical parent and current secondary destination');
+    }
+    if (path === 'research.html') {
+      assert.match(desktop, /<details class="site-chrome__more" open>/);
+      assert.match(mobile, /<details class="site-mobile-chrome__more" open>/);
     }
   }
   assert.match(read('site-chrome.css'), /\.site-mobile-chrome__menu a\[aria-current=location\]/);
