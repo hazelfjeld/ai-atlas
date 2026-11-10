@@ -126,12 +126,16 @@ with sync_playwright() as p:
           page.locator('.research-mobile-topbar').get_attribute('data-page-label')=='Research library'
           and 'Research library' in page.locator('.research-mobile-topbar').evaluate(
               "el => getComputedStyle(el, '::before').content"))
-    check('Research identifies Discover as its selected shared parent with no JavaScript',
+    check('Research identifies its canonical Discover parent and active secondary link without JavaScript',
           page.locator('.site-chrome__links a').count()==7
           and page.locator('.site-chrome__links a[aria-current="location"]').count()==1
           and page.locator('.site-chrome__links a[aria-current="location"]').inner_text()=='Discover'
-          and page.locator('.research-menu-panel a[aria-current="location"]').count()==1
-          and page.locator('.research-menu-panel a[aria-current="location"]').text_content()=='Discover')
+          and page.locator('.site-chrome__more[open] a[aria-current="location"]').count()==1
+          and page.locator('.site-chrome__more[open] a[aria-current="location"]').inner_text()=='Research library'
+          and page.locator('.research-menu-panel > a[aria-current="location"]').count()==1
+          and page.locator('.research-menu-panel > a[aria-current="location"]').inner_text()=='Discover'
+          and page.locator('.research-menu-panel .site-mobile-chrome__more[open] a[aria-current="location"]').count()==1
+          and page.locator('.research-menu-panel .site-mobile-chrome__more[open] a[aria-current="location"]').inner_text()=='Research library')
 
     # The standalone native drawer must expose the same *real*, clickable
     # wordmark as Discover even before hydration or with scripts disabled.
