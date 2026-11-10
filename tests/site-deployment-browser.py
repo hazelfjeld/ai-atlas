@@ -1040,6 +1040,7 @@ with sync_playwright() as p:
           and mobile_research.locator('.site-mobile-chrome__more a[aria-current="location"][href="index.html#/papers"]').count() == 1
           and mobile_research.locator('.research-mobile-topbar .site-mobile-chrome__title').inner_text() == 'Research library'
           and mobile_research.evaluate("document.title === 'Research library | AI Updates'"))
+    mobile_research.set_viewport_size({'width': 320, 'height': 720})
     mobile_research.screenshot(path=str(out / 'research-mobile-header.png'), full_page=False)
     mobile_research.set_viewport_size({'width':390, 'height':844})
     check('390px research page fits without horizontal overflow',
