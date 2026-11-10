@@ -1414,7 +1414,7 @@ with sync_playwright() as p:
             page.reload()
             frame=page.evaluate("""() => ({
                 desktop: [...document.querySelectorAll('.site-chrome__links a')].map(a=>a.textContent.trim()),
-                activeDesktop: document.querySelector('.site-chrome__links a[aria-current]')?.textContent.trim(),
+                activeDesktop: document.querySelector('.site-chrome a[aria-current]')?.textContent.trim(),
                 activeMobile: document.querySelector('.site-mobile-chrome__menu a[aria-current]')?.textContent.trim(),
                 pageLabel: document.querySelector('.site-mobile-chrome')?.dataset.pageLabel,
                 theme: document.documentElement.dataset.theme,
