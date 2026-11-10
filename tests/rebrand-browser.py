@@ -216,26 +216,34 @@ with sync_playwright() as p:
               page.locator('.site-chrome__links a[aria-current="location"]').count() == 1
               and page.locator('.site-chrome__links a[aria-current="location"]').text_content() == 'What’s New Today')
 
-    # The generated directories and 1,648 detail pages already mark their
-    # canonical desktop rail section. Before hydration (or with JS disabled),
-    # the fixed topbar must display that section rather than "AI Updates".
+    # Directories now expose their real accessible workspace titles, while
+    # unchanged detail articles use their selected canonical parent as a CSS
+    # first-paint fallback. Test both presentations and the independently
+    # correct active parent without weakening the shared navigation contract.
     for width in (768, 1280):
         page.set_viewport_size({'width': width, 'height': 900})
         for theme in ('light', 'dark'):
             page.emulate_media(color_scheme=theme)
-            for route, expected in (
-                ('terms/index.html', 'Concept dictionary'),
-                ('terms/MLD-0002-ablation-study.html', 'Concept dictionary'),
-                ('technology/index.html', 'Technology profiles'),
-                ('technology/TECH-0216-pytorch.html', 'Technology profiles'),
+            for route, title, active_label in (
+                ('terms/index.html', 'Concept encyclopedia', 'Concept dictionary'),
+                ('terms/MLD-0002-ablation-study.html', 'Concept dictionary', 'Concept dictionary'),
+                ('technology/index.html', 'Technology profiles', 'Technology profiles'),
+                ('technology/TECH-0216-pytorch.html', 'Technology profiles', 'Technology profiles'),
             ):
                 page.goto(base + route)
                 header = page.locator('main.term-shell > .site-mobile-chrome')
                 active = page.locator('main.term-shell > .site-chrome .site-chrome__links a[aria-current="page"]')
+                real_title = header.locator(':scope > .site-mobile-chrome__title')
                 label = header.evaluate("el => getComputedStyle(el, '::before').content")
-                check(f'{route} {width}px {theme} uses the selected no-JS section title',
-                      header.is_visible() and expected in label
-                      and active.count() == 1 and active.inner_text() == expected)
+                if route.endswith('/index.html'):
+                    visible_title = (real_title.count() == 1 and real_title.is_visible()
+                                     and real_title.inner_text() == title
+                                     and header.evaluate("el => getComputedStyle(el, '::before').display === 'none'"))
+                else:
+                    visible_title = (real_title.count() == 0 and title in label)
+                check(f'{route} {width}px {theme} keeps its visible title and selected parent',
+                      header.is_visible() and visible_title
+                      and active.count() == 1 and active.inner_text() == active_label)
                 if width == 1280 and theme == 'light' and route in (
                         'terms/MLD-0002-ablation-study.html',
                         'technology/TECH-0216-pytorch.html'):
