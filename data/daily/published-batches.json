@@ -914,7 +914,7 @@
       "edition_date": "2026-11-10",
       "validation_result": "batch_sha256_bytes_schema_unique_ids_source_dates_qualified_sources_and_archive_dedup_checked",
       "status": "partially_published_with_6_deferred_catalog_proposals",
-      "publication_outcome": "immutable_revision_1_pending_cloudflare_http_browser_and_githack_verification",
+      "publication_outcome": "immutable_revision_1_cloudflare_http_browser_and_githack_verified",
       "publication_edition": "2026-11-10-v1",
       "accepted_news_ids": [
         "ai-news-google-alphaproof-code",
@@ -947,14 +947,25 @@
         "technology_updated": 0
       },
       "review_notes": "Four November 10 and five November 9 reports, independently cross-checked with original DeepMind, arXiv and attributed Reuters/Le Monde sources. Partial coverage and two failed source opens preserved. Six catalog proposals are withheld pending canonical and availability review.",
-      "production_verified_at": null,
+      "production_verified_at": "2026-11-10T14:46:53Z",
       "publication_history": [
         {
           "edition": "2026-11-10-v1",
-          "status": "pending_cloudflare_http_browser_and_githack_verification",
-          "note": "Prepared as an atomic publisher commit; immutable bytes and pending state do not assert hosted verification."
+          "status": "cloudflare_http_browser_and_githack_verified",
+          "note": "Prepared as an atomic publisher commit; immutable bytes and pending state do not assert hosted verification.",
+          "verified_at": "2026-11-10T14:46:53Z",
+          "production_commit": "2d76c34f9d9ce79bb8114cd69d73cda2a9af3360",
+          "production_workflow_run_id": 42835459925,
+          "githack_workflow_run_id": 42835459697
         }
-      ]
+      ],
+      "production_verified_revision": 1,
+      "last_verified_at": "2026-11-10T14:46:53Z",
+      "last_verified_public_url": "https://aiupdates.app/whats-new.html?date=2026-11-10&revision=1",
+      "production_workflow_run_id": 42835459925,
+      "githack_workflow_run_id": 42835459697,
+      "production_commit": "2d76c34f9d9ce79bb8114cd69d73cda2a9af3360",
+      "verification_scope": "Exact main 2d76c34f9d9ce79bb8114cd69d73cda2a9af3360 passed catalog/GitHack workflow 42835459697 and Cloudflare build, hosted browser and HTTP verification workflow 42835459925 by 2026-11-10T14:46:53Z. Verified 499 exact assets each on three production hostnames, including the November 10 immutable edition JSON, current archive index and receipts, with mobile/desktop dark/light and script-free/keyboard navigation, Games and offline checks. Dated archive navigation was browser-tested; the exact Nov10 date/revision query was not separately requested in an independent external browser. Partial source coverage and six deferred catalog proposals preserved."
     }
   ]
 }
