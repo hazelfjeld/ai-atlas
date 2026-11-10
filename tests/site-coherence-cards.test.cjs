@@ -5,6 +5,27 @@ const fs = require('node:fs');
 const path = require('node:path');
 const css = fs.readFileSync(path.join(__dirname, '..', 'site-chrome.css'), 'utf8');
 
+
+test('Research shares the heading-first reading order of Discover and Playbooks', () => {
+  const research = fs.readFileSync(path.join(__dirname, '..', 'research.html'), 'utf8');
+  const home = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+  const playbooks = fs.readFileSync(path.join(__dirname, '..', 'playbooks.html'), 'utf8');
+  const hero = research.indexOf('<section class="hero" id="main" tabindex="-1">');
+  const nav = research.indexOf('<nav class="research-local-nav" aria-label="Research views">');
+  const notice = research.indexOf('<div class="notice">', nav);
+  assert.ok(hero > 0 && hero < nav && nav < notice,
+    'Research must introduce the view before offering contextual navigation, like other landings');
+  assert.ok(home.indexOf('<h1>Discover</h1>') < home.indexOf('id="catalog-loading"'),
+    'Discover presents its page title before loading interactive data');
+  assert.ok(playbooks.indexOf('class="playbook-hero"') < playbooks.indexOf('class="playbook-tools"'),
+    'Playbooks introduces its content before local filters');
+  const links = research.slice(nav, notice);
+  assert.deepEqual([...links.matchAll(/data-nav="([^"]+)"/g)].map(m => m[1]),
+    ['papers', 'alerts', 'coverage'], 'Keep all existing native research hash routes');
+  assert.match(links, /id="papers-count"/);
+  assert.match(links, /id="alerts-count"/);
+});
+
 test('Playbooks, Technology, Research and editorial reviews reuse Discover card type', () => {
   const block = css.split('/* atlas-editorial-card-copy:begin */')[1]
     ?.split('/* atlas-editorial-card-copy:end */')[0];

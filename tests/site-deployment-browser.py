@@ -903,6 +903,26 @@ with sync_playwright() as p:
     # destinations as Games, while keeping its own three research-view tabs.
     mobile_research = browser.new_page(viewport={'width':320, 'height':720}, reduced_motion='reduce')
     mobile_research.goto(base + 'research.html')
+
+    # Research had three prominent local-view pills ABOVE its page heading;
+    # Discover/Playbooks introduce the page first. Preserve the same live hash
+    # routes, but let the article heading lead on phones and desktop alike.
+    for width in (320, 390, 768, 1280):
+        mobile_research.set_viewport_size({'width': width, 'height': 900})
+        for scheme in ('light', 'dark'):
+            mobile_research.emulate_media(color_scheme=scheme)
+            check(f'research {width}px {scheme}: heading precedes contextual views',
+                  mobile_research.evaluate("""() => {
+                    const heading = document.querySelector('#main h1');
+                    const hero = document.querySelector('section.hero#main');
+                    const tabs = document.querySelector('nav.research-local-nav');
+                    return !!heading && !!tabs &&
+                      hero.compareDocumentPosition(tabs) & Node.DOCUMENT_POSITION_FOLLOWING &&
+                      hero.getBoundingClientRect().top < tabs.getBoundingClientRect().top &&
+                      document.documentElement.scrollWidth <= innerWidth + 1;
+                  }"""))
+    mobile_research.set_viewport_size({'width': 320, 'height': 720})
+    mobile_research.emulate_media(color_scheme='light')
     check('research uses the compact mobile navigation instead of the legacy sidebar',
           mobile_research.locator('.research-mobile-topbar').is_visible()
           and not mobile_research.locator('.shell > aside').is_visible()
