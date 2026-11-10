@@ -530,7 +530,7 @@ test('both generated A-Z directories share native script-free secondary mobile n
     const source=fs.readFileSync(path.join(__dirname,'..',sourceFile),'utf8');
     const generatedMobileSecondary = page === 'technology/index.html'
       ? source.includes("mobile_secondary=True")
-      : source.includes("mobile_secondary=(path == '"+page+"')");
+      : source.includes("mobile_secondary=(path == 'terms/index.html' or static_mobile_more)");
     assert.ok(generatedMobileSecondary, page+' has build-time shared navigation');
     const html=fs.readFileSync(path.join(__dirname,'..',page),'utf8');
     const menu=html.match(/<nav class="site-mobile-chrome__menu" aria-label="AI Updates sections">([\s\S]*?)<\/nav><\/details>/)?.[1];
@@ -555,18 +555,22 @@ test('generated detail mobile More sections clones the completed shared desktop 
   const cloned = script.indexOf("if (menu && !menu.querySelector('.site-mobile-chrome__more'))");
   assert.ok(created !== -1 && cloned > created,
     'Build the missing detail-page secondary rail before its mobile disclosure copies links');
+  // Existing expanded concept guides now render their shared secondary
+  // disclosure before JavaScript, as technology profiles already do.
   for (const detail of ['terms/MLD-0002-ablation-study.html', 'technology/TECH-0288-vllm.html']) {
     const html = fs.readFileSync(path.join(__dirname, '..', detail), 'utf8');
     assert.match(html, /class="site-mobile-chrome__menu"/);
     assert.match(html, /class="site-chrome__links"/);
-    if (detail.startsWith('terms/')) {
-      assert.ok(!html.includes('site-mobile-chrome__more'),
-        'Concept details need the dynamically cloned mobile links');
-    } else {
-      assert.ok(html.includes('site-mobile-chrome__more'),
-        'Technology details retain their build-time script-free mobile links');
-    }
+    const extras = html.match(/<details class="site-mobile-chrome__more">([\\s\\S]*?)<\\/details>/g) || [];
+    assert.equal(extras.length, 1, detail + ' includes exactly one native mobile disclosure');
+    assert.equal((extras[0].match(/<a href=/g) || []).length, 8,
+      detail + ' keeps all eight canonical secondary destinations without scripts');
   }
+  // The 1,288 ordinary imported definitions remain unchanged in this bounded
+  // migration; their links must still clone from the shared desktop rail.
+  const plain = fs.readFileSync(path.join(__dirname, '..', 'terms/MLD-0001-a-b-test.html'), 'utf8');
+  assert.ok(!plain.includes('site-mobile-chrome__more'),
+    'Unmigrated ordinary concept pages still use the progressive enhancement fallback');
   const offline = fs.readFileSync(path.join(__dirname, '..', 'downloads/Atlas_Demo_Offline.html'), 'utf8');
   assert.ok(offline.includes(script), 'Offline fallback must embed the identical shared interaction script');
 });
