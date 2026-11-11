@@ -1137,16 +1137,16 @@ test('hydrated Discover route titles share native primary navigation labels', ()
 
 test('Games shares the script-free policy and coverage footer destinations', () => {
   const generator = fs.readFileSync(path.join(__dirname, '..', 'scripts/site_chrome.py'), 'utf8');
-  assert.ok(!generator.includes('if path == "games.html":\\n        return html'),
+  assert.ok(!generator.includes('if path == "games.html":\n        return html'),
     'Every standalone footer must pass through the canonical resource synchronizer');
   for (const route of ['about.html', 'whats-new.html', 'games.html']) {
     const html = fs.readFileSync(path.join(__dirname, '..', route), 'utf8');
-    const footers = [...html.matchAll(/<footer\\b[^>]*>([\\s\\S]*?)<\\/footer>/g)];
+    const footers = [...html.matchAll(/<footer\b[^>]*>([\s\S]*?)<\/footer>/g)];
     assert.equal(footers.length, 1, route + ' should preserve one native footer');
     const footer = footers[0][1];
-    assert.equal((footer.match(/href="about\\.html"/g) || []).length, 1,
+    assert.equal((footer.match(/href="about\.html"/g) || []).length, 1,
       route + ' must provide one script-free editorial policy link');
-    assert.equal((footer.match(/href="index\\.html#\\/sources"/g) || []).length, 1,
+    assert.equal((footer.match(/href="index\.html#\/sources"/g) || []).length, 1,
       route + ' must provide one script-free coverage link');
   }
   const games = fs.readFileSync(path.join(__dirname, '..', 'games.html'), 'utf8');
