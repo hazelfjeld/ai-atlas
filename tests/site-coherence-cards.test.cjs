@@ -145,7 +145,8 @@ test('standalone workspace headings are real shared DOM text, not CSS-only label
     const searchAt = html.indexOf('site-mobile-chrome__search');
     assert.ok(html.indexOf(title) > html.indexOf('site-mobile-chrome__nav')
       && html.indexOf(title) < searchAt, route + ' title must precede functional search');
-    assert.ok(html.includes('data-page-label="' + expected + '"'), route + ' label drift');
+    assert.ok(html.includes('aria-label="AI Updates mobile header" data-page-label="' + expected + '"'),
+      route + ' must expose the same named mobile header as Discover, even without JavaScript');
     assert.ok(html.includes('site-chrome__links'), route + ' lost primary navigation');
   }
   assert.match(css, /\.site-mobile-chrome:has\(> \.site-mobile-chrome__title\)::before\{display:none\}/);
