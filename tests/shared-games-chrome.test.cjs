@@ -89,3 +89,22 @@ test('Games keeps canonical script-free policy links without duplicating the nat
   assert.ok(read('downloads/Atlas_Demo_Offline.html').includes('About & editorial policy'),
             'offline app keeps its canonical policy label');
 });
+
+test('standalone editorial footers use the shared policy label and retain sources', () => {
+  for (const file of [
+    'demo.html', 'research.html', 'catalog-review.html', 'hardware-review.html',
+    'games.html', 'technologies.html', 'playbooks.html', 'whats-new.html'
+  ]) {
+    const footer = read(file).match(/<footer\b[^>]*>[\s\S]*?<\/footer>/)?.[0] || '';
+    assert.ok(footer, file + ' exposes a script-free footer');
+    assert.equal(
+      (footer.match(/<a href="about\.html">Editorial policy &(?:amp;)? coverage<\/a>/g) || []).length,
+      1, file + ' uses the same visible editorial-policy destination'
+    );
+    assert.match(footer, /href="index\.html#\/sources"/,
+                 file + ' retains its source/coverage destination');
+  }
+  assert.ok(read('scripts/site_chrome.py').includes(
+    'for old_label in ("Editorial policy", "Editorial corrections policy")'
+  ), 'the build normalizes both legacy names in the shared generator');
+});
