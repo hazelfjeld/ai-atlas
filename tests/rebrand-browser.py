@@ -48,6 +48,13 @@ with sync_playwright() as p:
     check('About provides context and the same public Discord invitation without JavaScript',
           page.locator('a[href="https://discord.gg/mvRJjgdM4R"]').count() == 1
           and 'Discord' in page.locator('main').inner_text())
+    page.goto(base + 'games.html')
+    check('script-free Games shows the same native reference fallback as other site sections',
+          page.locator('main .site-static-fallback').is_visible()
+          and page.locator('main .site-static-fallback a[href="terms/index.html"]').count() == 1
+          and page.locator('main .site-static-fallback a[href="technology/index.html"]').count() == 1
+          and not page.locator('#load-status').is_visible()
+          and not page.locator('.catalog-badge').is_visible())
     page.goto(base)
 
     # All native page families must use the same readable OS-dark palette even

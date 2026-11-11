@@ -108,3 +108,22 @@ test('standalone editorial footers use the shared policy label and retain source
     'for old_label in ("Editorial policy", "Editorial corrections policy")'
   ), 'the build normalizes both legacy names in the shared generator');
 });
+
+test('standalone Games reuses the shared in-main script-free fallback, never an endless loader', () => {
+  const html = read('games.html');
+  const main = html.indexOf('<main id="main" tabindex="-1">');
+  const end = html.indexOf('</main>', main);
+  const fallback = html.indexOf('<noscript><section class="site-static-fallback"', main);
+  const loader = html.indexOf('<div id="load-status" class="notice site-js-only"', main);
+  assert.ok(main >= 0 && fallback > main && loader > fallback && end > loader,
+    'Games must render its native reference fallback before the JS-only loading state inside main');
+  const section = html.slice(fallback, html.indexOf('</section></noscript>', fallback));
+  for (const href of ['terms/index.html', 'technology/index.html']) {
+    assert.ok(section.includes('href="' + href + '"'), 'Fallback must retain ' + href);
+    assert.ok(fs.existsSync(path.join(__dirname, '..', href)), 'Fallback target missing ' + href);
+  }
+  assert.ok(html.includes('class="catalog-badge site-js-only"'),
+    'Script-free visitors should not see a permanently checking concept count');
+  assert.ok(!html.slice(end).includes('<noscript>'),
+    'The fallback belongs in the main content landmark, not after it');
+});
