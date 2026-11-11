@@ -308,6 +308,15 @@ body > .site-mobile-chrome:not([data-page-label]):has(+ .site-chrome .site-chrom
    leaving the real workspace nav and shell widths unchanged. */
 :is(.tech-shell,.playbook-shell)>main{padding:0}
 
+/* The daily archive used its 16px shell gutter plus Discover's generic
+   20px main gutter on phones. Match the 20px shared reading origin while
+   preserving the original full-width native navigation/search header. */
+@media (max-width:650px){
+  .shell:has(> .site-chrome.top){padding-inline:20px}
+  .shell:has(> .site-chrome.top) > main{padding-inline:0}
+  .shell:has(> .site-chrome.top) > .mobile-topbar{margin-inline:-20px;padding-inline:20px}
+}
+
 /* Match Discover's first-content position beneath the 78px workspace bar.
    These existing landing pages previously stacked 38-56px of legacy hero
    whitespace on top of their shell padding. Apply one shared 8px rhythm

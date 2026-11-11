@@ -1704,6 +1704,7 @@ with sync_playwright() as p:
         page.set_viewport_size({'width':width,'height':844})
         for theme in ('light', 'dark'):
             baseline=None
+            discover_reading_x=None
             for route, selector in (
                 ('index.html','.topbar'),
                 ('terms/index.html','.site-mobile-chrome'),
@@ -1725,6 +1726,17 @@ with sync_playwright() as p:
                     theme:document.documentElement.dataset.theme
                 })""")
                 if baseline is None: baseline=metrics['height']
+                if route == 'index.html':
+                    discover_reading_x = page.locator('.discover-heading h1:visible').first.evaluate(
+                        'el => el.getBoundingClientRect().left')
+                elif route == 'whats-new.html':
+                    archive_reading_x = page.locator('main > header .discover-heading h1').evaluate(
+                        'el => el.getBoundingClientRect().left')
+                    nav_frame = box.bounding_box()
+                    check(f'{route} {width}px {theme} shares Discover mobile reading gutter',
+                          discover_reading_x is not None and
+                          abs(archive_reading_x-discover_reading_x)<=2.5 and
+                          abs(nav_frame['x'])<=2.5 and abs(nav_frame['width']-width)<=2.5)
                 check(f'{route} {width}px {theme} shared mobile header frame',
                       abs(metrics['height']-baseline)<=2.5 and
                       not metrics['overflow'] and metrics['theme']==theme)
