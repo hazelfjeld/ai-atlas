@@ -668,7 +668,11 @@ test('all 1345 concept details share the same script-free primary and secondary 
     assert.ok(html.includes('<script src="../site-theme.js"></script>'), id);
     const mainOpen = '<main class="term-shell">';
     const heroOpen = '<header class="hero" id="main" tabindex="-1">';
-    assert.equal(html.split(mainOpen)[1]?.split(heroOpen)[0], detailNav, id);
+    const nativeNavStart = html.indexOf('<div class="directory-mobile-topbar site-mobile-chrome"');
+    const nativeMainStart = html.indexOf(mainOpen);
+    assert.ok(nativeNavStart > 0 && nativeNavStart < nativeMainStart, id + ' has native sibling navigation');
+    assert.equal(html.slice(nativeNavStart, nativeMainStart), detailNav, id);
+    assert.ok(nativeMainStart < html.indexOf(heroOpen), id + ' keeps the article heading inside main');
     const extras = html.match(/<details class="site-mobile-chrome__more">[\s\S]*?<\/details>/)?.[0];
     assert.ok(extras, id + ' has native script-free mobile secondary navigation');
     assert.equal((extras.match(/<a href=/g) || []).length, 8, id + ' keeps all eight secondary routes');
