@@ -977,7 +977,7 @@
       "edition_date": "2026-11-11",
       "validation_result": "batch_sha256_bytes_schema_unique_ids_dates_qualified_publisher_source_check_10_stories",
       "status": "partially_published_with_8_deferred_catalog_proposals",
-      "publication_outcome": "pending_cloudflare_http_browser_and_githack_verification",
+      "publication_outcome": "immutable_revision_1_cloudflare_http_browser_and_githack_verified",
       "publication_edition": "2026-11-11-v1",
       "accepted_news_ids": [
         "ai-news-qvac-botpsy-0-8b-20261111",
@@ -1012,16 +1012,26 @@
         "catalog_deferred": 8,
         "technology_updated": 0
       },
-      "review_notes": "Published only source-qualified news from the collector's independently checksummed batch; all 10 news stories use attributed evidence and explicit caveats. Five technology and three terminology proposals remain deferred for canonical/catalog/license checks. The collector's partial coverage and inaccessible arXiv API are preserved. Hosted verification pending.",
-      "production_verified_at": null,
+      "review_notes": "Published only source-qualified news from the collector's independently checksummed batch; all 10 news stories use attributed evidence and explicit caveats. Five technology and three terminology proposals remain deferred for canonical/catalog/license checks. The collector's partial coverage and inaccessible arXiv API are preserved. Hosted production verification passed November 11 at 16:49:15Z; exact dated query permalink was not independently reopened outside the workflow.",
+      "production_verified_at": "2026-11-11T16:49:15Z",
       "publication_history": [
         {
           "edition": "2026-11-11-v1",
-          "status": "pending_production_verification",
-          "note": "Source-qualified collector batch independently checksummed, indexed and awaiting Cloudflare/GitHack hosted verification; no public deployment claimed.",
-          "verified_at": null
+          "status": "cloudflare_http_browser_and_githack_verified",
+          "note": "Source-qualified November 11 edition deployed and independently passed Cloudflare production HTTP/hosted browser checks (500 assets per each of three hosts) on exact main fe8c2eaf3716f26a7eae6c2e10a2d876f9cb9534. Earlier content-matched GitHack/catalog passed. Direct external opening of date/revision permalink not independently available.",
+          "verified_at": "2026-11-11T16:49:15Z",
+          "production_commit": "fe8c2eaf3716f26a7eae6c2e10a2d876f9cb9534",
+          "production_workflow_run_id": 43060279051,
+          "githack_workflow_run_id": 43049502132
         }
-      ]
+      ],
+      "production_verified_revision": 1,
+      "last_verified_at": "2026-11-11T16:49:15Z",
+      "last_verified_public_url": "https://aiupdates.app/whats-new.html?date=2026-11-11&revision=1",
+      "production_commit": "fe8c2eaf3716f26a7eae6c2e10a2d876f9cb9534",
+      "production_workflow_run_id": 43060279051,
+      "githack_workflow_run_id": 43049502132,
+      "verification_scope": "Exact tested main fe8c2eaf3716f26a7eae6c2e10a2d876f9cb9534 passed Cloudflare validate and production jobs in workflow 43060279051 by 2026-11-11T16:49:15Z: 500 exact HTTP assets on each of workers.dev, apex, and www; hosted Chromium tests for the archive, navigation, responsive 320/390/768/1280 layouts, themes, keyboard, script-free pages, Games, and offline paths. The earlier catalog/GitHack run 43049502132 succeeded for the November 11 editorial content (main 6c804008); the intervening main changes updated only the browser-install workflow, not public site assets. This is production HTTP/browser verification, not an independent direct browser reopening of the dated query permalink."
     }
   ]
 }
