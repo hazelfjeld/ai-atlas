@@ -77,6 +77,7 @@ def shell(title, description, path, body, structured=None, *, article_title=None
     prefix = '../' if '/' in path else ''
     mobile_css = DIRECTORY_MOBILE_CSS if path.startswith('technology/') or path == 'about.html' else ''
     print_nav = ',.directory-mobile-topbar' if path == 'about.html' else ''
+    # Detail pages supply their canonical h1 in the shared script-free workspace title.
     desktop_nav = render_directory_nav(prefix, 'Technology profiles', mobile_brand=True, native_secondary=True, mobile_secondary=True, page_label=('Technology profiles' if path == 'technology/index.html' else article_title), topbar_title=('Technology profiles' if path == 'technology/index.html' else article_title)) if path.startswith('technology/') else (render_directory_nav(prefix, 'About', mobile_brand=True, page_label='About', topbar_title='About', native_secondary=True, mobile_secondary=True) if path == 'about.html' else nav(prefix))
     chrome_css = f'<link rel="stylesheet" href="{prefix}site-chrome.css">\n' if path == 'about.html' or path.startswith('technology/') else ''
     theme_script = f'<script src="{prefix}site-theme.js"></script>' if path == 'about.html' or path.startswith('technology/') else ''
