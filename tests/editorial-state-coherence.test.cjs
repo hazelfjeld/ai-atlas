@@ -30,3 +30,26 @@ test('About and Research describe the same published editorial state as the date
   assert.ok(research.includes('not a continuously live news feed'),
     'Research must not imply that the site crawls or verifies continuously');
 });
+
+test('The public archive clock and visible release status agree with the latest verified receipt', () => {
+  const archive = JSON.parse(read('data/daily/index.json'));
+  const ledger = JSON.parse(read('data/daily/published-batches.json'));
+  const lastVerified = ledger.receipts.filter(r => r.production_verified_at).at(-1);
+  assert.ok(lastVerified, 'At least one independently verified release is required');
+  assert.equal(archive.last_successful_publish_at, lastVerified.production_verified_at);
+  const entry = archive.editions.at(-1);
+  const receipt = ledger.receipts.find(r => r.publication_edition === entry.date + '-v' + entry.revision);
+  assert.ok(receipt, 'Latest displayed archive needs an exact batch receipt');
+  const isVerified = Boolean(receipt.production_verified_at);
+  assert.equal(archive.status, 'edition_revision_' + entry.revision +
+    (isVerified ? '_production_verified' : '_pending_production_verification'));
+  if (isVerified) {
+    assert.equal(receipt.publication_history.at(-1).status, 'cloudflare_http_browser_and_githack_verified');
+    assert.ok(receipt.production_workflow_run_id > 0, 'Production proof must identify the completed workflow');
+    assert.equal(receipt.last_verified_public_url,
+      'https://aiupdates.app/whats-new.html?date=' + entry.date + '&revision=' + entry.revision);
+  }
+  const reader = read('whats-new.js');
+  assert.ok(reader.includes('Last successful publication: '), 'Archive must surface the actual verified clock');
+  assert.ok(reader.includes('index?.last_successful_publish_at?stamp('), 'Archive must use the shared index clock');
+});
