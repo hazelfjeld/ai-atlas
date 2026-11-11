@@ -5,7 +5,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 const root = path.join(__dirname, '..');
-const title = /<header class="hero"[^>]*>[\\s\\S]*?<h1>([^<]+)<\\/h1>/;
+const title = /<header class="hero"[^>]*>[\s\S]*?<h1>([^<]+)<\/h1>/;
 
 test('all generated concept and technology profiles expose their article title without scripts', () => {
   let count = 0;
@@ -24,7 +24,7 @@ test('all generated concept and technology profiles expose their article title w
         file + ' must announce the specific profile in the static workspace bar');
       assert.ok(html.includes('<span class="site-mobile-chrome__title">' + heading + '</span>'),
         file + ' must expose real static title text without JavaScript');
-      assert.equal((html.match(/<main\\b/g) || []).length, 1, file);
+      assert.equal((html.match(/<main\b/g) || []).length, 1, file);
       assert.ok(html.indexOf('<nav class="site-chrome term-nav"') < html.indexOf('<main'),
         file + ' must keep shared navigation outside main');
       count++;
