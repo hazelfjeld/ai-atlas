@@ -64,3 +64,25 @@ test('secondary static destinations are identified in the shared rail before hyd
   assert.ok(css.includes('.site-chrome__more-links a:hover,.site-chrome__more-links a[aria-current]'), 'active secondary rail uses the shared visible selection');
   assert.ok(read('downloads/Atlas_Demo_Offline.html').includes(css), 'offline chrome remains the exact shared stylesheet');
 });
+
+test('Games keeps canonical script-free policy links without duplicating the native app footer', () => {
+  const games=read('games.html'), app=read('index.html');
+  const footer=games.match(/<footer>([\\s\\S]*?)<\\/footer>/)?.[1];
+  assert.ok(footer, 'standalone Games has one native footer');
+  assert.equal((footer.match(/href="about\\.html"/g)||[]).length, 1,
+               'standalone Games includes one actual editorial-policy destination without JavaScript');
+  assert.equal((footer.match(/href="index\\.html#\\/sources"/g)||[]).length, 1,
+               'standalone Games retains coverage without JavaScript');
+  assert.match(app, /<footer class="main-footer">[\\s\\S]*?href="about\\.html">About & editorial policy<\\/a>/,
+               'native workspace already provides policy in its shared footer');
+  const canonical=read('scripts/site_chrome.py');
+  assert.ok(!canonical.includes('if path == "games.html":\\n        return html'),
+            'Games footer follows the shared build-time resource synchronizer');
+  const install=read('scripts/install_games_workspace.py');
+  assert.ok(install.includes('body = body.replace(\\' · <a href="about.html">Editorial policy & coverage</a>\\', \\'\\')'),
+            'native Games discards only the duplicate policy link');
+  assert.doesNotMatch(read('games-tab.js'), /Editorial policy & coverage/,
+                      'the native Games module does not copy the redundant link');
+  assert.ok(read('downloads/Atlas_Demo_Offline.html').includes('About & editorial policy'),
+            'offline app keeps its existing canonical policy label');
+});

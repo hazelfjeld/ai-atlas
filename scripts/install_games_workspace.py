@@ -62,6 +62,10 @@ def build_tab():
         raise RuntimeError('Standalone game template changed')
     body = match.group(1).replace('href="index.html#/', 'href="#/')
     body = body.replace('Scores and missed concepts stay in this tab’s memory.', 'Leaving Games ends the current round. Best times stay in this browser tab’s memory.')
+    # The standalone page needs its own script-free policy link; the native
+    # workspace already has the canonical app-shell policy footer. Avoid duplicates
+    # and retain byte-identical generated Games/offline artifacts.
+    body = body.replace(' · <a href="about.html">Editorial policy & coverage</a>', '')
     template = '<div class="atlas-games">' + body + '</div>'
     ui = (ROOT / 'games.js').read_text(encoding='utf-8')
     ui = replace_once(ui, '(async () => {', '''(function () {

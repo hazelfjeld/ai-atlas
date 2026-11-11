@@ -486,10 +486,8 @@ def ensure_footer_resources(html, path):
     """
     import re
     assert path in STANDALONE_NAVS
-    # The native Games footer feeds the generated workspace and offline demo.
-    # Preserve its current guidance and source link without changing gameplay assets.
-    if path == "games.html":
-        return html
+    # Games also uses the canonical footer resources. Its generated native
+    # workspace deliberately omits the duplicate policy link supplied by the app shell.
     match = re.search(r"<footer\b[^>]*>[\s\S]*?</footer>", html)
     assert match, "Missing standalone footer: " + path
     footer = match.group(0)
