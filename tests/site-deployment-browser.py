@@ -99,6 +99,13 @@ with sync_playwright() as p:
                 check('script-free reference article intro matches Discover mobile spacing '
                       + scheme + ' ' + str(width) + ' ' + route,
                       measurement['margin'] == '18px' and measurement['visible'])
+                if route.startswith(('terms/MLD-', 'technology/TECH-')):
+                    check('script-free generated profile has separate shared nav and main '
+                          + scheme + ' ' + str(width) + ' ' + route,
+                          intro_page.locator('body > .directory-mobile-topbar.site-mobile-chrome').count() == 1
+                          and intro_page.locator('body > nav.site-chrome.term-nav').count() == 1
+                          and intro_page.locator('main.term-shell > .site-chrome').count() == 0
+                          and intro_page.locator('main.term-shell > header.hero#main').count() == 1)
         intro_context.close()
     # Every profile should have separate site and article landmarks, even when
     # scripts are disabled and the viewport is just 320 pixels wide.
