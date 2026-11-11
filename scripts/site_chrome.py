@@ -250,7 +250,7 @@ STANDALONE_NAVS = {
                        "playbook-search-placeholder", "playbook-top", "Playbooks", "page", True),
     "whats-new.html": ("mobile-topbar", "archive-mobile-nav", "archive-mobile-nav", "archive-menu-toggle",
                        "archive-menu-panel", "archive-search-link", "archive-search-icon",
-                       "archive-search-placeholder", "top", "What’s New Today", "page", False),
+                       "archive-search-placeholder", "top", "What’s New Today", "page", True),
 }
 
 
