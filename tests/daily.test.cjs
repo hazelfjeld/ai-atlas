@@ -1690,3 +1690,28 @@ test('November 10 edition checks collector hashes, review scope, and newest scri
  assert.equal(archive.status,'edition_revision_1_'+(isVerified?'production_verified':'pending_production_verification'));
  assert.equal(archive.last_successful_publish_at,verifiedPublicationClock());
 });
+
+
+test('November 11 daily edition has durable publisher receipt, source qualification and script-free archive access',()=>{
+ const crypto=require('node:crypto');
+ const idx=JSON.parse(fs.readFileSync('data/daily/index.json','utf8'));
+ const ref=idx.editions.find(x=>x.date==='2026-11-11'&&x.revision===1);
+ assert.ok(ref,'November 11 immutable edition is indexed');
+ const bytes=fs.readFileSync(ref.path);
+ assert.equal(bytes.length,ref.bytes);
+ assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'),ref.sha256);
+ const edition=JSON.parse(bytes);
+ D.validateEdition(edition,ref);
+ assert.equal(edition.news.length,10);
+ assert.equal(edition.coverage.status,'partial');
+ assert.equal(edition.coverage.sources_failed.length,1);
+ assert.equal(edition.technologies.length,0);
+ assert.equal(edition.terms.length,0);
+ const r=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8')).receipts.at(-1);
+ assert.equal(r.batch_id,'atlas-daily-20261111-20261111T144728890z-source-review-a');
+ assert.deepEqual(edition.news.map(x=>x.id),r.accepted_news_ids);
+ assert.equal(r.counts.catalog_deferred,8);
+ assert.ok(r.publication_history.at(-1).status==='pending_production_verification'||r.publication_history.at(-1).status==='cloudflare_http_browser_and_githack_verified');
+ const html=fs.readFileSync('whats-new.html','utf8');
+ assert.ok(html.includes('href="'+ref.path+'"'),'The script-free daily archive includes the newest edition');
+});

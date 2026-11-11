@@ -980,16 +980,16 @@
       "publication_outcome": "pending_cloudflare_http_browser_and_githack_verification",
       "publication_edition": "2026-11-11-v1",
       "accepted_news_ids": [
-        "ai-news:qvac-botpsy-0-8b-20261111",
-        "ai-news:helsing-clarity-20261111",
-        "ai-news:google-gemini4-carbon-availability-20261110",
-        "ai-news:pytorch-executorch-webgpu-20261110",
-        "ai-news:motiongraphicsbench-20261110",
-        "ai-news:tng-bring-your-own-expert-20261110",
-        "ai-news:openai-businesses-chatgpt-20261110",
-        "ai-news:anthropic-ipo-roadshow-20261110",
-        "ai-news:openai-upwork-freelance-report-20261110",
-        "ai-news:us-china-ai-dialogue-bessent-20261111"
+        "ai-news-qvac-botpsy-0-8b-20261111",
+        "ai-news-helsing-clarity-20261111",
+        "ai-news-google-gemini4-carbon-availability-20261110",
+        "ai-news-pytorch-executorch-webgpu-20261110",
+        "ai-news-motiongraphicsbench-20261110",
+        "ai-news-tng-bring-your-own-expert-20261110",
+        "ai-news-openai-businesses-chatgpt-20261110",
+        "ai-news-anthropic-ipo-roadshow-20261110",
+        "ai-news-openai-upwork-freelance-report-20261110",
+        "ai-news-us-china-ai-dialogue-bessent-20261111"
       ],
       "deferred_news_ids": [],
       "deferred_catalog_proposal_ids": [
@@ -1013,7 +1013,15 @@
         "technology_updated": 0
       },
       "review_notes": "Published only source-qualified news from the collector's independently checksummed batch; all 10 news stories use attributed evidence and explicit caveats. Five technology and three terminology proposals remain deferred for canonical/catalog/license checks. The collector's partial coverage and inaccessible arXiv API are preserved. Hosted verification pending.",
-      "production_verified_at": null
+      "production_verified_at": null,
+      "publication_history": [
+        {
+          "edition": "2026-11-11-v1",
+          "status": "pending_production_verification",
+          "note": "Source-qualified collector batch independently checksummed, indexed and awaiting Cloudflare/GitHack hosted verification; no public deployment claimed.",
+          "verified_at": null
+        }
+      ]
     }
   ]
 }

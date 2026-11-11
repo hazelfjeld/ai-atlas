@@ -293,5 +293,5 @@
   ],
   "last_successful_publish_at": "2026-11-10T14:46:53Z",
   "status": "edition_revision_1_pending_production_verification",
-  "coverage_note": "November 11 source-attributed partial edition: 10 reports (three November 11, seven November 10), five deferred technology proposals and three deferred terminology proposals, one failed metadata feed. Pending public Cloudflare/GitHack and direct dated HTML verification. Existing last_successful_publish_at retained until verification."
+  "coverage_note": "November 11 revision 1 source-attributed partial edition: 10 reports (three November 11, seven November 10), five deferred technology proposals and three deferred terminology proposals, one failed metadata feed. Pending public Cloudflare/GitHack and direct dated HTML verification; last successful publication clock remains that of November 10."
 }
