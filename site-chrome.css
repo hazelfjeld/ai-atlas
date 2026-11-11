@@ -698,10 +698,12 @@ body:has(.site-chrome) :is(.tech-controls,.playbook-tools,.controls,.search-cont
 /* The shared rail and header precede technology-profile article content,
    preserving Discover-style reading rhythm and mobile gutters. */
 @media(min-width:651px){
+ body:has(> .site-chrome.term-nav) > .term-shell > .hero{margin-top:8px}
  body:has(> .site-chrome.term-nav) > .term-shell > .breadcrumb-links + .hero{margin-top:8px}
 }
 @media(max-width:650px){
  body > .directory-mobile-topbar{margin:0;padding-inline:20px}
+ body:has(> .site-chrome.term-nav) > .term-shell > .hero{margin-top:18px}
  body:has(> .site-chrome.term-nav) > .term-shell > .breadcrumb-links + .hero{margin-top:18px}
 }
 

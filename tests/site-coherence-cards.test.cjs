@@ -1076,6 +1076,10 @@ test('generated concept details share technology sibling navigation without requ
     'Migration is narrowly guarded against changing unrelated pages');
   assert.ok(style.includes('body > .directory-mobile-topbar.site-mobile-chrome:has(+ nav.site-chrome + main.term-shell)'),
     'Moved header must not inherit the legacy negative mobile gutters');
+  assert.ok(style.includes('body:has(> .site-chrome.term-nav) > .term-shell > .hero{margin-top:18px}'),
+    'All script-free concept and directory article introductions share Discover mobile spacing');
+  assert.ok(style.includes('body:has(> .site-chrome.term-nav) > .term-shell > .hero{margin-top:8px}'),
+    'All reference article headings share the existing desktop spacing');
   assert.ok(offline.includes(script) && offline.includes(style),
     'Offline demo embeds the exact current shared theme script and stylesheet');
 });

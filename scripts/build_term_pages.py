@@ -54,6 +54,7 @@ def shell(title, body, path, description, structured=None, *, native_concept_art
     if native_concept_article:
         assert article.startswith('<div class="directory-mobile-topbar site-mobile-chrome"'), path
         assert article.count('<main class="term-shell">') == 1, path
+        assert '<main class="term-shell"><header class="hero" id="main" tabindex="-1">' in article, path
         assert article.index('<nav class="site-chrome term-nav"') < article.index('<main class="term-shell">'), path
         assert article.count('class="site-chrome__links"') == 1, path
         assert article.count('class="site-mobile-chrome__search"') == 1, path
