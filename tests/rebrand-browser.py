@@ -244,19 +244,18 @@ with sync_playwright() as p:
               page.locator('.site-chrome__links a[aria-current="location"]').count() == 1
               and page.locator('.site-chrome__links a[aria-current="location"]').text_content() == 'What’s New Today')
 
-    # Directories now expose their real accessible workspace titles, while
-    # unchanged detail articles use their selected canonical parent as a CSS
-    # first-paint fallback. Test both presentations and the independently
-    # correct active parent without weakening the shared navigation contract.
+    # Directory and detail headers now expose real names from the shared build-time
+    # generator. The article title can differ from its active parent destination.
+    # Assert both the visible title and the selected canonical parent link.
     for width in (768, 1280):
         page.set_viewport_size({'width': width, 'height': 900})
         for theme in ('light', 'dark'):
             page.emulate_media(color_scheme=theme)
             for route, title, active_label in (
                 ('terms/index.html', 'Concept encyclopedia', 'Concept encyclopedia'),
-                ('terms/MLD-0002-ablation-study.html', 'Concept dictionary', 'Concept dictionary'),
+                ('terms/MLD-0002-ablation-study.html', 'Ablation study', 'Concept dictionary'),
                 ('technology/index.html', 'Technology profiles', 'Technology profiles'),
-                ('technology/TECH-0216-pytorch.html', 'Technology profiles', 'Technology profiles'),
+                ('technology/TECH-0216-pytorch.html', 'PyTorch', 'Technology profiles'),
             ):
                 page.goto(base + route)
                 # Directories and both kinds of generated detail profiles now
@@ -270,12 +269,9 @@ with sync_playwright() as p:
                       and page.locator('body > main.term-shell > header.hero#main').count() == 1)
                 real_title = header.locator(':scope > .site-mobile-chrome__title')
                 label = header.evaluate("el => getComputedStyle(el, '::before').content")
-                if route.endswith('/index.html'):
-                    visible_title = (real_title.count() == 1 and real_title.is_visible()
-                                     and real_title.inner_text() == title
-                                     and header.evaluate("el => getComputedStyle(el, '::before').display === 'none'"))
-                else:
-                    visible_title = (real_title.count() == 0 and title in label)
+                visible_title = (real_title.count() == 1 and real_title.is_visible()
+                                 and real_title.inner_text() == title
+                                 and header.evaluate("el => getComputedStyle(el, '::before').display === 'none'"))
                 check(f'{route} {width}px {theme} keeps its visible title and single selected destination',
                       header.is_visible() and visible_title
                       and active.count() == 1 and active.inner_text() == active_label)

@@ -2037,7 +2037,8 @@ with sync_playwright() as p:
         ('whats-new.html', 'What’s New Today', False),
         ('about.html', 'About', False),
         ('terms/index.html', 'Concept encyclopedia', False),
-        ('technology/TECH-0216-pytorch.html', 'Technology profiles', True),
+        ('terms/MLD-1179-structured-output.html', 'Structured output', False),
+        ('technology/TECH-0216-pytorch.html', 'PyTorch', False),
     ):
         first_paint.goto(base + route)
         check('unenhanced shared topbar has its expected visible title on ' + route,

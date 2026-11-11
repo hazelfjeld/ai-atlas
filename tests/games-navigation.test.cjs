@@ -616,9 +616,12 @@ test('all generated technology profiles use shared directory chrome with native 
     const html = read('technology/' + file);
     assert.ok(html.includes('<link rel="stylesheet" href="../site-chrome.css">'), file);
     assert.ok(html.includes('<script src="../site-theme.js"></script>'), file);
+    const heading = html.match(/<header class="hero" id="main" tabindex="-1">[\s\S]*?<h1>([^<]+)<\/h1>/)?.[1];
+    assert.ok(heading, file + ' must have a native profile heading');
     const detailFrame = directory
-      .replace(' data-page-label="Technology profiles"', '')
-      .replace('<span class="site-mobile-chrome__title">Technology profiles</span>', '');
+      .replace(' data-page-label="Technology profiles"', ' data-page-label="' + heading + '"')
+      .replace('<span class="site-mobile-chrome__title">Technology profiles</span>',
+        '<span class="site-mobile-chrome__title">' + heading + '</span>');
     assert.equal(landingNav(html), detailFrame, file);
     assert.ok(html.indexOf('<nav class="site-chrome term-nav"') < html.indexOf(prefix),
       file + ' must keep the shared rail outside the content landmark');
@@ -629,7 +632,7 @@ test('all generated technology profiles use shared directory chrome with native 
     assert.equal((html.match(/class="site-chrome__more"/g) || []).length, 1, file);
   }
   const generator = read('scripts/build_seo.py');
-  assert.ok(generator.includes("render_directory_nav(prefix, 'Technology profiles', mobile_brand=True, native_secondary=True, mobile_secondary=True, page_label=('Technology profiles' if path == 'technology/index.html' else None), topbar_title=('Technology profiles' if path == 'technology/index.html' else None)) if path.startswith('technology/')"));
+  assert.ok(generator.includes("render_directory_nav(prefix, 'Technology profiles', mobile_brand=True, native_secondary=True, mobile_secondary=True, page_label=('Technology profiles' if path == 'technology/index.html' else article_title), topbar_title=('Technology profiles' if path == 'technology/index.html' else article_title)) if path.startswith('technology/')"));
   assert.ok(generator.includes("DIRECTORY_MOBILE_CSS if path.startswith('technology/')"));
   assert.ok(read('downloads/Atlas_Demo_Offline.html').includes('/* Native, script-free reference pages: readable two-column touch navigation on phones.'));
 });
@@ -648,8 +651,9 @@ test('all 1345 concept details share the same script-free primary and secondary 
   // The directory alone is the active secondary destination. Detail pages
   // reuse its exact mobile and desktop link lists with no current-location marker.
   const detailNav = dictionaryNav
-    .replace(' data-page-label="Concept encyclopedia"', '')
-    .replace('<span class="site-mobile-chrome__title">Concept encyclopedia</span>', '')
+    .replace(' data-page-label="Concept encyclopedia"', ' data-page-label="__PROFILE_TITLE__"')
+    .replace('<span class="site-mobile-chrome__title">Concept encyclopedia</span>',
+      '<span class="site-mobile-chrome__title">__PROFILE_TITLE__</span>')
     .replace('<details class="site-chrome__more" open>', '<details class="site-chrome__more">')
     .replace('<details class="site-mobile-chrome__more" open>', '<details class="site-mobile-chrome__more">')
     .replaceAll('href="../terms/index.html" aria-current="location">Concept encyclopedia',
@@ -671,7 +675,10 @@ test('all 1345 concept details share the same script-free primary and secondary 
     const nativeNavStart = html.indexOf('<div class="directory-mobile-topbar site-mobile-chrome"');
     const nativeMainStart = html.indexOf(mainOpen);
     assert.ok(nativeNavStart > 0 && nativeNavStart < nativeMainStart, id + ' has native sibling navigation');
-    assert.equal(html.slice(nativeNavStart, nativeMainStart), detailNav, id);
+    const heading = html.match(/<header class="hero" id="main" tabindex="-1">[\s\S]*?<h1>([^<]+)<\/h1>/)?.[1];
+    assert.ok(heading, id + ' must retain a named native article heading');
+    assert.equal(html.slice(nativeNavStart, nativeMainStart),
+      detailNav.replaceAll('__PROFILE_TITLE__', heading), id);
     assert.ok(nativeMainStart < html.indexOf(heroOpen), id + ' keeps the article heading inside main');
     const extras = html.match(/<details class="site-mobile-chrome__more">[\s\S]*?<\/details>/)?.[0];
     assert.ok(extras, id + ' has native script-free mobile secondary navigation');
@@ -687,7 +694,7 @@ test('all 1345 concept details share the same script-free primary and secondary 
     assert.equal((links.match(/aria-current="page"/g) || []).length, 1, id);
   }
   const generator = read('scripts/build_term_pages.py');
-  assert.ok(generator.includes("directory_nav = render_directory_nav('../', (None if path == 'terms/index.html' else 'Concept dictionary'), mobile_brand=True, native_secondary=True, mobile_secondary=True, secondary_current=('encyclopedia' if path == 'terms/index.html' else None), page_label=('Concept encyclopedia' if path == 'terms/index.html' else None), topbar_title=('Concept encyclopedia' if path == 'terms/index.html' else None))"));
+  assert.ok(generator.includes("directory_nav = render_directory_nav('../', (None if path == 'terms/index.html' else 'Concept dictionary'), mobile_brand=True, native_secondary=True, mobile_secondary=True, secondary_current=('encyclopedia' if path == 'terms/index.html' else None), page_label=('Concept encyclopedia' if path == 'terms/index.html' else title), topbar_title=('Concept encyclopedia' if path == 'terms/index.html' else title))"));
   assert.ok(generator.includes('directory_css = DIRECTORY_MOBILE_CSS'));
 });
 
@@ -846,8 +853,8 @@ test('both generated catalog directories share Discover navigation and the nativ
     assert.ok(html.includes('THE FRONTIER, IN CONTEXT'), route);
   }
   const termGenerator=read('scripts/build_term_pages.py'), techGenerator=read('scripts/build_seo.py');
-  assert.ok(termGenerator.includes("render_directory_nav('../', (None if path == 'terms/index.html' else 'Concept dictionary'), mobile_brand=True, native_secondary=True, mobile_secondary=True, secondary_current=('encyclopedia' if path == 'terms/index.html' else None), page_label=('Concept encyclopedia' if path == 'terms/index.html' else None), topbar_title=('Concept encyclopedia' if path == 'terms/index.html' else None))"));
-  assert.ok(techGenerator.includes("render_directory_nav(prefix, 'Technology profiles', mobile_brand=True, native_secondary=True, mobile_secondary=True, page_label=('Technology profiles' if path == 'technology/index.html' else None), topbar_title=('Technology profiles' if path == 'technology/index.html' else None))"));
+  assert.ok(termGenerator.includes("render_directory_nav('../', (None if path == 'terms/index.html' else 'Concept dictionary'), mobile_brand=True, native_secondary=True, mobile_secondary=True, secondary_current=('encyclopedia' if path == 'terms/index.html' else None), page_label=('Concept encyclopedia' if path == 'terms/index.html' else title), topbar_title=('Concept encyclopedia' if path == 'terms/index.html' else title))"));
+  assert.ok(techGenerator.includes("render_directory_nav(prefix, 'Technology profiles', mobile_brand=True, native_secondary=True, mobile_secondary=True, page_label=('Technology profiles' if path == 'technology/index.html' else article_title), topbar_title=('Technology profiles' if path == 'technology/index.html' else article_title))"));
   assert.ok(read('scripts/site_chrome.py').includes('DIRECTORY_MOBILE_CSS'));
   assert.match(read('site-chrome.css'), /\.site-mobile-chrome__menu a\{[^}]*min-height:44px/);
 });

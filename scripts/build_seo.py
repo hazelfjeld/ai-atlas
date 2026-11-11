@@ -73,11 +73,12 @@ def nav(prefix=''):
     return f'<nav class="term-nav" aria-label="Site navigation"><a href="{prefix}index.html">AI Updates</a><a href="{prefix}whats-new.html">Daily editions</a><a href="{prefix}terms/index.html">Concepts</a><a href="{prefix}technology/index.html">Technologies</a><a href="{prefix}index.html#/games">Games</a><a href="{prefix}about.html">About</a></nav>'
 
 
-def shell(title, description, path, body, structured=None):
+def shell(title, description, path, body, structured=None, *, article_title=None):
     prefix = '../' if '/' in path else ''
     mobile_css = DIRECTORY_MOBILE_CSS if path.startswith('technology/') or path == 'about.html' else ''
     print_nav = ',.directory-mobile-topbar' if path == 'about.html' else ''
-    desktop_nav = render_directory_nav(prefix, 'Technology profiles', mobile_brand=True, native_secondary=True, mobile_secondary=True, page_label=('Technology profiles' if path == 'technology/index.html' else None), topbar_title=('Technology profiles' if path == 'technology/index.html' else None)) if path.startswith('technology/') else (render_directory_nav(prefix, 'About', mobile_brand=True, page_label='About', topbar_title='About', native_secondary=True, mobile_secondary=True) if path == 'about.html' else nav(prefix))
+    # Detail pages supply their canonical h1 in the shared script-free workspace title.
+    desktop_nav = render_directory_nav(prefix, 'Technology profiles', mobile_brand=True, native_secondary=True, mobile_secondary=True, page_label=('Technology profiles' if path == 'technology/index.html' else article_title), topbar_title=('Technology profiles' if path == 'technology/index.html' else article_title)) if path.startswith('technology/') else (render_directory_nav(prefix, 'About', mobile_brand=True, page_label='About', topbar_title='About', native_secondary=True, mobile_secondary=True) if path == 'about.html' else nav(prefix))
     chrome_css = f'<link rel="stylesheet" href="{prefix}site-chrome.css">\n' if path == 'about.html' or path.startswith('technology/') else ''
     theme_script = f'<script src="{prefix}site-theme.js"></script>' if path == 'about.html' or path.startswith('technology/') else ''
     # About reuses the same Discover hero component. Keep legacy detail-page
@@ -150,7 +151,7 @@ def main():
         body += f'<p><a href="../index.html#/technologies?record={r["id"]}">Compare, save or annotate this profile in the workspace →</a></p>'
         data = [{'@context': 'https://schema.org', '@type': 'WebPage', 'name': r['name'] + ' technology profile', 'description': r['what'], 'url': absolute(path), 'isPartOf': {'@type': 'WebSite', 'name': 'AI Updates', 'url': ORIGIN + '/'}, 'about': {'@type': 'Thing', 'name': r['name']}}, breadcrumbs([('AI Updates','index.html'), ('Technologies','technology/index.html'), (r['name'],path)])]
         description = (r['name'] + ': ' + r['what'] + ' Explore uses, tradeoffs and linked concepts.')[:170]
-        (ROOT / path).write_bytes(shell(r['name'] + ' — Uses & Tradeoffs | AI Updates', description, path, body, data).encode())
+        (ROOT / path).write_bytes(shell(r['name'] + ' — Uses & Tradeoffs | AI Updates', description, path, body, data, article_title=r['name']).encode())
     body = render_directory_hero('THE TECHNOLOGY FIELD GUIDE', 'Tools, with context.', f'{len(techs)} AI technology profiles. Explore what each does, where it fits, its tradeoffs and the ideas behind it.', lead=True) + '<p class="notice">The original 300 profiles are preserved; added profiles are separately source-reviewed, not independently benchmarked. <a href="../technologies.html">Open searchable technology filters →</a></p><div class="reference-grid">' + ''.join(f'<a href="{Path(technology_path(r)).name}">{e(r["name"])}</a>' for r in sorted(techs,key=lambda r:r['name'].casefold())) + '</div>'
     (out / 'index.html').write_bytes(shell(f'AI Technology Directory: {len(techs)} Profiles | AI Updates', f'Browse {len(techs)} profiles: 300 preserved originals plus {new_count} source-reviewed addition(s), with context and limitations.', 'technology/index.html', body).encode())
     about = '''<header class="hero"><div class="discover-heading"><div><p class="eyebrow">ABOUT AI UPDATES</p><h1>The frontier, in context.</h1></div></div><p class="lead">AI is easier to understand when the explanation comes with its evidence, connections and limits.</p></header>

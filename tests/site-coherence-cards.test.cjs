@@ -966,10 +966,10 @@ test('About and both generated catalog directories share real desktop workspace 
   const generator = fs.readFileSync(path.join(__dirname, '..', 'scripts/build_seo.py'), 'utf8');
   const termsGenerator = fs.readFileSync(path.join(__dirname, '..', 'scripts/build_term_pages.py'), 'utf8');
   assert.ok(generator.includes("topbar_title='About'"), 'About must be generated with the shared title');
-  assert.ok(generator.includes("topbar_title=('Technology profiles' if path == 'technology/index.html' else None)"),
-    'Technology directory title must not propagate to individual technology profiles');
-  assert.ok(termsGenerator.includes("topbar_title=('Concept encyclopedia' if path == 'terms/index.html' else None)"),
-    'Concept directory title must not propagate to 1,345 separate articles');
+  assert.ok(generator.includes("topbar_title=('Technology profiles' if path == 'technology/index.html' else article_title)"),
+    'Technology profiles must receive their own static article titles');
+  assert.ok(termsGenerator.includes("topbar_title=('Concept encyclopedia' if path == 'terms/index.html' else title)"),
+    'Concept details must receive their own static article titles');
   for (const [route, title] of [
     ['about.html', 'About'],
     ['terms/index.html', 'Concept encyclopedia'],
