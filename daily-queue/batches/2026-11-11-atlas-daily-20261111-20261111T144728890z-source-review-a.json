@@ -1,0 +1,819 @@
+{
+  "schema": 1,
+  "batch_id": "atlas-daily-20261111-20261111T144728890z-source-review-a",
+  "edition_date": "2026-11-11",
+  "timezone": "America/Chicago",
+  "collected_at": "2026-11-11T14:47:28.890Z",
+  "coverage_start": "2026-11-10T14:17:57.944Z",
+  "coverage_end": "2026-11-11T14:47:28.890Z",
+  "coverage_status": "partial",
+  "coverage_note": "Previous successful collection cutoff remains null across earlier partial batches. This bounded edition recovers the interval after the prior staged batch, while overlapping November 10 and keeping source publication dates explicit. Current staging records are not production publications.",
+  "overlap_lookback_start": "2026-11-10T00:00:00Z",
+  "sources_checked": [
+    {
+      "url": "https://huggingface.co/blog/qvac/botpsy",
+      "status": "opened",
+      "checked_at": "2026-11-11T14:47:28.890Z"
+    },
+    {
+      "url": "https://helsing.ai/newsroom/helsing-unveils-clarity-a-sovereign-software-platform-for-military-intelligence",
+      "status": "opened",
+      "checked_at": "2026-11-11T14:47:28.890Z"
+    },
+    {
+      "url": "https://www.reuters.com/technology/helsing-enters-market-battlefield-software-built-combat-data-2026-11-11/",
+      "status": "opened",
+      "checked_at": "2026-11-11T14:47:28.890Z"
+    },
+    {
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-carbon-now-available/",
+      "status": "opened",
+      "checked_at": "2026-11-11T14:47:28.890Z"
+    },
+    {
+      "url": "https://deepmind.google/models/model-cards/gemini-4-carbon/",
+      "status": "opened",
+      "checked_at": "2026-11-11T14:47:28.890Z"
+    },
+    {
+      "url": "https://pytorch.org/blog/executorch-webgpu-pytorch-models-on-the-gpu-in-the-browser/",
+      "status": "opened",
+      "checked_at": "2026-11-11T14:47:28.890Z"
+    },
+    {
+      "url": "https://huggingface.co/blog/figma-ai/motion-graphics-bench",
+      "status": "opened",
+      "checked_at": "2026-11-11T14:47:28.890Z"
+    },
+    {
+      "url": "https://arxiv.org/abs/2611.10592",
+      "status": "opened",
+      "checked_at": "2026-11-11T14:47:28.890Z"
+    },
+    {
+      "url": "https://huggingface.co/datasets/figma-ai/motion-graphics-bench",
+      "status": "opened",
+      "checked_at": "2026-11-11T14:47:28.890Z"
+    },
+    {
+      "url": "https://huggingface.co/blog/tngtech/bring-your-own-expert-extending-moe-models-with-ne",
+      "status": "opened",
+      "checked_at": "2026-11-11T14:47:28.890Z"
+    },
+    {
+      "url": "https://openai.com/index/introducing-businesses-chatgpt/",
+      "status": "opened",
+      "checked_at": "2026-11-11T14:47:28.890Z"
+    },
+    {
+      "url": "https://www.anthropic.com/news/roadshow-launch",
+      "status": "opened",
+      "checked_at": "2026-11-11T14:47:28.890Z"
+    },
+    {
+      "url": "https://openai.com/index/ai-effect-on-freelance-work/",
+      "status": "opened",
+      "checked_at": "2026-11-11T14:47:28.890Z"
+    },
+    {
+      "url": "https://www.reuters.com/world/china/us-china-should-stay-clear-eyed-ai-cooperation-competition-bessent-says-2026-11-11/",
+      "status": "opened",
+      "checked_at": "2026-11-11T14:47:28.890Z"
+    }
+  ],
+  "sources_failed": [
+    {
+      "url": "https://export.arxiv.org/api/query?search_query=cat%3Acs.LG&start=0&max_results=1",
+      "status": "inaccessible",
+      "reason": "Direct metadata API query was not accessible via browsing interface; does not establish absence of new papers.",
+      "checked_at": "2026-11-11T14:47:28.890Z"
+    }
+  ],
+  "source_health_note": "Opened primary publisher announcements, technical research pages, and independent Reuters context. The direct arXiv API query was inaccessible; other monitored feeds were not exhaustively polled.",
+  "coverage_backlog": [
+    "Perform broader cross-field arXiv metadata and proceedings sweep once the source endpoint is accessible, with duplicate DOI/title checks.",
+    "Recheck smaller robotics, voice/audio/video and infrastructure release feeds not exhaustively covered in this bounded run.",
+    "Publisher to validate product license/checkpoint availability, research benchmarks, existing technology/term aliases and independent evidence before catalog integration."
+  ],
+  "tldr": [
+    "On-device and browser-local AI gained notable new tooling: QVAC described a 0.8B assistant, PyTorch added a WebGPU inference path, and TNG explored modular MoE specialization; benchmark performance remains largely author-reported.",
+    "Google broadened Gemini 4 Carbon access while a new SVG-animation benchmark showed how executable graders can complement model judgments; Helsing's military-agent platform and renewed US–China AI dialogue warrant scrutiny of safety claims, oversight and real-world evidence."
+  ],
+  "news": [
+    {
+      "id": "ai-news:qvac-botpsy-0-8b-20261111",
+      "title": "QVAC introduces BotPsy, a sub-billion-parameter tool-use assistant",
+      "category": "models",
+      "tags": [
+        "SLM",
+        "LLM",
+        "on-device",
+        "agents",
+        "safety"
+      ],
+      "summary": "QVAC published BotPsy, an approximately 0.8B-parameter model adapted from Qwen3.5-0.8B for on-device assistants and multi-step tool calls, with a multi-stage training procedure and author-run evaluations.",
+      "why_it_matters": "Specialized small models can offer private, lower-resource tool use, making the approach relevant to local assistants instead of routing every interaction to frontier APIs.",
+      "caveat": "Reported benchmark improvements are author evaluations, not independent replications; the paper acknowledges significant remaining safety weaknesses, including susceptibility to harmful instructions and prompt injection. Actual downloadable checkpoint terms and hardware performance require separate verification.",
+      "canonical_url": "https://huggingface.co/blog/qvac/botpsy",
+      "source_url": "https://huggingface.co/blog/qvac/botpsy",
+      "publication_date": "2026-11-11",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-11",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-11T14:47:28.890Z",
+      "checked_at": "2026-11-11T14:47:28.890Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "author_model_research_release",
+      "release_status": "author_model_research_release",
+      "collection_classification": "current_window",
+      "sources": [
+        {
+          "url": "https://huggingface.co/blog/qvac/botpsy",
+          "publisher": "QVAC / Hugging Face",
+          "type": "author_model_research_release"
+        }
+      ],
+      "related_catalog_ids": []
+    },
+    {
+      "id": "ai-news:helsing-clarity-20261111",
+      "title": "Helsing announces Clarity, a military multi-agent intelligence platform",
+      "category": "applications",
+      "tags": [
+        "agents",
+        "multimodal",
+        "defense",
+        "security",
+        "governance"
+      ],
+      "summary": "Helsing unveiled Clarity, an agent-based platform intended to join sensor streams, reports and other military data into an intelligence picture with human review in the decision workflow.",
+      "why_it_matters": "It illustrates operational deployment ambitions for multi-agent information fusion and raises consequential questions about evidence quality, automation bias and human control in military settings.",
+      "caveat": "Its performance and human-control safeguards are company descriptions; independent field validation and actual deployment coverage were not established. Do not confuse platform marketing with proven operational effectiveness.",
+      "canonical_url": "https://helsing.ai/newsroom/helsing-unveils-clarity-a-sovereign-software-platform-for-military-intelligence",
+      "source_url": "https://helsing.ai/newsroom/helsing-unveils-clarity-a-sovereign-software-platform-for-military-intelligence",
+      "publication_date": "2026-11-11",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-11",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-11T14:47:28.890Z",
+      "checked_at": "2026-11-11T14:47:28.890Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "company_product_announcement",
+      "release_status": "company_product_announcement",
+      "collection_classification": "current_window",
+      "sources": [
+        {
+          "url": "https://helsing.ai/newsroom/helsing-unveils-clarity-a-sovereign-software-platform-for-military-intelligence",
+          "publisher": "Helsing",
+          "type": "company_product_announcement"
+        },
+        {
+          "url": "https://www.reuters.com/technology/helsing-enters-market-battlefield-software-built-combat-data-2026-11-11/",
+          "publisher": "Reuters",
+          "type": "independent reporting"
+        }
+      ],
+      "related_catalog_ids": []
+    },
+    {
+      "id": "ai-news:google-gemini4-carbon-availability-20261110",
+      "title": "Google expands Gemini 4 Carbon availability and agent tooling",
+      "category": "models",
+      "tags": [
+        "LLM",
+        "multimodal",
+        "agents",
+        "API"
+      ],
+      "summary": "Google announced broader access to Gemini 4 Carbon through its developer and customer surfaces and described agent coordination through Antigravity's preview /swarm workflow.",
+      "why_it_matters": "Developers evaluating long-context multimodal models and collaborative coding agents now have a newly described access and workflow option.",
+      "caveat": "Availability, quota and billing vary by product and eligibility; Google benchmarks are vendor-reported and the coordination feature is preview, not a universally released stable API.",
+      "canonical_url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-carbon-now-available/",
+      "source_url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-carbon-now-available/",
+      "publication_date": "2026-11-10",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-10",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-11T14:47:28.890Z",
+      "checked_at": "2026-11-11T14:47:28.890Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "model_access_announcement",
+      "release_status": "model_access_announcement",
+      "collection_classification": "previous_day_overlap",
+      "sources": [
+        {
+          "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-carbon-now-available/",
+          "publisher": "Google",
+          "type": "model_access_announcement"
+        },
+        {
+          "url": "https://deepmind.google/models/model-cards/gemini-4-carbon/",
+          "publisher": "Google DeepMind",
+          "type": "official model card"
+        }
+      ],
+      "related_catalog_ids": []
+    },
+    {
+      "id": "ai-news:pytorch-executorch-webgpu-20261110",
+      "title": "ExecuTorch gains a WebGPU path for local browser inference",
+      "category": "technologies",
+      "tags": [
+        "DL",
+        "LLM",
+        "inference",
+        "WebGPU",
+        "edge"
+      ],
+      "summary": "The PyTorch team documented an ExecuTorch WebGPU backend that runs exported PyTorch models as .pte files on supported browser GPUs, including examples spanning text, vision and speech.",
+      "why_it_matters": "Direct browser-local GPU execution can preserve prompt data on a device and reduce dependency on cloud inference for compatible workloads.",
+      "caveat": "Authors' speed comparisons against their selected CPU path are not cross-framework benchmarks. Model coverage, memory, WebGPU browser support and device-specific compatibility must be tested.",
+      "canonical_url": "https://pytorch.org/blog/executorch-webgpu-pytorch-models-on-the-gpu-in-the-browser/",
+      "source_url": "https://pytorch.org/blog/executorch-webgpu-pytorch-models-on-the-gpu-in-the-browser/",
+      "publication_date": "2026-11-10",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-10",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-11T14:47:28.890Z",
+      "checked_at": "2026-11-11T14:47:28.890Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "developer_tool_release",
+      "release_status": "developer_tool_release",
+      "collection_classification": "previous_day_overlap",
+      "sources": [
+        {
+          "url": "https://pytorch.org/blog/executorch-webgpu-pytorch-models-on-the-gpu-in-the-browser/",
+          "publisher": "PyTorch",
+          "type": "developer_tool_release"
+        }
+      ],
+      "related_catalog_ids": []
+    },
+    {
+      "id": "ai-news:motiongraphicsbench-20261110",
+      "title": "Figma and Stanford release an SVG animation benchmark with executable checks",
+      "category": "evaluation",
+      "tags": [
+        "LLM",
+        "evaluation",
+        "vision",
+        "code generation",
+        "benchmark"
+      ],
+      "summary": "MotionGraphicsBench introduces 100 static-SVG-to-motion tasks graded with explicit executable verification programs; its researchers evaluated 32 model configurations and released benchmark resources.",
+      "why_it_matters": "Task-specific programmatic graders can complement model-as-judge evaluation when outputs have properties that can be checked deterministically.",
+      "caveat": "Authors report only four evaluated systems exceeded 50% pass@1 and a 93.3% raw grader-human agreement on a held-out sample; results and grader correctness are not independently reproduced, and grading tests can miss visual quality.",
+      "canonical_url": "https://huggingface.co/blog/figma-ai/motion-graphics-bench",
+      "source_url": "https://huggingface.co/blog/figma-ai/motion-graphics-bench",
+      "publication_date": "2026-11-10",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-10",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-11T14:47:28.890Z",
+      "checked_at": "2026-11-11T14:47:28.890Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "research_benchmark_release",
+      "release_status": "research_benchmark_release",
+      "collection_classification": "previous_day_overlap",
+      "sources": [
+        {
+          "url": "https://huggingface.co/blog/figma-ai/motion-graphics-bench",
+          "publisher": "Figma / Stanford University",
+          "type": "research_benchmark_release"
+        },
+        {
+          "url": "https://arxiv.org/abs/2611.10592",
+          "publisher": "Research authors",
+          "type": "paper identifier"
+        },
+        {
+          "url": "https://huggingface.co/datasets/figma-ai/motion-graphics-bench",
+          "publisher": "Figma AI",
+          "type": "dataset and code"
+        }
+      ],
+      "related_catalog_ids": []
+    },
+    {
+      "id": "ai-news:tng-bring-your-own-expert-20261110",
+      "title": "TNG explores adding independently trained specialists to MoE models",
+      "category": "research",
+      "tags": [
+        "LLM",
+        "MoE",
+        "fine-tuning",
+        "distillation"
+      ],
+      "summary": "TNG researchers describe training and integrating new domain-specific experts into an existing mixture-of-experts base model, with worked coding-domain experiments and comparisons against adapter fine-tuning.",
+      "why_it_matters": "Modular domain adaptation could help small teams specialize an MoE model without retraining every existing expert or deploying separate full models.",
+      "caveat": "The authors' evaluations are workload-specific; expert-router compatibility, quality tradeoffs and total memory requirements limit portability, and this is not a universal plug-and-play skill transfer result.",
+      "canonical_url": "https://huggingface.co/blog/tngtech/bring-your-own-expert-extending-moe-models-with-ne",
+      "source_url": "https://huggingface.co/blog/tngtech/bring-your-own-expert-extending-moe-models-with-ne",
+      "publication_date": "2026-11-10",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-10",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-11T14:47:28.890Z",
+      "checked_at": "2026-11-11T14:47:28.890Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "author_method_research",
+      "release_status": "author_method_research",
+      "collection_classification": "previous_day_overlap",
+      "sources": [
+        {
+          "url": "https://huggingface.co/blog/tngtech/bring-your-own-expert-extending-moe-models-with-ne",
+          "publisher": "TNG Technology Consulting",
+          "type": "author_method_research"
+        }
+      ],
+      "related_catalog_ids": []
+    },
+    {
+      "id": "ai-news:openai-businesses-chatgpt-20261110",
+      "title": "OpenAI opens beta business listings and scoped Business Agents in ChatGPT",
+      "category": "products",
+      "tags": [
+        "agents",
+        "applications",
+        "commerce",
+        "LLM"
+      ],
+      "summary": "OpenAI introduced Businesses in ChatGPT in beta, including business-claimed information, aggregate discovery insights and Business Agents initially offered to eligible U.S. ecommerce and online-service businesses.",
+      "why_it_matters": "The release creates a distinct business-to-user agent interaction surface with implications for discovery, attribution, trust and merchant data maintenance.",
+      "caveat": "This is a restricted beta, not an account-wide public rollout. Availability, eligibility and data practices must be checked against product documentation; no independent outcome metrics were established.",
+      "canonical_url": "https://openai.com/index/introducing-businesses-chatgpt/",
+      "source_url": "https://openai.com/index/introducing-businesses-chatgpt/",
+      "publication_date": "2026-11-10",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-10",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-11T14:47:28.890Z",
+      "checked_at": "2026-11-11T14:47:28.890Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "product_beta_announcement",
+      "release_status": "product_beta_announcement",
+      "collection_classification": "previous_day_overlap",
+      "sources": [
+        {
+          "url": "https://openai.com/index/introducing-businesses-chatgpt/",
+          "publisher": "OpenAI",
+          "type": "product_beta_announcement"
+        }
+      ],
+      "related_catalog_ids": []
+    },
+    {
+      "id": "ai-news:anthropic-ipo-roadshow-20261110",
+      "title": "Anthropic starts roadshow for a proposed public offering",
+      "category": "industry",
+      "tags": [
+        "industry",
+        "investment",
+        "AI infrastructure"
+      ],
+      "summary": "Anthropic launched a roadshow for a proposed stock offering with an indicated $70–$78 share-price range and a planned Nasdaq listing under ANT.",
+      "why_it_matters": "A proposed listing could reshape public-market scrutiny of frontier-model economics, capital needs and governance.",
+      "caveat": "This is a proposed, not completed, IPO. The company's statement says the registration statement had not yet become effective, so pricing, timing and completion remain uncertain.",
+      "canonical_url": "https://www.anthropic.com/news/roadshow-launch",
+      "source_url": "https://www.anthropic.com/news/roadshow-launch",
+      "publication_date": "2026-11-10",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-10",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-11T14:47:28.890Z",
+      "checked_at": "2026-11-11T14:47:28.890Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "proposed_financing_announcement",
+      "release_status": "proposed_financing_announcement",
+      "collection_classification": "previous_day_overlap",
+      "sources": [
+        {
+          "url": "https://www.anthropic.com/news/roadshow-launch",
+          "publisher": "Anthropic",
+          "type": "proposed_financing_announcement"
+        }
+      ],
+      "related_catalog_ids": []
+    },
+    {
+      "id": "ai-news:openai-upwork-freelance-report-20261110",
+      "title": "OpenAI and Upwork report shifting demand for AI-related freelance work",
+      "category": "research",
+      "tags": [
+        "industry",
+        "AI applications",
+        "labor",
+        "evaluation"
+      ],
+      "summary": "An OpenAI–Upwork analysis describes changes in posted freelance tasks, combinations of requested skills and larger project budgets among AI-related work on the platform.",
+      "why_it_matters": "It supplies a concrete platform-level signal about how businesses are restructuring some contracted work around AI.",
+      "caveat": "The sample represents Upwork postings, not the whole labor market; associations cannot establish that AI caused the reported shifts, and the analysis involves the participating companies.",
+      "canonical_url": "https://openai.com/index/ai-effect-on-freelance-work/",
+      "source_url": "https://openai.com/index/ai-effect-on-freelance-work/",
+      "publication_date": "2026-11-10",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-10",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-11T14:47:28.890Z",
+      "checked_at": "2026-11-11T14:47:28.890Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "industry_observational_research",
+      "release_status": "industry_observational_research",
+      "collection_classification": "previous_day_overlap",
+      "sources": [
+        {
+          "url": "https://openai.com/index/ai-effect-on-freelance-work/",
+          "publisher": "OpenAI / Upwork",
+          "type": "industry_observational_research"
+        }
+      ],
+      "related_catalog_ids": []
+    },
+    {
+      "id": "ai-news:us-china-ai-dialogue-bessent-20261111",
+      "title": "US and China discuss possible AI incident-alert and testing dialogue",
+      "category": "governance",
+      "tags": [
+        "policy",
+        "AI safety",
+        "evaluation",
+        "governance"
+      ],
+      "summary": "Reuters reports that U.S. Treasury Secretary Scott Bessent called for a clear-eyed approach to AI cooperation and competition and described potential discussions on model testing practices and incident alerts.",
+      "why_it_matters": "Even preliminary international coordination about testing and incident reporting matters for cross-border AI safety governance.",
+      "caveat": "Reported remarks and prospective talks do not constitute a binding agreement, functioning alert channel or adopted regulatory standard.",
+      "canonical_url": "https://www.reuters.com/world/china/us-china-should-stay-clear-eyed-ai-cooperation-competition-bessent-says-2026-11-11/",
+      "source_url": "https://www.reuters.com/world/china/us-china-should-stay-clear-eyed-ai-cooperation-competition-bessent-says-2026-11-11/",
+      "publication_date": "2026-11-11",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-11",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-11T14:47:28.890Z",
+      "checked_at": "2026-11-11T14:47:28.890Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "attributed_policy_reporting",
+      "release_status": "attributed_policy_reporting",
+      "collection_classification": "current_window",
+      "sources": [
+        {
+          "url": "https://www.reuters.com/world/china/us-china-should-stay-clear-eyed-ai-cooperation-competition-bessent-says-2026-11-11/",
+          "publisher": "Reuters",
+          "type": "attributed_policy_reporting"
+        }
+      ],
+      "related_catalog_ids": []
+    }
+  ],
+  "technologies": [
+    {
+      "id": "tech-proposal:qvac-botpsy-08b:2026-11-11",
+      "name": "BotPsy 0.8B",
+      "aliases": [
+        "BotPsy",
+        "BotPsy-0.8B"
+      ],
+      "usage_tags": [
+        "SLM",
+        "LLM",
+        "agents",
+        "edge"
+      ],
+      "explanation": "A roughly 0.8B-parameter assistant derived from Qwen3.5-0.8B and post-trained through staged supervised, distillation and reinforcement methods for tool-calling and mobile-assistant workflows.",
+      "conditional_advantage": "May handle narrow local app/tool tasks with substantially lower runtime footprint than server-hosted frontier models, subject to measured reliability.",
+      "best_fit_uses": [
+        "Privacy-sensitive on-device assistant prototyping",
+        "Local tool-call research and constrained agent workflows"
+      ],
+      "tradeoffs": [
+        "Weaknesses in difficult multi-step retrieval and adversarial prompting",
+        "Task performance varies across tools, and no independent benchmark replication"
+      ],
+      "alternatives": [
+        "Qwen3.5-0.8B base with custom SFT",
+        "Function-calling compact models",
+        "Cloud agents with explicit user controls"
+      ],
+      "hardware_runtime_constraints": "Sub-billion-parameter transformer; actual RAM, quantization and battery requirements depend on device and runtime, not independently measured for all devices.",
+      "license_uncertainty": "Public checkpoint and license conditions must be independently checked before integration.",
+      "availability_uncertainty": "Author announces research and points to model resources; deployment quality and platform support unverified.",
+      "pricing_uncertainty": "No universal deployment cost or hosted service price established.",
+      "official_documentation_url": "https://huggingface.co/blog/qvac/botpsy",
+      "source_links": [
+        {
+          "url": "https://huggingface.co/blog/qvac/botpsy",
+          "publisher": "QVAC / Hugging Face",
+          "type": "official documentation or first-hand research"
+        }
+      ],
+      "date_checked": "2026-11-11",
+      "checked_at": "2026-11-11T14:47:28.890Z",
+      "existing_profile_id": null,
+      "review_status": "source_checked_pending_publisher_catalog_dedup"
+    },
+    {
+      "id": "tech-proposal:executorch-webgpu:2026-11-10",
+      "name": "ExecuTorch WebGPU backend",
+      "aliases": [
+        "ExecuTorch in-browser GPU backend"
+      ],
+      "usage_tags": [
+        "DL",
+        "LLM",
+        "inference",
+        "WebGPU",
+        "edge"
+      ],
+      "explanation": "Runs torch.export-to-ExecuTorch .pte model artifacts on a browser GPU through a WebGPU compute backend, enabling on-device web inference.",
+      "conditional_advantage": "Potentially reduces server latency and transmission of user data for supported browser/model combinations.",
+      "best_fit_uses": [
+        "Offline-first vision and speech inference pages",
+        "On-device browser chat prototypes"
+      ],
+      "tradeoffs": [
+        "GPU/browser support and memory ceilings vary",
+        "Operator coverage and runtime bundling need testing",
+        "Author-vs-CPU speedups are limited comparisons"
+      ],
+      "alternatives": [
+        "WebLLM",
+        "Transformers.js and ONNX Runtime Web",
+        "Native ExecuTorch mobile"
+      ],
+      "hardware_runtime_constraints": "WebGPU-capable browser and compatible GPU drivers; memory and operator support depend on model and device.",
+      "license_uncertainty": "Project license likely follows ExecuTorch, but verify bundled backend and model licenses before use.",
+      "availability_uncertainty": "Backend documentation and playground available; production compatibility and browser rollouts vary.",
+      "pricing_uncertainty": "Open tooling does not eliminate device and distribution costs; hosted inference is not required for local execution.",
+      "official_documentation_url": "https://pytorch.org/blog/executorch-webgpu-pytorch-models-on-the-gpu-in-the-browser/",
+      "source_links": [
+        {
+          "url": "https://pytorch.org/blog/executorch-webgpu-pytorch-models-on-the-gpu-in-the-browser/",
+          "publisher": "PyTorch",
+          "type": "official documentation or first-hand research"
+        }
+      ],
+      "date_checked": "2026-11-11",
+      "checked_at": "2026-11-11T14:47:28.890Z",
+      "existing_profile_id": null,
+      "review_status": "source_checked_pending_publisher_catalog_dedup"
+    },
+    {
+      "id": "tech-proposal:gemini4-carbon:2026-11-10",
+      "name": "Gemini 4 Carbon",
+      "aliases": [
+        "Gemini 4 Carbon model"
+      ],
+      "usage_tags": [
+        "LLM",
+        "DL",
+        "multimodal",
+        "agents"
+      ],
+      "explanation": "Google's newly announced frontier model offering for multimodal and long-context interactions, exposed through specified Google developer and customer products.",
+      "conditional_advantage": "A single multimodal model API can simplify workflows needing large context and multiple input modalities when supported and appropriately budgeted.",
+      "best_fit_uses": [
+        "Long-context research assistant comparison",
+        "Multimodal tool-using agent evaluation"
+      ],
+      "tradeoffs": [
+        "Provider access, quotas and policy limits",
+        "Vendor benchmarks need external corroboration",
+        "Hosted-model privacy and token costs"
+      ],
+      "alternatives": [
+        "Claude models",
+        "OpenAI GPT family",
+        "Open-weight multimodal models"
+      ],
+      "hardware_runtime_constraints": "Cloud access through Google's specified API and products; 1M context announced but rate limits, costs and modality availability differ by surface.",
+      "license_uncertainty": "Proprietary hosted service; specific terms vary by surface.",
+      "availability_uncertainty": "Availability announced November 10; feature previews and tier restrictions remain.",
+      "pricing_uncertainty": "Pricing and quotas vary by API/account and require live provider verification.",
+      "official_documentation_url": "https://deepmind.google/models/model-cards/gemini-4-carbon/",
+      "source_links": [
+        {
+          "url": "https://deepmind.google/models/model-cards/gemini-4-carbon/",
+          "publisher": "Google DeepMind",
+          "type": "official documentation or first-hand research"
+        },
+        {
+          "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-carbon-now-available/",
+          "publisher": "Google",
+          "type": "official announcement"
+        }
+      ],
+      "date_checked": "2026-11-11",
+      "checked_at": "2026-11-11T14:47:28.890Z",
+      "existing_profile_id": null,
+      "review_status": "source_checked_pending_publisher_catalog_dedup"
+    },
+    {
+      "id": "tech-proposal:motiongraphicsbench:2026-11-10",
+      "name": "MotionGraphicsBench",
+      "aliases": [
+        "Motion Graphics Bench"
+      ],
+      "usage_tags": [
+        "ML",
+        "LLM",
+        "evaluation",
+        "code generation",
+        "vision"
+      ],
+      "explanation": "A benchmark of 100 SVG animation-edit tasks with deterministic executable checking programs and human-judgment comparison.",
+      "conditional_advantage": "For SVG and code-structured output, explicit task checks can produce more reproducible grading than unconstrained aesthetic model judging.",
+      "best_fit_uses": [
+        "Evaluating SVG animation agents",
+        "Research on programmatic versus model-based graders"
+      ],
+      "tradeoffs": [
+        "Only 100 task templates",
+        "Passing checks does not guarantee pleasing motion or general visual quality",
+        "Benchmarks risk overfitting"
+      ],
+      "alternatives": [
+        "Human evaluation",
+        "VLM-as-judge on rendered video",
+        "Custom animation unit tests"
+      ],
+      "hardware_runtime_constraints": "SVG rendering and validation scripts plus candidate model inference; GPU needs depend on the tested model rather than the benchmark itself.",
+      "license_uncertainty": "Dataset/code license must be checked on its repository before redistribution.",
+      "availability_uncertainty": "Public project, paper and dataset linked; versioned fixtures and current access should be rechecked.",
+      "pricing_uncertainty": "Benchmark may be freely accessed, but model inference and human review can cost money.",
+      "official_documentation_url": "https://huggingface.co/blog/figma-ai/motion-graphics-bench",
+      "source_links": [
+        {
+          "url": "https://huggingface.co/blog/figma-ai/motion-graphics-bench",
+          "publisher": "Figma / Stanford University",
+          "type": "official documentation or first-hand research"
+        },
+        {
+          "url": "https://huggingface.co/datasets/figma-ai/motion-graphics-bench",
+          "publisher": "Figma AI",
+          "type": "dataset"
+        }
+      ],
+      "date_checked": "2026-11-11",
+      "checked_at": "2026-11-11T14:47:28.890Z",
+      "existing_profile_id": null,
+      "review_status": "source_checked_pending_publisher_catalog_dedup"
+    },
+    {
+      "id": "tech-proposal:tng-moe-additive-experts:2026-11-10",
+      "name": "Bring Your Own Expert MoE extension",
+      "aliases": [
+        "Additive MoE domain experts",
+        "BYOE"
+      ],
+      "usage_tags": [
+        "DL",
+        "LLM",
+        "MoE",
+        "fine-tuning"
+      ],
+      "explanation": "A proposed method to train new domain-specific expert modules and integrate them with a pretrained mixture-of-experts model and its router, demonstrated on code domains.",
+      "conditional_advantage": "For compatible MoE bases, domain-targeted capacity can be added without retraining every base expert.",
+      "best_fit_uses": [
+        "Extending open MoE models with language-specific coding expertise",
+        "Comparing expert addition with LoRA on the same base"
+      ],
+      "tradeoffs": [
+        "Extra expert weights consume memory",
+        "Routing and interference can hurt general quality",
+        "Depends on MoE internals and training data"
+      ],
+      "alternatives": [
+        "LoRA/adapters",
+        "Mixture of Tunable Experts",
+        "Full-model fine-tuning"
+      ],
+      "hardware_runtime_constraints": "Requires a compatible open MoE base with accessible expert architecture plus training compute and enough inference memory for the added experts.",
+      "license_uncertainty": "Implementation and pretrained model licenses must be separately reviewed.",
+      "availability_uncertainty": "Research demonstration; a production-ready general expert plug-in interface is not established.",
+      "pricing_uncertainty": "Custom expert training and serving cost depend on model, hardware and dataset.",
+      "official_documentation_url": "https://huggingface.co/blog/tngtech/bring-your-own-expert-extending-moe-models-with-ne",
+      "source_links": [
+        {
+          "url": "https://huggingface.co/blog/tngtech/bring-your-own-expert-extending-moe-models-with-ne",
+          "publisher": "TNG Technology Consulting",
+          "type": "official documentation or first-hand research"
+        }
+      ],
+      "date_checked": "2026-11-11",
+      "checked_at": "2026-11-11T14:47:28.890Z",
+      "existing_profile_id": null,
+      "review_status": "source_checked_pending_publisher_catalog_dedup"
+    }
+  ],
+  "terms": [
+    {
+      "id": "term-proposal:webgpu-browser-inference:2026-11-11",
+      "name": "WebGPU browser inference",
+      "aliases": [
+        "WebGPU local inference",
+        "In-browser GPU model inference"
+      ],
+      "definition": "Running a machine-learning model inside a web browser while sending supported compute operations to the user's local GPU through the WebGPU API.",
+      "mechanism": "A model runtime translates supported operators to GPU compute workloads and handles model weights and tensors locally within browser/device limits.",
+      "usage_tags": [
+        "DL",
+        "ML",
+        "LLM",
+        "inference",
+        "edge"
+      ],
+      "example": "A browser page loads an exported .pte model and executes speech transcription on the device's GPU without submitting the audio to a remote inference server.",
+      "caveat": "Local execution does not automatically mean no network telemetry or complete privacy; app code, browser capabilities, model downloads and device memory still matter.",
+      "related_existing_ids": [
+        "MLD-0724",
+        "MLD-0062"
+      ],
+      "primary_references": [
+        {
+          "url": "https://pytorch.org/blog/executorch-webgpu-pytorch-models-on-the-gpu-in-the-browser/",
+          "publisher": "PyTorch",
+          "type": "primary technical evidence"
+        }
+      ],
+      "term_origin": "established_technique_new_to_atlas_candidate",
+      "date_checked": "2026-11-11",
+      "checked_at": "2026-11-11T14:47:28.890Z",
+      "review_status": "source_checked_pending_publisher_canonical_dedup"
+    },
+    {
+      "id": "term-proposal:moe-expert-extension:2026-11-11",
+      "name": "MoE expert extension",
+      "aliases": [
+        "Additive mixture-of-experts adaptation",
+        "Expert grafting"
+      ],
+      "definition": "Adapting a pretrained mixture-of-experts model by training and introducing additional specialized expert modules, rather than only updating its existing parameters.",
+      "mechanism": "New expert parameters specialize on target-domain data and routing or integration logic determines when tokens invoke them alongside original experts.",
+      "usage_tags": [
+        "DL",
+        "LLM",
+        "SLM",
+        "fine-tuning"
+      ],
+      "example": "A coding MoE receives an independently trained Rust-focused expert and the routing is evaluated for domain improvements and regressions.",
+      "caveat": "Expert addition is not guaranteed to preserve general capability; exact router behavior and added serving-memory costs determine usefulness.",
+      "related_existing_ids": [
+        "MLD-0752"
+      ],
+      "primary_references": [
+        {
+          "url": "https://huggingface.co/blog/tngtech/bring-your-own-expert-extending-moe-models-with-ne",
+          "publisher": "TNG Technology Consulting",
+          "type": "primary technical evidence"
+        }
+      ],
+      "term_origin": "established_concept_new_to_atlas_candidate",
+      "date_checked": "2026-11-11",
+      "checked_at": "2026-11-11T14:47:28.890Z",
+      "review_status": "source_checked_pending_publisher_canonical_dedup"
+    },
+    {
+      "id": "term-proposal:programmatic-benchmark-verification:2026-11-11",
+      "name": "Programmatic benchmark verification",
+      "aliases": [
+        "Executable evaluation criteria",
+        "Deterministic benchmark grader"
+      ],
+      "definition": "Evaluating a model-produced artifact with explicit executable checks for defined success conditions instead of relying solely on a human or language-model judge.",
+      "mechanism": "For each task, a validator executes or inspects the artifact and tests constraints such as element positions, transitions or structural requirements, producing a reproducible result.",
+      "usage_tags": [
+        "ML",
+        "LLM",
+        "evaluation",
+        "benchmark"
+      ],
+      "example": "For a requested SVG motion, a grading script tests that specified objects move along permitted trajectories and preserve key positions.",
+      "caveat": "Passing explicit assertions can miss aesthetics, usability and untested failure modes; weak graders invite specification gaming.",
+      "related_existing_ids": [
+        "MLD-0110",
+        "MLD-0386"
+      ],
+      "primary_references": [
+        {
+          "url": "https://huggingface.co/blog/figma-ai/motion-graphics-bench",
+          "publisher": "Figma / Stanford University",
+          "type": "primary technical evidence"
+        }
+      ],
+      "term_origin": "established_evaluation_concept_new_to_atlas_candidate",
+      "date_checked": "2026-11-11",
+      "checked_at": "2026-11-11T14:47:28.890Z",
+      "review_status": "source_checked_pending_publisher_canonical_dedup"
+    }
+  ],
+  "corrections": []
+}
