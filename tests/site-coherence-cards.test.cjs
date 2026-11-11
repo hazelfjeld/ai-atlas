@@ -424,10 +424,12 @@ test('About and both A-Z landing pages separate shared navigation from the main 
     assert.ok(html.indexOf('</nav>', desktop) < main, route + ' nests site navigation within main');
     assert.ok(html.includes('href="#main"') && html.includes('@media(min-width:651px){.term-shell>.hero{margin-top:8px}}@media(max-width:650px){.term-shell>.hero{margin-top:18px}body>.directory-mobile-topbar{margin:0;padding-inline:20px}}'), route);
   }
-  // Detailed articles remain unchanged until a future complete generated build.
+  // Concept details must retain Discover's separate rail before hydration.
   for (const route of ['terms/MLD-0001-a-b-test.html']) {
     const html = fs.readFileSync(path.join(__dirname, '..', route), 'utf8');
-    assert.ok(html.indexOf('<main class="term-shell">') < html.indexOf('<nav class="site-chrome term-nav"'), route);
+    const main = html.indexOf('<main class="term-shell">');
+    assert.ok(html.indexOf('<nav class="site-chrome term-nav"') < main, route);
+    assert.ok(html.indexOf('<div class="directory-mobile-topbar site-mobile-chrome"') < main, route);
   }
 });
 
@@ -444,8 +446,16 @@ test('all concept pages use the technology-profile native article skip, without 
     assert.doesNotMatch(html, /<main class="term-shell" id="main"/, entry.path);
     assert.match(html, /<header class="hero" id="main" tabindex="-1"><p class="eyebrow">/, entry.path);
     assert.equal((html.match(/id="main"/g) || []).length, 1, entry.path);
-    assert.ok(html.indexOf('<nav class="site-chrome term-nav"') <
-              html.indexOf('<header class="hero" id="main" tabindex="-1">'), entry.path);
+    const main = html.indexOf('<main class="term-shell">');
+    const rail = html.indexOf('<nav class="site-chrome term-nav"');
+    const mobile = html.indexOf('<div class="directory-mobile-topbar site-mobile-chrome"');
+    const hero = html.indexOf('<header class="hero" id="main" tabindex="-1">');
+    const footer = html.indexOf('<footer>', hero);
+    const mainEnd = html.indexOf('</main>', main);
+    assert.ok(mobile > 0 && mobile < rail && rail < main && main < hero &&
+      hero < footer && footer < mainEnd, entry.path + ' must have a separate shared rail and one article landmark');
+    assert.equal((html.match(/<main\b/g) || []).length, 1, entry.path);
+    assert.equal((html.match(/<nav class="site-chrome term-nav"/g) || []).length, 1, entry.path);
     assert.equal((html.match(/aria-label="AI Updates primary navigation"/g) || []).length, 1,
                  entry.path + ' must not duplicate desktop navigation');
   }
@@ -1046,24 +1056,30 @@ test('all technology profiles put shared navigation outside the content landmark
 });
 
 
-test('enhanced concept details reuse technology sibling navigation without changing script-free HTML', () => {
+test('generated concept details share technology sibling navigation without requiring JavaScript', () => {
   const concept = fs.readFileSync(path.join(__dirname, '..', 'terms/MLD-0001-a-b-test.html'), 'utf8');
   const technology = fs.readFileSync(path.join(__dirname, '..', 'technology/TECH-0216-pytorch.html'), 'utf8');
   const script = fs.readFileSync(path.join(__dirname, '..', 'site-theme.js'), 'utf8');
   const style = fs.readFileSync(path.join(__dirname, '..', 'site-chrome.css'), 'utf8');
   const offline = fs.readFileSync(path.join(__dirname, '..', 'downloads/Atlas_Demo_Offline.html'), 'utf8');
-  assert.ok(concept.indexOf('<main class="term-shell">') < concept.indexOf('<nav class="site-chrome term-nav"'),
-    'Unenhanced concept details retain usable native navigation');
+  const article = concept.indexOf('<main class="term-shell">');
+  assert.ok(concept.indexOf('<div class="directory-mobile-topbar site-mobile-chrome"') < article &&
+    concept.indexOf('<nav class="site-chrome term-nav"') < article,
+    'Unenhanced concept pages separate navigation from the main landmark');
   assert.ok(concept.includes('<header class="hero" id="main" tabindex="-1">'),
     'Native skip still targets the real article');
   assert.ok(technology.indexOf('<nav class="site-chrome term-nav"') < technology.indexOf('<main class="term-shell">'),
     'Technology detail remains the sibling-nav reference');
   assert.ok(script.includes('main.before(mobile, rail);'),
-    'Enhancement moves rather than duplicates the existing rail and drawer');
+    'Legacy client-side enhancement remains compatible without duplicating either navigation');
   assert.ok(script.includes('main.firstElementChild !== mobile || mobile.nextElementSibling !== rail'),
     'Migration is narrowly guarded against changing unrelated pages');
   assert.ok(style.includes('body > .directory-mobile-topbar.site-mobile-chrome:has(+ nav.site-chrome + main.term-shell)'),
     'Moved header must not inherit the legacy negative mobile gutters');
+  assert.ok(style.includes('body:has(> .site-chrome.term-nav) > .term-shell > .hero{margin-top:18px}'),
+    'All script-free concept and directory article introductions share Discover mobile spacing');
+  assert.ok(style.includes('body:has(> .site-chrome.term-nav) > .term-shell > .hero{margin-top:8px}'),
+    'All reference article headings share the existing desktop spacing');
   assert.ok(offline.includes(script) && offline.includes(style),
     'Offline demo embeds the exact current shared theme script and stylesheet');
 });
