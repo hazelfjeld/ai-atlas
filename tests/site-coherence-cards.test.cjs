@@ -1133,3 +1133,30 @@ test('hydrated Discover route titles share native primary navigation labels', ()
   assert.ok(offline.includes(block),
     'Offline must embed the same canonical hydrated labels');
 });
+
+
+test('shared long-form reading widths follow Discover without shrinking cards or navigation', () => {
+  const block = css.split('/* atlas-longform-reading-measure:begin */')[1]
+    ?.split('/* atlas-longform-reading-measure:end */')[0];
+  assert.ok(block, 'Missing common long-form measure');
+  for (const selector of [
+    '.term-shell > .hero > p.lead',
+    '.term-shell > .profile-section > p',
+    '.term-shell > .detail-block > p',
+    '.review-shell > header > p.lead',
+    '.review-shell > section > p'
+  ]) assert.ok(block.includes(selector), 'Missing prose family: ' + selector);
+  assert.ok(block.includes('max-width:70ch'),
+    'Long-form text must keep the same readable measure as Discover introductions');
+  assert.ok(!/\\b(?:nav|card|table|game)\\b.*max-width/.test(block),
+    'Do not alter navigation, interactive cards, wide tables, or games');
+  for (const route of [
+    'about.html', 'technology/TECH-0216-pytorch.html',
+    'terms/MLD-0691-machine-learning.html', 'hardware-review.html'
+  ]) {
+    const html = fs.readFileSync(path.join(__dirname, '..', route), 'utf8');
+    assert.ok(html.includes('site-chrome.css'), route + ' must share the new measure');
+  }
+  const offline = fs.readFileSync(path.join(__dirname, '..', 'downloads/Atlas_Demo_Offline.html'), 'utf8');
+  assert.ok(offline.includes(css), 'The offline fallback must include exact shared styles');
+});
