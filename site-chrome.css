@@ -229,6 +229,7 @@ body:has(.site-chrome){padding-top:78px}
 .term-shell > .site-mobile-chrome:not([data-page-label]):has(+ .site-chrome .site-chrome__links a[href$="#/dictionary"][aria-current="page"])::before{content:"Concept dictionary"}
 .term-shell > .site-mobile-chrome:not([data-page-label]):has(+ .site-chrome .site-chrome__links a[href$="#/technologies"][aria-current="page"])::before{content:"Technology profiles"}
 body > .site-mobile-chrome:not([data-page-label]):has(+ .site-chrome .site-chrome__links a[href$="#/technologies"][aria-current="page"])::before{content:"Technology profiles"}
+body > .site-mobile-chrome:not([data-page-label]):has(+ .site-chrome .site-chrome__links a[href$="#/dictionary"][aria-current="page"])::before{content:"Concept dictionary"}
 .site-mobile-chrome__nav{display:none}
 .site-mobile-chrome__search{
   display:flex;align-items:center;gap:10px;flex:0 1 365px;

@@ -49,6 +49,12 @@ def shell(title, body, path, description, structured=None, *, native_concept_art
     landing_css = REFERENCE_LANDING_HERO_CSS if path in REFERENCE_LANDING_PATHS else ''
     footer = '<footer>Prepared catalog snapshot: November 1, 2026. Imported references retain their prior review labels. These pages work without JavaScript; external references require internet. <a href="../about.html">Editorial policy</a> · <a href="../index.html#/sources">Sources & downloads</a></footer>'
     article = wrap_reference_shell(directory_nav, body + footer, path, main_id)
+    # Generated concept pages must have separate global navigation and main
+    # landmarks in the original HTML, not only after JavaScript enhancement.
+    if native_concept_article:
+        assert article.startswith('<div class="directory-mobile-topbar site-mobile-chrome"'), path
+        assert article.count('<main class="term-shell">') == 1, path
+        assert article.index('<nav class="site-chrome term-nav"') < article.index('<main class="term-shell">'), path
     return f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 {metadata(title + ' | AI Updates', description, path, structured)}

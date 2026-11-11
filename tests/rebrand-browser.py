@@ -259,14 +259,15 @@ with sync_playwright() as p:
                 ('technology/TECH-0216-pytorch.html', 'Technology profiles', 'Technology profiles'),
             ):
                 page.goto(base + route)
-                # Directories and technology profiles share sibling navigation;
-                # concept details retain their nested original layout.
-                landing = route.endswith('/index.html') or route.startswith('technology/TECH-')
-                header = page.locator('body > .site-mobile-chrome' if landing else
-                                      'main.term-shell > .site-mobile-chrome')
+                # Directories and both kinds of generated detail profiles now
+                # share the same script-free sibling navigation landmarks.
+                header = page.locator('body > .site-mobile-chrome')
                 active = page.locator('body > .site-chrome .site-chrome__more a[aria-current="location"]') if route == 'terms/index.html' else page.locator(
-                    'body > .site-chrome .site-chrome__links a[aria-current="page"]' if landing else
-                    'main.term-shell > .site-chrome .site-chrome__links a[aria-current="page"]')
+                    'body > .site-chrome .site-chrome__links a[aria-current="page"]')
+                check(f'{route} retains separate nav and main without JavaScript',
+                      page.locator('main.term-shell > .site-chrome').count() == 0
+                      and page.locator('main.term-shell > .site-mobile-chrome').count() == 0
+                      and page.locator('body > main.term-shell > header.hero#main').count() == 1)
                 real_title = header.locator(':scope > .site-mobile-chrome__title')
                 label = header.evaluate("el => getComputedStyle(el, '::before').content")
                 if route.endswith('/index.html'):

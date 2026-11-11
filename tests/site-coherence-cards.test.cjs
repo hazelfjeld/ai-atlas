@@ -424,10 +424,12 @@ test('About and both A-Z landing pages separate shared navigation from the main 
     assert.ok(html.indexOf('</nav>', desktop) < main, route + ' nests site navigation within main');
     assert.ok(html.includes('href="#main"') && html.includes('@media(min-width:651px){.term-shell>.hero{margin-top:8px}}@media(max-width:650px){.term-shell>.hero{margin-top:18px}body>.directory-mobile-topbar{margin:0;padding-inline:20px}}'), route);
   }
-  // Detailed articles remain unchanged until a future complete generated build.
+  // Concept details must retain Discover's separate rail before hydration.
   for (const route of ['terms/MLD-0001-a-b-test.html']) {
     const html = fs.readFileSync(path.join(__dirname, '..', route), 'utf8');
-    assert.ok(html.indexOf('<main class="term-shell">') < html.indexOf('<nav class="site-chrome term-nav"'), route);
+    const main = html.indexOf('<main class="term-shell">');
+    assert.ok(html.indexOf('<nav class="site-chrome term-nav"') < main, route);
+    assert.ok(html.indexOf('<div class="directory-mobile-topbar site-mobile-chrome"') < main, route);
   }
 });
 
@@ -444,8 +446,16 @@ test('all concept pages use the technology-profile native article skip, without 
     assert.doesNotMatch(html, /<main class="term-shell" id="main"/, entry.path);
     assert.match(html, /<header class="hero" id="main" tabindex="-1"><p class="eyebrow">/, entry.path);
     assert.equal((html.match(/id="main"/g) || []).length, 1, entry.path);
-    assert.ok(html.indexOf('<nav class="site-chrome term-nav"') <
-              html.indexOf('<header class="hero" id="main" tabindex="-1">'), entry.path);
+    const main = html.indexOf('<main class="term-shell">');
+    const rail = html.indexOf('<nav class="site-chrome term-nav"');
+    const mobile = html.indexOf('<div class="directory-mobile-topbar site-mobile-chrome"');
+    const hero = html.indexOf('<header class="hero" id="main" tabindex="-1">');
+    const footer = html.indexOf('<footer>', hero);
+    const mainEnd = html.indexOf('</main>', main);
+    assert.ok(mobile > 0 && mobile < rail && rail < main && main < hero &&
+      hero < footer && footer < mainEnd, entry.path + ' must have a separate shared rail and one article landmark');
+    assert.equal((html.match(/<main\b/g) || []).length, 1, entry.path);
+    assert.equal((html.match(/<nav class="site-chrome term-nav"/g) || []).length, 1, entry.path);
     assert.equal((html.match(/aria-label="AI Updates primary navigation"/g) || []).length, 1,
                  entry.path + ' must not duplicate desktop navigation');
   }
