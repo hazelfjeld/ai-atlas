@@ -57,7 +57,9 @@ jobs:
       - name: Install browser regression tooling
         run: |
           python3 -m pip install playwright==1.57.0
-          python3 -m playwright install --with-deps chromium
+          # Ubuntu 24.04 GitHub runners include Chromium's required system libraries. Avoid apt mirror DNS outages.
+          # Browser launches and the complete test suites below remain mandatory.
+          python3 -m playwright install chromium
       - name: Exercise the allowlisted site through Cloudflare's local asset runtime
         run: |
           set -eu
@@ -138,7 +140,9 @@ jobs:
         if: steps.current.outputs.deploy == 'true'
         run: |
           python3 -m pip install playwright==1.57.0
-          python3 -m playwright install --with-deps chromium
+          # Ubuntu 24.04 GitHub runners include Chromium's required system libraries. Avoid apt mirror DNS outages.
+          # Browser launches and the complete test suites below remain mandatory.
+          python3 -m playwright install chromium
       - name: Verify actual production assets, caching, navigation, Quiz and Match
         if: steps.current.outputs.deploy == 'true'
         run: |
