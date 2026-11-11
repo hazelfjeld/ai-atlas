@@ -966,6 +966,54 @@
       "githack_workflow_run_id": 42835459697,
       "production_commit": "2d76c34f9d9ce79bb8114cd69d73cda2a9af3360",
       "verification_scope": "Exact main 2d76c34f9d9ce79bb8114cd69d73cda2a9af3360 passed catalog/GitHack workflow 42835459697 and Cloudflare build, hosted browser and HTTP verification workflow 42835459925 by 2026-11-10T14:46:53Z. Verified 499 exact assets each on three production hostnames, including the November 10 immutable edition JSON, current archive index and receipts, with mobile/desktop dark/light and script-free/keyboard navigation, Games and offline checks. Dated archive navigation was browser-tested; the exact Nov10 date/revision query was not separately requested in an independent external browser. Partial source coverage and six deferred catalog proposals preserved."
+    },
+    {
+      "batch_id": "atlas-daily-20261111-20261111T144728890z-source-review-a",
+      "source_branch": "atlas-daily-staging",
+      "source_commit": "c71a03842c475c96ef9858166315f29ba01ae1e9",
+      "source_batch_path": "daily-queue/batches/2026-11-11-atlas-daily-20261111-20261111T144728890z-source-review-a.json",
+      "source_batch_sha256": "806048d784dc1047c9acab156c5a081c564e74d4e6fd2861f11e501c6ef4420b",
+      "source_batch_bytes": 40606,
+      "edition_date": "2026-11-11",
+      "validation_result": "batch_sha256_bytes_schema_unique_ids_dates_qualified_publisher_source_check_10_stories",
+      "status": "partially_published_with_8_deferred_catalog_proposals",
+      "publication_outcome": "pending_cloudflare_http_browser_and_githack_verification",
+      "publication_edition": "2026-11-11-v1",
+      "accepted_news_ids": [
+        "ai-news:qvac-botpsy-0-8b-20261111",
+        "ai-news:helsing-clarity-20261111",
+        "ai-news:google-gemini4-carbon-availability-20261110",
+        "ai-news:pytorch-executorch-webgpu-20261110",
+        "ai-news:motiongraphicsbench-20261110",
+        "ai-news:tng-bring-your-own-expert-20261110",
+        "ai-news:openai-businesses-chatgpt-20261110",
+        "ai-news:anthropic-ipo-roadshow-20261110",
+        "ai-news:openai-upwork-freelance-report-20261110",
+        "ai-news:us-china-ai-dialogue-bessent-20261111"
+      ],
+      "deferred_news_ids": [],
+      "deferred_catalog_proposal_ids": [
+        "tech-proposal:qvac-botpsy-08b:2026-11-11",
+        "tech-proposal:executorch-webgpu:2026-11-10",
+        "tech-proposal:gemini4-carbon:2026-11-10",
+        "tech-proposal:motiongraphicsbench:2026-11-10",
+        "tech-proposal:tng-moe-additive-experts:2026-11-10",
+        "term-proposal:webgpu-browser-inference:2026-11-11",
+        "term-proposal:moe-expert-extension:2026-11-11",
+        "term-proposal:programmatic-benchmark-verification:2026-11-11"
+      ],
+      "rejected_ids": [],
+      "counts": {
+        "news_published": 10,
+        "technology_added": 0,
+        "term_added": 0,
+        "corrections": 0,
+        "news_deferred": 0,
+        "catalog_deferred": 8,
+        "technology_updated": 0
+      },
+      "review_notes": "Published only source-qualified news from the collector's independently checksummed batch; all 10 news stories use attributed evidence and explicit caveats. Five technology and three terminology proposals remain deferred for canonical/catalog/license checks. The collector's partial coverage and inaccessible arXiv API are preserved. Hosted verification pending.",
+      "production_verified_at": null
     }
   ]
 }

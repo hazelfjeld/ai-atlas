@@ -281,9 +281,17 @@
       "sha256": "fd20cd766838fe5812271b4ef339279677720d9e369426c899f733199368d219",
       "bytes": 17121,
       "published_at": "2026-11-10T14:33:21.130Z"
+    },
+    {
+      "date": "2026-11-11",
+      "revision": 1,
+      "path": "data/daily/editions/2026-11-11-v1.json",
+      "sha256": "e555005a4af18457bfde6fd6ac220ae81d43fa7811e31f155c6dc3f84c2beaff",
+      "bytes": 20900,
+      "published_at": "2026-11-11T15:31:21.435Z"
     }
   ],
   "last_successful_publish_at": "2026-11-10T14:46:53Z",
-  "status": "edition_revision_1_production_verified",
-  "coverage_note": "November 10 revision 1 source-reviewed partial edition: nine attributed reports (four November 10 and five November 9), six deferred catalog proposals, no new canonical records, two failed source opens. Verified Cloudflare HTTP/browser and GitHack on 2026-11-10 at 14:46:53 UTC using exact publication commit 2d76c34f9d9ce79bb8114cd69d73cda2a9af3360."
+  "status": "edition_revision_1_pending_production_verification",
+  "coverage_note": "November 11 source-attributed partial edition: 10 reports (three November 11, seven November 10), five deferred technology proposals and three deferred terminology proposals, one failed metadata feed. Pending public Cloudflare/GitHack and direct dated HTML verification. Existing last_successful_publish_at retained until verification."
 }

@@ -1,0 +1,354 @@
+{
+  "schema": 1,
+  "edition_date": "2026-11-11",
+  "timezone": "America/Chicago",
+  "published_at": "2026-11-11T15:31:21.435Z",
+  "coverage": {
+    "start": "2026-11-10T14:17:57.944Z",
+    "end": "2026-11-11T14:47:28.890Z",
+    "status": "partial",
+    "note": "Source-qualified editorial selection: 3 reports dated November 11 and 7 discovered as November 10 catch-up; author/company claims are attributed and independently unreplicated. The collector's source polling was incomplete and its arXiv metadata endpoint failed. Five technology and three terminology proposals remain pending canonical/catalog/license review.",
+    "sources_checked": [
+      {
+        "name": "source-01",
+        "url": "https://huggingface.co/blog/qvac/botpsy",
+        "checked_at": "2026-11-11T14:47:28.890Z",
+        "status": "opened",
+        "note": "Collector source-open recorded; publisher reviewed material claims using primary pages or independent indexed reporting, retaining explicit qualification."
+      },
+      {
+        "name": "source-02",
+        "url": "https://helsing.ai/newsroom/helsing-unveils-clarity-a-sovereign-software-platform-for-military-intelligence",
+        "checked_at": "2026-11-11T14:47:28.890Z",
+        "status": "opened",
+        "note": "Collector source-open recorded; publisher reviewed material claims using primary pages or independent indexed reporting, retaining explicit qualification."
+      },
+      {
+        "name": "source-03",
+        "url": "https://www.reuters.com/technology/helsing-enters-market-battlefield-software-built-combat-data-2026-11-11/",
+        "checked_at": "2026-11-11T14:47:28.890Z",
+        "status": "opened",
+        "note": "Collector source-open recorded; publisher reviewed material claims using primary pages or independent indexed reporting, retaining explicit qualification."
+      },
+      {
+        "name": "source-04",
+        "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-carbon-now-available/",
+        "checked_at": "2026-11-11T14:47:28.890Z",
+        "status": "opened",
+        "note": "Collector source-open recorded; publisher reviewed material claims using primary pages or independent indexed reporting, retaining explicit qualification."
+      },
+      {
+        "name": "source-05",
+        "url": "https://deepmind.google/models/model-cards/gemini-4-carbon/",
+        "checked_at": "2026-11-11T14:47:28.890Z",
+        "status": "opened",
+        "note": "Collector source-open recorded; publisher reviewed material claims using primary pages or independent indexed reporting, retaining explicit qualification."
+      },
+      {
+        "name": "source-06",
+        "url": "https://pytorch.org/blog/executorch-webgpu-pytorch-models-on-the-gpu-in-the-browser/",
+        "checked_at": "2026-11-11T14:47:28.890Z",
+        "status": "opened",
+        "note": "Collector source-open recorded; publisher reviewed material claims using primary pages or independent indexed reporting, retaining explicit qualification."
+      },
+      {
+        "name": "source-07",
+        "url": "https://huggingface.co/blog/figma-ai/motion-graphics-bench",
+        "checked_at": "2026-11-11T14:47:28.890Z",
+        "status": "opened",
+        "note": "Collector source-open recorded; publisher reviewed material claims using primary pages or independent indexed reporting, retaining explicit qualification."
+      },
+      {
+        "name": "source-08",
+        "url": "https://arxiv.org/abs/2611.10592",
+        "checked_at": "2026-11-11T14:47:28.890Z",
+        "status": "opened",
+        "note": "Collector source-open recorded; publisher reviewed material claims using primary pages or independent indexed reporting, retaining explicit qualification."
+      },
+      {
+        "name": "source-09",
+        "url": "https://huggingface.co/datasets/figma-ai/motion-graphics-bench",
+        "checked_at": "2026-11-11T14:47:28.890Z",
+        "status": "opened",
+        "note": "Collector source-open recorded; publisher reviewed material claims using primary pages or independent indexed reporting, retaining explicit qualification."
+      },
+      {
+        "name": "source-10",
+        "url": "https://huggingface.co/blog/tngtech/bring-your-own-expert-extending-moe-models-with-ne",
+        "checked_at": "2026-11-11T14:47:28.890Z",
+        "status": "opened",
+        "note": "Collector source-open recorded; publisher reviewed material claims using primary pages or independent indexed reporting, retaining explicit qualification."
+      },
+      {
+        "name": "source-11",
+        "url": "https://openai.com/index/introducing-businesses-chatgpt/",
+        "checked_at": "2026-11-11T14:47:28.890Z",
+        "status": "opened",
+        "note": "Collector source-open recorded; publisher reviewed material claims using primary pages or independent indexed reporting, retaining explicit qualification."
+      },
+      {
+        "name": "source-12",
+        "url": "https://www.anthropic.com/news/roadshow-launch",
+        "checked_at": "2026-11-11T14:47:28.890Z",
+        "status": "opened",
+        "note": "Collector source-open recorded; publisher reviewed material claims using primary pages or independent indexed reporting, retaining explicit qualification."
+      },
+      {
+        "name": "source-13",
+        "url": "https://openai.com/index/ai-effect-on-freelance-work/",
+        "checked_at": "2026-11-11T14:47:28.890Z",
+        "status": "opened",
+        "note": "Collector source-open recorded; publisher reviewed material claims using primary pages or independent indexed reporting, retaining explicit qualification."
+      },
+      {
+        "name": "source-14",
+        "url": "https://www.reuters.com/world/china/us-china-should-stay-clear-eyed-ai-cooperation-competition-bessent-says-2026-11-11/",
+        "checked_at": "2026-11-11T14:47:28.890Z",
+        "status": "opened",
+        "note": "Collector source-open recorded; publisher reviewed material claims using primary pages or independent indexed reporting, retaining explicit qualification."
+      }
+    ],
+    "sources_failed": [
+      {
+        "url": "https://export.arxiv.org/api/query?search_query=cat%3Acs.LG&start=0&max_results=1",
+        "status": "inaccessible",
+        "reason": "Direct metadata API query was not accessible via browsing interface; does not establish absence of new papers.",
+        "checked_at": "2026-11-11T14:47:28.890Z"
+      }
+    ]
+  },
+  "tldr": [
+    "On-device and browser-local AI gained notable new tooling: QVAC described a 0.8B assistant, PyTorch added a WebGPU inference path, and TNG explored modular MoE specialization; benchmark performance remains largely author-reported.",
+    "Google broadened Gemini 4 Carbon access while a new SVG-animation benchmark showed how executable graders can complement model judgments; Helsing's military-agent platform and renewed US–China AI dialogue warrant scrutiny of safety claims, oversight and real-world evidence.",
+    "Three reports are dated November 11 and seven November 10; five technology and three terminology proposals remain deferred, with incomplete source coverage."
+  ],
+  "news": [
+    {
+      "id": "ai-news-qvac-botpsy-0-8b-20261111",
+      "title": "QVAC introduces BotPsy, a sub-billion-parameter tool-use assistant",
+      "category": "models",
+      "tags": [
+        "SLM",
+        "LLM",
+        "on-device",
+        "agents",
+        "safety"
+      ],
+      "summary": "QVAC published BotPsy, an approximately 0.8B-parameter model adapted from Qwen3.5-0.8B for on-device assistants and multi-step tool calls, with a multi-stage training procedure and author-run evaluations.",
+      "why_it_matters": "Specialized small models can offer private, lower-resource tool use, making the approach relevant to local assistants instead of routing every interaction to frontier APIs.",
+      "caveat": "Reported benchmark improvements are author evaluations, not independent replications; the paper acknowledges significant remaining safety weaknesses, including susceptibility to harmful instructions and prompt injection. Actual downloadable checkpoint terms and hardware performance require separate verification.",
+      "review_status": "publisher_checked_attributed_source_qualified",
+      "release_status": "author_model_research_release",
+      "source_url": "https://huggingface.co/blog/qvac/botpsy",
+      "publication_date": "2026-11-11",
+      "event_date": "2026-11-11",
+      "discovered_at": "2026-11-11T14:47:28.890Z",
+      "added_to_atlas_at": "2026-11-11T15:31:21.435Z",
+      "collection_classification": "current_window"
+    },
+    {
+      "id": "ai-news-helsing-clarity-20261111",
+      "title": "Helsing announces Clarity, a military multi-agent intelligence platform",
+      "category": "applications",
+      "tags": [
+        "agents",
+        "multimodal",
+        "defense",
+        "security",
+        "governance"
+      ],
+      "summary": "Helsing unveiled Clarity, an agent-based platform intended to join sensor streams, reports and other military data into an intelligence picture with human review in the decision workflow.",
+      "why_it_matters": "It illustrates operational deployment ambitions for multi-agent information fusion and raises consequential questions about evidence quality, automation bias and human control in military settings.",
+      "caveat": "Its performance and human-control safeguards are company descriptions; independent field validation and actual deployment coverage were not established. Do not confuse platform marketing with proven operational effectiveness.",
+      "review_status": "publisher_checked_attributed_source_qualified",
+      "release_status": "company_product_announcement",
+      "source_url": "https://helsing.ai/newsroom/helsing-unveils-clarity-a-sovereign-software-platform-for-military-intelligence",
+      "publication_date": "2026-11-11",
+      "event_date": "2026-11-11",
+      "discovered_at": "2026-11-11T14:47:28.890Z",
+      "added_to_atlas_at": "2026-11-11T15:31:21.435Z",
+      "collection_classification": "current_window"
+    },
+    {
+      "id": "ai-news-google-gemini4-carbon-availability-20261110",
+      "title": "Google expands Gemini 4 Carbon availability and agent tooling",
+      "category": "models",
+      "tags": [
+        "LLM",
+        "multimodal",
+        "agents",
+        "API"
+      ],
+      "summary": "Google announced broader access to Gemini 4 Carbon through its developer and customer surfaces and described agent coordination through Antigravity's preview /swarm workflow.",
+      "why_it_matters": "Developers evaluating long-context multimodal models and collaborative coding agents now have a newly described access and workflow option.",
+      "caveat": "Availability, quota and billing vary by product and eligibility; Google benchmarks are vendor-reported and the coordination feature is preview, not a universally released stable API.",
+      "review_status": "publisher_checked_attributed_source_qualified",
+      "release_status": "model_access_announcement",
+      "source_url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-4-carbon-now-available/",
+      "publication_date": "2026-11-10",
+      "event_date": "2026-11-10",
+      "discovered_at": "2026-11-11T14:47:28.890Z",
+      "added_to_atlas_at": "2026-11-11T15:31:21.435Z",
+      "collection_classification": "previous_day_overlap"
+    },
+    {
+      "id": "ai-news-pytorch-executorch-webgpu-20261110",
+      "title": "ExecuTorch gains a WebGPU path for local browser inference",
+      "category": "technologies",
+      "tags": [
+        "DL",
+        "LLM",
+        "inference",
+        "WebGPU",
+        "edge"
+      ],
+      "summary": "The PyTorch team documented an ExecuTorch WebGPU backend that runs exported PyTorch models as .pte files on supported browser GPUs, including examples spanning text, vision and speech.",
+      "why_it_matters": "Direct browser-local GPU execution can preserve prompt data on a device and reduce dependency on cloud inference for compatible workloads.",
+      "caveat": "Authors' speed comparisons against their selected CPU path are not cross-framework benchmarks. Model coverage, memory, WebGPU browser support and device-specific compatibility must be tested.",
+      "review_status": "publisher_checked_attributed_source_qualified",
+      "release_status": "developer_tool_release",
+      "source_url": "https://pytorch.org/blog/executorch-webgpu-pytorch-models-on-the-gpu-in-the-browser/",
+      "publication_date": "2026-11-10",
+      "event_date": "2026-11-10",
+      "discovered_at": "2026-11-11T14:47:28.890Z",
+      "added_to_atlas_at": "2026-11-11T15:31:21.435Z",
+      "collection_classification": "previous_day_overlap"
+    },
+    {
+      "id": "ai-news-motiongraphicsbench-20261110",
+      "title": "Figma and Stanford release an SVG animation benchmark with executable checks",
+      "category": "evaluation",
+      "tags": [
+        "LLM",
+        "evaluation",
+        "vision",
+        "code generation",
+        "benchmark"
+      ],
+      "summary": "MotionGraphicsBench introduces 100 static-SVG-to-motion tasks graded with explicit executable verification programs; its researchers evaluated 32 model configurations and released benchmark resources.",
+      "why_it_matters": "Task-specific programmatic graders can complement model-as-judge evaluation when outputs have properties that can be checked deterministically.",
+      "caveat": "Authors report only four evaluated systems exceeded 50% pass@1 and a 93.3% raw grader-human agreement on a held-out sample; results and grader correctness are not independently reproduced, and grading tests can miss visual quality.",
+      "review_status": "publisher_checked_attributed_source_qualified",
+      "release_status": "research_benchmark_release",
+      "source_url": "https://huggingface.co/blog/figma-ai/motion-graphics-bench",
+      "publication_date": "2026-11-10",
+      "event_date": "2026-11-10",
+      "discovered_at": "2026-11-11T14:47:28.890Z",
+      "added_to_atlas_at": "2026-11-11T15:31:21.435Z",
+      "collection_classification": "previous_day_overlap"
+    },
+    {
+      "id": "ai-news-tng-bring-your-own-expert-20261110",
+      "title": "TNG explores adding independently trained specialists to MoE models",
+      "category": "research",
+      "tags": [
+        "LLM",
+        "MoE",
+        "fine-tuning",
+        "distillation"
+      ],
+      "summary": "TNG researchers describe training and integrating new domain-specific experts into an existing mixture-of-experts base model, with worked coding-domain experiments and comparisons against adapter fine-tuning.",
+      "why_it_matters": "Modular domain adaptation could help small teams specialize an MoE model without retraining every existing expert or deploying separate full models.",
+      "caveat": "The authors' evaluations are workload-specific; expert-router compatibility, quality tradeoffs and total memory requirements limit portability, and this is not a universal plug-and-play skill transfer result.",
+      "review_status": "publisher_checked_attributed_source_qualified",
+      "release_status": "author_method_research",
+      "source_url": "https://huggingface.co/blog/tngtech/bring-your-own-expert-extending-moe-models-with-ne",
+      "publication_date": "2026-11-10",
+      "event_date": "2026-11-10",
+      "discovered_at": "2026-11-11T14:47:28.890Z",
+      "added_to_atlas_at": "2026-11-11T15:31:21.435Z",
+      "collection_classification": "previous_day_overlap"
+    },
+    {
+      "id": "ai-news-openai-businesses-chatgpt-20261110",
+      "title": "OpenAI opens beta business listings and scoped Business Agents in ChatGPT",
+      "category": "products",
+      "tags": [
+        "agents",
+        "applications",
+        "commerce",
+        "LLM"
+      ],
+      "summary": "OpenAI introduced Businesses in ChatGPT in beta, including business-claimed information, aggregate discovery insights and Business Agents initially offered to eligible U.S. ecommerce and online-service businesses.",
+      "why_it_matters": "The release creates a distinct business-to-user agent interaction surface with implications for discovery, attribution, trust and merchant data maintenance.",
+      "caveat": "This is a restricted beta, not an account-wide public rollout. Availability, eligibility and data practices must be checked against product documentation; no independent outcome metrics were established.",
+      "review_status": "publisher_checked_attributed_source_qualified",
+      "release_status": "product_beta_announcement",
+      "source_url": "https://openai.com/index/introducing-businesses-chatgpt/",
+      "publication_date": "2026-11-10",
+      "event_date": "2026-11-10",
+      "discovered_at": "2026-11-11T14:47:28.890Z",
+      "added_to_atlas_at": "2026-11-11T15:31:21.435Z",
+      "collection_classification": "previous_day_overlap"
+    },
+    {
+      "id": "ai-news-anthropic-ipo-roadshow-20261110",
+      "title": "Anthropic starts roadshow for a proposed public offering",
+      "category": "industry",
+      "tags": [
+        "industry",
+        "investment",
+        "AI infrastructure"
+      ],
+      "summary": "Anthropic launched a roadshow for a proposed stock offering with an indicated $70–$78 share-price range and a planned Nasdaq listing under ANT.",
+      "why_it_matters": "A proposed listing could reshape public-market scrutiny of frontier-model economics, capital needs and governance.",
+      "caveat": "This is a proposed, not completed, IPO. The company's statement says the registration statement had not yet become effective, so pricing, timing and completion remain uncertain.",
+      "review_status": "publisher_checked_attributed_source_qualified",
+      "release_status": "proposed_financing_announcement",
+      "source_url": "https://www.anthropic.com/news/roadshow-launch",
+      "publication_date": "2026-11-10",
+      "event_date": "2026-11-10",
+      "discovered_at": "2026-11-11T14:47:28.890Z",
+      "added_to_atlas_at": "2026-11-11T15:31:21.435Z",
+      "collection_classification": "previous_day_overlap"
+    },
+    {
+      "id": "ai-news-openai-upwork-freelance-report-20261110",
+      "title": "OpenAI and Upwork report shifting demand for AI-related freelance work",
+      "category": "research",
+      "tags": [
+        "industry",
+        "AI applications",
+        "labor",
+        "evaluation"
+      ],
+      "summary": "An OpenAI–Upwork analysis describes changes in posted freelance tasks, combinations of requested skills and larger project budgets among AI-related work on the platform.",
+      "why_it_matters": "It supplies a concrete platform-level signal about how businesses are restructuring some contracted work around AI.",
+      "caveat": "The sample represents Upwork postings, not the whole labor market; associations cannot establish that AI caused the reported shifts, and the analysis involves the participating companies.",
+      "review_status": "publisher_checked_attributed_source_qualified",
+      "release_status": "industry_observational_research",
+      "source_url": "https://openai.com/index/ai-effect-on-freelance-work/",
+      "publication_date": "2026-11-10",
+      "event_date": "2026-11-10",
+      "discovered_at": "2026-11-11T14:47:28.890Z",
+      "added_to_atlas_at": "2026-11-11T15:31:21.435Z",
+      "collection_classification": "previous_day_overlap"
+    },
+    {
+      "id": "ai-news-us-china-ai-dialogue-bessent-20261111",
+      "title": "US and China discuss possible AI incident-alert and testing dialogue",
+      "category": "governance",
+      "tags": [
+        "policy",
+        "AI safety",
+        "evaluation",
+        "governance"
+      ],
+      "summary": "Reuters reports that U.S. Treasury Secretary Scott Bessent called for a clear-eyed approach to AI cooperation and competition and described potential discussions on model testing practices and incident alerts.",
+      "why_it_matters": "Even preliminary international coordination about testing and incident reporting matters for cross-border AI safety governance.",
+      "caveat": "Reported remarks and prospective talks do not constitute a binding agreement, functioning alert channel or adopted regulatory standard.",
+      "review_status": "publisher_checked_attributed_source_qualified",
+      "release_status": "attributed_policy_reporting",
+      "source_url": "https://www.reuters.com/world/china/us-china-should-stay-clear-eyed-ai-cooperation-competition-bessent-says-2026-11-11/",
+      "publication_date": "2026-11-11",
+      "event_date": "2026-11-11",
+      "discovered_at": "2026-11-11T14:47:28.890Z",
+      "added_to_atlas_at": "2026-11-11T15:31:21.435Z",
+      "collection_classification": "current_window"
+    }
+  ],
+  "technologies": [],
+  "terms": [],
+  "site_changes": [],
+  "corrections": []
+}
