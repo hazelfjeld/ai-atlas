@@ -490,7 +490,15 @@ def ensure_footer_resources(html, path):
     # workspace deliberately omits the duplicate policy link supplied by the app shell.
     match = re.search(r"<footer\b[^>]*>[\s\S]*?</footer>", html)
     assert match, "Missing standalone footer: " + path
-    footer = match.group(0)
+    original_footer = match.group(0)
+    footer = original_footer
+    # Normalize the visible label for the one shared policy destination.
+    # Keep contextual wording, source links and other review-page destinations.
+    for old_label in ("Editorial policy", "Editorial corrections policy"):
+        footer = footer.replace(
+            '<a href="about.html">' + old_label + "</a>",
+            '<a href="about.html">Editorial policy & coverage</a>',
+        )
     extra = ""
     for url, label in (
         ("about.html", "Editorial policy & coverage"),
@@ -498,10 +506,12 @@ def ensure_footer_resources(html, path):
     ):
         if ('href="' + url + '"') not in footer:
             extra += ' · <a href="' + url + '">' + label + "</a>"
-    if not extra:
+    if not extra and footer == original_footer:
         return html
-    before_close = match.end() - len("</footer>")
-    return html[:before_close] + extra + html[before_close:]
+    # Replace the footer atomically; its length may change during normalization.
+    # A second build produces identical output with no duplicate links.
+    updated_footer = footer.replace("</footer>", extra + "</footer>", 1)
+    return html[:match.start()] + updated_footer + html[match.end():]
 
 
 
