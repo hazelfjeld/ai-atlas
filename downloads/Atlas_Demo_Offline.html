@@ -1228,6 +1228,23 @@ body:has(.site-chrome) > a.skip:focus{
 .site-static-fallback__links a:focus-visible{outline:3px solid #b77833;outline-offset:2px}
 @media(max-width:650px){.site-static-fallback{padding:14px 16px}.site-static-fallback__links a{flex:1 1 100%}}
 /* atlas-scriptless-catalog-fallback:end */
+
+/* atlas-longform-reading-measure:begin */
+/* Discover constrains editorial introductions to readable lines. The older
+   reference and evidence templates let full-width 1000px article prose stretch
+   across the workspace on desktop. Use the same 70ch reading measure for
+   prose on existing articles, without shrinking cards, tables, navigation,
+   source lists or game controls. Mobile widths naturally remain fluid. */
+:is(.term-shell > .hero > p.lead,
+    .term-shell > .profile-section > p,
+    .term-shell > .detail-block > p,
+    .review-shell > header > p.lead,
+    .review-shell > section > p,
+    .shell:has(> .site-chrome.nav) > main > header > p.lead){
+  max-width:70ch;
+}
+/* atlas-longform-reading-measure:end */
+
 </style><script>/* Enhance the native dropdown only when scripts can make its drawer modal.
    Without JavaScript, keep the accessible, nonmodal <details> fallback. */
 document.documentElement.classList?.add('atlas-enhanced');
