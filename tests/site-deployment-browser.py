@@ -107,6 +107,34 @@ with sync_playwright() as p:
                           and intro_page.locator('main.term-shell > .site-chrome').count() == 0
                           and intro_page.locator('main.term-shell > header.hero#main').count() == 1)
         intro_context.close()
+    # Long-form article copy used to run the entire 1000px reference and
+    # evidence workspace while Discover constrained its introductory prose.
+    # Compare real native layouts in both themes and with scripts disabled;
+    # cards, tables and the shared navigation are intentionally unaffected.
+    for scheme in ('light', 'dark'):
+        reading_ctx = browser.new_context(java_script_enabled=False, color_scheme=scheme)
+        reading_page = reading_ctx.new_page()
+        for width in (390, 1280):
+            reading_page.set_viewport_size({'width':width, 'height':844})
+            for route, selector in (
+                ('about.html', '.term-shell > .profile-section > p'),
+                ('terms/MLD-0691-machine-learning.html', '.term-shell > .detail-block > p'),
+                ('technology/TECH-0216-pytorch.html', '.term-shell > .profile-section > p'),
+                ('hardware-review.html', '.review-shell > section > p')
+            ):
+                reading_page.goto(base + route)
+                actual = reading_page.locator(selector).first.evaluate("""el => ({
+                    max: getComputedStyle(el).maxWidth,
+                    visible: el.getBoundingClientRect().height > 0,
+                    right: el.getBoundingClientRect().right,
+                    available: innerWidth
+                })""")
+                check('shared script-free article reading width ' + route + ' ' + scheme + ' ' + str(width),
+                      actual['max'] != 'none' and actual['visible']
+                      and actual['right'] <= actual['available'] + 1)
+                if scheme == 'dark' and width == 1280 and route in ('about.html', 'hardware-review.html'):
+                    reading_page.screenshot(path=str(out / ('longform-' + route.split('.')[0] + '-1280-dark.png')))
+        reading_ctx.close()
     # Every profile should have separate site and article landmarks, even when
     # scripts are disabled and the viewport is just 320 pixels wide.
     for scheme in ('light', 'dark'):
