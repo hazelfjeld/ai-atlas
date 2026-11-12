@@ -82,7 +82,7 @@
   ],
   "news": [
     {
-      "id": "ai-news:alibaba-qwen4-max-preview-20261111",
+      "id": "ai-news-alibaba-qwen4-max-preview-20261111",
       "title": "Alibaba previews Qwen4-Max with multimodal tools and a time-limited access window",
       "category": "models",
       "tags": [
@@ -104,7 +104,7 @@
       "collection_classification": "current_window"
     },
     {
-      "id": "ai-news:deepmind-alphagenome2-20261111",
+      "id": "ai-news-deepmind-alphagenome2-20261111",
       "title": "DeepMind introduces AlphaGenome 2 for predicting variant effects by cell type",
       "category": "research",
       "tags": [
@@ -127,7 +127,7 @@
       "collection_classification": "current_window"
     },
     {
-      "id": "ai-news:fractile-series-c-ai-inference-20261111",
+      "id": "ai-news-fractile-series-c-ai-inference-20261111",
       "title": "Fractile raises funding for AI inference chips ahead of planned commercial launch",
       "category": "hardware",
       "tags": [
@@ -149,7 +149,7 @@
       "collection_classification": "current_window"
     },
     {
-      "id": "ai-news:china-rented-nvidia-compute-concerns-20261112",
+      "id": "ai-news-china-rented-nvidia-compute-concerns-20261112",
       "title": "Reuters reports Chinese AI firms seeking overseas Nvidia cloud capacity amid policy uncertainty",
       "category": "governance",
       "tags": [
@@ -172,7 +172,7 @@
       "collection_classification": "current_window"
     },
     {
-      "id": "ai-news:anthropic-fable-mythos52-20261109",
+      "id": "ai-news-anthropic-fable-mythos52-20261109",
       "title": "Anthropic launches Fable 5.2 and restricted Mythos 5.2 with new safety evaluations",
       "category": "models",
       "tags": [
@@ -195,7 +195,7 @@
       "collection_classification": "catch_up"
     },
     {
-      "id": "ai-news:hedra-model-factory-20261110",
+      "id": "ai-news-hedra-model-factory-20261110",
       "title": "Hedra offers a research-assisted model training and inference factory",
       "category": "tools",
       "tags": [
@@ -218,7 +218,7 @@
       "collection_classification": "catch_up"
     },
     {
-      "id": "ai-news:suse-ai-infrastructure-20261110",
+      "id": "ai-news-suse-ai-infrastructure-20261110",
       "title": "SUSE outlines new AI-assisted hybrid infrastructure management features",
       "category": "infrastructure",
       "tags": [

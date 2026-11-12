@@ -1046,13 +1046,13 @@
       "publication_outcome": "immutable_revision_1_pending_production_verification",
       "publication_edition": "2026-11-12-v1",
       "accepted_news_ids": [
-        "ai-news:alibaba-qwen4-max-preview-20261111",
-        "ai-news:deepmind-alphagenome2-20261111",
-        "ai-news:fractile-series-c-ai-inference-20261111",
-        "ai-news:china-rented-nvidia-compute-concerns-20261112",
-        "ai-news:anthropic-fable-mythos52-20261109",
-        "ai-news:hedra-model-factory-20261110",
-        "ai-news:suse-ai-infrastructure-20261110"
+        "ai-news-alibaba-qwen4-max-preview-20261111",
+        "ai-news-deepmind-alphagenome2-20261111",
+        "ai-news-fractile-series-c-ai-inference-20261111",
+        "ai-news-china-rented-nvidia-compute-concerns-20261112",
+        "ai-news-anthropic-fable-mythos52-20261109",
+        "ai-news-hedra-model-factory-20261110",
+        "ai-news-suse-ai-infrastructure-20261110"
       ],
       "deferred_news_ids": [],
       "deferred_catalog_proposal_ids": [
@@ -1073,7 +1073,7 @@
         "catalog_deferred": 6,
         "technology_updated": 0
       },
-      "review_notes": "Publisher opened and independently checked seven material sources (official docs/releases and Reuters reporting) and retained all caveats. Four technology and two term proposals are deferred rather than presented as permanent additions. The collector reports partial source coverage and an inaccessible arXiv API endpoint. Public deployment pending independent CI/HTTP/browser verification.",
+      "review_notes": "Publisher opened and independently checked seven material sources (official docs/releases and Reuters reporting) and retained all caveats. Four technology and two term proposals are deferred rather than presented as permanent additions. The collector reports partial source coverage and an inaccessible arXiv API endpoint. Public deployment pending independent CI/HTTP/browser verification. Pre-publication validation caught disallowed colon separators in the collector IDs; published news IDs use the reader's safe hyphenated stable-ID syntax, with raw batch provenance retained.",
       "publication_history": [
         {
           "edition": "2026-11-12-v1",
