@@ -133,10 +133,10 @@ def wrap_reference_shell(nav, content, path, main_id, *, expanded_concept=False)
             assert content.count('<header class="hero" id="main" tabindex="-1">') == 1, path
         else:
             assert content.startswith('<header class="hero" id="main" tabindex="-1">'), path
-        if path in REFERENCE_LANDING_PATHS or is_tech_detail or expanded_concept:
-            # Landing pages, technology profiles and reviewed expanded guides
-            # use the same script-free global footer without copying links.
-            # Reference-depth concepts keep their hashed source until migrated.
+        if path in REFERENCE_LANDING_PATHS or is_tech_detail or is_concept_detail:
+            # Every existing concept (reference or expanded), technology profile
+            # and landing page uses one script-free global contentinfo landmark.
+            # Preserve the original policy/source links rather than copying them.
             assert content.count('<footer>') == 1 and content.endswith('</footer>'), path
             article, footer_tail = content.rsplit('<footer>', 1)
             return (nav + '<main class="term-shell">' + article + '</main>'

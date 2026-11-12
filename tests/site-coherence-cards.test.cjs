@@ -458,12 +458,11 @@ test('all concept pages use the technology-profile native article skip, without 
     const rail = html.indexOf('<nav class="site-chrome term-nav"');
     const mobile = html.indexOf('<div class="directory-mobile-topbar site-mobile-chrome"');
     const hero = html.indexOf('<header class="hero" id="main" tabindex="-1">');
-    const footer = html.indexOf(entry.expanded ?
-      '<footer class="site-chrome__footer">' : '<footer>', hero);
+    const footer = html.indexOf('<footer class="site-chrome__footer">', hero);
     const mainEnd = html.indexOf('</main>', main);
     assert.ok(mobile > 0 && mobile < rail && rail < main && main < hero &&
-      hero < mainEnd && (entry.expanded ? footer > mainEnd : footer < mainEnd),
-      entry.path + ' preserves exactly the reviewed-guide/reference-depth footer contract');
+      hero < mainEnd && footer > mainEnd,
+      entry.path + ' preserves one native global footer for all reference depths');
     assert.equal((html.match(/<footer\b/g) || []).length, 1, entry.path + ': one native footer');
     assert.equal((html.match(/<main\b/g) || []).length, 1, entry.path);
     assert.equal((html.match(/<nav class="site-chrome term-nav"/g) || []).length, 1, entry.path);

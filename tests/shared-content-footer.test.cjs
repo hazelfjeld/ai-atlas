@@ -66,12 +66,23 @@ test('all 303 generated technology profiles use the shared global footer landmar
   }
 });
 
-test('reference-depth concept profiles retain script-free content and footers during migration', () => {
-  for (const route of ['terms/MLD-0001-a-b-test.html']) {
-    const html = fs.readFileSync(path.join(root, route), 'utf8');
-    const footer = html.indexOf('<footer>');
-    assert.ok(footer > html.indexOf('<main'), route + ': footer retained');
-    assert.ok(footer < html.indexOf('</main>'), route + ': unchanged concept article');
+test('reference-depth concepts expose the same native global footer as expanded guides', () => {
+  const manifest = JSON.parse(fs.readFileSync(path.join(root, 'terms/manifest.json'), 'utf8'));
+  const crypto = require('node:crypto');
+  assert.equal(Object.values(manifest).filter(entry => !entry.expanded).length, 1288);
+  for (const entry of Object.values(manifest)) {
+    const bytes = fs.readFileSync(path.join(root, entry.path));
+    const html = bytes.toString('utf8');
+    const main = html.indexOf('<main class="term-shell">');
+    const endMain = html.indexOf('</main>', main);
+    const footer = html.indexOf('<footer class="site-chrome__footer">');
+    assert.ok(main > 0 && endMain > main && footer > endMain, entry.path + ': footer is global without scripts');
+    assert.equal((html.match(/<main\\b/g) || []).length, 1, entry.path + ': one main');
+    assert.equal((html.match(/<footer\\b/g) || []).length, 1, entry.path + ': one footer');
+    assert.ok(html.includes('href="../about.html"') && html.includes('href="../index.html#/sources"'),
+      entry.path + ': existing policy and evidence links');
+    assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'), entry.sha256,
+      entry.path + ': published manifest matches exact bytes');
   }
 });
 
@@ -126,7 +137,7 @@ test('daily archive, catalog review, technologies and playbooks share the global
   execFileSync('python3', ['-c', check], { cwd: root, stdio: 'pipe' });
 });
 
-test('all frozen concept footers use the shared global contentinfo when enhanced and remain usable without scripts', () => {
+test('all concept details expose native global footers and retain non-duplicating legacy enhancement', () => {
   const runtime = fs.readFileSync(path.join(root, 'site-theme.js'), 'utf8');
   const css = fs.readFileSync(path.join(root, 'site-chrome.css'), 'utf8');
   const offline = fs.readFileSync(path.join(root, 'downloads/Atlas_Demo_Offline.html'), 'utf8');
@@ -145,9 +156,9 @@ test('all frozen concept footers use the shared global contentinfo when enhanced
   for (const route of ['terms/MLD-0001-a-b-test.html']) {
     const html = fs.readFileSync(path.join(root, route), 'utf8');
     assert.equal((html.match(/<footer\b/g) || []).length, 1, route + ': one existing footer');
-    assert.ok(html.indexOf('<main class="term-shell">') < html.indexOf('<footer>') &&
-              html.indexOf('<footer>') < html.indexOf('</main>'),
-              route + ': frozen script-free source retains its original article and links');
+    assert.ok(html.indexOf('</main>') < html.indexOf('<footer class="site-chrome__footer">') &&
+              html.indexOf('<footer class="site-chrome__footer">') < html.indexOf('</body>'),
+              route + ': native global footer keeps the original source links');
     assert.ok(html.includes('href="../about.html"') &&
               html.includes('href="../index.html#/sources"'), route + ': policy and sources');
   }

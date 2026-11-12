@@ -59,6 +59,10 @@ def shell(title, body, path, description, structured=None, *, native_concept_art
         assert article.index('<nav class="site-chrome term-nav"') < article.index('<main class="term-shell">'), path
         assert article.count('class="site-chrome__links"') == 1, path
         assert article.count('class="site-mobile-chrome__search"') == 1, path
+        # All 1,345 existing concept pages share the same script-free global
+        # footer landmark as Discover, the directories and technology details.
+        assert article.count('<footer class="site-chrome__footer">') == 1, path
+        assert article.index('</main>') < article.index('<footer class="site-chrome__footer">'), path
     return f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 {metadata(title + ' | AI Updates', description, path, structured)}
