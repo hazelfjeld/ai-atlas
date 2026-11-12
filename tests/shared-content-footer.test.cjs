@@ -74,3 +74,20 @@ test('concept profiles retain their hash-indexed source footers until their own 
     assert.ok(footer < html.indexOf('</main>'), route + ': unchanged concept article');
   }
 });
+
+test('daily archive and editorial catalog review reuse the global native footer', () => {
+  for (const page of ['whats-new.html', 'catalog-review.html']) {
+    const html = fs.readFileSync(path.join(root, page), 'utf8');
+    assert.equal((html.match(/<main\\b/g) || []).length, 1, page + ': one main');
+    assert.equal((html.match(/<footer\\b/g) || []).length, 1, page + ': one footer');
+    const mainEnd = html.indexOf('</main>');
+    const footer = html.indexOf('<footer class="site-chrome__footer">');
+    assert.ok(mainEnd !== -1 && footer > mainEnd, page + ': footer is global contentinfo');
+    assert.ok(footer < html.indexOf('</body>'), page + ': footer remains in body');
+    assert.ok(html.includes('href="about.html"'), page + ': editorial policy preserved');
+    assert.ok(html.includes('href="index.html#/sources"'), page + ': evidence policy preserved');
+    assert.ok(html.includes('aria-label="AI Updates primary navigation"'), page + ': shared navigation preserved');
+  }
+  const generator = fs.readFileSync(path.join(root, 'scripts/site_chrome.py'), 'utf8');
+  assert.match(generator, /if path in \\("whats-new\\.html", "catalog-review\\.html"\\):/);
+});

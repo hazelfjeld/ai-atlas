@@ -501,6 +501,12 @@ def ensure_footer_resources(html, path):
     assert match, "Missing standalone footer: " + path
     original_footer = match.group(0)
     footer = original_footer
+    # These two editorial pages already place their footer outside <main>,
+    # but previously retained private footer typography. Reuse the same
+    # global contentinfo styling as native Research, Games and references.
+    if path in ("whats-new.html", "catalog-review.html"):
+        assert footer.startswith("<footer>"), "Unexpected editorial footer: " + path
+        footer = footer.replace("<footer>", '<footer class="site-chrome__footer">', 1)
     # Normalize the visible label for the one shared policy destination.
     # Keep contextual wording, source links and other review-page destinations.
     for old_label in ("Editorial policy", "Editorial corrections policy"):
