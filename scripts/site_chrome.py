@@ -118,10 +118,11 @@ def render_mobile_secondary_nav(prefix, current=None):
 REFERENCE_LANDING_PATHS = frozenset(("about.html", "terms/index.html", "technology/index.html"))
 REFERENCE_LANDING_HERO_CSS = '@media(min-width:651px){.term-shell>.hero{margin-top:8px}}@media(max-width:650px){.term-shell>.hero{margin-top:18px}body>.directory-mobile-topbar{margin:0;padding-inline:20px}}'
 
-def wrap_reference_shell(nav, content, path, main_id):
+def wrap_reference_shell(nav, content, path, main_id, *, expanded_concept=False):
     """Keep the canonical shared navigation outside the main landmark on migrated pages."""
     is_tech_detail = path.startswith('technology/TECH-') and path.endswith('.html')
     is_concept_detail = path.startswith('terms/MLD-') and path.endswith('.html')
+    assert not expanded_concept or is_concept_detail, path
     if path in REFERENCE_LANDING_PATHS or is_tech_detail or is_concept_detail:
         if path == "about.html" and main_id == ' id="main"':
             marker = '<header class="hero">'
@@ -132,11 +133,10 @@ def wrap_reference_shell(nav, content, path, main_id):
             assert content.count('<header class="hero" id="main" tabindex="-1">') == 1, path
         else:
             assert content.startswith('<header class="hero" id="main" tabindex="-1">'), path
-        if path in REFERENCE_LANDING_PATHS or is_tech_detail:
-            # Landing pages and all technology profiles expose the one global
-            # footer outside the article; keep the original evidence and links.
-            # Concept detail pages retain their hashed-manifest source until
-            # their entire family can be rebuilt and checked atomically.
+        if path in REFERENCE_LANDING_PATHS or is_tech_detail or expanded_concept:
+            # Landing pages, technology profiles and reviewed expanded guides
+            # use the same script-free global footer without copying links.
+            # Reference-depth concepts keep their hashed source until migrated.
             assert content.count('<footer>') == 1 and content.endswith('</footer>'), path
             article, footer_tail = content.rsplit('<footer>', 1)
             return (nav + '<main class="term-shell">' + article + '</main>'

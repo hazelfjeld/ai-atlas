@@ -2685,6 +2685,28 @@ with sync_playwright() as p:
                     skip_page.screenshot(path=str(out/('skip-'+route.split('.')[0]+'-'+scheme+'.png')))
         skip_context.close()
 
+    # Source-reviewed concept guides now use the existing global footer
+    # without hydration, matching technology profiles across all viewports.
+    for scheme in ('light', 'dark'):
+        guide_context = browser.new_context(java_script_enabled=False, color_scheme=scheme,
+                                            reduced_motion='reduce')
+        guide_page = guide_context.new_page()
+        for width in (320, 390, 768, 1280):
+            guide_page.set_viewport_size({'width':width, 'height':844})
+            for route in ('terms/MLD-0002-ablation-study.html',
+                          'terms/MLD-0957-prompt-injection.html'):
+                guide_page.goto(base + route)
+                footer = guide_page.locator('footer.site-chrome__footer')
+                check('expanded guide shared global footer ' + route + ' ' + scheme + ' ' + str(width),
+                      footer.count()==1 and footer.is_visible()
+                      and guide_page.get_by_role('contentinfo').count()==1
+                      and guide_page.locator('main footer').count()==0
+                      and footer.locator('a[href="../about.html"]').count()==1
+                      and footer.evaluate('el => el.getBoundingClientRect().right <= innerWidth + 1'))
+                if width==390 and scheme=='dark':
+                    guide_page.screenshot(path=str(out/('expanded-guide-'+route.split('/')[1].split('.')[0]+'-390-dark.png')))
+        guide_context.close()
+
     check('no application runtime exceptions', not errors)
     browser.close()
 (out / 'report.json').write_text(json.dumps({'base':base, 'checks':checks, 'checks_passed':len(checks), 'errors':errors}, indent=2), encoding='utf-8')

@@ -41,7 +41,7 @@ test('all migrated footers share one responsive light/dark reading-column treatm
 
 test('all 303 generated technology profiles use the shared global footer landmark', () => {
   const generator = fs.readFileSync(path.join(root, 'scripts/site_chrome.py'), 'utf8');
-  assert.match(generator, /if path in REFERENCE_LANDING_PATHS or is_tech_detail:/);
+  assert.match(generator, /if path in REFERENCE_LANDING_PATHS or is_tech_detail or expanded_concept:/);
   const directory = path.join(root, 'technology');
   const files = fs.readdirSync(directory).filter(name => /^TECH-\d+-.+\.html$/.test(name));
   assert.equal(files.length, 303, 'canonical published technology profile count');
@@ -66,13 +66,35 @@ test('all 303 generated technology profiles use the shared global footer landmar
   }
 });
 
-test('concept profiles retain their hash-indexed source footers until their own migration', () => {
-  for (const route of ['terms/MLD-0001-a-b-test.html', 'terms/MLD-0002-ablation-study.html']) {
+test('reference-depth concept profiles retain script-free content and footers during migration', () => {
+  for (const route of ['terms/MLD-0001-a-b-test.html']) {
     const html = fs.readFileSync(path.join(root, route), 'utf8');
     const footer = html.indexOf('<footer>');
     assert.ok(footer > html.indexOf('<main'), route + ': footer retained');
     assert.ok(footer < html.indexOf('</main>'), route + ': unchanged concept article');
   }
+});
+
+test('all 57 expanded guides use the same global footer as technology profiles without JavaScript', () => {
+  const manifest = JSON.parse(fs.readFileSync(path.join(root, 'terms/manifest.json'), 'utf8'));
+  const guides = Object.values(manifest).filter(entry => entry.expanded);
+  assert.equal(guides.length, 57, 'all existing expanded guides migrated together');
+  for (const entry of guides) {
+    const html = fs.readFileSync(path.join(root, entry.path), 'utf8');
+    const main = html.indexOf('<main class="term-shell">');
+    const mainEnd = html.indexOf('</main>', main);
+    const footer = html.indexOf('<footer class="site-chrome__footer">');
+    assert.ok(main > 0 && mainEnd > main && footer > mainEnd &&
+              html.indexOf('</footer>', footer) < html.indexOf('</body>'),
+              entry.path + ': global script-free contentinfo');
+    assert.equal((html.match(/<footer\b/g) || []).length, 1, entry.path + ': exactly one footer');
+    assert.ok(html.includes('href="../about.html"') &&
+              html.includes('href="../index.html#/sources"'),
+              entry.path + ': source and editorial links retained');
+  }
+  const generator = fs.readFileSync(path.join(root, 'scripts/build_term_pages.py'), 'utf8');
+  assert.ok(generator.includes('expanded_concept=bool(guide)'),
+            'generator—not a page-specific patch—owns reviewed-guide migration');
 });
 
 test('daily archive, catalog review, technologies and playbooks share the global native footer', () => {
@@ -120,8 +142,7 @@ test('all frozen concept footers use the shared global contentinfo when enhanced
     'the single-file offline fallback embeds the exact shared styling');
   const manifest = JSON.parse(fs.readFileSync(path.join(root, 'terms/manifest.json'), 'utf8'));
   assert.equal(Object.keys(manifest).length, 1345, 'retain every stable concept URL');
-  for (const route of ['terms/MLD-0001-a-b-test.html',
-                       'terms/MLD-0957-prompt-injection.html']) {
+  for (const route of ['terms/MLD-0001-a-b-test.html']) {
     const html = fs.readFileSync(path.join(root, route), 'utf8');
     assert.equal((html.match(/<footer\b/g) || []).length, 1, route + ': one existing footer');
     assert.ok(html.indexOf('<main class="term-shell">') < html.indexOf('<footer>') &&

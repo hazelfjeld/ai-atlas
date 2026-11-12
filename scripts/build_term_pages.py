@@ -33,7 +33,7 @@ def section(title, body, extra=''):
     return f'<section class="detail-block {extra}"><h2>{e(title)}</h2>{body}</section>'
 
 
-def shell(title, body, path, description, structured=None, *, native_concept_article=False):
+def shell(title, body, path, description, structured=None, *, native_concept_article=False, expanded_concept=False):
     # Every concept detail URL shares the native, script-free article skip
     # and navigation source used by the technology directories and profiles.
     # All concept detail pages now ship the same eight mobile secondary links
@@ -49,7 +49,7 @@ def shell(title, body, path, description, structured=None, *, native_concept_art
     body, main_id = native_directory_article_skip(body, path, native_concept_article=native_concept_article)
     landing_css = REFERENCE_LANDING_HERO_CSS if path in REFERENCE_LANDING_PATHS else ''
     footer = '<footer>Prepared catalog snapshot: November 1, 2026. Imported references retain their prior review labels. These pages work without JavaScript; external references require internet. <a href="../about.html">Editorial policy</a> · <a href="../index.html#/sources">Sources & downloads</a></footer>'
-    article = wrap_reference_shell(directory_nav, body + footer, path, main_id)
+    article = wrap_reference_shell(directory_nav, body + footer, path, main_id, expanded_concept=expanded_concept)
     # Generated concept pages must have separate global navigation and main
     # landmarks in the original HTML, not only after JavaScript enhancement.
     if native_concept_article:
@@ -103,7 +103,7 @@ def main():
         body += f'<p><a href="../index.html#/dictionary?record={quote(r["id"])}">Open original record, export or annotate →</a></p>'
         path = term_path(r)
         structured = [{'@context':'https://schema.org', '@type':'DefinedTerm', '@id':absolute(path)+'#term', 'name':r['term'], 'termCode':r['id'], 'description':r['definition'], 'url':absolute(path), 'inDefinedTermSet':{'@type':'DefinedTermSet', 'name':'AI Updates Concept Dictionary', 'url':absolute('terms/index.html')}}, breadcrumbs([('AI Updates','index.html'), ('Concept dictionary','terms/index.html'), (r['term'],path)])]
-        blob = shell(r['term'], body, path, (r['term'] + ': ' + r['definition'])[:170], structured, native_concept_article=True).encode('utf-8')
+        blob = shell(r['term'], body, path, (r['term'] + ': ' + r['definition'])[:170], structured, native_concept_article=True, expanded_concept=bool(guide)).encode('utf-8')
         (ROOT / path).write_bytes(blob)
         manifest[r['id']] = {'path': path, 'sha256': hashlib.sha256(blob).hexdigest(), 'expanded': bool(guide)}
     (out / 'manifest.json').write_bytes((json.dumps(manifest, indent=2) + '\n').encode())

@@ -458,10 +458,13 @@ test('all concept pages use the technology-profile native article skip, without 
     const rail = html.indexOf('<nav class="site-chrome term-nav"');
     const mobile = html.indexOf('<div class="directory-mobile-topbar site-mobile-chrome"');
     const hero = html.indexOf('<header class="hero" id="main" tabindex="-1">');
-    const footer = html.indexOf('<footer>', hero);
+    const footer = html.indexOf(entry.expanded ?
+      '<footer class="site-chrome__footer">' : '<footer>', hero);
     const mainEnd = html.indexOf('</main>', main);
     assert.ok(mobile > 0 && mobile < rail && rail < main && main < hero &&
-      hero < footer && footer < mainEnd, entry.path + ' must have a separate shared rail and one article landmark');
+      hero < mainEnd && (entry.expanded ? footer > mainEnd : footer < mainEnd),
+      entry.path + ' preserves exactly the reviewed-guide/reference-depth footer contract');
+    assert.equal((html.match(/<footer\b/g) || []).length, 1, entry.path + ': one native footer');
     assert.equal((html.match(/<main\b/g) || []).length, 1, entry.path);
     assert.equal((html.match(/<nav class="site-chrome term-nav"/g) || []).length, 1, entry.path);
     assert.equal((html.match(/aria-label="AI Updates primary navigation"/g) || []).length, 1,
