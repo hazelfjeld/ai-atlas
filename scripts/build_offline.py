@@ -32,6 +32,11 @@ def main():
     html = html.replace('<main id="main" tabindex="-1">', f'<main id="main" tabindex="-1"><p class="notice">Offline demonstration fallback: all {count:,} catalog records (1,705 preserved originals), search, comparisons, Games and JSON exports work without internet. Term explanations open as record dialogs here. Expanded web pages, original downloads and external citations require the served edition.</p>')
     html = html.replace('href="playbooks.html"', 'href="#/playbooks"').replace('href="about.html"', 'href="#/sources"').replace('href="technology/index.html"', 'href="#/technologies"')
     html = html.replace('href="demo.html"', 'href="#/overview"').replace('href="terms/index.html"', 'href="#/dictionary"')
+    # Unlike self-contained workspace routes, daily editions are not bundled.
+    # Resolve the shared nav to the real archive, not a nonexistent sibling of
+    # the downloaded single-file HTML (which otherwise produces a file:// 404).
+    html = html.replace('href="whats-new.html"',
+                        'href="https://aiupdates.app/whats-new.html" title="Online daily archive; internet required"')
     html = html.replace('<meta name="robots" content="index,follow,max-image-preview:large">', '<meta name="robots" content="noindex,follow">')
     (ROOT / 'downloads/Atlas_Demo_Offline.html').write_bytes(html.encode('utf-8'))
     print('Built downloads/Atlas_Demo_Offline.html from the complete catalog.')

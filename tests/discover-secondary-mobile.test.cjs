@@ -80,3 +80,15 @@ test('single-file fallback embeds the shared navigation implementation',()=>{
   const end=app.indexOf('\nfunction renderDock(){',start);
   assert.ok(offline.includes(app.slice(start,end)));
 });
+
+
+test('single-file navigation resolves the real daily archive rather than a nonexistent local sibling', () => {
+  const generator = fs.readFileSync(path.join(root, 'scripts/build_offline.py'), 'utf8');
+  assert.match(generator, /html = html\.replace\('href="whats-new\.html"'/);
+  assert.equal((offline.match(/href="whats-new\.html"/g) || []).length, 0,
+    'standalone archive route cannot resolve from a downloaded HTML file');
+  const online = 'href="https://aiupdates.app/whats-new.html" title="Online daily archive; internet required"';
+  assert.ok((offline.split(online).length - 1) >= 3, 'same primary archive route on mobile/desktop');
+  assert.match(offline, /id="global-search" role="search"/, 'offline keeps its functional local search form');
+  assert.match(offline, /href="#\/games"/, 'offline games still point to the real local route');
+});
