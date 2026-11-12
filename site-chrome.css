@@ -436,8 +436,6 @@ body:has(.site-chrome) footer{
   padding:20px 0 0;
   border-top:1px solid var(--atlas-footer-line);
   color:var(--atlas-footer-muted);
-  font-size:11px;
-  line-height:1.8;
   overflow-wrap:anywhere;
 }
 body:has(.site-chrome) footer a{
@@ -977,7 +975,7 @@ body:has(.site-chrome) > a.skip:focus{
 /* atlas-longform-reading-measure:end */
 
 
-/* atlas-global-contentinfo: shared reading-column footer for native research/editorial pages. */
+/* atlas-global-contentinfo: canonical 13px/1.65 footer type for Discover, editorial, Games, and reference pages. */
 main:has(+ .site-chrome__footer){padding-bottom:24px}
 .site-chrome__footer{box-sizing:border-box;width:calc(100% - 48px);max-width:1000px;margin:0 auto 46px;padding:18px 0 0;border-top:1px solid var(--line,#dce1d7);color:var(--muted,#627067);font-size:13px;line-height:1.65;overflow-wrap:anywhere}
 .site-chrome__footer a{color:var(--accent,#27664e)}
@@ -995,8 +993,6 @@ main:has(+ .site-chrome__footer){padding-bottom:24px}
   padding:20px 0 0;
   border-top:1px solid var(--atlas-footer-line);
   color:var(--atlas-footer-muted);
-  font-size:11px;
-  line-height:1.8;
 }
 @media(max-width:1200px){.workspace > .main-footer.site-chrome__footer{width:calc(100% - 52px)}}
 @media(max-width:650px){.workspace > .main-footer.site-chrome__footer{width:calc(100% - 34px)}}

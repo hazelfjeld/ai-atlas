@@ -200,3 +200,36 @@ test('Discover and native pages expose sibling main and global footer landmarks,
   assert.ok(native.indexOf('<footer class="site-chrome__footer">') > native.indexOf('</main>'),
     'Discover matches the existing native global footer landmark');
 });
+
+test('Discover, native editorial, Games, and generated reference footers share one 13px reading scale', () => {
+  const css = fs.readFileSync(path.join(root, 'site-chrome.css'), 'utf8');
+  const brand = fs.readFileSync(path.join(root, 'brand.css'), 'utf8');
+  const offline = fs.readFileSync(path.join(root, 'downloads/Atlas_Demo_Offline.html'), 'utf8');
+  const shared = css.match(/\.site-chrome__footer\{([^}]+)\}/)?.[1];
+  assert.ok(shared, 'the global footer component exists');
+  assert.match(shared, /font-size:13px;line-height:1\.65;/,
+    'all page families use the same legible footer scale');
+  for (const marker of [
+    'body:has(.site-chrome) footer{',
+    '.workspace > .main-footer.site-chrome__footer{',
+  ]) {
+    const start = css.indexOf(marker);
+    assert.ok(start >= 0, marker + ': shared layout exists');
+    const declaration = css.slice(start + marker.length, css.indexOf('}', start));
+    assert.doesNotMatch(declaration, /(?:font-size|line-height)\s*:/,
+      marker + ': page-family overrides must not silently shrink text');
+  }
+  assert.doesNotMatch(brand, /\.main-footer\{font-size:/,
+    'legacy Discover typography must not override the shared footer scale');
+  assert.ok(offline.includes('<style>' + css + '</style>'),
+    'offline Discover carries the exact shared footer styling');
+  assert.ok(offline.includes('<style>' + brand + '</style>'),
+    'offline Discover carries the exact matching legacy brand stylesheet');
+  for (const page of ['index.html', 'whats-new.html', 'games.html',
+                      'research.html', 'about.html', 'terms/MLD-0001-a-b-test.html',
+                      'technology/TECH-0001-adversarial-robustness-toolbox.html']) {
+    const html = fs.readFileSync(path.join(root, page), 'utf8');
+    assert.match(html, /<footer class="(?:main-footer )?site-chrome__footer">/,
+      page + ': footer uses canonical component, not a page-specific copy');
+  }
+});
