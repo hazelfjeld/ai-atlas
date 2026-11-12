@@ -1018,24 +1018,3 @@ main.term-shell > footer:not(.site-chrome__footer) a{color:var(--accent,#27664e)
   #main{scroll-margin-top:80px}
 }
 /* atlas-mobile-skip-clearance:end */
-
-/* atlas-desktop-search:begin */
-/* One functional desktop search destination on native editorial/reference
-   rails, using Discover's existing search route and sidebar palette. */
-@media(min-width:651px){
-.site-chrome > a.site-chrome__search{
- box-sizing:border-box;display:flex;align-items:center;min-height:42px;width:100%;
- padding:10px 12px;margin:0 0 5px;border:1px solid #405043;border-radius:9px;
- background:#ffffff0a;color:#c5cfc6!important;text-decoration:none;
- font-size:12px;font-weight:600;white-space:normal;overflow-wrap:anywhere
-}
-.site-chrome > a.site-chrome__search:hover{
- border-color:#8ca997;background:#ffffff13;color:#fff!important
-}
-.site-chrome > a.site-chrome__search:focus-visible{
- outline:3px solid #edba87;outline-offset:2px
-}
-}
-@media(max-width:650px){.site-chrome > a.site-chrome__search{display:none!important}}
-@media print{.site-chrome > a.site-chrome__search{display:none!important}}
-/* atlas-desktop-search:end */

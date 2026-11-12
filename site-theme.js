@@ -148,7 +148,7 @@ document.addEventListener('keydown', (event) => {
 document.addEventListener('click', event => {
   if (event.defaultPrevented || event.button !== 0 || event.ctrlKey ||
       event.metaKey || event.altKey || event.shiftKey) return;
-  if (!event.target?.closest?.('a.site-mobile-chrome__search[href],a.site-chrome__search[href]')) return;
+  if (!event.target?.closest?.('a.site-mobile-chrome__search[href]')) return;
   rememberSearchFocus();
 });
 document.addEventListener('pointerdown', (event) => {
@@ -296,22 +296,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // links, mobile drawer and script-free navigation remain unchanged.
   const desktopRail = document.querySelector('.site-chrome');
   const desktopPrimary = desktopRail?.querySelector?.('.site-chrome__links');
-  /* atlas-desktop-search:begin */
-  // The phone header already owns the real Discover search route. Reuse its
-  // exact relative href on the desktop rail; don't create an inert search box.
-  // No-JavaScript primary links and native mobile search remain untouched.
-  if (desktopPrimary && !desktopRail.querySelector('.site-chrome__search')) {
-    const nativeSearch = document.querySelector('a.site-mobile-chrome__search[href]');
-    if (nativeSearch) {
-      const search = document.createElement('a');
-      search.className = 'site-chrome__search';
-      search.setAttribute('href', nativeSearch.getAttribute('href'));
-      search.setAttribute('aria-label', 'Search AI Updates');
-      search.textContent = '⌕  Search AI Updates';
-      desktopPrimary.insertAdjacentElement('beforebegin', search);
-    }
-  }
-  /* atlas-desktop-search:end */
   if (desktopPrimary && !desktopRail.querySelector('.site-chrome__more')) {
     // The brand is the canonical relative-root link for both root and nested
     // concept/technology routes. Never guess the deployment's base pathname.
