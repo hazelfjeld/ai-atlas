@@ -411,7 +411,8 @@ test('Discover shares the native script-free mobile drawer used by standalone pa
       ['#/dictionary','Concept dictionary'],['#/technologies','Technology profiles'],
       ['#/games','Games'],['playbooks.html','Playbooks'],['about.html','About']];
   for(const [source, expected] of [[html,original],[offline,
-      original.map(([href,name])=>[name==='Playbooks'?'#/playbooks':name==='About'?'#/sources':href,name])]]) {
+      original.map(([href,name])=>[name==='Playbooks'?'#/playbooks':name==='About'?'#/sources':
+        name==='What’s New Today'?'https://aiupdates.app/whats-new.html':href,name])]]) {
     const nav=source.split('id="discover-mobile-nav"')[1]?.split('</nav>')[0];
     assert.ok(nav, 'Shared native menu must survive the offline build');
     const links=[...primaryMobile(nav).matchAll(/<a href="([^"]+)"[^>]*>([^<]+)<\/a>/g)];
