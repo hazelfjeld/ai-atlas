@@ -505,8 +505,11 @@ def ensure_footer_resources(html, path):
     # but previously retained private footer typography. Reuse the same
     # global contentinfo styling as native Research, Games and references.
     if path in ("whats-new.html", "catalog-review.html"):
-        assert footer.startswith("<footer>"), "Unexpected editorial footer: " + path
-        footer = footer.replace("<footer>", '<footer class="site-chrome__footer">', 1)
+        if footer.startswith("<footer>"):
+            footer = footer.replace("<footer>", '<footer class="site-chrome__footer">', 1)
+        else:
+            assert footer.startswith('<footer class="site-chrome__footer">'), (
+                "Unexpected editorial footer: " + path)
     # Normalize the visible label for the one shared policy destination.
     # Keep contextual wording, source links and other review-page destinations.
     for old_label in ("Editorial policy", "Editorial corrections policy"):

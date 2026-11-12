@@ -90,4 +90,16 @@ test('daily archive and editorial catalog review reuse the global native footer'
   }
   const generator = fs.readFileSync(path.join(root, 'scripts/site_chrome.py'), 'utf8');
   assert.match(generator, /if path in \("whats-new\.html", "catalog-review\.html"\):/);
+  const { execFileSync } = require('node:child_process');
+  const check = [
+    'import sys',
+    'from pathlib import Path',
+    'sys.path.insert(0, "scripts")',
+    'from site_chrome import ensure_footer_resources',
+    'for page in ("whats-new.html", "catalog-review.html"):',
+    '    html = Path(page).read_text(encoding="utf-8")',
+    '    assert ensure_footer_resources(html, page) == html, page',
+    '    assert ensure_footer_resources(ensure_footer_resources(html, page), page) == html, page',
+  ].join('\\n');
+  execFileSync('python3', ['-c', check], { cwd: root, stdio: 'pipe' });
 });
