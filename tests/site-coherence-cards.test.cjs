@@ -1075,10 +1075,12 @@ test('generated concept details share technology sibling navigation without requ
     'Native skip still targets the real article');
   assert.ok(technology.indexOf('<nav class="site-chrome term-nav"') < technology.indexOf('<main class="term-shell">'),
     'Technology detail remains the sibling-nav reference');
-  assert.ok(script.includes('main.before(mobile, rail);'),
-    'Legacy client-side enhancement remains compatible without duplicating either navigation');
-  assert.ok(script.includes('main.firstElementChild !== mobile || mobile.nextElementSibling !== rail'),
-    'Migration is narrowly guarded against changing unrelated pages');
+  assert.ok(script.includes("document.querySelector('body > nav.site-chrome.term-nav')"),
+    'the native shared rail stays outside the article without hydration');
+  assert.ok(script.includes("document.querySelectorAll('footer').length !== 1"),
+    'footer enhancement rejects missing and duplicate footers');
+  assert.ok(script.includes('main.after(footer);'),
+    'only the existing footer moves into the global landmark');
   assert.ok(style.includes('body > .directory-mobile-topbar.site-mobile-chrome:has(+ nav.site-chrome + main.term-shell)'),
     'Moved header must not inherit the legacy negative mobile gutters');
   assert.ok(style.includes('body:has(> .site-chrome.term-nav) > .term-shell > .hero{margin-top:18px}'),

@@ -123,7 +123,7 @@ test('all frozen concept footers use the shared global contentinfo when enhanced
   for (const route of ['terms/MLD-0001-a-b-test.html',
                        'terms/MLD-0957-prompt-injection.html']) {
     const html = fs.readFileSync(path.join(root, route), 'utf8');
-    assert.equal((html.match(/<footer\\b/g) || []).length, 1, route + ': one existing footer');
+    assert.equal((html.match(/<footer\b/g) || []).length, 1, route + ': one existing footer');
     assert.ok(html.indexOf('<main class="term-shell">') < html.indexOf('<footer>') &&
               html.indexOf('<footer>') < html.indexOf('</main>'),
               route + ': frozen script-free source retains its original article and links');

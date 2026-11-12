@@ -1780,13 +1780,14 @@ test('standalone native article skips bypass the shared rail before JavaScript',
 test('generated dictionary and technology skip links target article content after the shared rail', () => {
   const theme = read('site-theme.js');
   const css = read('site-chrome.css');
-  // Static concept pages now ship #main on the actual hero. Enhancement moves
-  // the *existing* shared rail and mobile header outside the landmark, matching
-  // generated technology profiles while preserving script-free article skips.
+  // Both detail families ship the shared rail as a native sibling of main.
+  // The current enhancement moves only the preserved concept footer.
   assert.ok(theme.includes("document.querySelector('body > main.term-shell')"));
-  assert.ok(theme.includes("main?.querySelector(':scope > header.hero#main[tabindex=\"-1\"]')"));
-  assert.ok(theme.includes("main.before(mobile, rail);"));
-  assert.ok(theme.includes("main.firstElementChild !== mobile || mobile.nextElementSibling !== rail"));
+  assert.ok(theme.includes("document.querySelector('body > nav.site-chrome.term-nav')"));
+  assert.ok(theme.includes("main?.querySelector(':scope > footer')"));
+  assert.ok(theme.includes("main.after(footer);"));
+  assert.ok(!theme.includes("main.before(mobile, rail);"),
+    'the native rail must never be duplicated or moved after hydration');
   assert.ok(css.includes('body > .directory-mobile-topbar.site-mobile-chrome:has(+ nav.site-chrome + main.term-shell)'),
     'Concept header must not retain negative nested gutters when it becomes a body sibling');
   assert.ok(css.includes('html:has(.site-chrome){scroll-padding-top:96px}'));
