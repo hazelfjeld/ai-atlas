@@ -59,7 +59,7 @@ test('all major site families retain their script-free routes and use shared sty
     assert.ok(html.includes('site-mobile-chrome__nav'), route + ': keep native mobile navigation');
   }
   assert.ok(css.includes('/* atlas-desktop-search:begin */'));
-  assert.match(css, /\\.site-chrome > a\\.site-chrome__search:focus-visible/);
+  assert.match(css, /\.site-chrome > a\.site-chrome__search:focus-visible/);
   assert.ok(offline.includes(css), 'single-file offline download uses the exact shared CSS');
   assert.ok(offline.includes(js), 'single-file offline download uses the exact shared script');
 });
