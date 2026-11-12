@@ -1367,12 +1367,17 @@ test('shared static-page footers follow Discover rhythm without replacing sectio
   assert.ok(offline.includes(rule),'offline fallback embeds the exact footer treatment');
   assert.ok(rule.includes('body:has(.site-chrome) footer{'), 'real shared footer selector');
   for (const expected of ['margin-top:42px;','padding:20px 0 0;',
-    'border-top:1px solid var(--atlas-footer-line);','font-size:11px;',
-    'line-height:1.8;','overflow-wrap:anywhere;','footer a:focus-visible',
+    'border-top:1px solid var(--atlas-footer-line);',
+    'overflow-wrap:anywhere;','footer a:focus-visible',
     '--atlas-footer-muted:#5d6861;','--atlas-footer-line:#3b4a40;',
     ':root:not([data-theme="light"])']) {
     assert.ok(rule.includes(expected),'shared footer missing '+expected);
   }
+  const legacy=rule.split('body:has(.site-chrome) footer{')[1]?.split('}')[0] || '';
+  assert.doesNotMatch(legacy, /(?:font-size|line-height)\s*:/,
+    'shared native footer must inherit typography rather than override the canonical component');
+  assert.ok(css.includes('font-size:13px;line-height:1.65;'),
+    'the global component provides an accessible consistent 13px reading scale');
   assert.ok(!rule.includes('.main-footer{') && !rule.includes('footer{display:none'),
     'never override Discover or suppress a real footer');
   for (const route of ['about.html','whats-new.html','terms/index.html',
