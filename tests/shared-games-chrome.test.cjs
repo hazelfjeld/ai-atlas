@@ -146,3 +146,29 @@ test('shared listing shells expose their existing footer as a contentinfo landma
     assert.match(html.slice(footerOpen, footerClose), /href="index\.html#\/sources"/);
   }
 });
+
+test('native Games generation strips only the standalone script-free fallback', () => {
+  const standalone = read('games.html');
+  const native = read('games-tab.js');
+  const main = standalone.match(/<main id="main"(?: tabindex="-1")?>([\s\S]*?)<\/main>/);
+  assert.ok(main, 'standalone Games main is required for native generation');
+  const fallback = /<noscript><section class="site-static-fallback"[^>]*>[\s\S]*?<\/section><\/noscript>\n?/g;
+  assert.equal([...main[1].matchAll(fallback)].length, 1,
+    'script-free fallback must appear exactly once on the standalone Games page');
+  let body = main[1]
+    .replaceAll('href="index.html#/', 'href="#/')
+    .replace('Scores and missed concepts stay in this tab’s memory.',
+      'Leaving Games ends the current round. Best times stay in this browser tab’s memory.')
+    .replace(' · <a href="about.html">Editorial policy & coverage</a>', '')
+    .replace(fallback, '')
+    .replace('class="catalog-badge site-js-only"', 'class="catalog-badge"')
+    .replace('id="load-status" class="notice site-js-only"', 'id="load-status" class="notice"');
+  const embedded = native.match(/html: \(\) => ("(?:\\.|[^"\\])*"),\s*mount/);
+  assert.ok(embedded, 'native Games exposes an embedded deterministic template');
+  assert.equal(JSON.parse(embedded[1]), '<div class="atlas-games">' + body + '</div>',
+    'native Games must remain byte-reproducible from standalone source without no-JS-only content');
+  assert.ok(!native.includes('Browse concepts without JavaScript'),
+    'native app must not embed a redundant standalone fallback');
+  assert.ok(read('scripts/install_games_workspace.py').includes('fallback_count == 1'),
+    'generator must fail rather than silently drifting when the fallback changes');
+});

@@ -61,6 +61,21 @@ def build_tab():
     if not match:
         raise RuntimeError('Standalone game template changed')
     body = match.group(1).replace('href="index.html#/', 'href="#/')
+    # The standalone Games page provides a native no-JavaScript path to the
+    # encyclopedia. The embedded Games *app* only mounts after JavaScript
+    # hydration and has its own source-backed fallback. Do not duplicate the
+    # standalone-only noscript block or its loader-hiding classes in the native
+    # template; doing so breaks reproducible games-tab.js and offline builds.
+    body, fallback_count = re.subn(
+        r'<noscript><section class="site-static-fallback"[^>]*>.*?</section></noscript>\n?',
+        '', body, count=1, flags=re.S,
+    )
+    assert fallback_count == 1, 'Standalone Games script-free fallback missing or changed'
+    assert 'class="catalog-badge site-js-only"' in body
+    assert 'id="load-status" class="notice site-js-only"' in body
+    body = body.replace('class="catalog-badge site-js-only"', 'class="catalog-badge"', 1)
+    body = body.replace('id="load-status" class="notice site-js-only"',
+                        'id="load-status" class="notice"', 1)
     body = body.replace('Scores and missed concepts stay in this tab’s memory.', 'Leaving Games ends the current round. Best times stay in this browser tab’s memory.')
     # The standalone page needs its own script-free policy link; the native
     # workspace already has the canonical app-shell policy footer. Avoid duplicates
