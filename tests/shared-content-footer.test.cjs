@@ -131,3 +131,37 @@ test('all frozen concept footers use the shared global contentinfo when enhanced
               html.includes('href="../index.html#/sources"'), route + ': policy and sources');
   }
 });
+
+test('Discover and native pages expose sibling main and global footer landmarks, including offline', () => {
+  const discover = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+  const offline = fs.readFileSync(path.join(root, 'downloads/Atlas_Demo_Offline.html'), 'utf8');
+  const css = fs.readFileSync(path.join(root, 'site-chrome.css'), 'utf8');
+  const pages = [discover, offline];
+  for (const [index, html] of pages.entries()) {
+    const name = index ? 'offline Discover' : 'hosted Discover';
+    const main = html.indexOf('<main id="main" tabindex="-1">');
+    const endMain = html.indexOf('</main>', main);
+    const footer = html.indexOf('<footer class="main-footer site-chrome__footer">');
+    const endFooter = html.indexOf('</footer>', footer);
+    assert.ok(main > 0 && endMain > main && footer > endMain && endFooter > footer,
+      name + ': site-wide footer is a sibling after main, not part of article');
+    assert.ok(endFooter < html.indexOf('</div></div><dialog id="record-dialog"', endFooter),
+      name + ': original app shell and record dialog remain in order');
+    assert.ok(html.includes('href="#/sources"') && html.includes('Evidence & coverage'),
+      name + ': functional evidence link remains');
+    assert.ok(html.includes('id="navigation"') && html.includes('class="global-search"'),
+      name + ': original desktop navigation and genuine search remain');
+    assert.equal((html.slice(0, html.indexOf('<dialog id="record-dialog"')).match(/<main\\b/g) || []).length,
+      1, name + ': exactly one visible app main landmark');
+  }
+  assert.ok(css.includes('/* atlas-discover-global-footer:begin */'),
+    'shared stylesheet provides one Discover footer-layout variant');
+  for (const gutter of ['76px', '52px', '34px']) {
+    assert.ok(css.includes('width:calc(100% - ' + gutter + ')'),
+      'footer width must match desktop, tablet and mobile main gutters: ' + gutter);
+  }
+  assert.ok(offline.includes(css), 'offline fallback embeds the exact canonical shared stylesheet');
+  const native = fs.readFileSync(path.join(root, 'about.html'), 'utf8');
+  assert.ok(native.indexOf('<footer class="site-chrome__footer">') > native.indexOf('</main>'),
+    'Discover matches the existing native global footer landmark');
+});

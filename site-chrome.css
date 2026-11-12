@@ -984,6 +984,19 @@ main:has(+ .site-chrome__footer){padding-bottom:24px}
 @media(max-width:650px){.site-chrome__footer{width:calc(100% - 40px);margin-bottom:30px}}
 @media print{.site-chrome__footer{max-width:none;width:auto;margin:14px 0 0;padding:8px 0}}
 
+/* atlas-discover-global-footer:begin */
+/* Discover uses the same global contentinfo component as native articles.
+   Preserve its wider working-column measure and responsive main gutters. */
+.workspace > .main-footer.site-chrome__footer{
+  width:calc(100% - 76px);
+  max-width:1544px;
+  margin:0 auto 46px;
+}
+@media(max-width:1200px){.workspace > .main-footer.site-chrome__footer{width:calc(100% - 52px)}}
+@media(max-width:650px){.workspace > .main-footer.site-chrome__footer{width:calc(100% - 34px)}}
+@media print{.workspace > .main-footer.site-chrome__footer{width:auto;max-width:none;margin:14px 0 0}}
+/* atlas-discover-global-footer:end */
+
 /* The immutable concept snapshots retain an in-article footer without JS.
    Give those existing links the same token-driven footer treatment on first
    paint; when enhanced, the identical nodes use .site-chrome__footer above. */
