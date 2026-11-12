@@ -1753,7 +1753,7 @@ with sync_playwright() as p:
         page.set_viewport_size({'width':width,'height':844 if width <= 650 else 900})
         for theme in ('light', 'dark'):
             page.emulate_media(color_scheme=theme)
-            for route in ('index.html', 'whats-new.html', 'about.html', 'research.html',
+            for route in ('index.html', 'whats-new.html', 'catalog-review.html', 'about.html', 'research.html',
                           'playbooks.html', 'technologies.html', 'terms/index.html',
                           'technology/index.html', 'games.html'):
                 page.goto(base + route)
@@ -1763,14 +1763,21 @@ with sync_playwright() as p:
                 frame=footer.evaluate("""el => ({
                     display:getComputedStyle(el).display,
                     border:getComputedStyle(el).borderTopStyle,
-                    overflow:document.documentElement.scrollWidth > innerWidth
+                    overflow:document.documentElement.scrollWidth > innerWidth,
+                    globalLandmark:!el.closest('main')
                 })""")
                 expected='block' if width <= 850 else 'flex'
                 check(f'{route} {width}px {theme} uses Discover footer layout',
                       frame['display']==expected and frame['border']=='solid'
                       and not frame['overflow'])
-                if width==1280 and theme=='light' and route in ('index.html','terms/index.html','games.html'):
-                    footer.screenshot(path=str(out / f'footer-{route.replace("/", "-")}-1280-light.png'))
+                if route in ('whats-new.html','catalog-review.html'):
+                    check(f'{route} {width}px {theme} global contentinfo outside main',
+                          frame['globalLandmark'])
+                if ((width==1280 and theme=='light' and route in
+                     ('index.html','terms/index.html','games.html','whats-new.html','catalog-review.html'))
+                     or (width==390 and theme=='dark' and route in
+                         ('whats-new.html','catalog-review.html'))):
+                    footer.screenshot(path=str(out / f'footer-{route.replace("/", "-")}-{width}-{theme}.png'))
 
     check('no application runtime exceptions',not errors)
     browser.close()
