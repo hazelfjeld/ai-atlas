@@ -100,6 +100,6 @@ test('daily archive and editorial catalog review reuse the global native footer'
     '    html = Path(page).read_text(encoding="utf-8")',
     '    assert ensure_footer_resources(html, page) == html, page',
     '    assert ensure_footer_resources(ensure_footer_resources(html, page), page) == html, page',
-  ].join('\\n');
+  ].join('\n');
   execFileSync('python3', ['-c', check], { cwd: root, stdio: 'pipe' });
 });
