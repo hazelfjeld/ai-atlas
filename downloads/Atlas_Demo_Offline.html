@@ -1252,6 +1252,12 @@ main:has(+ .site-chrome__footer){padding-bottom:24px}
 .site-chrome__footer a{color:var(--accent,#27664e)}
 @media(max-width:650px){.site-chrome__footer{width:calc(100% - 40px);margin-bottom:30px}}
 @media print{.site-chrome__footer{max-width:none;width:auto;margin:14px 0 0;padding:8px 0}}
+
+/* The immutable concept snapshots retain an in-article footer without JS.
+   Give those existing links the same token-driven footer treatment on first
+   paint; when enhanced, the identical nodes use .site-chrome__footer above. */
+main.term-shell > footer:not(.site-chrome__footer){box-sizing:border-box;width:100%;margin:28px auto 0;padding:18px 0 0;border-top:1px solid var(--line,#dce1d7);color:var(--muted,#627067);font-size:13px;line-height:1.65;overflow-wrap:anywhere}
+main.term-shell > footer:not(.site-chrome__footer) a{color:var(--accent,#27664e)}
 </style><script>/* Enhance the native dropdown only when scripts can make its drawer modal.
    Without JavaScript, keep the accessible, nonmodal <details> fallback. */
 document.documentElement.classList?.add('atlas-enhanced');
@@ -1293,22 +1299,21 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// Concept detail articles still have their shared rail *inside* <main> in
-// the preserved static HTML, unlike technology profiles and Discover. Move the
-// existing nodes, never clone them, once the page enhances: screen-reader
-// landmarks and the desktop/mobile reading order now match technology pages.
-// Without JavaScript, the original full native navigation and #main skip still
-// work. The source generator remains unchanged until the full catalog can be
-// rebuilt atomically rather than leaving published pages out of sync.
+// The published 1,345 concept pages keep immutable, manifest-verified HTML.
+// Their native footer is still inside <main> without JavaScript, where its
+// policy/source links remain readable. With JavaScript, move the *existing*
+// footer (never clone it) into the same global contentinfo position as
+// Discover, technology profiles and editorial pages. This is a bounded shared
+// enhancement until the complete concept HTML + manifest can rebuild atomically.
 document.addEventListener('DOMContentLoaded', () => {
   if (!/(?:^|\/)terms\/MLD-\d+-[^/]+\.html$/.test(window.location.pathname)) return;
   const main = document.querySelector('body > main.term-shell');
-  const mobile = main?.querySelector(':scope > .directory-mobile-topbar.site-mobile-chrome');
-  const rail = main?.querySelector(':scope > nav.site-chrome.term-nav');
-  const hero = main?.querySelector(':scope > header.hero#main[tabindex="-1"]');
-  if (!mobile || !rail || !hero || !document.querySelector('a.skip[href="#main"]')) return;
-  if (main.firstElementChild !== mobile || mobile.nextElementSibling !== rail) return;
-  main.before(mobile, rail);
+  const footer = main?.querySelector(':scope > footer');
+  const nav = document.querySelector('body > nav.site-chrome.term-nav');
+  if (!main || !footer || !nav || document.querySelectorAll('footer').length !== 1 ||
+      !document.querySelector('a.skip[href="#main"]')) return;
+  footer.classList.add('site-chrome__footer');
+  main.after(footer);
 });
 
 // The main workspace consumes this one-shot intent after catalog hydration.

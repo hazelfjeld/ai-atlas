@@ -103,3 +103,31 @@ test('daily archive and editorial catalog review reuse the global native footer'
   ].join('\n');
   execFileSync('python3', ['-c', check], { cwd: root, stdio: 'pipe' });
 });
+
+test('all frozen concept footers use the shared global contentinfo when enhanced and remain usable without scripts', () => {
+  const runtime = fs.readFileSync(path.join(root, 'site-theme.js'), 'utf8');
+  const css = fs.readFileSync(path.join(root, 'site-chrome.css'), 'utf8');
+  const offline = fs.readFileSync(path.join(root, 'downloads/Atlas_Demo_Offline.html'), 'utf8');
+  assert.match(runtime, /main\.after\(footer\)/,
+    'move the existing footer after main, without duplicating its policy links');
+  assert.match(runtime, /footer\.classList\.add\('site-chrome__footer'\)/);
+  assert.match(runtime, /document\.querySelectorAll\('footer'\)\.length !== 1/);
+  assert.ok(css.includes('main.term-shell > footer:not(.site-chrome__footer)'),
+    'native no-JS concept footers keep the shared theme and reading-column treatment');
+  assert.ok(offline.includes(runtime.replaceAll('</script', '<\\/script')),
+    'the single-file offline fallback embeds the exact shared runtime');
+  assert.ok(offline.includes(css),
+    'the single-file offline fallback embeds the exact shared styling');
+  const manifest = JSON.parse(fs.readFileSync(path.join(root, 'terms/manifest.json'), 'utf8'));
+  assert.equal(Object.keys(manifest).length, 1345, 'retain every stable concept URL');
+  for (const route of ['terms/MLD-0001-a-b-test.html',
+                       'terms/MLD-0957-prompt-injection.html']) {
+    const html = fs.readFileSync(path.join(root, route), 'utf8');
+    assert.equal((html.match(/<footer\\b/g) || []).length, 1, route + ': one existing footer');
+    assert.ok(html.indexOf('<main class="term-shell">') < html.indexOf('<footer>') &&
+              html.indexOf('<footer>') < html.indexOf('</main>'),
+              route + ': frozen script-free source retains its original article and links');
+    assert.ok(html.includes('href="../about.html"') &&
+              html.includes('href="../index.html#/sources"'), route + ': policy and sources');
+  }
+});

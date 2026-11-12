@@ -135,6 +135,63 @@ with sync_playwright() as p:
                 if scheme == 'dark' and width == 1280 and route in ('about.html', 'hardware-review.html'):
                     reading_page.screenshot(path=str(out / ('longform-' + route.split('.')[0] + '-1280-dark.png')))
         reading_ctx.close()
+    # Compare Discover's existing global footer treatment against real concept
+    # and technology profiles across breakpoints and both themes. The 1,345
+    # concept HTML assets remain hash-identical; the shared runtime moves the
+    # existing footer rather than rewriting history or duplicating policy links.
+    for scheme in ('light', 'dark'):
+        footer_ctx = browser.new_context(color_scheme=scheme, reduced_motion='reduce')
+        footer_page = footer_ctx.new_page()
+        for width in (320, 390, 768, 1280):
+            footer_page.set_viewport_size({'width':width, 'height':844})
+            footer_page.goto(base + 'technology/TECH-0216-pytorch.html')
+            technology_style = footer_page.locator('body > footer.site-chrome__footer').evaluate(
+                """el => { const s=getComputedStyle(el), r=el.getBoundingClientRect();
+                    return {font:s.fontSize,color:s.color,border:s.borderTopStyle,
+                            line:s.lineHeight,width:r.width,left:r.left}; }""")
+            footer_page.goto(base + 'terms/MLD-0001-a-b-test.html')
+            concept = footer_page.locator('body > footer.site-chrome__footer')
+            concept_style = concept.evaluate(
+                """el => { const s=getComputedStyle(el), r=el.getBoundingClientRect();
+                    return {font:s.fontSize,color:s.color,border:s.borderTopStyle,
+                            line:s.lineHeight,width:r.width,left:r.left}; }""")
+            check('concept and technology share real global footer '+scheme+' '+str(width),
+                  concept.count() == 1 and footer_page.get_by_role('contentinfo').count() == 1
+                  and footer_page.locator('main.term-shell > footer').count() == 0
+                  and footer_page.locator('body > nav.site-chrome.term-nav').count() == 1
+                  and footer_page.locator('body > main.term-shell').count() == 1
+                  and footer_page.locator('body > footer a[href="../about.html"]').count() == 1
+                  and footer_page.locator('body > footer a[href="../index.html#/sources"]').count() == 1
+                  and concept_style == technology_style
+                  and footer_page.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'))
+            if scheme == 'dark' and width in (390, 1280):
+                concept.scroll_into_view_if_needed()
+                footer_page.screenshot(path=str(out / ('concept-global-footer-'+str(width)+'-dark.png')))
+            if scheme == 'light' and width == 390:
+                footer_page.locator('body > footer a[href="../about.html"]').click()
+                check('concept footer policy navigates to the shared About page',
+                      footer_page.locator('body > footer.site-chrome__footer').count() == 1
+                      and footer_page.locator('main.term-shell > header.hero h1').inner_text() == 'The frontier, in context.')
+                footer_page.go_back()
+                check('returning to concept preserves the single global footer',
+                      footer_page.locator('body > footer.site-chrome__footer').count() == 1)
+        footer_ctx.close()
+    for scheme in ('light','dark'):
+        scriptless_ctx = browser.new_context(java_script_enabled=False, color_scheme=scheme)
+        scriptless_page = scriptless_ctx.new_page()
+        for width in (320, 1280):
+            scriptless_page.set_viewport_size({'width':width,'height':844})
+            scriptless_page.goto(base+'terms/MLD-0001-a-b-test.html')
+            footer = scriptless_page.locator('main.term-shell > footer')
+            check('script-free concept retains styled policy and source links '+scheme+' '+str(width),
+                  footer.count() == 1
+                  and footer.locator('a[href="../about.html"]').count() == 1
+                  and footer.locator('a[href="../index.html#/sources"]').count() == 1
+                  and footer.evaluate("""el => {const s=getComputedStyle(el);
+                      return s.fontSize==='13px' && s.borderTopStyle==='solid' &&
+                          s.color!=='' && el.getBoundingClientRect().width > 0;}""")
+                  and scriptless_page.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'))
+        scriptless_ctx.close()
     # Every profile should have separate site and article landmarks, even when
     # scripts are disabled and the viewport is just 320 pixels wide.
     for scheme in ('light', 'dark'):

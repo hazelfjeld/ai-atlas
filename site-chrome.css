@@ -982,3 +982,9 @@ main:has(+ .site-chrome__footer){padding-bottom:24px}
 .site-chrome__footer a{color:var(--accent,#27664e)}
 @media(max-width:650px){.site-chrome__footer{width:calc(100% - 40px);margin-bottom:30px}}
 @media print{.site-chrome__footer{max-width:none;width:auto;margin:14px 0 0;padding:8px 0}}
+
+/* The immutable concept snapshots retain an in-article footer without JS.
+   Give those existing links the same token-driven footer treatment on first
+   paint; when enhanced, the identical nodes use .site-chrome__footer above. */
+main.term-shell > footer:not(.site-chrome__footer){box-sizing:border-box;width:100%;margin:28px auto 0;padding:18px 0 0;border-top:1px solid var(--line,#dce1d7);color:var(--muted,#627067);font-size:13px;line-height:1.65;overflow-wrap:anywhere}
+main.term-shell > footer:not(.site-chrome__footer) a{color:var(--accent,#27664e)}

@@ -39,22 +39,21 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// Concept detail articles still have their shared rail *inside* <main> in
-// the preserved static HTML, unlike technology profiles and Discover. Move the
-// existing nodes, never clone them, once the page enhances: screen-reader
-// landmarks and the desktop/mobile reading order now match technology pages.
-// Without JavaScript, the original full native navigation and #main skip still
-// work. The source generator remains unchanged until the full catalog can be
-// rebuilt atomically rather than leaving published pages out of sync.
+// The published 1,345 concept pages keep immutable, manifest-verified HTML.
+// Their native footer is still inside <main> without JavaScript, where its
+// policy/source links remain readable. With JavaScript, move the *existing*
+// footer (never clone it) into the same global contentinfo position as
+// Discover, technology profiles and editorial pages. This is a bounded shared
+// enhancement until the complete concept HTML + manifest can rebuild atomically.
 document.addEventListener('DOMContentLoaded', () => {
   if (!/(?:^|\/)terms\/MLD-\d+-[^/]+\.html$/.test(window.location.pathname)) return;
   const main = document.querySelector('body > main.term-shell');
-  const mobile = main?.querySelector(':scope > .directory-mobile-topbar.site-mobile-chrome');
-  const rail = main?.querySelector(':scope > nav.site-chrome.term-nav');
-  const hero = main?.querySelector(':scope > header.hero#main[tabindex="-1"]');
-  if (!mobile || !rail || !hero || !document.querySelector('a.skip[href="#main"]')) return;
-  if (main.firstElementChild !== mobile || mobile.nextElementSibling !== rail) return;
-  main.before(mobile, rail);
+  const footer = main?.querySelector(':scope > footer');
+  const nav = document.querySelector('body > nav.site-chrome.term-nav');
+  if (!main || !footer || !nav || document.querySelectorAll('footer').length !== 1 ||
+      !document.querySelector('a.skip[href="#main"]')) return;
+  footer.classList.add('site-chrome__footer');
+  main.after(footer);
 });
 
 // The main workspace consumes this one-shot intent after catalog hydration.
