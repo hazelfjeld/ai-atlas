@@ -39,15 +39,38 @@ test('all migrated footers share one responsive light/dark reading-column treatm
   assert.ok(css.includes('@media print{.site-chrome__footer'));
 });
 
-test('shared reference generator promotes only landing footers; detail URLs retain their article content', () => {
+test('all 303 generated technology profiles use the shared global footer landmark', () => {
   const generator = fs.readFileSync(path.join(root, 'scripts/site_chrome.py'), 'utf8');
-  assert.match(generator, /if path in REFERENCE_LANDING_PATHS:/);
-  assert.match(generator, /footer class="site-chrome__footer"/);
-  for (const detail of ['terms/MLD-0001-a-b-test.html', 'technology/TECH-0301-nvidia-auto-ontology.html']) {
-    const file = path.join(root, detail);
-    if (!fs.existsSync(file)) continue;
-    const html = fs.readFileSync(file, 'utf8');
-    assert.ok(html.indexOf('<footer>') > html.indexOf('<main'), detail + ': reference footer retained');
-    assert.ok(html.indexOf('<footer>') < html.indexOf('</main>'), detail + ': detail page unchanged');
+  assert.match(generator, /if path in REFERENCE_LANDING_PATHS or is_tech_detail:/);
+  const directory = path.join(root, 'technology');
+  const files = fs.readdirSync(directory).filter(name => /^TECH-\d+-.+\.html$/.test(name));
+  assert.equal(files.length, 303, 'canonical published technology profile count');
+  for (const file of files) {
+    const route = 'technology/' + file;
+    const html = fs.readFileSync(path.join(directory, file), 'utf8');
+    const main = html.indexOf('<main class="term-shell">');
+    const endMain = html.indexOf('</main>', main);
+    const footer = html.indexOf('<footer class="site-chrome__footer">');
+    assert.ok(main > 0 && endMain > main && footer > endMain &&
+              footer < html.indexOf('</body>'), route + ': global footer outside main');
+    assert.equal((html.match(/<main\b/g) || []).length, 1, route + ': one main');
+    assert.equal((html.match(/<footer\b/g) || []).length, 1, route + ': one footer');
+    assert.ok(html.indexOf('<nav class="site-chrome term-nav"') < main,
+              route + ': native desktop navigation outside main');
+    assert.ok(html.includes('<header class="hero" id="main" tabindex="-1">'),
+              route + ': focusable article title');
+    assert.ok(html.includes('href="#main"'), route + ': no-script skip link');
+    assert.ok(html.includes('href="../about.html"'), route + ': editorial policy');
+    assert.ok(html.includes('href="../index.html#/sources"'), route + ': source coverage');
+    assert.ok(html.includes('href="../index.html#/search"'), route + ': live search destination');
+  }
+});
+
+test('concept profiles retain their hash-indexed source footers until their own migration', () => {
+  for (const route of ['terms/MLD-0001-a-b-test.html', 'terms/MLD-0002-ablation-study.html']) {
+    const html = fs.readFileSync(path.join(root, route), 'utf8');
+    const footer = html.indexOf('<footer>');
+    assert.ok(footer > html.indexOf('<main'), route + ': footer retained');
+    assert.ok(footer < html.indexOf('</main>'), route + ': unchanged concept article');
   }
 });

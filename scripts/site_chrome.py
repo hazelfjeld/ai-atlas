@@ -132,9 +132,11 @@ def wrap_reference_shell(nav, content, path, main_id):
             assert content.count('<header class="hero" id="main" tabindex="-1">') == 1, path
         else:
             assert content.startswith('<header class="hero" id="main" tabindex="-1">'), path
-        if path in REFERENCE_LANDING_PATHS:
-            # These outer site footers are global contentinfo landmarks, not
-            # part of the directory/About article. Keep detail pages unchanged.
+        if path in REFERENCE_LANDING_PATHS or is_tech_detail:
+            # Landing pages and all technology profiles expose the one global
+            # footer outside the article; keep the original evidence and links.
+            # Concept detail pages retain their hashed-manifest source until
+            # their entire family can be rebuilt and checked atomically.
             assert content.count('<footer>') == 1 and content.endswith('</footer>'), path
             article, footer_tail = content.rsplit('<footer>', 1)
             return (nav + '<main class="term-shell">' + article + '</main>'
