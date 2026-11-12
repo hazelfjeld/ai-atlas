@@ -9,7 +9,8 @@
    every native page (news, research, playbooks, Games, and both catalogs).
    Explicit light/dark choices always take precedence. */
 @media (prefers-color-scheme:dark){
-  :root:not([data-theme]):has(.site-chrome){
+  :root:not([data-theme]):has(.site-chrome),
+  :root:not([data-theme]):has(.app-shell){
     color-scheme:dark;
     --bg:#18211E;--surface:#222D27;--ink:#F6F6F2;
     --muted:#AFBEB2;--line:#3B4A40;--accent:#B1D5BD;

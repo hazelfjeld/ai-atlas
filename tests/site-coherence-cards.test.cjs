@@ -265,6 +265,11 @@ test('script-free dark OS palette is shared across every native navigation famil
   const block = css.split('/* atlas-scriptfree-dark-chrome:begin */')[1]
     ?.split('/* atlas-scriptfree-dark-chrome:end */')[0];
   assert.ok(block, 'Missing shared no-JavaScript OS theme fallback');
+  assert.ok(block.includes(':root:not([data-theme]):has(.app-shell)'),
+    'Discover must share OS-dark first-paint colors without JavaScript');
+  const discover = fs.readFileSync(path.join(__dirname,'..','index.html'),'utf8');
+  assert.ok(discover.includes('class="app-shell"') && discover.includes('href="site-chrome.css"'),
+    'Discover must expose its app-shell selector and load the shared CSS');
   assert.ok(block.includes(':root:not([data-theme]):has(.site-chrome)'),
     'Explicit saved light/dark must win; do not scope the fallback to one article type');
   for (const variable of ['--bg:#18211E','--surface:#222D27','--ink:#F6F6F2',
