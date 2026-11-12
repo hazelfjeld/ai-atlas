@@ -151,7 +151,7 @@ test('Discover and native pages expose sibling main and global footer landmarks,
       name + ': functional evidence link remains');
     assert.ok(html.includes('id="navigation"') && html.includes('class="global-search"'),
       name + ': original desktop navigation and genuine search remain');
-    assert.equal((html.slice(0, html.indexOf('<dialog id="record-dialog"')).match(/<main\\b/g) || []).length,
+    assert.equal((html.slice(0, html.indexOf('<dialog id="record-dialog"')).match(/<main\b/g) || []).length,
       1, name + ': exactly one visible app main landmark');
   }
   assert.ok(css.includes('/* atlas-discover-global-footer:begin */'),
