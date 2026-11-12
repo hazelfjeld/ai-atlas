@@ -73,8 +73,10 @@ test('Games keeps canonical script-free policy links without duplicating the nat
                'standalone Games has a script-free policy destination');
   assert.equal(footer.split('href="index.html#/sources"').length-1, 1,
                'standalone Games retains source coverage');
-  assert.ok(app.includes('<footer class="main-footer">'),
-            'native workspace keeps its canonical footer');
+  const appFooter = '<footer class="main-footer site-chrome__footer">';
+  assert.ok(app.includes(appFooter), 'native workspace keeps its canonical shared footer');
+  assert.ok(app.indexOf(appFooter) > app.indexOf('</main>'),
+            'native workspace footer is now a global contentinfo landmark');
   assert.ok(app.includes('href="about.html">About & editorial policy</a>'),
             'native workspace already provides the policy destination');
   const canonical=read('scripts/site_chrome.py');
