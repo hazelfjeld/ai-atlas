@@ -127,3 +127,22 @@ test('standalone Games reuses the shared in-main script-free fallback, never an 
   assert.ok(!html.slice(end).includes('<noscript>'),
     'The fallback belongs in the main content landmark, not after it');
 });
+
+test('shared listing shells expose their existing footer as a contentinfo landmark', () => {
+  for (const file of ['playbooks.html', 'technologies.html']) {
+    const html = read(file);
+    const mainClose = html.indexOf('</main>');
+    const footerOpen = html.indexOf('<footer>');
+    const footerClose = html.indexOf('</footer>');
+    assert.equal((html.match(/<main\b/g) || []).length, 1, file + ' keeps one main');
+    assert.equal((html.match(/<footer\b/g) || []).length, 1, file + ' keeps one site footer');
+    assert.ok(mainClose >= 0 && footerOpen > mainClose && footerClose > footerOpen,
+      file + ' must keep its site-wide footer outside the article landmark');
+    assert.match(html.slice(mainClose, footerOpen), /^<\/main>\s*$/,
+      file + ' footer directly follows main');
+    assert.match(html.slice(footerClose), /^<\/footer>\s*<\/div>/,
+      file + ' footer keeps the existing width-limited content shell');
+    assert.match(html.slice(footerOpen, footerClose), /href="about\.html"/);
+    assert.match(html.slice(footerOpen, footerClose), /href="index\.html#\/sources"/);
+  }
+});
