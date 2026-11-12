@@ -75,7 +75,8 @@ test('Playbooks and Technology separate the shared navigation from main', () => 
     const footerAt = html.indexOf('<footer>', heroAt);
     const mainEnd = html.indexOf('</main>', main);
     assert.ok(shellAt > 0 && shellAt < mobile && mobile < railAt &&
-      railEnd < main && main < heroAt && heroAt < footerAt && footerAt < mainEnd,
+      railEnd < main && main < heroAt && heroAt < mainEnd && mainEnd < footerAt &&
+      /^<\/footer>\s*<\/div>/.test(html.slice(html.indexOf('</footer>', footerAt))),
       route + ' must place shared navigation before the article landmark');
     assert.equal((html.match(/<main\b/g) || []).length, 1, route + ' must have one main landmark');
     assert.equal((html.match(/<nav class="site-chrome /g) || []).length, 1,
