@@ -151,8 +151,11 @@ test('Discover and native pages expose sibling main and global footer landmarks,
       name + ': functional evidence link remains');
     assert.ok(html.includes('id="navigation"') && html.includes('class="global-search"'),
       name + ': original desktop navigation and genuine search remain');
-    assert.equal((html.slice(0, html.indexOf('<dialog id="record-dialog"')).match(/<main\b/g) || []).length,
-      1, name + ': exactly one visible app main landmark');
+    const bodyStart = html.indexOf('</head>') + '</head>'.length;
+    const dialogStart = html.indexOf('<dialog id="record-dialog"', bodyStart);
+    assert.ok(bodyStart > 6 && dialogStart > bodyStart, name + ': valid body and dialog');
+    assert.equal((html.slice(bodyStart, dialogStart).match(/<main\b/g) || []).length,
+      1, name + ': exactly one visible app main landmark (excluding embedded CSS and scripts)');
   }
   assert.ok(css.includes('/* atlas-discover-global-footer:begin */'),
     'shared stylesheet provides one Discover footer-layout variant');
