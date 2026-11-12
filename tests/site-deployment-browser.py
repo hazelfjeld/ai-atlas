@@ -2624,7 +2624,7 @@ with sync_playwright() as p:
     for scheme in ('light', 'dark'):
         skip_context = browser.new_context(java_script_enabled=False, color_scheme=scheme,
                                            reduced_motion='reduce')
-        skip_page = skip_context.new_page(viewport={'width':390, 'height':844})
+        skip_page = skip_context.new_page()
         for width in (320, 390):
             skip_page.set_viewport_size({'width':width, 'height':844})
             skip_page.goto(base + 'index.html')
