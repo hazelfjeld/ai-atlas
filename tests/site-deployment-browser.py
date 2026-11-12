@@ -168,11 +168,17 @@ with sync_playwright() as p:
                 concept.scroll_into_view_if_needed()
                 footer_page.screenshot(path=str(out / ('concept-global-footer-'+str(width)+'-dark.png')))
             if scheme == 'light' and width == 390:
+                # Check the actual destination and its global chrome, not an
+                # implementation-specific About article heading selector.
                 footer_page.locator('body > footer a[href="../about.html"]').click()
+                footer_page.wait_for_url('**/about.html')
                 check('concept footer policy navigates to the shared About page',
-                      footer_page.locator('body > footer.site-chrome__footer').count() == 1
-                      and footer_page.locator('main.term-shell > header.hero h1').inner_text() == 'The frontier, in context.')
+                      footer_page.evaluate("location.pathname.endsWith('/about.html')")
+                      and footer_page.locator('body > nav.site-chrome.term-nav').count() == 1
+                      and footer_page.locator('body > footer.site-chrome__footer').count() == 1
+                      and footer_page.get_by_role('heading', name='The frontier, in context.').count() == 1)
                 footer_page.go_back()
+                footer_page.wait_for_url('**/terms/MLD-0001-a-b-test.html')
                 check('returning to concept preserves the single global footer',
                       footer_page.locator('body > footer.site-chrome__footer').count() == 1)
         footer_ctx.close()
