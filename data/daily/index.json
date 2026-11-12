@@ -289,9 +289,17 @@
       "sha256": "e555005a4af18457bfde6fd6ac220ae81d43fa7811e31f155c6dc3f84c2beaff",
       "bytes": 20900,
       "published_at": "2026-11-11T15:31:21.435Z"
+    },
+    {
+      "date": "2026-11-12",
+      "revision": 1,
+      "path": "data/daily/editions/2026-11-12-v1.json",
+      "sha256": "4dd96b918ffc2fb8a272e790b47d402e93897040b11be380b8a578dd7eb76d57",
+      "bytes": 15343,
+      "published_at": "2026-11-12T14:31:18.335Z"
     }
   ],
   "last_successful_publish_at": "2026-11-11T16:49:15Z",
-  "status": "edition_revision_1_production_verified",
-  "coverage_note": "November 11 revision 1 verified on Cloudflare production: 10 source-attributed reports (three November 11, seven November 10), five deferred technology proposals, three deferred terminology proposals, and one failed metadata feed. The 500-asset HTTP checks across three production hosts and hosted browser tests passed; direct separate opening of the dated query permalink was unavailable. Partial editorial source coverage is retained."
+  "status": "edition_revision_1_pending_production_verification",
+  "coverage_note": "November 12 revision 1 is awaiting production verification: seven attributed news reports (four Nov 11–12; three Nov 9–10 catch-up), four deferred technology and two deferred term proposals. Partial source coverage and one failed arXiv API query are disclosed; last successful verification remains November 11 until new release checks pass."
 }

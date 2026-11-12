@@ -1032,6 +1032,56 @@
       "production_workflow_run_id": 43060279051,
       "githack_workflow_run_id": 43049502132,
       "verification_scope": "Exact tested main fe8c2eaf3716f26a7eae6c2e10a2d876f9cb9534 passed Cloudflare validate and production jobs in workflow 43060279051 by 2026-11-11T16:49:15Z: 500 exact HTTP assets on each of workers.dev, apex, and www; hosted Chromium tests for the archive, navigation, responsive 320/390/768/1280 layouts, themes, keyboard, script-free pages, Games, and offline paths. The earlier catalog/GitHack run 43049502132 succeeded for the November 11 editorial content (main 6c804008); the intervening main changes updated only the browser-install workflow, not public site assets. This is production HTTP/browser verification, not an independent direct browser reopening of the dated query permalink."
+    },
+    {
+      "batch_id": "atlas-daily-20261112-20261112T141239072z-bounded-a",
+      "source_branch": "atlas-daily-staging",
+      "source_commit": "287c853e8f08fe776c3170374fbeb94a07f4af87",
+      "source_batch_path": "daily-queue/batches/2026-11-12-atlas-daily-20261112-20261112T141239072z-bounded-a.json",
+      "source_batch_sha256": "bac863d4b2f8f667cbe56fd382345b9af2b19cdca99a2a870bb4894ce18c9a6b",
+      "source_batch_bytes": 31204,
+      "edition_date": "2026-11-12",
+      "validation_result": "batch_sha256_bytes_schema_unique_ids_dates_verified_publisher_source_review_7_stories",
+      "status": "partially_published_with_6_deferred_catalog_proposals",
+      "publication_outcome": "immutable_revision_1_pending_production_verification",
+      "publication_edition": "2026-11-12-v1",
+      "accepted_news_ids": [
+        "ai-news:alibaba-qwen4-max-preview-20261111",
+        "ai-news:deepmind-alphagenome2-20261111",
+        "ai-news:fractile-series-c-ai-inference-20261111",
+        "ai-news:china-rented-nvidia-compute-concerns-20261112",
+        "ai-news:anthropic-fable-mythos52-20261109",
+        "ai-news:hedra-model-factory-20261110",
+        "ai-news:suse-ai-infrastructure-20261110"
+      ],
+      "deferred_news_ids": [],
+      "deferred_catalog_proposal_ids": [
+        "tech-proposal:qwen4-max-preview:2026-11-11",
+        "tech-proposal:alphagenome2:2026-11-11",
+        "tech-proposal:claude-fable-mythos-52:2026-11-09",
+        "tech-proposal:hedra-model-factory:2026-11-10",
+        "term-proposal:cell-state-conditioning-genomics:2026-11-12",
+        "term-proposal:cross-modality-imputation:2026-11-12"
+      ],
+      "rejected_ids": [],
+      "counts": {
+        "news_published": 7,
+        "technology_added": 0,
+        "term_added": 0,
+        "corrections": 0,
+        "news_deferred": 0,
+        "catalog_deferred": 6,
+        "technology_updated": 0
+      },
+      "review_notes": "Publisher opened and independently checked seven material sources (official docs/releases and Reuters reporting) and retained all caveats. Four technology and two term proposals are deferred rather than presented as permanent additions. The collector reports partial source coverage and an inaccessible arXiv API endpoint. Public deployment pending independent CI/HTTP/browser verification.",
+      "publication_history": [
+        {
+          "edition": "2026-11-12-v1",
+          "status": "pending_production_verification",
+          "note": "Staging batch independently checksummed and seven qualified news records prepared; publisher CI and live asset verification pending.",
+          "production_commit": null
+        }
+      ]
     }
   ]
 }

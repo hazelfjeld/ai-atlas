@@ -1,0 +1,248 @@
+{
+  "schema": 1,
+  "edition_date": "2026-11-12",
+  "timezone": "America/Chicago",
+  "published_at": "2026-11-12T14:31:18.335Z",
+  "coverage": {
+    "start": "2026-11-11T14:12:39.072Z",
+    "end": "2026-11-12T14:12:39.072Z",
+    "status": "partial",
+    "note": "Source-attributed selection: four reports dated November 11–12 and three November 9–10 catch-up reports; vendor benchmarks and roadmap claims remain attributed, not independently reproduced. Four technology and two terminology candidates are deferred pending permanent-catalog distinctness, availability and licensing review. The collector's arXiv API check failed, and its source sweep was incomplete. No complete AI-news coverage is claimed.",
+    "sources_checked": [
+      {
+        "name": "source-01",
+        "url": "https://www.alibabacloud.com/help/en/model-studio/qwen4-max-preview",
+        "checked_at": "2026-11-12T14:12:39.072Z",
+        "status": "opened",
+        "note": "Collector source opened; publisher independently checked material claims against linked primary reporting, retaining limitations and release stage."
+      },
+      {
+        "name": "source-02",
+        "url": "https://deepmind.google/blog/alphagenome-2-deciphering-how-cells-read-dna-to-better-understand-disease/",
+        "checked_at": "2026-11-12T14:12:39.072Z",
+        "status": "opened",
+        "note": "Collector source opened; publisher independently checked material claims against linked primary reporting, retaining limitations and release stage."
+      },
+      {
+        "name": "source-03",
+        "url": "https://www.theverge.com/ai-artificial-intelligence/1031524/google-deepmind-alphagenome-2-genetic-ai-model",
+        "checked_at": "2026-11-12T14:12:39.072Z",
+        "status": "opened",
+        "note": "Collector source opened; publisher independently checked material claims against linked primary reporting, retaining limitations and release stage."
+      },
+      {
+        "name": "source-04",
+        "url": "https://www.reuters.com/legal/transactional/uk-backed-ai-chip-startup-fractile-hits-7-billion-valuation-funding-round-2026-11-11/",
+        "checked_at": "2026-11-12T14:12:39.072Z",
+        "status": "opened",
+        "note": "Collector source opened; publisher independently checked material claims against linked primary reporting, retaining limitations and release stage."
+      },
+      {
+        "name": "source-05",
+        "url": "https://www.reuters.com/world/china/chinese-ai-firms-rush-secure-nvidia-chip-capacity-spy-scandal-stirs-fear-us-2026-11-12/",
+        "checked_at": "2026-11-12T14:12:39.072Z",
+        "status": "opened",
+        "note": "Collector source opened; publisher independently checked material claims against linked primary reporting, retaining limitations and release stage."
+      },
+      {
+        "name": "source-06",
+        "url": "https://www.anthropic.com/claude-fable-and-mythos-5-2",
+        "checked_at": "2026-11-12T14:12:39.072Z",
+        "status": "opened",
+        "note": "Collector source opened; publisher independently checked material claims against linked primary reporting, retaining limitations and release stage."
+      },
+      {
+        "name": "source-07",
+        "url": "https://www.globenewswire.com/news-release/2026/11/10/3399821/0/en/hedra-launches-model-factory-an-autonomous-post-training-and-inference-platform-for-real-world-ai.html",
+        "checked_at": "2026-11-12T14:12:39.072Z",
+        "status": "opened",
+        "note": "Collector source opened; publisher independently checked material claims against linked primary reporting, retaining limitations and release stage."
+      },
+      {
+        "name": "source-08",
+        "url": "https://www.suse.com/ja-jp/news-articles/2026/112/suse-solidifies-position-as-platform-for-ai-workloads/",
+        "checked_at": "2026-11-12T14:12:39.072Z",
+        "status": "opened",
+        "note": "Collector source opened; publisher independently checked material claims against linked primary reporting, retaining limitations and release stage."
+      }
+    ],
+    "sources_failed": [
+      {
+        "url": "https://export.arxiv.org/api/query?search_query=cat%3Acs.LG&start=0&max_results=1",
+        "status": "inaccessible",
+        "reason": "Direct arXiv metadata API URL could not be opened by the research browser; paper coverage is incomplete, not zero.",
+        "checked_at": "2026-11-12T14:12:39.072Z"
+      }
+    ]
+  },
+  "tldr": [
+    "Alibaba's Qwen4-Max preview offers long-context multimodal tool use with subscription-only, time-limited access; DeepMind introduced cell-conditioned AlphaGenome 2 research predictions that are not validated for clinical diagnosis.",
+    "Reuters reported major financing for UK inference-chip company Fractile and attributed overseas GPU-rental plans by Chinese AI companies; both require careful distinction between reporting, company targets, and established outcomes.",
+    "Catch-up coverage includes Anthropic's gated Fable/Mythos model release, Hedra's Model Factory service and SUSE infrastructure announcements. Four technology and two terminology proposals remain under catalog review; source coverage is partial."
+  ],
+  "news": [
+    {
+      "id": "ai-news:alibaba-qwen4-max-preview-20261111",
+      "title": "Alibaba previews Qwen4-Max with multimodal tools and a time-limited access window",
+      "category": "models",
+      "tags": [
+        "LLM",
+        "multimodal",
+        "agents",
+        "API"
+      ],
+      "summary": "Alibaba Cloud documents Qwen4-Max-Preview for text, image and video understanding, reasoning, tool calls and structured output, with a listed one-million-token context. The preview started November 11 and is scheduled to end November 25 (UTC+8).",
+      "why_it_matters": "A temporary large-context model is available for developers evaluating multimodal, agent-oriented API workloads.",
+      "caveat": "Preview is restricted to Alibaba Token Plan, not pay-as-you-go; access may require a subscription. Parameter count and independent benchmark results were not established from this documentation; it is explicitly a temporary preview.",
+      "review_status": "publisher_checked_attributed_source_qualified",
+      "release_status": "official_product_documentation",
+      "source_url": "https://www.alibabacloud.com/help/en/model-studio/qwen4-max-preview",
+      "publication_date": "2026-11-11",
+      "event_date": "2026-11-11",
+      "discovered_at": "2026-11-12T14:12:39.072Z",
+      "added_to_atlas_at": "2026-11-12T14:31:18.335Z",
+      "collection_classification": "current_window"
+    },
+    {
+      "id": "ai-news:deepmind-alphagenome2-20261111",
+      "title": "DeepMind introduces AlphaGenome 2 for predicting variant effects by cell type",
+      "category": "research",
+      "tags": [
+        "ML",
+        "DL",
+        "biology",
+        "multimodal",
+        "evaluation"
+      ],
+      "summary": "Google DeepMind announced a DNA-sequence model conditioned on specific cell types or states, using more than 100 million cell profiles spanning 68 tissues. The team reports higher variant-effect sensitivity than its earlier model and offers research API access.",
+      "why_it_matters": "Cell-conditioned predictions could help researchers prioritize experiments linking genetic variation with cell-specific expression and disease mechanisms.",
+      "caveat": "Performance results are author-reported; not independently replicated here. Research-only tool, not approved for clinical diagnosis; computational cost is higher than the original broad-tissue approach.",
+      "review_status": "publisher_checked_attributed_source_qualified",
+      "release_status": "primary_research_announcement",
+      "source_url": "https://deepmind.google/blog/alphagenome-2-deciphering-how-cells-read-dna-to-better-understand-disease/",
+      "publication_date": "2026-11-11",
+      "event_date": "2026-11-11",
+      "discovered_at": "2026-11-12T14:12:39.072Z",
+      "added_to_atlas_at": "2026-11-12T14:31:18.335Z",
+      "collection_classification": "current_window"
+    },
+    {
+      "id": "ai-news:fractile-series-c-ai-inference-20261111",
+      "title": "Fractile raises funding for AI inference chips ahead of planned commercial launch",
+      "category": "hardware",
+      "tags": [
+        "inference",
+        "chips",
+        "infrastructure",
+        "industry"
+      ],
+      "summary": "Reuters reports that UK chip startup Fractile raised $720 million in a Series C and was valued at about $7 billion, as it develops inference-focused processors.",
+      "why_it_matters": "The financing reflects demand for alternatives to dominant AI inference hardware vendors.",
+      "caveat": "Valuation is attributed to a person involved in the deal; speed/energy claims are company statements, not independently benchmarked here. Reuters says the first commercial chip is planned for 2027, not currently shipping.",
+      "review_status": "publisher_checked_attributed_source_qualified",
+      "release_status": "reported_funding_and_hardware_plans",
+      "source_url": "https://www.reuters.com/legal/transactional/uk-backed-ai-chip-startup-fractile-hits-7-billion-valuation-funding-round-2026-11-11/",
+      "publication_date": "2026-11-11",
+      "event_date": "2026-11-11",
+      "discovered_at": "2026-11-12T14:12:39.072Z",
+      "added_to_atlas_at": "2026-11-12T14:31:18.335Z",
+      "collection_classification": "current_window"
+    },
+    {
+      "id": "ai-news:china-rented-nvidia-compute-concerns-20261112",
+      "title": "Reuters reports Chinese AI firms seeking overseas Nvidia cloud capacity amid policy uncertainty",
+      "category": "governance",
+      "tags": [
+        "AI infrastructure",
+        "chips",
+        "policy",
+        "geopolitics",
+        "security"
+      ],
+      "summary": "Reuters cites unnamed industry sources saying some Chinese AI developers are considering longer commitments for Nvidia GPU compute rented abroad because US restrictions on remote chip access might tighten.",
+      "why_it_matters": "Remote compute access, not only physical chip exports, is becoming a material policy and capacity-planning issue.",
+      "caveat": "Company plans rely on anonymous sources and are not verified transactions. A proposed US bill is not enacted law, and personal espionage allegations mentioned in the report are disputed and not independently verified; none is treated as an established incident here.",
+      "review_status": "publisher_checked_attributed_source_qualified",
+      "release_status": "attributed_industry_reporting",
+      "source_url": "https://www.reuters.com/world/china/chinese-ai-firms-rush-secure-nvidia-chip-capacity-spy-scandal-stirs-fear-us-2026-11-12/",
+      "publication_date": "2026-11-12",
+      "event_date": "2026-11-12",
+      "discovered_at": "2026-11-12T14:12:39.072Z",
+      "added_to_atlas_at": "2026-11-12T14:31:18.335Z",
+      "collection_classification": "current_window"
+    },
+    {
+      "id": "ai-news:anthropic-fable-mythos52-20261109",
+      "title": "Anthropic launches Fable 5.2 and restricted Mythos 5.2 with new safety evaluations",
+      "category": "models",
+      "tags": [
+        "LLM",
+        "agents",
+        "cybersecurity",
+        "safety",
+        "evaluation"
+      ],
+      "summary": "Anthropic describes Fable 5.2 and Mythos 5.2 as versions of the same underlying model with differentiated access safeguards. It presents prerelease software, scientific and cybersecurity evaluations and limits Mythos use to vetted organizations.",
+      "why_it_matters": "The release provides a concrete example of capability-targeted access controls paired with model evaluations for dual-use domains.",
+      "caveat": "Reported scientific achievements, benchmark rankings and safeguards are chiefly vendor reports, not comprehensive independent validations. Mythos access is limited; some Fable queries fall back to other models.",
+      "review_status": "publisher_checked_attributed_source_qualified",
+      "release_status": "official_model_and_safety_release",
+      "source_url": "https://www.anthropic.com/claude-fable-and-mythos-5-2",
+      "publication_date": "2026-11-09",
+      "event_date": "2026-11-09",
+      "discovered_at": "2026-11-12T14:12:39.072Z",
+      "added_to_atlas_at": "2026-11-12T14:31:18.335Z",
+      "collection_classification": "catch_up"
+    },
+    {
+      "id": "ai-news:hedra-model-factory-20261110",
+      "title": "Hedra offers a research-assisted model training and inference factory",
+      "category": "tools",
+      "tags": [
+        "fine-tuning",
+        "distillation",
+        "multimodal",
+        "robotics",
+        "inference"
+      ],
+      "summary": "Hedra announced Model Factory, combining GPU sandboxes, its inference stack, research-led post-training and feedback from deployments for multimodal and physical-AI customers.",
+      "why_it_matters": "It packages complex post-training, inference optimization and evaluation workflows for teams that cannot operate a full internal research lab.",
+      "caveat": "Its sixfold image-editing speed claim compares a 30-step original with a distilled 14-step model on specified AMD GPUs; this is not a controlled general speedup. Availability and service costs require confirmation with the vendor.",
+      "review_status": "publisher_checked_attributed_source_qualified",
+      "release_status": "first_party_press_release",
+      "source_url": "https://www.globenewswire.com/news-release/2026/11/10/3399821/0/en/hedra-launches-model-factory-an-autonomous-post-training-and-inference-platform-for-real-world-ai.html",
+      "publication_date": "2026-11-10",
+      "event_date": "2026-11-10",
+      "discovered_at": "2026-11-12T14:12:39.072Z",
+      "added_to_atlas_at": "2026-11-12T14:31:18.335Z",
+      "collection_classification": "catch_up"
+    },
+    {
+      "id": "ai-news:suse-ai-infrastructure-20261110",
+      "title": "SUSE outlines new AI-assisted hybrid infrastructure management features",
+      "category": "infrastructure",
+      "tags": [
+        "AI",
+        "agents",
+        "Kubernetes",
+        "MCP",
+        "security"
+      ],
+      "summary": "SUSE announced updates connecting Rancher Prime, SUSE AI Factory and SLES 16.1, including agentic troubleshooting, trusted Python packages and an on-box MCP framework.",
+      "why_it_matters": "Enterprise AI infrastructure is expanding beyond serving models into managing and defending the Kubernetes and Linux layers that host them.",
+      "caveat": "Capabilities have different availability: SLES 16.1 is available, but the on-box MCP framework is a technical preview and AI-first CLI is open beta; other improvements are future releases. No independent security audit was performed.",
+      "review_status": "publisher_checked_attributed_source_qualified",
+      "release_status": "official_enterprise_release",
+      "source_url": "https://www.suse.com/ja-jp/news-articles/2026/112/suse-solidifies-position-as-platform-for-ai-workloads/",
+      "publication_date": "2026-11-10",
+      "event_date": "2026-11-10",
+      "discovered_at": "2026-11-12T14:12:39.072Z",
+      "added_to_atlas_at": "2026-11-12T14:31:18.335Z",
+      "collection_classification": "catch_up"
+    }
+  ],
+  "technologies": [],
+  "terms": [],
+  "site_changes": [],
+  "corrections": []
+}

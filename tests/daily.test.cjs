@@ -1707,11 +1707,35 @@ test('November 11 daily edition has durable publisher receipt, source qualificat
  assert.equal(edition.coverage.sources_failed.length,1);
  assert.equal(edition.technologies.length,0);
  assert.equal(edition.terms.length,0);
- const r=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8')).receipts.at(-1);
- assert.equal(r.batch_id,'atlas-daily-20261111-20261111T144728890z-source-review-a');
+ const r=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8')).receipts.find(x=>x.batch_id==='atlas-daily-20261111-20261111T144728890z-source-review-a');
+ assert.ok(r,'November 11 historical receipt remains immutable');
  assert.deepEqual(edition.news.map(x=>x.id),r.accepted_news_ids);
  assert.equal(r.counts.catalog_deferred,8);
  assert.ok(r.publication_history.at(-1).status==='pending_production_verification'||r.publication_history.at(-1).status==='cloudflare_http_browser_and_githack_verified');
  const html=fs.readFileSync('whats-new.html','utf8');
  assert.ok(html.includes('href="'+ref.path+'"'),'The script-free daily archive includes the newest edition');
+});
+
+
+test('November 12 staged editorial batch has a unique receipt, integrity-pinned edition and script-free archive link',()=>{
+ const crypto=require('node:crypto'),fs=require('node:fs');
+ const idx=JSON.parse(fs.readFileSync('data/daily/index.json','utf8'));
+ const r=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8')).receipts.find(x=>x.batch_id==='atlas-daily-20261112-20261112T141239072z-bounded-a');
+ const ref=idx.editions.find(x=>x.date==='2026-11-12'&&x.revision===1);
+ assert.ok(r&&ref);
+ const raw=fs.readFileSync(ref.path);
+ assert.equal(raw.byteLength,ref.bytes);
+ assert.equal(crypto.createHash('sha256').update(raw).digest('hex'),ref.sha256);
+ const edition=D.validateEdition(JSON.parse(raw),ref);
+ assert.equal(edition.news.length,7);
+ assert.deepEqual(edition.news.map(n=>n.id),r.accepted_news_ids);
+ assert.equal(edition.news.filter(n=>n.publication_date===edition.edition_date).length,1);
+ assert.equal(edition.coverage.status,'partial');
+ assert.equal(edition.coverage.sources_failed.length,1);
+ assert.deepEqual([edition.technologies.length,edition.terms.length,edition.corrections.length,r.counts.catalog_deferred],[0,0,0,6]);
+ assert.equal(r.source_batch_sha256,'bac863d4b2f8f667cbe56fd382345b9af2b19cdca99a2a870bb4894ce18c9a6b');
+ assert.equal(r.source_batch_bytes,31204);
+ assert.ok(edition.news.every(n=>n.review_status.startsWith('publisher_checked_')&&n.caveat&&n.source_url.startsWith('https://')));
+ assert.ok(fs.readFileSync('whats-new.html','utf8').includes('href="'+ref.path+'"'));
+ assert.equal(idx.last_successful_publish_at,verifiedPublicationClock());
 });
