@@ -1,0 +1,586 @@
+{
+  "schema": 1,
+  "batch_id": "atlas-daily-20261112-20261112T141239072z-bounded-a",
+  "edition_date": "2026-11-12",
+  "timezone": "America/Chicago",
+  "collected_at": "2026-11-12T14:12:39.072Z",
+  "coverage_start": "2026-11-11T14:12:39.072Z",
+  "coverage_end": "2026-11-12T14:12:39.072Z",
+  "coverage_status": "partial",
+  "coverage_note": "First genuinely successful coverage cutoff remains null. This is a bounded daily collection over the preceding 24 hours, with a rolling overlap and clearly labeled November 9–10 catch-up discoveries. Some listed original publications fall on November 11 with day-only precision, so their timing relative to the prior run is not inferred. Source diversity and comprehensive arXiv/robotics/voice release coverage remain incomplete; do not advance the successful cutoff.",
+  "overlap_lookback_start": "2026-11-09T14:00:00Z",
+  "sources_checked": [
+    {
+      "url": "https://www.alibabacloud.com/help/en/model-studio/qwen4-max-preview",
+      "status": "opened",
+      "checked_at": "2026-11-12T14:12:39.072Z"
+    },
+    {
+      "url": "https://deepmind.google/blog/alphagenome-2-deciphering-how-cells-read-dna-to-better-understand-disease/",
+      "status": "opened",
+      "checked_at": "2026-11-12T14:12:39.072Z"
+    },
+    {
+      "url": "https://www.theverge.com/ai-artificial-intelligence/1031524/google-deepmind-alphagenome-2-genetic-ai-model",
+      "status": "opened",
+      "checked_at": "2026-11-12T14:12:39.072Z"
+    },
+    {
+      "url": "https://www.reuters.com/legal/transactional/uk-backed-ai-chip-startup-fractile-hits-7-billion-valuation-funding-round-2026-11-11/",
+      "status": "opened",
+      "checked_at": "2026-11-12T14:12:39.072Z"
+    },
+    {
+      "url": "https://www.reuters.com/world/china/chinese-ai-firms-rush-secure-nvidia-chip-capacity-spy-scandal-stirs-fear-us-2026-11-12/",
+      "status": "opened",
+      "checked_at": "2026-11-12T14:12:39.072Z"
+    },
+    {
+      "url": "https://www.anthropic.com/claude-fable-and-mythos-5-2",
+      "status": "opened",
+      "checked_at": "2026-11-12T14:12:39.072Z"
+    },
+    {
+      "url": "https://www.globenewswire.com/news-release/2026/11/10/3399821/0/en/hedra-launches-model-factory-an-autonomous-post-training-and-inference-platform-for-real-world-ai.html",
+      "status": "opened",
+      "checked_at": "2026-11-12T14:12:39.072Z"
+    },
+    {
+      "url": "https://www.suse.com/ja-jp/news-articles/2026/112/suse-solidifies-position-as-platform-for-ai-workloads/",
+      "status": "opened",
+      "checked_at": "2026-11-12T14:12:39.072Z"
+    }
+  ],
+  "sources_failed": [
+    {
+      "url": "https://export.arxiv.org/api/query?search_query=cat%3Acs.LG&start=0&max_results=1",
+      "status": "inaccessible",
+      "reason": "Direct arXiv metadata API URL could not be opened by the research browser; paper coverage is incomplete, not zero.",
+      "checked_at": "2026-11-12T14:12:39.072Z"
+    }
+  ],
+  "source_health_note": "Eight source pages opened: four direct product/research announcements or documentation, one company press release, two Reuters originals and one independent science report; coverage is partial, not an exhaustive feed sweep.",
+  "coverage_backlog": [
+    "Re-run arXiv and specialist journal/workshop metadata queries when the API is accessible; compare identifiers with prior reports.",
+    "Sweep robotics, audio/voice, video generation and open-weight software tags not fully checked during this bounded run.",
+    "Publisher must validate catalog names/aliases and licenses before promoting technology/term proposals; retain all previously deferred proposals rather than duplicating them.",
+    "Revisit mixed/sensitive claims only with new primary evidence; avoid treating confidential-source rumors as verified incidents."
+  ],
+  "tldr": [
+    "Alibaba's Qwen4-Max preview and DeepMind's AlphaGenome 2 point to continued specialization across long-context multimodal assistants and cell-specific scientific AI; Anthropic's recent release highlights capability gating in sensitive domains.",
+    "New chip funding and reported cloud-capacity concerns underline infrastructure dependence, while managed post-training and hybrid operations tools are moving toward practical enterprise workflows. Vendor performance claims and attributed reports need independent verification."
+  ],
+  "news": [
+    {
+      "id": "ai-news:alibaba-qwen4-max-preview-20261111",
+      "title": "Alibaba previews Qwen4-Max with multimodal tools and a time-limited access window",
+      "category": "models",
+      "tags": [
+        "LLM",
+        "multimodal",
+        "agents",
+        "API"
+      ],
+      "summary": "Alibaba Cloud documents Qwen4-Max-Preview for text, image and video understanding, reasoning, tool calls and structured output, with a listed one-million-token context. The preview started November 11 and is scheduled to end November 25 (UTC+8).",
+      "why_it_matters": "A temporary large-context model is available for developers evaluating multimodal, agent-oriented API workloads.",
+      "caveat": "Preview is restricted to Alibaba Token Plan, not pay-as-you-go; access may require a subscription. Parameter count and independent benchmark results were not established from this documentation; it is explicitly a temporary preview.",
+      "canonical_url": "https://www.alibabacloud.com/help/en/model-studio/qwen4-max-preview",
+      "source_url": "https://www.alibabacloud.com/help/en/model-studio/qwen4-max-preview",
+      "publication_date": "2026-11-11",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-11",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-12T14:12:39.072Z",
+      "checked_at": "2026-11-12T14:12:39.072Z",
+      "evidence_type": "official_product_documentation",
+      "release_status": "official_product_documentation",
+      "review_status": "source_checked_pending_publisher_review",
+      "collection_classification": "current_window",
+      "sources": [
+        {
+          "url": "https://www.alibabacloud.com/help/en/model-studio/qwen4-max-preview",
+          "publisher": "Alibaba Cloud",
+          "type": "official_product_documentation"
+        }
+      ],
+      "related_catalog_ids": []
+    },
+    {
+      "id": "ai-news:deepmind-alphagenome2-20261111",
+      "title": "DeepMind introduces AlphaGenome 2 for predicting variant effects by cell type",
+      "category": "research",
+      "tags": [
+        "ML",
+        "DL",
+        "biology",
+        "multimodal",
+        "evaluation"
+      ],
+      "summary": "Google DeepMind announced a DNA-sequence model conditioned on specific cell types or states, using more than 100 million cell profiles spanning 68 tissues. The team reports higher variant-effect sensitivity than its earlier model and offers research API access.",
+      "why_it_matters": "Cell-conditioned predictions could help researchers prioritize experiments linking genetic variation with cell-specific expression and disease mechanisms.",
+      "caveat": "Performance results are author-reported; not independently replicated here. Research-only tool, not approved for clinical diagnosis; computational cost is higher than the original broad-tissue approach.",
+      "canonical_url": "https://deepmind.google/blog/alphagenome-2-deciphering-how-cells-read-dna-to-better-understand-disease/",
+      "source_url": "https://deepmind.google/blog/alphagenome-2-deciphering-how-cells-read-dna-to-better-understand-disease/",
+      "publication_date": "2026-11-11",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-11",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-12T14:12:39.072Z",
+      "checked_at": "2026-11-12T14:12:39.072Z",
+      "evidence_type": "primary_research_announcement",
+      "release_status": "primary_research_announcement",
+      "review_status": "source_checked_pending_publisher_review",
+      "collection_classification": "current_window",
+      "sources": [
+        {
+          "url": "https://deepmind.google/blog/alphagenome-2-deciphering-how-cells-read-dna-to-better-understand-disease/",
+          "publisher": "Google DeepMind",
+          "type": "primary_research_announcement"
+        },
+        {
+          "url": "https://www.theverge.com/ai-artificial-intelligence/1031524/google-deepmind-alphagenome-2-genetic-ai-model",
+          "publisher": "The Verge",
+          "type": "independent_reporting"
+        }
+      ],
+      "related_catalog_ids": []
+    },
+    {
+      "id": "ai-news:fractile-series-c-ai-inference-20261111",
+      "title": "Fractile raises funding for AI inference chips ahead of planned commercial launch",
+      "category": "hardware",
+      "tags": [
+        "inference",
+        "chips",
+        "infrastructure",
+        "industry"
+      ],
+      "summary": "Reuters reports that UK chip startup Fractile raised $720 million in a Series C and was valued at about $7 billion, as it develops inference-focused processors.",
+      "why_it_matters": "The financing reflects demand for alternatives to dominant AI inference hardware vendors.",
+      "caveat": "Valuation is attributed to a person involved in the deal; speed/energy claims are company statements, not independently benchmarked here. Reuters says the first commercial chip is planned for 2027, not currently shipping.",
+      "canonical_url": "https://www.reuters.com/legal/transactional/uk-backed-ai-chip-startup-fractile-hits-7-billion-valuation-funding-round-2026-11-11/",
+      "source_url": "https://www.reuters.com/legal/transactional/uk-backed-ai-chip-startup-fractile-hits-7-billion-valuation-funding-round-2026-11-11/",
+      "publication_date": "2026-11-11",
+      "publication_date_precision": "day",
+      "publication_time_utc": "2026-11-11T14:53:00Z",
+      "event_date": "2026-11-11",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-12T14:12:39.072Z",
+      "checked_at": "2026-11-12T14:12:39.072Z",
+      "evidence_type": "reported_funding_and_hardware_plans",
+      "release_status": "reported_funding_and_hardware_plans",
+      "review_status": "source_checked_pending_publisher_review",
+      "collection_classification": "current_window",
+      "sources": [
+        {
+          "url": "https://www.reuters.com/legal/transactional/uk-backed-ai-chip-startup-fractile-hits-7-billion-valuation-funding-round-2026-11-11/",
+          "publisher": "Reuters",
+          "type": "reported_funding_and_hardware_plans"
+        }
+      ],
+      "related_catalog_ids": []
+    },
+    {
+      "id": "ai-news:china-rented-nvidia-compute-concerns-20261112",
+      "title": "Reuters reports Chinese AI firms seeking overseas Nvidia cloud capacity amid policy uncertainty",
+      "category": "governance",
+      "tags": [
+        "AI infrastructure",
+        "chips",
+        "policy",
+        "geopolitics",
+        "security"
+      ],
+      "summary": "Reuters cites unnamed industry sources saying some Chinese AI developers are considering longer commitments for Nvidia GPU compute rented abroad because US restrictions on remote chip access might tighten.",
+      "why_it_matters": "Remote compute access, not only physical chip exports, is becoming a material policy and capacity-planning issue.",
+      "caveat": "Company plans rely on anonymous sources and are not verified transactions. A proposed US bill is not enacted law, and personal espionage allegations mentioned in the report are disputed and not independently verified; none is treated as an established incident here.",
+      "canonical_url": "https://www.reuters.com/world/china/chinese-ai-firms-rush-secure-nvidia-chip-capacity-spy-scandal-stirs-fear-us-2026-11-12/",
+      "source_url": "https://www.reuters.com/world/china/chinese-ai-firms-rush-secure-nvidia-chip-capacity-spy-scandal-stirs-fear-us-2026-11-12/",
+      "publication_date": "2026-11-12",
+      "publication_date_precision": "day",
+      "publication_time_utc": "2026-11-12T05:31:00Z",
+      "event_date": "2026-11-12",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-12T14:12:39.072Z",
+      "checked_at": "2026-11-12T14:12:39.072Z",
+      "evidence_type": "attributed_industry_reporting",
+      "release_status": "attributed_industry_reporting",
+      "review_status": "source_checked_pending_publisher_review",
+      "collection_classification": "current_window",
+      "sources": [
+        {
+          "url": "https://www.reuters.com/world/china/chinese-ai-firms-rush-secure-nvidia-chip-capacity-spy-scandal-stirs-fear-us-2026-11-12/",
+          "publisher": "Reuters",
+          "type": "attributed_industry_reporting"
+        }
+      ],
+      "related_catalog_ids": []
+    },
+    {
+      "id": "ai-news:anthropic-fable-mythos52-20261109",
+      "title": "Anthropic launches Fable 5.2 and restricted Mythos 5.2 with new safety evaluations",
+      "category": "models",
+      "tags": [
+        "LLM",
+        "agents",
+        "cybersecurity",
+        "safety",
+        "evaluation"
+      ],
+      "summary": "Anthropic describes Fable 5.2 and Mythos 5.2 as versions of the same underlying model with differentiated access safeguards. It presents prerelease software, scientific and cybersecurity evaluations and limits Mythos use to vetted organizations.",
+      "why_it_matters": "The release provides a concrete example of capability-targeted access controls paired with model evaluations for dual-use domains.",
+      "caveat": "Reported scientific achievements, benchmark rankings and safeguards are chiefly vendor reports, not comprehensive independent validations. Mythos access is limited; some Fable queries fall back to other models.",
+      "canonical_url": "https://www.anthropic.com/claude-fable-and-mythos-5-2",
+      "source_url": "https://www.anthropic.com/claude-fable-and-mythos-5-2",
+      "publication_date": "2026-11-09",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-09",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-12T14:12:39.072Z",
+      "checked_at": "2026-11-12T14:12:39.072Z",
+      "evidence_type": "official_model_and_safety_release",
+      "release_status": "official_model_and_safety_release",
+      "review_status": "source_checked_pending_publisher_review",
+      "collection_classification": "catch_up",
+      "sources": [
+        {
+          "url": "https://www.anthropic.com/claude-fable-and-mythos-5-2",
+          "publisher": "Anthropic",
+          "type": "official_model_and_safety_release"
+        }
+      ],
+      "related_catalog_ids": []
+    },
+    {
+      "id": "ai-news:hedra-model-factory-20261110",
+      "title": "Hedra offers a research-assisted model training and inference factory",
+      "category": "tools",
+      "tags": [
+        "fine-tuning",
+        "distillation",
+        "multimodal",
+        "robotics",
+        "inference"
+      ],
+      "summary": "Hedra announced Model Factory, combining GPU sandboxes, its inference stack, research-led post-training and feedback from deployments for multimodal and physical-AI customers.",
+      "why_it_matters": "It packages complex post-training, inference optimization and evaluation workflows for teams that cannot operate a full internal research lab.",
+      "caveat": "Its sixfold image-editing speed claim compares a 30-step original with a distilled 14-step model on specified AMD GPUs; this is not a controlled general speedup. Availability and service costs require confirmation with the vendor.",
+      "canonical_url": "https://www.globenewswire.com/news-release/2026/11/10/3399821/0/en/hedra-launches-model-factory-an-autonomous-post-training-and-inference-platform-for-real-world-ai.html",
+      "source_url": "https://www.globenewswire.com/news-release/2026/11/10/3399821/0/en/hedra-launches-model-factory-an-autonomous-post-training-and-inference-platform-for-real-world-ai.html",
+      "publication_date": "2026-11-10",
+      "publication_date_precision": "day",
+      "publication_time_utc": "2026-11-10T15:00:00Z",
+      "event_date": "2026-11-10",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-12T14:12:39.072Z",
+      "checked_at": "2026-11-12T14:12:39.072Z",
+      "evidence_type": "first_party_press_release",
+      "release_status": "first_party_press_release",
+      "review_status": "source_checked_pending_publisher_review",
+      "collection_classification": "catch_up",
+      "sources": [
+        {
+          "url": "https://www.globenewswire.com/news-release/2026/11/10/3399821/0/en/hedra-launches-model-factory-an-autonomous-post-training-and-inference-platform-for-real-world-ai.html",
+          "publisher": "Hedra via GlobeNewswire",
+          "type": "first_party_press_release"
+        }
+      ],
+      "related_catalog_ids": []
+    },
+    {
+      "id": "ai-news:suse-ai-infrastructure-20261110",
+      "title": "SUSE outlines new AI-assisted hybrid infrastructure management features",
+      "category": "infrastructure",
+      "tags": [
+        "AI",
+        "agents",
+        "Kubernetes",
+        "MCP",
+        "security"
+      ],
+      "summary": "SUSE announced updates connecting Rancher Prime, SUSE AI Factory and SLES 16.1, including agentic troubleshooting, trusted Python packages and an on-box MCP framework.",
+      "why_it_matters": "Enterprise AI infrastructure is expanding beyond serving models into managing and defending the Kubernetes and Linux layers that host them.",
+      "caveat": "Capabilities have different availability: SLES 16.1 is available, but the on-box MCP framework is a technical preview and AI-first CLI is open beta; other improvements are future releases. No independent security audit was performed.",
+      "canonical_url": "https://www.suse.com/ja-jp/news-articles/2026/112/suse-solidifies-position-as-platform-for-ai-workloads/",
+      "source_url": "https://www.suse.com/ja-jp/news-articles/2026/112/suse-solidifies-position-as-platform-for-ai-workloads/",
+      "publication_date": "2026-11-10",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-10",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-12T14:12:39.072Z",
+      "checked_at": "2026-11-12T14:12:39.072Z",
+      "evidence_type": "official_enterprise_release",
+      "release_status": "official_enterprise_release",
+      "review_status": "source_checked_pending_publisher_review",
+      "collection_classification": "catch_up",
+      "sources": [
+        {
+          "url": "https://www.suse.com/ja-jp/news-articles/2026/112/suse-solidifies-position-as-platform-for-ai-workloads/",
+          "publisher": "SUSE",
+          "type": "official_enterprise_release"
+        }
+      ],
+      "related_catalog_ids": []
+    }
+  ],
+  "technologies": [
+    {
+      "id": "tech-proposal:qwen4-max-preview:2026-11-11",
+      "name": "Qwen4-Max-Preview",
+      "aliases": [
+        "qwen4-max-preview",
+        "Qwen4-Max"
+      ],
+      "usage_tags": [
+        "LLM",
+        "ML",
+        "multimodal",
+        "agents"
+      ],
+      "explanation": "Alibaba-hosted multimodal reasoning model in a dated preview, offering a one-million-token context, visual inputs, tool calls and structured JSON API output.",
+      "conditional_advantage": "Potentially useful for very long multimodal and tool-based tasks where a temporary Alibaba Token Plan endpoint and its constraints are acceptable.",
+      "best_fit_uses": [
+        "Long-document evaluation with images or video",
+        "Structured multi-tool experiments"
+      ],
+      "tradeoffs": [
+        "Scheduled preview retirement on November 25",
+        "No independent quality/reliability tests in this collection",
+        "Subscription-gated API introduces vendor and data-handling considerations"
+      ],
+      "alternatives": [
+        "Gemini API multimodal models",
+        "Claude models with tools",
+        "Open-weight long-context models"
+      ],
+      "hardware_runtime_constraints": "Hosted Alibaba endpoint; local weights/VRAM not documented for this preview. Listed one-million-token context and combined thinking/output cap.",
+      "license_uncertainty": "No verified open-weight release or open-source license; API service conditions govern use.",
+      "availability_uncertainty": "Token Plan preview through November 25 (UTC+8); no pay-as-you-go access.",
+      "pricing_uncertainty": "Token Plan subscription and any regional pricing must be separately checked; not established here.",
+      "official_documentation_url": "https://www.alibabacloud.com/help/en/model-studio/qwen4-max-preview",
+      "source_links": [
+        {
+          "url": "https://www.alibabacloud.com/help/en/model-studio/qwen4-max-preview",
+          "publisher": "Alibaba Cloud",
+          "type": "official documentation"
+        }
+      ],
+      "date_checked": "2026-11-12",
+      "checked_at": "2026-11-12T14:12:39.072Z",
+      "existing_profile_id": null,
+      "review_status": "source_checked_pending_publisher_catalog_dedup"
+    },
+    {
+      "id": "tech-proposal:alphagenome2:2026-11-11",
+      "name": "AlphaGenome 2",
+      "aliases": [
+        "AlphaGenome2",
+        "Google DeepMind AlphaGenome 2"
+      ],
+      "usage_tags": [
+        "ML",
+        "DL",
+        "biology",
+        "genomics",
+        "research"
+      ],
+      "explanation": "Cell-conditioned DNA variant-effect predictor that uses a biological cell-type/state embedding alongside sequence input to estimate regulatory readouts in a targeted cell context.",
+      "conditional_advantage": "Can distinguish effects specific to rare or newly profiled cell states that whole-tissue averages may obscure.",
+      "best_fit_uses": [
+        "Prioritizing candidate regulatory variants",
+        "Designing single-cell experiments",
+        "Exploratory GWAS follow-up"
+      ],
+      "tradeoffs": [
+        "More compute-intensive per condition than original AlphaGenome",
+        "Clinical validity unestablished",
+        "Underlying biological state and training-domain coverage affect predictions"
+      ],
+      "alternatives": [
+        "Original AlphaGenome for broad-scale screening",
+        "Specialized variant effect predictors",
+        "Single-cell laboratory validation"
+      ],
+      "hardware_runtime_constraints": "Cloud API for non-commercial research; no publicly verified local checkpoint or GPU/VRAM specification in this review.",
+      "license_uncertainty": "Non-commercial research API; no open checkpoint or reusable model license confirmed.",
+      "availability_uncertainty": "Available to non-commercial researchers via AlphaGenome API, with private commercial preview.",
+      "pricing_uncertainty": "API quotas, conditions and any commercial fees unverified.",
+      "official_documentation_url": "https://deepmind.google/blog/alphagenome-2-deciphering-how-cells-read-dna-to-better-understand-disease/",
+      "source_links": [
+        {
+          "url": "https://deepmind.google/blog/alphagenome-2-deciphering-how-cells-read-dna-to-better-understand-disease/",
+          "publisher": "Google DeepMind",
+          "type": "primary research/official docs"
+        }
+      ],
+      "date_checked": "2026-11-12",
+      "checked_at": "2026-11-12T14:12:39.072Z",
+      "existing_profile_id": null,
+      "review_status": "source_checked_pending_publisher_catalog_dedup"
+    },
+    {
+      "id": "tech-proposal:claude-fable-mythos-52:2026-11-09",
+      "name": "Claude Fable 5.2 / Claude Mythos 5.2",
+      "aliases": [
+        "Fable 5.2",
+        "Mythos 5.2",
+        "claude-fable-5-2"
+      ],
+      "usage_tags": [
+        "LLM",
+        "agents",
+        "safety",
+        "software engineering"
+      ],
+      "explanation": "Related frontier model variants based on the same core model, differentiated by safety gating and eligibility for sensitive cyber/biological tasks.",
+      "conditional_advantage": "For complex research/code workflows that benefit from extensive tool use and, when vetted, specialized dual-use security capabilities.",
+      "best_fit_uses": [
+        "High-effort technical tasks with oversight",
+        "Controlled research workflows",
+        "Authorized defensive security assessment (restricted Mythos)"
+      ],
+      "tradeoffs": [
+        "Higher API expense than small models",
+        "Vendor-reported evaluations need independent replication",
+        "Safety fallback and usage gating can change effective model behavior"
+      ],
+      "alternatives": [
+        "Claude Opus 5.5",
+        "Gemini 4 Carbon",
+        "Other vetted research models"
+      ],
+      "hardware_runtime_constraints": "Cloud-hosted API/products; no local weights or supported local GPU deployment confirmed.",
+      "license_uncertainty": "Proprietary hosted model, not an open-weight license.",
+      "availability_uncertainty": "Fable broadly accessible through supported platforms; Mythos only via verification programs/eligible enterprises.",
+      "pricing_uncertainty": "Anthropic lists $8/M input and $40/M output tokens at launch, optional fast mode more; actual applicable provider/plan pricing may vary.",
+      "official_documentation_url": "https://www.anthropic.com/claude-fable-and-mythos-5-2",
+      "source_links": [
+        {
+          "url": "https://www.anthropic.com/claude-fable-and-mythos-5-2",
+          "publisher": "Anthropic",
+          "type": "official model release"
+        }
+      ],
+      "date_checked": "2026-11-12",
+      "checked_at": "2026-11-12T14:12:39.072Z",
+      "existing_profile_id": null,
+      "review_status": "source_checked_pending_publisher_catalog_dedup"
+    },
+    {
+      "id": "tech-proposal:hedra-model-factory:2026-11-10",
+      "name": "Hedra Model Factory",
+      "aliases": [
+        "Model Factory (Hedra)"
+      ],
+      "usage_tags": [
+        "ML",
+        "DL",
+        "fine-tuning",
+        "distillation",
+        "robotics",
+        "inference"
+      ],
+      "explanation": "Managed post-training and deployment workflow that pairs model researchers with automated training/evaluation loops and optimized serving for physical and multimodal AI.",
+      "conditional_advantage": "Useful for teams with specialized proprietary simulation/video/robot data but limited full-time training infrastructure.",
+      "best_fit_uses": [
+        "Multimodal model specialization",
+        "Vision-language-action edge distillation",
+        "Research-to-production iteration"
+      ],
+      "tradeoffs": [
+        "Vendor-managed service and potential lock-in",
+        "Not an independently validated autonomous research system",
+        "Performance comparisons change sampling steps and model variant"
+      ],
+      "alternatives": [
+        "Self-managed PyTorch plus vLLM/SGLang",
+        "Modal or Kubernetes GPU jobs",
+        "Managed custom-model offerings"
+      ],
+      "hardware_runtime_constraints": "Vendor runs GPU sandboxes and serving; illustrative test used AMD Instinct MI355X, no fixed client VRAM or required local runtime established.",
+      "license_uncertainty": "Proprietary managed service; code and model ownership terms unverified.",
+      "availability_uncertainty": "Company says available to teams; provisioning and geography require checking.",
+      "pricing_uncertainty": "No dependable public pricing established by this run.",
+      "official_documentation_url": "https://www.globenewswire.com/news-release/2026/11/10/3399821/0/en/hedra-launches-model-factory-an-autonomous-post-training-and-inference-platform-for-real-world-ai.html",
+      "source_links": [
+        {
+          "url": "https://www.globenewswire.com/news-release/2026/11/10/3399821/0/en/hedra-launches-model-factory-an-autonomous-post-training-and-inference-platform-for-real-world-ai.html",
+          "publisher": "Hedra",
+          "type": "first-party release"
+        }
+      ],
+      "date_checked": "2026-11-12",
+      "checked_at": "2026-11-12T14:12:39.072Z",
+      "existing_profile_id": null,
+      "review_status": "source_checked_pending_publisher_catalog_dedup"
+    }
+  ],
+  "terms": [
+    {
+      "id": "term-proposal:cell-state-conditioning-genomics:2026-11-12",
+      "name": "Cell-state conditioning",
+      "aliases": [
+        "Cell-type-conditioned prediction",
+        "Biological-state-conditioned prediction"
+      ],
+      "definition": "Supplying a representation of a cell's biological type or state alongside DNA or other molecular features so a machine-learning model can predict responses specific to that condition.",
+      "mechanism": "The model incorporates a learned state representation at prediction time, letting a shared sequence have different modeled effects in distinct cells.",
+      "usage_tags": [
+        "ML",
+        "DL",
+        "genomics",
+        "conditioning"
+      ],
+      "example": "Given a DNA change and a T-cell activation-state embedding, estimate the expression effect in activated T cells rather than a whole-blood average.",
+      "caveat": "Conditioning does not prove causality or guarantee accurate out-of-distribution state predictions; laboratory validation remains necessary.",
+      "related_existing_ids": [],
+      "primary_references": [
+        {
+          "url": "https://deepmind.google/blog/alphagenome-2-deciphering-how-cells-read-dna-to-better-understand-disease/",
+          "publisher": "Google DeepMind",
+          "type": "primary research announcement"
+        }
+      ],
+      "term_origin": "established_mechanism_new_to_atlas_candidate",
+      "date_checked": "2026-11-12",
+      "checked_at": "2026-11-12T14:12:39.072Z",
+      "review_status": "source_checked_pending_publisher_canonical_dedup"
+    },
+    {
+      "id": "term-proposal:cross-modality-imputation:2026-11-12",
+      "name": "Cross-modality imputation",
+      "aliases": [
+        "Cross-modal imputation",
+        "Cross-omics imputation"
+      ],
+      "definition": "Estimating one kind of measurement from another observed modality by learning relationships between data types.",
+      "mechanism": "A model infers a shared latent representation from an available signal and uses that representation to predict an unmeasured readout.",
+      "usage_tags": [
+        "ML",
+        "DL",
+        "multimodal",
+        "biology",
+        "imputation"
+      ],
+      "example": "Infer a cell's chromatin accessibility from measured single-cell RNA expression in a research dataset.",
+      "caveat": "Inferred measurements are predictions, not direct experimental observations; correlations and domain shift can introduce systematic errors.",
+      "related_existing_ids": [],
+      "primary_references": [
+        {
+          "url": "https://deepmind.google/blog/alphagenome-2-deciphering-how-cells-read-dna-to-better-understand-disease/",
+          "publisher": "Google DeepMind",
+          "type": "primary research announcement"
+        }
+      ],
+      "term_origin": "established_concept_new_to_atlas_candidate",
+      "date_checked": "2026-11-12",
+      "checked_at": "2026-11-12T14:12:39.072Z",
+      "review_status": "source_checked_pending_publisher_canonical_dedup"
+    }
+  ],
+  "corrections": []
+}
