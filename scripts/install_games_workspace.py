@@ -60,7 +60,14 @@ def build_tab():
     match = re.search(r'<main id="main"(?: tabindex="-1")?>(.*?)</main>', html, re.S)
     if not match:
         raise RuntimeError('Standalone game template changed')
-    body = match.group(1).replace('href="index.html#/', 'href="#/')
+    # Standalone Games presents its global footer after the main landmark.
+    # Keep that existing guidance inside native Games, whose Atlas app shell
+    # supplies its own global footer; generated/offline bytes must not change.
+    remainder = html[match.end():]
+    footer = re.search(r'<footer class="site-chrome__footer">(.*?)</footer>', remainder, re.S)
+    if not footer or remainder.count('<footer') != 1:
+        raise RuntimeError('Standalone Games global footer missing or changed')
+    body = (match.group(1) + '<footer>' + footer.group(1) + '</footer>\n').replace('href="index.html#/', 'href="#/')
     # The standalone Games page provides a native no-JavaScript path to the
     # encyclopedia. The embedded Games *app* only mounts after JavaScript
     # hydration and has its own source-backed fallback. Do not duplicate the

@@ -67,7 +67,7 @@ test('secondary static destinations are identified in the shared rail before hyd
 
 test('Games keeps canonical script-free policy links without duplicating the native app footer', () => {
   const games=read('games.html'), app=read('index.html');
-  const footer=games.split('<footer>')[1]?.split('</footer>')[0] || '';
+  const footer=games.match(/<footer class="site-chrome__footer">([\s\S]*?)<\/footer>/)?.[1] || '';
   assert.ok(footer, 'standalone Games has one native footer');
   assert.equal(footer.split('href="about.html"').length-1, 1,
                'standalone Games has a script-free policy destination');
@@ -155,7 +155,9 @@ test('native Games generation strips only the standalone script-free fallback', 
   const fallback = /<noscript><section class="site-static-fallback"[^>]*>[\s\S]*?<\/section><\/noscript>\n?/g;
   assert.equal([...main[1].matchAll(fallback)].length, 1,
     'script-free fallback must appear exactly once on the standalone Games page');
-  let body = main[1]
+  const globalFooter = standalone.match(/<\/main>\s*<footer class="site-chrome__footer">([\s\S]*?)<\/footer>/);
+  assert.ok(globalFooter, 'standalone Games footer remains global and native view still preserves its guidance');
+  let body = (main[1] + '<footer>' + globalFooter[1] + '</footer>\n')
     .replaceAll('href="index.html#/', 'href="#/')
     .replace('Scores and missed concepts stay in this tab’s memory.',
       'Leaving Games ends the current round. Best times stay in this browser tab’s memory.')

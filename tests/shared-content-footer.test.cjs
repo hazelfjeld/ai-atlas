@@ -5,9 +5,9 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 const root = path.join(__dirname, '..');
-const pages = ['research.html', 'demo.html', 'hardware-review.html', 'about.html', 'terms/index.html', 'technology/index.html'];
+const pages = ['research.html', 'demo.html', 'hardware-review.html', 'about.html', 'terms/index.html', 'technology/index.html', 'games.html'];
 
-test('six native page families expose a global footer outside their article landmark', () => {
+test('seven native page families expose a global footer outside their article landmark', () => {
   for (const page of pages) {
     const html = fs.readFileSync(path.join(root, page), 'utf8');
     const mainStart = html.indexOf('<main');
