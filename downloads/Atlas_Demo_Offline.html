@@ -1257,10 +1257,16 @@ main:has(+ .site-chrome__footer){padding-bottom:24px}
 /* atlas-discover-global-footer:begin */
 /* Discover uses the same global contentinfo component as native articles.
    Preserve its wider working-column measure and responsive main gutters. */
+.workspace > main:has(+ .main-footer.site-chrome__footer){padding-bottom:0}
 .workspace > .main-footer.site-chrome__footer{
   width:calc(100% - 76px);
   max-width:1544px;
-  margin:0 auto 46px;
+  margin:42px auto 46px;
+  padding:20px 0 0;
+  border-top:1px solid var(--atlas-footer-line);
+  color:var(--atlas-footer-muted);
+  font-size:11px;
+  line-height:1.8;
 }
 @media(max-width:1200px){.workspace > .main-footer.site-chrome__footer{width:calc(100% - 52px)}}
 @media(max-width:650px){.workspace > .main-footer.site-chrome__footer{width:calc(100% - 34px)}}
