@@ -132,12 +132,12 @@ test('shared listing shells expose their existing footer as a contentinfo landma
   for (const file of ['playbooks.html', 'technologies.html']) {
     const html = read(file);
     const mainClose = html.indexOf('</main>');
-    const footerOpen = html.indexOf('<footer>');
+    const footerOpen = html.indexOf('<footer class="site-chrome__footer">');
     const footerClose = html.indexOf('</footer>');
     assert.equal((html.match(/<main\b/g) || []).length, 1, file + ' keeps one main');
     assert.equal((html.match(/<footer\b/g) || []).length, 1, file + ' keeps one site footer');
     assert.ok(mainClose >= 0 && footerOpen > mainClose && footerClose > footerOpen,
-      file + ' must keep its site-wide footer outside the article landmark');
+      file + ' must keep its shared global contentinfo footer outside the article landmark');
     assert.match(html.slice(mainClose, footerOpen), /^<\/main>\s*$/,
       file + ' footer directly follows main');
     assert.match(html.slice(footerClose), /^<\/footer>\s*<\/div>/,

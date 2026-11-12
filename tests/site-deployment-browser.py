@@ -157,7 +157,7 @@ with sync_playwright() as p:
                       and footer.locator('a[href="index.html#/sources"]').count() == 1
                       and footer.evaluate("""el => {
                           const s = getComputedStyle(el), r = el.getBoundingClientRect();
-                          return s.borderTopStyle === 'solid' && s.fontSize === '13px'
+                          return s.borderTopStyle === 'solid' && s.fontSize === '11px'
                               && r.width > 0 && r.left >= -1
                               && r.right <= innerWidth + 1;
                       }""")
