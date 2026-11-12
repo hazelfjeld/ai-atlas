@@ -73,12 +73,12 @@ test('Playbooks and Technology separate the shared navigation from main', () => 
     const railEnd = html.indexOf('</nav>', railAt);
     const main = html.indexOf('<main class="' + shell + '-content">');
     const heroAt = html.indexOf('<section class="' + hero + '" id="main" tabindex="-1">');
-    const footerAt = html.indexOf('<footer>', heroAt);
+    const footerAt = html.indexOf('<footer class="site-chrome__footer">', heroAt);
     const mainEnd = html.indexOf('</main>', main);
     assert.ok(shellAt > 0 && shellAt < mobile && mobile < railAt &&
       railEnd < main && main < heroAt && heroAt < mainEnd && mainEnd < footerAt &&
       /^<\/footer>\s*<\/div>/.test(html.slice(html.indexOf('</footer>', footerAt))),
-      route + ' must place shared navigation before the article landmark');
+      route + ' must place shared navigation before the article and use the global footer landmark');
     assert.equal((html.match(/<main\b/g) || []).length, 1, route + ' must have one main landmark');
     assert.equal((html.match(/<nav class="site-chrome /g) || []).length, 1,
       route + ' must retain one desktop rail');

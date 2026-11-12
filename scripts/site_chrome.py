@@ -501,10 +501,10 @@ def ensure_footer_resources(html, path):
     assert match, "Missing standalone footer: " + path
     original_footer = match.group(0)
     footer = original_footer
-    # These two editorial pages already place their footer outside <main>,
-    # but previously retained private footer typography. Reuse the same
-    # global contentinfo styling as native Research, Games and references.
-    if path in ("whats-new.html", "catalog-review.html"):
+    # The two editorial and two native directory pages already keep the
+    # footer outside <main>. Give them one global footer component,
+    # preserving their existing policy links and source-specific caveats.
+    if path in ("whats-new.html", "catalog-review.html", "technologies.html", "playbooks.html"):
         if footer.startswith("<footer>"):
             footer = footer.replace("<footer>", '<footer class="site-chrome__footer">', 1)
         else:

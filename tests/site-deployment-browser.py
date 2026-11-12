@@ -135,6 +135,40 @@ with sync_playwright() as p:
                 if scheme == 'dark' and width == 1280 and route in ('about.html', 'hardware-review.html'):
                     reading_page.screenshot(path=str(out / ('longform-' + route.split('.')[0] + '-1280-dark.png')))
         reading_ctx.close()
+    # The static technology and playbook directories used to keep separate
+    # narrow footer treatments even after moving outside their article main.
+    # Confirm the shared global component is a true contentinfo landmark in
+    # both themes, with and without scripts, at the four reference widths.
+    for scheme in ('light', 'dark'):
+        shared_footer_context = browser.new_context(
+            java_script_enabled=False, color_scheme=scheme, reduced_motion='reduce')
+        shared_footer_page = shared_footer_context.new_page()
+        for width in (320, 390, 768, 1280):
+            shared_footer_page.set_viewport_size({'width':width, 'height':844})
+            for route in ('technologies.html', 'playbooks.html'):
+                shared_footer_page.goto(base + route)
+                footer = shared_footer_page.locator('footer.site-chrome__footer')
+                check('native directory uses shared global contentinfo footer ' +
+                      route + ' ' + scheme + ' ' + str(width),
+                      footer.count() == 1 and footer.is_visible()
+                      and shared_footer_page.get_by_role('contentinfo').count() == 1
+                      and shared_footer_page.locator('main footer').count() == 0
+                      and footer.locator('a[href="about.html"]').count() == 1
+                      and footer.locator('a[href="index.html#/sources"]').count() == 1
+                      and footer.evaluate("""el => {
+                          const s = getComputedStyle(el), r = el.getBoundingClientRect();
+                          return s.borderTopStyle === 'solid' && s.fontSize === '13px'
+                              && r.width > 0 && r.left >= -1
+                              && r.right <= innerWidth + 1;
+                      }""")
+                      and shared_footer_page.evaluate(
+                          'document.documentElement.scrollWidth <= innerWidth + 1'))
+                if scheme == 'dark' and width in (390, 1280):
+                    footer.scroll_into_view_if_needed()
+                    shared_footer_page.screenshot(path=str(
+                        out / ('shared-footer-' + route.split('.')[0] + '-' +
+                               str(width) + '-dark.png')))
+        shared_footer_context.close()
     # Compare Discover's existing global footer treatment against real concept
     # and technology profiles across breakpoints and both themes. The 1,345
     # concept HTML assets remain hash-identical; the shared runtime moves the
