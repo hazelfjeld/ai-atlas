@@ -299,7 +299,7 @@
       "published_at": "2026-11-12T14:31:18.335Z"
     }
   ],
-  "last_successful_publish_at": "2026-11-11T16:49:15Z",
-  "status": "edition_revision_1_pending_production_verification",
-  "coverage_note": "November 12 revision 1 is awaiting production verification: seven attributed news reports (four Nov 11–12; three Nov 9–10 catch-up), four deferred technology and two deferred term proposals. Partial source coverage and one failed arXiv API query are disclosed; last successful verification remains November 11 until new release checks pass."
+  "last_successful_publish_at": "2026-11-12T14:46:49Z",
+  "status": "edition_revision_1_production_verified",
+  "coverage_note": "November 12 revision 1 passed Cloudflare production HTTP/hosted browser and GitHack/catalog checks on e7baa124 (November 12, 14:46:49 UTC): seven qualified reports, four deferred technologies, two deferred terminology proposals, one inaccessible arXiv API, and partial source coverage. Direct separate opening of the dated query permalink was unavailable."
 }

@@ -1043,7 +1043,7 @@
       "edition_date": "2026-11-12",
       "validation_result": "batch_sha256_bytes_schema_unique_ids_dates_verified_publisher_source_review_7_stories",
       "status": "partially_published_with_6_deferred_catalog_proposals",
-      "publication_outcome": "immutable_revision_1_pending_production_verification",
+      "publication_outcome": "immutable_revision_1_cloudflare_http_browser_and_githack_verified",
       "publication_edition": "2026-11-12-v1",
       "accepted_news_ids": [
         "ai-news-alibaba-qwen4-max-preview-20261111",
@@ -1073,15 +1073,26 @@
         "catalog_deferred": 6,
         "technology_updated": 0
       },
-      "review_notes": "Publisher opened and independently checked seven material sources (official docs/releases and Reuters reporting) and retained all caveats. Four technology and two term proposals are deferred rather than presented as permanent additions. The collector reports partial source coverage and an inaccessible arXiv API endpoint. Public deployment pending independent CI/HTTP/browser verification. Pre-publication validation caught disallowed colon separators in the collector IDs; published news IDs use the reader's safe hyphenated stable-ID syntax, with raw batch provenance retained.",
+      "review_notes": "Publisher opened and independently checked seven material sources (official docs/releases and Reuters reporting) and retained all caveats. Four technology and two term proposals are deferred rather than presented as permanent additions. The collector reports partial source coverage and an inaccessible arXiv API endpoint. Public deployment pending independent CI/HTTP/browser verification. Pre-publication validation caught disallowed colon separators in the collector IDs; published news IDs use the reader's safe hyphenated stable-ID syntax, with raw batch provenance retained. Deployment production HTTP/browser and GitHack checks passed at exact commit e7baa124 on November 12, 14:46:49 UTC.",
       "publication_history": [
         {
           "edition": "2026-11-12-v1",
-          "status": "pending_production_verification",
-          "note": "Staging batch independently checksummed and seven qualified news records prepared; publisher CI and live asset verification pending.",
-          "production_commit": null
+          "status": "cloudflare_http_browser_and_githack_verified",
+          "note": "Exact production release e7baa12491b687c4a020a1413df860219248ebba passed full Cloudflare validation/hosted browser/production asset checks and GitHack/catalog verification. Direct external reopening of the query permalink was unavailable.",
+          "verified_at": "2026-11-12T14:46:49Z",
+          "production_commit": "e7baa12491b687c4a020a1413df860219248ebba",
+          "production_workflow_run_id": 43238510659,
+          "githack_workflow_run_id": 43238510781
         }
-      ]
+      ],
+      "production_verified_at": "2026-11-12T14:46:49Z",
+      "production_verified_revision": 1,
+      "last_verified_at": "2026-11-12T14:46:49Z",
+      "last_verified_public_url": "https://aiupdates.app/whats-new.html?date=2026-11-12&revision=1",
+      "production_commit": "e7baa12491b687c4a020a1413df860219248ebba",
+      "production_workflow_run_id": 43238510659,
+      "githack_workflow_run_id": 43238510781,
+      "verification_scope": "Exact main e7baa12491b687c4a020a1413df860219248ebba passed Cloudflare validate, reproducibility, local hosted-browser and production HTTP/browser checks in workflow 43238510659, completed 2026-11-12T14:46:49Z. Catalog and GitHack workflow 43238510781 passed on the same commit. Direct independent reopening of the exact dated query permalink was not possible in this run."
     }
   ]
 }
