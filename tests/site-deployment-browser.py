@@ -2618,6 +2618,39 @@ with sync_playwright() as p:
               and live_page.locator('section.site-static-fallback').count()==0)
         live_page.close()
 
+    # A keyboard skip on mobile must land below the same shared sticky header
+    # on Discover, news, article, Games and generated reference routes. Verify
+    # real no-JavaScript navigation at both phone widths in both OS themes.
+    for scheme in ('light', 'dark'):
+        skip_context = browser.new_context(java_script_enabled=False, color_scheme=scheme,
+                                           reduced_motion='reduce')
+        skip_page = skip_context.new_page(viewport={'width':390, 'height':844})
+        for width in (320, 390):
+            skip_page.set_viewport_size({'width':width, 'height':844})
+            skip_page.goto(base + 'index.html')
+            for route in (
+                'index.html', 'whats-new.html', 'research.html', 'games.html',
+                'terms/MLD-0001-a-b-test.html',
+                'technology/TECH-0001-adversarial-robustness-toolbox.html'
+            ):
+                skip_page.goto(base + route)
+                native_skip = skip_page.locator('a[href="#main"]').first
+                native_skip.focus()
+                skip_page.keyboard.press('Enter')
+                skip_page.wait_for_function('window.location.hash === "#main"')
+                geometry = skip_page.locator('#main').evaluate("""el => {
+                    const topbar=document.querySelector('.site-mobile-chrome');
+                    return {top:el.getBoundingClientRect().top,
+                            bottom:topbar?.getBoundingClientRect().bottom,
+                            margin:getComputedStyle(el).scrollMarginTop};
+                }""")
+                check('Skip clears sticky header '+route+' '+scheme+' '+str(width),
+                      geometry['margin']=='80px' and geometry['bottom'] is not None
+                      and geometry['top']>=geometry['bottom']-2)
+                if width==390 and route in ('whats-new.html','research.html'):
+                    skip_page.screenshot(path=str(out/('skip-'+route.split('.')[0]+'-'+scheme+'.png')))
+        skip_context.close()
+
     check('no application runtime exceptions', not errors)
     browser.close()
 (out / 'report.json').write_text(json.dumps({'base':base, 'checks':checks, 'checks_passed':len(checks), 'errors':errors}, indent=2), encoding='utf-8')

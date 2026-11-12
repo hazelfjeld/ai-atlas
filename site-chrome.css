@@ -988,3 +988,13 @@ main:has(+ .site-chrome__footer){padding-bottom:24px}
    paint; when enhanced, the identical nodes use .site-chrome__footer above. */
 main.term-shell > footer:not(.site-chrome__footer){box-sizing:border-box;width:100%;margin:28px auto 0;padding:18px 0 0;border-top:1px solid var(--line,#dce1d7);color:var(--muted,#627067);font-size:13px;line-height:1.65;overflow-wrap:anywhere}
 main.term-shell > footer:not(.site-chrome__footer) a{color:var(--accent,#27664e)}
+
+/* atlas-mobile-skip-clearance:begin */
+/* Every native "Skip to content" link resolves to #main. On phones the shared
+   68px menu/search header remains sticky; without a scroll offset it can cover
+   the destination heading after Enter or a deep link. Reserve that clearance
+   in the shared stylesheet, including when JavaScript is disabled. */
+@media(max-width:650px){
+  #main{scroll-margin-top:80px}
+}
+/* atlas-mobile-skip-clearance:end */
