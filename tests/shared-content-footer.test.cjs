@@ -41,7 +41,7 @@ test('all migrated footers share one responsive light/dark reading-column treatm
 
 test('all 303 generated technology profiles use the shared global footer landmark', () => {
   const generator = fs.readFileSync(path.join(root, 'scripts/site_chrome.py'), 'utf8');
-  assert.match(generator, /if path in REFERENCE_LANDING_PATHS or is_tech_detail or expanded_concept:/);
+  assert.match(generator, /if path in REFERENCE_LANDING_PATHS or is_tech_detail or is_concept_detail:/);
   const directory = path.join(root, 'technology');
   const files = fs.readdirSync(directory).filter(name => /^TECH-\d+-.+\.html$/.test(name));
   assert.equal(files.length, 303, 'canonical published technology profile count');
@@ -77,8 +77,8 @@ test('reference-depth concepts expose the same native global footer as expanded 
     const endMain = html.indexOf('</main>', main);
     const footer = html.indexOf('<footer class="site-chrome__footer">');
     assert.ok(main > 0 && endMain > main && footer > endMain, entry.path + ': footer is global without scripts');
-    assert.equal((html.match(/<main\\b/g) || []).length, 1, entry.path + ': one main');
-    assert.equal((html.match(/<footer\\b/g) || []).length, 1, entry.path + ': one footer');
+    assert.equal((html.match(/<main\b/g) || []).length, 1, entry.path + ': one main');
+    assert.equal((html.match(/<footer\b/g) || []).length, 1, entry.path + ': one footer');
     assert.ok(html.includes('href="../about.html"') && html.includes('href="../index.html#/sources"'),
       entry.path + ': existing policy and evidence links');
     assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'), entry.sha256,

@@ -105,6 +105,8 @@ def main():
         citations = [s for s in refs if s['id'] in r['source_ids']]
         body += section('Original references', '<ul>' + ''.join('<li>' + external(s['url'], s['title']) + ' · ' + e(s['review_status']) + '</li>' for s in citations) + '<li>' + external(r['reference_url'], 'Original reference URL') + '</li></ul>')
         body += f'<p><a href="../index.html#/dictionary?record={quote(r["id"])}">Open original record, export or annotate →</a></p>'
+        # The expanded flag describes editorial depth, not footer placement;
+        # every existing concept now uses the shared global contentinfo.
         path = term_path(r)
         structured = [{'@context':'https://schema.org', '@type':'DefinedTerm', '@id':absolute(path)+'#term', 'name':r['term'], 'termCode':r['id'], 'description':r['definition'], 'url':absolute(path), 'inDefinedTermSet':{'@type':'DefinedTermSet', 'name':'AI Updates Concept Dictionary', 'url':absolute('terms/index.html')}}, breadcrumbs([('AI Updates','index.html'), ('Concept dictionary','terms/index.html'), (r['term'],path)])]
         blob = shell(r['term'], body, path, (r['term'] + ': ' + r['definition'])[:170], structured, native_concept_article=True, expanded_concept=bool(guide)).encode('utf-8')
