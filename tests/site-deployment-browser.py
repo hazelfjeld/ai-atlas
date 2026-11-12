@@ -197,6 +197,7 @@ with sync_playwright() as p:
                   and footer_page.locator('body > footer a[href="../about.html"]').count() == 1
                   and footer_page.locator('body > footer a[href="../index.html#/sources"]').count() == 1
                   and concept_style == technology_style
+                  and concept_style['font'] == '13px'
                   and footer_page.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'))
             if scheme == 'dark' and width in (390, 1280):
                 concept.scroll_into_view_if_needed()
@@ -230,7 +231,7 @@ with sync_playwright() as p:
                   and footer.locator('a[href="../about.html"]').count() == 1
                   and footer.locator('a[href="../index.html#/sources"]').count() == 1
                   and footer.evaluate("""el => {const s=getComputedStyle(el);
-                      return s.fontSize==='11px' && s.borderTopStyle==='solid' &&
+                      return s.fontSize==='13px' && s.borderTopStyle==='solid' &&
                           s.color!=='' && el.getBoundingClientRect().width > 0;}""")
                   and scriptless_page.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'))
         scriptless_ctx.close()
