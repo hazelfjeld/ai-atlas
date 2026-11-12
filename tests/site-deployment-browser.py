@@ -219,12 +219,14 @@ with sync_playwright() as p:
     for scheme in ('light','dark'):
         scriptless_ctx = browser.new_context(java_script_enabled=False, color_scheme=scheme)
         scriptless_page = scriptless_ctx.new_page()
-        for width in (320, 1280):
+        for width in (320, 390, 768, 1280):
             scriptless_page.set_viewport_size({'width':width,'height':844})
             scriptless_page.goto(base+'terms/MLD-0001-a-b-test.html')
-            footer = scriptless_page.locator('main.term-shell > footer')
-            check('script-free concept retains styled policy and source links '+scheme+' '+str(width),
+            footer = scriptless_page.locator('body > footer.site-chrome__footer')
+            check('script-free concept exposes global contentinfo with styled policy and source links '+scheme+' '+str(width),
                   footer.count() == 1
+                  and scriptless_page.get_by_role('contentinfo').count() == 1
+                  and scriptless_page.locator('main.term-shell > footer').count() == 0
                   and footer.locator('a[href="../about.html"]').count() == 1
                   and footer.locator('a[href="../index.html#/sources"]').count() == 1
                   and footer.evaluate("""el => {const s=getComputedStyle(el);
