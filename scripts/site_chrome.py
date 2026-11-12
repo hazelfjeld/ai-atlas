@@ -132,6 +132,13 @@ def wrap_reference_shell(nav, content, path, main_id):
             assert content.count('<header class="hero" id="main" tabindex="-1">') == 1, path
         else:
             assert content.startswith('<header class="hero" id="main" tabindex="-1">'), path
+        if path in REFERENCE_LANDING_PATHS:
+            # These outer site footers are global contentinfo landmarks, not
+            # part of the directory/About article. Keep detail pages unchanged.
+            assert content.count('<footer>') == 1 and content.endswith('</footer>'), path
+            article, footer_tail = content.rsplit('<footer>', 1)
+            return (nav + '<main class="term-shell">' + article + '</main>'
+                    + '<footer class="site-chrome__footer">' + footer_tail)
         return nav + '<main class="term-shell">' + content + '</main>'
     return '<main class="term-shell"' + main_id + '>' + nav + content + '</main>'
 
