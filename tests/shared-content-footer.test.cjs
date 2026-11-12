@@ -15,8 +15,8 @@ test('three native page families expose a global footer outside their article la
     const footerStart = html.indexOf('<footer class="site-chrome__footer">');
     const footerEnd = html.indexOf('</footer>');
     assert.ok(mainStart >= 0 && mainEnd > mainStart, page + ': main');
-    assert.equal((html.match(/<main\\b/g) || []).length, 1, page + ': one main');
-    assert.equal((html.match(/<footer\\b/g) || []).length, 1, page + ': one footer');
+    assert.equal((html.match(/<main\b/g) || []).length, 1, page + ': one main');
+    assert.equal((html.match(/<footer\b/g) || []).length, 1, page + ': one footer');
     assert.ok(footerStart > mainEnd && footerEnd > footerStart, page + ': global contentinfo');
     assert.ok(footerEnd < html.indexOf('</body>'), page + ': footer retained in body');
     assert.ok(html.includes('href="about.html"'), page + ': editorial policy link');

@@ -40,10 +40,11 @@ test('Guided demo and hardware evidence use Discover\'s sibling navigation landm
     const railEnd = html.indexOf('</nav>', rail) + '</nav>'.length;
     const main = html.indexOf(mainTag);
     const article = html.indexOf('<header id="main" tabindex="-1">', main);
-    const footer = html.indexOf('<footer>', article);
+    const footer = html.indexOf('<footer class="site-chrome__footer">', main);
     const mainEnd = html.indexOf('</main>', main);
     assert.ok(mobile > 0 && mobile < rail && rail < railEnd && railEnd < main &&
-      main < article && article < footer && footer < mainEnd,
+      main < article && article < mainEnd && mainEnd < footer &&
+      footer < html.indexOf('</body>') && html.indexOf('</footer>', footer) < html.indexOf('</body>'),
       route + ' must separate the native navigation from the article landmark');
     assert.equal((html.match(/<main\b/g) || []).length, 1, route + ' must retain one main');
     assert.equal((html.match(/<nav class="site-chrome /g) || []).length, 1, route + ' must retain one desktop rail');
