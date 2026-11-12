@@ -418,7 +418,7 @@ test('script-free daily archive and catalog review skip links focus the editoria
 
 test('About and both A-Z landing pages separate shared navigation from the main landmark', () => {
   const shared = fs.readFileSync(path.join(__dirname, '..', 'scripts/site_chrome.py'), 'utf8');
-  assert.ok(shared.includes('def wrap_reference_shell(nav, content, path, main_id):'));
+  assert.ok(shared.includes('def wrap_reference_shell(nav, content, path, main_id, *, expanded_concept=False):'));
   for (const route of ['about.html', 'terms/index.html', 'technology/index.html']) {
     const html = fs.readFileSync(path.join(__dirname, '..', route), 'utf8');
     const desktop = html.indexOf('<nav class="site-chrome term-nav"');
