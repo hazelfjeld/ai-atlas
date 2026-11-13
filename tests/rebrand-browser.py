@@ -739,7 +739,7 @@ with sync_playwright() as p:
                 check(f'{route} {width}px {theme} slash focuses live search without leaving',
                       page.locator('.site-mobile-chrome__search-input').is_visible()
                       and page.evaluate("document.activeElement?.classList.contains('site-mobile-chrome__search-input') === true")
-                      and page.evaluate("location.pathname.endsWith('/'+arguments[0])", route)
+                      and page.evaluate("(r) => location.pathname.endsWith('/'+r)", route)
                       and page.evaluate("document.documentElement.dataset.theme") == theme
                       and page.evaluate("sessionStorage.getItem('atlas.searchShortcutPending') === null"))
                 if (width,theme,route)==(390,'dark','about.html'):
