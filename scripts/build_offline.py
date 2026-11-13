@@ -37,6 +37,17 @@ def main():
     # the downloaded single-file HTML (which otherwise produces a file:// 404).
     html = html.replace('href="whats-new.html"',
                         'href="https://aiupdates.app/whats-new.html" title="Online daily archive; internet required"')
+    # Keep the downloaded file recognizably Atlas even when it sits outside the
+    # site tree. A relative favicon otherwise resolves beside the file and fails.
+    import base64
+    favicon = base64.b64encode((ROOT / 'favicon.svg').read_bytes()).decode('ascii')
+    html = html.replace('href="favicon.svg" type="image/svg+xml"',
+                        f'href="data:image/svg+xml;base64,{favicon}" type="image/svg+xml"')
+    # This file is already the offline demo. A fresh copy can be downloaded
+    # from the real hosted address; never link to a nonexistent local downloads/
+    # directory beside the single HTML file.
+    html = html.replace('href="downloads/Atlas_Demo_Offline.html" download',
+                        'href="https://aiupdates.app/downloads/Atlas_Demo_Offline.html" download title="Online re-download; internet required"')
     # Discover's featured story and reference cards use hosted detail URLs.
     # Inside a single downloaded HTML file, these resolve beneath downloads/
     # and fail offline. Reuse the already bundled catalog record-dialog routes

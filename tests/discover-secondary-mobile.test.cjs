@@ -111,3 +111,17 @@ test('offline Discover story cards open their bundled catalog records, not missi
   assert.doesNotMatch(offline, /href="(?:terms|technology)\//,
     'a downloaded HTML file must not navigate to nonexistent downloaded detail pages');
 });
+
+test('single-file chrome bundles its favicon and does not offer broken local re-download links', () => {
+  const favicon = fs.readFileSync(path.join(root, 'favicon.svg')).toString('base64');
+  const icon = 'href="data:image/svg+xml;base64,' + favicon + '" type="image/svg+xml"';
+  assert.equal(offline.split(icon).length - 1, 1,
+    'the original site mark must resolve in a downloaded standalone file');
+  assert.equal(offline.includes('href="favicon.svg"'), false,
+    'a downloaded file has no sibling favicon.svg');
+  const redownload = 'href="https://aiupdates.app/downloads/Atlas_Demo_Offline.html" download title="Online re-download; internet required"';
+  assert.equal(offline.split(redownload).length - 1, 2,
+    'desktop and mobile secondary navigation must be honest about needing internet');
+  assert.equal(offline.includes('href="downloads/Atlas_Demo_Offline.html"'), false,
+    'a downloaded file has no nested downloads directory');
+});
