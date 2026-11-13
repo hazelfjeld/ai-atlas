@@ -190,6 +190,16 @@ html[data-theme=dark] .atlas-games{color-scheme:dark;--paper:#141c19;--panel:#1b
 @media(prefers-reduced-motion:reduce){.atlas-games .flip-card-inner{transition:none}}
 @media(max-width:360px){.atlas-games .masthead nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px;width:100%}
 .atlas-games .masthead nav a{display:flex;align-items:center;min-height:44px;min-width:0;padding:9px 10px}}
+@media(max-width:600px){.atlas-games .hero{display:block;min-width:0}
+.atlas-games .hero > div:first-child{min-width:0}
+.atlas-games .hero .catalog-badge{
+    box-sizing:border-box;display:flex;flex-direction:row;flex-wrap:wrap;
+    align-items:baseline;gap:2px 10px;min-width:0;width:100%;
+    margin:20px 0 0;padding:13px 0 0;border-left:0;border-top:1px solid var(--line)
+  }
+.atlas-games .hero .catalog-badge strong{font-size:29px;line-height:1.1}
+.atlas-games .hero .catalog-badge span{font-size:12px}
+.atlas-games .hero .catalog-badge small{flex:0 0 100%;margin-top:0;font-size:11px}}
 /* The Atlas shell, global theme switch and navigation remain untouched. */
 .atlas-games{max-width:none;padding:0;margin:0;background:transparent;min-width:0}
 .atlas-games.is-playing{padding:0}
