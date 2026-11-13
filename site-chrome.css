@@ -650,6 +650,15 @@ body:has(.site-chrome) :is(.tech-controls,.playbook-tools,.controls,.search-cont
 /* Live native search uses Discover's same field within the existing shared
    topbar; without scripts the original working search link remains visible. */
 .site-mobile-chrome__search-form{margin:0;box-sizing:border-box}
+/* The live search submit is 36px high. The inherited 8px block padding
+   made the form 54px (36 + 16 + 2px border), 10px taller than the native
+   44px menu toggle. Keep the actual submit control, but restore the shared
+   44px row and its aligned menu/search top edges on every mobile template. */
+@media (max-width:650px){
+  body:has(.site-chrome) .site-mobile-chrome__search.site-mobile-chrome__search-form{
+    padding-block:3px;
+  }
+}
 .site-mobile-chrome__search-form .site-mobile-chrome__search-input{
   flex:1 1 auto;min-width:0;width:0;margin:0;padding:0;border:0;outline:0;
   border-radius:0;background:transparent;color:var(--ink,#202b28);

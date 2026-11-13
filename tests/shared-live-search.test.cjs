@@ -22,6 +22,14 @@ test('one progressive search component preserves every native no-JavaScript rout
   }
 });
 
+test('live native search stays level with the 44px mobile menu without shrinking submit', () => {
+  const css=read('site-chrome.css');
+  assert.match(css,/\.site-mobile-chrome__search-submit\s*\{[^}]*min-height:36px/s);
+  assert.match(css,/body:has\(\.site-chrome\) \.site-mobile-chrome__search\.site-mobile-chrome__search-form\s*\{\s*padding-block:3px;/);
+  // 36px button + 3px top/bottom + 1px border top/bottom = 44px.
+  // Full browser integration also checks top-edge alignment on review pages.
+});
+
 test('shared search styling and single-file demo reproduce the exact sources', () => {
   const css=read('site-chrome.css'),script=read('site-theme.js');
   assert.match(css,/\.site-mobile-chrome__search-form:focus-within/);
