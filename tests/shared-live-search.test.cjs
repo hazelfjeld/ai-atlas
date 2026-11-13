@@ -26,6 +26,9 @@ test('live native search stays level with the 44px mobile menu without shrinking
   const css=read('site-chrome.css');
   assert.match(css,/\.site-mobile-chrome__search-submit\s*\{[^}]*min-height:36px/s);
   assert.match(css,/body:has\(\.site-chrome\) \.site-mobile-chrome__search\.site-mobile-chrome__search-form\s*\{\s*padding-block:3px;/);
+  // Older hardware review loads checkpoint.css, whose generic input min-height
+  // would otherwise expand the shared live field past the 44px header row.
+  assert.match(css,/\.site-mobile-chrome__search-form \.site-mobile-chrome__search-input\s*\{[^}]*min-height:0;/s);
   // 36px button + 3px top/bottom + 1px border top/bottom = 44px.
   // Full browser integration also checks top-edge alignment on review pages.
 });
