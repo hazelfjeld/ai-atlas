@@ -92,3 +92,22 @@ test('single-file navigation resolves the real daily archive rather than a nonex
   assert.match(offline, /id="global-search" role="search"/, 'offline keeps its functional local search form');
   assert.match(offline, /href="#\/games"/, 'offline games still point to the real local route');
 });
+
+test('offline Discover story cards open their bundled catalog records, not missing downloaded siblings', () => {
+  const discover = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+  const generator = fs.readFileSync(path.join(root, 'scripts/build_offline.py'), 'utf8');
+  assert.match(generator, /def local_record_link\(match\):/);
+  const hostedLinks = [...discover.matchAll(/href="(terms|technology)\/((?:MLD|TECH)-[0-9]{4})-[^"]+\.html"/g)];
+  assert.ok(hostedLinks.length >= 7, 'Discover retains its human-readable featured record links');
+  const counts = new Map();
+  for (const [, family, recordId] of hostedLinks) {
+    const route = '#/' + (family === 'terms' ? 'dictionary' : 'technologies') + '?record=' + recordId;
+    counts.set(route, (counts.get(route) || 0) + 1);
+  }
+  for (const [route, count] of counts) {
+    assert.equal(offline.split('href="' + route + '"').length - 1, count,
+      'offline cards route to the existing local dialog: ' + route);
+  }
+  assert.doesNotMatch(offline, /href="(?:terms|technology)\//,
+    'a downloaded HTML file must not navigate to nonexistent downloaded detail pages');
+});

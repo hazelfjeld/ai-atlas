@@ -37,6 +37,27 @@ def main():
     # the downloaded single-file HTML (which otherwise produces a file:// 404).
     html = html.replace('href="whats-new.html"',
                         'href="https://aiupdates.app/whats-new.html" title="Online daily archive; internet required"')
+    # Discover's featured story and reference cards use hosted detail URLs.
+    # Inside a single downloaded HTML file, these resolve beneath downloads/
+    # and fail offline. Reuse the already bundled catalog record-dialog routes
+    # instead of making an internet request or creating another detail page.
+    import re
+    offline_records = {
+        'terms': {record['id'] for record in data['terms']},
+        'technology': {record['id'] for record in data['technologies']},
+    }
+
+    def local_record_link(match):
+        kind, record_id = match.groups()
+        if record_id not in offline_records[kind]:
+            raise ValueError(f'Unbundled Discover record link: {kind}/{record_id}')
+        section = 'dictionary' if kind == 'terms' else 'technologies'
+        return f'href="#/{section}?record={record_id}"'
+
+    html = re.sub(
+        r'href="(terms|technology)/((?:MLD|TECH)-[0-9]{4})-[^"]+\.html"',
+        local_record_link, html,
+    )
     html = html.replace('<meta name="robots" content="index,follow,max-image-preview:large">', '<meta name="robots" content="noindex,follow">')
     (ROOT / 'downloads/Atlas_Demo_Offline.html').write_bytes(html.encode('utf-8'))
     print('Built downloads/Atlas_Demo_Offline.html from the complete catalog.')
