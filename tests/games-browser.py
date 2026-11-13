@@ -84,7 +84,16 @@ with sync_playwright() as p:
         if n<5: check(f'pair disappears {n+1}',not page.locator(f'[data-key="{id}:term"]').is_visible())
     check('match completed','Board cleared' in page.locator('#round-title').inner_text());check('one second penalty in final score','1.0s penalties' in page.locator('.result-panel').inner_text());check('all matched concepts linked',page.locator('.review-item a').count()==6)
     page.locator('[data-action=match-again]').click();page.locator('.tile').first.click();check('fresh board resets selection and score','0 / 6' in page.locator('#pairs-count').inner_text());page.locator('[data-action=menu]').click()
+    def games_hero_is_stacked():
+        return page.locator('.hero').evaluate("""hero => {
+            const heading=hero.firstElementChild.getBoundingClientRect();
+            const badge=hero.querySelector('.catalog-badge').getBoundingClientRect();
+            const area=hero.getBoundingClientRect();
+            return heading.width>=area.width-2 && badge.width>=area.width-2 &&
+                badge.top>=heading.bottom-1;
+        }""")
     page.set_viewport_size({'width':390,'height':844});page.screenshot(path=str(out/'games-mobile.png'),full_page=True);check('mobile setup has no horizontal overflow',page.evaluate('document.documentElement.scrollWidth <= innerWidth'))
+    check('390px Games heading and dictionary count use the full mobile reading width',games_hero_is_stacked())
     page.locator('#start-match').click();page.screenshot(path=str(out/'match-mobile.png'),full_page=True);check('mobile match has no horizontal overflow',page.evaluate('document.documentElement.scrollWidth <= innerWidth'));check('mobile full definitions untruncated',page.locator('.tile').evaluate_all('(els)=>els.every(el=>el.scrollHeight<=el.clientHeight+1)'))
     page.locator('[data-action=menu]').click()
     if args.fixture:
@@ -100,6 +109,7 @@ with sync_playwright() as p:
     # navigation now reveals all seven canonical sections via a native details
     # menu; validate the actual rendered controls rather than the removed nav.
     page.set_viewport_size({'width':320,'height':700})
+    check('320px Games introduction stays full-width instead of two squeezed columns',games_hero_is_stacked())
     for palette in ('dark','light'):
         if page.locator('html').get_attribute('data-theme') != palette:
             if args.fixture:
