@@ -874,6 +874,15 @@ with sync_playwright() as p:
     # Discover. Standalone articles previously had no way to change themes.
     theme_page.set_viewport_size({'width':1280, 'height':844})
     theme_page.goto(base + 'about.html')
+    rail_search = theme_page.locator('.site-chrome > .site-chrome__search')
+    check('native desktop rail offers one real Discover search destination',
+          rail_search.count() == 1 and rail_search.is_visible() and
+          rail_search.get_attribute('href') == 'index.html#/search')
+    rail_search.click()
+    theme_page.locator('#catalog-loading').wait_for(state='detached')
+    check('desktop native search click focuses the functional Discover input',
+          theme_page.evaluate("document.activeElement?.id === 'global-query' && location.hash.startsWith('#/search')"))
+    theme_page.goto(base + 'about.html')
     rail_theme = theme_page.locator('.site-chrome > .site-chrome__theme-toggle')
     check('editorial desktop rail exposes the existing theme action',
           rail_theme.is_visible() and

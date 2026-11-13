@@ -100,6 +100,20 @@ body:has(.site-chrome){padding-left:224px}
  display:flex;flex:0 0 auto;flex-direction:column;align-items:stretch;
  justify-content:flex-start;flex-wrap:nowrap;gap:4px;width:100%;min-width:0
 }
+/* The real Discover search remains in its workspace topbar. Native desktop
+   rails reuse the identical search destination already present on mobile. */
+.site-chrome__search{
+  display:flex;align-items:center;gap:9px;min-width:0;min-height:44px;
+  padding:9px 11px;border:1px solid #405043;border-radius:8px;
+  color:#c5cfc6;background:#ffffff0c;text-decoration:none;
+  font-size:12px;font-weight:550;line-height:1.3
+}
+.site-chrome__search .site-mobile-chrome__search-icon{flex:none;font-size:20px;line-height:1;color:#edbb87}
+.site-chrome__search .site-mobile-chrome__search-placeholder{
+  min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis
+}
+.site-chrome__search:hover{background:#ffffff13;border-color:#708b77;color:#fff}
+.site-chrome__search:focus-visible{outline:3px solid #edbb87;outline-offset:3px}
 /* Discover's section heading and baseline are part of the same rail chrome. */
 .site-chrome .site-chrome__links::before{content:"EXPLORE";display:block;margin:0 13px 5px;font-size:10px;font-weight:700;letter-spacing:.13em;color:#87998b}
 .site-chrome .site-chrome__links a{
