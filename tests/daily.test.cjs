@@ -1758,5 +1758,5 @@ test('November 13 edition has a durable receipt, verified bytes and accessible n
  assert.equal(r.deferred_catalog_proposal_ids.length,8);
  assert.equal(idx.status,'edition_revision_1_'+(r.production_verified_at?'production_verified':'pending_production_verification'));
  assert.equal(idx.last_successful_publish_at,verifiedPublicationClock());
- assert.match(fs.readFileSync('whats-new.html','utf8'),/data\\/daily\\/editions\\/2026-11-13-v1\\.json/);
+ assert.ok(fs.readFileSync('whats-new.html','utf8').includes('data/daily/editions/2026-11-13-v1.json'));
 });
