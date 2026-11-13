@@ -7,6 +7,17 @@ function verifiedPublicationClock(){
  const receipts=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8')).receipts;
  return [...receipts].reverse().find(r=>r.production_verified_at)?.production_verified_at || null;
 }
+function assertNoScriptArchiveDiscovery(index,path){
+ const html=fs.readFileSync('whats-new.html','utf8');
+ const start=html.indexOf('id="scriptfree-daily-archive"');
+ const end=html.indexOf('</section></noscript>',start);
+ assert.ok(start>0&&end>start,'No-script archive remains present');
+ const block=html.slice(start,end);
+ assert.ok(block.includes('href="data/daily/index.json"'),'Every archived revision remains discoverable in the persistent register');
+ const newest=[...new Map(index.editions.map(e=>[e.date,e])).values()].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,3).map(e=>e.path);
+ assert.ok(index.editions.some(e=>e.path===path),'Historical archive path must remain indexed');
+ if(newest.includes(path))assert.ok(block.includes('href="'+path+'"'),'Recent edition needs a direct no-script shortcut');
+}
 function assertBatchReceipts(ledger){
  const ids=ledger.receipts.map(r=>r.batch_id);
  assert.equal(new Set(ids).size,ids.length,'No duplicate immutable collector batch');
@@ -1683,9 +1694,7 @@ test('November 10 edition checks collector hashes, review scope, and newest scri
  assert.ok(e.news.every(n=>n.review_status.startsWith('publisher_checked_')&&n.caveat&&n.source_url.startsWith('https://')));
  assert.deepEqual([e.technologies.length,e.terms.length,e.corrections.length,receipt.counts.catalog_deferred],[0,0,0,6]);
  assert.equal(receipt.deferred_catalog_proposal_ids.length,6);
- const html=fs.readFileSync('whats-new.html','utf8');
- const start=html.indexOf('id="scriptfree-daily-archive"');
- assert.ok(start>0&&html.slice(start,start+2200).includes('data/daily/editions/2026-11-10-v1.json'));
+ assertNoScriptArchiveDiscovery(archive,entry.path);
  const last=ledger.receipts.at(-1), isVerified=!!last.production_verified_at;
  assert.equal(archive.status,'edition_revision_1_'+(isVerified?'production_verified':'pending_production_verification'));
  assert.equal(archive.last_successful_publish_at,verifiedPublicationClock());
@@ -1712,8 +1721,7 @@ test('November 11 daily edition has durable publisher receipt, source qualificat
  assert.deepEqual(edition.news.map(x=>x.id),r.accepted_news_ids);
  assert.equal(r.counts.catalog_deferred,8);
  assert.ok(r.publication_history.at(-1).status==='pending_production_verification'||r.publication_history.at(-1).status==='cloudflare_http_browser_and_githack_verified');
- const html=fs.readFileSync('whats-new.html','utf8');
- assert.ok(html.includes('href="'+ref.path+'"'),'The script-free daily archive includes the newest edition');
+ assertNoScriptArchiveDiscovery(idx,ref.path);
 });
 
 
@@ -1736,7 +1744,7 @@ test('November 12 staged editorial batch has a unique receipt, integrity-pinned 
  assert.equal(r.source_batch_sha256,'bac863d4b2f8f667cbe56fd382345b9af2b19cdca99a2a870bb4894ce18c9a6b');
  assert.equal(r.source_batch_bytes,31204);
  assert.ok(edition.news.every(n=>n.review_status.startsWith('publisher_checked_')&&n.caveat&&n.source_url.startsWith('https://')));
- assert.ok(fs.readFileSync('whats-new.html','utf8').includes('href="'+ref.path+'"'));
+ assertNoScriptArchiveDiscovery(idx,ref.path);
  assert.equal(idx.last_successful_publish_at,verifiedPublicationClock());
 });
 
@@ -1758,5 +1766,5 @@ test('November 13 edition has a durable receipt, verified bytes and accessible n
  assert.equal(r.deferred_catalog_proposal_ids.length,8);
  assert.equal(idx.status,'edition_revision_1_'+(r.production_verified_at?'production_verified':'pending_production_verification'));
  assert.equal(idx.last_successful_publish_at,verifiedPublicationClock());
- assert.ok(fs.readFileSync('whats-new.html','utf8').includes('data/daily/editions/2026-11-13-v1.json'));
+ assertNoScriptArchiveDiscovery(idx,e.path);
 });
