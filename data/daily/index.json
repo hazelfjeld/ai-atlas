@@ -307,7 +307,7 @@
       "published_at": "2026-11-13T14:40:42.355Z"
     }
   ],
-  "last_successful_publish_at": "2026-11-12T14:46:49Z",
-  "status": "edition_revision_1_pending_production_verification",
-  "coverage_note": "November 13 v1: ten source-qualified reports, one older catch-up report, five deferred technology and three deferred terminology proposals; partial collection with arXiv API failure. Deployment and production hosted-browser verification pending. Do not claim this edition is verified live until checks succeed."
+  "last_successful_publish_at": "2026-11-13T14:56:10Z",
+  "status": "edition_revision_1_production_verified",
+  "coverage_note": "November 13 revision 1 verified at 2026-11-13T14:56:10Z: ten source-qualified AI reports and immutable archive bytes passed Cloudflare hosted-browser, production HTTP/assets and GitHack/catalog checks at exact commit 222c2a0c. Five technology and three terminology proposals remain deferred; source collection was partial with an inaccessible arXiv metadata API. The exact date/revision query permalink was not independently reopened outside CI."
 }

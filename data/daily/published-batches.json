@@ -1103,8 +1103,8 @@
       "source_batch_bytes": 41239,
       "edition_date": "2026-11-13",
       "validation_result": "sha256_bytes_counts_unique_ids_dates_and_publisher_source_review",
-      "status": "partially_published_with_8_deferred_catalog_proposals_pending_production_verification",
-      "publication_outcome": "pending_cloudflare_http_browser_and_githack_verification",
+      "status": "partially_published_with_8_deferred_catalog_proposals",
+      "publication_outcome": "immutable_revision_1_cloudflare_http_browser_and_githack_verified",
       "publication_edition": "2026-11-13-v1",
       "accepted_news_ids": [
         "ai-news-google-gemini4-hydrogen-20261112",
@@ -1139,23 +1139,23 @@
         "catalog_deferred": 8,
         "technology_updated": 0
       },
-      "review_notes": "Publisher cross-checked original Google, NVIDIA and PyTorch releases, both Hugging Face announcements, the GitHub tagged release and Reuters reporting. Attribution, actual dated catch-up, legal allegations and corporate plans remain qualified. The collector's partial coverage and inaccessible arXiv metadata API are retained. Deployment has not yet been verified.",
-      "production_verified_at": null,
+      "review_notes": "Publisher cross-checked original Google, NVIDIA and PyTorch releases, both Hugging Face announcements, the GitHub tagged release and Reuters reporting. Attribution, actual dated catch-up, legal allegations and corporate plans remain qualified. The collector's partial coverage and inaccessible arXiv metadata API are retained. Deployment has not yet been verified. Exact main 222c2a0c was production/browser/GitHack-verified 2026-11-13T14:56:10Z; no additional content introduced during receipt certification.",
+      "production_verified_at": "2026-11-13T14:56:10Z",
       "publication_history": [
         {
           "edition": "2026-11-13-v1",
-          "status": "pending_production_verification",
-          "note": "GitHub source publication committed, public HTTP and hosted browsers pending.",
-          "verified_at": null
+          "status": "cloudflare_http_browser_and_githack_verified",
+          "note": "Exact main 222c2a0c passed Cloudflare hosted-browser and production HTTP verification 43445647404 plus catalog/GitHack 43445647463. Direct separate opening of dated query permalink was unavailable.",
+          "verified_at": "2026-11-13T14:56:10Z"
         }
       ],
-      "production_verified_revision": null,
-      "last_verified_at": null,
-      "last_verified_public_url": null,
-      "production_commit": null,
-      "production_workflow_run_id": null,
-      "githack_workflow_run_id": null,
-      "verification_scope": "Not yet verified publicly."
+      "production_verified_revision": 1,
+      "last_verified_at": "2026-11-13T14:56:10Z",
+      "last_verified_public_url": "https://aiupdates.app/whats-new.html?date=2026-11-13&revision=1",
+      "production_commit": "222c2a0c6bcf48231a191ed0b56ec8b094ebdb8b",
+      "production_workflow_run_id": 43445647404,
+      "githack_workflow_run_id": 43445647463,
+      "verification_scope": "Exact tested commit 222c2a0c6bcf48231a191ed0b56ec8b094ebdb8b passed Cloudflare validation, local hosted-browser/production asset and browser checks (workflow 43445647404) completed November 13 14:56:10Z, and catalog/GitHack checks (workflow 43445647463) passed 320 Node tests plus byte-parity. Direct independent opening of the full dated query URL was unavailable."
     }
   ]
 }
