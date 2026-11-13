@@ -711,17 +711,23 @@ test('Discover mobile drawer exposes the canonical eight secondary destinations 
       route + ' keeps the seven top-level primary links');
     const secondary = drawer.match(/<details class="site-mobile-chrome__more"(?: open)?><summary>More sections<\/summary><div class="site-mobile-chrome__more-links">([\s\S]*?)<\/div><\/details>/)?.[1];
     assert.ok(secondary, route + ' retains native nested keyboard disclosure');
-    const actual = [...secondary.matchAll(/<a href="([^"]+)"(?: aria-current="location")?( download)?>([^<]+)<\/a>/g)]
+    const actual = [...secondary.matchAll(/<a href="([^"]+)"(?: aria-current="location")?( download)?(?: title="Online re-download; internet required")?>([^<]+)<\/a>/g)]
       .map(m => [m[1], m[3].replaceAll('&amp;', '&')]);
     const expected = canonical.map(([href, label]) => {
       let local = href.replace(/^index\.html(?=#\/)/, '');
       if (offline && local === 'demo.html') local = '#/overview';
       if (offline && local === 'terms/index.html') local = '#/dictionary';
+      if (offline && local === 'downloads/Atlas_Demo_Offline.html') local = 'https://aiupdates.app/downloads/Atlas_Demo_Offline.html';
       return [local, label];
     });
     assert.deepEqual(actual, expected, route + ' retains working canonical destinations');
-    assert.match(secondary, /href="downloads\/Atlas_Demo_Offline\.html" download>/,
-      'Keep the original downloadable offline fallback');
+    if (offline) {
+      assert.match(secondary, /href="https:\/\/aiupdates\.app\/downloads\/Atlas_Demo_Offline\.html" download title="Online re-download; internet required">/,
+        'Downloaded single-file navigation must offer an honest working online re-download');
+    } else {
+      assert.match(secondary, /href="downloads\/Atlas_Demo_Offline\.html" download>/,
+        'The hosted navigation must still offer the local downloadable fallback');
+    }
   }
 });
 
