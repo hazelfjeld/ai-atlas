@@ -726,8 +726,9 @@ with sync_playwright() as p:
           not page.locator('details.site-mobile-chrome__nav').evaluate('el=>el.open')
           and not page.locator('.site-mobile-chrome__search').evaluate('el=>el.inert'))
 
-    # On standalone and reference routes, / used to navigate to Search but
-    # leave focus behind. Compare its real input handoff across screen sizes.
+    # Slash now focuses the shared real field on the current page, so visitors
+    # can type immediately without an extra cross-page navigation. A real
+    # submission must still reach the existing Discover catalog results.
     for width, height in ((320,700),(390,844),(768,900),(1280,900)):
         page.set_viewport_size({'width':width,'height':height})
         for theme in ('light','dark'):
@@ -735,32 +736,33 @@ with sync_playwright() as p:
                 page.goto(base+route)
                 page.evaluate("t => {localStorage.setItem('atlas.theme',t);document.documentElement.dataset.theme=t}",theme)
                 page.keyboard.press('/')
-                page.wait_for_url('**/index.html#/search')
-                page.wait_for_function("() => document.activeElement?.id === 'global-query'", timeout=10000)
-                check(f'{route} {width}px {theme} slash opens functional search ready for typing',
-                      page.locator('#global-query').is_visible()
-                      and page.evaluate("document.activeElement?.id === 'global-query'")
+                check(f'{route} {width}px {theme} slash focuses live search without leaving',
+                      page.locator('.site-mobile-chrome__search-input').is_visible()
+                      and page.evaluate("document.activeElement?.classList.contains('site-mobile-chrome__search-input') === true")
+                      and page.evaluate("location.pathname.endsWith('/'+arguments[0])", route)
                       and page.evaluate("document.documentElement.dataset.theme") == theme
                       and page.evaluate("sessionStorage.getItem('atlas.searchShortcutPending') === null"))
                 if (width,theme,route)==(390,'dark','about.html'):
-                    page.locator('#global-query').fill('reward hacking')
-                    page.locator('#global-query').press('Enter')
-                    page.wait_for_url('**/index.html#/search?q=reward+hacking')
-                    check('cross-page slash handoff submits an actual catalog query',
-                          page.locator('#page h1').inner_text()=='Search the whole atlas.')
+                    page.locator('.site-mobile-chrome__search-input').fill('reward hacking')
+                    page.locator('.site-mobile-chrome__search-input').press('Enter')
+                    page.wait_for_url('**/index.html#/search?q=reward%20hacking')
+                    page.locator('#catalog-loading').wait_for(state='detached',timeout=45000)
+                    check('cross-page native search submits an actual catalog query',
+                          page.locator('#page h1').inner_text()=='Search the whole atlas.'
+                          and page.locator('#all-query').input_value()=='reward hacking')
                     page.screenshot(path=str(out/'cross-page-slash-search-390-dark.png'))
-    # Activating the existing mobile search link must focus the hydrated
-    # Discover input, not merely navigate to the Search workspace.
+    # Activating the shared native submit control must still focus the hydrated
+    # Discover input after the search route opens.
     for width,height in ((320,700),(390,844)):
         page.set_viewport_size({'width':width,'height':height})
         for theme in ('light','dark'):
             for route in ('about.html','technology/TECH-0216-pytorch.html'):
                 page.goto(base+route)
                 page.evaluate("t => {localStorage.setItem('atlas.theme',t);document.documentElement.dataset.theme=t}",theme)
-                page.locator('.site-mobile-chrome__search').click()
+                page.locator('.site-mobile-chrome__search-submit').click()
                 page.wait_for_url('**/index.html#/search')
                 page.wait_for_function("() => document.activeElement?.id === 'global-query'", timeout=10000)
-                check(f'{route} {width}px {theme} search-link click focuses actual input',
+                check(f'{route} {width}px {theme} live search submit focuses actual input',
                       page.locator('#global-query').is_visible()
                       and page.evaluate("document.documentElement.dataset.theme") == theme
                       and page.evaluate("sessionStorage.getItem('atlas.searchShortcutPending') === null"))
