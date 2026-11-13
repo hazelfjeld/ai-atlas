@@ -399,7 +399,10 @@ body:has(.site-chrome){padding-left:224px}
  padding:12px 11px!important;white-space:normal;color:#c5cfc6!important;
  font-size:13px!important;font-weight:540!important
 }
-.site-chrome .site-chrome__links a:hover,
+/* Mirror Discover: hovering another destination must not look selected. */
+.site-chrome .site-chrome__links a:hover{
+ color:#fff!important;background:#ffffff0c!important
+}
 .site-chrome .site-chrome__links a[aria-current]{
  color:#fff!important;background:#ffffff13!important
 }
