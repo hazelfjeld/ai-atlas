@@ -712,7 +712,7 @@ with sync_playwright() as p:
               .get_by_role('link', name='What’s New Today').get_attribute('aria-current') == 'page')
     mobile_archive.locator('.archive-menu-toggle').click()
     mobile_archive.screenshot(path=str(out / 'archive-mobile-header.png'), full_page=False)
-    mobile_archive.locator('.archive-search-link').click()
+    mobile_archive.locator('.archive-search-link .site-mobile-chrome__search-submit').click()
     mobile_archive.wait_for_url('**/index.html#/search')
     check('mobile archive search entry opens the actual site search',
           mobile_archive.locator('#global-query').is_visible())
@@ -989,7 +989,7 @@ with sync_playwright() as p:
           desktop_shared_navigation(mobile_tech)
           and mobile_tech.locator('.tech-top').is_visible())
     mobile_tech.set_viewport_size({'width':320,'height':720})
-    mobile_tech.locator('.tech-search-link').click()
+    mobile_tech.locator('.tech-search-link .site-mobile-chrome__search-submit').click()
     mobile_tech.wait_for_url('**/index.html#/search')
     check('technology directory search opens the actual workspace search',
           mobile_tech.locator('#global-query').is_visible())
@@ -1029,7 +1029,7 @@ with sync_playwright() as p:
           desktop_shared_navigation(mobile_playbooks)
           and mobile_playbooks.locator('.playbook-top').is_visible())
     mobile_playbooks.set_viewport_size({'width':320, 'height':720})
-    mobile_playbooks.locator('.playbook-search-link').click()
+    mobile_playbooks.locator('.playbook-search-link .site-mobile-chrome__search-submit').click()
     mobile_playbooks.wait_for_url('**/index.html#/search')
     check('playbooks search opens the existing workspace search',
           mobile_playbooks.locator('#global-query').is_visible())
