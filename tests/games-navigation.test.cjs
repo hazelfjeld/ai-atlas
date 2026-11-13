@@ -1008,11 +1008,11 @@ test('standalone sections use Discover’s slash-to-search shortcut without stea
   assert.match(script, /site-mobile-chrome__search\[href\]/);
   // The native mobile search link uses the same one-shot focus handoff
   // whether activated by touch or keyboard, without changing its href.
-  const activateSearch = (overrides={}, source='site-mobile-chrome__search') => {
+  const activateSearch = overrides => {
     const event = {
       button:0, defaultPrevented:false, ctrlKey:false, metaKey:false,
       altKey:false, shiftKey:false,
-      target:{closest: selector => selector.split(',').map(x => x.trim()).includes('a.'+source+'[href]') ? search : null},
+      target:{closest: selector => selector === 'a.site-mobile-chrome__search[href]' ? search : null},
       ...overrides,
     };
     for(const handler of listeners.click) handler(event);
@@ -1021,10 +1021,6 @@ test('standalone sections use Discover’s slash-to-search shortcut without stea
   activateSearch();
   assert.equal(stored.get('atlas.searchShortcutPending'), '1',
     'Following the visible search link should focus the real Discover input');
-  stored.delete('atlas.searchShortcutPending');
-  activateSearch({}, 'site-chrome__search');
-  assert.equal(stored.get('atlas.searchShortcutPending'), '1',
-    'Clicking the shared desktop search must use the same functional focus handoff');
   for (const modified of [{ctrlKey:true},{metaKey:true},{altKey:true},
                           {shiftKey:true},{button:1},{defaultPrevented:true},
                           {target:{closest: () => null}}]) {

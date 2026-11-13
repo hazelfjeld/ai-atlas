@@ -176,29 +176,3 @@ test('native Games generation strips only the standalone script-free fallback', 
   assert.ok(read('scripts/install_games_workspace.py').includes('fallback_count == 1'),
     'generator must fail rather than silently drifting when the fallback changes');
 });
-
-test('native desktop pages inherit one visible global search route from the shared mobile link', () => {
-  const runtime = read('site-theme.js'), css = read('site-chrome.css');
-  assert.match(runtime, /const mobileSearch = chrome\.querySelector\('a\.site-mobile-chrome__search\[href\]'\)/);
-  assert.match(runtime, /desktopSearch = mobileSearch\.cloneNode\(true\)/);
-  assert.match(runtime, /desktopPrimary\.before\(desktopSearch\)/);
-  assert.match(runtime, /a\.site-mobile-chrome__search\[href\],a\.site-chrome__search\[href\]/,
-    'desktop click must use the same one-shot search focus handoff');
-  assert.match(css, /\.site-chrome__search\{[^}]*min-height:44px/);
-  assert.match(css, /\.site-chrome__search:focus-visible\{outline:3px/);
-  for (const file of ['about.html','whats-new.html','playbooks.html','research.html',
-    'games.html','technologies.html','terms/index.html','technology/index.html']) {
-    const html = read(file);
-    assert.equal((html.match(/site-mobile-chrome__search" href=/g) || []).length, 1,
-      file + ' supplies exactly one working global search source');
-    assert.equal((html.match(/class="site-chrome__search"/g) || []).length, 0,
-      file + ' must not duplicate the progressively enhanced desktop link');
-    assert.match(html, /href="(?:\.\.\/)?index\.html#\/search"/,
-      file + ' routes to the real Discover search');
-  }
-  const offline = read('downloads/Atlas_Demo_Offline.html');
-  assert.ok(offline.includes(runtime) && offline.includes(css),
-    'the single-file demo must embed both current shared sources exactly');
-  assert.match(read('index.html'), /<form class="global-search" id="global-search"/,
-    'Discover must retain its existing functioning search form');
-});

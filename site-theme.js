@@ -148,7 +148,7 @@ document.addEventListener('keydown', (event) => {
 document.addEventListener('click', event => {
   if (event.defaultPrevented || event.button !== 0 || event.ctrlKey ||
       event.metaKey || event.altKey || event.shiftKey) return;
-  if (!event.target?.closest?.('a.site-mobile-chrome__search[href],a.site-chrome__search[href]')) return;
+  if (!event.target?.closest?.('a.site-mobile-chrome__search[href]')) return;
   rememberSearchFocus();
 });
 document.addEventListener('pointerdown', (event) => {
@@ -296,18 +296,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // links, mobile drawer and script-free navigation remain unchanged.
   const desktopRail = document.querySelector('.site-chrome');
   const desktopPrimary = desktopRail?.querySelector?.('.site-chrome__links');
-  // Discover already has a real desktop search form. Native page families only
-  // exposed that destination on phones, so desktop mouse/AT users had to
-  // navigate to Discover first. Clone the *existing* working mobile destination
-  // into the shared desktop rail; never introduce another fake search field.
-  const mobileSearch = chrome.querySelector('a.site-mobile-chrome__search[href]');
-  if (desktopRail && desktopPrimary && mobileSearch &&
-      !desktopRail.querySelector('.site-chrome__search')) {
-    const desktopSearch = mobileSearch.cloneNode(true);
-    desktopSearch.className = 'site-chrome__search';
-    desktopSearch.removeAttribute('id');
-    desktopPrimary.before(desktopSearch);
-  }
   if (desktopPrimary && !desktopRail.querySelector('.site-chrome__more')) {
     // The brand is the canonical relative-root link for both root and nested
     // concept/technology routes. Never guess the deployment's base pathname.
