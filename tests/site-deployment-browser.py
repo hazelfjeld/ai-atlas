@@ -29,7 +29,7 @@ def desktop_shared_navigation(page):
     """The native search wrapper remains visible on desktop, but its
     mobile disclosure must be hidden; only the shared sidebar is navigation."""
     nav = page.locator('nav.site-chrome')
-    search = page.locator('a.site-mobile-chrome__search[href="index.html#/search"]')
+    search = page.locator('form.site-mobile-chrome__search')
     return (nav.count() == 1 and nav.is_visible()
             and nav.locator('.site-chrome__links a').count() == 7
             and search.count() == 1 and search.is_visible()
@@ -545,7 +545,7 @@ with sync_playwright() as p:
               and nav.locator('.site-chrome__links a[aria-current="' + current_kind + '"]').inner_text() == active)
         check('shared wordmark has legible inherited foreground on ' + route,
               nav.locator('.site-chrome__name').evaluate('el => getComputedStyle(el).color === getComputedStyle(el.closest("a")).color'))
-        desktop_search = page.locator('a.site-mobile-chrome__search[href="index.html#/search"]')
+        desktop_search = page.locator('form.site-mobile-chrome__search')
         check('shared desktop workspace bar retains the real search destination on ' + route,
               desktop_search.is_visible()
               and desktop_search.evaluate('''el => {
@@ -660,11 +660,39 @@ with sync_playwright() as p:
           page.locator('.site-chrome__links a[aria-current="page"]').inner_text() == 'Playbooks')
     # Search is already a first-class Discover control; standalone desktop
     # pages must expose the same real destination without inventing a fake input.
-    page.locator('a.site-mobile-chrome__search').click()
+    page.locator('.site-mobile-chrome__search-submit').click()
     page.wait_for_url('**/index.html#/search')
     check('desktop shared search returns to live Discover search',
           page.locator('#global-query').is_visible())
 
+
+    # Compare Discover with news, Games and generated references in both
+    # themes and at four responsive widths; actually submit and navigate.
+    for scheme in ('light', 'dark'):
+        live_ctx = browser.new_context(color_scheme=scheme, reduced_motion='reduce')
+        live_page = live_ctx.new_page()
+        for width in (320, 390, 768, 1280):
+            live_page.set_viewport_size({'width':width,'height':844})
+            live_page.goto(base + 'index.html')
+            for route in ('whats-new.html','games.html','terms/MLD-0002-ablation-study.html'):
+                live_page.goto(base + route)
+                form = live_page.locator('form.site-mobile-chrome__search')
+                field = form.locator('input[type="search"]')
+                check('shared real search '+route+' '+scheme+' '+str(width),
+                      form.count()==1 and form.is_visible() and field.is_visible()
+                      and form.locator('button[type="submit"]').is_visible()
+                      and live_page.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'))
+                if route == 'games.html' and width in (390,1280):
+                    live_page.screenshot(path=str(out/('live-search-'+scheme+'-'+str(width)+'.png')))
+            if width in (390,1280):
+                field.fill('reward hacking')
+                field.press('Enter')
+                live_page.wait_for_url('**/index.html#/search?q=reward%20hacking')
+                live_page.locator('#catalog-loading').wait_for(state='detached', timeout=45000)
+                check('native search reaches actual Discover results '+scheme+' '+str(width),
+                      live_page.locator('#all-query').input_value() == 'reward hacking'
+                      and live_page.locator('#global-query').is_visible())
+        live_ctx.close()
 
     # The archive formerly showed a multi-row legacy masthead on a 320px
     # phone, unlike Discover's compact menu + search entry. Both should feel
@@ -783,7 +811,7 @@ with sync_playwright() as p:
               '(el) => document.activeElement === el'))
     mobile_games.locator('#games-mobile-nav > summary').click()
     mobile_games.locator('#games-mobile-nav > summary').click()
-    mobile_games.locator('.site-mobile-chrome__search').click()
+    mobile_games.locator('.site-mobile-chrome__search-submit').click()
     mobile_games.wait_for_url('**/index.html#/search')
     check('standalone Games search points into the actual workspace',
           mobile_games.locator('#global-query').is_visible())
@@ -920,7 +948,7 @@ with sync_playwright() as p:
               .get_by_role('link', name='About', exact=True).get_attribute('aria-current') == 'page')
     mobile_about.locator('.site-mobile-chrome__toggle').click()
     mobile_about.screenshot(path=str(out / 'about-mobile-header.png'), full_page=False)
-    mobile_about.locator('.site-mobile-chrome__search').click()
+    mobile_about.locator('.site-mobile-chrome__search-submit').click()
     mobile_about.wait_for_url('**/index.html#/search')
     check('about mobile search entry opens the real collection search',
           mobile_about.locator('#global-query').is_visible())
@@ -1075,7 +1103,7 @@ with sync_playwright() as p:
           desktop_shared_navigation(mobile_review)
           and mobile_review.locator('.shell > .nav').is_visible())
     mobile_review.set_viewport_size({'width':320, 'height':720})
-    mobile_review.locator('.review-mobile-topbar .site-mobile-chrome__search').click()
+    mobile_review.locator('.review-mobile-topbar .site-mobile-chrome__search-submit').click()
     mobile_review.wait_for_url('**/index.html#/search')
     check('catalog review search opens actual workspace search',
           mobile_review.locator('#global-query').is_visible())
@@ -1121,7 +1149,7 @@ with sync_playwright() as p:
           and mobile_hardware.locator('body > .review-nav').is_visible()
           and mobile_hardware.locator('main.review-shell nav.site-chrome').count() == 0)
     mobile_hardware.set_viewport_size({'width':320, 'height':720})
-    mobile_hardware.locator('.hardware-mobile-topbar .site-mobile-chrome__search').click()
+    mobile_hardware.locator('.hardware-mobile-topbar .site-mobile-chrome__search-submit').click()
     mobile_hardware.wait_for_url('**/index.html#/search')
     check('hardware review search opens the actual workspace search',
           mobile_hardware.locator('#global-query').is_visible())
@@ -1258,23 +1286,27 @@ with sync_playwright() as p:
           and mobile_research.evaluate("location.pathname.endsWith('/research.html')")
           and mobile_research.evaluate("sessionStorage.getItem('atlas.searchShortcutPending') !== '1'"))
     mobile_research.locator('#close-detail').click()
-    mobile_research.locator('.research-search-link').click()
+    mobile_research.locator('.research-search-link .site-mobile-chrome__search-submit').click()
     mobile_research.wait_for_url('**/index.html#/search')
     mobile_research.locator('#catalog-loading').wait_for(state='detached', timeout=45000)
     check('research search opens the existing workspace and focuses its real input',
           mobile_research.locator('#global-query').is_visible()
           and mobile_research.evaluate("document.activeElement?.id === 'global-query'"))
-    # After leaving a Research modal, '/' must behave the same as on other
-    # native pages: enter the real Discover search and focus its input once.
-    # Research previously had a second document handler that also focused its
-    # local filter during this navigation.
+    # Slash now focuses the real local shared search field first, without
+    # another page load; Enter preserves the query in Discover search.
     mobile_research.goto(base + 'research.html')
     mobile_research.keyboard.press('/')
-    mobile_research.wait_for_url('**/index.html#/search')
+    check('Research slash focuses shared live search in place',
+          mobile_research.locator('.site-mobile-chrome__search-input').is_visible()
+          and mobile_research.evaluate(
+              "document.activeElement?.classList.contains('site-mobile-chrome__search-input') === true")
+          and mobile_research.evaluate("location.pathname.endsWith('/research.html')"))
+    mobile_research.locator('.site-mobile-chrome__search-input').fill('reward hacking')
+    mobile_research.locator('.site-mobile-chrome__search-input').press('Enter')
+    mobile_research.wait_for_url('**/index.html#/search?q=reward%20hacking')
     mobile_research.locator('#catalog-loading').wait_for(state='detached', timeout=45000)
-    check('Research slash uses the single shared global search route',
-          mobile_research.locator('#global-query').is_visible()
-          and mobile_research.evaluate("document.activeElement?.id === 'global-query'"))
+    check('shared search submits a real query to Discover',
+          mobile_research.locator('#all-query').input_value() == 'reward hacking')
     mobile_research.close()
     # Direct concept detail pages share the same native, script-free menu
     # and current-section indication as the dictionary and technology directories.

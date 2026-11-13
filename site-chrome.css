@@ -646,6 +646,30 @@ body:has(.site-chrome) :is(.tech-controls,.playbook-tools,.controls,.search-cont
   html:has(.site-chrome){scroll-padding-top:80px}
 }
 
+
+/* Live native search uses Discover's same field within the existing shared
+   topbar; without scripts the original working search link remains visible. */
+.site-mobile-chrome__search-form{margin:0;box-sizing:border-box}
+.site-mobile-chrome__search-form .site-mobile-chrome__search-input{
+  flex:1 1 auto;min-width:0;width:0;margin:0;padding:0;border:0;outline:0;
+  border-radius:0;background:transparent;color:var(--ink,#202b28);
+  font:inherit;font-size:16px;line-height:1.4;box-shadow:none
+}
+.site-mobile-chrome__search-input::placeholder{color:var(--muted,#627067);opacity:1}
+.site-mobile-chrome__search-submit{
+  flex:none;display:grid;place-items:center;min-width:34px;min-height:36px;
+  padding:0 4px;margin:0;border:0;border-radius:6px;background:transparent;
+  color:var(--muted,#627067);font:inherit;font-size:22px;cursor:pointer
+}
+.site-mobile-chrome__search-submit:hover{color:var(--ink,#202b28);background:var(--soft,#eaf1ea)}
+.site-mobile-chrome__search-form:focus-within{
+  outline:3px solid var(--orange,#b77833);outline-offset:2px;
+  border-color:var(--accent,#27664e)
+}
+.site-mobile-chrome__search-submit:focus-visible{
+  outline:2px solid var(--orange,#b77833);outline-offset:1px
+}
+
 /* atlas-mobile-search-frame:begin */
 /* Discover's real search form and the other pages' working search link share
    the same mobile frame. Keep the native input (and its submit handler), with

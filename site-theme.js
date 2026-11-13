@@ -58,6 +58,43 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // The main workspace consumes this one-shot intent after catalog hydration.
 // Use the same handoff for the slash shortcut and the visible search link.
+
+/* Real search everywhere: keep the static link as the no-JavaScript fallback,
+   and use its relative route on both root and nested reference pages. */
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('a.site-mobile-chrome__search[href]').forEach(link => {
+    const route = link.getAttribute('href') || '';
+    if (!/^(?:\.\.\/)*index\.html#\/search$/.test(route)) return;
+    const form = document.createElement('form');
+    form.className = link.className + ' site-mobile-chrome__search-form';
+    form.setAttribute('role', 'search');
+    form.setAttribute('aria-label', 'Search AI Updates');
+    const icon = link.querySelector('.site-mobile-chrome__search-icon');
+    if (icon) form.append(icon.cloneNode(true));
+    const field = document.createElement('input');
+    field.type = 'search';
+    field.className = 'site-mobile-chrome__search-input';
+    field.setAttribute('aria-label', 'Search AI Updates');
+    field.placeholder = link.querySelector('.site-mobile-chrome__search-placeholder')?.textContent?.trim() ||
+      'Search tools, research, concepts…';
+    field.autocomplete = 'off';
+    field.maxLength = 200;
+    const submit = document.createElement('button');
+    submit.type = 'submit';
+    submit.className = 'site-mobile-chrome__search-submit';
+    submit.setAttribute('aria-label', 'Submit search');
+    submit.textContent = '↵';
+    form.append(field, submit);
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      const query = field.value.trim();
+      rememberSearchFocus();
+      window.location.assign(route + (query ? '?q=' + encodeURIComponent(query) : ''));
+    });
+    link.replaceWith(form);
+  });
+});
+
 function rememberSearchFocus() {
   try { sessionStorage.setItem('atlas.searchShortcutPending', '1'); }
   catch (_) { /* The native search link still works without storage. */ }
@@ -135,6 +172,12 @@ document.addEventListener('keydown', (event) => {
   // Do not leave Research detail dialogs for the site-wide search route.
   if (document.querySelector('dialog[open],[role="dialog"][aria-modal="true"]')) return;
   if (document.querySelector('details.site-mobile-chrome__nav[open]')) return;
+  const inline = document.querySelector('.site-mobile-chrome__search-input');
+  if (inline && inline.getClientRects().length) {
+    event.preventDefault();
+    inline.focus({preventScroll:true});
+    return;
+  }
   const search = document.querySelector('a.site-mobile-chrome__search[href]');
   if (!search) return;
   event.preventDefault();

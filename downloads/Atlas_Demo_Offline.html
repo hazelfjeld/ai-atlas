@@ -926,6 +926,30 @@ body:has(.site-chrome) :is(.tech-controls,.playbook-tools,.controls,.search-cont
   html:has(.site-chrome){scroll-padding-top:80px}
 }
 
+
+/* Live native search uses Discover's same field within the existing shared
+   topbar; without scripts the original working search link remains visible. */
+.site-mobile-chrome__search-form{margin:0;box-sizing:border-box}
+.site-mobile-chrome__search-form .site-mobile-chrome__search-input{
+  flex:1 1 auto;min-width:0;width:0;margin:0;padding:0;border:0;outline:0;
+  border-radius:0;background:transparent;color:var(--ink,#202b28);
+  font:inherit;font-size:16px;line-height:1.4;box-shadow:none
+}
+.site-mobile-chrome__search-input::placeholder{color:var(--muted,#627067);opacity:1}
+.site-mobile-chrome__search-submit{
+  flex:none;display:grid;place-items:center;min-width:34px;min-height:36px;
+  padding:0 4px;margin:0;border:0;border-radius:6px;background:transparent;
+  color:var(--muted,#627067);font:inherit;font-size:22px;cursor:pointer
+}
+.site-mobile-chrome__search-submit:hover{color:var(--ink,#202b28);background:var(--soft,#eaf1ea)}
+.site-mobile-chrome__search-form:focus-within{
+  outline:3px solid var(--orange,#b77833);outline-offset:2px;
+  border-color:var(--accent,#27664e)
+}
+.site-mobile-chrome__search-submit:focus-visible{
+  outline:2px solid var(--orange,#b77833);outline-offset:1px
+}
+
 /* atlas-mobile-search-frame:begin */
 /* Discover's real search form and the other pages' working search link share
    the same mobile frame. Keep the native input (and its submit handler), with
@@ -1369,6 +1393,43 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // The main workspace consumes this one-shot intent after catalog hydration.
 // Use the same handoff for the slash shortcut and the visible search link.
+
+/* Real search everywhere: keep the static link as the no-JavaScript fallback,
+   and use its relative route on both root and nested reference pages. */
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('a.site-mobile-chrome__search[href]').forEach(link => {
+    const route = link.getAttribute('href') || '';
+    if (!/^(?:\.\.\/)*index\.html#\/search$/.test(route)) return;
+    const form = document.createElement('form');
+    form.className = link.className + ' site-mobile-chrome__search-form';
+    form.setAttribute('role', 'search');
+    form.setAttribute('aria-label', 'Search AI Updates');
+    const icon = link.querySelector('.site-mobile-chrome__search-icon');
+    if (icon) form.append(icon.cloneNode(true));
+    const field = document.createElement('input');
+    field.type = 'search';
+    field.className = 'site-mobile-chrome__search-input';
+    field.setAttribute('aria-label', 'Search AI Updates');
+    field.placeholder = link.querySelector('.site-mobile-chrome__search-placeholder')?.textContent?.trim() ||
+      'Search tools, research, concepts…';
+    field.autocomplete = 'off';
+    field.maxLength = 200;
+    const submit = document.createElement('button');
+    submit.type = 'submit';
+    submit.className = 'site-mobile-chrome__search-submit';
+    submit.setAttribute('aria-label', 'Submit search');
+    submit.textContent = '↵';
+    form.append(field, submit);
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      const query = field.value.trim();
+      rememberSearchFocus();
+      window.location.assign(route + (query ? '?q=' + encodeURIComponent(query) : ''));
+    });
+    link.replaceWith(form);
+  });
+});
+
 function rememberSearchFocus() {
   try { sessionStorage.setItem('atlas.searchShortcutPending', '1'); }
   catch (_) { /* The native search link still works without storage. */ }
@@ -1446,6 +1507,12 @@ document.addEventListener('keydown', (event) => {
   // Do not leave Research detail dialogs for the site-wide search route.
   if (document.querySelector('dialog[open],[role="dialog"][aria-modal="true"]')) return;
   if (document.querySelector('details.site-mobile-chrome__nav[open]')) return;
+  const inline = document.querySelector('.site-mobile-chrome__search-input');
+  if (inline && inline.getClientRects().length) {
+    event.preventDefault();
+    inline.focus({preventScroll:true});
+    return;
+  }
   const search = document.querySelector('a.site-mobile-chrome__search[href]');
   if (!search) return;
   event.preventDefault();
