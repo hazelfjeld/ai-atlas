@@ -1093,6 +1093,69 @@
       "production_workflow_run_id": 43238510659,
       "githack_workflow_run_id": 43238510781,
       "verification_scope": "Exact main e7baa12491b687c4a020a1413df860219248ebba passed Cloudflare validate, reproducibility, local hosted-browser and production HTTP/browser checks in workflow 43238510659, completed 2026-11-12T14:46:49Z. Catalog and GitHack workflow 43238510781 passed on the same commit. Direct independent reopening of the exact dated query permalink was not possible in this run."
+    },
+    {
+      "batch_id": "atlas-daily-20261113-20261113142129588-source-reviewed-a",
+      "source_branch": "atlas-daily-staging",
+      "source_commit": "a0f3397c75e27afdab80b1f5287a5745363c57c6",
+      "source_batch_path": "daily-queue/batches/2026-11-13-atlas-daily-20261113-20261113142129588-source-reviewed-a.json",
+      "source_batch_sha256": "a421a4ebf1f8b8aa8417d0c31ccb8399e6a6d3628256515cd42a5bb03e7d5a27",
+      "source_batch_bytes": 41239,
+      "edition_date": "2026-11-13",
+      "validation_result": "sha256_bytes_counts_unique_ids_dates_and_publisher_source_review",
+      "status": "partially_published_with_8_deferred_catalog_proposals_pending_production_verification",
+      "publication_outcome": "pending_cloudflare_http_browser_and_githack_verification",
+      "publication_edition": "2026-11-13-v1",
+      "accepted_news_ids": [
+        "ai-news-google-gemini4-hydrogen-20261112",
+        "ai-news-europa-pytorch-torchtitan-1t-moe-20261112",
+        "ai-news-nvidia-jensen-huang-ceo-transition-20261112",
+        "ai-news-zyphra-zonos3-mini-20261112",
+        "ai-news-salesforce-sov-transcribe1-20261112",
+        "ai-news-llm-router-2026-11-1-20261112",
+        "ai-news-google-ai-edge-gallery-speech-20261110",
+        "ai-news-frontier-ai-development-injunction-lawsuit-20261112",
+        "ai-news-spacex-texas-arizona-ai-campuses-20261112",
+        "ai-news-fed-barr-ai-job-disruption-warning-20261112"
+      ],
+      "deferred_news_ids": [],
+      "deferred_catalog_proposal_ids": [
+        "tech-proposal:gemini4-hydrogen:2026-11-12",
+        "tech-proposal:torchtitan-flexshard-europa:2026-11-12",
+        "tech-proposal:zyphra-zonos3-mini:2026-11-12",
+        "tech-proposal:salesforce-sov-transcribe1:2026-11-12",
+        "tech-proposal:llm-router-2026-11-1:2026-11-12",
+        "term-proposal:activation-offloading:2026-11-13",
+        "term-proposal:time-to-first-audio:2026-11-13",
+        "term-proposal:asr-context-biasing:2026-11-13"
+      ],
+      "rejected_ids": [],
+      "counts": {
+        "news_published": 10,
+        "technology_added": 0,
+        "term_added": 0,
+        "corrections": 0,
+        "news_deferred": 0,
+        "catalog_deferred": 8,
+        "technology_updated": 0
+      },
+      "review_notes": "Publisher cross-checked original Google, NVIDIA and PyTorch releases, both Hugging Face announcements, the GitHub tagged release and Reuters reporting. Attribution, actual dated catch-up, legal allegations and corporate plans remain qualified. The collector's partial coverage and inaccessible arXiv metadata API are retained. Deployment has not yet been verified.",
+      "production_verified_at": null,
+      "publication_history": [
+        {
+          "edition": "2026-11-13-v1",
+          "status": "pending_production_verification",
+          "note": "GitHub source publication committed, public HTTP and hosted browsers pending.",
+          "verified_at": null
+        }
+      ],
+      "production_verified_revision": null,
+      "last_verified_at": null,
+      "last_verified_public_url": null,
+      "production_commit": null,
+      "production_workflow_run_id": null,
+      "githack_workflow_run_id": null,
+      "verification_scope": "Not yet verified publicly."
     }
   ]
 }

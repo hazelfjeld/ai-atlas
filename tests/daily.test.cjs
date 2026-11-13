@@ -1739,3 +1739,24 @@ test('November 12 staged editorial batch has a unique receipt, integrity-pinned 
  assert.ok(fs.readFileSync('whats-new.html','utf8').includes('href="'+ref.path+'"'));
  assert.equal(idx.last_successful_publish_at,verifiedPublicationClock());
 });
+
+test('November 13 edition has a durable receipt, verified bytes and accessible no-script link',()=>{
+ const fs=require('node:fs'),crypto=require('node:crypto');
+ const idx=JSON.parse(fs.readFileSync('data/daily/index.json','utf8'));
+ const r=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8')).receipts.find(x=>x.batch_id==='atlas-daily-20261113-20261113142129588-source-reviewed-a');
+ const e=idx.editions.find(x=>x.date==='2026-11-13'&&x.revision===1);
+ assert.ok(r&&e);
+ const raw=fs.readFileSync(e.path);
+ assert.equal(raw.byteLength,e.bytes);
+ assert.equal(crypto.createHash('sha256').update(raw).digest('hex'),e.sha256);
+ const d=D.validateEdition(JSON.parse(raw),e);
+ assert.equal(d.news.length,10);
+ assert.deepEqual(d.news.map(n=>n.id),r.accepted_news_ids);
+ assert.equal(d.technologies.length+d.terms.length+d.corrections.length,0);
+ assert.equal(d.coverage.status,'partial');
+ assert.equal(d.coverage.sources_failed.length,1);
+ assert.equal(r.deferred_catalog_proposal_ids.length,8);
+ assert.equal(idx.status,'edition_revision_1_'+(r.production_verified_at?'production_verified':'pending_production_verification'));
+ assert.equal(idx.last_successful_publish_at,verifiedPublicationClock());
+ assert.match(fs.readFileSync('whats-new.html','utf8'),/data\\/daily\\/editions\\/2026-11-13-v1\\.json/);
+});

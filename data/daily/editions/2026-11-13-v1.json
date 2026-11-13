@@ -1,0 +1,326 @@
+{
+  "schema": 1,
+  "edition_date": "2026-11-13",
+  "timezone": "America/Chicago",
+  "published_at": "2026-11-13T14:40:42.355Z",
+  "coverage": {
+    "start": "2026-11-12T14:12:39.072Z",
+    "end": "2026-11-13T14:21:29.588Z",
+    "status": "partial",
+    "note": "Ten source-qualified reports; one November 10 catch-up item is explicitly dated. Vendor claims and Reuters reporting are attributed. Five technology and three terminology proposals remain deferred for license, alias and canonical-catalog review; arXiv metadata API could not be opened, so coverage is incomplete.",
+    "sources_checked": [
+      {
+        "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/",
+        "status": "opened",
+        "checked_at": "2026-11-13T14:21:29.588Z"
+      },
+      {
+        "url": "https://pytorch.org/blog/training-a-1t-parameter-moe-on-eu-public-infrastructure-with-pytorch-and-torchtitan/",
+        "status": "opened",
+        "checked_at": "2026-11-13T14:21:29.588Z"
+      },
+      {
+        "url": "https://nvidianews.nvidia.com/news/nvidia-announces-ceo-transition",
+        "status": "opened",
+        "checked_at": "2026-11-13T14:21:29.588Z"
+      },
+      {
+        "url": "https://www.reuters.com/business/view-nvidia-ceo-jensen-huang-steps-down-2026-11-12/",
+        "status": "opened",
+        "checked_at": "2026-11-13T14:21:29.588Z"
+      },
+      {
+        "url": "https://huggingface.co/blog/Zyphra/zonos3-mini",
+        "status": "opened",
+        "checked_at": "2026-11-13T14:21:29.588Z"
+      },
+      {
+        "url": "https://huggingface.co/blog/salesforce-sovereign-intelligence/sov-transcribe-1",
+        "status": "opened",
+        "checked_at": "2026-11-13T14:21:29.588Z"
+      },
+      {
+        "url": "https://github.com/sockless-coding/llm-router/releases/tag/2026.11.1",
+        "status": "opened",
+        "checked_at": "2026-11-13T14:21:29.588Z"
+      },
+      {
+        "url": "https://developers.googleblog.com/on-device-speech-recognition-and-text-to-speech-in-google-ai-edge-gallery/",
+        "status": "opened",
+        "checked_at": "2026-11-13T14:21:29.588Z"
+      },
+      {
+        "url": "https://huggingface.co/blog/litert-community/on-device-speech-recognition-and-text-to-speech-in",
+        "status": "opened",
+        "checked_at": "2026-11-13T14:21:29.588Z"
+      },
+      {
+        "url": "https://www.reuters.com/business/openai-google-anthropic-hit-with-lawsuit-seeking-halt-frontier-ai-development-2026-11-12/",
+        "status": "opened",
+        "checked_at": "2026-11-13T14:21:29.588Z"
+      },
+      {
+        "url": "https://www.reuters.com/business/media-telecom/spacex-invest-over-74-billion-supercompute-facilities-texas-arizona-2026-11-12/",
+        "status": "opened",
+        "checked_at": "2026-11-13T14:21:29.588Z"
+      },
+      {
+        "url": "https://www.reuters.com/legal/government/feds-barr-us-should-prepare-serious-ai-job-disruption-widening-inequality-2026-11-12/",
+        "status": "opened",
+        "checked_at": "2026-11-13T14:21:29.588Z"
+      },
+      {
+        "url": "https://openai.com/news/",
+        "status": "opened",
+        "checked_at": "2026-11-13T14:21:29.588Z"
+      },
+      {
+        "url": "https://huggingface.co/blog",
+        "status": "opened",
+        "checked_at": "2026-11-13T14:21:29.588Z"
+      }
+    ],
+    "sources_failed": [
+      {
+        "url": "https://export.arxiv.org/api/query?search_query=cat%3Acs.LG&start=0&max_results=1",
+        "status": "inaccessible",
+        "reason": "The export.arxiv.org metadata API query could not be opened; this does not imply an absence of new research papers.",
+        "checked_at": "2026-11-13T14:21:29.588Z"
+      }
+    ]
+  },
+  "tldr": [
+    "Gemini 4 Hydrogen launched, while PyTorch published engineering details of a near-trillion-parameter MoE training experiment on JUPITER.",
+    "NVIDIA confirmed Jensen Huang's resignation and Colette Kress as interim CEO. Zyphra and Salesforce announced open-weight speech models, alongside Google's offline speech demos.",
+    "Other source-qualified reports cover local inference tooling, a lawsuit seeking AI development restrictions, proposed SpaceX computing campuses and warnings about employment disruption. Eight catalog proposals remain deferred; source coverage is partial."
+  ],
+  "news": [
+    {
+      "id": "ai-news-google-gemini4-hydrogen-20261112",
+      "title": "Google releases Gemini 4 Hydrogen for faster agent-oriented workloads",
+      "category": "models",
+      "tags": [
+        "LLM",
+        "agents",
+        "inference",
+        "API"
+      ],
+      "summary": "Google introduced Gemini 4 Hydrogen, positioned for quick coding and agent workflows, with access across AI Studio, Gemini API, business products and consumer services. It also described multi-model routing between Hydrogen and Carbon.",
+      "why_it_matters": "A smaller or faster model tier could make frequent agent actions cheaper or more responsive when stronger reasoning is unnecessary.",
+      "caveat": "Google's routing, latency, quality and cost comparisons are company-reported, not independent benchmarks. Feature availability, rates, quotas and prices differ by product and region.",
+      "review_status": "publisher_checked_attributed_source_qualified",
+      "release_status": "official_model_release",
+      "source_url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/",
+      "publication_date": "2026-11-12",
+      "event_date": "2026-11-12",
+      "discovered_at": "2026-11-13T14:21:29.588Z",
+      "added_to_atlas_at": "2026-11-13T14:40:42.355Z",
+      "collection_classification": "current_window"
+    },
+    {
+      "id": "ai-news-europa-pytorch-torchtitan-1t-moe-20261112",
+      "title": "EUROPA details nearly one-trillion-parameter MoE training on JUPITER",
+      "category": "research",
+      "tags": [
+        "DL",
+        "MoE",
+        "training",
+        "hardware",
+        "distributed"
+      ],
+      "summary": "PyTorch and the EUROPA team documented a roughly 952-billion-parameter sparse MoE training run using TorchTitan, FlexShard, FSDP and CPU memory offloading on Europe's JUPITER GH200 infrastructure.",
+      "why_it_matters": "Concrete systems-level techniques for expert ownership, optimizer placement and activation transfers can inform reproducible large-model training design.",
+      "caveat": "Throughput and memory figures describe the authors' particular supercomputer configurations. This is an engineering report, not proof of downstream model capability or a ready-to-download trained checkpoint.",
+      "review_status": "publisher_checked_attributed_source_qualified",
+      "release_status": "controlled_research_report",
+      "source_url": "https://pytorch.org/blog/training-a-1t-parameter-moe-on-eu-public-infrastructure-with-pytorch-and-torchtitan/",
+      "publication_date": "2026-11-12",
+      "event_date": "2026-11-12",
+      "discovered_at": "2026-11-13T14:21:29.588Z",
+      "added_to_atlas_at": "2026-11-13T14:40:42.355Z",
+      "collection_classification": "current_window"
+    },
+    {
+      "id": "ai-news-nvidia-jensen-huang-ceo-transition-20261112",
+      "title": "NVIDIA appoints Colette Kress interim CEO after Jensen Huang resignation",
+      "category": "industry",
+      "tags": [
+        "AI infrastructure",
+        "semiconductors",
+        "industry"
+      ],
+      "summary": "NVIDIA's board announced that Jensen Huang resigned as chief executive and director effective November 12, appointed CFO Colette Kress as interim CEO, and named Harvey Jones board chair.",
+      "why_it_matters": "A leadership transition at a dominant AI-accelerator supplier can affect how customers interpret strategy and continuity, even before any technical roadmap changes.",
+      "caveat": "NVIDIA says its roadmap and commitments should continue without interruption; the announcement does not establish longer-term strategic effects or motives.",
+      "review_status": "publisher_checked_attributed_source_qualified",
+      "release_status": "confirmed_corporate_announcement",
+      "source_url": "https://nvidianews.nvidia.com/news/nvidia-announces-ceo-transition",
+      "publication_date": "2026-11-12",
+      "event_date": "2026-11-12",
+      "discovered_at": "2026-11-13T14:21:29.588Z",
+      "added_to_atlas_at": "2026-11-13T14:40:42.355Z",
+      "collection_classification": "current_window"
+    },
+    {
+      "id": "ai-news-zyphra-zonos3-mini-20261112",
+      "title": "Zyphra releases sparse 100M-active-parameter ZONOS3-Mini speech model",
+      "category": "models",
+      "tags": [
+        "SLM",
+        "audio",
+        "TTS",
+        "MoE",
+        "open weights"
+      ],
+      "summary": "Zyphra released ZONOS3-Mini for multilingual voice synthesis and zero-shot speaker conditioning, reporting 800 million total and 100 million active parameters, with Apache-2.0 model weights and MIT reference runtimes.",
+      "why_it_matters": "Open weights and multiple local execution backends expand options for low-latency speech assistants and on-device testing.",
+      "caveat": "Latency and voice-quality comparisons are author-reported; use of speaker cloning requires consent and safeguards. The Hugging Face platform lists November 12, while the article byline is dated November 11.",
+      "review_status": "publisher_checked_attributed_source_qualified",
+      "release_status": "open_weights_release",
+      "source_url": "https://huggingface.co/blog/Zyphra/zonos3-mini",
+      "publication_date": "2026-11-12",
+      "event_date": "2026-11-12",
+      "discovered_at": "2026-11-13T14:21:29.588Z",
+      "added_to_atlas_at": "2026-11-13T14:40:42.355Z",
+      "collection_classification": "current_window"
+    },
+    {
+      "id": "ai-news-salesforce-sov-transcribe1-20261112",
+      "title": "Salesforce releases SOV-Transcribe-1 for contextual speech recognition",
+      "category": "models",
+      "tags": [
+        "speech",
+        "ASR",
+        "open weights",
+        "SLM",
+        "enterprise"
+      ],
+      "summary": "Salesforce published an Apache-2.0 speech transcription model with a 26B-total, 4B-active parameter architecture, non-streaming ASR, instruction-controlled transcript style and contextual keyword biasing.",
+      "why_it_matters": "Entity-aware transcription and domain-specific formatting may help speech agents preserve names, codes, URLs and other critical fields.",
+      "caveat": "Model size and performance claims rely on the release authors and cited leaderboards; scores do not guarantee safety or accuracy in a new accent, language, recording condition or workflow.",
+      "review_status": "publisher_checked_attributed_source_qualified",
+      "release_status": "open_weights_release",
+      "source_url": "https://huggingface.co/blog/salesforce-sovereign-intelligence/sov-transcribe-1",
+      "publication_date": "2026-11-12",
+      "event_date": "2026-11-12",
+      "discovered_at": "2026-11-13T14:21:29.588Z",
+      "added_to_atlas_at": "2026-11-13T14:40:42.355Z",
+      "collection_classification": "current_window"
+    },
+    {
+      "id": "ai-news-llm-router-2026-11-1-20261112",
+      "title": "LLM Router adds TensorFold and Intel GPU-backed vLLM workflows",
+      "category": "tools",
+      "tags": [
+        "LLM",
+        "SLM",
+        "inference",
+        "open source",
+        "Intel GPU"
+      ],
+      "summary": "The small-project LLM Router 2026.11.1 release documents a TensorFold inference engine, HF checkpoint-format management, Intel XPU vLLM Docker setup, and more detailed streaming and speculative-decoding metrics.",
+      "why_it_matters": "Developers managing heterogeneous local backends may benefit from a unified router and model-library controls, especially on mixed-vendor hardware.",
+      "caveat": "Release notes are maintainer claims; no independent runtime, security, license or compatibility audit was completed. Remote agents and exposed services require deliberate access control.",
+      "review_status": "publisher_checked_attributed_source_qualified",
+      "release_status": "tagged_software_release",
+      "source_url": "https://github.com/sockless-coding/llm-router/releases/tag/2026.11.1",
+      "publication_date": "2026-11-12",
+      "event_date": "2026-11-12",
+      "discovered_at": "2026-11-13T14:21:29.588Z",
+      "added_to_atlas_at": "2026-11-13T14:40:42.355Z",
+      "collection_classification": "current_window"
+    },
+    {
+      "id": "ai-news-google-ai-edge-gallery-speech-20261110",
+      "title": "Google AI Edge Gallery adds offline speech recognition and synthesis demos",
+      "category": "tools",
+      "tags": [
+        "speech",
+        "TTS",
+        "ASR",
+        "edge AI",
+        "SLM",
+        "multimodal"
+      ],
+      "summary": "Google's November 10 developer announcement describes new local speech recognition and text-to-speech experiences in AI Edge Gallery, with LiteRT model bundles for ASR/TTS and a camera-plus-voice language-tutor demonstration.",
+      "why_it_matters": "Local voice pipelines can cut network dependency and support privacy-conscious SLM and wearable experiments.",
+      "caveat": "This is November 10 catch-up news, not a November 13 launch. Device support, speed and memory depend on platform and model; the source's performance estimates are not independently replicated.",
+      "review_status": "publisher_checked_attributed_source_qualified",
+      "release_status": "official_software_capability",
+      "source_url": "https://developers.googleblog.com/on-device-speech-recognition-and-text-to-speech-in-google-ai-edge-gallery/",
+      "publication_date": "2026-11-10",
+      "event_date": "2026-11-10",
+      "discovered_at": "2026-11-13T14:21:29.588Z",
+      "added_to_atlas_at": "2026-11-13T14:40:42.355Z",
+      "collection_classification": "catch_up"
+    },
+    {
+      "id": "ai-news-frontier-ai-development-injunction-lawsuit-20261112",
+      "title": "Lawsuit seeks to stop frontier AI development; no injunction established",
+      "category": "governance",
+      "tags": [
+        "AI safety",
+        "law",
+        "governance"
+      ],
+      "summary": "Reuters reported a lawsuit against several large AI developers seeking to halt frontier AI work on asserted legal and safety grounds.",
+      "why_it_matters": "The case illustrates a legal strategy focused on development restraint, distinct from agency rulemaking or model-provider safety policies.",
+      "caveat": "The plaintiffs' assertions are allegations, not findings of liability or demonstrated model harms. Filing a lawsuit does not mean any court ordered AI development to stop.",
+      "review_status": "publisher_checked_reported_lawsuit_not_adjudicated",
+      "release_status": "reported_lawsuit_allegations",
+      "source_url": "https://www.reuters.com/business/openai-google-anthropic-hit-with-lawsuit-seeking-halt-frontier-ai-development-2026-11-12/",
+      "publication_date": "2026-11-12",
+      "event_date": "2026-11-12",
+      "discovered_at": "2026-11-13T14:21:29.588Z",
+      "added_to_atlas_at": "2026-11-13T14:40:42.355Z",
+      "collection_classification": "current_window"
+    },
+    {
+      "id": "ai-news-spacex-texas-arizona-ai-campuses-20261112",
+      "title": "SpaceX outlines plans for more than $74 billion in AI compute campuses",
+      "category": "infrastructure",
+      "tags": [
+        "AI infrastructure",
+        "hardware",
+        "data centers",
+        "energy"
+      ],
+      "summary": "Reuters reported SpaceX plans exceeding $74 billion for large computing campuses in Texas and Arizona, with permitting and utility questions still in play.",
+      "why_it_matters": "Announced infrastructure scale underlines competition for power, cooling and accelerator capacity across the AI sector.",
+      "caveat": "Planned spending is not executed investment; permits, financing, build-out timing and claimed energy benefits remain uncertain.",
+      "review_status": "publisher_checked_attributed_source_qualified",
+      "release_status": "reported_investment_plan",
+      "source_url": "https://www.reuters.com/business/media-telecom/spacex-invest-over-74-billion-supercompute-facilities-texas-arizona-2026-11-12/",
+      "publication_date": "2026-11-12",
+      "event_date": "2026-11-12",
+      "discovered_at": "2026-11-13T14:21:29.588Z",
+      "added_to_atlas_at": "2026-11-13T14:40:42.355Z",
+      "collection_classification": "current_window"
+    },
+    {
+      "id": "ai-news-fed-barr-ai-job-disruption-warning-20261112",
+      "title": "Federal Reserve governor urges preparation for possible AI labor disruption",
+      "category": "governance",
+      "tags": [
+        "labor",
+        "economic impact",
+        "policy"
+      ],
+      "summary": "Reuters reported Federal Reserve Governor Michael Barr warning policymakers to prepare for potentially serious AI-driven workplace disruption and widening inequality.",
+      "why_it_matters": "The remarks reinforce uncertainty around transition costs and the need to separate near-term deployment evidence from long-run forecasts.",
+      "caveat": "These are a policymaker's warnings and scenarios, not observed economy-wide displacement statistics or a formal Federal Reserve policy forecast.",
+      "review_status": "publisher_checked_attributed_source_qualified",
+      "release_status": "reported_policy_remarks",
+      "source_url": "https://www.reuters.com/legal/government/feds-barr-us-should-prepare-serious-ai-job-disruption-widening-inequality-2026-11-12/",
+      "publication_date": "2026-11-12",
+      "event_date": "2026-11-12",
+      "discovered_at": "2026-11-13T14:21:29.588Z",
+      "added_to_atlas_at": "2026-11-13T14:40:42.355Z",
+      "collection_classification": "current_window"
+    }
+  ],
+  "technologies": [],
+  "terms": [],
+  "site_changes": [],
+  "corrections": []
+}

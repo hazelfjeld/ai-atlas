@@ -297,9 +297,17 @@
       "sha256": "8d832b038b06060b693deb3128ae82233f4960fb6ca24fea0636b9768b1a2bb8",
       "bytes": 15343,
       "published_at": "2026-11-12T14:31:18.335Z"
+    },
+    {
+      "date": "2026-11-13",
+      "revision": 1,
+      "path": "data/daily/editions/2026-11-13-v1.json",
+      "sha256": "d8b3b5f37ff38794834338804fa3c76240e321ff6188e4b895c5bb2468d06da9",
+      "bytes": 17937,
+      "published_at": "2026-11-13T14:40:42.355Z"
     }
   ],
   "last_successful_publish_at": "2026-11-12T14:46:49Z",
-  "status": "edition_revision_1_production_verified",
-  "coverage_note": "November 12 revision 1 passed Cloudflare production HTTP/hosted browser and GitHack/catalog checks on e7baa124 (November 12, 14:46:49 UTC): seven qualified reports, four deferred technologies, two deferred terminology proposals, one inaccessible arXiv API, and partial source coverage. Direct separate opening of the dated query permalink was unavailable."
+  "status": "edition_revision_1_pending_production_verification",
+  "coverage_note": "November 13 v1: ten source-qualified reports, one older catch-up report, five deferred technology and three deferred terminology proposals; partial collection with arXiv API failure. Deployment and production hosted-browser verification pending. Do not claim this edition is verified live until checks succeed."
 }
