@@ -11,7 +11,7 @@ test('Discover uses the native functional search-submit component once', () => {
   const form = index.match(/<form class="global-search" id="global-search" role="search">[\s\S]*?<\/form>/);
   assert.ok(form, 'Discover must preserve the existing one real form');
   assert.match(form[0], /id="global-query" type="search"/);
-  assert.match(form[0], /<kbd>\/</kbd><button type="submit" class="site-mobile-chrome__search-submit" aria-label="Submit search">↵<\/button>/);
+  assert.match(form[0], /<kbd>\/<\/kbd><button type="submit" class="site-mobile-chrome__search-submit" aria-label="Submit search">↵<\/button>/);
   assert.equal((form[0].match(/type="submit"/g) || []).length, 1);
   assert.match(read('app.js'), /\$\('global-search'\)\.addEventListener\('submit',e=>\{e\.preventDefault\(\);goto\('search'/);
   assert.match(read('site-theme.js'), /submit.className = 'site-mobile-chrome__search-submit'/);
