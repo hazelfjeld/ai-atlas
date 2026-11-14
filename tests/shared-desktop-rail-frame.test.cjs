@@ -107,3 +107,30 @@ test('native editorial families render the shared rail bottom before hydration',
   }
   assert.match(discover, /<div class="sidebar-bottom">/, 'Discover retains its original shared rail footer');
 });
+
+test('reference landing directories and About expose one shared lower desktop rail without scripts', () => {
+  const generator = read('scripts/site_chrome.py');
+  const termBuilder = read('scripts/build_term_pages.py');
+  const seoBuilder = read('scripts/build_seo.py');
+  assert.match(generator, /rail_bottom=False/);
+  assert.match(generator, /render_static_rail_bottom\(prefix\) if rail_bottom/);
+  assert.match(termBuilder, /rail_bottom=\(path == 'terms\/index\.html'\)/);
+  assert.match(seoBuilder, /rail_bottom=\(path == 'technology\/index\.html'\)/);
+  assert.match(seoBuilder, /topbar_title='About', native_secondary=True, mobile_secondary=True, rail_bottom=True/);
+  assert.match(read('site-theme.js'), /const previous = rail\.querySelector\('\.sidebar-bottom'\)/);
+  for (const [page, prefix] of [
+    ['terms/index.html', '../'],
+    ['technology/index.html', '../'],
+    ['about.html', ''],
+  ]) {
+    const html = read(page);
+    const rail = html.match(/<nav class="site-chrome term-nav" aria-label="AI Updates primary navigation">([\s\S]*?)<\/nav>/)?.[1];
+    assert.ok(rail, page + ' has one native desktop navigation landmark');
+    assert.equal((html.match(/class="sidebar-bottom site-chrome__bottom"/g) || []).length, 1, page);
+    assert.ok(rail.includes('<div class="sidebar-bottom site-chrome__bottom">'), page);
+    assert.ok(rail.includes('href="' + prefix + 'index.html#/sources"'), page + ' has a working native sources link');
+    assert.ok(rail.includes('<div class="sidebar-actions"><span>Curated & sourced</span>'), page);
+    assert.ok(rail.includes('<details class="site-chrome__more"'), page + ' retains all secondary destinations');
+    assert.match(html, /<details class="site-mobile-chrome__nav"[^>]*>/, page + ' retains its script-free mobile menu');
+  }
+});

@@ -202,7 +202,7 @@ def render_directory_nav(prefix, selected, *, mobile_classes="directory-mobile-t
                          toggle_classes="site-mobile-chrome__toggle", menu_classes="site-mobile-chrome__menu",
                          search_classes="site-mobile-chrome__search", icon_classes="site-mobile-chrome__search-icon",
                          search_label_classes="site-mobile-chrome__search-placeholder",
-                         desktop_classes="site-chrome term-nav", labeled=True, current_kind="page", page_label=None, mobile_brand=False, native_secondary=False, mobile_secondary=False, secondary_current=None, topbar_title=None):
+                         desktop_classes="site-chrome term-nav", labeled=True, current_kind="page", page_label=None, mobile_brand=False, native_secondary=False, mobile_secondary=False, secondary_current=None, topbar_title=None, rail_bottom=False):
     """One script-free site header, with only page-specific shell classes configurable."""
     assert prefix in ("", "../")
     assert selected is None or selected in {name for _, name in DESTINATIONS}
@@ -229,7 +229,8 @@ def render_directory_nav(prefix, selected, *, mobile_classes="directory-mobile-t
     desktop = (
         '<nav class="' + desktop_classes + '" aria-label="AI Updates primary navigation">'
         + brand + '<div class="site-chrome__links">' + links + '</div>' +
-        (render_secondary_nav(prefix, secondary_current) if native_secondary else '') + '</nav>'
+        (render_secondary_nav(prefix, secondary_current) if native_secondary else '') +
+        (render_static_rail_bottom(prefix) if rail_bottom else '') + '</nav>'
     )
     return mobile + desktop
 
