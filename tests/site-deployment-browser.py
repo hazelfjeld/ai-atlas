@@ -2156,6 +2156,20 @@ with sync_playwright() as p:
                       abs(page.locator('.site-mobile-chrome__menu').evaluate(
                           'el => el.getBoundingClientRect().width') - baseline) <= 1)
             else:
+                if width == 1280 and theme == 'light':
+                    print('RAIL FRAME DIAGNOSTICS', page.evaluate("""(expected) => {
+                        const rail=document.querySelector('.site-chrome');
+                        const first=rail.querySelector('.site-chrome__links a');
+                        const active=rail.querySelector('[aria-current]');
+                        return {expected,actual:{
+                            width:rail.getBoundingClientRect().width,
+                            firstTop:first.getBoundingClientRect().top,
+                            linkFont:getComputedStyle(first).fontSize,
+                            brandFont:getComputedStyle(rail.querySelector('.site-chrome__name')).fontSize,
+                            activeBg:getComputedStyle(active).backgroundColor,
+                            overflow:document.documentElement.scrollWidth-innerWidth
+                        }};
+                    }""", baseline), flush=True)
                 check(f'{theme} {width}px shared rail matches Discover geometry and type',
                       page.evaluate("""(expected) => {
                           const rail=document.querySelector('.site-chrome');
