@@ -27,9 +27,9 @@ const landingNav = html => {
 // compare their complete primary/secondary menus without pretending the
 // deliberately landing-only footer is duplicated across all detail pages.
 const withoutLandingRailBottom = nav => {
-  const bottoms = [...nav.matchAll(/<div class="sidebar-bottom site-chrome__bottom">[\\s\\S]*?<\\/div><\\/div>/g)];
+  const bottoms = [...nav.matchAll(/<div class="sidebar-bottom site-chrome__bottom">[\s\S]*?<\/div><\/div>/g)];
   assert.equal(bottoms.length, 1, 'Landing template must expose exactly one static lower rail');
-  assert.match(bottoms[0][0], /href="\\.\\.\\/index\\.html#\\/sources"/, 'Static coverage shortcut must work without scripts');
+  assert.match(bottoms[0][0], /href="\.\.\/index\.html#\/sources"/, 'Static coverage shortcut must work without scripts');
   return nav.replace(bottoms[0][0], '');
 };
 
