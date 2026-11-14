@@ -416,9 +416,9 @@ with sync_playwright() as p:
             labels = primary_links.all_text_contents()
             about_link = primary_links.last
         else:
-            primary_links = page.locator('#navigation > a.nav-link')
+            primary_links = page.locator('#navigation > .site-chrome__links > a.nav-link')
             labels = primary_links.locator('span:not(.nav-count)').all_text_contents()
-            about_link = page.locator('#navigation > a[data-static="about"]')
+            about_link = page.locator('#navigation > .site-chrome__links > a[data-static="about"]')
         check('Discover shares seven-link primary order at ' + str(width),
               primary_links.count() == 7
               and all(link.is_visible() for link in primary_links.all())
@@ -2140,7 +2140,7 @@ with sync_playwright() as p:
                 baseline = page.locator('#discover-mobile-nav .site-mobile-chrome__menu').evaluate('el => el.getBoundingClientRect().width')
             else:
                 baseline = page.evaluate("""() => {
-                    const link = document.querySelector('#navigation > a.nav-link');
+                    const link = document.querySelector('#navigation > .site-chrome__links > a.nav-link');
                     return {
                         width:document.querySelector('#sidebar').getBoundingClientRect().width,
                         firstTop:link.getBoundingClientRect().top,
