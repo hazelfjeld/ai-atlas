@@ -205,7 +205,11 @@ function route(){
   const changedSection = routeInitialized && previousView !== view;
   renderNav();
   const fromMobileNav = $('discover-mobile-nav').open;
-  closeMobileNavigation();
+  // Catalog hydration and redundant same-section renders are not navigation.
+  // If a visitor opened the drawer while the async first render was pending,
+  // do not close it or steal focus; only actual section changes dismiss it.
+  const navigatedFromMobileNav = routeInitialized && fromMobileNav && changedSection;
+  if (!fromMobileNav || navigatedFromMobileNav) closeMobileNavigation();
   if(view==='overview')page.innerHTML=overview();
   else if(view==='games'){page.innerHTML=window.AtlasGamesTab.html();disposeGames=window.AtlasGamesTab.mount(page.querySelector('.atlas-games'),D,{openConcept:openRecord});}
   else if(view==='compare')page.innerHTML=comparePage();
@@ -217,7 +221,7 @@ function route(){
   if(view==='overview'&&!window.ATLAS_OFFLINE)void loadDailyPreview();
   if(state.record)openRecord(state.record);
   else if(dialog.open){recordReturnFocus=null;dialog.close();}
-  const focusMain = !state.record && (wasRecordOpen || fromMobileNav || changedSection || (routeInitialized && focusWasInPage));
+  const focusMain = !state.record && (wasRecordOpen || navigatedFromMobileNav || changedSection || (routeInitialized && focusWasInPage));
   routeInitialized = true;
   if(focusMain){$('main').focus({preventScroll:true});$('main').scrollIntoView({block:'start'});}
 }

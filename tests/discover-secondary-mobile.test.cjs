@@ -75,6 +75,18 @@ test('Discover nested mobile More reflects the selected secondary workspace',()=
   assert.equal(desktopMore.open,true,'Manual desktop expansion preserved');
 });
 
+test('async Discover hydration preserves an already-open drawer and desktop rail focus',()=>{
+  // Initial catalogue hydration may finish after a visitor opens navigation.
+  // Redundant initial/same-section routes must not close that menu or move focus.
+  assert.match(app,/const navigatedFromMobileNav = routeInitialized && fromMobileNav && changedSection;/);
+  assert.match(app,/if \(!fromMobileNav \|\| navigatedFromMobileNav\) closeMobileNavigation\(\);/);
+  assert.match(app,/const focusMain = !state\.record && \(wasRecordOpen \|\| navigatedFromMobileNav \|\| changedSection/);
+  const start=app.indexOf('function route(){');
+  const end=app.indexOf('\nfunction bindControls(){',start);
+  assert.ok(start>=0&&end>start);
+  assert.ok(offline.includes(app.slice(start,end)),'offline retains the exact focus-safe route');
+});
+
 test('single-file fallback embeds the shared navigation implementation',()=>{
   const start=app.indexOf('function renderNav(){');
   const end=app.indexOf('\nfunction renderDock(){',start);
