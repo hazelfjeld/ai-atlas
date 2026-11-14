@@ -23,9 +23,9 @@ const landingNav = html => {
 // secondary disclosure. Verify all eight secondary links instead of
 // silently ignoring or counting them as duplicate primary navigation.
 // Landing directories now render the shared lower rail at first paint.
-// Catalog detail HTML is manifest-pinned and still uses progressive hydration;
-// compare their complete primary/secondary menus without pretending the
-// deliberately landing-only footer is duplicated across all detail pages.
+// Catalog detail HTML is manifest-pinned. Authored concept guides now share
+// the first-paint lower rail; pending reference pages retain the scriptless
+// primary/secondary navigation until their own atomic rebuild.
 const withoutLandingRailBottom = nav => {
   const bottoms = [...nav.matchAll(/<div class="sidebar-bottom site-chrome__bottom">[\s\S]*?<\/div><\/div>/g)];
   assert.equal(bottoms.length, 1, 'Landing template must expose exactly one static lower rail');
@@ -664,6 +664,8 @@ test('all 1345 concept details share the same script-free primary and secondary 
   assert.ok(mobileExtra, 'Directory carries eight static mobile secondary destinations');
   // The directory alone is the active secondary destination. Detail pages
   // reuse its exact mobile and desktop link lists with no current-location marker.
+  const railBottom = dictionaryNav.match(/<div class="sidebar-bottom site-chrome__bottom">[\s\S]*?<\/div><\/div>/)?.[0];
+  assert.ok(railBottom, 'reuse the exact shared native rail bottom from the directory');
   const detailNav = withoutLandingRailBottom(dictionaryNav)
     .replace(' data-page-label="Concept encyclopedia"', ' data-page-label="__PROFILE_TITLE__"')
     .replace('<span class="site-mobile-chrome__title">Concept encyclopedia</span>',
@@ -691,9 +693,12 @@ test('all 1345 concept details share the same script-free primary and secondary 
     assert.ok(nativeNavStart > 0 && nativeNavStart < nativeMainStart, id + ' has native sibling navigation');
     const heading = html.match(/<header class="hero" id="main" tabindex="-1">[\s\S]*?<h1>([^<]+)<\/h1>/)?.[1];
     assert.ok(heading, id + ' must retain a named native article heading');
+    const expectedNav = info.expanded
+      ? detailNav.replace(/<\/nav>$/, railBottom + '</nav>') : detailNav;
     assert.equal(html.slice(nativeNavStart, nativeMainStart),
-      detailNav.replaceAll('__PROFILE_TITLE__', heading), id);
-    assert.doesNotMatch(html, /class="sidebar-bottom site-chrome__bottom"/, id + ' remains manifest-pinned');
+      expectedNav.replaceAll('__PROFILE_TITLE__', heading), id);
+    assert.equal((html.match(/class="sidebar-bottom site-chrome__bottom"/g) || []).length,
+      info.expanded ? 1 : 0, id + ' matches manifest-pinned first-paint rail policy');
     assert.ok(nativeMainStart < html.indexOf(heroOpen), id + ' keeps the article heading inside main');
     const extras = html.match(/<details class="site-mobile-chrome__more">[\s\S]*?<\/details>/)?.[0];
     assert.ok(extras, id + ' has native script-free mobile secondary navigation');
@@ -709,7 +714,7 @@ test('all 1345 concept details share the same script-free primary and secondary 
     assert.equal((links.match(/aria-current="page"/g) || []).length, 1, id);
   }
   const generator = read('scripts/build_term_pages.py');
-  assert.ok(generator.includes("directory_nav = render_directory_nav('../', (None if path == 'terms/index.html' else 'Concept dictionary'), mobile_brand=True, native_secondary=True, mobile_secondary=True, secondary_current=('encyclopedia' if path == 'terms/index.html' else None), page_label=('Concept encyclopedia' if path == 'terms/index.html' else title), topbar_title=('Concept encyclopedia' if path == 'terms/index.html' else title), rail_bottom=(path == 'terms/index.html'))"));
+  assert.ok(generator.includes("directory_nav = render_directory_nav('../', (None if path == 'terms/index.html' else 'Concept dictionary'), mobile_brand=True, native_secondary=True, mobile_secondary=True, secondary_current=('encyclopedia' if path == 'terms/index.html' else None), page_label=('Concept encyclopedia' if path == 'terms/index.html' else title), topbar_title=('Concept encyclopedia' if path == 'terms/index.html' else title), rail_bottom=(path == 'terms/index.html' or expanded_concept))"));
   assert.ok(generator.includes('directory_css = DIRECTORY_MOBILE_CSS'));
 });
 
@@ -868,7 +873,7 @@ test('both generated catalog directories share Discover navigation and the nativ
     assert.ok(html.includes('THE FRONTIER, IN CONTEXT'), route);
   }
   const termGenerator=read('scripts/build_term_pages.py'), techGenerator=read('scripts/build_seo.py');
-  assert.ok(termGenerator.includes("render_directory_nav('../', (None if path == 'terms/index.html' else 'Concept dictionary'), mobile_brand=True, native_secondary=True, mobile_secondary=True, secondary_current=('encyclopedia' if path == 'terms/index.html' else None), page_label=('Concept encyclopedia' if path == 'terms/index.html' else title), topbar_title=('Concept encyclopedia' if path == 'terms/index.html' else title), rail_bottom=(path == 'terms/index.html'))"));
+  assert.ok(termGenerator.includes("render_directory_nav('../', (None if path == 'terms/index.html' else 'Concept dictionary'), mobile_brand=True, native_secondary=True, mobile_secondary=True, secondary_current=('encyclopedia' if path == 'terms/index.html' else None), page_label=('Concept encyclopedia' if path == 'terms/index.html' else title), topbar_title=('Concept encyclopedia' if path == 'terms/index.html' else title), rail_bottom=(path == 'terms/index.html' or expanded_concept))"));
   assert.ok(techGenerator.includes("render_directory_nav(prefix, 'Technology profiles', mobile_brand=True, native_secondary=True, mobile_secondary=True, page_label=('Technology profiles' if path == 'technology/index.html' else article_title), topbar_title=('Technology profiles' if path == 'technology/index.html' else article_title), rail_bottom=True)"));
   assert.ok(read('scripts/site_chrome.py').includes('DIRECTORY_MOBILE_CSS'));
   assert.match(read('site-chrome.css'), /\.site-mobile-chrome__menu a\{[^}]*min-height:44px/);
