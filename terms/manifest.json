@@ -151,17 +151,17 @@
   },
   "MLD-0031": {
     "path": "terms/MLD-0031-adjusted-rand-index.html",
-    "sha256": "4e413f4fc68e86f97855e7514725d33a9e8607cf2c28e2094164d4a05e161429",
+    "sha256": "4afc140bddb2e08a10d036e4b9129e4d5cc77bf0da10a85393d42be629a507cd",
     "expanded": false
   },
   "MLD-0032": {
     "path": "terms/MLD-0032-advantage.html",
-    "sha256": "e6667a5358e0e8363d5f47e4d618250744b5d1bb2110a6a970792a2e982991aa",
+    "sha256": "4b31b5e69375913ee5eeb90a5f247dc40fd96d2ff755b386d4e18248f6fd673d",
     "expanded": false
   },
   "MLD-0033": {
     "path": "terms/MLD-0033-adversarial-evaluation.html",
-    "sha256": "e785dfc6eb9d89a5b736afac1ca9ab52f22c857aa3e09e46cc37b0a9845bd8c3",
+    "sha256": "b7a3647f5a2fa9d5960d3f4df7b77b6434b461f435d46c143062baad9271881b",
     "expanded": false
   },
   "MLD-0034": {
@@ -171,7 +171,7 @@
   },
   "MLD-0035": {
     "path": "terms/MLD-0035-adversarial-loss.html",
-    "sha256": "0351c36b3e114703f446b43a80a2910c7b94be7478bd2afaa6f95a4b27a9f30a",
+    "sha256": "3ebfb76a4cfd325fa48bcba9c4edcfb6e2bcfc6722cf13b9f61048c9dbe8f971",
     "expanded": false
   },
   "MLD-0036": {
@@ -181,22 +181,22 @@
   },
   "MLD-0037": {
     "path": "terms/MLD-0037-adversarial-training.html",
-    "sha256": "561fd0dd05586fdfef227f894e436bc080a370960e5f513dbc333feb81ef95de",
+    "sha256": "8f3f05bbd3d0d2c69a5414e669711a1145308031290f606842d4d8e2db8fb41b",
     "expanded": false
   },
   "MLD-0038": {
     "path": "terms/MLD-0038-affinity-propagation.html",
-    "sha256": "8bcbfe40de269836f929bc3c2e71df4cea75b5fa067dcb36f962303013269114",
+    "sha256": "111a7d62cb59f318992eb09eecbe0d2cabb6ccca83fc1fb01533e3ccaf25c064",
     "expanded": false
   },
   "MLD-0039": {
     "path": "terms/MLD-0039-agent.html",
-    "sha256": "5f35760616ca9af3d5d7c2c130448fb9db37b3365783046bc3ac515d94bc037d",
+    "sha256": "8f41a02bfd96db94f04451ef20adb47433217889529c9cd78840e0c77ebf4a56",
     "expanded": false
   },
   "MLD-0040": {
     "path": "terms/MLD-0040-agent-containment.html",
-    "sha256": "1e68b786a495f740748c448e249b99af912c1dae9064a0722cbbcfbebed590ac",
+    "sha256": "8874157f2072da2ab78fbcb984b936cc7ad97364befba05bdd35bf0c9b151ef4",
     "expanded": false
   },
   "MLD-0041": {
