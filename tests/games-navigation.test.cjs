@@ -73,7 +73,7 @@ test('Offline fallback embeds Games without redirecting learners to another site
 
 test('first-paint sidebar uses the same canonical workspace destinations as hydration', () => {
   const html=read('index.html'),app=read('app.js');
-  const nav=html.match(/<div id="navigation">([\s\S]*?)<\/details><\/div><div class="sidebar-bottom">/)?.[1];
+  const nav=html.match(/<div id="navigation">([\s\S]*?<\/details>)<\/div><div class="sidebar-bottom">/)?.[1];
   assert.ok(nav);
   const links=[...nav.matchAll(/<a class="nav-link(?: active)?"([^>]*)>[\s\S]*?<\/a>/g)].map(m=>({
     id:m[1].match(/data-(?:view|static)="([^"]+)"/)?.[1],href:m[1].match(/href="([^"]+)"/)?.[1]
@@ -118,7 +118,7 @@ test('Discover primary links reuse the seven canonical destinations without dupl
 
 test('progressive sidebar retains all canonical links and reveals deep-linked secondary views', () => {
   const html=read('index.html'), app=read('app.js'), css=read('brand.css');
-  const nav=html.match(/<div id="navigation">([\s\S]*?)<\/details><\/div><div class="sidebar-bottom">/)?.[1];
+  const nav=html.match(/<div id="navigation">([\s\S]*?<\/details>)<\/div><div class="sidebar-bottom">/)?.[1];
   assert.ok(nav);
   assert.match(nav, /<details class="nav-more" id="additional-navigation"><summary class="nav-more-toggle">/);
   assert.ok(!nav.includes('id="additional-navigation" open'), 'Secondary links should be collapsed on initial paint');
