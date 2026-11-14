@@ -51,32 +51,32 @@
   },
   "MLD-0011": {
     "path": "terms/MLD-0011-activation.html",
-    "sha256": "6c3fa8ced0f17db031e8b56765246d71c22d9a6230967a80e666c575ba11339c",
+    "sha256": "59294bca103fe6adae2e9f6fc1371286a75de2c229976ed30b2d05cf119498b6",
     "expanded": false
   },
   "MLD-0012": {
     "path": "terms/MLD-0012-activation-checkpointing.html",
-    "sha256": "3e2aca8ccd250d429d63520129086c08dd9244b4ce8baa67351688656af220a9",
+    "sha256": "d6639423e941a4feef689cbe18a7789cb62e15923a4f204ff307b5982df94f8b",
     "expanded": false
   },
   "MLD-0013": {
     "path": "terms/MLD-0013-activation-function.html",
-    "sha256": "25ce4400344435003ff9ab2f15158e778c5425f9ba149fd595aaa26b826bdcf2",
+    "sha256": "01da7f0df23ac10e6285ac84edd25f70af81e76ee22df8f6e524d84578a4a678",
     "expanded": false
   },
   "MLD-0014": {
     "path": "terms/MLD-0014-activation-patching.html",
-    "sha256": "8575cc65f8fb9715d05eae0248fa8a8a69bda0613e62f2b0bcc5c09ed3e9a168",
+    "sha256": "01349c8f9cb8e229020abc681600d4688d5bac3dd5ab1acc2bd6af84e58dcb43",
     "expanded": false
   },
   "MLD-0015": {
     "path": "terms/MLD-0015-activation-quantization.html",
-    "sha256": "0f0db6317b8fa3cba3d3bb04db824ca815594f263405d9ef50dfe3c46dafe471",
+    "sha256": "b22c9c65f51601bb71c475351b1b8d690453cc395626759ee1845d4aa9f3f379",
     "expanded": false
   },
   "MLD-0016": {
     "path": "terms/MLD-0016-activation-steering.html",
-    "sha256": "eab89e6c114221d6481d780753a9b8cfed147c86494119dc8be359f7bc9df839",
+    "sha256": "0f59ec512b20dab256642682ffe100ff86878e111ee946523ef9342987b8ac87",
     "expanded": false
   },
   "MLD-0017": {
@@ -86,17 +86,17 @@
   },
   "MLD-0018": {
     "path": "terms/MLD-0018-active-learning.html",
-    "sha256": "4779ab2532a1c79c29dba6edb64bc26d0cac466f4bfe423b29b2c8cc64b9bd3c",
+    "sha256": "d6db34400a548fe3d434faaebef9f3c2d39320326191af5ba16d8c55fbc7bc5c",
     "expanded": false
   },
   "MLD-0019": {
     "path": "terms/MLD-0019-active-parameters.html",
-    "sha256": "1dd0549a34bab09468ee58a135fe8587feade09db230aa600bf646408cc74f45",
+    "sha256": "c7d98df4641394fa6bc58a1aff51fe4a2d5f2eaa7d4f51a14a5efebcee1b3545",
     "expanded": false
   },
   "MLD-0020": {
     "path": "terms/MLD-0020-actor.html",
-    "sha256": "6a493556f3e20a90ec2d35f0dadc90b2a162bb41e08dda739ba89c3b4810a4b0",
+    "sha256": "f82cfde2cb236cf62f6365024823697fc4a2eae7c720a77d5900a4bf6c047a78",
     "expanded": false
   },
   "MLD-0021": {
