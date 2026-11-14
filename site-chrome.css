@@ -1081,3 +1081,23 @@ main.term-shell > footer:not(.site-chrome__footer) a{color:var(--accent,#27664e)
   }
 }
 /* atlas-unified-mobile-search-submit:end */
+
+/* Shared rail footer: the existing Discover markup and the hydrated native
+   page families use the same .sidebar-bottom CSS, not page-specific copies. */
+.sidebar-bottom{margin-top:auto;padding:45px 12px 0}
+.snapshot{display:flex;gap:10px;align-items:flex-start;font-size:11px;color:#e0e7de}
+.snapshot i{width:6px;height:6px;background:#deb58b;border-radius:50%;margin-top:7px}
+.snapshot small{display:block;font-size:10px;color:#9baa9d;margin-top:3px}
+.sidebar-bottom p{font:15px/1.6 Georgia,serif;color:#a7b4a8;margin:22px 0 18px}
+.sidebar-bottom>a{font-size:10px;color:#bdcbbc}
+.sidebar-actions{display:flex;justify-content:space-between;align-items:center;margin-top:22px;color:#859888;font-size:10px}
+.sidebar-actions .icon-button{border-color:#435446;color:#d2dfd3;background:none}
+@media(min-width:651px){
+  .site-chrome .sidebar-bottom{width:100%;box-sizing:border-box;padding:32px 12px 0}
+  .site-chrome .sidebar-actions .site-chrome__theme-toggle--rail{
+    width:44px;height:44px;min-height:44px;padding:0;margin:0;
+    flex:0 0 44px;justify-content:center;border:1px solid #435446;
+    color:#d2dfd3;background:none;
+  }
+  .site-chrome .sidebar-actions .site-chrome__theme-toggle--rail:hover{color:#fff;background:#374b3c}
+}

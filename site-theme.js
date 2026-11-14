@@ -272,6 +272,48 @@ if (typeof window !== 'undefined' && window.addEventListener) {
 // Discover's sidebar action and Games' existing header action must expose
 // the same pressed state as the native theme actions on standalone pages.
 // Keep their existing accessible names and click handlers intact.
+/* Discover and native rails share the same sidebar-bottom structure and CSS.
+   Retain script-free native navigation when JS is disabled. */
+function buildSharedRailBottom(rail) {
+  if (!rail) return null;
+  const previous = rail.querySelector('.sidebar-bottom');
+  if (previous) return previous;
+  const home = rail.querySelector('.site-chrome__brand')?.getAttribute('href') || '';
+  const suffix = 'index.html#/overview';
+  if (!home.endsWith(suffix)) return null;
+  const prefix = home.slice(0, -suffix.length);
+  const bottom = document.createElement('div');
+  bottom.className = 'sidebar-bottom site-chrome__bottom';
+  const snapshot = document.createElement('div');
+  snapshot.className = 'snapshot';
+  const dot = document.createElement('i');
+  dot.setAttribute('aria-hidden', 'true');
+  const description = document.createElement('span');
+  description.append('Research snapshot');
+  const date = document.createElement('small');
+  date.textContent = 'November 1, 2026';
+  description.append(date);
+  snapshot.append(dot, description);
+  const motto = document.createElement('p');
+  motto.append('Sources, not speculation.', document.createElement('br'), 'Tradeoffs, not rankings.');
+  const coverage = document.createElement('a');
+  coverage.href = prefix + 'index.html#/sources';
+  coverage.textContent = 'Coverage & collection status ↗';
+  const actions = document.createElement('div');
+  actions.className = 'sidebar-actions';
+  const sourced = document.createElement('span');
+  sourced.textContent = 'Curated & sourced';
+  actions.append(sourced);
+  bottom.append(snapshot, motto, coverage, actions);
+  rail.append(bottom);
+  return bottom;
+}
+function syncSharedThemeAction(button, theme) {
+  button.setAttribute('aria-pressed', String(theme === 'dark'));
+  button.textContent = button.classList.contains('site-chrome__theme-toggle--rail') ?
+    '◐' : '◐  ' + (theme === 'dark' ? 'Dark' : 'Light') + ' theme';
+}
+
 function syncPrimaryThemeButton(theme) {
   document.getElementById?.('theme-toggle')?.setAttribute('aria-pressed', String(theme === 'dark'));
 }
@@ -280,8 +322,7 @@ function syncSharedStoredTheme(theme) {
   document.documentElement.dataset.theme = theme;
   syncPrimaryThemeButton(theme);
   document.querySelectorAll('.site-chrome__theme-toggle').forEach(button => {
-    button.setAttribute('aria-pressed', String(theme === 'dark'));
-    button.textContent = '◐  ' + (theme === 'dark' ? 'Dark' : 'Light') + ' theme';
+    syncSharedThemeAction(button, theme);
   });
 }
 function restoreSharedThemeAfterHistory() {
@@ -412,7 +453,9 @@ document.addEventListener('DOMContentLoaded', () => {
   if (typeof document.createElement === 'function' && menu) {
     const rail = document.querySelector('.site-chrome');
     const existing = document.getElementById?.('theme-toggle');
-    const containers = rail && !existing ? [rail, menu] :
+    const railBottom = buildSharedRailBottom(rail);
+    const desktopAction = railBottom?.querySelector('.sidebar-actions');
+    const containers = rail && !existing && desktopAction ? [desktopAction, menu] :
       existing ? [menu] : [];
     if (containers.length && !menu.querySelector('.site-chrome__theme-toggle')) {
       const controls = [];
@@ -422,14 +465,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const theme = effectiveTheme();
         syncPrimaryThemeButton(theme);
         controls.forEach(button => {
-          button.setAttribute('aria-pressed', String(theme === 'dark'));
-          button.textContent = '◐  ' + (theme === 'dark' ? 'Dark' : 'Light') + ' theme';
+          syncSharedThemeAction(button, theme);
         });
       };
       for (const container of containers) {
         const button = document.createElement('button');
         button.type = 'button';
-        button.className = 'site-chrome__theme-toggle';
+        button.className = 'site-chrome__theme-toggle' +
+          (container === desktopAction ? ' site-chrome__theme-toggle--rail icon-button' : '');
         button.setAttribute('aria-label', 'Toggle color theme');
         button.addEventListener('click', () => {
           const chosen = effectiveTheme() === 'dark' ? 'light' : 'dark';
@@ -438,7 +481,8 @@ document.addEventListener('DOMContentLoaded', () => {
           catch (_) { /* Theme still changes when persistence is unavailable. */ }
           syncThemeButtons();
         });
-        container.append(button);
+        if (container === desktopAction) container.prepend(button);
+        else container.append(button);
         controls.push(button);
       }
       // Discover's app-level click handler may be registered after this head

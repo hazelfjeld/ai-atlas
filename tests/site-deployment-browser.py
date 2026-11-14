@@ -956,8 +956,12 @@ with sync_playwright() as p:
     # Discover. Standalone articles previously had no way to change themes.
     theme_page.set_viewport_size({'width':1280, 'height':844})
     theme_page.goto(base + 'about.html')
-    rail_theme = theme_page.locator('.site-chrome > .site-chrome__theme-toggle')
-    check('editorial desktop rail exposes the existing theme action',
+    rail_theme = theme_page.locator('.site-chrome .sidebar-bottom .site-chrome__theme-toggle--rail')
+    check('native rail uses Discover sidebar bottom and the real coverage route',
+          theme_page.locator('.site-chrome .sidebar-bottom .snapshot').inner_text().startswith('Research snapshot')
+          and theme_page.locator('.site-chrome .sidebar-bottom a[href="index.html#/sources"]').count() == 1
+          and theme_page.locator('.site-chrome .sidebar-actions').count() == 1)
+    check('editorial desktop rail exposes shared appearance action',
           rail_theme.is_visible() and
           rail_theme.get_attribute('aria-label') == 'Toggle color theme' and
           rail_theme.get_attribute('aria-pressed') == 'false')
@@ -966,6 +970,9 @@ with sync_playwright() as p:
           theme_page.evaluate("document.documentElement.dataset.theme === 'dark' && localStorage.getItem('atlas.theme') === 'dark'") and
           rail_theme.get_attribute('aria-pressed') == 'true')
     theme_page.goto(base + 'technologies.html')
+    check('technology directory reuses the rail-bottom component',
+          theme_page.locator('.site-chrome .sidebar-bottom a[href="index.html#/sources"]').count() == 1
+          and theme_page.locator('.site-chrome .sidebar-bottom .site-chrome__theme-toggle--rail').count() == 1)
     check('technology directory preserves the theme chosen on About',
           theme_page.evaluate("document.documentElement.dataset.theme === 'dark'"))
     theme_page.set_viewport_size({'width':390, 'height':844})
