@@ -308,13 +308,11 @@ def render_standalone_nav(path):
         desktop_classes="site-chrome " + desktop, labeled=labeled, current_kind=kind,
         page_label=page_title, topbar_title=page_title,
         mobile_brand=True, native_secondary=True, mobile_secondary=True,
-        secondary_current=secondary_current,
+        secondary_current=secondary_current, rail_bottom=True,
     )
-    # Each page owns its article landmark. Keep navigation outside <main>,
-    # matching the existing editorial and reference landing pages. Render
-    # the shared lower rail before JS so it never pops into view after load.
-    assert markup.endswith('</nav>')
-    return markup[:-len('</nav>')] + render_static_rail_bottom() + '</nav>'
+    # All native and reference rails now use the same first-paint component
+    # boundary. Keep each page's article landmark outside this navigation.
+    return markup
 
 
 # Discover has a distinct interactive sidebar, but uses the same canonical

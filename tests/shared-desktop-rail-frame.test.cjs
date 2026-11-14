@@ -90,7 +90,7 @@ test('native editorial families render the shared rail bottom before hydration',
   const generator = read('scripts/site_chrome.py');
   const css = read('site-chrome.css');
   assert.match(generator, /def render_static_rail_bottom\(prefix=""/);
-  assert.match(generator, /render_static_rail_bottom\(\) \+ '<\/nav>'/);
+  assert.match(generator, /secondary_current=secondary_current, rail_bottom=True/);
   assert.match(script, /const previous = rail\.querySelector\('\.sidebar-bottom'\)/);
   assert.match(script, /if \(previous\) return previous;/);
   assert.match(css, /\.site-chrome \.sidebar-bottom/);
@@ -133,4 +133,23 @@ test('reference landing directories and About expose one shared lower desktop ra
     assert.ok(rail.includes('<details class="site-chrome__more"'), page + ' retains all secondary destinations');
     assert.match(html, /<details class="site-mobile-chrome__nav"[^>]*>/, page + ' retains its script-free mobile menu');
   }
+});
+
+test('the same generator owns all eight native first-paint rails without fragile closing-tag surgery', () => {
+  const generator = read('scripts/site_chrome.py');
+  assert.doesNotMatch(generator, /markup\[:-len\('<\\/nav>'\)\]/,
+    'native pages must not splice inside a generated nav element');
+  const { execFileSync } = require('node:child_process');
+  const probe = [
+    'import sys',
+    'from pathlib import Path',
+    'sys.path.insert(0, "scripts")',
+    'from site_chrome import STANDALONE_NAVS, render_standalone_nav',
+    'for page in STANDALONE_NAVS:',
+    '    html = Path(page).read_text(encoding="utf-8")',
+    '    nav = render_standalone_nav(page)',
+    '    assert html.count(nav) == 1, page',
+    '    assert nav.count(\'<div class="sidebar-bottom site-chrome__bottom">\') == 1, page',
+  ].join('\\n');
+  execFileSync('python3', ['-c', probe], { cwd: require('node:path').resolve(__dirname, '..'), stdio: 'pipe' });
 });
