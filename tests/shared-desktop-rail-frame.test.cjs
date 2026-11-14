@@ -79,3 +79,31 @@ test('Discover and standalone rail share the native More sections disclosure and
   assert.match(offline, /<details class="nav-more" id="additional-navigation">/);
   assert.match(offline, /<div class="nav-more-links">/);
 });
+
+test('native editorial families render the shared rail bottom before hydration', () => {
+  const paths = [
+    'whats-new.html', 'research.html', 'games.html', 'playbooks.html',
+    'technologies.html', 'catalog-review.html', 'hardware-review.html', 'demo.html',
+  ];
+  const discover = read('index.html');
+  const script = read('site-theme.js');
+  const generator = read('scripts/site_chrome.py');
+  const css = read('site-chrome.css');
+  assert.match(generator, /def render_static_rail_bottom\(prefix=""/);
+  assert.match(generator, /render_static_rail_bottom\(\) \+ '<\\/nav>'/);
+  assert.match(script, /const previous = rail\.querySelector\('\.sidebar-bottom'\)/);
+  assert.match(script, /if \(previous\) return previous;/);
+  assert.match(css, /\.site-chrome \.sidebar-bottom/);
+  for (const path of paths) {
+    const page = read(path);
+    const rail = page.match(/<nav class="site-chrome [^"]+" aria-label="AI Updates primary navigation">([\\s\\S]*?)<\\/nav>/)?.[1];
+    assert.ok(rail, path + ' has a native global rail');
+    assert.equal((rail.match(/class="sidebar-bottom site-chrome__bottom"/g) || []).length, 1, path);
+    assert.match(rail, /Research snapshot<small>November 1, 2026<\\/small>/, path);
+    assert.match(rail, /href="index\.html#\\/sources">Coverage & collection status/, path);
+    assert.match(rail, /class="sidebar-actions"><span>Curated & sourced<\\/span>/, path);
+    assert.match(rail, /<details class="site-chrome__more">/, path);
+    assert.match(page, /site-mobile-chrome__nav/, path + ' retains script-free mobile navigation');
+  }
+  assert.match(discover, /<div class="sidebar-bottom">/, 'Discover retains its original shared rail footer');
+});

@@ -263,6 +263,24 @@ STANDALONE_NAVS = {
 }
 
 
+
+def render_static_rail_bottom(prefix=""):
+    """First-paint native rail bottom matching Discover, including without JS.
+
+    site-theme.js hydrates its existing actions instead of inserting a second
+    bottom. The same fallback builder remains for immutable reference details.
+    """
+    assert prefix in ("", "../")
+    return (
+        '<div class="sidebar-bottom site-chrome__bottom">'
+        '<div class="snapshot"><i aria-hidden="true"></i><span>Research snapshot'
+        '<small>November 1, 2026</small></span></div>'
+        '<p>Sources, not speculation.<br>Tradeoffs, not rankings.</p>'
+        '<a href="' + prefix + 'index.html#/sources">Coverage & collection status ↗</a>'
+        '<div class="sidebar-actions"><span>Curated & sourced</span></div></div>'
+    )
+
+
 def render_standalone_nav(path):
     (mobile, details, details_id, toggle, menu, search, icon, label, desktop, selected, kind, labeled) = STANDALONE_NAVS[path]
     def classes(extra, core):
@@ -292,8 +310,10 @@ def render_standalone_nav(path):
         secondary_current=secondary_current,
     )
     # Each page owns its article landmark. Keep navigation outside <main>,
-    # matching the existing editorial and reference landing pages.
-    return markup
+    # matching the existing editorial and reference landing pages. Render
+    # the shared lower rail before JS so it never pops into view after load.
+    assert markup.endswith('</nav>')
+    return markup[:-len('</nav>')] + render_static_rail_bottom() + '</nav>'
 
 
 # Discover has a distinct interactive sidebar, but uses the same canonical
