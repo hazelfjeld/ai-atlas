@@ -29,8 +29,9 @@ test('Discover and native families share a desktop rail layout source of truth',
 
 test('one shared frame preserves native navigation and the offline standalone', () => {
   const discover = read('index.html'), native = read('whats-new.html');
-  assert.match(discover, /<aside class="sidebar" id="sidebar">/);
-  assert.match(discover, /<nav id="navigation" aria-label="Main navigation">/);
+  assert.match(discover, /<nav class="sidebar" id="sidebar" aria-label="AI Updates primary navigation">/);
+  assert.match(discover, /<div id="navigation">/);
+  assert.doesNotMatch(discover, /<aside class="sidebar"|<nav id="navigation"/, 'one desktop navigation landmark');
   assert.match(native, /<nav class="site-chrome/);
   assert.match(native, /site-mobile-chrome__nav/);
   assert.match(native, /href="index\.html#\/search"/);
@@ -41,7 +42,7 @@ test('one shared frame preserves native navigation and the offline standalone', 
 
 test('Discover primary rail uses the native primary-link DOM wrapper without changing SPA routes', () => {
   const discover = read('index.html'), native = read('whats-new.html');
-  const main = discover.match(/<nav id="navigation" aria-label="Main navigation"><div class="site-chrome__links">([\s\S]*?)<\/div><details class="nav-more"/)?.[1];
+  const main = discover.match(/<div id="navigation"><div class="site-chrome__links">([\s\S]*?)<\/div><details class="nav-more"/)?.[1];
   const staticRail = native.match(/<div class="site-chrome__links">([\s\S]*?)<\/div>/)?.[1];
   assert.ok(main && staticRail, 'both desktop families expose the same link-list structure');
   const discoverLinks = [...main.matchAll(/<a class="nav-link(?: active)?"[^>]*href="([^"]+)"[^>]*>[\s\S]*?<span>([^<]+)<\/span>/g)]
@@ -54,7 +55,8 @@ test('Discover primary rail uses the native primary-link DOM wrapper without cha
   assert.match(read('scripts/site_chrome.py'), /primary_wrapper = '<div class="site-chrome__links">'/);
   const offline = read('downloads/Atlas_Demo_Offline.html');
   assert.ok(offline.includes(css), 'single-file fallback uses the updated shared stylesheet');
-  assert.match(offline, /<nav id="navigation" aria-label="Main navigation"><div class="site-chrome__links">/);
+  assert.match(offline, /<div id="navigation"><div class="site-chrome__links">/);
+  assert.match(offline, /<nav class="sidebar" id="sidebar" aria-label="AI Updates primary navigation">/);
 });
 
 

@@ -134,12 +134,20 @@ class SEOPublication(unittest.TestCase):
     def test_discover_primary_nav_is_generated_from_the_shared_canonical_routes(self):
         source = (ROOT / 'index.html').read_text(encoding='utf-8')
         pub = json.loads((ROOT / 'publication.json').read_text(encoding='utf-8'))['published_counts']
-        begin = '<nav id="navigation" aria-label="Main navigation">'
+        begin = '<div id="navigation">'
         primary = source.split(begin, 1)[1].split('<details class="nav-more"', 1)[0]
         self.assertEqual(len(DESTINATIONS), 7)
         self.assertEqual(primary, '<div class="site-chrome__links">' +
                          render_discover_primary(pub['terms'], pub['technologies']) + '</div>')
         self.assertEqual(normalize_discover_sidebar(source, pub['terms'], pub['technologies']), source)
+        self.assertIn('<nav class="sidebar" id="sidebar" aria-label="AI Updates primary navigation">', source)
+        self.assertIn('</details></div><div class="sidebar-bottom">', source)
+        self.assertNotIn('<aside class="sidebar" id="sidebar">', source)
+        legacy = (source.replace('<nav class="sidebar" id="sidebar" aria-label="AI Updates primary navigation">', '<aside class="sidebar" id="sidebar">', 1)
+                        .replace('<div id="navigation">', '<nav id="navigation" aria-label="Main navigation">', 1)
+                        .replace('</details></div><div class="sidebar-bottom">', '</details></nav><div class="sidebar-bottom">', 1)
+                        .replace('</nav><div class="workspace">', '</aside><div class="workspace">', 1))
+        self.assertEqual(normalize_discover_sidebar(legacy, pub['terms'], pub['technologies']), source)
         # Editing a stale first-paint label or URL must not create a second source
         # of truth: rebuilding restores the generated canonical destinations.
         drifted = source.replace('>What’s New Today</span>', '>Different news</span>', 1)

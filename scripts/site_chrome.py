@@ -404,21 +404,37 @@ def render_discover_mobile():
 
 
 def normalize_discover_sidebar(html, term_count, tech_count):
-    """Generate canonical Discover primary navigation; preserve native extras.
+    """Normalize the shared semantic desktop rail and canonical Discover links.
 
-    Keep the existing sidebar shell, details/secondary routes, SVG icons and
-    hydration hooks. Fail on unexpected input instead of silently dropping
-    navigation during a rebuild.
+    The outer desktop container now matches the native pages' <nav> landmark,
+    with #navigation retained as a plain hydration and link-list hook. Migrate
+    older aside/nested-nav snapshots once, then remain idempotent on rebuild.
     """
     import re
-    marker = '<nav id="navigation" aria-label="Main navigation">'
+    marker = '<div id="navigation">'
+    legacy = '<nav id="navigation" aria-label="Main navigation">'
+    if legacy in html:
+        assert html.count(legacy) == html.count('<aside class="sidebar" id="sidebar">') == 1
+        html = html.replace('<aside class="sidebar" id="sidebar">',
+                            '<nav class="sidebar" id="sidebar" aria-label="AI Updates primary navigation">', 1)
+        html = html.replace(legacy, marker, 1)
+        assert html.count('</details></nav><div class="sidebar-bottom">') == 1
+        html = html.replace('</details></nav><div class="sidebar-bottom">',
+                            '</details></div><div class="sidebar-bottom">', 1)
+        assert html.count('</aside><div class="workspace">') == 1
+        html = html.replace('</aside><div class="workspace">',
+                            '</nav><div class="workspace">', 1)
     assert html.count(marker) == 1, 'Unexpected Discover navigation structure'
+    assert html.count('<nav class="sidebar" id="sidebar" aria-label="AI Updates primary navigation">') == 1
+    assert html.count('</details></div><div class="sidebar-bottom">') == 1
+    assert html.count('</nav><div class="workspace">') == 1
     before, rest = html.split(marker, 1)
-    nav, after = rest.split('</nav>', 1)
-    assert nav.count('<details class="nav-more"') == 1
-    original_primary, secondary = nav.split('<details class="nav-more"', 1)
-    # Discover and native pages share the same primary-link DOM container.
-    # Accept the older flat sidebar only during migration; repeated builds stay idempotent.
+    disclosure = '<details class="nav-more"'
+    assert rest.count(disclosure) == 1
+    original_primary, trailing = rest.split(disclosure, 1)
+    secondary_tail, after = trailing.split('</details></div><div class="sidebar-bottom">', 1)
+    secondary = disclosure + secondary_tail + '</details>'
+    assert secondary.count('<div class="nav-more-links">') == 1
     primary_wrapper = '<div class="site-chrome__links">'
     if original_primary.startswith(primary_wrapper):
         assert original_primary.endswith('</div>'), 'Malformed Discover primary-link wrapper'
@@ -432,12 +448,11 @@ def normalize_discover_sidebar(html, term_count, tech_count):
     assert existing_keys == [key for key, _, _ in DISCOVER_LINKS], (
         'Unexpected Discover primary links: ' + repr(existing_keys)
     )
-    secondary = '<details class="nav-more"' + secondary
     secondary = sync_discover_secondary(secondary)
     assert 'data-view="playbooks"' not in secondary, 'Playbooks must appear only once'
     normalized = (before + marker + primary_wrapper +
                   render_discover_primary(term_count, tech_count) +
-                  '</div>' + secondary + '</nav>' + after)
+                  '</div>' + secondary + '</div><div class="sidebar-bottom">' + after)
     mobile = render_discover_mobile()
     old_button = '<button id="menu-toggle" class="icon-button mobile-only" aria-label="Toggle navigation" aria-controls="sidebar" aria-expanded="false">☰</button>'
     native_pattern = r'<div class="site-mobile-chrome discover-mobile-chrome"[^>]*>.*?</nav></details></div>'
