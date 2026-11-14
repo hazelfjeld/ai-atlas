@@ -251,52 +251,52 @@
   },
   "MLD-0051": {
     "path": "terms/MLD-0051-alignment-tax.html",
-    "sha256": "f02d6b4264dc280108d12a2a9c59eb0f0786f754328c2e04b2270aef2975ebeb",
+    "sha256": "9624d3ed4a5ffbeea8508ece3fe10604966f23d0963c83dca71aff18c78e5ff5",
     "expanded": false
   },
   "MLD-0052": {
     "path": "terms/MLD-0052-all-gather.html",
-    "sha256": "c87a5652e7943a5411bb180e5e31b192fbda8097fa3cd455ecaee18cc5c8716c",
+    "sha256": "5af8229ebf5495a39b1f2d62b1b59115d003396ff39a150129dabf1602fa9c05",
     "expanded": false
   },
   "MLD-0053": {
     "path": "terms/MLD-0053-all-reduce.html",
-    "sha256": "485cdf56bc4e528e10b2d4df34103c4a46daaa2de915645956413d026ec25d56",
+    "sha256": "5e2abbdbb949081da0eaf2732fe12be50fc31e96a2ead0f10b78ccc5f1d2d65e",
     "expanded": false
   },
   "MLD-0054": {
     "path": "terms/MLD-0054-alternative-hypothesis.html",
-    "sha256": "8e2c75fdd59392e1a565608a5ba5df5f48293b70c8c30e126e9116e18ff65c56",
+    "sha256": "f6906a864873cb9ecfc9592a8253d309fb71f26c0c2a6a82eede7fa11e50d2f6",
     "expanded": false
   },
   "MLD-0055": {
     "path": "terms/MLD-0055-annotation.html",
-    "sha256": "73a74c508ea01b92d3a354594dbf08838bc46eaea5a8961d31272b4a273d2344",
+    "sha256": "c9b9a6905bc663e2d4e6567a7f41044a7906e8985650127b594c7b8d1e2131de",
     "expanded": false
   },
   "MLD-0056": {
     "path": "terms/MLD-0056-anomaly-detection.html",
-    "sha256": "c298edbc9ba1d0e0357d814194d833dcba32a8c394aab2bd70b246ae7b75459a",
+    "sha256": "ed1ad95d298504805c02a49f6b2a9cd1534272cdf3fe2481627053c97e19eb86",
     "expanded": false
   },
   "MLD-0057": {
     "path": "terms/MLD-0057-answer-normalization.html",
-    "sha256": "67dfc7126da12f96931d1e21ec05be9f8781ba8ee93f17f1262289a710bf2dfa",
+    "sha256": "4207d2d8c026878153f4aca18f77b0ab8b69a03332d223df680cd7bb260fc2ba",
     "expanded": false
   },
   "MLD-0058": {
     "path": "terms/MLD-0058-answer-relevance.html",
-    "sha256": "0975e984366767dd726aa3e03e10c8d38049fe4232d79392d60b2ea22bf118cf",
+    "sha256": "c9303854eab3a34428999fd6b910f196c3c10462f36dc6d5c6c11420707ca686",
     "expanded": false
   },
   "MLD-0059": {
     "path": "terms/MLD-0059-approximate-nearest-neighbor-search.html",
-    "sha256": "dc887c430eea02c6f5b7da51293a2ba7dd147496014a052bc7863e7bd807506f",
+    "sha256": "6e4966ef6c585360768e35b9855181d31bbd5e754b4aaaaa573a11feb2b7c823",
     "expanded": false
   },
   "MLD-0060": {
     "path": "terms/MLD-0060-architecture.html",
-    "sha256": "33567e8e9312a13fce24daa8c9dec704f8f6b2dc92b3eb4c64a555e5041d4f3a",
+    "sha256": "bcc4ea938b0bcc7d43fc7d6b7fd30975cd9fc4f3e0e9eca968e583c3c9ba5142",
     "expanded": false
   },
   "MLD-0061": {
