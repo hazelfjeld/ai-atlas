@@ -44,6 +44,60 @@ with sync_playwright() as p:
     page.goto(base)
     page.locator('#navigation a[href="#/games"]').wait_for()
     check('homepage retains original Atlas shell and native Games tab', page.locator('.app-shell').count() == 1)
+    # One real submit action now belongs to both search layouts. Discover
+    # retains its useful desktop '/' hint, while phone visitors can submit
+    # the same input with a visible 36px button as on standalone pages.
+    for scheme in ('light', 'dark'):
+        for width in (320, 390, 768, 1280):
+            submit_page = browser.new_page(
+                viewport={'width': width, 'height': 844},
+                color_scheme=scheme, reduced_motion='reduce')
+            submit_page.goto(base + 'index.html')
+            submit_button = submit_page.locator(
+                '#global-search > button.site-mobile-chrome__search-submit')
+            check('shared Discover submit only appears on mobile ' +
+                  scheme + ' ' + str(width),
+                  submit_button.count() == 1 and
+                  submit_button.is_visible() == (width <= 650) and
+                  submit_page.locator('#global-search').count() == 1)
+            if width <= 650:
+                frame = submit_page.locator('#global-search').bounding_box()
+                menu = submit_page.locator(
+                    '#discover-mobile-nav > summary').bounding_box()
+                check('Discover search and mobile menu share a 44px row ' +
+                      scheme + ' ' + str(width),
+                      frame is not None and menu is not None
+                      and abs(frame['height'] - 44) <= 1
+                      and abs(frame['y'] - menu['y']) <= 2)
+                if width == 390:
+                    submit_page.screenshot(
+                        path=str(out / ('discover-submit-' + scheme + '-390.png')))
+                submit_page.locator('#global-query').fill('reward hacking')
+                submit_page.wait_for_function(
+                    "() => !document.getElementById('catalog-loading')",
+                    timeout=45000)
+                submit_button.click()
+                submit_page.wait_for_function(
+                    """() => location.hash.startsWith('#/search?q=') &&
+                    new URLSearchParams(location.hash.split('?')[1]).get('q') === 'reward hacking'""",
+                    timeout=15000)
+                check('shared Discover submit executes real search ' +
+                      scheme + ' ' + str(width),
+                      submit_page.evaluate(
+                          "new URLSearchParams(location.hash.split('?')[1]).get('q')") ==
+                      'reward hacking')
+            submit_page.close()
+    # Scriptless Discover retains exactly its original input and fallback
+    # references; no extra dead button appears as an apparent search action.
+    nojs_submit = browser.new_page(viewport={'width': 390, 'height': 844},
+                                   java_script_enabled=False)
+    nojs_submit.goto(base + 'index.html')
+    check('script-free Discover does not advertise an inert submit button',
+          nojs_submit.locator('#global-query').is_visible()
+          and not nojs_submit.locator(
+              '#global-search > button.site-mobile-chrome__search-submit').is_visible()
+          and nojs_submit.locator('noscript a[href="terms/index.html"]').count() == 1)
+    nojs_submit.close()
     # Discover's desktop workspace title is a real text node. Native article
     # families must provide the same accessible heading instead of a CSS-only
     # pseudo-element; the compact mobile drawer retains its original layout.

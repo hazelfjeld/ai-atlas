@@ -1062,3 +1062,22 @@ main.term-shell > footer:not(.site-chrome__footer) a{color:var(--accent,#27664e)
   #main{scroll-margin-top:80px}
 }
 /* atlas-mobile-skip-clearance:end */
+
+/* atlas-unified-mobile-search-submit:begin */
+/* Reuse the same real submit control from the generated native search form
+   in Discover. Keep desktop's slash shortcut hint; never expose an inert
+   submit button on the no-JavaScript fallback. */
+.global-search > .site-mobile-chrome__search-submit{display:none}
+@media(max-width:650px){
+  html.atlas-enhanced .topbar:has(.discover-mobile-chrome) .global-search{
+    /* 36px shared submit + 3px top/bottom + 2px border = 44px. */
+    padding-block:3px;
+  }
+  html.atlas-enhanced .topbar:has(.discover-mobile-chrome) .global-search > .site-mobile-chrome__search-submit{
+    display:grid;
+  }
+  .topbar:has(.discover-mobile-chrome) .global-search > input{
+    flex:1 1 auto;min-width:0;width:0;
+  }
+}
+/* atlas-unified-mobile-search-submit:end */
