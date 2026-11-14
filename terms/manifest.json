@@ -101,52 +101,52 @@
   },
   "MLD-0021": {
     "path": "terms/MLD-0021-actor-critic.html",
-    "sha256": "7918d0d0cbe619cbe4268a8ca08d7c8ddda79511de550eb57f631db481de80c3",
+    "sha256": "9c96dde446e4a90b74b8f31df6d9a7f7e2120e397b7773883c35ade23f34c0d7",
     "expanded": false
   },
   "MLD-0022": {
     "path": "terms/MLD-0022-adaboost.html",
-    "sha256": "b68c317ee7684dc5dbcc4d0eb4de90ded221946a33dceed97ba675e6eb99fe71",
+    "sha256": "1e14175240760a9ab4305457a8438fb9fc88de18243b7e091413dc913f7f6e8a",
     "expanded": false
   },
   "MLD-0023": {
     "path": "terms/MLD-0023-adafactor.html",
-    "sha256": "2d4a597d1a822c824d2bbc2ec47536138165e0a9c540652442a85b58108fd2b0",
+    "sha256": "8142d9a407e7691578830b570057a5c51fbab912dd7844d5238eb3cca48f8055",
     "expanded": false
   },
   "MLD-0024": {
     "path": "terms/MLD-0024-adagrad.html",
-    "sha256": "e2e8008ebb9199b1284c862630b72e4d282a2f8b68de72656b1906e1e36fcf83",
+    "sha256": "f8b6de7948b05cf83d9d7e03391e5c3eb02d1470163059f9b1ae1785cfbb3e57",
     "expanded": false
   },
   "MLD-0025": {
     "path": "terms/MLD-0025-adam.html",
-    "sha256": "247a4d28230712bad8542f27cd94c20f79982920d2c12612f1eda251c4bfe94b",
+    "sha256": "1d06d70a66891d2e355bad5cf9ada0ca6dd1dc94885e6c840888ee9e7a0ef624",
     "expanded": false
   },
   "MLD-0026": {
     "path": "terms/MLD-0026-adamw.html",
-    "sha256": "c1c6c9d0003b4d2d54ea45167ee9bf8a28cf6abce23891cc8c1256fe930e6e60",
+    "sha256": "02c1d6b68842850877389a9c3877b04e5ad5d2f4461af335b89acd18e75614f3",
     "expanded": false
   },
   "MLD-0027": {
     "path": "terms/MLD-0027-adapter-merging.html",
-    "sha256": "711591b18ce48d4d9ade0ba7ed429bd8e5ca00e3bdddb4f6f11e49bdaed205e3",
+    "sha256": "5bb7b29063183cf58ffde948a96330537a9adcce25ef40728579d35acfe7063e",
     "expanded": false
   },
   "MLD-0028": {
     "path": "terms/MLD-0028-adapter-tuning.html",
-    "sha256": "38a4eeacb9f2a6e59626a5f6b95d8acf0f67b1a365a92a3074cce1d1d0360a70",
+    "sha256": "95b5297a3f958c705a49cf7590da4b2f865ce89c894e0c65ce655fd7855f54d7",
     "expanded": false
   },
   "MLD-0029": {
     "path": "terms/MLD-0029-adaptive-optimizer.html",
-    "sha256": "dc96d56d451aa3290d8976a0a21f68e8c5ee37b3d4c9320e4f8d8c5de205e74e",
+    "sha256": "f2b57682c84466640ca608b4f0bfbbdc85a61ce2ef6bdd0f1b4b91a9dac4e66a",
     "expanded": false
   },
   "MLD-0030": {
     "path": "terms/MLD-0030-adjusted-mutual-information.html",
-    "sha256": "6cf8aac0a2e718fe80ddecdfaf89dccda10fecfc5d9dad63ebe87bf1ac2def6c",
+    "sha256": "469864576711c781316f21dc2b89bcb95bd2f94385572a30625a760a9b6f7d31",
     "expanded": false
   },
   "MLD-0031": {
