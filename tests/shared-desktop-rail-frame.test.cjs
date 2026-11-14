@@ -20,6 +20,10 @@ test('Discover and native families share a desktop rail layout source of truth',
   assert.match(frame, /\.site-chrome\{[^}]*width:var\(--atlas-desktop-rail-width\)!important/s);
   assert.match(frame, /\.site-mobile-chrome\{left:var\(--atlas-desktop-rail-width\)\}/);
   assert.match(frame, /\.site-chrome \.site-chrome__links a\{[^}]*padding:11px 12px!important/s);
+  assert.match(frame, /\.site-chrome \.site-chrome__name\{font-size:25px\}/);
+  assert.match(frame, /font-size:13px!important/);
+  assert.match(frame, /\.site-chrome \.site-chrome__name\{font-size:22px\}/);
+  assert.match(frame, /\.site-chrome \.site-chrome__links a\{font-size:12px!important\}/);
   assert.match(frame, /\.site-chrome \.site-chrome__links::before\{[^}]*font-size:9px/s);
 });
 
