@@ -56,3 +56,24 @@ test('Discover primary rail uses the native primary-link DOM wrapper without cha
   assert.ok(offline.includes(css), 'single-file fallback uses the updated shared stylesheet');
   assert.match(offline, /<nav id="navigation" aria-label="Main navigation"><div class="site-chrome__links">/);
 });
+
+
+test('Discover and standalone rail share the native More sections disclosure and keyboard styling', () => {
+  const discover = read('index.html');
+  const native = read('whats-new.html');
+  const css = read('site-chrome.css');
+  const offline = read('downloads/Atlas_Demo_Offline.html');
+  assert.match(discover, /<details class="nav-more site-chrome__more" id="additional-navigation">/);
+  assert.match(discover, /<div class="nav-more-links site-chrome__more-links">/);
+  assert.match(native, /<details class="site-chrome__more"><summary>More sections<\/summary><div class="site-chrome__more-links">/);
+  const unified = css.split('/* atlas-unified-more-disclosure:begin */')[1]
+    ?.split('/* atlas-unified-more-disclosure:end */')[0];
+  assert.ok(unified, 'shared native disclosure styling exists');
+  assert.match(unified, /:is\(#navigation, nav\.site-chrome\) > details\.site-chrome__more/);
+  assert.match(unified, /min-height:44px/);
+  assert.match(unified, /summary:focus-visible/);
+  assert.match(unified, /prefers-reduced-motion:reduce/);
+  assert.ok(offline.includes(css), 'offline edition uses exact shared disclosure CSS');
+  assert.match(offline, /<details class="nav-more site-chrome__more" id="additional-navigation">/);
+  assert.match(offline, /<div class="nav-more-links site-chrome__more-links">/);
+});
