@@ -1,7 +1,7 @@
 {
   "MLD-0001": {
     "path": "terms/MLD-0001-a-b-test.html",
-    "sha256": "7f69e1756a86b1b08adf4c02e9735b85f743ceb7782704c7e7079303f24f4869",
+    "sha256": "da5bd1abcd96867a971229f9061d369921b376fb51f0543fa99a571f6cf49bc3",
     "expanded": false
   },
   "MLD-0002": {
@@ -11,42 +11,42 @@
   },
   "MLD-0003": {
     "path": "terms/MLD-0003-abliteration.html",
-    "sha256": "0c2f3c656eed4a439f063141508d4231a85024720f7e686b246f6551c59e2c6d",
+    "sha256": "924593f3a25d01a925523afbc96cfea0c71032ea9604cf38e8217d273f2d505e",
     "expanded": false
   },
   "MLD-0004": {
     "path": "terms/MLD-0004-abstention.html",
-    "sha256": "1084c249f63591008c9f23dd098b7730c6bae22ce6e9c140a50976238c793c60",
+    "sha256": "eeb9b9acd422f1b8cbe230e7eebc69882de2a312ced96d24f84de9cb683e17b0",
     "expanded": false
   },
   "MLD-0005": {
     "path": "terms/MLD-0005-acceptance-rate.html",
-    "sha256": "51c85a25b052c9f4683ffbddaffcc6f10204abb8f3a404548cbf6152d5c976b8",
+    "sha256": "c4b1fc9250b0f67fffc14f57e1705cd1a020054be920cad44d82793ae86d1b0b",
     "expanded": false
   },
   "MLD-0006": {
     "path": "terms/MLD-0006-access-control.html",
-    "sha256": "1c28f24cf796b9ab1237ea26ed0c05caf4d3cab9a64fd074a877b1730a4c2b99",
+    "sha256": "a9fe13ce7c286e8360ed8f1376727cf989c57a94972422173d170d57ed7aa178",
     "expanded": false
   },
   "MLD-0007": {
     "path": "terms/MLD-0007-accuracy.html",
-    "sha256": "3ab26c01d69ed5a9a9e14fa8cf025aa12122e6a56def8c2e31db38acd821ed15",
+    "sha256": "1b53db6d2fee11db6622b7e010a9f1c0653d35e519c623a05cb2401621b45216",
     "expanded": false
   },
   "MLD-0008": {
     "path": "terms/MLD-0008-acquisition-function.html",
-    "sha256": "86b43e8b7c4bf6a3b92d3bb8a976cb68838028b3fb4bb5c0812abcbb28090877",
+    "sha256": "b5ab23829d073bf7c0243558b5def8127454f0ce29a3b689b76eff601224286e",
     "expanded": false
   },
   "MLD-0009": {
     "path": "terms/MLD-0009-action.html",
-    "sha256": "3a3d67cfee4e8ac2d4dadc8580d16d40860da8437a6cd33f015348e702eb2a71",
+    "sha256": "a69bd68007909aa82c4f7ab5081ad9bd060d27400a8d70ea10a7f357af978f11",
     "expanded": false
   },
   "MLD-0010": {
     "path": "terms/MLD-0010-action-space.html",
-    "sha256": "c2ff18227ea61c514fe0ede59add3336231e6b01aa958721b19d24e52317a587",
+    "sha256": "b9f7c082eebf3e1bf8011e50970539c3e1ac140aeced3130c752dcbfbe363fa3",
     "expanded": false
   },
   "MLD-0011": {

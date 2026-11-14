@@ -114,7 +114,7 @@ test('reference landing directories and About expose one shared lower desktop ra
   const seoBuilder = read('scripts/build_seo.py');
   assert.match(generator, /rail_bottom=False/);
   assert.match(generator, /render_static_rail_bottom\(prefix\) if rail_bottom/);
-  assert.match(termBuilder, /rail_bottom=\(path == 'terms\/index\.html' or expanded_concept\)/);
+  assert.match(termBuilder, /rail_bottom=\(path == 'terms\/index\.html' or expanded_concept or first_paint_reference\)/);
   assert.match(seoBuilder, /rail_bottom=True/);
   assert.match(seoBuilder, /topbar_title='About', native_secondary=True, mobile_secondary=True, rail_bottom=True/);
   assert.match(read('site-theme.js'), /const previous = rail\.querySelector\('\.sidebar-bottom'\)/);
@@ -155,6 +155,22 @@ test('the same generator owns all eight native first-paint rails without fragile
 });
 
 
+test('first ten canonical concept references have the shared lower rail at first paint', () => {
+  const { createHash } = require('node:crypto');
+  const manifest = JSON.parse(read('terms/manifest.json'));
+  const cohort = Object.entries(manifest).filter(([id]) => Number(id.slice(4)) <= 10);
+  assert.equal(cohort.length, 10, 'bounded cohort leaves stable IDs intact');
+  for (const [id, entry] of cohort) {
+    const html = read(entry.path);
+    const nav = html.match(/<nav class="site-chrome term-nav" aria-label="AI Updates primary navigation">([\\s\\S]*?)<\\/nav>/)?.[1];
+    assert.ok(nav, id + ' retains the canonical desktop rail');
+    assert.equal((nav.match(/class="sidebar-bottom site-chrome__bottom"/g) || []).length, 1, id);
+    assert.ok(nav.includes('href="../index.html#/sources">Coverage & collection status'), id);
+    assert.equal(createHash('sha256').update(html).digest('hex'), entry.sha256, id);
+    assert.equal((html.match(/<footer class="site-chrome__footer">/g) || []).length, 1, id);
+  }
+});
+
 test('all 57 authored concept guides share first-paint navigation with technology articles', () => {
   const { createHash } = require('node:crypto');
   const manifest = JSON.parse(read('terms/manifest.json'));
@@ -172,10 +188,10 @@ test('all 57 authored concept guides share first-paint navigation with technolog
     assert.equal(createHash('sha256').update(html, 'utf8').digest('hex'), entry.sha256,
       entry.path + ' matches its original stable ID in the integrity manifest');
   }
-  const basic = read('terms/MLD-0001-a-b-test.html');
+  const basic = read('terms/MLD-0011-activation.html');
   assert.doesNotMatch(basic, /class="sidebar-bottom site-chrome__bottom"/,
-    'unexpanded reference pages remain unchanged until their own atomic migration');
+    'unmigrated reference pages retain their original HTML and integrity hashes');
   assert.match(read('scripts/build_term_pages.py'),
-    /rail_bottom=\(path == 'terms\/index\.html' or expanded_concept\)/,
+    /rail_bottom=\(path == 'terms\/index\.html' or expanded_concept or first_paint_reference\)/,
     'one shared generator controls the entire authored-guide family');
 });
