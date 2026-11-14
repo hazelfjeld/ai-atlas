@@ -1377,7 +1377,10 @@ main.term-shell > footer:not(.site-chrome__footer) a{color:var(--accent,#27664e)
   .site-chrome .sidebar-actions .site-chrome__theme-toggle--rail{
     width:44px;height:44px;min-height:44px;padding:0;margin:0;
     flex:0 0 44px;justify-content:center;border:1px solid #435446;
-    color:#d2dfd3;background:none;
+    color:#d2dfd3;background:none;font-size:0;
+  }
+  .site-chrome .sidebar-actions .site-chrome__theme-toggle--rail::before{
+    content:'◐';font-size:17px;line-height:1;
   }
   .site-chrome .sidebar-actions .site-chrome__theme-toggle--rail:hover{color:#fff;background:#374b3c}
 }
@@ -1693,8 +1696,7 @@ function buildSharedRailBottom(rail) {
 }
 function syncSharedThemeAction(button, theme) {
   button.setAttribute('aria-pressed', String(theme === 'dark'));
-  button.textContent = button.classList && button.classList.contains('site-chrome__theme-toggle--rail') ?
-    '◐' : '◐  ' + (theme === 'dark' ? 'Dark' : 'Light') + ' theme';
+  button.textContent = '◐  ' + (theme === 'dark' ? 'Dark' : 'Light') + ' theme';
 }
 
 function syncPrimaryThemeButton(theme) {

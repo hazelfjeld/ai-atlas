@@ -38,5 +38,6 @@ test('standalone desktop uses one toggle while Games keeps its existing header c
   assert.match(script,/rail && !existing && desktopAction \? \[desktopAction, menu\]/);
   assert.match(script,/existing \? \[menu\] : \[\]/);
   assert.match(script,/syncSharedThemeAction\(button, theme\)/);
-  assert.match(script,/button\.classList\.contains\('site-chrome__theme-toggle--rail'\)/);
+  assert.match(script,/button\.textContent = '◐  ' \+ \(theme === 'dark' \? 'Dark' : 'Light'\) \+ ' theme'/);
+  assert.match(read('site-chrome.css'),/\.site-chrome \.sidebar-actions \.site-chrome__theme-toggle--rail::before/);
 });
