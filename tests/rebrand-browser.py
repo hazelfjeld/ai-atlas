@@ -538,6 +538,9 @@ with sync_playwright() as p:
     page.goto(base+'#/technologies')
     page.locator('#catalog-loading').wait_for(state='detached')
     comparisons=page.locator('.tech-grid .card button[data-compare]')
+    # A detached loading indicator can precede async card painting after hash navigation.
+    # Wait for the actual interactive control before testing dock keyboard behavior.
+    comparisons.first.wait_for(state='visible')
     comparisons.nth(0).click()
     comparisons.nth(1).click()
     dock_remove=page.locator('#compare-dock button[data-compare]')
