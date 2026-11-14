@@ -1,0 +1,744 @@
+{
+  "schema": 1,
+  "batch_id": "atlas-daily-20261114-source-checked-20261114t144005781z",
+  "edition_date": "2026-11-14",
+  "timezone": "America/Chicago",
+  "collected_at": "2026-11-14T14:40:05.781Z",
+  "coverage_start": "2026-11-13T14:21:29.588Z",
+  "coverage_end": "2026-11-14T14:40:05.781Z",
+  "coverage_status": "partial",
+  "coverage_note": "Bounded overlapping lookback from November 12; last_successful_coverage_end remains null because earlier batches and this run do not constitute a complete registry sweep. Earlier dated findings explicitly labeled catch-up, and report dates are distinct from paper submissions and product preview events.",
+  "overlap_lookback_start": "2026-11-12T00:00:00Z",
+  "sources_checked": [
+    {
+      "url": "https://github.com/ggml-org/llama.cpp/releases/tag/v1.0.0",
+      "status": "opened",
+      "checked_at": "2026-11-14T14:40:05.781Z"
+    },
+    {
+      "url": "https://huggingface.co/blog/ggml-org/llama-cpp-v1",
+      "status": "opened",
+      "checked_at": "2026-11-14T14:40:05.781Z"
+    },
+    {
+      "url": "https://huggingface.co/blog/ibm-granite/llmon-an-llm-native-markup-language-now-in-granite",
+      "status": "opened",
+      "checked_at": "2026-11-14T14:40:05.781Z"
+    },
+    {
+      "url": "https://huggingface.co/ibm-granite/granite-4.1-3b-llmon-preview",
+      "status": "opened",
+      "checked_at": "2026-11-14T14:40:05.781Z"
+    },
+    {
+      "url": "https://huggingface.co/blog/nvidia/simready-assets-robot-pick-and-place",
+      "status": "opened",
+      "checked_at": "2026-11-14T14:40:05.781Z"
+    },
+    {
+      "url": "https://huggingface.co/spaces/nvidia/simready-central",
+      "status": "opened",
+      "checked_at": "2026-11-14T14:40:05.781Z"
+    },
+    {
+      "url": "https://arxiv.org/abs/2611.17287",
+      "status": "opened",
+      "checked_at": "2026-11-14T14:40:05.781Z"
+    },
+    {
+      "url": "https://arxiv.org/abs/2611.17230",
+      "status": "opened",
+      "checked_at": "2026-11-14T14:40:05.781Z"
+    },
+    {
+      "url": "https://www.federalreserve.gov/publications/files/financial-stability-report-20261113.pdf",
+      "status": "opened",
+      "checked_at": "2026-11-14T14:40:05.781Z"
+    },
+    {
+      "url": "https://www.federalreserve.gov/publications/financial-stability-report.htm",
+      "status": "opened",
+      "checked_at": "2026-11-14T14:40:05.781Z"
+    },
+    {
+      "url": "https://www.reuters.com/business/media-telecom/amazons-plan-own-worlds-product-data-fight-ai-shopping-agents-2026-11-13/",
+      "status": "opened",
+      "checked_at": "2026-11-14T14:40:05.781Z"
+    },
+    {
+      "url": "https://techcrunch.com/2026/11/13/elevenlabs-new-app-combines-meeting-note-taking-and-dictation-for-teams/",
+      "status": "opened",
+      "checked_at": "2026-11-14T14:40:05.781Z"
+    },
+    {
+      "url": "https://www.reuters.com/world/china/eu-leaders-seek-tackle-challenges-first-ever-ai-summit-2026-11-13/",
+      "status": "opened",
+      "checked_at": "2026-11-14T14:40:05.781Z"
+    },
+    {
+      "url": "https://www.reuters.com/world/china/huang-exit-us-scrutiny-imperil-3-billion-chinese-ai-projects-reliant-nvidia-2026-11-13/",
+      "status": "opened",
+      "checked_at": "2026-11-14T14:40:05.781Z"
+    },
+    {
+      "url": "https://arxiv.org/list/cs.LG/recent",
+      "status": "opened",
+      "checked_at": "2026-11-14T14:40:05.781Z"
+    }
+  ],
+  "sources_failed": [
+    {
+      "url": "https://export.arxiv.org/api/query?search_query=cat%3Acs.LG%26start%3D0%26max_results%3D3",
+      "status": "inaccessible",
+      "reason": "Metadata API request was inaccessible; arxiv.org cs.LG listing and three individual paper pages were opened as fallback. Do not infer no other papers.",
+      "checked_at": "2026-11-14T14:40:05.781Z"
+    }
+  ],
+  "source_health_note": "15 primary or independent source destinations successfully opened, and one arXiv export API lookup failed. GitHub tagged release details were also verified using GitHub connector; no exhaustive search of all categories or journal feeds was performed.",
+  "coverage_backlog": [
+    "Complete segmented arXiv cs.AI/cs.CL/cs.RO and specialist workshop sweeps; cs.LG listing was sampled, not comprehensively screened.",
+    "Review audio/video foundation model releases, robotics repos, open-weight model registry changes and framework changelogs not fully covered in this bounded pass.",
+    "Publisher should independently check llama.cpp compatibility, LLMON model-card licenses, SimReady asset licensing, and canonical IDs before integrating 3 technology and 3 terminology candidates.",
+    "Monitor material corrections to Amazon's unreleased product plan and update that story ID instead of treating draft plans as product releases.",
+    "Follow up on Fed financial risk survey scope (23 respondents) and separate survey sentiment from Board conclusions."
+  ],
+  "tldr": [
+    "llama.cpp's versioned C libraries, IBM's structured LLMON previews and new research on verifiability and distillation point toward more reliable, adaptable small-model systems, but benchmark and defense claims remain unreplicated.",
+    "Robotics simulation tooling is improving while the Federal Reserve highlights financial exposure around the AI infrastructure buildout; corporate plans, market risks and policy discussions are not treated as realized outcomes."
+  ],
+  "news": [
+    {
+      "id": "ai-news:llama-cpp-library-v1-20261113",
+      "title": "llama.cpp and ggml publish v1.0.0 with stricter library versioning",
+      "category": "inference",
+      "tags": [
+        "SLM",
+        "LLM",
+        "open source",
+        "inference",
+        "runtime"
+      ],
+      "summary": "The ggml-org team tagged llama.cpp v1.0.0, documenting public C API/ABI versioning and introducing FP8 KV caches, an MoE host-memory expert cache, new model support, audio speech serving, and server hardening.",
+      "why_it_matters": "Library compatibility promises and optional memory-saving inference paths matter to local model deployers.",
+      "caveat": "The release removes deprecated API interfaces. Memory/performance outcomes depend on model, backend and hardware; hardening changes do not prove comprehensive security.",
+      "canonical_url": "https://github.com/ggml-org/llama.cpp/releases/tag/v1.0.0",
+      "source_url": "https://github.com/ggml-org/llama.cpp/releases/tag/v1.0.0",
+      "publication_date": "2026-11-13",
+      "publication_date_precision": "day",
+      "publication_time_utc": "2026-11-13T10:20:19Z",
+      "event_date": "2026-11-13",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-14T14:40:05.781Z",
+      "checked_at": "2026-11-14T14:40:05.781Z",
+      "evidence_type": "official_release",
+      "release_status": "tagged_software_release",
+      "review_status": "source_checked_pending_publisher_review",
+      "collection_classification": "catch_up",
+      "sources": [
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/releases/tag/v1.0.0",
+          "publisher": "ggml-org",
+          "type": "official_release"
+        },
+        {
+          "url": "https://huggingface.co/blog/ggml-org/llama-cpp-v1",
+          "publisher": "ggml-org / Hugging Face",
+          "type": "first_party_release_explainer"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:ibm-granite-llmon-preview-20261112",
+      "title": "IBM introduces LLMON-structured Granite 4.1 preview models",
+      "category": "model",
+      "tags": [
+        "SLM",
+        "LLM",
+        "prompt injection",
+        "structured input",
+        "open weights"
+      ],
+      "summary": "IBM released experimental Granite 4.1 3B and 8B previews trained on LLM Object Notation, a token-delimited structure that explicitly binds instructions to data and requirements.",
+      "why_it_matters": "Structured prompts could reduce confusion between agent instructions and untrusted retrieved or tool data while remaining practical for compact models.",
+      "caveat": "Prompt-injection resistance and benchmark parity are author-reported, based on controlled tests; a learned boundary is not an enforcement guarantee, and IBM labels the previews non-production.",
+      "canonical_url": "https://huggingface.co/blog/ibm-granite/llmon-an-llm-native-markup-language-now-in-granite",
+      "source_url": "https://huggingface.co/blog/ibm-granite/llmon-an-llm-native-markup-language-now-in-granite",
+      "publication_date": "2026-11-12",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-12",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-14T14:40:05.781Z",
+      "checked_at": "2026-11-14T14:40:05.781Z",
+      "evidence_type": "first_party_technical_release",
+      "release_status": "experimental_model_preview",
+      "review_status": "source_checked_pending_publisher_review",
+      "collection_classification": "catch_up",
+      "sources": [
+        {
+          "url": "https://huggingface.co/blog/ibm-granite/llmon-an-llm-native-markup-language-now-in-granite",
+          "publisher": "IBM Granite",
+          "type": "first_party_technical_release"
+        },
+        {
+          "url": "https://huggingface.co/ibm-granite/granite-4.1-3b-llmon-preview",
+          "publisher": "IBM Granite",
+          "type": "official_model_card"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:nvidia-simready-pick-place-walkthrough-20261113",
+      "title": "NVIDIA demonstrates validated SimReady assets in an Isaac Sim pick-and-place task",
+      "category": "robotics",
+      "tags": [
+        "robotics",
+        "simulation",
+        "OpenUSD",
+        "physical AI"
+      ],
+      "summary": "NVIDIA published a reproducible workflow combining a robot arm, gripper and object assets with defined joint, mass and collision properties for a virtual pick-and-place example in Isaac Sim.",
+      "why_it_matters": "Reusable simulation-aware assets can shorten initial robotics scenario setup and make failures in kinematics and contacts easier to diagnose.",
+      "caveat": "This is a tutorial and assembled simulation demo, not a newly released robot or verified real-world autonomous deployment; asset licenses and simulator requirements differ.",
+      "canonical_url": "https://huggingface.co/blog/nvidia/simready-assets-robot-pick-and-place",
+      "source_url": "https://huggingface.co/blog/nvidia/simready-assets-robot-pick-and-place",
+      "publication_date": "2026-11-13",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-13",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-14T14:40:05.781Z",
+      "checked_at": "2026-11-14T14:40:05.781Z",
+      "evidence_type": "first_party_technical_release",
+      "release_status": "technical_workflow_demonstration",
+      "review_status": "source_checked_pending_publisher_review",
+      "collection_classification": "catch_up",
+      "sources": [
+        {
+          "url": "https://huggingface.co/blog/nvidia/simready-assets-robot-pick-and-place",
+          "publisher": "NVIDIA",
+          "type": "first_party_technical_release"
+        },
+        {
+          "url": "https://huggingface.co/spaces/nvidia/simready-central",
+          "publisher": "NVIDIA",
+          "type": "asset_library"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:fed-ai-financial-stability-survey-20261113",
+      "title": "Federal Reserve report puts AI first among surveyed financial-stability concerns",
+      "category": "industry",
+      "tags": [
+        "AI infrastructure",
+        "hardware",
+        "finance",
+        "governance",
+        "risk"
+      ],
+      "summary": "In the November Financial Stability Report, AI-related risks were cited by 87% of 23 market contacts, up from 50% in the prior survey; the Fed also documents rapidly expanding financing for data centers and advanced computing.",
+      "why_it_matters": "The findings connect compute infrastructure investment to systemic credit and market vulnerabilities, an important constraint on AI scaling.",
+      "caveat": "These percentages describe a small survey of market contacts, not the Federal Reserve Board's own ranking of risks or a prediction that a crisis will occur. The report notes information generally through October 28.",
+      "canonical_url": "https://www.federalreserve.gov/publications/files/financial-stability-report-20261113.pdf",
+      "source_url": "https://www.federalreserve.gov/publications/files/financial-stability-report-20261113.pdf",
+      "publication_date": "2026-11-13",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-13",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-14T14:40:05.781Z",
+      "checked_at": "2026-11-14T14:40:05.781Z",
+      "evidence_type": "primary_government_report",
+      "release_status": "government_report",
+      "review_status": "source_checked_pending_publisher_review",
+      "collection_classification": "current_window",
+      "sources": [
+        {
+          "url": "https://www.federalreserve.gov/publications/files/financial-stability-report-20261113.pdf",
+          "publisher": "US Federal Reserve",
+          "type": "primary_government_report"
+        },
+        {
+          "url": "https://www.reuters.com/business/finance/ai-rockets-top-worries-about-financial-system-latest-fed-survey-2026-11-13/",
+          "publisher": "Reuters",
+          "type": "independent_context"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:nopo-one-sided-verification-preprint-2611-17287",
+      "title": "Research proposes negative-only RL when a verifier can reliably reject but not confirm answers",
+      "category": "research",
+      "tags": [
+        "ML",
+        "RLVR",
+        "evaluation",
+        "reward hacking",
+        "training"
+      ],
+      "summary": "A November 12 arXiv preprint formalizes one-sided verifiability and proposes Negative-Only Policy Optimization, which suppresses verified bad outputs without positively rewarding merely unrefuted ones.",
+      "why_it_matters": "The idea addresses training settings where unit tests or weaker critics produce trustworthy failures but misleading passes.",
+      "caveat": "Reported improvements are paper-author results under selected tasks and verifiers, not independent replication or a universal improvement over conventional RL.",
+      "canonical_url": "https://arxiv.org/abs/2611.17287",
+      "source_url": "https://arxiv.org/abs/2611.17287",
+      "publication_date": "2026-11-12",
+      "publication_date_precision": "day",
+      "publication_time_utc": "2026-11-12T18:52:33Z",
+      "event_date": "2026-11-12",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-14T14:40:05.781Z",
+      "checked_at": "2026-11-14T14:40:05.781Z",
+      "evidence_type": "research_preprint",
+      "release_status": "research_preprint",
+      "review_status": "source_checked_pending_publisher_review",
+      "collection_classification": "catch_up",
+      "sources": [
+        {
+          "url": "https://arxiv.org/abs/2611.17287",
+          "publisher": "arXiv / paper authors",
+          "type": "research_preprint"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:distillation-optimization-theory-2611-17230",
+      "title": "New theoretical study separates distillation's optimization gains from generalization claims",
+      "category": "research",
+      "tags": [
+        "SLM",
+        "ML",
+        "distillation",
+        "training theory"
+      ],
+      "summary": "An arXiv preprint analyzes generalized linear models and rank-one matrix approximation, arguing that knowledge distillation can speed optimization without necessarily improving generalization.",
+      "why_it_matters": "A clearer mechanism may help SLM researchers decide whether teacher labels improve learning dynamics or final task accuracy.",
+      "caveat": "The proofs apply to specific simplified model classes, and reported real-data experiments do not establish the same mechanism for frontier-scale Transformers.",
+      "canonical_url": "https://arxiv.org/abs/2611.17230",
+      "source_url": "https://arxiv.org/abs/2611.17230",
+      "publication_date": "2026-11-12",
+      "publication_date_precision": "day",
+      "publication_time_utc": "2026-11-12T18:21:37Z",
+      "event_date": "2026-11-12",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-14T14:40:05.781Z",
+      "checked_at": "2026-11-14T14:40:05.781Z",
+      "evidence_type": "research_preprint",
+      "release_status": "research_preprint",
+      "review_status": "source_checked_pending_publisher_review",
+      "collection_classification": "catch_up",
+      "sources": [
+        {
+          "url": "https://arxiv.org/abs/2611.17230",
+          "publisher": "arXiv / paper authors",
+          "type": "research_preprint"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:amazon-world-product-graph-draft-20261113",
+      "title": "Reuters describes Amazon's draft World Product Graph effort for AI shopping",
+      "category": "industry",
+      "tags": [
+        "agents",
+        "RAG",
+        "product data",
+        "commerce"
+      ],
+      "summary": "Reuters reviewed internal planning material for a possible Amazon World Product Graph intended to consolidate product attributes for search and AI-driven shopping amid competition from other agents.",
+      "why_it_matters": "High-quality product knowledge bases could become a strategic bottleneck for reliable commerce agents and retrieval systems.",
+      "caveat": "This is reporting about an internal draft, NOT a launched product. Amazon said the document was outdated and may not reflect current plans; the project may change or be canceled.",
+      "canonical_url": "https://www.reuters.com/business/media-telecom/amazons-plan-own-worlds-product-data-fight-ai-shopping-agents-2026-11-13/",
+      "source_url": "https://www.reuters.com/business/media-telecom/amazons-plan-own-worlds-product-data-fight-ai-shopping-agents-2026-11-13/",
+      "publication_date": "2026-11-13",
+      "publication_date_precision": "day",
+      "publication_time_utc": "2026-11-13T11:02:00Z",
+      "event_date": "2026-11-13",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-14T14:40:05.781Z",
+      "checked_at": "2026-11-14T14:40:05.781Z",
+      "evidence_type": "independent_journalism",
+      "release_status": "reported_unconfirmed_company_plan",
+      "review_status": "source_checked_pending_publisher_review",
+      "collection_classification": "catch_up",
+      "sources": [
+        {
+          "url": "https://www.reuters.com/business/media-telecom/amazons-plan-own-worlds-product-data-fight-ai-shopping-agents-2026-11-13/",
+          "publisher": "Reuters",
+          "type": "independent_journalism"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:elevenai-enterprise-preview-20261113",
+      "title": "ElevenLabs previews an enterprise voice-notes and dictation assistant",
+      "category": "applications",
+      "tags": [
+        "audio",
+        "ASR",
+        "agents",
+        "productivity"
+      ],
+      "summary": "TechCrunch reports that ElevenLabs launched an early-access ElevenAI preview at its November 11 event, combining meeting notes, cross-meeting recall, dictation and agent-driven follow-up actions.",
+      "why_it_matters": "The product demonstrates the convergence of speech recognition, organizational memory and action-taking assistants.",
+      "caveat": "The November 11 event date differs from the November 13 report. The preview requires early-access signup; 90-plus-language and quality statements are provider claims, and recording raises consent/privacy questions.",
+      "canonical_url": "https://techcrunch.com/2026/11/13/elevenlabs-new-app-combines-meeting-note-taking-and-dictation-for-teams/",
+      "source_url": "https://techcrunch.com/2026/11/13/elevenlabs-new-app-combines-meeting-note-taking-and-dictation-for-teams/",
+      "publication_date": "2026-11-13",
+      "publication_date_precision": "day",
+      "publication_time_utc": "2026-11-13T14:44:00Z",
+      "event_date": "2026-11-11",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-14T14:40:05.781Z",
+      "checked_at": "2026-11-14T14:40:05.781Z",
+      "evidence_type": "independent_reporting",
+      "release_status": "reported_product_preview",
+      "review_status": "source_checked_pending_publisher_review",
+      "collection_classification": "current_window",
+      "sources": [
+        {
+          "url": "https://techcrunch.com/2026/11/13/elevenlabs-new-app-combines-meeting-note-taking-and-dictation-for-teams/",
+          "publisher": "TechCrunch",
+          "type": "independent_reporting"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:eu-dublin-ai-leaders-summit-20261113",
+      "title": "EU leaders convene for AI competitiveness and governance talks",
+      "category": "governance",
+      "tags": [
+        "policy",
+        "AI infrastructure",
+        "chips",
+        "safety"
+      ],
+      "summary": "Reuters reports EU leaders meeting in Dublin to debate AI investment, regulation and safety while financing disputes constrain proposed gigafactories.",
+      "why_it_matters": "The meeting illustrates how compute access, industrial policy and model governance are becoming linked issues.",
+      "caveat": "This source covers the meeting and agenda, not a finalized EU law, funded gigafactory program or independently established summit outcome.",
+      "canonical_url": "https://www.reuters.com/world/china/eu-leaders-seek-tackle-challenges-first-ever-ai-summit-2026-11-13/",
+      "source_url": "https://www.reuters.com/world/china/eu-leaders-seek-tackle-challenges-first-ever-ai-summit-2026-11-13/",
+      "publication_date": "2026-11-13",
+      "publication_date_precision": "day",
+      "publication_time_utc": "2026-11-13T06:06:00Z",
+      "event_date": "2026-11-13",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-14T14:40:05.781Z",
+      "checked_at": "2026-11-14T14:40:05.781Z",
+      "evidence_type": "independent_journalism",
+      "release_status": "reported_government_meeting",
+      "review_status": "source_checked_pending_publisher_review",
+      "collection_classification": "catch_up",
+      "sources": [
+        {
+          "url": "https://www.reuters.com/world/china/eu-leaders-seek-tackle-challenges-first-ever-ai-summit-2026-11-13/",
+          "publisher": "Reuters",
+          "type": "independent_journalism"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:reuters-china-nvidia-ai-procurement-20261113",
+      "title": "Reuters identifies restricted-NVIDIA-chip reliance in more than $3 billion of Chinese AI projects",
+      "category": "hardware",
+      "tags": [
+        "AI hardware",
+        "export controls",
+        "data centers",
+        "supply chain"
+      ],
+      "summary": "A Reuters examination of more than 150 records found over $3.2 billion of Chinese AI-computing projects tied to restricted NVIDIA processors, spanning proposals, contracts and some installations.",
+      "why_it_matters": "The findings show how chip restrictions, procurement uncertainty and infrastructure financing interact across the global compute supply chain.",
+      "caveat": "The value includes infrastructure beyond chips, and projects are at different stages. Reuters did not establish how chips were obtained or connect the projects to separate allegations involving NVIDIA executives.",
+      "canonical_url": "https://www.reuters.com/world/china/huang-exit-us-scrutiny-imperil-3-billion-chinese-ai-projects-reliant-nvidia-2026-11-13/",
+      "source_url": "https://www.reuters.com/world/china/huang-exit-us-scrutiny-imperil-3-billion-chinese-ai-projects-reliant-nvidia-2026-11-13/",
+      "publication_date": "2026-11-13",
+      "publication_date_precision": "day",
+      "publication_time_utc": "2026-11-13T08:31:00Z",
+      "event_date": "2026-11-13",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-14T14:40:05.781Z",
+      "checked_at": "2026-11-14T14:40:05.781Z",
+      "evidence_type": "independent_journalism",
+      "release_status": "investigative_reporting",
+      "review_status": "source_checked_pending_publisher_review",
+      "collection_classification": "catch_up",
+      "sources": [
+        {
+          "url": "https://www.reuters.com/world/china/huang-exit-us-scrutiny-imperil-3-billion-chinese-ai-projects-reliant-nvidia-2026-11-13/",
+          "publisher": "Reuters",
+          "type": "independent_journalism"
+        }
+      ]
+    }
+  ],
+  "technologies": [
+    {
+      "id": "tech-proposal:llama-cpp-v1-api:2026-11-14",
+      "name": "llama.cpp / libllama v1.0.0",
+      "aliases": [
+        "llama.cpp v1",
+        "ggml-org libllama"
+      ],
+      "usage_tags": [
+        "SLM",
+        "LLM",
+        "ML",
+        "local inference"
+      ],
+      "explanation": "Open-source C/C++ inference runtime with a versioned public C API, quantized multimodal model support, optional FP8 KV cache and CPU-shared MoE expert caching.",
+      "conditional_advantage": "For developers shipping local-model applications on heterogeneous systems, a versioned ABI and optional cache/backends may simplify compatibility and reduce accelerator-memory pressure for supported models.",
+      "best_fit_uses": [
+        "Local inference services",
+        "Cross-platform embedded LLMs",
+        "Backend-specific MoE cache experiments"
+      ],
+      "tradeoffs": [
+        "Removed deprecated API signatures can break downstream integrations",
+        "FP8 cache precision and memory-saving paths require model/backend validation",
+        "Not every advertised architecture works on every backend"
+      ],
+      "alternatives": [
+        "MLX",
+        "ONNX Runtime GenAI",
+        "vLLM for server-scale inference"
+      ],
+      "hardware_runtime_constraints": "Portable C/C++; Linux, Windows, macOS and supported mobile targets. CUDA, Metal, Vulkan and CPU capabilities differ. Actual RAM/VRAM depends on selected model, quantization and context.",
+      "license_uncertainty": "Core repository has a published open-source license; verify exact release and dependencies before redistribution. Model-weight licenses are separate.",
+      "availability_uncertainty": "Public v1.0.0 release tag accessible; individual distribution channels and model converters require separate verification.",
+      "pricing_uncertainty": "Source is publicly obtainable; hosted compute/hardware/model usage costs vary.",
+      "official_documentation_url": "https://github.com/ggml-org/llama.cpp/releases/tag/v1.0.0",
+      "source_links": [
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/releases/tag/v1.0.0",
+          "publisher": "ggml-org",
+          "type": "tagged release"
+        },
+        {
+          "url": "https://huggingface.co/blog/ggml-org/llama-cpp-v1",
+          "publisher": "ggml-org",
+          "type": "release notes"
+        }
+      ],
+      "date_checked": "2026-11-14",
+      "checked_at": "2026-11-14T14:40:05.781Z",
+      "existing_profile_id": "TECH-0148",
+      "review_status": "source_checked_pending_publisher_catalog_dedup"
+    },
+    {
+      "id": "tech-proposal:granite-llmon-preview:2026-11-14",
+      "name": "Granite 4.1 LLMON preview models",
+      "aliases": [
+        "Granite 4.1 3B LLMON",
+        "Granite 4.1 8B LLMON",
+        "LLM Object Notation Granite"
+      ],
+      "usage_tags": [
+        "SLM",
+        "LLM",
+        "ML",
+        "prompt injection defense",
+        "agents"
+      ],
+      "explanation": "Experimental Granite 4.1 checkpoints post-trained with reserved structural tokens and execution pointers that identify authoritative instructions separately from documents, tool results and data.",
+      "conditional_advantage": "In RAG/agent workflows that can maintain trusted instruction/data provenance, the learned markup may improve instruction-boundary behavior versus unstructured prompts on the team's tests.",
+      "best_fit_uses": [
+        "Prompt-injection robustness research",
+        "Structured-agent prompt experiments",
+        "Small-model instruction/data ablations"
+      ],
+      "tradeoffs": [
+        "Resistance is learned, not a trust-boundary enforcement mechanism",
+        "Converting existing pipelines introduces format complexity",
+        "Controlled benchmark gains are author-reported"
+      ],
+      "alternatives": [
+        "Granite 4.1 Instruct with explicit application-side tool authorization",
+        "StruQ-style separated inputs",
+        "Schema-constrained JSON outputs"
+      ],
+      "hardware_runtime_constraints": "3B and 8B open-weight models; Transformers loaders and Hugging Face model cards available. Exact device VRAM depends on precision and quantization; no universal minimum validated.",
+      "license_uncertainty": "3B model card states Apache-2.0; independently verify 8B artifacts, dependencies and any deployment obligations.",
+      "availability_uncertainty": "Two public experimental model cards; IBM says preview is not production-ready.",
+      "pricing_uncertainty": "Weights downloadable without a paid API according to the public model card; hosted or private inference costs depend on hardware/service.",
+      "official_documentation_url": "https://huggingface.co/blog/ibm-granite/llmon-an-llm-native-markup-language-now-in-granite",
+      "source_links": [
+        {
+          "url": "https://huggingface.co/blog/ibm-granite/llmon-an-llm-native-markup-language-now-in-granite",
+          "publisher": "IBM Granite",
+          "type": "technical announcement"
+        },
+        {
+          "url": "https://huggingface.co/ibm-granite/granite-4.1-3b-llmon-preview",
+          "publisher": "IBM Granite",
+          "type": "model card"
+        }
+      ],
+      "date_checked": "2026-11-14",
+      "checked_at": "2026-11-14T14:40:05.781Z",
+      "existing_profile_id": null,
+      "review_status": "source_checked_pending_publisher_catalog_dedup"
+    },
+    {
+      "id": "tech-proposal:nvidia-simready-central:2026-11-14",
+      "name": "NVIDIA SimReady Central and Foundation",
+      "aliases": [
+        "SimReady assets",
+        "SimReady OpenUSD profiles"
+      ],
+      "usage_tags": [
+        "ML",
+        "robotics",
+        "simulation",
+        "DL"
+      ],
+      "explanation": "An OpenUSD asset and validation workflow in which robot/object files expose simulation-ready properties like collisions, mass and driven joints for compatible tasks.",
+      "conditional_advantage": "When constructing Isaac Sim robotics datasets or task prototypes, validated assets can reduce duplicate authoring and catch missing physical properties early.",
+      "best_fit_uses": [
+        "Pick-and-place simulation",
+        "Robot asset interchange",
+        "Simulation data preparation"
+      ],
+      "tradeoffs": [
+        "Asset-level validation cannot prove real-world dynamics",
+        "Task-specific motion and controls remain the user's responsibility",
+        "Asset quality and physical fidelity vary"
+      ],
+      "alternatives": [
+        "Custom Isaac Sim USD authoring",
+        "MuJoCo assets and MJCF",
+        "ROS/Gazebo model libraries"
+      ],
+      "hardware_runtime_constraints": "Requires OpenUSD-compatible tooling and a supported Isaac Sim setup for the published walkthrough; GPU/driver requirements vary by Isaac Sim version.",
+      "license_uncertainty": "Verify licenses on individual robot/gripper/object assets; do not assume the library grants one blanket open-source license.",
+      "availability_uncertainty": "Public asset browser and examples accessible; per-asset download and simulator compatibility are not independently execution-tested.",
+      "pricing_uncertainty": "Tutorial and some assets publicly accessible; commercial simulator, cloud, third-party asset and compute costs may apply.",
+      "official_documentation_url": "https://huggingface.co/blog/nvidia/simready-assets-robot-pick-and-place",
+      "source_links": [
+        {
+          "url": "https://huggingface.co/blog/nvidia/simready-assets-robot-pick-and-place",
+          "publisher": "NVIDIA",
+          "type": "technical walkthrough"
+        },
+        {
+          "url": "https://huggingface.co/spaces/nvidia/simready-central",
+          "publisher": "NVIDIA",
+          "type": "asset library"
+        }
+      ],
+      "date_checked": "2026-11-14",
+      "checked_at": "2026-11-14T14:40:05.781Z",
+      "existing_profile_id": "TECH-0175",
+      "review_status": "source_checked_pending_publisher_catalog_dedup"
+    }
+  ],
+  "terms": [
+    {
+      "id": "term-proposal:llmon-llm-object-notation:2026-11-14",
+      "name": "LLM Object Notation (LLMON)",
+      "aliases": [
+        "LLMON",
+        "LLM-native markup"
+      ],
+      "definition": "A token-delimited notation for labeling instructions, data, documents and requirements as separately addressable blocks, with execution references specifying which blocks an LLM should act on.",
+      "mechanism": "Reserved structural delimiters and identifiers mark contextual spans; an execution block explicitly binds a task to its input data, and models are trained to respect that binding.",
+      "usage_tags": [
+        "SLM",
+        "LLM",
+        "agents",
+        "prompt injection",
+        "structured prompting"
+      ],
+      "example": "An RAG agent includes two retrieved snippets as data, but only one is bound to the answer instruction; a malicious instruction inside the other should be treated as inert context.",
+      "caveat": "LLMON is an IBM-associated format, not a universal interoperability standard; even a trained model can fail under adversarial inputs, and application authorization is still essential.",
+      "related_existing_ids": [
+        "MLD-0957",
+        "MLD-0549",
+        "MLD-1179"
+      ],
+      "primary_references": [
+        {
+          "url": "https://huggingface.co/blog/ibm-granite/llmon-an-llm-native-markup-language-now-in-granite",
+          "publisher": "IBM Granite",
+          "type": "first_party_technical_release"
+        },
+        {
+          "url": "https://arxiv.org/abs/2610.38120",
+          "publisher": "research authors",
+          "type": "primary_preprint"
+        }
+      ],
+      "term_origin": "recently_released_named_format_with_prior_preprint_new_to_atlas_candidate",
+      "date_checked": "2026-11-14",
+      "checked_at": "2026-11-14T14:40:05.781Z",
+      "review_status": "source_checked_pending_publisher_canonical_dedup"
+    },
+    {
+      "id": "term-proposal:one-sided-verifiability-osv:2026-11-14",
+      "name": "One-sided verifiability",
+      "aliases": [
+        "OSV",
+        "one-sided verifier"
+      ],
+      "definition": "A verification regime in which rejected outputs are trustworthy failures but outputs that pass available checks are not necessarily correct.",
+      "mechanism": "A partial test acts as a reliable falsifier rather than a complete correctness oracle; training can suppress proven failures without rewarding every non-falsified output.",
+      "usage_tags": [
+        "ML",
+        "RL",
+        "RLVR",
+        "evaluation",
+        "safety"
+      ],
+      "example": "A coding policy avoids known test failures while treating programs that pass a small test suite as unverified rather than automatically correct.",
+      "caveat": "This formalization appears in the cited 2026 paper and may overlap older partial-verification ideas; it does not imply every negative label from a real-world judge is reliable.",
+      "related_existing_ids": [
+        "MLD-1040",
+        "MLD-1041"
+      ],
+      "primary_references": [
+        {
+          "url": "https://arxiv.org/abs/2611.17287",
+          "publisher": "Xu et al.",
+          "type": "research_preprint"
+        }
+      ],
+      "term_origin": "named_formalization_in_new_research_preprint",
+      "date_checked": "2026-11-14",
+      "checked_at": "2026-11-14T14:40:05.781Z",
+      "review_status": "source_checked_pending_publisher_canonical_dedup"
+    },
+    {
+      "id": "term-proposal:simready-asset-profile:2026-11-14",
+      "name": "Simulation-ready asset profile",
+      "aliases": [
+        "SimReady profile",
+        "SimReady asset validation"
+      ],
+      "definition": "A specification of physical and structural attributes a 3D asset must include for a particular simulation use case, such as mass, collision geometry and controllable joints.",
+      "mechanism": "A profile combines required features with checks on asset settings so a simulator can validate whether an object or robot has appropriate dynamic properties.",
+      "usage_tags": [
+        "ML",
+        "robotics",
+        "simulation",
+        "physical AI"
+      ],
+      "example": "A robot gripper asset must expose its joint limits and drives, while a can must carry collision and mass properties before a pick-and-place task is tested.",
+      "caveat": "Simulation-ready does not mean physics-identical or safe on hardware; the SimReady name denotes NVIDIA's workflow and should not be misread as a universal industry certification.",
+      "related_existing_ids": [
+        "TECH-0175"
+      ],
+      "primary_references": [
+        {
+          "url": "https://huggingface.co/blog/nvidia/simready-assets-robot-pick-and-place",
+          "publisher": "NVIDIA",
+          "type": "first_party_walkthrough"
+        }
+      ],
+      "term_origin": "established_vendor_specific_concept_new_to_atlas_candidate",
+      "date_checked": "2026-11-14",
+      "checked_at": "2026-11-14T14:40:05.781Z",
+      "review_status": "source_checked_pending_publisher_canonical_dedup"
+    }
+  ],
+  "corrections": []
+}
