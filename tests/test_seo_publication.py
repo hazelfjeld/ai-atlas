@@ -137,7 +137,8 @@ class SEOPublication(unittest.TestCase):
         begin = '<nav id="navigation" aria-label="Main navigation">'
         primary = source.split(begin, 1)[1].split('<details class="nav-more"', 1)[0]
         self.assertEqual(len(DESTINATIONS), 7)
-        self.assertEqual(primary, render_discover_primary(pub['terms'], pub['technologies']))
+        self.assertEqual(primary, '<div class="site-chrome__links">' +
+                         render_discover_primary(pub['terms'], pub['technologies']) + '</div>')
         self.assertEqual(normalize_discover_sidebar(source, pub['terms'], pub['technologies']), source)
         # Editing a stale first-paint label or URL must not create a second source
         # of truth: rebuilding restores the generated canonical destinations.
