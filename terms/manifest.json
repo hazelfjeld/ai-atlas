@@ -206,7 +206,7 @@
   },
   "MLD-0042": {
     "path": "terms/MLD-0042-agent-memory.html",
-    "sha256": "bd6e2e90e11803f06c17be9efd8bb752cc2f306188f334b6cb5a621bdf601541",
+    "sha256": "34e8322b77667da609c513f87df35ed4c57b81662a73f6cfc657a337521b6208",
     "expanded": false
   },
   "MLD-0043": {
@@ -216,37 +216,37 @@
   },
   "MLD-0044": {
     "path": "terms/MLD-0044-agglomerative-clustering.html",
-    "sha256": "1588b849ce57602ca6a9830a467d126d5d5ab18c4c2a2141600bdb39ccf9f5f9",
+    "sha256": "5f9e1b97bf105d3126f6df436609cced1f8ef16027e575d67cc7fe6d65b3e272",
     "expanded": false
   },
   "MLD-0045": {
     "path": "terms/MLD-0045-ai-alignment.html",
-    "sha256": "ae13f0b13f259851e3d997fc7bfec47c7dfc71e98053c2eb86ed32fa7744ba66",
+    "sha256": "b012cacb001dabe04e1abfb8ae5491643f090a453a9c60c87be2ca7e7edaae43",
     "expanded": false
   },
   "MLD-0046": {
     "path": "terms/MLD-0046-ai-safety.html",
-    "sha256": "65dfba25b6a5498acb93fe90b014b6b31723daf7cc3b77904c4d9722c74f038b",
+    "sha256": "a9e9ce7a6274225a8e87a3284fa887544bc28d882cfc711c7b3f3c3884650bef",
     "expanded": false
   },
   "MLD-0047": {
     "path": "terms/MLD-0047-aleatoric-uncertainty.html",
-    "sha256": "33cc9f74ae818d6a7aeff71a598e99c4bd29d898d6aeb9e9f72372ca4b2c6675",
+    "sha256": "58fd64a44bdad105c6697c8cda77367c8912ab2be05ce6c69774c4125287f27b",
     "expanded": false
   },
   "MLD-0048": {
     "path": "terms/MLD-0048-algorithm.html",
-    "sha256": "941262eafa0b777061f95af92db40895bbdbbe5ba1e1cc9cde88810dc216524f",
+    "sha256": "09302f39c2907a40cd87dff46df43c58cc3bedc979917e9d49318244fe7116fe",
     "expanded": false
   },
   "MLD-0049": {
     "path": "terms/MLD-0049-alibi.html",
-    "sha256": "a4758db9251500a5e242ed2288a444858211c7730eac360d0d0cdca24d4432a2",
+    "sha256": "e813b19cb52c6738007dd01f67fa02ff940f53f3fbd69bc9b74dcf8236c0cf55",
     "expanded": false
   },
   "MLD-0050": {
     "path": "terms/MLD-0050-alignment-faking.html",
-    "sha256": "a3325cb603b248f387f0addd75b2769999ea881d84b70c4e113130a986d34a5f",
+    "sha256": "884901e6006ae2e9fbf015e001bc800ebb56a4b6e9d6a6d5486ba6b93eeb130d",
     "expanded": false
   },
   "MLD-0051": {
