@@ -2007,6 +2007,11 @@ with sync_playwright() as p:
         page.evaluate("(chosen) => localStorage.setItem('atlas.theme', chosen)", theme)
         for width in (651, 768, 1280):
             page.set_viewport_size({'width':width, 'height':900})
+            page.goto(base + 'index.html#/overview')
+            page.locator('#catalog-loading').wait_for(state='detached', timeout=45000)
+            reference_rail_width = page.locator('#sidebar').evaluate('el => el.getBoundingClientRect().width')
+            check(f'Discover has canonical desktop rail width at {width}px in {theme}',
+                  abs(reference_rail_width - (215 if width <= 1200 else 242)) <= 1)
             for route in ('about.html', 'technologies.html', 'playbooks.html', 'research.html'):
                 page.goto(base + route)
                 if theme == 'light' and width == 651 and route == 'about.html':
@@ -2031,7 +2036,7 @@ with sync_playwright() as p:
                               && tagline.scrollWidth <= tagline.clientWidth + 1;
                       }"""))
                 check(f'shared {theme} navigation has no orphan link at {width}px on {route}',
-                      page.evaluate("""() => {
+                      page.evaluate("""(referenceWidth) => {
                           const nav = document.querySelector('.site-chrome');
                           if (!nav) return false;
                           const links = [...nav.querySelectorAll('.site-chrome__links a')];
@@ -2042,8 +2047,8 @@ with sync_playwright() as p:
                               const main=document.querySelector('main');
                               return getComputedStyle(nav).position === 'fixed'
                                   && getComputedStyle(nav).flexDirection === 'column'
-                                  && rect.left === 0 && Math.abs(rect.width - (innerWidth <= 1150 ? 204 : 224)) <= 1
-                                  && !!main && main.getBoundingClientRect().left >= (innerWidth <= 1150 ? 203 : 223)
+                                  && rect.left === 0 && Math.abs(rect.width - referenceWidth) <= 1
+                                  && !!main && main.getBoundingClientRect().left >= referenceWidth - 1
                                   && (location.pathname.endsWith('/about.html')
                                       ? (nav.parentElement === document.body && !main.contains(nav))
                                       : location.pathname.endsWith('/research.html')
@@ -2063,7 +2068,7 @@ with sync_playwright() as p:
                               && Math.max(...tops) - Math.min(...tops) <= 2
                               && links.every(el => el.getBoundingClientRect().height >= 44)
                               && document.documentElement.scrollWidth <= innerWidth + 1;
-                      }"""))
+                      }""", reference_rail_width))
     page.evaluate("localStorage.setItem('atlas.theme', 'light')")
     page.set_viewport_size({'width':390,'height':844})
     page.goto(base + 'index.html#/games')
@@ -2116,10 +2121,10 @@ with sync_playwright() as p:
     # same page families at mobile/tablet widths in both saved themes.
     page.set_viewport_size({'width': 1280, 'height': 900})
     page.goto(base + 'index.html#/overview')
-    check('Discover anchors the baseline 224px desktop sidebar',
+    check('Discover anchors the baseline 242px desktop sidebar',
           page.evaluate("""() => {
               const rect = document.querySelector('#sidebar').getBoundingClientRect();
-              return rect.left === 0 && Math.abs(rect.width - (innerWidth <= 1150 ? 204 : 224)) <= 1;
+              return rect.left === 0 && Math.abs(rect.width - 242) <= 1;
           }"""))
     # Regression: navigating between Discover and a standalone article must not
     # shift the rail's wordmark, first link, active surface or drawer width.
@@ -2190,7 +2195,7 @@ with sync_playwright() as p:
                               && (mobile ? computed.display !== 'none'
                                   : large ? computed.position === 'fixed'
                                       && computed.flexDirection === 'column'
-                                      && Math.abs(rect.width - (innerWidth <= 1150 ? 204 : 224)) <= 1
+                                      && Math.abs(rect.width - (innerWidth <= 1200 ? 215 : 242)) <= 1
                                       && rect.left === 0
                                       : computed.position !== 'fixed');
                       }"""))
