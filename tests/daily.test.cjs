@@ -1189,7 +1189,10 @@ test('Immutable v25 records the actual TECH-0302 Atlas catalog addition without 
  assert.deepEqual(m.catalog_additions.technologies.slice(0,2).map(x=>x.source_proposal_id),r.accepted_catalog_addition_ids,'Earlier receipt remains the historical two-addition event');
  assert.equal(idx.last_successful_publish_at,verifiedPublicationClock(),'Last successful publication must match latest independently verified batch');
  const activeReceipt=JSON.parse(fs.readFileSync(path.join(root,'data/daily/published-batches.json'))).receipts.at(-1),lastIndexEntry=idx.editions.at(-1);
- assert.equal(idx.status,'edition_revision_'+lastIndexEntry.revision+(activeReceipt.publication_edition===lastIndexEntry.date+'-v'+lastIndexEntry.revision&&activeReceipt.publication_history.at(-1).status==='cloudflare_http_browser_and_githack_verified'?'_production_verified':'_pending_production_verification'));
+ const newestEdition=lastIndexEntry.date+'-v'+lastIndexEntry.revision;
+ assert.equal(activeReceipt.publication_edition,newestEdition,'Latest indexed edition must match the newest durable batch receipt');
+ const latestVerified=activeReceipt.publication_history.some(h=>h.edition===newestEdition&&h.status==='cloudflare_http_browser_and_githack_verified')&&Boolean(activeReceipt.production_verified_at);
+ assert.equal(idx.status,'edition_revision_'+lastIndexEntry.revision+(latestVerified?'_production_verified':'_pending_production_verification'),'Archive certification state must describe the newest batch, not a prior verified edition');
  assert.ok(r.publication_history.at(-1).status==='pending_production_verification'||r.publication_history.at(-1).status==='cloudflare_http_browser_and_githack_verified');
  assert.ok(D.selection(idx,'2026-11-03').todayEntry?.revision>=4);
 });
@@ -1764,7 +1767,35 @@ test('November 13 edition has a durable receipt, verified bytes and accessible n
  assert.equal(d.coverage.status,'partial');
  assert.equal(d.coverage.sources_failed.length,1);
  assert.equal(r.deferred_catalog_proposal_ids.length,8);
- assert.equal(idx.status,'edition_revision_1_'+(r.production_verified_at?'production_verified':'pending_production_verification'));
+ assert.equal(r.publication_history.at(-1).status,'cloudflare_http_browser_and_githack_verified','November 13 retains its independent production certification');
+ const active=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8')).receipts.at(-1),latest=idx.editions.at(-1);
+ assert.equal(active.publication_edition,latest.date+'-v'+latest.revision,'Newest publication receipt must match the indexed edition');
+ assert.equal(idx.status,'edition_revision_'+latest.revision+'_'+(active.production_verified_at?'production_verified':'pending_production_verification'),'Global status follows the newest edition without retroactively decertifying November 13');
  assert.equal(idx.last_successful_publish_at,verifiedPublicationClock());
  assertNoScriptArchiveDiscovery(idx,e.path);
+});
+
+test('November 14 source-reviewed edition is immutable and honest about pending certification',()=>{
+ const crypto=require('node:crypto');
+ const idx=JSON.parse(fs.readFileSync('data/daily/index.json','utf8'));
+ const ledger=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8'));
+ const receipt=ledger.receipts.find(r=>r.batch_id==='atlas-daily-20261114-source-checked-20261114t144005781z');
+ const entry=idx.editions.find(e=>e.date==='2026-11-14'&&e.revision===1);
+ assert.ok(receipt&&entry,'The November 14 source-reviewed batch and immutable edition are both recorded');
+ assert.equal(receipt.source_batch_sha256,'03feac038e955b24f6e90edf0a2a5dd7f98d437c5962a288ca0db7b567d9fc5b');
+ assert.equal(receipt.source_batch_bytes,37775);
+ assert.equal(receipt.publication_edition,'2026-11-14-v1');
+ const raw=fs.readFileSync(entry.path);
+ assert.equal(raw.byteLength,entry.bytes);
+ assert.equal(crypto.createHash('sha256').update(raw).digest('hex'),entry.sha256);
+ const edition=D.validateEdition(JSON.parse(raw),entry);
+ assert.equal(edition.news.length,10);
+ assert.deepEqual(edition.news.map(n=>n.id),receipt.accepted_news_ids);
+ assert.equal(edition.technologies.length+edition.terms.length+edition.corrections.length,0,'Deferred proposals are not announced as catalog additions');
+ assert.equal(receipt.deferred_catalog_proposal_ids.length,6);
+ assert.equal(edition.coverage.status,'partial');
+ assert.ok(edition.coverage.sources_failed.length>=1,'Unavailable sources remain disclosed');
+ assert.ok(edition.news.every(n=>n.caveat&&n.review_status&&n.source_url.startsWith('https://')),'Every report keeps review, evidence and caveat metadata');
+ assert.equal(idx.last_successful_publish_at,verifiedPublicationClock(),'Pending edition cannot advance the certified deployment clock');
+ assertNoScriptArchiveDiscovery(idx,entry.path);
 });
