@@ -315,7 +315,7 @@
       "published_at": "2026-11-14T14:52:11.272Z"
     }
   ],
-  "last_successful_publish_at": "2026-11-13T14:56:10Z",
-  "status": "edition_revision_1_pending_production_verification",
-  "coverage_note": "November 14 revision 1 accepted for production verification: ten source-reviewed reports, six catalog proposals deferred, one inaccessible arXiv metadata endpoint. Public verification pending; previous verified release remains the certified checkpoint."
+  "last_successful_publish_at": "2026-11-14T15:09:10Z",
+  "status": "edition_revision_1_production_verified",
+  "coverage_note": "November 14 revision 1 production-verified at 2026-11-14T15:09:10Z on exact code 7f64b1c65822c6e868bb60433c676da88a0d4a43: ten source-reviewed AI reports with partial coverage and one inaccessible source metadata endpoint; three technology and three term proposals remain deferred. Earlier immutable editions and all existing catalogs retained."
 }

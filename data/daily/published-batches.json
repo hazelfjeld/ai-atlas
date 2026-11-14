@@ -1167,7 +1167,7 @@
       "edition_date": "2026-11-14",
       "validation_result": "independent_sha256_bytes_counts_unique_ids_dates_and_publisher_source_review",
       "status": "partially_published_with_6_deferred_catalog_proposals",
-      "publication_outcome": "new_edition_staged_pending_cloudflare_http_browser_and_githack_verification",
+      "publication_outcome": "immutable_revision_1_cloudflare_http_browser_and_githack_verified",
       "publication_edition": "2026-11-14-v1",
       "accepted_news_ids": [
         "ai-news-llama-cpp-library-v1-20261113",
@@ -1213,11 +1213,22 @@
         "technology_updated": 0
       },
       "review_notes": "Publisher independently checked ggml llama.cpp release, IBM Granite and NVIDIA first-party posts, both arXiv abstracts, the Fed primary report listing and contemporaneous reporting via TechCrunch/Reuters. Unsupported performance, prompt-injection and risk claims remain qualified. One source metadata API inaccessible. Three technology and three terminology candidates require separate canonical alias/license and data-integrity work. Production deployment has not yet been verified.",
-      "production_verified_at": null,
-      "publication_history": [],
-      "last_verified_at": null,
-      "last_verified_public_url": null,
-      "verification_scope": "Pending production publication checks; cannot claim edition live until exact commit and public assets pass."
+      "production_verified_at": "2026-11-14T15:09:10Z",
+      "publication_history": [
+        {
+          "edition": "2026-11-14-v1",
+          "status": "cloudflare_http_browser_and_githack_verified",
+          "note": "Exact main 7f64b1c65822c6e868bb60433c676da88a0d4a43 passed 339 Node tests, catalog/GitHack 43607694359, Cloudflare 43607694346, 503 exact assets on each of three production hostnames, 66 hosted site-browser checks and 40 Games checks. Direct separate opening of dated query URL was unavailable.",
+          "verified_at": "2026-11-14T15:09:10Z"
+        }
+      ],
+      "last_verified_at": "2026-11-14T15:09:10Z",
+      "last_verified_public_url": "https://aiupdates.app/whats-new.html?date=2026-11-14&revision=1",
+      "verification_scope": "Exact tested commit 7f64b1c65822c6e868bb60433c676da88a0d4a43 passed catalog/GitHack 43607694359 with 339 Node tests and byte parity, and Cloudflare production/browser 43607694346 completed 2026-11-14T15:09:10Z with 503 verified assets per hostname on three hosts, 66 site and 40 Games browser checks. The November 14 immutable edition and staged source batch independently passed UTF-8 SHA-256 and byte-length verification. Direct independent opening of the full query permalink remained unavailable.",
+      "production_verified_revision": 1,
+      "production_commit": "7f64b1c65822c6e868bb60433c676da88a0d4a43",
+      "production_workflow_run_id": 43607694346,
+      "githack_workflow_run_id": 43607694359
     }
   ]
 }
