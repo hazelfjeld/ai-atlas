@@ -310,7 +310,7 @@ function buildSharedRailBottom(rail) {
 }
 function syncSharedThemeAction(button, theme) {
   button.setAttribute('aria-pressed', String(theme === 'dark'));
-  button.textContent = button.classList.contains('site-chrome__theme-toggle--rail') ?
+  button.textContent = button.classList && button.classList.contains('site-chrome__theme-toggle--rail') ?
     '◐' : '◐  ' + (theme === 'dark' ? 'Dark' : 'Light') + ' theme';
 }
 

@@ -1102,7 +1102,7 @@ test('shared native mobile drawer preserves site branding when enhancement is un
 test('existing shared standalone chrome exposes the Discover appearance action without cloning navigation', () => {
   const js = read('site-theme.js'), css = read('site-chrome.css');
   new vm.Script(js);
-  assert.match(js, /const containers = rail && !existing \? \[rail, menu\] :[\s\S]*?existing \? \[menu\] : \[\];/,
+  assert.match(js, /const containers = rail && !existing && desktopAction \? \[desktopAction, menu\] :[\s\S]*?existing \? \[menu\] : \[\];/,
     'Games and Discover both expose the shared mobile drawer action, even when Games has its own desktop button');
   assert.match(css, /\.games-header__inner > #theme-toggle\{display:none\}/,
     'The Games desktop theme action must not become a third mobile header button');
@@ -1114,7 +1114,7 @@ test('existing shared standalone chrome exposes the Discover appearance action w
     'Cross-page theme preference uses Discover existing storage key');
   assert.match(js, /a\[href\],button:not\(\[disabled\]\)/,
     'A new drawer action must join the keyboard focus trap');
-  assert.match(css, /\.site-chrome > \.site-chrome__theme-toggle/);
+  assert.match(css, /\.site-chrome \.sidebar-actions \.site-chrome__theme-toggle--rail/);
   assert.match(css, /\.site-mobile-chrome__menu > \.site-chrome__theme-toggle/);
   assert.match(js, /'aria-pressed', String\(theme === 'dark'\)/);
 });
