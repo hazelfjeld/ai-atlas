@@ -1104,3 +1104,56 @@ main.term-shell > footer:not(.site-chrome__footer) a{color:var(--accent,#27664e)
   }
   .site-chrome .sidebar-actions .site-chrome__theme-toggle--rail:hover{color:#fff;background:#374b3c}
 }
+
+/* atlas-unified-desktop-rail-frame:begin */
+/* Discover and every native page family share one measured desktop rail frame.
+   This is a layout contract, not another page-specific imitation: the same
+   width determines the workspace grid, the fixed rail and the topbar origin.
+   Preserve the existing script-free links, navigation semantics and content. */
+@media (min-width:651px){
+  :root{
+    --atlas-desktop-rail-width:242px;
+    --atlas-desktop-rail-top:30px;
+    --atlas-desktop-rail-x:19px;
+    --atlas-desktop-rail-bottom:22px;
+    --atlas-desktop-rail-brand-x:10px;
+  }
+  .app-shell{grid-template-columns:var(--atlas-desktop-rail-width) minmax(0,1fr)}
+  .app-shell > .sidebar{
+    width:var(--atlas-desktop-rail-width);
+    padding:var(--atlas-desktop-rail-top) var(--atlas-desktop-rail-x) var(--atlas-desktop-rail-bottom);
+  }
+  body:has(.site-chrome){padding-left:var(--atlas-desktop-rail-width)}
+  .site-chrome{
+    width:var(--atlas-desktop-rail-width)!important;
+    padding:var(--atlas-desktop-rail-top) var(--atlas-desktop-rail-x) var(--atlas-desktop-rail-bottom)!important;
+    gap:0!important;
+  }
+  .site-mobile-chrome{left:var(--atlas-desktop-rail-width)}
+  .site-chrome .site-chrome__brand{
+    padding:0 var(--atlas-desktop-rail-brand-x) 35px!important;
+    gap:12px!important;
+  }
+  .site-chrome .site-chrome__name{font-size:24px}
+  .site-chrome .site-chrome__links::before{
+    font-size:9px;
+    margin:0 13px 12px;
+  }
+  .site-chrome .site-chrome__links a{
+    padding:11px 12px!important;
+    border-radius:8px!important;
+    font-size:12px!important;
+    line-height:1.55!important;
+  }
+}
+@media (min-width:651px) and (max-width:1200px){
+  :root{
+    --atlas-desktop-rail-width:215px;
+    --atlas-desktop-rail-top:25px;
+    --atlas-desktop-rail-x:13px;
+    --atlas-desktop-rail-bottom:20px;
+    --atlas-desktop-rail-brand-x:8px;
+  }
+  .site-chrome .site-chrome__name{font-size:22px}
+}
+/* atlas-unified-desktop-rail-frame:end */
