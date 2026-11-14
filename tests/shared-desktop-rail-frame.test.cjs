@@ -15,9 +15,9 @@ test('Discover and native families share a desktop rail layout source of truth',
   assert.match(frame, /--atlas-desktop-rail-width:215px/);
   assert.match(frame, /max-width:1200px/);
   assert.match(frame, /\.app-shell\{grid-template-columns:var\(--atlas-desktop-rail-width\)/);
-  assert.match(frame, /\.app-shell > \.sidebar\{[^}]*width:var\(--atlas-desktop-rail-width\)/s);
+  assert.match(frame, /:is\(\.app-shell > \.sidebar, \.site-chrome\)\{[^}]*width:var\(--atlas-desktop-rail-width\)!important[^}]*padding:var\(--atlas-desktop-rail-top\)/s);
   assert.match(frame, /body:has\(\.site-chrome\)\{padding-left:var\(--atlas-desktop-rail-width\)\}/);
-  assert.match(frame, /\.site-chrome\{[^}]*width:var\(--atlas-desktop-rail-width\)!important/s);
+  assert.doesNotMatch(frame, /\.app-shell > \.sidebar\s*\{/, 'no independently maintained Discover outer rail width or padding');
   assert.match(frame, /\.site-mobile-chrome\{left:var\(--atlas-desktop-rail-width\)\}/);
   assert.match(frame, /\.site-chrome \.site-chrome__links a\{[^}]*padding:11px 12px!important/s);
   assert.match(frame, /\.site-chrome \.site-chrome__name\{font-size:25px\}/);

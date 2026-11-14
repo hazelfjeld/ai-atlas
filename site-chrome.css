@@ -1124,16 +1124,14 @@ main.term-shell > footer:not(.site-chrome__footer) a{color:var(--accent,#27664e)
     --atlas-desktop-rail-brand-x:10px;
   }
   .app-shell{grid-template-columns:var(--atlas-desktop-rail-width) minmax(0,1fr)}
-  .app-shell > .sidebar{
-    width:var(--atlas-desktop-rail-width);
-    padding:var(--atlas-desktop-rail-top) var(--atlas-desktop-rail-x) var(--atlas-desktop-rail-bottom);
-  }
   body:has(.site-chrome){padding-left:var(--atlas-desktop-rail-width)}
-  .site-chrome{
+  /* One outer-frame rule owns width and padding for both desktop page families.
+     Preserve differing navigation semantics and the functional SPA grid. */
+  :is(.app-shell > .sidebar, .site-chrome){
     width:var(--atlas-desktop-rail-width)!important;
     padding:var(--atlas-desktop-rail-top) var(--atlas-desktop-rail-x) var(--atlas-desktop-rail-bottom)!important;
-    gap:0!important;
   }
+  .site-chrome{gap:0!important}
   .site-mobile-chrome{left:var(--atlas-desktop-rail-width)}
   .site-chrome .site-chrome__brand{
     padding:0 var(--atlas-desktop-rail-brand-x) 35px!important;
