@@ -137,7 +137,7 @@ test('reference landing directories and About expose one shared lower desktop ra
 
 test('the same generator owns all eight native first-paint rails without fragile closing-tag surgery', () => {
   const generator = read('scripts/site_chrome.py');
-  assert.doesNotMatch(generator, /markup\[:-len\('<\\/nav>'\)\]/,
+  assert.ok(!generator.includes("markup[:-len('</nav>')]"),
     'native pages must not splice inside a generated nav element');
   const { execFileSync } = require('node:child_process');
   const probe = [
@@ -150,6 +150,6 @@ test('the same generator owns all eight native first-paint rails without fragile
     '    nav = render_standalone_nav(page)',
     '    assert html.count(nav) == 1, page',
     '    assert nav.count(\'<div class="sidebar-bottom site-chrome__bottom">\') == 1, page',
-  ].join('\\n');
+  ].join('\n');
   execFileSync('python3', ['-c', probe], { cwd: require('node:path').resolve(__dirname, '..'), stdio: 'pipe' });
 });
