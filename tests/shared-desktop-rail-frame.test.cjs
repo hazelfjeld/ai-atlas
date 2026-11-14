@@ -162,7 +162,7 @@ test('first ten canonical concept references have the shared lower rail at first
   assert.equal(cohort.length, 10, 'bounded cohort leaves stable IDs intact');
   for (const [id, entry] of cohort) {
     const html = read(entry.path);
-    const nav = html.match(/<nav class="site-chrome term-nav" aria-label="AI Updates primary navigation">([\\s\\S]*?)<\\/nav>/)?.[1];
+    const nav = html.match(/<nav class="site-chrome term-nav" aria-label="AI Updates primary navigation">([\s\S]*?)<\/nav>/)?.[1];
     assert.ok(nav, id + ' retains the canonical desktop rail');
     assert.equal((nav.match(/class="sidebar-bottom site-chrome__bottom"/g) || []).length, 1, id);
     assert.ok(nav.includes('href="../index.html#/sources">Coverage & collection status'), id);
