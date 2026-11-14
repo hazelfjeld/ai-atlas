@@ -301,7 +301,7 @@
   },
   "MLD-0061": {
     "path": "terms/MLD-0061-arima.html",
-    "sha256": "a5d61a93b921db7d2cc54c2253a4270edab8c2d03e4e90ee5bbfdd3c7884d16d",
+    "sha256": "05cdcea17d7db8def303a5eb372d6e9ccfac7806bd1f54c1ae1c45f4b2f1e963",
     "expanded": false
   },
   "MLD-0062": {
@@ -311,42 +311,42 @@
   },
   "MLD-0063": {
     "path": "terms/MLD-0063-artificial-intelligence.html",
-    "sha256": "898cb27fc8a87f0ab0cb604a7be5eef8d7e4d2be886a5de2df6a5736649a31f1",
+    "sha256": "a0a03f2c8f235b7247e9aca88e8dd1fa243fd1cdd6a5669d6e958375e35d3a02",
     "expanded": false
   },
   "MLD-0064": {
     "path": "terms/MLD-0064-assistant-only-loss.html",
-    "sha256": "65c12f44bc3a267dc052f3dbd8ec1689b3769af1bbd4c8e2965a019b601cf415",
+    "sha256": "3a79e84391b22693417ece96ea59658d5db9aead4fe560beb6d15566d5417005",
     "expanded": false
   },
   "MLD-0065": {
     "path": "terms/MLD-0065-asymmetric-quantization.html",
-    "sha256": "0a5e0931fd11146887c6e2fe6bbea8614229d7c761b64423edd0988559142ea8",
+    "sha256": "bb5df8264488915052ee95038f2a97c84236ef2ec652e164edab516724dab93b",
     "expanded": false
   },
   "MLD-0066": {
     "path": "terms/MLD-0066-attack-surface.html",
-    "sha256": "38b076c9fad4faffe96e3581a152974b5a51c1692a81dda2a8bf3ac02473f438",
+    "sha256": "2a5ee48e9415018b365a38c11718a2c4905dcb62e6a99a3226cfd8c06f86ff61",
     "expanded": false
   },
   "MLD-0067": {
     "path": "terms/MLD-0067-attention.html",
-    "sha256": "9895f25214cfa43d878213d4a799a3f0b8e0a57042550c54017e9841ca43f650",
+    "sha256": "e463c370fd3726aaba57df83f4e551ad22f67d2777e040bd18981d84a877364c",
     "expanded": false
   },
   "MLD-0068": {
     "path": "terms/MLD-0068-attention-distillation.html",
-    "sha256": "0d69f96532313a9e5a557afcaaf0dfeed71e4e7d5c8819b1fd07fc24cd01bdaf",
+    "sha256": "8265d9d6c73a5ef78c13a79d04264bbcb2a6dc76a2d50fe62bc1c79c4c675725",
     "expanded": false
   },
   "MLD-0069": {
     "path": "terms/MLD-0069-attention-head.html",
-    "sha256": "db4d1fc076b8fb2cb8ccfac1257c8d25226d021685d1c057069936ad1869fddb",
+    "sha256": "b0f55c9085a710ead03f0a9c08e2d3ef0c5a62b41b8e72d887dff95c99fc03c4",
     "expanded": false
   },
   "MLD-0070": {
     "path": "terms/MLD-0070-attention-map.html",
-    "sha256": "2098da89d9c0f4fec1f10d99c7e8b22e7ab51a9052e6a00be9fab8e001cb2169",
+    "sha256": "212de6cc4080c6d3a266df0c9ab0e697aec5e79fdaf9b04b95acb6c06b0a2a86",
     "expanded": false
   },
   "MLD-0071": {
