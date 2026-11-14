@@ -1167,42 +1167,42 @@ main.term-shell > footer:not(.site-chrome__footer) a{color:var(--accent,#27664e)
    Discover and every standalone page. Links stay native and usable without JS;
    Discover retains its SPA icons and counters. The arrow is purely decorative. */
 @media (min-width:651px){
-  :is(#navigation, nav.site-chrome) > details.site-chrome__more{
+  :is(#navigation > details.nav-more, nav.site-chrome > details.site-chrome__more){
     width:100%;min-width:0;margin-top:6px;padding-top:8px;
     border-top:1px solid #405043;
   }
-  :is(#navigation, nav.site-chrome) > details.site-chrome__more > summary{
+  :is(#navigation > details.nav-more, nav.site-chrome > details.site-chrome__more) > summary{
     display:flex;align-items:center;justify-content:space-between;gap:8px;
     box-sizing:border-box;width:100%;min-height:44px;
     margin:0;padding:10px 11px;border:0;border-radius:7px;
     list-style:none;cursor:pointer;color:#c5cfc6;
     font-size:12px;font-weight:650;line-height:1.4;
   }
-  :is(#navigation, nav.site-chrome) > details.site-chrome__more > summary::-webkit-details-marker{display:none}
-  :is(#navigation, nav.site-chrome) > details.site-chrome__more > summary::after{
+  :is(#navigation > details.nav-more, nav.site-chrome > details.site-chrome__more) > summary::-webkit-details-marker{display:none}
+  :is(#navigation > details.nav-more, nav.site-chrome > details.site-chrome__more) > summary::after{
     content:"";display:block;flex:0 0 7px;width:7px;height:7px;margin-left:auto;
     border-right:2px solid currentColor;border-bottom:2px solid currentColor;
     transform:rotate(45deg);transition:transform .15s ease;
   }
-  :is(#navigation, nav.site-chrome) > details.site-chrome__more[open] > summary::after{
+  :is(#navigation > details.nav-more, nav.site-chrome > details.site-chrome__more)[open] > summary::after{
     transform:rotate(225deg);
   }
-  :is(#navigation, nav.site-chrome) > details.site-chrome__more > summary .nav-more-chevron{
+  :is(#navigation > details.nav-more, nav.site-chrome > details.site-chrome__more) > summary .nav-more-chevron{
     display:none;
   }
-  :is(#navigation, nav.site-chrome) > details.site-chrome__more > summary:hover,
-  :is(#navigation, nav.site-chrome) > details.site-chrome__more[open] > summary{
+  :is(#navigation > details.nav-more, nav.site-chrome > details.site-chrome__more) > summary:hover,
+  :is(#navigation > details.nav-more, nav.site-chrome > details.site-chrome__more)[open] > summary{
     background:#ffffff13;color:#fff;
   }
-  :is(#navigation, nav.site-chrome) > details.site-chrome__more > summary:focus-visible{
+  :is(#navigation > details.nav-more, nav.site-chrome > details.site-chrome__more) > summary:focus-visible{
     outline:3px solid #d9a16f;outline-offset:2px;
   }
-  :is(#navigation, nav.site-chrome) > details.site-chrome__more > .site-chrome__more-links{
+  :is(#navigation > details.nav-more, nav.site-chrome > details.site-chrome__more) > .site-chrome__more-links{
     display:grid;grid-template-columns:minmax(0,1fr);gap:4px;padding:4px 0 0;
   }
 }
 @media (prefers-reduced-motion:reduce){
-  :is(#navigation, nav.site-chrome) > details.site-chrome__more > summary::after{
+  :is(#navigation > details.nav-more, nav.site-chrome > details.site-chrome__more) > summary::after{
     transition:none;
   }
 }
