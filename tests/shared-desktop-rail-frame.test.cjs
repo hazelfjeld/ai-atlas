@@ -115,7 +115,7 @@ test('reference landing directories and About expose one shared lower desktop ra
   assert.match(generator, /rail_bottom=False/);
   assert.match(generator, /render_static_rail_bottom\(prefix\) if rail_bottom/);
   assert.match(termBuilder, /rail_bottom=\(path == 'terms\/index\.html'\)/);
-  assert.match(seoBuilder, /rail_bottom=\(path == 'technology\/index\.html'\)/);
+  assert.match(seoBuilder, /rail_bottom=True/);
   assert.match(seoBuilder, /topbar_title='About', native_secondary=True, mobile_secondary=True, rail_bottom=True/);
   assert.match(read('site-theme.js'), /const previous = rail\.querySelector\('\.sidebar-bottom'\)/);
   for (const [page, prefix] of [

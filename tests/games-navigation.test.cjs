@@ -630,12 +630,13 @@ test('all generated technology profiles use shared directory chrome with native 
     assert.ok(html.includes('<script src="../site-theme.js"></script>'), file);
     const heading = html.match(/<header class="hero" id="main" tabindex="-1">[\s\S]*?<h1>([^<]+)<\/h1>/)?.[1];
     assert.ok(heading, file + ' must have a native profile heading');
-    const detailFrame = withoutLandingRailBottom(directory)
+    const detailFrame = directory
       .replace(' data-page-label="Technology profiles"', ' data-page-label="' + heading + '"')
       .replace('<span class="site-mobile-chrome__title">Technology profiles</span>',
         '<span class="site-mobile-chrome__title">' + heading + '</span>');
     assert.equal(landingNav(html), detailFrame, file);
-    assert.doesNotMatch(html, /class="sidebar-bottom site-chrome__bottom"/, file + ' remains an immutable detail page');
+    assert.equal((html.match(/class="sidebar-bottom site-chrome__bottom"/g)||[]).length, 1,
+      file + ' renders the same script-free lower rail as the directory');
     assert.ok(html.indexOf('<nav class="site-chrome term-nav"') < html.indexOf(prefix),
       file + ' must keep the shared rail outside the content landmark');
     assert.ok(html.indexOf(prefix) < html.indexOf('<p class="breadcrumb-links">'),
@@ -645,7 +646,7 @@ test('all generated technology profiles use shared directory chrome with native 
     assert.equal((html.match(/class="site-chrome__more"/g) || []).length, 1, file);
   }
   const generator = read('scripts/build_seo.py');
-  assert.ok(generator.includes("render_directory_nav(prefix, 'Technology profiles', mobile_brand=True, native_secondary=True, mobile_secondary=True, page_label=('Technology profiles' if path == 'technology/index.html' else article_title), topbar_title=('Technology profiles' if path == 'technology/index.html' else article_title), rail_bottom=(path == 'technology/index.html')) if path.startswith('technology/')"));
+  assert.ok(generator.includes("render_directory_nav(prefix, 'Technology profiles', mobile_brand=True, native_secondary=True, mobile_secondary=True, page_label=('Technology profiles' if path == 'technology/index.html' else article_title), topbar_title=('Technology profiles' if path == 'technology/index.html' else article_title), rail_bottom=True) if path.startswith('technology/')"));
   assert.ok(generator.includes("DIRECTORY_MOBILE_CSS if path.startswith('technology/')"));
   assert.ok(read('downloads/Atlas_Demo_Offline.html').includes('/* Native, script-free reference pages: readable two-column touch navigation on phones.'));
 });
@@ -868,7 +869,7 @@ test('both generated catalog directories share Discover navigation and the nativ
   }
   const termGenerator=read('scripts/build_term_pages.py'), techGenerator=read('scripts/build_seo.py');
   assert.ok(termGenerator.includes("render_directory_nav('../', (None if path == 'terms/index.html' else 'Concept dictionary'), mobile_brand=True, native_secondary=True, mobile_secondary=True, secondary_current=('encyclopedia' if path == 'terms/index.html' else None), page_label=('Concept encyclopedia' if path == 'terms/index.html' else title), topbar_title=('Concept encyclopedia' if path == 'terms/index.html' else title), rail_bottom=(path == 'terms/index.html'))"));
-  assert.ok(techGenerator.includes("render_directory_nav(prefix, 'Technology profiles', mobile_brand=True, native_secondary=True, mobile_secondary=True, page_label=('Technology profiles' if path == 'technology/index.html' else article_title), topbar_title=('Technology profiles' if path == 'technology/index.html' else article_title), rail_bottom=(path == 'technology/index.html'))"));
+  assert.ok(techGenerator.includes("render_directory_nav(prefix, 'Technology profiles', mobile_brand=True, native_secondary=True, mobile_secondary=True, page_label=('Technology profiles' if path == 'technology/index.html' else article_title), topbar_title=('Technology profiles' if path == 'technology/index.html' else article_title), rail_bottom=True)"));
   assert.ok(read('scripts/site_chrome.py').includes('DIRECTORY_MOBILE_CSS'));
   assert.match(read('site-chrome.css'), /\.site-mobile-chrome__menu a\{[^}]*min-height:44px/);
 });
