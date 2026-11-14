@@ -1156,6 +1156,68 @@
       "production_workflow_run_id": 43445647404,
       "githack_workflow_run_id": 43445647463,
       "verification_scope": "Exact tested commit 222c2a0c6bcf48231a191ed0b56ec8b094ebdb8b passed Cloudflare validation, local hosted-browser/production asset and browser checks (workflow 43445647404) completed November 13 14:56:10Z, and catalog/GitHack checks (workflow 43445647463) passed 320 Node tests plus byte-parity. Direct independent opening of the full dated query URL was unavailable."
+    },
+    {
+      "batch_id": "atlas-daily-20261114-source-checked-20261114t144005781z",
+      "source_branch": "atlas-daily-staging",
+      "source_commit": "7c1f4d8c99ba806fee8c93b2a86e56a94bd7f00f",
+      "source_batch_path": "daily-queue/batches/2026-11-14-atlas-daily-20261114-source-checked-20261114t144005781z.json",
+      "source_batch_sha256": "03feac038e955b24f6e90edf0a2a5dd7f98d437c5962a288ca0db7b567d9fc5b",
+      "source_batch_bytes": 37775,
+      "edition_date": "2026-11-14",
+      "validation_result": "independent_sha256_bytes_counts_unique_ids_dates_and_publisher_source_review",
+      "status": "partially_published_with_6_deferred_catalog_proposals",
+      "publication_outcome": "new_edition_staged_pending_cloudflare_http_browser_and_githack_verification",
+      "publication_edition": "2026-11-14-v1",
+      "accepted_news_ids": [
+        "ai-news-llama-cpp-library-v1-20261113",
+        "ai-news-ibm-granite-llmon-preview-20261112",
+        "ai-news-nvidia-simready-pick-place-walkthrough-20261113",
+        "ai-news-fed-ai-financial-stability-survey-20261113",
+        "ai-news-nopo-one-sided-verification-preprint-2611-17287",
+        "ai-news-distillation-optimization-theory-2611-17230",
+        "ai-news-amazon-world-product-graph-draft-20261113",
+        "ai-news-elevenai-enterprise-preview-20261113",
+        "ai-news-eu-dublin-ai-leaders-summit-20261113",
+        "ai-news-reuters-china-nvidia-ai-procurement-20261113"
+      ],
+      "source_news_ids": [
+        "ai-news:llama-cpp-library-v1-20261113",
+        "ai-news:ibm-granite-llmon-preview-20261112",
+        "ai-news:nvidia-simready-pick-place-walkthrough-20261113",
+        "ai-news:fed-ai-financial-stability-survey-20261113",
+        "ai-news:nopo-one-sided-verification-preprint-2611-17287",
+        "ai-news:distillation-optimization-theory-2611-17230",
+        "ai-news:amazon-world-product-graph-draft-20261113",
+        "ai-news:elevenai-enterprise-preview-20261113",
+        "ai-news:eu-dublin-ai-leaders-summit-20261113",
+        "ai-news:reuters-china-nvidia-ai-procurement-20261113"
+      ],
+      "deferred_news_ids": [],
+      "deferred_catalog_proposal_ids": [
+        "tech-proposal:llama-cpp-v1-api:2026-11-14",
+        "tech-proposal:granite-llmon-preview:2026-11-14",
+        "tech-proposal:nvidia-simready-central:2026-11-14",
+        "term-proposal:llmon-llm-object-notation:2026-11-14",
+        "term-proposal:one-sided-verifiability-osv:2026-11-14",
+        "term-proposal:simready-asset-profile:2026-11-14"
+      ],
+      "rejected_ids": [],
+      "counts": {
+        "news_published": 10,
+        "technology_added": 0,
+        "term_added": 0,
+        "corrections": 0,
+        "news_deferred": 0,
+        "catalog_deferred": 6,
+        "technology_updated": 0
+      },
+      "review_notes": "Publisher independently checked ggml llama.cpp release, IBM Granite and NVIDIA first-party posts, both arXiv abstracts, the Fed primary report listing and contemporaneous reporting via TechCrunch/Reuters. Unsupported performance, prompt-injection and risk claims remain qualified. One source metadata API inaccessible. Three technology and three terminology candidates require separate canonical alias/license and data-integrity work. Production deployment has not yet been verified.",
+      "production_verified_at": null,
+      "publication_history": [],
+      "last_verified_at": null,
+      "last_verified_public_url": null,
+      "verification_scope": "Pending production publication checks; cannot claim edition live until exact commit and public assets pass."
     }
   ]
 }

@@ -305,9 +305,17 @@
       "sha256": "d8b3b5f37ff38794834338804fa3c76240e321ff6188e4b895c5bb2468d06da9",
       "bytes": 17937,
       "published_at": "2026-11-13T14:40:42.355Z"
+    },
+    {
+      "date": "2026-11-14",
+      "revision": 1,
+      "path": "data/daily/editions/2026-11-14-v1.json",
+      "sha256": "e2c0c1c53974008a68a7d98e74a821235d14ffce731e59ad14aeae2fffddbb8d",
+      "bytes": 18645,
+      "published_at": "2026-11-14T14:52:11.272Z"
     }
   ],
   "last_successful_publish_at": "2026-11-13T14:56:10Z",
-  "status": "edition_revision_1_production_verified",
-  "coverage_note": "November 13 revision 1 verified at 2026-11-13T14:56:10Z: ten source-qualified AI reports and immutable archive bytes passed Cloudflare hosted-browser, production HTTP/assets and GitHack/catalog checks at exact commit 222c2a0c. Five technology and three terminology proposals remain deferred; source collection was partial with an inaccessible arXiv metadata API. The exact date/revision query permalink was not independently reopened outside CI."
+  "status": "edition_revision_1_pending_production_verification",
+  "coverage_note": "November 14 revision 1 accepted for production verification: ten source-reviewed reports, six catalog proposals deferred, one inaccessible arXiv metadata endpoint. Public verification pending; previous verified release remains the certified checkpoint."
 }
