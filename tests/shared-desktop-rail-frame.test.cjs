@@ -153,3 +153,29 @@ test('the same generator owns all eight native first-paint rails without fragile
   ].join('\n');
   execFileSync('python3', ['-c', probe], { cwd: require('node:path').resolve(__dirname, '..'), stdio: 'pipe' });
 });
+
+
+test('all 57 authored concept guides share first-paint navigation with technology articles', () => {
+  const { createHash } = require('node:crypto');
+  const manifest = JSON.parse(read('terms/manifest.json'));
+  const guides = Object.values(manifest).filter(entry => entry.expanded);
+  assert.equal(Object.keys(manifest).length, 1345, 'preserve all original term IDs and URLs');
+  assert.equal(guides.length, 57, 'existing expanded guide family');
+  for (const entry of guides) {
+    const html = read(entry.path);
+    const nav = html.match(/<nav class="site-chrome term-nav" aria-label="AI Updates primary navigation">([\s\S]*?)<\/nav>/)?.[1];
+    assert.ok(nav, entry.path + ' keeps its native desktop navigation');
+    assert.equal((nav.match(/class="sidebar-bottom site-chrome__bottom"/g) || []).length, 1, entry.path);
+    assert.match(nav, /href="\.\.\/index\.html#\/sources">Coverage & collection status/, entry.path);
+    assert.match(html, /<details class="site-mobile-chrome__nav"/, entry.path + ' keeps no-script mobile menu');
+    assert.equal((html.match(/<footer class="site-chrome__footer">/g) || []).length, 1, entry.path);
+    assert.equal(createHash('sha256').update(html, 'utf8').digest('hex'), entry.sha256,
+      entry.path + ' matches its original stable ID in the integrity manifest');
+  }
+  const basic = read('terms/MLD-0001-a-b-test.html');
+  assert.doesNotMatch(basic, /class="sidebar-bottom site-chrome__bottom"/,
+    'unexpanded reference pages remain unchanged until their own atomic migration');
+  assert.match(read('scripts/build_term_pages.py'),
+    /rail_bottom=\(path == 'terms\/index\.html' or expanded_concept\)/,
+    'one shared generator controls the entire authored-guide family');
+});

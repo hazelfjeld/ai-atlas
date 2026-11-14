@@ -39,7 +39,11 @@ def shell(title, body, path, description, structured=None, *, native_concept_art
     # All concept detail pages now ship the same eight mobile secondary links
     # as the A-Z directory and technology profiles, even without JavaScript.
     # Read the article h1 into the shared, script-free workspace title before any JavaScript enhancement.
-    directory_nav = render_directory_nav('../', (None if path == 'terms/index.html' else 'Concept dictionary'), mobile_brand=True, native_secondary=True, mobile_secondary=True, secondary_current=('encyclopedia' if path == 'terms/index.html' else None), page_label=('Concept encyclopedia' if path == 'terms/index.html' else title), topbar_title=('Concept encyclopedia' if path == 'terms/index.html' else title), rail_bottom=(path == 'terms/index.html'))
+    directory_nav = render_directory_nav('../', (None if path == 'terms/index.html' else 'Concept dictionary'), mobile_brand=True, native_secondary=True, mobile_secondary=True, secondary_current=('encyclopedia' if path == 'terms/index.html' else None), page_label=('Concept encyclopedia' if path == 'terms/index.html' else title), topbar_title=('Concept encyclopedia' if path == 'terms/index.html' else title), rail_bottom=(path == 'terms/index.html' or expanded_concept))
+    if expanded_concept:
+        assert directory_nav.count('class="sidebar-bottom site-chrome__bottom"') == 1, path
+    elif path.startswith('terms/MLD-'):
+        assert 'class="sidebar-bottom site-chrome__bottom"' not in directory_nav, path
     # Fail during generation if the common native mobile disclosure disappears.
     assert directory_nav.count('class="site-mobile-chrome__more"') == 1, path
     assert directory_nav.count('class="site-mobile-chrome__more-links"') == 1, path
