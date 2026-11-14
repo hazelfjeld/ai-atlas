@@ -1453,7 +1453,7 @@ with sync_playwright() as p:
     # mobile menu/search and saved appearance without replacing tour links.
     page.set_viewport_size({'width':1280,'height':900})
     page.goto(base+'index.html#/overview')
-    canonical=[s.strip() for s in page.locator('#navigation > a.nav-link > span:first-of-type').all_text_contents()]
+    canonical=[s.strip() for s in page.locator('#navigation > .site-chrome__links > a.nav-link > span:first-of-type').all_text_contents()]
     for width in (320,390,768,1280):
         for theme in ('light','dark'):
             page.set_viewport_size({'width':width,'height':844})
