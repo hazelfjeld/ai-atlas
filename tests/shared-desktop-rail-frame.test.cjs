@@ -102,7 +102,7 @@ test('native editorial families render the shared rail bottom before hydration',
     assert.match(rail, /Research snapshot<small>November 1, 2026<\/small>/, path);
     assert.match(rail, /href="index\.html#\/sources">Coverage & collection status/, path);
     assert.match(rail, /class="sidebar-actions"><span>Curated & sourced<\/span>/, path);
-    assert.match(rail, /<details class="site-chrome__more">/, path);
+    assert.match(rail, /<details class="site-chrome__more"(?: open)?>/, path);
     assert.match(page, /site-mobile-chrome__nav/, path + ' retains script-free mobile navigation');
   }
   assert.match(discover, /<div class="sidebar-bottom">/, 'Discover retains its original shared rail footer');
