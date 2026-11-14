@@ -38,3 +38,21 @@ test('one shared frame preserves native navigation and the offline standalone', 
   assert.ok(offline.includes(read('site-chrome.css')),
     'single-file demo embeds the entire current shared layout contract');
 });
+
+test('Discover primary rail uses the native primary-link DOM wrapper without changing SPA routes', () => {
+  const discover = read('index.html'), native = read('whats-new.html');
+  const main = discover.match(/<nav id="navigation" aria-label="Main navigation"><div class="site-chrome__links">([\s\S]*?)<\/div><details class="nav-more"/)?.[1];
+  const staticRail = native.match(/<div class="site-chrome__links">([\s\S]*?)<\/div>/)?.[1];
+  assert.ok(main && staticRail, 'both desktop families expose the same link-list structure');
+  const discoverLinks = [...main.matchAll(/<a class="nav-link(?: active)?"[^>]*href="([^"]+)"[^>]*>[\s\S]*?<span>([^<]+)<\/span>/g)]
+    .map(([, href, label]) => [href.replace(/^#\//, 'index.html#/'), label]);
+  const staticLinks = [...staticRail.matchAll(/<a href="([^"]+)"[^>]*>([^<]+)<\/a>/g)]
+    .map(([, href, label]) => [href, label.replaceAll('&amp;', '&')]);
+  assert.deepEqual(discoverLinks, staticLinks, 'same seven destinations in the same order');
+  const css = read('site-chrome.css');
+  assert.match(css, /#navigation > \.site-chrome__links\{display:grid;grid-template-columns:minmax\(0,1fr\);gap:4px/);
+  assert.match(read('scripts/site_chrome.py'), /primary_wrapper = '<div class="site-chrome__links">'/);
+  const offline = read('downloads/Atlas_Demo_Offline.html');
+  assert.ok(offline.includes(css), 'single-file fallback uses the updated shared stylesheet');
+  assert.match(offline, /<nav id="navigation" aria-label="Main navigation"><div class="site-chrome__links">/);
+});

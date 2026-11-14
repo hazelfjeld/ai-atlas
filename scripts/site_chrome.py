@@ -417,6 +417,14 @@ def normalize_discover_sidebar(html, term_count, tech_count):
     nav, after = rest.split('</nav>', 1)
     assert nav.count('<details class="nav-more"') == 1
     original_primary, secondary = nav.split('<details class="nav-more"', 1)
+    # Discover and native pages share the same primary-link DOM container.
+    # Accept the older flat sidebar only during migration; repeated builds stay idempotent.
+    primary_wrapper = '<div class="site-chrome__links">'
+    if original_primary.startswith(primary_wrapper):
+        assert original_primary.endswith('</div>'), 'Malformed Discover primary-link wrapper'
+        original_primary = original_primary[len(primary_wrapper):-len('</div>')]
+    else:
+        assert primary_wrapper not in original_primary, 'Ambiguous Discover primary-link wrapper'
     existing_keys = re.findall(
         r'<a class="nav-link(?: active)?" data-(?:view|static)="([^"]+)"',
         original_primary,
@@ -427,8 +435,9 @@ def normalize_discover_sidebar(html, term_count, tech_count):
     secondary = '<details class="nav-more"' + secondary
     secondary = sync_discover_secondary(secondary)
     assert 'data-view="playbooks"' not in secondary, 'Playbooks must appear only once'
-    normalized = (before + marker + render_discover_primary(term_count, tech_count) +
-                  secondary + '</nav>' + after)
+    normalized = (before + marker + primary_wrapper +
+                  render_discover_primary(term_count, tech_count) +
+                  '</div>' + secondary + '</nav>' + after)
     mobile = render_discover_mobile()
     old_button = '<button id="menu-toggle" class="icon-button mobile-only" aria-label="Toggle navigation" aria-controls="sidebar" aria-expanded="false">☰</button>'
     native_pattern = r'<div class="site-mobile-chrome discover-mobile-chrome"[^>]*>.*?</nav></details></div>'
