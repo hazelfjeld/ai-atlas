@@ -1251,47 +1251,47 @@
   },
   "MLD-0251": {
     "path": "terms/MLD-0251-cumulative-distribution-function.html",
-    "sha256": "cfafacfa0e31d2606171dea9258ade8704af69159ee66040bd7024008a8d58b2",
+    "sha256": "29cb8a3804f5b3b386834ab70356e3e6629ccd554c39bd5f3a7bc5c6b81c6069",
     "expanded": false
   },
   "MLD-0252": {
     "path": "terms/MLD-0252-curriculum-learning.html",
-    "sha256": "d991c275cce9ff9504499e43ef34981f6596ca76d59bf21e7e4cd45ade03f173",
+    "sha256": "0f773639bf2feffee01cfea41e31bc36ca6d216a7cb651be7fc4987f396fa0a0",
     "expanded": false
   },
   "MLD-0253": {
     "path": "terms/MLD-0253-curse-of-dimensionality.html",
-    "sha256": "08f227bde58eb7012c34e7ca69111c7b4c34e900ae0348725b6f96f12862c6d1",
+    "sha256": "fb8eeed22a71b2b9478d7eef65d33db0aef66ec582f604dfd4c102fc2871bce1",
     "expanded": false
   },
   "MLD-0254": {
     "path": "terms/MLD-0254-cutmix.html",
-    "sha256": "7d01e58df3e0935f9fdcb2ed25d502ffcd180fea735ca8ace551c96e90dd862d",
+    "sha256": "def03b221d3956e053ce4781fb8ddb7ac1fcf2ab04c835b274e62cbd8edf532b",
     "expanded": false
   },
   "MLD-0255": {
     "path": "terms/MLD-0255-data-augmentation.html",
-    "sha256": "2742e5601299ec6cc8dc33b287a27dafa8220ec8d1dd1ca65c24f3f37422528e",
+    "sha256": "90fd707723bd40f09a5b0126ec3ba0f44ee2ce68d4ec5ca9ca7aa3ee52230e53",
     "expanded": false
   },
   "MLD-0256": {
     "path": "terms/MLD-0256-data-cleaning.html",
-    "sha256": "b3cd13e126aff16f11f6874c1fca68a247d805b0729433ce94f7db261816e251",
+    "sha256": "b6317806880ae8c1e0a71a43f67b9c3494c3d208c5df6c51ca276ab2968853a1",
     "expanded": false
   },
   "MLD-0257": {
     "path": "terms/MLD-0257-data-curation.html",
-    "sha256": "d7353e8238bcdf20d383c76ef04615dc44663d6536baf39a6a1d713881a80fbf",
+    "sha256": "d710ae2d7d819e0de7dbbb12603f23fba933ceaca31b9755642c89f7e71bc4d5",
     "expanded": false
   },
   "MLD-0258": {
     "path": "terms/MLD-0258-data-curriculum.html",
-    "sha256": "18985804d26b89a3c67d34d47873e739a70635475f2c50517575afef8b4c2997",
+    "sha256": "8394a6b68197d42bc2f1e70077ca8f9e140ce5f31801cd7da82552f164bc2346",
     "expanded": false
   },
   "MLD-0259": {
     "path": "terms/MLD-0259-data-deduplication.html",
-    "sha256": "2e47f244dd3c3f59b547beb75a190e991f24dd4045d0da33ca6e72dbd31fa9ed",
+    "sha256": "5cb892770daea739de5ce30e5e974d91378aa26f8cff53ca8cec93d9f26e27a9",
     "expanded": false
   },
   "MLD-0260": {
