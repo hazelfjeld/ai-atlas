@@ -1376,22 +1376,22 @@
   },
   "MLD-0276": {
     "path": "terms/MLD-0276-dbscan.html",
-    "sha256": "606b7c75e79c69c92eebc8839bca238e6ce686a247d2a2662ba86be8a74cc0a2",
+    "sha256": "0e9c9c78c1e7281a82b06254d9faa08ecc9d1648f1046aa95efdb9478920e260",
     "expanded": false
   },
   "MLD-0277": {
     "path": "terms/MLD-0277-dcg.html",
-    "sha256": "44148afaa7fc9d68d6e873c9c4c1b4e947f648e6413db92cbef9e88bfd0cbcc9",
+    "sha256": "4fa9fc894f43feae5f152f276c1cbdb7220cc48df0f8bc55575a23f4dc3f5a3f",
     "expanded": false
   },
   "MLD-0278": {
     "path": "terms/MLD-0278-dead-neuron.html",
-    "sha256": "9a1957b9075cadab33e2f44db48f66a0d6026ead8a6f9b1f6198f693756977d8",
+    "sha256": "6d4b713720c09d7a5b060a6fe6c3a98e8ef50cdd8808b1c43a571b44ad55ff35",
     "expanded": false
   },
   "MLD-0279": {
     "path": "terms/MLD-0279-deception.html",
-    "sha256": "41c9de54adbb7bf49b9de5249fad79547f22698365930efea5d7d1d5dbc7d5dd",
+    "sha256": "5195cff17e29d6c47759ca4b719a57e152bb9cc1dd4909977e5d180642aff07f",
     "expanded": false
   },
   "MLD-0280": {
@@ -1401,27 +1401,27 @@
   },
   "MLD-0281": {
     "path": "terms/MLD-0281-decision-boundary.html",
-    "sha256": "d5d87a86a8f7ddf07604d70d7622190763ead8dbc0ada0958c344961ff0b84d3",
+    "sha256": "98799947c196deb94d6f7837048fbad7ae3277d71780a9f44c55aee19fc34799",
     "expanded": false
   },
   "MLD-0282": {
     "path": "terms/MLD-0282-decision-forest.html",
-    "sha256": "02b964883d5bb5776f0cba2ae748164ccb2efed04b1d98043bf8a014c47d7835",
+    "sha256": "e0103c92c3aaafa34b24f150a2e5763022003a7452bad19e785c6f183cfdb54e",
     "expanded": false
   },
   "MLD-0283": {
     "path": "terms/MLD-0283-decision-threshold.html",
-    "sha256": "2d90dbcd0582e37c0149d8335ff48c177030eabc3b7d302f676f3a4cc4485935",
+    "sha256": "1430057e847308c014d49d294180a45b71bfc0c11653b6e0bf4d7da2bbbc21a3",
     "expanded": false
   },
   "MLD-0284": {
     "path": "terms/MLD-0284-decision-tree.html",
-    "sha256": "2b6f8531f6cf4208c66481694b3ad371dd6ad7c59adf18c126a21ce61669816e",
+    "sha256": "b27efb4c24ee2f4aae1c2d78eccd2387c11a307b054f7ef023410386bd3671f5",
     "expanded": false
   },
   "MLD-0285": {
     "path": "terms/MLD-0285-decode-phase.html",
-    "sha256": "2cdd40961ce4e4b369d29ae192e46da27ac01b877aebb3e3ab174aa09147ff95",
+    "sha256": "63c483cbb4e481d785f042f33af321fcae2b70a16bc617e4a4e0744a588d22af",
     "expanded": false
   },
   "MLD-0286": {
