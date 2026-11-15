@@ -560,7 +560,7 @@ with sync_playwright() as p:
                 native_page.screenshot(path=str(out / ('concept-first-paint-0111-' + scheme + '-' + str(width) + '.png')))
             if width == 390:
                 native_page.locator('.site-mobile-chrome__nav > summary').click()
-                native_page.locator('.site-mobile-chrome__menu > a[href="../index.html#/overview"]').click()
+                native_page.locator('.site-mobile-chrome__menu > a:not(.site-mobile-chrome__brand)[href="../index.html#/overview"]').click()
                 native_page.wait_for_url('**/index.html#/overview')
                 check('new concept mobile menu navigates to Discover without scripts ' + scheme,
                       native_page.locator('main h1').first.inner_text() == 'Discover')
