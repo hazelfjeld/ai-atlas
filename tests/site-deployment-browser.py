@@ -512,7 +512,7 @@ with sync_playwright() as p:
 
     # The A-Z concept and technology directory pages must share Discover's
     # secondary destinations with JavaScript disabled, not only after hydration.
-    for route in ('terms/index.html', 'terms/MLD-0001-a-b-test.html', 'terms/MLD-0101-bayesian-inference.html', 'terms/MLD-0111-bernoulli-distribution.html', 'terms/MLD-0121-bidirectional-context.html', 'terms/MLD-0131-boosting.html', 'terms/MLD-0141-byte-pair-encoding.html', 'terms/MLD-0151-categorical-feature.html', 'terms/MLD-0161-chain-of-thought-prompting.html', 'technology/index.html', 'technology/TECH-0216-pytorch.html'):
+    for route in ('terms/index.html', 'terms/MLD-0001-a-b-test.html', 'terms/MLD-0101-bayesian-inference.html', 'terms/MLD-0111-bernoulli-distribution.html', 'terms/MLD-0121-bidirectional-context.html', 'terms/MLD-0131-boosting.html', 'terms/MLD-0141-byte-pair-encoding.html', 'terms/MLD-0151-categorical-feature.html', 'terms/MLD-0161-chain-of-thought-prompting.html', 'terms/MLD-0171-circuit.html', 'technology/index.html', 'technology/TECH-0216-pytorch.html'):
         scriptless.goto(base + route)
         scriptless.locator('#directory-mobile-nav > summary').click()
         more_menu = scriptless.locator('#directory-mobile-nav .site-mobile-chrome__more')
@@ -544,7 +544,7 @@ with sync_playwright() as p:
             native_page.goto(base + 'index.html#/overview')
             native_page.goto(base + 'technology/TECH-0216-pytorch.html')
             shared_labels = native_page.locator('nav.site-chrome .site-chrome__links a').all_text_contents()
-            native_page.goto(base + 'terms/MLD-0161-chain-of-thought-prompting.html')
+            native_page.goto(base + 'terms/MLD-0161-chain-of-thought-prompting.html', 'terms/MLD-0171-circuit.html')
             native_nav = native_page.locator('nav.site-chrome')
             lower = native_nav.locator('.sidebar-bottom.site-chrome__bottom')
             check('new concept first-paint rail matches technology and Discover ' +
@@ -2455,7 +2455,7 @@ with sync_playwright() as p:
         enhanced_concept.emulate_media(color_scheme=color)
         for width in (320, 390, 768, 1280):
             enhanced_concept.set_viewport_size({'width':width, 'height':844})
-            for route in ('terms/MLD-0001-a-b-test.html', 'terms/MLD-0101-bayesian-inference.html', 'terms/MLD-0121-bidirectional-context.html', 'terms/MLD-0131-boosting.html', 'terms/MLD-0141-byte-pair-encoding.html', 'terms/MLD-0151-categorical-feature.html', 'technology/TECH-0216-pytorch.html'):
+            for route in ('terms/MLD-0001-a-b-test.html', 'terms/MLD-0101-bayesian-inference.html', 'terms/MLD-0121-bidirectional-context.html', 'terms/MLD-0131-boosting.html', 'terms/MLD-0141-byte-pair-encoding.html', 'terms/MLD-0151-categorical-feature.html', 'terms/MLD-0171-circuit.html', 'technology/TECH-0216-pytorch.html'):
                 enhanced_concept.goto(base + route)
                 check('generated detail shared sibling landmarks ' + route + ' ' + color + ' ' + str(width),
                       enhanced_concept.evaluate("""() => {

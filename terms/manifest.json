@@ -851,52 +851,52 @@
   },
   "MLD-0171": {
     "path": "terms/MLD-0171-circuit.html",
-    "sha256": "85318c1618ec74e1feaae1f64a577546fdac7924a6f33fe35c52f573307cbe7f",
+    "sha256": "9c4ab89918163747396a8c610e3b7709d28937b1a128bb82e4aa651ad3707621",
     "expanded": false
   },
   "MLD-0172": {
     "path": "terms/MLD-0172-circuit-tracing.html",
-    "sha256": "09af03e82776fc936dcf3d1f06b22eeffbb6fd9dc00d90b26980586d17d7c217",
+    "sha256": "8016103789f0fb431ef16d4b76584bfc6db787f33e2657e5ada0b3a03789fd6f",
     "expanded": false
   },
   "MLD-0173": {
     "path": "terms/MLD-0173-citation-attribution.html",
-    "sha256": "6f579ef828a2442c367f00b28ca1fb8335cae6f28912aac77c3a6f10a741692d",
+    "sha256": "8b9692cb9ed3c908ac3f2109c70cb2ab9ebf2db3764210ddc914d9c676c53e47",
     "expanded": false
   },
   "MLD-0174": {
     "path": "terms/MLD-0174-class-imbalance.html",
-    "sha256": "8f439b0ff356138773ad414eb3c4eaba39c4298ac66ba4bc40a66d5a2ce085c1",
+    "sha256": "c183df8b683c1fd7abe6cacaedadca2f154eba13769ee49c1e87ca00bed0f230",
     "expanded": false
   },
   "MLD-0175": {
     "path": "terms/MLD-0175-class-weight.html",
-    "sha256": "d716600968fdc089b0a849c83723ad9cbdb48b91357340a131a52b30133a18da",
+    "sha256": "a2b2f18b40ada7dab266a1dd0d4e776952ceb67fa186e12450ba70cb54bfac8b",
     "expanded": false
   },
   "MLD-0176": {
     "path": "terms/MLD-0176-classification.html",
-    "sha256": "05d3ac1675e8fb335b1e88fc9643dfc619277669ec7cff54211bf77cfe595067",
+    "sha256": "f168c3397adebbc15ae9833b6fced9515488eee4feb2eaad0115dfb99f326f2a",
     "expanded": false
   },
   "MLD-0177": {
     "path": "terms/MLD-0177-classifier-free-guidance.html",
-    "sha256": "7fe19df65109ce1b77742b4d9420725cab4ccf4fd9d6292ccc6c956e68405af3",
+    "sha256": "0d2ce0ed7e2d3656cde7422ddfd9cf1597246d436ebeacc64089821be61cc899",
     "expanded": false
   },
   "MLD-0178": {
     "path": "terms/MLD-0178-clip.html",
-    "sha256": "617d7bb495eea72bd4f3c24de38064b7d39ae390226e8fe6680da6fad944cc0d",
+    "sha256": "3e22bafa6cca08dfefcde2ada3497cf696eaa285170c3efeb59289cafc7e80cd",
     "expanded": false
   },
   "MLD-0179": {
     "path": "terms/MLD-0179-clustering.html",
-    "sha256": "d84b772ab4554006d1dd9b9f56532afeedac8566543e4e650b27741ebe6a13b2",
+    "sha256": "ed1c061fac328e2455d93d2de23bd7532e397090c1dbc2f6ad8a772cb5022fce",
     "expanded": false
   },
   "MLD-0180": {
     "path": "terms/MLD-0180-codebook.html",
-    "sha256": "fd6f06511aca57a186ee9e17404d6a5f33fd65e55f7ac08dcf5437d5402645a3",
+    "sha256": "029383196f499839e2c6ebf81e4e626829d0f05791aebe2d1d432014f75d4571",
     "expanded": false
   },
   "MLD-0181": {
