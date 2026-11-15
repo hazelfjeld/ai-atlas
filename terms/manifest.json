@@ -601,52 +601,52 @@
   },
   "MLD-0121": {
     "path": "terms/MLD-0121-bidirectional-context.html",
-    "sha256": "5d99656d519b14e6df0e9ce6e886f804b7b6eb3574db1a1fe5289a30247d02c8",
+    "sha256": "b206a7b88bbeff8081638f9c697bc77bfb7f714ede849fc33dc102e5fc902758",
     "expanded": false
   },
   "MLD-0122": {
     "path": "terms/MLD-0122-bidirectional-rnn.html",
-    "sha256": "01eec53e08fe1b9c22c71ded714777923f4423055835a675cb877ed3901ebbd4",
+    "sha256": "9db332c080a1c62c7e375a4b4b1a6ff447a4643191b3fa2e1841ee4158096f32",
     "expanded": false
   },
   "MLD-0123": {
     "path": "terms/MLD-0123-binary-classification.html",
-    "sha256": "a0b12f7dafaa3c1948567ae1769fab99f1615cd8d73340e50fb7eac3cc96dbb7",
+    "sha256": "9659098937d16a23f76b708678629d5e8451734472fd95450f565e24e5a43a52",
     "expanded": false
   },
   "MLD-0124": {
     "path": "terms/MLD-0124-binary-cross-entropy.html",
-    "sha256": "ddf5af2474c91aac460b7ba11dc379d4261ba0fc761f544eea0960064e975526",
+    "sha256": "392c0770a1be3b4fe9010a9bd1f43e3f49cb70da94398235c1fde3616f80313b",
     "expanded": false
   },
   "MLD-0125": {
     "path": "terms/MLD-0125-binomial-distribution.html",
-    "sha256": "1b472175ccd2862ec30447b179f4dea3bc6ad4336909c6889c6eb7242c0aecee",
+    "sha256": "b71c3c85715f66c6b25070a5d9a5fa184b4b4df8731c0d0ce2f07935fe3624ff",
     "expanded": false
   },
   "MLD-0126": {
     "path": "terms/MLD-0126-bits-per-character.html",
-    "sha256": "0aadca80fedac9f2d0c72beb0db4ab91c9ca28a5b75a5e073d909fb4e0638494",
+    "sha256": "7908106f0b4fb44326563416b8b66ca37f1d9086dbc0c89295cc943998a3dc86",
     "expanded": false
   },
   "MLD-0127": {
     "path": "terms/MLD-0127-blending.html",
-    "sha256": "531378b531ebd183f11236696782d369f3ae500855cc58d8be59fd85e63824a1",
+    "sha256": "d3ff37c2331befc0e1b093ab7f0e50fdaa26ee3cae4679422ecb827e98899cbe",
     "expanded": false
   },
   "MLD-0128": {
     "path": "terms/MLD-0128-bleu.html",
-    "sha256": "d4afe4ae813d40e2fc619d288d8f7d1d3732885b47e0193ff37c09bab3abdcca",
+    "sha256": "5e8f58981a063dabf4629567a9cf24a0791c5c9b921d1f337194ff0a49f07323",
     "expanded": false
   },
   "MLD-0129": {
     "path": "terms/MLD-0129-bm25.html",
-    "sha256": "49357ced521eefcc2f1f14a84fe794c8b947b4f276e78fc5e762ca3f91e5aa33",
+    "sha256": "b78422e693150c7455df2182be434c02f244ed9dbca995155d9860e253d99f2d",
     "expanded": false
   },
   "MLD-0130": {
     "path": "terms/MLD-0130-bonferroni-correction.html",
-    "sha256": "af6d26738afac28166799ec21d90abe4af22a673f34faa12d90b442190c25477",
+    "sha256": "cb4ee75a3a266df39032b14e760096f9e21d91cbabdce1281de24216b2b67ef3",
     "expanded": false
   },
   "MLD-0131": {
