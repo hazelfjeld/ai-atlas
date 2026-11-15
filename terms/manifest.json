@@ -901,52 +901,52 @@
   },
   "MLD-0181": {
     "path": "terms/MLD-0181-cohen-s-kappa.html",
-    "sha256": "2a1e4d13bee07fe44c8cf6347e26d68f47331be44b16356e2206c02e0ec61f1a",
+    "sha256": "a7e626eb3b723791bd5bb528db1adf77173a731c6e132765b38683fee77edd90",
     "expanded": false
   },
   "MLD-0182": {
     "path": "terms/MLD-0182-cold-start-problem.html",
-    "sha256": "592dcb003a3a4b6213642b30f14626f3f64ef98a244c6187b5d46d744947b0b4",
+    "sha256": "0378ad79b1e208767b7a6cea19cbcd309d52048a0a7b72a6b437e779197962c5",
     "expanded": false
   },
   "MLD-0183": {
     "path": "terms/MLD-0183-collaborative-filtering.html",
-    "sha256": "c136455f52a881e2b158b1cdd5fdde3ddbf83ae6a31e65b2ae7244f578418a57",
+    "sha256": "dd9ad060cd1f70e719c57c8e5b4fd87b2c88f75d760aec784cbdb2b557ba4aad",
     "expanded": false
   },
   "MLD-0184": {
     "path": "terms/MLD-0184-collective-communication.html",
-    "sha256": "519eb18c77369570fccae6edac93f5bede9b81265c21229a5d8868df54dfb3c1",
+    "sha256": "f5759e3e5a3e246a0556812a295abadf64f2aa3dccb6aa779211b99739b57f89",
     "expanded": false
   },
   "MLD-0185": {
     "path": "terms/MLD-0185-completion-only-training.html",
-    "sha256": "a6fe6f13e545c41debc750cfa13eba5263fa6d914ac47a3cdb5999fdaa500105",
+    "sha256": "0fd018c5812dfe242cbd0825ca4aaa8fa01402d64982254cca3215d168f370b9",
     "expanded": false
   },
   "MLD-0186": {
     "path": "terms/MLD-0186-computation-graph.html",
-    "sha256": "6e30432de6aababd1d8b0e5952903c0c1e90a642a3de2995b93a10e39b15c732",
+    "sha256": "c6fe00d256530fbcefa2ab69387abb41604670b2f4e8a561508ef4560c9680bb",
     "expanded": false
   },
   "MLD-0187": {
     "path": "terms/MLD-0187-computational-complexity.html",
-    "sha256": "0322b842b21657c0ad147388a447dfbc702f905fd7c47ea68d42dc2649d60539",
+    "sha256": "a3cd79ab9d6965a471c83873c5448a468d304a0590e28f72e85d9b9703d69db1",
     "expanded": false
   },
   "MLD-0188": {
     "path": "terms/MLD-0188-compute-kernel.html",
-    "sha256": "07f6b7aa8b521fe90da7f5dc5a34b0693494a36b7c585d539528b013bfa86e7b",
+    "sha256": "675d3df60c8212c7b7d1564435932f2eab8c0d1b263a34e547a6414ef3a798b6",
     "expanded": false
   },
   "MLD-0189": {
     "path": "terms/MLD-0189-compute-optimal-training.html",
-    "sha256": "534104f2e84524f7a8056ca91f12cabc4162ba0e5afdc884d7907b367acb6afa",
+    "sha256": "9c5055f86644f4e309e6092303321f6dab3fa9a0c85dc8819f43aae27709a19a",
     "expanded": false
   },
   "MLD-0190": {
     "path": "terms/MLD-0190-computer-vision.html",
-    "sha256": "12d1dec28808ef27761f5739b40de1ba301b08216eb3dd4494372d553d72d560",
+    "sha256": "a1944511061b8bdd5ac2146615e053c3d2a44e8842fc5e671a7e02a44389583e",
     "expanded": false
   },
   "MLD-0191": {
