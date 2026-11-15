@@ -512,7 +512,7 @@ with sync_playwright() as p:
 
     # The A-Z concept and technology directory pages must share Discover's
     # secondary destinations with JavaScript disabled, not only after hydration.
-    for route in ('terms/index.html', 'terms/MLD-0001-a-b-test.html', 'terms/MLD-0091-ball-tree.html', 'technology/index.html', 'technology/TECH-0216-pytorch.html'):
+    for route in ('terms/index.html', 'terms/MLD-0001-a-b-test.html', 'terms/MLD-0101-bayesian-inference.html', 'technology/index.html', 'technology/TECH-0216-pytorch.html'):
         scriptless.goto(base + route)
         scriptless.locator('#directory-mobile-nav > summary').click()
         more_menu = scriptless.locator('#directory-mobile-nav .site-mobile-chrome__more')
@@ -2363,7 +2363,7 @@ with sync_playwright() as p:
                                      java_script_enabled=False, reduced_motion='reduce')
     for theme in ('light', 'dark'):
         reference_nav.emulate_media(color_scheme=theme)
-        for route in ('terms/index.html', 'terms/MLD-0001-a-b-test.html', 'terms/MLD-0091-ball-tree.html', 'technology/index.html', 'technology/TECH-0216-pytorch.html'):
+        for route in ('terms/index.html', 'terms/MLD-0001-a-b-test.html', 'terms/MLD-0101-bayesian-inference.html', 'technology/index.html', 'technology/TECH-0216-pytorch.html'):
             for width in (320, 390, 768, 1280):
                 reference_nav.set_viewport_size({'width':width, 'height':844})
                 reference_nav.goto(base + route)
@@ -2373,7 +2373,7 @@ with sync_playwright() as p:
                 check('reference directory shared navigation before JS ' + route + ' ' + theme + ' ' + str(width),
                       more.count() == 1 and mobile.count() == 1 and
                       (rail.is_visible() if width >= 768 else mobile.is_visible()))
-                if route == 'terms/MLD-0091-ball-tree.html':
+                if route == 'terms/MLD-0101-bayesian-inference.html':
                     check('newly migrated concept has one native first-paint rail bottom ' + theme + ' ' + str(width),
                           rail.locator('.sidebar-bottom.site-chrome__bottom').count() == 1 and
                           rail.locator('a[href="../index.html#/sources"]').count() >= 1)
@@ -2424,7 +2424,7 @@ with sync_playwright() as p:
         enhanced_concept.emulate_media(color_scheme=color)
         for width in (320, 390, 768, 1280):
             enhanced_concept.set_viewport_size({'width':width, 'height':844})
-            for route in ('terms/MLD-0001-a-b-test.html', 'terms/MLD-0091-ball-tree.html', 'technology/TECH-0216-pytorch.html'):
+            for route in ('terms/MLD-0001-a-b-test.html', 'terms/MLD-0101-bayesian-inference.html', 'technology/TECH-0216-pytorch.html'):
                 enhanced_concept.goto(base + route)
                 check('generated detail shared sibling landmarks ' + route + ' ' + color + ' ' + str(width),
                       enhanced_concept.evaluate("""() => {

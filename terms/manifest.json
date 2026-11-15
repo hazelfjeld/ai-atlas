@@ -501,47 +501,47 @@
   },
   "MLD-0101": {
     "path": "terms/MLD-0101-bayesian-inference.html",
-    "sha256": "d107e5025a8150d7bdad583c9c899123682a20e9f8c09685d77f91b926a54426",
+    "sha256": "0afb14bcf06cc6db0c592fb6eaa039eb5f97bbe4ae0d186be855fab5ee88ec71",
     "expanded": false
   },
   "MLD-0102": {
     "path": "terms/MLD-0102-bayesian-linear-regression.html",
-    "sha256": "846143d91c324d44c6a94a82df5ed6c2e392acf87ede8ad6edd94442d47e4118",
+    "sha256": "eb2b717cc337add3580d034571133fb049857a6cae255c9fb83cad7ad28c7e83",
     "expanded": false
   },
   "MLD-0103": {
     "path": "terms/MLD-0103-bayesian-neural-network.html",
-    "sha256": "5f16aec76a71d79c268e48d774f76e66ccb597a872292c18bf132d83133a0cdd",
+    "sha256": "ca6bbb4eb41f7979f284dcb5acef82c69443d79e7b309df9dd2ad0a3f3858be7",
     "expanded": false
   },
   "MLD-0104": {
     "path": "terms/MLD-0104-bayesian-optimization.html",
-    "sha256": "296536da9e71d8f3c10a97ec939e01ade4fb3fcb70a2e7c22d9356d84801ad0f",
+    "sha256": "2ee023dfaae5ccc1224376acf10b5dfb396b77d675cde654b480501de69974c1",
     "expanded": false
   },
   "MLD-0105": {
     "path": "terms/MLD-0105-beam-search.html",
-    "sha256": "7b853147d094cfe8784081e320cc081fddc6fa4abe9abb322dd3b77e9ccc4e8b",
+    "sha256": "b47d84b31401387cdbc9d4bd90907b0e7fd7ada6041c6b76d0c2e96ffe51d221",
     "expanded": false
   },
   "MLD-0106": {
     "path": "terms/MLD-0106-beam-width.html",
-    "sha256": "857c8c63af0f6ed7be12444341309a6515846e509f38cfc8507b3476c3fb146a",
+    "sha256": "6f1a37325aba09ad50c93c1db92e639198ba6241f8b3e5f3ab915dbd91b00080",
     "expanded": false
   },
   "MLD-0107": {
     "path": "terms/MLD-0107-behavioral-cloning.html",
-    "sha256": "51f8c53a0c0546af1588dc6d9e6460ff2a8b67f631569dab61afb0405b94a69c",
+    "sha256": "1958a365e19fd47fc97c1347e8f7b3477b192cb0aaaac638b2a400114bfb0e73",
     "expanded": false
   },
   "MLD-0108": {
     "path": "terms/MLD-0108-belief-state.html",
-    "sha256": "7bf097e0e4aa490973deb8958b990e230cb64fa207bf87c884c5e05b95a48094",
+    "sha256": "74e81fa54e9e4d24979277a4ff32748325b6798d685adc5412d874e0e1b45ec1",
     "expanded": false
   },
   "MLD-0109": {
     "path": "terms/MLD-0109-bellman-equation.html",
-    "sha256": "7d35b36f170abe20341694e7db7789dc7acc3f1092d9b4cdccc3d1582564aca3",
+    "sha256": "e1f22fb90ce82336a048b0c44d478b5d353a52a4cf49ff6cce1d53fb25a98109",
     "expanded": false
   },
   "MLD-0110": {
