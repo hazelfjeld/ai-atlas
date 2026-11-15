@@ -512,7 +512,7 @@ with sync_playwright() as p:
 
     # The A-Z concept and technology directory pages must share Discover's
     # secondary destinations with JavaScript disabled, not only after hydration.
-    for route in ('terms/index.html', 'terms/MLD-0001-a-b-test.html', 'terms/MLD-0101-bayesian-inference.html', 'terms/MLD-0111-bernoulli-distribution.html', 'terms/MLD-0121-bidirectional-context.html', 'technology/index.html', 'technology/TECH-0216-pytorch.html'):
+    for route in ('terms/index.html', 'terms/MLD-0001-a-b-test.html', 'terms/MLD-0101-bayesian-inference.html', 'terms/MLD-0111-bernoulli-distribution.html', 'terms/MLD-0121-bidirectional-context.html', 'terms/MLD-0131-boosting.html', 'technology/index.html', 'technology/TECH-0216-pytorch.html'):
         scriptless.goto(base + route)
         scriptless.locator('#directory-mobile-nav > summary').click()
         more_menu = scriptless.locator('#directory-mobile-nav .site-mobile-chrome__more')
@@ -544,7 +544,7 @@ with sync_playwright() as p:
             native_page.goto(base + 'index.html#/overview')
             native_page.goto(base + 'technology/TECH-0216-pytorch.html')
             shared_labels = native_page.locator('nav.site-chrome .site-chrome__links a').all_text_contents()
-            native_page.goto(base + 'terms/MLD-0121-bidirectional-context.html')
+            native_page.goto(base + 'terms/MLD-0131-boosting.html')
             native_nav = native_page.locator('nav.site-chrome')
             lower = native_nav.locator('.sidebar-bottom.site-chrome__bottom')
             check('new concept first-paint rail matches technology and Discover ' +
@@ -557,7 +557,7 @@ with sync_playwright() as p:
                   and native_page.locator('body > main.term-shell').count() == 1
                   and native_page.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'))
             if width in (390, 1280):
-                native_page.screenshot(path=str(out / ('concept-first-paint-0121-' + scheme + '-' + str(width) + '.png')))
+                native_page.screenshot(path=str(out / ('concept-first-paint-0131-' + scheme + '-' + str(width) + '.png')))
             if width == 390:
                 native_page.locator('.site-mobile-chrome__nav > summary').click()
                 native_page.locator('.site-mobile-chrome__menu > a:not(.site-mobile-chrome__brand)[href="../index.html#/overview"]').click()
@@ -2394,7 +2394,7 @@ with sync_playwright() as p:
                                      java_script_enabled=False, reduced_motion='reduce')
     for theme in ('light', 'dark'):
         reference_nav.emulate_media(color_scheme=theme)
-        for route in ('terms/index.html', 'terms/MLD-0001-a-b-test.html', 'terms/MLD-0101-bayesian-inference.html', 'terms/MLD-0121-bidirectional-context.html', 'technology/index.html', 'technology/TECH-0216-pytorch.html'):
+        for route in ('terms/index.html', 'terms/MLD-0001-a-b-test.html', 'terms/MLD-0101-bayesian-inference.html', 'terms/MLD-0121-bidirectional-context.html', 'terms/MLD-0131-boosting.html', 'technology/index.html', 'technology/TECH-0216-pytorch.html'):
             for width in (320, 390, 768, 1280):
                 reference_nav.set_viewport_size({'width':width, 'height':844})
                 reference_nav.goto(base + route)
@@ -2404,7 +2404,7 @@ with sync_playwright() as p:
                 check('reference directory shared navigation before JS ' + route + ' ' + theme + ' ' + str(width),
                       more.count() == 1 and mobile.count() == 1 and
                       (rail.is_visible() if width >= 768 else mobile.is_visible()))
-                if route in ('terms/MLD-0101-bayesian-inference.html', 'terms/MLD-0121-bidirectional-context.html'):
+                if route in ('terms/MLD-0101-bayesian-inference.html', 'terms/MLD-0121-bidirectional-context.html', 'terms/MLD-0131-boosting.html'):
                     check('newly migrated concept has one native first-paint rail bottom ' + theme + ' ' + str(width),
                           rail.locator('.sidebar-bottom.site-chrome__bottom').count() == 1 and
                           rail.locator('a[href="../index.html#/sources"]').count() >= 1)
@@ -2455,7 +2455,7 @@ with sync_playwright() as p:
         enhanced_concept.emulate_media(color_scheme=color)
         for width in (320, 390, 768, 1280):
             enhanced_concept.set_viewport_size({'width':width, 'height':844})
-            for route in ('terms/MLD-0001-a-b-test.html', 'terms/MLD-0101-bayesian-inference.html', 'terms/MLD-0121-bidirectional-context.html', 'technology/TECH-0216-pytorch.html'):
+            for route in ('terms/MLD-0001-a-b-test.html', 'terms/MLD-0101-bayesian-inference.html', 'terms/MLD-0121-bidirectional-context.html', 'terms/MLD-0131-boosting.html', 'technology/TECH-0216-pytorch.html'):
                 enhanced_concept.goto(base + route)
                 check('generated detail shared sibling landmarks ' + route + ' ' + color + ' ' + str(width),
                       enhanced_concept.evaluate("""() => {
