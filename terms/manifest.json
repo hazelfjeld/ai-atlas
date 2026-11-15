@@ -701,7 +701,7 @@
   },
   "MLD-0141": {
     "path": "terms/MLD-0141-byte-pair-encoding.html",
-    "sha256": "a254ff04b3a5809a2d007dd7e130f8bb1286fa820a7c5ff2246e37f582363138",
+    "sha256": "12b281803a6c241265631c6c8526363ab2029dfdfa523673139fb6f5731b82f4",
     "expanded": false
   },
   "MLD-0142": {
@@ -711,17 +711,17 @@
   },
   "MLD-0143": {
     "path": "terms/MLD-0143-calibration-dataset.html",
-    "sha256": "a0776e879e77c31d89afd0721dc59bf5d531278257475863858db5f5fea2f38b",
+    "sha256": "4893419abae705f7979fa28b1e72af2c9a9cc010208a9ab82be7e716baf4738b",
     "expanded": false
   },
   "MLD-0144": {
     "path": "terms/MLD-0144-canary-deployment.html",
-    "sha256": "039ed8b7a41cf0d680f55a992344a61a5d9d5b98c49b6e2f44b9dc858624ed70",
+    "sha256": "b682587c1fada20e60c008540517e88b3a20aa434b2e96bd06386ee565dd9c30",
     "expanded": false
   },
   "MLD-0145": {
     "path": "terms/MLD-0145-capability-evaluation.html",
-    "sha256": "c1b330ee043ad0519c200b360ad43e86758936cff3d2829a552919da2938c0e2",
+    "sha256": "78eed750fd5526f4024ae30d9f6f98212c959a9f025a0cdf1b2bd9e915a52e78",
     "expanded": false
   },
   "MLD-0146": {
@@ -731,22 +731,22 @@
   },
   "MLD-0147": {
     "path": "terms/MLD-0147-catastrophic-forgetting.html",
-    "sha256": "19a1bfafdcfc8d877daf53a30371e1d156cce0a6daf3fce53f9129780060faf2",
+    "sha256": "001fd35c581f11e80fcc1c48ddd3868f17a5a72fad7a45e3fe8932f7c7442d82",
     "expanded": false
   },
   "MLD-0148": {
     "path": "terms/MLD-0148-catboost.html",
-    "sha256": "023df83014a727c4bb4f5351d0367eac11ab8798f425826a11bd6c14456f8d44",
+    "sha256": "dd0290d4fe04884bc3b709fb8355c80142aac3fe2530881e1ec0a36d232249e5",
     "expanded": false
   },
   "MLD-0149": {
     "path": "terms/MLD-0149-categorical-cross-entropy.html",
-    "sha256": "730cc80af0541512b30c0c7d3fa64bdf3d9e42ddd58712be9cb08d2011e7527c",
+    "sha256": "b03d83a9b1b23fe63593045ed5e0e17a79f4afecfc1c1bccfd2616dc54c2bf09",
     "expanded": false
   },
   "MLD-0150": {
     "path": "terms/MLD-0150-categorical-distribution.html",
-    "sha256": "1aa281f33b7bf8ad57f107a2f9f0c1a95077631709ea304ba117212edff5ac9c",
+    "sha256": "c57bfb9394430d20bf11f9c9ce5559220d2c6267071be9436cca06e0be61549f",
     "expanded": false
   },
   "MLD-0151": {
