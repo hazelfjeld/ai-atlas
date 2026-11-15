@@ -1476,27 +1476,27 @@
   },
   "MLD-0296": {
     "path": "terms/MLD-0296-denoising-diffusion-implicit-model.html",
-    "sha256": "09b8b04fabc3b6347eafc6428c0e897185e9b84b79c1a1142bf129d03091f62a",
+    "sha256": "c8815c652487d60d0a36d0018eb5a0a3559a1116134159111e31781a783d30fb",
     "expanded": false
   },
   "MLD-0297": {
     "path": "terms/MLD-0297-denoising-diffusion-probabilistic-model.html",
-    "sha256": "829a70ff179d3e89fd8a9c4b940ee6a060232d0c395daf0958bf0aa24c7d10a1",
+    "sha256": "9084af078b2c4e53164718b49fe1ae57af453d6a621994e47e611584502912ab",
     "expanded": false
   },
   "MLD-0298": {
     "path": "terms/MLD-0298-denoising-objective.html",
-    "sha256": "fc2a37472caf3a04098b1a8cd0639791c443c13dd6986795325c20d89a50099f",
+    "sha256": "73292dad6094ee0c649d7afc9f96319e743010c21444b7fc3cc0685625660a6c",
     "expanded": false
   },
   "MLD-0299": {
     "path": "terms/MLD-0299-dense-model.html",
-    "sha256": "f0948d91ad72eb31dbd62f736f296725f252016632499094e25d3ab92cdb4419",
+    "sha256": "7784b6508da155ea5585d3cfed416aff41ba627010d573e0a6e80a5fed60dd8f",
     "expanded": false
   },
   "MLD-0300": {
     "path": "terms/MLD-0300-dense-retrieval.html",
-    "sha256": "e3019d2831008aa8f84906551a72668210e3d0efef48c9dbf0fa3ea37d0046da",
+    "sha256": "f1a37038910381ab995f2c16d855f6a76c87eb23352abad9ad1fcb085e96b013",
     "expanded": false
   },
   "MLD-0301": {
