@@ -2363,7 +2363,7 @@ with sync_playwright() as p:
                                      java_script_enabled=False, reduced_motion='reduce')
     for theme in ('light', 'dark'):
         reference_nav.emulate_media(color_scheme=theme)
-        for route in ('terms/index.html', 'terms/MLD-0001-a-b-test.html', 'technology/index.html', 'technology/TECH-0216-pytorch.html'):
+        for route in ('terms/index.html', 'terms/MLD-0001-a-b-test.html', 'terms/MLD-0091-ball-tree.html', 'technology/index.html', 'technology/TECH-0216-pytorch.html'):
             for width in (320, 390, 768, 1280):
                 reference_nav.set_viewport_size({'width':width, 'height':844})
                 reference_nav.goto(base + route)
