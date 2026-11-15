@@ -1301,12 +1301,12 @@
   },
   "MLD-0261": {
     "path": "terms/MLD-0261-data-extraction.html",
-    "sha256": "28b9648f4890dd43ee2f85350ea291d036a6305db178fc10d40a41da740c8e09",
+    "sha256": "71e2e4dff9f2f2d50cfd6383590b6e1a333c7ac47944761095cd86f3b217f51a",
     "expanded": false
   },
   "MLD-0262": {
     "path": "terms/MLD-0262-data-filtering.html",
-    "sha256": "103cbc7663c08ca8b9c1596644a0aa07c29e71b43dda5fa244908a5e9914f17f",
+    "sha256": "babc8146ba4f6fcfa6ae745d19cf48bee763a4c1040a00904a6d120bd2c8f8c6",
     "expanded": false
   },
   "MLD-0263": {
@@ -1316,12 +1316,12 @@
   },
   "MLD-0264": {
     "path": "terms/MLD-0264-data-lineage.html",
-    "sha256": "a24056a107832bd8d75f2eb17fcebfa8983f1c3fbdd5ba97ee2178908c9ae2a2",
+    "sha256": "19738ca40f75fb8cc9eeb40c4f1b2b5c336e44941d8a0a103b7a50f19bd7a1de",
     "expanded": false
   },
   "MLD-0265": {
     "path": "terms/MLD-0265-data-minimization.html",
-    "sha256": "8da47f5e5c8ddbfdb870f55b7a2618f8d3b8ff9fc55a363cccb4b848bb2c06d6",
+    "sha256": "6b5a1a2366bd231183bb980dc954f52c9dbe4f4db295483a877e099dfa5b8a00",
     "expanded": false
   },
   "MLD-0266": {
