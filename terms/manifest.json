@@ -1051,52 +1051,52 @@
   },
   "MLD-0211": {
     "path": "terms/MLD-0211-contextual-bandit.html",
-    "sha256": "cb34a3cbee6b6bb6376197810587c92fe7b7ba926ac3778a5da302c9639cbe54",
+    "sha256": "08fca18f489913cbf212787e957b38df1784dcf56d9ba424036f046bd3795f99",
     "expanded": false
   },
   "MLD-0212": {
     "path": "terms/MLD-0212-contextual-embedding.html",
-    "sha256": "b266d5a940d9672417ec53b335ef47020c38a69a99dcce775d9e7b6be0a6278c",
+    "sha256": "759ba212c90ec35920f3e2f68a96369c845fd14209e93ee78ed316766b231bd0",
     "expanded": false
   },
   "MLD-0213": {
     "path": "terms/MLD-0213-continual-learning.html",
-    "sha256": "8e555b048eb12a64c02afcc7c94e1cb1237451940422dbd847c81cbed3b5cb7d",
+    "sha256": "76b3c8bf93e5186eb1df66b25cb38c1dc36e866026fcdab79b22b195bdaf775f",
     "expanded": false
   },
   "MLD-0214": {
     "path": "terms/MLD-0214-continued-instruction-tuning.html",
-    "sha256": "99a05f6c8667294f965f0f344bc663ca53932dc54b4b897ca5cbb27d179ccd6a",
+    "sha256": "2a7a119c920ff0586a2935a224b4a9a0b49a52f643a7c38e73cd35c36958ada9",
     "expanded": false
   },
   "MLD-0215": {
     "path": "terms/MLD-0215-continued-pretraining.html",
-    "sha256": "0a252ac34cf28a3d99d7c40d32d115ab910c8e220cc2a40feec5922e9de57c4a",
+    "sha256": "4d424664c21f279a161c44917b027259347d91db9b663824565c5a115798142c",
     "expanded": false
   },
   "MLD-0216": {
     "path": "terms/MLD-0216-continuous-bag-of-words.html",
-    "sha256": "a92342481a97f7543c02220bcf82b9ff9283bf90fc8bbee7dd74ee6e1e12c163",
+    "sha256": "cc7ab34cd60c998f4cb27b47ce21184b2c7f54826825fee727a2c28a84108f68",
     "expanded": false
   },
   "MLD-0217": {
     "path": "terms/MLD-0217-continuous-batching.html",
-    "sha256": "07001acbec30c6d0e20ce92dbb3921c85dafd85af41e5baff89e598c958473ef",
+    "sha256": "fdbc4d149b16e92c3bda80406f49e736388fd7e3efa4e7ea4eaf46d2c8517a1a",
     "expanded": false
   },
   "MLD-0218": {
     "path": "terms/MLD-0218-continuous-feature.html",
-    "sha256": "b73b77cbcaa2e031ef701c60f5d5df565c6766962dc562b2095c9692b1417784",
+    "sha256": "ac318ec7c52ffaa25f2f8d2f0d102f08ea6cb02dde64de5b716444a8f0e4c079",
     "expanded": false
   },
   "MLD-0219": {
     "path": "terms/MLD-0219-continuous-normalizing-flow.html",
-    "sha256": "bf56ba02930c84578dccd3274cbb7b4263a9c2fbd9df1f5dec2b20409eb668d7",
+    "sha256": "db165f88ef66ce731e7d9f4cb1e4d0c9228de47fbb83933a7da0ff9551d93703",
     "expanded": false
   },
   "MLD-0220": {
     "path": "terms/MLD-0220-contrastive-learning.html",
-    "sha256": "04bc1e900f9117fec9cd15a6482a3604527e7addadfb6bc27e41db8310667552",
+    "sha256": "c6ed6d34584825fd7fd3ec11dbcd56ab5a5e0120b366c183707325bff91d11ec",
     "expanded": false
   },
   "MLD-0221": {
