@@ -313,9 +313,17 @@
       "sha256": "e2c0c1c53974008a68a7d98e74a821235d14ffce731e59ad14aeae2fffddbb8d",
       "bytes": 18645,
       "published_at": "2026-11-14T14:52:11.272Z"
+    },
+    {
+      "date": "2026-11-15",
+      "revision": 1,
+      "path": "data/daily/editions/2026-11-15-v1.json",
+      "sha256": "f7c718e78163d33c7f7e5ef1e09bd4fc8094fbb0f84f88c95ad6c0f831587388",
+      "bytes": 16810,
+      "published_at": "2026-11-15T14:32:11.277Z"
     }
   ],
   "last_successful_publish_at": "2026-11-14T15:09:10Z",
-  "status": "edition_revision_1_production_verified",
+  "status": "edition_revision_1_pending_production_verification",
   "coverage_note": "November 14 revision 1 production-verified at 2026-11-14T15:09:10Z on exact code 7f64b1c65822c6e868bb60433c676da88a0d4a43: ten source-reviewed AI reports with partial coverage and one inaccessible source metadata endpoint; three technology and three term proposals remain deferred. Earlier immutable editions and all existing catalogs retained."
 }

@@ -1,0 +1,297 @@
+{
+  "schema": 1,
+  "edition_date": "2026-11-15",
+  "timezone": "America/Chicago",
+  "published_at": "2026-11-15T14:32:11.277Z",
+  "coverage": {
+    "start": "2026-11-14T14:40:05.781Z",
+    "end": "2026-11-15T14:20:00.356Z",
+    "status": "partial",
+    "note": "Nine catch-up source-qualified stories from November 12–13; no November 15 launches claimed. Perplexity English page unavailable but localized first-party page and model cards checked. 3 technology and 3 terminology proposals deferred pending canonical/catalog/license review. Partial source coverage; not an exhaustive news sweep.",
+    "sources_checked": [
+      {
+        "url": "https://www.perplexity.ai/de/hub/blog/perplexity-decider",
+        "status": "opened",
+        "checked_at": "2026-11-15T14:20:00.356Z"
+      },
+      {
+        "url": "https://huggingface.co/perplexity-ai/pplx-decider-v1.3",
+        "status": "opened",
+        "checked_at": "2026-11-15T14:20:00.356Z"
+      },
+      {
+        "url": "https://huggingface.co/perplexity-ai/pplx-decider-flash-v1.3",
+        "status": "opened",
+        "checked_at": "2026-11-15T14:20:00.356Z"
+      },
+      {
+        "url": "https://aws.amazon.com/blogs/machine-learning/build-a-model-improvement-flywheel-with-amazon-sagemaker-hyperpod-data-capture/",
+        "status": "opened",
+        "checked_at": "2026-11-15T14:20:00.356Z"
+      },
+      {
+        "url": "https://aws.amazon.com/blogs/machine-learning/deploy-frontier-ai-models-on-aws-trainium-with-sglang-neuron/",
+        "status": "opened",
+        "checked_at": "2026-11-15T14:20:00.356Z"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.16122",
+        "status": "opened",
+        "checked_at": "2026-11-15T14:20:00.356Z"
+      },
+      {
+        "url": "https://github.blog/changelog/2026-11-13-gemini-4-hydrogen-in-github-copilot/",
+        "status": "opened",
+        "checked_at": "2026-11-15T14:20:00.356Z"
+      },
+      {
+        "url": "https://github.blog/changelog/2026-11-13-upcoming-deprecation-of-selected-github-copilot-models-in-december/",
+        "status": "opened",
+        "checked_at": "2026-11-15T14:20:00.356Z"
+      },
+      {
+        "url": "https://github.blog/changelog/2026-11-13-manage-ai-scan-for-repositories-using-the-rest-api/",
+        "status": "opened",
+        "checked_at": "2026-11-15T14:20:00.356Z"
+      },
+      {
+        "url": "https://www.reuters.com/world/asia-pacific/malaysia-says-it-is-investigating-if-any-chips-linked-speedmatrix-were-re-2026-11-13/",
+        "status": "opened",
+        "checked_at": "2026-11-15T14:20:00.356Z"
+      },
+      {
+        "url": "https://aws.amazon.com/blogs/machine-learning/cost-attribution-and-controls-for-ai-developer-and-productivity-tools-on-amazon-bedrock/",
+        "status": "opened",
+        "checked_at": "2026-11-15T14:20:00.356Z"
+      }
+    ],
+    "sources_failed": [
+      {
+        "url": "https://www.perplexity.ai/hub/blog/perplexity-decider",
+        "status": "unavailable_via_web_reader",
+        "checked_at": "2026-11-15T14:20:00.356Z",
+        "note": "Unlocalized English article reader returned an error; first-party localized explanation and official model cards were available."
+      }
+    ]
+  },
+  "tldr": [
+    "Catch-up discoveries span Perplexity's task-specific Decider/Flash classifiers, AWS deployment and data-capture tooling, and an agent-security preprint proposing checks against an agent's intended purpose.",
+    "GitHub's new model-access and security-control changes have operational consequences, while an AI-chip trade inquiry remains an investigation, not an established violation; benchmark and availability claims require independent validation."
+  ],
+  "news": [
+    {
+      "id": "ai-news-perplexity-decider-v13-20261112",
+      "title": "Perplexity releases Decider v1.3 and distilled Flash for classification and span extraction",
+      "category": "models",
+      "tags": [
+        "SLM",
+        "LLM",
+        "distillation",
+        "evaluation",
+        "multimodal"
+      ],
+      "summary": "Perplexity announced Decider v1.3 and a smaller distilled Flash variant for probability-valued text/image classification, routing, scoring and Locate span extraction. The model cards describe 26B and 5B parameter checkpoints, respectively.",
+      "why_it_matters": "Task-flexible decision heads may replace token-by-token text generation in routine classification and agent-routing pipelines.",
+      "caveat": "Vendor comparisons are not independently replicated. Both public Hugging Face model cards say the repository is private and needs authorized access, despite Apache-2.0 labels and the launch article saying downloadable; public weight accessibility must be rechecked.",
+      "review_status": "publisher_checked_attributed_source_qualified",
+      "release_status": "released_with_access_ambiguity",
+      "source_url": "https://www.perplexity.ai/de/hub/blog/perplexity-decider",
+      "publication_date": "2026-11-12",
+      "event_date": "2026-11-12",
+      "discovered_at": "2026-11-15T14:20:00.356Z",
+      "added_to_atlas_at": "2026-11-15T14:32:11.277Z",
+      "collection_classification": "catch_up",
+      "source_record_id": "ai-news:perplexity-decider-v13:2026-11-12"
+    },
+    {
+      "id": "ai-news-aws-hyperpod-inference-data-capture-20261113",
+      "title": "AWS details HyperPod Data Capture for turning inference traffic into training examples",
+      "category": "training",
+      "tags": [
+        "MLOps",
+        "fine tuning",
+        "data",
+        "inference",
+        "privacy"
+      ],
+      "summary": "AWS described three capture tiers for SageMaker HyperPod, including a model-pod proxy that writes sampled request/response payloads into S3. A synthetic support-router demonstration analyzed records in Athena, trained a LoRA update and compared the old and updated deployments.",
+      "why_it_matters": "Production-data feedback loops can surface shifts in actual request distributions, but need governed consent, redaction and held-out evaluation.",
+      "caveat": "The reported no-measurable-latency result comes from a synthetic demonstration and specific infrastructure. Full captured payloads can contain sensitive data and create retention/compliance obligations.",
+      "review_status": "publisher_checked_attributed_source_qualified",
+      "release_status": "capability_documented",
+      "source_url": "https://aws.amazon.com/blogs/machine-learning/build-a-model-improvement-flywheel-with-amazon-sagemaker-hyperpod-data-capture/",
+      "publication_date": "2026-11-13",
+      "event_date": "2026-11-13",
+      "discovered_at": "2026-11-15T14:20:00.356Z",
+      "added_to_atlas_at": "2026-11-15T14:32:11.277Z",
+      "collection_classification": "catch_up",
+      "source_record_id": "ai-news:aws-hyperpod-inference-data-capture:2026-11-13"
+    },
+    {
+      "id": "ai-news-aws-sglang-neuron-20261112",
+      "title": "SGLang-Neuron brings SGLang serving and RL rollouts to AWS Trainium",
+      "category": "inference",
+      "tags": [
+        "LLM",
+        "SLM",
+        "inference",
+        "reinforcement learning",
+        "hardware"
+      ],
+      "summary": "AWS and collaborators announced a Deep Learning Container exposing SGLang serving APIs and reinforcement-learning rollout workflows on Trainium accelerators through native PyTorch.",
+      "why_it_matters": "Alternative accelerator support may help teams compare inference and training economics outside dominant GPU stacks.",
+      "caveat": "Actual model coverage, economics, latency and hardware scaling are workload-dependent and not independently benchmarked here; Trainium requires compatible AWS hardware and software.",
+      "review_status": "publisher_checked_attributed_source_qualified",
+      "release_status": "public_container_announcement",
+      "source_url": "https://aws.amazon.com/blogs/machine-learning/deploy-frontier-ai-models-on-aws-trainium-with-sglang-neuron/",
+      "publication_date": "2026-11-12",
+      "event_date": "2026-11-12",
+      "discovered_at": "2026-11-15T14:20:00.356Z",
+      "added_to_atlas_at": "2026-11-15T14:32:11.277Z",
+      "collection_classification": "catch_up",
+      "source_record_id": "ai-news:aws-sglang-neuron:2026-11-12"
+    },
+    {
+      "id": "ai-news-intent-aware-agent-protection-preprint-2611-16122",
+      "title": "Agent-security preprint evaluates intent profiles beyond prompt-injection signatures",
+      "category": "safety",
+      "tags": [
+        "AI safety",
+        "agents",
+        "security",
+        "evaluation",
+        "research"
+      ],
+      "summary": "A November 12 preprint introduces trusted intent profiles for checking whether an agent remains inside its assigned role. The authors evaluate 887 benchmark cases over 35 agents and more than 10,000 AgentDojo trajectories, reporting stronger detection scores than specified baselines.",
+      "why_it_matters": "Tracking authorized purpose alongside tool permissions could catch harmful but syntactically legitimate agent actions.",
+      "caveat": "This is an author-reported controlled research result, not a verified production defense or proof of robust protection against adaptive attackers.",
+      "review_status": "publisher_checked_attributed_source_qualified",
+      "release_status": "research_not_deployment",
+      "source_url": "https://arxiv.org/abs/2611.16122",
+      "publication_date": "2026-11-12",
+      "event_date": "2026-11-12",
+      "discovered_at": "2026-11-15T14:20:00.356Z",
+      "added_to_atlas_at": "2026-11-15T14:32:11.277Z",
+      "collection_classification": "catch_up",
+      "source_record_id": "ai-news:intent-aware-agent-protection-preprint:2611.16122"
+    },
+    {
+      "id": "ai-news-github-copilot-gemini-hydrogen-20261113",
+      "title": "GitHub adds Gemini 4 Hydrogen to Copilot coding surfaces",
+      "category": "agents",
+      "tags": [
+        "LLM",
+        "coding agents",
+        "developer tools"
+      ],
+      "summary": "GitHub announced Gemini 4 Hydrogen availability across Copilot editors, CLI, mobile and coding-agent experiences, with usage-based billing and gradual rollout.",
+      "why_it_matters": "A faster model option for tool-rich coding workflows changes model-choice tradeoffs in practical agent systems.",
+      "caveat": "This is a GitHub integration update, not a new Google model launch. Plans, administrator policies and provider-list billing determine actual access.",
+      "review_status": "publisher_checked_attributed_source_qualified",
+      "release_status": "gradual_release",
+      "source_url": "https://github.blog/changelog/2026-11-13-gemini-4-hydrogen-in-github-copilot/",
+      "publication_date": "2026-11-13",
+      "event_date": "2026-11-13",
+      "discovered_at": "2026-11-15T14:20:00.356Z",
+      "added_to_atlas_at": "2026-11-15T14:32:11.277Z",
+      "collection_classification": "catch_up",
+      "source_record_id": "ai-news:github-copilot-gemini-hydrogen:2026-11-13"
+    },
+    {
+      "id": "ai-news-github-copilot-december-model-deprecation-20261113",
+      "title": "GitHub schedules six Copilot model retirements for December 14",
+      "category": "developer_tools",
+      "tags": [
+        "LLM",
+        "developer tools",
+        "model lifecycle"
+      ],
+      "summary": "GitHub says six Copilot model choices will be deprecated December 14, 2026, including Claude Fable 5, Gemini 3.8 Flash, Gemini 4 Argon, Grok 4.6 and Kimi K3; the changelog lists migration alternatives.",
+      "why_it_matters": "Model retirements can break pinned model choices and agent reproducibility, so enterprise workflows should validate replacements before the deadline.",
+      "caveat": "This is an announced future deprecation, not a retirement that has already occurred. Annual-plan individuals retain a stated Claude Haiku 4.5 exception.",
+      "review_status": "publisher_checked_attributed_source_qualified",
+      "release_status": "announced_future_change",
+      "source_url": "https://github.blog/changelog/2026-11-13-upcoming-deprecation-of-selected-github-copilot-models-in-december/",
+      "publication_date": "2026-11-13",
+      "event_date": "2026-11-13",
+      "discovered_at": "2026-11-15T14:20:00.356Z",
+      "added_to_atlas_at": "2026-11-15T14:32:11.277Z",
+      "collection_classification": "catch_up",
+      "source_record_id": "ai-news:github-copilot-december-model-deprecation:2026-11-13"
+    },
+    {
+      "id": "ai-news-github-ai-scan-repository-api-20261113",
+      "title": "GitHub adds repository-level AI Scan configuration through REST",
+      "category": "security",
+      "tags": [
+        "security",
+        "AI code scanning",
+        "APIs",
+        "developer tools"
+      ],
+      "summary": "GitHub added public-preview REST settings for enabling or disabling AI Scan at organization and repository level, with policy inheritance.",
+      "why_it_matters": "Infrastructure-as-code controls can make security rollout less manual and more auditable across organizations.",
+      "caveat": "Setting AI Scan to enabled does not automatically run a scan. Scans are on demand, may consume Code Security AI credits and require eligible repository security plans.",
+      "review_status": "publisher_checked_attributed_source_qualified",
+      "release_status": "public_preview",
+      "source_url": "https://github.blog/changelog/2026-11-13-manage-ai-scan-for-repositories-using-the-rest-api/",
+      "publication_date": "2026-11-13",
+      "event_date": "2026-11-13",
+      "discovered_at": "2026-11-15T14:20:00.356Z",
+      "added_to_atlas_at": "2026-11-15T14:32:11.277Z",
+      "collection_classification": "catch_up",
+      "source_record_id": "ai-news:github-ai-scan-repository-api:2026-11-13"
+    },
+    {
+      "id": "ai-news-malaysia-ai-chip-reexport-inquiry-20261113",
+      "title": "Malaysia examines whether Speedmatrix-linked AI chips were re-exported",
+      "category": "governance",
+      "tags": [
+        "AI hardware",
+        "export controls",
+        "policy",
+        "supply chain"
+      ],
+      "summary": "Reuters reported Malaysia's trade ministry is investigating whether AI chips imported by Speedmatrix, a Megaspeed unit, were re-exported and whether any movement complied with local rules. Malaysia's prime minister said there was no indication the chips had been shipped from the country.",
+      "why_it_matters": "The inquiry illustrates how advanced-accelerator trade compliance affects cross-border AI infrastructure.",
+      "caveat": "An investigation and a US senator's allegations are not evidence of a confirmed violation. No illicit re-export was established in the report.",
+      "review_status": "publisher_checked_attributed_source_qualified",
+      "release_status": "investigation_reported",
+      "source_url": "https://www.reuters.com/world/asia-pacific/malaysia-says-it-is-investigating-if-any-chips-linked-speedmatrix-were-re-2026-11-13/",
+      "publication_date": "2026-11-13",
+      "event_date": "2026-11-13",
+      "discovered_at": "2026-11-15T14:20:00.356Z",
+      "added_to_atlas_at": "2026-11-15T14:32:11.277Z",
+      "collection_classification": "catch_up",
+      "source_record_id": "ai-news:malaysia-ai-chip-reexport-inquiry:2026-11-13"
+    },
+    {
+      "id": "ai-news-aws-bedrock-user-cost-attribution-20261113",
+      "title": "AWS documents per-user Bedrock AI spend attribution and budget controls",
+      "category": "infrastructure",
+      "tags": [
+        "LLM",
+        "MLOps",
+        "governance",
+        "FinOps",
+        "API"
+      ],
+      "summary": "AWS published a workflow for tracing Bedrock inference spending to IAM principals through Cost and Usage Reports 2.0, optional organizational tags and controls that range from delayed budgets to gateway-level enforcement.",
+      "why_it_matters": "AI teams can connect agent and developer usage to accountable budgets rather than relying only on aggregate model spend.",
+      "caveat": "Cost and usage reports do not provide per-prompt costs. Budget billing lag can allow overspend, and organization-specific identity setup and third-party pricing still matter.",
+      "review_status": "publisher_checked_attributed_source_qualified",
+      "release_status": "documented_workflow",
+      "source_url": "https://aws.amazon.com/blogs/machine-learning/cost-attribution-and-controls-for-ai-developer-and-productivity-tools-on-amazon-bedrock/",
+      "publication_date": "2026-11-13",
+      "event_date": "2026-11-13",
+      "discovered_at": "2026-11-15T14:20:00.356Z",
+      "added_to_atlas_at": "2026-11-15T14:32:11.277Z",
+      "collection_classification": "catch_up",
+      "source_record_id": "ai-news:aws-bedrock-user-cost-attribution:2026-11-13"
+    }
+  ],
+  "technologies": [],
+  "terms": [],
+  "site_changes": [],
+  "corrections": []
+}

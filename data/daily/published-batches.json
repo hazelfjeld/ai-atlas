@@ -1229,6 +1229,70 @@
       "production_commit": "7f64b1c65822c6e868bb60433c676da88a0d4a43",
       "production_workflow_run_id": 43607694346,
       "githack_workflow_run_id": 43607694359
+    },
+    {
+      "batch_id": "atlas-daily-20261115-bounded-0816ct-a",
+      "source_branch": "atlas-daily-staging",
+      "source_commit": "3ff7ce3b39a213be45b6ecc7ba2735f07725f2d4",
+      "source_batch_path": "daily-queue/batches/2026-11-15-atlas-daily-20261115-bounded-0816ct-a.json",
+      "source_batch_sha256": "319891bfe962cf21138b56beea89bffef3c8e83d5de692a43a0faa3649057982",
+      "source_batch_bytes": 34541,
+      "edition_date": "2026-11-15",
+      "validation_result": "independent_sha256_bytes_counts_unique_ids_dates_and_publisher_source_review",
+      "status": "partially_published_with_6_deferred_catalog_proposals",
+      "publication_outcome": "immutable_revision_1_pending_production_verification",
+      "publication_edition": "2026-11-15-v1",
+      "accepted_news_ids": [
+        "ai-news-perplexity-decider-v13-20261112",
+        "ai-news-aws-hyperpod-inference-data-capture-20261113",
+        "ai-news-aws-sglang-neuron-20261112",
+        "ai-news-intent-aware-agent-protection-preprint-2611-16122",
+        "ai-news-github-copilot-gemini-hydrogen-20261113",
+        "ai-news-github-copilot-december-model-deprecation-20261113",
+        "ai-news-github-ai-scan-repository-api-20261113",
+        "ai-news-malaysia-ai-chip-reexport-inquiry-20261113",
+        "ai-news-aws-bedrock-user-cost-attribution-20261113"
+      ],
+      "source_news_ids": [
+        "ai-news:perplexity-decider-v13:2026-11-12",
+        "ai-news:aws-hyperpod-inference-data-capture:2026-11-13",
+        "ai-news:aws-sglang-neuron:2026-11-12",
+        "ai-news:intent-aware-agent-protection-preprint:2611.16122",
+        "ai-news:github-copilot-gemini-hydrogen:2026-11-13",
+        "ai-news:github-copilot-december-model-deprecation:2026-11-13",
+        "ai-news:github-ai-scan-repository-api:2026-11-13",
+        "ai-news:malaysia-ai-chip-reexport-inquiry:2026-11-13",
+        "ai-news:aws-bedrock-user-cost-attribution:2026-11-13"
+      ],
+      "deferred_news_ids": [],
+      "deferred_catalog_proposal_ids": [
+        "tech-proposal:perplexity-decider-v13-family:2026-11-15",
+        "tech-proposal:aws-hyperpod-data-capture:2026-11-15",
+        "tech-proposal:sglang-neuron-trainium:2026-11-15",
+        "term-proposal:intent-profile-agent-security:2026-11-15",
+        "term-proposal:locate-span-extraction:2026-11-15",
+        "term-proposal:post-deployment-model-feedback-loop:2026-11-15"
+      ],
+      "rejected_ids": [],
+      "counts": {
+        "news_published": 9,
+        "technology_added": 0,
+        "term_added": 0,
+        "corrections": 0,
+        "news_deferred": 0,
+        "catalog_deferred": 6,
+        "technology_updated": 0
+      },
+      "review_notes": "Publisher independently checked Perplexity's localized official article plus Hugging Face model cards, AWS technical articles, arXiv preprint, GitHub changelog, Reuters indexed reporting corroborated by Malaysian reporting. All November 12–13 items labeled catch-up; benchmark/availability caveats, announced future deprecations and mere chip re-export inquiry explicitly qualified. Localized Perplexity article available; unlocalized English reader inaccessible. Six catalog proposals require separate canonical dedup/license validation. Partial coverage retained. Production verification pending.",
+      "production_verified_at": null,
+      "publication_history": [
+        {
+          "edition": "2026-11-15-v1",
+          "status": "pending_production_verification",
+          "note": "Immutable edition, SHA256 index and receipt atomically committed; public deployment/browser verification pending.",
+          "prepared_at": "2026-11-15T14:32:11.277Z"
+        }
+      ]
     }
   ]
 }
