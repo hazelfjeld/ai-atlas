@@ -351,52 +351,52 @@
   },
   "MLD-0071": {
     "path": "terms/MLD-0071-attention-mask.html",
-    "sha256": "9188ea8ac303b60f5ddfd4c3990c35a9d296de33947dd2ed719bbba8b6bd7d0c",
+    "sha256": "9c6e1850a9276ad2cffb01eaf8a72e86dacea65d986e2162f0349848bc2b43fd",
     "expanded": false
   },
   "MLD-0072": {
     "path": "terms/MLD-0072-attention-score.html",
-    "sha256": "c433d581bd0307d6ae8399c3c54350ee4843c6bc98ed97cf5c829e65412b612f",
+    "sha256": "3f54f11e6eda49ffeaeacd066a26d2edfb8652f24cb4fbbb8ab7daac96b7adf0",
     "expanded": false
   },
   "MLD-0073": {
     "path": "terms/MLD-0073-attention-weight.html",
-    "sha256": "02a6794733b8c14507ecb8d0998ec823ba67ebe514b36f4b27ed2a87b1fc5784",
+    "sha256": "2c64e73db213f8cbae7a54ac3b79bf0f531f47f1f7f1d998b05be96294ff894a",
     "expanded": false
   },
   "MLD-0074": {
     "path": "terms/MLD-0074-attribution-graph.html",
-    "sha256": "b2eaed20b8050ed7d8d412509aa62252ea4e1151ff463d7cd06f1cb218fff20a",
+    "sha256": "3a6d97e9c1605c11d7024296d84bbfde21836812ca706b7fa4a3f0d45b6b3380",
     "expanded": false
   },
   "MLD-0075": {
     "path": "terms/MLD-0075-autocorrelation.html",
-    "sha256": "6ad459ac27ea3baabcdd0c4967815535e9535683a65ac8b6ab8835587215ed2d",
+    "sha256": "f4cfd6c8b8f0d92fc9d824299ab84051be66944c5edde4e27071cd9ea42eb1dd",
     "expanded": false
   },
   "MLD-0076": {
     "path": "terms/MLD-0076-autoencoder.html",
-    "sha256": "c38e4ec6ef253ff358410e8232228f28279fc6c9fa532a1fef5076eee7b46e0a",
+    "sha256": "008ed1c65e3c2f74beb2cf43abb97bd172ee56d9116d4479545ba3d345916230",
     "expanded": false
   },
   "MLD-0077": {
     "path": "terms/MLD-0077-automatic-differentiation.html",
-    "sha256": "ab7d8af4c1d77cd1e0dad54b2f0816bef28fd96c2e20c54700c698000cf97af5",
+    "sha256": "2a7e9f39e00cbf6ada35dba98e4c8416ceaba93a42bb903c84898492c45721b0",
     "expanded": false
   },
   "MLD-0078": {
     "path": "terms/MLD-0078-automatic-speech-recognition.html",
-    "sha256": "fbab5dcac41c43c8230d5244fe1bbf6519fafaf5b26796c72abbe5a226765858",
+    "sha256": "8397b7964a5bb8028386193a4ee65f8d50d68dc58aaef6cc5a1aa1f303e09120",
     "expanded": false
   },
   "MLD-0079": {
     "path": "terms/MLD-0079-autoregression.html",
-    "sha256": "a5677928017a6566449b04e6e67b541ff8723a8af795e95561eb2d5232f7d0ac",
+    "sha256": "f1dd3ccc6c7aa6229668a7891a4a2e793c3e519f9bdc1e5c2894454dededb683",
     "expanded": false
   },
   "MLD-0080": {
     "path": "terms/MLD-0080-auxiliary-loss.html",
-    "sha256": "40cc67fb42d98430a6b336e5073aed6149bf4478b1d0bec821b722b8d139784d",
+    "sha256": "c5f6397809d2c10ccec54ae787eceb3ac695a84216ce27efb5474828f89720ae",
     "expanded": false
   },
   "MLD-0081": {
