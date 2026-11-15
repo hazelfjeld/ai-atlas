@@ -544,7 +544,7 @@ with sync_playwright() as p:
             native_page.goto(base + 'index.html#/overview')
             native_page.goto(base + 'technology/TECH-0216-pytorch.html')
             shared_labels = native_page.locator('nav.site-chrome .site-chrome__links a').all_text_contents()
-            native_page.goto(base + 'terms/MLD-0161-chain-of-thought-prompting.html', 'terms/MLD-0171-circuit.html')
+            native_page.goto(base + 'terms/MLD-0171-circuit.html')
             native_nav = native_page.locator('nav.site-chrome')
             lower = native_nav.locator('.sidebar-bottom.site-chrome__bottom')
             check('new concept first-paint rail matches technology and Discover ' +
@@ -2394,7 +2394,7 @@ with sync_playwright() as p:
                                      java_script_enabled=False, reduced_motion='reduce')
     for theme in ('light', 'dark'):
         reference_nav.emulate_media(color_scheme=theme)
-        for route in ('terms/index.html', 'terms/MLD-0001-a-b-test.html', 'terms/MLD-0101-bayesian-inference.html', 'terms/MLD-0121-bidirectional-context.html', 'terms/MLD-0131-boosting.html', 'terms/MLD-0141-byte-pair-encoding.html', 'terms/MLD-0151-categorical-feature.html', 'terms/MLD-0161-chain-of-thought-prompting.html', 'technology/index.html', 'technology/TECH-0216-pytorch.html'):
+        for route in ('terms/index.html', 'terms/MLD-0001-a-b-test.html', 'terms/MLD-0101-bayesian-inference.html', 'terms/MLD-0121-bidirectional-context.html', 'terms/MLD-0131-boosting.html', 'terms/MLD-0141-byte-pair-encoding.html', 'terms/MLD-0151-categorical-feature.html', 'terms/MLD-0161-chain-of-thought-prompting.html', 'terms/MLD-0171-circuit.html', 'technology/index.html', 'technology/TECH-0216-pytorch.html'):
             for width in (320, 390, 768, 1280):
                 reference_nav.set_viewport_size({'width':width, 'height':844})
                 reference_nav.goto(base + route)
@@ -2404,7 +2404,7 @@ with sync_playwright() as p:
                 check('reference directory shared navigation before JS ' + route + ' ' + theme + ' ' + str(width),
                       more.count() == 1 and mobile.count() == 1 and
                       (rail.is_visible() if width >= 768 else mobile.is_visible()))
-                if route in ('terms/MLD-0101-bayesian-inference.html', 'terms/MLD-0121-bidirectional-context.html', 'terms/MLD-0131-boosting.html', 'terms/MLD-0141-byte-pair-encoding.html', 'terms/MLD-0151-categorical-feature.html', 'terms/MLD-0161-chain-of-thought-prompting.html'):
+                if route in ('terms/MLD-0101-bayesian-inference.html', 'terms/MLD-0121-bidirectional-context.html', 'terms/MLD-0131-boosting.html', 'terms/MLD-0141-byte-pair-encoding.html', 'terms/MLD-0151-categorical-feature.html', 'terms/MLD-0161-chain-of-thought-prompting.html', 'terms/MLD-0171-circuit.html'):
                     check('newly migrated concept has one native first-paint rail bottom ' + theme + ' ' + str(width),
                           rail.locator('.sidebar-bottom.site-chrome__bottom').count() == 1 and
                           rail.locator('a[href="../index.html#/sources"]').count() >= 1)
