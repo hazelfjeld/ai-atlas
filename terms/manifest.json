@@ -1151,32 +1151,32 @@
   },
   "MLD-0231": {
     "path": "terms/MLD-0231-corrigibility.html",
-    "sha256": "4dfd4079892a8741cff633a8394a54e58bdae42400441efa3db121a66bc4e84e",
+    "sha256": "7fc97534018128818bbd43cfe7efc820bfb6638462e79495fce6b785ff8f3e4e",
     "expanded": false
   },
   "MLD-0232": {
     "path": "terms/MLD-0232-cosine-decay.html",
-    "sha256": "a49f13ed0ba29153c3a16e3966e9dd2fc2077bee66a23bb0db42ef689f85a864",
+    "sha256": "3e1a010f6e0fbd555e99ca400a68031d2dcac3739f1afdb78e73cdc71b4175cd",
     "expanded": false
   },
   "MLD-0233": {
     "path": "terms/MLD-0233-cosine-similarity.html",
-    "sha256": "ee832dea03ddbe64447bf461eb00626575db43da0920a62772a14657d801864c",
+    "sha256": "624486afb0b87e2dfe5d851583120633e14f79c21f759b19f6774805185f8b41",
     "expanded": false
   },
   "MLD-0234": {
     "path": "terms/MLD-0234-counterfactual.html",
-    "sha256": "504f223f96074cf7b9319a7197c35d14e39d01f32da692f373ddc4551b9190d6",
+    "sha256": "478e3ee3629bb2bef50684cf7eae0ac9ccf9029d053d00b446aeee9529f68212",
     "expanded": false
   },
   "MLD-0235": {
     "path": "terms/MLD-0235-counterfactual-explanation.html",
-    "sha256": "de4e1c9931cad67b1b9195ac2f1a9aaa3d10eff66ee23fe80d8c636749832133",
+    "sha256": "90e6c57d5f7cfb3d9ca3187e35635b5ecbda2ce05dfe96461f09642e1e7261aa",
     "expanded": false
   },
   "MLD-0236": {
     "path": "terms/MLD-0236-covariance.html",
-    "sha256": "230198d9160ce2956f2ec4cb3ef77d780cf90d7ac1d003d783a2a939308938be",
+    "sha256": "bb1f7549fb5737500683a19ccdb80e1709de66a1e69d7976404672fcf50698b5",
     "expanded": false
   },
   "MLD-0237": {
@@ -1186,17 +1186,17 @@
   },
   "MLD-0238": {
     "path": "terms/MLD-0238-cpu-offloading.html",
-    "sha256": "3b554b5609869f57f92c111f010421ab7eb07879a0900b6f2a984891fe74e0b7",
+    "sha256": "ac4b77ba98e58ef95991c43d6f7588a587abf9ff473afb12d7a7eb904f0b3dae",
     "expanded": false
   },
   "MLD-0239": {
     "path": "terms/MLD-0239-credible-interval.html",
-    "sha256": "f588771ba72e11aae47b78ef8772dcbf6a64eebf9725b281a948d9378f75bda2",
+    "sha256": "876b4a7c396fccba13eb1bd0ded1d0c83ebbb90a51c8b37641cd1fcbb0caf9e1",
     "expanded": false
   },
   "MLD-0240": {
     "path": "terms/MLD-0240-credit-assignment.html",
-    "sha256": "1295945f92705cb2032a03c84380646a4677ec1e9d8e66c1806428345b37247c",
+    "sha256": "0508760bb39b315b85ff51c443f4061cf236bb90a6b4ef75f1033117679e0b12",
     "expanded": false
   },
   "MLD-0241": {
