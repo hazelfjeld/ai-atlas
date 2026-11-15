@@ -451,52 +451,52 @@
   },
   "MLD-0091": {
     "path": "terms/MLD-0091-ball-tree.html",
-    "sha256": "25e67194b76dc6a7e71970121cc60644edc91d0f24af75dc8decfb2273935d4a",
+    "sha256": "9d130a82d0923fcf205649ecb2cd38a326d16b10c1c73c3e3c52834d0dd562ee",
     "expanded": false
   },
   "MLD-0092": {
     "path": "terms/MLD-0092-bandwidth.html",
-    "sha256": "96b2a88c19469c2c1194f83f625c46fb1d48089b789c0b801321e61c8e05a40f",
+    "sha256": "5cb4b0df43b56e74b1f6ae50d237973d54efbcf02471a08e05ddacacf315385f",
     "expanded": false
   },
   "MLD-0093": {
     "path": "terms/MLD-0093-base-model.html",
-    "sha256": "6e612d794df0db118802339ee1b177b0ef815766489117218160de68aa214ad5",
+    "sha256": "117188779e21a9a8be0bcebaaaf5a0c3836583f2efc7136239427586574b59e6",
     "expanded": false
   },
   "MLD-0094": {
     "path": "terms/MLD-0094-base-optimizer.html",
-    "sha256": "f56b7a68de925972752afd61df3d2c7645f5985300ce6f8ad2402cbc3d487649",
+    "sha256": "02e2baf5a674345ae6a4b22bcb3e133112d64eb8ea486ec798f845c904061c45",
     "expanded": false
   },
   "MLD-0095": {
     "path": "terms/MLD-0095-baseline.html",
-    "sha256": "6c75e5aa1923ec755043dba32a6c821451168683ea3cacbd9546bc340bc3028e",
+    "sha256": "ea081d4af2930169ca7365c1decc46b51b327d5a5728d5e7a4ff8e6cb000eb58",
     "expanded": false
   },
   "MLD-0096": {
     "path": "terms/MLD-0096-batch-inference.html",
-    "sha256": "bb015ea3fe91797f1442387df71621d4c64e7fd2aa93b823c4d9ede8f7156691",
+    "sha256": "93b4486c7d031c692b73a6d5a195de762f7ca0365b88f470de1917b33691c871",
     "expanded": false
   },
   "MLD-0097": {
     "path": "terms/MLD-0097-batch-learning.html",
-    "sha256": "3163b56be542d55c6207744853df781b821e5e283bc30de7ceb5fdd7a9fc174a",
+    "sha256": "441053844900f91a31238db652207724da623594f01d5b3c448931656f14c927",
     "expanded": false
   },
   "MLD-0098": {
     "path": "terms/MLD-0098-batch-normalization.html",
-    "sha256": "6eb40b8c61a9e3876499df5a51c02f7b7a9738de454bf19926f1fa6389ebe5ed",
+    "sha256": "9c2150e048f67db0d79a46612e93c766e6cacbbd0c3cbb5b8d0afe6ee5db637b",
     "expanded": false
   },
   "MLD-0099": {
     "path": "terms/MLD-0099-batch-size.html",
-    "sha256": "f190a2ab8a3983877722a7bae0a6330bdde376504c9a6f78e81d05a01c85e1d6",
+    "sha256": "04ae04fe6b666e3d4fdbf957dbe849c90d1b241c8567a25b72c984382d9b63d3",
     "expanded": false
   },
   "MLD-0100": {
     "path": "terms/MLD-0100-bayes-theorem.html",
-    "sha256": "4d5cf3a4a8c43a867699caf82de9f1f42a2ad874f6a28f7d91902f4c8f51ecad",
+    "sha256": "8f9e88170970125ca4c5f282011ba48d8b048438835bffaba7d544dd10038356",
     "expanded": false
   },
   "MLD-0101": {
