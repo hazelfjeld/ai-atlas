@@ -551,52 +551,52 @@
   },
   "MLD-0111": {
     "path": "terms/MLD-0111-bernoulli-distribution.html",
-    "sha256": "74a80ed9b4749b336fd68fe9e6616d750df918c747326ff050b2e7edf0d01608",
+    "sha256": "c90bdddcd296d5f6271f18bc12a18eb4de3ecd31ad7124fba107adf236fc0f5c",
     "expanded": false
   },
   "MLD-0112": {
     "path": "terms/MLD-0112-bernoulli-naive-bayes.html",
-    "sha256": "e0d2674dd6d1995aed58cff73e8049963afa67b5b2bd6bd1584e562e4ddc748e",
+    "sha256": "e5587610afddd21c6069729730aa5e874185c6c4f53cb15b1088a92b71ae0c86",
     "expanded": false
   },
   "MLD-0113": {
     "path": "terms/MLD-0113-bert.html",
-    "sha256": "e7bb34672bccf2dc6a90227b4328630ba40893f47ae976dd67476b7fa81aa740",
+    "sha256": "1ad4018a93425aae959cbba8f4a1a9032d37dbdcc64143bb751d02e146210e78",
     "expanded": false
   },
   "MLD-0114": {
     "path": "terms/MLD-0114-bertscore.html",
-    "sha256": "0f2a1a090f2dd5c528a666edeae1cf771c5f2e5a4cf8d01b4d4c1cde81dbadac",
+    "sha256": "26e8b3426ad061b5ff594ed7bc83f40063b613d447a1abe4a9f50e6e5a6f4547",
     "expanded": false
   },
   "MLD-0115": {
     "path": "terms/MLD-0115-best-of-n-sampling.html",
-    "sha256": "7b94ff3ea9292a550ec722db314635f4896640a455d63dc82003d420a93d81b3",
+    "sha256": "5bab619ec98a6df4ab7cb82c9218d3de016578c26da245bfac6c03f15b342c82",
     "expanded": false
   },
   "MLD-0116": {
     "path": "terms/MLD-0116-bfloat16.html",
-    "sha256": "d643886a4875bf12f05fe711566b46afb5c5cc15e89ab999e6bc4b3168d4ae9e",
+    "sha256": "5f010d7636d4d9430ce74a9f50a079d6c93b2dcf92add43f6bedc948c7afb333",
     "expanded": false
   },
   "MLD-0117": {
     "path": "terms/MLD-0117-bi-encoder.html",
-    "sha256": "aa8ebd24255507495b075f3d767158cfddafe07f00aac042a143c14613f1c191",
+    "sha256": "1aa2de54b0216d07feeb0bf52b0d222795c6975d2ffda6634eb9453cf9964e1e",
     "expanded": false
   },
   "MLD-0118": {
     "path": "terms/MLD-0118-bias-audit.html",
-    "sha256": "5f0cf8b6512b94dae4ea538e55753d3afe2e1523305b95c31fccb20bda49caae",
+    "sha256": "46c6da66e2116731f2b89e47828d38a3382631a41a93b09c9054121357bec85a",
     "expanded": false
   },
   "MLD-0119": {
     "path": "terms/MLD-0119-bias-parameter.html",
-    "sha256": "f4c5fa04887f945c8155337de1ee04a40a1a9bfcb44013294d743865dea00a0b",
+    "sha256": "6ab3bc5f806652d6c37702b3faf777669be2b2af8a04843211ddcfd516e78e5b",
     "expanded": false
   },
   "MLD-0120": {
     "path": "terms/MLD-0120-bias-variance-tradeoff.html",
-    "sha256": "ea876fbe1405e3f665d7c14cc8dafef6511c831669858acb7f8736ad26c2787c",
+    "sha256": "70610c9fc41d635b2a34de83c043d91cf63314a50bb1663afa327a2922d4a6c1",
     "expanded": false
   },
   "MLD-0121": {
