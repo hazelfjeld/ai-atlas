@@ -801,52 +801,52 @@
   },
   "MLD-0161": {
     "path": "terms/MLD-0161-chain-of-thought-prompting.html",
-    "sha256": "d67a7b3ac2036677764c690beb3353a1f1c3efde1ca34bb3be8e878cf5fe9a7b",
+    "sha256": "01b02b9e9e5c4f1028e76155dfaea890ecb8e12656e9a43049bcee122288d9b3",
     "expanded": false
   },
   "MLD-0162": {
     "path": "terms/MLD-0162-change-of-variables.html",
-    "sha256": "05ab326410ef0bab22da009389d5409a4b8ebb24c132836ee2ea7888ed36dd47",
+    "sha256": "79d46fb8115de35802d86f90298e17db5eaf721ab28f7c67278ac1f2a07fff9c",
     "expanded": false
   },
   "MLD-0163": {
     "path": "terms/MLD-0163-channel.html",
-    "sha256": "d981b0362d5e0171746b03d6b0b720250a32cb8cb7814b4dcb2abe44d80725ff",
+    "sha256": "4a0a6f53a6d24740351041947938942647e579bb42c19c672e2901bee7adaf0b",
     "expanded": false
   },
   "MLD-0164": {
     "path": "terms/MLD-0164-character-error-rate.html",
-    "sha256": "47b94bd7d9bc3c0b3054666a8d5924a3a0f7f2fdb54071c5c3cdead7e2d9b96f",
+    "sha256": "e7ab2274f6898c7a6a85cf9ac76a0d08fc3b4c9808a958971b59a787deed0d2c",
     "expanded": false
   },
   "MLD-0165": {
     "path": "terms/MLD-0165-chat-template.html",
-    "sha256": "7a7fdac4c659227549013bc517e07cf6b89cf1a85d1f9174efceb4cf42202571",
+    "sha256": "f8e10fb7bef0d75c82da80370f361e07d1e678fce833108c103babf1887c55b5",
     "expanded": false
   },
   "MLD-0166": {
     "path": "terms/MLD-0166-checkpoint.html",
-    "sha256": "0f1ae79c5dd07669a31d3e5f7ccec861cd380f7ddf26d791d060f7319260d592",
+    "sha256": "a9b15a200d02309b43cf1e6652ecd9d7ce7eefef1bc5d4e83ca1771fbba5823f",
     "expanded": false
   },
   "MLD-0167": {
     "path": "terms/MLD-0167-chosen-response.html",
-    "sha256": "641fe146238d6bdd4ae8c357d8b4f46dbf9c96534cbb7bb48949b4cfad07e0cb",
+    "sha256": "6f62faab589a40d370637ec86a0bc51183e386c57f140700435297e5a507ffd8",
     "expanded": false
   },
   "MLD-0168": {
     "path": "terms/MLD-0168-chunk-overlap.html",
-    "sha256": "7f2187cedc47b1bfb11dcbdb8a002781f1453207cf3c06d4822b3235b7cc7d91",
+    "sha256": "040ece9b8b1ee66a98e2508ab4e66d1ee16ceecc5cbb29c1331ce5318da0d330",
     "expanded": false
   },
   "MLD-0169": {
     "path": "terms/MLD-0169-chunked-prefill.html",
-    "sha256": "ceb2a02d6b243e2e72b896ea0672d7a36dc477374049b9a0fac9c263f8f09abf",
+    "sha256": "e04ee213e08d2dd25ddb7cc8e84284c398b05df7c6e9e57ce82aa80fd37a0921",
     "expanded": false
   },
   "MLD-0170": {
     "path": "terms/MLD-0170-chunking.html",
-    "sha256": "a07b0da97dc2f4204e372b30ca6f44585ad6029fbd140b2b023e5fbb2682ceff",
+    "sha256": "afba612a3f214bb35107131916f23c16b70c1d4750ed3f07866341550e49b925",
     "expanded": false
   },
   "MLD-0171": {
