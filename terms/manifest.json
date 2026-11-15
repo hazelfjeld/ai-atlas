@@ -1101,52 +1101,52 @@
   },
   "MLD-0221": {
     "path": "terms/MLD-0221-contrastive-loss.html",
-    "sha256": "c422c2f4d88e0865a4f995e14590d25b8ec2fb5c5a9b2f6167a8f614e4068f2b",
+    "sha256": "b8d7c531c24a03f21cfc69ab1984041bb1c777dd188269a09609ad10fcd42cdb",
     "expanded": false
   },
   "MLD-0222": {
     "path": "terms/MLD-0222-control-group.html",
-    "sha256": "ae74f8973b7ade068a3fc2550b8a72c8180b8102437ceb1fae9028aa67b08582",
+    "sha256": "8aebaa79cff11e3e387be63cec608fc90f4dc68b0a093455ad73b9a41280a189",
     "expanded": false
   },
   "MLD-0223": {
     "path": "terms/MLD-0223-convergence.html",
-    "sha256": "dd55d9ee202b72ae178cbfc5f00ca3ed00b49d3b5885188d6d6eff286c8dbacd",
+    "sha256": "d85e0e6ecef2b941cc5e5e7d4738dd039131aa473b283b69a523bcc262ada17b",
     "expanded": false
   },
   "MLD-0224": {
     "path": "terms/MLD-0224-convex-function.html",
-    "sha256": "dd3995bec9acc077a8ad74b0edd795658f9323297844879e49a5572cc533558a",
+    "sha256": "b96aa8d5a97df69c055ebb89fc8edaf71cf554095fb7459d016bb13453924756",
     "expanded": false
   },
   "MLD-0225": {
     "path": "terms/MLD-0225-convex-optimization.html",
-    "sha256": "a7202561cf547b30291c64e449b076acabdbb38d6943aa22847f6b16501b707f",
+    "sha256": "57143703ace94951f68f520232a334645beb1704d5a8d26c4f1ed2090e97d3b4",
     "expanded": false
   },
   "MLD-0226": {
     "path": "terms/MLD-0226-convolution.html",
-    "sha256": "380d28e31f339665120b34aeaaf8af2d76b63c46802d0ddc95d7417e1dbf13b7",
+    "sha256": "e3e2597efb70ac1dfe0398a0b05ab7ce4ab38f0fc3a34765c2847f52394b495b",
     "expanded": false
   },
   "MLD-0227": {
     "path": "terms/MLD-0227-convolution-kernel.html",
-    "sha256": "f386fd8dda52737419eba2e78b1e022b97724f5b1e57ac36ebc2f38be78fc69f",
+    "sha256": "323797b2a4aa798e8c526e37d2c61283689df8384f1838c38e342c2ff7feb641",
     "expanded": false
   },
   "MLD-0228": {
     "path": "terms/MLD-0228-convolutional-neural-network.html",
-    "sha256": "d72e77d0129ef7b7fd2df444f1065f2df30dfc36c197cda4ca81f78d0617d81a",
+    "sha256": "6a8b904d0442dc4fe4df631c259eee682ef3c1a7230025e11c27874872dd3629",
     "expanded": false
   },
   "MLD-0229": {
     "path": "terms/MLD-0229-corpus.html",
-    "sha256": "6e9793a3a4ce288a3e5b0d7b6bd005bab70522d08a4ecf22c0346cd382e05a0c",
+    "sha256": "aa9dacbb883628eb69b20184220c5a53eaf425b1956f8d4728a80fbcd380c9af",
     "expanded": false
   },
   "MLD-0230": {
     "path": "terms/MLD-0230-correlation.html",
-    "sha256": "169dcbf53484205ecd6999f61d03d1ff731f4ea3adc8b03b640276db98809872",
+    "sha256": "c597aa3f05b4240623acd5494df7afbe9ba44ef8f44d2e544f6e244672d41ae0",
     "expanded": false
   },
   "MLD-0231": {
