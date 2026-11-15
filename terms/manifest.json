@@ -401,22 +401,22 @@
   },
   "MLD-0081": {
     "path": "terms/MLD-0081-average-pooling.html",
-    "sha256": "5be97152b346ffe6fac792429bed121d229c8379bad63b9bed5d876cb05b9955",
+    "sha256": "ca81e14eec5f9ae8438089156b9e06f4b63f70275611eeb0df83e255df7670bf",
     "expanded": false
   },
   "MLD-0082": {
     "path": "terms/MLD-0082-average-precision.html",
-    "sha256": "9bf4951930f901e8cf1909ab1eca99331b2140c557f7942b8bc26abb5411439c",
+    "sha256": "57c2756a28d1b52a4dbdcc31f7d34f6d94d601aabcd9c20e493837c44f0e7a0e",
     "expanded": false
   },
   "MLD-0083": {
     "path": "terms/MLD-0083-awq.html",
-    "sha256": "f6a9076e858604b052467ad830aa6433266eef1b1fee49ff04c18f636a8fd117",
+    "sha256": "3c4af25e829e8770ee3b8cb4674328754933e7e35918268bd8aed855ac2b561f",
     "expanded": false
   },
   "MLD-0084": {
     "path": "terms/MLD-0084-backbone.html",
-    "sha256": "788e055ec3835f2a6a57f23bac8d7b9bf023ea77865b450eea995c70aadf3ea5",
+    "sha256": "46f879db0feeb7f0347378205a55789c88863d82bb2de37b5ec5e641fe022a64",
     "expanded": false
   },
   "MLD-0085": {
@@ -426,27 +426,27 @@
   },
   "MLD-0086": {
     "path": "terms/MLD-0086-backpropagation.html",
-    "sha256": "6cffec15c0b5490791351119363869cfb0916c3887d7ce07bc9a65d97d1c13c9",
+    "sha256": "2ce38b647d97a3feabf3d409c64724a27316fa6331e2e68daa50fcd576a3a67d",
     "expanded": false
   },
   "MLD-0087": {
     "path": "terms/MLD-0087-backpropagation-through-time.html",
-    "sha256": "8a1fd3b9bddc4e3f96a58235e8935d188f10b055e9406aed2531ba8729999fb2",
+    "sha256": "f0f1028a3379ca4055ab27e3bad5c41fe0fc4c994f57dc45b00577fc48665f05",
     "expanded": false
   },
   "MLD-0088": {
     "path": "terms/MLD-0088-bag-of-words.html",
-    "sha256": "3ef6a2916a0e60c9a882510bbc69167e0b6911bc45cb4db3016454f68c3844ad",
+    "sha256": "768ddea58fa9c9cf71dbeba3104b173753a0b11d62b8ee042549a2f6cc9847db",
     "expanded": false
   },
   "MLD-0089": {
     "path": "terms/MLD-0089-bagging.html",
-    "sha256": "7d6098769d8f8a5aa4225040b53a91f54962e404fc00db75bada8907478bee4c",
+    "sha256": "2b7965237a85bb378cf5cb5413234031a828d2870a9a47fec781b1d7e071e75c",
     "expanded": false
   },
   "MLD-0090": {
     "path": "terms/MLD-0090-balanced-accuracy.html",
-    "sha256": "fbae0cfb448ba55cdb9012490646518d5786b0928ce826b7df3949aa5339aa93",
+    "sha256": "c5cdd160a8191345e4e636e0e8a87c6f5e27331233720bd39cf4e3a477c7f14e",
     "expanded": false
   },
   "MLD-0091": {
