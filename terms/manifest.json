@@ -1201,52 +1201,52 @@
   },
   "MLD-0241": {
     "path": "terms/MLD-0241-critic.html",
-    "sha256": "fc6e2877df98a625fddd3ecf929aacb2d3ac497185d95c354e1ed08e5a63ff21",
+    "sha256": "f0252caf8d1bc9e03d960e7613260c80bf57a4a311c4d064c31b723d1395b42e",
     "expanded": false
   },
   "MLD-0242": {
     "path": "terms/MLD-0242-cross-attention.html",
-    "sha256": "68c548dab58de27b7e4c220d0e6a7a09f9dc04d846d9767d8e00256772bdd380",
+    "sha256": "75d04546556c4c22dfead1b05045b54dc28b511a3f12b05ba654ade5e046960a",
     "expanded": false
   },
   "MLD-0243": {
     "path": "terms/MLD-0243-cross-encoder.html",
-    "sha256": "0dd6384f2852c78c07b58fdfaffcc7f6c46854182bd5bfeaa9874e96797af20f",
+    "sha256": "bc9d939f44737929f2a2ae4838a17d193b684822152ea3bf7962cfd7242ddafb",
     "expanded": false
   },
   "MLD-0244": {
     "path": "terms/MLD-0244-cross-entropy.html",
-    "sha256": "73362370311f68de410f6dc356ede577df2c6f8178fd432a2188454fc071653a",
+    "sha256": "c74a28b2d26893401bacce53c13972a1e553ed7885c220d4a5254e6d1c10f2b0",
     "expanded": false
   },
   "MLD-0245": {
     "path": "terms/MLD-0245-cross-fitting.html",
-    "sha256": "1f7e7a90a7981d9e67557708ce67ac1cb6004979e204830aaf004500dcad59e4",
+    "sha256": "5ce72ffc0dac2ccf02ad04dd9f471f66838fc0c71c22986ec367c95d857dae22",
     "expanded": false
   },
   "MLD-0246": {
     "path": "terms/MLD-0246-cross-modal-alignment.html",
-    "sha256": "c2a0230163a96c780750b8348d97c79200cfa8917bf71704b37840f452c9af7c",
+    "sha256": "46737a6444a810a86a29a92750dd61be8e0abd61f4c1dc0d60a311402b855ea0",
     "expanded": false
   },
   "MLD-0247": {
     "path": "terms/MLD-0247-cross-validation.html",
-    "sha256": "57f469ab551fa53ebd11b0aeea410b8d23a03d6bae98673f294307bae5db86f1",
+    "sha256": "9f2af759bb73e37cf69157af5eabf3bfbfb33487f73e2a9e9e7658b0c1733533",
     "expanded": false
   },
   "MLD-0248": {
     "path": "terms/MLD-0248-cryptographic-hash.html",
-    "sha256": "6b6e71d177f1113fb80cfb16b8bd1a527ae3957e1e0b69ef7f045f694cdb77e6",
+    "sha256": "b715757e0871b735a3c1f05f96a2921649fff3eeaa274c353edf64b6a737fd0c",
     "expanded": false
   },
   "MLD-0249": {
     "path": "terms/MLD-0249-csr-format.html",
-    "sha256": "e34f4c8c022751c9833077eb990179073f4fdcce1bb18b767227590c08b7cd6a",
+    "sha256": "0a0944c1c68ddd98af4d9a238d452128b5a803d202271c147b8e12ac7f09e28c",
     "expanded": false
   },
   "MLD-0250": {
     "path": "terms/MLD-0250-cuda.html",
-    "sha256": "60cb47dbd73ebf744f7082a1a6384599303bf88933e94f5f0b1e31175c6155fa",
+    "sha256": "a988a090058d63997ed434ba94e2a0d9cd46dc76d9fb6c259acfa368c19e5031",
     "expanded": false
   },
   "MLD-0251": {
