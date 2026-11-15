@@ -1240,7 +1240,7 @@
       "edition_date": "2026-11-15",
       "validation_result": "independent_sha256_bytes_counts_unique_ids_dates_and_publisher_source_review",
       "status": "partially_published_with_6_deferred_catalog_proposals",
-      "publication_outcome": "immutable_revision_1_pending_production_verification",
+      "publication_outcome": "immutable_revision_1_cloudflare_http_browser_and_githack_verified",
       "publication_edition": "2026-11-15-v1",
       "accepted_news_ids": [
         "ai-news-perplexity-decider-v13-20261112",
@@ -1284,15 +1284,28 @@
         "technology_updated": 0
       },
       "review_notes": "Publisher independently checked Perplexity's localized official article plus Hugging Face model cards, AWS technical articles, arXiv preprint, GitHub changelog, Reuters indexed reporting corroborated by Malaysian reporting. All November 12–13 items labeled catch-up; benchmark/availability caveats, announced future deprecations and mere chip re-export inquiry explicitly qualified. Localized Perplexity article available; unlocalized English reader inaccessible. Six catalog proposals require separate canonical dedup/license validation. Partial coverage retained. Production verification pending.",
-      "production_verified_at": null,
+      "production_verified_at": "2026-11-15T14:44:40Z",
       "publication_history": [
         {
           "edition": "2026-11-15-v1",
           "status": "pending_production_verification",
           "note": "Immutable edition, SHA256 index and receipt atomically committed; public deployment/browser verification pending.",
           "prepared_at": "2026-11-15T14:32:11.277Z"
+        },
+        {
+          "edition": "2026-11-15-v1",
+          "status": "cloudflare_http_browser_and_githack_verified",
+          "note": "Exact main f435a8462ef65d50e906d29169854b4631f09720 passed Cloudflare hosted/browser and 504 per-host production assets, catalog/GitHack, immutable date and archive checks. Exact dated query permalink was not independently opened.",
+          "verified_at": "2026-11-15T14:44:40Z"
         }
-      ]
+      ],
+      "production_verified_revision": 1,
+      "last_verified_at": "2026-11-15T14:44:40Z",
+      "last_verified_public_url": "https://aiupdates.app/whats-new.html?date=2026-11-15&revision=1",
+      "production_commit": "f435a8462ef65d50e906d29169854b4631f09720",
+      "production_workflow_run_id": 43725134778,
+      "githack_workflow_run_id": 43725134804,
+      "verification_scope": "Exact tested main f435a8462ef65d50e906d29169854b4631f09720 passed catalog/GitHack workflow 43725134804 (342 Node tests; byte parity), Cloudflare production and hosted-browser workflow 43725134778 (504 exact HTTP assets across each of three hostnames; 66 site-browser and 40 Games checks), completed 2026-11-15T14:44:40Z. Immutable edition and staged source SHA-256/UTF-8 byte counts validated. Direct separate reopening of the full dated query permalink was unavailable."
     }
   ]
 }

@@ -323,7 +323,7 @@
       "published_at": "2026-11-15T14:32:11.277Z"
     }
   ],
-  "last_successful_publish_at": "2026-11-14T15:09:10Z",
-  "status": "edition_revision_1_pending_production_verification",
+  "last_successful_publish_at": "2026-11-15T14:44:40Z",
+  "status": "edition_revision_1_production_verified",
   "coverage_note": "November 14 revision 1 production-verified at 2026-11-14T15:09:10Z on exact code 7f64b1c65822c6e868bb60433c676da88a0d4a43: ten source-reviewed AI reports with partial coverage and one inaccessible source metadata endpoint; three technology and three term proposals remain deferred. Earlier immutable editions and all existing catalogs retained."
 }
