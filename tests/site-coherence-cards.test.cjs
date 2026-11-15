@@ -183,6 +183,12 @@ test('daily archive shares script-free collection fallback instead of trapping r
   for (const item of expected) {
     assert.ok(fs.existsSync(path.join(__dirname, '..', item)),
       'Script-free edition cannot point at a missing immutable file: ' + item);
+    const date = item.match(/(\\d{4}-\\d{2}-\\d{2})-v\\d+\\.json$/)?.[1];
+    assert.ok(date, 'Expected immutable dated edition: ' + item);
+    const label = new Date(date + 'T12:00:00Z').toLocaleDateString('en-US',
+      {month:'long',day:'numeric',year:'numeric'}) + ' · reviewed edition JSON';
+    assert.ok(block.includes('href="' + item + '">' + label + '</a>'),
+      'The script-free edition label must match the real publication date: ' + item);
   }
   assert.ok(fs.readFileSync(path.join(__dirname, '..', 'scripts/build_seo.py'), 'utf8')
     .includes('def sync_scriptfree_daily_archive(html):'),
