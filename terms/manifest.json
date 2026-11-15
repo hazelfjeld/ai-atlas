@@ -1326,12 +1326,12 @@
   },
   "MLD-0266": {
     "path": "terms/MLD-0266-data-mixture.html",
-    "sha256": "5a8e3f8b3d41731fcba09cc9679ab46dd6b6d840db9b89b4ece63c7bd1441277",
+    "sha256": "0ed0746ab364b978fa39ed2c8edc9e5a23762dd612c77d50adb786df17ff3b68",
     "expanded": false
   },
   "MLD-0267": {
     "path": "terms/MLD-0267-data-parallelism.html",
-    "sha256": "2273b46ff1398da4c4eeafd0245baad8399d5238dc7561f3681389f9079ba51f",
+    "sha256": "624e53c2accb3e557b68a5ebf9d0d89ab61bdb8b30165870126796485340cdb1",
     "expanded": false
   },
   "MLD-0268": {
@@ -1341,37 +1341,37 @@
   },
   "MLD-0269": {
     "path": "terms/MLD-0269-data-preprocessing.html",
-    "sha256": "2c740608a7935dfead4220f4bf13dd15ab447c791d5588192a28a5ea5084263c",
+    "sha256": "115535e5e2e8aa4ede5da279fb97499dab54fac53407aff86aba1ffe324ae8a3",
     "expanded": false
   },
   "MLD-0270": {
     "path": "terms/MLD-0270-data-provenance.html",
-    "sha256": "9b9a56b2231e52967b0f833362b1c6fc64aa14be302ef4bbb12347393fb19405",
+    "sha256": "ba2e0a9ad4c397de205608d9c1884770aec6df6f9b3d5e1b9d57ff1dcdb593f0",
     "expanded": false
   },
   "MLD-0271": {
     "path": "terms/MLD-0271-data-quality.html",
-    "sha256": "025b3ba7b8cd8e616795d2c62f4b36bc07aa7cad35d28b56bab8b0b6d11eaa36",
+    "sha256": "e6ff2ff6e50fc70a023fadd718272955648576421fc3f159253f98341d57ad68",
     "expanded": false
   },
   "MLD-0272": {
     "path": "terms/MLD-0272-data-split.html",
-    "sha256": "9d52b0cb49224f948bc26483fce0be997dad4c888998981fb65c3da5f008d56d",
+    "sha256": "05f24be7e69394e97c51b7c73ea25b9bce9561369841fd1a66ba9de018acdf5d",
     "expanded": false
   },
   "MLD-0273": {
     "path": "terms/MLD-0273-data-versioning.html",
-    "sha256": "be690c9bbdad64f939135ac3a2043aa75cfcd2a5bfeba064694e4115a7c7e25e",
+    "sha256": "0da3ef1755463ebf4c3649d8756a7956c2ca911569dc1faf4ad73439365f90cc",
     "expanded": false
   },
   "MLD-0274": {
     "path": "terms/MLD-0274-dataset.html",
-    "sha256": "269b4b3e7da34b65a9edc22a3c77c714f6996fb253405d0cdb0586151a40d0b4",
+    "sha256": "949d8bcc33f3f5054bf07c9b5a3cd851b45f3b64f89583a3a21c4c1f827bfd39",
     "expanded": false
   },
   "MLD-0275": {
     "path": "terms/MLD-0275-dataset-card.html",
-    "sha256": "bdf4ae93d25b687471a0bedc21da0183c7e6f764106c47cbf2a7a8b346b1efb8",
+    "sha256": "0eb5d5b9bfe997432e63ada4185ed263062894518d03af303b044cd7e0cac7ec",
     "expanded": false
   },
   "MLD-0276": {
