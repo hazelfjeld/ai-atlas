@@ -956,32 +956,32 @@
   },
   "MLD-0192": {
     "path": "terms/MLD-0192-condition-number.html",
-    "sha256": "773f6069262876c1dbac1fe8f36045f62afdd9ac177ee12dc7c0a97f8e38b268",
+    "sha256": "3ab3abb06750f64a2d4080f124e7e78f3c63fb3b95ede5f56786065e6ad8c90b",
     "expanded": false
   },
   "MLD-0193": {
     "path": "terms/MLD-0193-conditional-independence.html",
-    "sha256": "2e4ddbe33cf6b1237669b38721ed5c95db792f99c7ce813e1719e001a4d220aa",
+    "sha256": "e4238650c9503a8d4858763bf9ca5574abca247ef02cff311a0b0d97779f4c7b",
     "expanded": false
   },
   "MLD-0194": {
     "path": "terms/MLD-0194-conditional-probability.html",
-    "sha256": "fe1fe1095fb09cc40e7fe538a2dc2308d3290441869cd7ddf82401a3ed72ed4e",
+    "sha256": "a50bc43ae1e9e33ddbda4f7ce094968242b5c97ffda9e6ce562badcb944b6006",
     "expanded": false
   },
   "MLD-0195": {
     "path": "terms/MLD-0195-conditioning.html",
-    "sha256": "2cd1bf354c974a3de756a122849c9b913f819387944c6517a21fd17bc67b6de3",
+    "sha256": "6f4bf65faaf1858a3eb6c3dc6e6286e4e37d391771de55a943de76e1d0ceafab",
     "expanded": false
   },
   "MLD-0196": {
     "path": "terms/MLD-0196-confidence-interval.html",
-    "sha256": "1751fd5c2a04caf17593919514b64e8de73c83db31629b45a89f90cae8161aa1",
+    "sha256": "f65893cc8df9a00b35c6d92198e1e8806a099aff3442d22f4082d45baf1e7bcb",
     "expanded": false
   },
   "MLD-0197": {
     "path": "terms/MLD-0197-confirmation-bias.html",
-    "sha256": "b4a28a9171d9b955bacfc6bb99d997edcf683d8d9c0a42aa9dbf8bed67669cf1",
+    "sha256": "a167bafce1e47b7f7d4baf0703a83172299c3eb99d1531674b22b9b6c6a02c18",
     "expanded": false
   },
   "MLD-0198": {
@@ -991,12 +991,12 @@
   },
   "MLD-0199": {
     "path": "terms/MLD-0199-confounding.html",
-    "sha256": "203032c39b679dc9ba2899d42b0db8e62531825afde71e8d2d7dd7244f5b3cdd",
+    "sha256": "da2388c0490cac9a38e8657b6d8cf35d6f7622af91405582af9435f019e03b35",
     "expanded": false
   },
   "MLD-0200": {
     "path": "terms/MLD-0200-confusion-matrix.html",
-    "sha256": "a99129e6fc35a6318689ffc2d2c40d18a8eede2d2683612bd28fb55ea8fd03ca",
+    "sha256": "7be5ec429e9dd19236f3d84a969452c30a2e4921af43dc3e7d36870648e2a82b",
     "expanded": false
   },
   "MLD-0201": {
