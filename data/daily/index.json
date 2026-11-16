@@ -333,5 +333,5 @@
   ],
   "last_successful_publish_at": "2026-11-15T14:44:40Z",
   "status": "edition_revision_1_pending_production_verification",
-  "coverage_note": "2026-11-16 — Two November 16 first-party announcements (Alibaba/Qwen4-Max and Governor Barr's speech) plus two dated catch-up items (Meituan avatar release November 15 and Microsoft Lazarus research disclosure November 10). Source and event dates kept distinct; 4 proposed catalog entries remain deferred pending deduplication, primary-reference and license checks. This is a bounded partial collection, not an exhaustive sweep. Qwen's secondary official page returned no readable text; the dated Alibaba Cloud primary announcement was corroborated via indexed first-party source."
+  "coverage_note": "2026-11-16 v1 — Two November 16 first-party announcements (Alibaba/Qwen4-Max and Governor Barr's speech) plus two dated catch-up items (Meituan avatar release November 15 and Microsoft Lazarus research disclosure November 10). Source and event dates kept distinct; 4 proposed catalog entries remain deferred pending deduplication, primary-reference and license checks. This is a bounded partial collection, not an exhaustive sweep. Qwen's secondary official page returned no readable text; the dated Alibaba Cloud primary announcement was corroborated via indexed first-party source."
 }
