@@ -1,0 +1,439 @@
+{
+  "schema": 1,
+  "batch_id": "atlas-daily-20261116-bounded-0814ct-primary-source-a",
+  "edition_date": "2026-11-16",
+  "timezone": "America/Chicago",
+  "collected_at": "2026-11-16T14:17:06.808Z",
+  "coverage_start": "2026-11-15T14:20:00.356Z",
+  "coverage_end": "2026-11-16T14:17:06.808Z",
+  "coverage_status": "partial",
+  "coverage_note": "Bounded November 15–16 primary-source collection with overlapping lookback. Staging index has no last_successful_coverage_end, so earlier incomplete intervals remain a backlog and are not claimed covered. The November 10 Lazarus study is explicitly catch-up; November 15 LongCat release is within current window. Qwen4-Max general availability is treated as a material update to the November 11 preview, not another discovery of the preview.",
+  "overlap_lookback_start": "2026-11-13T14:20:00.356Z",
+  "sources_checked": [
+    {
+      "url": "https://www.alibabacloud.com/blog/alibaba-unveils-qwen4-max-new-ai-teammate-for-work-creativity-and-discovery_603783",
+      "status": "opened",
+      "checked_at": "2026-11-16T14:17:06.808Z"
+    },
+    {
+      "url": "https://github.com/meituan-longcat/LongCat-Video",
+      "status": "opened",
+      "checked_at": "2026-11-16T14:17:06.808Z"
+    },
+    {
+      "url": "https://huggingface.co/meituan-longcat/LongCat-Video-Avatar-1.6",
+      "status": "opened",
+      "checked_at": "2026-11-16T14:17:06.808Z"
+    },
+    {
+      "url": "https://www.federalreserve.gov/newsevents/speech/barr20261116a.htm",
+      "status": "opened",
+      "checked_at": "2026-11-16T14:17:06.808Z"
+    },
+    {
+      "url": "https://www.microsoft.com/en-us/research/blog/lazare-veni-foras-reprogramming-dormant-neurons-to-backdoor-ai-agents/",
+      "status": "opened",
+      "checked_at": "2026-11-16T14:17:06.808Z"
+    },
+    {
+      "url": "https://www.microsoft.com/en-us/research/publication/lazare-veni-foras-reprogramming-dormant-neurons-to-backdoor-ai-agents/",
+      "status": "opened",
+      "checked_at": "2026-11-16T14:17:06.808Z"
+    },
+    {
+      "url": "https://arxiv.org/abs/2611.15118",
+      "status": "opened",
+      "checked_at": "2026-11-16T14:17:06.808Z"
+    }
+  ],
+  "sources_failed": [
+    {
+      "url": "https://qwen.ai/blog?id=qwen4-max",
+      "status": "empty_web_reader_response",
+      "checked_at": "2026-11-16T14:17:06.808Z",
+      "note": "Official Qwen page yielded no readable text; Alibaba Cloud's separately dated announcement was available."
+    }
+  ],
+  "source_health_note": "Seven distinct primary source pages opened; one empty-content official Qwen blog. Independent account/model inference, third-party benchmarking and repository weight execution not conducted.",
+  "coverage_backlog": [
+    "Full arXiv category and AI safety feed sweep remains incomplete; some specialist preprints may be missing",
+    "Robotics and specialized open-source framework releases not comprehensively checked",
+    "Cloud vendor launch feeds, policy decisions and global industry reports not exhaustive",
+    "Recheck official Qwen blog reader and independently verify advertised QwenCloud availability and LongCat GPU needs",
+    "Long-running collector backlog has no successful coverage cutoff; don't advance it on this partial run"
+  ],
+  "tldr": [
+    "Alibaba moved Qwen4-Max from a limited preview to a newly announced general release, while Meituan's open-weight LongCat-Video-Avatar 1.6 offers updated audio-conditioned video research tooling; the providers' benchmark and efficiency claims remain unreplicated.",
+    "A November 16 Federal Reserve speech emphasizes AI-related financial-system and agent-authorization risks, and catch-up Microsoft research shows why trustworthy model-weight provenance matters for autonomous agents."
+  ],
+  "news": [
+    {
+      "id": "ai-news:alibaba-qwen4-max-ga:2026-11-16",
+      "title": "Alibaba formally releases Qwen4-Max after its November 11 preview",
+      "category": "models",
+      "tags": [
+        "LLM",
+        "MoE",
+        "multimodal",
+        "agents",
+        "AI safety"
+      ],
+      "summary": "Alibaba announced general access to Qwen4-Max, a 2.4-trillion-total-parameter sparse MoE activating 71 billion per token, with native vision and a one-million-token context window. The company describes cybersecurity training filters and CBRN safeguards alongside QwenCloud and Alibaba platform access.",
+      "why_it_matters": "Updates the earlier preview with a production-facing named endpoint and concrete model architecture, creating a materially changed option for large-context API users.",
+      "caveat": "The 60% average cost-per-task improvement, Work360 rankings, software-security results and scientific demonstrations are Alibaba's own claims, not independent replications. The flagship is API/app-accessible; smaller open-weight Qwen4 models are promised, not yet verified as available.",
+      "canonical_url": "https://www.alibabacloud.com/blog/alibaba-unveils-qwen4-max-new-ai-teammate-for-work-creativity-and-discovery_603783",
+      "source_url": "https://www.alibabacloud.com/blog/alibaba-unveils-qwen4-max-new-ai-teammate-for-work-creativity-and-discovery_603783",
+      "publication_date": "2026-11-16",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-16",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-16T14:17:06.808Z",
+      "checked_at": "2026-11-16T14:17:06.808Z",
+      "evidence_type": "first_party_model_release",
+      "release_status": "generally_available_per_publisher",
+      "review_status": "source_checked_pending_publisher_review",
+      "collection_classification": "current_day",
+      "sources": [
+        {
+          "url": "https://www.alibabacloud.com/blog/alibaba-unveils-qwen4-max-new-ai-teammate-for-work-creativity-and-discovery_603783",
+          "publisher": "Alibaba Cloud",
+          "type": "dated first-party announcement"
+        },
+        {
+          "url": "https://qwen.ai/blog?id=qwen4-max",
+          "publisher": "Qwen",
+          "type": "official model blog (reader returned empty; not independently inspected)"
+        }
+      ],
+      "publisher": "Alibaba Cloud",
+      "type": "dated first-party announcement",
+      "related_prior_news_ids": [
+        "ai-news:alibaba-qwen4-max-preview-20261111"
+      ],
+      "material_update_of": "ai-news:alibaba-qwen4-max-preview-20261111"
+    },
+    {
+      "id": "ai-news:meituan-longcat-video-avatar-16:2026-11-15",
+      "title": "Meituan publishes LongCat-Video-Avatar 1.6 with audio-driven long-form video",
+      "category": "multimodal",
+      "tags": [
+        "video",
+        "audio",
+        "open weights",
+        "diffusion",
+        "inference"
+      ],
+      "summary": "Meituan's November 15 announcement and public Hugging Face card describe an MIT-labeled audio-conditioned avatar generator with improvements to lip synchronization, facial/body motion and autoregressive video continuation. Its examples cover single- and multi-character generation, LoRA-adapter mixing and optional reduced-precision inference.",
+      "why_it_matters": "A downloadable reference implementation for studying speech-conditioned character animation, including extended videos and inference tradeoffs.",
+      "caveat": "Ten-minute-plus stability and preference rankings are publisher-reported. Demonstration examples use two CUDA GPUs; hardware minimum, full practical throughput, downstream dependencies and consent/deepfake misuse controls require evaluation.",
+      "canonical_url": "https://github.com/meituan-longcat/LongCat-Video",
+      "source_url": "https://github.com/meituan-longcat/LongCat-Video",
+      "publication_date": "2026-11-15",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-15",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-16T14:17:06.808Z",
+      "checked_at": "2026-11-16T14:17:06.808Z",
+      "evidence_type": "first_party_open_weight_model_release",
+      "release_status": "open_weights_listed_mit",
+      "review_status": "source_checked_pending_publisher_review",
+      "collection_classification": "catch_up",
+      "sources": [
+        {
+          "url": "https://github.com/meituan-longcat/LongCat-Video",
+          "publisher": "Meituan LongCat",
+          "type": "official GitHub announcement"
+        },
+        {
+          "url": "https://huggingface.co/meituan-longcat/LongCat-Video-Avatar-1.6",
+          "publisher": "Meituan LongCat / Hugging Face",
+          "type": "first-party model card"
+        }
+      ],
+      "publisher": "Meituan LongCat",
+      "type": "official GitHub announcement"
+    },
+    {
+      "id": "ai-news:federal-reserve-barr-ai-financial-stability:2026-11-16",
+      "title": "Federal Reserve governor warns of financial-stability risks from AI agents and infrastructure debt",
+      "category": "policy",
+      "tags": [
+        "AI governance",
+        "financial stability",
+        "agents",
+        "infrastructure",
+        "security"
+      ],
+      "summary": "In a November 16 speech, Federal Reserve Governor Michael Barr highlighted advanced-computing debt and opaque financing, correlated AI trading strategies, autonomous-agent account authorization, cybersecurity risks and consumer lending fairness.",
+      "why_it_matters": "Connects AI infrastructure investment and agent deployment to specific financial-system failure modes and requirements for authorization, oversight, explainability and reproducibility.",
+      "caveat": "These are the governor's risk assessments and scenarios, not a new Federal Reserve regulation, proof of systemic failure, or official consensus of the Board. The November 13 Financial Stability Report was already cataloged and is not a new event.",
+      "canonical_url": "https://www.federalreserve.gov/newsevents/speech/barr20261116a.htm",
+      "source_url": "https://www.federalreserve.gov/newsevents/speech/barr20261116a.htm",
+      "publication_date": "2026-11-16",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-16",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-16T14:17:06.808Z",
+      "checked_at": "2026-11-16T14:17:06.808Z",
+      "evidence_type": "official_policy_speech",
+      "release_status": "speech_published",
+      "review_status": "source_checked_pending_publisher_review",
+      "collection_classification": "current_day",
+      "sources": [
+        {
+          "url": "https://www.federalreserve.gov/newsevents/speech/barr20261116a.htm",
+          "publisher": "U.S. Federal Reserve",
+          "type": "official speech"
+        }
+      ],
+      "publisher": "U.S. Federal Reserve",
+      "type": "official speech",
+      "related_prior_news_ids": [
+        "ai-news:fed-ai-financial-stability-survey-20261113"
+      ]
+    },
+    {
+      "id": "ai-news:microsoft-lazarus-dormant-neuron-backdoor:2026-11-10",
+      "title": "Microsoft researchers demonstrate a weight-editing backdoor against tool-using agents",
+      "category": "AI safety",
+      "tags": [
+        "model security",
+        "agent security",
+        "backdoors",
+        "mechanistic interpretability",
+        "research"
+      ],
+      "summary": "Microsoft researchers disclosed Lazarus, a controlled demonstration in which small edits to dormant model neurons create trigger-dependent malicious output while ordinary behavior can appear unchanged. Their paper reports tests on several models and early detection results.",
+      "why_it_matters": "Adds weight integrity and trusted checkpoint provenance to agent threat models, beyond filtering prompts and testing ordinary model outputs.",
+      "caveat": "This is a controlled research attack, not evidence that the technique is circulating in the wild. Detection figures are study-specific and do not establish guaranteed checkpoint safety; do not infer that every model is vulnerable.",
+      "canonical_url": "https://www.microsoft.com/en-us/research/blog/lazare-veni-foras-reprogramming-dormant-neurons-to-backdoor-ai-agents/",
+      "source_url": "https://www.microsoft.com/en-us/research/blog/lazare-veni-foras-reprogramming-dormant-neurons-to-backdoor-ai-agents/",
+      "publication_date": "2026-11-10",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-10",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-16T14:17:06.808Z",
+      "checked_at": "2026-11-16T14:17:06.808Z",
+      "evidence_type": "first_party_research_disclosure",
+      "release_status": "research_preprint",
+      "review_status": "source_checked_pending_publisher_review",
+      "collection_classification": "catch_up",
+      "sources": [
+        {
+          "url": "https://www.microsoft.com/en-us/research/blog/lazare-veni-foras-reprogramming-dormant-neurons-to-backdoor-ai-agents/",
+          "publisher": "Microsoft Research",
+          "type": "dated first-party research blog"
+        },
+        {
+          "url": "https://arxiv.org/abs/2611.15118",
+          "publisher": "Zeng et al. / arXiv",
+          "type": "primary research preprint"
+        }
+      ],
+      "publisher": "Microsoft Research",
+      "type": "dated first-party research blog",
+      "preprint_publication_date": "2026-11-11",
+      "arxiv_id": "2611.15118"
+    }
+  ],
+  "technologies": [
+    {
+      "id": "tech-proposal:qwen4-max-general-release:2026-11-16",
+      "name": "Qwen4-Max (general release)",
+      "aliases": [
+        "qwen4-max",
+        "Qwen4-Max API"
+      ],
+      "usage_tags": [
+        "AI",
+        "ML",
+        "DL",
+        "LLM",
+        "MoE",
+        "multimodal",
+        "agents"
+      ],
+      "explanation": "Alibaba's 2.4T-parameter sparse MoE foundation model that activates roughly 71B parameters per token and supports up to 1M tokens in context with visual input, offered as a hosted QwenCloud/API model.",
+      "conditional_advantage": "For enterprises needing very long context plus visual reasoning and tool-using workflows, its sparse activation may lower compute per generated token relative to fully dense 2.4T models, but end-to-end savings are workload- and API-price-dependent.",
+      "best_fit_uses": [
+        "Long-context multimodal document analysis",
+        "Coding and agentic tool workflows",
+        "Visual reasoning and information extraction"
+      ],
+      "tradeoffs": [
+        "Large hosted model; no practical self-hosted flagship weights verified",
+        "Long context does not guarantee reliable retrieval or reasoning",
+        "Publisher benchmarks lack independent replication",
+        "Hosted-data, privacy and compliance constraints"
+      ],
+      "alternatives": [
+        "Qwen4-Max Preview (retiring variant)",
+        "Gemini 4 Carbon",
+        "Claude Fable 5.2",
+        "Open-weight smaller MoE models"
+      ],
+      "hardware_runtime_constraints": "Qwen4-Max hosted inference only in inspected official announcement; no downloadable flagship checkpoint or self-hosting hardware specification verified. Actual server GPUs and per-request throughput unknown.",
+      "license_uncertainty": "Flagship API model is not established as open weight; prospective smaller Qwen4 releases should not be conflated with this license.",
+      "availability_uncertainty": "Alibaba announces QwenCloud Token Plan and API access November 16; independent account/region test not performed.",
+      "pricing_uncertainty": "QwenCloud cached input is reported at US$0.075 per 1M tokens; complete price tiers, effective cost and regional billing require official plan validation.",
+      "official_documentation_url": "https://www.alibabacloud.com/blog/alibaba-unveils-qwen4-max-new-ai-teammate-for-work-creativity-and-discovery_603783",
+      "source_links": [
+        {
+          "url": "https://www.alibabacloud.com/blog/alibaba-unveils-qwen4-max-new-ai-teammate-for-work-creativity-and-discovery_603783",
+          "publisher": "Alibaba Cloud",
+          "type": "official announcement"
+        }
+      ],
+      "date_checked": "2026-11-16",
+      "checked_at": "2026-11-16T14:17:06.808Z",
+      "existing_profile_id": null,
+      "related_prior_proposal_ids": [
+        "tech-proposal:qwen4-max-preview:2026-11-11"
+      ],
+      "review_status": "source_checked_pending_publisher_catalog_dedup"
+    },
+    {
+      "id": "tech-proposal:longcat-video-avatar-16:2026-11-15",
+      "name": "LongCat-Video-Avatar 1.6",
+      "aliases": [
+        "LongCat Video Avatar 1.6",
+        "meituan-longcat/LongCat-Video-Avatar-1.6"
+      ],
+      "usage_tags": [
+        "AI",
+        "ML",
+        "DL",
+        "video",
+        "audio",
+        "diffusion",
+        "multimodal"
+      ],
+      "explanation": "Open-weight audio-driven avatar video generation system with a video base architecture, specialized LoRA adapters and autoregressive long-video continuation; supports single- and multi-speaker animation.",
+      "conditional_advantage": "For offline research into expressive speech-synchronized characters, its published weights and code offer control over audio conditioning, LoRA step mixing and precision modes instead of relying exclusively on closed video APIs.",
+      "best_fit_uses": [
+        "Consented speaking-avatar clips",
+        "Lip-sync and audiovisual expression research",
+        "Long-form character-animation prototypes"
+      ],
+      "tradeoffs": [
+        "High compute and memory needs",
+        "Publisher-reported preference scores",
+        "Identity/deepfake consent and watermarking safeguards must be developed downstream",
+        "Some 10-minute stability claims may vary by motion and scene"
+      ],
+      "alternatives": [
+        "LongCat-Video-Avatar 1.5",
+        "OmniHuman 2.0",
+        "HeyGen",
+        "Kling Avatar 2.0"
+      ],
+      "hardware_runtime_constraints": "Official demo uses torchrun with two GPU processes, CUDA PyTorch 2.6, FlashAttention and optional FP8 or INT8; no proven minimum VRAM or consumer-GPU practicality, and exact speed depends on hardware.",
+      "license_uncertainty": "Hugging Face card labels model weights MIT; review third-party dependencies, base weights and trademark/patent restrictions separately.",
+      "availability_uncertainty": "Public Hugging Face card and GitHub inference steps visible; checkpoint download execution and reproducible local inference not tested.",
+      "pricing_uncertainty": "Self-hosted compute and storage costs depend on accelerators, generation length and checkpoint format; no official managed API price verified.",
+      "official_documentation_url": "https://github.com/meituan-longcat/LongCat-Video",
+      "source_links": [
+        {
+          "url": "https://github.com/meituan-longcat/LongCat-Video",
+          "publisher": "Meituan LongCat",
+          "type": "official repository and release date"
+        },
+        {
+          "url": "https://huggingface.co/meituan-longcat/LongCat-Video-Avatar-1.6",
+          "publisher": "Meituan LongCat / Hugging Face",
+          "type": "official model card"
+        }
+      ],
+      "date_checked": "2026-11-16",
+      "checked_at": "2026-11-16T14:17:06.808Z",
+      "existing_profile_id": null,
+      "review_status": "source_checked_pending_publisher_catalog_dedup"
+    }
+  ],
+  "terms": [
+    {
+      "id": "term-proposal:weight-space-backdoor:2026-11-16",
+      "name": "Weight-space backdoor",
+      "aliases": [
+        "checkpoint-level backdoor",
+        "weight-editing backdoor"
+      ],
+      "definition": "An unauthorized alteration of a machine-learning model's stored parameter values that causes undesired, potentially harmful behavior only when a trigger condition occurs, while normal checks may still pass.",
+      "mechanism": "An attacker with access to model checkpoint contents changes selected weights so particular input conditions activate a hidden behavior; defenses include provenance and integrity checks, restricted agent permissions and adversarial testing.",
+      "usage_tags": [
+        "AI safety",
+        "security",
+        "LLM",
+        "agents",
+        "model integrity"
+      ],
+      "example": "An internally controlled test model appears normal on ordinary prompts but produces an unauthorized action when a specific trigger appears, indicating tampered checkpoint parameters.",
+      "caveat": "The general attack class predates Lazarus; the November 2026 paper studies a particular dormant-neuron mechanism. Controlled demonstrations are not real-world incident prevalence and detection cannot guarantee safety.",
+      "related_existing_ids": [
+        "MLD-0085",
+        "MLD-0270",
+        "MLD-1029"
+      ],
+      "primary_references": [
+        {
+          "url": "https://arxiv.org/abs/2611.15118",
+          "publisher": "Zeng et al.",
+          "type": "primary research preprint"
+        },
+        {
+          "url": "https://www.microsoft.com/en-us/research/blog/lazare-veni-foras-reprogramming-dormant-neurons-to-backdoor-ai-agents/",
+          "publisher": "Microsoft Research",
+          "type": "first-party security research"
+        }
+      ],
+      "term_origin": "established_security_concept_new_to_atlas_proposal",
+      "date_checked": "2026-11-16",
+      "checked_at": "2026-11-16T14:17:06.808Z",
+      "review_status": "source_checked_pending_publisher_canonical_dedup"
+    },
+    {
+      "id": "term-proposal:bradley-terry-preference-model:2026-11-16",
+      "name": "Bradley–Terry preference model",
+      "aliases": [
+        "Bradley-Terry model",
+        "pairwise preference model"
+      ],
+      "definition": "A statistical model that converts outcomes of pairwise comparisons into latent relative scores, typically assigning a probability that one item is preferred over another based on their score difference.",
+      "mechanism": "Fit a score for each system to pairwise win/loss observations under a logistic probability model; rankings and uncertainty depend on the observed comparison graph and sampling design.",
+      "usage_tags": [
+        "ML",
+        "evaluation",
+        "human preferences",
+        "multimodal",
+        "benchmarking"
+      ],
+      "example": "A human-evaluation study compares pairs of speaking-avatar videos and uses Bradley–Terry scores to summarize which systems viewers prefer, rather than interpreting raw counts as absolute visual quality.",
+      "caveat": "This method is decades old and only newly proposed for Atlas coverage. Scores are relative to evaluated competitors and raters; selection bias, inconsistent raters and missing pairings can mislead.",
+      "related_existing_ids": [
+        "MLD-0932",
+        "MLD-0933"
+      ],
+      "primary_references": [
+        {
+          "url": "https://huggingface.co/meituan-longcat/LongCat-Video-Avatar-1.6",
+          "publisher": "Meituan LongCat",
+          "type": "first-party avatar model card and study description"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Bradley%E2%80%93Terry_model",
+          "publisher": "Wikipedia",
+          "type": "background only; publisher should add statistical primary source before canonical promotion"
+        }
+      ],
+      "term_origin": "established_statistical_method_new_to_atlas_proposal",
+      "date_checked": "2026-11-16",
+      "checked_at": "2026-11-16T14:17:06.808Z",
+      "review_status": "source_checked_pending_publisher_primary_reference_review"
+    }
+  ],
+  "corrections": []
+}
