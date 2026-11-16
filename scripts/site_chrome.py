@@ -561,6 +561,10 @@ def ensure_footer_resources(html, path):
         ("index.html#/sources", "Sources & downloads"),
     )
     for url, label in footer_labels:
+        # The Games app embeds this same guidance from its native module;
+        # preserve its established source label until both outputs rebuild.
+        if path == "games.html" and url == "index.html#/sources":
+            continue
         link = re.compile(r'(<a href="' + re.escape(url) + r'">)[^<]*(</a>)')
         footer, count = link.subn(
             lambda match: match.group(1) + label + match.group(2), footer

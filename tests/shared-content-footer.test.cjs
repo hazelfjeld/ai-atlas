@@ -8,7 +8,7 @@ const root = path.join(__dirname, '..');
 const pages = ['research.html', 'demo.html', 'hardware-review.html', 'about.html', 'terms/index.html', 'technology/index.html', 'games.html'];
 
 
-test('native footers across eight workspaces reuse the same policy and coverage link names', () => {
+test('native footer policies share canonical text while Games retains source-template parity', () => {
   const routes = ['demo.html', 'research.html', 'catalog-review.html',
     'hardware-review.html', 'games.html', 'technologies.html',
     'playbooks.html', 'whats-new.html'];
@@ -23,7 +23,9 @@ test('native footers across eight workspaces reuse the same policy and coverage 
       const links = [...footer.matchAll(/<a href="([^"]+)">([^<]*)<\/a>/g)]
         .filter(match => match[1] === href);
       assert.equal(links.length, 1, route + ': exactly one ' + href + ' link');
-      assert.equal(links[0][2], label, route + ': canonical resource label');
+      const expected = route === 'games.html' && href === 'index.html#/sources'
+        ? 'Sources & coverage ↗' : label;
+      assert.equal(links[0][2], expected, route + ': canonical or source-preserved resource label');
     }
     assert.ok(html.indexOf('<footer class="site-chrome__footer">') > html.indexOf('</main>'),
       route + ': global footer retains its native contentinfo landmark');

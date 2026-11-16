@@ -106,9 +106,10 @@ test('standalone editorial footers use the shared policy label and retain source
     assert.match(footer, /href="index\.html#\/sources"/,
                  file + ' retains its source/coverage destination');
   }
-  assert.ok(read('scripts/site_chrome.py').includes(
-    'for old_label in ("Editorial policy", "Editorial corrections policy")'
-  ), 'the build normalizes both legacy names in the shared generator');
+  const generator = read('scripts/site_chrome.py');
+  assert.ok(generator.includes('for url, label in footer_labels:') &&
+            generator.includes('assert count <= 1'),
+    'the shared generator normalizes canonical labels and rejects duplicate resource links');
 });
 
 test('standalone Games reuses the shared in-main script-free fallback, never an endless loader', () => {
