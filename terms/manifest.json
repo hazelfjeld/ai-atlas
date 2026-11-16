@@ -1616,12 +1616,12 @@
   },
   "MLD-0324": {
     "path": "terms/MLD-0324-distributed-learning.html",
-    "sha256": "7eeb2d1c6f5e871f1f85c8080ef02961b8783912ce6dec7a76e4fd16cd72085b",
+    "sha256": "670880062835c2099e35af78b41944ac11cc97dafdec4ee578cba402a0b20db6",
     "expanded": false
   },
   "MLD-0325": {
     "path": "terms/MLD-0325-distributed-training.html",
-    "sha256": "982c105dfe9718343b7c5289fbe268bdfba6d5dd6442c01c7973becbfcdaf715",
+    "sha256": "2c45df9c8bdfb01ab132edeffd91cb77e350f1b96e1148ede839d8db9860f4bc",
     "expanded": false
   },
   "MLD-0326": {
@@ -1631,37 +1631,37 @@
   },
   "MLD-0327": {
     "path": "terms/MLD-0327-diversity.html",
-    "sha256": "409726f3ba2a1f1cd5a7d6286c91294d2b18b209ed31a490dbc9fe6ddd28b419",
+    "sha256": "2fc35c99e32f5a5859b67becdfeea5ceda6e42624472223880d259e684b57109",
     "expanded": false
   },
   "MLD-0328": {
     "path": "terms/MLD-0328-document-index.html",
-    "sha256": "efb2100808b35d6eae97a65c4cf1c558693e0345c81eda7397c40eed9d0dd656",
+    "sha256": "4bfad97b31ed92edc0d4b51717bc1ee9349c7b74d7e1fc4a06b1fd6041e88a67",
     "expanded": false
   },
   "MLD-0329": {
     "path": "terms/MLD-0329-document-understanding.html",
-    "sha256": "68fd7a07bd712534beb18dc329799881584610fbda1a3377a981f57773be381e",
+    "sha256": "7f1333392be9a5d5c4df689682f3370c7045b2c439da3da8397cfbedcac6be8a",
     "expanded": false
   },
   "MLD-0330": {
     "path": "terms/MLD-0330-domain-adaptation.html",
-    "sha256": "787e37de9a86a0ed74c1bb8296bc71eb8908c73d5bafaef405c42629671bf3ad",
+    "sha256": "fa1dcaf0aeb73881673520b723f21ffef7dbbc1496f1b1ea83201d1b552e4939",
     "expanded": false
   },
   "MLD-0331": {
     "path": "terms/MLD-0331-domain-generalization.html",
-    "sha256": "2909f7610d7d840dd4fd29eb41f411d244eb7dd20cdd8ce57236f6a070d5904c",
+    "sha256": "3edee038dfc3f87f4fa60af31d5565c3c2db80645f2d763547e40e3979a028a1",
     "expanded": false
   },
   "MLD-0332": {
     "path": "terms/MLD-0332-domain-adaptive-pretraining.html",
-    "sha256": "f8fb1bf2ed4758f1bc32c8bb5cf102c0792fcaabcfd9c0b9d9cb955ddfcafde7",
+    "sha256": "c12acf8242b9ab341641e8dbbb0a63ead585570b09294b924e2b9deff5d12dbd",
     "expanded": false
   },
   "MLD-0333": {
     "path": "terms/MLD-0333-dora.html",
-    "sha256": "8bb7bb5e33593b502c3cd7305a3996e366da4ba71de8c5c04f27113ffcaffe55",
+    "sha256": "67cb3018a9bfff297e490349bdf596e72551e83c6b544ceaa8e1122aba61beef",
     "expanded": false
   },
   "MLD-0334": {
