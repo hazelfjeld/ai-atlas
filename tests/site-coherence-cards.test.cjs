@@ -161,10 +161,14 @@ test('standalone workspace headings are real shared DOM text, not CSS-only label
 test('daily archive shares script-free collection fallback instead of trapping readers in loading states', () => {
   const archive = fs.readFileSync(path.join(__dirname, '..', 'whats-new.html'), 'utf8');
   const published = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data/daily/index.json'), 'utf8'));
-  const start = archive.indexOf('<noscript><section class="site-static-fallback" id="scriptfree-daily-archive"');
-  const end = archive.indexOf('</section></noscript>', start);
+  const start = archive.indexOf('<section class="site-static-fallback" id="scriptfree-daily-archive"');
+  const end = archive.indexOf('</section>', start);
   assert.ok(start >= 0 && end > start, 'Archive must expose the shared script-free collection fallback');
-  const block = archive.slice(start, end + '</section></noscript>'.length);
+  assert.ok(archive.includes('.atlas-enhanced #scriptfree-daily-archive{display:none!important}'),
+    'Only the shared JavaScript enhancement state may hide the native archive links');
+  assert.ok(!archive.includes('<noscript><section class="site-static-fallback"'),
+    'Edition links must remain ordinary native HTML, not script-dependent parsed markup');
+  const block = archive.slice(start, end + '</section>'.length);
   assert.ok(block.includes('href="data/daily/index.json"'), 'Always-current edition register is available');
   assert.ok(block.includes('not a live news feed'), 'Do not present older snapshots as fresh news');
   assert.ok(block.includes('href="about.html"'), 'Coverage and editorial policy stay available');
