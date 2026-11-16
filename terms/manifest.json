@@ -1916,12 +1916,12 @@
   },
   "MLD-0384": {
     "path": "terms/MLD-0384-evaluator-integrity.html",
-    "sha256": "4e210e0657d998bcbf02c9faa7f4ab6d6bdaed5e32e7bf4d7b153bcd85311618",
+    "sha256": "5cc6401b0407fa4af572b13b2aeaba7eda9a6b832ef43d191b907ad7316d8849",
     "expanded": false
   },
   "MLD-0385": {
     "path": "terms/MLD-0385-evidence-lower-bound.html",
-    "sha256": "c8f7f5c78157c57e7f2a22bf98b992ea4c41be45e561e41a0802ef412bf1258e",
+    "sha256": "8f8aaa146ee42862c887fe199db763419a148c2539b7aca8334f5f238339788a",
     "expanded": false
   },
   "MLD-0386": {
@@ -1931,12 +1931,12 @@
   },
   "MLD-0387": {
     "path": "terms/MLD-0387-expectation.html",
-    "sha256": "6c6c87076fd9126d2d5a74274fd738e717cbfe575fa2ce667fbcd6169c1da236",
+    "sha256": "5fa2eab903a6921f9af350335f4cc726185e49dd440bc5b40e51d615c9e5df2c",
     "expanded": false
   },
   "MLD-0388": {
     "path": "terms/MLD-0388-expectation-maximization.html",
-    "sha256": "0c06a02c377de2b9b0c0d34e6493e7ce842c1c34b5b6cb8ff8d7d15603f3be7e",
+    "sha256": "1ccfeadbcfabb9857c14a5be8a9c4d36c7fda29227bc0db5725a1935d080a2c0",
     "expanded": false
   },
   "MLD-0389": {
@@ -1946,22 +1946,22 @@
   },
   "MLD-0390": {
     "path": "terms/MLD-0390-expected-risk.html",
-    "sha256": "1386f5592b1682815da61effdf4ba2a4abe7ec18340cb1b3e7c2b1c5ed849901",
+    "sha256": "0cb89021ed2ed60af6cc85720cb642ded6d376af4ba28637769101ee3375d1eb",
     "expanded": false
   },
   "MLD-0391": {
     "path": "terms/MLD-0391-experiment-tracking.html",
-    "sha256": "3c2da920e0e561b370c8ae78f9e0056304e162270a2df4b33d9ae3c60633ae32",
+    "sha256": "1de2ad0de066b44d1d49cc9e02357164d983408e7419e065911e589289b133bd",
     "expanded": false
   },
   "MLD-0392": {
     "path": "terms/MLD-0392-expert.html",
-    "sha256": "138cc0215519aacf5fe570778e92793f04e524d40ecc7c5a81805b47e53af285",
+    "sha256": "39005ce578289b0d08e9e6f1dc78fc9e0c9e6f05cd3f161763d0960c57d8956e",
     "expanded": false
   },
   "MLD-0393": {
     "path": "terms/MLD-0393-expert-capacity.html",
-    "sha256": "1589ee5ab26c5138c98b862be98fac8bc1c75159d3163c7f35c44607d85f89db",
+    "sha256": "62a67ce4d406408382b23ef34024f0e3f6c6ac2612ed0ac559852feb9bf2dc70",
     "expanded": false
   },
   "MLD-0394": {
