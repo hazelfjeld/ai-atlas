@@ -1431,10 +1431,21 @@ with sync_playwright() as p:
             viewport={'width':width, 'height':844},
             color_scheme=scheme, reduced_motion='reduce')
         desktop_search.goto(base + route)
-        check('native desktop search row is hidden '+route+' '+scheme,
-              not desktop_search.locator('.site-mobile-chrome__search-form').is_visible())
+        # A few existing editorial headers deliberately keep the shared
+        # search input visible at desktop widths; those should focus locally.
+        # Script-free generated references hide theirs, so / must travel to
+        # Discover rather than silently failing after link enhancement.
+        input_visible = desktop_search.locator('.site-mobile-chrome__search-input').is_visible()
         desktop_search.keyboard.press('/')
-        desktop_search.wait_for_url('**/index.html#/search', timeout=20000)
+        if input_visible:
+            check('visible desktop shared search is focused in place '+route+' '+scheme,
+                  desktop_search.evaluate(
+                      "document.activeElement?.classList.contains('site-mobile-chrome__search-input') === true"))
+            desktop_search.locator('.site-mobile-chrome__search-input').fill('reward hacking')
+            desktop_search.locator('.site-mobile-chrome__search-input').press('Enter')
+            desktop_search.wait_for_url('**/index.html#/search?q=reward%20hacking', timeout=20000)
+        else:
+            desktop_search.wait_for_url('**/index.html#/search', timeout=20000)
         desktop_search.locator('#catalog-loading').wait_for(state='detached', timeout=45000)
         check('native desktop slash reaches functional Discover search '+route+' '+scheme,
               desktop_search.evaluate("document.activeElement?.id === 'global-query'")
