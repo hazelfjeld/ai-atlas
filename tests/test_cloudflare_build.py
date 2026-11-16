@@ -172,6 +172,25 @@ class Packaging(unittest.TestCase):
         self.assertLess(worker, apex)
         self.assertLess(apex, www)
 
+    def test_production_budget_preserves_complete_browser_coverage(self):
+        # The browser matrix exceeded the former 15-minute production job cap
+        # after deployment, leaving actual releases uncertified despite passing
+        # checks. Keep the complete matrix rather than dropping verification.
+        workflow = (ROOT / '.github/workflows/deploy-cloudflare.yml').read_text()
+        production = workflow.split('\n  production:\n', 1)[1].split('\n    steps:\n', 1)[0]
+        self.assertIn('timeout-minutes: 30', production)
+        verify = workflow.split('name: Verify actual production assets, caching, navigation, Quiz and Match', 1)[1]
+        for command in (
+            'scripts/verify_cloudflare.py --base https://ai-atlas.airheadhazelnut.workers.dev/',
+            'scripts/verify_cloudflare.py --base "$PRODUCTION_URL/"',
+            'scripts/verify_cloudflare.py --base https://www.aiupdates.app/',
+            'tests/site-deployment-browser.py --base "$PRODUCTION_URL/"',
+            'tests/rebrand-browser.py --base "$PRODUCTION_URL/"',
+            'tests/games-workspace-browser.py --base "$PRODUCTION_URL/"',
+            'tests/games-browser.py --base "$PRODUCTION_URL/"',
+        ):
+            self.assertIn(command, verify)
+
     def test_config_is_static_only_and_keeps_literal_html_routes(self):
         config = json.loads((ROOT / 'wrangler.json').read_bytes())
         self.assertEqual(config['assets']['directory'], './dist/cloudflare')

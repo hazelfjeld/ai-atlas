@@ -94,7 +94,9 @@ jobs:
     needs: validate
     if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
     runs-on: ubuntu-24.04
-    timeout-minutes: 15
+    # Full production coverage verifies three hostnames, then all browser matrices.
+    # The previous 15-minute limit cancelled a passing test sweep mid-run.
+    timeout-minutes: 30
     # Never cancel an upload in flight; newer releases wait and older queued runs are skipped below.
     concurrency:
       group: atlas-cloudflare-production
