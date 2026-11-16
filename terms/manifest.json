@@ -1866,52 +1866,52 @@
   },
   "MLD-0374": {
     "path": "terms/MLD-0374-episodic-memory.html",
-    "sha256": "4a28b2fd24731a0a11e733d2fec28d23e2ff42b73d858a360474b6a78a72f026",
+    "sha256": "d4b2e8945e6535c353ae208d7aa022b4a6fee43eb5943a641bb19b18f9fcdb96",
     "expanded": false
   },
   "MLD-0375": {
     "path": "terms/MLD-0375-epistemic-uncertainty.html",
-    "sha256": "f99798aefe82fa82d240a14ebd127a56b46f11c587dcc3c679cc492c6cf773e3",
+    "sha256": "29ba937d770644da71bdb2e60da7c36fa8769e10a02a7e4b5fd09323f781e5d5",
     "expanded": false
   },
   "MLD-0376": {
     "path": "terms/MLD-0376-epoch.html",
-    "sha256": "c065e1d157eee5770aaaab96822309951628de564af7118b8661d41ae9c566c9",
+    "sha256": "147c0b68ce151a701cf92335438b0238679b2e1672e8d0ed602723cbec42048e",
     "expanded": false
   },
   "MLD-0377": {
     "path": "terms/MLD-0377-epsilon-greedy.html",
-    "sha256": "4870ca45c93f217f0159c869d0dadf79a5ced82f88b98cc9d22e308c717ed9dc",
+    "sha256": "1a9b009dd05d1c820cef8528b59a86d79a2bdb99ef14f39d7f99f66fa92966c8",
     "expanded": false
   },
   "MLD-0378": {
     "path": "terms/MLD-0378-equal-opportunity-fairness.html",
-    "sha256": "5d108547d4df130d9553562b5bb84a7e28ae399ebd949ee3878ed43690d46e19",
+    "sha256": "c44cf3130ded37548df685f3992c01a2006e1ec52340ff9629f7bd2321de867a",
     "expanded": false
   },
   "MLD-0379": {
     "path": "terms/MLD-0379-equalized-odds.html",
-    "sha256": "76268d83a931a014a606d3d32b44a76e1273f0afe1e5a376edfdc16d8a1e681e",
+    "sha256": "9c75c769dd4d6049c3456475124d03f3382f240e3cd9b9a58437c300365bfc8f",
     "expanded": false
   },
   "MLD-0380": {
     "path": "terms/MLD-0380-euclidean-distance.html",
-    "sha256": "6451df6698459ad0d252a53b6c0559293e600777efeab85a8140d7a0cf192029",
+    "sha256": "4759141ddb9fe19942dafa9424d5ce559aeb92d3875b16353f09980dc8cc95f9",
     "expanded": false
   },
   "MLD-0381": {
     "path": "terms/MLD-0381-evaluation-awareness.html",
-    "sha256": "deedbd3c5483fd744f5305312c99149366fa2f387adebc2d48f8bb90b0a9263e",
+    "sha256": "b58f2cd3c1dd9d4f4856e81ebae02a88e5ee956d2fd72037bf42ade86240fbd6",
     "expanded": false
   },
   "MLD-0382": {
     "path": "terms/MLD-0382-evaluation-variance.html",
-    "sha256": "3fe25632bcf290c0ea0d855939f7c15b4932a89b5acdfbde576a13f2f48b8c48",
+    "sha256": "e4108f1010d0f838a22a0d62a1893765e54ba871a484a66ffaa1decc091fc701",
     "expanded": false
   },
   "MLD-0383": {
     "path": "terms/MLD-0383-evaluator-bias.html",
-    "sha256": "db607c299df6a69c5da5e2e86b66935f62133e563b3d1a9e16c5a0caa2339502",
+    "sha256": "5cb7f08f75433cb4ad26a6eb2a468004ad4c67fb3ebfa4e391e302009a8cfafa",
     "expanded": false
   },
   "MLD-0384": {
