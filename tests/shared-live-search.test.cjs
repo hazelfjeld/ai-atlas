@@ -46,17 +46,17 @@ test('shared search styling and single-file demo reproduce the exact sources', (
 test('Discover and native page families share a truthful desktop search-key hint', () => {
   const script=read('site-theme.js'), css=read('site-chrome.css');
   const discover=read('index.html');
-  assert.match(discover, /<form class="global-search"[\\s\\S]*?<kbd>\\/<\\/kbd>/);
-  assert.match(script, /hint\\.className = 'site-mobile-chrome__search-hint'/);
-  assert.match(script, /hint\\.setAttribute\\('aria-hidden', 'true'\\)/);
-  assert.match(script, /form\\.append\\(field, hint, submit\\)/,
+  assert.match(discover, /<form class="global-search"[\s\S]*?<kbd>\/<\/kbd>/);
+  assert.match(script, /hint\.className = 'site-mobile-chrome__search-hint'/);
+  assert.match(script, /hint\.setAttribute\('aria-hidden', 'true'\)/);
+  assert.match(script, /form\.append\(field, hint, submit\)/,
     'retain the real native submit handler, without adding a second form');
   const shared=css.split('/* atlas-shared-search-key-hint:begin */')[1]
     ?.split('/* atlas-shared-search-key-hint:end */')[0];
   assert.ok(shared, 'shared desktop and mobile hint contract exists');
-  assert.match(shared, /:is\\(\\.global-search > kbd, \\.site-mobile-chrome__search-hint\\)/);
-  assert.match(shared, /@media \\(max-width:650px\\)/);
-  assert.match(shared, /\\.site-mobile-chrome__search-hint\\{display:none\\}/);
+  assert.match(shared, /:is\(\.global-search > kbd, \.site-mobile-chrome__search-hint\)/);
+  assert.match(shared, /@media \(max-width:650px\)/);
+  assert.match(shared, /\.site-mobile-chrome__search-hint\{display:none\}/);
   const offline=read('downloads/Atlas_Demo_Offline.html');
   assert.ok(offline.includes(css) && offline.includes(script),
     'single-file offline fallback reproduces the exact shared desktop affordance');
