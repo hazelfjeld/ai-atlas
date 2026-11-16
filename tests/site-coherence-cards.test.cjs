@@ -1064,6 +1064,29 @@ test('Research shares the one global slash-to-search keyboard route without a co
     'Research search link must reach the canonical real search view');
 });
 
+test('Desktop native page slash shortcut keeps the shared search destination after enhancement', () => {
+  const shared = fs.readFileSync(path.join(__dirname, '..', 'site-theme.js'), 'utf8');
+  const offline = fs.readFileSync(path.join(__dirname, '..', 'downloads/Atlas_Demo_Offline.html'), 'utf8');
+  assert.ok(shared.includes('form.dataset.searchRoute = route;'),
+    'Enhancing the mobile search link must retain its actual relative Discover route');
+  assert.ok(shared.includes("document.querySelector('form.site-mobile-chrome__search-form')?.dataset.searchRoute"),
+    'Desktop shortcut must reuse the already rendered mobile form destination');
+  assert.ok(shared.includes('window.location.assign(hiddenSearchRoute);'),
+    'Hidden desktop search must navigate to functional Discover search, not a dead field');
+  assert.ok(shared.includes('rememberSearchFocus();\n    window.location.assign(hiddenSearchRoute);'),
+    'Desktop search transition must restore keyboard focus after loading Discover');
+  assert.ok(offline.includes(shared.replaceAll('</script', '<\\/script')),
+    'Offline single-file fallback must embed the exact updated shared navigation behavior');
+  for (const route of ['whats-new.html', 'research.html', 'technologies.html',
+                       'playbooks.html', 'games.html', 'terms/index.html', 'technology/index.html']) {
+    const html = fs.readFileSync(path.join(__dirname, '..', route), 'utf8');
+    assert.ok(html.includes('site-mobile-chrome__search'),
+      route + ' must expose the same native search destination before enhancement');
+    assert.ok(html.includes('src="site-theme.js"') || html.includes('src="../site-theme.js"'),
+      route + ' must include the shared desktop keyboard handler');
+  }
+});
+
 test('all technology profiles put shared navigation outside the content landmark', () => {
  const dir=path.join(__dirname,'..','technology');
  const pages=fs.readdirSync(dir).filter(name=>/^TECH-[0-9]{4}-.+\.html$/.test(name));

@@ -1556,6 +1556,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!/^(?:\.\.\/)*index\.html#\/search$/.test(route)) return;
     const form = document.createElement('form');
     form.className = link.className + ' site-mobile-chrome__search-form';
+    // Retain the original, build-time navigation destination even when this
+    // mobile-only form is hidden by the shared desktop breakpoint.
+    form.dataset.searchRoute = route;
     form.setAttribute('role', 'search');
     form.setAttribute('aria-label', 'Search AI Updates');
     const icon = link.querySelector('.site-mobile-chrome__search-icon');
@@ -1665,6 +1668,17 @@ document.addEventListener('keydown', (event) => {
   if (inline && inline.getClientRects().length) {
     event.preventDefault();
     inline.focus({preventScroll:true});
+    return;
+  }
+  // Desktop native workspaces hide their mobile search form; the old
+  // link has already been enhanced into that form. Preserve Discover's
+  // '/' shortcut by following that same real search destination instead
+  // of silently doing nothing on Research, News, Games and directories.
+  const hiddenSearchRoute = document.querySelector('form.site-mobile-chrome__search-form')?.dataset.searchRoute;
+  if (hiddenSearchRoute) {
+    event.preventDefault();
+    rememberSearchFocus();
+    window.location.assign(hiddenSearchRoute);
     return;
   }
   const search = document.querySelector('a.site-mobile-chrome__search[href]');

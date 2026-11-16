@@ -1415,6 +1415,31 @@ with sync_playwright() as p:
     check('shared search submits a real query to Discover',
           mobile_research.locator('#all-query').input_value() == 'reward hacking')
     mobile_research.close()
+    # Desktop hides the native mobile search row, but its real destination
+    # must remain available via the same '/' shortcut as Discover. Previously
+    # enhancing the link into a hidden form orphaned the desktop keyboard path.
+    for route, scheme, width in (
+        ('whats-new.html', 'light', 1280),
+        ('research.html', 'dark', 768),
+        ('playbooks.html', 'light', 1280),
+        ('technologies.html', 'dark', 768),
+        ('games.html', 'light', 1280),
+        ('terms/index.html', 'dark', 1280),
+        ('technology/index.html', 'light', 768),
+    ):
+        desktop_search = browser.new_page(
+            viewport={'width':width, 'height':844},
+            color_scheme=scheme, reduced_motion='reduce')
+        desktop_search.goto(base + route)
+        check('native desktop search row is hidden '+route+' '+scheme,
+              not desktop_search.locator('.site-mobile-chrome__search-form').is_visible())
+        desktop_search.keyboard.press('/')
+        desktop_search.wait_for_url('**/index.html#/search', timeout=20000)
+        desktop_search.locator('#catalog-loading').wait_for(state='detached', timeout=45000)
+        check('native desktop slash reaches functional Discover search '+route+' '+scheme,
+              desktop_search.evaluate("document.activeElement?.id === 'global-query'")
+              and desktop_search.locator('#global-query').is_visible())
+        desktop_search.close()
     # Direct concept detail pages share the same native, script-free menu
     # and current-section indication as the dictionary and technology directories.
     for reference in ('terms/MLD-0002-ablation-study.html', 'terms/MLD-0957-prompt-injection.html'):
