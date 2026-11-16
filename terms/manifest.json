@@ -2216,52 +2216,52 @@
   },
   "MLD-0444": {
     "path": "terms/MLD-0444-frequency-penalty.html",
-    "sha256": "14bdda12891bea7732467aed3f518881440e81fecc16833cb328f350fb7f1add",
+    "sha256": "90f9b9601ff87925af1df2ccf84beea5f42d5f6b930b5e66e3affe1dcd2f708d",
     "expanded": false
   },
   "MLD-0445": {
     "path": "terms/MLD-0445-frobenius-norm.html",
-    "sha256": "fd145d55c1f8934370f4e13030f32798f5c4d6df17aa566c5addb972c93b9b4f",
+    "sha256": "629740294493b291f38717ddf3d7e1d27e2590c15625a9113123be61dedb921b",
     "expanded": false
   },
   "MLD-0446": {
     "path": "terms/MLD-0446-full-attention.html",
-    "sha256": "36bba529d40bf271cccc80c1c4e221579e493017306f2ce3fb2b2bd284339522",
+    "sha256": "33e449026220d6eb7a3f64ccdb022690dc7bf69423441ac3f68830a391d83c0d",
     "expanded": false
   },
   "MLD-0447": {
     "path": "terms/MLD-0447-full-fine-tuning.html",
-    "sha256": "9b4478e92da894c7b47e5f59c9c99f88d0304367778b6c2484d1c259b7230fc4",
+    "sha256": "59fb7bfc61ddc4deac825266d2688a7fbad0c0eb129763ae6cdff41bc0dbe715",
     "expanded": false
   },
   "MLD-0448": {
     "path": "terms/MLD-0448-fully-sharded-data-parallel.html",
-    "sha256": "227ceba0d47f7a18a32665b1d4a36c9b45e29597efad9f875e485d01de2adef4",
+    "sha256": "1d68d3293afcb64ee5e2b3be850525face61e6c7f4acccf1a3195f7ce767b565",
     "expanded": false
   },
   "MLD-0449": {
     "path": "terms/MLD-0449-function-calling.html",
-    "sha256": "310987eefa68e09e8f1dcc0564ee5880a66ee9c9edbb94fc109db4d97942c916",
+    "sha256": "dd0d6c90aa6e70301ffe953d5eb0cc0f58667c2ab1555f24bc68445a9a38176c",
     "expanded": false
   },
   "MLD-0450": {
     "path": "terms/MLD-0450-gated-linear-unit.html",
-    "sha256": "8e8cf2f6963e0e95d92600006a0cedcf4e9b96d4fb3f498a743f7f684ea03335",
+    "sha256": "09ddecde2f7e68b33eeddaeb5269ea3602f0a578f558f8150e8c515a83103dc8",
     "expanded": false
   },
   "MLD-0451": {
     "path": "terms/MLD-0451-gating-mechanism.html",
-    "sha256": "fb13a25658115c70b7d6654ab3fd1cb61f6babc741514dd1e343d039a57c4196",
+    "sha256": "8c9032b664a52c2c98cb51aa381bee7f9c603e032e0d6c274372ab5f32c41f1d",
     "expanded": false
   },
   "MLD-0452": {
     "path": "terms/MLD-0452-gaussian-mixture-model.html",
-    "sha256": "cdeb95bfcaa9c5feb092c158b5201100ad661d18b7c725d5fdee3ef9064835be",
+    "sha256": "4d9e3b896ce7676b582bea3c2f7707cbdc3854c2211e3b0a741e5d875a1e1af5",
     "expanded": false
   },
   "MLD-0453": {
     "path": "terms/MLD-0453-gaussian-naive-bayes.html",
-    "sha256": "879a77c2691c4cef96c8e48ae7a3826b0b6a9bab8700025ca52f17f2f1d73458",
+    "sha256": "2540f35295c84c1fa21ee83e3a191d61d6a2bff4147a67cf41e857d9458165b3",
     "expanded": false
   },
   "MLD-0454": {
