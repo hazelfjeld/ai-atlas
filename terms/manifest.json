@@ -1526,52 +1526,52 @@
   },
   "MLD-0306": {
     "path": "terms/MLD-0306-detokenization.html",
-    "sha256": "4d9d81036d817a84989d801f6ba88a20e4e7153d5d6a75021b48871da35a06a1",
+    "sha256": "640077a4f656574f1d31a421ac6b1efb0e69792ffe06aa35604c6d8bfb909a62",
     "expanded": false
   },
   "MLD-0307": {
     "path": "terms/MLD-0307-dice-coefficient.html",
-    "sha256": "0305a7e574f7a6db78ed54f5194dc81678126a361203b7d5efbaed6f02a6a2f8",
+    "sha256": "9934473dd02f1fa3f9c52dd0c1e93371da90a8ea09776e8605661f0b23c11cb7",
     "expanded": false
   },
   "MLD-0308": {
     "path": "terms/MLD-0308-dice-loss.html",
-    "sha256": "34b33e2832bd1539e7e4605e550ca3628973f6ef04c7f05bc433ae6b230ae4d1",
+    "sha256": "3b6dbd31adcb3f1c68820fd1e768dac9d5be3b5787b755b8f3dc3dad3f920fa7",
     "expanded": false
   },
   "MLD-0309": {
     "path": "terms/MLD-0309-dictionary-learning.html",
-    "sha256": "b321c64cb409a3c1a36591318a3e97a36eec14a4a525a075385574cc953cb4a1",
+    "sha256": "97cc582a670d22d70fc89e78728cb77c3a1a6e2505a094b823967cacf7820396",
     "expanded": false
   },
   "MLD-0310": {
     "path": "terms/MLD-0310-differential-privacy.html",
-    "sha256": "8dee07a0524d78db5a9904b4053723ddbd13c2fda312bd5332ebbe43d266fa60",
+    "sha256": "a4e3e532d195fcbad1ec7be4ecd736d69d4c3a5998c339920d930ee7911dad1f",
     "expanded": false
   },
   "MLD-0311": {
     "path": "terms/MLD-0311-diffusion-model.html",
-    "sha256": "e65de2756967d92ee73404901412f22e9f3bc33e4554e1dcfb26b8b5549a8a49",
+    "sha256": "c38eeff8410a93dfad5da880cf8533ccb310a08051dda35f8ce77abd68af9932",
     "expanded": false
   },
   "MLD-0312": {
     "path": "terms/MLD-0312-diffusion-sampler.html",
-    "sha256": "2312d8822f20247988cd0c9560415cebb4f93f268c9915db06eb0e901ffe2178",
+    "sha256": "4c4c6e2fb8ec35ea6b925099211fd3820a1c128d938ad90f24e56e993bb70336",
     "expanded": false
   },
   "MLD-0313": {
     "path": "terms/MLD-0313-dilated-convolution.html",
-    "sha256": "25b1f1c01d86dd97376b5b6ad02da2ac97a6625282d6c2132fe630cfe34d4e2c",
+    "sha256": "596de5ff84bbe771d24ed46551f394c6bae704aed5fce7aabe16a10957e36a1e",
     "expanded": false
   },
   "MLD-0314": {
     "path": "terms/MLD-0314-dimensionality-reduction.html",
-    "sha256": "e150020768b844ca0be9239904c9a439d57a647b8512de00cff8b8facef2bcb2",
+    "sha256": "2c13d0fb252578a7680b596963b21fa33b523eb274655e1e1dd585638b8d2502",
     "expanded": false
   },
   "MLD-0315": {
     "path": "terms/MLD-0315-disaggregated-serving.html",
-    "sha256": "f7c9a3d2dc251a69ecef2c1f765bca6b260e5752b5138bdb2ad8767d442ed8b5",
+    "sha256": "fa28715f8baea0bc62b5532245f77e609d4313335dfae22e12f8862d9615ec9d",
     "expanded": false
   },
   "MLD-0316": {
