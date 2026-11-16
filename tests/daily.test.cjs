@@ -1799,3 +1799,31 @@ test('November 14 source-reviewed edition is immutable and honest about pending 
  assert.equal(idx.last_successful_publish_at,verifiedPublicationClock(),'Pending edition cannot advance the certified deployment clock');
  assertNoScriptArchiveDiscovery(idx,entry.path);
 });
+
+test('November 16 source-reviewed batch preserves dated evidence, deferred catalogs and no-script archive access',()=>{
+ const crypto=require('node:crypto');
+ const idx=JSON.parse(fs.readFileSync('data/daily/index.json','utf8'));
+ const ledger=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8'));
+ const r=ledger.receipts.find(x=>x.batch_id==='atlas-daily-20261116-bounded-0814ct-primary-source-a');
+ const ref=idx.editions.find(x=>x.date==='2026-11-16'&&x.revision===1);
+ assert.ok(r&&ref,'The staged source batch has exactly one immutable edition/receipt');
+ assert.equal(ledger.receipts.filter(x=>x.batch_id===r.batch_id).length,1);
+ assert.equal(r.source_batch_sha256,'7fcd9e6bb0987c8f3c8ac2b49ccc4168c177d3fe3da1d3bd564f7631dbc22558');
+ assert.equal(r.source_batch_bytes,23518);
+ const bytes=fs.readFileSync(ref.path);
+ assert.equal(bytes.length,ref.bytes);
+ assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'),ref.sha256);
+ const e=D.validateEdition(JSON.parse(bytes),ref);
+ assert.equal(e.news.length,4);
+ assert.deepEqual(e.news.map(x=>x.id),r.accepted_news_ids);
+ assert.deepEqual([e.news.filter(n=>n.publication_date===e.edition_date).length,e.news.filter(n=>n.publication_date<e.edition_date).length],[2,2]);
+ assert.equal(e.coverage.status,'partial');
+ assert.equal(e.coverage.sources_failed.length,1);
+ assert.deepEqual([e.technologies.length,e.terms.length,e.corrections.length,r.counts.catalog_deferred],[0,0,0,4]);
+ assert.ok(e.news.every(n=>n.source_url.startsWith('https://')&&n.review_status.startsWith('publisher_checked_')&&n.caveat));
+ assertNoScriptArchiveDiscovery(idx,ref.path);
+ assert.equal(idx.last_successful_publish_at,verifiedPublicationClock(),'Only verified releases advance the certified publication clock');
+ const last=ledger.receipts.at(-1);
+ assert.equal(last.batch_id,r.batch_id);
+ assert.equal(idx.status,'edition_revision_1_'+(last.production_verified_at?'production_verified':'pending_production_verification'));
+});

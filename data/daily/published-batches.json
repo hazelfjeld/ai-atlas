@@ -1306,6 +1306,61 @@
       "production_workflow_run_id": 43725134778,
       "githack_workflow_run_id": 43725134804,
       "verification_scope": "Exact tested main f435a8462ef65d50e906d29169854b4631f09720 passed catalog/GitHack workflow 43725134804 (342 Node tests; byte parity), Cloudflare production and hosted-browser workflow 43725134778 (504 exact HTTP assets across each of three hostnames; 66 site-browser and 40 Games checks), completed 2026-11-15T14:44:40Z. Immutable edition and staged source SHA-256/UTF-8 byte counts validated. Direct separate reopening of the full dated query permalink was unavailable."
+    },
+    {
+      "batch_id": "atlas-daily-20261116-bounded-0814ct-primary-source-a",
+      "source_branch": "atlas-daily-staging",
+      "source_commit": "18f63c52ef6923d00bcd6d7913de36089b89382c",
+      "source_batch_path": "daily-queue/batches/2026-11-16-atlas-daily-20261116-bounded-0814ct-primary-source-a.json",
+      "source_batch_sha256": "7fcd9e6bb0987c8f3c8ac2b49ccc4168c177d3fe3da1d3bd564f7631dbc22558",
+      "source_batch_bytes": 23518,
+      "edition_date": "2026-11-16",
+      "validation_result": "sha256_bytes_counts_unique_ids_dates_and_independent_primary_source_review",
+      "status": "partially_published_with_4_deferred_catalog_proposals",
+      "publication_outcome": "immutable_revision_1_pending_production_verification",
+      "publication_edition": "2026-11-16-v1",
+      "accepted_news_ids": [
+        "ai-news-alibaba-qwen4-max-ga-2026-11-16",
+        "ai-news-meituan-longcat-video-avatar-16-2026-11-15",
+        "ai-news-federal-reserve-barr-ai-financial-stability-2026-11-16",
+        "ai-news-microsoft-lazarus-dormant-neuron-backdoor-2026-11-10"
+      ],
+      "source_news_ids": [
+        "ai-news:alibaba-qwen4-max-ga:2026-11-16",
+        "ai-news:meituan-longcat-video-avatar-16:2026-11-15",
+        "ai-news:federal-reserve-barr-ai-financial-stability:2026-11-16",
+        "ai-news:microsoft-lazarus-dormant-neuron-backdoor:2026-11-10"
+      ],
+      "deferred_news_ids": [],
+      "deferred_catalog_proposal_ids": [
+        "tech-proposal:qwen4-max-general-release:2026-11-16",
+        "tech-proposal:longcat-video-avatar-16:2026-11-15",
+        "term-proposal:weight-space-backdoor:2026-11-16",
+        "term-proposal:bradley-terry-preference-model:2026-11-16"
+      ],
+      "rejected_ids": [],
+      "counts": {
+        "news_published": 4,
+        "technology_added": 0,
+        "term_added": 0,
+        "corrections": 0,
+        "news_deferred": 0,
+        "catalog_deferred": 4,
+        "technology_updated": 0
+      },
+      "review_notes": "Independent review used dated Alibaba Cloud and Federal Reserve first-party indexed texts, Meituan GitHub/Hugging Face first-party release, and Microsoft Research/arXiv preprint. Vendor performance, availability and security findings attributed, not independently replicated. Qwen's secondary official page was unreadable. Four proposed catalog records remain deferred; production/browser verification pending.",
+      "publication_history": [
+        {
+          "edition": "2026-11-16-v1",
+          "status": "pending_production_verification",
+          "note": "Immutable index/edition and verified collector-source receipt prepared on main. Exact production browser/HTTP/GitHack proof pending.",
+          "prepared_at": "2026-11-16T14:27:22Z"
+        }
+      ],
+      "production_verified_at": null,
+      "production_verified_revision": null,
+      "last_verified_at": null,
+      "last_verified_public_url": null
     }
   ]
 }

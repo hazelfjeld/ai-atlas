@@ -1,0 +1,164 @@
+{
+  "schema": 1,
+  "edition_date": "2026-11-16",
+  "timezone": "America/Chicago",
+  "published_at": "2026-11-16T14:27:22Z",
+  "coverage": {
+    "start": "2026-11-15T14:20:00.356Z",
+    "end": "2026-11-16T14:17:06.808Z",
+    "status": "partial",
+    "note": "Two November 16 first-party announcements (Alibaba/Qwen4-Max and Governor Barr's speech) plus two dated catch-up items (Meituan avatar release November 15 and Microsoft Lazarus research disclosure November 10). Source and event dates kept distinct; 4 proposed catalog entries remain deferred pending deduplication, primary-reference and license checks. This is a bounded partial collection, not an exhaustive sweep. Qwen's secondary official page returned no readable text; the dated Alibaba Cloud primary announcement was corroborated via indexed first-party source.",
+    "sources_checked": [
+      {
+        "url": "https://www.alibabacloud.com/blog/alibaba-unveils-qwen4-max-new-ai-teammate-for-work-creativity-and-discovery_603783",
+        "status": "opened",
+        "checked_at": "2026-11-16T14:17:06.808Z"
+      },
+      {
+        "url": "https://github.com/meituan-longcat/LongCat-Video",
+        "status": "opened",
+        "checked_at": "2026-11-16T14:17:06.808Z"
+      },
+      {
+        "url": "https://huggingface.co/meituan-longcat/LongCat-Video-Avatar-1.6",
+        "status": "opened",
+        "checked_at": "2026-11-16T14:17:06.808Z"
+      },
+      {
+        "url": "https://www.federalreserve.gov/newsevents/speech/barr20261116a.htm",
+        "status": "opened",
+        "checked_at": "2026-11-16T14:17:06.808Z"
+      },
+      {
+        "url": "https://www.microsoft.com/en-us/research/blog/lazare-veni-foras-reprogramming-dormant-neurons-to-backdoor-ai-agents/",
+        "status": "opened",
+        "checked_at": "2026-11-16T14:17:06.808Z"
+      },
+      {
+        "url": "https://www.microsoft.com/en-us/research/publication/lazare-veni-foras-reprogramming-dormant-neurons-to-backdoor-ai-agents/",
+        "status": "opened",
+        "checked_at": "2026-11-16T14:17:06.808Z"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.15118",
+        "status": "opened",
+        "checked_at": "2026-11-16T14:17:06.808Z"
+      }
+    ],
+    "sources_failed": [
+      {
+        "url": "https://qwen.ai/blog?id=qwen4-max",
+        "status": "empty_web_reader_response",
+        "checked_at": "2026-11-16T14:17:06.808Z",
+        "note": "Official Qwen page yielded no readable text; Alibaba Cloud's separately dated announcement was available."
+      }
+    ]
+  },
+  "tldr": [
+    "Alibaba announced Qwen4-Max general access after a preview, while Governor Barr outlined financial-stability and agent-authorization concerns in a November 16 speech; publisher claims and official views are attributed.",
+    "Catch-up coverage includes Meituan's November 15 audio-driven avatar release and Microsoft's November 10 dormant-neuron backdoor research; two technology and two terminology proposals remain under review."
+  ],
+  "news": [
+    {
+      "id": "ai-news-alibaba-qwen4-max-ga-2026-11-16",
+      "title": "Alibaba formally releases Qwen4-Max after its November 11 preview",
+      "category": "models",
+      "tags": [
+        "LLM",
+        "MoE",
+        "multimodal",
+        "agents",
+        "AI safety"
+      ],
+      "summary": "Alibaba announced general access to Qwen4-Max, a 2.4-trillion-total-parameter sparse MoE activating 71 billion per token, with native vision and a one-million-token context window. The company describes cybersecurity training filters and CBRN safeguards alongside QwenCloud and Alibaba platform access.",
+      "why_it_matters": "Updates the earlier preview with a production-facing named endpoint and concrete model architecture, creating a materially changed option for large-context API users.",
+      "caveat": "The 60% average cost-per-task improvement, Work360 rankings, software-security results and scientific demonstrations are Alibaba's own claims, not independent replications. The flagship is API/app-accessible; smaller open-weight Qwen4 models are promised, not yet verified as available.",
+      "review_status": "publisher_checked_attributed_source_qualified",
+      "release_status": "generally_available_per_publisher",
+      "source_url": "https://www.alibabacloud.com/blog/alibaba-unveils-qwen4-max-new-ai-teammate-for-work-creativity-and-discovery_603783",
+      "publication_date": "2026-11-16",
+      "event_date": "2026-11-16",
+      "discovered_at": "2026-11-16T14:17:06.808Z",
+      "added_to_atlas_at": "2026-11-16T14:27:22Z",
+      "collection_classification": "current_day",
+      "source_record_id": "ai-news:alibaba-qwen4-max-ga:2026-11-16",
+      "material_update_of": "ai-news:alibaba-qwen4-max-preview-20261111"
+    },
+    {
+      "id": "ai-news-meituan-longcat-video-avatar-16-2026-11-15",
+      "title": "Meituan publishes LongCat-Video-Avatar 1.6 with audio-driven long-form video",
+      "category": "multimodal",
+      "tags": [
+        "video",
+        "audio",
+        "open weights",
+        "diffusion",
+        "inference"
+      ],
+      "summary": "Meituan's November 15 announcement and public Hugging Face card describe an MIT-labeled audio-conditioned avatar generator with improvements to lip synchronization, facial/body motion and autoregressive video continuation. Its examples cover single- and multi-character generation, LoRA-adapter mixing and optional reduced-precision inference.",
+      "why_it_matters": "A downloadable reference implementation for studying speech-conditioned character animation, including extended videos and inference tradeoffs.",
+      "caveat": "Ten-minute-plus stability and preference rankings are publisher-reported. Demonstration examples use two CUDA GPUs; hardware minimum, full practical throughput, downstream dependencies and consent/deepfake misuse controls require evaluation.",
+      "review_status": "publisher_checked_attributed_source_qualified",
+      "release_status": "open_weights_listed_mit",
+      "source_url": "https://github.com/meituan-longcat/LongCat-Video",
+      "publication_date": "2026-11-15",
+      "event_date": "2026-11-15",
+      "discovered_at": "2026-11-16T14:17:06.808Z",
+      "added_to_atlas_at": "2026-11-16T14:27:22Z",
+      "collection_classification": "catch_up",
+      "source_record_id": "ai-news:meituan-longcat-video-avatar-16:2026-11-15"
+    },
+    {
+      "id": "ai-news-federal-reserve-barr-ai-financial-stability-2026-11-16",
+      "title": "Federal Reserve governor warns of financial-stability risks from AI agents and infrastructure debt",
+      "category": "policy",
+      "tags": [
+        "AI governance",
+        "financial stability",
+        "agents",
+        "infrastructure",
+        "security"
+      ],
+      "summary": "In a November 16 speech, Federal Reserve Governor Michael Barr highlighted advanced-computing debt and opaque financing, correlated AI trading strategies, autonomous-agent account authorization, cybersecurity risks and consumer lending fairness.",
+      "why_it_matters": "Connects AI infrastructure investment and agent deployment to specific financial-system failure modes and requirements for authorization, oversight, explainability and reproducibility.",
+      "caveat": "These are the governor's risk assessments and scenarios, not a new Federal Reserve regulation, proof of systemic failure, or official consensus of the Board. The November 13 Financial Stability Report was already cataloged and is not a new event.",
+      "review_status": "publisher_checked_attributed_source_qualified",
+      "release_status": "speech_published",
+      "source_url": "https://www.federalreserve.gov/newsevents/speech/barr20261116a.htm",
+      "publication_date": "2026-11-16",
+      "event_date": "2026-11-16",
+      "discovered_at": "2026-11-16T14:17:06.808Z",
+      "added_to_atlas_at": "2026-11-16T14:27:22Z",
+      "collection_classification": "current_day",
+      "source_record_id": "ai-news:federal-reserve-barr-ai-financial-stability:2026-11-16"
+    },
+    {
+      "id": "ai-news-microsoft-lazarus-dormant-neuron-backdoor-2026-11-10",
+      "title": "Microsoft researchers demonstrate a weight-editing backdoor against tool-using agents",
+      "category": "AI safety",
+      "tags": [
+        "model security",
+        "agent security",
+        "backdoors",
+        "mechanistic interpretability",
+        "research"
+      ],
+      "summary": "Microsoft researchers disclosed Lazarus, a controlled demonstration in which small edits to dormant model neurons create trigger-dependent malicious output while ordinary behavior can appear unchanged. Their paper reports tests on several models and early detection results.",
+      "why_it_matters": "Adds weight integrity and trusted checkpoint provenance to agent threat models, beyond filtering prompts and testing ordinary model outputs.",
+      "caveat": "This is a controlled research attack, not evidence that the technique is circulating in the wild. Detection figures are study-specific and do not establish guaranteed checkpoint safety; do not infer that every model is vulnerable.",
+      "review_status": "publisher_checked_attributed_source_qualified",
+      "release_status": "research_preprint",
+      "source_url": "https://www.microsoft.com/en-us/research/blog/lazare-veni-foras-reprogramming-dormant-neurons-to-backdoor-ai-agents/",
+      "publication_date": "2026-11-10",
+      "event_date": "2026-11-10",
+      "discovered_at": "2026-11-16T14:17:06.808Z",
+      "added_to_atlas_at": "2026-11-16T14:27:22Z",
+      "collection_classification": "catch_up",
+      "source_record_id": "ai-news:microsoft-lazarus-dormant-neuron-backdoor:2026-11-10"
+    }
+  ],
+  "technologies": [],
+  "terms": [],
+  "site_changes": [],
+  "corrections": []
+}

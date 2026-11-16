@@ -321,9 +321,17 @@
       "sha256": "f7c718e78163d33c7f7e5ef1e09bd4fc8094fbb0f84f88c95ad6c0f831587388",
       "bytes": 16810,
       "published_at": "2026-11-15T14:32:11.277Z"
+    },
+    {
+      "date": "2026-11-16",
+      "revision": 1,
+      "path": "data/daily/editions/2026-11-16-v1.json",
+      "sha256": "04f43a36629e1c5a7ec4542b15efd24c20c69051fdd20019d69fa08649feb333",
+      "bytes": 9781,
+      "published_at": "2026-11-16T14:27:22Z"
     }
   ],
   "last_successful_publish_at": "2026-11-15T14:44:40Z",
-  "status": "edition_revision_1_production_verified",
-  "coverage_note": "November 14 revision 1 production-verified at 2026-11-14T15:09:10Z on exact code 7f64b1c65822c6e868bb60433c676da88a0d4a43: ten source-reviewed AI reports with partial coverage and one inaccessible source metadata endpoint; three technology and three term proposals remain deferred. Earlier immutable editions and all existing catalogs retained."
+  "status": "edition_revision_1_pending_production_verification",
+  "coverage_note": "Two November 16 first-party announcements (Alibaba/Qwen4-Max and Governor Barr's speech) plus two dated catch-up items (Meituan avatar release November 15 and Microsoft Lazarus research disclosure November 10). Source and event dates kept distinct; 4 proposed catalog entries remain deferred pending deduplication, primary-reference and license checks. This is a bounded partial collection, not an exhaustive sweep. Qwen's secondary official page returned no readable text; the dated Alibaba Cloud primary announcement was corroborated via indexed first-party source."
 }
