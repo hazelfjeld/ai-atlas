@@ -366,10 +366,14 @@ with sync_playwright() as p:
             else:
                 archive_page.locator('#navigation a[href="whats-new.html"]').click()
             fallback = archive_page.locator('#scriptfree-daily-archive')
-            check('script-free archive has published records '+scheme+' '+str(width),
-                  fallback.is_visible()
-                  and fallback.locator('a[href="data/daily/index.json"]').is_visible()
-                  and len(newest_archive_paths) == 3
+            check('script-free archive follows native site link '+scheme+' '+str(width),
+                  archive_page.url.split('#')[0].rstrip('/').endswith('/whats-new.html'))
+            check('script-free archive renders ordinary native content '+scheme+' '+str(width),
+                  fallback.is_visible())
+            check('script-free archive register is accessible '+scheme+' '+str(width),
+                  fallback.locator('a[href="data/daily/index.json"]').is_visible())
+            check('script-free archive has three dated records '+scheme+' '+str(width),
+                  len(newest_archive_paths) == 3
                   and all(fallback.locator('a[href="' + path + '"]').is_visible()
                           for path in newest_archive_paths))
             check('script-free archive hides misleading loaders and dead filters '+scheme+' '+str(width),
@@ -380,6 +384,17 @@ with sync_playwright() as p:
                   and archive_page.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'))
             archive_page.screenshot(path=str(out / ('daily-scriptfree-'+scheme+'-'+str(width)+'.png')), full_page=False)
         archive_context.close()
+    # The same static fallback remains in the DOM but must disappear before
+    # first paint when the shared site-theme enhancement is available.
+    archive_enhanced = browser.new_context(java_script_enabled=True)
+    archive_enhanced_page = archive_enhanced.new_page()
+    archive_enhanced_page.goto(base+'whats-new.html')
+    check('archive uses the shared enhancement boundary without duplicate editions',
+          archive_enhanced_page.locator('#scriptfree-daily-archive').count() == 1
+          and archive_enhanced_page.locator('#scriptfree-daily-archive').is_hidden()
+          and archive_enhanced_page.locator('html').evaluate(
+              "el => el.classList.contains('atlas-enhanced')"))
+    archive_enhanced.close()
     # Check actual Discover-to-editorial transitions, not CSS similarity alone.
     for width in (320, 390, 768, 1280):
         page.set_viewport_size({'width':width, 'height':844})

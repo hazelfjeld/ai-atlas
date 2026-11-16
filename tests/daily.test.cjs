@@ -10,7 +10,7 @@ function verifiedPublicationClock(){
 function assertNoScriptArchiveDiscovery(index,path){
  const html=fs.readFileSync('whats-new.html','utf8');
  const start=html.indexOf('id="scriptfree-daily-archive"');
- const end=html.indexOf('</section></noscript>',start);
+ const end=html.indexOf('</section>',start);
  assert.ok(start>0&&end>start,'No-script archive remains present');
  const block=html.slice(start,end);
  assert.ok(block.includes('href="data/daily/index.json"'),'Every archived revision remains discoverable in the persistent register');
@@ -18,6 +18,17 @@ function assertNoScriptArchiveDiscovery(index,path){
  assert.ok(index.editions.some(e=>e.path===path),'Historical archive path must remain indexed');
  if(newest.includes(path))assert.ok(block.includes('href="'+path+'"'),'Recent edition needs a direct no-script shortcut');
 }
+test('script-free archive keeps real dated links in native HTML and hides them only after shared enhancement',()=>{
+ const html=fs.readFileSync('whats-new.html','utf8');
+ const theme=fs.readFileSync('site-theme.js','utf8');
+ assert.match(html,/<section class="site-static-fallback" id="scriptfree-daily-archive"/);
+ assert.doesNotMatch(html,/<noscript><section class="site-static-fallback" id="scriptfree-daily-archive"/);
+ assert.match(html,/\.atlas-enhanced #scriptfree-daily-archive\{display:none!important\}/);
+ assert.match(theme,/classList\?\.add\('atlas-enhanced'\)/);
+ const block=html.slice(html.indexOf('id="scriptfree-daily-archive"'),html.indexOf('</section>',html.indexOf('id="scriptfree-daily-archive"')));
+ assert.ok(block.includes('href="data/daily/index.json"'),'Scriptless reader keeps the canonical archive register');
+});
+
 function assertBatchReceipts(ledger){
  const ids=ledger.receipts.map(r=>r.batch_id);
  assert.equal(new Set(ids).size,ids.length,'No duplicate immutable collector batch');
