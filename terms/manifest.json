@@ -2166,52 +2166,52 @@
   },
   "MLD-0434": {
     "path": "terms/MLD-0434-float16.html",
-    "sha256": "9b67666308f43cd9aa1ffd624d30c44d34fa24d47661b9c226a249630c868681",
+    "sha256": "d773b526b7ca40a69fc7e35d361d41ed3129775d9255a54f4b0729fe11c4120d",
     "expanded": false
   },
   "MLD-0435": {
     "path": "terms/MLD-0435-float32.html",
-    "sha256": "e423cf5157c3f5eed36580c5516f9110f9eaacdfcd7edc83d6fe27b6b333e9ba",
+    "sha256": "1981a542ac82e44fa0a4df3c4d64b262d7d917bcfe907f3b3e13c9110a89a196",
     "expanded": false
   },
   "MLD-0436": {
     "path": "terms/MLD-0436-float8.html",
-    "sha256": "8f4366aae9ed5e943f005d5ba1d31f00c93e8824603823ad129548bfb65ce3d9",
+    "sha256": "c392f03b285704442db10edc63b146dd1d1f866ca5ffcf15a887914f69c2b49c",
     "expanded": false
   },
   "MLD-0437": {
     "path": "terms/MLD-0437-floating-point-operation-count.html",
-    "sha256": "db0c2caca876bfaa3a6aae260bc48f4227629bb37f4fa3ff52451cff0e20651f",
+    "sha256": "d9b4fbcfd21ba25d086011e7e0473efc6c0f8762b51bb659a5379cad3632c70c",
     "expanded": false
   },
   "MLD-0438": {
     "path": "terms/MLD-0438-floating-point-operations-per-second.html",
-    "sha256": "39b214758df0a9fbb8cb7d777a0de182b773e0fe78ee98455ceb71f4a2880992",
+    "sha256": "8676e2c9d2b30c89ad4b65b0a625a5cff9f95bc706f02c60e9c99e3fedb6c9bc",
     "expanded": false
   },
   "MLD-0439": {
     "path": "terms/MLD-0439-flow-matching.html",
-    "sha256": "edc53ef54b264a20c92bc9c106263b104c78368f59fcc43d83aa548a2e2eefe8",
+    "sha256": "c8887c608ab4612a5bcb65d116f2226944d6e6fce4f7ad2cfc5d0091a2e112e0",
     "expanded": false
   },
   "MLD-0440": {
     "path": "terms/MLD-0440-focal-loss.html",
-    "sha256": "2e8c5acf5e24bf80d811333152948de5a7243dcd68099d9d905ca74d8347c3b7",
+    "sha256": "90488173ee11e53d63357e3aeb09433bee95d679af2ca97744b7c7e5cf493b86",
     "expanded": false
   },
   "MLD-0441": {
     "path": "terms/MLD-0441-forecasting.html",
-    "sha256": "5b519746aa8165b217b17eb629e65cca32cac2d9aed60245ea266ea58f65f639",
+    "sha256": "9d2a0c9f7e57e797e440597f3d6ec653c34fb6a28c9b787af3c0d5012142e9bf",
     "expanded": false
   },
   "MLD-0442": {
     "path": "terms/MLD-0442-forward-mode-autodiff.html",
-    "sha256": "e66a438cec5c5d5b7bc6894ae886e5de98c58c88daf9a06bbc82fe0c1610861d",
+    "sha256": "1ca69011e589425173f648a26bfa9b3917746e20ec0fc1463f4e6182fad57192",
     "expanded": false
   },
   "MLD-0443": {
     "path": "terms/MLD-0443-foundation-model.html",
-    "sha256": "9664f3fb6f29e251facd460b3b9c6de9e5acd2fde78eb9ac6e4ac891c1065e9d",
+    "sha256": "a53b3b6977832fb19a40f60778d7be6ad1086a78806810da3e56f87e0deb8f73",
     "expanded": false
   },
   "MLD-0444": {
