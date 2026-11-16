@@ -7,6 +7,47 @@ const path = require('node:path');
 const root = path.join(__dirname, '..');
 const pages = ['research.html', 'demo.html', 'hardware-review.html', 'about.html', 'terms/index.html', 'technology/index.html', 'games.html'];
 
+
+test('native footers across eight workspaces reuse the same policy and coverage link names', () => {
+  const routes = ['demo.html', 'research.html', 'catalog-review.html',
+    'hardware-review.html', 'games.html', 'technologies.html',
+    'playbooks.html', 'whats-new.html'];
+  for (const route of routes) {
+    const html = fs.readFileSync(path.join(root, route), 'utf8');
+    const footer = html.match(/<footer\b[^>]*>[\s\S]*?<\/footer>/)?.[0];
+    assert.ok(footer, route + ': native footer exists without JavaScript');
+    for (const [href, label] of [
+      ['about.html', 'Editorial policy & coverage'],
+      ['index.html#/sources', 'Sources & downloads'],
+    ]) {
+      const links = [...footer.matchAll(/<a href="([^"]+)">([^<]*)<\/a>/g)]
+        .filter(match => match[1] === href);
+      assert.equal(links.length, 1, route + ': exactly one ' + href + ' link');
+      assert.equal(links[0][2], label, route + ': canonical resource label');
+    }
+    assert.ok(html.indexOf('<footer class="site-chrome__footer">') > html.indexOf('</main>'),
+      route + ': global footer retains its native contentinfo landmark');
+  }
+  const generator = fs.readFileSync(path.join(root, 'scripts/site_chrome.py'), 'utf8');
+  assert.ok(generator.includes('for url, label in footer_labels:'),
+    'Footer labels are maintained by one shared normalizer');
+  assert.ok(generator.includes('assert count <= 1'),
+    'The normalizer detects duplicate source and policy links');
+  const {execFileSync} = require('node:child_process');
+  const check = [
+    'import sys',
+    'from pathlib import Path',
+    'sys.path.insert(0, "scripts")',
+    'from site_chrome import ensure_footer_resources',
+    'for p in ("demo.html", "research.html", "catalog-review.html", "hardware-review.html",',
+    '          "games.html", "technologies.html", "playbooks.html", "whats-new.html"):',
+    '    h = Path(p).read_text(encoding="utf-8")',
+    '    assert ensure_footer_resources(h, p) == h, p',
+    '    assert ensure_footer_resources(ensure_footer_resources(h, p), p) == h, p',
+  ].join('\\n');
+  execFileSync('python3', ['-c', check], {cwd:root, stdio:'pipe'});
+});
+
 test('seven native page families expose a global footer outside their article landmark', () => {
   for (const page of pages) {
     const html = fs.readFileSync(path.join(root, page), 'utf8');

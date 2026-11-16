@@ -553,18 +553,21 @@ def ensure_footer_resources(html, path):
         else:
             assert footer.startswith('<footer class="site-chrome__footer">'), (
                 "Unexpected editorial footer: " + path)
-    # Normalize the visible label for the one shared policy destination.
-    # Keep contextual wording, source links and other review-page destinations.
-    for old_label in ("Editorial policy", "Editorial corrections policy"):
-        footer = footer.replace(
-            '<a href="about.html">' + old_label + "</a>",
-            '<a href="about.html">Editorial policy & coverage</a>',
-        )
-    extra = ""
-    for url, label in (
+    # One canonical resource label for all native page families, matching
+    # their shared navigation and preserving page-specific editorial caveats.
+    # Only exact local policy/coverage anchors are changed, not external links.
+    footer_labels = (
         ("about.html", "Editorial policy & coverage"),
         ("index.html#/sources", "Sources & downloads"),
-    ):
+    )
+    for url, label in footer_labels:
+        link = re.compile(r'(<a href="' + re.escape(url) + r'">)[^<]*(</a>)')
+        footer, count = link.subn(
+            lambda match: match.group(1) + label + match.group(2), footer
+        )
+        assert count <= 1, "Duplicate footer resource on " + path + ": " + url
+    extra = ""
+    for url, label in footer_labels:
         if ('href="' + url + '"') not in footer:
             extra += ' · <a href="' + url + '">' + label + "</a>"
     if not extra and footer == original_footer:
