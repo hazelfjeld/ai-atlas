@@ -1666,52 +1666,52 @@
   },
   "MLD-0334": {
     "path": "terms/MLD-0334-dot-product.html",
-    "sha256": "b2a26b803321ee0117f09a96adf36b310f92dc17b1a4ac827c9d578f76415fe1",
+    "sha256": "47cf4769dd098ac86b62261aafd0682bf5c34a059be97c96e8a7a3928b07a915",
     "expanded": false
   },
   "MLD-0335": {
     "path": "terms/MLD-0335-double-descent.html",
-    "sha256": "2a14da6d937c0e0b94830b45a365b93cbff949d2a6ed1abf8267b0e0599c4a87",
+    "sha256": "c76892ad1c64c616ebbf104d2ef5f6df85cd5406a05b3fa1317ae2276c0c9527",
     "expanded": false
   },
   "MLD-0336": {
     "path": "terms/MLD-0336-double-quantization.html",
-    "sha256": "befb802368e56365f0c893dba673f6bc1759dd882b261953224660a58ace13ac",
+    "sha256": "badcef36680ef4dd66930e49453ec810fb8e5d45df57fdf34843e9eb076f79d1",
     "expanded": false
   },
   "MLD-0337": {
     "path": "terms/MLD-0337-dp-sgd.html",
-    "sha256": "5f1434bd9f3c06c94854daa0abdd6450f45f73e554105519d593b0c3f9fcd20f",
+    "sha256": "eb2e3e2ed735b07a3a1d939389aff75a3d373d68b20c693ccb22a4371fb1e38d",
     "expanded": false
   },
   "MLD-0338": {
     "path": "terms/MLD-0338-dpo.html",
-    "sha256": "5eb45bc4cadd4a06930b501fd64e35cac40ed47268c91c12ebf268d9ac628f9f",
+    "sha256": "8cad8264b8e9fc198ef219a07d88d6dc1f86d29a8f368f3b833bafb2a58aa81d",
     "expanded": false
   },
   "MLD-0339": {
     "path": "terms/MLD-0339-draft-model.html",
-    "sha256": "5b8a16bb927332b8f3ff55ed18cc6fb5151249f31afb5805179f68de0c09f08c",
+    "sha256": "a2f82b6be5f8e3dfbc8632b7fd06bee2c861b72f1ab2a7f446c59a94b400face",
     "expanded": false
   },
   "MLD-0340": {
     "path": "terms/MLD-0340-dropconnect.html",
-    "sha256": "5b31af52d7d066795c1851160f90e8aed7f86b4bc204b54594e07efe2a4ce159",
+    "sha256": "da142acbff20ab33b9bcb261ba05d7a91dde6c83e330e238d9c1a740bf90c05e",
     "expanded": false
   },
   "MLD-0341": {
     "path": "terms/MLD-0341-dropout.html",
-    "sha256": "163fa89ca4c7c75c00127fdbcb30d99d6d35c2790cb271bacd0af7a257301fa5",
+    "sha256": "dc7c81343bb3706c222d8deb3ad92dce6e10acc3e3d9d481bba755ea841bfd82",
     "expanded": false
   },
   "MLD-0342": {
     "path": "terms/MLD-0342-dynamic-batching.html",
-    "sha256": "f6c211e48524a64b033109bde51bdd3a63a983f5bf8f0269c8af83bb31ae7847",
+    "sha256": "6a970433e04eed68f5dd906557dc945efb5baac34b7a216e1cb4ee91950d488c",
     "expanded": false
   },
   "MLD-0343": {
     "path": "terms/MLD-0343-dynamic-padding.html",
-    "sha256": "7ee2cef9f869093422a212ae3a94c1edf31daeac9e6300ae575f705fcb9cf69c",
+    "sha256": "52ee07f5470348695a202537cb7ddde2c4d37c6bcd315123abb0612c36bf50e1",
     "expanded": false
   },
   "MLD-0344": {
