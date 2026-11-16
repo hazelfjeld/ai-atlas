@@ -1966,52 +1966,52 @@
   },
   "MLD-0394": {
     "path": "terms/MLD-0394-expert-parallelism.html",
-    "sha256": "bfe73cd2706b3e6a501365d83e0c0dcf3d472427656cf29f65a7d25b2d7d6571",
+    "sha256": "f7ae91e62ec846167d353ea8a0b8b0644f1d1fa67fabaa09a20427c5b76e3c28",
     "expanded": false
   },
   "MLD-0395": {
     "path": "terms/MLD-0395-explainability.html",
-    "sha256": "b857deff6a8b17dcf3f876b386fdc4c604f8d7b149ca67fb20a043675ae831cf",
+    "sha256": "9127623229918ddfdf9aad072f0590bbe828bcf580741cc1d86d2a3e156a460f",
     "expanded": false
   },
   "MLD-0396": {
     "path": "terms/MLD-0396-explained-variance.html",
-    "sha256": "44d60ce457e7aa540076bb816181be9af1586c935bd480b18a6d6ccd5e559ca6",
+    "sha256": "0e2bbcc7606a961b1f45e5e30795f230043fbde6c1869d137b65eab9df9b11fe",
     "expanded": false
   },
   "MLD-0397": {
     "path": "terms/MLD-0397-exploration-exploitation-tradeoff.html",
-    "sha256": "3b5cc22ff13d1dfcac01398b0e44f02648e03cce5c26e117d0c8812b467f72a2",
+    "sha256": "4a52d52b5ab74af665189b4950adcf0512ab7a91ede471eca9b460b2c590267d",
     "expanded": false
   },
   "MLD-0398": {
     "path": "terms/MLD-0398-exponential-decay.html",
-    "sha256": "089f67d421cc6f240fb19313494b79d17d5fe1bb685b6a9a40b8905363858a63",
+    "sha256": "5d62396df500c220487b571e35fce050d615f82d74757442bdff05d35914305b",
     "expanded": false
   },
   "MLD-0399": {
     "path": "terms/MLD-0399-exposure-bias.html",
-    "sha256": "19a50c4fa3b20f758d74545d5e9c13c2d6561e1a2930aa375bbcbf6dd17c5fe0",
+    "sha256": "88acae93287e2e3dbceaae792978d9602bdfb1c849a0b3e195306c2c1217aebb",
     "expanded": false
   },
   "MLD-0400": {
     "path": "terms/MLD-0400-expressivity.html",
-    "sha256": "ff1585a5d6d540f22fd86efc207cf9a9c7194231cf3541e9007280f0b7e6d0b9",
+    "sha256": "5aab4ce4506ad29231ca27008b9267195f3edc91d8bfd7d7eb7cead6397436ae",
     "expanded": false
   },
   "MLD-0401": {
     "path": "terms/MLD-0401-external-validity.html",
-    "sha256": "870e367e32e0e336ef6f636d77779dc0abebd418850f555fa206efbc310315b7",
+    "sha256": "85a26fa37abe82265f13daa9559287bff595b9baa3839931110015bd89ac1ae1",
     "expanded": false
   },
   "MLD-0402": {
     "path": "terms/MLD-0402-extra-trees.html",
-    "sha256": "261f181cfc03f7e46c6d65e3fd1ab4eaefbc9628687b76ccf450385dcd2daa12",
+    "sha256": "0c39a6e44ca9bf32b324b17e4e9c82f55e28c2ed241815c91f8b731d0b43686d",
     "expanded": false
   },
   "MLD-0403": {
     "path": "terms/MLD-0403-extrapolation.html",
-    "sha256": "afc7c385b7ac749d8c59436e125b329bc2947409d2ab17873fdfc3e61c543590",
+    "sha256": "56a4dafbb0349c03f8ac96b70abc8b0c2df863829071c79b73e7f5532795c4d1",
     "expanded": false
   },
   "MLD-0404": {

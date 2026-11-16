@@ -155,11 +155,11 @@ test('the same generator owns all eight native first-paint rails without fragile
 });
 
 
-test('first 393 canonical concept references have the shared lower rail at first paint', () => {
+test('first 403 canonical concept references have the shared lower rail at first paint', () => {
   const { createHash } = require('node:crypto');
   const manifest = JSON.parse(read('terms/manifest.json'));
-  const cohort = Object.entries(manifest).filter(([id]) => Number(id.slice(4)) <= 393);
-  assert.equal(cohort.length, 393, 'bounded cohort leaves stable IDs intact');
+  const cohort = Object.entries(manifest).filter(([id]) => Number(id.slice(4)) <= 403);
+  assert.equal(cohort.length, 403, 'bounded cohort leaves stable IDs intact');
   for (const [id, entry] of cohort) {
     const html = read(entry.path);
     const nav = html.match(/<nav class="site-chrome term-nav" aria-label="AI Updates primary navigation">([\s\S]*?)<\/nav>/)?.[1];
@@ -188,7 +188,7 @@ test('all 57 authored concept guides share first-paint navigation with technolog
     assert.equal(createHash('sha256').update(html, 'utf8').digest('hex'), entry.sha256,
       entry.path + ' matches its original stable ID in the integrity manifest');
   }
-  const unmigrated = Object.entries(manifest).find(([id, entry]) => Number(id.slice(4)) > 393 && !entry.expanded);
+  const unmigrated = Object.entries(manifest).find(([id, entry]) => Number(id.slice(4)) > 403 && !entry.expanded);
   assert.ok(unmigrated, 'unmigrated reference routes remain outside this bounded cohort');
   const basic = read(unmigrated[1].path);
   assert.doesNotMatch(basic, /class="sidebar-bottom site-chrome__bottom"/,
