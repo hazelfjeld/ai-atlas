@@ -512,7 +512,7 @@ with sync_playwright() as p:
 
     # The A-Z concept and technology directory pages must share Discover's
     # secondary destinations with JavaScript disabled, not only after hydration.
-    for route in ('terms/index.html', 'terms/MLD-0001-a-b-test.html', 'terms/MLD-0101-bayesian-inference.html', 'terms/MLD-0111-bernoulli-distribution.html', 'terms/MLD-0121-bidirectional-context.html', 'terms/MLD-0131-boosting.html', 'terms/MLD-0141-byte-pair-encoding.html', 'terms/MLD-0151-categorical-feature.html', 'terms/MLD-0161-chain-of-thought-prompting.html', 'terms/MLD-0171-circuit.html', 'terms/MLD-0181-cohen-s-kappa.html', 'terms/MLD-0192-condition-number.html', 'terms/MLD-0201-connectionist-temporal-classification.html', 'terms/MLD-0221-contrastive-loss.html', 'terms/MLD-0241-critic.html', 'terms/MLD-0251-cumulative-distribution-function.html', 'terms/MLD-0261-data-extraction.html', 'terms/MLD-0266-data-mixture.html', 'terms/MLD-0276-dbscan.html', 'terms/MLD-0286-decoder.html', 'terms/MLD-0296-denoising-diffusion-implicit-model.html', 'terms/MLD-0306-detokenization.html', 'terms/MLD-0316-discount-factor.html', 'terms/MLD-0324-distributed-learning.html', 'terms/MLD-0334-dot-product.html', 'terms/MLD-0344-dynamic-programming.html', 'technology/index.html', 'technology/TECH-0216-pytorch.html'):
+    for route in ('terms/index.html', 'terms/MLD-0001-a-b-test.html', 'terms/MLD-0101-bayesian-inference.html', 'terms/MLD-0111-bernoulli-distribution.html', 'terms/MLD-0121-bidirectional-context.html', 'terms/MLD-0131-boosting.html', 'terms/MLD-0141-byte-pair-encoding.html', 'terms/MLD-0151-categorical-feature.html', 'terms/MLD-0161-chain-of-thought-prompting.html', 'terms/MLD-0171-circuit.html', 'terms/MLD-0181-cohen-s-kappa.html', 'terms/MLD-0192-condition-number.html', 'terms/MLD-0201-connectionist-temporal-classification.html', 'terms/MLD-0221-contrastive-loss.html', 'terms/MLD-0241-critic.html', 'terms/MLD-0251-cumulative-distribution-function.html', 'terms/MLD-0261-data-extraction.html', 'terms/MLD-0266-data-mixture.html', 'terms/MLD-0276-dbscan.html', 'terms/MLD-0286-decoder.html', 'terms/MLD-0296-denoising-diffusion-implicit-model.html', 'terms/MLD-0306-detokenization.html', 'terms/MLD-0316-discount-factor.html', 'terms/MLD-0324-distributed-learning.html', 'terms/MLD-0334-dot-product.html', 'terms/MLD-0344-dynamic-programming.html', 'terms/MLD-0354-elastic-net.html', 'technology/index.html', 'technology/TECH-0216-pytorch.html'):
         scriptless.goto(base + route)
         scriptless.locator('#directory-mobile-nav > summary').click()
         more_menu = scriptless.locator('#directory-mobile-nav .site-mobile-chrome__more')
@@ -544,7 +544,7 @@ with sync_playwright() as p:
             native_page.goto(base + 'index.html#/overview')
             native_page.goto(base + 'technology/TECH-0216-pytorch.html')
             shared_labels = native_page.locator('nav.site-chrome .site-chrome__links a').all_text_contents()
-            native_page.goto(base + 'terms/MLD-0344-dynamic-programming.html')
+            native_page.goto(base + 'terms/MLD-0354-elastic-net.html')
             native_nav = native_page.locator('nav.site-chrome')
             lower = native_nav.locator('.sidebar-bottom.site-chrome__bottom')
             check('new concept first-paint rail matches technology and Discover ' +
@@ -557,7 +557,7 @@ with sync_playwright() as p:
                   and native_page.locator('body > main.term-shell').count() == 1
                   and native_page.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'))
             if width in (390, 1280):
-                native_page.screenshot(path=str(out / ('concept-first-paint-0344-' + scheme + '-' + str(width) + '.png')))
+                native_page.screenshot(path=str(out / ('concept-first-paint-0354-' + scheme + '-' + str(width) + '.png')))
             if width == 390:
                 native_page.locator('.site-mobile-chrome__nav > summary').click()
                 native_page.locator('.site-mobile-chrome__menu > a:not(.site-mobile-chrome__brand)[href="../index.html#/overview"]').click()
