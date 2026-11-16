@@ -2116,37 +2116,37 @@
   },
   "MLD-0424": {
     "path": "terms/MLD-0424-feature-store.html",
-    "sha256": "fb8920ab598f350252ac350b7d8daae7fb1d07d760ab01f36f1099205538a022",
+    "sha256": "ac01b54a81c35042e7310fc94d9039a039b8661b3e768fb97053fad5aa4c6e70",
     "expanded": false
   },
   "MLD-0425": {
     "path": "terms/MLD-0425-feature-vector.html",
-    "sha256": "1d8ea0ff69167e6a521899d7f5c50dafbe8b064bc570616997284240f8a25eb5",
+    "sha256": "4681151dd04795ff158b239c1bfd4c9a7ceddf7bbb621c07c30b00662488aa36",
     "expanded": false
   },
   "MLD-0426": {
     "path": "terms/MLD-0426-federated-learning.html",
-    "sha256": "7cdc540598b73757c54224b0a5af4988ebe4ccf1b6c82574e3842e154ae9a6c8",
+    "sha256": "bc465f479ec8c1c912c9e3b823c50de94a21d0cf796cf02af9845f69f8e027ca",
     "expanded": false
   },
   "MLD-0427": {
     "path": "terms/MLD-0427-feed-forward-network.html",
-    "sha256": "73d2d8b1761a607f2e52e6d11e5060c196657fa5deb985ed431276ef80ad00a4",
+    "sha256": "44e93ed5a89068c4ea6038a34d9675eea040a7e2cbfe31284c6be01900ba14e3",
     "expanded": false
   },
   "MLD-0428": {
     "path": "terms/MLD-0428-few-shot-learning.html",
-    "sha256": "8728e41c4b802ac2c7d6cfa3bebaf7d8a3f353883a846c476ae4f9268d8ed6c0",
+    "sha256": "77cbb609526b74b699fadd12c7ca388d555bfb258e3ab835de55c20b1ef30f39",
     "expanded": false
   },
   "MLD-0429": {
     "path": "terms/MLD-0429-few-shot-prompting.html",
-    "sha256": "f69ef65b98979516a69bb2cb3fa4a9591e17fe18e2d56d265911e2892b11c796",
+    "sha256": "9ca3d3952d2af1281aa27f573673f42705e4a541a8cda9f52a596941dd7fbd53",
     "expanded": false
   },
   "MLD-0430": {
     "path": "terms/MLD-0430-fill-in-the-middle.html",
-    "sha256": "9777f4f47fd28a2486f216ce278a6243b560108c5412373f5b04df188cb3917a",
+    "sha256": "dc8d4d61129ecc32ba9d5cc7f6f8d32da8c89bbfcc52aa33e5bcbc93df7cf650",
     "expanded": false
   },
   "MLD-0431": {
@@ -2156,12 +2156,12 @@
   },
   "MLD-0432": {
     "path": "terms/MLD-0432-fisher-information.html",
-    "sha256": "b677041f305535733b095df0e5640e1839aa9655c0eaec746518da40d22ef890",
+    "sha256": "37aa714078eea63cdbc554d9d192e470b84c747307285597e496f30374fb084b",
     "expanded": false
   },
   "MLD-0433": {
     "path": "terms/MLD-0433-flashattention.html",
-    "sha256": "372ff877e3a96db41fadfb4f6e13c4f34ca7233294d066dd8d05edb07bcb98a5",
+    "sha256": "9ca3e44037a3e5b365548fc59adb6a03aa2dc6e617f301e59b39af2682a04c4f",
     "expanded": false
   },
   "MLD-0434": {
