@@ -1317,7 +1317,7 @@
       "edition_date": "2026-11-16",
       "validation_result": "sha256_bytes_counts_unique_ids_dates_and_independent_primary_source_review",
       "status": "partially_published_with_4_deferred_catalog_proposals",
-      "publication_outcome": "immutable_revision_1_pending_production_verification",
+      "publication_outcome": "immutable_revision_1_cloudflare_http_browser_and_githack_verified",
       "publication_edition": "2026-11-16-v1",
       "accepted_news_ids": [
         "ai-news-alibaba-qwen4-max-ga-2026-11-16",
@@ -1355,12 +1355,22 @@
           "status": "pending_production_verification",
           "note": "Immutable index/edition and verified collector-source receipt prepared on main. Exact production browser/HTTP/GitHack proof pending.",
           "prepared_at": "2026-11-16T14:27:22Z"
+        },
+        {
+          "edition": "2026-11-16-v1",
+          "status": "cloudflare_http_browser_and_githack_verified",
+          "note": "Exact main 0cb759609d9d500d2285e9eeb8f9087add11f73a passed catalog/GitHack 43887023987 (343 Node tests and byte-equivalent assets), Cloudflare production/hosted browser 43887023908 (66 site checks, 40 Games checks, full production asset verification). Direct independent opening of dated query permalink was unavailable.",
+          "verified_at": "2026-11-16T14:47:10Z"
         }
       ],
-      "production_verified_at": null,
-      "production_verified_revision": null,
-      "last_verified_at": null,
-      "last_verified_public_url": null
+      "production_verified_at": "2026-11-16T14:47:10Z",
+      "production_verified_revision": 1,
+      "last_verified_at": "2026-11-16T14:47:10Z",
+      "last_verified_public_url": "https://aiupdates.app/whats-new.html?date=2026-11-16&revision=1",
+      "production_commit": "0cb759609d9d500d2285e9eeb8f9087add11f73a",
+      "production_workflow_run_id": 43887023908,
+      "githack_workflow_run_id": 43887023987,
+      "verification_scope": "Exact tested main 0cb759609d9d500d2285e9eeb8f9087add11f73a passed catalog/GitHack workflow 43887023987 (343 Node tests and GitHack parity) and Cloudflare workflow 43887023908 (production asset HTTP, 66 site-browser and 40 Games checks), completed at 2026-11-16T14:47:10Z. Source batch, immutable edition bytes and SHA256 verified. Exact dated query permalink was not separately reopened outside CI."
     }
   ]
 }
