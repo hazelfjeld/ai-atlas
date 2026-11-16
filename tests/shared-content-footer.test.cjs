@@ -44,7 +44,7 @@ test('native footers across eight workspaces reuse the same policy and coverage 
     '    h = Path(p).read_text(encoding="utf-8")',
     '    assert ensure_footer_resources(h, p) == h, p',
     '    assert ensure_footer_resources(ensure_footer_resources(h, p), p) == h, p',
-  ].join('\\n');
+  ].join('\n');
   execFileSync('python3', ['-c', check], {cwd:root, stdio:'pipe'});
 });
 
