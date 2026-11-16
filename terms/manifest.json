@@ -1816,37 +1816,37 @@
   },
   "MLD-0364": {
     "path": "terms/MLD-0364-encoder-decoder-model.html",
-    "sha256": "9c40af82de05eede76c9efb610fd7bec9b04d62bc6cca88e24e2a4e7bd200f6b",
+    "sha256": "192cc77720e4dc228b0c03abe423b16a5121b605ef27c63433ee4714ec38c2a1",
     "expanded": false
   },
   "MLD-0365": {
     "path": "terms/MLD-0365-encoder-only-model.html",
-    "sha256": "458c936301b1fa9993254f687f662a590512d6dc725bc81e65a08b004ef52015",
+    "sha256": "1eb5536d562435579f9a182c7c3f6ca531b4da08e52e55031d03025c7c351d38",
     "expanded": false
   },
   "MLD-0366": {
     "path": "terms/MLD-0366-end-to-end-learning.html",
-    "sha256": "39d809964f73a96dc0c0dec4d65e43bd4b49152a4cdcef46338864f00b19858a",
+    "sha256": "fc51ddcd49e6073fd6e3dd7e1c133cea2cb3d647ddbe27278e31016d7d8a497b",
     "expanded": false
   },
   "MLD-0367": {
     "path": "terms/MLD-0367-ensemble-learning.html",
-    "sha256": "fceedaa87e862f8ed76909c782d1cdf5101a7f585578dafffd7c94409ecd755a",
+    "sha256": "6d6b25cb579f6f7e0bc2d42f37fa4a00b435e094ad291ffdc0807ff0ee7b4adc",
     "expanded": false
   },
   "MLD-0368": {
     "path": "terms/MLD-0368-entity-linking.html",
-    "sha256": "0821ef912bfdd5fe4315597a9790ca7d45eb700b50f975e2365952a07c938c30",
+    "sha256": "3cd1704650954362d3e055f194e3c1404a8c9abd7c9aed7ca40b1a3a9cde4b91",
     "expanded": false
   },
   "MLD-0369": {
     "path": "terms/MLD-0369-entropy.html",
-    "sha256": "968b87095e3d7f15cd7005e2ca47989af4017eabdf29b024da995b46c9ed17b0",
+    "sha256": "99f2fc307e2f0aff7375eb93a35e1d3163859ff75dc32b4d84779cfca04d932f",
     "expanded": false
   },
   "MLD-0370": {
     "path": "terms/MLD-0370-entropy-bonus.html",
-    "sha256": "06a746b7e5ed790eb0014e71c09fbb844e0192af467339786d60ebc2cbc099b9",
+    "sha256": "0c5f119982ce6dd729147b16f73ee314ad06015e14864f4be6676e12fc8f48a0",
     "expanded": false
   },
   "MLD-0371": {
@@ -1856,12 +1856,12 @@
   },
   "MLD-0372": {
     "path": "terms/MLD-0372-eos-token.html",
-    "sha256": "5b7c240e6caa48aef6a7ff0782d04d75483bf36af5ac8a730db390cb4fc8fa9d",
+    "sha256": "5d4a6fca6217e865767b232b2dbba5e68634e383b70f27713fa06fbeae369baa",
     "expanded": false
   },
   "MLD-0373": {
     "path": "terms/MLD-0373-episode.html",
-    "sha256": "04c3d366cd01e936b642c234e6025301d4d5f944768b4ece1d851fbd29bdbfe8",
+    "sha256": "0ebec76c34292fd873150a937e4c23d147688bfa2fe9bbefa62c08ebdb157635",
     "expanded": false
   },
   "MLD-0374": {
