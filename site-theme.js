@@ -87,7 +87,14 @@ document.addEventListener('DOMContentLoaded', () => {
     submit.className = 'site-mobile-chrome__search-submit';
     submit.setAttribute('aria-label', 'Submit search');
     submit.textContent = '↵';
-    form.append(field, submit);
+    // Discover labels the working desktop / shortcut alongside its search.
+    // Reuse that same key hint across native page families; CSS suppresses it
+    // on phones where the real 36px submit action is more useful.
+    const hint = document.createElement('kbd');
+    hint.className = 'site-mobile-chrome__search-hint';
+    hint.textContent = '/';
+    hint.setAttribute('aria-hidden', 'true');
+    form.append(field, hint, submit);
     form.addEventListener('submit', event => {
       event.preventDefault();
       const query = field.value.trim();

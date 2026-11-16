@@ -679,6 +679,22 @@ body:has(.site-chrome) :is(.tech-controls,.playbook-tools,.controls,.search-cont
   outline:2px solid var(--orange,#b77833);outline-offset:1px
 }
 
+/* atlas-shared-search-key-hint:begin */
+/* Discover and native pages now label the same functional desktop "/" search
+   shortcut. This is one shared treatment, not separate page-specific hints.
+   The existing native mobile submit remains visible and the hint is hidden. */
+@media (min-width:651px){
+  :is(.global-search > kbd, .site-mobile-chrome__search-hint){
+    flex:none;padding:0 5px;border:1px solid var(--line,#dce1d7);
+    border-radius:4px;color:var(--muted,#627067);
+    font:500 10px/1.45 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif
+  }
+}
+@media (max-width:650px){
+  .site-mobile-chrome__search-hint{display:none}
+}
+/* atlas-shared-search-key-hint:end */
+
 /* atlas-mobile-search-frame:begin */
 /* Discover's real search form and the other pages' working search link share
    the same mobile frame. Keep the native input (and its submit handler), with

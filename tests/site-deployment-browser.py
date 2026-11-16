@@ -33,6 +33,9 @@ def desktop_shared_navigation(page):
     return (nav.count() == 1 and nav.is_visible()
             and nav.locator('.site-chrome__links a').count() == 7
             and search.count() == 1 and search.is_visible()
+            and search.locator('kbd.site-mobile-chrome__search-hint').count() == 1
+            and search.locator('kbd.site-mobile-chrome__search-hint').is_visible()
+            and search.locator('kbd.site-mobile-chrome__search-hint').text_content() == '/'
             and search.evaluate('el => getComputedStyle(el.closest(".site-mobile-chrome")).position === "fixed"')
             and not page.locator('details.site-mobile-chrome__nav').is_visible())
 
