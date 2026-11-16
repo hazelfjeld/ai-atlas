@@ -1576,42 +1576,42 @@
   },
   "MLD-0316": {
     "path": "terms/MLD-0316-discount-factor.html",
-    "sha256": "aa87e65a9680212b21600ad639601a4fd4492632db01719770cfee5873c81779",
+    "sha256": "12ed7391baabb883362bbf92ff7f9be915d08b123f62d611b311056d63110b4f",
     "expanded": false
   },
   "MLD-0317": {
     "path": "terms/MLD-0317-discretization.html",
-    "sha256": "332c39e7dba19b9acb0a4ec4ae5cfb33d35e13bf2c57f6740d857e645eea918e",
+    "sha256": "ba699f0678cb1d94affe3eb9d7b1b118c5c0ec6bb325feb9495dd697d144f478",
     "expanded": false
   },
   "MLD-0318": {
     "path": "terms/MLD-0318-discriminative-model.html",
-    "sha256": "7762702b30b5ead0dfbdb7316393137687e803249ec9b2385a057b60083a6db0",
+    "sha256": "12f63e8021d2098568011c63e120fb417ec5edf4c51e08069c74bb492baa9d51",
     "expanded": false
   },
   "MLD-0319": {
     "path": "terms/MLD-0319-discriminator.html",
-    "sha256": "d928db24c37fe87c02b8282dccb7b0ec3019ada7b1ddc9f003f487cafd92791f",
+    "sha256": "f94b5d140e4e688710251e22c63a96d7b00a31162e3c6287cd72b7bb3d757933",
     "expanded": false
   },
   "MLD-0320": {
     "path": "terms/MLD-0320-distance-metric.html",
-    "sha256": "f1465443b657d8dbc7346d13b2fc7aa296b3c7b5319b17cccfc243b173e4c2ee",
+    "sha256": "8cafacc6125d3c171c8a4452fea785e6ec3edc8358be3b191583fcdc7ac237db",
     "expanded": false
   },
   "MLD-0321": {
     "path": "terms/MLD-0321-distillation-loss.html",
-    "sha256": "5dcdf168810fc22fc594ebc5fcf9e1b9d4da824180b23306af94c8ecd167be41",
+    "sha256": "304e1564e587e17e1fb3e7ec2161a22162794a78bdda059efd5d864ef99f8943",
     "expanded": false
   },
   "MLD-0322": {
     "path": "terms/MLD-0322-distillation-temperature.html",
-    "sha256": "3a1c93384f437f41e207265e0c2f2f91fd55ba60afbc844469d98de4bef45184",
+    "sha256": "eea72fcd4f885e9922efd7339570c2e4139dc34cb70fa39571c266de1554bbb4",
     "expanded": false
   },
   "MLD-0323": {
     "path": "terms/MLD-0323-distributed-data-parallel.html",
-    "sha256": "396dba7736e1810c78194ec49613cff3f48e18c65a34a1e2559748532feb6af5",
+    "sha256": "2489886a57d37b212798722109c257120b5d3250cf6906f1ecb3871e687c7db4",
     "expanded": false
   },
   "MLD-0324": {
