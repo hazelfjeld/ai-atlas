@@ -155,11 +155,11 @@ test('the same generator owns all eight native first-paint rails without fragile
 });
 
 
-test('first 343 canonical concept references have the shared lower rail at first paint', () => {
+test('first 353 canonical concept references have the shared lower rail at first paint', () => {
   const { createHash } = require('node:crypto');
   const manifest = JSON.parse(read('terms/manifest.json'));
-  const cohort = Object.entries(manifest).filter(([id]) => Number(id.slice(4)) <= 343);
-  assert.equal(cohort.length, 343, 'bounded cohort leaves stable IDs intact');
+  const cohort = Object.entries(manifest).filter(([id]) => Number(id.slice(4)) <= 353);
+  assert.equal(cohort.length, 353, 'bounded cohort leaves stable IDs intact');
   for (const [id, entry] of cohort) {
     const html = read(entry.path);
     const nav = html.match(/<nav class="site-chrome term-nav" aria-label="AI Updates primary navigation">([\s\S]*?)<\/nav>/)?.[1];

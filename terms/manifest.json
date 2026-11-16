@@ -1716,52 +1716,52 @@
   },
   "MLD-0344": {
     "path": "terms/MLD-0344-dynamic-programming.html",
-    "sha256": "877ea06ea69095ac07bdfafcf85ecb2ee5a48b74ab3a724ed55ce3861e732235",
+    "sha256": "80546609e3d3098626db5b1bf96328759b0fda950681aa5eb21c5fa71fe257d7",
     "expanded": false
   },
   "MLD-0345": {
     "path": "terms/MLD-0345-early-stopping.html",
-    "sha256": "5be5354ccded0ca7662393c767406ae40c558fe9d91f07dfd604632408065570",
+    "sha256": "7a0137ed371b2fc23bed01d92783205f11a866d1ece7fa5526476de8a0e81a25",
     "expanded": false
   },
   "MLD-0346": {
     "path": "terms/MLD-0346-edge-ai.html",
-    "sha256": "6f2cfb95ac94541934e9db0d1967e484a44e66ad578db7096ddce484b3991347",
+    "sha256": "c8ff39a4e04c3d480a27ac24da20ddfb53d052857d4f44eae53d8484bd159909",
     "expanded": false
   },
   "MLD-0347": {
     "path": "terms/MLD-0347-edit-distance.html",
-    "sha256": "65539c6393d3fb07af878cac296c7aa71dcab3d306cb5f7c19636583e28ce545",
+    "sha256": "cb285ab41ecdc1e932772a9f00680de8bd0b7b7bf9eafc4cee78c03b0cc6509f",
     "expanded": false
   },
   "MLD-0348": {
     "path": "terms/MLD-0348-effect-size.html",
-    "sha256": "09907fec8f3ad7ed7524b67c68614279f097224fe1cd7c4395357c2f0ed0a34f",
+    "sha256": "3c45484bb10e647fe625f6399d855ba307de26ca117f377bbbd9a95412acaf9c",
     "expanded": false
   },
   "MLD-0349": {
     "path": "terms/MLD-0349-effective-batch-size.html",
-    "sha256": "50e6676017e7d8a2d71a2c3ab3f7a8ab2b4f6db6bd2570b8b00df9e9be3406c6",
+    "sha256": "a0d9878b5c9710df2fc0a448776b521cd48a101c37bb7e69ba6679fd55819fb7",
     "expanded": false
   },
   "MLD-0350": {
     "path": "terms/MLD-0350-effective-horizon.html",
-    "sha256": "b5c3df4ce9345947d4ed2a77d9e68c55e8bc30ea5b3f27a6ce265ffed0cc8e48",
+    "sha256": "54a962e38ba61afd7e4de8fe60d4b3f382a51ae72f31bbff11b477bc35562a43",
     "expanded": false
   },
   "MLD-0351": {
     "path": "terms/MLD-0351-effective-sample-size.html",
-    "sha256": "ead94ad94bca47d4b9de5a7a3cb7c2171c3d7669f2305eee3eb7d0d1e6e9ab66",
+    "sha256": "d523856bc6390354a389449f2dc8653c0e205f961746ee370d27d110c8a0c70b",
     "expanded": false
   },
   "MLD-0352": {
     "path": "terms/MLD-0352-eigenvalue.html",
-    "sha256": "afc2af3afc181784dbcf4a8cba3f6ebbe75ceff87c860b9409f4a606cdc75c80",
+    "sha256": "751cdfa05c7faee8eafaaebbe829b9f0c1b7b7b92786e38beb9e26adee0481ac",
     "expanded": false
   },
   "MLD-0353": {
     "path": "terms/MLD-0353-eigenvector.html",
-    "sha256": "5fd2723bcf6fe9de3d61c5a0e7a779f949d702fd87a80c6e148a17629a3e94da",
+    "sha256": "16fdc6acda2fa1f017ce6cda906921adbce10925369927ef0ab763ab7e484b3c",
     "expanded": false
   },
   "MLD-0354": {
