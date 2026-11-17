@@ -3996,52 +3996,52 @@
   },
   "MLD-0800": {
     "path": "terms/MLD-0800-negative-log-likelihood.html",
-    "sha256": "3b97baeb7e6652c066c574d0590a6a21785f5d61516063c56346bd0244759a20",
+    "sha256": "7eda8fdbd83748b7ac1890074ab4a9055ca04a30404fc9ed718bb4e4a25e4ca3",
     "expanded": false
   },
   "MLD-0801": {
     "path": "terms/MLD-0801-negative-sampling.html",
-    "sha256": "9a9adae065a500e16817b057c768f9338c12a57bca12782df01056d5ea278434",
+    "sha256": "0cd698d22693dcdfe5aae7fd74062ffb69c99fa38d1a0e467344974ac8ef96c4",
     "expanded": false
   },
   "MLD-0802": {
     "path": "terms/MLD-0802-nested-cross-validation.html",
-    "sha256": "f350a9d09836a83570d6f5765047b841a37c9e6340745978b8aa154e07048676",
+    "sha256": "c15a63d1d05add2f9cb9985e0b3b51b405e361f12fe3ab359410f4066a27f1ec",
     "expanded": false
   },
   "MLD-0803": {
     "path": "terms/MLD-0803-nesterov-momentum.html",
-    "sha256": "afce7c2e1514b2982dcc5e44775c9bcdb05b5e53870e74ebf433208a762df0e5",
+    "sha256": "15df8109545c79e7c421ddbc6268eb4f0f3156321f06828b5c8e82a32225b807",
     "expanded": false
   },
   "MLD-0804": {
     "path": "terms/MLD-0804-neural-network.html",
-    "sha256": "bfec0ebb6528e2e23a779202411cc1bf9b911f148d401763fac65bacdc3ea0fe",
+    "sha256": "dcb98222ca5cb3a99b02ed40506e68386ecf7b22eb1e9cf8181c34026c7898bd",
     "expanded": false
   },
   "MLD-0805": {
     "path": "terms/MLD-0805-neural-ordinary-differential-equation.html",
-    "sha256": "3f9ab1ca7367c5f38c23d6eb1da99c10015cd0ad739c1d636ebabdbb55ff890a",
+    "sha256": "08df983ed0413990f284bbede1bd02c8898226b015e77a48e28bffba80641b52",
     "expanded": false
   },
   "MLD-0806": {
     "path": "terms/MLD-0806-neuron.html",
-    "sha256": "ec878265bc90deb5033c104aec565271587e7183769f127ac7a70d38d998f1a3",
+    "sha256": "a9df8193e4c045939d3d2aaee0db0d97c91ad65c25500f882bfff10c1aadab75",
     "expanded": false
   },
   "MLD-0807": {
     "path": "terms/MLD-0807-newton-s-method.html",
-    "sha256": "32dfc4a74d82577b09d398baed5f18f59e4c4bfc0a58237a4f3b34c477363ff4",
+    "sha256": "0e558cad82b000e3ee5a33341c6f0321af3825e668eacfe1f8375ee2c0ff9616",
     "expanded": false
   },
   "MLD-0808": {
     "path": "terms/MLD-0808-nf4.html",
-    "sha256": "78f163f829c02e58c43ce8a8f4d9549afa65a1b9c1abcdc5d7640123d07c2fb8",
+    "sha256": "431d2cada89a2701e0f5fa09b1a82e8186d5a6d23989f314b7a1e216ce3f5246",
     "expanded": false
   },
   "MLD-0809": {
     "path": "terms/MLD-0809-no-free-lunch-theorem.html",
-    "sha256": "a78628bfa0259868befd1065d99aa6951fee6f023da0ee90f75f4ee9fcebdd8e",
+    "sha256": "0427a62deca3bdf860501301d5eb1ee68a1211fd200ad2757f6b2f4fb234b54d",
     "expanded": false
   },
   "MLD-0810": {
