@@ -3096,27 +3096,27 @@
   },
   "MLD-0620": {
     "path": "terms/MLD-0620-label-noise.html",
-    "sha256": "833e218cd7ee9c803e516ae2003994ac31d1afd6055ae980eef7efab5382249f",
+    "sha256": "74c2a3c6c0a2d512feb83caa272e19405ce955d5cd931668fdb0e634a8a47c1f",
     "expanded": false
   },
   "MLD-0621": {
     "path": "terms/MLD-0621-label-shift.html",
-    "sha256": "aa5a8b33f858478e905c56732a2e49105ac8f72f535b98c846d38e762fefc6f5",
+    "sha256": "2a0855f2108c4a221d69f742e6ef2f7fc9c1df8800b42d966ee0a07a670930e3",
     "expanded": false
   },
   "MLD-0622": {
     "path": "terms/MLD-0622-label-smoothing.html",
-    "sha256": "647591280dc4f51d81d247524bbda8d63f1e66516d63f8897f5f0fed72ab852e",
+    "sha256": "15fe6cf8fbe129f4c0046041ca86b3465008354d64bcbaa29809fa49e0cedaca",
     "expanded": false
   },
   "MLD-0623": {
     "path": "terms/MLD-0623-lag-feature.html",
-    "sha256": "6fece9fe50fd91b15806465c24f889fbded5db4c7ce388e164b29b421c30ac45",
+    "sha256": "a4dc00901eff89ba5b3571f192f1d6d88aff4eaf9a17c38ac355e8d0a3d706ec",
     "expanded": false
   },
   "MLD-0624": {
     "path": "terms/MLD-0624-language-model.html",
-    "sha256": "7147b60a774e72541a0af12c7b6b381ef03a0e4a64ba9f62eb66dbcd06af06bc",
+    "sha256": "4e2fb297bacc41a91c9b2d38bad6a98b89779b6f67dc4d31e254f820ca0dfda1",
     "expanded": false
   },
   "MLD-0625": {
@@ -3126,72 +3126,72 @@
   },
   "MLD-0626": {
     "path": "terms/MLD-0626-lasso.html",
-    "sha256": "d119cc17a7b1156ceb3edf4ea86aac124d3f805808a1760b04072fce6f4beaff",
+    "sha256": "4fb50b20e8a389092974bd739e1f8f04f7fc09988f062b958e87d5a9b92cfa94",
     "expanded": false
   },
   "MLD-0627": {
     "path": "terms/MLD-0627-late-interaction.html",
-    "sha256": "37eb8b171dc080006d2698e26d6a4b80cd06f0ea898ecfafab978e1d0320ea6c",
+    "sha256": "b28a211fd48fb53f75ddb63ab3608d45095413038285a9edce6c40218efc0ce7",
     "expanded": false
   },
   "MLD-0628": {
     "path": "terms/MLD-0628-latency.html",
-    "sha256": "6c10bc47be45f0320c6977968144200135a50661508d381c4193ae8e992285be",
+    "sha256": "daeec2ce37257e2b760a593642a24489713054bfa0488be605a19a89d5c80504",
     "expanded": false
   },
   "MLD-0629": {
     "path": "terms/MLD-0629-latent-diffusion-model.html",
-    "sha256": "bd6ff581405dd2e7a25619cfbbc9ec296651cf91c5a12e7db3e4d8c381dd95da",
+    "sha256": "0f09374b32c528e7227f67ccabcc061f0fcd2da86322f606ff131d5f33d56b92",
     "expanded": false
   },
   "MLD-0630": {
     "path": "terms/MLD-0630-latent-dirichlet-allocation.html",
-    "sha256": "17ddd866eed5f64b4cdd134cff7dc016de6308c45600e84701be1a2289192b2e",
+    "sha256": "e5fc5e8f9bd69da0bc9b572af4c7be110d0517f0c7b0b7285ca968c17bd8af28",
     "expanded": false
   },
   "MLD-0631": {
     "path": "terms/MLD-0631-latent-space.html",
-    "sha256": "5fd86b99754ef91bf6746fbab553acf6a74795a1557f7034a7028ba380969695",
+    "sha256": "1be0901b94f6722d75ae68a5ad3779a93266d98de2a21ad80c9bcb086a2079fa",
     "expanded": false
   },
   "MLD-0632": {
     "path": "terms/MLD-0632-latent-variable.html",
-    "sha256": "3a5737bba75415a5f40c1afbba73871a725e5808c4522b05bd0a130dbdb838be",
+    "sha256": "40f315b9164c2ad5346dec555e72b138dcb2a44eede88eff28f3776010124088",
     "expanded": false
   },
   "MLD-0633": {
     "path": "terms/MLD-0633-layer.html",
-    "sha256": "9a2582639c9ad8e021a290c888470fc24490d915506ac95e69db2223642479f2",
+    "sha256": "21ba93f5b714950c14fcd9ea1f2754f84a2b1774a840c53aca671e2ec4572e53",
     "expanded": false
   },
   "MLD-0634": {
     "path": "terms/MLD-0634-layer-normalization.html",
-    "sha256": "4bd0b95de0770f303514cf07d135848246e5869b0038be837ace7d0ce973e42c",
+    "sha256": "7a33d463f54b9c620c5679e5d84ccdae794686925606dfcb0d7201e286ce58ff",
     "expanded": false
   },
   "MLD-0635": {
     "path": "terms/MLD-0635-leaf-node.html",
-    "sha256": "e0b5ea00b7fc1851cb1fb92b71da16e4c5b77dc0aea5f8f9020d982af9647c89",
+    "sha256": "336431601e65a544346d9d76f0f9b014e40d4f6bc0ac700e68d5f32e2e29f6b5",
     "expanded": false
   },
   "MLD-0636": {
     "path": "terms/MLD-0636-leaky-relu.html",
-    "sha256": "7768f915fd253234eb1ad1846d1ad3041f507bcf5b6f55831678469c15f620df",
+    "sha256": "e89b987056b93c9139d18c77878be317ea18d58db3fce8ca585d2fd729e22de1",
     "expanded": false
   },
   "MLD-0637": {
     "path": "terms/MLD-0637-learning-curve.html",
-    "sha256": "b9c9d9466cbbd99ea512164848a275fab2270e8256a2c31b4ddd79967d710b9d",
+    "sha256": "acf11840dc8c76f1f10950e772f37287bd9c10c4e02525bdad2b1d6770b60b3a",
     "expanded": false
   },
   "MLD-0638": {
     "path": "terms/MLD-0638-learning-rate.html",
-    "sha256": "7b91cd6e9f289e11086c9ce3da7bb53e2d807cf269127c57dc484b10fdf20d45",
+    "sha256": "0c700de096310bb6aa8359f788f18689302070f7a49f345494714f4eacb74377",
     "expanded": false
   },
   "MLD-0639": {
     "path": "terms/MLD-0639-learning-to-rank.html",
-    "sha256": "a5eeda9d862ffe79d9a1c9cca39dfd276821d1c5dc8c499d4cf49ca301125f07",
+    "sha256": "1f4ef88049879f7f18bb8aaeb3136390f1534d5be49d3d1efe5a3bd1bbeb14c2",
     "expanded": false
   },
   "MLD-0640": {
