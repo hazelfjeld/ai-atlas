@@ -579,7 +579,7 @@ with sync_playwright() as p:
             native_page.goto(base + 'index.html#/overview')
             native_page.goto(base + 'technology/TECH-0216-pytorch.html')
             shared_labels = native_page.locator('nav.site-chrome .site-chrome__links a').all_text_contents()
-            native_page.goto(base + 'terms/MLD-0709-maximum-a-posteriori-estimation.html')
+            native_page.goto(base + 'terms/MLD-0729-meta-learning.html')
             native_nav = native_page.locator('nav.site-chrome')
             lower = native_nav.locator('.sidebar-bottom.site-chrome__bottom')
             check('new concept first-paint rail matches technology and Discover ' +
@@ -592,11 +592,11 @@ with sync_playwright() as p:
                   and native_page.locator('body > main.term-shell').count() == 1
                   and native_page.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'))
             if width in (390, 1280):
-                native_page.goto(base + 'terms/MLD-0710-maximum-likelihood-estimation.html')
+                native_page.goto(base + 'terms/MLD-0730-metadata-filtering.html')
                 check('following reference retains its original script-free rail boundary ' + scheme + ' ' + str(width),
                       native_page.locator('nav.site-chrome .sidebar-bottom.site-chrome__bottom').count() == 0)
-                native_page.goto(base + 'terms/MLD-0709-maximum-a-posteriori-estimation.html')
-                native_page.screenshot(path=str(out / ('concept-first-paint-0709-' + scheme + '-' + str(width) + '.png')))
+                native_page.goto(base + 'terms/MLD-0729-meta-learning.html')
+                native_page.screenshot(path=str(out / ('concept-first-paint-0729-' + scheme + '-' + str(width) + '.png')))
             if width == 390:
                 native_page.locator('.site-mobile-chrome__nav > summary').click()
                 native_page.locator('.site-mobile-chrome__menu > a:not(.site-mobile-chrome__brand)[href="../index.html#/overview"]').click()

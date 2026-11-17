@@ -3546,42 +3546,42 @@
   },
   "MLD-0710": {
     "path": "terms/MLD-0710-maximum-likelihood-estimation.html",
-    "sha256": "c1f4d748bd712c35d48afc044543aa1ce3243673f4d7f0decc1ab01241a9b273",
+    "sha256": "807f3c001b00f42eeee0acedddb2e609b108d2a6045271ec83d30cdc9cd78137",
     "expanded": false
   },
   "MLD-0711": {
     "path": "terms/MLD-0711-maximum-marginal-relevance.html",
-    "sha256": "1eac9141d01e5f324e71fd68679f6d568c271c30138a8ae3da60274b9226ea99",
+    "sha256": "db9b4dd1077e9004f2dfffa31dcce5dd37227535078f19209cde38a3096c1d8f",
     "expanded": false
   },
   "MLD-0712": {
     "path": "terms/MLD-0712-mean-absolute-error.html",
-    "sha256": "a9bddff953db332829368c8e8b44030faefaa09292f7a2477b2ef57f2f41f3a0",
+    "sha256": "347b98b4230e0ab6fe5e43d14237708f859cc85a2b289d1f840ef743db1ad277",
     "expanded": false
   },
   "MLD-0713": {
     "path": "terms/MLD-0713-mean-absolute-percentage-error.html",
-    "sha256": "76ca76887b63c9eca693ccde6f5baf2683ee0e30c9cb9f6226107658a2663c25",
+    "sha256": "0f7016d2fc8d0d454117ce86806d286e7f1db2714f4590d70269cbbffd23ba3a",
     "expanded": false
   },
   "MLD-0714": {
     "path": "terms/MLD-0714-mean-average-precision.html",
-    "sha256": "168b0be2bde55167f65ba8e053b62fe504fbec2c8c4614eb6d65f68d6d96aca6",
+    "sha256": "f0be22e1a0bc01eef9bd0586cc89af5ec9c05f6b47f33e3e9ed96ea477c23493",
     "expanded": false
   },
   "MLD-0715": {
     "path": "terms/MLD-0715-mean-reciprocal-rank.html",
-    "sha256": "350596ec80a53ff777d188bf21638af5a76bf863a55d3bd5a91734c96ed3f11f",
+    "sha256": "2a0ef96aa282bbe214c8c0151761ea564feaa606bf9e822d445ec176a944c5d4",
     "expanded": false
   },
   "MLD-0716": {
     "path": "terms/MLD-0716-mean-shift.html",
-    "sha256": "d5e95722ccf52929d6dedcb32d021bd00050928b7767183ae1aac894b3e6d228",
+    "sha256": "4f6b5b0d8946f69070f138e0a82bf0c9981e7cc40ef63bc0b16b3576da73e607",
     "expanded": false
   },
   "MLD-0717": {
     "path": "terms/MLD-0717-mean-squared-error.html",
-    "sha256": "232b931dc21d6ec9f086715cb6c458c588a973f82308023de618fccaf3be53b8",
+    "sha256": "aad3412e06a78c1cec8865d79328a272c708a78cbc91e946924c22babd191a16",
     "expanded": false
   },
   "MLD-0718": {
@@ -3591,27 +3591,27 @@
   },
   "MLD-0719": {
     "path": "terms/MLD-0719-median-absolute-error.html",
-    "sha256": "90da82d752aa871c7410b2ae386b8b8ff90a9edb070ea4299926537c107333db",
+    "sha256": "bb25371d420fe539d77b896ead8a5f0c72b31469e21a5a084e90881b3e6516f0",
     "expanded": false
   },
   "MLD-0720": {
     "path": "terms/MLD-0720-medoid.html",
-    "sha256": "731d17223e05a200d568cfec31e5373cc25bdd78da5cf2298fc56f4b0c1be6eb",
+    "sha256": "5a8e4039563aae6e325c3512032efa052dfec12438d7441b8870e7459fc94062",
     "expanded": false
   },
   "MLD-0721": {
     "path": "terms/MLD-0721-mel-spectrogram.html",
-    "sha256": "9c623a7c1551c0998a270b374177b9cfbba27f04f366486c31464c6c905ed260",
+    "sha256": "e54e2e6adb2772ba6cfd484f08beec0bfc70030309752b174fa66bb5ca129bc3",
     "expanded": false
   },
   "MLD-0722": {
     "path": "terms/MLD-0722-membership-inference.html",
-    "sha256": "057458a1aedd8545b80fe12891d292bfdf06770a9717954625de22e61ea51256",
+    "sha256": "b2764086ab10cf466391933e03f96511ffde87ff36200b21497959e29b38d2cd",
     "expanded": false
   },
   "MLD-0723": {
     "path": "terms/MLD-0723-memorization.html",
-    "sha256": "e93e4ce90576d15f222f7b00bf9b00ff8a08cfe51e702d06fe6a719470cfee1d",
+    "sha256": "f539e73bab2697965ad11307f520af5bdd3aee1bea8bc46c6afdb3085a006ca5",
     "expanded": false
   },
   "MLD-0724": {
@@ -3621,27 +3621,27 @@
   },
   "MLD-0725": {
     "path": "terms/MLD-0725-mesa-objective.html",
-    "sha256": "d4d462548ec83f3614cd0f4896cf110d422bd3f9ef6563db48415932ea99f447",
+    "sha256": "4c9555d6564b90d07a0f1ba53488b479109fa8c310d02c1b6b81e22d6eb6b071",
     "expanded": false
   },
   "MLD-0726": {
     "path": "terms/MLD-0726-mesa-optimization.html",
-    "sha256": "425e361c74566c6ac2a610a5cb5be6c3a950a1d85895a24e92d8b1c57a4cf891",
+    "sha256": "8208801e5c3df44b2f65b8a594d2ee0a6d017488e9cf6d3e08e2fbb3ba4b99cb",
     "expanded": false
   },
   "MLD-0727": {
     "path": "terms/MLD-0727-mesa-optimizer.html",
-    "sha256": "5daa6f30b69daaf3c94ec660285f1ecce682212689e4e2baf0415bd6b4a4e1a7",
+    "sha256": "ea757da96571cd904e6752080b04ec8940fadb522c9b57dad8dded1a6547cc16",
     "expanded": false
   },
   "MLD-0728": {
     "path": "terms/MLD-0728-message-passing.html",
-    "sha256": "633545e597bb69daec6eec928aa8d0f80fcd2d371ed6e366889fb91de69f461d",
+    "sha256": "cf64ef7ddfea9b8253da7ee022ecf1e6fb7566dbf579094c9bbfabed833f28f7",
     "expanded": false
   },
   "MLD-0729": {
     "path": "terms/MLD-0729-meta-learning.html",
-    "sha256": "b4e6f06bcdd4be5270752aafb24bf21fef504d77f1ae0741f226125a3f155d0e",
+    "sha256": "699ef8d7ffd3b79642338783427155f8a723be9a2a61eaa46a8bf7661bb804c3",
     "expanded": false
   },
   "MLD-0730": {
