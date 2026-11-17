@@ -2996,42 +2996,42 @@
   },
   "MLD-0600": {
     "path": "terms/MLD-0600-kernel-fusion.html",
-    "sha256": "5a4de062c8c147ef4535aa5bd7b17d6aa0f13675d4a17c187d2160066eda2f8e",
+    "sha256": "621316acd098d3ec50130e7c4c659c76c8a20adf4367e251a66c34c454312da9",
     "expanded": false
   },
   "MLD-0601": {
     "path": "terms/MLD-0601-kernel-pca.html",
-    "sha256": "b5287e7584827be53f3f23f3212b8c5698d36b41e870527574e395c1a4db0456",
+    "sha256": "81600b2d641189bd47384d61aa626c818ca3864121661afae196b3126f7a4265",
     "expanded": false
   },
   "MLD-0602": {
     "path": "terms/MLD-0602-kernel-ridge-regression.html",
-    "sha256": "8a8d9501481241191b2f3231e71a514d54977b622478eca19ecc2ad41dc7a3dd",
+    "sha256": "1ca127877f897f617349363e763a075fc73005018e7941394b28104e58d8a99a",
     "expanded": false
   },
   "MLD-0603": {
     "path": "terms/MLD-0603-kernel-trick.html",
-    "sha256": "4c588e745b99fff3fde132604d878ad4a46ca09a6141ea3cdef1a03deea22fd2",
+    "sha256": "23df396727f439682f3a09cd8ce04c968b7a8ad1c98e925453b65d18d5fad0da",
     "expanded": false
   },
   "MLD-0604": {
     "path": "terms/MLD-0604-key.html",
-    "sha256": "97b637097703c3bf5d46b7d0df99f9954c5a7c23b8efe90530212eef1cb1b450",
+    "sha256": "687e22cdb43c8eba8b1a6572739f3988121e732d5420133e59545e01981c29c8",
     "expanded": false
   },
   "MLD-0605": {
     "path": "terms/MLD-0605-key-value-cache.html",
-    "sha256": "a0606facbe0bc0aa63649297a217b5060c8aa6e3b9c2319b7f1bd71f80413249",
+    "sha256": "56ec8537aa2517c359c42e0f88c15e7cce9ab10c26fe10db2d8653c4975dc045",
     "expanded": false
   },
   "MLD-0606": {
     "path": "terms/MLD-0606-kl-penalty.html",
-    "sha256": "a59a1c31401a181c29fc501c8f2232a531eb2e5f5beabfc534e149fde35fabf0",
+    "sha256": "749440c38e54a2342b98140964b6bded97bcd766caf59d2cc8c32fcd7fa01c32",
     "expanded": false
   },
   "MLD-0607": {
     "path": "terms/MLD-0607-knowledge-distillation.html",
-    "sha256": "ce97a8fe565671f1aa6365f3a96209d65d92c473552543990fc81ebba7c5bdb2",
+    "sha256": "7f18958544f6b71b52a8c53722d58ec97646de2bc2aaf85796423af0ddd9e6e5",
     "expanded": false
   },
   "MLD-0608": {
@@ -3041,57 +3041,57 @@
   },
   "MLD-0609": {
     "path": "terms/MLD-0609-knowledge-retention.html",
-    "sha256": "bfcf350c4dd66ac86693309e1a66ffd007a6fef386b02d34c99c04875ddd1744",
+    "sha256": "73a6d4220d1ad1956c294dd99b69e58e9466fc40b91a4e957ea523ca46a5a4c5",
     "expanded": false
   },
   "MLD-0610": {
     "path": "terms/MLD-0610-kullback-leibler-divergence.html",
-    "sha256": "26794edbbd6304dc50f5890360a24b73fa43f7a669cd3264df64ba5043c77d2c",
+    "sha256": "010984b3728168a970b2880be240d83f397e9cbd07e5d85e25e3927baa2950c0",
     "expanded": false
   },
   "MLD-0611": {
     "path": "terms/MLD-0611-kv-cache-quantization.html",
-    "sha256": "89bdf63315a16811a853d6f82e25718cee9ba96008b6727ca83ecbcf21912094",
+    "sha256": "c6d2fbcf2ebcefec585931bd49674828a2a3290c24dfbd75d4c02dd25252986c",
     "expanded": false
   },
   "MLD-0612": {
     "path": "terms/MLD-0612-l-bfgs.html",
-    "sha256": "8012edde2e2fcf8820df606ee9016af80f4c70c8b7829b3e78b3b8e6aea9ea72",
+    "sha256": "1def9cbcd8f1912ab3521e312f5d9f1239060ea99df83f7e278f87b931dc5521",
     "expanded": false
   },
   "MLD-0613": {
     "path": "terms/MLD-0613-l1-loss.html",
-    "sha256": "fb0241a8c1833bcbad5c7def62cc314c0e34d692c5e07c41d4b64e8dea5f9427",
+    "sha256": "01d2ea0d024fae358b7bdc7b69abc1e5aeab1fadc50a9bc17ab13506a9a3b918",
     "expanded": false
   },
   "MLD-0614": {
     "path": "terms/MLD-0614-l1-norm.html",
-    "sha256": "438f43f55680366c9d474181325cb4329fc029285614aa9cd90837952bf6e134",
+    "sha256": "9ce8a684de0f172bcc461a831095851b83c6804b27cc10a2a712eb9e911303c9",
     "expanded": false
   },
   "MLD-0615": {
     "path": "terms/MLD-0615-l1-regularization.html",
-    "sha256": "4f7dd8ecd85e763e098bca19c10d98e0789c236f8d7b137b2a0dcae568cfde96",
+    "sha256": "1954202d5090052d01979311d668831171253e62689ffbc57273b172160efaba",
     "expanded": false
   },
   "MLD-0616": {
     "path": "terms/MLD-0616-l2-loss.html",
-    "sha256": "de37913ffb8bb1e6b7645e8a5e82cc23288c229d602a48f320f6b25446858af8",
+    "sha256": "0d70bec58388b19cb9c28d4409932ef68d73c015d966fdde1315f664a14df158",
     "expanded": false
   },
   "MLD-0617": {
     "path": "terms/MLD-0617-l2-norm.html",
-    "sha256": "d153dfee0d4d53079f38f33478ec79a0a48e3a125d3a2d341a674edf5ef2abcd",
+    "sha256": "84f39e8f3e613dd6812177c478f63cda69f3065c96e39c48799044084b5f3a16",
     "expanded": false
   },
   "MLD-0618": {
     "path": "terms/MLD-0618-l2-regularization.html",
-    "sha256": "59318cab97d2d0e3b98d9f5c9870b0bc092927712a3b09dc450acc14fc8d8ed5",
+    "sha256": "5e32ca4decdf669165a0bcab069bcd65feeb33032a5a4701c252d32d21f88971",
     "expanded": false
   },
   "MLD-0619": {
     "path": "terms/MLD-0619-label.html",
-    "sha256": "12b2ef9a9afe094855a802a64781d96b92907f68883b9451de703abec37c3ee0",
+    "sha256": "ffaa5b6016b96512710920384be1e0be132ca32c6e08bb0b89e345de20083e2a",
     "expanded": false
   },
   "MLD-0620": {
