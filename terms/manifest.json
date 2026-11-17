@@ -3196,102 +3196,102 @@
   },
   "MLD-0640": {
     "path": "terms/MLD-0640-learning-rate-schedule.html",
-    "sha256": "629621402a5e6218a80e4b16769afd01f23e689192e4b31293d7994c027a9c81",
+    "sha256": "7d6817abef95cedcc5781a18a11338ff63665d0189aec1aefa2e0b1064de3107",
     "expanded": false
   },
   "MLD-0641": {
     "path": "terms/MLD-0641-least-privilege.html",
-    "sha256": "e6219a242bc294f49f0754df68242f6d9151ed1d11e852374732dc6a68695040",
+    "sha256": "2942423720613d531be5cb59c8c53aaa3fc170426fbc4ba105217498aa7b8656",
     "expanded": false
   },
   "MLD-0642": {
     "path": "terms/MLD-0642-leave-one-out-cross-validation.html",
-    "sha256": "df730fcf8eb9c3f253e4313b3e97da9f5e7d8983defc97cbc6ac7c47794673f5",
+    "sha256": "baea6546a41056f1978d38bf416ecca28989192add44f6162ec7d27501c2c2f7",
     "expanded": false
   },
   "MLD-0643": {
     "path": "terms/MLD-0643-length-bias.html",
-    "sha256": "35c952516400006460cb80f16d6bb483b14d0a431ee402c25870ef43840c08eb",
+    "sha256": "dc7f5425bd75a3828f51e676549b537cfd8b6d1513cbbb068be6a7d3ca28baba",
     "expanded": false
   },
   "MLD-0644": {
     "path": "terms/MLD-0644-length-bucketing.html",
-    "sha256": "f916c235ebd4e9dd04be6f403ba05eb083be0a3fb21e344116bf48d4ffe1bbfd",
+    "sha256": "33b4af785a97f96b645094be2121cb2d493b72d52e4a0470369eef7ab31843ca",
     "expanded": false
   },
   "MLD-0645": {
     "path": "terms/MLD-0645-length-penalty.html",
-    "sha256": "f6978a5b8a70caa01388c55492f638aa44731df4404209b45b12005381b3a584",
+    "sha256": "0c627255341ae5584fa1e90b9e9b8040e63c2e6ea643ffbaef9134fef879d0bf",
     "expanded": false
   },
   "MLD-0646": {
     "path": "terms/MLD-0646-lightgbm.html",
-    "sha256": "1299529eb6447e553b72d1273eea35c9dfaf420b2f4bb47a0f3ff704b08d94d3",
+    "sha256": "79fd02ec877677dc9b0e03e8939feddeb54ccdd020fe9acc4c9de7f57792f591",
     "expanded": false
   },
   "MLD-0647": {
     "path": "terms/MLD-0647-likelihood.html",
-    "sha256": "e15d077bae439f8f109956d0b40b7bfcf675cd41f2866b6668eb7ff24c4c34ed",
+    "sha256": "c4dfd48add4d3299c53d0dcdb26a0f8a8199273124b1d86ca9051c18de17c84c",
     "expanded": false
   },
   "MLD-0648": {
     "path": "terms/MLD-0648-lime.html",
-    "sha256": "58bc9d836b069d2dda0ceac465baaab9db454c78c1cde6deeb4437ba64694bf4",
+    "sha256": "ffaccce37b41d16a76c81d717f3cfde1fa1877cdde8e923c1589ab1f9aa6f55f",
     "expanded": false
   },
   "MLD-0649": {
     "path": "terms/MLD-0649-linear-attention.html",
-    "sha256": "3b015c1867e496fd5ebb1a52b14f1246bf5de14591c5afebc6457d425c8f7535",
+    "sha256": "c1409da78edac147383e7cd63a2863ff72ba7ad9d119b438fee0a46087e01f6b",
     "expanded": false
   },
   "MLD-0650": {
     "path": "terms/MLD-0650-linear-decay.html",
-    "sha256": "1f8ca5273e044cb82e94b3745899a7a22bb4b46427eee8f006434449ae276fb0",
+    "sha256": "ec70220d95f4a9423f07b542650f4950bf64513f6f8aba8d0e4a3f27af343391",
     "expanded": false
   },
   "MLD-0651": {
     "path": "terms/MLD-0651-linear-discriminant-analysis.html",
-    "sha256": "8f0e976b9bb2846869d3430cb81f4bf6583c52c9e1e8b07841c8b7bb9e72a9f1",
+    "sha256": "56f6a7291a537625aab346d8e2c63151f4205f7f03a1e21884848852d3b24df3",
     "expanded": false
   },
   "MLD-0652": {
     "path": "terms/MLD-0652-linear-layer.html",
-    "sha256": "2598626e1b027e62613f3feb28f267632984bdc0a39554670164e1632c0e7d91",
+    "sha256": "3bdecc9cce163c17409bed6b589db78ca0e2efb7a70757378f64101c6d1f05f1",
     "expanded": false
   },
   "MLD-0653": {
     "path": "terms/MLD-0653-linear-probe.html",
-    "sha256": "7b6a9abb7506bb8069f0db1bc26359f8db487f26634902a038d452f7f650a1b4",
+    "sha256": "d1be9fe7f2f637d5141aa26880c16584890b1305eccf2624476ade17200ff230",
     "expanded": false
   },
   "MLD-0654": {
     "path": "terms/MLD-0654-linear-regression.html",
-    "sha256": "5c4a576ea9afac40a524b134d2f8a7c7649c9721bacbea1cd37f46870fb6a35e",
+    "sha256": "2e94d8fdbd56d1ddaf81fd8844fa16bc7612731fbc81382aea8b0b322513bdff",
     "expanded": false
   },
   "MLD-0655": {
     "path": "terms/MLD-0655-linear-system.html",
-    "sha256": "0557689e7651eb6f88a4c2116276f209e15ae02b89c3d555e62f651cadd2a956",
+    "sha256": "6ad8639ec533edca51823bc9acf4ccf491a1d62eafa1a1bd8cef7887943e1a56",
     "expanded": false
   },
   "MLD-0656": {
     "path": "terms/MLD-0656-link-prediction.html",
-    "sha256": "66212e06c2a6b63916b4cd5d9ad70840c061978fadee08db075d3fcb650b72f3",
+    "sha256": "bd1439ce7a758724d3d75c10f8af6577005919ade3eff08e344568e8a9da3895",
     "expanded": false
   },
   "MLD-0657": {
     "path": "terms/MLD-0657-linkage-criterion.html",
-    "sha256": "bc4b7d5b37d87648e0f7740ff66a2c886dcc75782f52ca1dc5c15d318fc2cca5",
+    "sha256": "7779b76554ea44332b131e8eff83fab98b37af3b8efb52c80f656d60816d5001",
     "expanded": false
   },
   "MLD-0658": {
     "path": "terms/MLD-0658-lipschitz-continuity.html",
-    "sha256": "c55bfccecdbc7bf5762681ca12770b62d098f8ffab94e0bd2e536f2560c02471",
+    "sha256": "f039f6c2b9ef55fd37b96258f734508d4fb7865b355f18216de72d9efb4e4508",
     "expanded": false
   },
   "MLD-0659": {
     "path": "terms/MLD-0659-listwise-ranking-loss.html",
-    "sha256": "7a2b65d545739c81f1b2b81b151117eff0cead9adfeed7b8b71d5327f3653f1f",
+    "sha256": "e886b602492140b0e66ad06eac1f987b3e24cc9f098e0aa13c27d047a214f08d",
     "expanded": false
   },
   "MLD-0660": {
