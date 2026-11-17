@@ -1835,6 +1835,34 @@ test('November 16 source-reviewed batch preserves dated evidence, deferred catal
  assertNoScriptArchiveDiscovery(idx,ref.path);
  assert.equal(idx.last_successful_publish_at,verifiedPublicationClock(),'Only verified releases advance the certified publication clock');
  const last=ledger.receipts.at(-1);
- assert.equal(last.batch_id,r.batch_id);
+ assert.equal(last.publication_edition,idx.editions.at(-1).date+'-v'+idx.editions.at(-1).revision,'Historical Nov 16 receipt remains valid after later editions');
  assert.equal(idx.status,'edition_revision_1_'+(last.production_verified_at?'production_verified':'pending_production_verification'));
+});
+
+
+test('November 17 editorial queue publishes only independently checked news and leaves disputed candidates pending',()=>{
+ const crypto=require('node:crypto');
+ const idx=JSON.parse(fs.readFileSync('data/daily/index.json','utf8'));
+ const ledger=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8'));
+ const r=ledger.receipts.find(x=>x.batch_id==='atlas-daily-20261117-bounded-0820ct-verified-relations-b');
+ const ref=idx.editions.find(x=>x.date==='2026-11-17'&&x.revision===1);
+ assert.ok(r&&ref);
+ assert.equal(ledger.receipts.filter(x=>x.batch_id===r.batch_id).length,1,'Idempotent staging consumption');
+ assert.equal(r.source_batch_sha256,'2a9db3de61d5d1f3d1735b914995f57e3938a16a08ab248645f6652e3c7c09a5');
+ assert.equal(r.source_batch_bytes,53783);
+ const data=fs.readFileSync(ref.path);
+ assert.equal(data.length,ref.bytes);
+ assert.equal(crypto.createHash('sha256').update(data).digest('hex'),ref.sha256);
+ const edition=D.validateEdition(JSON.parse(data),ref);
+ assert.equal(edition.news.length,11);
+ assert.deepEqual(edition.news.map(n=>n.id),r.accepted_news_ids);
+ assert.deepEqual([edition.technologies.length,edition.terms.length,edition.corrections.length,r.counts.catalog_deferred,r.counts.news_deferred],[0,0,0,8,3]);
+ assert.ok(edition.news.every(n=>n.caveat&&n.review_status.startsWith('publisher_checked_')&&n.source_url.startsWith('https://')));
+ assert.ok(edition.news.some(n=>n.review_status.includes('allegations_unadjudicated')),'Legal allegations remain attributed');
+ assert.ok(r.deferred_news_ids.some(id=>id.includes('k2-horizon')),'Conflicting source date cannot become verified news');
+ assert.equal(edition.coverage.status,'partial');
+ assert.equal(edition.coverage.sources_failed.length,1);
+ assertNoScriptArchiveDiscovery(idx,ref.path);
+ assert.equal(idx.status,'edition_revision_1_'+(r.production_verified_at?'production_verified':'pending_production_verification'));
+ assert.equal(idx.last_successful_publish_at,verifiedPublicationClock());
 });

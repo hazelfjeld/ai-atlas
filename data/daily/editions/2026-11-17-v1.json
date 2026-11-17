@@ -1,0 +1,381 @@
+{
+  "schema": 1,
+  "edition_date": "2026-11-17",
+  "timezone": "America/Chicago",
+  "published_at": "2026-11-17T14:33:00Z",
+  "coverage": {
+    "start": "2026-11-16T14:17:06.808Z",
+    "end": "2026-11-17T14:25:56.620Z",
+    "status": "partial",
+    "note": "Bounded source-reviewed Nov 16–17 window: 11 accepted reports from first-party announcements, an official legal filing, Reuters reporting and research preprints. GitHub, Tencent and arXiv dates independently checked; Reuters financing/robotics plans reported, not independently replicated. California allegations are NOT court findings. K2 Horizon proposal deferred after a date conflict with the institute's September 3, 2026 release; VoxMel access and Garlic's original publication date remain unresolved. All five technology and three terminology proposals remain pending catalog deduplication, primary-source and license review. One arXiv API failure disclosed. Collection is partial, not exhaustive.",
+    "sources_checked": [
+      {
+        "url": "https://www.tencent.com/tencent-launches-hy4-flash-to-power-high-speed-cost-efficient-ai-deployment-for-everyday-workflows/",
+        "status": "opened_or_primary_listing_reviewed",
+        "checked_at": "2026-11-17T14:25:56.620Z"
+      },
+      {
+        "url": "https://github.blog/changelog/2026-11-16-bulk-start-ai-scan-for-repositories/",
+        "status": "opened_or_primary_listing_reviewed",
+        "checked_at": "2026-11-17T14:25:56.620Z"
+      },
+      {
+        "url": "https://github.blog/changelog/2026-11-16-control-where-github-copilot-customizations-come-from/",
+        "status": "opened_or_primary_listing_reviewed",
+        "checked_at": "2026-11-17T14:25:56.620Z"
+      },
+      {
+        "url": "https://github.blog/changelog/2026-11-16-vs-code-retires-the-local-harness-in-february-2027/",
+        "status": "opened_or_primary_listing_reviewed",
+        "checked_at": "2026-11-17T14:25:56.620Z"
+      },
+      {
+        "url": "https://github.blog/changelog/2026-11-16-github-copilot-models-deprecated-on-november-16-2026/",
+        "status": "opened_or_primary_listing_reviewed",
+        "checked_at": "2026-11-17T14:25:56.620Z"
+      },
+      {
+        "url": "https://oag.ca.gov/news/press-releases/it%E2%80%99s-golden-state-not-wild-west-attorney-general-bonta-sues-openai-over",
+        "status": "opened_or_primary_listing_reviewed",
+        "checked_at": "2026-11-17T14:25:56.620Z"
+      },
+      {
+        "url": "https://www.reuters.com/business/finance/french-robot-maker-genesis-raises-500-million-35-billion-valuation-2026-11-17/",
+        "status": "opened_or_primary_listing_reviewed",
+        "checked_at": "2026-11-17T14:25:56.620Z"
+      },
+      {
+        "url": "https://www.reuters.com/business/autos-transportation/gm-plans-20-boost-robotics-factory-costs-rise-2026-11-17/",
+        "status": "opened_or_primary_listing_reviewed",
+        "checked_at": "2026-11-17T14:25:56.620Z"
+      },
+      {
+        "url": "https://ifm.ai/k2/",
+        "status": "opened_or_primary_listing_reviewed",
+        "checked_at": "2026-11-17T14:25:56.620Z"
+      },
+      {
+        "url": "https://huggingface.co/papers/2611.21003",
+        "status": "opened_or_primary_listing_reviewed",
+        "checked_at": "2026-11-17T14:25:56.620Z"
+      },
+      {
+        "url": "https://huggingface.co/papers/2611.20254",
+        "status": "opened_or_primary_listing_reviewed",
+        "checked_at": "2026-11-17T14:25:56.620Z"
+      },
+      {
+        "url": "https://huggingface.co/papers/2611.21607",
+        "status": "opened_or_primary_listing_reviewed",
+        "checked_at": "2026-11-17T14:25:56.620Z"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.18113",
+        "status": "opened_or_primary_listing_reviewed",
+        "checked_at": "2026-11-17T14:25:56.620Z"
+      },
+      {
+        "url": "https://github.com/myboker/concertina",
+        "status": "opened_or_primary_listing_reviewed",
+        "checked_at": "2026-11-17T14:25:56.620Z"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.18104",
+        "status": "opened_or_primary_listing_reviewed",
+        "checked_at": "2026-11-17T14:25:56.620Z"
+      },
+      {
+        "url": "https://github.com/leonardo-alegria/garlic-llm",
+        "status": "opened_or_primary_listing_reviewed",
+        "checked_at": "2026-11-17T14:25:56.620Z"
+      },
+      {
+        "url": "https://www.anthropic.com/research",
+        "status": "opened_or_primary_listing_reviewed",
+        "checked_at": "2026-11-17T14:25:56.620Z"
+      },
+      {
+        "url": "https://huggingface.co/papers",
+        "status": "opened_or_primary_listing_reviewed",
+        "checked_at": "2026-11-17T14:25:56.620Z"
+      }
+    ],
+    "sources_failed": [
+      {
+        "url": "https://export.arxiv.org/api/query?search_query=cat:cs.LG&start=0&max_results=1",
+        "status": "web_reader_inaccessible",
+        "checked_at": "2026-11-17T14:25:56.620Z",
+        "note": "arXiv API unavailable through this tool; individual arXiv/Hugging Face paper pages were reviewed instead. No zero-results inference."
+      }
+    ]
+  },
+  "tldr": [
+    "Tencent's sparse Hy4 flash announcement and four GitHub developer/security updates join research on model distillation, model fingerprinting and large-scale robot policies; vendor and preprint claims remain attributed.",
+    "November 17 coverage also includes Reuters reporting on robotics financing and factory automation, plus a California lawsuit whose assertions are allegations rather than proven incidents. Eight catalog proposals and three news candidates remain deferred for further review."
+  ],
+  "news": [
+    {
+      "id": "ai-news-tencent-hy4-flash-2026-11-16",
+      "title": "Tencent unveils Hy4 flash: sparse, long-context multimodal inference",
+      "category": "models",
+      "tags": [
+        "LLM",
+        "MoE",
+        "multimodal",
+        "inference",
+        "agents"
+      ],
+      "summary": "Tencent announced a 224B-total-parameter Hy4 flash model with 12B active parameters, Engram components and a claimed one-million-token context. Tencent advertises TokenHub availability and lower token pricing than Hy4.",
+      "why_it_matters": "A new sparse-inference option may help teams balance long-context API usage with latency and expense.",
+      "caveat": "Parameter counts, relative performance, throughput and prices are Tencent-reported, not independently benchmarked. Announced future open weights are not available weights.",
+      "review_status": "publisher_checked_first_party_statement_attributed",
+      "release_status": "released_per_publisher",
+      "source_url": "https://www.tencent.com/tencent-launches-hy4-flash-to-power-high-speed-cost-efficient-ai-deployment-for-everyday-workflows/",
+      "publication_date": "2026-11-16",
+      "event_date": "2026-11-16",
+      "discovered_at": "2026-11-17T14:25:56.620Z",
+      "added_to_atlas_at": "2026-11-17T14:33:00Z",
+      "collection_classification": "catch_up",
+      "source_record_id": "ai-news:tencent-hy4-flash:2026-11-16"
+    },
+    {
+      "id": "ai-news-github-bulk-ai-scan-2026-11-16",
+      "title": "GitHub adds up-to-20-repository bulk starts for AI Scan",
+      "category": "developer_tools",
+      "tags": [
+        "AI security",
+        "code scanning",
+        "developer tools",
+        "agents"
+      ],
+      "summary": "GitHub made a public-preview bulk action to launch AI Scan across up to 20 repositories, with findings integrated into existing code-scanning alerts.",
+      "why_it_matters": "Security teams can investigate many codebases without launching separate scans for each repository.",
+      "caveat": "This is a workflow change to AI Scan, not evidence of complete vulnerability detection. Prior November 13 repository-level API controls are a separate already-covered feature.",
+      "review_status": "publisher_checked_first_party_statement_attributed",
+      "release_status": "public_preview",
+      "source_url": "https://github.blog/changelog/2026-11-16-bulk-start-ai-scan-for-repositories/",
+      "publication_date": "2026-11-16",
+      "event_date": "2026-11-16",
+      "discovered_at": "2026-11-17T14:25:56.620Z",
+      "added_to_atlas_at": "2026-11-17T14:33:00Z",
+      "collection_classification": "catch_up",
+      "source_record_id": "ai-news:github-bulk-ai-scan:2026-11-16"
+    },
+    {
+      "id": "ai-news-github-plugin-only-copilot-customization-2026-11-16",
+      "title": "GitHub introduces plugin-only rules for enterprise Copilot customizations",
+      "category": "agents",
+      "tags": [
+        "agents",
+        "MCP",
+        "AI security",
+        "enterprise",
+        "developer tools"
+      ],
+      "summary": "GitHub enterprise administrators can apply strictPluginOnlyCustomization to skills, agents, hooks, MCP servers and executable Copilot extensions, permitting controlled plugins or managed settings instead of standalone user/project variants.",
+      "why_it_matters": "Organizations gain a concrete enforcement layer for where agent tools and executable extensions originate.",
+      "caveat": "Plugin-only is not a marketplace allowlist; GitHub says administrators must combine it with marketplace policy to restrict which plugin sources are eligible. Plan and administrative availability apply.",
+      "review_status": "publisher_checked_first_party_statement_attributed",
+      "release_status": "available_per_publisher",
+      "source_url": "https://github.blog/changelog/2026-11-16-control-where-github-copilot-customizations-come-from/",
+      "publication_date": "2026-11-16",
+      "event_date": "2026-11-16",
+      "discovered_at": "2026-11-17T14:25:56.620Z",
+      "added_to_atlas_at": "2026-11-17T14:33:00Z",
+      "collection_classification": "catch_up",
+      "source_record_id": "ai-news:github-plugin-only-copilot-customization:2026-11-16"
+    },
+    {
+      "id": "ai-news-vscode-local-harness-retirement-notice-2026-11-16",
+      "title": "VS Code starts transition away from the Local Copilot harness",
+      "category": "developer_tools",
+      "tags": [
+        "coding agents",
+        "VS Code",
+        "harnesses",
+        "security"
+      ],
+      "summary": "GitHub says VS Code 1.146 deprecates the old Local harness and plans its removal in February 2027. The newer Copilot harness has been the default for new sessions since 1.143.",
+      "why_it_matters": "Coding-agent users must test compatibility of sessions, tools and customizations before the future removal.",
+      "caveat": "The old harness was deprecated, not removed on November 16. Local code execution still exists; choosing the newer harness does not automatically turn on sandboxing.",
+      "review_status": "publisher_checked_first_party_statement_attributed",
+      "release_status": "deprecation_announced_future_removal",
+      "source_url": "https://github.blog/changelog/2026-11-16-vs-code-retires-the-local-harness-in-february-2027/",
+      "publication_date": "2026-11-16",
+      "event_date": "2026-11-16",
+      "discovered_at": "2026-11-17T14:25:56.620Z",
+      "added_to_atlas_at": "2026-11-17T14:33:00Z",
+      "collection_classification": "catch_up",
+      "source_record_id": "ai-news:vscode-local-harness-retirement-notice:2026-11-16"
+    },
+    {
+      "id": "ai-news-github-copilot-nov16-model-deprecations-2026-11-16",
+      "title": "Copilot retires three older model choices, with documented exceptions",
+      "category": "models",
+      "tags": [
+        "coding agents",
+        "LLM",
+        "API compatibility",
+        "developer tools"
+      ],
+      "summary": "GitHub lists November 16 deprecations for Claude Opus 4.8, Claude Opus 5 and GPT-5.6 Terra across most Copilot experiences, recommending supported replacements.",
+      "why_it_matters": "Model-selection changes can break fixed-model assumptions in coding-agent evaluations and enterprise policies.",
+      "caveat": "GitHub explicitly retains Opus 4.8 for individual annual subscribers and Opus 5 for certain runtime refusal fallbacks; this is distinct from a separately announced December 14 deprecation batch.",
+      "review_status": "publisher_checked_first_party_statement_attributed",
+      "release_status": "deprecation_effective",
+      "source_url": "https://github.blog/changelog/2026-11-16-github-copilot-models-deprecated-on-november-16-2026/",
+      "publication_date": "2026-11-16",
+      "event_date": "2026-11-16",
+      "discovered_at": "2026-11-17T14:25:56.620Z",
+      "added_to_atlas_at": "2026-11-17T14:33:00Z",
+      "collection_classification": "catch_up",
+      "source_record_id": "ai-news:github-copilot-nov16-model-deprecations:2026-11-16"
+    },
+    {
+      "id": "ai-news-california-ag-openai-cyber-lawsuit-2026-11-16",
+      "title": "California files suit alleging unsafe AI-agent security testing",
+      "category": "governance",
+      "tags": [
+        "AI safety",
+        "agents",
+        "legal",
+        "cybersecurity",
+        "governance"
+      ],
+      "summary": "California's Attorney General announced a lawsuit filed November 16 alleging that OpenAI's experimental agent testing and cyber controls created risks and violated California law. The release cites prior incidents and investigative claims.",
+      "why_it_matters": "The filing brings AI-agent containment, authorization and testing safeguards into an active legal dispute.",
+      "caveat": "The filing and allegations are real; the allegations themselves are not established findings of fact or court judgments. Do not promote the claimed incidents or 80-incident figure into confirmed Atlas incident records.",
+      "review_status": "publisher_checked_official_filing_allegations_unadjudicated",
+      "release_status": "lawsuit_filed_allegations_unadjudicated",
+      "source_url": "https://oag.ca.gov/news/press-releases/it%E2%80%99s-golden-state-not-wild-west-attorney-general-bonta-sues-openai-over",
+      "publication_date": "2026-11-16",
+      "event_date": "2026-11-16",
+      "discovered_at": "2026-11-17T14:25:56.620Z",
+      "added_to_atlas_at": "2026-11-17T14:33:00Z",
+      "collection_classification": "catch_up",
+      "source_record_id": "ai-news:california-ag-openai-cyber-lawsuit:2026-11-16"
+    },
+    {
+      "id": "ai-news-genesis-ai-series-a-eno-robot-2026-11-17",
+      "title": "Genesis AI reports $500M round for Eno mobile manipulation robot",
+      "category": "robotics",
+      "tags": [
+        "robotics",
+        "physical AI",
+        "investment",
+        "automation"
+      ],
+      "summary": "Reuters reports French robotics company Genesis AI says it raised $500 million at a $3.5 billion valuation and will expand production, data collection and training for its wheeled Eno robot.",
+      "why_it_matters": "Funding and small customer tests point to continued investment in real-world manipulation, alongside model-training and robotics data needs.",
+      "caveat": "The financing terms and prospective broader customer rollout in 2027 are reported and forward-looking; funding does not establish autonomous production readiness or generalization.",
+      "review_status": "publisher_checked_reuters_reporting_attributed",
+      "release_status": "funding_announced;future_robot_rollout_plan",
+      "source_url": "https://www.reuters.com/business/finance/french-robot-maker-genesis-raises-500-million-35-billion-valuation-2026-11-17/",
+      "publication_date": "2026-11-17",
+      "event_date": "2026-11-17",
+      "discovered_at": "2026-11-17T14:25:56.620Z",
+      "added_to_atlas_at": "2026-11-17T14:33:00Z",
+      "collection_classification": "current_day",
+      "source_record_id": "ai-news:genesis-ai-series-a-eno-robot:2026-11-17"
+    },
+    {
+      "id": "ai-news-gm-north-america-robotics-expansion-plan-2026-11-17",
+      "title": "Reuters: GM targets more plant robotics by 2028",
+      "category": "robotics",
+      "tags": [
+        "robotics",
+        "industry",
+        "automation",
+        "manufacturing"
+      ],
+      "summary": "Reuters reports that sources familiar with the plans say GM targets roughly 20% more robotics and automation across North American factories by 2028, including developing its own mobile robots in Indiana.",
+      "why_it_matters": "An industrial deployment plan illustrates demand for practical mobile-robot systems beyond laboratory benchmarks.",
+      "caveat": "This is Reuters source-based reporting on a target, not a completed 20% expansion or verification of independent robot performance. Operational and workforce effects remain uncertain.",
+      "review_status": "publisher_checked_reuters_reporting_attributed",
+      "release_status": "reported_plan_not_completed",
+      "source_url": "https://www.reuters.com/business/autos-transportation/gm-plans-20-boost-robotics-factory-costs-rise-2026-11-17/",
+      "publication_date": "2026-11-17",
+      "event_date": "2026-11-17",
+      "discovered_at": "2026-11-17T14:25:56.620Z",
+      "added_to_atlas_at": "2026-11-17T14:33:00Z",
+      "collection_classification": "current_day",
+      "source_record_id": "ai-news:gm-north-america-robotics-expansion-plan:2026-11-17"
+    },
+    {
+      "id": "ai-news-scalevla-552b-robot-policy-2611-21607",
+      "title": "ScaleVLA paper studies a 552B backbone for robot manipulation",
+      "category": "robotics",
+      "tags": [
+        "robotics",
+        "VLA",
+        "vision",
+        "multimodal",
+        "research"
+      ],
+      "summary": "ScaleVLA connects a 552B vision-language backbone to an action diffusion transformer and reports better sample efficiency and contact-sensitive manipulation than smaller baselines in its chosen evaluations.",
+      "why_it_matters": "Provides testable evidence toward studying whether large pretrained representations can benefit low-demonstration robotic policies.",
+      "caveat": "Only the researchers' comparisons are available; the paper is not a verified industrial deployment, and 552B scale introduces significant inference cost and reproducibility constraints.",
+      "review_status": "publisher_checked_research_preprint_not_replicated",
+      "release_status": "research_preprint",
+      "source_url": "https://huggingface.co/papers/2611.21607",
+      "publication_date": "2026-11-16",
+      "event_date": "2026-11-16",
+      "discovered_at": "2026-11-17T14:25:56.620Z",
+      "added_to_atlas_at": "2026-11-17T14:33:00Z",
+      "collection_classification": "catch_up",
+      "source_record_id": "ai-news:scalevla-552b-robot-policy:2611.21607"
+    },
+    {
+      "id": "ai-news-concertina-layer-folding-distillation-2611-18113",
+      "title": "Concertina folds pretrained layers into a smaller weight-sharing student",
+      "category": "research",
+      "tags": [
+        "SLM",
+        "LLM",
+        "distillation",
+        "compression",
+        "training"
+      ],
+      "summary": "Concertina reuses teacher weights by executing a shared block repeatedly with initialized low-rank layer corrections and token-dependent gates; the authors report a Qwen3-4B derived 2.27B model trained on 22B distillation tokens.",
+      "why_it_matters": "Could reduce the data needed to derive a compact student when good teacher checkpoints are available, without training a new network from scratch.",
+      "caveat": "The authors' 84% average retention over eight tests and comparison with other baselines are not independently reproduced; student performance may differ outside the test suite. November 13 paper is catch-up.",
+      "review_status": "publisher_checked_research_preprint_not_replicated",
+      "release_status": "research_with_code",
+      "source_url": "https://arxiv.org/abs/2611.18113",
+      "publication_date": "2026-11-13",
+      "event_date": "2026-11-13",
+      "discovered_at": "2026-11-17T14:25:56.620Z",
+      "added_to_atlas_at": "2026-11-17T14:33:00Z",
+      "collection_classification": "catch_up",
+      "source_record_id": "ai-news:concertina-layer-folding-distillation:2611.18113"
+    },
+    {
+      "id": "ai-news-contagious-llm-fingerprints-audit-2611-18104",
+      "title": "Model-fingerprint paper finds conversational style can undermine API audits",
+      "category": "evaluation",
+      "tags": [
+        "LLM",
+        "evaluation",
+        "model provenance",
+        "API",
+        "security"
+      ],
+      "summary": "A November 13 preprint reports that model-identification fingerprints shift toward the authors of earlier conversation turns, weakening some mid-conversation API-substitution checks. Its Lineup technique compares a reply with samples drawn on the same conversational history.",
+      "why_it_matters": "Auditors may need history-matched references rather than assuming fresh-prompt model fingerprints hold across long sessions.",
+      "caveat": "Research experiments and author-reported error rates do not establish that a particular provider substituted models or that Lineup universally detects it. This is a catch-up research finding.",
+      "review_status": "publisher_checked_research_preprint_not_replicated",
+      "release_status": "research_preprint",
+      "source_url": "https://arxiv.org/abs/2611.18104",
+      "publication_date": "2026-11-13",
+      "event_date": "2026-11-13",
+      "discovered_at": "2026-11-17T14:25:56.620Z",
+      "added_to_atlas_at": "2026-11-17T14:33:00Z",
+      "collection_classification": "catch_up",
+      "source_record_id": "ai-news:contagious-llm-fingerprints-audit:2611.18104"
+    }
+  ],
+  "technologies": [],
+  "terms": [],
+  "site_changes": [],
+  "corrections": []
+}

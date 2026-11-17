@@ -329,9 +329,17 @@
       "sha256": "04f43a36629e1c5a7ec4542b15efd24c20c69051fdd20019d69fa08649feb333",
       "bytes": 9781,
       "published_at": "2026-11-16T14:27:22Z"
+    },
+    {
+      "date": "2026-11-17",
+      "revision": 1,
+      "path": "data/daily/editions/2026-11-17-v1.json",
+      "sha256": "75379d4bf69768a080f1c934b38f31f84140a999753c17f79af7e4ba15cb4f5d",
+      "bytes": 21535,
+      "published_at": "2026-11-17T14:33:00Z"
     }
   ],
   "last_successful_publish_at": "2026-11-16T14:47:10Z",
-  "status": "edition_revision_1_production_verified",
-  "coverage_note": "2026-11-16 v1 — Two November 16 first-party announcements (Alibaba/Qwen4-Max and Governor Barr's speech) plus two dated catch-up items (Meituan avatar release November 15 and Microsoft Lazarus research disclosure November 10). Source and event dates kept distinct; 4 proposed catalog entries remain deferred pending deduplication, primary-reference and license checks. This is a bounded partial collection, not an exhaustive sweep. Qwen's secondary official page returned no readable text; the dated Alibaba Cloud primary announcement was corroborated via indexed first-party source."
+  "status": "edition_revision_1_pending_production_verification",
+  "coverage_note": "2026-11-17 v1 — Bounded source-reviewed Nov 16–17 window: 11 accepted reports from first-party announcements, an official legal filing, Reuters reporting and research preprints. GitHub, Tencent and arXiv dates independently checked; Reuters financing/robotics plans reported, not independently replicated. California allegations are NOT court findings. K2 Horizon proposal deferred after a date conflict with the institute's September 3, 2026 release; VoxMel access and Garlic's original publication date remain unresolved. All five technology and three terminology proposals remain pending catalog deduplication, primary-source and license review. One arXiv API failure disclosed. Collection is partial, not exhaustive."
 }

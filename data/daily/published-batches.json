@@ -1371,6 +1371,79 @@
       "production_workflow_run_id": 43887023908,
       "githack_workflow_run_id": 43887023987,
       "verification_scope": "Exact tested main 0cb759609d9d500d2285e9eeb8f9087add11f73a passed catalog/GitHack workflow 43887023987 (343 Node tests and GitHack parity) and Cloudflare workflow 43887023908 (production asset HTTP, 66 site-browser and 40 Games checks), completed at 2026-11-16T14:47:10Z. Source batch, immutable edition bytes and SHA256 verified. Exact dated query permalink was not separately reopened outside CI."
+    },
+    {
+      "batch_id": "atlas-daily-20261117-bounded-0820ct-verified-relations-b",
+      "source_branch": "atlas-daily-staging",
+      "source_commit": "a0434a7e700d03bd36b393133e0e0ba8b05bf052",
+      "source_batch_path": "daily-queue/batches/2026-11-17-atlas-daily-20261117-bounded-0820ct-verified-relations-b.json",
+      "source_batch_sha256": "2a9db3de61d5d1f3d1735b914995f57e3938a16a08ab248645f6652e3c7c09a5",
+      "source_batch_bytes": 53783,
+      "edition_date": "2026-11-17",
+      "validation_result": "sha256_bytes_record_counts_unique_ids_dates_dedup_and_independent_primary_source_review",
+      "status": "partially_published_with_3_deferred_news_and_8_deferred_catalog_proposals",
+      "publication_outcome": "immutable_revision_1_pending_production_verification",
+      "publication_edition": "2026-11-17-v1",
+      "accepted_news_ids": [
+        "ai-news-tencent-hy4-flash-2026-11-16",
+        "ai-news-github-bulk-ai-scan-2026-11-16",
+        "ai-news-github-plugin-only-copilot-customization-2026-11-16",
+        "ai-news-vscode-local-harness-retirement-notice-2026-11-16",
+        "ai-news-github-copilot-nov16-model-deprecations-2026-11-16",
+        "ai-news-california-ag-openai-cyber-lawsuit-2026-11-16",
+        "ai-news-genesis-ai-series-a-eno-robot-2026-11-17",
+        "ai-news-gm-north-america-robotics-expansion-plan-2026-11-17",
+        "ai-news-scalevla-552b-robot-policy-2611-21607",
+        "ai-news-concertina-layer-folding-distillation-2611-18113",
+        "ai-news-contagious-llm-fingerprints-audit-2611-18104"
+      ],
+      "source_news_ids": [
+        "ai-news:tencent-hy4-flash:2026-11-16",
+        "ai-news:github-bulk-ai-scan:2026-11-16",
+        "ai-news:github-plugin-only-copilot-customization:2026-11-16",
+        "ai-news:vscode-local-harness-retirement-notice:2026-11-16",
+        "ai-news:github-copilot-nov16-model-deprecations:2026-11-16",
+        "ai-news:california-ag-openai-cyber-lawsuit:2026-11-16",
+        "ai-news:genesis-ai-series-a-eno-robot:2026-11-17",
+        "ai-news:gm-north-america-robotics-expansion-plan:2026-11-17",
+        "ai-news:scalevla-552b-robot-policy:2611.21607",
+        "ai-news:concertina-layer-folding-distillation:2611.18113",
+        "ai-news:contagious-llm-fingerprints-audit:2611.18104"
+      ],
+      "deferred_news_ids": [
+        "ai-news:k2-horizon-open-model-fleet:2611.21003",
+        "ai-news:voxmel-tokenizer-free-tts:2611.20254",
+        "ai-news:garlic-llm-offline-ps4-inference:2026-11-17-discovery"
+      ],
+      "deferred_catalog_proposal_ids": [
+        "tech-proposal:k2-horizon-model-fleet:2026-11-17",
+        "tech-proposal:tencent-hy4-flash:2026-11-17",
+        "tech-proposal:voxmel-tts-research:2026-11-17",
+        "tech-proposal:concertina-layer-folding:2026-11-17",
+        "tech-proposal:garlic-llm-ps4:2026-11-17",
+        "term-proposal:layer-folding-distillation:2026-11-17",
+        "term-proposal:mixture-of-value-attention:2026-11-17",
+        "term-proposal:history-conditioned-model-fingerprint:2026-11-17"
+      ],
+      "rejected_ids": [],
+      "counts": {
+        "news_published": 11,
+        "technology_added": 0,
+        "term_added": 0,
+        "corrections": 0,
+        "news_deferred": 3,
+        "catalog_deferred": 8,
+        "technology_updated": 0
+      },
+      "review_notes": "Bounded source-reviewed Nov 16–17 window: 11 accepted reports from first-party announcements, an official legal filing, Reuters reporting and research preprints. GitHub, Tencent and arXiv dates independently checked; Reuters financing/robotics plans reported, not independently replicated. California allegations are NOT court findings. K2 Horizon proposal deferred after a date conflict with the institute's September 3, 2026 release; VoxMel access and Garlic's original publication date remain unresolved. All five technology and three terminology proposals remain pending catalog deduplication, primary-source and license review. One arXiv API failure disclosed. Collection is partial, not exhaustive.",
+      "publication_history": [
+        {
+          "edition": "2026-11-17-v1",
+          "status": "pending_production_verification",
+          "note": "Immutable source-qualified Nov 17 edition, checksums and receipt prepared on main; production asset HTTP/GitHack/hosted browser verification not yet complete.",
+          "prepared_at": "2026-11-17T14:33:00Z"
+        }
+      ]
     }
   ]
 }
