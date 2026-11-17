@@ -3396,52 +3396,52 @@
   },
   "MLD-0680": {
     "path": "terms/MLD-0680-lora-alpha.html",
-    "sha256": "dbc84b88dda49f5976a07d772425b99f71eedfb48e3da5db48542e5978033b7d",
+    "sha256": "722c10fac11fba86ba9a288edca08d02f18428e9dda19318c055b9f537755fc2",
     "expanded": false
   },
   "MLD-0681": {
     "path": "terms/MLD-0681-lora-rank.html",
-    "sha256": "a3e7e5a6e8655d39f8ab5465fd11da5547eae219b47daf28573a67b9882e5993",
+    "sha256": "6dddd44f8562e8400d81baf13fb4050fca6c115e5fd02b05dc38cede75323386",
     "expanded": false
   },
   "MLD-0682": {
     "path": "terms/MLD-0682-loss-function.html",
-    "sha256": "1f25e22481fb66cce5c84a1573ad701b96c8e0dc8bed01b8c83fd285998b1d8c",
+    "sha256": "b77440b1e298e74772073918503a7453ee7834b985c7303db80ed531087ea534",
     "expanded": false
   },
   "MLD-0683": {
     "path": "terms/MLD-0683-loss-landscape.html",
-    "sha256": "d3fcbff65310d5e8d6bb9b2aaa4937489ce3fc5b3fb124963e4ace0a173c2fc8",
+    "sha256": "554396ee4f45b22c0bfa705916e05c227a6cdffe19974f9dc999977f9f89b37a",
     "expanded": false
   },
   "MLD-0684": {
     "path": "terms/MLD-0684-loss-masking.html",
-    "sha256": "162bd1639f250800442a0ad0e7f4ac97ded6745e7e1fc0b11358c9db43677c75",
+    "sha256": "db8dd929a8c7a81996d5e1f0e06b79ab18a4c8a07e6940c48cb766d34b331065",
     "expanded": false
   },
   "MLD-0685": {
     "path": "terms/MLD-0685-loss-scaling.html",
-    "sha256": "a464726cd7e418d760d37144de06a16d2a8748f0032450b46243301788117cf0",
+    "sha256": "53b92722a6236cda80e20f68f7e665e22cb4095bcad6da6e0a0e4a08b2fe7ff4",
     "expanded": false
   },
   "MLD-0686": {
     "path": "terms/MLD-0686-lost-in-the-middle-effect.html",
-    "sha256": "0acaaade18eba9de722a91d5e787b3a26200ec0bed62b768809f2b39c38b3399",
+    "sha256": "1faaf010b8bee6f832c437b85dc97801d450ee720fd75743c4215a99b44f9135",
     "expanded": false
   },
   "MLD-0687": {
     "path": "terms/MLD-0687-low-bit-inference.html",
-    "sha256": "d5cd69daf60cb4685fbb4814401e40407e5c90827a261db8f41d49da2d5ba9b8",
+    "sha256": "fbd80bf45050cb16cfeab6308f5fa69a26e8be449ee35646a3f7325e674e988d",
     "expanded": false
   },
   "MLD-0688": {
     "path": "terms/MLD-0688-low-rank-adaptation.html",
-    "sha256": "a3b0f2c3517c2d99883b95a24368163553a8555e52da200acb949e93141dc012",
+    "sha256": "4b998b22adfeef1ce833c8adc9739d2274b6b792632fbb3a94f8cc20221316c4",
     "expanded": false
   },
   "MLD-0689": {
     "path": "terms/MLD-0689-low-rank-approximation.html",
-    "sha256": "14608316b6a5368cdad123f2069417fc577b36bd562a068f3de83f4562f883bd",
+    "sha256": "2fd136bf18e02e6018e298d59936b8a9b98cd78d3566d4f8c1417bcb19b24ac5",
     "expanded": false
   },
   "MLD-0690": {
