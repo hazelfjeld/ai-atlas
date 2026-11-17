@@ -312,7 +312,12 @@ def render_standalone_nav(path):
     )
     # All native and reference rails now use the same first-paint component
     # boundary. Keep each page's article landmark outside this navigation.
-    return markup
+    # Match Discover's section-aware mobile navigation announcement at first
+    # paint. Native pages retain this context without needing JavaScript.
+    toggle_label = 'aria-label="Toggle navigation"'
+    assert markup.count(toggle_label) == 1, "Unexpected mobile navigation toggle: " + path
+    return markup.replace(toggle_label,
+                          'aria-label="Toggle navigation · ' + escape(page_title) + '"', 1)
 
 
 # Discover has a distinct interactive sidebar, but uses the same canonical
