@@ -4171,27 +4171,27 @@
   },
   "MLD-0835": {
     "path": "terms/MLD-0835-offline-distillation.html",
-    "sha256": "044ee38521645ef4fd7e7f2111c7f37d078cfe112ce2f6e1576ad18f16eb36e3",
+    "sha256": "80173eccd0ee3b3f0642f8b1b0187c99b5fb6522624afbd1e2689b7ba4925908",
     "expanded": false
   },
   "MLD-0836": {
     "path": "terms/MLD-0836-offline-reinforcement-learning.html",
-    "sha256": "e95bd7a0fe2ac5904c8eac83c759f4f62fd40ec84e562955115b45b9f8a559e9",
+    "sha256": "e599c327f3995f50822f3d5bf90513a96e2b3bdb7a8d737d846240c7e7e290f3",
     "expanded": false
   },
   "MLD-0837": {
     "path": "terms/MLD-0837-on-device-inference.html",
-    "sha256": "4a902df62d91198b650485b378a6dfc9608c5b932e0c580c84012abde08dab0f",
+    "sha256": "2c3ea6825383bf601c47093a7884edf398552c3c0a6b3fe14f22dd15a680c979",
     "expanded": false
   },
   "MLD-0838": {
     "path": "terms/MLD-0838-on-policy-distillation.html",
-    "sha256": "bcb99c867a96deeae11ba043210681d7b316cc8ec248d7439f740e97e672c02a",
+    "sha256": "22b04ba5116748e8588bb740d268b1b025a34a2d93a9de38e209244939a39365",
     "expanded": false
   },
   "MLD-0839": {
     "path": "terms/MLD-0839-on-policy-learning.html",
-    "sha256": "ca8c955c0d82879bd5e3dd1edf441a2383c41a9c3df0e8e2ca08d01e4328c22f",
+    "sha256": "972bd23fab7c01e1b815bafa2bd3704216b2fa5dd396862cf57651d4e1b708ec",
     "expanded": false
   },
   "MLD-0840": {

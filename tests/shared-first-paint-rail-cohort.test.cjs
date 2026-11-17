@@ -13,8 +13,8 @@ const links = html => {
   return [...chunk.matchAll(/<a\b[^>]*>([^<]+)<\/a>/g)].map(m => m[1]);
 };
 
-test('concept references through MLD-0834 share Discover first-paint rail without scripts', () => {
-  assert.match(read('scripts/build_term_pages.py'), /int\(path\[10:14\]\) <= 834/,
+test('concept references through MLD-0839 share Discover first-paint rail without scripts', () => {
+  assert.match(read('scripts/build_term_pages.py'), /int\(path\[10:14\]\) <= 839/,
     'deterministic reference builder must preserve the migrated cohort');
   const technology = read('technology/TECH-0216-pytorch.html');
   assert.ok(read('index.html').includes('class="sidebar-bottom"'),
@@ -39,7 +39,7 @@ test('concept references through MLD-0834 share Discover first-paint rail withou
     assert.ok(html.includes('<a class="skip" href="#main">'), id);
     assert.ok(html.includes('href="../index.html#/search"'), id);
   }
-  const next = manifest['MLD-0835'];
+  const next = manifest['MLD-0840'];
   assert.ok(next, 'next stable concept ID remains indexed');
   const untouched = read(next.path);
   assert.doesNotMatch(untouched, /sidebar-bottom site-chrome__bottom/,
