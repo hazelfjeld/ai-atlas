@@ -3446,7 +3446,7 @@
   },
   "MLD-0690": {
     "path": "terms/MLD-0690-lstm.html",
-    "sha256": "97138fb53c08b759f9092ed091ae3bc4eafae0e940d20b208c25a3d331786e50",
+    "sha256": "f73d18b0188deafe5943a9a3a0d9d39f78e41bb1155f4070cdf8c10f001c3b58",
     "expanded": false
   },
   "MLD-0691": {
@@ -3456,92 +3456,92 @@
   },
   "MLD-0692": {
     "path": "terms/MLD-0692-macro-averaging.html",
-    "sha256": "36f32408fe5ad8d3a3c015040d272c76a8f7ae9f8dc37a05badddde6378f7ad5",
+    "sha256": "117b2e681efe1053a028d536d70ab186bd4cc4f1c118ec510f97788e8c1bf21e",
     "expanded": false
   },
   "MLD-0693": {
     "path": "terms/MLD-0693-majority-voting.html",
-    "sha256": "65c7fbf0c935b9ecbad484c3c36e72d49cb8052ae61f8d47a125cb55bed48171",
+    "sha256": "908ba79fe7f6a769dbd8602cee904dda4e02e54c6898b84206bd2aa7fb7092da",
     "expanded": false
   },
   "MLD-0694": {
     "path": "terms/MLD-0694-mamba.html",
-    "sha256": "b4fa7b1ddf119665cb741c2241a7b3e07b70f6cc10e0ebb9bc66753609e16942",
+    "sha256": "4fa38f4b3d33c031a7a8b25294f522d98a1057cc7ec5139e0900466ff7747ecc",
     "expanded": false
   },
   "MLD-0695": {
     "path": "terms/MLD-0695-manifold-learning.html",
-    "sha256": "a7ccd0d8cdb2a731d676d941f1fecbc60aa60962bb02c00b4ab8e3b05e3c4620",
+    "sha256": "e42fa1988d2f11379a08f734ec096064e4740bb376d9eca611a065f6b06bde87",
     "expanded": false
   },
   "MLD-0696": {
     "path": "terms/MLD-0696-margin.html",
-    "sha256": "1f99a0a4f61e01c1a185dcbac5d079bb486c17519725c595a6cb1db68eff2b3c",
+    "sha256": "590dcc48f69c70eb4941119fafdc6399cbfe445699a513c99a36fbe68c460cbf",
     "expanded": false
   },
   "MLD-0697": {
     "path": "terms/MLD-0697-marginal-probability.html",
-    "sha256": "16829947b781254972284d87d2f11c4e767d05465933a5b5ce0a3f745412a61a",
+    "sha256": "5bec48987669e9cac1c47616bb6c516bffb2bf78ddcf583b3b4f5e518ea677bd",
     "expanded": false
   },
   "MLD-0698": {
     "path": "terms/MLD-0698-markov-chain.html",
-    "sha256": "ccc5ab3b1627e2c2067e78f2c80c7b8b71704f85fbaa4f7e6f7369394ed9d0e2",
+    "sha256": "d3ee1d9804c1d0285ad4a27f5f9a09ae45a5c46490f53366ddeb6005e34217f7",
     "expanded": false
   },
   "MLD-0699": {
     "path": "terms/MLD-0699-markov-chain-monte-carlo.html",
-    "sha256": "73569de277b88b903fb0712058327cb624035744d7c2fe940d3f21528ab28935",
+    "sha256": "8a6ab2fa8fc2e3818d7fe8f7b0055d916d28b7641fa5ac84ac6c125895891a3c",
     "expanded": false
   },
   "MLD-0700": {
     "path": "terms/MLD-0700-markov-decision-process.html",
-    "sha256": "2b0c9cfadad7bbb65da9a1cfe0849d3ccb61bcc157dcd1b4098db6022f46e0b8",
+    "sha256": "082e53f7855d4e7f7f34273022b1c8a55b5c1101a226c07d95b5c5270ac294c3",
     "expanded": false
   },
   "MLD-0701": {
     "path": "terms/MLD-0701-markov-property.html",
-    "sha256": "f981ed32a7bd93d990569d49d0d026fdc7565fbfcb77378dbda626956e63fdef",
+    "sha256": "c7694f4acfd4b31a9cbcb51b6b572f584b1e58e529859fee6d36eaab66b573f2",
     "expanded": false
   },
   "MLD-0702": {
     "path": "terms/MLD-0702-masked-language-modeling.html",
-    "sha256": "2ab4b1c94d09599d2c0263963c62a1e69e3864952c49b5e1dd43f062121d3d34",
+    "sha256": "e6d4de68bb2a257341459e02473bf2e12bbf86589e17433187975429fc81b6f1",
     "expanded": false
   },
   "MLD-0703": {
     "path": "terms/MLD-0703-matrix.html",
-    "sha256": "41b3fd5934da10e63c6be6a1dbc094302452ef7ede9aba579aa9fdfead10a115",
+    "sha256": "906418e7820d6e83d16558222b04c2cdeded85149e46f7b97a8be2476d402e40",
     "expanded": false
   },
   "MLD-0704": {
     "path": "terms/MLD-0704-matrix-factorization.html",
-    "sha256": "82dca6fb428f3f1d1a8084e46c75e1aaae5d3002a8908ffaa9dafcb82b47beb3",
+    "sha256": "c32b8872430ebaf64818fb4055eb2dde944bf5a34117cdf41764c92ef4a4515b",
     "expanded": false
   },
   "MLD-0705": {
     "path": "terms/MLD-0705-matrix-multiplication.html",
-    "sha256": "9df19edb44b63a8706a405105d1577776e22756c68afc095b705a4dc7a4380a6",
+    "sha256": "943abc652d42700d64528f1c622df58d69a63e1de1c131621e046849855d24c0",
     "expanded": false
   },
   "MLD-0706": {
     "path": "terms/MLD-0706-matrix-rank.html",
-    "sha256": "3d37b955a364fca6d8d748dff7b1ccdd5b414af292fb4c80db93d76ef9ea2aae",
+    "sha256": "ecd4325c5ff765613dd810bbfba8fcb5ed0e198a07632e924d0d294db9abf807",
     "expanded": false
   },
   "MLD-0707": {
     "path": "terms/MLD-0707-matthews-correlation-coefficient.html",
-    "sha256": "bdee1164ff8eaffbfbb713b30cd426465244ff668b23d986515aa25c2b18e8a0",
+    "sha256": "6617c78a6310fd9b14ffb9b459281d05bd2748bcaf290734d56190727f88ab73",
     "expanded": false
   },
   "MLD-0708": {
     "path": "terms/MLD-0708-max-pooling.html",
-    "sha256": "2102a664fe8cf8a8e8e7db97e2a8776d9c3c361ab8d4eba64def427e59abcbe9",
+    "sha256": "5cfbd20b14af30ffc6e7d32c66b1a6d7bf23e7cbdc4c349737756a356cce51cb",
     "expanded": false
   },
   "MLD-0709": {
     "path": "terms/MLD-0709-maximum-a-posteriori-estimation.html",
-    "sha256": "4d0067cee10868f4b867dc6cdbec7213f410387ab3441a4c135b990789fbc27b",
+    "sha256": "c4b380da281825a4d4f31fac9d5609866617ac12223623e67644a62608f9b3b6",
     "expanded": false
   },
   "MLD-0710": {
