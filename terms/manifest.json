@@ -2326,17 +2326,17 @@
   },
   "MLD-0466": {
     "path": "terms/MLD-0466-global-attention.html",
-    "sha256": "9a147cfc85858c5a2f8c598fb181df958cbc89af677a70c4c89bb4035296575b",
+    "sha256": "fcb189702fbd9e2afc0d9bd9de606beb1e4b71f8f340551e36c2dcf183a55775",
     "expanded": false
   },
   "MLD-0467": {
     "path": "terms/MLD-0467-global-average-pooling.html",
-    "sha256": "6f9af50f904d77cd276c4c7d46aec1a72a38d2545e173c37efa671ba0e54a6ad",
+    "sha256": "3400d8c966c56c86c2be7583ab963d0452389b86ab034fee00175bc1a03c101b",
     "expanded": false
   },
   "MLD-0468": {
     "path": "terms/MLD-0468-global-minimum.html",
-    "sha256": "504004a83d4e116b1521cd922ebb4f3f3162359b28138576b58557e3dc9480ec",
+    "sha256": "6cee0ed5297b0d758f724e0a966ab7ed649e8b1b274dc8ff7fab9a4079ae210d",
     "expanded": false
   },
   "MLD-0469": {
@@ -2351,37 +2351,37 @@
   },
   "MLD-0471": {
     "path": "terms/MLD-0471-gptq.html",
-    "sha256": "d6c1451be9519ef006b808a5d03400593f3445b9795654001de1d5e925d3d6e0",
+    "sha256": "75b9152c8672309d19f54bc9b2a9315d47824ba4b75f175860ad0bb0c77866de",
     "expanded": false
   },
   "MLD-0472": {
     "path": "terms/MLD-0472-gpu.html",
-    "sha256": "42e1927cbd2f9c6b49f72c0697d42a1b0e63dea2163fc8d506b1bdd7df0abd79",
+    "sha256": "87f148a9825e28f1ec11fc6d60d21f150f670016de55abc9e955d8a592d7ddee",
     "expanded": false
   },
   "MLD-0473": {
     "path": "terms/MLD-0473-grad-cam.html",
-    "sha256": "9429629c0605feef3aacca37950c461ada340174f8e53596a282275302656cda",
+    "sha256": "3677bb515896536a9111753dba4196c7f2849d04640d9fc67795dd3b7cbf3d9d",
     "expanded": false
   },
   "MLD-0474": {
     "path": "terms/MLD-0474-gradient.html",
-    "sha256": "b20947637e751b5ce27084b2f77029db19a256889304142f2862d02758014d41",
+    "sha256": "0e072ffdac4f695a75a11de531928dc31bee1727bc1568c8440f9e98dd339565",
     "expanded": false
   },
   "MLD-0475": {
     "path": "terms/MLD-0475-gradient-accumulation.html",
-    "sha256": "5165adb3cec2d66859787dbd641b622c1096ea831bed47de864b8f5e33a98216",
+    "sha256": "ee0a7e5c078a88a2b5cb5983406c2fb0bf0f00c8404992f02f6038c2398a2254",
     "expanded": false
   },
   "MLD-0476": {
     "path": "terms/MLD-0476-gradient-boosting.html",
-    "sha256": "7fc751ca4a62b1b9772f150e0fa543d5b7702cfa798d907b44af0652366f2f29",
+    "sha256": "b358769620311c7e0c6278e2ac430459d42f79277bdf6c165e02d2d17764b7c3",
     "expanded": false
   },
   "MLD-0477": {
     "path": "terms/MLD-0477-gradient-clipping.html",
-    "sha256": "cd8c245aa5b41170be3080f720e0d46fe1e94e74e2b8ef20cc7f5d5998037c64",
+    "sha256": "4b614742c8642f2b6654a8f3de48b605e6196c5f2327d3a2e40f4281d9b6c5ab",
     "expanded": false
   },
   "MLD-0478": {
@@ -2391,57 +2391,57 @@
   },
   "MLD-0479": {
     "path": "terms/MLD-0479-gradient-estimator.html",
-    "sha256": "0ed8663f48ed15cfe4345cf3e2cce6e6c5460dbaa68e43d73dcd158e643cf22f",
+    "sha256": "de0befe922a2bef50784a59a96d94e2912b1eabbd0e409a3fbbf06395b7f38db",
     "expanded": false
   },
   "MLD-0480": {
     "path": "terms/MLD-0480-gradient-explosion.html",
-    "sha256": "01246f20d03c57c0ed3fb026619b53b44675d94d0366d7f219ac66e3b13800a3",
+    "sha256": "38d973d25b7758dfdb85c46a35bc27b7d8b5c8846bbfa38b4f13f43c64cca8bf",
     "expanded": false
   },
   "MLD-0481": {
     "path": "terms/MLD-0481-gradient-noise.html",
-    "sha256": "bf9dfb77e90797db80b7f9d0985c6c8dd8e7abd48bd0d599617acad205df3ce4",
+    "sha256": "34a3acdfd79a05f2a99bb7907fd1051e73cd8b8b028466b34d04223a68cbe1c1",
     "expanded": false
   },
   "MLD-0482": {
     "path": "terms/MLD-0482-gradient-norm.html",
-    "sha256": "6eb647461336baab2e1ca50881ed512654931b668d7da3757109676a6a30d828",
+    "sha256": "8562b05c5463556aae9d2537a387c9c43a27603a4d62966d3e4c4a9dab6466f9",
     "expanded": false
   },
   "MLD-0483": {
     "path": "terms/MLD-0483-gradient-penalty.html",
-    "sha256": "4501321cae6d7dde43c3b362a293a2229d85de332dc6f59841c9ba358a3d74c5",
+    "sha256": "9dc0ccc959ce9483bd33c6e68e8296132cca0794dc12bbd282f199b16d3645b4",
     "expanded": false
   },
   "MLD-0484": {
     "path": "terms/MLD-0484-gradient-boosted-decision-trees.html",
-    "sha256": "e57bb367d5c99b96737622422aa507054ac2423079c322a75a2cc547e4118a4d",
+    "sha256": "f20754cb814c715a8aa3835250d0b1ba1eb6534b33a316c60d8e2a5769c372ee",
     "expanded": false
   },
   "MLD-0485": {
     "path": "terms/MLD-0485-grammar-constrained-decoding.html",
-    "sha256": "237a2aa3709b5ad600df54a1314d8ce6695aa80c62b620f81739e24a6bdfabff",
+    "sha256": "8fef6cdef4e12958d2181eec7f59ce1b2a910f3202fd5a9855b60474f83f1fdf",
     "expanded": false
   },
   "MLD-0486": {
     "path": "terms/MLD-0486-graph-attention-network.html",
-    "sha256": "60185ac956f4637275f07b097d6842240f6725991cff014a44f32e80f82828c8",
+    "sha256": "336bae44a624453989d6b2431c87aed764b7c092468b6d166969525c307c0c5f",
     "expanded": false
   },
   "MLD-0487": {
     "path": "terms/MLD-0487-graph-convolutional-network.html",
-    "sha256": "24264b2a0e30d7d52b6d7829a4042fe63a3256619b708eeb8bf5bbc0fe15dec5",
+    "sha256": "51ebed9366aaf6b3761ecee4b4b778ce1044880e5d0f452f48d4be6c60e142b8",
     "expanded": false
   },
   "MLD-0488": {
     "path": "terms/MLD-0488-graph-laplacian.html",
-    "sha256": "b85d961e53223b29781860c043f7ba257745a9e1a9b644994a22057ab25b39f1",
+    "sha256": "1f78c5c0017281ac863b11f0ff1627f1f42c0fa211d352bdfab75aa5616c4df2",
     "expanded": false
   },
   "MLD-0489": {
     "path": "terms/MLD-0489-graph-neural-network.html",
-    "sha256": "896f459f3f344a0927cbd921622024956c0af0a3d832d977b036f62f197650f2",
+    "sha256": "c0d32ee5237902efb4718d8ebced6c68ef3f845f6c8e525f61b99a0b366048a1",
     "expanded": false
   },
   "MLD-0490": {
