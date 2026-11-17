@@ -2266,62 +2266,62 @@
   },
   "MLD-0454": {
     "path": "terms/MLD-0454-gaussian-process.html",
-    "sha256": "4f5921a9ca039a87dc20895a8375a1b57aadab945b02d13e420ee4dd8d37ea18",
+    "sha256": "b7fc107f8d3562643f8fe902fbcbcb8403cf45406e5e1ea0afb78d95797be737",
     "expanded": false
   },
   "MLD-0455": {
     "path": "terms/MLD-0455-gaussian-process-regression.html",
-    "sha256": "e283b5da410f99b1b414b9b0b7018e8e60ddbe9f2aa6c5780ee46a03611c1078",
+    "sha256": "cd7e01bd8db9dab3360e2650c486850082ef8ade46a14708d012049a3abf8e07",
     "expanded": false
   },
   "MLD-0456": {
     "path": "terms/MLD-0456-gelu.html",
-    "sha256": "23b777e4e8e4b800dd5a7d13b4a1bcc1c9bc43fc34939dcd43de8f2bfef9a430",
+    "sha256": "acc513f8e30cfa9dc7c7d8c3999c6de7eab96cfb24bf00af13b274f8c8e37f21",
     "expanded": false
   },
   "MLD-0457": {
     "path": "terms/MLD-0457-generalization.html",
-    "sha256": "4ef27957b58541b3200aa33d63db0c62ee9f4ed4760fb0fec9e4ed2bce95ee3d",
+    "sha256": "c7a44cd8414729462a542c32b316d375d2f126a3fe95cfba1c2275b670ceffa0",
     "expanded": false
   },
   "MLD-0458": {
     "path": "terms/MLD-0458-generalized-additive-model.html",
-    "sha256": "a4ca9e444811f805d3851ae0ee9923961d1085ed45f8a911c33b7e67a625e295",
+    "sha256": "b5be5911d3d9a4afc76232f47a10de8001fae5ece4047fdcd9e7c459b1991e2a",
     "expanded": false
   },
   "MLD-0459": {
     "path": "terms/MLD-0459-generalized-advantage-estimation.html",
-    "sha256": "2c18995a186788006f320929a05d945ec0f355775b9e1be92ea784e5b2a3a406",
+    "sha256": "9aca56987b12c642c55c7f6b3aec383ac2249a3c47d3a43a0e779f85965918b3",
     "expanded": false
   },
   "MLD-0460": {
     "path": "terms/MLD-0460-generalized-linear-model.html",
-    "sha256": "eb52e6d932dd92dc7d683796aab327bc3a7f92e25e97574d9015f925ed7f047c",
+    "sha256": "439dabb8b0af96c994bc186ae7de7e94060b11d9f6f0ab06f48c98ca8a649ad7",
     "expanded": false
   },
   "MLD-0461": {
     "path": "terms/MLD-0461-generative-adversarial-network.html",
-    "sha256": "0b8de29dbd44941960fd8760fa47c3ddc6fbb79341ff0b25a6cf061ddac609f8",
+    "sha256": "c4b34985b127ed27c8ac6c66b930683cb3bb5ddef78eabde151930af3e987e9f",
     "expanded": false
   },
   "MLD-0462": {
     "path": "terms/MLD-0462-generative-ai.html",
-    "sha256": "19d9b02479372708196f560fd2b9acf63bf8f03df876d361492d151faa75beef",
+    "sha256": "3c004d2a80c0f02908418f0fbee6d7423c9ae43ee9ae35defc5099db95e31abf",
     "expanded": false
   },
   "MLD-0463": {
     "path": "terms/MLD-0463-generative-model.html",
-    "sha256": "94e74467a54c105b6568354ed4b13c6c04bea8903b8830efe0f1a7dee908012c",
+    "sha256": "c77762b7d657fe0cc18d20be05db6448edac89dce51a0f71feeb9029c7c55a70",
     "expanded": false
   },
   "MLD-0464": {
     "path": "terms/MLD-0464-generator.html",
-    "sha256": "83d86eb479435ef97ebd92aac9edcf5c52bd4206f7aa69a2d524600e62fa9877",
+    "sha256": "75197e342d039d0a8b002ac2beaba10678d4003e4d48c77b7c5ac919ec49f6de",
     "expanded": false
   },
   "MLD-0465": {
     "path": "terms/MLD-0465-gini-impurity.html",
-    "sha256": "4aa429f8657b4dff923c6730f0c015216ff2eb0e23909289f6cfadf34364e0ad",
+    "sha256": "bd93b888a5bd3a0ef09d335fee6872f9a103d9ae7fd5fa4299163c79398a427e",
     "expanded": false
   },
   "MLD-0466": {
