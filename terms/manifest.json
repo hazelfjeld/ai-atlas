@@ -3846,52 +3846,52 @@
   },
   "MLD-0770": {
     "path": "terms/MLD-0770-monte-carlo-estimation.html",
-    "sha256": "d398d961fa8014df4af438ae9e70d74d4a11e4349ce8ad23953e1c9f0be258f1",
+    "sha256": "9e56f9a0cb7bc84d8ccf76856d7787dfe33e5f284a046079a4a7f9437c533a19",
     "expanded": false
   },
   "MLD-0771": {
     "path": "terms/MLD-0771-multi-agent-reinforcement-learning.html",
-    "sha256": "d70c1146668949b03eaeaa16b67deea7d2ec1e800407b2037133a5da0cd3214d",
+    "sha256": "b8d071f360265b6819c811fa2085b93b87f0ca7d515f57149a91939d717b5f7a",
     "expanded": false
   },
   "MLD-0772": {
     "path": "terms/MLD-0772-multi-agent-system.html",
-    "sha256": "ea0ee46786fb77eb7eec1bb8ab541eeb6a5714a206491593823c112dbfd11e1e",
+    "sha256": "08f1f56c28b11637d4af345eb248a17838a5bab2e09b0fcc5e41692eb84d02ce",
     "expanded": false
   },
   "MLD-0773": {
     "path": "terms/MLD-0773-multi-armed-bandit.html",
-    "sha256": "52bb5c97dc7e6fce348f651c81a83b255dbb283a775422d16f7016db97ae7e57",
+    "sha256": "8b03fd1edc6b0d7e2eae0432ecb4a7d70b5e6069eac604beb4ca461aa85ac392",
     "expanded": false
   },
   "MLD-0774": {
     "path": "terms/MLD-0774-multi-head-attention.html",
-    "sha256": "848bd4fb2c7ab65def61c2a1a0e8693421479d2c426885b90eee73a3e4253d0c",
+    "sha256": "626258a03d6778a0c2fb7ddea23c6b393848335c81f24f35a7d69d05136ec82d",
     "expanded": false
   },
   "MLD-0775": {
     "path": "terms/MLD-0775-multi-head-latent-attention.html",
-    "sha256": "0b9ce8c28e0aaeccc938423add787fbbb82b713c056685127e33d77aadb81732",
+    "sha256": "1701abfede54775c2398d2d4d5755191fbb75d3ec6dad139f65ddf8f169a4423",
     "expanded": false
   },
   "MLD-0776": {
     "path": "terms/MLD-0776-multi-objective-optimization.html",
-    "sha256": "39e43892992748852742ffffffd793faf1cf6d7574f89d0ec3db5e9ae2998716",
+    "sha256": "6a785331a829b545f86c2cd5c90c03e237969db39e10f985d635f13477b684ff",
     "expanded": false
   },
   "MLD-0777": {
     "path": "terms/MLD-0777-multi-query-attention.html",
-    "sha256": "71641ce3b42a87bc02d8c711e196c3fb9f8e75714a28c630ab4ba0af0e9a77e9",
+    "sha256": "8863d3bd1e64bee2cc54c29feec2cfbb8a0b620f7bd24d177afd5caf336ff071",
     "expanded": false
   },
   "MLD-0778": {
     "path": "terms/MLD-0778-multi-query-retrieval.html",
-    "sha256": "0b21d433a682abd7c2465bf5f0a4161a9ec1161e9726fced583ba9042a31348d",
+    "sha256": "2b1e91a50edbc1818c4933898525d2fefab2fef1adece733fd983b9112acd7d1",
     "expanded": false
   },
   "MLD-0779": {
     "path": "terms/MLD-0779-multi-token-prediction.html",
-    "sha256": "552a0a07c78d6624834d3d31758250738a0d5de2305c43fbffb95e85e16f2cc2",
+    "sha256": "7184866548658ab5eda48ca4362b080e78d230108164a9744a02d61e19e66b86",
     "expanded": false
   },
   "MLD-0780": {
