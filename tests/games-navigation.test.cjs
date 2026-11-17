@@ -681,6 +681,11 @@ test('all 1345 concept details share the same script-free primary and secondary 
   assert.equal(Object.keys(guides).length, 57);
   const manifest = JSON.parse(read('terms/manifest.json'));
   assert.equal(Object.keys(manifest).length, 1345);
+  const generator = read('scripts/build_term_pages.py');
+  const referenceBoundary = generator.match(/int\(path\[10:14\]\) <= (\d+)/);
+  assert.ok(referenceBoundary, 'first-paint reference rollout is explicit in the generator');
+  const firstPaintLimit = Number(referenceBoundary[1]);
+  assert.ok(Number.isInteger(firstPaintLimit) && firstPaintLimit >= 0 && firstPaintLimit <= 1345);
   const names = ['Discover', 'What’s New Today', 'Concept dictionary', 'Technology profiles', 'Games', 'Playbooks', 'About'];
   for (const [id, info] of Object.entries(manifest)) {
     const html = read(info.path);
@@ -693,7 +698,7 @@ test('all 1345 concept details share the same script-free primary and secondary 
     assert.ok(nativeNavStart > 0 && nativeNavStart < nativeMainStart, id + ' has native sibling navigation');
     const heading = html.match(/<header class="hero" id="main" tabindex="-1">[\s\S]*?<h1>([^<]+)<\/h1>/)?.[1];
     assert.ok(heading, id + ' must retain a named native article heading');
-    const firstPaintRail = info.expanded || Number(id.slice(4)) <= 709;
+    const firstPaintRail = info.expanded || Number(id.slice(4)) <= firstPaintLimit;
     const expectedNav = firstPaintRail
       ? detailNav.replace(/<\/nav>$/, railBottom + '</nav>') : detailNav;
     assert.equal(html.slice(nativeNavStart, nativeMainStart),
@@ -714,7 +719,6 @@ test('all 1345 concept details share the same script-free primary and secondary 
     assert.deepEqual([...links.matchAll(/<a [^>]+>([^<]+)<\/a>/g)].map(x => x[1]), names, id);
     assert.equal((links.match(/aria-current="page"/g) || []).length, 1, id);
   }
-  const generator = read('scripts/build_term_pages.py');
   assert.ok(generator.includes("directory_nav = render_directory_nav('../', (None if path == 'terms/index.html' else 'Concept dictionary'), mobile_brand=True, native_secondary=True, mobile_secondary=True, secondary_current=('encyclopedia' if path == 'terms/index.html' else None), page_label=('Concept encyclopedia' if path == 'terms/index.html' else title), topbar_title=('Concept encyclopedia' if path == 'terms/index.html' else title), rail_bottom=(path == 'terms/index.html' or expanded_concept or first_paint_reference))"));
   assert.ok(generator.includes('directory_css = DIRECTORY_MOBILE_CSS'));
 });
