@@ -4146,27 +4146,27 @@
   },
   "MLD-0830": {
     "path": "terms/MLD-0830-observation.html",
-    "sha256": "4a561c7a710261d6050003b7b9524fbe757a7da30062456a073f29352536b445",
+    "sha256": "c28d69960a288ab34c2d41fea4e5b5c1c998091834f4799be00b36f2a9da4ab0",
     "expanded": false
   },
   "MLD-0831": {
     "path": "terms/MLD-0831-odds-ratio.html",
-    "sha256": "d306b4ec968840c7363d961cce949c198687ca1fd197b398edeeaf9385d6cfcc",
+    "sha256": "e2e9595c2363f2ab73bd841798af4de8f2c92e1411f82605dc60e9ccf9419978",
     "expanded": false
   },
   "MLD-0832": {
     "path": "terms/MLD-0832-off-policy-distillation.html",
-    "sha256": "6a57c0b95b53c3265cf735fdf77950115c43f146f06127b6d70467e343bac04a",
+    "sha256": "ee1688ef7954217f5860d80dd652607c88a471e06e7dd01336d3591d93fbff8a",
     "expanded": false
   },
   "MLD-0833": {
     "path": "terms/MLD-0833-off-policy-evaluation.html",
-    "sha256": "9bf033329c5904a8f0dae51de25fb9792ae8c8e4b83f88f68a0f3fbedf12c852",
+    "sha256": "905677f9351a7adde25ebadf65b66c7d89ed6afff6000b83a96eceb1300bd2f2",
     "expanded": false
   },
   "MLD-0834": {
     "path": "terms/MLD-0834-off-policy-learning.html",
-    "sha256": "5bb0b8b15700b60f52a4bc371c9cb0fd3ffccb5216c99a6d7089203b589cabef",
+    "sha256": "c0409f1253334c6701a8036710691da636bc807b0d7babc1918061f6fcf4b9eb",
     "expanded": false
   },
   "MLD-0835": {
