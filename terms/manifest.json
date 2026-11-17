@@ -4046,102 +4046,102 @@
   },
   "MLD-0810": {
     "path": "terms/MLD-0810-node-embedding.html",
-    "sha256": "d188dc8f0aa89bb4b13e244e9aae8b3354474304284dfc9f4e325374688859bf",
+    "sha256": "9f5f9d325796c48ed4422cbb190b64b439618d7321be2d0c5d7b10c774199556",
     "expanded": false
   },
   "MLD-0811": {
     "path": "terms/MLD-0811-noise-schedule.html",
-    "sha256": "2e8cd78826551d070be80111367ea71609e38655f58685d9dcf072abbbd535c0",
+    "sha256": "1c914e812daebde85e1dcf9e0ff726703c3bd289e01c49dda0a0077e0f7094e9",
     "expanded": false
   },
   "MLD-0812": {
     "path": "terms/MLD-0812-noise-contrastive-estimation.html",
-    "sha256": "3a962fc6b40c0fc04e1ebf568fef5e7a2d5df3b72949212e2bf00f22f85d1c15",
+    "sha256": "dc0ea8554a175adc1cf19c979c82ca05a5db5fec7a3bbd71b3e8a0b1d75ce81b",
     "expanded": false
   },
   "MLD-0813": {
     "path": "terms/MLD-0813-non-maximum-suppression.html",
-    "sha256": "fc8b7db1308e24471baa8d85e92d7aac803c5421d56dffb64eea7502a5f7f223",
+    "sha256": "d66165f0d485cb5d49c02fa348fc4aaaf9a69f6df40a137eb99abb56be71182c",
     "expanded": false
   },
   "MLD-0814": {
     "path": "terms/MLD-0814-nonconvex-optimization.html",
-    "sha256": "68960bbdc42c3c000c7bb268d930b52c8d4f310332147ead48dfd72d5d1483f7",
+    "sha256": "720e9f56d3e1ea2020ce14b1f3c8a7b699591b03985d501d842e692cd618c59a",
     "expanded": false
   },
   "MLD-0815": {
     "path": "terms/MLD-0815-nonnegative-matrix-factorization.html",
-    "sha256": "7608fcd684560bb32bfbb3a7e054d48dfeb7ceaa27784a31032050f5723fd3b4",
+    "sha256": "ee87964d204307e294b8d69412d17560ef9c0508f36222cf96e40cfdedba06b1",
     "expanded": false
   },
   "MLD-0816": {
     "path": "terms/MLD-0816-nonstationarity.html",
-    "sha256": "81051b3a946b60bca64a615ae596c0c5e30cc65fbf4356193436a05443c6e1f7",
+    "sha256": "a8463d4273dedcb52739c3c4246e822df9b82eda8cb0e89505822ea4f8f42c22",
     "expanded": false
   },
   "MLD-0817": {
     "path": "terms/MLD-0817-norm.html",
-    "sha256": "c845ffa48addc65b53cfcee417484ea0f39ed7124f498ca132429f51843ff90e",
+    "sha256": "bf3bc614c96f564115f25b3ee3cb7d7e351b8d762d0419667ba19c30437a97c2",
     "expanded": false
   },
   "MLD-0818": {
     "path": "terms/MLD-0818-normal-distribution.html",
-    "sha256": "8c78f693e814ab4062e2bb6c56a8f577d21a6b6f03378722f512f8abad6ebd63",
+    "sha256": "59fb08a2ef7d291274e858d948cef9efc58bbc306d84f9efc6ff9f3343114279",
     "expanded": false
   },
   "MLD-0819": {
     "path": "terms/MLD-0819-normalization.html",
-    "sha256": "a52929f29b5606dae47d689f6b769930d76292b97780cc6c50705c7fbedc42da",
+    "sha256": "d117b6f6de4c665e70601a32336adaa8b6024e63f9074343489e979acef3b722",
     "expanded": false
   },
   "MLD-0820": {
     "path": "terms/MLD-0820-normalizing-flow.html",
-    "sha256": "bb0e34564fb282e225a417f1d802a67e68b149902a09e720f730f287583d789f",
+    "sha256": "1660585f84d37b05d9f43471e108a11aaa3613d0623e54076ce32ba7e2fdb3d6",
     "expanded": false
   },
   "MLD-0821": {
     "path": "terms/MLD-0821-novelty-detection.html",
-    "sha256": "8f1269d511147bea93f70b6a39475459d33e20291f691052947ce91e6e732c9e",
+    "sha256": "a3c00e0b2b5a2c53e1ad75d109dffbf33b2062ee75f38b94bcf44d616cc4acbe",
     "expanded": false
   },
   "MLD-0822": {
     "path": "terms/MLD-0822-null-hypothesis.html",
-    "sha256": "399e4f130422ee4b10edc8396d20afe9739ba57fb55eee04f3372681ea5737d0",
+    "sha256": "10c5886089a93f4cc788736a02416fd901e6c58e23034789f5ba63cd51d5771a",
     "expanded": false
   },
   "MLD-0823": {
     "path": "terms/MLD-0823-numerical-overflow.html",
-    "sha256": "921f6a9030ae98fd488eee5c07208a3bbaba2ea4eeee485424f0b50448bf6826",
+    "sha256": "8b879818e95f41818079afdb9a1fcd6c6dd092ecaecf2dce17664e304b25f97c",
     "expanded": false
   },
   "MLD-0824": {
     "path": "terms/MLD-0824-numerical-stability.html",
-    "sha256": "dbf599a35c3af9fc0c91d59deddc7d302dd1b163380f4b006140ebf104bcfd71",
+    "sha256": "6158d749348c5ccba2ec0060fce3ad262b0705f6056e4d43b9965b69002f091f",
     "expanded": false
   },
   "MLD-0825": {
     "path": "terms/MLD-0825-numerical-underflow.html",
-    "sha256": "607b2e2993a024ecabf9401784182a542158c93abbb37e8040009516439484d7",
+    "sha256": "1c81b183fbed0f8fa6ae4e6670f90aae5d5705f2aa181adbb03cbfd01bc6407d",
     "expanded": false
   },
   "MLD-0826": {
     "path": "terms/MLD-0826-nystrom-approximation.html",
-    "sha256": "12c4f56eac0a6bdb45c233835d8c578e3218edd0cea1470251159ceaf2f32bc9",
+    "sha256": "1bfea82dc25929feccc778bdda0540e6792456f8af2ac8f643d557a0b0111f1c",
     "expanded": false
   },
   "MLD-0827": {
     "path": "terms/MLD-0827-object-detection.html",
-    "sha256": "8dac75ac595272e7c4ddb67c5ff394dea21176e29534afbce231200e454187c5",
+    "sha256": "3c8e01a0bc9a401f135aa37f54c62867577fa909f281918c2da4f221e5ec540c",
     "expanded": false
   },
   "MLD-0828": {
     "path": "terms/MLD-0828-objective-function.html",
-    "sha256": "0e2677439110a1031a772fcb2ce669db160c46a8fbcea3b1d9b82aea9c4da08d",
+    "sha256": "6f78f6233ed01d83b2377cff3f6491e3cddfc93f9d9987d8aa119d2d6bd1ce69",
     "expanded": false
   },
   "MLD-0829": {
     "path": "terms/MLD-0829-observability.html",
-    "sha256": "470037780510469cafd71d5114a6f2b7d5c6caeff1183afdaf333aa9f8f6fe6e",
+    "sha256": "3b7e23bdf8a54b02f9a846fadb9a5947a10769b484624512850f79731d82f612",
     "expanded": false
   },
   "MLD-0830": {
