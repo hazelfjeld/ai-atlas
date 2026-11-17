@@ -3296,102 +3296,102 @@
   },
   "MLD-0660": {
     "path": "terms/MLD-0660-llm-as-a-judge.html",
-    "sha256": "1a084eb3ab284ce0768ca06971e6ce931d0caaa9dc0e7d9bfe800960a66526b7",
+    "sha256": "e8c74ca327d1e9506a72c3ff5448bbada306f7903d0b19919696a7fa8d9d4dfd",
     "expanded": false
   },
   "MLD-0661": {
     "path": "terms/MLD-0661-llmops.html",
-    "sha256": "bf144ff36772daa7aa5172a30c1f1f9ddc52816b88d939dc3b8cd700f5e7f08b",
+    "sha256": "0fcc3a2432e82caee0980e0c3747280116f4b9d7ad0f5839b9dd5c2b381d7240",
     "expanded": false
   },
   "MLD-0662": {
     "path": "terms/MLD-0662-load-balancing-loss.html",
-    "sha256": "788c67b0666fceaac4290eca6b23e19513acc9e97a7b4b12f627ec700716295c",
+    "sha256": "cae3e96302ec7ee8d0f02bee8e2dd2cacb02a4a28c3c5a8204eb3eaa0499533d",
     "expanded": false
   },
   "MLD-0663": {
     "path": "terms/MLD-0663-local-minimum.html",
-    "sha256": "429eb6f80a0b51d82d1639c326aee32e5f8cdd80b9129deb1db2ba10207b077d",
+    "sha256": "aa29d65929b1aa77b40b4961625938b0aed2db30ca3ab15ddba81093205f550f",
     "expanded": false
   },
   "MLD-0664": {
     "path": "terms/MLD-0664-local-outlier-factor.html",
-    "sha256": "3751f6e65f99240791d87b8e7e5873b5aa5ef1bdbdc8e18507e43d28bdec9938",
+    "sha256": "f1f8577bf90ce92e6e237594fa36e315569782f3e470843443eaee1891a91b89",
     "expanded": false
   },
   "MLD-0665": {
     "path": "terms/MLD-0665-locality-sensitive-hashing.html",
-    "sha256": "7de86a18a63222c7f19decac63ca876564438d7e78f28c33c58a05d6504defd9",
+    "sha256": "3808509163e51ad04e7b8ec83456c6c0dbf05a3ca1cbc01b16e776b84908dca8",
     "expanded": false
   },
   "MLD-0666": {
     "path": "terms/MLD-0666-locally-linear-embedding.html",
-    "sha256": "0f61451cf2150465e3e69579a4e244a4de639e1ee01895e130039141f7d27ff3",
+    "sha256": "3f8ad87442a16555a809e7772a5110895379c022dd7c0956981540b738679440",
     "expanded": false
   },
   "MLD-0667": {
     "path": "terms/MLD-0667-log-loss.html",
-    "sha256": "6d9da700b515ed6f7d6af64fbc40dfca7940f51ccc6c82ee96bdddcdb50432ec",
+    "sha256": "4f97b1a4cc247f0fff7733253506f7b3f27485a4d16d07e483f3cf02ae29b382",
     "expanded": false
   },
   "MLD-0668": {
     "path": "terms/MLD-0668-log-transformation.html",
-    "sha256": "4fe059e76ec238457f637841fde2a8b0250e52e216cbc051b3f1d661bb9ff157",
+    "sha256": "0940c68f9cd17c95db89bdc69853d626d84b2b89d9bbab73bf0021f54210f835",
     "expanded": false
   },
   "MLD-0669": {
     "path": "terms/MLD-0669-log-normal-distribution.html",
-    "sha256": "757ecf5693d72bbc098b0aa576107ce36d18bf6949edaf611c1ababe34a50c56",
+    "sha256": "5068129f7a51c30c03836080a91865cdf43a554d92a38d27ecfed75d523519ad",
     "expanded": false
   },
   "MLD-0670": {
     "path": "terms/MLD-0670-log-odds.html",
-    "sha256": "04bb1105ddf0d403a7f70d9b6be02789170024c269f576e23fe80e53665dadbf",
+    "sha256": "2879853c17d9e3536c49f6ff062f31536c1389b76ad0210febead6b49e26907b",
     "expanded": false
   },
   "MLD-0671": {
     "path": "terms/MLD-0671-log-softmax.html",
-    "sha256": "95edfb402f88b6ece68b30f8f54946c081569ec965afa39da1ebef8da9f5d75c",
+    "sha256": "e5499ae42fc34e2d3cce5572f769cf0db2ccbdb303f77922daefa2d9cdbedfda",
     "expanded": false
   },
   "MLD-0672": {
     "path": "terms/MLD-0672-log-sum-exp.html",
-    "sha256": "653e211b362fc12c83edb956c17255a665e0a00d21d4a4cbe288630946d2b275",
+    "sha256": "d02b9275bf9734f090ebc5e9c07dd556239e7676d1ae33aecd9c0bba2828414b",
     "expanded": false
   },
   "MLD-0673": {
     "path": "terms/MLD-0673-logistic-regression.html",
-    "sha256": "50219ce4d4dfa0a8086c29db7a87945c2f2978451d5c18e1b617f2889faf9d78",
+    "sha256": "0b656c96f8c08c58fac0552cd52905eec44de2ad785cb17f76297cccafb892e3",
     "expanded": false
   },
   "MLD-0674": {
     "path": "terms/MLD-0674-logit.html",
-    "sha256": "c66119bba118f52c0783dfdb8be5f4dab19821e230a7a4ff7234c237fb274cf2",
+    "sha256": "a30b0ce7275b4061a3067f67a6a0bd5d54e598ba8d60afbbd04b938df87b7f9b",
     "expanded": false
   },
   "MLD-0675": {
     "path": "terms/MLD-0675-logit-distillation.html",
-    "sha256": "fe7a2eaada98c9f585b59d4a80b3963cb8470ed3df5610f02d37d390f651e179",
+    "sha256": "4b284dca7a3fa95c5e363e4d222250350a43e239cd6304fafeb17d90d5240bbd",
     "expanded": false
   },
   "MLD-0676": {
     "path": "terms/MLD-0676-logit-lens.html",
-    "sha256": "adfbe4efe09b9d28645efe660e3ee220b971a3c15049a55a0f491ada57814289",
+    "sha256": "3bba10a7078df187b33c6c783e1627bea47f238722c23bf7d26a7c09648db975",
     "expanded": false
   },
   "MLD-0677": {
     "path": "terms/MLD-0677-logits-processor.html",
-    "sha256": "ead690e9839ce7024caa49946cd2568fff6c2bd6d6767898b6b18706b1448656",
+    "sha256": "8c8fbfef5921b0fa8cc1f080d426a16bdc3e93b0f16b5596f9a5c4ac9563f207",
     "expanded": false
   },
   "MLD-0678": {
     "path": "terms/MLD-0678-long-context-evaluation.html",
-    "sha256": "7e280405c0a52157e050992f1560bd446debe7f5fdd6c4fb35bf0ec0daa9a14a",
+    "sha256": "5a9c3567e60ea4e9cd952e97da46ae4c572d7747fccbb4f2dde54a3b0063cc0c",
     "expanded": false
   },
   "MLD-0679": {
     "path": "terms/MLD-0679-longest-common-subsequence.html",
-    "sha256": "e5f7dc23121e3a8a33700c06f7bbcc5fd8ed3cf3ac14c7b8ea24e94e7f414c33",
+    "sha256": "6c68542ccf31c5427cf4b657211c66b530530dcaef92ea97cd68b44e1327cef9",
     "expanded": false
   },
   "MLD-0680": {
