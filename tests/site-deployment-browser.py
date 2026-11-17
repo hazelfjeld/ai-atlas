@@ -526,6 +526,8 @@ with sync_playwright() as p:
               and desktop_title
               and (width > 650 or scriptless.locator('#discover-mobile-nav > summary').is_visible()))
         scriptless.screenshot(path=str(out / f'discover-first-paint-{width}-nojs.png'))
+    # Resume the existing mobile-drawer journey after checking desktop widths.
+    scriptless.set_viewport_size({'width':320,'height':844})
     scriptless.locator('#discover-mobile-nav > summary').click()
     check('Discover keeps seven script-free native drawer links',
           scriptless.locator('#discover-mobile-nav').evaluate('(el) => el.open')
