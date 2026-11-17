@@ -2496,102 +2496,102 @@
   },
   "MLD-0500": {
     "path": "terms/MLD-0500-grpo.html",
-    "sha256": "7cd3894dfc2c8dfe0187b4d4318853e4baf73968f283056ac76d4f0ea20e4338",
+    "sha256": "448c5faf8efc4f37dd3b4a9cdd7013c23c9d982b655d586d73e1fe6d25300477",
     "expanded": false
   },
   "MLD-0501": {
     "path": "terms/MLD-0501-gru.html",
-    "sha256": "263801bb5f4736c3c78871e17592a0d57311f18fed9302883f72caa088f2907e",
+    "sha256": "b86c9401a0f590e70415cd38fbd480620756a9a070fdea9ea23a2bff3484a666",
     "expanded": false
   },
   "MLD-0502": {
     "path": "terms/MLD-0502-hadamard-product.html",
-    "sha256": "0e28ab711f9c817f82c9a71b767f0441ed88680ff2d2b104dc2ae616d25beed9",
+    "sha256": "cc17215050ce874b3487a4493d9b3d057212a7344b7bf1221dfd5449256c1065",
     "expanded": false
   },
   "MLD-0503": {
     "path": "terms/MLD-0503-hallucination.html",
-    "sha256": "fe4bba9b38436954081ed892545daf8f61ae1c5503131f72a00b58642c69902a",
+    "sha256": "b908c6a5e3ba3b29f28ad68dc5a28a8cb292bf90b34fd84ae3111134de6012f8",
     "expanded": false
   },
   "MLD-0504": {
     "path": "terms/MLD-0504-hard-targets.html",
-    "sha256": "f2045a9e591dfaa3549d1db6be30a667f654dcb0f8f697a1a85a5d21d2cd8955",
+    "sha256": "669f721395509b47cbd5e10d7f5227f58c0b93857ee161ac1796c6c724eba303",
     "expanded": false
   },
   "MLD-0505": {
     "path": "terms/MLD-0505-hard-negative-mining.html",
-    "sha256": "84dae251058811e608faf68242fa7edd24efdccade4b88402e06a4f341be4bef",
+    "sha256": "89d437351e774153ef9e0c28a15b83bea5a5b5a71f2c9352f2e6f348a7a9eea7",
     "expanded": false
   },
   "MLD-0506": {
     "path": "terms/MLD-0506-harmlessness.html",
-    "sha256": "98a3aa65fb8e88cf1c8ab21ce6acbc86b06514735e18fce87798677e75adc86c",
+    "sha256": "4f1d19c1a5857cde3e25d9cd5413515a14bdae4d7e89d862790714dd250feedd",
     "expanded": false
   },
   "MLD-0507": {
     "path": "terms/MLD-0507-hashing-trick.html",
-    "sha256": "b4c4088ac44fd472a9b7271be28658e11adaa789cad4d5ef093e0880654de56e",
+    "sha256": "640d2e330d745dbfbb3aae1c00ff47d034e175b173f3470843c99904c00bdc54",
     "expanded": false
   },
   "MLD-0508": {
     "path": "terms/MLD-0508-hdbscan.html",
-    "sha256": "51acd7a24235d005822bb58b919f7c11a3fa9d102abbf00aa49574662f854529",
+    "sha256": "7cb25991a6e67ed26ef68a5433d566b206ea852e119eb4d9b914ae08639bd3fd",
     "expanded": false
   },
   "MLD-0509": {
     "path": "terms/MLD-0509-he-initialization.html",
-    "sha256": "609dc6a3b347ea127167100c900c42459f76bfed1fa84272ad5660e13e0266ae",
+    "sha256": "864ebde7593e2550633d8282c5a1b7a7b83bcc8405151e245019d41eae9dbcbc",
     "expanded": false
   },
   "MLD-0510": {
     "path": "terms/MLD-0510-head-dimension.html",
-    "sha256": "9d45b6bfe7da352715e74f9ba6c696d5202f4e1857b5b96d4a5585f0b28ece53",
+    "sha256": "b88ecc10a2d987a4de92b958a7433ade499fbe2b52132cf74015e581fdc020f3",
     "expanded": false
   },
   "MLD-0511": {
     "path": "terms/MLD-0511-helpfulness.html",
-    "sha256": "6c63e57b0ab942c5d04cbb890895ecb9642702ce9a45401538c897fd5a0697fe",
+    "sha256": "fccf4365a52c82f57cf46ec266bbdaaaa70449987c84f39b30d4cddfd3f5f568",
     "expanded": false
   },
   "MLD-0512": {
     "path": "terms/MLD-0512-hessian.html",
-    "sha256": "1c1c168ff9a5ece3798708d838ce5369a455b53fc3f66b1239449308984354c1",
+    "sha256": "b91d0a82440e9aa151bb80cee50bbf032df4b24ee11b6f4550650b4e2c22eb63",
     "expanded": false
   },
   "MLD-0513": {
     "path": "terms/MLD-0513-heuristic.html",
-    "sha256": "6c347ff4db53f60776067d9c826783990c494c77c812741f7a4c326a44944890",
+    "sha256": "58b177c9133aa95aff456188c1836603f4193051dd0c8f2f0fba85b1238f5603",
     "expanded": false
   },
   "MLD-0514": {
     "path": "terms/MLD-0514-hidden-layer.html",
-    "sha256": "537bdda78529337fdb03e009218f1a71473b4c2c02521b9690949254ae3f507e",
+    "sha256": "19ff5a7a46fca8367874f174140e65324fe36028d43f9238f06381d93248e6d5",
     "expanded": false
   },
   "MLD-0515": {
     "path": "terms/MLD-0515-hidden-size.html",
-    "sha256": "e3b654d38555d0454368ae3f3019975b9ba8d68580b3f90bcf4e5779b0909fa2",
+    "sha256": "6fa0e70c7c93076986ba16ea87581daa53a2e6fb5609b103378e8ac05c5b6a37",
     "expanded": false
   },
   "MLD-0516": {
     "path": "terms/MLD-0516-hidden-state.html",
-    "sha256": "f962a9b1a95cb1ba9ba05523361cc390d892e631e8ab1394aff4b6a8845b972f",
+    "sha256": "09ad932d3035ce0e125e9162aeafefd50c1eda666366a99855ec382e2bfcc6dc",
     "expanded": false
   },
   "MLD-0517": {
     "path": "terms/MLD-0517-hierarchical-clustering.html",
-    "sha256": "f8212798dea4e835df095122f6e5cd0f62dda048c1bfcb40990a90781ef27716",
+    "sha256": "19b790bc952905977399a58d94c7eed460d5fc9761ea3b327dde5a2ba1010b6a",
     "expanded": false
   },
   "MLD-0518": {
     "path": "terms/MLD-0518-hierarchical-retrieval.html",
-    "sha256": "60f66693826062719bf74d903965f9120e48cb85d5ad401545de1d93e82a6c26",
+    "sha256": "5780a67c4846aab258719accdae0de60b46cedb39df4dfc90fa37d7a94dd898a",
     "expanded": false
   },
   "MLD-0519": {
     "path": "terms/MLD-0519-hinge-loss.html",
-    "sha256": "2c9e8bff6772753e7b6e56e49e5011311f0df8457187cb55ba0347e62a03a8a2",
+    "sha256": "73ea2ace6b9aa0a6bc7e8072341b82f629a45758b95eb34cccb6a320db189b00",
     "expanded": false
   },
   "MLD-0520": {
