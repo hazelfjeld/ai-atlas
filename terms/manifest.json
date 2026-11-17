@@ -2696,47 +2696,47 @@
   },
   "MLD-0540": {
     "path": "terms/MLD-0540-imitation-learning.html",
-    "sha256": "4e95eccbdf34cb678ff5e6063d4f087f83089dd6b357d312f1b86df602c83c9f",
+    "sha256": "01a066bcfabaf2c27b9a4f767156ab669446327a808d0d049c88de5b6b98a910",
     "expanded": false
   },
   "MLD-0541": {
     "path": "terms/MLD-0541-implicit-regularization.html",
-    "sha256": "253aa0a0c333e4477d1ef2a688181da52cefd4083886be50dd0c3aaf6102b2a6",
+    "sha256": "10251fddc716bf2e4897456a8b562f38acff0faab6784fc4f69b47bf48eeae02",
     "expanded": false
   },
   "MLD-0542": {
     "path": "terms/MLD-0542-importance-sampling.html",
-    "sha256": "4f9974dbd3f301738cfb70343a497ec7bf17864df51b19dee9c1ae7482fe52f6",
+    "sha256": "4045d8813ffc84b4632ac6408ae3a348c8428969a392b0d5176a1c357a91dec9",
     "expanded": false
   },
   "MLD-0543": {
     "path": "terms/MLD-0543-importance-weighting.html",
-    "sha256": "6dda028197b8746866265739c502f19276c434b74e2036aa61c110ee28aaf3e2",
+    "sha256": "2b40273be09e9a42555fc001b6edb4443a5b1aaf8ec65c4a33992763e5f7459d",
     "expanded": false
   },
   "MLD-0544": {
     "path": "terms/MLD-0544-imputation.html",
-    "sha256": "66f525a54dda27f508261028891d7b1e4682247b87e3cf835a24388400bdd291",
+    "sha256": "54bb14a021dc6858364d3da449479fdd3abc7bf49f3c09bd939213629d750cbe",
     "expanded": false
   },
   "MLD-0545": {
     "path": "terms/MLD-0545-in-context-learning.html",
-    "sha256": "b39d30df4935cac1c276326b0d6d6c2ee70f80feca6185be3c04ba8e9293f3f4",
+    "sha256": "f346e9e7fd0f36d439725b4468cb850a95ef0e6860fd22ecbd7cd9060919f2c0",
     "expanded": false
   },
   "MLD-0546": {
     "path": "terms/MLD-0546-incremental-learning.html",
-    "sha256": "e32311642ce10ee560bfd48f385408836c4d90628a1f9bd4f6f3acb18ac1340c",
+    "sha256": "4cae32a3ddcf20eb0699aef81829809652bc8d52611adc66fe02b3943b9e2fd6",
     "expanded": false
   },
   "MLD-0547": {
     "path": "terms/MLD-0547-independence.html",
-    "sha256": "0baa902af1bf092a99ae3fc12752e894444e1e26579d789b0d227bc288c430bc",
+    "sha256": "5eb239119757160b27dbe9d2571c8f4c359d61221dcb0ed2b064f3cec216c574",
     "expanded": false
   },
   "MLD-0548": {
     "path": "terms/MLD-0548-independent-component-analysis.html",
-    "sha256": "cbbc03860d40a961a29233995e5f8023826d8688f3224a30e1ba98c633fe8e5d",
+    "sha256": "7cfa8af45967cd6719375a15d875bdc533d0a5950d06eff9f60a29fefbd38f6d",
     "expanded": false
   },
   "MLD-0549": {
@@ -2746,52 +2746,52 @@
   },
   "MLD-0550": {
     "path": "terms/MLD-0550-individual-conditional-expectation.html",
-    "sha256": "fc24102feecc54ab46e48f7c3f8e8fa6595aa4e238434f3c4143cc6b1d2e563f",
+    "sha256": "c6317e6034fa557c0bf362316383d137ed0f41cb0e80e1d783fa9a327a25cbde",
     "expanded": false
   },
   "MLD-0551": {
     "path": "terms/MLD-0551-individual-fairness.html",
-    "sha256": "6f981848586090f05eacef7609fa501a35cc834d6ee6aa268959d8ce6f3cdac9",
+    "sha256": "3ba81eafd72ffe14704ffc5dd25a0bb19cf963716976b7eb54e71bf109947531",
     "expanded": false
   },
   "MLD-0552": {
     "path": "terms/MLD-0552-induction-head.html",
-    "sha256": "2773eca882f2a6a76e925334d4d98f35be6b5ee8c8e39f3c2896c42c527468c7",
+    "sha256": "529b12286524eb7b8c4928eef68e459c3c5932734cc108116847a9f3d9ac8acb",
     "expanded": false
   },
   "MLD-0553": {
     "path": "terms/MLD-0553-inductive-bias.html",
-    "sha256": "d8b6ba7e31866a22aeb8366187fc40c991e33c1c1079babad663674f366b01f8",
+    "sha256": "a16ff6d505c6a1ea908f480b1ff2596a5c5b7bb3ad5de60d6ec81b859573ac80",
     "expanded": false
   },
   "MLD-0554": {
     "path": "terms/MLD-0554-inference.html",
-    "sha256": "80cfb690e1d8a95f26debca8380acd650fd81c4dabce7f6a218fb617f3d8ec70",
+    "sha256": "d5adb459af5bc1558aaaa33de8218cc51c6c428b71530bb30fa6330f8d1fc1ac",
     "expanded": false
   },
   "MLD-0555": {
     "path": "terms/MLD-0555-inference-endpoint.html",
-    "sha256": "f44d5f75f74595614831d5e214de171a17fe995da41a729a6f06721897622ceb",
+    "sha256": "24a8e70d9b913aad8d38821224a060b01e934b1e48214f98d02288897ceb1429",
     "expanded": false
   },
   "MLD-0556": {
     "path": "terms/MLD-0556-infilling.html",
-    "sha256": "e634e418e1645686a417971a5b55b614c090815110746da6887b1d9fe2aab3cb",
+    "sha256": "b837680443795ef9b15684d8556ada50eff608465b7841ced19c5a3c36a220bc",
     "expanded": false
   },
   "MLD-0557": {
     "path": "terms/MLD-0557-infonce.html",
-    "sha256": "0a0d4b2b946a3275b7f506c3ca4080228dfac588e616fae45f8ae1cc5c33a5ce",
+    "sha256": "c2a20bf4496f9fe3e592a6b57a14ed525d159a832b9dab9c383136714c4b67ed",
     "expanded": false
   },
   "MLD-0558": {
     "path": "terms/MLD-0558-information-gain.html",
-    "sha256": "c08ac2fb53ad5d47492bfd1e0d39998489334991cb6b907e41f8f1e34bad500d",
+    "sha256": "990cd93e1bb49b15d5708b1697663bcfdab75f14d8fedc64cb8cbdfa8392bf72",
     "expanded": false
   },
   "MLD-0559": {
     "path": "terms/MLD-0559-information-retrieval.html",
-    "sha256": "d0fc026fba3e88c51d1fd2520248a9e76ab70d48f7ac7fbee1466845c9d6349a",
+    "sha256": "2984096335fedc72985239dbf8c89b549b5e3b5765c9753544f7e32747251e7f",
     "expanded": false
   },
   "MLD-0560": {
