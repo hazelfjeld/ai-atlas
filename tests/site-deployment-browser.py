@@ -593,6 +593,12 @@ with sync_playwright() as p:
     check('secondary sidebar destinations start collapsed on the homepage',
           not page.locator('#additional-navigation').evaluate('(el) => el.open'))
     page.locator('#additional-navigation summary').click()
+    page.locator('#additional-navigation summary').focus()
+    page.keyboard.press('Escape')
+    check('Discover desktop More closes on Escape and returns focus to its toggle',
+          not page.locator('#additional-navigation').evaluate('(el) => el.open')
+          and page.locator('#additional-navigation summary').evaluate('(el) => document.activeElement === el'))
+    page.locator('#additional-navigation summary').click()
     check('disclosure reveals the original safety navigation link',
           page.locator('#navigation a[href="#/safety"]').is_visible())
     page.locator('#navigation a[href="#/safety"]').click()
@@ -673,6 +679,12 @@ with sync_playwright() as p:
                   'Safety observatory', 'Research library', 'Compare tools',
                   'Your notebook', 'Sources & coverage', 'Guided professor demo',
                   'Concept encyclopedia', 'Offline demo download ↓'])
+        more.locator('summary').focus()
+        page.keyboard.press('Escape')
+        check('native desktop More closes on Escape without losing keyboard focus on ' + route,
+              not more.evaluate('(el) => el.open')
+              and more.locator('summary').evaluate('(el) => document.activeElement === el'))
+        more.locator('summary').click()
         check('secondary destinations navigate to real workspace routes on ' + route,
               more.locator('a').first.get_attribute('href') == 'index.html#/safety'
               and more.locator('a').last.get_attribute('href') == 'downloads/Atlas_Demo_Offline.html')

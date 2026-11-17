@@ -681,6 +681,18 @@ test('native desktop rails expose Discover secondary destinations from one share
     'Single-file demo must carry the exact same shared styles and enhancement');
 });
 
+test('Escape closes a focused desktop More disclosure in both Discover and native rails', () => {
+  const js = fs.readFileSync(path.join(__dirname, '..', 'site-theme.js'), 'utf8');
+  const offline = fs.readFileSync(path.join(__dirname, '..', 'downloads/Atlas_Demo_Offline.html'), 'utf8');
+  assert.ok(js.includes("document.activeElement?.closest?.('details.site-chrome__more[open], details#additional-navigation[open]')"),
+    'Both desktop rail implementations must use the same keyboard Escape handler');
+  assert.ok(js.includes("more.querySelector(':scope > summary')?.focus({preventScroll:true})"),
+    'Return focus to the disclosure instead of leaving it in hidden links');
+  assert.ok(js.includes("if (document.querySelector('dialog[open],[role=\"dialog\"][aria-modal=\"true\"]')) return;"),
+    'Do not intercept Escape from an open content dialog');
+  assert.ok(offline.includes(js), 'Bundled offline workspace must keep the exact shared keyboard runtime');
+});
+
 test('one shared mobile disclosure exposes the existing secondary routes with keyboard access', () => {
   const js = fs.readFileSync(path.join(__dirname, '..', 'site-theme.js'), 'utf8');
   const css = fs.readFileSync(path.join(__dirname, '..', 'site-chrome.css'), 'utf8');

@@ -1673,9 +1673,21 @@ document.addEventListener('keydown', (event) => {
   }
   if (event.key === 'Escape') {
     if (event.defaultPrevented) return;
-    if (!document.querySelectorAll('details.site-mobile-chrome__nav[open]').length) return;
-    closeSharedDrawers({restoreFocus:true});
-    event.preventDefault();
+    if (document.querySelectorAll('details.site-mobile-chrome__nav[open]').length) {
+      closeSharedDrawers({restoreFocus:true});
+      event.preventDefault();
+      return;
+    }
+    // Discover and standalone rails share a native desktop More disclosure.
+    // Close only the one holding keyboard focus; leave dialogs and other
+    // page-level Escape actions alone. Native links still work without JS.
+    if (document.querySelector('dialog[open],[role="dialog"][aria-modal="true"]')) return;
+    const more = document.activeElement?.closest?.('details.site-chrome__more[open], details#additional-navigation[open]');
+    if (more) {
+      more.open = false;
+      more.querySelector(':scope > summary')?.focus({preventScroll:true});
+      event.preventDefault();
+    }
     return;
   }
   // Discover's / keyboard search should work on every standalone page too.
