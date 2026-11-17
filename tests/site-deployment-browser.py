@@ -511,6 +511,16 @@ with sync_playwright() as p:
     no_script = browser.new_context(java_script_enabled=False, viewport={'width':320, 'height':844})
     scriptless = no_script.new_page()
     scriptless.goto(base + 'index.html#/overview')
+    # Match native What's New and Research headers before hydration.
+    # Discover must not jump from a generic site title after data loads.
+    for width in (320, 390):
+        scriptless.set_viewport_size({'width':width,'height':844})
+        header = scriptless.locator('.discover-mobile-chrome')
+        check('Script-free Discover title and menu context at ' + str(width),
+              header.get_attribute('data-page-label') == 'Discover'
+              and scriptless.locator('#discover-mobile-nav > summary').get_attribute('aria-label') == 'Toggle navigation · Discover'
+              and header.evaluate("(el) => getComputedStyle(el, '::before').content") == '"Discover"')
+        scriptless.screenshot(path=str(out / f'discover-first-paint-{width}-nojs.png'))
     scriptless.locator('#discover-mobile-nav > summary').click()
     check('Discover keeps seven script-free native drawer links',
           scriptless.locator('#discover-mobile-nav').evaluate('(el) => el.open')

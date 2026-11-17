@@ -50,3 +50,25 @@ test('shared build-time menu normalization remains idempotent', () => {
   ].join('\n');
   execFileSync('python3', ['-c', check], {cwd: root, stdio: 'pipe'});
 });
+
+test('Discover first-paint mobile context matches standalone pages without scripts', () => {
+  // Hash-route enhancement updates data-page-label later. Do not briefly show
+  // the generic site name (or a generic toggle) before catalog hydration.
+  const bar = 'class="site-mobile-chrome discover-mobile-chrome" aria-label="AI Updates mobile header" data-page-label="Discover"';
+  const toggle = '<summary class="site-mobile-chrome__toggle" aria-label="Toggle navigation · Discover">';
+  for (const route of ['index.html', 'downloads/Atlas_Demo_Offline.html']) {
+    const html = read(route);
+    assert.equal(html.split(bar).length - 1, 1, route + ': Discover title on first paint');
+    assert.equal(html.split(toggle).length - 1, 1, route + ': keyboard menu context before JS');
+    assert.ok(html.includes('href="#/overview" aria-current="page"'),
+      route + ': initial active destination remains Discover');
+  }
+  const source = read('scripts/site_chrome.py');
+  assert.ok(source.includes(bar) && source.includes(toggle),
+    'rebuilding navigation must preserve the same first-paint context');
+  const app = read('app.js');
+  assert.ok(app.includes('mobileHeading.dataset.pageLabel=currentName;'),
+    'real hash navigation must keep updating the canonical title');
+  assert.ok(app.includes("'Toggle navigation · '+currentName"),
+    'real hash navigation must keep updating the accessible menu label');
+});

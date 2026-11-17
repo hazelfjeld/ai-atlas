@@ -418,9 +418,9 @@ def render_discover_mobile():
     links = render_primary_links("", "Discover").replace('href="index.html#/', 'href="#/')
     brand = render_brand("", "site-mobile-chrome__brand").replace('href="index.html#/', 'href="#/')
     return (
-        '<div class="site-mobile-chrome discover-mobile-chrome" aria-label="AI Updates mobile header">'
+        '<div class="site-mobile-chrome discover-mobile-chrome" aria-label="AI Updates mobile header" data-page-label="Discover">'
         '<details class="site-mobile-chrome__nav" id="discover-mobile-nav">'
-        '<summary class="site-mobile-chrome__toggle" aria-label="Toggle navigation">'
+        '<summary class="site-mobile-chrome__toggle" aria-label="Toggle navigation · Discover">'
         '<span aria-hidden="true">☰</span></summary>'
         '<nav class="site-mobile-chrome__menu" aria-label="AI Updates sections">'
         + brand + links + render_mobile_secondary_nav("").replace('href="index.html#/', 'href="#/') + '</nav></details></div>'
