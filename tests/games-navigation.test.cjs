@@ -693,7 +693,7 @@ test('all 1345 concept details share the same script-free primary and secondary 
     assert.ok(nativeNavStart > 0 && nativeNavStart < nativeMainStart, id + ' has native sibling navigation');
     const heading = html.match(/<header class="hero" id="main" tabindex="-1">[\s\S]*?<h1>([^<]+)<\/h1>/)?.[1];
     assert.ok(heading, id + ' must retain a named native article heading');
-    const firstPaintRail = info.expanded || Number(id.slice(4)) <= 489;
+    const firstPaintRail = info.expanded || Number(id.slice(4)) <= 499;
     const expectedNav = firstPaintRail
       ? detailNav.replace(/<\/nav>$/, railBottom + '</nav>') : detailNav;
     assert.equal(html.slice(nativeNavStart, nativeMainStart),

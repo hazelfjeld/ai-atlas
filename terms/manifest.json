@@ -2446,52 +2446,52 @@
   },
   "MLD-0490": {
     "path": "terms/MLD-0490-graphrag.html",
-    "sha256": "c8ca80b60f2b7c4b1f4ad7ed9808f6b91ee6ee918fda51f42bc045bf0c298dfc",
+    "sha256": "72bd2b037f14c29baf86e722c37b9453ae7fa4ff1422f4dd45e139ed7bbab5f0",
     "expanded": false
   },
   "MLD-0491": {
     "path": "terms/MLD-0491-greedy-decoding.html",
-    "sha256": "cba93a5502b2177347620b4743308baa7f9f0a24bf295921897ce9596be53acb",
+    "sha256": "430de22cf8f7f3e1d8982bb1e9183bcb25e364dd2cefbb39756ffbd99e31e8fd",
     "expanded": false
   },
   "MLD-0492": {
     "path": "terms/MLD-0492-grid-search.html",
-    "sha256": "9fefda43fa94528c61beb919a34e27cabf9d9cae616a45a0bd729461993afe58",
+    "sha256": "50f829e4be847d26e7e8bd800640e6fccdf59724979df97745159136ed7a6570",
     "expanded": false
   },
   "MLD-0493": {
     "path": "terms/MLD-0493-grokking.html",
-    "sha256": "7d08bee71e1b4db5e74b9a8d15b394caa781c06a0839085f966efa470d855973",
+    "sha256": "f6039a7358250961865ef071a8def81cfc3cb9aec39d9798e489da0c19866d7d",
     "expanded": false
   },
   "MLD-0494": {
     "path": "terms/MLD-0494-grounding.html",
-    "sha256": "364cb158a1319937ce8f3c03b9d01e448f1620392bc095822149363d3224aac7",
+    "sha256": "0f89223b998b6a98a5d4d0410800b42ddab96bf865de10ba250d2df7f0d84c9a",
     "expanded": false
   },
   "MLD-0495": {
     "path": "terms/MLD-0495-group-cross-validation.html",
-    "sha256": "887fd4a9d35861de189aa475cea9a345982236dde86a57551dbc3a7ff6538ab8",
+    "sha256": "089fed1fca576500f4381030f69e0e3211b351005421297d19769c69c8a02207",
     "expanded": false
   },
   "MLD-0496": {
     "path": "terms/MLD-0496-group-normalization.html",
-    "sha256": "2f63eac309caa52cc2874235c95263208c8bd943449cb108fabf9d1f7fd2c59d",
+    "sha256": "464b45c222b68344762db475cc979f5df1991a5052a22dedee16e4c5245c62bf",
     "expanded": false
   },
   "MLD-0497": {
     "path": "terms/MLD-0497-group-split.html",
-    "sha256": "038d803f78d2ee7e8a0b861996420c3f4d1c2433495c687e69324b5d3cbf15d7",
+    "sha256": "6563051db508b82d5526ecc371e9a487d0a6156ba4198aa5254d5f97a6d4250b",
     "expanded": false
   },
   "MLD-0498": {
     "path": "terms/MLD-0498-grouped-query-attention.html",
-    "sha256": "20c8d887807c808c848a9777b441130d4e7d55ef53b0fca69a246f183fdbe84b",
+    "sha256": "01ac82f13f455d983cd13c673e5c8b9696e45d38052ea5c6d4ceca8035123768",
     "expanded": false
   },
   "MLD-0499": {
     "path": "terms/MLD-0499-groupwise-quantization.html",
-    "sha256": "d55eabd85733c9f1e679f97e429c9ad5f67c03204fda7c944dfb7df02fcd3eaf",
+    "sha256": "286b0870123f33be78cbe9dc8bdf42647b0a37e634822ee21d1dd2deae275c3e",
     "expanded": false
   },
   "MLD-0500": {
