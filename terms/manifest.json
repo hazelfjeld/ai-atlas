@@ -3896,102 +3896,102 @@
   },
   "MLD-0780": {
     "path": "terms/MLD-0780-multiclass-classification.html",
-    "sha256": "16d526912dd443fde2dbee15ef04444b53c0820cf14c710c6cf2e35ba7f9648f",
+    "sha256": "ee4af5daa4e2af250279062548d486a8207f92f0febc24254c78dc1efb89b3a4",
     "expanded": false
   },
   "MLD-0781": {
     "path": "terms/MLD-0781-multidimensional-scaling.html",
-    "sha256": "9b9c3bd2037718232ad910999a0d8cf74efc1ac84090e814de5db285d19028d1",
+    "sha256": "bb7207682613ba6d075c5e4dcf1cd491d579165e4765f9b962a5b1dd066d9308",
     "expanded": false
   },
   "MLD-0782": {
     "path": "terms/MLD-0782-multihead-network.html",
-    "sha256": "3de40b519040f2b61bc02ee2dbe65380d652828037008314bf2052c1e28e3d92",
+    "sha256": "5732c3bc30c5206a2b754c25f138ccd2822080ac0648de38b7d54fa3a8ebdaee",
     "expanded": false
   },
   "MLD-0783": {
     "path": "terms/MLD-0783-multilabel-classification.html",
-    "sha256": "b9b093351f36984d67d748d95a68b03b3282a7e78636bf22efdca81941936ccb",
+    "sha256": "45f192dd324f6cf9e5f0800f759abe16b9cd73bebd19e30af804fab084cef8c5",
     "expanded": false
   },
   "MLD-0784": {
     "path": "terms/MLD-0784-multilayer-perceptron.html",
-    "sha256": "b527b5dbef6b92be26442e2a168766caa8a418e909def14428b915f5f56cdea4",
+    "sha256": "8d0561cc366f8302efca5fb53d0916ffbef251615e9d95d0e940886f3c1a482e",
     "expanded": false
   },
   "MLD-0785": {
     "path": "terms/MLD-0785-multimodal-model.html",
-    "sha256": "b7d0a581dee38ebbf5af1333eef4fc015e465f7f7673b39107c100f12e5cb03f",
+    "sha256": "d13d4691078b1032d07e623ea2832b70d2b22e576b8572cf076714c78f0fce6f",
     "expanded": false
   },
   "MLD-0786": {
     "path": "terms/MLD-0786-multinomial-distribution.html",
-    "sha256": "6d6dee5a27b56d0a34c8d72bc175540cce9fcee4c41e7ab4cb50de27be9bb725",
+    "sha256": "2c2f4dcdc73e98ebf6fc5ed0d2fd4b5d55b059120f29f55a73f8d8bc654bb6be",
     "expanded": false
   },
   "MLD-0787": {
     "path": "terms/MLD-0787-multinomial-naive-bayes.html",
-    "sha256": "98d683a7db8eb163645df0076529d622d574c5b6eae223ea7c54b9df7015f227",
+    "sha256": "23021e66fb530f141a712505664aa49a0ea9a6de53c11df09076e33b9abf5c68",
     "expanded": false
   },
   "MLD-0788": {
     "path": "terms/MLD-0788-multiple-imputation.html",
-    "sha256": "bcfd36bab771f6920b58b8ace54501d0c083bbdfed3d7502eee4c67f52f05401",
+    "sha256": "1161076e170422facc55d8bbe40df5bd093061721b5ec98fe5636b899d876a32",
     "expanded": false
   },
   "MLD-0789": {
     "path": "terms/MLD-0789-multiple-testing.html",
-    "sha256": "3589ffc9ce2b19f1b1715b8baf57a70b57615b1fcb8e30c9d28b261aa783244d",
+    "sha256": "0eaad334f7b16574bcdd9576571b5c3151ff0974bd84bc8ef3f58a3956245db2",
     "expanded": false
   },
   "MLD-0790": {
     "path": "terms/MLD-0790-multitask-learning.html",
-    "sha256": "35cc477f366b7abcc6bea6291b383fbac43fb4e0efd4a2eae8f0ed0d4e1c95c0",
+    "sha256": "b4fbe5e292cae039b8cd337619e6a80f80b6f7ff5387150b8decd7420a9c861e",
     "expanded": false
   },
   "MLD-0791": {
     "path": "terms/MLD-0791-mutual-information.html",
-    "sha256": "14c9e55609bd962c80fd91c3670205e73ffb8a0c3ce4270520ea6f68db0dcdf0",
+    "sha256": "41e70deefe9749d452fc6774acee941c2bedd3f9148c06127ce176cfe902110c",
     "expanded": false
   },
   "MLD-0792": {
     "path": "terms/MLD-0792-n-gram.html",
-    "sha256": "d2db462fc4183b2d1277a144cf6cc90dd671de826d0558ed75325b4f37ad2160",
+    "sha256": "dc015759ac72366e72748c81695d70e8df34e9a3b62fa58edbedb02e0dd49861",
     "expanded": false
   },
   "MLD-0793": {
     "path": "terms/MLD-0793-naive-bayes.html",
-    "sha256": "e915140a13343b4d66e87ddc99f906a77fb5665059f16fcac474ef4aa4b596d6",
+    "sha256": "784d20201e5a27e78aff2afb28153cabea26428c6758ede08373566a65e049c1",
     "expanded": false
   },
   "MLD-0794": {
     "path": "terms/MLD-0794-named-entity-recognition.html",
-    "sha256": "0a232bd3ceafd1aa66bae6a3d06a1dfc7c3816734677430f24cf2ff472026d2c",
+    "sha256": "293bfc363bd2e69b03685bb2d35e0eb7e942013bdfda51d04f2a8a3c5f688e09",
     "expanded": false
   },
   "MLD-0795": {
     "path": "terms/MLD-0795-natural-gradient.html",
-    "sha256": "9505f1d6b5bb75d6864c418aff0f271db9dd608dea969ae4d11911777aed726b",
+    "sha256": "46108460707e04c90102a2d26d460034457d2efd0348355677052c5431ff0ab0",
     "expanded": false
   },
   "MLD-0796": {
     "path": "terms/MLD-0796-ndcg.html",
-    "sha256": "26ac7d45b7da99b73a3ca2a4577d07866459510810b8ecf0966f0e39e6e77865",
+    "sha256": "219c7911a37ce2b0698586f1f8045f606afd1a044351ba5d4105eae924ad5f96",
     "expanded": false
   },
   "MLD-0797": {
     "path": "terms/MLD-0797-near-duplicate-detection.html",
-    "sha256": "41048f382409a55c9aca1f682f648bf643bd09b148ac06147e49d6b1839117a5",
+    "sha256": "f8cc246e6fa98aab1eb81c0008461999e1530bb8dd3cd22c83449ac5b8656cc7",
     "expanded": false
   },
   "MLD-0798": {
     "path": "terms/MLD-0798-nearest-centroid-classifier.html",
-    "sha256": "4c4ad5041a6ebf02286595b48be30cc0859411874c6d06f099d9fa7c9431144b",
+    "sha256": "e7d2c24d56da09ef760aa83715129763d6f5bc3ce2a3be04d66df7e21b4eb661",
     "expanded": false
   },
   "MLD-0799": {
     "path": "terms/MLD-0799-nearest-neighbor-search.html",
-    "sha256": "3cad9dc2a8ed324785d73bfc93605f9a5a6eb25fcc1e7649b87c168a0278805c",
+    "sha256": "71fe0af9b7c1fd98e6ae6d2f7b5da0a8f7c3cc7d460deb7ce41fd3af78c68f70",
     "expanded": false
   },
   "MLD-0800": {
