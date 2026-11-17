@@ -2596,102 +2596,102 @@
   },
   "MLD-0520": {
     "path": "terms/MLD-0520-histogram-based-boosting.html",
-    "sha256": "e4bbc23c78ccbdff7cdff12c4ff23eda0a8cd00756e1b0941258cef82edfa2ea",
+    "sha256": "e8b23a308a7f4aa21b1ce0422031e16e4901114807b0bc046e2a0422d362e730",
     "expanded": false
   },
   "MLD-0521": {
     "path": "terms/MLD-0521-hit-rate.html",
-    "sha256": "0beafe902bb6228f56403ad5c032a14cf8f2370377e4321775c6fdb97577b923",
+    "sha256": "5e353d528ef9262d3aefeac4d43dc304acd4a9078d34b611632594b0c7bb3076",
     "expanded": false
   },
   "MLD-0522": {
     "path": "terms/MLD-0522-hnsw.html",
-    "sha256": "19fab4bb955b4eab0529821aab38e14abd2f0c3b1cac4034032458b6ca401526",
+    "sha256": "e1b6fdb851ea31671e9a799e74917458cb2e8a9a1129bcbce27d23908c8d0db0",
     "expanded": false
   },
   "MLD-0523": {
     "path": "terms/MLD-0523-honesty.html",
-    "sha256": "36d9f595414140b8a063f33572febc006f73875f9dc68159bdc3b1b58abf7da0",
+    "sha256": "4ec220bd8f8e71401259234fc935899ba6e35c0d133206bc1f407b749eda1d73",
     "expanded": false
   },
   "MLD-0524": {
     "path": "terms/MLD-0524-huber-loss.html",
-    "sha256": "9ee2bee965fdcc66c09eb77feac3141df25785d1490074c9fdefd9a9f6d476f3",
+    "sha256": "65e48e7483e613236b2cf6ef01760c39cce8bbe0a8c1378beb77c377a5f77f36",
     "expanded": false
   },
   "MLD-0525": {
     "path": "terms/MLD-0525-hugging-face-transformers.html",
-    "sha256": "c6b9a01702f46123403f9c9c518f56ecdf6979fce3d248a057050ce075cdb445",
+    "sha256": "cb94f57df74c71430cd258fda79f950f22d538df3affeb04ee37f9f424654cc0",
     "expanded": false
   },
   "MLD-0526": {
     "path": "terms/MLD-0526-human-evaluation.html",
-    "sha256": "1b3000641147336c5956a9f681200cb3e13883fa0832ed4bcbed46a1a41ff147",
+    "sha256": "f942ae292e3929fc9f3145afd8a9ef5f74014e4a5f79813135b13ebb2d25544c",
     "expanded": false
   },
   "MLD-0527": {
     "path": "terms/MLD-0527-human-oversight.html",
-    "sha256": "5ad3a79082a98c3a92585eaa83d0008d5fe3773d139b121e480ff09d82b0d95c",
+    "sha256": "4dc2fbc4b1fb579b6498153e8bb3a307f81550504070da8fe127db02d463b8df",
     "expanded": false
   },
   "MLD-0528": {
     "path": "terms/MLD-0528-human-in-the-loop.html",
-    "sha256": "67d7b5370871e84b14c2cb5ce5bfeabc0ea833ceb2e624478d6e8d8c87b75db7",
+    "sha256": "34bdd0bd864d816946ea23482d15ac83af0f214a7b3da2171a8a2f57229c74d4",
     "expanded": false
   },
   "MLD-0529": {
     "path": "terms/MLD-0529-humaneval.html",
-    "sha256": "73bb338a38f7d8c701676908bcbc230e1a4bc11ad5a932d87e28aa5dbe8421ad",
+    "sha256": "c35563670adc1927f2d991ec12e87d0dd31f2d20363c7b3c838e2d434db60883",
     "expanded": false
   },
   "MLD-0530": {
     "path": "terms/MLD-0530-hybrid-architecture.html",
-    "sha256": "ecd19a1d9f9aa6620b20572f32d1f38f2881d0f3c2aadd0d21cc6e9508bf9e33",
+    "sha256": "974ebff3f03402df08c18e3921080bb8bed27c4f9f8337a14ac098e90b51d7d2",
     "expanded": false
   },
   "MLD-0531": {
     "path": "terms/MLD-0531-hybrid-retrieval.html",
-    "sha256": "85667aabe84971130ba7f907132ac7ca851e8650327ac74aa98eab6d738b29f6",
+    "sha256": "4425a4a8d7dea2cb1dd6a15382d3dc72adfb9adc08e9f87276164a85c3b8cdbf",
     "expanded": false
   },
   "MLD-0532": {
     "path": "terms/MLD-0532-hyde.html",
-    "sha256": "95a9aa04d05dffc82d00edb428e4c5b21c872a738dbbc47929dd73f85b49947b",
+    "sha256": "de273e41e8722776f2cbeec3b877faf79d51f9ec2a09e880bad88b4cda5a37ca",
     "expanded": false
   },
   "MLD-0533": {
     "path": "terms/MLD-0533-hyperband.html",
-    "sha256": "6bba20526a6c94cc99c41d6a1d04928270e1c99a9fae3c99e008942bc23766df",
+    "sha256": "b445274f7bfa351e76e2b61b111e9c2f1d91338c0bacbfc2e13e17801d600b22",
     "expanded": false
   },
   "MLD-0534": {
     "path": "terms/MLD-0534-hyperparameter.html",
-    "sha256": "d2ae9a687492877df70f037008ad326114c0622a639a226c73916785e427372f",
+    "sha256": "40b78247ae65abd004e9e6352be0a037e99afa31b0067fb60338230c886aa528",
     "expanded": false
   },
   "MLD-0535": {
     "path": "terms/MLD-0535-hyperparameter-optimization.html",
-    "sha256": "752787453e612b755726121ca35d3fd816f5e3203cd19801908399cb8c5df5c2",
+    "sha256": "3b2e4c7b792f541f4ec311f7a1e0ef1905f06a67111e58337940afc24c3d63a4",
     "expanded": false
   },
   "MLD-0536": {
     "path": "terms/MLD-0536-hypothesis-class.html",
-    "sha256": "1911774a327e10c9c38aba2608a26a59ce7447a8b006debde4b93933bc76e097",
+    "sha256": "8df8c8d7726f42834f1af81e9fa90f05c9a5021c35b7c8178ffd2faf45ccced7",
     "expanded": false
   },
   "MLD-0537": {
     "path": "terms/MLD-0537-iid.html",
-    "sha256": "defc328df07deb92024cc4dca51c3863274c950c8bbce405a8219abd48e18653",
+    "sha256": "24d8803473211689ee785135700ef6be30520f1a78dd76b087841fad63eb0166",
     "expanded": false
   },
   "MLD-0538": {
     "path": "terms/MLD-0538-image-classification.html",
-    "sha256": "e131141aaf5a905d8af303feb40a8657d41536407a0c91f4a573e13af76a251d",
+    "sha256": "9b25c6ecddedf1a2bd2c2be579398847214563775de12d194e27139836f52350",
     "expanded": false
   },
   "MLD-0539": {
     "path": "terms/MLD-0539-image-to-image-generation.html",
-    "sha256": "c06da78ca8302b91f322520737e27591e75199ebd6a0ecc835e4fdd4d0eb850c",
+    "sha256": "0ef1af1b4a28871db6eec3ffe5aa86b2a7550576b1e8c1581e1e8fca2d78f3b6",
     "expanded": false
   },
   "MLD-0540": {
