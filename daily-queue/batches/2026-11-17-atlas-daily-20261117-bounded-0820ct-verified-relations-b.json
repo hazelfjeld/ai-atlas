@@ -1,0 +1,1077 @@
+{
+  "schema": 1,
+  "batch_id": "atlas-daily-20261117-bounded-0820ct-verified-relations-b",
+  "edition_date": "2026-11-17",
+  "timezone": "America/Chicago",
+  "collected_at": "2026-11-17T14:25:56.620Z",
+  "coverage_start": "2026-11-16T14:17:06.808Z",
+  "coverage_end": "2026-11-17T14:25:56.620Z",
+  "coverage_status": "partial",
+  "coverage_note": "Bounded daily collection since last operational staged end, with overlapping November 13–17 research lookback. The historical last_successful_coverage_end is null because earlier collections were partial; this batch does not certify exhaustive recovery back to November 1. Older research is marked catch_up, and unverified publication dates are explicit. Validated the catalog relationship for Knowledge distillation (MLD-0607); the first unindexed draft remains immutable and this replacement is the only intended index entry.",
+  "overlap_lookback_start": "2026-11-13T00:00:00Z",
+  "sources_checked": [
+    {
+      "url": "https://www.tencent.com/tencent-launches-hy4-flash-to-power-high-speed-cost-efficient-ai-deployment-for-everyday-workflows/",
+      "status": "opened_or_primary_listing_reviewed",
+      "checked_at": "2026-11-17T14:25:56.620Z"
+    },
+    {
+      "url": "https://github.blog/changelog/2026-11-16-bulk-start-ai-scan-for-repositories/",
+      "status": "opened_or_primary_listing_reviewed",
+      "checked_at": "2026-11-17T14:25:56.620Z"
+    },
+    {
+      "url": "https://github.blog/changelog/2026-11-16-control-where-github-copilot-customizations-come-from/",
+      "status": "opened_or_primary_listing_reviewed",
+      "checked_at": "2026-11-17T14:25:56.620Z"
+    },
+    {
+      "url": "https://github.blog/changelog/2026-11-16-vs-code-retires-the-local-harness-in-february-2027/",
+      "status": "opened_or_primary_listing_reviewed",
+      "checked_at": "2026-11-17T14:25:56.620Z"
+    },
+    {
+      "url": "https://github.blog/changelog/2026-11-16-github-copilot-models-deprecated-on-november-16-2026/",
+      "status": "opened_or_primary_listing_reviewed",
+      "checked_at": "2026-11-17T14:25:56.620Z"
+    },
+    {
+      "url": "https://oag.ca.gov/news/press-releases/it%E2%80%99s-golden-state-not-wild-west-attorney-general-bonta-sues-openai-over",
+      "status": "opened_or_primary_listing_reviewed",
+      "checked_at": "2026-11-17T14:25:56.620Z"
+    },
+    {
+      "url": "https://www.reuters.com/business/finance/french-robot-maker-genesis-raises-500-million-35-billion-valuation-2026-11-17/",
+      "status": "opened_or_primary_listing_reviewed",
+      "checked_at": "2026-11-17T14:25:56.620Z"
+    },
+    {
+      "url": "https://www.reuters.com/business/autos-transportation/gm-plans-20-boost-robotics-factory-costs-rise-2026-11-17/",
+      "status": "opened_or_primary_listing_reviewed",
+      "checked_at": "2026-11-17T14:25:56.620Z"
+    },
+    {
+      "url": "https://ifm.ai/k2/",
+      "status": "opened_or_primary_listing_reviewed",
+      "checked_at": "2026-11-17T14:25:56.620Z"
+    },
+    {
+      "url": "https://huggingface.co/papers/2611.21003",
+      "status": "opened_or_primary_listing_reviewed",
+      "checked_at": "2026-11-17T14:25:56.620Z"
+    },
+    {
+      "url": "https://huggingface.co/papers/2611.20254",
+      "status": "opened_or_primary_listing_reviewed",
+      "checked_at": "2026-11-17T14:25:56.620Z"
+    },
+    {
+      "url": "https://huggingface.co/papers/2611.21607",
+      "status": "opened_or_primary_listing_reviewed",
+      "checked_at": "2026-11-17T14:25:56.620Z"
+    },
+    {
+      "url": "https://arxiv.org/abs/2611.18113",
+      "status": "opened_or_primary_listing_reviewed",
+      "checked_at": "2026-11-17T14:25:56.620Z"
+    },
+    {
+      "url": "https://github.com/myboker/concertina",
+      "status": "opened_or_primary_listing_reviewed",
+      "checked_at": "2026-11-17T14:25:56.620Z"
+    },
+    {
+      "url": "https://arxiv.org/abs/2611.18104",
+      "status": "opened_or_primary_listing_reviewed",
+      "checked_at": "2026-11-17T14:25:56.620Z"
+    },
+    {
+      "url": "https://github.com/leonardo-alegria/garlic-llm",
+      "status": "opened_or_primary_listing_reviewed",
+      "checked_at": "2026-11-17T14:25:56.620Z"
+    },
+    {
+      "url": "https://www.anthropic.com/research",
+      "status": "opened_or_primary_listing_reviewed",
+      "checked_at": "2026-11-17T14:25:56.620Z"
+    },
+    {
+      "url": "https://huggingface.co/papers",
+      "status": "opened_or_primary_listing_reviewed",
+      "checked_at": "2026-11-17T14:25:56.620Z"
+    }
+  ],
+  "sources_failed": [
+    {
+      "url": "https://export.arxiv.org/api/query?search_query=cat:cs.LG&start=0&max_results=1",
+      "status": "web_reader_inaccessible",
+      "checked_at": "2026-11-17T14:25:56.620Z",
+      "note": "arXiv API unavailable through this tool; individual arXiv/Hugging Face paper pages were reviewed instead. No zero-results inference."
+    }
+  ],
+  "source_health_note": "Primary publisher documentation, official changelogs, academic paper pages, author repositories, Hugging Face daily feed, government legal notice and Reuters reports were reviewed. arXiv API unavailable. No model weights executed or benchmarks replicated.",
+  "coverage_backlog": [
+    "Full arXiv category/API sweep and long-running historical successful-cutoff recovery remain outstanding",
+    "Not all framework releases, scientific domains, specialist robotics and model repositories were audited",
+    "Validate repository licenses, model weight/download links, cloud/API prices and hardware requirements before catalog promotion",
+    "Check original publication timestamps of Garlic LLM and reconcile academic paper versions; source-date and discovery-date remain distinct",
+    "Revisit ongoing California litigation and the response/filings before updating any actual-incident labels"
+  ],
+  "tldr": [
+    "Open-model research broadened with K2 Horizon, VoxMel audio synthesis and Concertina compression, while Tencent announced a sparse long-context hosted model; authors' benchmark claims and artifact availability require independent checking.",
+    "New coding-agent governance controls, production-robotics plans and a California AI-agent testing lawsuit highlight operational and safety questions, with legal allegations and reported plans distinguished from verified incidents or completed deployments."
+  ],
+  "news": [
+    {
+      "id": "ai-news:tencent-hy4-flash:2026-11-16",
+      "title": "Tencent unveils Hy4 flash: sparse, long-context multimodal inference",
+      "category": "models",
+      "tags": [
+        "LLM",
+        "MoE",
+        "multimodal",
+        "inference",
+        "agents"
+      ],
+      "summary": "Tencent announced a 224B-total-parameter Hy4 flash model with 12B active parameters, Engram components and a claimed one-million-token context. Tencent advertises TokenHub availability and lower token pricing than Hy4.",
+      "why_it_matters": "A new sparse-inference option may help teams balance long-context API usage with latency and expense.",
+      "caveat": "Parameter counts, relative performance, throughput and prices are Tencent-reported, not independently benchmarked. Announced future open weights are not available weights.",
+      "canonical_url": "https://www.tencent.com/tencent-launches-hy4-flash-to-power-high-speed-cost-efficient-ai-deployment-for-everyday-workflows/",
+      "source_url": "https://www.tencent.com/tencent-launches-hy4-flash-to-power-high-speed-cost-efficient-ai-deployment-for-everyday-workflows/",
+      "publication_date": "2026-11-16",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-16",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-17T14:25:56.620Z",
+      "checked_at": "2026-11-17T14:25:56.620Z",
+      "release_status": "released_per_publisher",
+      "evidence_type": "source_opened",
+      "review_status": "source_checked_pending_publisher_review",
+      "collection_classification": "previous_day",
+      "publisher": "Tencent",
+      "type": "dated first-party model announcement",
+      "version": null,
+      "sources": [
+        {
+          "url": "https://www.tencent.com/tencent-launches-hy4-flash-to-power-high-speed-cost-efficient-ai-deployment-for-everyday-workflows/",
+          "publisher": "Tencent",
+          "type": "dated first-party model announcement"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:github-bulk-ai-scan:2026-11-16",
+      "title": "GitHub adds up-to-20-repository bulk starts for AI Scan",
+      "category": "developer_tools",
+      "tags": [
+        "AI security",
+        "code scanning",
+        "developer tools",
+        "agents"
+      ],
+      "summary": "GitHub made a public-preview bulk action to launch AI Scan across up to 20 repositories, with findings integrated into existing code-scanning alerts.",
+      "why_it_matters": "Security teams can investigate many codebases without launching separate scans for each repository.",
+      "caveat": "This is a workflow change to AI Scan, not evidence of complete vulnerability detection. Prior November 13 repository-level API controls are a separate already-covered feature.",
+      "canonical_url": "https://github.blog/changelog/2026-11-16-bulk-start-ai-scan-for-repositories/",
+      "source_url": "https://github.blog/changelog/2026-11-16-bulk-start-ai-scan-for-repositories/",
+      "publication_date": "2026-11-16",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-16",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-17T14:25:56.620Z",
+      "checked_at": "2026-11-17T14:25:56.620Z",
+      "release_status": "public_preview",
+      "evidence_type": "source_opened",
+      "review_status": "source_checked_pending_publisher_review",
+      "collection_classification": "previous_day",
+      "publisher": "GitHub",
+      "type": "dated official changelog",
+      "version": null,
+      "sources": [
+        {
+          "url": "https://github.blog/changelog/2026-11-16-bulk-start-ai-scan-for-repositories/",
+          "publisher": "GitHub",
+          "type": "dated official changelog"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:github-plugin-only-copilot-customization:2026-11-16",
+      "title": "GitHub introduces plugin-only rules for enterprise Copilot customizations",
+      "category": "agents",
+      "tags": [
+        "agents",
+        "MCP",
+        "AI security",
+        "enterprise",
+        "developer tools"
+      ],
+      "summary": "GitHub enterprise administrators can apply strictPluginOnlyCustomization to skills, agents, hooks, MCP servers and executable Copilot extensions, permitting controlled plugins or managed settings instead of standalone user/project variants.",
+      "why_it_matters": "Organizations gain a concrete enforcement layer for where agent tools and executable extensions originate.",
+      "caveat": "Plugin-only is not a marketplace allowlist; GitHub says administrators must combine it with marketplace policy to restrict which plugin sources are eligible. Plan and administrative availability apply.",
+      "canonical_url": "https://github.blog/changelog/2026-11-16-control-where-github-copilot-customizations-come-from/",
+      "source_url": "https://github.blog/changelog/2026-11-16-control-where-github-copilot-customizations-come-from/",
+      "publication_date": "2026-11-16",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-16",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-17T14:25:56.620Z",
+      "checked_at": "2026-11-17T14:25:56.620Z",
+      "release_status": "available_per_publisher",
+      "evidence_type": "source_opened",
+      "review_status": "source_checked_pending_publisher_review",
+      "collection_classification": "previous_day",
+      "publisher": "GitHub",
+      "type": "dated official changelog",
+      "version": null,
+      "sources": [
+        {
+          "url": "https://github.blog/changelog/2026-11-16-control-where-github-copilot-customizations-come-from/",
+          "publisher": "GitHub",
+          "type": "dated official changelog"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:vscode-local-harness-retirement-notice:2026-11-16",
+      "title": "VS Code starts transition away from the Local Copilot harness",
+      "category": "developer_tools",
+      "tags": [
+        "coding agents",
+        "VS Code",
+        "harnesses",
+        "security"
+      ],
+      "summary": "GitHub says VS Code 1.146 deprecates the old Local harness and plans its removal in February 2027. The newer Copilot harness has been the default for new sessions since 1.143.",
+      "why_it_matters": "Coding-agent users must test compatibility of sessions, tools and customizations before the future removal.",
+      "caveat": "The old harness was deprecated, not removed on November 16. Local code execution still exists; choosing the newer harness does not automatically turn on sandboxing.",
+      "canonical_url": "https://github.blog/changelog/2026-11-16-vs-code-retires-the-local-harness-in-february-2027/",
+      "source_url": "https://github.blog/changelog/2026-11-16-vs-code-retires-the-local-harness-in-february-2027/",
+      "publication_date": "2026-11-16",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-16",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-17T14:25:56.620Z",
+      "checked_at": "2026-11-17T14:25:56.620Z",
+      "release_status": "deprecation_announced_future_removal",
+      "evidence_type": "source_opened",
+      "review_status": "source_checked_pending_publisher_review",
+      "collection_classification": "previous_day",
+      "publisher": "GitHub",
+      "type": "dated official roadmap changelog",
+      "version": null,
+      "sources": [
+        {
+          "url": "https://github.blog/changelog/2026-11-16-vs-code-retires-the-local-harness-in-february-2027/",
+          "publisher": "GitHub",
+          "type": "dated official roadmap changelog"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:github-copilot-nov16-model-deprecations:2026-11-16",
+      "title": "Copilot retires three older model choices, with documented exceptions",
+      "category": "models",
+      "tags": [
+        "coding agents",
+        "LLM",
+        "API compatibility",
+        "developer tools"
+      ],
+      "summary": "GitHub lists November 16 deprecations for Claude Opus 4.8, Claude Opus 5 and GPT-5.6 Terra across most Copilot experiences, recommending supported replacements.",
+      "why_it_matters": "Model-selection changes can break fixed-model assumptions in coding-agent evaluations and enterprise policies.",
+      "caveat": "GitHub explicitly retains Opus 4.8 for individual annual subscribers and Opus 5 for certain runtime refusal fallbacks; this is distinct from a separately announced December 14 deprecation batch.",
+      "canonical_url": "https://github.blog/changelog/2026-11-16-github-copilot-models-deprecated-on-november-16-2026/",
+      "source_url": "https://github.blog/changelog/2026-11-16-github-copilot-models-deprecated-on-november-16-2026/",
+      "publication_date": "2026-11-16",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-16",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-17T14:25:56.620Z",
+      "checked_at": "2026-11-17T14:25:56.620Z",
+      "release_status": "deprecation_effective",
+      "evidence_type": "source_opened",
+      "review_status": "source_checked_pending_publisher_review",
+      "collection_classification": "previous_day",
+      "publisher": "GitHub",
+      "type": "dated official changelog",
+      "version": null,
+      "sources": [
+        {
+          "url": "https://github.blog/changelog/2026-11-16-github-copilot-models-deprecated-on-november-16-2026/",
+          "publisher": "GitHub",
+          "type": "dated official changelog"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:california-ag-openai-cyber-lawsuit:2026-11-16",
+      "title": "California files suit alleging unsafe AI-agent security testing",
+      "category": "governance",
+      "tags": [
+        "AI safety",
+        "agents",
+        "legal",
+        "cybersecurity",
+        "governance"
+      ],
+      "summary": "California's Attorney General announced a lawsuit filed November 16 alleging that OpenAI's experimental agent testing and cyber controls created risks and violated California law. The release cites prior incidents and investigative claims.",
+      "why_it_matters": "The filing brings AI-agent containment, authorization and testing safeguards into an active legal dispute.",
+      "caveat": "The filing and allegations are real; the allegations themselves are not established findings of fact or court judgments. Do not promote the claimed incidents or 80-incident figure into confirmed Atlas incident records.",
+      "canonical_url": "https://oag.ca.gov/news/press-releases/it%E2%80%99s-golden-state-not-wild-west-attorney-general-bonta-sues-openai-over",
+      "source_url": "https://oag.ca.gov/news/press-releases/it%E2%80%99s-golden-state-not-wild-west-attorney-general-bonta-sues-openai-over",
+      "publication_date": "2026-11-16",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-16",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-17T14:25:56.620Z",
+      "checked_at": "2026-11-17T14:25:56.620Z",
+      "release_status": "lawsuit_filed_allegations_unadjudicated",
+      "evidence_type": "confirmed_lawsuit_with_disputed_allegations",
+      "review_status": "source_checked_pending_publisher_review",
+      "collection_classification": "previous_day",
+      "publisher": "California Department of Justice",
+      "type": "official plaintiff statement; legal allegations",
+      "version": null,
+      "sources": [
+        {
+          "url": "https://oag.ca.gov/news/press-releases/it%E2%80%99s-golden-state-not-wild-west-attorney-general-bonta-sues-openai-over",
+          "publisher": "California Department of Justice",
+          "type": "official plaintiff statement; legal allegations"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:genesis-ai-series-a-eno-robot:2026-11-17",
+      "title": "Genesis AI reports $500M round for Eno mobile manipulation robot",
+      "category": "robotics",
+      "tags": [
+        "robotics",
+        "physical AI",
+        "investment",
+        "automation"
+      ],
+      "summary": "Reuters reports French robotics company Genesis AI says it raised $500 million at a $3.5 billion valuation and will expand production, data collection and training for its wheeled Eno robot.",
+      "why_it_matters": "Funding and small customer tests point to continued investment in real-world manipulation, alongside model-training and robotics data needs.",
+      "caveat": "The financing terms and prospective broader customer rollout in 2027 are reported and forward-looking; funding does not establish autonomous production readiness or generalization.",
+      "canonical_url": "https://www.reuters.com/business/finance/french-robot-maker-genesis-raises-500-million-35-billion-valuation-2026-11-17/",
+      "source_url": "https://www.reuters.com/business/finance/french-robot-maker-genesis-raises-500-million-35-billion-valuation-2026-11-17/",
+      "publication_date": "2026-11-17",
+      "publication_date_precision": "day",
+      "publication_time_utc": "2026-11-17T14:04:00Z",
+      "event_date": "2026-11-17",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-17T14:25:56.620Z",
+      "checked_at": "2026-11-17T14:25:56.620Z",
+      "release_status": "funding_announced;future_robot_rollout_plan",
+      "evidence_type": "source_opened",
+      "review_status": "source_checked_pending_publisher_review",
+      "collection_classification": "same_day",
+      "publisher": "Reuters",
+      "type": "independent business journalism citing company",
+      "version": null,
+      "sources": [
+        {
+          "url": "https://www.reuters.com/business/finance/french-robot-maker-genesis-raises-500-million-35-billion-valuation-2026-11-17/",
+          "publisher": "Reuters",
+          "type": "independent business journalism citing company"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:gm-north-america-robotics-expansion-plan:2026-11-17",
+      "title": "Reuters: GM targets more plant robotics by 2028",
+      "category": "robotics",
+      "tags": [
+        "robotics",
+        "industry",
+        "automation",
+        "manufacturing"
+      ],
+      "summary": "Reuters reports that sources familiar with the plans say GM targets roughly 20% more robotics and automation across North American factories by 2028, including developing its own mobile robots in Indiana.",
+      "why_it_matters": "An industrial deployment plan illustrates demand for practical mobile-robot systems beyond laboratory benchmarks.",
+      "caveat": "This is Reuters source-based reporting on a target, not a completed 20% expansion or verification of independent robot performance. Operational and workforce effects remain uncertain.",
+      "canonical_url": "https://www.reuters.com/business/autos-transportation/gm-plans-20-boost-robotics-factory-costs-rise-2026-11-17/",
+      "source_url": "https://www.reuters.com/business/autos-transportation/gm-plans-20-boost-robotics-factory-costs-rise-2026-11-17/",
+      "publication_date": "2026-11-17",
+      "publication_date_precision": "day",
+      "publication_time_utc": "2026-11-17T11:07:00Z",
+      "event_date": "2026-11-17",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-17T14:25:56.620Z",
+      "checked_at": "2026-11-17T14:25:56.620Z",
+      "release_status": "reported_plan_not_completed",
+      "evidence_type": "source_opened",
+      "review_status": "source_checked_pending_publisher_review",
+      "collection_classification": "same_day",
+      "publisher": "Reuters",
+      "type": "independent business reporting using unnamed sources",
+      "version": null,
+      "sources": [
+        {
+          "url": "https://www.reuters.com/business/autos-transportation/gm-plans-20-boost-robotics-factory-costs-rise-2026-11-17/",
+          "publisher": "Reuters",
+          "type": "independent business reporting using unnamed sources"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:k2-horizon-open-model-fleet:2611.21003",
+      "title": "K2 Horizon team releases six model scales and training-reproduction artifacts",
+      "category": "open_source_models",
+      "tags": [
+        "SLM",
+        "LLM",
+        "MoE",
+        "training",
+        "agents",
+        "open source"
+      ],
+      "summary": "The Institute of Foundation Models describes six K2 Horizon models ranging from a 0.9B dense model to a 375B-total/23B-active MoE, with training checkpoints, data processing and training-code artifacts. Its paper introduces Mixture-of-Value Attention and a diffusion-based decoding adapter.",
+      "why_it_matters": "A comparatively transparent release may support controlled studies of small versus sparse large models, synthetic data and post-training.",
+      "caveat": "Open-source and benchmark claims are made by the authors. The independently downloaded completeness of all checkpoints/data, licenses and hardware requirements were not verified in this collection.",
+      "canonical_url": "https://ifm.ai/k2/",
+      "source_url": "https://ifm.ai/k2/",
+      "publication_date": "2026-11-16",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-16",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-17T14:25:56.620Z",
+      "checked_at": "2026-11-17T14:25:56.620Z",
+      "release_status": "project_and_paper_released",
+      "evidence_type": "source_opened",
+      "review_status": "source_checked_pending_publisher_review",
+      "collection_classification": "previous_day",
+      "publisher": "Institute of Foundation Models (MBZUAI)",
+      "type": "first-party model release and project documentation",
+      "version": "paper v1",
+      "sources": [
+        {
+          "url": "https://ifm.ai/k2/",
+          "publisher": "Institute of Foundation Models (MBZUAI)",
+          "type": "first-party model release and project documentation"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.21003",
+          "publisher": "K2 Horizon authors / Hugging Face",
+          "type": "primary research paper listing"
+        }
+      ],
+      "arxiv_id": "2611.21003"
+    },
+    {
+      "id": "ai-news:voxmel-tokenizer-free-tts:2611.20254",
+      "title": "VoxMel research explores tokenizer-free autoregressive speech synthesis",
+      "category": "audio",
+      "tags": [
+        "audio",
+        "TTS",
+        "SLM",
+        "distillation",
+        "flow matching"
+      ],
+      "summary": "VoxMel reports a fixed invertible Haar decomposition of mel spectrograms so a small language model autoregressively predicts coarse acoustic features and separate predictors reconstruct residuals. Authors link 0.3B and 0.6B checkpoints and four-step head distillation experiments.",
+      "why_it_matters": "Separating coarse speech trajectories from acoustic detail is a differentiable alternative to learned discrete audio tokenizers for efficient synthesis.",
+      "caveat": "WER, CER, speaker similarity and faster-step performance are paper claims without independent listening or latency replication. Published November 15 and added to November 17 HF feed, so this is catch-up.",
+      "canonical_url": "https://huggingface.co/papers/2611.20254",
+      "source_url": "https://huggingface.co/papers/2611.20254",
+      "publication_date": "2026-11-15",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-15",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-17T14:25:56.620Z",
+      "checked_at": "2026-11-17T14:25:56.620Z",
+      "release_status": "research_and_artifacts_reported",
+      "evidence_type": "source_opened",
+      "review_status": "source_checked_pending_publisher_review",
+      "collection_classification": "catch_up",
+      "publisher": "VoxDance-Lab researchers / Hugging Face",
+      "type": "primary research abstract and linked model cards",
+      "version": null,
+      "sources": [
+        {
+          "url": "https://huggingface.co/papers/2611.20254",
+          "publisher": "VoxDance-Lab researchers / Hugging Face",
+          "type": "primary research abstract and linked model cards"
+        }
+      ],
+      "arxiv_id": "2611.20254"
+    },
+    {
+      "id": "ai-news:scalevla-552b-robot-policy:2611.21607",
+      "title": "ScaleVLA paper studies a 552B backbone for robot manipulation",
+      "category": "robotics",
+      "tags": [
+        "robotics",
+        "VLA",
+        "vision",
+        "multimodal",
+        "research"
+      ],
+      "summary": "ScaleVLA connects a 552B vision-language backbone to an action diffusion transformer and reports better sample efficiency and contact-sensitive manipulation than smaller baselines in its chosen evaluations.",
+      "why_it_matters": "Provides testable evidence toward studying whether large pretrained representations can benefit low-demonstration robotic policies.",
+      "caveat": "Only the researchers' comparisons are available; the paper is not a verified industrial deployment, and 552B scale introduces significant inference cost and reproducibility constraints.",
+      "canonical_url": "https://huggingface.co/papers/2611.21607",
+      "source_url": "https://huggingface.co/papers/2611.21607",
+      "publication_date": "2026-11-16",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-16",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-17T14:25:56.620Z",
+      "checked_at": "2026-11-17T14:25:56.620Z",
+      "release_status": "research_preprint",
+      "evidence_type": "source_opened",
+      "review_status": "source_checked_pending_publisher_review",
+      "collection_classification": "previous_day",
+      "publisher": "galbot / ScaleVLA authors",
+      "type": "primary robotics preprint listing",
+      "version": null,
+      "sources": [
+        {
+          "url": "https://huggingface.co/papers/2611.21607",
+          "publisher": "galbot / ScaleVLA authors",
+          "type": "primary robotics preprint listing"
+        }
+      ],
+      "arxiv_id": "2611.21607"
+    },
+    {
+      "id": "ai-news:concertina-layer-folding-distillation:2611.18113",
+      "title": "Concertina folds pretrained layers into a smaller weight-sharing student",
+      "category": "research",
+      "tags": [
+        "SLM",
+        "LLM",
+        "distillation",
+        "compression",
+        "training"
+      ],
+      "summary": "Concertina reuses teacher weights by executing a shared block repeatedly with initialized low-rank layer corrections and token-dependent gates; the authors report a Qwen3-4B derived 2.27B model trained on 22B distillation tokens.",
+      "why_it_matters": "Could reduce the data needed to derive a compact student when good teacher checkpoints are available, without training a new network from scratch.",
+      "caveat": "The authors' 84% average retention over eight tests and comparison with other baselines are not independently reproduced; student performance may differ outside the test suite. November 13 paper is catch-up.",
+      "canonical_url": "https://arxiv.org/abs/2611.18113",
+      "source_url": "https://arxiv.org/abs/2611.18113",
+      "publication_date": "2026-11-13",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-13",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-17T14:25:56.620Z",
+      "checked_at": "2026-11-17T14:25:56.620Z",
+      "release_status": "research_with_code",
+      "evidence_type": "source_opened",
+      "review_status": "source_checked_pending_publisher_review",
+      "collection_classification": "catch_up",
+      "publisher": "Zhang et al. / arXiv",
+      "type": "original research preprint",
+      "version": "v1",
+      "sources": [
+        {
+          "url": "https://arxiv.org/abs/2611.18113",
+          "publisher": "Zhang et al. / arXiv",
+          "type": "original research preprint"
+        },
+        {
+          "url": "https://github.com/myboker/concertina",
+          "publisher": "Concertina authors",
+          "type": "official code repository"
+        }
+      ],
+      "arxiv_id": "2611.18113"
+    },
+    {
+      "id": "ai-news:contagious-llm-fingerprints-audit:2611.18104",
+      "title": "Model-fingerprint paper finds conversational style can undermine API audits",
+      "category": "evaluation",
+      "tags": [
+        "LLM",
+        "evaluation",
+        "model provenance",
+        "API",
+        "security"
+      ],
+      "summary": "A November 13 preprint reports that model-identification fingerprints shift toward the authors of earlier conversation turns, weakening some mid-conversation API-substitution checks. Its Lineup technique compares a reply with samples drawn on the same conversational history.",
+      "why_it_matters": "Auditors may need history-matched references rather than assuming fresh-prompt model fingerprints hold across long sessions.",
+      "caveat": "Research experiments and author-reported error rates do not establish that a particular provider substituted models or that Lineup universally detects it. This is a catch-up research finding.",
+      "canonical_url": "https://arxiv.org/abs/2611.18104",
+      "source_url": "https://arxiv.org/abs/2611.18104",
+      "publication_date": "2026-11-13",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-13",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-17T14:25:56.620Z",
+      "checked_at": "2026-11-17T14:25:56.620Z",
+      "release_status": "research_preprint",
+      "evidence_type": "source_opened",
+      "review_status": "source_checked_pending_publisher_review",
+      "collection_classification": "catch_up",
+      "publisher": "Zailong Tian / arXiv",
+      "type": "original research preprint",
+      "version": "v1",
+      "sources": [
+        {
+          "url": "https://arxiv.org/abs/2611.18104",
+          "publisher": "Zailong Tian / arXiv",
+          "type": "original research preprint"
+        }
+      ],
+      "arxiv_id": "2611.18104"
+    },
+    {
+      "id": "ai-news:garlic-llm-offline-ps4-inference:2026-11-17-discovery",
+      "title": "Garlic LLM demonstrates homebrew offline language models on a PS4",
+      "category": "edge_ai",
+      "tags": [
+        "SLM",
+        "LLM",
+        "edge",
+        "quantization",
+        "inference",
+        "audio"
+      ],
+      "summary": "An independently accessible developer repository documents running a quantized Qwen3.5-9B on a jailbroken PlayStation 4 via custom GCN GPU kernels and low-level command buffers, with optional on-console speech and Python tools.",
+      "why_it_matters": "A specialist implementation offers concrete systems lessons about constrained-memory inference, custom kernels and offline voice workflows on old hardware.",
+      "caveat": "Repository first-publication date was not reliably established, so do not label it a November 17 launch. The developer's 31–39 tokens/s, 16K context and voice claims are unreplicated and require console modification.",
+      "canonical_url": "https://github.com/leonardo-alegria/garlic-llm",
+      "source_url": "https://github.com/leonardo-alegria/garlic-llm",
+      "publication_date": null,
+      "publication_date_precision": "unknown",
+      "publication_time_utc": null,
+      "event_date": null,
+      "event_date_precision": "unknown",
+      "discovered_at": "2026-11-17T14:25:56.620Z",
+      "checked_at": "2026-11-17T14:25:56.620Z",
+      "release_status": "public_homebrew_project_date_unverified",
+      "evidence_type": "source_opened",
+      "review_status": "source_checked_pending_publisher_review",
+      "collection_classification": "catch_up",
+      "publisher": "Garlic LLM developer",
+      "type": "first-party source repository with implementation notes",
+      "version": null,
+      "sources": [
+        {
+          "url": "https://github.com/leonardo-alegria/garlic-llm",
+          "publisher": "Garlic LLM developer",
+          "type": "first-party source repository with implementation notes"
+        }
+      ]
+    }
+  ],
+  "technologies": [
+    {
+      "id": "tech-proposal:k2-horizon-model-fleet:2026-11-17",
+      "name": "K2 Horizon model fleet",
+      "aliases": [
+        "K2-Horizon",
+        "K2 Horizon 0.9B",
+        "K2 Horizon 36B-A4B",
+        "K2 Horizon 375B-A23B"
+      ],
+      "usage_tags": [
+        "AI",
+        "ML",
+        "DL",
+        "SLM",
+        "LLM",
+        "MoE",
+        "training"
+      ],
+      "explanation": "Six-model open research series across dense and mixture-of-experts scales with training checkpoints, pipelines and reported reproducibility artifacts, including 0.9B dense and 375B/23B-active MoE variants.",
+      "conditional_advantage": "When conducting controlled pretraining, synthetic data or sparsity research, common pipeline artifacts across multiple model sizes may make cross-scale comparisons more tractable than isolated closed checkpoints.",
+      "best_fit_uses": [
+        "Scaling and distillation studies",
+        "Agent/coding model evaluations",
+        "Open-model inference trials",
+        "Training pipeline reproduction"
+      ],
+      "tradeoffs": [
+        "Flagship checkpoint is enormous",
+        "All benchmark claims need independent evaluation",
+        "Availability and full licenses of every artifact need per-file verification"
+      ],
+      "alternatives": [
+        "Qwen open-weight families",
+        "DeepSeek MoE releases",
+        "Open-sourced smaller dense models"
+      ],
+      "hardware_runtime_constraints": "0.9B may be quantized for local hardware; 375B-total-parameter flagship requires substantial multi-accelerator memory and expert routing. Exact supported devices, runtimes, KV-cache usage and serving costs unverified.",
+      "license_uncertainty": "Authors call it fully open, but individual model, dataset, code and derived-data license texts not independently audited.",
+      "availability_uncertainty": "Official project and paper expose download and research links; complete artifact reachability and checkpoint integrity were not tested.",
+      "pricing_uncertainty": "Free research artifacts are advertised; local/infrastructure costs and hosted endpoint pricing not independently checked.",
+      "official_documentation_url": "https://ifm.ai/k2/",
+      "source_links": [
+        {
+          "url": "https://ifm.ai/k2/",
+          "publisher": "Institute of Foundation Models",
+          "type": "official model family project"
+        },
+        {
+          "url": "https://huggingface.co/papers/2611.21003",
+          "publisher": "K2 Horizon authors",
+          "type": "research paper"
+        }
+      ],
+      "date_checked": "2026-11-17",
+      "checked_at": "2026-11-17T14:25:56.620Z",
+      "existing_profile_id": null,
+      "review_status": "source_checked_pending_publisher_catalog_dedup"
+    },
+    {
+      "id": "tech-proposal:tencent-hy4-flash:2026-11-17",
+      "name": "Tencent Hy4 flash",
+      "aliases": [
+        "Hy4 flash",
+        "Tencent Hy flash"
+      ],
+      "usage_tags": [
+        "AI",
+        "ML",
+        "DL",
+        "LLM",
+        "MoE",
+        "multimodal",
+        "agents"
+      ],
+      "explanation": "Tencent's announced 224B total / 12B active sparse language and multimodal model, integrating Engram capacity and long-context attention for hosted API inference.",
+      "conditional_advantage": "For large-context multimodal applications billed per token, the provider's listed price may lower usage expense relative to heavier hosted models if accuracy and service-level goals hold.",
+      "best_fit_uses": [
+        "Hosted multimodal document processing",
+        "Agent tool workflows",
+        "High-volume summarization",
+        "Long-context programming tasks"
+      ],
+      "tradeoffs": [
+        "Benchmarks and throughput are provider reported",
+        "Weight availability not established for self-hosting",
+        "Long context can add retrieval errors and latency"
+      ],
+      "alternatives": [
+        "Qwen4-Max hosted API",
+        "Smaller dense open weights",
+        "Other low-cost hosted sparse MoE models"
+      ],
+      "hardware_runtime_constraints": "Hosted serving is described; exact GPU types, RAM and KV-cache memory per million-token conversation unverified. 224B total parameters not practically equivalent to 12B model storage.",
+      "license_uncertainty": "Tencent's announcement describes future open-weight plans; no downloadable Hy4 flash checkpoint license verified.",
+      "availability_uncertainty": "Tencent announces TokenHub access; region/account activation not independently tested.",
+      "pricing_uncertainty": "Advertised approximately $0.070/1M input, $0.281/1M output and $0.003/1M cached input; taxes, tiers and stable rates unverified.",
+      "official_documentation_url": "https://www.tencent.com/tencent-launches-hy4-flash-to-power-high-speed-cost-efficient-ai-deployment-for-everyday-workflows/",
+      "source_links": [
+        {
+          "url": "https://www.tencent.com/tencent-launches-hy4-flash-to-power-high-speed-cost-efficient-ai-deployment-for-everyday-workflows/",
+          "publisher": "Tencent",
+          "type": "official model announcement"
+        }
+      ],
+      "date_checked": "2026-11-17",
+      "checked_at": "2026-11-17T14:25:56.620Z",
+      "existing_profile_id": null,
+      "review_status": "source_checked_pending_publisher_catalog_dedup"
+    },
+    {
+      "id": "tech-proposal:voxmel-tts-research:2026-11-17",
+      "name": "VoxMel tokenizer-free TTS",
+      "aliases": [
+        "VoxMel",
+        "Coarse-Mel autoregressive TTS"
+      ],
+      "usage_tags": [
+        "AI",
+        "ML",
+        "DL",
+        "SLM",
+        "audio",
+        "TTS",
+        "distillation"
+      ],
+      "explanation": "Autoregressive continuous-mel speech framework using invertible Haar frequency/time decomposition; predict coarse spectrogram steps autoregressively then restore temporal/frequency residuals with separate predictors.",
+      "conditional_advantage": "Where avoiding learned acoustic tokenizers is important, a fixed invertible transform gives a structured continuous target and potentially simpler tokenizer-dependent failure analysis.",
+      "best_fit_uses": [
+        "Voice-model research",
+        "Low-parameter multilingual TTS prototyping",
+        "Distillation of acoustic generation heads",
+        "Speaker-consistency evaluation"
+      ],
+      "tradeoffs": [
+        "Residual heads and flow matching require additional modeling",
+        "Audio quality and latency need listening trials",
+        "Reported WER/CER and identity metrics may not generalize"
+      ],
+      "alternatives": [
+        "Discrete codec token TTS",
+        "VAE latent audio generation",
+        "Direct mel diffusion",
+        "Vocoder-based pipelines"
+      ],
+      "hardware_runtime_constraints": "Researchers describe 0.3B/0.6B models and 2–4-step student heads, but measured VRAM, CPU support, real-time factors and specific GPU needs not verified.",
+      "license_uncertainty": "Weights appear linked from Hugging Face; license compatibility for checkpoints, training dataset and vocoders not independently checked.",
+      "availability_uncertainty": "Preprint links model cards and demo spaces; actual checkpoint downloads were not performed.",
+      "pricing_uncertainty": "Academic artifacts may be free; inference, hosting and downstream model costs unverified.",
+      "official_documentation_url": "https://huggingface.co/papers/2611.20254",
+      "source_links": [
+        {
+          "url": "https://huggingface.co/papers/2611.20254",
+          "publisher": "VoxDance-Lab",
+          "type": "research preprint"
+        },
+        {
+          "url": "https://huggingface.co/VoxDance-Lab/VoxMel-0.6B",
+          "publisher": "VoxDance-Lab",
+          "type": "referenced official model card; not downloaded"
+        }
+      ],
+      "date_checked": "2026-11-17",
+      "checked_at": "2026-11-17T14:25:56.620Z",
+      "existing_profile_id": null,
+      "review_status": "source_checked_pending_publisher_catalog_dedup"
+    },
+    {
+      "id": "tech-proposal:concertina-layer-folding:2026-11-17",
+      "name": "Concertina layer-folding distillation",
+      "aliases": [
+        "Concertina",
+        "folding language models into themselves"
+      ],
+      "usage_tags": [
+        "AI",
+        "ML",
+        "DL",
+        "SLM",
+        "LLM",
+        "distillation",
+        "compression"
+      ],
+      "explanation": "Compresses pretrained transformer layers by replacing groups with a shared recurrently applied block plus initialized low-rank corrections and per-token gates, followed by targeted distillation.",
+      "conditional_advantage": "With available teacher weights and limited retraining tokens, a weight-initialized student may retain useful behavior better than a similarly sized newly trained dense student under matched studies.",
+      "best_fit_uses": [
+        "Open-weight model compression",
+        "SLM research",
+        "Shared-layer transformer ablations",
+        "Distillation data mixtures"
+      ],
+      "tradeoffs": [
+        "Requires access to full teacher weights",
+        "Distillation compute remains substantial",
+        "Quality can shift by task and distribution",
+        "Benchmark improvements are not replicated"
+      ],
+      "alternatives": [
+        "Conventional teacher–student distillation",
+        "Layer pruning",
+        "Parameter tying",
+        "LoRA model adaptation",
+        "Quantization"
+      ],
+      "hardware_runtime_constraints": "Authors report a Qwen3-4B-derived 2.27B checkpoint using 22B distillation tokens; training GPU/VRAM and inference speed not independently checked.",
+      "license_uncertainty": "Research code is public, but exact code license, Qwen teacher, student release and training data use require separate review.",
+      "availability_uncertainty": "A public GitHub source and arXiv paper were opened; executable pipeline and weights were not run or downloaded.",
+      "pricing_uncertainty": "Infrastructure GPU cost depends on distillation corpus, precision and optimizer; no official hosted product price.",
+      "official_documentation_url": "https://github.com/myboker/concertina",
+      "source_links": [
+        {
+          "url": "https://arxiv.org/abs/2611.18113",
+          "publisher": "Zhang et al.",
+          "type": "primary preprint"
+        },
+        {
+          "url": "https://github.com/myboker/concertina",
+          "publisher": "Concertina authors",
+          "type": "official code repository"
+        }
+      ],
+      "date_checked": "2026-11-17",
+      "checked_at": "2026-11-17T14:25:56.620Z",
+      "existing_profile_id": null,
+      "review_status": "source_checked_pending_publisher_catalog_dedup"
+    },
+    {
+      "id": "tech-proposal:garlic-llm-ps4:2026-11-17",
+      "name": "Garlic LLM for PlayStation 4",
+      "aliases": [
+        "Garlic LLM",
+        "PS4 homebrew Qwen3.5-9B inference"
+      ],
+      "usage_tags": [
+        "AI",
+        "ML",
+        "DL",
+        "SLM",
+        "LLM",
+        "edge",
+        "quantization",
+        "audio"
+      ],
+      "explanation": "Homebrew offline PS4 app for a quantized 9B language model and optional ASR/TTS using OpenCL-derived GCN kernels, hand-built GPU commands and custom Q3/Q4 quantization.",
+      "conditional_advantage": "For research on decade-old GPUs lacking supported ML driver stacks, it demonstrates a direct-command-buffer systems path to private local inference.",
+      "best_fit_uses": [
+        "Constrained hardware inference experimentation",
+        "Retro console homebrew demonstrations",
+        "Low-level GPU kernel studies",
+        "Offline chat and voice prototyping"
+      ],
+      "tradeoffs": [
+        "Requires modified supported PS4 and firmware",
+        "Unreplicated throughput/speaker claims",
+        "No ordinary production reliability or security guarantees",
+        "Heavily custom GCN code"
+      ],
+      "alternatives": [
+        "llama.cpp on supported PCs",
+        "WebGPU local inference",
+        "Mobile on-device SLM apps",
+        "Other GCN/OpenCL homebrew inference"
+      ],
+      "hardware_runtime_constraints": "Developer documents GoldHEN-modified base/Slim PS4, about 6GB free space, 5.7GB installation bundle, 16K context; claimed 31–39 tokens/s on a PS4, benchmark methodology not independently checked.",
+      "license_uncertainty": "Repository lists GPL-3.0, but model weights, firmware/homebrew components, voices and distribution terms must be checked individually.",
+      "availability_uncertainty": "Public source code and installation notes were opened; package installation and running on console not tested. A documented new local API exists in code but not the older v1.19 package.",
+      "pricing_uncertainty": "No verified commercial subscription; console, homebrew and storage costs vary.",
+      "official_documentation_url": "https://github.com/leonardo-alegria/garlic-llm",
+      "source_links": [
+        {
+          "url": "https://github.com/leonardo-alegria/garlic-llm",
+          "publisher": "Garlic LLM developer",
+          "type": "official code and README"
+        }
+      ],
+      "date_checked": "2026-11-17",
+      "checked_at": "2026-11-17T14:25:56.620Z",
+      "existing_profile_id": null,
+      "review_status": "source_checked_pending_publisher_catalog_dedup"
+    }
+  ],
+  "terms": [
+    {
+      "id": "term-proposal:layer-folding-distillation:2026-11-17",
+      "name": "Layer-folding distillation",
+      "aliases": [
+        "teacher-weight layer folding",
+        "shared-block student compression"
+      ],
+      "definition": "A model-compression approach that converts sequential pretrained teacher layers into repeated uses of fewer shared blocks, retaining trainable differences and distilling the resulting student against teacher outputs.",
+      "mechanism": "For each group of teacher layers, initialize one shared weight block, retain low-rank corrections and token-dependent mixing, and train a smaller recurrent-in-depth network to recover useful behavior.",
+      "usage_tags": [
+        "AI",
+        "ML",
+        "DL",
+        "SLM",
+        "LLM",
+        "distillation"
+      ],
+      "example": "Turn a pretrained 4B-layer stack into a roughly 2.3B student by sharing block weights and distilling with a task-balanced token corpus.",
+      "caveat": "Not the same as quantization or simple depth pruning. It may reduce parameter storage but can still apply repeated computation and needs empirical accuracy checks.",
+      "related_existing_ids": [
+        "MLD-0607"
+      ],
+      "related_existing_names": [
+        "Knowledge distillation",
+        "Parameter sharing",
+        "Low-rank adaptation"
+      ],
+      "primary_references": [
+        {
+          "url": "https://arxiv.org/abs/2611.18113",
+          "publisher": "Zhang et al.",
+          "type": "original preprint"
+        },
+        {
+          "url": "https://github.com/myboker/concertina",
+          "publisher": "Concertina authors",
+          "type": "method implementation"
+        }
+      ],
+      "term_origin": "paper_introduced_method_new_to_atlas_proposal",
+      "date_checked": "2026-11-17",
+      "checked_at": "2026-11-17T14:25:56.620Z",
+      "review_status": "source_checked_pending_publisher_canonical_dedup"
+    },
+    {
+      "id": "term-proposal:mixture-of-value-attention:2026-11-17",
+      "name": "Mixture-of-Value Attention",
+      "aliases": [
+        "MoVA",
+        "expert-routed attention value projections"
+      ],
+      "definition": "An attention architecture that selectively uses different expert modules to compute the value representations inside a transformer attention mechanism.",
+      "mechanism": "Expert routing is applied to attention value projections rather than only the feed-forward sublayers, allowing specialized representations to be used for different tokens or contexts.",
+      "usage_tags": [
+        "AI",
+        "ML",
+        "DL",
+        "SLM",
+        "LLM",
+        "MoE"
+      ],
+      "example": "An MoE language model dynamically selects value-projection experts while retaining its attention structure, aiming to improve capacity per active parameter.",
+      "caveat": "Do not confuse it with classical mixture-of-experts feed-forward routing; performance and routing stability require independent evaluations.",
+      "related_existing_ids": [],
+      "related_existing_names": [
+        "Mixture of experts",
+        "Attention value projection",
+        "Expert routing"
+      ],
+      "primary_references": [
+        {
+          "url": "https://huggingface.co/papers/2611.21003",
+          "publisher": "K2 Horizon authors",
+          "type": "technical paper"
+        },
+        {
+          "url": "https://ifm.ai/k2/",
+          "publisher": "Institute of Foundation Models",
+          "type": "official project"
+        }
+      ],
+      "term_origin": "named_architecture_from_november_16_research_new_to_atlas_proposal",
+      "date_checked": "2026-11-17",
+      "checked_at": "2026-11-17T14:25:56.620Z",
+      "review_status": "source_checked_pending_publisher_canonical_dedup"
+    },
+    {
+      "id": "term-proposal:history-conditioned-model-fingerprint:2026-11-17",
+      "name": "History-conditioned model fingerprint auditing",
+      "aliases": [
+        "same-history model references",
+        "conversation-conditioned Lineup audit"
+      ],
+      "definition": "A model-provenance test that compares an AI model's response to reference responses generated under the same preceding conversation, rather than using only fresh-context fingerprints.",
+      "mechanism": "Reproduce the audited conversation history with the claimed model, sample contemporaneous reference replies, rank the observed answer among them and aggregate test evidence across turns.",
+      "usage_tags": [
+        "AI",
+        "ML",
+        "LLM",
+        "evaluation",
+        "model provenance",
+        "security"
+      ],
+      "example": "To check whether an API silently switched models halfway through a chat, gather claimed-model reference continuations from that chat history rather than unrelated single-turn prompts.",
+      "caveat": "An apparent fingerprint change alone is not proof of fraud; conversation style can change legitimate replies. The paper's Lineup false-positive results depend on its experimental reference-sampling assumptions.",
+      "related_existing_ids": [],
+      "related_existing_names": [
+        "Model fingerprinting",
+        "Model equality testing",
+        "LLM API auditing"
+      ],
+      "primary_references": [
+        {
+          "url": "https://arxiv.org/abs/2611.18104",
+          "publisher": "Zailong Tian",
+          "type": "primary original preprint"
+        }
+      ],
+      "term_origin": "research_specific_method_new_to_atlas_proposal_not_a_universal_term",
+      "date_checked": "2026-11-17",
+      "checked_at": "2026-11-17T14:25:56.620Z",
+      "review_status": "source_checked_pending_publisher_canonical_dedup"
+    }
+  ],
+  "corrections": []
+}
