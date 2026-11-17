@@ -1382,7 +1382,7 @@
       "edition_date": "2026-11-17",
       "validation_result": "sha256_bytes_record_counts_unique_ids_dates_dedup_and_independent_primary_source_review",
       "status": "partially_published_with_3_deferred_news_and_8_deferred_catalog_proposals",
-      "publication_outcome": "immutable_revision_1_pending_production_verification",
+      "publication_outcome": "immutable_revision_1_cloudflare_http_browser_and_githack_verified",
       "publication_edition": "2026-11-17-v1",
       "accepted_news_ids": [
         "ai-news-tencent-hy4-flash-2026-11-16",
@@ -1442,8 +1442,22 @@
           "status": "pending_production_verification",
           "note": "Immutable source-qualified Nov 17 edition, checksums and receipt prepared on main; production asset HTTP/GitHack/hosted browser verification not yet complete.",
           "prepared_at": "2026-11-17T14:33:00Z"
+        },
+        {
+          "edition": "2026-11-17-v1",
+          "status": "cloudflare_http_browser_and_githack_verified",
+          "note": "Exact main a3afe777e19841cccf851ef944e43e84e6ec364c passed catalog/GitHack 44105350757 and Cloudflare production/hosted-browser 44105351068, with 66 site and 40 Games browser checks. Direct separate opening of the full dated query permalink was unavailable.",
+          "verified_at": "2026-11-17T14:52:54Z"
         }
-      ]
+      ],
+      "production_verified_at": "2026-11-17T14:52:54Z",
+      "production_verified_revision": 1,
+      "last_verified_at": "2026-11-17T14:52:54Z",
+      "last_verified_public_url": "https://aiupdates.app/whats-new.html?date=2026-11-17&revision=1",
+      "production_commit": "a3afe777e19841cccf851ef944e43e84e6ec364c",
+      "production_workflow_run_id": 44105351068,
+      "githack_workflow_run_id": 44105350757,
+      "verification_scope": "Exact main a3afe777e19841cccf851ef944e43e84e6ec364c passed incremental catalog/GitHack workflow 44105350757 and Cloudflare deployment/hosted-browser workflow 44105351068 (validation and production jobs successful at 2026-11-17T14:52:54Z). Production HTTP assets on the Worker and both aiupdates.app hostnames plus browser navigation, themes, no-JavaScript pages, 66 site and 40 Games checks passed. The immutable 2026-11-17-v1 source-qualified edition was hash-verified by the publication validation suite. Direct independent opening of the exact dated query permalink was unavailable."
     }
   ]
 }

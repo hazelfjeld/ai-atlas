@@ -339,7 +339,7 @@
       "published_at": "2026-11-17T14:33:00Z"
     }
   ],
-  "last_successful_publish_at": "2026-11-16T14:47:10Z",
-  "status": "edition_revision_1_pending_production_verification",
+  "last_successful_publish_at": "2026-11-17T14:52:54Z",
+  "status": "edition_revision_1_production_verified",
   "coverage_note": "2026-11-17 v1 — Bounded source-reviewed Nov 16–17 window: 11 accepted reports from first-party announcements, an official legal filing, Reuters reporting and research preprints. GitHub, Tencent and arXiv dates independently checked; Reuters financing/robotics plans reported, not independently replicated. California allegations are NOT court findings. K2 Horizon proposal deferred after a date conflict with the institute's September 3, 2026 release; VoxMel access and Garlic's original publication date remain unresolved. All five technology and three terminology proposals remain pending catalog deduplication, primary-source and license review. One arXiv API failure disclosed. Collection is partial, not exhaustive."
 }
