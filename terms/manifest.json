@@ -4246,22 +4246,22 @@
   },
   "MLD-0850": {
     "path": "terms/MLD-0850-optimizer-state.html",
-    "sha256": "2616193d1c094d31d834c6ac36071f911eaf59322a3707927ba0fb3f37245c71",
+    "sha256": "7a5a18d7bf1cb40c101b661341c5e276cbbc8d2aee611dc289ce9e2998916de7",
     "expanded": false
   },
   "MLD-0851": {
     "path": "terms/MLD-0851-orchestrator.html",
-    "sha256": "251c51f1e6ffa14eceb4c6867f100c2c20fa487990427bf34c3c254388312683",
+    "sha256": "011704fb5cfe558ea97a1e91198af07337800950e83371317edf8f755c406043",
     "expanded": false
   },
   "MLD-0852": {
     "path": "terms/MLD-0852-ordinal-encoding.html",
-    "sha256": "2b43494d221042c99183e6ff154cbeff47a0c280555b1485de0ce25acbe8f205",
+    "sha256": "7cbcc0bfe4f392f333fa837919691d6bd94a6befd51e3d6ee0dcd504c6241991",
     "expanded": false
   },
   "MLD-0853": {
     "path": "terms/MLD-0853-out-of-bag-evaluation.html",
-    "sha256": "cfed1a0607b2bf6f87cee0affaa0a09e34953dbc4d84acabe379dda1cea87fb5",
+    "sha256": "470602490050fab468c2c19819acb358b0452e21f5db903db01224e038d824f4",
     "expanded": false
   },
   "MLD-0854": {
@@ -4271,27 +4271,27 @@
   },
   "MLD-0855": {
     "path": "terms/MLD-0855-out-of-vocabulary.html",
-    "sha256": "f5488cfe0d3009ee449343b347107a1073f6e322610a7f078f94fe7736dcce7f",
+    "sha256": "d39cacf8b32fe59c1c96a14bb6679e9ae19f410fb177251bb93a134c319049c8",
     "expanded": false
   },
   "MLD-0856": {
     "path": "terms/MLD-0856-outcome-reward-model.html",
-    "sha256": "74866e941f22a6b5bbe921271b569778f4a5a9cbde6fa07dd54686e117382624",
+    "sha256": "3f6759a65f00425b6dca7ac9ab3b8548cac11a665a5f5714397744ffbc33c682",
     "expanded": false
   },
   "MLD-0857": {
     "path": "terms/MLD-0857-outcome-supervision.html",
-    "sha256": "8eb33530e891f73c28accfe9959dcf3f0f2903cf0572880cd7bd4ccea05aded2",
+    "sha256": "2eda7b4cc1ee51224c5da3f3853ef346d222fc113b97ff0aa742c7321ab10983",
     "expanded": false
   },
   "MLD-0858": {
     "path": "terms/MLD-0858-outer-alignment.html",
-    "sha256": "e92330263dd82e4f0d0de93ac34997448074732ea8ddcceef6ead3b2d3e68a37",
+    "sha256": "601736f14d560c962989ef28ecce8594c7ed2d1e5549208ac33e33fcb4f5ac99",
     "expanded": false
   },
   "MLD-0859": {
     "path": "terms/MLD-0859-outer-product.html",
-    "sha256": "dddb1e10f6d3cc50279bf8e9d3aa0749a61ff4e087a2927a6888344abc4bef36",
+    "sha256": "41c8d763ba3f04b3088587394a0f206d5e57953f9a82d5172a096e86222ce167",
     "expanded": false
   },
   "MLD-0860": {
