@@ -5076,52 +5076,52 @@
   },
   "MLD-1016": {
     "path": "terms/MLD-1016-reliability-diagram.html",
-    "sha256": "925112ce586e4d6508a40f41c0c139569f5bf62e861b2dd04dbb9752bcd8a148",
+    "sha256": "9b0a9ffda018fba76345070399baeef0f2c4393ceec77096706cee80ceb8be34",
     "expanded": false
   },
   "MLD-1017": {
     "path": "terms/MLD-1017-relu.html",
-    "sha256": "406e5e8b5f02217fd9e8f0710d64c306d0cd1fbb496e90562ddaeb1c1cefcbce",
+    "sha256": "d84cfdd8a4f901bf0ce6706c961705d7e433f1e0bdbf1062fd246402a53b62c3",
     "expanded": false
   },
   "MLD-1018": {
     "path": "terms/MLD-1018-reparameterization-trick.html",
-    "sha256": "fb1b5ac872d1030adf165a49df566bbf475e56e7ac090e3b8aaacf59dd805c2d",
+    "sha256": "d1d77bd4ce25ffb5c6cf0aeca509bedbdaa5758ef9f5d824466d8168097e83ae",
     "expanded": false
   },
   "MLD-1019": {
     "path": "terms/MLD-1019-repetition-penalty.html",
-    "sha256": "5789f88e9f2cb8b69432cab8d90059aedab5486b314268d6bd2e0150693f2d8c",
+    "sha256": "0358a3213991f325bde9af276cf9e53edad3b9d10cb756cdccd6acf7c9f4ff0e",
     "expanded": false
   },
   "MLD-1020": {
     "path": "terms/MLD-1020-replanning.html",
-    "sha256": "81b7a5036d8b61edeb07059da30d70e165735fa33773931dd76a16bf9320fd65",
+    "sha256": "8e6599fc96fe367de5e41ef07a5ab0c4cb9c117d88ca1bcc4099ae848e99179e",
     "expanded": false
   },
   "MLD-1021": {
     "path": "terms/MLD-1021-replay-buffer.html",
-    "sha256": "0550fe707a15276b4eaa84ecb04c846e78656417f5e3e5dae6f8d83be44e3534",
+    "sha256": "6d1d8143d21300c66ef18b1bdfbba822fe2ba8b3df01c4edb9f5b051a331979f",
     "expanded": false
   },
   "MLD-1022": {
     "path": "terms/MLD-1022-replication.html",
-    "sha256": "a37b4a61bf669a5dedef18285b731f15628994637ae8df2013daccca4d41b016",
+    "sha256": "c77de022acdcb1717c6e4b24051ac40f8e06c087e55af10e8a5d045bb412d894",
     "expanded": false
   },
   "MLD-1023": {
     "path": "terms/MLD-1023-representation-learning.html",
-    "sha256": "395aeae1332bd10651df1de512d98b41f65082d028b52334d9ca999e1f613063",
+    "sha256": "890afa0ad5e048170d5a5ce160cc6515f38de41ac1185243f17406fbca70d01f",
     "expanded": false
   },
   "MLD-1024": {
     "path": "terms/MLD-1024-reproducibility.html",
-    "sha256": "bf739a4f05cd28d0ff314a2da8e7b1faaa0ce8e6d789a2a3f0bbb9be833ad055",
+    "sha256": "9a0ede22d1d71cd29ce5323558a8ea5f61e5215a7433ee019c4eb12162d8b26c",
     "expanded": false
   },
   "MLD-1025": {
     "path": "terms/MLD-1025-reranking.html",
-    "sha256": "59724e988b022f74f2f9ef141d370655bc8830a340311755f2076fafbac0f4f6",
+    "sha256": "ef702bef7350793cf9d8436b2746c17eaef83197bf7c87f734ae33baf0de0074",
     "expanded": false
   },
   "MLD-1026": {
