@@ -4671,27 +4671,27 @@
   },
   "MLD-0935": {
     "path": "terms/MLD-0935-prefix-caching.html",
-    "sha256": "263430c3596620801241c08c6962bb25f38baa3336aeb9d16ad73430e84f25bd",
+    "sha256": "b073077a4f94497015dc1b225ed8e2671f3579f90df4146ea58cb4d40e9b5701",
     "expanded": false
   },
   "MLD-0936": {
     "path": "terms/MLD-0936-prefix-tuning.html",
-    "sha256": "f2f05206adb19b188beb26e1dd9c2d8b4124e7ffe99219943d2d8a1ba6887d81",
+    "sha256": "2b7e32a012bf1b7e50ef84f9a9520044355fcb831c0478f9a2106076789e8c3d",
     "expanded": false
   },
   "MLD-0937": {
     "path": "terms/MLD-0937-prelu.html",
-    "sha256": "7608be8a569a36a346186083e9b1a7ca05f99c004d4cb4c6f7fb391e2740b855",
+    "sha256": "0279f59d641d8028d6ad30f6864f927f85bf221892005eda4945268316f249fd",
     "expanded": false
   },
   "MLD-0938": {
     "path": "terms/MLD-0938-presence-penalty.html",
-    "sha256": "f1c309929e6ceb754457aa6400258790c01292499643d652739782f0043e6a1a",
+    "sha256": "624a6e0caaa794b65113e708ab48259fc98fadc00bd2bf4ce159397819637204",
     "expanded": false
   },
   "MLD-0939": {
     "path": "terms/MLD-0939-pretraining.html",
-    "sha256": "22eea9eacdec19dbada3985ab8a73e87a35031b185ab1a0dc0171b5392fc7ce8",
+    "sha256": "1cd37db949386dcfe6221dcc50022e61d7986a9f6120ab2465198cc990251bce",
     "expanded": false
   },
   "MLD-0940": {

@@ -188,7 +188,7 @@ test('all 57 authored concept guides share first-paint navigation with technolog
     assert.equal(createHash('sha256').update(html, 'utf8').digest('hex'), entry.sha256,
       entry.path + ' matches its original stable ID in the integrity manifest');
   }
-  const unmigrated = Object.entries(manifest).find(([id, entry]) => Number(id.slice(4)) > 934 && !entry.expanded);
+  const unmigrated = Object.entries(manifest).find(([id, entry]) => Number(id.slice(4)) > 939 && !entry.expanded);
   assert.ok(unmigrated, 'unmigrated reference routes after MLD-0934 remain outside the bounded cohort');
   const basic = read(unmigrated[1].path);
   assert.doesNotMatch(basic, /class="sidebar-bottom site-chrome__bottom"/,
