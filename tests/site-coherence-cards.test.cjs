@@ -1224,3 +1224,28 @@ test('shared long-form reading widths follow Discover without shrinking cards or
   const offline = fs.readFileSync(path.join(__dirname, '..', 'downloads/Atlas_Demo_Offline.html'), 'utf8');
   assert.ok(offline.includes(css), 'The offline fallback must include exact shared styles');
 });
+
+
+test('MLD-0885–0894 use the deterministic shared first-paint rail', () => {
+  const crypto = require('node:crypto');
+  const manifest = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'terms/manifest.json'), 'utf8'));
+  const builder = fs.readFileSync(path.join(__dirname, '..', 'scripts/build_term_pages.py'), 'utf8');
+  assert.match(builder, /int\(path\[10:14\]\) <= 894/);
+  const reference = fs.readFileSync(path.join(__dirname, '..', 'technology/TECH-0216-pytorch.html'), 'utf8');
+  const links = reference.match(/<div class="site-chrome__links">[\s\S]*?<\/div>/)?.[0];
+  assert.ok(links, 'Missing canonical technology links');
+  for (let i = 885; i <= 894; i++) {
+    const id = 'MLD-' + String(i).padStart(4, '0');
+    const entry = manifest[id];
+    const html = fs.readFileSync(path.join(__dirname, '..', entry.path), 'utf8');
+    assert.equal(crypto.createHash('sha256').update(html).digest('hex'), entry.sha256, id);
+    assert.equal((html.match(/sidebar-bottom site-chrome__bottom/g) || []).length, 1, id);
+    assert.ok(html.includes(links), id + ' must retain canonical primary links');
+    assert.ok(html.includes('Coverage & collection status'), id + ' needs live sources link');
+    assert.ok(html.indexOf('<nav class="site-chrome term-nav"') < html.indexOf('<main class="term-shell">'));
+    assert.equal((html.match(/aria-current="page">Concept dictionary/g) || []).length, 1);
+  }
+  const following = fs.readFileSync(path.join(__dirname, '..', manifest['MLD-0895'].path), 'utf8');
+  assert.equal((following.match(/sidebar-bottom site-chrome__bottom/g) || []).length, 0,
+    'Next reference remains untouched in this bounded migration');
+});

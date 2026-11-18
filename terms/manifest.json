@@ -4421,52 +4421,52 @@
   },
   "MLD-0885": {
     "path": "terms/MLD-0885-per-tensor-quantization.html",
-    "sha256": "6c5abbe71a557daef243a3088f6063307188a340ca4f3b23085e6d32fc540216",
+    "sha256": "0774f6b2dc7678912a96aa220662a8f536c61987583f428f3f922ef77d516d81",
     "expanded": false
   },
   "MLD-0886": {
     "path": "terms/MLD-0886-perceptual-hash.html",
-    "sha256": "d1f3a5f6cd3473c6583858a5f5f50a90d68a418afa44881eeedff7a9ab3b6ae6",
+    "sha256": "be49d90117f5fb5ed5ed8b5c8f065f69e63085c2bc74bcc849b5cd78f832586f",
     "expanded": false
   },
   "MLD-0887": {
     "path": "terms/MLD-0887-perceptual-loss.html",
-    "sha256": "d36f651c6f00133323b9d4257b95ee55cc14e5536c34507d176649d60a8a4d82",
+    "sha256": "f4f94fbcafd03038bf967bd039a7f9145a24d4532bd5764cb38391a0723d023b",
     "expanded": false
   },
   "MLD-0888": {
     "path": "terms/MLD-0888-permutation-importance.html",
-    "sha256": "7a6724eec64262c630cd163a9ec926cfd2d6c57c0ad3ee69603604d5b4b5065c",
+    "sha256": "9c2ccfc7ff6069da5213863c237e39909535c2747174ec198465c974616c3c5a",
     "expanded": false
   },
   "MLD-0889": {
     "path": "terms/MLD-0889-permutation-test.html",
-    "sha256": "7468ce76b4c90a3307cde235cb3f3b4851fb492a280c09d9368956b16f88b9ab",
+    "sha256": "ef52ee5c59aa2ef5d86263fc3f82af08699ce4d0c41cba60ba8e51c5c1098ef4",
     "expanded": false
   },
   "MLD-0890": {
     "path": "terms/MLD-0890-perplexity.html",
-    "sha256": "b6a8da0c839e0496ef408ff1bbe7dafe27211d3363941940c129ad76d8dcebc9",
+    "sha256": "e8316287789cbf15df2bfbb54bb2cef6df5a09cc828f91051f01bb9d25410436",
     "expanded": false
   },
   "MLD-0891": {
     "path": "terms/MLD-0891-pinball-loss.html",
-    "sha256": "3af07d3799f741d3544e09b66b369e5787115f2b6be3e929b07c4a5dee06e290",
+    "sha256": "ec9b3c05420c56e5f9f41dae6a91559af0dcce9ce2909e0d32614d94c22058c6",
     "expanded": false
   },
   "MLD-0892": {
     "path": "terms/MLD-0892-pipeline-parallelism.html",
-    "sha256": "3ebcccbb0abf9b1a0f7b0e89776ef45de8c5d3f128075c9d96e0ab7c65a939a8",
+    "sha256": "0acc46de430dc9f518f17a4d1b7acfbe5bbec1d4bad9134fc534cf6d4c104a73",
     "expanded": false
   },
   "MLD-0893": {
     "path": "terms/MLD-0893-planning.html",
-    "sha256": "35ec02d6e82ad8d6676b9aefe8894bbc5c6522f041e01a00c398a2be04227f09",
+    "sha256": "e53b897038c7e4cb59dcc2a35cb619c37dc7fcb9af49eec676857da6f1415ae3",
     "expanded": false
   },
   "MLD-0894": {
     "path": "terms/MLD-0894-platt-scaling.html",
-    "sha256": "12fb9b81ec74d6e45d9d4da3b396e744a505d6aa4fa5730ebb6ed4f5e8abec55",
+    "sha256": "6a783b74af5165964b86d8fa9e3ba83e21c6dcf6f0cbc8bf2da9063f1999e664",
     "expanded": false
   },
   "MLD-0895": {
