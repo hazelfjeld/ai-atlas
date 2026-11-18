@@ -5401,52 +5401,52 @@
   },
   "MLD-1081": {
     "path": "terms/MLD-1081-scaling-law.html",
-    "sha256": "0c40b16994f57c29681a84ff1e830ec4dfad56d36f0ed706c12163038d6f466e",
+    "sha256": "8e0536404702af652120f3710a60389759bf5477784ce1d06d8f218038a49288",
     "expanded": false
   },
   "MLD-1082": {
     "path": "terms/MLD-1082-scheduled-sampling.html",
-    "sha256": "15264e04840a03c09603a2cf75dae63a848aba747e05f27361a79332942485e4",
+    "sha256": "9523b0b4d1d303a45b540eed0c00edabce55b86f8518274e703aab627f30008d",
     "expanded": false
   },
   "MLD-1083": {
     "path": "terms/MLD-1083-scheming.html",
-    "sha256": "69f5ba4006adb6910980a7a56c7a00e6edaf1c7d5dca1bb12b780e5e36ae3352",
+    "sha256": "771a3a4549930a9b8d2d891d1a2958749ea57fdffe70d10c781c534a84828a40",
     "expanded": false
   },
   "MLD-1084": {
     "path": "terms/MLD-1084-scikit-learn.html",
-    "sha256": "a5feb02234bd75e80e9cb16076fef0375aec9b97e1c4224504e0d009f78599a0",
+    "sha256": "432fcafcf2399e67415f0a30b1205da72c1e395158cb97c9b1e08e62dad6683f",
     "expanded": false
   },
   "MLD-1085": {
     "path": "terms/MLD-1085-score-function.html",
-    "sha256": "8fd46dba4096bc7797b576debce368e371343270ffe08fc635a96a7656823f64",
+    "sha256": "8a2995183f5ab608a8b180412640737aee9fae944bfef2a8d27e89f06cbd2415",
     "expanded": false
   },
   "MLD-1086": {
     "path": "terms/MLD-1086-score-matching.html",
-    "sha256": "3c08015cd3907397092433459048f7c552933ca6ea466975deafbbbf8b94843a",
+    "sha256": "bf068d7c0d94534d997fa9197bbd1e1f0e017c41ae84dd56fcf8e1b773dda75f",
     "expanded": false
   },
   "MLD-1087": {
     "path": "terms/MLD-1087-score-based-generative-model.html",
-    "sha256": "5a86b02934794e0fe5f3a8382f3280e99eefeff9453493d61fd4f7534b4c0d34",
+    "sha256": "30b16df163a266a9090db92197483c6284a52f5e708447f1ba1670d483a01209",
     "expanded": false
   },
   "MLD-1088": {
     "path": "terms/MLD-1088-search-budget.html",
-    "sha256": "bdb745be77ae865ad1b7b26f28b25e0163ae879c4d833ebf1ffac4bab1866c52",
+    "sha256": "bf28a042c2f86656a76878d10c15d07d0296e1d76429c7ffa4bc6910dfd6d528",
     "expanded": false
   },
   "MLD-1089": {
     "path": "terms/MLD-1089-seasonality.html",
-    "sha256": "8bc4b37660cba673bb0c343f4809742c28b6e3a6614e495533b368d6ea8f7ed3",
+    "sha256": "bdc00656a843911ce7668f6b4b373da68769d984f2dc904a3ed190321afdd933",
     "expanded": false
   },
   "MLD-1090": {
     "path": "terms/MLD-1090-security-evaluation.html",
-    "sha256": "b90ac11c2bea9eb726c33a2d7668ef513a3a39889ff91aa0dc5b54755ad6127c",
+    "sha256": "52403271f5588cd6dd8f714121bff0534876299ecce67d1dc7d1772c2cc577bd",
     "expanded": false
   },
   "MLD-1091": {
