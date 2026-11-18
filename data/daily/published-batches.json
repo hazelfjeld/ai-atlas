@@ -1458,6 +1458,86 @@
       "production_workflow_run_id": 44105351068,
       "githack_workflow_run_id": 44105350757,
       "verification_scope": "Exact main a3afe777e19841cccf851ef944e43e84e6ec364c passed incremental catalog/GitHack workflow 44105350757 and Cloudflare deployment/hosted-browser workflow 44105351068 (validation and production jobs successful at 2026-11-17T14:52:54Z). Production HTTP assets on the Worker and both aiupdates.app hostnames plus browser navigation, themes, no-JavaScript pages, 66 site and 40 Games checks passed. The immutable 2026-11-17-v1 source-qualified edition was hash-verified by the publication validation suite. Direct independent opening of the exact dated query permalink was unavailable."
+    },
+    {
+      "batch_id": "atlas-daily-20261118-20261118t143921859z-review-a",
+      "source_branch": "atlas-daily-staging",
+      "source_commit": "59b0bd09e9e753c1d67309a907b4823d90c2abfd",
+      "source_batch_path": "daily-queue/batches/2026-11-18-atlas-daily-20261118-20261118t143921859z-review-a.json",
+      "source_batch_sha256": "6be4bbe7533ff8c00d7212a82b054bd9494868d162cad3fcee74dc926a313161",
+      "source_batch_bytes": 49974,
+      "edition_date": "2026-11-18",
+      "validation_result": "sha256_bytes_record_counts_unique_ids_dates_dedup_and_independent_primary_source_review",
+      "status": "partially_published_with_2_deferred_news_and_8_deferred_catalog_proposals",
+      "publication_outcome": "immutable_revision_1_pending_production_verification",
+      "publication_edition": "2026-11-18-v1",
+      "accepted_news_ids": [
+        "ai-news-gpt62-astra-sol-2026-11-17",
+        "ai-news-nato-defensive-agents-2026-11-17",
+        "ai-news-mai-code2-flash-2026-11-17",
+        "ai-news-microsoft-ignite-agent-stack-2026-11-17",
+        "ai-news-copilot-evals-preview-2026-11-17",
+        "ai-news-copilot-fusion-routing-2026-11-17",
+        "ai-news-copilot-secret-scanning-preview-2026-11-17",
+        "ai-news-copilot-adaptive-code-review-2026-11-17",
+        "ai-news-copilot-agent365-audit-2026-11-17",
+        "ai-news-copilot-harness-comparisons-2026-11-17",
+        "ai-news-ny-ai-asset-enforcement-unit-2026-11-17",
+        "ai-news-nvidia-china-hopper-shipments-2026-11-18",
+        "ai-news-china-us-model-distillation-2026-11-17",
+        "ai-news-pytorch-2151-cancelled-2026-11-17",
+        "ai-news-weight-space-programming-2611-22055"
+      ],
+      "source_news_ids": [
+        "ai-news:gpt62-astra-sol:2026-11-17",
+        "ai-news:nato-defensive-agents:2026-11-17",
+        "ai-news:mai-code2-flash:2026-11-17",
+        "ai-news:microsoft-ignite-agent-stack:2026-11-17",
+        "ai-news:copilot-evals-preview:2026-11-17",
+        "ai-news:copilot-fusion-routing:2026-11-17",
+        "ai-news:copilot-secret-scanning-preview:2026-11-17",
+        "ai-news:copilot-adaptive-code-review:2026-11-17",
+        "ai-news:copilot-agent365-audit:2026-11-17",
+        "ai-news:copilot-harness-comparisons:2026-11-17",
+        "ai-news:ny-ai-asset-enforcement-unit:2026-11-17",
+        "ai-news:nvidia-china-hopper-shipments:2026-11-18",
+        "ai-news:china-us-model-distillation:2026-11-17",
+        "ai-news:pytorch-2151-cancelled:2026-11-17",
+        "ai-news:weight-space-programming:2611.22055"
+      ],
+      "deferred_news_ids": [
+        "ai-news:responses-long-background:2026-11-17",
+        "ai-news:eff-ai-cyber-policy:2026-11-discovery"
+      ],
+      "deferred_catalog_proposal_ids": [
+        "tech-proposal:gpt62-astra-sol:2026-11-18",
+        "tech-proposal:mai-code2-family:2026-11-18",
+        "tech-proposal:copilot-evals:2026-11-18",
+        "tech-proposal:copilot-fusion:2026-11-18",
+        "tech-proposal:weight-space-programmed-memory:2026-11-18",
+        "term-proposal:agent-harness:2026-11-18",
+        "term-proposal:agent-tool-trace:2026-11-18",
+        "term-proposal:weight-space-programming:2026-11-18"
+      ],
+      "rejected_ids": [],
+      "counts": {
+        "news_published": 15,
+        "technology_added": 0,
+        "term_added": 0,
+        "corrections": 0,
+        "news_deferred": 2,
+        "catalog_deferred": 8,
+        "technology_updated": 0
+      },
+      "review_notes": "Bounded November 17–18 collection. Fifteen source-reviewed reports retain original event dates and distinguish company statements, official policy, Reuters reporting and an unreviewed research preprint. OpenAI background-mode changelog timing and EFF original publication date remain unresolved, so two news candidates are deferred. Five technologies and three terms await catalog and license/alias review; no catalog additions implied. Eighteen sources checked, two failures. Coverage remains partial.",
+      "publication_history": [
+        {
+          "edition": "2026-11-18-v1",
+          "status": "pending_production_verification",
+          "note": "Immutable dated edition and validated collector receipt prepared on main; deployment and public HTTP verification pending.",
+          "prepared_at": "2026-11-18T15:27:25.705Z"
+        }
+      ]
     }
   ]
 }

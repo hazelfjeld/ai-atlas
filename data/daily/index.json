@@ -337,9 +337,17 @@
       "sha256": "75379d4bf69768a080f1c934b38f31f84140a999753c17f79af7e4ba15cb4f5d",
       "bytes": 21535,
       "published_at": "2026-11-17T14:33:00Z"
+    },
+    {
+      "date": "2026-11-18",
+      "revision": 1,
+      "path": "data/daily/editions/2026-11-18-v1.json",
+      "sha256": "049526af3b876c3e5b47d0d7c81006212daf858e437f7144e25349db0b3a29bb",
+      "bytes": 25049,
+      "published_at": "2026-11-18T15:27:25.705Z"
     }
   ],
   "last_successful_publish_at": "2026-11-17T14:52:54Z",
-  "status": "edition_revision_1_production_verified",
-  "coverage_note": "2026-11-17 v1 — Bounded source-reviewed Nov 16–17 window: 11 accepted reports from first-party announcements, an official legal filing, Reuters reporting and research preprints. GitHub, Tencent and arXiv dates independently checked; Reuters financing/robotics plans reported, not independently replicated. California allegations are NOT court findings. K2 Horizon proposal deferred after a date conflict with the institute's September 3, 2026 release; VoxMel access and Garlic's original publication date remain unresolved. All five technology and three terminology proposals remain pending catalog deduplication, primary-source and license review. One arXiv API failure disclosed. Collection is partial, not exhaustive."
+  "status": "edition_revision_1_pending_production_verification",
+  "coverage_note": "2026-11-18 v1 — Bounded November 17–18 collection. Fifteen source-reviewed reports retain original event dates and distinguish company statements, official policy, Reuters reporting and an unreviewed research preprint. OpenAI background-mode changelog timing and EFF original publication date remain unresolved, so two news candidates are deferred. Five technologies and three terms await catalog and license/alias review; no catalog additions implied. Eighteen sources checked, two failures. Coverage remains partial."
 }

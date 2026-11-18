@@ -1863,6 +1863,33 @@ test('November 17 editorial queue publishes only independently checked news and 
  assert.equal(edition.coverage.status,'partial');
  assert.equal(edition.coverage.sources_failed.length,1);
  assertNoScriptArchiveDiscovery(idx,ref.path);
- assert.equal(idx.status,'edition_revision_1_'+(r.production_verified_at?'production_verified':'pending_production_verification'));
+ assert.equal(idx.status,'edition_revision_1_'+(ledger.receipts.at(-1).production_verified_at?'production_verified':'pending_production_verification'), 'Archive status reflects newest receipt, not an older verified edition');
  assert.equal(idx.last_successful_publish_at,verifiedPublicationClock());
+});
+
+test('November 18 reviewed queue preserves immutable partial coverage, deferred records and real no-script links',()=>{
+ const crypto=require('node:crypto');
+ const idx=JSON.parse(fs.readFileSync('data/daily/index.json','utf8'));
+ const ledger=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8'));
+ const receipt=ledger.receipts.find(r=>r.batch_id==='atlas-daily-20261118-20261118t143921859z-review-a');
+ const ref=idx.editions.find(e=>e.date==='2026-11-18'&&e.revision===1);
+ assert.ok(receipt&&ref,'One sourced publication receipt and dated edition');
+ assert.equal(ledger.receipts.filter(r=>r.batch_id===receipt.batch_id).length,1);
+ assert.equal(receipt.source_batch_sha256,'6be4bbe7533ff8c00d7212a82b054bd9494868d162cad3fcee74dc926a313161');
+ assert.equal(receipt.source_batch_bytes,49974);
+ const bytes=fs.readFileSync(ref.path);
+ assert.equal(bytes.length,ref.bytes);
+ assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'),ref.sha256);
+ const edition=D.validateEdition(JSON.parse(bytes),ref);
+ assert.equal(edition.news.length,15);
+ assert.deepEqual(edition.news.map(n=>n.id),receipt.accepted_news_ids);
+ assert.deepEqual([edition.technologies.length,edition.terms.length,edition.corrections.length,receipt.counts.news_deferred,receipt.counts.catalog_deferred],[0,0,0,2,8]);
+ assert.ok(edition.news.every(n=>n.source_url.startsWith('https://')&&n.review_status.startsWith('publisher_checked_')&&n.caveat));
+ assert.ok(edition.news.some(n=>n.review_status.includes('preprint_not_peer_reviewed')));
+ assert.ok(edition.news.some(n=>n.review_status.includes('reuters_reporting_attributed')));
+ assert.equal(edition.coverage.status,'partial');
+ assert.equal(edition.coverage.sources_failed.length,2);
+ assertNoScriptArchiveDiscovery(idx,ref.path);
+ assert.equal(idx.status,'edition_revision_1_'+(receipt.production_verified_at?'production_verified':'pending_production_verification'));
+ assert.equal(idx.last_successful_publish_at,verifiedPublicationClock(),'Pending batch cannot advance previously verified publication time');
 });
