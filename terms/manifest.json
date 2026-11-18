@@ -5126,37 +5126,37 @@
   },
   "MLD-1026": {
     "path": "terms/MLD-1026-resampling.html",
-    "sha256": "496177a4361f6c01ce49c50c3df5bc8200c73b2e26f498c83d4ff6fed2915952",
+    "sha256": "73978e25d47f952244c15f0dd35c81cc665aeb89776f6b3eff8865c73c96db3c",
     "expanded": false
   },
   "MLD-1027": {
     "path": "terms/MLD-1027-residual-connection.html",
-    "sha256": "731452f11a2ffca0db3a75b8df21ccd9f794ef95f2d57741fff6913550f58fa0",
+    "sha256": "02ac30ceaf95219ae976f47c09c5db399ed351eccbca0989f5779990f772d193",
     "expanded": false
   },
   "MLD-1028": {
     "path": "terms/MLD-1028-residual-network.html",
-    "sha256": "4a64e251cb651423eafff50e585d7a5d20cf97c3fda4807b57bf3e4487fd32fb",
+    "sha256": "0e7602db563db4b4555e4cc15c89472ad2258c503a77587a4a3b9f323e516a93",
     "expanded": false
   },
   "MLD-1029": {
     "path": "terms/MLD-1029-residual-stream.html",
-    "sha256": "8935577f201d626d2e98a93f2186e48aeb3a4ab994334d54544a17c33451dab8",
+    "sha256": "9ff7e8796b41c969543b5a9c4ac897eae25875c27fb777ef38fd8105752db8fe",
     "expanded": false
   },
   "MLD-1030": {
     "path": "terms/MLD-1030-retrieval-corpus.html",
-    "sha256": "a5a9b4f7c99d281017d0cb4b0c980168b15e343b36bd8668ac254071bb7922b4",
+    "sha256": "3d7fb25b384afbeea4f8cdb0143922a9c2e711f8b6c676c21b1fa3bf00256ca4",
     "expanded": false
   },
   "MLD-1031": {
     "path": "terms/MLD-1031-retrieval-precision.html",
-    "sha256": "f12f2a91e2d0711f57cf1b6bd12434b4b38b1dc4705d23ba1ef9143d482df8b3",
+    "sha256": "b31ffad51c5203fc9c2a1473db184750dd818d0937425a4ec18514fc737b1e7e",
     "expanded": false
   },
   "MLD-1032": {
     "path": "terms/MLD-1032-retrieval-recall.html",
-    "sha256": "43691f1d025c7db3fa2a7df179d57fdad7c64bc8a338f13fb74a5e19b4a26713",
+    "sha256": "41017bac2abfd1013d386abbee4dffbe7a0e9c5c17be2c1e318119dcef0143d0",
     "expanded": false
   },
   "MLD-1033": {
@@ -5166,12 +5166,12 @@
   },
   "MLD-1034": {
     "path": "terms/MLD-1034-retriever.html",
-    "sha256": "5c457a89f7484871c898236732af0144bf08708591b471e0642b6e5ba5f56493",
+    "sha256": "0807eb38ae82cd1f5ea6a5bb48e78526a6cb792e9d02d3ecd7af82aa59dbd6e2",
     "expanded": false
   },
   "MLD-1035": {
     "path": "terms/MLD-1035-return.html",
-    "sha256": "58e68345a15234f4e0436b0d61e5d87706aaa71d11c69b27d56559cc9c4db491",
+    "sha256": "745ff12f37fa79003b22759756e320dfa595b7b2f5e710ecc6bbfd667a149f77",
     "expanded": false
   },
   "MLD-1036": {
