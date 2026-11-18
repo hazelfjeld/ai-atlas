@@ -5581,12 +5581,12 @@
   },
   "MLD-1117": {
     "path": "terms/MLD-1117-shapley-value.html",
-    "sha256": "9f01a4918bb07f6d3e44f04763ed850bfd33a4f1a1f55c392dc83386f73c2cc2",
+    "sha256": "cbc8fd44ebe25983b2478433b99a66512cbad6fbb626f4e02241b450206e22d1",
     "expanded": false
   },
   "MLD-1118": {
     "path": "terms/MLD-1118-shortcut-learning.html",
-    "sha256": "c336f1ea8b324e1f9eeeb8f2e58db377df42acd3f19fe52fbde19403f15f70b1",
+    "sha256": "9ab38b8a3d5b1d50057a3e75cf8b02c0744c998f89784ab01ca69f695ed2e822",
     "expanded": false
   },
   "MLD-1119": {
@@ -5596,37 +5596,37 @@
   },
   "MLD-1120": {
     "path": "terms/MLD-1120-shutdownability.html",
-    "sha256": "f2ce3b0cbd69c215d86307bb5e8600b29ee84c6f8824f506e145fb297b011282",
+    "sha256": "07d93e3dff2a9f11df6d3a88a99b421d0cfca7de814d0189aa203106dbfe4fb5",
     "expanded": false
   },
   "MLD-1121": {
     "path": "terms/MLD-1121-sigmoid.html",
-    "sha256": "ca3c2e49e32ceeb265a75a6fd94bbc2f9781fb7be7a68cfccb6f4cef8496e81a",
+    "sha256": "9562a1b77eb9b4bcf370a7cfabce295b32497d8142e7642c2c0b68aee74907b4",
     "expanded": false
   },
   "MLD-1122": {
     "path": "terms/MLD-1122-signal-to-noise-ratio.html",
-    "sha256": "a849de50c97a0a6dfc2c5f97a5c2306451ccb65f13de2ca0b0cf58853d0db85d",
+    "sha256": "347126599ad6fb4bc17a714d8c4e9d18cded6126fe25bfa1edeb7c0fea0f8141",
     "expanded": false
   },
   "MLD-1123": {
     "path": "terms/MLD-1123-silhouette-score.html",
-    "sha256": "613c30c57ef9205abef09026f1d6226e888944e3539ad61583e5bed875076d21",
+    "sha256": "b0646ae6101822554442f4e01147095d1f8dc050f4119a8325c80425829f3a0d",
     "expanded": false
   },
   "MLD-1124": {
     "path": "terms/MLD-1124-silu.html",
-    "sha256": "639a1c9ebdb6dbcdf20019c1360be8694ca2a1a8bf201d39976bf34dd3645c1a",
+    "sha256": "3539f6ba8ad451e9fad83f4e9ef69021d549910b24baab8e81ebe55bdbdbfe5d",
     "expanded": false
   },
   "MLD-1125": {
     "path": "terms/MLD-1125-singular-value-decomposition.html",
-    "sha256": "b422a958d17246dc5aadbcb7a7d264e5ed858195198b9046951d2163921b766a",
+    "sha256": "11560151ab9cc6845225767d5e515337d16aed8bc384927585134a29d7b6b0f8",
     "expanded": false
   },
   "MLD-1126": {
     "path": "terms/MLD-1126-sinusoidal-positional-encoding.html",
-    "sha256": "8dcbf398823591dbd143374ea1d4585764ea17233a96bb1ab1cc033239c064ae",
+    "sha256": "dfdb649d1f1d307656da0a381b40f3d667083e1e0cacdb088373c5114328a6db",
     "expanded": false
   },
   "MLD-1127": {
