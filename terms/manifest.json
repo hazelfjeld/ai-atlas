@@ -4796,52 +4796,52 @@
   },
   "MLD-0960": {
     "path": "terms/MLD-0960-prompt-versioning.html",
-    "sha256": "9fa99b7abf6a2547f9454f1f13320d8543d6a3cf189d1da9da0016e7708e4c12",
+    "sha256": "120561cc361077fb83aa6dc75cdc90f2d2849b70d06ef99ee2435b86b2d68b03",
     "expanded": false
   },
   "MLD-0961": {
     "path": "terms/MLD-0961-proxy-objective.html",
-    "sha256": "3cd4be82980afec4fa188747213700613d70bcd4a7b411f267acbe04f7fc727f",
+    "sha256": "4267b5e4b6ca49d289567222540f1533a5dc8717c8ffc30b019a138dc60a372c",
     "expanded": false
   },
   "MLD-0962": {
     "path": "terms/MLD-0962-pruning.html",
-    "sha256": "75271f19bb18f8cd4d829c940f5ca7bc5f76991b9b4bb39c0a46e63d5cadc410",
+    "sha256": "216f74e77278c4efa68e2cf8902607a82a18b5592919c517d0016c6a0fd6c6a1",
     "expanded": false
   },
   "MLD-0963": {
     "path": "terms/MLD-0963-pseudo-labeling.html",
-    "sha256": "8503e79d429c7622b94b9bad92c9a7dd998249ad4bdda204808583d6d7fb694e",
+    "sha256": "2a104334a36f674de26dd177c2613a91843c5ec0df22118358526d27a3806230",
     "expanded": false
   },
   "MLD-0964": {
     "path": "terms/MLD-0964-pseudoinverse.html",
-    "sha256": "38428f258345e35bc525ea89f2715175725c96720dd970486061d77b644234ea",
+    "sha256": "b128f1d02c2131b7be35acaa14e30fc5489d856bae78c32ad6c85397917d3672",
     "expanded": false
   },
   "MLD-0965": {
     "path": "terms/MLD-0965-pytorch.html",
-    "sha256": "1886dd3986255708d10221a16c8ff4b99a79de448a8c155bf39c0750fa02560e",
+    "sha256": "c4b00484dff3af0f491420873a4c2c83d2a93ea6236e3fe20a7b6114c55b062a",
     "expanded": false
   },
   "MLD-0966": {
     "path": "terms/MLD-0966-q-function.html",
-    "sha256": "a0141bc659df19b91d4b0f684976b18f70e6a2c25642a5fd790d6e632e2691d5",
+    "sha256": "000f0687332ee2970e83374c2effd63dc561fb35b8440a4faeab2815a65431ed",
     "expanded": false
   },
   "MLD-0967": {
     "path": "terms/MLD-0967-q-learning.html",
-    "sha256": "b8c45fd7e801389578cc83a77a4ceac667629276657df6e039b8fb9cc416aaa8",
+    "sha256": "8c3c7c6dffb4c1b929e91e3f8e633743d64502df4bd3657a4ba7308952bb5db0",
     "expanded": false
   },
   "MLD-0968": {
     "path": "terms/MLD-0968-qlora.html",
-    "sha256": "d4f6d6b94b8a93cfecfb67b9657c6570e7780b68205d81974e577c3e9644d3bd",
+    "sha256": "b89a88c1d639f9efbe756bed43d086a26c7b3f5af24e2f3145f069650205d785",
     "expanded": false
   },
   "MLD-0969": {
     "path": "terms/MLD-0969-quadratic-complexity.html",
-    "sha256": "f5f3ef4c9e3f1875a2eabb9c2ab729b2e4b404f3e3fa146cd0608cb3cc2d0314",
+    "sha256": "ca3027b6ecf35d918b5613b46fe37b63e1dc28e87da6bb56d6dbee7af84627ea",
     "expanded": false
   },
   "MLD-0970": {
