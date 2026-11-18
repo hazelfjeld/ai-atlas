@@ -5026,52 +5026,52 @@
   },
   "MLD-1006": {
     "path": "terms/MLD-1006-refusal.html",
-    "sha256": "6fb1f3621997f882bc06d6c4336322c85c82a8e32a40243d947e0c1ac2a578d9",
+    "sha256": "52a132a63b1fe52833f459c91dbb0cea952e4a0ed7e3b54bdc6acf7b44cd9850",
     "expanded": false
   },
   "MLD-1007": {
     "path": "terms/MLD-1007-refusal-direction.html",
-    "sha256": "d6ff6e6c0a2190ea591643884196c4a6c2f24d6a7589ea465c46e6928b3287fd",
+    "sha256": "e4e82f5feec5b6922038751cd35cd58e8a8d7129ce083fa6480f810b8cc5f644",
     "expanded": false
   },
   "MLD-1008": {
     "path": "terms/MLD-1008-regression.html",
-    "sha256": "efec50678781acb6d8a1ac51cb04a91196c07c780afcb842a50ff22dccf2fb3a",
+    "sha256": "553b97d677ae8f68e377453c1742e48b7a57a5b00e5b09f2df9dd3af1eaabfc1",
     "expanded": false
   },
   "MLD-1009": {
     "path": "terms/MLD-1009-regularization.html",
-    "sha256": "a9b48846efebdcb3c766c50c0dcc4c5367b6a4715b0ef37f97d22015567fc006",
+    "sha256": "ca391d060a372ca7e9b6734165ae6d24221d5d93dfcd50e156738e1b68386d6d",
     "expanded": false
   },
   "MLD-1010": {
     "path": "terms/MLD-1010-regularization-loss.html",
-    "sha256": "19c0f0951883f286d4aee52dbbb2854a5707451fe39eb894f4b7cf470e70dfe6",
+    "sha256": "738fd893e2b5f7c3ca10aca5b50d1e0801543a96888ae1232defb4e2afd87393",
     "expanded": false
   },
   "MLD-1011": {
     "path": "terms/MLD-1011-reinforce.html",
-    "sha256": "a0bc888cdf17d71cef8423d29b052dfc7da9461838b1ceceff87bd459fa7037a",
+    "sha256": "0fd169a51ea4c74a447ed318960f466e85bc0b506134f571d13fd8374fe59e39",
     "expanded": false
   },
   "MLD-1012": {
     "path": "terms/MLD-1012-reinforcement-learning.html",
-    "sha256": "51381ad8e5c06844d63de04b6331baca0f1d3797b83b32f86f40619194dadbb0",
+    "sha256": "b48cf877042e08b6a96e5ae9cf61a7eaa572a9ed681bce7fb9390a0777e20fcb",
     "expanded": false
   },
   "MLD-1013": {
     "path": "terms/MLD-1013-rejected-response.html",
-    "sha256": "9e67aef442b6204bf6adb20e3b7ad27d840a7c80674b6b15239d3e78e4aea7cb",
+    "sha256": "2335374c11cb2ac43913284e7a4bc7181ab85751dfc38c7364cd34a8647c0e97",
     "expanded": false
   },
   "MLD-1014": {
     "path": "terms/MLD-1014-rejection-sampling-fine-tuning.html",
-    "sha256": "0bf8be5871cd5b96b6ef5a01d6fc61adbb7092b74003bca829bc164873a16f96",
+    "sha256": "5a1000077a4432a920359b25c3f2a661cc12a865c4b436531ec900ec497d949c",
     "expanded": false
   },
   "MLD-1015": {
     "path": "terms/MLD-1015-relative-position-encoding.html",
-    "sha256": "3143c3598dba5ba140f1e15a9214298cd7027387dc90a4390c8e2f409f03938c",
+    "sha256": "07c99a0e7b465ad59c56af7669cf74ccd80fe95a3a395a485aaa5c3f719b7132",
     "expanded": false
   },
   "MLD-1016": {
