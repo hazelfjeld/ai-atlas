@@ -1,0 +1,1160 @@
+{
+  "schema": 1,
+  "batch_id": "atlas-daily-20261118-20261118t143921859z-review-a",
+  "edition_date": "2026-11-18",
+  "timezone": "America/Chicago",
+  "collected_at": "2026-11-18T14:39:21.859Z",
+  "coverage_start": "2026-11-17T14:25:56.620Z",
+  "coverage_end": "2026-11-18T14:39:21.859Z",
+  "coverage_status": "partial",
+  "coverage_note": "Bounded November 17–18 primary-source review and overlapping catch-up. Historic last_successful_coverage_end remains null because previous sweeps were partial. Two older November 17 discoveries marked catch-up; not falsely dated November 18.",
+  "overlap_lookback_start": "2026-11-14T00:00:00Z",
+  "sources_checked": [
+    {
+      "url": "https://openai.com/index/introducing-gpt-6-2-astra-sol/",
+      "status": "full_page_opened",
+      "checked_at": "2026-11-18T14:39:21.859Z",
+      "publisher": "OpenAI",
+      "type": "product release"
+    },
+    {
+      "url": "https://deploymentsafety.openai.com/gpt-6-2-astra-sol/internal-deployment-of-gpt-6.2-astra-and-gpt-6.2-sol",
+      "status": "full_page_opened",
+      "checked_at": "2026-11-18T14:39:21.859Z",
+      "publisher": "OpenAI",
+      "type": "safety evaluation"
+    },
+    {
+      "url": "https://developers.openai.com/api/docs/changelog",
+      "status": "full_page_opened",
+      "checked_at": "2026-11-18T14:39:21.859Z",
+      "publisher": "OpenAI",
+      "type": "API changelog"
+    },
+    {
+      "url": "https://openai.com/index/strengthening-nato-allied-cyber-defences-ai/",
+      "status": "full_page_opened",
+      "checked_at": "2026-11-18T14:39:21.859Z",
+      "publisher": "OpenAI",
+      "type": "partnership announcement"
+    },
+    {
+      "url": "https://microsoft.ai/news/introducing-mai-code-2-and-mai-code-2-flash/",
+      "status": "full_page_opened",
+      "checked_at": "2026-11-18T14:39:21.859Z",
+      "publisher": "Microsoft AI",
+      "type": "model release"
+    },
+    {
+      "url": "https://blogs.microsoft.com/blog/2026/11/17/ignite-2026-building-the-frontier-ecosystem/",
+      "status": "full_page_opened",
+      "checked_at": "2026-11-18T14:39:21.859Z",
+      "publisher": "Microsoft",
+      "type": "conference announcement"
+    },
+    {
+      "url": "https://github.blog/changelog/2026-11-17-github-copilot-evals-is-now-in-public-preview/",
+      "status": "full_page_opened",
+      "checked_at": "2026-11-18T14:39:21.859Z",
+      "publisher": "GitHub",
+      "type": "product changelog"
+    },
+    {
+      "url": "https://github.blog/changelog/2026-11-17-github-copilot-fusion-updates-more-availability-benchmarks-and-models/",
+      "status": "full_page_opened",
+      "checked_at": "2026-11-18T14:39:21.859Z",
+      "publisher": "GitHub",
+      "type": "product changelog"
+    },
+    {
+      "url": "https://github.blog/changelog/2026-11-17-secret-scanning-on-demand-for-developers-and-agents/",
+      "status": "full_page_opened",
+      "checked_at": "2026-11-18T14:39:21.859Z",
+      "publisher": "GitHub",
+      "type": "security changelog"
+    },
+    {
+      "url": "https://github.blog/changelog/2026-11-17-copilot-code-review-adaptive-effort-secret-detection-and-more/",
+      "status": "full_page_opened",
+      "checked_at": "2026-11-18T14:39:21.859Z",
+      "publisher": "GitHub",
+      "type": "product changelog"
+    },
+    {
+      "url": "https://github.blog/changelog/2026-11-17-monitor-github-copilot-activity-through-microsoft-agent-365/",
+      "status": "full_page_opened",
+      "checked_at": "2026-11-18T14:39:21.859Z",
+      "publisher": "GitHub",
+      "type": "product changelog"
+    },
+    {
+      "url": "https://github.blog/changelog/2026-11-17-github-copilot-benchmarks-site-adds-harness-comparisons/",
+      "status": "full_page_opened",
+      "checked_at": "2026-11-18T14:39:21.859Z",
+      "publisher": "GitHub",
+      "type": "evaluation changelog"
+    },
+    {
+      "url": "https://ag.ny.gov/press-release/2026/attorney-general-james-announces-creation-ai-safety-standards-enforcement-and",
+      "status": "full_page_opened",
+      "checked_at": "2026-11-18T14:39:21.859Z",
+      "publisher": "New York Attorney General",
+      "type": "government statement"
+    },
+    {
+      "url": "https://www.eff.org/deeplinks/2026/11/effs-ai-cybersecurity-policy-framework",
+      "status": "full_page_opened",
+      "checked_at": "2026-11-18T14:39:21.859Z",
+      "publisher": "Electronic Frontier Foundation",
+      "type": "advocacy article"
+    },
+    {
+      "url": "https://www.reuters.com/world/china/nvidia-stops-shipping-us-approved-ai-chips-china-2026-11-18/",
+      "status": "full_page_opened",
+      "checked_at": "2026-11-18T14:39:21.859Z",
+      "publisher": "Reuters",
+      "type": "independent reporting"
+    },
+    {
+      "url": "https://www.reuters.com/world/china/china-taps-us-ai-models-train-homegrown-rivals-chip-curbs-bite-2026-11-17/",
+      "status": "full_page_opened",
+      "checked_at": "2026-11-18T14:39:21.859Z",
+      "publisher": "Reuters",
+      "type": "investigative reporting"
+    },
+    {
+      "url": "https://dev-discuss.pytorch.org/t/no-pytorch-2-15-1-release/3536",
+      "status": "full_page_opened",
+      "checked_at": "2026-11-18T14:39:21.859Z",
+      "publisher": "PyTorch maintainers",
+      "type": "maintainer announcement"
+    },
+    {
+      "url": "https://arxiv.org/abs/2611.22055",
+      "status": "full_page_opened",
+      "checked_at": "2026-11-18T14:39:21.859Z",
+      "publisher": "Ok and Lee",
+      "type": "research preprint"
+    }
+  ],
+  "sources_failed": [
+    {
+      "url": "https://export.arxiv.org/api/query?search_query=cat%3Acs.LG%26start%3D0%26max_results%3D1",
+      "status": "web_reader_inaccessible",
+      "checked_at": "2026-11-18T14:39:21.859Z",
+      "note": "Metadata API failed; individual arXiv paper successfully opened. Not interpreted as zero results."
+    },
+    {
+      "url": "https://yi.ag.ny.gov/press-release/2026/attorney-general-james-announces-creation-ai-safety-standards-enforcement-and",
+      "status": "404",
+      "checked_at": "2026-11-18T14:39:21.859Z",
+      "note": "Alternate-language URL failed; English canonical press release opened."
+    }
+  ],
+  "source_health_note": "18 first-party/official, advocacy, journalism and research destinations opened; arXiv metadata endpoint and alternate-language state press URL failed; the canonical state page and arXiv paper page succeeded.",
+  "coverage_backlog": [
+    "Historical November 1–16 partial collection gaps await bounded review; no successful continuous cutoff established",
+    "Full arXiv category/API and specialist robotics, audio/video, vision, model-card and open-source framework sweeps outstanding",
+    "Check actual API pricing, licenses and availability for newly proposed model and product profiles",
+    "Recheck EFF publication date and policy developments; follow Nvidia shipments and cross-border model distillation"
+  ],
+  "tldr": [
+    "New OpenAI and Microsoft coding models plus GitHub updates to agent evaluation, routing and security expand the available developer toolkit, though release benchmarks and safety ratings still require independent validation.",
+    "Government AI enforcement plans, Reuters reporting on accelerator shipments, and research into directly programmed sparse memories illustrate AI's widening operational and scientific consequences."
+  ],
+  "news": [
+    {
+      "id": "ai-news:gpt62-astra-sol:2026-11-17",
+      "title": "OpenAI introduces GPT-6.2 Astra and Sol",
+      "category": "models",
+      "tags": [
+        "LLM",
+        "agents",
+        "coding",
+        "safety"
+      ],
+      "summary": "OpenAI announced Astra for complex professional agent tasks and Sol for lower-cost routine work, with API support and a deployment safety assessment.",
+      "why_it_matters": "Offers differentiated quality-versus-cost choices for agent orchestration.",
+      "caveat": "Benchmarks and capability thresholds are OpenAI-reported; access and safety restrictions vary.",
+      "canonical_url": "https://openai.com/index/introducing-gpt-6-2-astra-sol/",
+      "source_url": "https://openai.com/index/introducing-gpt-6-2-astra-sol/",
+      "publication_date": "2026-11-17",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-17",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-18T14:39:21.859Z",
+      "checked_at": "2026-11-18T14:39:21.859Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "source_page_opened",
+      "release_status": "first_party_release_or_report",
+      "collection_classification": "previous_day",
+      "publisher": "OpenAI",
+      "type": "product release",
+      "sources": [
+        {
+          "url": "https://openai.com/index/introducing-gpt-6-2-astra-sol/",
+          "publisher": "OpenAI",
+          "type": "product release"
+        },
+        {
+          "url": "https://deploymentsafety.openai.com/gpt-6-2-astra-sol/internal-deployment-of-gpt-6.2-astra-and-gpt-6.2-sol",
+          "publisher": "OpenAI",
+          "type": "safety evaluation"
+        },
+        {
+          "url": "https://developers.openai.com/api/docs/changelog",
+          "publisher": "OpenAI",
+          "type": "API changelog"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:responses-long-background:2026-11-17",
+      "title": "Responses API offers longer background completion windows",
+      "category": "developer-tools",
+      "tags": [
+        "LLM",
+        "API",
+        "inference",
+        "agents"
+      ],
+      "summary": "OpenAI's November 17 changelog lists a beta with two- and eight-hour background completions for eligible models, with advertised lower token-rate tiers.",
+      "why_it_matters": "Long-running work can trade latency for compute cost.",
+      "caveat": "Beta and pricing details vary by model; longer windows do not guarantee a successful task.",
+      "canonical_url": "https://developers.openai.com/api/docs/changelog",
+      "source_url": "https://developers.openai.com/api/docs/changelog",
+      "publication_date": "2026-11-17",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-17",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-18T14:39:21.859Z",
+      "checked_at": "2026-11-18T14:39:21.859Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "source_page_opened",
+      "release_status": "first_party_release_or_report",
+      "collection_classification": "previous_day",
+      "publisher": "OpenAI",
+      "type": "API changelog",
+      "sources": [
+        {
+          "url": "https://developers.openai.com/api/docs/changelog",
+          "publisher": "OpenAI",
+          "type": "API changelog"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:nato-defensive-agents:2026-11-17",
+      "title": "OpenAI reports NATO defensive cybersecurity deployments",
+      "category": "applications",
+      "tags": [
+        "AI",
+        "agents",
+        "cybersecurity",
+        "governance"
+      ],
+      "summary": "OpenAI described supplying cybersecurity models and supporting NATO's 2026 Crossed Swords exercise involving supervised AI cyber agents.",
+      "why_it_matters": "Shows the practical need for human authorization and boundaries in defensive agent systems.",
+      "caveat": "The exercise predates the article; effectiveness figures are company-reported.",
+      "canonical_url": "https://openai.com/index/strengthening-nato-allied-cyber-defences-ai/",
+      "source_url": "https://openai.com/index/strengthening-nato-allied-cyber-defences-ai/",
+      "publication_date": "2026-11-17",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-17",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-18T14:39:21.859Z",
+      "checked_at": "2026-11-18T14:39:21.859Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "source_page_opened",
+      "release_status": "first_party_release_or_report",
+      "collection_classification": "previous_day",
+      "publisher": "OpenAI",
+      "type": "partnership announcement",
+      "sources": [
+        {
+          "url": "https://openai.com/index/strengthening-nato-allied-cyber-defences-ai/",
+          "publisher": "OpenAI",
+          "type": "partnership announcement"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:mai-code2-flash:2026-11-17",
+      "title": "Microsoft releases MAI Code 2 and Code 2 Flash",
+      "category": "models",
+      "tags": [
+        "LLM",
+        "agents",
+        "coding",
+        "inference"
+      ],
+      "summary": "Microsoft announced Code 2 for complex, multi-file coding and Flash for faster high-volume coding, with GitHub Copilot client availability under plan conditions.",
+      "why_it_matters": "Workload-specific coding models may reduce cost and response time.",
+      "caveat": "Vendor benchmark claims are not independent; no downloadable weights or local runtime verified.",
+      "canonical_url": "https://microsoft.ai/news/introducing-mai-code-2-and-mai-code-2-flash/",
+      "source_url": "https://microsoft.ai/news/introducing-mai-code-2-and-mai-code-2-flash/",
+      "publication_date": "2026-11-17",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-17",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-18T14:39:21.859Z",
+      "checked_at": "2026-11-18T14:39:21.859Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "source_page_opened",
+      "release_status": "first_party_release_or_report",
+      "collection_classification": "previous_day",
+      "publisher": "Microsoft AI",
+      "type": "model release",
+      "sources": [
+        {
+          "url": "https://microsoft.ai/news/introducing-mai-code-2-and-mai-code-2-flash/",
+          "publisher": "Microsoft AI",
+          "type": "model release"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:microsoft-ignite-agent-stack:2026-11-17",
+      "title": "Ignite outlines Copilot Workspaces and Microsoft IQ",
+      "category": "enterprise",
+      "tags": [
+        "AI",
+        "agents",
+        "enterprise",
+        "infrastructure"
+      ],
+      "summary": "Microsoft's Ignite keynote introduced shared human-agent workspace concepts and organizational context tooling alongside infrastructure updates such as Cobalt 200 general availability.",
+      "why_it_matters": "Enterprise agents increasingly need persistent context and governance controls.",
+      "caveat": "Keynote mixes shipping releases and roadmap intentions; feature availability differs.",
+      "canonical_url": "https://blogs.microsoft.com/blog/2026/11/17/ignite-2026-building-the-frontier-ecosystem/",
+      "source_url": "https://blogs.microsoft.com/blog/2026/11/17/ignite-2026-building-the-frontier-ecosystem/",
+      "publication_date": "2026-11-17",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-17",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-18T14:39:21.859Z",
+      "checked_at": "2026-11-18T14:39:21.859Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "source_page_opened",
+      "release_status": "first_party_release_or_report",
+      "collection_classification": "previous_day",
+      "publisher": "Microsoft",
+      "type": "conference announcement",
+      "sources": [
+        {
+          "url": "https://blogs.microsoft.com/blog/2026/11/17/ignite-2026-building-the-frontier-ecosystem/",
+          "publisher": "Microsoft",
+          "type": "conference announcement"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:copilot-evals-preview:2026-11-17",
+      "title": "GitHub Copilot Evals enters public preview",
+      "category": "evaluation",
+      "tags": [
+        "LLM",
+        "agents",
+        "evaluation",
+        "MCP"
+      ],
+      "summary": "GitHub's task-based evaluator lets eligible developers test custom agents, skills, and MCP tools, inspect outcomes and traces, and compare repeated runs.",
+      "why_it_matters": "Repeatable tests reveal regressions single-chat examples miss.",
+      "caveat": "Test definitions and harness settings affect outcomes; a pass is not a safety guarantee.",
+      "canonical_url": "https://github.blog/changelog/2026-11-17-github-copilot-evals-is-now-in-public-preview/",
+      "source_url": "https://github.blog/changelog/2026-11-17-github-copilot-evals-is-now-in-public-preview/",
+      "publication_date": "2026-11-17",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-17",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-18T14:39:21.859Z",
+      "checked_at": "2026-11-18T14:39:21.859Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "source_page_opened",
+      "release_status": "first_party_release_or_report",
+      "collection_classification": "previous_day",
+      "publisher": "GitHub",
+      "type": "product changelog",
+      "sources": [
+        {
+          "url": "https://github.blog/changelog/2026-11-17-github-copilot-evals-is-now-in-public-preview/",
+          "publisher": "GitHub",
+          "type": "product changelog"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:copilot-fusion-routing:2026-11-17",
+      "title": "Copilot Fusion expands routing, clients and model options",
+      "category": "developer-tools",
+      "tags": [
+        "LLM",
+        "agents",
+        "model-routing",
+        "coding"
+      ],
+      "summary": "GitHub expanded its multi-model Copilot Fusion execution experience across supported clients, including beta mobile, and published coding benchmark comparisons.",
+      "why_it_matters": "Harness and model coordination may change the cost and reliability of coding agents.",
+      "caveat": "Vendor benchmark figures are harness-specific and mobile access is not universal.",
+      "canonical_url": "https://github.blog/changelog/2026-11-17-github-copilot-fusion-updates-more-availability-benchmarks-and-models/",
+      "source_url": "https://github.blog/changelog/2026-11-17-github-copilot-fusion-updates-more-availability-benchmarks-and-models/",
+      "publication_date": "2026-11-17",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-17",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-18T14:39:21.859Z",
+      "checked_at": "2026-11-18T14:39:21.859Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "source_page_opened",
+      "release_status": "first_party_release_or_report",
+      "collection_classification": "previous_day",
+      "publisher": "GitHub",
+      "type": "product changelog",
+      "sources": [
+        {
+          "url": "https://github.blog/changelog/2026-11-17-github-copilot-fusion-updates-more-availability-benchmarks-and-models/",
+          "publisher": "GitHub",
+          "type": "product changelog"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:copilot-secret-scanning-preview:2026-11-17",
+      "title": "GitHub previews on-demand secret scanning in agent code review",
+      "category": "security",
+      "tags": [
+        "LLM",
+        "agents",
+        "security",
+        "coding"
+      ],
+      "summary": "GitHub introduced opt-in scanning using credential patterns and contextual ML detection during supported Copilot review workflows.",
+      "why_it_matters": "Can check agent-generated changes for accidental secrets before integration.",
+      "caveat": "Preview feature only covers selected changed content; consumes credits and can miss credentials.",
+      "canonical_url": "https://github.blog/changelog/2026-11-17-secret-scanning-on-demand-for-developers-and-agents/",
+      "source_url": "https://github.blog/changelog/2026-11-17-secret-scanning-on-demand-for-developers-and-agents/",
+      "publication_date": "2026-11-17",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-17",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-18T14:39:21.859Z",
+      "checked_at": "2026-11-18T14:39:21.859Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "source_page_opened",
+      "release_status": "first_party_release_or_report",
+      "collection_classification": "previous_day",
+      "publisher": "GitHub",
+      "type": "security changelog",
+      "sources": [
+        {
+          "url": "https://github.blog/changelog/2026-11-17-secret-scanning-on-demand-for-developers-and-agents/",
+          "publisher": "GitHub",
+          "type": "security changelog"
+        },
+        {
+          "url": "https://github.blog/changelog/2026-11-17-copilot-code-review-adaptive-effort-secret-detection-and-more/",
+          "publisher": "GitHub",
+          "type": "product changelog"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:copilot-adaptive-code-review:2026-11-17",
+      "title": "Copilot reviews now vary effort by pull-request risk",
+      "category": "developer-tools",
+      "tags": [
+        "AI",
+        "agents",
+        "code-review",
+        "security"
+      ],
+      "summary": "GitHub previews Lite, Balanced and Max review effort selected by pull-request complexity and optional cross-repository public code context.",
+      "why_it_matters": "Review resources can be concentrated on complex changes.",
+      "caveat": "Automation is fallible; administrators and developers must independently verify flagged risks.",
+      "canonical_url": "https://github.blog/changelog/2026-11-17-copilot-code-review-adaptive-effort-secret-detection-and-more/",
+      "source_url": "https://github.blog/changelog/2026-11-17-copilot-code-review-adaptive-effort-secret-detection-and-more/",
+      "publication_date": "2026-11-17",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-17",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-18T14:39:21.859Z",
+      "checked_at": "2026-11-18T14:39:21.859Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "source_page_opened",
+      "release_status": "first_party_release_or_report",
+      "collection_classification": "previous_day",
+      "publisher": "GitHub",
+      "type": "product changelog",
+      "sources": [
+        {
+          "url": "https://github.blog/changelog/2026-11-17-copilot-code-review-adaptive-effort-secret-detection-and-more/",
+          "publisher": "GitHub",
+          "type": "product changelog"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:copilot-agent365-audit:2026-11-17",
+      "title": "GitHub adds enterprise Copilot activity export to Agent 365",
+      "category": "governance",
+      "tags": [
+        "AI",
+        "agents",
+        "auditing",
+        "security"
+      ],
+      "summary": "Eligible GitHub Enterprise Cloud organizations can export supported Copilot prompts, responses and tool-call logs to Microsoft's Agent 365 oversight system.",
+      "why_it_matters": "Structured agent traces can aid incident investigation and oversight.",
+      "caveat": "Available only for specified Enterprise Managed Users; privacy and retention require review.",
+      "canonical_url": "https://github.blog/changelog/2026-11-17-monitor-github-copilot-activity-through-microsoft-agent-365/",
+      "source_url": "https://github.blog/changelog/2026-11-17-monitor-github-copilot-activity-through-microsoft-agent-365/",
+      "publication_date": "2026-11-17",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-17",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-18T14:39:21.859Z",
+      "checked_at": "2026-11-18T14:39:21.859Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "source_page_opened",
+      "release_status": "policy_announcement_or_advocacy",
+      "collection_classification": "previous_day",
+      "publisher": "GitHub",
+      "type": "product changelog",
+      "sources": [
+        {
+          "url": "https://github.blog/changelog/2026-11-17-monitor-github-copilot-activity-through-microsoft-agent-365/",
+          "publisher": "GitHub",
+          "type": "product changelog"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:copilot-harness-comparisons:2026-11-17",
+      "title": "GitHub benchmarks compare coding-agent harnesses",
+      "category": "evaluation",
+      "tags": [
+        "LLM",
+        "agents",
+        "benchmarks"
+      ],
+      "summary": "GitHub's preview benchmarks add science tasks and harness-by-harness success and cost comparisons with model and effort controls.",
+      "why_it_matters": "Separates some execution-environment effects from model-level quality.",
+      "caveat": "Test environments and selected tasks may not represent real production workloads.",
+      "canonical_url": "https://github.blog/changelog/2026-11-17-github-copilot-benchmarks-site-adds-harness-comparisons/",
+      "source_url": "https://github.blog/changelog/2026-11-17-github-copilot-benchmarks-site-adds-harness-comparisons/",
+      "publication_date": "2026-11-17",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-17",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-18T14:39:21.859Z",
+      "checked_at": "2026-11-18T14:39:21.859Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "source_page_opened",
+      "release_status": "first_party_release_or_report",
+      "collection_classification": "previous_day",
+      "publisher": "GitHub",
+      "type": "evaluation changelog",
+      "sources": [
+        {
+          "url": "https://github.blog/changelog/2026-11-17-github-copilot-benchmarks-site-adds-harness-comparisons/",
+          "publisher": "GitHub",
+          "type": "evaluation changelog"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:ny-ai-asset-enforcement-unit:2026-11-17",
+      "title": "New York attorney general establishes AI enforcement unit",
+      "category": "governance",
+      "tags": [
+        "AI",
+        "safety",
+        "policy",
+        "law"
+      ],
+      "summary": "New York announced an AI Safety, Standards, Enforcement and Transparency unit to support investigations and implementation of the RAISE Act.",
+      "why_it_matters": "Creates a dedicated oversight and enforcement function for AI safety.",
+      "caveat": "The law's specified effective date is January 1, 2027; announcement is not proof of any company violation.",
+      "canonical_url": "https://ag.ny.gov/press-release/2026/attorney-general-james-announces-creation-ai-safety-standards-enforcement-and",
+      "source_url": "https://ag.ny.gov/press-release/2026/attorney-general-james-announces-creation-ai-safety-standards-enforcement-and",
+      "publication_date": "2026-11-17",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-17",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-18T14:39:21.859Z",
+      "checked_at": "2026-11-18T14:39:21.859Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "source_page_opened",
+      "release_status": "policy_announcement_or_advocacy",
+      "collection_classification": "previous_day",
+      "publisher": "New York Attorney General",
+      "type": "government statement",
+      "sources": [
+        {
+          "url": "https://ag.ny.gov/press-release/2026/attorney-general-james-announces-creation-ai-safety-standards-enforcement-and",
+          "publisher": "New York Attorney General",
+          "type": "government statement"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:eff-ai-cyber-policy:2026-11-discovery",
+      "title": "EFF urges conventional cybersecurity controls for powerful agents",
+      "category": "governance",
+      "tags": [
+        "AI",
+        "agents",
+        "safety",
+        "cybersecurity"
+      ],
+      "summary": "EFF published an advocacy framework emphasizing least privilege, isolation, logging and incident response in agent deployment.",
+      "why_it_matters": "Connects agent risks to implementable security control patterns.",
+      "caveat": "This is an advocacy proposal, not adopted law; original publication day could not be conclusively established.",
+      "canonical_url": "https://www.eff.org/deeplinks/2026/11/effs-ai-cybersecurity-policy-framework",
+      "source_url": "https://www.eff.org/deeplinks/2026/11/effs-ai-cybersecurity-policy-framework",
+      "publication_date": null,
+      "publication_date_precision": "unknown",
+      "publication_time_utc": null,
+      "event_date": null,
+      "event_date_precision": "unknown",
+      "discovered_at": "2026-11-18T14:39:21.859Z",
+      "checked_at": "2026-11-18T14:39:21.859Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "source_page_opened",
+      "release_status": "policy_announcement_or_advocacy",
+      "collection_classification": "previous_day",
+      "publisher": "Electronic Frontier Foundation",
+      "type": "advocacy article",
+      "sources": [
+        {
+          "url": "https://www.eff.org/deeplinks/2026/11/effs-ai-cybersecurity-policy-framework",
+          "publisher": "Electronic Frontier Foundation",
+          "type": "advocacy article"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:nvidia-china-hopper-shipments:2026-11-18",
+      "title": "Reuters reports Nvidia halted further licensed Hopper China shipments",
+      "category": "hardware",
+      "tags": [
+        "AI",
+        "hardware",
+        "compute",
+        "trade"
+      ],
+      "summary": "Reuters quoted Nvidia's interim chief executive saying no further approved Hopper datacenter-chip shipments to China are planned after past licensed sales.",
+      "why_it_matters": "Export policy affects available AI accelerator supply and compute costs.",
+      "caveat": "Future duration and cause were not independently established; prior shipment volume is not a future commitment.",
+      "canonical_url": "https://www.reuters.com/world/china/nvidia-stops-shipping-us-approved-ai-chips-china-2026-11-18/",
+      "source_url": "https://www.reuters.com/world/china/nvidia-stops-shipping-us-approved-ai-chips-china-2026-11-18/",
+      "publication_date": "2026-11-18",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-18",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-18T14:39:21.859Z",
+      "checked_at": "2026-11-18T14:39:21.859Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "source_page_opened",
+      "release_status": "first_party_release_or_report",
+      "collection_classification": "same_day",
+      "publisher": "Reuters",
+      "type": "independent reporting",
+      "sources": [
+        {
+          "url": "https://www.reuters.com/world/china/nvidia-stops-shipping-us-approved-ai-chips-china-2026-11-18/",
+          "publisher": "Reuters",
+          "type": "independent reporting"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:china-us-model-distillation:2026-11-17",
+      "title": "Reuters examines Chinese companies' distillation of US AI models",
+      "category": "industry",
+      "tags": [
+        "LLM",
+        "SLM",
+        "distillation",
+        "governance"
+      ],
+      "summary": "Reuters reviewed hundreds of records documenting attempts to use large American models' outputs to train local alternatives.",
+      "why_it_matters": "Highlights economic incentives and policy disputes around teacher-model access.",
+      "caveat": "Distillation is a legitimate technique; the report does not establish universal contract or legal violations.",
+      "canonical_url": "https://www.reuters.com/world/china/china-taps-us-ai-models-train-homegrown-rivals-chip-curbs-bite-2026-11-17/",
+      "source_url": "https://www.reuters.com/world/china/china-taps-us-ai-models-train-homegrown-rivals-chip-curbs-bite-2026-11-17/",
+      "publication_date": "2026-11-17",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-17",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-18T14:39:21.859Z",
+      "checked_at": "2026-11-18T14:39:21.859Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "source_page_opened",
+      "release_status": "first_party_release_or_report",
+      "collection_classification": "catch_up",
+      "publisher": "Reuters",
+      "type": "investigative reporting",
+      "sources": [
+        {
+          "url": "https://www.reuters.com/world/china/china-taps-us-ai-models-train-homegrown-rivals-chip-curbs-bite-2026-11-17/",
+          "publisher": "Reuters",
+          "type": "investigative reporting"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:pytorch-2151-cancelled:2026-11-17",
+      "title": "PyTorch cancels v2.15.1 patch release",
+      "category": "frameworks",
+      "tags": [
+        "AI",
+        "ML",
+        "DL",
+        "PyTorch"
+      ],
+      "summary": "Maintainers said PyTorch 2.15.1 will not ship; work is being redirected toward the planned 2.16.0 release.",
+      "why_it_matters": "Dependency managers can adjust planned compatibility tests.",
+      "caveat": "December 17 target for 2.16.0 is a plan and not a shipping guarantee.",
+      "canonical_url": "https://dev-discuss.pytorch.org/t/no-pytorch-2-15-1-release/3536",
+      "source_url": "https://dev-discuss.pytorch.org/t/no-pytorch-2-15-1-release/3536",
+      "publication_date": "2026-11-17",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-17",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-18T14:39:21.859Z",
+      "checked_at": "2026-11-18T14:39:21.859Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "source_page_opened",
+      "release_status": "first_party_release_or_report",
+      "collection_classification": "previous_day",
+      "publisher": "PyTorch maintainers",
+      "type": "maintainer announcement",
+      "sources": [
+        {
+          "url": "https://dev-discuss.pytorch.org/t/no-pytorch-2-15-1-release/3536",
+          "publisher": "PyTorch maintainers",
+          "type": "maintainer announcement"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:weight-space-programming:2611.22055",
+      "title": "Preprint explores language models writing sparse model weights",
+      "category": "research",
+      "tags": [
+        "AI",
+        "ML",
+        "SLM",
+        "model-design"
+      ],
+      "summary": "Ok and Lee report that frontier model agents can construct narrow associative-memory systems directly from examples rather than training Transformers end to end.",
+      "why_it_matters": "Suggests an interpretable route for constrained small-model design.",
+      "caveat": "Small multiple-choice tests and author-reported results do not demonstrate a general-purpose LLM replacement.",
+      "canonical_url": "https://arxiv.org/abs/2611.22055",
+      "source_url": "https://arxiv.org/abs/2611.22055",
+      "publication_date": "2026-11-17",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-17",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-18T14:39:21.859Z",
+      "checked_at": "2026-11-18T14:39:21.859Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "source_page_opened",
+      "release_status": "author_research_preprint",
+      "collection_classification": "catch_up",
+      "publisher": "Ok and Lee",
+      "type": "research preprint",
+      "sources": [
+        {
+          "url": "https://arxiv.org/abs/2611.22055",
+          "publisher": "Ok and Lee",
+          "type": "research preprint"
+        }
+      ]
+    }
+  ],
+  "technologies": [
+    {
+      "id": "tech-proposal:gpt62-astra-sol:2026-11-18",
+      "name": "GPT-6.2 Astra / Sol",
+      "aliases": [
+        "GPT-6.2 Astra",
+        "GPT-6.2 Sol"
+      ],
+      "usage_tags": [
+        "AI",
+        "ML",
+        "DL",
+        "LLM",
+        "agents"
+      ],
+      "explanation": "Hosted models optimized respectively for demanding professional agent tasks and lower-cost routine workloads.",
+      "conditional_advantage": "Conditional routing can avoid using a premium model for easier tasks.",
+      "best_fit_uses": [
+        "Code agents",
+        "Research and document analysis"
+      ],
+      "tradeoffs": [
+        "Closed weights",
+        "Vendor measurements and safeguards",
+        "Plan dependence"
+      ],
+      "alternatives": [
+        "Claude",
+        "Gemini",
+        "open-weight models"
+      ],
+      "hardware_runtime_constraints": "Hosted Responses API/ChatGPT Work; no local runtime or weights confirmed",
+      "official_documentation_url": "https://openai.com/index/introducing-gpt-6-2-astra-sol/",
+      "license_uncertainty": "Proprietary; not open weight",
+      "availability_uncertainty": "Product/plan access varies",
+      "pricing_uncertainty": "Astra API: $8 input/$0.40 cached/$40 output per million; Sol $2/$0.10/$10 per million on published Nov17 rate sheet; verify live pricing",
+      "source_links": [
+        {
+          "url": "https://openai.com/index/introducing-gpt-6-2-astra-sol/",
+          "publisher": "OpenAI",
+          "type": "product release"
+        }
+      ],
+      "date_checked": "2026-11-18",
+      "checked_at": "2026-11-18T14:39:21.859Z",
+      "existing_profile_id": null,
+      "review_status": "source_checked_pending_publisher_catalog_dedup"
+    },
+    {
+      "id": "tech-proposal:mai-code2-family:2026-11-18",
+      "name": "MAI Code 2 and Code 2 Flash",
+      "aliases": [
+        "MAI Code 2",
+        "MAI Code 2 Flash"
+      ],
+      "usage_tags": [
+        "AI",
+        "ML",
+        "DL",
+        "LLM",
+        "agents"
+      ],
+      "explanation": "Microsoft coding models for complicated multistep editing versus fast short editing.",
+      "conditional_advantage": "Flash may cost less for high-volume edits than flagship if its accuracy suffices.",
+      "best_fit_uses": [
+        "Agent coding",
+        "IDE assistance"
+      ],
+      "tradeoffs": [
+        "Closed weights",
+        "Limited general science abilities",
+        "Reported benchmarks"
+      ],
+      "alternatives": [
+        "GPT-6.2 Sol",
+        "Open code models"
+      ],
+      "hardware_runtime_constraints": "Available in eligible Copilot clients; local hardware unknown",
+      "official_documentation_url": "https://microsoft.ai/news/introducing-mai-code-2-and-mai-code-2-flash/",
+      "license_uncertainty": "No public open-weight license verified",
+      "availability_uncertainty": "Plan- and client-dependent",
+      "pricing_uncertainty": "Current per-call and token prices were not independently verified",
+      "source_links": [
+        {
+          "url": "https://microsoft.ai/news/introducing-mai-code-2-and-mai-code-2-flash/",
+          "publisher": "Microsoft AI",
+          "type": "model release"
+        }
+      ],
+      "date_checked": "2026-11-18",
+      "checked_at": "2026-11-18T14:39:21.859Z",
+      "existing_profile_id": null,
+      "review_status": "source_checked_pending_publisher_catalog_dedup"
+    },
+    {
+      "id": "tech-proposal:copilot-evals:2026-11-18",
+      "name": "GitHub Copilot Evals",
+      "aliases": [
+        "Copilot Evals",
+        "agent evaluation plugin"
+      ],
+      "usage_tags": [
+        "AI",
+        "ML",
+        "LLM",
+        "agents",
+        "evaluation"
+      ],
+      "explanation": "Repeatable task runner and evidence viewer for custom Copilot agents, skills, and MCP tools.",
+      "conditional_advantage": "A consistent test harness can detect behavioral regressions that a single conversation hides.",
+      "best_fit_uses": [
+        "Agent QA",
+        "MCP regression tests"
+      ],
+      "tradeoffs": [
+        "Preview",
+        "Stochastic results",
+        "Human-designed test quality"
+      ],
+      "alternatives": [
+        "DeepEval",
+        "OpenAI Evals",
+        "custom test harness"
+      ],
+      "hardware_runtime_constraints": "Runs through supported VS Code, CLI and Copilot app integrations",
+      "official_documentation_url": "https://github.blog/changelog/2026-11-17-github-copilot-evals-is-now-in-public-preview/",
+      "license_uncertainty": "Service/plugin terms apply; full offline redistribution unverified",
+      "availability_uncertainty": "Public preview for eligible Copilot accounts",
+      "pricing_uncertainty": "Evaluation and model quota/credit charges not independently audited",
+      "source_links": [
+        {
+          "url": "https://github.blog/changelog/2026-11-17-github-copilot-evals-is-now-in-public-preview/",
+          "publisher": "GitHub",
+          "type": "product changelog"
+        }
+      ],
+      "date_checked": "2026-11-18",
+      "checked_at": "2026-11-18T14:39:21.859Z",
+      "existing_profile_id": null,
+      "review_status": "source_checked_pending_publisher_catalog_dedup"
+    },
+    {
+      "id": "tech-proposal:copilot-fusion:2026-11-18",
+      "name": "GitHub Copilot Fusion",
+      "aliases": [
+        "Fusion Standard",
+        "Fusion High",
+        "Fusion Max"
+      ],
+      "usage_tags": [
+        "AI",
+        "LLM",
+        "agents",
+        "coding"
+      ],
+      "explanation": "Cloud execution harness that routes coding work across supported models and effort tiers.",
+      "conditional_advantage": "Task-aware routing may improve cost/performance mix over a manually fixed model.",
+      "best_fit_uses": [
+        "Coding agents",
+        "Repo tooling"
+      ],
+      "tradeoffs": [
+        "Opaque routing",
+        "Harness-confounded evaluation",
+        "Uneven surface availability"
+      ],
+      "alternatives": [
+        "Manual routing",
+        "Microsoft Agent Framework"
+      ],
+      "hardware_runtime_constraints": "Supported GitHub Copilot clients; no verified local model weights",
+      "official_documentation_url": "https://github.blog/changelog/2026-11-17-github-copilot-fusion-updates-more-availability-benchmarks-and-models/",
+      "license_uncertainty": "Commercial service terms; no standalone open source runtime license established",
+      "availability_uncertainty": "Web and Visual Studio supported; beta mobile rollout incomplete",
+      "pricing_uncertainty": "Pricing depends on plan and effort; not independently audited",
+      "source_links": [
+        {
+          "url": "https://github.blog/changelog/2026-11-17-github-copilot-fusion-updates-more-availability-benchmarks-and-models/",
+          "publisher": "GitHub",
+          "type": "product changelog"
+        }
+      ],
+      "date_checked": "2026-11-18",
+      "checked_at": "2026-11-18T14:39:21.859Z",
+      "existing_profile_id": null,
+      "review_status": "source_checked_pending_publisher_catalog_dedup"
+    },
+    {
+      "id": "tech-proposal:weight-space-programmed-memory:2026-11-18",
+      "name": "LLM-authored sparse associative memory",
+      "aliases": [
+        "weight-space programming",
+        "sparse fact-table target"
+      ],
+      "usage_tags": [
+        "AI",
+        "ML",
+        "DL",
+        "SLM",
+        "model-design"
+      ],
+      "explanation": "Experimental agent-written lookup structures that encode task examples as directly editable sparse parameters.",
+      "conditional_advantage": "In constrained lookup cases, explicit memory rows can enable auditable corrections without gradient training.",
+      "best_fit_uses": [
+        "Small constrained QA",
+        "Interpretability research"
+      ],
+      "tradeoffs": [
+        "Narrow tasks",
+        "Author-reported findings",
+        "Not general pretrained LLM replacement"
+      ],
+      "alternatives": [
+        "RAG",
+        "kNN",
+        "small Transformers"
+      ],
+      "hardware_runtime_constraints": "Paper-level prototype; standard package and target compute requirements unverified",
+      "official_documentation_url": "https://arxiv.org/abs/2611.22055",
+      "license_uncertainty": "Publication public; implementation and code license uncertain",
+      "availability_uncertainty": "Research method rather than mature downloadable product",
+      "pricing_uncertainty": "No validated inference or agent-creation cost",
+      "source_links": [
+        {
+          "url": "https://arxiv.org/abs/2611.22055",
+          "publisher": "Ok and Lee",
+          "type": "research preprint"
+        }
+      ],
+      "date_checked": "2026-11-18",
+      "checked_at": "2026-11-18T14:39:21.859Z",
+      "existing_profile_id": null,
+      "review_status": "source_checked_pending_publisher_catalog_dedup"
+    }
+  ],
+  "terms": [
+    {
+      "id": "term-proposal:agent-harness:2026-11-18",
+      "name": "Agent harness",
+      "aliases": [
+        "agent execution harness",
+        "tool-use harness"
+      ],
+      "definition": "Execution layer that gives an AI model tools, permissions, state, memory handling and feedback while performing tasks.",
+      "mechanism": "Runtime manages tool calls and task state outside model weights.",
+      "usage_tags": [
+        "AI",
+        "LLM",
+        "agents",
+        "evaluation"
+      ],
+      "example": "Run identical coding model and task with two different tool harnesses; compare success and cost.",
+      "caveat": "Different harnesses are a confound in model benchmark rankings.",
+      "related_existing_ids": [
+        "MLD-0041",
+        "MLD-0043",
+        "MLD-0110"
+      ],
+      "related_existing_names": [
+        "Agent evaluation",
+        "Agentic workflow",
+        "Benchmark"
+      ],
+      "primary_references": [
+        {
+          "url": "https://github.blog/changelog/2026-11-17-github-copilot-benchmarks-site-adds-harness-comparisons/",
+          "publisher": "GitHub",
+          "type": "evaluation changelog"
+        },
+        {
+          "url": "https://github.blog/changelog/2026-11-17-github-copilot-evals-is-now-in-public-preview/",
+          "publisher": "GitHub",
+          "type": "product changelog"
+        }
+      ],
+      "term_origin": "established_concept_new_to_atlas",
+      "date_checked": "2026-11-18",
+      "checked_at": "2026-11-18T14:39:21.859Z",
+      "review_status": "source_checked_pending_publisher_canonical_dedup"
+    },
+    {
+      "id": "term-proposal:agent-tool-trace:2026-11-18",
+      "name": "Agent tool-call trace",
+      "aliases": [
+        "tool-use trace",
+        "agent execution log"
+      ],
+      "definition": "Ordered record of an agent's tool invocations, inputs, outputs and relevant runtime state.",
+      "mechanism": "Execution system emits inspectable action entries for audits or evaluators.",
+      "usage_tags": [
+        "AI",
+        "LLM",
+        "agents",
+        "evaluation",
+        "security"
+      ],
+      "example": "Check whether a coding agent actually ran claimed tests by inspecting command and response traces.",
+      "caveat": "Logs can expose secrets and may be incomplete; they are not proof of authorization.",
+      "related_existing_ids": [
+        "MLD-0041",
+        "MLD-0384",
+        "MLD-0270"
+      ],
+      "related_existing_names": [
+        "Agent evaluation",
+        "Evaluator integrity",
+        "Data provenance"
+      ],
+      "primary_references": [
+        {
+          "url": "https://github.blog/changelog/2026-11-17-github-copilot-evals-is-now-in-public-preview/",
+          "publisher": "GitHub",
+          "type": "product changelog"
+        },
+        {
+          "url": "https://github.blog/changelog/2026-11-17-monitor-github-copilot-activity-through-microsoft-agent-365/",
+          "publisher": "GitHub",
+          "type": "product changelog"
+        }
+      ],
+      "term_origin": "established_concept_new_to_atlas",
+      "date_checked": "2026-11-18",
+      "checked_at": "2026-11-18T14:39:21.859Z",
+      "review_status": "source_checked_pending_publisher_canonical_dedup"
+    },
+    {
+      "id": "term-proposal:weight-space-programming:2026-11-18",
+      "name": "Weight-space programming",
+      "aliases": [
+        "WSP",
+        "model-written weights"
+      ],
+      "definition": "Research approach where a language model directly writes or edits a target model's parameters instead of learning them exclusively through gradient optimization.",
+      "mechanism": "A model-writing agent proposes parameter values or memory-table entries, then executes checks of target behavior.",
+      "usage_tags": [
+        "AI",
+        "ML",
+        "DL",
+        "SLM",
+        "model-design"
+      ],
+      "example": "Program a sparse ten-example question-answer memory and evaluate held-out lookup accuracy.",
+      "caveat": "Early research with limited task scope; not proven to displace conventional pretraining.",
+      "related_existing_ids": [
+        "MLD-0607",
+        "MLD-0554",
+        "MLD-0270"
+      ],
+      "related_existing_names": [
+        "Knowledge distillation",
+        "Inference",
+        "Data provenance"
+      ],
+      "primary_references": [
+        {
+          "url": "https://arxiv.org/abs/2611.22055",
+          "publisher": "Ok and Lee",
+          "type": "research preprint"
+        }
+      ],
+      "term_origin": "emerging_research_term_new_to_atlas",
+      "date_checked": "2026-11-18",
+      "checked_at": "2026-11-18T14:39:21.859Z",
+      "review_status": "source_checked_pending_publisher_canonical_dedup"
+    }
+  ],
+  "corrections": []
+}
