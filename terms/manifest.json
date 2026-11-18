@@ -4996,12 +4996,12 @@
   },
   "MLD-1000": {
     "path": "terms/MLD-1000-recurrent-neural-network.html",
-    "sha256": "8494af3c1e66aabc25ca99f513e00df7d596eed984e220b681425f438499ea56",
+    "sha256": "9fd024a2ccd50ee3cbdfc206b95e10ed68f51cc2419059989e60338437b065da",
     "expanded": false
   },
   "MLD-1001": {
     "path": "terms/MLD-1001-recursive-feature-elimination.html",
-    "sha256": "152333d0a8818a4fd995f2cf2cffaae7fa684d978c7fa4fd6edee0e0a35023e6",
+    "sha256": "35d48ca5a8794ebf64b9956e271fe07cf202a3db3f5ed5d54378292a9cd2f0b7",
     "expanded": false
   },
   "MLD-1002": {
@@ -5011,17 +5011,17 @@
   },
   "MLD-1003": {
     "path": "terms/MLD-1003-reduce-scatter.html",
-    "sha256": "1a3fd9ca85776c16410686027e5642f417e1d420c3d528da102f0748b4838afa",
+    "sha256": "3d7586f48ce8c2535f6b72a001146a3ff38dfded77c21b44eae85b8fce85d7b5",
     "expanded": false
   },
   "MLD-1004": {
     "path": "terms/MLD-1004-reference-model.html",
-    "sha256": "ea90f68fd4554cee599e49fc604164dea4d1a0158f8db2526b630e3339aff654",
+    "sha256": "46ef4634958eda853ad1bfe479786d621567c7a7923135e9802fb85bf9ca7f9b",
     "expanded": false
   },
   "MLD-1005": {
     "path": "terms/MLD-1005-reflection.html",
-    "sha256": "83381d08b6e9a2e10dedc7efbacdbe5c5e2be35df3a07c70b56f6f37b5801074",
+    "sha256": "dad14ac47720ec9ad5844692420b627917f72ab67fb14e8a1d8742929768b77d",
     "expanded": false
   },
   "MLD-1006": {
