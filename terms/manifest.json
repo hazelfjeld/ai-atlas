@@ -4471,102 +4471,102 @@
   },
   "MLD-0895": {
     "path": "terms/MLD-0895-pointwise-convolution.html",
-    "sha256": "320c4f9e356f5223b05b956fae4c27db983c89291fcdc0fb8545fccccc83e2d8",
+    "sha256": "f07dd1c0fc17af5ec1507a12b7ab85c78ac869f26b34e7e1f47475d6a53197dc",
     "expanded": false
   },
   "MLD-0896": {
     "path": "terms/MLD-0896-poisson-distribution.html",
-    "sha256": "78065ef4a10b26a51b151985cd0af6c546882f0bf5d526fc8fd128f6642a7d87",
+    "sha256": "d83d1eb55361b85c1106b5cb2296c85ba02c3960579bd3a2345e3ee580325a5a",
     "expanded": false
   },
   "MLD-0897": {
     "path": "terms/MLD-0897-poisson-regression.html",
-    "sha256": "e54b1fc520cffe8766ad9881ac70cbedc3af95c52e9cdb436bcf51c933e1e9dc",
+    "sha256": "d8043ed947cf7eb40f6aa52c35ecaf14c8ac5cfe097461c628b7b9cff518cfbd",
     "expanded": false
   },
   "MLD-0898": {
     "path": "terms/MLD-0898-policy.html",
-    "sha256": "ea7b809f69215cc48955cbd983cb0737f9fadddc56c801568bb6c56c6f499c75",
+    "sha256": "e400c1d0fdf7404375fe0cacb8d6b7b7085e37e8e7ca3251a0096d3d25411852",
     "expanded": false
   },
   "MLD-0899": {
     "path": "terms/MLD-0899-policy-collapse.html",
-    "sha256": "f11eda365380d776b247c78d3d7561acfa2a5c7d9572b94450acb1075422772d",
+    "sha256": "d989e3597e61a10aeb1665394a72cb296a37d16ad4d0b9100ad669c3670dad89",
     "expanded": false
   },
   "MLD-0900": {
     "path": "terms/MLD-0900-policy-gradient.html",
-    "sha256": "c160891ae4a9376e18a25560fac45016fa8be43a604a13a7f72f1989394fc12b",
+    "sha256": "a490a45cdbbdad15e8ba3730f42ad3c5bfc644447c4cca60aa153492656b80a4",
     "expanded": false
   },
   "MLD-0901": {
     "path": "terms/MLD-0901-policy-iteration.html",
-    "sha256": "1515828b2f35bfd0b87fdf7e7781bc0165bf9bd7d48730ca0e51490c492b2f57",
+    "sha256": "ed01b4f28689f24fdb038218b5300dfd03efcaa09076cb217dd35586f026ae22",
     "expanded": false
   },
   "MLD-0902": {
     "path": "terms/MLD-0902-polynomial-features.html",
-    "sha256": "bed9bda0c489c2c8ff36e4019129df68185ffa0934c8410339a8ba988316545f",
+    "sha256": "abd3e5654a060e182ef96a8d2fa026b61031e264db7c76b82482eb216ee42365",
     "expanded": false
   },
   "MLD-0903": {
     "path": "terms/MLD-0903-polynomial-kernel.html",
-    "sha256": "b28fb48473f99f7a065330ff86c4d69c1e90e0db811e02f749b1010c126f0d44",
+    "sha256": "51e57354ca99d21ee2ee036edf9c6345cec01888ba8f667fba16679745297b9b",
     "expanded": false
   },
   "MLD-0904": {
     "path": "terms/MLD-0904-polynomial-regression.html",
-    "sha256": "d9a4020987d77d09ae4e0cfbefb8b56c49dee311044b0c7b9c4a02a4a76f51a2",
+    "sha256": "6dd1ef553c343d061bd96e82c924de6c72cbc9817a2d48b8c13e5ec659b120d6",
     "expanded": false
   },
   "MLD-0905": {
     "path": "terms/MLD-0905-polysemanticity.html",
-    "sha256": "b41b4b14c116a68b48f5d8a3a0da1308da5bdd42e659cfdc2cf10d6a4185cb62",
+    "sha256": "51ed9447d05d344465464771f48bb0a6adecd08d76084041079c1f19f08a5e67",
     "expanded": false
   },
   "MLD-0906": {
     "path": "terms/MLD-0906-pooling.html",
-    "sha256": "62cb6a947eb658983f99700c2bf765069906f17640323ca977ecd1d530ca76f5",
+    "sha256": "cf015d0b1a572236cd476f104a48753f03c945d4a24584a3a47f0d0d3cfae064",
     "expanded": false
   },
   "MLD-0907": {
     "path": "terms/MLD-0907-position-bias.html",
-    "sha256": "9b041778fd3eebc40577e70aff49ec32907c4aad281011455f8a916af05f5f46",
+    "sha256": "6ab0b85e8bcccbfee36a7ae39ab0dc60003eb96fb345806f4181d1920d57d92c",
     "expanded": false
   },
   "MLD-0908": {
     "path": "terms/MLD-0908-position-embedding.html",
-    "sha256": "1756987963295c8b2028ef09c1a9824aefe3347cda3b311b51fa5efaad2d4e9d",
+    "sha256": "4095e0f5822bb3ea313f58f7c9cd6013eef859dc2d674b968c95c418a6e72678",
     "expanded": false
   },
   "MLD-0909": {
     "path": "terms/MLD-0909-positional-encoding.html",
-    "sha256": "2759b007fbf12bf929a1fea83d9264ccf45e236591c1ff7e46cc28cce8c1b846",
+    "sha256": "83599d538411f08f7058eb27a03e7af98b45de0f97d796663015766326c94a73",
     "expanded": false
   },
   "MLD-0910": {
     "path": "terms/MLD-0910-positional-feature.html",
-    "sha256": "0d0d598e04ad83b4d00a94cedb0e698eead8bd0d7ba8e34ad6143586427876f9",
+    "sha256": "398080e785ea73e844387626e483794d98d2beb307483fd052df9e0f1398d2ca",
     "expanded": false
   },
   "MLD-0911": {
     "path": "terms/MLD-0911-positive-semidefinite-matrix.html",
-    "sha256": "871bc80f0d6cc4214b7fa4d7c1b9e7c61a0327064c3368d903fd371687bcc0f5",
+    "sha256": "0edc9dd5c41ffe1374723f54807afc842ea5ef056acf712a8a2159ebee25c2ea",
     "expanded": false
   },
   "MLD-0912": {
     "path": "terms/MLD-0912-post-norm-transformer.html",
-    "sha256": "7ad6259d3283247189d28464fd9c24e22b6f5311db660027b6a274f0d0595b37",
+    "sha256": "f89d5543d8eb15e9effbd7cd6f72041fffb6a05267532dc25441b7340335e949",
     "expanded": false
   },
   "MLD-0913": {
     "path": "terms/MLD-0913-post-training.html",
-    "sha256": "8c0b5425352e4622d0e49c801a3ffac84ba70caf6f00fe06661377e0b621b59e",
+    "sha256": "27d1b4246ea872cadbfc77315ded55923c83d047f3c7387cd4910b9f7c5027a6",
     "expanded": false
   },
   "MLD-0914": {
     "path": "terms/MLD-0914-post-training-quantization.html",
-    "sha256": "b10265c88fa44f3e86daba6dcd2c650dae683d1a96acf34af4e73906b074ccd2",
+    "sha256": "eb614ceffdbf7d09aab8bd427b0e21fbc57cacdf85858e4eaaa381265b313ab8",
     "expanded": false
   },
   "MLD-0915": {
