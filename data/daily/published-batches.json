@@ -1469,7 +1469,7 @@
       "edition_date": "2026-11-18",
       "validation_result": "sha256_bytes_record_counts_unique_ids_dates_dedup_and_independent_primary_source_review",
       "status": "partially_published_with_2_deferred_news_and_8_deferred_catalog_proposals",
-      "publication_outcome": "immutable_revision_1_pending_production_verification",
+      "publication_outcome": "immutable_revision_1_cloudflare_http_browser_and_githack_verified",
       "publication_edition": "2026-11-18-v1",
       "accepted_news_ids": [
         "ai-news-gpt62-astra-sol-2026-11-17",
@@ -1536,8 +1536,22 @@
           "status": "pending_production_verification",
           "note": "Immutable dated edition and validated collector receipt prepared on main; deployment and public HTTP verification pending.",
           "prepared_at": "2026-11-18T15:27:25.705Z"
+        },
+        {
+          "edition": "2026-11-18-v1",
+          "status": "cloudflare_http_browser_and_githack_verified",
+          "note": "Exact main 4655095ed856c7213e969f72d58297e86df94ef7 passed catalog/GitHack workflow 44335862647 (355 Node tests; reproducible generation; GitHack parity), then Cloudflare production/hosted-browser workflow 44335862362, attempt 2 (production asset revision/HTTP, 66 site and 40 Games browser checks). Immutable source-batch and dated edition bytes/SHA-256 validated. Direct independent opening of the exact dated query permalink remained unavailable.",
+          "verified_at": "2026-11-18T15:45:43Z"
         }
-      ]
+      ],
+      "production_verified_at": "2026-11-18T15:45:43Z",
+      "production_verified_revision": 1,
+      "last_verified_at": "2026-11-18T15:45:43Z",
+      "last_verified_public_url": "https://aiupdates.app/whats-new.html?date=2026-11-18&revision=1",
+      "production_commit": "4655095ed856c7213e969f72d58297e86df94ef7",
+      "production_workflow_run_id": 44335862362,
+      "githack_workflow_run_id": 44335862647,
+      "verification_scope": "Exact main 4655095ed856c7213e969f72d58297e86df94ef7 passed catalog/GitHack workflow 44335862647 (355 Node tests; reproducible generation; GitHack parity), then Cloudflare production/hosted-browser workflow 44335862362, attempt 2 (production asset revision/HTTP, 66 site and 40 Games browser checks). Immutable source-batch and dated edition bytes/SHA-256 validated. Direct independent opening of the exact dated query permalink remained unavailable."
     }
   ]
 }

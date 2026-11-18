@@ -347,7 +347,7 @@
       "published_at": "2026-11-18T15:27:25.705Z"
     }
   ],
-  "last_successful_publish_at": "2026-11-17T14:52:54Z",
-  "status": "edition_revision_1_pending_production_verification",
+  "last_successful_publish_at": "2026-11-18T15:45:43Z",
+  "status": "edition_revision_1_production_verified",
   "coverage_note": "2026-11-18 v1 — Bounded November 17–18 collection. Fifteen source-reviewed reports retain original event dates and distinguish company statements, official policy, Reuters reporting and an unreviewed research preprint. OpenAI background-mode changelog timing and EFF original publication date remain unresolved, so two news candidates are deferred. Five technologies and three terms await catalog and license/alias review; no catalog additions implied. Eighteen sources checked, two failures. Coverage remains partial."
 }
