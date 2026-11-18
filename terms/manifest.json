@@ -4846,52 +4846,52 @@
   },
   "MLD-0970": {
     "path": "terms/MLD-0970-quadratic-discriminant-analysis.html",
-    "sha256": "ea8312cf103d9a0222b6222c6049b0887c06ee47d2039a6033299efad239685f",
+    "sha256": "dc1dc8c28b684f25d50c8e549d4a4b1196d5567345b4dc7ad06282f8567813b5",
     "expanded": false
   },
   "MLD-0971": {
     "path": "terms/MLD-0971-quantile.html",
-    "sha256": "0265c8ffe3fb65013b459f440bd04e07343f86253b621ef46c9c9030cdcc1cb7",
+    "sha256": "d3dae14a8661f45b962d0897c78952391fb5891d8a8f849b2ddc968b64e04dd0",
     "expanded": false
   },
   "MLD-0972": {
     "path": "terms/MLD-0972-quantile-regression.html",
-    "sha256": "722a41ab31af8e28f58cf1f48ce702b3eceaf66533d848bb89bacf1ed7886631",
+    "sha256": "bc2435fa56bae5c750888f66c4c2b95061b037f53749a0db8dd55c6c969d7bc5",
     "expanded": false
   },
   "MLD-0973": {
     "path": "terms/MLD-0973-quantization.html",
-    "sha256": "b7fa4f0c88df687c83893c1a43cf59bb1ce33464ecc2da849eac5db8af0d9f43",
+    "sha256": "deb46e6b54daee722be97c69847c4e152d5201289a013503142b7f57396ae051",
     "expanded": false
   },
   "MLD-0974": {
     "path": "terms/MLD-0974-quantization-scale.html",
-    "sha256": "59bf7006aa5620d47b76b31831f5c3414888515562db4cc2b9ec1b34b330ec5a",
+    "sha256": "ab57ad76ff31ac5c930d28b1064a51d28928eda2d9b3a937eeb3e9d3a2317d86",
     "expanded": false
   },
   "MLD-0975": {
     "path": "terms/MLD-0975-quantization-aware-training.html",
-    "sha256": "f48e2a0c12e823934bb0840bd89cbf0e0ea88fb5d060432c3598f84a39f55e75",
+    "sha256": "3c084d819ff2f2a4277c663eb3006a6d52ad814f33e9d0f40bd7ecdaf79f2b2c",
     "expanded": false
   },
   "MLD-0976": {
     "path": "terms/MLD-0976-quasi-newton-method.html",
-    "sha256": "5d9232a77d7f350a225b10fb3092b8c20722a779535411aa53b54716480c5605",
+    "sha256": "87945838141a29575fffacfacd6f5965ee90dadf9cbcd3a9cbd8615879340687",
     "expanded": false
   },
   "MLD-0977": {
     "path": "terms/MLD-0977-query.html",
-    "sha256": "14e81be08cba6dfc78ca415cd1ebeca2311bfac727885a8acf1e5bab64c4ca04",
+    "sha256": "b8ae7167a0d5ad23d4059ec9ae0d6430b0762b0ab674a478b7d26abdb4a2c55c",
     "expanded": false
   },
   "MLD-0978": {
     "path": "terms/MLD-0978-query-expansion.html",
-    "sha256": "befc6243c0680bdc83b7daf0d2bbaef2c820c58db0bb7fcb0f1877bda4d41e72",
+    "sha256": "acf034c4e39665c295b61e9e19d72bc99a194eeb0357e24e33212afa3d712b96",
     "expanded": false
   },
   "MLD-0979": {
     "path": "terms/MLD-0979-query-rewriting.html",
-    "sha256": "00426d69ab5036d0a5eae90b9575e8f6c79c5af672e2781745603bd7f993a46e",
+    "sha256": "d8be46342bca7a20c9103c9a5c862b3b9cfe12513fdaaf841cbd86e2ca30f163",
     "expanded": false
   },
   "MLD-0980": {
