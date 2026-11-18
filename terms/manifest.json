@@ -5226,52 +5226,52 @@
   },
   "MLD-1046": {
     "path": "terms/MLD-1046-rlhf.html",
-    "sha256": "ecb912dbc0e22858eac9b18fcc92392e33610416dbf479b543ff05222a511d02",
+    "sha256": "111cefb66454249ab01a1994a7bbe04c9af5d31088c93753f16b25c225d67c4f",
     "expanded": false
   },
   "MLD-1047": {
     "path": "terms/MLD-1047-rlvr.html",
-    "sha256": "5434b345c5dad57018f542c7a2ffbbf57a2938028ff484e0eb57311e179ad849",
+    "sha256": "851452dea51ff4a6792ea63b13eb62ce293e4a5ec94e09b0d423e0ec8b290642",
     "expanded": false
   },
   "MLD-1048": {
     "path": "terms/MLD-1048-rms-normalization.html",
-    "sha256": "3acf3720815bc1aaaf9e73636f16996fb5f047cfc25c4c09fee1ecd349d9a1f3",
+    "sha256": "78f6e6c75c0864365993b52fd7cdc138d122e5bd1cb42718c42c035be8979651",
     "expanded": false
   },
   "MLD-1049": {
     "path": "terms/MLD-1049-rmsprop.html",
-    "sha256": "6d29ec86a887efa4dbc861bfe66db014346d5abc3620c0d2aa5939bc8d6cf9d2",
+    "sha256": "8f4930e51a909d2bd5243f21b40709ca2040c522f4aaccfed777b76f4963c969",
     "expanded": false
   },
   "MLD-1050": {
     "path": "terms/MLD-1050-robust-loss.html",
-    "sha256": "5e889e32fc678b35a2e58b4d22dd13dde949b5510493dad781082f9bc99dbe81",
+    "sha256": "1b5f9d5ca5a28c7c48c611dc1723622d35bda1e32f596a80f63f8badec346e5a",
     "expanded": false
   },
   "MLD-1051": {
     "path": "terms/MLD-1051-robust-optimization.html",
-    "sha256": "43dfb57e7f010887949d984d2d4414781cbbafa01e9972d338523bdd2222bdfa",
+    "sha256": "cc4416240417d5417c7a0f8b0994ea14d87788a6f535ad080dd453d943289bb9",
     "expanded": false
   },
   "MLD-1052": {
     "path": "terms/MLD-1052-robust-regression.html",
-    "sha256": "f8c2ea158f2a3bb68cc5862ec004dd74b3c9b41b63e689e97ea0fbc7c69f7652",
+    "sha256": "a4339020e5e27975b84e0bf89496721dbc8d27d86711dc6258a3f327363b8acd",
     "expanded": false
   },
   "MLD-1053": {
     "path": "terms/MLD-1053-robust-scaling.html",
-    "sha256": "4ac12a690c57e56e6fe5f1ecd147e298e2b54e06fa6e08eb5a5cbd5a30cdeefd",
+    "sha256": "604e45344c1011ac004bb0c349686e9de2018f0e1d52d696e000dc9b3a48b45f",
     "expanded": false
   },
   "MLD-1054": {
     "path": "terms/MLD-1054-robustness.html",
-    "sha256": "3126d3d7a8db2b53114ef347dc69c9883600cd3cc2e2e137d417994330f8e5c0",
+    "sha256": "6378c4761637fb7fab528e3b70dd46d39120801c63a717d4be80eca4cec64450",
     "expanded": false
   },
   "MLD-1055": {
     "path": "terms/MLD-1055-roc-auc.html",
-    "sha256": "5252159a25ff3cf8c169c40722a780e9d4e45666fd3ff991a05d1013ab4e69b0",
+    "sha256": "ff3291854f8ef1d442f85e5928260773f067765183d7a24e24afd5c9c8ee8f56",
     "expanded": false
   },
   "MLD-1056": {
