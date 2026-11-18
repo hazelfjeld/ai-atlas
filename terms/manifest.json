@@ -5276,52 +5276,52 @@
   },
   "MLD-1056": {
     "path": "terms/MLD-1056-roc-curve.html",
-    "sha256": "3bc2708d76876d5d999d651fa56c7bb2401788f9ad41037e423f2cc620cf3fac",
+    "sha256": "621795d4df679025ceb8a8b07191e5598818b47cf5c3afd2c87a45db88a8af6a",
     "expanded": false
   },
   "MLD-1057": {
     "path": "terms/MLD-1057-rollback.html",
-    "sha256": "bc022a7c1698f36de22338fd0e792092480c547b08b79bfe66ee1fc67e226aa3",
+    "sha256": "bcf47ac01cb02c937fa69dca65f34b541dc41f9c27eb94bb6203b939bb99754a",
     "expanded": false
   },
   "MLD-1058": {
     "path": "terms/MLD-1058-root-mean-squared-error.html",
-    "sha256": "5fa2314c348144a5ebae423d17216e4d6ffe70f92f0b9d213d09d056c61737ee",
+    "sha256": "048a217638bbc871efb269c9f5d99b64afd2a380f11741e1b47cf0af8d15c517",
     "expanded": false
   },
   "MLD-1059": {
     "path": "terms/MLD-1059-root-node.html",
-    "sha256": "cc3e6443db6f7273a190bee1a90c86985028a4fe331830e1cd59206a195d10f9",
+    "sha256": "c26aec0ba361f3b6c9fe1d4b253238bd8d6b9a88998f89b23451b5bea34db069",
     "expanded": false
   },
   "MLD-1060": {
     "path": "terms/MLD-1060-rotary-position-embedding.html",
-    "sha256": "1c4d683c4ed15f02aef14d03117bd211219663cb3c57da3e4247cf8099168635",
+    "sha256": "de259e5e4df3d83fefeddcbcf7d600ee310b90927066891c3626b16d97193fbb",
     "expanded": false
   },
   "MLD-1061": {
     "path": "terms/MLD-1061-rouge.html",
-    "sha256": "f48780361c8dde7ef8bd096bdd41c4a383e9a263cfe3190c1bc5f16d55eb00da",
+    "sha256": "b472ca0c7ec1b33069439eb9fb6e2949e39a4e1dd5e00bfe5725e51f3d119c77",
     "expanded": false
   },
   "MLD-1062": {
     "path": "terms/MLD-1062-router.html",
-    "sha256": "8a1066aec8c0dfdaf55effac31692d05ef9752867855609f56ed954cd6ff4374",
+    "sha256": "bcf1aa3a8c7ee490a67fda389013e30fe49d1cb2494678949c7f31ba70cd80ad",
     "expanded": false
   },
   "MLD-1063": {
     "path": "terms/MLD-1063-saddle-point.html",
-    "sha256": "a9c750886bc715c35f30392a0c7046fbeb31882873c9d0f34059bd10649f10e4",
+    "sha256": "acd1bae73c69593c61c7de5428afcf1feebc7c2bdac03604df3e43c1e7c05926",
     "expanded": false
   },
   "MLD-1064": {
     "path": "terms/MLD-1064-safety-case.html",
-    "sha256": "e86b97b09c608c4b3ccb58bafb4deabf020f2797b66abb53e641b3f4014f0d64",
+    "sha256": "c1409e27e0bc41b5432853256ab064708c1907e4f4dd00ffda205f3d475b7fc2",
     "expanded": false
   },
   "MLD-1065": {
     "path": "terms/MLD-1065-safety-evaluation.html",
-    "sha256": "0886959efe39c251c1ddffa8fa93f14a1cee3010676ab06e2cb4334462dbd540",
+    "sha256": "1a7c4f341598563dd9cfd1d4fb7fdbdfeab54114e919dfb325689459393a7fa4",
     "expanded": false
   },
   "MLD-1066": {
