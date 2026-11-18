@@ -1240,7 +1240,7 @@ test('MLD-0885–0894 use the deterministic shared first-paint rail', () => {
     const html = fs.readFileSync(path.join(__dirname, '..', entry.path), 'utf8');
     assert.equal(crypto.createHash('sha256').update(html).digest('hex'), entry.sha256, id);
     assert.equal((html.match(/sidebar-bottom site-chrome__bottom/g) || []).length, 1, id);
-    const actualLinks = html.match(/<div class="site-chrome__links">[\\s\\S]*?<\\/div>/)?.[0];
+    const actualLinks = '<div class="site-chrome__links">' + html.split('<div class="site-chrome__links">')[1]?.split('</div>')[0] + '</div>';
     const withoutActive = markup => markup.replaceAll(' aria-current="page"', '');
     assert.equal(withoutActive(actualLinks), withoutActive(links),
       id + ' must retain canonical primary routes and labels');
