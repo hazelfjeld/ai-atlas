@@ -13,15 +13,15 @@ const links = html => {
   return [...chunk.matchAll(/<a\b[^>]*>([^<]+)<\/a>/g)].map(m => m[1]);
 };
 
-test('concept references through MLD-1070 share Discover first-paint rail without scripts', () => {
-  assert.match(read('scripts/build_term_pages.py'), /int\(path\[10:14\]\) <= 1070/,
+test('concept references through MLD-1080 share Discover first-paint rail without scripts', () => {
+  assert.match(read('scripts/build_term_pages.py'), /int\(path\[10:14\]\) <= 1080/,
     'deterministic reference builder must preserve the migrated cohort');
   const technology = read('technology/TECH-0216-pytorch.html');
   assert.ok(read('index.html').includes('class="sidebar-bottom"'),
     'Discover exposes reference sidebar bottom');
   const expectedLabels = links(technology);
   assert.equal(expectedLabels.length, 7);
-  for (let i = 454; i <= 1070; i++) {
+  for (let i = 454; i <= 1080; i++) {
     const id = 'MLD-' + String(i).padStart(4, '0');
     const entry = manifest[id];
     assert.ok(entry, id + ' retains its stable route');
@@ -39,7 +39,7 @@ test('concept references through MLD-1070 share Discover first-paint rail withou
     assert.ok(html.includes('<a class="skip" href="#main">'), id);
     assert.ok(html.includes('href="../index.html#/search"'), id);
   }
-  const next = manifest['MLD-1071'];
+  const next = manifest['MLD-1081'];
   assert.ok(next, 'next stable concept ID remains indexed');
   const untouched = read(next.path);
   assert.doesNotMatch(untouched, /sidebar-bottom site-chrome__bottom/,
