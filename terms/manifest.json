@@ -5531,52 +5531,52 @@
   },
   "MLD-1107": {
     "path": "terms/MLD-1107-sentence-embedding.html",
-    "sha256": "10f587ba7bee84d9b6ea633b22190d55d1db9cbbfed16acdda1cbb2fef053021",
+    "sha256": "afecbc393b64e2ef80fda7155dfa5b9b909322b2124b1743e82047e48260ec04",
     "expanded": false
   },
   "MLD-1108": {
     "path": "terms/MLD-1108-sentencepiece.html",
-    "sha256": "803adaeda6a5bbeeeb75478155cc8dcafbe8d24ce4b3e3e7ac8389ca4b489c40",
+    "sha256": "79f98570af83609e0be891830d774026553e839bd1c053dda835a38c873c95ae",
     "expanded": false
   },
   "MLD-1109": {
     "path": "terms/MLD-1109-sequence-length.html",
-    "sha256": "d0feeef3c2f747378383689ac6bd7ded97735fcca51377ad8a58e5e58cdcc22c",
+    "sha256": "4d6fed1201ff82221f1ef0d3086908d2a9e7e2e148bbef1358f3473859494f82",
     "expanded": false
   },
   "MLD-1110": {
     "path": "terms/MLD-1110-sequence-packing.html",
-    "sha256": "0e37effaafa92513ed53d8822878937d0c51234c9bfa54b66d7ffeb41d4e0c50",
+    "sha256": "66b85e22a1be51fd797c7e7f6e24ed4fc9c5c96fe309c90c33cf253dfdfcb595",
     "expanded": false
   },
   "MLD-1111": {
     "path": "terms/MLD-1111-sequence-padding.html",
-    "sha256": "ae3e3303f2cf817571f67badc89a48b137b0b9302905c50342e238b0f033f0d8",
+    "sha256": "b3a477010e64d49a9ca09987ed2e632ba4504eabedece0d90ba97a96cc340828",
     "expanded": false
   },
   "MLD-1112": {
     "path": "terms/MLD-1112-sequence-parallelism.html",
-    "sha256": "d1ee357cdcf7d21c620c9eb523ec5a76b834a87b8c23b8973090138d8ace2245",
+    "sha256": "4c5b3887d17fdbdd492e384b75bb79b80e4f569c1774d1902857af82124cd70a",
     "expanded": false
   },
   "MLD-1113": {
     "path": "terms/MLD-1113-sequence-level-distillation.html",
-    "sha256": "5377c2947640c245d69905473111d2ba447459949d72368a1179fee5c817d64e",
+    "sha256": "17328b6f5ab834dff00e72f67d8cba2d528aaea80a9af8567aa81367c1ad31eb",
     "expanded": false
   },
   "MLD-1114": {
     "path": "terms/MLD-1114-sequence-to-sequence.html",
-    "sha256": "9c9c0cb34cb976c81dbc5a01cf49109a494068826347c23be270d2aa2208fd00",
+    "sha256": "f9a956da0b0f18d496243ec99dc9eebe2f2864a206572051ce1a7d3bcc6e48dc",
     "expanded": false
   },
   "MLD-1115": {
     "path": "terms/MLD-1115-shadow-deployment.html",
-    "sha256": "e05efedf80d6c5bdc34ce2fe247c7af894279846d2b1332eab7909b28ca38d5b",
+    "sha256": "3eb061eda9a6499b194f3147f02c74b4ec3be8e17db98508d4a594c9de839dcf",
     "expanded": false
   },
   "MLD-1116": {
     "path": "terms/MLD-1116-shap.html",
-    "sha256": "d83c9e6bf306acfd3799bd466a185c1dafe12bd175af16f6f2faa117fd294777",
+    "sha256": "3300c1fc7bc2af32c0c2f5a22362519d7da4f10fe8e1a874da5f49ecfed78ff7",
     "expanded": false
   },
   "MLD-1117": {
