@@ -5481,52 +5481,52 @@
   },
   "MLD-1097": {
     "path": "terms/MLD-1097-self-correction.html",
-    "sha256": "da729ebb0de702737c0a370b05031135e50b9a19090a8e3ed080c9daf69d83a1",
+    "sha256": "8c05172d47c5ed7c8b53addebd5454fc179e707f2ec0800254da07b501a77787",
     "expanded": false
   },
   "MLD-1098": {
     "path": "terms/MLD-1098-self-distillation.html",
-    "sha256": "da493e725e1337327a2f8693cd26e4273a65c04f284be35e16e0096e8310b3ef",
+    "sha256": "8bc807128eda9e2b1c5156a184795866b644cd5adce553ee4ee5b11bab93e201",
     "expanded": false
   },
   "MLD-1099": {
     "path": "terms/MLD-1099-self-paced-learning.html",
-    "sha256": "eb713bf5c6698cfe0fa1be2bf218a38c8496332e8194d407254bc1f2b930b4ac",
+    "sha256": "a27dd5b7b2adb7b16de154075038c227d7dd2f97772324c0635babd5d28052ba",
     "expanded": false
   },
   "MLD-1100": {
     "path": "terms/MLD-1100-self-supervised-learning.html",
-    "sha256": "cba18600b8c2dc29847c86f32cd2dadb786c3dc1dd08c0c240c677880b25948f",
+    "sha256": "ca640c15913f2eac81412229988ca3524da5c2e605c79ecfcec9f6cad21c3583",
     "expanded": false
   },
   "MLD-1101": {
     "path": "terms/MLD-1101-self-training.html",
-    "sha256": "d63f65c66ca83c4fb8332a92b4c0166d791c25a73467fcf0f427c20f83efd900",
+    "sha256": "a1d5fca2af52c6b04d92cb94f1f807c698e1601b0521d681dc02d848f00da1a4",
     "expanded": false
   },
   "MLD-1102": {
     "path": "terms/MLD-1102-semantic-chunking.html",
-    "sha256": "74485606c3ac2e6349d6ae2dd723f9eb9d243d7cb3d136f5260d13bc8a4b444c",
+    "sha256": "b4d6e468e1d89e1a3e4dabaf9db29c182f39d07ca8e17bf3a080233651f57075",
     "expanded": false
   },
   "MLD-1103": {
     "path": "terms/MLD-1103-semantic-memory.html",
-    "sha256": "3b4136e67d646be3d57f941bb3eb50faf8dff47e6db07c42695d4c5c4f0419f1",
+    "sha256": "b335d288467825fd87d4febb22b0e30b55427ba3772afffe2f318822a3ab6cae",
     "expanded": false
   },
   "MLD-1104": {
     "path": "terms/MLD-1104-semantic-search.html",
-    "sha256": "90518083dc0908c791f8c1f1a921fc8cb18048715224098aa80f31ecc3059e96",
+    "sha256": "91baf2c69f61a3b56eb315521efd6da0364daf851bf7a6fd6cec7d6d9f35f26a",
     "expanded": false
   },
   "MLD-1105": {
     "path": "terms/MLD-1105-semantic-segmentation.html",
-    "sha256": "fd71183e4019277acdaffbdf20a253649cd3d30187411b0e200ed9124117a368",
+    "sha256": "7a9b59af624b251ba1e77c7564283b4c5ba48229633f0922f18d4290e10749d9",
     "expanded": false
   },
   "MLD-1106": {
     "path": "terms/MLD-1106-semi-supervised-learning.html",
-    "sha256": "bc525cc3f02d34c4aa8646dbe67b3800586ef801f6ff4fb841b2572fc08e8297",
+    "sha256": "f675abb6f4fd2659ed05ecc4173a6bb6be604d5be44c2a82aa7759eaaf824087",
     "expanded": false
   },
   "MLD-1107": {
