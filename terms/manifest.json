@@ -5631,22 +5631,22 @@
   },
   "MLD-1127": {
     "path": "terms/MLD-1127-situational-awareness.html",
-    "sha256": "a5ac82e43bf4d66b76206d5c01ece74ec267da1177b88c514498e2297738bc09",
+    "sha256": "54844c2a415101cc1d11071f3bcc9e0d8e3e424ca1b78cdcc95c9ad5b552fa0c",
     "expanded": false
   },
   "MLD-1128": {
     "path": "terms/MLD-1128-skip-gram.html",
-    "sha256": "024aff26fb4de95af03cee9d6b3f2592e1376a4a5b304d616db1a14e60ef0200",
+    "sha256": "8e7f7f48f46bf07e2adb46f40de3e88eb50166d7e0a7910b8af619eb80df14bc",
     "expanded": false
   },
   "MLD-1129": {
     "path": "terms/MLD-1129-sleeper-agent-model.html",
-    "sha256": "c2830d53e059b6922f02f1dda3d63fecd862b81329221dfa44bad6614d3cca84",
+    "sha256": "f4861611c48687a23dd081eab37bc93021f77669b8aafac36700577026c72694",
     "expanded": false
   },
   "MLD-1130": {
     "path": "terms/MLD-1130-sliding-window-attention.html",
-    "sha256": "e7f99b8fd19837361f946360f43517f2a6e70f2c1a9e4faea799f20da6b58493",
+    "sha256": "868ea98f5a96b440c7529b055ac6dcdb897b5e1632f6dec9c7d0cdf4ec5f8022",
     "expanded": false
   },
   "MLD-1131": {
@@ -5656,27 +5656,27 @@
   },
   "MLD-1132": {
     "path": "terms/MLD-1132-smote.html",
-    "sha256": "20f92bd745de4385013956470d060463521535f91b9e5e3f6be8a5acd5294383",
+    "sha256": "73e901163757b609e7e73b8c3ac6e64604a24d7721fe4755c43b68515e492d7c",
     "expanded": false
   },
   "MLD-1133": {
     "path": "terms/MLD-1133-soft-prompt.html",
-    "sha256": "35516396b5f8c39a2e242d4e1e12df58772bc6b9f59385a155f9d509f8037723",
+    "sha256": "731b241a2d92aa888705d53021c079325e50f5c2098a5a9d73c531b09adaa00f",
     "expanded": false
   },
   "MLD-1134": {
     "path": "terms/MLD-1134-soft-targets.html",
-    "sha256": "8ab53a70e960d63e5b35ffdbb4f5d3ce65e87db1c5ae988334dbcedb9cdf60c9",
+    "sha256": "459a2f24cc7a8f35f3c76b466d2b4263a62fccf4365ad64bf5fa3b5f578f2feb",
     "expanded": false
   },
   "MLD-1135": {
     "path": "terms/MLD-1135-soft-margin-svm.html",
-    "sha256": "2c3266b3e0a9091e9ad4ac44592bd10f21b8d7ba581acac84610bc461e8b2a1b",
+    "sha256": "360a211310aaf3f515a7c02cadbeca7de844d529898ab4af9599e5f76b2305d2",
     "expanded": false
   },
   "MLD-1136": {
     "path": "terms/MLD-1136-softmax.html",
-    "sha256": "8d2287d52c82a794a558200d004a5faf918be22f04a859d6b4385b9792432c1f",
+    "sha256": "bcfa9d88125fcc056c24b881d1b5b0866d85befef278f6a5e61ee7d5b321392c",
     "expanded": false
   },
   "MLD-1137": {
