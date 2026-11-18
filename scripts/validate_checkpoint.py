@@ -15,6 +15,9 @@ from html.parser import HTMLParser
 from concurrent.futures import ThreadPoolExecutor
 import urllib.parse
 import urllib.request
+import urllib.error
+import time
+from http.client import IncompleteRead, RemoteDisconnected
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE_KINDS = ('papers', 'alerts')
@@ -260,6 +263,28 @@ def validate_links():
     return checked
 
 
+def read_remote_response(request, byte_limit, *, attempts=3, pause=time.sleep, opener=None):
+    """Retry only transient GitHack transport failures, even during response reads.
+
+    All bytes, MIME and status still undergo their original strict checks.
+    HTTP errors and exhausted retries fail closed.
+    """
+    assert attempts >= 1 and byte_limit > 0
+    opener = opener or urllib.request.urlopen
+    for attempt in range(attempts):
+        try:
+            with opener(request, timeout=25) as response:
+                return response.status, response.read(byte_limit), response.headers.get_content_type()
+        except urllib.error.HTTPError:
+            raise
+        except (urllib.error.URLError, RemoteDisconnected, IncompleteRead, ConnectionError, TimeoutError) as error:
+            if attempt + 1 == attempts:
+                raise
+            print(f'Transient remote read for {request.full_url}: {type(error).__name__}; '
+                  f'retrying {attempt + 1}/{attempts}', flush=True)
+            pause(0.5 * (attempt + 1))
+
+
 def check_remote(base: str, manifest: dict) -> dict:
     parsed = urllib.parse.urlparse(base)
     assert parsed.scheme == 'https' and parsed.hostname in ('raw.githack.com', 'rawcdn.githack.com'), 'Unsupported host'
@@ -282,10 +307,9 @@ def check_remote(base: str, manifest: dict) -> dict:
         files += [list(pages.values())[0]['path'], list(pages.values())[-1]['path']]
     def check(path):
         request = urllib.request.Request(base + path, headers={'User-Agent': 'Atlas-publication-integrity-check/1.1'})
-        with urllib.request.urlopen(request, timeout=25) as response:
-            assert response.status == 200, f'HTTP error: {path}'
-            body = response.read((ROOT / path).stat().st_size + 1)
-            content_type = response.headers.get_content_type()
+        status, body, content_type = read_remote_response(
+            request, (ROOT / path).stat().st_size + 1)
+        assert status == 200, f'HTTP error: {path}'
         assert body == (ROOT / path).read_bytes(), f'Remote bytes differ or confirmation page returned: {path}'
         if path.endswith('.html'):
             assert content_type == 'text/html', f'Wrong HTML content type: {content_type}'
