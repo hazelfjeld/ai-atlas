@@ -5351,52 +5351,52 @@
   },
   "MLD-1071": {
     "path": "terms/MLD-1071-sample-weight.html",
-    "sha256": "58168c299caecb496fb559c834eff40371872b176481e0f5d7a31cebdd9ef0c4",
+    "sha256": "60eebe4ed234b92c383405f4397f68e5376d9f8b7af7ca679d678321593870f0",
     "expanded": false
   },
   "MLD-1072": {
     "path": "terms/MLD-1072-sampling.html",
-    "sha256": "44acb4408811f8e3c62cd3f922cc798f53eb8ec6a7a18a1b1c6e2e0639ea76b9",
+    "sha256": "b02442958bb2afcd4ffa825ff65df9602baac27f4d7f426c3db5ee2604c23cdd",
     "expanded": false
   },
   "MLD-1073": {
     "path": "terms/MLD-1073-sampling-bias.html",
-    "sha256": "2014c8e57f280b0820ed9741efcab05a81271a35b780146827311af71bb17b3e",
+    "sha256": "540a8807319a8c145a6802c62f82ebef8fe435d4c832fbe7ff3119a3faf62e73",
     "expanded": false
   },
   "MLD-1074": {
     "path": "terms/MLD-1074-sampling-variance.html",
-    "sha256": "71ad35f7ef1c6b9bf2c6a83f67f02e3029bfa30b6a98aeac214a761cd02545ac",
+    "sha256": "69582cef3bec284b3cb7614d23468ad351cd10a9fbabfc6f51575a6560a7f7e6",
     "expanded": false
   },
   "MLD-1075": {
     "path": "terms/MLD-1075-sandbagging.html",
-    "sha256": "5948a10b329723ff648eeac89c89673ddc1e6495cc5bc606e0fb3cc9c9ff77d8",
+    "sha256": "6f44feab235940e08c6d7aba4e9ce060ec66c8ca241a5a84c5b91cddc13f9054",
     "expanded": false
   },
   "MLD-1076": {
     "path": "terms/MLD-1076-sandbox.html",
-    "sha256": "b1023903dfdf74eb0fdaf55a5f0b49ae9708b23e3a3a1e887ccd26b93e85a40c",
+    "sha256": "30d9256d382f863b342549059ad57d590e1dd1a76c3a40104393d6996a8d0024",
     "expanded": false
   },
   "MLD-1077": {
     "path": "terms/MLD-1077-sarsa.html",
-    "sha256": "cdba31672bdbcef40514a8a9d2de05e2b7aa5b6f4983cc04966154de6aa3b856",
+    "sha256": "f03d8577360b0659402c98c2d5e9d4115d9f4433d9b256e446cc0d4e08825ba8",
     "expanded": false
   },
   "MLD-1078": {
     "path": "terms/MLD-1078-scalable-oversight.html",
-    "sha256": "c77cfa0af58a15817d893f3db50eb58d7c4f3cfcc862fcdf2c5d4ee00aabd052",
+    "sha256": "7cf0238e46c11365511e013682fbf14737c025304fa3a43da160d4545393b70f",
     "expanded": false
   },
   "MLD-1079": {
     "path": "terms/MLD-1079-scalar.html",
-    "sha256": "0df44832991d1007f170047753078c1d23a060894fcff207f56b58bd5eb5bf8c",
+    "sha256": "e7916aee83f7ed6688bc278d982d200780901b7eeaaddd9a028622ab23ee8a3b",
     "expanded": false
   },
   "MLD-1080": {
     "path": "terms/MLD-1080-scaled-dot-product-attention.html",
-    "sha256": "e76827743ce45ac8c34db9affebf539b31b0efa41dc9cdbcc3c40d0be32198f9",
+    "sha256": "1b3c2e17d26d096448722585d1a08bd8dc5ba5c76d0d2ed38cbb1c0cf3763bff",
     "expanded": false
   },
   "MLD-1081": {

@@ -1226,15 +1226,15 @@ test('shared long-form reading widths follow Discover without shrinking cards or
 });
 
 
-test('MLD-0915–1070 use the deterministic shared first-paint rail', () => {
+test('MLD-0915–1080 use the deterministic shared first-paint rail', () => {
   const crypto = require('node:crypto');
   const manifest = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'terms/manifest.json'), 'utf8'));
   const builder = fs.readFileSync(path.join(__dirname, '..', 'scripts/build_term_pages.py'), 'utf8');
-  assert.match(builder, /int\(path\[10:14\]\) <= 1070/);
+  assert.match(builder, /int\(path\[10:14\]\) <= 1080/);
   const reference = fs.readFileSync(path.join(__dirname, '..', 'technology/TECH-0216-pytorch.html'), 'utf8');
   const links = reference.match(/<div class="site-chrome__links">[\s\S]*?<\/div>/)?.[0];
   assert.ok(links, 'Missing canonical technology links');
-  for (let i = 915; i <= 1070; i++) {
+  for (let i = 915; i <= 1080; i++) {
     const id = 'MLD-' + String(i).padStart(4, '0');
     const entry = manifest[id];
     const html = fs.readFileSync(path.join(__dirname, '..', entry.path), 'utf8');
@@ -1250,7 +1250,7 @@ test('MLD-0915–1070 use the deterministic shared first-paint rail', () => {
     assert.equal((desktopNav.match(/aria-current="page">Concept dictionary/g) || []).length, 1,
       id + ' must have one desktop active section');
   }
-  const following = fs.readFileSync(path.join(__dirname, '..', manifest['MLD-1071'].path), 'utf8');
+  const following = fs.readFileSync(path.join(__dirname, '..', manifest['MLD-1081'].path), 'utf8');
   assert.equal((following.match(/sidebar-bottom site-chrome__bottom/g) || []).length, 0,
     'Next reference remains untouched in this bounded migration');
 });
