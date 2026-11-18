@@ -5681,27 +5681,27 @@
   },
   "MLD-1137": {
     "path": "terms/MLD-1137-span-corruption.html",
-    "sha256": "da7c541691e2390eecfeac4ba4873a07b88f92d518f12c8fbcc6d63550508f74",
+    "sha256": "6c273e776cb5f6ca2f4c986e4dec61fae5eac9033e0bb9ea6e310a2b02867fd8",
     "expanded": false
   },
   "MLD-1138": {
     "path": "terms/MLD-1138-sparse-attention.html",
-    "sha256": "711cf501de8da02cebc1965630b23c0e164823777c196bd46d30d0a5d5f5b69c",
+    "sha256": "ec7ca525d91c998e88826ba9ef061ba1dcadc0a658ce0ce652ec2636a2de93cb",
     "expanded": false
   },
   "MLD-1139": {
     "path": "terms/MLD-1139-sparse-autoencoder.html",
-    "sha256": "c0feb4acdec9675520e3c8a81092d0e7c945f2eeb45bd354c6ed977dc745ce5b",
+    "sha256": "32ecb4f7e57f9980792f871137c04e2e8efaac2fb8573685adcd4d45d75c1ef7",
     "expanded": false
   },
   "MLD-1140": {
     "path": "terms/MLD-1140-sparse-coding.html",
-    "sha256": "59dcb78747529e26b9c22b443e9c81c364eaf467a454c80025db8490cb34f18b",
+    "sha256": "45cc05c6f61bae087a02900dd31085db72008745da7bb3d3985660b0cac79b11",
     "expanded": false
   },
   "MLD-1141": {
     "path": "terms/MLD-1141-sparse-feature.html",
-    "sha256": "3784fce2ebf52ac8f73076419a6cb5eaee377867fbb3d18b18f66e70a1bbf0e2",
+    "sha256": "4423b599b5524754d673f95e9e5b500af3ca9a11285a52341ef19a8e6d9fe4f0",
     "expanded": false
   },
   "MLD-1142": {
