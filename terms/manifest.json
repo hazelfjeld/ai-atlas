@@ -4296,17 +4296,17 @@
   },
   "MLD-0860": {
     "path": "terms/MLD-0860-outlier.html",
-    "sha256": "054a083a4e922fac0b7d3ec8a9d22a2bff3180964876bb301dbfb0a9e4acced8",
+    "sha256": "a4e98de0f46c081f290c9134f9cf5fb40b840a5ac8e044fe95764a8d788f2601",
     "expanded": false
   },
   "MLD-0861": {
     "path": "terms/MLD-0861-output-layer.html",
-    "sha256": "f95fafc6f505235da7e7ff362d73fc626e1f3fc87cfe5111025031e9df9f4bbf",
+    "sha256": "3ab5ffecb6d7f3011b90814d76fe78677b0b29a80085a1396f94cef451142cbb",
     "expanded": false
   },
   "MLD-0862": {
     "path": "terms/MLD-0862-over-smoothing.html",
-    "sha256": "4c4b624aee78cfef26d2aa44f5ddb1f38ff7865b54ba98ebd9528a653788a2f4",
+    "sha256": "667f6408d1f72d1de32ad8ed5ae87b9481ab381911bc0e2c7b5b925567525e7b",
     "expanded": false
   },
   "MLD-0863": {
@@ -4316,7 +4316,7 @@
   },
   "MLD-0864": {
     "path": "terms/MLD-0864-overrefusal.html",
-    "sha256": "4e3bc9f252d97930855509da2d165190845aad3584b74f73ae8ca01d861958d8",
+    "sha256": "46d558e9de530f68b383addc522c6ba6ceb6cc8a49adfe8f32de004b823a3b87",
     "expanded": false
   },
   "MLD-0865": {
