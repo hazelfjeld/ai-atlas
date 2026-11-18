@@ -5326,27 +5326,27 @@
   },
   "MLD-1066": {
     "path": "terms/MLD-1066-safety-training.html",
-    "sha256": "97c8db23d08a9ad844521c18cfe449677f2c64740a17c19d0cb3f0c1fd6a86a4",
+    "sha256": "ea7601caccea0f45367078c62d8adf1aa21824a3d4b2f5b795ee98ce8d16a64f",
     "expanded": false
   },
   "MLD-1067": {
     "path": "terms/MLD-1067-saliency-map.html",
-    "sha256": "243f8da1a033cc891a3c15090134ba827a31d81a1638ab92acaa48f02530b984",
+    "sha256": "310447fc7f42fcbd0cd6bf82d095939beb79452dad5e98fc51c75d729ae3d0ad",
     "expanded": false
   },
   "MLD-1068": {
     "path": "terms/MLD-1068-sample.html",
-    "sha256": "c9a4001a3a624e04fc9e90e1214dfdd951d07bb4c71e35914c645309fb3cb3a7",
+    "sha256": "69caf4d2d9923dfaf60cfb88a4a3ca8fc9e56f8126d49dbc45ef6f2df8252779",
     "expanded": false
   },
   "MLD-1069": {
     "path": "terms/MLD-1069-sample-complexity.html",
-    "sha256": "00afb9ab3be5e06138ba29fffce16d99a4f256ddf25bb1952a61de45b97d9cbe",
+    "sha256": "1ac79982e35b4431e797e55b1be764f1d4aa7da45914735bc1f895e3d0bae14a",
     "expanded": false
   },
   "MLD-1070": {
     "path": "terms/MLD-1070-sample-size.html",
-    "sha256": "8538cf6b887574534830f2c6e9d72f16b3fa4ca305fcf8d85512332aa34143f4",
+    "sha256": "d2c4569bac94c61d4502c072cf126acaea371ba0d09b5302697219a55bbfbe4a",
     "expanded": false
   },
   "MLD-1071": {
