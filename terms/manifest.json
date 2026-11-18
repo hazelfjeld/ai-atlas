@@ -5176,17 +5176,17 @@
   },
   "MLD-1036": {
     "path": "terms/MLD-1036-reverse-mode-autodiff.html",
-    "sha256": "08bb720274b61d6eb5db17c28e08f0d11596808c396dbbff912cce5f40e251e8",
+    "sha256": "dc96f17a6875e208dfdf4973f5cad1ab41a31b84735791579172f1803e5eb51f",
     "expanded": false
   },
   "MLD-1037": {
     "path": "terms/MLD-1037-reward.html",
-    "sha256": "b011b84c6989bd3913f5f31104826e0560dcc9215286c7d19c6f4a3018547414",
+    "sha256": "2b2e2262cdc6795b815bb039dd54cef5097d7c903de4e3a4c9d91f5adc6fa2a3",
     "expanded": false
   },
   "MLD-1038": {
     "path": "terms/MLD-1038-reward-function.html",
-    "sha256": "2e3bb1553bb598fd05574b75fe4e762b67bedd431d3cb2e20ad2c9986dbf32f4",
+    "sha256": "04be2ca881d91932d1b67680c4e2de55f4f11343ec89fa5e27b135107473d810",
     "expanded": false
   },
   "MLD-1039": {
@@ -5206,22 +5206,22 @@
   },
   "MLD-1042": {
     "path": "terms/MLD-1042-reward-shaping.html",
-    "sha256": "076ea1f9826eb951ef5bca99412273e845df8ccec2cd18381992eb73a116e9f7",
+    "sha256": "56ddd394a3d4178e7970f5207268dda046faedbac1198606c853aa23fbc64f5a",
     "expanded": false
   },
   "MLD-1043": {
     "path": "terms/MLD-1043-reward-tampering.html",
-    "sha256": "1900d6ea967e97084cd9843e16356be88106b4fbbfa0e4c30c07ec86d2995bda",
+    "sha256": "15f3af70c2b95762406c29cb59847f8a6cfdc74b40c03f2b8d9256c8bcd8fa41",
     "expanded": false
   },
   "MLD-1044": {
     "path": "terms/MLD-1044-ridge-regression.html",
-    "sha256": "8683fe29b47f16f1deec61020b3774d585ffc6183c3f8eea4928c00554b8592e",
+    "sha256": "aad989fed95a324eeddfa5eb3aea9b422c1aad9be5e2cd25d6d50d47fb4edc96",
     "expanded": false
   },
   "MLD-1045": {
     "path": "terms/MLD-1045-rlaif.html",
-    "sha256": "f53c587b5e00588ca24fec578eb8099c7f155981f05812dc9c2edf57bf95253e",
+    "sha256": "d0e01b23e7debca9cff5fb01b66fa5b12506df282ab9509d572dbdb4e6baefce",
     "expanded": false
   },
   "MLD-1046": {
