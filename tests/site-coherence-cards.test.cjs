@@ -1246,7 +1246,9 @@ test('MLD-0885–0894 use the deterministic shared first-paint rail', () => {
       id + ' must retain canonical primary routes and labels');
     assert.ok(html.includes('Coverage & collection status'), id + ' needs live sources link');
     assert.ok(html.indexOf('<nav class="site-chrome term-nav"') < html.indexOf('<main class="term-shell">'));
-    assert.equal((html.match(/aria-current="page">Concept dictionary/g) || []).length, 1);
+    const desktopNav = html.split('<nav class="site-chrome term-nav"')[1]?.split('</nav>')[0];
+    assert.equal((desktopNav.match(/aria-current="page">Concept dictionary/g) || []).length, 1,
+      id + ' must have one desktop active section');
   }
   const following = fs.readFileSync(path.join(__dirname, '..', manifest['MLD-0895'].path), 'utf8');
   assert.equal((following.match(/sidebar-bottom site-chrome__bottom/g) || []).length, 0,
