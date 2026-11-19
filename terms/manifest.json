@@ -6346,52 +6346,52 @@
   },
   "MLD-1270": {
     "path": "terms/MLD-1270-trend.html",
-    "sha256": "45105dc12db5e9f06209a847354850bc555f0b02ea9782382eb66b8d467c9ffb",
+    "sha256": "214d262f49cabbdd5f278a66442b7baf056116d13a73e8ddb4111cc4bb45b8d0",
     "expanded": false
   },
   "MLD-1271": {
     "path": "terms/MLD-1271-triplet-loss.html",
-    "sha256": "d1bff8c51c0463ab116f7cfdea00b1609333177e05c0e98318dc768c5c960ed0",
+    "sha256": "f550a57a8ef0ce8964f312cecd331a67c974fdae334945568286d18a04e3b975",
     "expanded": false
   },
   "MLD-1272": {
     "path": "terms/MLD-1272-trl.html",
-    "sha256": "d2c566e107cf333fa9232cc9b1ca322ba0857a7d377cccb707c06d5b024eaed5",
+    "sha256": "0c2c737a909dafeac1e285d2b9867e47959ac4cbe42e22f43989fc02beb49961",
     "expanded": false
   },
   "MLD-1273": {
     "path": "terms/MLD-1273-true-negative.html",
-    "sha256": "87edbc9447b229450ad6e678a70d81fb97db88066fed8d52a03c6a5d0ecc93cd",
+    "sha256": "f91356c781409ca87ca660cd62f32f59acfe89022ca82956c8dee2c67ea0b08e",
     "expanded": false
   },
   "MLD-1274": {
     "path": "terms/MLD-1274-true-positive.html",
-    "sha256": "21c1fb4e8bf8b442dfcd614642c8ba1a214fbc630ed560f6bef7e303b5a242f2",
+    "sha256": "cbf39db9843918a24d6b07c91f65a08a2a8c18ec8f8050a34269904d9300dbea",
     "expanded": false
   },
   "MLD-1275": {
     "path": "terms/MLD-1275-truncated-backpropagation-through-time.html",
-    "sha256": "dcfb8dce88f583306a4b041ebf3677a0c74bb4acea5f1733cd667cd9e29d9f2b",
+    "sha256": "5973f81f51dbcf10497443e679c9a3332738bfeef598994bb7c6a953aeeaf8af",
     "expanded": false
   },
   "MLD-1276": {
     "path": "terms/MLD-1276-truncation.html",
-    "sha256": "f44ac3d8b8b02f0dae55a55110a73d8d8a7165cf9263435a1db8c76b671ff537",
+    "sha256": "3e08249890bc280409b231cfb0caef842ca472dba6dac3356ee58090c75b63bb",
     "expanded": false
   },
   "MLD-1277": {
     "path": "terms/MLD-1277-truthfulness.html",
-    "sha256": "6429191077da496b722fc79ea8b336716e5344120cbd2df33eb5509d90a0eca4",
+    "sha256": "8123d4b2cd59bd7a6e0fcd9b6968242e30cd2aaeffeb8c4439ba0ecc065584af",
     "expanded": false
   },
   "MLD-1278": {
     "path": "terms/MLD-1278-type-i-error.html",
-    "sha256": "208336cf3d661da4d49e227eeb7732cf05a12ce2cadcf2ae3ee98ae077aaa698",
+    "sha256": "4bc55d951cb39f10cb413705943dff2a8d49736107e9fd74571a0bcaaa5be2a8",
     "expanded": false
   },
   "MLD-1279": {
     "path": "terms/MLD-1279-type-ii-error.html",
-    "sha256": "8d4f4ef582da6037d4a16fe2a00b6bfb5da15a02d6a354a27ca23f77f1f12f59",
+    "sha256": "8b8e5b5317c33ec286eaec406a47da5265beaa4cd32fbd6c7ea592f8f6e306cc",
     "expanded": false
   },
   "MLD-1280": {
