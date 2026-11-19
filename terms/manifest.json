@@ -5946,52 +5946,52 @@
   },
   "MLD-1190": {
     "path": "terms/MLD-1190-supervised-learning.html",
-    "sha256": "c8ff5fbd2220e1408a31e3bc2bc71ae28fc7fd2b8236cdfc4927d02b10221137",
+    "sha256": "07c21dc05ad59be094f8f8e450d2bdcedcfbf6d1ddc2848575a67ce7af1764a3",
     "expanded": false
   },
   "MLD-1191": {
     "path": "terms/MLD-1191-support-vector.html",
-    "sha256": "652c0c686aa1e6f5c9d2ae2c1dc5bbbafadc8f5c66ed52fec9afd73abbe370c7",
+    "sha256": "4cc3205c780ff5dc2033b7f3c0ec8d32fa0a167185983fd5f11bf7f86e4dc39c",
     "expanded": false
   },
   "MLD-1192": {
     "path": "terms/MLD-1192-support-vector-machine.html",
-    "sha256": "3f03fb5753098cb6ad7ecf4dad9fd6cb272cc4a6acf61522c8c639503c72d2f2",
+    "sha256": "3383c927df8f8ce2d2421125c8a81e00332ddf9f4a1ea2b914d8c8b1af88d41a",
     "expanded": false
   },
   "MLD-1193": {
     "path": "terms/MLD-1193-support-vector-regression.html",
-    "sha256": "6ced87c35f522554c92f2a1479b01915e66a04b888e84aea0cc30eb9f47f8417",
+    "sha256": "1b11d3b8ff1d42bbbb3385bf11c25feb152875f83cb453c31e95f45b84a17fa3",
     "expanded": false
   },
   "MLD-1194": {
     "path": "terms/MLD-1194-surrogate-model.html",
-    "sha256": "89c4cbaf17ebfb8fd7fdcb62567a0d6affe53291d9d39eb69ac76857a6ba4df4",
+    "sha256": "de5f50a95abb1473cc384e928d3048a09bf4abb315b12329af0b7c7ad4b8ccfb",
     "expanded": false
   },
   "MLD-1195": {
     "path": "terms/MLD-1195-survivorship-bias.html",
-    "sha256": "3904eb948ae70e56dfe1fa3eb3dbd24da6ffc4e33c5e9abb13702eb8e797fa80",
+    "sha256": "933eaaa9665b2ae1d808fc6b0f439d2f2bb6a1e87cd97038abfbfcf726ef0f13",
     "expanded": false
   },
   "MLD-1196": {
     "path": "terms/MLD-1196-swiglu.html",
-    "sha256": "a714066d482c1581258f02d29ef52cbdb003f9ed35b1bd3dca9fb2b7f9f39eab",
+    "sha256": "07f7d938b9340e8b272d4fe758ff17cb96eaed7b83b16f665e884813259aeedd",
     "expanded": false
   },
   "MLD-1197": {
     "path": "terms/MLD-1197-sycophancy.html",
-    "sha256": "416ff485d533b219da24503bdc882659d20dab21f265824c0e617cd51ef1b255",
+    "sha256": "4df04980bc954ab34465f5e81bef825428bfbe45573cc4b38e482ef0c2cf71f2",
     "expanded": false
   },
   "MLD-1198": {
     "path": "terms/MLD-1198-symmetric-mape.html",
-    "sha256": "a6f73969e1b52eadc2af5ed605397f88bb06d93c6d653d370e2b1d5459303243",
+    "sha256": "ee7e1f90bb925c312273df6e12afaf16cdb5a753f7af8794713383b202b0aac0",
     "expanded": false
   },
   "MLD-1199": {
     "path": "terms/MLD-1199-symmetric-quantization.html",
-    "sha256": "bea75046faf5f12ddd862475c5fd86e3b5888048ab9e53bcfba766cc271243dd",
+    "sha256": "6e84f7a464b46690932a7abec09f5b698db1ab7825756ed1b73a64e63ea6f578",
     "expanded": false
   },
   "MLD-1200": {

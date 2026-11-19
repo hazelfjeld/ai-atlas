@@ -42,7 +42,7 @@ def shell(title, body, path, description, structured=None, *, native_concept_art
     # Roll out the first-paint rail across an integrity-checked cohort.
     # Unmigrated references retain their original HTML and manifest hashes.
     first_paint_reference = (path.startswith('terms/MLD-') and
-                             int(path[10:14]) <= 1189)
+                             int(path[10:14]) <= 1199)
     directory_nav = render_directory_nav('../', (None if path == 'terms/index.html' else 'Concept dictionary'), mobile_brand=True, native_secondary=True, mobile_secondary=True, secondary_current=('encyclopedia' if path == 'terms/index.html' else None), page_label=('Concept encyclopedia' if path == 'terms/index.html' else title), topbar_title=('Concept encyclopedia' if path == 'terms/index.html' else title), rail_bottom=(path == 'terms/index.html' or expanded_concept or first_paint_reference))
     if expanded_concept or first_paint_reference:
         assert directory_nav.count('class="sidebar-bottom site-chrome__bottom"') == 1, path
