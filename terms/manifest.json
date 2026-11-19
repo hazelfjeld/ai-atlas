@@ -5996,52 +5996,52 @@
   },
   "MLD-1200": {
     "path": "terms/MLD-1200-synthetic-data.html",
-    "sha256": "93458ac743627be983b2a5d2ef64f4d07a7fe91b08f811fe8e8ff2c8c747575f",
+    "sha256": "25f40bb400afc00b4dc449069bb7999a2654fad9935043bc57a100a3c702cb3d",
     "expanded": false
   },
   "MLD-1201": {
     "path": "terms/MLD-1201-system-prompt.html",
-    "sha256": "de370607beb59748b40f3d56190b0e2e337ceac16834ae4cff1ba9a4f93b83ed",
+    "sha256": "9f9c3913135b356753aab75997dda3f752c2bce642cc62911bff628e66ed573c",
     "expanded": false
   },
   "MLD-1202": {
     "path": "terms/MLD-1202-t-sne.html",
-    "sha256": "f019ff48f6c9abda13570ae453af6b3d928ce97c393faa91fca386424da40dee",
+    "sha256": "5db53df3b326df104c09017738ce1de0fd453057d8619908cad1c943833ad555",
     "expanded": false
   },
   "MLD-1203": {
     "path": "terms/MLD-1203-t5.html",
-    "sha256": "4fa5536de88d6ac2385acbe859e94efe1df3e0623e11e9e65af37f6bdf1006fc",
+    "sha256": "de2407a1900520da5d72c41831fec11330c7fb8990b00a93ec0b7825b52c3252",
     "expanded": false
   },
   "MLD-1204": {
     "path": "terms/MLD-1204-tanh.html",
-    "sha256": "81dbc0b563156517afeb3721a2f0c390a08d880a3c4fca14a469780b10d6eb29",
+    "sha256": "4411f020fabf91fc68dd1b648efd12228ef3864eafbf06c1edd765a5b06e2d05",
     "expanded": false
   },
   "MLD-1205": {
     "path": "terms/MLD-1205-target-encoding.html",
-    "sha256": "33c264e39dcaa1e8bee923e00fa2deca30af12c0e6279f18965533c5d6e96068",
+    "sha256": "7a5c8754a3ae31458fd200c371ea18c1543c856f1ec4ecf37df3e08c1b33fe41",
     "expanded": false
   },
   "MLD-1206": {
     "path": "terms/MLD-1206-target-leakage.html",
-    "sha256": "4d29e6027a50cfefd48f8839a1fe7f60ab39639426956bd03a818ca2912efec8",
+    "sha256": "ea5da3b4a4c95a409321a1b14b1f98aa7840e1418910fcb61ef7dfd580cb99a6",
     "expanded": false
   },
   "MLD-1207": {
     "path": "terms/MLD-1207-target-model.html",
-    "sha256": "f8e1731b910bedc5320300c64ca359614742ebf9f803237e5874bb89ba69943f",
+    "sha256": "ba2f142fe21d6d1382afbfc086d609a1c026ff772d484ac917c8024ab89a68a7",
     "expanded": false
   },
   "MLD-1208": {
     "path": "terms/MLD-1208-target-network.html",
-    "sha256": "7ccb5e9481fe535f139a80601bca24cf0729a086c59a036645d02f9e86e72a8c",
+    "sha256": "b56df0ea53703cbf1cfe5c2d855d75d4cb8c052076c8b0e47c76771ecf20726e",
     "expanded": false
   },
   "MLD-1209": {
     "path": "terms/MLD-1209-task-arithmetic.html",
-    "sha256": "36e936f2981aee4bd529a8745f96ac228b9a0283ac2ac18919cfb9c150995265",
+    "sha256": "995b81450fb2137828720c818a7c0c313dc443ea333421712f60021029fcc7d4",
     "expanded": false
   },
   "MLD-1210": {
