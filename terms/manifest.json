@@ -6396,52 +6396,52 @@
   },
   "MLD-1280": {
     "path": "terms/MLD-1280-typical-sampling.html",
-    "sha256": "05a3ef5f80dc533c98f1887d0fe513fd6c4d5f90a2028d22e540068e20d2bf7b",
+    "sha256": "c221541e3dbe05be574e981fbdd72fe43c814a392affb1e0568846e357e96bee",
     "expanded": false
   },
   "MLD-1281": {
     "path": "terms/MLD-1281-u-net.html",
-    "sha256": "a2e5e162a0e30c8df217f0912a06a535caf4e215512f2283745ce2978ad85e49",
+    "sha256": "7a4fc3ba02e0a6231ba5bb497ff44f31893fa864a3dec19073ff4fb4d37a0f3b",
     "expanded": false
   },
   "MLD-1282": {
     "path": "terms/MLD-1282-umap.html",
-    "sha256": "969ae56826359b3408a6c4070a2db9be105aa4624bb5cae7f038b95dda8b30ca",
+    "sha256": "055ddcbb4f510c97f4c894dd5688bd82ffbbead12587c2e72dde565bc07447bf",
     "expanded": false
   },
   "MLD-1283": {
     "path": "terms/MLD-1283-uncertainty-estimation.html",
-    "sha256": "8dc7cdea7d5569e6bf363e4d34b2ab6f51e2524bf9c79d89d4f9fc13c2ea3c1e",
+    "sha256": "b31525a376bdb047f4a37845734590f8e876edf99b19635fad52b7bf2b7ea8f8",
     "expanded": false
   },
   "MLD-1284": {
     "path": "terms/MLD-1284-uncertainty-sampling.html",
-    "sha256": "64102f4688d6b59337eebe866de199fd8273038220c00159212041f0187e73a0",
+    "sha256": "93ea6a850354b4a8ed581e371bc7916cae65c91da3dc5aeb4b1929ee5b4f57e9",
     "expanded": false
   },
   "MLD-1285": {
     "path": "terms/MLD-1285-underfitting.html",
-    "sha256": "918271d79d4176be7c5cc101ad1a083f5583ced5096151b23c38c60b3d92070d",
+    "sha256": "ea17b9929055123028c621040eeecfa012568f6b66a8b8557b27a2b898ca972a",
     "expanded": false
   },
   "MLD-1286": {
     "path": "terms/MLD-1286-undersampling.html",
-    "sha256": "3ac2ae6703f08ea629b59f52b39729bd36d1ff9b8ac7ff52c01dc0b65fbab560",
+    "sha256": "57a27fb90f046bb8b32449352b95e6c6cd3587fbb40867a1eea68609b83f9934",
     "expanded": false
   },
   "MLD-1287": {
     "path": "terms/MLD-1287-unigram-tokenizer.html",
-    "sha256": "5bdd919465f7ce693aa1239d40d8fa7584a951484035056c8b4f890d54db277a",
+    "sha256": "d589a2d1dfda330d53c1cf3ca8d911adb9d18d5e383dca4ff03369e2b27e3459",
     "expanded": false
   },
   "MLD-1288": {
     "path": "terms/MLD-1288-unknown-token.html",
-    "sha256": "bd3883d349b824e8819b1da19d7e1fcf183e3c9da62be60fd693a4b2473dbe64",
+    "sha256": "6322eb25c0f7c28290e7c402fe708298e6651c7af9123d88a01bd18128162bc1",
     "expanded": false
   },
   "MLD-1289": {
     "path": "terms/MLD-1289-unstructured-pruning.html",
-    "sha256": "3b8bbda7623b142605f0d93da93c83380e2a840eab496eb5bea42bbd0d4b3f4a",
+    "sha256": "bd933be2d830f44a4de030cba1ed165a94a8cf612caaafcd6df834b1fab0f5af",
     "expanded": false
   },
   "MLD-1290": {
