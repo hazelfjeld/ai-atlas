@@ -5896,22 +5896,22 @@
   },
   "MLD-1180": {
     "path": "terms/MLD-1180-structured-pruning.html",
-    "sha256": "68862de32477fdc20c1a41d3c22731fe9357505ae7cf627888f79b9f2e1d8cde",
+    "sha256": "e859247e85c97226b69cf2b75e3d80b950ba7d65267c284e34f0fa1f61c78444",
     "expanded": false
   },
   "MLD-1181": {
     "path": "terms/MLD-1181-structured-sparsity.html",
-    "sha256": "a57842cc928ebb43721922dca70c091c9986569ac6022adbcfd6666db836a328",
+    "sha256": "f595241048db41e14b37945e28c081e812cf988f67ffffa0bd1340721deacd3f",
     "expanded": false
   },
   "MLD-1182": {
     "path": "terms/MLD-1182-student-model.html",
-    "sha256": "c46564f1618559d5937c07ba5161d685110829d0a21ad42c105bf31b2065e0e5",
+    "sha256": "c8d1d0aab75d80207ad7db7efea0264d4630cd82572810ed2f1de9f3be467be8",
     "expanded": false
   },
   "MLD-1183": {
     "path": "terms/MLD-1183-subagent.html",
-    "sha256": "6576bacce8233a18013fc9c4d312e4e203e04bee3dd9150a538c56777ceb8668",
+    "sha256": "94cc3dccc24b25eaa78c86d11fc98d3994d0a0dfe2faa7dd65970554ea1ad499",
     "expanded": false
   },
   "MLD-1184": {
@@ -5921,27 +5921,27 @@
   },
   "MLD-1185": {
     "path": "terms/MLD-1185-subword-regularization.html",
-    "sha256": "fae9c10e1b4d437cdfe3824498d9fe9f51c1c8c5d6df5b544688bd6f23f6f902",
+    "sha256": "1c0a0f4186b5aac52bdcd3d2d62743a9897e6db0f50b8aea5aedcd72d27d5dea",
     "expanded": false
   },
   "MLD-1186": {
     "path": "terms/MLD-1186-subword-token.html",
-    "sha256": "149c99f0b225553adde41cd7995efa25ace6a60942aed1bbfb5b9455ab24b1da",
+    "sha256": "bf3b1178b7c5e75f4f0bfa6c0c29c20b70baa3dc8cfe16f00c99925cc4499e83",
     "expanded": false
   },
   "MLD-1187": {
     "path": "terms/MLD-1187-successive-halving.html",
-    "sha256": "bdca18e0d6e74373544e7f84cb28d776c12e92322308918996680f9b57c240ab",
+    "sha256": "6a4a18d9ce33488f7a93f3394f7fc8cab71bb3b1abba318152b20c453533a6ac",
     "expanded": false
   },
   "MLD-1188": {
     "path": "terms/MLD-1188-superposition.html",
-    "sha256": "27ecc251ebd2931679aa193a25c90ef745c3f124aa0ce71563bc86b4d5e05484",
+    "sha256": "2b1b4ca8f15dd579b48711cc9692f9555b23444f2646ec153cdd8832feae2c70",
     "expanded": false
   },
   "MLD-1189": {
     "path": "terms/MLD-1189-supervised-fine-tuning.html",
-    "sha256": "45bf61dec46727bd21c2d1a06505a61a255140da361e6741370c27940b7fc3b7",
+    "sha256": "1b139e201bc00721eb4282331eb0d9d105e4276899388c03ce0004aea05d4061",
     "expanded": false
   },
   "MLD-1190": {
