@@ -1890,6 +1890,8 @@ test('November 18 reviewed queue preserves immutable partial coverage, deferred 
  assert.equal(edition.coverage.status,'partial');
  assert.equal(edition.coverage.sources_failed.length,2);
  assertNoScriptArchiveDiscovery(idx,ref.path);
- assert.equal(idx.status,'edition_revision_1_'+(receipt.production_verified_at?'production_verified':'pending_production_verification'));
+ const latest=idx.editions.at(-1), latestReceipt=ledger.receipts.at(-1);
+ assert.equal(latestReceipt.publication_edition,latest.date+'-v'+latest.revision,'Newest receipt must describe the newest immutable edition');
+ assert.equal(idx.status,'edition_revision_'+latest.revision+'_'+(latestReceipt.production_verified_at?'production_verified':'pending_production_verification'),'Current archive status is based on the newest batch, not this historic November 18 receipt');
  assert.equal(idx.last_successful_publish_at,verifiedPublicationClock(),'Pending batch cannot advance previously verified publication time');
 });
