@@ -5856,37 +5856,37 @@
   },
   "MLD-1172": {
     "path": "terms/MLD-1172-stop-sequence.html",
-    "sha256": "8a9372b9566749eabc1815240f3ad01f2c187bddec67238b68ba580ae2f8affa",
+    "sha256": "b10640a0c627f9006252f2146aa541bb110e0e3c16510a2bd4b7c29259a153e1",
     "expanded": false
   },
   "MLD-1173": {
     "path": "terms/MLD-1173-stop-gradient.html",
-    "sha256": "1fcb6b945064d4288ca77970c42939d43026f58abc5389622e81e2b35b3e3d21",
+    "sha256": "19c42e73fe3b0a3b6c92e611fa39cee1988bd91abdb22610b07603f5af5f4c4f",
     "expanded": false
   },
   "MLD-1174": {
     "path": "terms/MLD-1174-straight-through-estimator.html",
-    "sha256": "102b00473fee7aa0b88084da51b0e379be59fed23a04286607e6690a07ba84f8",
+    "sha256": "c9b9b8099e8d32ea638c9a4a2f72c337a69a021615e7f869864b6c792ddfc8e8",
     "expanded": false
   },
   "MLD-1175": {
     "path": "terms/MLD-1175-stratified-k-fold.html",
-    "sha256": "f0c777dce3578cb17f27cfb1182a4c5bea103a50ed0bba32b99998042b177812",
+    "sha256": "65d95354c63f09ed49ac249a004a7e5e0386e98099b638872ec3cd066fe2d4e5",
     "expanded": false
   },
   "MLD-1176": {
     "path": "terms/MLD-1176-stratified-split.html",
-    "sha256": "69cf949922826014efde6812d2f8122659c33d5f3ef0f9d6844b2fb7fcf86521",
+    "sha256": "5ea1da4f2880e9d45f96c75531ce2b8eaf51527e5f6c52366c0cf149953ca2c8",
     "expanded": false
   },
   "MLD-1177": {
     "path": "terms/MLD-1177-stride.html",
-    "sha256": "50dc65539895512af9ba921391ed2fff92a3988041135c228453ddbb79b28b0b",
+    "sha256": "0f76a8bb6440b99cab06b1977b9fc0aab9eb84f5cad21b20c05c58a85b61ad64",
     "expanded": false
   },
   "MLD-1178": {
     "path": "terms/MLD-1178-structural-risk-minimization.html",
-    "sha256": "2f14f89fed65e267d7614e5e1296d28583f7d2a90f6ec074809da30ba1b1a3b8",
+    "sha256": "89a9197bba92f31a4bc1c5df985dc39aa7e0f3fc7ec773ff3827ca95bf4d8534",
     "expanded": false
   },
   "MLD-1179": {
