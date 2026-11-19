@@ -34,6 +34,6 @@ test('November 19 source-reviewed queue becomes exactly one immutable partially 
  assert.equal(receipt.githack_workflow_run_id,44600094160);
  assert.ok(receipt.publication_history.some(h=>h.status==='cloudflare_http_browser_and_githack_verified'&&h.verified_at===receipt.production_verified_at));
  assert.equal(idx.last_successful_publish_at,receipt.production_verified_at,'Verified edition must advance the archive timestamp');
- assert.equal(idx.status,'edition_revision_1_cloudflare_http_browser_and_githack_verified');
+ assert.equal(idx.status,'edition_revision_1_production_verified');
  assert.equal(receipt.counts.catalog_deferred,7,'Public verification must not promote deferred proposals');
 });
