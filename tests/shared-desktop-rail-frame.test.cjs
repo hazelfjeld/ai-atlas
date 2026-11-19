@@ -188,11 +188,13 @@ test('all 57 authored concept guides share first-paint navigation with technolog
     assert.equal(createHash('sha256').update(html, 'utf8').digest('hex'), entry.sha256,
       entry.path + ' matches its original stable ID in the integrity manifest');
   }
-  const unmigrated = Object.entries(manifest).find(([id, entry]) => Number(id.slice(4)) > 1189 && !entry.expanded);
-  assert.ok(unmigrated, 'unmigrated reference routes after MLD-1189 remain outside the bounded cohort');
+  const unmigrated = Object.entries(manifest).find(([id, entry]) => Number(id.slice(4)) > 1199 && !entry.expanded);
+  assert.ok(unmigrated, 'unmigrated reference routes after MLD-1199 remain outside the bounded cohort');
   const basic = read(unmigrated[1].path);
   assert.doesNotMatch(basic, /class="sidebar-bottom site-chrome__bottom"/,
     'unmigrated reference pages retain their original HTML and integrity hashes');
+  assert.equal(createHash('sha256').update(basic, 'utf8').digest('hex'), unmigrated[1].sha256,
+    'unmigrated reference retains its original exact SHA-256');
   assert.match(read('scripts/build_term_pages.py'),
     /rail_bottom=\(path == 'terms\/index\.html' or expanded_concept or first_paint_reference\)/,
     'one shared generator controls the entire authored-guide family');
