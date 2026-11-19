@@ -6596,17 +6596,17 @@
   },
   "MLD-1320": {
     "path": "terms/MLD-1320-wasserstein-distance.html",
-    "sha256": "91e8c2f2cf38088c125c5f5ad759c758370b82dbdc25ae78e8f80b99a5120eb0",
+    "sha256": "d7400be1c6e948d54d0162c94dee13544c9933360fbe15041116899bb819bb39",
     "expanded": false
   },
   "MLD-1321": {
     "path": "terms/MLD-1321-wasserstein-gan.html",
-    "sha256": "481a9e2afbccc5059e22e0084fd3e5e59cb66953efcf3575b97ae1927882db55",
+    "sha256": "5c3dd8c015ed951faa7fbb389eb936d05b2dcb2e0620d0366406fe26256e500e",
     "expanded": false
   },
   "MLD-1322": {
     "path": "terms/MLD-1322-weak-supervision.html",
-    "sha256": "eb7b10082ed5087726c538b0fbc54783a345526a70ed0bf1ff090458766dbbd5",
+    "sha256": "a18b43879e5bb571919a48fec60598ac2792b0d89020d850693720769d1c7944",
     "expanded": false
   },
   "MLD-1323": {
@@ -6616,32 +6616,32 @@
   },
   "MLD-1324": {
     "path": "terms/MLD-1324-weight.html",
-    "sha256": "0ea029b161e7269be298512def12b0fd2b1b56d42c02b1cfa784e3aaafb23e43",
+    "sha256": "5841d7b50ac0015dd771c9773beba99cefb48ca61a9ffd9512ad26e3427f4be4",
     "expanded": false
   },
   "MLD-1325": {
     "path": "terms/MLD-1325-weight-decay.html",
-    "sha256": "e7f02851d7976d1eb58367a9316e449d3d062ba39385b15e226fe25b0b6630fe",
+    "sha256": "ce75ee29c95865b6cd205a9998ec0dae3f4bad92866b1727346fea7cdf5a60c4",
     "expanded": false
   },
   "MLD-1326": {
     "path": "terms/MLD-1326-weight-initialization.html",
-    "sha256": "ffbb6b0dba20d1d09d44ce715243104d1b29fdff490d14a42dcb3a940e5c72c4",
+    "sha256": "e24f7a474e586cd7b5ed4f172310575ee7e9fba0a611e568dee3e0316329afd5",
     "expanded": false
   },
   "MLD-1327": {
     "path": "terms/MLD-1327-weight-tying.html",
-    "sha256": "88bfb2994b9621cdd1042dbd3d67c07ffcfd5a287517856affa04e36d81ea768",
+    "sha256": "4592bf69d6dec46e4544687d165489ef34ea0e26be1a57b8fdabb79480edbdd7",
     "expanded": false
   },
   "MLD-1328": {
     "path": "terms/MLD-1328-weight-only-quantization.html",
-    "sha256": "c2f3e99668010aa1c74d8155cdee44c27e63ea9f8ebb7bfa2d65fca2a3066c3f",
+    "sha256": "35027c55f8778e6555a5db592045776fcd73103c02cf1d2518b65498cdd05271",
     "expanded": false
   },
   "MLD-1329": {
     "path": "terms/MLD-1329-weighted-averaging.html",
-    "sha256": "b3a4795f739c3c41f8ba9090e420031774339b604ec3145589446910f7c5a954",
+    "sha256": "6746f535c4dd1da1880121ac09088a1373995eee456b13352ada0c864f3aa40b",
     "expanded": false
   },
   "MLD-1330": {
