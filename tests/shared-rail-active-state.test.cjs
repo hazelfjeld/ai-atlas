@@ -29,6 +29,7 @@ test('the shared current-section contract survives across page families', () => 
     'terms/MLD-1289-unstructured-pruning.html',
     'terms/MLD-1299-variational-autoencoder.html',
     'terms/MLD-1309-vision-transformer.html',
+    'terms/MLD-1319-warmup.html',
     'technology/TECH-0216-pytorch.html'
   ];
   for (const route of routes) {

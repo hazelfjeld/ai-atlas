@@ -6546,52 +6546,52 @@
   },
   "MLD-1310": {
     "path": "terms/MLD-1310-vision-language-model.html",
-    "sha256": "86da8a803f071d220cf22a22fcfa0591dd2a9b2548f63af7a7daea9466fb4d5f",
+    "sha256": "f4f4421a47fb06b554bf499962722ae8434bc14cc80c15f6a2f438c14875020c",
     "expanded": false
   },
   "MLD-1311": {
     "path": "terms/MLD-1311-visual-question-answering.html",
-    "sha256": "244b56b35ccf462208404f015c7ba08261cd1153bfa23e315fe1b9c57fac5f14",
+    "sha256": "9a9ddb0a3b3e9eb56acb4a12e9774e3af9492b17a3eea1e0382deae5cfcca15d",
     "expanded": false
   },
   "MLD-1312": {
     "path": "terms/MLD-1312-vllm.html",
-    "sha256": "d777ccdbb3c9419bb5095edeb0a69b1fe7c04657d7e8f75f2df3cbdc46454b66",
+    "sha256": "ecdc1ebd3be85811dd9f2141a0c8397e85c5cb17b98be25729e59803ab803651",
     "expanded": false
   },
   "MLD-1313": {
     "path": "terms/MLD-1313-vocabulary.html",
-    "sha256": "178b9794e77b841c2a104abfa34a36dafe348ddcbc4542f39369139ae072c72f",
+    "sha256": "ea9e746fbd1c3d475a5260229f9c740f32ae093c0bec7c82f4b91f6c35e2bd7c",
     "expanded": false
   },
   "MLD-1314": {
     "path": "terms/MLD-1314-vocabulary-size.html",
-    "sha256": "bc2235b679fbc70c36d7258f60741d2acc08fb2794da05913a4bf6767d387bea",
+    "sha256": "bf5aac3aaa3f2eac5b7a9b22e9a75a88892846328da2f2564e0baeaaa4a1b761",
     "expanded": false
   },
   "MLD-1315": {
     "path": "terms/MLD-1315-vocoder.html",
-    "sha256": "bb2526404d063343a4ee83f6172e5922e5f0bbed1c47a097bf3b2865c9aa1643",
+    "sha256": "900ba39b1fe1c085e5e593b8825e1f296beff98424b8f2998b2d853855fb073d",
     "expanded": false
   },
   "MLD-1316": {
     "path": "terms/MLD-1316-voting-ensemble.html",
-    "sha256": "054c1f4504a5862cf0dece71520a0c152346d38d69fef45a13b0062667ff407d",
+    "sha256": "28a38fd2480cf6c35d372c2e851f5df6fae3ab59455c0861ceb4ef74c3998027",
     "expanded": false
   },
   "MLD-1317": {
     "path": "terms/MLD-1317-vram.html",
-    "sha256": "6b72b68a0f0c92ee580a0a4accb595ddc988c80371f0b19307c5b84cd56e4d91",
+    "sha256": "ac3bf68d5f7b2924e7f27ba05ed8627353b149b8b07cc1b0e7ce386cd6826f11",
     "expanded": false
   },
   "MLD-1318": {
     "path": "terms/MLD-1318-warm-restarts.html",
-    "sha256": "f20945a46af4d1b69a5fe7c60012636958598a065f2fcfd75ccd4c5c59988c03",
+    "sha256": "947c3bab2c6af7a749fef83884286ec72ec10071f1504dd892a22bc10206d194",
     "expanded": false
   },
   "MLD-1319": {
     "path": "terms/MLD-1319-warmup.html",
-    "sha256": "bd6d95ae737df3e2e47222a289b4aa714085779513ac332137ff82d854330102",
+    "sha256": "65ca03127caceedbb914dc920e55b16fc2ea8bb5d6c6ba97fdcbd7cba020c99a",
     "expanded": false
   },
   "MLD-1320": {
