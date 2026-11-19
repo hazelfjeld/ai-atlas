@@ -6196,52 +6196,52 @@
   },
   "MLD-1240": {
     "path": "terms/MLD-1240-token-id.html",
-    "sha256": "f03ec9b5fca0d37c58d57feae944dabb30c51009b8fd9bf9699b8ba2a17bf106",
+    "sha256": "733ed437fded1060dcbff2a113b41d5d3c97eb03f77b7b4390fd824df93c6cc4",
     "expanded": false
   },
   "MLD-1241": {
     "path": "terms/MLD-1241-token-to-parameter-ratio.html",
-    "sha256": "0ac688b69762314cb87c81c59916fcbea69e4d8e81712ef0b738c11357ea7234",
+    "sha256": "d127e4789b6e855ec22610e009c7fa09a8230b37336696e43006e8a5de239a4f",
     "expanded": false
   },
   "MLD-1242": {
     "path": "terms/MLD-1242-tokenization.html",
-    "sha256": "bedbac63d9a7d5eeccc6543f132f81150444af974884eb06944eabee7ef49b51",
+    "sha256": "5eb74b5155fab5bd7d0c8e73b32a368aea74f2192acbee3641da23c4e76c66ee",
     "expanded": false
   },
   "MLD-1243": {
     "path": "terms/MLD-1243-tokenizer.html",
-    "sha256": "5a68a235484109a810569d756a61843a44c73fa567f3591ade6e1ca0576f3f92",
+    "sha256": "f270e319817b2a6fa57143948ceb800de2d5dd7db5f60e7ebaeffec3f8a5809b",
     "expanded": false
   },
   "MLD-1244": {
     "path": "terms/MLD-1244-tool-result.html",
-    "sha256": "47631478b9336334f884406d6ca715b5a642fc056fe1b22e46c37dac9c3f5ed7",
+    "sha256": "a5351c6b717918c02a6ae0f46e6b2e6b9df55cd9e18e7c0b6bd6791e8a509529",
     "expanded": false
   },
   "MLD-1245": {
     "path": "terms/MLD-1245-tool-schema.html",
-    "sha256": "d7e46dd66d66f9b8214982244f77d059c4dcbab0a654d7a94530ef5246a2432a",
+    "sha256": "d6931bd494efbe6b54e8dd09fb73bc227cb60fa742a81a84412ab4edcf33e6e0",
     "expanded": false
   },
   "MLD-1246": {
     "path": "terms/MLD-1246-tool-use.html",
-    "sha256": "2d00643264b74f5f297fa388ec61d8b0cbf08a75cec69f772e206b8f30404a0e",
+    "sha256": "b752fd15685a2fe21ec25553a8f1c1b622e5b3bf6e07824297208e3e385be768",
     "expanded": false
   },
   "MLD-1247": {
     "path": "terms/MLD-1247-top-k-accuracy.html",
-    "sha256": "ad5bb7d3a325fdbe2cac5c05830974c691bfeb7933e4e66016a8490ecaf0b2df",
+    "sha256": "9bc64f4d32000aa9587ce98ef9c34a4451c0748c2a10f72525e2b9cee6de3fb7",
     "expanded": false
   },
   "MLD-1248": {
     "path": "terms/MLD-1248-top-k-routing.html",
-    "sha256": "23f5001664276e101984008a339837b5c3e3f0334622a10ad148a191dafd06b3",
+    "sha256": "78a05caf946f2607015af90a2cccf2a2e7b4c267adec0f7616f9f1ced10cb6f2",
     "expanded": false
   },
   "MLD-1249": {
     "path": "terms/MLD-1249-top-k-sampling.html",
-    "sha256": "8e43fc2afd6a788a59262c6ac69fd7bc72f1dfce573405360bd90f3d5dedecc6",
+    "sha256": "52b03844601441b93b90de8aa750cb08745a764f9405c5d9bc79360c70339fe2",
     "expanded": false
   },
   "MLD-1250": {
