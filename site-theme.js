@@ -487,6 +487,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const existing = document.getElementById?.('theme-toggle');
     const railBottom = buildSharedRailBottom(rail);
     const desktopAction = railBottom?.querySelector('.sidebar-actions');
+    // Games already owns a working theme button, but formerly floated it over
+    // the desktop search bar. Reparent that SAME control into Discover's
+    // canonical rail action slot before Games registers its click handler.
+    // A stable ID, existing listeners and the mobile drawer action survive.
+    // CSS hides its old header position on first paint to prevent a jump.
+    if (existing && desktopAction &&
+        document.querySelector('.games-header__inner > #theme-toggle') === existing) {
+      desktopAction.prepend(existing);
+      existing.classList.add('site-chrome__theme-toggle--rail');
+    }
     const containers = rail && !existing && desktopAction ? [desktopAction, menu] :
       existing ? [menu] : [];
     if (containers.length && !menu.querySelector('.site-chrome__theme-toggle')) {

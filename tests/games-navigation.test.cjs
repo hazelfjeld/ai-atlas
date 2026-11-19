@@ -1092,7 +1092,10 @@ test('shared desktop workspace bar reuses one real search link across page famil
   assert.match(css, /\.site-mobile-chrome\{[\s\S]*?display:flex;[\s\S]*?position:fixed;inset:0 0 auto 224px/);
   assert.ok(css.includes('.site-mobile-chrome[data-page-label]::before{content:attr(data-page-label)}'));
   assert.match(css, /\.site-mobile-chrome\{left:204px;padding-inline:26px\}/);
-  assert.match(css, /\.games-header__inner > \.icon-button\{[\s\S]*?position:fixed;top:17px/);
+  assert.ok(!css.includes('position:fixed;top:17px;right:40px;z-index:26'),
+    'Games no longer floats a separate appearance control over the shared desktop search');
+  assert.match(js, /desktopAction\.prepend\(existing\)/,
+    'Games reuses its original theme button in the canonical rail action slot');
   assert.match(js, /chrome\.dataset\.pageLabel = label/);
   assert.match(css, /\.site-mobile-chrome__nav\{display:none\}/,
     'Do not duplicate desktop section navigation');
@@ -1127,7 +1130,7 @@ test('existing shared standalone chrome exposes the Discover appearance action w
   const js = read('site-theme.js'), css = read('site-chrome.css');
   new vm.Script(js);
   assert.match(js, /const containers = rail && !existing && desktopAction \? \[desktopAction, menu\] :[\s\S]*?existing \? \[menu\] : \[\];/,
-    'Games and Discover both expose the shared mobile drawer action, even when Games has its own desktop button');
+    'Games and Discover both expose the shared mobile drawer action and retain one desktop button');
   assert.match(css, /\.games-header__inner > #theme-toggle\{display:none\}/,
     'The Games desktop theme action must not become a third mobile header button');
   assert.match(js, /if \(existing\) existing\.addEventListener\('click', \(\) => queueMicrotask\(syncThemeButtons\)\)/,

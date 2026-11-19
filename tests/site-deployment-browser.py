@@ -1041,6 +1041,12 @@ with sync_playwright() as p:
     check('Games inherits Discover dark preference and pressed state',
           theme_page.locator('#theme-toggle').get_attribute('aria-pressed') == 'true'
           and theme_page.evaluate("document.documentElement.dataset.theme === 'dark'"))
+    check('Games theme control occupies the shared desktop rail, not an overlapping topbar',
+          theme_page.locator('.site-chrome .sidebar-actions > #theme-toggle.site-chrome__theme-toggle--rail').count() == 1
+          and theme_page.locator('.site-chrome .sidebar-actions > #theme-toggle').is_visible()
+          and theme_page.locator('.games-header__inner > #theme-toggle').count() == 0
+          and theme_page.locator('.site-mobile-chrome__search-form').is_visible())
+    theme_page.screenshot(path=str(out / 'games-unified-desktop-rail-1280-dark.png'))
     theme_page.goto(base + 'index.html#/overview')
     theme_page.locator('#catalog-loading').wait_for(state='detached')
     check('Discover restores dark pressed state after Games navigation',

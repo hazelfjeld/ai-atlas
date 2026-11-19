@@ -74,8 +74,8 @@ html.atlas-enhanced .site-mobile-chrome__more>summary:hover,html.atlas-enhanced 
 @media(max-width:650px){
 .games-header__inner{padding:12px 16px}
 .games-header__inner > .site-mobile-chrome{flex:1;min-width:0}
-/* On mobile, Games uses the same drawer appearance action as the rest of
-   Atlas; its original native button remains available on desktop. */
+/* The original Games action is hidden until site-theme.js moves the same
+   control into the shared rail; on phones the native drawer owns appearance. */
 .games-header__inner > #theme-toggle{display:none}
 }
 @media print{.games-header{display:none}}
@@ -264,18 +264,11 @@ body > .site-mobile-chrome:not([data-page-label]):has(+ .site-chrome .site-chrom
 @media (min-width:651px) and (max-width:1150px){
 .site-mobile-chrome{left:204px;padding-inline:26px}
 }
-/* Games keeps its existing theme control within the same desktop bar,
-   rather than introducing a second horizontal header row. */
+/* Games uses the same fixed topbar/search and rail appearance slot as
+   Discover and every native page, not a competing fixed header button. */
 @media (min-width:651px){
 .games-header{height:0;border:0}
 .games-header__inner{height:0;padding:0!important}
-.games-header__inner > .icon-button{
-  position:fixed;top:17px;right:40px;z-index:26
-}
-.games-header .site-mobile-chrome{padding-right:102px}
-}
-@media (min-width:651px) and (max-width:1150px){
-.games-header__inner > .icon-button{right:26px}
 }
 @media print{.site-mobile-chrome{display:none!important}}
 
