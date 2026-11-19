@@ -5756,52 +5756,52 @@
   },
   "MLD-1152": {
     "path": "terms/MLD-1152-spectral-norm.html",
-    "sha256": "4a4fadc22e70cc8f8d370d8fd13e843009c1bdc5e22dec799cb84c9bd567c9dd",
+    "sha256": "e70e459e2fd470d0945ed1f66decc377016ca049ff2632da4cfddc177ede0b5c",
     "expanded": false
   },
   "MLD-1153": {
     "path": "terms/MLD-1153-spectral-normalization.html",
-    "sha256": "1984ff9e075e00d44ead2361c00b1d2bf36dfdc9b436aab4d2c8231e69070de3",
+    "sha256": "f00cdb145b03f0781db88f0e572ee55f1e2ad779c972abf5d192bde53cb24000",
     "expanded": false
   },
   "MLD-1154": {
     "path": "terms/MLD-1154-spectrogram.html",
-    "sha256": "422a67d349a077b924c72221a4094126f210900b14849073d40f6cde8f8b09fb",
+    "sha256": "055c77b6d5197e364f2bf1a279a4508d36d2fbf01ddae36d1b10e50f75689913",
     "expanded": false
   },
   "MLD-1155": {
     "path": "terms/MLD-1155-speculative-decoding.html",
-    "sha256": "04bdba4999f57d239545a926a734f5f828a2c120c1385217db5e2d8ccaaa8947",
+    "sha256": "76d3beb7d525733e1fded7e1388a95fe9fe5726307ac95cfb0e83f3a2ccfa3fa",
     "expanded": false
   },
   "MLD-1156": {
     "path": "terms/MLD-1156-split-criterion.html",
-    "sha256": "4566f4451d617e9c669dea24e081b2b887ef35544bc2bef913ba7f7197028bf2",
+    "sha256": "928f85b0539a2cf13dd6ec9952b9c1fac0a12be60e660bbc1ff0936f6828d1ef",
     "expanded": false
   },
   "MLD-1157": {
     "path": "terms/MLD-1157-spurious-correlation.html",
-    "sha256": "2bcbcaddada707a3774b9c8ccfbea2a46a3d609f37f10f0945a27db68ce2c124",
+    "sha256": "6c5c69318ddcb22d1bc4e3dfb4c316a83bbc086c0d49a59e7ea555ad3968f539",
     "expanded": false
   },
   "MLD-1158": {
     "path": "terms/MLD-1158-squared-hinge-loss.html",
-    "sha256": "e9a3df6c3a3dcc90eda09480f465844fb7f1f4bb8321db5919a5d9ca0d4e09e3",
+    "sha256": "48e6d98c87480dee9b92c7fbc7d551af4b6ac3dc477a1959645451c432d7c6aa",
     "expanded": false
   },
   "MLD-1159": {
     "path": "terms/MLD-1159-stacking.html",
-    "sha256": "021b9a2c407c43ae4a43ce8cee0507670ed95d2cb93936e385e517ff14c1d6cb",
+    "sha256": "383fcbac6cfc38fd28a0853cb5638945dce834ebf710dd125bd66089daa06fb7",
     "expanded": false
   },
   "MLD-1160": {
     "path": "terms/MLD-1160-standard-deviation.html",
-    "sha256": "56aa422d8b2558bfd006c67154154b9e74c61a09bbac450237b99b09d96d244f",
+    "sha256": "25fcc10e00d52c5471b7cc45a75e119751dcefc80621cd09e691db5f8b6ca0c0",
     "expanded": false
   },
   "MLD-1161": {
     "path": "terms/MLD-1161-standard-error.html",
-    "sha256": "7496f4aa0889604221db0b9b7c96ba06ea9d9fe4e7a52e7e82d73c0312713adb",
+    "sha256": "d5c2cc149b910e4e5e5130e500776ee0d81e8aac989bafabd9f2f5824adbc67f",
     "expanded": false
   },
   "MLD-1162": {
