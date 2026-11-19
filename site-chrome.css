@@ -1229,3 +1229,24 @@ main.term-shell > footer:not(.site-chrome__footer) a{color:var(--accent,#27664e)
   }
 }
 /* atlas-unified-more-disclosure:end */
+
+/* atlas-current-secondary-parent:begin */
+/* Keep the selected section visible on the shared More disclosure itself.
+   Its current child is the sole aria-current link. This works on native pages
+   without JavaScript and on Discover's live hash-routed secondary sections. */
+@media (min-width:651px){
+  :is(#navigation > details.nav-more,
+      nav.site-chrome > details.site-chrome__more):has(a[aria-current]) > summary{
+    color:#fff;
+    background:#ffffff13;
+    box-shadow:inset 3px 0 0 #edba87;
+  }
+}
+@media (max-width:650px){
+  .site-mobile-chrome__more:has(.site-mobile-chrome__more-links a[aria-current]) > summary{
+    color:var(--green,#28664f);
+    background:var(--soft,#eaf1ea);
+    box-shadow:inset 3px 0 0 var(--orange,#b77833);
+  }
+}
+/* atlas-current-secondary-parent:end */
