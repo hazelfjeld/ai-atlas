@@ -345,9 +345,17 @@
       "sha256": "049526af3b876c3e5b47d0d7c81006212daf858e437f7144e25349db0b3a29bb",
       "bytes": 25049,
       "published_at": "2026-11-18T15:27:25.705Z"
+    },
+    {
+      "date": "2026-11-19",
+      "revision": 1,
+      "path": "data/daily/editions/2026-11-19-v1.json",
+      "sha256": "bd4f5e59c69fc35ab719e9949f4a31c1dc1ae41eb9b8086682d0f7e4bfcf7d56",
+      "bytes": 24611,
+      "published_at": "2026-11-19T15:33:04.684Z"
     }
   ],
   "last_successful_publish_at": "2026-11-18T15:45:43Z",
-  "status": "edition_revision_1_production_verified",
-  "coverage_note": "2026-11-18 v1 — Bounded November 17–18 collection. Fifteen source-reviewed reports retain original event dates and distinguish company statements, official policy, Reuters reporting and an unreviewed research preprint. OpenAI background-mode changelog timing and EFF original publication date remain unresolved, so two news candidates are deferred. Five technologies and three terms await catalog and license/alias review; no catalog additions implied. Eighteen sources checked, two failures. Coverage remains partial."
+  "status": "edition_revision_1_pending_production_verification",
+  "coverage_note": "2026-11-19 v1 — 14 source-reviewed reports from November 16–19, 15 sources checked and one failed endpoint; 4 technology and 3 terminology proposals deferred for catalog/license/alias checks. Partial coverage; public HTTP/browser verification pending."
 }

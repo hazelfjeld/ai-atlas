@@ -1,0 +1,462 @@
+{
+  "schema": 1,
+  "edition_date": "2026-11-19",
+  "timezone": "America/Chicago",
+  "published_at": "2026-11-19T15:33:04.684Z",
+  "coverage": {
+    "start": "2026-11-18T12:39:21.859Z",
+    "end": "2026-11-19T14:58:14.545Z",
+    "status": "partial",
+    "note": "Bounded source-diverse November 18-19 sweep with two-hour overlap against latest partial batch, not a claim of complete coverage. Staging index still has no last successful collection cutoff; historical gap recovery remains in backlog. Same-day news explicitly dated November 19, previous-day announcements retain November 18, and the November 16 Google benchmark is catch-up. No successful cutoff advanced. Four technology and three terminology proposals remain pending alias/license/catalog dedup. One source endpoint inaccessible; coverage incomplete.",
+    "sources_checked": [
+      {
+        "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-neon/",
+        "status": "full_page_opened",
+        "checked_at": "2026-11-19T14:58:14.545Z",
+        "publisher": "Google",
+        "type": "model release"
+      },
+      {
+        "url": "https://github.blog/changelog/2026-11-18-gemini-4-neon-in-github-copilot/",
+        "status": "full_page_opened",
+        "checked_at": "2026-11-19T14:58:14.545Z",
+        "publisher": "GitHub",
+        "type": "model availability"
+      },
+      {
+        "url": "https://aws.amazon.com/blogs/database/announcing-distributed-kv-caching-for-self-hosted-llms-with-amazon-elasticache/",
+        "status": "full_page_opened",
+        "checked_at": "2026-11-19T14:58:14.545Z",
+        "publisher": "AWS",
+        "type": "product release"
+      },
+      {
+        "url": "https://aws.amazon.com/blogs/machine-learning/how-salesforce-is-advancing-global-scale-model-serving-with-cross-region-inference-routing-in-amazon-sagemaker-ai/",
+        "status": "full_page_opened",
+        "checked_at": "2026-11-19T14:58:14.545Z",
+        "publisher": "AWS / Salesforce",
+        "type": "deployment case study"
+      },
+      {
+        "url": "https://www.anthropic.com/news/anthropic-prices-initial-public-offering",
+        "status": "full_page_opened",
+        "checked_at": "2026-11-19T14:58:14.545Z",
+        "publisher": "Anthropic",
+        "type": "company announcement"
+      },
+      {
+        "url": "https://openai.com/index/managing-frontier-ai-risk/",
+        "status": "full_page_opened",
+        "checked_at": "2026-11-19T14:58:14.545Z",
+        "publisher": "OpenAI",
+        "type": "safety methodology"
+      },
+      {
+        "url": "https://help.openai.com/en/articles/10128477-chatgpt-enterprise-and-edu-release-notes",
+        "status": "full_page_opened",
+        "checked_at": "2026-11-19T14:58:14.545Z",
+        "publisher": "OpenAI",
+        "type": "official release notes"
+      },
+      {
+        "url": "https://github.blog/changelog/2026-11-18-customize-github-copilot-for-your-team/",
+        "status": "full_page_opened",
+        "checked_at": "2026-11-19T14:58:14.545Z",
+        "publisher": "GitHub",
+        "type": "product release"
+      },
+      {
+        "url": "https://github.blog/changelog/2026-11-18-connect-supabase-box-calendly-and-more-to-copilot/",
+        "status": "full_page_opened",
+        "checked_at": "2026-11-19T14:58:14.545Z",
+        "publisher": "GitHub",
+        "type": "connector release"
+      },
+      {
+        "url": "https://github.blog/changelog/2026-11-18-wait-for-pull-request-events-with-github-cli/",
+        "status": "full_page_opened",
+        "checked_at": "2026-11-19T14:58:14.545Z",
+        "publisher": "GitHub",
+        "type": "CLI release"
+      },
+      {
+        "url": "https://github.com/vllm-project/vllm/security/advisories/GHSA-xgh8-qwjh-q853",
+        "status": "full_page_opened",
+        "checked_at": "2026-11-19T14:58:14.545Z",
+        "publisher": "vLLM maintainers",
+        "type": "security advisory"
+      },
+      {
+        "url": "https://www.reuters.com/business/ovhcloud-launches-ai-cloud-products-hosted-europe-2026-11-19/",
+        "status": "full_page_opened",
+        "checked_at": "2026-11-19T14:58:14.545Z",
+        "publisher": "Reuters",
+        "type": "independent reporting"
+      },
+      {
+        "url": "https://www.reuters.com/world/china/tsmc-tightens-china-ai-chip-curbs-new-us-rules-close-manufacturing-loophole-2026-11-19/",
+        "status": "full_page_opened",
+        "checked_at": "2026-11-19T14:58:14.545Z",
+        "publisher": "Reuters",
+        "type": "sourced reporting"
+      },
+      {
+        "url": "https://www.reuters.com/business/finance/euro-zone-banks-data-centre-exposure-small-growing-ecb-says-2026-11-19/",
+        "status": "full_page_opened",
+        "checked_at": "2026-11-19T14:58:14.545Z",
+        "publisher": "Reuters",
+        "type": "independent reporting"
+      },
+      {
+        "url": "https://blog.google/innovation-and-ai/infrastructure-and-cloud/google-cloud/training-performance-benchmarks-tpus/",
+        "status": "full_page_opened",
+        "checked_at": "2026-11-19T14:58:14.545Z",
+        "publisher": "Google Cloud",
+        "type": "benchmark results"
+      }
+    ],
+    "sources_failed": [
+      {
+        "url": "https://export.arxiv.org/api/query?search_query=cat%3Acs.LG%26start%3D0%26max_results%3D2",
+        "status": "web_reader_inaccessible",
+        "checked_at": "2026-11-19T14:58:14.545Z",
+        "note": "Arxiv metadata endpoint could not be retrieved. This does not mean no papers were published."
+      }
+    ]
+  },
+  "tldr": [
+    "Google's Gemini 4 Neon release and new AWS inference-routing and distributed-KV-cache features expand choices for capable agents and lower-latency self-hosted serving, but reported speed and cost gains depend on workload and access.",
+    "Anthropic priced a major IPO, while European cloud growth and chip export restrictions reshape AI infrastructure; OpenAI and vLLM disclosures reinforce the need for evidence-based safety assessment and version-specific security review."
+  ],
+  "news": [
+    {
+      "id": "ai-news-gemini-4-neon-2026-11-18",
+      "title": "Google releases Gemini 4 Neon for faster complex agent tasks",
+      "category": "models",
+      "tags": [
+        "LLM",
+        "agents",
+        "coding",
+        "multimodal"
+      ],
+      "summary": "Google introduced Gemini 4 Neon with a one-million-token context window, multimodal inputs and access through its Gemini API and selected apps. Google lists API token rates and performance results.",
+      "why_it_matters": "Adds a new latency-versus-capability choice for coding, multimodal review and agent pipelines.",
+      "caveat": "Benchmark rankings are partly company-reported; independent evaluation settings, plan access, effective costs and rollout vary.",
+      "review_status": "publisher_checked_first_party_statement_attributed",
+      "release_status": "official_release_or_report",
+      "source_url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-neon/",
+      "publication_date": "2026-11-18",
+      "event_date": "2026-11-18",
+      "discovered_at": "2026-11-19T14:58:14.545Z",
+      "added_to_atlas_at": "2026-11-19T15:33:04.684Z",
+      "collection_classification": "previous_day",
+      "source_record_id": "ai-news:gemini-4-neon:2026-11-18"
+    },
+    {
+      "id": "ai-news-elasticache-distributed-kv-2026-11-18",
+      "title": "AWS adds managed distributed KV caching to self-hosted inference",
+      "category": "inference",
+      "tags": [
+        "LLM",
+        "SLM",
+        "inference",
+        "memory",
+        "cloud"
+      ],
+      "summary": "Amazon ElastiCache for Valkey introduced a managed key-value cache tier for LLM prefill states, integrated through LMCache with vLLM, SGLang and TensorRT-LLM.",
+      "why_it_matters": "Reusable prefill work can reduce time to first token when prompts or prefixes repeat across distributed GPU workers.",
+      "caveat": "AWS's up-to-40-percent inference-cost and up-to-80-percent TTFT improvements are workload- and cache-hit-rate-dependent vendor measurements; added network and cache costs matter.",
+      "review_status": "publisher_checked_first_party_statement_attributed",
+      "release_status": "official_release_or_report",
+      "source_url": "https://aws.amazon.com/blogs/database/announcing-distributed-kv-caching-for-self-hosted-llms-with-amazon-elasticache/",
+      "publication_date": "2026-11-18",
+      "event_date": "2026-11-18",
+      "discovered_at": "2026-11-19T14:58:14.545Z",
+      "added_to_atlas_at": "2026-11-19T15:33:04.684Z",
+      "collection_classification": "previous_day",
+      "source_record_id": "ai-news:elasticache-distributed-kv:2026-11-18"
+    },
+    {
+      "id": "ai-news-sagemaker-cross-region-router-2026-11-18",
+      "title": "SageMaker enables region-policy-aware overflow inference routing",
+      "category": "infrastructure",
+      "tags": [
+        "ML",
+        "LLM",
+        "inference",
+        "infrastructure",
+        "governance"
+      ],
+      "summary": "AWS announced general availability of cross-Region inference routing for real-time SageMaker endpoints and described Salesforce's multi-Region deployment.",
+      "why_it_matters": "Eligible requests can use spare model-serving capacity without rewriting the calling application, while residency-constrained requests remain local.",
+      "caveat": "Destination models and artifacts must be synchronized; the router does not create GPU capacity and regional, IAM and cost policies require verification.",
+      "review_status": "publisher_checked_first_party_statement_attributed",
+      "release_status": "official_release_or_report",
+      "source_url": "https://aws.amazon.com/blogs/machine-learning/how-salesforce-is-advancing-global-scale-model-serving-with-cross-region-inference-routing-in-amazon-sagemaker-ai/",
+      "publication_date": "2026-11-18",
+      "event_date": "2026-11-18",
+      "discovered_at": "2026-11-19T14:58:14.545Z",
+      "added_to_atlas_at": "2026-11-19T15:33:04.684Z",
+      "collection_classification": "previous_day",
+      "source_record_id": "ai-news:sagemaker-cross-region-router:2026-11-18"
+    },
+    {
+      "id": "ai-news-anthropic-ipo-pricing-2026-11-18",
+      "title": "Anthropic prices its IPO ahead of intended November 19 listing",
+      "category": "industry",
+      "tags": [
+        "AI",
+        "industry",
+        "finance"
+      ],
+      "summary": "Anthropic's November 18 statement priced 980 million Class A shares at $83 each and said Nasdaq trading under ANT was expected to begin November 19.",
+      "why_it_matters": "The prospective listing is a major AI-capital-market event with implications for financing and disclosures.",
+      "caveat": "The stated trading and closing dates were expectations at announcement, not proof that trading or closing had occurred.",
+      "review_status": "publisher_checked_first_party_statement_attributed",
+      "release_status": "official_release_or_report",
+      "source_url": "https://www.anthropic.com/news/anthropic-prices-initial-public-offering",
+      "publication_date": "2026-11-18",
+      "event_date": "2026-11-18",
+      "discovered_at": "2026-11-19T14:58:14.545Z",
+      "added_to_atlas_at": "2026-11-19T15:33:04.684Z",
+      "collection_classification": "previous_day",
+      "source_record_id": "ai-news:anthropic-ipo-pricing:2026-11-18"
+    },
+    {
+      "id": "ai-news-openai-frontier-lifecycle-2026-11-18",
+      "title": "OpenAI details staged controls across frontier-model lifecycle",
+      "category": "safety",
+      "tags": [
+        "AI",
+        "LLM",
+        "safety",
+        "security",
+        "evaluation"
+      ],
+      "summary": "OpenAI described sandboxing during research, alignment testing for internal use, safety cases, monitoring, and external-release safeguards.",
+      "why_it_matters": "Offers a concrete account of how a frontier lab says it links pre-deployment evaluation to operational safeguards.",
+      "caveat": "These are organizational claims and procedures, not an independent audit or proof that every failure mode is mitigated.",
+      "review_status": "publisher_checked_first_party_statement_attributed",
+      "release_status": "official_release_or_report",
+      "source_url": "https://openai.com/index/managing-frontier-ai-risk/",
+      "publication_date": "2026-11-18",
+      "event_date": "2026-11-18",
+      "discovered_at": "2026-11-19T14:58:14.545Z",
+      "added_to_atlas_at": "2026-11-19T15:33:04.684Z",
+      "collection_classification": "previous_day",
+      "source_record_id": "ai-news:openai-frontier-lifecycle:2026-11-18"
+    },
+    {
+      "id": "ai-news-openai-api-residency-self-serve-2026-11-18",
+      "title": "OpenAI adds self-service API project data-residency choices",
+      "category": "developer_tools",
+      "tags": [
+        "AI",
+        "API",
+        "governance",
+        "cloud"
+      ],
+      "summary": "OpenAI's Enterprise and Edu release notes describe fixed-region project selection and per-request residency for eligible Global API projects, without a separate Zero Data Retention application.",
+      "why_it_matters": "Regional storage and processing controls matter for jurisdiction-sensitive AI deployments.",
+      "caveat": "Eligibility, supported models/endpoints, data storage versus processing, UAE options and pricing differ; this is not universal residency coverage.",
+      "review_status": "publisher_checked_first_party_statement_attributed",
+      "release_status": "official_release_or_report",
+      "source_url": "https://help.openai.com/en/articles/10128477-chatgpt-enterprise-and-edu-release-notes",
+      "publication_date": "2026-11-18",
+      "event_date": "2026-11-18",
+      "discovered_at": "2026-11-19T14:58:14.545Z",
+      "added_to_atlas_at": "2026-11-19T15:33:04.684Z",
+      "collection_classification": "previous_day",
+      "source_record_id": "ai-news:openai-api-residency-self-serve:2026-11-18"
+    },
+    {
+      "id": "ai-news-copilot-team-plugin-defaults-2026-11-18",
+      "title": "GitHub launches team-level Copilot plugin defaults",
+      "category": "tools",
+      "tags": [
+        "agents",
+        "developer_tools",
+        "MCP",
+        "workflow"
+      ],
+      "summary": "GitHub now lets authorized team maintainers and organization owners select approved Agent Plugins for team defaults in supported Copilot clients.",
+      "why_it_matters": "Reduces per-developer setup for shared agent tools while retaining higher-level policy controls.",
+      "caveat": "Applies to supported Business/Enterprise setups and direct team members; child teams do not inherit the configuration.",
+      "review_status": "publisher_checked_first_party_statement_attributed",
+      "release_status": "official_release_or_report",
+      "source_url": "https://github.blog/changelog/2026-11-18-customize-github-copilot-for-your-team/",
+      "publication_date": "2026-11-18",
+      "event_date": "2026-11-18",
+      "discovered_at": "2026-11-19T14:58:14.545Z",
+      "added_to_atlas_at": "2026-11-19T15:33:04.684Z",
+      "collection_classification": "previous_day",
+      "source_record_id": "ai-news:copilot-team-plugin-defaults:2026-11-18"
+    },
+    {
+      "id": "ai-news-copilot-eight-new-connectors-2026-11-18",
+      "title": "Copilot previews eight additional verified service connectors",
+      "category": "tools",
+      "tags": [
+        "agents",
+        "MCP",
+        "API",
+        "developer_tools"
+      ],
+      "summary": "GitHub announced eight more GitHub-verified MCP service connections, including Supabase, Box and Calendly, in a public preview.",
+      "why_it_matters": "Broadens the authorized external systems coding agents can consult and operate through.",
+      "caveat": "Preview access, per-service permissions, connector capabilities and policy restrictions vary; verification does not eliminate prompt-injection risk.",
+      "review_status": "publisher_checked_first_party_statement_attributed",
+      "release_status": "official_release_or_report",
+      "source_url": "https://github.blog/changelog/2026-11-18-connect-supabase-box-calendly-and-more-to-copilot/",
+      "publication_date": "2026-11-18",
+      "event_date": "2026-11-18",
+      "discovered_at": "2026-11-19T14:58:14.545Z",
+      "added_to_atlas_at": "2026-11-19T15:33:04.684Z",
+      "collection_classification": "previous_day",
+      "source_record_id": "ai-news:copilot-eight-new-connectors:2026-11-18"
+    },
+    {
+      "id": "ai-news-gh-cli-event-listen-2-105-0",
+      "title": "GitHub CLI previews event-driven pull-request waiting",
+      "category": "tools",
+      "tags": [
+        "agents",
+        "GitHub",
+        "API",
+        "developer_tools"
+      ],
+      "summary": "GitHub CLI v2.105.0 added gh event listen for streaming pull-request changes and checks into agent and script workflows instead of polling.",
+      "why_it_matters": "Can make coding-agent orchestration more reactive and reduce idle repeated API requests.",
+      "caveat": "Event Streams require preview access and may change; not all users can enable the commands.",
+      "review_status": "publisher_checked_first_party_statement_attributed",
+      "release_status": "official_release_or_report",
+      "source_url": "https://github.blog/changelog/2026-11-18-wait-for-pull-request-events-with-github-cli/",
+      "publication_date": "2026-11-18",
+      "event_date": "2026-11-18",
+      "discovered_at": "2026-11-19T14:58:14.545Z",
+      "added_to_atlas_at": "2026-11-19T15:33:04.684Z",
+      "collection_classification": "previous_day",
+      "source_record_id": "ai-news:gh-cli-event-listen:2.105.0"
+    },
+    {
+      "id": "ai-news-vllm-ghsa-xgh8-qwjh-q853-2026-11-18",
+      "title": "vLLM discloses request-template trust-gate bypass",
+      "category": "safety",
+      "tags": [
+        "LLM",
+        "security",
+        "open_source",
+        "inference"
+      ],
+      "summary": "A vLLM maintainer advisory describes how the /v1/systemone endpoint could route caller-supplied chat-template kwargs around a template trust check for supported model architectures.",
+      "why_it_matters": "Operators exposing the affected structured-decision endpoint should review their versions and trusted caller boundaries.",
+      "caveat": "This is a disclosed vulnerability, not evidence of exploitation. The advisory's machine-readable affected-range field includes 0.34.0 while its explanatory text says 0.34.0 is patched; operators should verify release details.",
+      "review_status": "publisher_checked_security_advisory_version_discrepancy",
+      "release_status": "disclosed_vulnerability",
+      "source_url": "https://github.com/vllm-project/vllm/security/advisories/GHSA-xgh8-qwjh-q853",
+      "publication_date": "2026-11-18",
+      "event_date": "2026-11-18",
+      "discovered_at": "2026-11-19T14:58:14.545Z",
+      "added_to_atlas_at": "2026-11-19T15:33:04.684Z",
+      "collection_classification": "previous_day",
+      "source_record_id": "ai-news:vllm-ghsa-xgh8-qwjh-q853:2026-11-18"
+    },
+    {
+      "id": "ai-news-ovhcloud-european-ai-services-2026-11-19",
+      "title": "OVHcloud announces Europe-hosted AI cloud offerings",
+      "category": "infrastructure",
+      "tags": [
+        "AI",
+        "hardware",
+        "cloud",
+        "industry"
+      ],
+      "summary": "Reuters reported OVHcloud's launch of 55 European-hosted cloud and AI products, including Blackwell-powered offerings and a work suite with AI assistants.",
+      "why_it_matters": "Regional cloud infrastructure and data-location promises are increasingly important to European organizations.",
+      "caveat": "Capacity figures and cost improvements were attributed to company statements; 60,000-chip potential capacity is not verified installed inventory.",
+      "review_status": "publisher_checked_reuters_reporting_attributed",
+      "release_status": "official_release_or_report",
+      "source_url": "https://www.reuters.com/business/ovhcloud-launches-ai-cloud-products-hosted-europe-2026-11-19/",
+      "publication_date": "2026-11-19",
+      "event_date": "2026-11-19",
+      "discovered_at": "2026-11-19T14:58:14.545Z",
+      "added_to_atlas_at": "2026-11-19T15:33:04.684Z",
+      "collection_classification": "same_day",
+      "source_record_id": "ai-news:ovhcloud-european-ai-services:2026-11-19"
+    },
+    {
+      "id": "ai-news-tsmc-us-export-licence-restrictions-2026-11-19",
+      "title": "Reuters reports tighter TSMC chip-manufacturing restrictions",
+      "category": "governance",
+      "tags": [
+        "AI",
+        "semiconductors",
+        "policy",
+        "infrastructure"
+      ],
+      "summary": "Reuters cited people familiar with TSMC guidance saying affected orders from Chinese chip designers at 16 nm and below now require US export licenses, following new federal rules.",
+      "why_it_matters": "Advanced process access and high-bandwidth memory packaging affect where frontier AI hardware can be produced.",
+      "caveat": "This is source-based reporting rather than a direct public TSMC statement; exceptions, individual license decisions and future effects remain uncertain.",
+      "review_status": "publisher_checked_reuters_reporting_attributed",
+      "release_status": "official_release_or_report",
+      "source_url": "https://www.reuters.com/world/china/tsmc-tightens-china-ai-chip-curbs-new-us-rules-close-manufacturing-loophole-2026-11-19/",
+      "publication_date": "2026-11-19",
+      "event_date": "2026-11-19",
+      "discovered_at": "2026-11-19T14:58:14.545Z",
+      "added_to_atlas_at": "2026-11-19T15:33:04.684Z",
+      "collection_classification": "same_day",
+      "source_record_id": "ai-news:tsmc-us-export-licence-restrictions:2026-11-19"
+    },
+    {
+      "id": "ai-news-ecb-data-centre-bank-exposure-2026-11-19",
+      "title": "ECB supervisor flags growing bank lending to data centres",
+      "category": "industry",
+      "tags": [
+        "AI",
+        "infrastructure",
+        "finance",
+        "governance"
+      ],
+      "summary": "Reuters quoted ECB banking supervisor Claudia Buch reporting data-centre exposure at roughly 1.2-1.3% of euro area banks' corporate exposure, but a quickly rising share of new lending.",
+      "why_it_matters": "AI infrastructure growth creates financing concentration and electricity-demand risks to monitor.",
+      "caveat": "Figures concern the ECB's stated bank-exposure scope, not all global AI infrastructure financing or an immediate crisis.",
+      "review_status": "publisher_checked_reuters_reporting_attributed",
+      "release_status": "official_release_or_report",
+      "source_url": "https://www.reuters.com/business/finance/euro-zone-banks-data-centre-exposure-small-growing-ecb-says-2026-11-19/",
+      "publication_date": "2026-11-19",
+      "event_date": "2026-11-19",
+      "discovered_at": "2026-11-19T14:58:14.545Z",
+      "added_to_atlas_at": "2026-11-19T15:33:04.684Z",
+      "collection_classification": "same_day",
+      "source_record_id": "ai-news:ecb-data-centre-bank-exposure:2026-11-19"
+    },
+    {
+      "id": "ai-news-google-mlperf-training-6-1-2026-11-16",
+      "title": "Google expands MLPerf Training v6.1 TPU and GPU evidence",
+      "category": "research",
+      "tags": [
+        "ML",
+        "DL",
+        "training",
+        "hardware",
+        "evaluation"
+      ],
+      "summary": "Google Cloud's November 16 training benchmark post, updated November 18, reports reference-checkpoint-to-target measurements for Ironwood TPU and Blackwell GPU systems, including agentic reinforcement learning.",
+      "why_it_matters": "Makes scaling and hardware orchestration comparisons possible using named standardized benchmark settings.",
+      "caveat": "Benchmark times are not full from-scratch frontier training costs; results depend on precise workloads, quality criteria, and tuning.",
+      "review_status": "publisher_checked_vendor_benchmark_unreplicated",
+      "release_status": "official_release_or_report",
+      "source_url": "https://blog.google/innovation-and-ai/infrastructure-and-cloud/google-cloud/training-performance-benchmarks-tpus/",
+      "publication_date": "2026-11-16",
+      "event_date": "2026-11-18",
+      "discovered_at": "2026-11-19T14:58:14.545Z",
+      "added_to_atlas_at": "2026-11-19T15:33:04.684Z",
+      "collection_classification": "catch_up",
+      "source_record_id": "ai-news:google-mlperf-training-6-1:2026-11-16"
+    }
+  ],
+  "technologies": [],
+  "terms": [],
+  "site_changes": [],
+  "corrections": []
+}

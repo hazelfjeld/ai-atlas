@@ -1552,6 +1552,84 @@
       "production_workflow_run_id": 44335862362,
       "githack_workflow_run_id": 44335862647,
       "verification_scope": "Exact main 4655095ed856c7213e969f72d58297e86df94ef7 passed catalog/GitHack workflow 44335862647 (355 Node tests; reproducible generation; GitHack parity), then Cloudflare production/hosted-browser workflow 44335862362, attempt 2 (production asset revision/HTTP, 66 site and 40 Games browser checks). Immutable source-batch and dated edition bytes/SHA-256 validated. Direct independent opening of the exact dated query permalink remained unavailable."
+    },
+    {
+      "batch_id": "atlas-daily-20261119-20261119t145814545z-review-a",
+      "source_branch": "atlas-daily-staging",
+      "source_commit": "e9e4ad0008634d9ad3fedea1be6c53e2c2081df8",
+      "source_batch_path": "daily-queue/batches/2026-11-19-atlas-daily-20261119-20261119t145814545z-review-a.json",
+      "source_batch_sha256": "b9e61406e081f130f556a17cec2b4668b9dc5afdad3c0ca5fd2e1984ee69086f",
+      "source_batch_bytes": 47281,
+      "edition_date": "2026-11-19",
+      "validation_result": "sha256_bytes_record_counts_unique_ids_dates_cross_edition_dedup_and_independent_primary_source_review",
+      "status": "partially_published_with_7_deferred_catalog_proposals",
+      "publication_outcome": "immutable_revision_1_pending_production_verification",
+      "publication_edition": "2026-11-19-v1",
+      "accepted_news_ids": [
+        "ai-news-gemini-4-neon-2026-11-18",
+        "ai-news-elasticache-distributed-kv-2026-11-18",
+        "ai-news-sagemaker-cross-region-router-2026-11-18",
+        "ai-news-anthropic-ipo-pricing-2026-11-18",
+        "ai-news-openai-frontier-lifecycle-2026-11-18",
+        "ai-news-openai-api-residency-self-serve-2026-11-18",
+        "ai-news-copilot-team-plugin-defaults-2026-11-18",
+        "ai-news-copilot-eight-new-connectors-2026-11-18",
+        "ai-news-gh-cli-event-listen-2-105-0",
+        "ai-news-vllm-ghsa-xgh8-qwjh-q853-2026-11-18",
+        "ai-news-ovhcloud-european-ai-services-2026-11-19",
+        "ai-news-tsmc-us-export-licence-restrictions-2026-11-19",
+        "ai-news-ecb-data-centre-bank-exposure-2026-11-19",
+        "ai-news-google-mlperf-training-6-1-2026-11-16"
+      ],
+      "source_news_ids": [
+        "ai-news:gemini-4-neon:2026-11-18",
+        "ai-news:elasticache-distributed-kv:2026-11-18",
+        "ai-news:sagemaker-cross-region-router:2026-11-18",
+        "ai-news:anthropic-ipo-pricing:2026-11-18",
+        "ai-news:openai-frontier-lifecycle:2026-11-18",
+        "ai-news:openai-api-residency-self-serve:2026-11-18",
+        "ai-news:copilot-team-plugin-defaults:2026-11-18",
+        "ai-news:copilot-eight-new-connectors:2026-11-18",
+        "ai-news:gh-cli-event-listen:2.105.0",
+        "ai-news:vllm-ghsa-xgh8-qwjh-q853:2026-11-18",
+        "ai-news:ovhcloud-european-ai-services:2026-11-19",
+        "ai-news:tsmc-us-export-licence-restrictions:2026-11-19",
+        "ai-news:ecb-data-centre-bank-exposure:2026-11-19",
+        "ai-news:google-mlperf-training-6-1:2026-11-16"
+      ],
+      "deferred_news_ids": [],
+      "deferred_catalog_proposal_ids": [
+        "tech-proposal:gemini-4-neon:2026-11-19",
+        "tech-proposal:elasticache-distributed-kv:2026-11-19",
+        "tech-proposal:sagemaker-cross-region-routing:2026-11-19",
+        "tech-proposal:github-cli-event-streams:2026-11-19",
+        "term-proposal:distributed-kv-cache-tier:2026-11-19",
+        "term-proposal:cross-region-inference-routing:2026-11-19",
+        "term-proposal:event-driven-agent-orchestration:2026-11-19"
+      ],
+      "rejected_ids": [],
+      "counts": {
+        "news_published": 14,
+        "technology_added": 0,
+        "term_added": 0,
+        "corrections": 0,
+        "news_deferred": 0,
+        "catalog_deferred": 7,
+        "technology_updated": 0
+      },
+      "review_notes": "Fourteen dated source-attributed stories reviewed against official Google, AWS, Anthropic, OpenAI, GitHub, vLLM and Reuters publications. Security advisory's 0.34.0 affected/patched version discrepancy retained. Google MLPerf benchmark originally posted November 16 and updated November 18. Reuters reporting is attributed, not elevated to primary confirmation. Partial collection: 15 checked sources, one failed arXiv metadata endpoint. Four technology and three term proposals remain unintegrated pending canonical/alias/license dedup.",
+      "publication_history": [
+        {
+          "edition": "2026-11-19-v1",
+          "status": "pending_production_verification",
+          "note": "Immutable dated edition, SHA-256 and source-reviewed receipt prepared on main; public HTTP, GitHack and hosted-browser certification pending.",
+          "prepared_at": "2026-11-19T15:33:04.684Z"
+        }
+      ],
+      "production_verified_at": null,
+      "production_verified_revision": null,
+      "last_verified_at": null,
+      "last_verified_public_url": null
     }
   ]
 }

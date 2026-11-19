@@ -1,0 +1,32 @@
+const test=require('node:test');
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const crypto=require('node:crypto');
+const Daily=require('../daily-core.js');
+
+test('November 19 source-reviewed queue becomes exactly one immutable partially covered edition',()=>{
+ const idx=Daily.validateIndex(JSON.parse(fs.readFileSync('data/daily/index.json','utf8')));
+ const ledger=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8'));
+ const receipt=ledger.receipts.find(r=>r.batch_id==='atlas-daily-20261119-20261119t145814545z-review-a');
+ assert.ok(receipt,'New batch has durable source receipt');
+ assert.equal(ledger.receipts.filter(r=>r.batch_id===receipt.batch_id).length,1);
+ assert.equal(receipt.source_batch_sha256,'b9e61406e081f130f556a17cec2b4668b9dc5afdad3c0ca5fd2e1984ee69086f');
+ assert.equal(receipt.source_batch_bytes,47281);
+ assert.equal(receipt.counts.news_published,14);
+ assert.deepEqual([receipt.counts.technology_added,receipt.counts.term_added,receipt.counts.catalog_deferred],[0,0,7]);
+ const entry=idx.editions.find(e=>e.date==='2026-11-19'&&e.revision===1);
+ assert.ok(entry);
+ const bytes=fs.readFileSync(entry.path);
+ assert.equal(bytes.length,entry.bytes);
+ assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'),entry.sha256);
+ const e=Daily.validateEdition(JSON.parse(bytes.toString('utf8')),entry);
+ assert.equal(e.coverage.status,'partial');
+ assert.equal(e.coverage.sources_failed.length,1);
+ assert.equal(e.news.length,14);
+ assert.equal(new Set(e.news.map(n=>n.id)).size,14);
+ assert.ok(e.news.every(n=>n.source_record_id&&n.review_status&&n.caveat&&n.source_url.startsWith('https://')));
+ assert.ok(e.news.some(n=>n.id.includes('mlperf')&&n.publication_date==='2026-11-16'&&n.event_date==='2026-11-18'),'Catch-up post retains distinct post/update dates');
+ const html=fs.readFileSync('whats-new.html','utf8');
+ assert.ok(html.includes('href="'+entry.path+'"'),'Latest archive remains accessible without JavaScript');
+ assert.equal(idx.last_successful_publish_at,[...ledger.receipts].reverse().find(r=>r.production_verified_at).production_verified_at,'Pending edition must not advance verified production timestamp');
+});
