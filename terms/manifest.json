@@ -6296,22 +6296,22 @@
   },
   "MLD-1260": {
     "path": "terms/MLD-1260-training-step.html",
-    "sha256": "a6312a674beab2b9a3680adb2b00f1b79552f3a3c4dd944db5569189e723ec38",
+    "sha256": "5060579191418ac581a7beba639c83ce086348ee2ca30bf40e315777971ff8b0",
     "expanded": false
   },
   "MLD-1261": {
     "path": "terms/MLD-1261-training-serving-skew.html",
-    "sha256": "3ed2596f7b8d7fc34f5c23f6b08f0433b21925aece6f89ffd9ce3dc2d2d18dc7",
+    "sha256": "20e70175f34f32a70a2290b97ba974ce9a74001951d3c36a3437ae82aa7f6d86",
     "expanded": false
   },
   "MLD-1262": {
     "path": "terms/MLD-1262-trajectory.html",
-    "sha256": "e31810fa9926cfd47553a25a1195798709900ad00b699046052269d76908c9bc",
+    "sha256": "4b4c418c250a70eec9cc929b61b92a104fdba5c0aa0903d3f15a7aaa55291ace",
     "expanded": false
   },
   "MLD-1263": {
     "path": "terms/MLD-1263-transfer-learning.html",
-    "sha256": "dac4ab88e9b6ee5d386306babbd7423a77a3270930597fe43a03ce58b23cf9a1",
+    "sha256": "017bea16d8fe5cc5863ae9154931792dd8e8eccadbec8a29ee67d3f57f134903",
     "expanded": false
   },
   "MLD-1264": {
@@ -6321,27 +6321,27 @@
   },
   "MLD-1265": {
     "path": "terms/MLD-1265-transformer-block.html",
-    "sha256": "5bfe1a2e8feb6e2776753a083a4e3152262d1387584f29e659cd6357ce4c147e",
+    "sha256": "b94a5e67584ebf4552e779311cd5f5fb3f7d675c21c08c0b0ed437560219d4b8",
     "expanded": false
   },
   "MLD-1266": {
     "path": "terms/MLD-1266-transpose.html",
-    "sha256": "7800ad1e6e22da79ba04baf6d73b4d9e1eefcb7e2a403c6f657bf354c72eec02",
+    "sha256": "aa422d93a60686b2f461208966a94e077bcd8e9234c3d15a1f21a352fd931953",
     "expanded": false
   },
   "MLD-1267": {
     "path": "terms/MLD-1267-transposed-convolution.html",
-    "sha256": "fd842f828dfb2483b3ee0afd08f863d8e73c5f2b313e9b0ffec6f32bafe1ff54",
+    "sha256": "b6d53d437f4d4306bb534bc4d4c477db868f0552307787b765439ccf29ed9d81",
     "expanded": false
   },
   "MLD-1268": {
     "path": "terms/MLD-1268-tree-depth.html",
-    "sha256": "8ebeb1294a4b9848e18dd9b1d0485a71d498d4b7ec2f9ea7b1165353e62bd902",
+    "sha256": "ab6419f6ba0aa9c99340704bac55a12fb85cf32a8dd6892e9c38ed21a7fc7072",
     "expanded": false
   },
   "MLD-1269": {
     "path": "terms/MLD-1269-tree-of-thoughts.html",
-    "sha256": "034fe662ca641969f0d86f754763206d1af271330679e9aa862580d06b31117f",
+    "sha256": "0d493a8aca2a151ba773321293f51f27b84c160a50090c7a3ccdf90355d248b6",
     "expanded": false
   },
   "MLD-1270": {
