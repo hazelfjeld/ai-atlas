@@ -5806,52 +5806,52 @@
   },
   "MLD-1162": {
     "path": "terms/MLD-1162-standardization.html",
-    "sha256": "bf26763a4fa9f52c7bcd7dfd4b0332356893e964a72d7a4db3ee830c17880506",
+    "sha256": "efb6534413ef804ef0c2f1c5648ca925c70d647a13b681c993a14ebd08c62a61",
     "expanded": false
   },
   "MLD-1163": {
     "path": "terms/MLD-1163-state.html",
-    "sha256": "01cf76617bd0aa0d4300ab2cdbe946ccae47b2a9cc1ec831ef5e0fddde76b45b",
+    "sha256": "f123fd1416eed49b5a101764b0ceb7d7e0aa9aca43a12ded404f8c427319ccff",
     "expanded": false
   },
   "MLD-1164": {
     "path": "terms/MLD-1164-state-space-model.html",
-    "sha256": "b766f2cd5c7d44ebf66ef30bcb83b3a2d8d27605d5cf5f2f505ab2426521ad1e",
+    "sha256": "4d0a575533fec8703e5e4d2cca7048820296cae6a934e720cab48c80d1d5ac63",
     "expanded": false
   },
   "MLD-1165": {
     "path": "terms/MLD-1165-stationarity.html",
-    "sha256": "ce61902217178a156294132c1dd53b4cacf11380f71e371bfa9e7fc6466ad847",
+    "sha256": "ad942d1048936c60740c7df0237948f540f970c37332c2695f64f6ecc355a7d9",
     "expanded": false
   },
   "MLD-1166": {
     "path": "terms/MLD-1166-statistical-bias.html",
-    "sha256": "794c0e3922cc8459ed8081682edfc5b1e32843f800bd87e9c6af6f303ab1cce6",
+    "sha256": "cf3273d718c53b7cd052587136b0f8e693c34567e818d66da96222014a17513e",
     "expanded": false
   },
   "MLD-1167": {
     "path": "terms/MLD-1167-statistical-power.html",
-    "sha256": "16a12b89a796d3300f48c9e51f4d11bebc9fda2f69b17195e9c0b5aeafd91e4d",
+    "sha256": "12aea7c2efad670441473abc334e5f6542d6d8dab78a5e449f8c3aaa0c6f5532",
     "expanded": false
   },
   "MLD-1168": {
     "path": "terms/MLD-1168-statistical-significance.html",
-    "sha256": "6c7a7b18ec92c9581379460c395767f69a2f703a5e5847f2c828d807526af2a3",
+    "sha256": "d0e9cb946e179f9948373ae2210849e4057b15fb25ed947af2f74e2ef47f3c10",
     "expanded": false
   },
   "MLD-1169": {
     "path": "terms/MLD-1169-steering-vector.html",
-    "sha256": "1c676530ba4e0eebf268b14ed82b209f17c9ac0eb2c5e8f4115d465ab24c8bd1",
+    "sha256": "abd008edcfb32594da98bc15eff531eb8665b7e6b14a73c6f4e4892fcb609720",
     "expanded": false
   },
   "MLD-1170": {
     "path": "terms/MLD-1170-stochastic-depth.html",
-    "sha256": "06538417ea339eb1620d6a6e22eb4bfa20016c3fc9778c9f483c1f7d43fafff2",
+    "sha256": "a7cb83109a18451f2ca06086c1514df70cd76be72bb853a44f6529d12ccade82",
     "expanded": false
   },
   "MLD-1171": {
     "path": "terms/MLD-1171-stochastic-gradient-descent.html",
-    "sha256": "2ccc729eec36eeb6554e2321c428de5ad43e98440a2a11cda8d4bf5435745513",
+    "sha256": "d887a8b6a7a0a0480eb53e4aa8fcece766c02bbda8a455bff9e5094f61a80db2",
     "expanded": false
   },
   "MLD-1172": {
