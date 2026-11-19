@@ -6496,27 +6496,27 @@
   },
   "MLD-1300": {
     "path": "terms/MLD-1300-variational-inference.html",
-    "sha256": "2cd47e0cf318455f8257258e5cb085b6ff493c217062e26ff5714a992dde83d5",
+    "sha256": "d71984bfc0c9b44d924bb148eb07d0ff43db3c911d0bbede2178caba6b22d572",
     "expanded": false
   },
   "MLD-1301": {
     "path": "terms/MLD-1301-vc-dimension.html",
-    "sha256": "f5e2c0e73a1b22518a6b325d61c33cb0930ec3c8f9fe2990889529ae589ab05a",
+    "sha256": "1c687119ae58de115ab4a8088d5a4779d100daa165c183ed2b99d3aa951f8f90",
     "expanded": false
   },
   "MLD-1302": {
     "path": "terms/MLD-1302-vector.html",
-    "sha256": "9a571c0a8177024589a3bfc5f866fb39c85a19d656a2f94cc053a9f7f2816abe",
+    "sha256": "6cfafb8ef261035e7648c9bf8ce1c68f4db72e7e4383526decf8e858abfa7ff5",
     "expanded": false
   },
   "MLD-1303": {
     "path": "terms/MLD-1303-vector-database.html",
-    "sha256": "72b74f3663018e20217b08a87fb8bbe9ea7aa8ed8ae09a0d9b2e284a9ac86372",
+    "sha256": "7fc4d0e9e1bfa7351dce4ff05e3fbc48db28a8e85be439c347c9be81b7a8b0fc",
     "expanded": false
   },
   "MLD-1304": {
     "path": "terms/MLD-1304-vector-field.html",
-    "sha256": "dbd9d98d6f5e6aa0071646aa8e3496ffb3078a838e281b3199ffaac188cd0039",
+    "sha256": "811f3f3395385884f08fc9111f22c942e281511d201255cb97465f5618ec6e6b",
     "expanded": false
   },
   "MLD-1305": {
