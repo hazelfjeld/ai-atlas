@@ -6521,17 +6521,17 @@
   },
   "MLD-1305": {
     "path": "terms/MLD-1305-vector-index.html",
-    "sha256": "6df72ed8eab94834cded3617ebaa13509aa53ac21f14f2b5d6854da8f48224a4",
+    "sha256": "52bc6192b9907e72ed986bdd44a42ead804f339c51adaa547d1d585e2bd0d182",
     "expanded": false
   },
   "MLD-1306": {
     "path": "terms/MLD-1306-vector-search.html",
-    "sha256": "a4d3cdce81fed67eab6a4895e095f92c3c69e616b3edbaf023583d45df5e63a5",
+    "sha256": "e5362545956662e3fa67aa68caabf1f34eed5ad1501974e44f4507e964a810c7",
     "expanded": false
   },
   "MLD-1307": {
     "path": "terms/MLD-1307-vector-jacobian-product.html",
-    "sha256": "7b3893423298195bede2f2a00c4aabd7aed106823e13b1b74ed4fcb3407674d6",
+    "sha256": "14d1d3296f3cd0abb70293caf65dcc0b2117ceca508ba9bf8ae10b09d05bb0ed",
     "expanded": false
   },
   "MLD-1308": {
@@ -6541,7 +6541,7 @@
   },
   "MLD-1309": {
     "path": "terms/MLD-1309-vision-transformer.html",
-    "sha256": "34d579293c80cf81ac0a0cb6c0cb82eff97b2ac01b7575818b808d6f051ca91d",
+    "sha256": "2a35e3e418ab8541fada40a6a25ef8e6a8cc3a341dce132aa5f9a71b7027e43b",
     "expanded": false
   },
   "MLD-1310": {
