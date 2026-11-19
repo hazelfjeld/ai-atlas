@@ -6646,52 +6646,52 @@
   },
   "MLD-1330": {
     "path": "terms/MLD-1330-winsorization.html",
-    "sha256": "fd519d5af781076d284572788df3f9cb4337d64ec93b47c5fbb8198efe9e7e48",
+    "sha256": "b2fcc921dd9c199bcd94215c57e4885a8ac6d6dd6883a155a70ab603918645a0",
     "expanded": false
   },
   "MLD-1331": {
     "path": "terms/MLD-1331-wireheading.html",
-    "sha256": "a2444eaa7b3085855d2990e4936798c8d0baccd3aa9d0c35ff7eb2325f45dd9f",
+    "sha256": "ec00670b109f4cc36525dcc10be7033352c5401d4455e5df01552f7951808eb6",
     "expanded": false
   },
   "MLD-1332": {
     "path": "terms/MLD-1332-word-embedding.html",
-    "sha256": "6abfd1800f8db049fbad934487c8163b48d417045ad1547342a63a58dbf3506e",
+    "sha256": "effdc0d2f0191b5502af3a0a5d7520a4bf279a7314f5fef77ccf3172e9e960cc",
     "expanded": false
   },
   "MLD-1333": {
     "path": "terms/MLD-1333-word-error-rate.html",
-    "sha256": "a74881b925ca895438b0fb70bc45b9a5265d30e791dcea791e251c5b9107bd76",
+    "sha256": "6f468182d6720852a736d11b7d5905e33a5b55ce6757aa5b4a64c20165ab5c9a",
     "expanded": false
   },
   "MLD-1334": {
     "path": "terms/MLD-1334-word2vec.html",
-    "sha256": "40d3ec9a74e790ae1e670e20b682443a5a3a635d1f4159cacb65f3bc6eb3957f",
+    "sha256": "9715d36070a10c7d1d12312367c9d0e268f34d90b7a2fcf8e3e65bfefefa740d",
     "expanded": false
   },
   "MLD-1335": {
     "path": "terms/MLD-1335-wordpiece.html",
-    "sha256": "3752402d442dd96163f3a01a80b8895d754ad06844449426af127fa3fb93b9b4",
+    "sha256": "ceedd3076edcd74f3ad30cdfa41abcc2048cfadb9a30f4ab35e358ca7f82061f",
     "expanded": false
   },
   "MLD-1336": {
     "path": "terms/MLD-1336-workflow.html",
-    "sha256": "5b0255e7f194ce10d2f136e90091b6fe13e5857a5fe13cb9109fcdc99448ce2d",
+    "sha256": "790e693980eba8fcf36ac01fb4c0988b31872303e0e1755c19b3e51a6cf8ffb2",
     "expanded": false
   },
   "MLD-1337": {
     "path": "terms/MLD-1337-working-memory.html",
-    "sha256": "b5b1784e5afd5ab57f7e203cd000afdd4f8abdd03c5ea2a28cd223d7eaa1e4cf",
+    "sha256": "d7c95aa4a519164ccd00746c731e49ef2dd9dd5a68dec19e37e5b153aaa39fe2",
     "expanded": false
   },
   "MLD-1338": {
     "path": "terms/MLD-1338-world-model.html",
-    "sha256": "9c9de70568c8aeafe0ed7a6274a12e7522844307b8017f79dd3be56d29e6d1d6",
+    "sha256": "15622d221097328d601bc3ed172c5c1699b80b0a4f5d6c527b057e9f0e5e04db",
     "expanded": false
   },
   "MLD-1339": {
     "path": "terms/MLD-1339-worst-group-accuracy.html",
-    "sha256": "1e681cfa36d47e8bef6e337946b31f7565a2288eb35e1c25b3a0e7d4b1d915dd",
+    "sha256": "62ee26744a08ae5daa937c05074a91376309c6e6872d1881ff5ed5b693e63076",
     "expanded": false
   },
   "MLD-1340": {
