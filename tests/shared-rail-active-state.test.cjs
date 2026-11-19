@@ -25,6 +25,7 @@ test('the shared current-section contract survives across page families', () => 
     'about.html', 'terms/MLD-0002-ablation-study.html',
     'terms/MLD-1259-training-set.html',
     'terms/MLD-1269-tree-of-thoughts.html',
+    'terms/MLD-1279-type-ii-error.html',
     'technology/TECH-0216-pytorch.html'
   ];
   for (const route of routes) {
