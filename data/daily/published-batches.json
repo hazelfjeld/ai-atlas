@@ -1563,7 +1563,7 @@
       "edition_date": "2026-11-19",
       "validation_result": "sha256_bytes_record_counts_unique_ids_dates_cross_edition_dedup_and_independent_primary_source_review",
       "status": "partially_published_with_7_deferred_catalog_proposals",
-      "publication_outcome": "immutable_revision_1_pending_production_verification",
+      "publication_outcome": "immutable_revision_1_cloudflare_http_browser_and_githack_verified",
       "publication_edition": "2026-11-19-v1",
       "accepted_news_ids": [
         "ai-news-gemini-4-neon-2026-11-18",
@@ -1624,12 +1624,22 @@
           "status": "pending_production_verification",
           "note": "Immutable dated edition, SHA-256 and source-reviewed receipt prepared on main; public HTTP, GitHack and hosted-browser certification pending.",
           "prepared_at": "2026-11-19T15:33:04.684Z"
+        },
+        {
+          "edition": "2026-11-19-v1",
+          "status": "cloudflare_http_browser_and_githack_verified",
+          "note": "Exact main 75eb1d33811831f79c2c38fa6aa7a424025ee94c passed catalog/GitHack workflow 44600094160 and Cloudflare deployment/hosted-browser workflow 44600094128 on November 19, 2026: deterministic build/integrity and GitHack parity, 508 commit-pinned HTTP assets on each of three production hostnames, archive register with 44 revisions and 15 receipts, 66 site-browser and 40 Games browser checks. Independent source-batch SHA-256, counts, unique IDs and 24,611-byte immutable edition hash checked. The exact dated query permalink could not be separately opened outside CI.",
+          "verified_at": "2026-11-19T19:50:08Z"
         }
       ],
-      "production_verified_at": null,
-      "production_verified_revision": null,
-      "last_verified_at": null,
-      "last_verified_public_url": null
+      "production_verified_at": "2026-11-19T19:50:08Z",
+      "production_verified_revision": 1,
+      "last_verified_at": "2026-11-19T19:50:08Z",
+      "last_verified_public_url": "https://aiupdates.app/whats-new.html?date=2026-11-19&revision=1",
+      "production_commit": "75eb1d33811831f79c2c38fa6aa7a424025ee94c",
+      "production_workflow_run_id": 44600094128,
+      "githack_workflow_run_id": 44600094160,
+      "verification_scope": "Exact main 75eb1d33811831f79c2c38fa6aa7a424025ee94c passed catalog/GitHack workflow 44600094160 and Cloudflare deployment/hosted-browser workflow 44600094128 on November 19, 2026: deterministic build/integrity and GitHack parity, 508 commit-pinned HTTP assets on each of three production hostnames, archive register with 44 revisions and 15 receipts, 66 site-browser and 40 Games browser checks. Independent source-batch SHA-256, counts, unique IDs and 24,611-byte immutable edition hash checked. The exact dated query permalink could not be separately opened outside CI."
     }
   ]
 }
