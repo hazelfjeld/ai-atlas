@@ -32,6 +32,7 @@ test('the shared current-section contract survives across page families', () => 
     'terms/MLD-1319-warmup.html',
     'terms/MLD-1329-weighted-averaging.html',
     'terms/MLD-1339-worst-group-accuracy.html',
+    'terms/MLD-1345-zero-shot-prompting.html',
     'technology/TECH-0216-pytorch.html'
   ];
   for (const route of routes) {

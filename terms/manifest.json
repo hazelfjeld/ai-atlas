@@ -6696,32 +6696,32 @@
   },
   "MLD-1340": {
     "path": "terms/MLD-1340-xavier-initialization.html",
-    "sha256": "a3af66dfd9e40c8bc827c23e63a94d091cedb17dbeca26849e6f5fb059546da1",
+    "sha256": "be4e10a16e61bedfa727e7d5ac9b4544c69b6a35456c00353360323a3199f16c",
     "expanded": false
   },
   "MLD-1341": {
     "path": "terms/MLD-1341-xgboost.html",
-    "sha256": "1e0d6cc6ec32c2dc793e629707c9c2f4f5edab14e2e0dc470709ee78fe036379",
+    "sha256": "1ab0e0e0891985c01218a72fb24580cc53cd72cb96ad54d188dfc810371e15a9",
     "expanded": false
   },
   "MLD-1342": {
     "path": "terms/MLD-1342-zero.html",
-    "sha256": "2eb4639e6629c500ebebfec15ecd3248956dcca5f2279167cf421a8ed223adee",
+    "sha256": "ee5a3e2dc733d3333109ddd6296612fd0266130afe4d7a752bb584d645060833",
     "expanded": false
   },
   "MLD-1343": {
     "path": "terms/MLD-1343-zero-point.html",
-    "sha256": "090517645c32f778d70567876f97a5d0fab336a1ba517b7d17d9bf9f0f6b449c",
+    "sha256": "a3cb9882a97f4abaa81b37b0b308544b8a7c7585c8fe9d0d58e6f21c420060c8",
     "expanded": false
   },
   "MLD-1344": {
     "path": "terms/MLD-1344-zero-shot-learning.html",
-    "sha256": "5e551f278a3631b9a66713c123786152a7d1526bd73d54b2f3b802674c8cbe5d",
+    "sha256": "78b3301e61d51444e6d5843d2f10c71c24e00603d55bdfe23a310e813a72e07d",
     "expanded": false
   },
   "MLD-1345": {
     "path": "terms/MLD-1345-zero-shot-prompting.html",
-    "sha256": "291aa12e021d2c01c4f02b6faabc2348835e5eaea1d19ecb339d3327da63c5d8",
+    "sha256": "b5313644ce8572d9fabb0906a44d697eb3b2f6ee19272520fe6bd486033f37dc",
     "expanded": false
   }
 }

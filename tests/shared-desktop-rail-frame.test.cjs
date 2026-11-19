@@ -188,13 +188,15 @@ test('all 57 authored concept guides share first-paint navigation with technolog
     assert.equal(createHash('sha256').update(html, 'utf8').digest('hex'), entry.sha256,
       entry.path + ' matches its original stable ID in the integrity manifest');
   }
-  const unmigrated = Object.entries(manifest).find(([id, entry]) => Number(id.slice(4)) > 1339 && !entry.expanded);
-  assert.ok(unmigrated, 'unmigrated reference routes after MLD-1339 remain outside the bounded cohort');
-  const basic = read(unmigrated[1].path);
-  assert.doesNotMatch(basic, /class="sidebar-bottom site-chrome__bottom"/,
-    'unmigrated reference pages retain their original HTML and integrity hashes');
-  assert.equal(createHash('sha256').update(basic, 'utf8').digest('hex'), unmigrated[1].sha256,
-    'unmigrated reference retains its original exact SHA-256');
+  const references = Object.entries(manifest).filter(([, entry]) => !entry.expanded);
+  assert.equal(references.length, 1288, 'all original unexpanded concept references remain indexed');
+  for (const [id, entry] of references) {
+    const html = read(entry.path);
+    assert.equal((html.match(/class="sidebar-bottom site-chrome__bottom"/g) || []).length, 1,
+      id + ' shares the complete desktop rail on first paint');
+    assert.equal(createHash('sha256').update(html, 'utf8').digest('hex'), entry.sha256,
+      id + ' preserves exact manifest integrity');
+  }
   assert.match(read('scripts/build_term_pages.py'),
     /rail_bottom=\(path == 'terms\/index\.html' or expanded_concept or first_paint_reference\)/,
     'one shared generator controls the entire authored-guide family');

@@ -25,7 +25,7 @@ test('all generated concept and technology profiles expose their article title w
       assert.ok(html.includes('<span class="site-mobile-chrome__title">' + heading + '</span>'),
         file + ' must expose real static title text without JavaScript');
       assert.equal((html.match(/<main\b/g) || []).length, 1, file);
-      if (folder === 'technology') {
+      if (folder === 'technology' || folder === 'terms') {
         const rail = html.match(/<nav class="site-chrome term-nav"[^>]*>([\s\S]*?)<\/nav><main class="term-shell">/)?.[1];
         assert.ok(rail, file + ' must keep the primary rail outside article content');
         assert.equal((rail.match(/class="sidebar-bottom site-chrome__bottom"/g) || []).length, 1,
