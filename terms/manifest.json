@@ -6046,52 +6046,52 @@
   },
   "MLD-1210": {
     "path": "terms/MLD-1210-task-vector.html",
-    "sha256": "142db06021e9175b1267a0ba41556b9d17499eb5a7485fe2bf984b139284232e",
+    "sha256": "94df17f21c45ffa5b3b0add40896b497f15ac813aa5f450f1b2e55728f045447",
     "expanded": false
   },
   "MLD-1211": {
     "path": "terms/MLD-1211-task-adaptive-pretraining.html",
-    "sha256": "47858be72f5e9da8890d1bd75505304ee57f592066c2924e05fec5b3481efd34",
+    "sha256": "b35307bc0f122df640ad99a58c10b171e4f1ff952fdcccb3ce1d86de95ba8812",
     "expanded": false
   },
   "MLD-1212": {
     "path": "terms/MLD-1212-td-error.html",
-    "sha256": "bb132cd93ab019c302a596a24672e805ab6604d5618a47b53897cd0654147a17",
+    "sha256": "ac3a80a49fcbe2f74369bbb2bf332f0f1c83e887ad511678c21ca940f7d7c82d",
     "expanded": false
   },
   "MLD-1213": {
     "path": "terms/MLD-1213-teacher-forcing.html",
-    "sha256": "da5e9091bb3e561d532ac649a8b8361fbbae2932d3d93676c39f2da8b41b9820",
+    "sha256": "751325cdd786e5369403472fc595bc43175cc7cbf88c4e0ea9e53a9abdf5bbd8",
     "expanded": false
   },
   "MLD-1214": {
     "path": "terms/MLD-1214-teacher-model.html",
-    "sha256": "eff5b1a2ffa3c25d9ff32def847dd4baada141529164081dac4de32532cb0421",
+    "sha256": "e0e1e672a0dc45a9172a0d3db3214ce3200fd14d560057d691150fa49499bfad",
     "expanded": false
   },
   "MLD-1215": {
     "path": "terms/MLD-1215-temperature.html",
-    "sha256": "0440d8e6b459a6a9f8a5192781d225a4340c5fea1e159729867390a2e90bdd1f",
+    "sha256": "a1a004316ce75a9f0beae1ada7af08ab10c9344e5e34e0d3185e32a0ce8128c2",
     "expanded": false
   },
   "MLD-1216": {
     "path": "terms/MLD-1216-temperature-scaling.html",
-    "sha256": "23f8db535efe028f9226a5991e4bde102648747c28c4a3a82d1186e28e2f901c",
+    "sha256": "3e73994d4c83de1134627bd85d09e874b374d5420f603943ca6e7c8af5d3266a",
     "expanded": false
   },
   "MLD-1217": {
     "path": "terms/MLD-1217-temporal-cross-validation.html",
-    "sha256": "5d23bb10e6189701aafae10b23320651931f9cfb79e09074c39a9ce8047e6517",
+    "sha256": "c7d724cb83dc90621c95a422288afb42f6642679c504b371814a31414b17d0c0",
     "expanded": false
   },
   "MLD-1218": {
     "path": "terms/MLD-1218-temporal-split.html",
-    "sha256": "e2bbe8c1199e7fe4a97e246aded19e86dd72a28ee877909b5a548a6d1b2ca508",
+    "sha256": "cc84bbd0fbe15586a6a3bd3c744bac3a8f19b4a4e0824473450c36c3c2b9fbb9",
     "expanded": false
   },
   "MLD-1219": {
     "path": "terms/MLD-1219-temporal-difference-learning.html",
-    "sha256": "54f320da31f2bac73f10961d0339f4023cc245fbd291e8b96accadc915c36d92",
+    "sha256": "af94562f64090d6a0adea1e1b00cc22f5498c5c0dc7cf35de323fd0e80c72e1f",
     "expanded": false
   },
   "MLD-1220": {
