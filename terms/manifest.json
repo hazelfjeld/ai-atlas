@@ -5706,37 +5706,37 @@
   },
   "MLD-1142": {
     "path": "terms/MLD-1142-sparse-kernel.html",
-    "sha256": "4394b8726e26d390184359668a53e99ea0c268ad5c00258e46b7ebd20880b492",
+    "sha256": "7e5335b2e4881997b4041eeb2780bd1a4af0d8de89ee1cf659c2d98fd686f270",
     "expanded": false
   },
   "MLD-1143": {
     "path": "terms/MLD-1143-sparse-matrix.html",
-    "sha256": "e7a7db64a3d15e0ecc694000b9a51c4d89a1bca8d730086fe13dc9915879dad1",
+    "sha256": "f6107985a0d8de63f5414c8d40ea509335140c82d738ca2093ab497910e81f2a",
     "expanded": false
   },
   "MLD-1144": {
     "path": "terms/MLD-1144-sparse-model.html",
-    "sha256": "33f10fa5b781c34ca885cb18583c1d6178fcf53ca015b20da8b0563b523df248",
+    "sha256": "678005d00112b9bcad31bae3dc092d25da410d14a09b7fb8e73eede269458d38",
     "expanded": false
   },
   "MLD-1145": {
     "path": "terms/MLD-1145-sparse-retrieval.html",
-    "sha256": "5dee685136d4fff6d54f905be13304d458bca68a43c9ba8bbefb2eb49dc9c1fc",
+    "sha256": "be3fb5ffd3fa98b53b1c704be46e480517242b1644aca57b59bf5facde57222a",
     "expanded": false
   },
   "MLD-1146": {
     "path": "terms/MLD-1146-sparse-reward.html",
-    "sha256": "00d0aad0ce5e8b2a3405a4b7f33e4d1117078dcbc8c9581935a05efefffc27f0",
+    "sha256": "5284e2c0a16382c3a40e5328fceacd4dab0404326b9807999d0e11089d6caace",
     "expanded": false
   },
   "MLD-1147": {
     "path": "terms/MLD-1147-spatial-padding.html",
-    "sha256": "53960bd5cb2be82ece7a134c26b715cb0f8ff2e212bbf9392b8caa49692bd6f4",
+    "sha256": "05f6497647cc8c2c09d4eba681babaf3011bb9dd2f3693edb93cf8611caf311c",
     "expanded": false
   },
   "MLD-1148": {
     "path": "terms/MLD-1148-special-token.html",
-    "sha256": "c0ba69b55212c2aa56f8beaa73f19f343bb66986ca68e182e0b5ba028f1ae53b",
+    "sha256": "1abda9cee0ea503de362e4aecc25dd4b71f9836a2ce584f25d74085ac7254369",
     "expanded": false
   },
   "MLD-1149": {
@@ -5746,12 +5746,12 @@
   },
   "MLD-1150": {
     "path": "terms/MLD-1150-specificity.html",
-    "sha256": "8c776eb506cb1e75bf42e6a2edefe25abd72b5bdb0a978e64c32a096950fb2df",
+    "sha256": "b4356867fc10e67453a85e9c7f45e0e52f753e9218e241e8bcfeb8b8aa87aa92",
     "expanded": false
   },
   "MLD-1151": {
     "path": "terms/MLD-1151-spectral-clustering.html",
-    "sha256": "938d9fc8eb8bfa5b368b1eaece5c19ce15fca0416fe28f6f776a216d24857a18",
+    "sha256": "166553bc52d1ef6d6420a090a471d8b7f0257f9729014d5acf80f6a3a4f0fcab",
     "expanded": false
   },
   "MLD-1152": {
