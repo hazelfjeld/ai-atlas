@@ -6096,52 +6096,52 @@
   },
   "MLD-1220": {
     "path": "terms/MLD-1220-tensor.html",
-    "sha256": "7d26e9a88ae0f29619bf6d91b2cd98f5d102659702d503443e4fcf9bb2cdf347",
+    "sha256": "0f7573814beedcce563e9f99ffdbfaee1cb35c104f0223e2912a056cc3715ed1",
     "expanded": false
   },
   "MLD-1221": {
     "path": "terms/MLD-1221-tensor-parallelism.html",
-    "sha256": "876d2e98d4631108e4fae151a8ca7633b9e771cbbea843cd1db6d2949f1a8eea",
+    "sha256": "7d566377255dbd667fe0e0f6b976aca647c79dddb9f3f1342720061f273e1706",
     "expanded": false
   },
   "MLD-1222": {
     "path": "terms/MLD-1222-tensor-rank.html",
-    "sha256": "355c4c5bfffe7f47dddb05b6f21bddefba2191cacb3e63b4057e99063fd21b73",
+    "sha256": "3c00886de0d587f426ac251aff039e686e6fb786038de4560ec8a347d614a8ce",
     "expanded": false
   },
   "MLD-1223": {
     "path": "terms/MLD-1223-tensor-shape.html",
-    "sha256": "aa34dde9c79178b9bb3dccd8a3f7b466da7591f8eb045cb457bbbfd70265ede5",
+    "sha256": "d125e89e6706ddb9734e82e2a1cf5c6f7bffff999956ca462af98165ab20c132",
     "expanded": false
   },
   "MLD-1224": {
     "path": "terms/MLD-1224-terminal-state.html",
-    "sha256": "6501e3929fe6d7e83adc1be7fbe9e71695d0ad065f3d41a878fc9ead23d06de7",
+    "sha256": "99bc426f4c56f13f96759e1b3ed95231ad05f99924506eae887300e49cb36aea",
     "expanded": false
   },
   "MLD-1225": {
     "path": "terms/MLD-1225-test-set.html",
-    "sha256": "05b456428564158930d6446eea7bc050e85edc1aaecf3187aee281be37e0f2c9",
+    "sha256": "c9aec5eefc60653c7bbe0df246e22c89ca4a4df2a829383e171274534f4116b2",
     "expanded": false
   },
   "MLD-1226": {
     "path": "terms/MLD-1226-test-time-compute.html",
-    "sha256": "50e628c1bbb836d2a57f906a39771b5c6ab12ca27e8ff0516537d5628c72162e",
+    "sha256": "9d207ae6ff25648cea142d19f47a1368e7ce9368ab1e7524ebd82c7fcc03f086",
     "expanded": false
   },
   "MLD-1227": {
     "path": "terms/MLD-1227-test-time-scaling.html",
-    "sha256": "ac136fde70726df7d16325377902539c7217e0b07f6c1c05473c51b7b1734f09",
+    "sha256": "dcc24d2109943bf5acdc392920b5e185d62b66587f63ab4dadad65ffc7e3a826",
     "expanded": false
   },
   "MLD-1228": {
     "path": "terms/MLD-1228-text-normalization.html",
-    "sha256": "2691270eb3805f8868e52028f6d2370bc1ab5a1f1637e0e0ceea00150f431cf7",
+    "sha256": "c9e4ca4f80e576036a53d6da7a1642932aff0a8c385504c4f25a9c9b9f0f74bb",
     "expanded": false
   },
   "MLD-1229": {
     "path": "terms/MLD-1229-text-to-speech.html",
-    "sha256": "cc1525d1927dea63b26900a3f0db07cf0656e41516b8c2492ad7131b25b4c49e",
+    "sha256": "c20308d80bbfdcb12660914811482fd943ce6139efab92ee312e80fce2376d3c",
     "expanded": false
   },
   "MLD-1230": {
