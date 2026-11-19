@@ -592,9 +592,25 @@ with sync_playwright() as p:
                   and native_page.locator('body > main.term-shell').count() == 1
                   and native_page.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'))
             if width in (390, 1280):
-                native_page.goto(base + 'terms/MLD-1340-xavier-initialization.html')
-                check('following reference retains its original script-free rail boundary ' + scheme + ' ' + str(width),
-                      native_page.locator('nav.site-chrome .sidebar-bottom.site-chrome__bottom').count() == 0)
+                # The final six existing references now share the same rail.
+                # Check both ends of the cohort rather than protecting the
+                # former unmigrated boundary, with real no-script browsers.
+                for route in ('terms/MLD-1340-xavier-initialization.html',
+                              'terms/MLD-1345-zero-shot-prompting.html'):
+                    native_page.goto(base + route)
+                    final_nav = native_page.locator('nav.site-chrome')
+                    final_bottom = final_nav.locator('.sidebar-bottom.site-chrome__bottom')
+                    check('final reference cohort matches Discover and technology ' +
+                          route + ' ' + scheme + ' ' + str(width),
+                          final_nav.count() == 1
+                          and final_nav.locator('.site-chrome__links a').all_text_contents() == shared_labels
+                          and final_nav.locator('.site-chrome__links a[aria-current="page"]').inner_text() == 'Concept dictionary'
+                          and final_bottom.count() == 1
+                          and final_bottom.locator('a[href="../index.html#/sources"]').count() == 1
+                          and native_page.locator('body > main.term-shell').count() == 1
+                          and native_page.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'))
+                    native_page.screenshot(path=str(out / ('concept-first-paint-' +
+                        route.rsplit('/', 1)[-1].split('-', 2)[1] + '-' + scheme + '-' + str(width) + '.png')))
                 native_page.goto(base + 'terms/MLD-1339-worst-group-accuracy.html')
                 native_page.screenshot(path=str(out / ('concept-first-paint-1339-' + scheme + '-' + str(width) + '.png')))
             if width == 390:
