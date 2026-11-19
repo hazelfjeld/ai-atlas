@@ -6146,32 +6146,32 @@
   },
   "MLD-1230": {
     "path": "terms/MLD-1230-tf-idf.html",
-    "sha256": "d4f08cc0632b465b929d30902fc4a171a4d39be030203c2f74e9c28d41c15c09",
+    "sha256": "0fab559a331386f266a0ce8e167fc972b2833837e85fceaa553d2c77331f8757",
     "expanded": false
   },
   "MLD-1231": {
     "path": "terms/MLD-1231-threat-model.html",
-    "sha256": "a1c4b6f9c8be7792872bf7932618426fc8377e67c713ef15a65c6607eb367369",
+    "sha256": "7eb9a065dec5a7496968a8ab55571d75da9e002b6b1c7473b1ff8d731d062621",
     "expanded": false
   },
   "MLD-1232": {
     "path": "terms/MLD-1232-throughput.html",
-    "sha256": "4118e466fc33b2a2237cdaeebb464485e302cf2ade7d9cb17253209d0f168361",
+    "sha256": "9254baf6fa73ba14f90f36bf4f2df414d9f5b32275a47ce914042a2f49290163",
     "expanded": false
   },
   "MLD-1233": {
     "path": "terms/MLD-1233-time-series.html",
-    "sha256": "96371411d827fad0d41adf9a0116904214eb11bb08dd8699e135f39f93c1e96a",
+    "sha256": "3ac4b1dbd9dfb0f8009c3ed4c9ce1a4b512ea1e2934ca73fbb78784f6f5d7f8d",
     "expanded": false
   },
   "MLD-1234": {
     "path": "terms/MLD-1234-time-to-first-token.html",
-    "sha256": "ccda6757e53c27bbe7bcbcbbae7073cd0aa0666a56325695c49f503e83879152",
+    "sha256": "a78b4deceee36c08fa596fc2f2cfd79af9b4530b68c9554c5de2802340379174",
     "expanded": false
   },
   "MLD-1235": {
     "path": "terms/MLD-1235-tinyml.html",
-    "sha256": "de02eac1fd8f5ca8d3cad79293d21b2f637432a910e321a1f306e4e1e38e0617",
+    "sha256": "bd41724e7611cfeae4077da3d4e822b54883ca506b948caa44ad497be53339f2",
     "expanded": false
   },
   "MLD-1236": {
@@ -6181,17 +6181,17 @@
   },
   "MLD-1237": {
     "path": "terms/MLD-1237-token-budget.html",
-    "sha256": "f83804cbaef5af3a5c99d0e0cc78fdee7f74ad7b7b42b4a658d0b0608fc7eaa5",
+    "sha256": "8ba090bbd8e24d64f1f78b98fc46f8fd94579be90c96c086f41895af08e6a1fb",
     "expanded": false
   },
   "MLD-1238": {
     "path": "terms/MLD-1238-token-count.html",
-    "sha256": "b1aa2b1e2d8a71077744f1b5dbca877816c43c90bf2f44e4189a7b5cd4037997",
+    "sha256": "6c42e55a5935ed8654e88b886a21299f87d6ef4fcb3e4029a8bef6639515fa5e",
     "expanded": false
   },
   "MLD-1239": {
     "path": "terms/MLD-1239-token-dropping.html",
-    "sha256": "79156101b5e08f4ae2a930d73de4c49f3f02006a8ea813b813400496c6d584c1",
+    "sha256": "08a2966417b247b32cc258c5ceb9859d0c34d8bde648bbab421a63b01ebdcad1",
     "expanded": false
   },
   "MLD-1240": {

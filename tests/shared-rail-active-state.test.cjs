@@ -23,7 +23,7 @@ test('the shared current-section contract survives across page families', () => 
   const routes = [
     'whats-new.html', 'playbooks.html', 'games.html', 'technologies.html',
     'about.html', 'terms/MLD-0002-ablation-study.html',
-    'terms/MLD-1229-text-to-speech.html',
+    'terms/MLD-1239-token-dropping.html',
     'technology/TECH-0216-pytorch.html'
   ];
   for (const route of routes) {
