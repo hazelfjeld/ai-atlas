@@ -879,6 +879,12 @@ html.atlas-enhanced #catalog-loading{
    actual edition panel, date selector and news filters. */
 @media (max-width:650px){
   .shell:has(> .site-chrome.top) > main > header{padding-top:8px}
+  /* Research and Playbooks already pad their mobile main. Their legacy hero
+     margins stacked another 27px/35px of blank space after the same shared
+     header, unlike Discover. Align their first heading with the workspace
+     rhythm while preserving independent tabs, search and content grids. */
+  .shell:has(> .site-chrome.research-site-chrome) > main > .hero{margin-top:8px}
+  .playbook-shell:has(> .site-chrome.playbook-top) > main > .playbook-hero{margin-top:20px}
 }
 /* atlas-mobile-news-intro-rhythm:end */
 
