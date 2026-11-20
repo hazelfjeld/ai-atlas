@@ -30,12 +30,12 @@ test('Discover, editorial pages and references use one generated wordmark/mark',
   assert.equal(discover.match(svg)?.[0], nativeRoot.match(svg)?.[0]);
   assert.equal(discover.match(svg)?.[0], nativeNested.match(svg)?.[0]);
 });
-test('preserved reference logos render the same two-stroke mark in both themes', () => {
+test('reference logos and offline demo preserve one two-stroke mark in both themes', () => {
   const shared = read('site-chrome.css');
   assert.match(shared, /:is\(\.brandmark,\.site-chrome__brand,\.site-mobile-chrome__brand\) svg path\{stroke-width:2\}/);
-  const before = anchor(read('terms/MLD-0001-a-b-test.html'), 'site-chrome__brand');
-  assert.match(before, /stroke-linecap="round"\/><\/svg>/,
-    'Historical detail pages still depend on the shared stroke correction');
+  const reference = anchor(read('terms/MLD-0001-a-b-test.html'), 'site-chrome__brand');
+  assert.match(reference, /stroke-width="2" stroke-linecap="round"\/><\/svg>/,
+    'Preserve the exact canonical two-stroke SVG on immutable detail pages');
   for (const output of [discover, nativeRoot, nativeNested]) {
     assert.equal((output.match(/<svg/g) || []).length, 1);
     assert.match(output, /AI Updates<small>THE FRONTIER, IN CONTEXT<\/small>/);
