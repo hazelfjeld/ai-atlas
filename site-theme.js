@@ -415,6 +415,12 @@ document.addEventListener('DOMContentLoaded', () => {
   // Respect the server-rendered page label on first paint and after hydration.
   const label = chrome.dataset.pageLabel || active?.textContent?.trim() || heading?.textContent?.trim() || document.title.split('·')[0].trim();
   chrome.dataset.pageLabel = label;
+  // Every shared mobile menu should announce the same current workspace as
+  // its visible header. Native reference pages still carry a generic
+  // script-free summary label; normalize it centrally after hydration instead
+  // of duplicating a screen-reader-only label in every page template.
+  const mobileToggle = chrome.querySelector(':scope > details.site-mobile-chrome__nav > summary');
+  if (mobileToggle && label) mobileToggle.setAttribute('aria-label', 'Toggle navigation · ' + label);
   // Reuse the canonical desktop brand in the native mobile drawer. Never
   // maintain a second logo template; no-JS <details> navigation still works.
   const menu = chrome.querySelector('.site-mobile-chrome__menu');

@@ -847,6 +847,10 @@ with sync_playwright() as p:
                               document.documentElement.scrollWidth <= innerWidth + 1;
                       }"""))
                 menu = sticky_page.locator('details.site-mobile-chrome__nav')
+                check(f'{route} {mobile_width}px {chosen_theme} announces the active workspace on its menu toggle',
+                      menu.locator(':scope > summary').get_attribute('aria-label') ==
+                      'Toggle navigation · ' +
+                      sticky_page.locator('.site-mobile-chrome').get_attribute('data-page-label'))
                 menu.locator(':scope > summary').click()
                 check(f'{route} {mobile_width}px {chosen_theme} can navigate from the pinned mobile header',
                       menu.evaluate('el => el.open') and
