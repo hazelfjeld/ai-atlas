@@ -363,7 +363,7 @@
       "published_at": "2026-11-20T14:54:12.109Z"
     }
   ],
-  "last_successful_publish_at": "2026-11-19T19:50:08Z",
-  "status": "edition_revision_1_pending_production_verification",
-  "coverage_note": "2026-11-20 v1 — 15 independently source-reviewed, dated reports (November 14–19), 15 original sources checked and one failed arXiv metadata endpoint; 6 technology and 4 terminology proposals deferred for canonical/alias/license review. Partial coverage. The November 20 edition and receipt are on main but Cloudflare, GitHack and hosted-browser certification are PENDING. November 19 v1 remains the most recently production-verified edition (November 19 19:50 UTC)."
+  "last_successful_publish_at": "2026-11-20T15:15:36Z",
+  "status": "edition_revision_1_production_verified",
+  "coverage_note": "2026-11-20 v1 — 15 source-reviewed dated reports (November 14–19), 15 original sources checked, one failed arXiv metadata endpoint; 6 technology and 4 terminology proposals deferred for canonical/alias/license review. Partial coverage. Exact main e6e8a94abb72fd3ba53fe3632684e88249a37c29 passed GitHack (run 44759028287) and Cloudflare/hosted-browser production verification (run 44759028003) on November 20; hosted archive rendered, independent exact dated permalink opening unavailable. Last verified at 2026-11-20T15:15:36Z."
 }

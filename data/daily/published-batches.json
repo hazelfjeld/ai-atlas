@@ -1651,7 +1651,7 @@
       "edition_date": "2026-11-20",
       "validation_result": "independent_sha256_utf8_bytes_counts_unique_ids_dates_prior_receipt_dedup_and_primary_source_review",
       "status": "partially_published_with_10_deferred_catalog_proposals",
-      "publication_outcome": "immutable_revision_1_pending_production_verification",
+      "publication_outcome": "immutable_revision_1_cloudflare_http_browser_and_githack_verified",
       "publication_edition": "2026-11-20-v1",
       "accepted_news_ids": [
         "ai-news-gemini-tool-retrieval-2026-11-19",
@@ -1717,12 +1717,22 @@
           "status": "pending_production_verification",
           "note": "Immutable edition integrated on main with verified source SHA-256 and evidence attribution; CI, public HTTP and interactive archive verification pending.",
           "prepared_at": "2026-11-20T14:54:12.109Z"
+        },
+        {
+          "edition": "2026-11-20-v1",
+          "status": "cloudflare_http_browser_and_githack_verified",
+          "note": "Exact main e6e8a94abb72fd3ba53fe3632684e88249a37c29 passed catalog/GitHack workflow 44759028287 (392 Node tests, zero failures; deterministic generation, offline reproducibility, GitHack parity) and Cloudflare production workflow 44759028003 on November 20, 2026: exact-artifact deployment, production HTTP/asset-revision checks across workers.dev, aiupdates.app and www.aiupdates.app, 69 hosted site-browser checks and 40 Games checks. The 16 staging batches were independently rehashed and reconciled with receipts; 2026-11-20-v1 immutable edition SHA-256 e17eb7eade556b3011bea6d2da3d26798f0e9168a3ec929fe2b7ed4bf30713ae and 25,287 UTF-8 bytes verified. The live archive rendered in hosted Chromium; direct independent opening of the exact dated query permalink was unavailable.",
+          "verified_at": "2026-11-20T15:15:36Z"
         }
       ],
-      "production_verified_at": null,
-      "production_verified_revision": null,
-      "last_verified_at": null,
-      "last_verified_public_url": null
+      "production_verified_at": "2026-11-20T15:15:36Z",
+      "production_verified_revision": 1,
+      "last_verified_at": "2026-11-20T15:15:36Z",
+      "last_verified_public_url": "https://aiupdates.app/whats-new.html?date=2026-11-20&revision=1",
+      "production_commit": "e6e8a94abb72fd3ba53fe3632684e88249a37c29",
+      "production_workflow_run_id": 44759028003,
+      "githack_workflow_run_id": 44759028287,
+      "verification_scope": "Exact main e6e8a94abb72fd3ba53fe3632684e88249a37c29 passed catalog/GitHack workflow 44759028287 (392 Node tests, zero failures; deterministic generation, offline reproducibility, GitHack parity) and Cloudflare production workflow 44759028003 on November 20, 2026: exact-artifact deployment, production HTTP/asset-revision checks across workers.dev, aiupdates.app and www.aiupdates.app, 69 hosted site-browser checks and 40 Games checks. The 16 staging batches were independently rehashed and reconciled with receipts; 2026-11-20-v1 immutable edition SHA-256 e17eb7eade556b3011bea6d2da3d26798f0e9168a3ec929fe2b7ed4bf30713ae and 25,287 UTF-8 bytes verified. The live archive rendered in hosted Chromium; direct independent opening of the exact dated query permalink was unavailable."
     }
   ]
 }

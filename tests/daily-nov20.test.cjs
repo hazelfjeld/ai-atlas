@@ -31,6 +31,18 @@ test('November 20 queued evidence is a single integrity-checked, dated edition',
  assert.ok(edition.news.some(n=>n.publication_date==='2026-11-14'));
  assert.ok(edition.news.some(n=>n.review_status.includes('reuters_reporting_attributed')));
  assert.ok(receipt.publication_history.some(h=>h.status==='pending_production_verification'));
+ // A deployed reviewed edition must advance the shared archive clock only
+ // after exact-revision GitHack, Cloudflare HTTP, and hosted browsers succeed.
+ assert.equal(receipt.publication_outcome,'immutable_revision_1_cloudflare_http_browser_and_githack_verified');
+ assert.equal(receipt.production_verified_at,'2026-11-20T15:15:36Z');
+ assert.equal(receipt.production_verified_revision,1);
+ assert.equal(receipt.production_commit,'e6e8a94abb72fd3ba53fe3632684e88249a37c29');
+ assert.equal(receipt.production_workflow_run_id,44759028003);
+ assert.equal(receipt.githack_workflow_run_id,44759028287);
+ assert.equal(receipt.last_verified_public_url,'https://aiupdates.app/whats-new.html?date=2026-11-20&revision=1');
+ assert.ok(receipt.publication_history.some(h=>h.edition==='2026-11-20-v1'&&h.status==='cloudflare_http_browser_and_githack_verified'&&h.verified_at===receipt.production_verified_at));
+ assert.equal(index.last_successful_publish_at,receipt.production_verified_at);
+ assert.equal(index.status,'edition_revision_1_production_verified');
  assert.equal(index.editions.at(-1).path,entry.path);
  assert.equal(index.status,'edition_revision_1_'+(receipt.production_verified_at?'production_verified':'pending_production_verification'));
  const lastVerified=receipts.filter(r=>r.production_verified_at).at(-1);
