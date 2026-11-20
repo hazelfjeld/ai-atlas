@@ -114,6 +114,9 @@ async function start() {
   const all = [...loaded.papers, ...loaded.alerts]; if (new Set(all.map(r => r.id)).size !== all.length) throw new Error('Duplicate record IDs.');
   for (const kind of Object.keys(rows)) { if (loaded[kind].length !== m.published_counts[kind]) throw new Error('Catalog count mismatch.'); rows[kind] = loaded[kind]; $(kind + '-count').textContent = rows[kind].length; }
   manifest = m; $('loading-status').textContent = `${all.length} research/safety records loaded · ${m.files.length} checksums verified · snapshot ${m.snapshot_date}`; route();
+  // Keep the same verified-content handoff as the daily archive: only hide
+  // source-backed preview cards once every catalog checksum and render succeeds.
+  document.documentElement.classList.add('atlas-research-ready');
  } catch (error) {
   $('loading-status').textContent = 'Catalog could not load: ' + error.message + ' No incomplete catalog is being presented as complete.';
   const retry = element('button', 'Retry loading'); retry.type = 'button'; retry.onclick = () => location.reload(); $('loading-status').append(document.createTextNode(' '), retry);

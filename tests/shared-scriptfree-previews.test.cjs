@@ -1,6 +1,6 @@
 'use strict';
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),crypto=require('node:crypto');
-const h=fs.readFileSync('whats-new.html','utf8'),r=fs.readFileSync('research.html','utf8'),c=fs.readFileSync('site-chrome.css','utf8');
+const h=fs.readFileSync('whats-new.html','utf8'),r=fs.readFileSync('research.html','utf8'),c=fs.readFileSync('site-chrome.css','utf8'),j=fs.readFileSync('checkpoint.js','utf8');
 const manifest=JSON.parse(fs.readFileSync('data/daily/index.json','utf8'));
 const entry=manifest.editions.find(x=>x.date==='2026-11-20'&&x.revision===1);
 const raw=fs.readFileSync(entry.path),edition=JSON.parse(raw.toString('utf8'));
@@ -22,7 +22,13 @@ test('script-free news headlines come from a verified immutable edition',()=>{
  assert.match(h,/html\.atlas-daily-ready #scriptfree-daily-archive\{display:none!important\}/);
 });
 test('research shares native cards and preserves script-free source/archive links',()=>{
- const html=r.slice(r.indexOf('<noscript><section class="site-static-fallback"'),r.indexOf('</section></noscript>'));
+ const html=r.slice(r.indexOf('<section class="site-static-fallback" id="scriptfree-research-catalog"'),r.indexOf('</section><div class="site-js-only">')); 
+ assert.ok(html.startsWith('<section class="site-static-fallback"'));
+ assert.ok(!r.includes('<noscript><section class="site-static-fallback"'));
+ assert.match(r,/html\.atlas-research-ready #scriptfree-research-catalog\{display:none!important\}/);
+ assert.match(j,/manifest = m;[^\n]*route\(\);[\s\S]*?document\.documentElement\.classList\.add\('atlas-research-ready'\);/);
+ assert.ok(j.indexOf("classList.add('atlas-research-ready')") < j.indexOf('} catch (error)'));
+ assert.ok(j.indexOf("classList.add('atlas-research-ready')") > j.indexOf('route();'));
  assert.ok(html.includes('data-catalog-date="2026-11-01"'));
  assert.ok(html.indexOf('site-static-fallback__stories')<html.indexOf('Browse the full research catalog'));
  for(const row of papers.slice(0,3)){

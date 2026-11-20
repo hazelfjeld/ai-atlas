@@ -44,6 +44,11 @@ with sync_playwright() as p:
     check('Discover exposes a crawlable, human-readable Discord invite without JavaScript',
           page.locator('#community a[href="https://discord.gg/mvRJjgdM4R"]').count() == 1
           and 'AI research' in page.locator('#community').inner_text())
+    page.goto(base + 'research.html')
+    check('Research offers reviewed source cards without JavaScript',
+          page.locator('#scriptfree-research-catalog').is_visible()
+          and page.locator('#scriptfree-research-catalog .site-static-fallback__stories article').count() == 3
+          and not page.locator('#loading-status').is_visible())
     page.goto(base + 'about.html')
     check('About provides context and the same public Discord invitation without JavaScript',
           page.locator('a[href="https://discord.gg/mvRJjgdM4R"]').count() == 1
@@ -501,6 +506,21 @@ with sync_playwright() as p:
     context=browser.new_context(viewport={'width':1440,'height':1050},reduced_motion='reduce')
     page=context.new_page()
     errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
+    # The same source-backed content stays useful while checksum-checked
+    # Research data is unavailable, and yields to the live cards only on success.
+    page.route('**/data/papers-01.json', lambda route: route.abort())
+    page.goto(base+'research.html')
+    page.wait_for_function("document.querySelector('#loading-status')?.textContent.includes('Catalog could not load:')")
+    check('Research network failure retains accessible preview and retry state',
+          page.locator('#scriptfree-research-catalog').is_visible()
+          and not page.evaluate("document.documentElement.classList.contains('atlas-research-ready')")
+          and page.get_by_role('button', name='Retry loading').is_visible())
+    page.unroute('**/data/papers-01.json')
+    page.reload()
+    page.wait_for_function("document.documentElement.classList.contains('atlas-research-ready')", timeout=45000)
+    check('Research hides its preview only after all validated cards render',
+          not page.locator('#scriptfree-research-catalog').is_visible()
+          and page.locator('#results > article.card').count() == 30)
     page.goto(base)
     page.locator('#catalog-loading').wait_for(state='detached')
     hydrated_nav=page.locator('#navigation a.nav-link').evaluate_all(
