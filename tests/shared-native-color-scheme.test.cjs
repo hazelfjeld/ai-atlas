@@ -17,13 +17,13 @@ test('native Research, Technology and Playbooks controls respect the same light/
       file + ' must not force light-only native controls on dark-theme visits');
   }
   const css = read('site-chrome.css');
-  assert.match(css, /:root\\[data-theme="light"\\]\\{color-scheme:light\\}/);
-  assert.match(css, /:root\\[data-theme="dark"\\]\\{color-scheme:dark\\}/);
+  assert.match(css, /:root\[data-theme="light"\]\{color-scheme:light\}/);
+  assert.match(css, /:root\[data-theme="dark"\]\{color-scheme:dark\}/);
 });
 
 test('the shared native chrome normalizer preserves the dual-mode metadata on rebuilds', () => {
   const generator = read('scripts/site_chrome.py');
-  assert.match(generator, /def normalize_standalone_chrome\\(html, path\\):/);
+  assert.match(generator, /def normalize_standalone_chrome\(html, path\):/);
   assert.ok(generator.includes("light_only = '<meta name=\"color-scheme\" content=\"light\">'"));
   assert.ok(generator.includes("dual_scheme = '<meta name=\"color-scheme\" content=\"light dark\">'"));
   assert.ok(generator.includes('normalized.replace(light_only, dual_scheme, 1)'));
