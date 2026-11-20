@@ -3107,9 +3107,9 @@ with sync_playwright() as p:
                     skip_page.screenshot(path=str(out/('skip-'+route.split('.')[0]+'-'+scheme+'.png')))
         skip_context.close()
 
-    # The same fixed workspace bar is 78px tall on desktop, but the legacy
-    # anchor clearance only covered phones. Verify desktop deep-link and
-    # keyboard-skip targets are not hidden behind it across actual page types.
+    # Native pages already use the shared root-scroll offset. Discover's
+    # separate app-shell lacked that same clearance on desktop. Exercise both
+    # frames, deep links and keyboard Skip without introducing doubled margins.
     for scheme in ('light', 'dark'):
         desktop_skip_context = browser.new_context(
             java_script_enabled=False, color_scheme=scheme, reduced_motion='reduce')
@@ -3135,10 +3135,13 @@ with sync_playwright() as p:
                         node.getBoundingClientRect().height >= 50);
                     return {top:el.getBoundingClientRect().top,
                             headerBottom:header?.getBoundingClientRect().bottom,
+                            rootPadding:getComputedStyle(
+                                document.documentElement).scrollPaddingTop,
                             margin:getComputedStyle(el).scrollMarginTop};
                 }""")
                 check('Desktop skip clears shared bar '+route+' '+scheme+' '+str(width),
-                      clearance['margin']=='90px'
+                      clearance['rootPadding']=='96px'
+                      and clearance['margin']=='0px'
                       and clearance['headerBottom'] is not None
                       and clearance['top']>=clearance['headerBottom']-2)
         desktop_skip_context.close()

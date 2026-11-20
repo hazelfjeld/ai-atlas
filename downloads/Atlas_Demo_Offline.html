@@ -917,7 +917,10 @@ body:has(.site-chrome) :is(.tech-controls,.playbook-tools,.controls,.search-cont
   /* The 78px Discover-style fixed workspace bar otherwise covers native
      in-page hash destinations on editorial, reference and review pages.
      Apply the offset at the root scroller for all shared-chrome routes. */
-  html:has(.site-chrome){scroll-padding-top:96px}
+  /* Discover and native pages share the same 78px header clearance. The
+     root offset applies to deep links and skip links, without double-counting
+     #main's phone-only scroll margin on generated reference articles. */
+  html:has(.site-chrome),html:has(.app-shell){scroll-padding-top:96px}
 }
 /* The same fixed-header clearance is necessary below 651px now that the
    shared mobile menu/search frame remains sticky while scrolling. Native
@@ -1370,9 +1373,6 @@ main.term-shell > footer:not(.site-chrome__footer) a{color:var(--accent,#27664e)
    after cross-page navigation, in both themes and without JavaScript. */
 @media(max-width:650px){
   #main{scroll-margin-top:80px}
-}
-@media(min-width:651px){
-  #main{scroll-margin-top:90px}
 }
 /* atlas-mobile-skip-clearance:end */
 
