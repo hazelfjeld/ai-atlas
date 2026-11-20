@@ -333,6 +333,9 @@ test('shared mobile drawer makes background inert without leaving hidden control
   const themeButton = el('BUTTON'), drawer = el('DETAILS');
   const search = el('A'), summary = el('SUMMARY'), desktopLink = el('A');
   desktopLink.focus = () => { document.activeElement = desktopLink; };
+  // The resized desktop link is genuinely rendered: visibility is now
+  // checked before focus so the DOM fixture must expose its client rect.
+  desktopLink.getClientRects = () => [{}];
   drawer.contains = node => node === summary;
   drawer.matches = selector => selector === 'details.site-mobile-chrome__nav';
   append(body, skip, header, main, preInert);
@@ -1608,7 +1611,8 @@ test('closed shared mobile toggle restores focus to the selected desktop rail', 
   const railLink={
     getClientRects(){return window.innerWidth>650?[{}]:[];},
     focus(){document.activeElement=railLink;},
-    closest(selector){return selector.includes('.site-chrome')?{}:null;}
+    // This is a primary rail link, never a child of the native More disclosure.
+    closest(selector){return null;}
   };
   const contentInput={matches(){return false;},closest(){return null;}};
   const document={
