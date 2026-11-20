@@ -56,3 +56,32 @@ test('generated concept and technology articles use the same 16px desktop first-
   assert.ok(read('downloads/Atlas_Demo_Offline.html').includes(css),
     'the single-file fallback embeds exactly the updated shared stylesheet');
 });
+
+test('generated reference first-content offsets are desktop-only, not leaked onto 320px/390px layouts', () => {
+  const css = read('site-chrome.css');
+  const block = css.split('/* atlas-desktop-first-content-alignment:begin */')[1]
+    ?.split('/* atlas-desktop-first-content-alignment:end */')[0];
+  assert.ok(block, 'shared desktop alignment is present');
+  const mediaStart = block.indexOf('@media (min-width:651px){');
+  assert.notEqual(mediaStart, -1, 'desktop-only media query exists');
+  let depth = 0;
+  let mediaClose = -1;
+  for (let i = mediaStart + '@media (min-width:651px)'.length; i < block.length; i++) {
+    if (block[i] === '{') depth++;
+    if (block[i] === '}') {
+      depth--;
+      if (depth === 0) { mediaClose = i; break; }
+    }
+  }
+  assert.ok(mediaClose > mediaStart, 'desktop media block closes properly');
+  for (const selector of [
+    'body:has(> nav.site-chrome.term-nav) > main.term-shell{padding-top:8px}',
+    'body:has(> nav.site-chrome.term-nav) > main.term-shell:has(> .breadcrumb-links){padding-top:16px}',
+  ]) {
+    const offset = block.indexOf(selector);
+    assert.ok(offset > mediaStart && offset < mediaClose, selector + ' is within desktop media');
+  }
+  assert.equal(block.slice(mediaClose + 1).trim(), '', 'no reference offset can leak into mobile cascade');
+  assert.ok(read('downloads/Atlas_Demo_Offline.html').includes(css),
+    'offline build carries the corrected desktop-only query');
+});

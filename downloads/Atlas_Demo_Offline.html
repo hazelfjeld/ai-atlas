@@ -1572,7 +1572,6 @@ main.term-shell > footer:not(.site-chrome__footer) a{color:var(--accent,#27664e)
   .shell:has(> .site-chrome.research-site-chrome) > main > .hero{margin-top:8px}
   .tech-shell:has(> .site-chrome.tech-top){padding-top:0}
   .tech-shell:has(> .site-chrome.tech-top) > main > .tech-hero{padding-top:16px}
-}
   /* All 1,345 concept and 303 technology detail pages still inherited
      30-32px of pre-workspace article padding *on top* of the fixed shared
      78px bar. Use the same 16px desktop first-content baseline as Discover,
@@ -1580,6 +1579,7 @@ main.term-shell > footer:not(.site-chrome__footer) a{color:var(--accent,#27664e)
      first on technology profiles; a hero-only page keeps its 8px margin. */
   body:has(> nav.site-chrome.term-nav) > main.term-shell{padding-top:8px}
   body:has(> nav.site-chrome.term-nav) > main.term-shell:has(> .breadcrumb-links){padding-top:16px}
+}
 /* atlas-desktop-first-content-alignment:end */
 </style><script>/* Enhance the native dropdown only when scripts can make its drawer modal.
    Without JavaScript, keep the accessible, nonmodal <details> fallback. */
