@@ -1560,6 +1560,20 @@ main.term-shell > footer:not(.site-chrome__footer) a{color:var(--accent,#27664e)
   }
 }
 /* atlas-current-secondary-parent:end */
+
+/* atlas-desktop-first-content-alignment:begin */
+/* Discover and the existing native rail begin the reading desk below the 78px
+   workspace bar. Research was still adding checkpoint.css's 29px main
+   padding plus a 36px hero margin; Technology directory retained a 28px
+   shell pad and 55px hero pad from its pre-rail header. These now share one
+   16px first-content inset without moving cards, controls, or mobile Games. */
+@media (min-width:651px){
+  .shell:has(> .site-chrome.research-site-chrome) > main{padding-top:8px}
+  .shell:has(> .site-chrome.research-site-chrome) > main > .hero{margin-top:8px}
+  .tech-shell:has(> .site-chrome.tech-top){padding-top:0}
+  .tech-shell:has(> .site-chrome.tech-top) > main > .tech-hero{padding-top:16px}
+}
+/* atlas-desktop-first-content-alignment:end */
 </style><script>/* Enhance the native dropdown only when scripts can make its drawer modal.
    Without JavaScript, keep the accessible, nonmodal <details> fallback. */
 document.documentElement.classList?.add('atlas-enhanced');
