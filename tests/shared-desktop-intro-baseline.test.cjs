@@ -28,3 +28,31 @@ test('Research and Technology use one Discover-aligned first-content inset', () 
   assert.ok(read('downloads/Atlas_Demo_Offline.html').includes(css),
     'offline fallback embeds exact shared CSS and not the old hero rhythm');
 });
+
+test('generated concept and technology articles use the same 16px desktop first-content baseline', () => {
+  const css = read('site-chrome.css');
+  const block = css.split('/* atlas-desktop-first-content-alignment:begin */')[1]
+    ?.split('/* atlas-desktop-first-content-alignment:end */')[0];
+  assert.ok(block, 'existing shared desktop-alignment contract is present');
+  assert.ok(block.includes('body:has(> nav.site-chrome.term-nav) > main.term-shell{padding-top:8px}'),
+    'hero-first reference articles share 8px shell padding plus the 8px hero margin');
+  assert.ok(block.includes('body:has(> nav.site-chrome.term-nav) > main.term-shell:has(> .breadcrumb-links){padding-top:16px}'),
+    'breadcrumb-first technology profiles share a 16px first-content inset');
+  for (const [file, breadcrumbs] of [
+    ['terms/MLD-1345-zero-shot-prompting.html', false],
+    ['technology/TECH-0303-tohoku-aisin-16-nm-stt-mram-edge-ai-soc.html', true],
+    ['terms/index.html', false],
+    ['technology/index.html', false],
+    ['about.html', false],
+  ]) {
+    const html = read(file);
+    assert.ok(html.includes('<nav class="site-chrome term-nav"'),
+      file + ': native script-free primary rail remains present');
+    assert.ok(html.indexOf('<nav class="site-chrome term-nav"') < html.indexOf('<main class="term-shell">'),
+      file + ': rail precedes the article landmark');
+    assert.equal(html.includes('class="breadcrumb-links"'), breadcrumbs,
+      file + ': its existing first-content structure is unchanged');
+  }
+  assert.ok(read('downloads/Atlas_Demo_Offline.html').includes(css),
+    'the single-file fallback embeds exactly the updated shared stylesheet');
+});
