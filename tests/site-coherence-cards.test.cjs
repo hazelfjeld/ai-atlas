@@ -12,8 +12,10 @@ test('generated reference profiles expose real workspace title text after enhanc
     'Details must use the existing accessible shared workspace title class');
   assert.ok(runtime.includes("drawer.insertAdjacentElement('afterend', titleNode)"),
     'The real heading must occupy the same slot as directory and Discover headings');
-  assert.ok(runtime.includes('titleNode.textContent = title'),
-    'The heading must be DOM text, not interpolated HTML or a CSS pseudo-element');
+  assert.ok(runtime.includes('titleNode.textContent = label'),
+    'The shared workspace label must be real DOM text, not interpolated HTML or a CSS pseudo-element');
+  assert.ok(runtime.includes('ensureSharedWorkspaceTitle(chrome, label)'),
+    'Every native workspace must use the common title renderer, not a special-case heading');
   assert.ok(offline.includes(runtime.replaceAll('</script', '<\\/script')),
     'The offline fallback must embed exactly the updated shared runtime');
   for (const route of ['terms/MLD-1179-structured-output.html',
