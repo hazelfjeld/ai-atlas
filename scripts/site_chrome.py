@@ -641,4 +641,12 @@ def normalize_standalone_chrome(html, path):
     if light_only in normalized:
         assert normalized.count(light_only) == 1, path
         normalized = normalized.replace(light_only, dual_scheme, 1)
+    # Native editorial pages with no color-scheme hint still flash light-only
+    # browser controls before shared CSS/theme hydration. Reuse the existing
+    # two-scheme contract across every standalone page on first paint.
+    if dual_scheme not in normalized:
+        charset = '<meta charset="utf-8">'
+        assert normalized.count(charset) == 1, path
+        normalized = normalized.replace(charset, charset + '\\n' + dual_scheme, 1)
+    assert normalized.count(dual_scheme) == 1, path
     return ensure_skip_destination_focusable(migrate_legacy_article_landmark(normalized, path), path)
