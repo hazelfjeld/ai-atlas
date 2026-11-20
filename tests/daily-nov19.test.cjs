@@ -33,7 +33,15 @@ test('November 19 source-reviewed queue becomes exactly one immutable partially 
  assert.equal(receipt.production_workflow_run_id,44600094128);
  assert.equal(receipt.githack_workflow_run_id,44600094160);
  assert.ok(receipt.publication_history.some(h=>h.status==='cloudflare_http_browser_and_githack_verified'&&h.verified_at===receipt.production_verified_at));
- assert.equal(idx.last_successful_publish_at,receipt.production_verified_at,'Verified edition must advance the archive timestamp');
- assert.equal(idx.status,'edition_revision_1_production_verified');
+ // An independently verified historic receipt stays verified when a newer
+ // source-reviewed edition is committed but certification remains pending.
+ const lastVerified=ledger.receipts.filter(r=>r.production_verified_at).at(-1);
+ assert.equal(lastVerified.batch_id,receipt.batch_id,'November 19 remains last certified until newer verification');
+ assert.equal(idx.last_successful_publish_at,lastVerified.production_verified_at,
+   'A pending edition cannot advance the production-verified publication clock');
+ const newestReceipt=ledger.receipts.at(-1),newestEdition=idx.editions.at(-1);
+ assert.equal(newestReceipt.publication_edition,newestEdition.date+'-v'+newestEdition.revision);
+ assert.equal(idx.status,'edition_revision_'+newestEdition.revision+'_'+
+   (newestReceipt.production_verified_at?'production_verified':'pending_production_verification'));
  assert.equal(receipt.counts.catalog_deferred,7,'Public verification must not promote deferred proposals');
 });
