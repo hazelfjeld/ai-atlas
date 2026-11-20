@@ -29,3 +29,20 @@ test('the shared native chrome normalizer preserves the dual-mode metadata on re
   assert.ok(generator.includes('normalized.replace(light_only, dual_scheme, 1)'));
   assert.ok(generator.includes('assert normalized.count(light_only) == 1, path'));
 });
+
+
+test('first-paint review and demo page controls share the native two-theme contract', () => {
+  for (const file of ['catalog-review.html', 'hardware-review.html', 'demo.html']) {
+    const html = read(file);
+    assert.equal((html.match(/<meta name="color-scheme" content="light dark">/g)||[]).length, 1,
+      file + ' must advertise both appearances before styles and scripts load');
+    assert.ok(html.indexOf('<meta name="color-scheme" content="light dark">') < html.indexOf('<style'),
+      file + ' must declare native widget support before inline page styling');
+    assert.ok(html.includes('site-chrome.css'), file + ' retains the shared theme stylesheet');
+    assert.ok(html.includes('site-theme.js'), file + ' retains shared saved-theme behavior');
+  }
+  const generator = read('scripts/site_chrome.py');
+  assert.match(generator, /if dual_scheme not in normalized:/);
+  assert.match(generator, /assert normalized\.count\(charset\) == 1, path/);
+  assert.match(generator, /assert normalized\.count\(dual_scheme\) == 1, path/);
+});
