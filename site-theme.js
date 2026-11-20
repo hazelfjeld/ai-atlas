@@ -72,6 +72,62 @@ function ensureSharedWorkspaceTitle(chrome, label) {
 // The main workspace consumes this one-shot intent after catalog hydration.
 // Use the same handoff for the slash shortcut and the visible search link.
 
+/* atlas-prehydration-section-state:begin */
+/* Native pages expose their active rail destination in static HTML. Discover
+   must also reflect a direct hash link before its asynchronous catalog loads;
+   otherwise Research, dictionary and Games links briefly appear as Discover.
+   Derive everything from existing canonical anchors, never another route map. */
+document.addEventListener('DOMContentLoaded', () => {
+  const rail = document.getElementById('navigation');
+  const mobileNav = document.getElementById('discover-mobile-nav');
+  const route = window.location.hash.match(/^#\/([a-z-]+)(?:\?|$)/)?.[1];
+  if (!rail || !mobileNav || !route) return;
+  const links = [...rail.querySelectorAll('a[data-view]')];
+  const current = links.find(link => link.dataset.view === route);
+  if (!current) return; // Unknown/static routes keep the safe original fallback.
+  for (const link of links) {
+    const active = link === current;
+    link.classList.toggle('active', active);
+    if (active) link.setAttribute('aria-current', 'page');
+    else link.removeAttribute('aria-current');
+  }
+  const target = current.getAttribute('href');
+  for (const link of mobileNav.querySelectorAll('a[href^="#/"]')) {
+    if (link.getAttribute('href') === target) link.setAttribute('aria-current', 'page');
+    else link.removeAttribute('aria-current');
+  }
+  // Make a directly visited secondary workspace discoverable on both rails
+  // just as the hydrated app does, without overriding user-opened disclosures.
+  if (current.closest('details.nav-more')) {
+    for (const details of [
+      document.getElementById('additional-navigation'),
+      mobileNav.querySelector('details.site-mobile-chrome__more'),
+    ]) {
+      if (details && !details.open) {
+        details.open = true;
+        details.dataset.atlasAutoOpened = 'true';
+      }
+    }
+  }
+  const name = current.querySelector('span:not(.nav-count)')?.textContent?.trim();
+  const breadcrumb = document.getElementById('breadcrumb');
+  if (name && breadcrumb) breadcrumb.textContent = name;
+  const header = document.querySelector('.discover-mobile-chrome');
+  if (name && header) {
+    header.dataset.pageLabel = name;
+    header.setAttribute('aria-label', 'AI Updates mobile header · ' + name);
+    mobileNav.querySelector(':scope > summary')
+      ?.setAttribute('aria-label', 'Toggle navigation · ' + name);
+  }
+  // A direct secondary hash must not show the hard-coded Discover teaser while
+  // its requested section is pending. Keep the real loading status visible;
+  // only remove the original teaser, never an already-rendered view or error.
+  const page = document.getElementById('page');
+  if (route !== 'overview' && document.getElementById('catalog-loading') &&
+      page?.querySelector('.discover-heading')) page.replaceChildren();
+});
+/* atlas-prehydration-section-state:end */
+
 /* Real search everywhere: keep the static link as the no-JavaScript fallback,
    and use its relative route on both root and nested reference pages. */
 document.addEventListener('DOMContentLoaded', () => {
