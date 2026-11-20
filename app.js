@@ -104,20 +104,18 @@ function renderNav(){
   // Read the currently selected canonical rail label instead of duplicating
   // another set of navigation names or changing native/no-script links.
   const mobileHeading=document.querySelector('.discover-mobile-chrome');
+  // Discover's visible desktop title and native/mobile route announcement use
+  // the same selected canonical rail label, as the standalone shared chrome.
+  const selectedName=nav.querySelector('a.nav-link[aria-current="page"] span:not(.nav-count)');
+  const currentName=selectedName?.textContent?.trim()||labels[view];
   if(mobileHeading){
-    const selectedName=nav.querySelector('a.nav-link[aria-current="page"] span:not(.nav-count)');
-    const currentName=selectedName?.textContent?.trim()||labels[view];
     mobileHeading.dataset.pageLabel=currentName;
-    // Keep the real shared desktop header title synchronized with the selected
-    // SPA section. Updating data-page-label alone leaves visible text stale.
-    const workspaceTitle=mobileHeading.querySelector(':scope > .site-mobile-chrome__title');
-    if(workspaceTitle)workspaceTitle.textContent=currentName;
-    // The breadcrumb is intentionally hidden in the narrow search-first topbar.
+    // The breadcrumb is hidden on phones to leave room for working search.
     // Announce its current section on the visible menu trigger instead.
     mobileHeading.setAttribute('aria-label','AI Updates mobile header · '+currentName);
     mobileHeading.querySelector('#discover-mobile-nav > summary')?.setAttribute('aria-label','Toggle navigation · '+currentName);
   }
-  $('breadcrumb').textContent=labels[view];
+  $('breadcrumb').textContent=currentName;
   document.title=view==='overview'?'AI Updates — AI research, tools & concepts':labels[view]+' · AI Updates';
   $('snapshot-date').textContent=date(D.meta.research_checked_on);
   renderDock();

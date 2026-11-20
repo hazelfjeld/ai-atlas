@@ -470,9 +470,9 @@ with sync_playwright() as p:
                     ('overview', 'Discover'),
                 ):
                     page.evaluate('(route) => { location.hash = "#/" + route; }', section)
-                    title = page.locator('.discover-mobile-chrome > .site-mobile-chrome__title')
+                    title = page.locator('#breadcrumb.site-mobile-chrome__title')
                     page.wait_for_function(
-                        '(label) => document.querySelector(".discover-mobile-chrome > .site-mobile-chrome__title")?.textContent?.trim() === label',
+                        '(label) => document.getElementById("breadcrumb")?.textContent?.trim() === label',
                         arg=expected_label)
                     check('Discover visible desktop workspace title follows ' + section + ' at ' + str(width) + ' ' + chosen_theme,
                           title.is_visible()
