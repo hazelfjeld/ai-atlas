@@ -1085,12 +1085,14 @@ main.term-shell > footer:not(.site-chrome__footer){box-sizing:border-box;width:1
 main.term-shell > footer:not(.site-chrome__footer) a{color:var(--accent,#27664e)}
 
 /* atlas-mobile-skip-clearance:begin */
-/* Every native "Skip to content" link resolves to #main. On phones the shared
-   68px menu/search header remains sticky; without a scroll offset it can cover
-   the destination heading after Enter or a deep link. Reserve that clearance
-   in the shared stylesheet, including when JavaScript is disabled. */
+/* All workspaces expose a fixed shared topbar: 68px on phones, 78px on desktop.
+   One anchor offset keeps keyboard Skip to content and deep links visible
+   after cross-page navigation, in both themes and without JavaScript. */
 @media(max-width:650px){
   #main{scroll-margin-top:80px}
+}
+@media(min-width:651px){
+  #main{scroll-margin-top:90px}
 }
 /* atlas-mobile-skip-clearance:end */
 

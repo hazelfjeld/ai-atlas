@@ -3107,6 +3107,40 @@ with sync_playwright() as p:
                     skip_page.screenshot(path=str(out/('skip-'+route.split('.')[0]+'-'+scheme+'.png')))
         skip_context.close()
 
+    # The same fixed workspace bar is 78px tall on desktop, but the legacy
+    # anchor clearance only covered phones. Verify desktop deep-link and
+    # keyboard-skip targets are not hidden behind it across actual page types.
+    for scheme in ('light', 'dark'):
+        desktop_skip_context = browser.new_context(
+            java_script_enabled=False, color_scheme=scheme, reduced_motion='reduce')
+        desktop_skip_page = desktop_skip_context.new_page()
+        for width in (768, 1280):
+            desktop_skip_page.set_viewport_size({'width':width, 'height':844})
+            for route in (
+                'index.html', 'whats-new.html', 'research.html',
+                'playbooks.html', 'games.html',
+                'terms/MLD-0001-a-b-test.html',
+                'technology/TECH-0001-adversarial-robustness-toolbox.html'
+            ):
+                desktop_skip_page.goto(base + route)
+                desktop_skip_page.locator('a[href="#main"]').first.focus()
+                desktop_skip_page.keyboard.press('Enter')
+                desktop_skip_page.wait_for_function('location.hash === "#main"')
+                desktop_skip_page.locator('#main').evaluate(
+                    'el => el.scrollIntoView({block: "start", behavior: "instant"})')
+                clearance = desktop_skip_page.locator('#main').evaluate("""el => {
+                    const header=document.querySelector('.site-mobile-chrome') ||
+                                 document.querySelector('.topbar');
+                    return {top:el.getBoundingClientRect().top,
+                            headerBottom:header?.getBoundingClientRect().bottom,
+                            margin:getComputedStyle(el).scrollMarginTop};
+                }""")
+                check('Desktop skip clears shared bar '+route+' '+scheme+' '+str(width),
+                      clearance['margin']=='90px'
+                      and clearance['headerBottom'] is not None
+                      and clearance['top']>=clearance['headerBottom']-2)
+        desktop_skip_context.close()
+
     # Source-reviewed concept guides now use the existing global footer
     # without hydration, matching technology profiles across all viewports.
     for scheme in ('light', 'dark'):
