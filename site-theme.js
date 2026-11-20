@@ -32,16 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const title = document.querySelector('main.term-shell h1')?.textContent?.trim();
   if (bar && title && title.length <= 90) {
     bar.dataset.pageLabel = title;
-    // Match Discover and the native directory landings: the workspace name
-    // is actual DOM text, not an inaccessible CSS ::before label. Preserve
-    // the existing first-paint/no-JavaScript parent-section fallback.
-    const drawer = bar.querySelector(':scope > details.site-mobile-chrome__nav');
-    if (drawer && !bar.querySelector(':scope > .site-mobile-chrome__title')) {
-      const titleNode = document.createElement('span');
-      titleNode.className = 'site-mobile-chrome__title';
-      titleNode.textContent = title;
-      drawer.insertAdjacentElement('afterend', titleNode);
-    }
+    // The common renderer below supplies the same real heading for all native pages.
   }
 });
 
@@ -61,6 +52,22 @@ document.addEventListener('DOMContentLoaded', () => {
   footer.classList.add('site-chrome__footer');
   main.after(footer);
 });
+
+// Use one DOM-backed workspace title for every native page family, including
+// generated concept and technology references. The earlier CSS-only pseudo
+// heading was visible but unavailable as text to assistive technology. Keep
+// that pseudo heading for the script-free first paint and suppress it using
+// the existing :has(> .site-mobile-chrome__title) rule after hydration.
+function ensureSharedWorkspaceTitle(chrome, label) {
+  if (!chrome || !label || !document.querySelector('.site-chrome')) return;
+  if (chrome.querySelector(':scope > .site-mobile-chrome__title')) return;
+  const drawer = chrome.querySelector(':scope > details.site-mobile-chrome__nav');
+  if (!drawer) return;
+  const titleNode = document.createElement('span');
+  titleNode.className = 'site-mobile-chrome__title';
+  titleNode.textContent = label;
+  drawer.insertAdjacentElement('afterend', titleNode);
+}
 
 // The main workspace consumes this one-shot intent after catalog hydration.
 // Use the same handoff for the slash shortcut and the visible search link.
@@ -415,6 +422,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Respect the server-rendered page label on first paint and after hydration.
   const label = chrome.dataset.pageLabel || active?.textContent?.trim() || heading?.textContent?.trim() || document.title.split('·')[0].trim();
   chrome.dataset.pageLabel = label;
+  ensureSharedWorkspaceTitle(chrome, label);
   // Every shared mobile menu should announce the same current workspace as
   // its visible header. Native reference pages still carry a generic
   // script-free summary label; normalize it centrally after hydration instead
