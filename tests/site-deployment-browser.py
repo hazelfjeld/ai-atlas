@@ -2907,6 +2907,9 @@ with sync_playwright() as p:
         collapsed_page = collapsed_context.new_page()
         collapsed_page.on('pageerror', lambda e: errors.append(str(e)))
         for route in ('research.html', 'demo.html', 'terms/index.html'):
+            # Each route must begin at the mobile breakpoint: the previous
+            # iteration has already resized this same page to desktop.
+            collapsed_page.set_viewport_size({'width':390, 'height':844})
             collapsed_page.goto(base + route)
             more = collapsed_page.locator('details.site-chrome__more')
             more.evaluate('(el) => {el.open=false}')
