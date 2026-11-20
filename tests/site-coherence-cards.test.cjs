@@ -1000,9 +1000,20 @@ test('script-free native catalogs offer source links instead of inert search and
   for(const [route,required] of Object.entries(routes)){
     const html=fs.readFileSync(path.join(__dirname,'..',route),'utf8');
     assert.ok(html.includes('<script src="site-theme.js"></script>'),route+' must set shared enhancement state');
-    assert.match(html, /<noscript><section class="site-static-fallback"/,route+' needs native visible fallback');
+    // Research progressively enhances the same verified cards while loading;
+    // other native catalogs expose them only in no-JavaScript mode.
+    const research=route==='research.html';
+    if(research){
+      assert.match(html, /<section class="site-static-fallback" id="scriptfree-research-catalog"/,route+' needs first-paint preview');
+      assert.match(html, /html\.atlas-research-ready #scriptfree-research-catalog\{display:none!important\}/,
+        route+' must hide the preview only on verified hydration');
+    }else{
+      assert.match(html, /<noscript><section class="site-static-fallback"/,route+' needs native visible fallback');
+    }
     assert.ok(html.includes('class="site-js-only"'),route+' must hide controls when scripts are absent');
-    const fallback=html.match(/<noscript><section class="site-static-fallback"[\s\S]*?<\/section><\/noscript>/);
+    const fallback=research
+      ? html.match(/<section class="site-static-fallback" id="scriptfree-research-catalog"[\s\S]*?<\/section>/)
+      : html.match(/<noscript><section class="site-static-fallback"[\s\S]*?<\/section><\/noscript>/);
     assert.ok(fallback,route+' must expose published source links');
     for(const href of required){
       assert.ok(fallback[0].includes('href="'+href+'"'),route+' missing '+href);

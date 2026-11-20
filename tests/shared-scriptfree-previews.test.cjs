@@ -22,7 +22,11 @@ test('script-free news headlines come from a verified immutable edition',()=>{
  assert.match(h,/html\.atlas-daily-ready #scriptfree-daily-archive\{display:none!important\}/);
 });
 test('research shares native cards and preserves script-free source/archive links',()=>{
- const html=r.slice(r.indexOf('<section class="site-static-fallback" id="scriptfree-research-catalog"'),r.indexOf('</section><div class="site-js-only">')); 
+ const start=r.indexOf('<section class="site-static-fallback" id="scriptfree-research-catalog"');
+ assert.ok(start>=0,'Research must expose reviewed cards outside noscript');
+ const end=r.indexOf('</section>',start);
+ assert.ok(end>start,'Research fallback has a closing section');
+ const html=r.slice(start,end+'</section>'.length);
  assert.ok(html.startsWith('<section class="site-static-fallback"'));
  assert.ok(!r.includes('<noscript><section class="site-static-fallback"'));
  assert.match(r,/html\.atlas-research-ready #scriptfree-research-catalog\{display:none!important\}/);
