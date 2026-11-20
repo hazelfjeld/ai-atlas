@@ -2897,6 +2897,40 @@ with sync_playwright() as p:
               and not drawer.evaluate('(el) => el.open'))
     secondary_resize.close()
 
+    # If a visitor explicitly collapses More, its aria-current child remains
+    # semantically selected but is hidden. Rotating with the mobile drawer open
+    # must focus the visible desktop summary, not the hidden link or <body>.
+    for scheme in ('light', 'dark'):
+        collapsed_context = browser.new_context(
+            color_scheme=scheme, viewport={'width':390, 'height':844},
+            reduced_motion='reduce')
+        collapsed_page = collapsed_context.new_page()
+        collapsed_page.on('pageerror', lambda e: errors.append(str(e)))
+        for route in ('research.html', 'demo.html', 'terms/index.html'):
+            collapsed_page.goto(base + route)
+            more = collapsed_page.locator('details.site-chrome__more')
+            more.evaluate('(el) => {el.open=false}')
+            drawer = collapsed_page.locator('details.site-mobile-chrome__nav')
+            drawer.locator(':scope > summary').click()
+            check('mobile drawer opens before collapsed desktop handoff ' + route + ' ' + scheme,
+                  drawer.evaluate('(el) => el.open'))
+            collapsed_page.set_viewport_size({'width':768, 'height':844})
+            collapsed_page.wait_for_function("""() => {
+                const more=document.querySelector('details.site-chrome__more');
+                return more && !more.open &&
+                  document.activeElement === more.querySelector(':scope > summary');
+            }""", timeout=10000)
+            check('closed desktop More preserves visible focus on ' + route + ' ' + scheme,
+                  not drawer.evaluate('(el) => el.open')
+                  and not more.evaluate('(el) => el.open')
+                  and more.locator(':scope > summary').is_visible()
+                  and more.locator('a[aria-current="location"]').count()==1
+                  and not more.locator('a[aria-current="location"]').is_visible())
+            if scheme=='dark' and route=='research.html':
+                collapsed_page.screenshot(
+                    path=str(out/'collapsed-more-keyboard-research-768-dark.png'))
+        collapsed_context.close()
+
     # Verify actual cross-page introduction rhythm at mobile and desktop
     # widths in both OS themes, before any JavaScript can apply a patch.
     lead_routes = (

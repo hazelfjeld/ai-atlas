@@ -1661,7 +1661,18 @@ function focusSharedDesktopRail() {
     document.querySelector('#navigation a[aria-current]') ||
     document.querySelector('.site-chrome__brand') ||
     document.querySelector('#navigation a');
-  destination?.focus({preventScroll:true});
+  // A user may have collapsed More before rotating to mobile. The active link
+  // retains aria-current but is not focusable inside a closed <details>.
+  // Preserve their disclosure choice; put focus on its visible summary rather
+  // than reopening the menu or silently stranding keyboard focus on <body>.
+  const collapsedMore = destination?.closest?.(
+    'details.site-chrome__more:not([open]), details#additional-navigation:not([open])');
+  const candidate = collapsedMore?.querySelector(':scope > summary') || destination;
+  const fallback = document.querySelector('.site-chrome__brand') ||
+    document.querySelector('#sidebar .brand') ||
+    document.querySelector('#navigation a');
+  [candidate, fallback].find(node => node?.getClientRects?.().length)
+    ?.focus({preventScroll:true});
 }
 
 // Close a native shared drawer and release its background immediately, rather
