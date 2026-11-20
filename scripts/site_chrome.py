@@ -202,7 +202,8 @@ def render_directory_nav(prefix, selected, *, mobile_classes="directory-mobile-t
                          toggle_classes="site-mobile-chrome__toggle", menu_classes="site-mobile-chrome__menu",
                          search_classes="site-mobile-chrome__search", icon_classes="site-mobile-chrome__search-icon",
                          search_label_classes="site-mobile-chrome__search-placeholder",
-                         desktop_classes="site-chrome term-nav", labeled=True, current_kind="page", page_label=None, mobile_brand=False, native_secondary=False, mobile_secondary=False, secondary_current=None, topbar_title=None, rail_bottom=False):
+                         desktop_classes="site-chrome term-nav", labeled=True, current_kind="page", page_label=None, mobile_brand=False, native_secondary=False, mobile_secondary=False, secondary_current=None, topbar_title=None, rail_bottom=False,
+                         include_search=True, mobile_only=False):
     """One script-free site header, with only page-specific shell classes configurable."""
     assert prefix in ("", "../")
     assert selected is None or selected in {name for _, name in DESTINATIONS}
@@ -214,6 +215,11 @@ def render_directory_nav(prefix, selected, *, mobile_classes="directory-mobile-t
     brand = render_brand(prefix)
     mobile_wordmark = render_brand(prefix, "site-mobile-chrome__brand") if mobile_brand else ""
     title = ('<span class="site-mobile-chrome__title">' + escape(topbar_title) + '</span>') if topbar_title else ''
+    mobile_search = (
+        '<a class="' + search_classes + '" href="' + prefix + 'index.html#/search" aria-label="Search AI Updates in the main collection">'
+        '<span class="' + icon_classes + '" aria-hidden="true">⌕</span>'
+        '<span class="' + search_label_classes + '">Search tools, research, concepts…</span></a>'
+    ) if include_search else ''
     mobile = (
         '<div class="' + mobile_classes + '"' +
         (' aria-label="AI Updates mobile header"' if labeled else '') +
@@ -222,9 +228,7 @@ def render_directory_nav(prefix, selected, *, mobile_classes="directory-mobile-t
         '<summary class="' + toggle_classes + '" aria-label="Toggle navigation"><span aria-hidden="true">☰</span></summary>'
         '<nav class="' + menu_classes + '" aria-label="AI Updates sections">' + mobile_wordmark + links +
         (render_mobile_secondary_nav(prefix, secondary_current) if mobile_secondary else '') + '</nav></details>' + title +
-        '<a class="' + search_classes + '" href="' + prefix + 'index.html#/search" aria-label="Search AI Updates in the main collection">'
-        '<span class="' + icon_classes + '" aria-hidden="true">⌕</span>'
-        '<span class="' + search_label_classes + '">Search tools, research, concepts…</span></a></div>'
+        mobile_search + '</div>'
     )
     desktop = (
         '<nav class="' + desktop_classes + '" aria-label="AI Updates primary navigation">'
@@ -232,7 +236,7 @@ def render_directory_nav(prefix, selected, *, mobile_classes="directory-mobile-t
         (render_secondary_nav(prefix, secondary_current) if native_secondary else '') +
         (render_static_rail_bottom(prefix) if rail_bottom else '') + '</nav>'
     )
-    return mobile + desktop
+    return mobile if mobile_only else mobile + desktop
 
 
 # Retain each page's established layout classes, but generate the visible
@@ -411,20 +415,23 @@ def render_discover_primary(term_count, tech_count):
 
 
 def render_discover_mobile():
-    """Share the native script-free drawer and canonical secondary routes with other pages.
+    """Reuse the native mobile header's real markup, links and disclosure.
 
-    Discover retains its existing desktop rail and working search input.
+    Discover owns an already-working search input in its desktop/mobile topbar:
+    omit the native search link rather than placing two search controls beside
+    each other. Preserve hash-only links for this same-document SPA.
     """
-    links = render_primary_links("", "Discover").replace('href="index.html#/', 'href="#/')
-    brand = render_brand("", "site-mobile-chrome__brand").replace('href="index.html#/', 'href="#/')
-    return (
-        '<div class="site-mobile-chrome discover-mobile-chrome" aria-label="AI Updates mobile header" data-page-label="Discover">'
-        '<details class="site-mobile-chrome__nav" id="discover-mobile-nav">'
-        '<summary class="site-mobile-chrome__toggle" aria-label="Toggle navigation · Discover">'
-        '<span aria-hidden="true">☰</span></summary>'
-        '<nav class="site-mobile-chrome__menu" aria-label="AI Updates sections">'
-        + brand + links + render_mobile_secondary_nav("").replace('href="index.html#/', 'href="#/') + '</nav></details></div>'
+    mobile = render_directory_nav(
+        "", "Discover",
+        mobile_classes="site-mobile-chrome discover-mobile-chrome",
+        details_id="discover-mobile-nav",
+        page_label="Discover", mobile_brand=True, mobile_secondary=True,
+        include_search=False, mobile_only=True,
     )
+    assert mobile.count('aria-label="Toggle navigation"') == 1
+    return (mobile.replace('aria-label="Toggle navigation"',
+                           'aria-label="Toggle navigation · Discover"', 1)
+                  .replace('href="index.html#/', 'href="#/'))
 
 
 def normalize_discover_sidebar(html, term_count, tech_count):
