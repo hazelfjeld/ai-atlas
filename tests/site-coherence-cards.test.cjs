@@ -497,7 +497,10 @@ test('Discover and Games primary appearance controls share pressed state with ed
   const offline = fs.readFileSync(path.join(__dirname, '..', 'downloads/Atlas_Demo_Offline.html'), 'utf8');
   assert.match(home, /id="theme-toggle"/);
   assert.match(games, /id="theme-toggle"[^>]*aria-pressed="false"/);
-  assert.ok(script.includes("document.getElementById?.('theme-toggle')?.setAttribute('aria-pressed'"));
+  assert.match(script, /function syncPrimaryThemeButton\(theme\) \{[\s\S]*?button\.setAttribute\('aria-pressed', String\(theme === 'dark'\)\)/,
+    'shared primary theme control must expose the effective pressed state');
+  assert.match(script, /button\.setAttribute\('aria-label', 'Toggle color theme'\)/,
+    'Discover and Games must announce the same accessible toggle action');
   assert.ok(script.includes('syncPrimaryThemeButton(theme);'));
   assert.ok(fs.readFileSync(path.join(__dirname, '..', 'app.js'), 'utf8').includes("if(typeof syncSharedStoredTheme==='function')syncSharedStoredTheme(theme)"),
     'Discover invokes the shared theme synchronizer after its own click handler changes the theme');
