@@ -3129,8 +3129,10 @@ with sync_playwright() as p:
                 desktop_skip_page.locator('#main').evaluate(
                     'el => el.scrollIntoView({block: "start", behavior: "instant"})')
                 clearance = desktop_skip_page.locator('#main').evaluate("""el => {
-                    const header=document.querySelector('.site-mobile-chrome') ||
-                                 document.querySelector('.topbar');
+                    const header=[...document.querySelectorAll(
+                        '.topbar, .site-mobile-chrome')].find(node =>
+                        getComputedStyle(node).display !== 'none' &&
+                        node.getBoundingClientRect().height >= 50);
                     return {top:el.getBoundingClientRect().top,
                             headerBottom:header?.getBoundingClientRect().bottom,
                             margin:getComputedStyle(el).scrollMarginTop};
