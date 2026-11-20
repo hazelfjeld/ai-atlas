@@ -162,7 +162,9 @@ test('shared native mobile drawer reuses canonical desktop wordmark without dupl
   const copy={className:'site-chrome__brand'};
   const original={cloneNode(deep){assert.equal(deep,true);clones++;return copy;}};
   const menu={querySelector:()=>inserts?copy:null,prepend(el){assert.equal(el,copy);inserts++;}};
-  const chrome={dataset:{},querySelector:()=>menu};
+  const mobileToggle={attrs:{},setAttribute(name, value){this.attrs[name]=value;}};
+  const chrome={dataset:{},querySelector:selector=>
+    selector.startsWith(':scope > details.site-mobile-chrome__nav')?mobileToggle:menu};
   const document={
     documentElement:{dataset:{}},title:'Games · AI Updates',
     addEventListener:(name,handler)=>{handlers[name]=handler;},
@@ -176,6 +178,8 @@ test('shared native mobile drawer reuses canonical desktop wordmark without dupl
   assert.equal(inserts,1);
   assert.equal(copy.className,'site-mobile-chrome__brand', 'The mobile clone must not masquerade as the desktop rail');
   assert.equal(chrome.dataset.pageLabel,'Games');
+  assert.equal(mobileToggle.attrs['aria-label'],'Toggle navigation · Games',
+    'The actual shared menu trigger must name the current workspace');
   handlers.DOMContentLoaded();
   assert.equal(inserts,1,'Repeated initialization must not duplicate mobile brand');
   assert.match(css,/\.site-mobile-chrome \.site-mobile-chrome__menu > a\.site-mobile-chrome__brand/);
@@ -197,7 +201,9 @@ test('Discover and standalone Games share the mobile drawer appearance action wh
     },
     append(button) { buttons.push(button); }
   };
-  const chrome = {dataset:{}, querySelector: () => menu};
+  const mobileToggle={attrs:{},setAttribute(name, value){this.attrs[name]=value;}};
+  const chrome = {dataset:{}, querySelector: selector =>
+    selector.startsWith(':scope > details.site-mobile-chrome__nav') ? mobileToggle : menu};
   const existing = {
     listeners:{}, attrs:{},
     setAttribute(name, value) { this.attrs[name] = value; },
@@ -230,6 +236,8 @@ test('Discover and standalone Games share the mobile drawer appearance action wh
   });
   handlers.DOMContentLoaded();
   assert.equal(buttons.length,1,'Discover adds one mobile control, not another desktop button');
+  assert.equal(mobileToggle.attrs['aria-label'],'Toggle navigation · Discover',
+    'The Discover menu trigger must announce the same workspace as the header');
   assert.equal(buttons[0].className,'site-chrome__theme-toggle');
   assert.equal(buttons[0].attrs['aria-pressed'],'true');
   assert.equal(existing.attrs['aria-pressed'],'true', 'Discover sidebar mirrors the saved dark state');
