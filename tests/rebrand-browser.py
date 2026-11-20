@@ -133,9 +133,18 @@ with sync_playwright() as p:
     check('profile uses shared accessible navigation without JavaScript',
           page.locator('.site-chrome__links a').count() == 7
           and page.locator('.site-chrome__links a[aria-current="page"]').inner_text() == 'Technology profiles')
+    # Wait for the actual destination and its fully parsed directory. A bare
+    # locator count immediately after a click can run on the previous document
+    # during a slow production navigation; never accept an incomplete grid.
     page.locator('.breadcrumb-links').get_by_role('link',name='Technologies',exact=True).click()
+    page.wait_for_url('**/technology/index.html')
     expected_profiles=json.loads((Path(__file__).resolve().parents[1]/'publication.json').read_text())['published_counts']['technologies']
-    check('technology directory exposes every checksummed crawlable profile', expected_profiles>=300 and page.locator('.reference-grid a').count()==expected_profiles)
+    page.wait_for_function(
+        """expected => document.querySelectorAll('.reference-grid a').length === expected""",
+        arg=expected_profiles, timeout=45000)
+    check('technology directory exposes every checksummed crawlable profile',
+          expected_profiles>=300
+          and page.locator('.reference-grid a').count()==expected_profiles)
     # Research is a secondary Discover route: the parent remains a live link,
     # but only the Research destination should be announced as current.
     page.set_viewport_size({'width':768,'height':900})
