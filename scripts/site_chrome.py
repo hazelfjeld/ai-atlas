@@ -632,4 +632,13 @@ def normalize_standalone_chrome(html, path):
                          re.escape(end) + r'.*?</nav>', re.S)
     normalized, count = pattern.subn(lambda _: render_standalone_nav(path), html)
     assert count == 1, 'Unexpected shared header structure on ' + path
+    # A few older standalone shells still force light-only native controls
+    # even when Discover's shared saved theme is dark. Normalize the existing
+    # color-scheme hint in the same source of truth as their site chrome.
+    # Keep pages without a hint untouched, and make rebuilds idempotent.
+    light_only = '<meta name="color-scheme" content="light">'
+    dual_scheme = '<meta name="color-scheme" content="light dark">'
+    if light_only in normalized:
+        assert normalized.count(light_only) == 1, path
+        normalized = normalized.replace(light_only, dual_scheme, 1)
     return ensure_skip_destination_focusable(migrate_legacy_article_landmark(normalized, path), path)
