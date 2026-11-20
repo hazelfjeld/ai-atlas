@@ -29,10 +29,15 @@ with sync_playwright() as p:
     browser=p.chromium.launch(executable_path=os.environ.get('CHROMIUM_PATH'),headless=True,args=['--no-sandbox'])
     page=browser.new_page(viewport={'width':1440,'height':1100},reduced_motion='reduce');errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
     open_page(page);page.locator('#games').wait_for(state='visible');check('dictionary loads',int(page.locator('#catalog-count').inner_text().replace(',',''))>1000)
-    check('theme toggle announces current palette to assistive tech',
-          page.locator('#theme-toggle').get_attribute('aria-label') == 'Dark theme' and
+    check('Games primary appearance control reports the actual palette',
           page.locator('#theme-toggle').get_attribute('aria-pressed') ==
           str(page.locator('html').get_attribute('data-theme') == 'dark').lower())
+    if not args.fixture:
+        # The isolated fixture strips site-theme.js. Verify the *real* hosted
+        # shared chrome instead of its legacy pre-enhancement label.
+        check('Games primary and drawer theme actions share Discover accessible name',
+              page.locator('#theme-toggle').get_attribute('aria-label') == 'Toggle color theme' and
+              page.locator('#games-mobile-nav .site-chrome__theme-toggle').get_attribute('aria-label') == 'Toggle color theme')
     # A fragment skip target needs programmatic focus so Tab stays in game content.
     # Without tabindex=-1 on main, the fragment can scroll while focus stays in the header.
     if not args.fixture:
@@ -120,6 +125,9 @@ with sync_playwright() as p:
                 page.locator('#games-mobile-nav > summary').click()
         check(f'320px {palette} Games theme toggle state is accurate',
               page.locator('#theme-toggle').get_attribute('aria-pressed') == str(palette == 'dark').lower())
+        if not args.fixture:
+            check(f'320px {palette} Games primary appearance name stays shared after toggling',
+                  page.locator('#theme-toggle').get_attribute('aria-label') == 'Toggle color theme')
         if args.fixture:
             check(f'320px {palette} fixture theme button retains a touch-sized control',
                   page.locator('#theme-toggle').evaluate("el => el.getBoundingClientRect().height >= 44"))
