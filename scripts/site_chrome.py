@@ -188,14 +188,32 @@ def render_directory_hero(eyebrow, title, summary, *, lead=False):
         '<p' + suffix + '>' + escape(summary) + '</p></header>'
     )
 
+# One canonical SVG and wordmark for Discover, native workspaces and
+# reference details. Their wrappers keep their original layout and routes.
+BRAND_SVG = (
+    '<svg viewBox="0 0 36 36" fill="none" aria-hidden="true"><path d="M5 7h12v12H5zM21 17h10v12H21z" stroke="currentColor" stroke-width="2"/>'
+    '<path d="M21 6h10M26 1v10M5 25h12M5 30h8" stroke="currentColor" stroke-linecap="round"/></svg>'
+)
+BRAND_WORDMARK = 'AI Updates<small>THE FRONTIER, IN CONTEXT</small>'
+
+
 def render_brand(prefix, classes="site-chrome__brand"):
-    """Reusable real SVG wordmark for desktop and native mobile navigation."""
+    """One shared mark for native desktop and mobile menus, with safe routes."""
+    assert prefix in ("", "../")
     return (
         '<a class="' + classes + '" href="' + prefix + 'index.html#/overview" aria-label="AI Updates home">'
-        '<svg viewBox="0 0 36 36" fill="none" aria-hidden="true"><path d="M5 7h12v12H5zM21 17h10v12H21z" stroke="currentColor" stroke-width="2"/>'
-        '<path d="M21 6h10M26 1v10M5 25h12M5 30h8" stroke="currentColor" stroke-linecap="round" stroke-width="2"/></svg>'
-        '<span class="site-chrome__name">AI Updates<small>THE FRONTIER, IN CONTEXT</small></span></a>'
+        + BRAND_SVG + '<span class="site-chrome__name">' + BRAND_WORDMARK + '</span></a>'
     )
+
+
+def render_discover_brand():
+    """Reuse the mark/wordmark in the existing Discover visual-reference shell."""
+    return (
+        '<a class="brand" href="#/overview" aria-label="AI Updates home">'
+        '<span class="brandmark">' + BRAND_SVG + '</span><span>'
+        + BRAND_WORDMARK + '</span></a>'
+    )
+
 
 def render_directory_nav(prefix, selected, *, mobile_classes="directory-mobile-topbar site-mobile-chrome",
                          details_classes="site-mobile-chrome__nav", details_id="directory-mobile-nav",
@@ -455,6 +473,15 @@ def normalize_discover_sidebar(html, term_count, tech_count):
         assert html.count('</aside><div class="workspace">') == 1
         html = html.replace('</aside><div class="workspace">',
                             '</nav><div class="workspace">', 1)
+    # Remove independently maintained Discover logo markup on every build.
+    # The original brandmark wrapper, hash route and script-free link survive.
+    brand_start = '<a class="brand" href="#/overview" aria-label="AI Updates home">'
+    brand_end = '</a><div class="nav-label">'
+    assert html.count(brand_start) == html.count(brand_end) == 1, 'Ambiguous Discover brand'
+    before_brand, brand_tail = html.split(brand_start, 1)
+    existing_brand, after_brand = brand_tail.split(brand_end, 1)
+    assert existing_brand.count('<svg') == 1 and BRAND_WORDMARK in existing_brand, 'Unexpected Discover logo'
+    html = before_brand + render_discover_brand() + '<div class="nav-label">' + after_brand
     assert html.count(marker) == 1, 'Unexpected Discover navigation structure'
     assert html.count('<nav class="sidebar" id="sidebar" aria-label="AI Updates primary navigation">') == 1
     assert html.count('</details></div><div class="sidebar-bottom">') == 1
