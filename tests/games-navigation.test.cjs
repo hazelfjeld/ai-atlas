@@ -1628,6 +1628,9 @@ test('closed shared mobile toggle restores focus to the selected desktop rail', 
       // This primary-only fixture intentionally has no selected secondary link.
       if(selector==='.site-chrome__more a[aria-current]')return null;
       if(selector==='.site-chrome__links a[aria-current]')return railLink;
+      // The shared focus routine also checks the real DOM's absent brand/
+      // fallback nodes; querySelector returns null for those selectors.
+      if(['.site-chrome__brand','#sidebar .brand','#navigation a'].includes(selector))return null;
       throw new Error('Unexpected selector '+selector);
     }
   };
