@@ -338,6 +338,15 @@ async function start(){
  if(!C){status('Daily reader failed to initialize.');return;}
  const today=C.chicagoDate();$('date-display').textContent=humanDate(today);
  const filters=C.viewFilters(window.location.search);
+ const refinements=$('edition-refine');
+ // Initial mobile view should show the date picker, real search, and stories.
+ // Keep deep-linked advanced filters expanded so their state is not hidden.
+ const advancedSelected=['section','topic','review','source','publication']
+  .some(key=>filters[key]!=='all');
+ if(typeof window.matchMedia==='function'&&
+    window.matchMedia('(max-width: 560px)').matches&&!advancedSelected){
+  refinements.open=false;
+ }
  $('section-filter').value=filters.section;
  $('topic-filter').value=filters.topic;
  $('publication-filter').value=filters.publication;

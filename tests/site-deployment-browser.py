@@ -2086,6 +2086,20 @@ with sync_playwright() as p:
     page.set_viewport_size({'width':390,'height':844})
     page.goto(base + 'whats-new.html')
     page.locator('#edition-search').wait_for()
+    # The archive date picker and live edition search remain visible on phones,
+    # while advanced filters use one native keyboard-operable disclosure.
+    if index['editions']:
+        check('390px daily stories are reachable without stacked advanced controls',
+              not page.locator('#edition-refine').evaluate('(el) => el.open')
+              and page.locator('#edition-select').is_visible()
+              and page.locator('#edition-search').is_visible()
+              and page.locator('#edition-content article.item').first.is_visible())
+    page.screenshot(path=str(out / 'daily-mobile-390-compact.png'), full_page=True)
+    page.locator('#edition-refine > summary').click()
+    check('390px native disclosure reveals real archive filters and export',
+          page.locator('#edition-refine').evaluate('(el) => el.open')
+          and page.locator('#topic-filter').is_visible()
+          and page.locator('#export-verified').is_visible())
     mobile_readability_check = """() => [
         '#edition-select', '#section-filter', '#topic-filter',
         '#publication-filter', '#evidence-filter', '#source-filter',
@@ -2147,6 +2161,13 @@ with sync_playwright() as p:
         source_toggle_mobile.wait_for(timeout=45000)
         check('320px source-coverage summary is an accessible touch target',
               source_toggle_mobile.evaluate("(el) => el.getBoundingClientRect().height >= 44"))
+    # The expanded disclosure stays operable after resizing instead of hiding
+    # keyboard focus in a removed or decorative control.
+    check('320px advanced edition filters remain keyboard-accessible',
+          page.locator('#edition-refine').evaluate('(el) => el.open')
+          and page.locator('#section-filter').is_visible()
+          and page.locator('#edition-refine > summary').evaluate(
+              '(el) => el.getBoundingClientRect().height >= 44'))
     # Tapping Reset on a phone used to refocus Search, opening the software
     # keyboard again and obscuring the just-restored archive results.
     if index['editions']:
