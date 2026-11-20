@@ -18,13 +18,22 @@ function assertNoScriptArchiveDiscovery(index,path){
  assert.ok(index.editions.some(e=>e.path===path),'Historical archive path must remain indexed');
  if(newest.includes(path))assert.ok(block.includes('href="'+path+'"'),'Recent edition needs a direct no-script shortcut');
 }
-test('script-free archive keeps real dated links in native HTML and hides them only after shared enhancement',()=>{
+test('archive keeps source-linked recovery visible until the reader verifies and renders an edition',()=>{
  const html=fs.readFileSync('whats-new.html','utf8');
  const theme=fs.readFileSync('site-theme.js','utf8');
+ const reader=fs.readFileSync('whats-new.js','utf8');
  assert.match(html,/<section class="site-static-fallback" id="scriptfree-daily-archive"/);
  assert.doesNotMatch(html,/<noscript><section class="site-static-fallback" id="scriptfree-daily-archive"/);
- assert.match(html,/\.atlas-enhanced #scriptfree-daily-archive\{display:none!important\}/);
+ assert.match(html,/html\.atlas-daily-ready #scriptfree-daily-archive\{display:none!important\}/);
+ assert.doesNotMatch(html,/\.atlas-enhanced #scriptfree-daily-archive\{display:none!important\}/);
  assert.match(theme,/classList\?\.add\('atlas-enhanced'\)/);
+ const validated=reader.indexOf('  metadata();sourceCoverage();renderSnapshot();render();');
+ const ready=reader.indexOf("  document.documentElement.classList.add('atlas-daily-ready');");
+ const after=reader.indexOf('  void showRevisionDiff(entry,e,requestEpoch);');
+ assert.ok(validated>=0&&validated<ready&&ready<after,
+   'Only the verified, rendered archive can remove source-linked recovery navigation');
+ assert.equal(reader.split("classList.add('atlas-daily-ready')").length-1,1,
+   'An unsuccessful data request cannot mark the archive ready');
  const block=html.slice(html.indexOf('id="scriptfree-daily-archive"'),html.indexOf('</section>',html.indexOf('id="scriptfree-daily-archive"')));
  assert.ok(block.includes('href="data/daily/index.json"'),'Scriptless reader keeps the canonical archive register');
 });

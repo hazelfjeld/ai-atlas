@@ -671,7 +671,48 @@ with sync_playwright() as p:
     check('archive search cannot be used after an interrupted index request',
           failed_archive.locator('#edition-search').is_disabled()
           and 'Daily archive unavailable' in failed_archive.locator('#edition-status').inner_text())
+    check('interrupted archive keeps its verified register and source-linked recovery visible',
+          failed_archive.locator('#scriptfree-daily-archive').is_visible()
+          and failed_archive.locator(
+              '#scriptfree-daily-archive a[href="data/daily/index.json"]').is_visible())
     failed_archive.close()
+    # Cross-page recovery: the shared theme/navigation script is allowed to
+    # initialize even when the archive reader fails to load. That alone must
+    # never hide script-free source links. A verified reader then replaces them.
+    for scheme in ('light', 'dark'):
+        for width in (390, 1280):
+            broken_reader = browser.new_page(
+                viewport={'width':width, 'height':844}, color_scheme=scheme,
+                reduced_motion='reduce')
+            broken_reader.route('**/whats-new.js', lambda route: route.abort())
+            broken_reader.goto(base + 'whats-new.html')
+            check('archive reader failure retains source-linked recovery ' +
+                  scheme + ' ' + str(width),
+                  broken_reader.locator('html.atlas-enhanced').count() == 1
+                  and broken_reader.locator('html.atlas-daily-ready').count() == 0
+                  and broken_reader.locator('#scriptfree-daily-archive').is_visible()
+                  and broken_reader.locator(
+                      '#scriptfree-daily-archive a[href="data/daily/index.json"]').is_visible())
+            if width == 390:
+                broken_reader.screenshot(
+                    path=str(out / ('archive-recovery-' + scheme + '-390.png')))
+            broken_reader.close()
+            verified_reader = browser.new_page(
+                viewport={'width':width, 'height':844}, color_scheme=scheme,
+                reduced_motion='reduce')
+            verified_reader.goto(base + 'whats-new.html')
+            verified_reader.wait_for_function(
+                "() => !document.getElementById('edition-search').disabled",
+                timeout=45000)
+            check('verified archive replaces recovery links after SHA-256 and render ' +
+                  scheme + ' ' + str(width),
+                  verified_reader.locator('html.atlas-daily-ready').count() == 1
+                  and not verified_reader.locator('#scriptfree-daily-archive').is_visible()
+                  and verified_reader.locator('#edition-content').is_visible())
+            if width == 1280:
+                verified_reader.screenshot(
+                    path=str(out / ('archive-verified-' + scheme + '-1280.png')))
+            verified_reader.close()
     # Shared desktop chrome: these pages previously used four different mastheads.
     # Confirm the same visible order, focus and active link without replacing mobile navigation.
     unified = [('whats-new.html', 'What’s New Today', 'page'), ('about.html', 'About', 'page'),

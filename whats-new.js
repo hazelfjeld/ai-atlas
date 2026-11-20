@@ -292,6 +292,10 @@ async function switchEdition(entry){
   $('date-display').textContent=humanDate(entry.date);
   $('edition-search').disabled=false; // Search only after this edition passed byte, SHA-256 and schema verification.
   metadata();sourceCoverage();renderSnapshot();render();
+  // The theme and navigation scripts can load even when this reader or its
+  // archive data fails. Hide static archive links only after verified content
+  // is actually rendered; otherwise keep the recovery route readable.
+  document.documentElement.classList.add('atlas-daily-ready');
   void showRevisionDiff(entry,e,requestEpoch);
   const today=C.chicagoDate();
   const todayPublished=!!C.selection(index,today).todayEntry;

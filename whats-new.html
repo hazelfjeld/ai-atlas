@@ -153,8 +153,8 @@ html:root[data-theme=dark] .summary{background:var(--soft)}
 <script defer src="whats-new.js"></script>
 <link rel="stylesheet" href="site-chrome.css">
 <!-- Match the shared scriptless-page enhancement contract: native edition
-     links stay in ordinary HTML; hide them only after site-theme.js starts. -->
-<style>.atlas-enhanced #scriptfree-daily-archive{display:none!important}</style>
+     links stay in ordinary HTML until an edition passes SHA-256, schema validation and rendering. Theme enhancement alone must not hide the recovery links. -->
+<style>html.atlas-daily-ready #scriptfree-daily-archive{display:none!important}</style>
 <script src="site-theme.js"></script>
 
 <noscript><style>main > header .aside,#edition-status,main > .panel,#edition-content,.edition-footnotes{display:none!important}main > header#main{display:block}</style></noscript>
