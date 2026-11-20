@@ -36,7 +36,10 @@ test('November 19 source-reviewed queue becomes exactly one immutable partially 
  // An independently verified historic receipt stays verified when a newer
  // source-reviewed edition is committed but certification remains pending.
  const lastVerified=ledger.receipts.filter(r=>r.production_verified_at).at(-1);
- assert.equal(lastVerified.batch_id,receipt.batch_id,'November 19 remains last certified until newer verification');
+ assert.equal(receipt.production_verified_at,'2026-11-19T19:50:08Z',
+   'November 19 retains its original independent production certification');
+ assert.ok(Date.parse(lastVerified.production_verified_at)>=Date.parse(receipt.production_verified_at),
+   'Newer certified releases may advance the clock without invalidating November 19');
  assert.equal(idx.last_successful_publish_at,lastVerified.production_verified_at,
    'A pending edition cannot advance the production-verified publication clock');
  const newestReceipt=ledger.receipts.at(-1),newestEdition=idx.editions.at(-1);
