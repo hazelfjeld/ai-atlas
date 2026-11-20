@@ -46,3 +46,18 @@ test('research shares native cards and preserves script-free source/archive link
  assert.match(c,/@media\(max-width:650px\)\{\.site-static-fallback__stories/);
  assert.ok(h.includes('class="site-static-fallback__stories"'));
 });
+
+// The Discover daily card already uses a neutral loading message. The archive
+// must not claim no editions were ever published during a cold load, before
+// its SHA-256-backed reader has validated the newest published edition.
+test('pending archive controls use neutral initial copy across Discover and the daily page',()=>{
+ const discover=fs.readFileSync('index.html','utf8');
+ assert.ok(manifest.editions.length>0,'there are already immutable archived editions');
+ assert.match(discover,/Open the edition archive for publication status/);
+ assert.match(h,/<select id="edition-select"[^>]*disabled><option value="">Checking published editions…<\/option><\/select>/);
+ assert.match(h,/Last successful publication: <b>checking archive<\/b>/);
+ assert.match(h,/Collection status: <b>checking sources<\/b>/);
+ assert.doesNotMatch(h,/Awaiting first edition|Last successful publication: <b>none yet<\/b>/);
+ assert.match(h,/<div id="edition-content" aria-busy="true">/);
+ assert.match(h,/<section class="site-static-fallback" id="scriptfree-daily-archive"/);
+});

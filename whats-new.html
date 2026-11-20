@@ -214,7 +214,7 @@ html:root[data-theme=dark] .summary{background:var(--soft)}
 
 <div class="panel">
  <div class="archive-picker">
-  <label for="edition-select">Edition archive<select id="edition-select" aria-describedby="edition-selection-error" disabled><option value="">Awaiting first edition</option></select></label>
+  <label for="edition-select">Edition archive<select id="edition-select" aria-describedby="edition-selection-error" disabled><option value="">Checking published editions…</option></select></label>
  </div>
  <p id="edition-selection-error" class="selection-error" role="note" hidden></p>
  <details class="edition-filter-disclosure" id="edition-refine" open>
@@ -237,7 +237,7 @@ html:root[data-theme=dark] .summary{background:var(--soft)}
 <div id="edition-content" aria-busy="true"><div class="empty"><strong>Checking published editions…</strong><p>Verifying the archive before displaying stories.</p></div></div>
 <section class="edition-footnotes" aria-label="Edition details and provenance">
 <section id="edition-snapshot" class="snapshot" aria-label="Verified edition at a glance" hidden></section>
-<div class="meta" id="edition-metadata" aria-live="polite"><span>Last successful publication: <b>none yet</b></span><span>Collection status: <b>pending</b></span></div>
+<div class="meta" id="edition-metadata" aria-live="polite"><span>Last successful publication: <b>checking archive</b></span><span>Collection status: <b>checking sources</b></span></div>
  <p id="edition-permalink-wrap" class="edition-permalink" hidden><a id="edition-permalink" href="whats-new.html">Share this verified edition, revision and selected filters</a></p>
  <div id="source-coverage" hidden aria-label="Editorial source coverage and gaps"></div>
 <section id="revision-history" class="revision-history" aria-labelledby="revision-history-title" hidden><h2 id="revision-history-title">What changed in this revision?</h2><div id="revision-history-content" aria-live="polite"></div></section>
