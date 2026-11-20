@@ -2091,8 +2091,6 @@ with sync_playwright() as p:
     if index['editions']:
         page.locator('#edition-content article.item').first.wait_for(timeout=45000)
         compact_panel = page.locator('main > .panel').bounding_box()
-        check('390px daily filter panel is compact before expanding advanced controls',
-              compact_panel is not None and compact_panel['height'] < 340)
         check('390px daily stories are reachable without stacked advanced controls',
               not page.locator('#edition-refine').evaluate('(el) => el.open')
               and page.locator('#edition-select').is_visible()
@@ -2104,6 +2102,10 @@ with sync_playwright() as p:
           page.locator('#edition-refine').evaluate('(el) => el.open')
           and page.locator('#topic-filter').is_visible()
           and page.locator('#export-verified').is_visible())
+    expanded_panel = page.locator('main > .panel').bounding_box()
+    check('390px news disclosure saves substantial vertical space before opening',
+          compact_panel is not None and expanded_panel is not None
+          and expanded_panel['height'] - compact_panel['height'] >= 120)
     mobile_readability_check = """() => [
         '#edition-select', '#section-filter', '#topic-filter',
         '#publication-filter', '#evidence-filter', '#source-filter',
