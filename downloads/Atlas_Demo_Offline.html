@@ -1906,7 +1906,13 @@ function syncSharedThemeAction(button, theme) {
 }
 
 function syncPrimaryThemeButton(theme) {
-  document.getElementById?.('theme-toggle')?.setAttribute('aria-pressed', String(theme === 'dark'));
+  const button = document.getElementById?.('theme-toggle');
+  if (!button) return;
+  // Discover and Games have their own working action; normalize its name to
+  // the shared toggle contract when a saved theme changes in another tab or
+  // the page returns from BFCache. aria-pressed reports the actual theme.
+  button.setAttribute('aria-label', 'Toggle color theme');
+  button.setAttribute('aria-pressed', String(theme === 'dark'));
 }
 function syncSharedStoredTheme(theme) {
   if (theme !== 'dark' && theme !== 'light') return;
