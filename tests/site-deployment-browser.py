@@ -387,16 +387,22 @@ with sync_playwright() as p:
                   and archive_page.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'))
             archive_page.screenshot(path=str(out / ('daily-scriptfree-'+scheme+'-'+str(width)+'.png')), full_page=False)
         archive_context.close()
-    # The same static fallback remains in the DOM but must disappear before
-    # first paint when the shared site-theme enhancement is available.
+    # The same source-linked fallback remains until the reader has verified
+    # and rendered an edition, even when the shared theme script initializes.
+    # Wait for the async SHA-256 gate rather than asserting on initial navigation:
+    # the recovery links must never disappear merely because JavaScript exists.
     archive_enhanced = browser.new_context(java_script_enabled=True)
     archive_enhanced_page = archive_enhanced.new_page()
     archive_enhanced_page.goto(base+'whats-new.html')
-    check('archive uses the shared enhancement boundary without duplicate editions',
+    archive_enhanced_page.wait_for_function(
+        "() => document.documentElement.classList.contains('atlas-daily-ready')",
+        timeout=45000)
+    check('archive hides native recovery only after verified edition is rendered',
           archive_enhanced_page.locator('#scriptfree-daily-archive').count() == 1
           and archive_enhanced_page.locator('#scriptfree-daily-archive').is_hidden()
-          and archive_enhanced_page.locator('html').evaluate(
-              "el => el.classList.contains('atlas-enhanced')"))
+          and archive_enhanced_page.locator('#edition-content').is_visible()
+          and archive_enhanced_page.locator('#edition-search').is_enabled()
+          and archive_enhanced_page.locator('html.atlas-enhanced.atlas-daily-ready').count() == 1)
     archive_enhanced.close()
     # Check actual Discover-to-editorial transitions, not CSS similarity alone.
     for width in (320, 390, 768, 1280):
