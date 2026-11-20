@@ -208,8 +208,8 @@ test('tablet-native workspace title stays readable beside actual shared search',
   const balanced = css.split('/* atlas-tablet-workspace-title-balance:begin */')[1]
     ?.split('/* atlas-tablet-workspace-title-balance:end */')[0];
   assert.ok(balanced, 'the shared desktop bar owns the tablet balance rule');
-  assert.match(balanced, /@media \(min-width:651px\) and \(max-width:850px\)/);
-  assert.match(balanced, /\.site-mobile-chrome__search\{flex-basis:min\(280px,48%\)\}/);
+  assert.match(balanced, /@media \(min-width:651px\) and \(max-width:1200px\)/);
+  assert.match(balanced, /\.site-mobile-chrome__search\{flex-basis:clamp\(184px,calc\(100vw - 528px\),365px\)\}/);
   for (const path of ['whats-new.html', 'research.html', 'playbooks.html'])
     assert.match(read(path), /<span class="site-mobile-chrome__title">/,
       path + ' has a real page title, not a decorative pseudo-label');

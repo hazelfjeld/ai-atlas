@@ -552,11 +552,11 @@ body > .site-mobile-chrome:not([data-page-label]):has(+ .site-chrome .site-chrom
 .site-mobile-chrome{left:204px;padding-inline:26px}
 }
 /* atlas-tablet-workspace-title-balance:begin */
-/* Native page titles must stay readable when navigating from Discover at
-   tablet widths. Discover already caps its search at 280px here; reserve
-   comparable space for the real native search without eclipsing the title. */
-@media (min-width:651px) and (max-width:850px){
-  .site-mobile-chrome__search{flex-basis:min(280px,48%)}
+/* Keep the one desktop-rail breakpoint contract instead of reinstating an
+   old 850px navigation mode. Give the native live search less width only
+   where the tablet workspace would otherwise truncate its current title. */
+@media (min-width:651px) and (max-width:1200px){
+  .site-mobile-chrome__search{flex-basis:clamp(184px,calc(100vw - 528px),365px)}
 }
 /* atlas-tablet-workspace-title-balance:end */
 /* Games uses the same fixed topbar/search and rail appearance slot as
