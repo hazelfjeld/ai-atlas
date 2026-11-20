@@ -551,6 +551,14 @@ body > .site-mobile-chrome:not([data-page-label]):has(+ .site-chrome .site-chrom
 @media (min-width:651px) and (max-width:1150px){
 .site-mobile-chrome{left:204px;padding-inline:26px}
 }
+/* atlas-tablet-workspace-title-balance:begin */
+/* Native page titles must stay readable when navigating from Discover at
+   tablet widths. Discover already caps its search at 280px here; reserve
+   comparable space for the real native search without eclipsing the title. */
+@media (min-width:651px) and (max-width:850px){
+  .site-mobile-chrome__search{flex-basis:min(280px,48%)}
+}
+/* atlas-tablet-workspace-title-balance:end */
 /* Games uses the same fixed topbar/search and rail appearance slot as
    Discover and every native page, not a competing fixed header button. */
 @media (min-width:651px){

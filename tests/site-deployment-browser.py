@@ -2335,6 +2335,27 @@ with sync_playwright() as p:
                               && links.every(el => el.getBoundingClientRect().height >= 44)
                               && document.documentElement.scrollWidth <= innerWidth + 1;
                       }""", reference_rail_width))
+    # The real News/Research/Playbooks tablet title must remain readable while
+    # preserving Discover's functional native search, not a decorative field.
+    for scheme in ('light', 'dark'):
+        page.evaluate("(chosen) => localStorage.setItem('atlas.theme', chosen)", scheme)
+        for tablet_width in (651, 768):
+            page.set_viewport_size({'width':tablet_width, 'height':900})
+            for native_route in ('whats-new.html', 'research.html', 'playbooks.html'):
+                page.goto(base + native_route)
+                check(f'{native_route} {tablet_width}px {scheme} shows entire workspace title beside live search',
+                      page.evaluate("""() => {
+                          const chrome=document.querySelector('.site-mobile-chrome');
+                          const title=chrome?.querySelector(':scope > .site-mobile-chrome__title');
+                          const search=chrome?.querySelector('form.site-mobile-chrome__search-form');
+                          return !!title && title.getClientRects().length > 0
+                              && title.scrollWidth <= title.clientWidth + 1
+                              && !!search && search.getClientRects().length > 0
+                              && search.getBoundingClientRect().width >= 130
+                              && !!search.querySelector('input[type="search"]')
+                              && document.documentElement.scrollWidth <= innerWidth + 1;
+                      }"""))
+
     page.evaluate("localStorage.setItem('atlas.theme', 'light')")
     page.set_viewport_size({'width':390,'height':844})
     page.goto(base + 'index.html#/games')
