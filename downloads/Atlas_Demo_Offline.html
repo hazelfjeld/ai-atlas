@@ -1528,9 +1528,15 @@ main.term-shell > footer:not(.site-chrome__footer) a{color:var(--accent,#27664e)
    Without JavaScript, keep the accessible, nonmodal <details> fallback. */
 document.documentElement.classList?.add('atlas-enhanced');
 
+// GitHack is a shared origin across unrelated repositories. Discover and the
+// standalone Games page already refuse to persist appearance there; the shared
+// chrome must follow that same privacy and navigation policy on every page.
+const themePersistenceAllowed = !['raw.githack.com', 'rawcdn.githack.com']
+  .includes(typeof location === 'undefined' ? '' : location.hostname);
+
 /* Use Discover's saved choice on standalone editorial pages before rendering. */
 try {
-  const savedTheme = localStorage.getItem('atlas.theme');
+  const savedTheme = themePersistenceAllowed ? localStorage.getItem('atlas.theme') : null;
   if (savedTheme === 'dark' || savedTheme === 'light') {
     document.documentElement.dataset.theme = savedTheme;
     // CSS keeps native widgets in sync when Games toggles the theme later.
@@ -1884,6 +1890,7 @@ function syncSharedStoredTheme(theme) {
   });
 }
 function restoreSharedThemeAfterHistory() {
+  if (!themePersistenceAllowed) return;
   let savedTheme;
   try { savedTheme = localStorage.getItem('atlas.theme'); }
   catch (_) { return; }
@@ -1894,7 +1901,7 @@ function restoreSharedThemeAfterHistory() {
 // Ignore unrelated/invalid values and preserve script-free rendering.
 if (typeof window !== 'undefined' && window.addEventListener) {
   window.addEventListener('storage', (event) => {
-    if (event.key === 'atlas.theme') syncSharedStoredTheme(event.newValue);
+    if (themePersistenceAllowed && event.key === 'atlas.theme') syncSharedStoredTheme(event.newValue);
   });
 }
 
@@ -2045,8 +2052,10 @@ document.addEventListener('DOMContentLoaded', () => {
         button.addEventListener('click', () => {
           const chosen = effectiveTheme() === 'dark' ? 'light' : 'dark';
           document.documentElement.dataset.theme = chosen;
-          try { localStorage.setItem('atlas.theme', chosen); }
-          catch (_) { /* Theme still changes when persistence is unavailable. */ }
+          if (themePersistenceAllowed) {
+            try { localStorage.setItem('atlas.theme', chosen); }
+            catch (_) { /* Theme still changes when persistence is unavailable. */ }
+          }
           syncThemeButtons();
         });
         if (container === desktopAction) container.prepend(button);
