@@ -144,6 +144,6 @@ test('single-file chrome bundles its favicon and does not offer broken local re-
 test('Discover desktop route title uses the same existing shared title class as native pages', () => {
   const index=fs.readFileSync(path.join(root,'index.html'),'utf8');
   assert.match(index, /<span class="breadcrumb site-mobile-chrome__title" id="breadcrumb">Discover<\/span>/);
-  assert.match(app, /\$('breadcrumb')\.textContent=currentName/);
+  assert.ok(app.includes("$('breadcrumb').textContent=currentName"));
   assert.ok(offline.includes('<span class="breadcrumb site-mobile-chrome__title" id="breadcrumb">Discover</span>'));
 });
