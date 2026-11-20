@@ -3068,10 +3068,14 @@ with sync_playwright() as p:
         live_page=browser.new_page(viewport={'width':390,'height':844})
         live_page.goto(base+route)
         live_page.locator(search_control).wait_for(state='visible')
+        if route == 'research.html':
+            live_page.wait_for_function("document.documentElement.classList.contains('atlas-research-ready')")
         check('Enhanced catalog keeps real search '+route,
               live_page.locator('html.atlas-enhanced').count()==1
               and live_page.locator(search_control).is_visible()
-              and live_page.locator('section.site-static-fallback').count()==0)
+              and (live_page.locator('#scriptfree-research-catalog').is_hidden()
+                   if route == 'research.html'
+                   else live_page.locator('section.site-static-fallback').count()==0))
         live_page.close()
 
     # A keyboard skip on mobile must land below the same shared sticky header
