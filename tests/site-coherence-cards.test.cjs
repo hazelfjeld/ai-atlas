@@ -164,8 +164,14 @@ test('daily archive shares script-free collection fallback instead of trapping r
   const start = archive.indexOf('<section class="site-static-fallback" id="scriptfree-daily-archive"');
   const end = archive.indexOf('</section>', start);
   assert.ok(start >= 0 && end > start, 'Archive must expose the shared script-free collection fallback');
-  assert.ok(archive.includes('.atlas-enhanced #scriptfree-daily-archive{display:none!important}'),
-    'Only the shared JavaScript enhancement state may hide the native archive links');
+  assert.ok(archive.includes('html.atlas-daily-ready #scriptfree-daily-archive{display:none!important}'),
+    'Only a validated, rendered daily edition may hide the source-linked recovery paths');
+  assert.ok(!archive.includes('.atlas-enhanced #scriptfree-daily-archive{display:none!important}'),
+    'The shared theme script alone cannot hide the archive when its reader fails');
+  const reader = fs.readFileSync(path.join(__dirname, '..', 'whats-new.js'), 'utf8');
+  assert.ok(reader.indexOf("document.documentElement.classList.add('atlas-daily-ready')") >
+            reader.indexOf('metadata();sourceCoverage();renderSnapshot();render();'),
+    'Archive ready state must follow verified-edition rendering');
   assert.ok(!archive.includes('<noscript><section class="site-static-fallback"'),
     'Edition links must remain ordinary native HTML, not script-dependent parsed markup');
   const block = archive.slice(start, end + '</section>'.length);
