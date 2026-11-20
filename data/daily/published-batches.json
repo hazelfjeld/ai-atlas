@@ -1640,6 +1640,89 @@
       "production_workflow_run_id": 44600094128,
       "githack_workflow_run_id": 44600094160,
       "verification_scope": "Exact main 75eb1d33811831f79c2c38fa6aa7a424025ee94c passed catalog/GitHack workflow 44600094160 and Cloudflare deployment/hosted-browser workflow 44600094128 on November 19, 2026: deterministic build/integrity and GitHack parity, 508 commit-pinned HTTP assets on each of three production hostnames, archive register with 44 revisions and 15 receipts, 66 site-browser and 40 Games browser checks. Independent source-batch SHA-256, counts, unique IDs and 24,611-byte immutable edition hash checked. The exact dated query permalink could not be separately opened outside CI."
+    },
+    {
+      "batch_id": "atlas-daily-20261120-20261120t144529290z-primary-review-a",
+      "source_branch": "atlas-daily-staging",
+      "source_commit": "c0e135e08c874b7d6dc0df103c02e23f19fa5453",
+      "source_batch_path": "daily-queue/batches/2026-11-20-atlas-daily-20261120-20261120t144529290z-primary-review-a.json",
+      "source_batch_sha256": "e8f6ae539c87d7b7a02f2b4ecc2cac6ef5657f524c999c3a2ac6154705896e63",
+      "source_batch_bytes": 51634,
+      "edition_date": "2026-11-20",
+      "validation_result": "independent_sha256_utf8_bytes_counts_unique_ids_dates_prior_receipt_dedup_and_primary_source_review",
+      "status": "partially_published_with_10_deferred_catalog_proposals",
+      "publication_outcome": "immutable_revision_1_pending_production_verification",
+      "publication_edition": "2026-11-20-v1",
+      "accepted_news_ids": [
+        "ai-news-gemini-tool-retrieval-2026-11-19",
+        "ai-news-genie4-gemini-api-2026-11-19",
+        "ai-news-gemini-mac-computer-use-2026-11-19",
+        "ai-news-google-blueorigin-suncatcher-2026-11-19",
+        "ai-news-nvidia-microsoft-ignite-accelerated-2026-11-19",
+        "ai-news-google-vrp-disclosure-policy-2026-11-19",
+        "ai-news-openeval-commons-expansion-2026-11-19",
+        "ai-news-qwant-ovh-sovereign-ai-2026-11-19",
+        "ai-news-olala-mini-7a1b-launch-2026-11-19",
+        "ai-news-us-ai-chip-export-approvals-2026-11-19",
+        "ai-news-nvidia-agent-simulation-showcase-2026-11-19",
+        "ai-news-dneo-draft-feature-encoding-2611-21925",
+        "ai-news-repofactory-environment-evolution-2611-21152",
+        "ai-news-multi-branch-transformer-2611-19800",
+        "ai-news-agentic-opd-react-negative-transfer-2611-19244"
+      ],
+      "source_news_ids": [
+        "ai-news:gemini-tool-retrieval:2026-11-19",
+        "ai-news:genie4-gemini-api:2026-11-19",
+        "ai-news:gemini-mac-computer-use:2026-11-19",
+        "ai-news:google-blueorigin-suncatcher:2026-11-19",
+        "ai-news:nvidia-microsoft-ignite-accelerated:2026-11-19",
+        "ai-news:google-vrp-disclosure-policy:2026-11-19",
+        "ai-news:openeval-commons-expansion:2026-11-19",
+        "ai-news:qwant-ovh-sovereign-ai:2026-11-19",
+        "ai-news:olala-mini-7a1b-launch:2026-11-19",
+        "ai-news:us-ai-chip-export-approvals:2026-11-19",
+        "ai-news:nvidia-agent-simulation-showcase:2026-11-19",
+        "ai-news:dneo-draft-feature-encoding:2611.21925",
+        "ai-news:repofactory-environment-evolution:2611.21152",
+        "ai-news:multi-branch-transformer:2611.19800",
+        "ai-news:agentic-opd-react-negative-transfer:2611.19244"
+      ],
+      "deferred_news_ids": [],
+      "deferred_catalog_proposal_ids": [
+        "tech-proposal:gemini-tool-retrieval:2026-11-20",
+        "tech-proposal:genie4-api:2026-11-20",
+        "tech-proposal:olala-mini-7a1b:2026-11-20",
+        "tech-proposal:openeval-expanded:2026-11-20",
+        "tech-proposal:dneo-speculative-drafter:2026-11-20",
+        "tech-proposal:repofactory-training:2026-11-20",
+        "term-proposal:deferred-tool-schema-loading:2026-11-20",
+        "term-proposal:mixture-of-features-attention:2026-11-20",
+        "term-proposal:environment-evolution-loop:2026-11-20",
+        "term-proposal:transformer-branching:2026-11-20"
+      ],
+      "rejected_ids": [],
+      "counts": {
+        "news_published": 15,
+        "technology_added": 0,
+        "term_added": 0,
+        "corrections": 0,
+        "news_deferred": 0,
+        "catalog_deferred": 10,
+        "technology_updated": 0
+      },
+      "review_notes": "15 independently source-reviewed items: Google, NVIDIA, OVHcloud, OpenEval maintainer note, four arXiv abstracts and Reuters report corroborated by syndicated copy. Preserve preprint/vendor claims as attributed; older papers explicitly classified catch-up. Coverage partial with one failed arXiv metadata endpoint. Six technology and four term proposals deferred for canonical ID/alias/license review.",
+      "publication_history": [
+        {
+          "edition": "2026-11-20-v1",
+          "status": "pending_production_verification",
+          "note": "Immutable edition integrated on main with verified source SHA-256 and evidence attribution; CI, public HTTP and interactive archive verification pending.",
+          "prepared_at": "2026-11-20T14:54:12.109Z"
+        }
+      ],
+      "production_verified_at": null,
+      "production_verified_revision": null,
+      "last_verified_at": null,
+      "last_verified_public_url": null
     }
   ]
 }

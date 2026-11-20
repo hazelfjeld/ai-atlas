@@ -1,0 +1,491 @@
+{
+  "schema": 1,
+  "edition_date": "2026-11-20",
+  "timezone": "America/Chicago",
+  "published_at": "2026-11-20T14:54:12.109Z",
+  "coverage": {
+    "start": "2026-11-19T14:45:29.290Z",
+    "end": "2026-11-20T14:45:29.290Z",
+    "status": "partial",
+    "note": "Bounded primary-source research for the trailing 24 hours with older research catch-up. No last-successful cutoff in queue; partial historical coverage has been recorded but not certified complete. Publisher independently reopened first-party sources and research abstracts; Reuters was corroborated via syndication and search. Previous-day news and research catch-up are not presented as same-day launches. All six technology and four terminology proposals remain deferred pending canonical ID, alias and licensing review.",
+    "sources_checked": [
+      {
+        "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-api-tool-retrieval/",
+        "publisher": "Google",
+        "type": "developer API release",
+        "status": "full_page_opened",
+        "checked_at": "2026-11-20T14:45:29.290Z"
+      },
+      {
+        "url": "https://blog.google/innovation-and-ai/technology/developers-tools/genie-4-in-gemini-api/",
+        "publisher": "Google",
+        "type": "developer release",
+        "status": "full_page_opened",
+        "checked_at": "2026-11-20T14:45:29.290Z"
+      },
+      {
+        "url": "https://blog.google/innovation-and-ai/products/gemini-app/computer-use-mac/",
+        "publisher": "Google",
+        "type": "consumer-agent rollout",
+        "status": "full_page_opened",
+        "checked_at": "2026-11-20T14:45:29.290Z"
+      },
+      {
+        "url": "https://blog.google/innovation-and-ai/models-and-research/google-research/blue-origin-project-suncatcher-partnership/",
+        "publisher": "Google",
+        "type": "research infrastructure plan",
+        "status": "full_page_opened",
+        "checked_at": "2026-11-20T14:45:29.290Z"
+      },
+      {
+        "url": "https://blogs.nvidia.com/blog/microsoft-ignite-accelerated-computing-azure-windows-pcs/",
+        "publisher": "NVIDIA",
+        "type": "hardware/cloud partnership release",
+        "status": "full_page_opened",
+        "checked_at": "2026-11-20T14:45:29.290Z"
+      },
+      {
+        "url": "https://blog.google/security/expanding-transparency-google-alphabet-vrp-disclosure-policy-update/",
+        "publisher": "Google Security",
+        "type": "security policy announcement",
+        "status": "full_page_opened",
+        "checked_at": "2026-11-20T14:45:29.290Z"
+      },
+      {
+        "url": "https://huggingface.co/datasets/Open-Eval-Commons/OpenEval",
+        "publisher": "Open Eval Commons",
+        "type": "dataset changelog",
+        "status": "full_page_opened",
+        "checked_at": "2026-11-20T14:45:29.290Z"
+      },
+      {
+        "url": "https://corporate.ovhcloud.com/en-au/newsroom/news/qwant-shadow-eusp-ovhcloud-alliancy/",
+        "publisher": "OVHcloud",
+        "type": "partnership release",
+        "status": "full_page_opened",
+        "checked_at": "2026-11-20T14:45:29.290Z"
+      },
+      {
+        "url": "https://corporate.ovhcloud.com/en-sg/newsroom/news/ovh-olala-mini/",
+        "publisher": "OVHcloud",
+        "type": "model announcement",
+        "status": "full_page_opened",
+        "checked_at": "2026-11-20T14:45:29.290Z"
+      },
+      {
+        "url": "https://www.reuters.com/world/license-information-ai-chips-sent-china-released-by-us-house-committee-2026-11-19/",
+        "publisher": "Reuters",
+        "type": "independent political/business reporting",
+        "status": "full_page_opened",
+        "checked_at": "2026-11-20T14:45:29.290Z"
+      },
+      {
+        "url": "https://blogs.nvidia.com/blog/developers-simulation-frontier-ai-agents/",
+        "publisher": "NVIDIA",
+        "type": "developer demonstration",
+        "status": "full_page_opened",
+        "checked_at": "2026-11-20T14:45:29.290Z"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.21925",
+        "publisher": "arXiv / DNeo authors",
+        "type": "research preprint",
+        "status": "full_page_opened",
+        "checked_at": "2026-11-20T14:45:29.290Z"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.21152",
+        "publisher": "arXiv / RepoFactory authors",
+        "type": "research preprint",
+        "status": "full_page_opened",
+        "checked_at": "2026-11-20T14:45:29.290Z"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.19800",
+        "publisher": "arXiv / MBT authors",
+        "type": "research preprint",
+        "status": "full_page_opened",
+        "checked_at": "2026-11-20T14:45:29.290Z"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.19244",
+        "publisher": "arXiv / OPD authors",
+        "type": "research preprint",
+        "status": "full_page_opened",
+        "checked_at": "2026-11-20T14:45:29.290Z"
+      }
+    ],
+    "sources_failed": [
+      {
+        "url": "https://export.arxiv.org/api/query?search_query=cat%3Acs.LG%26start%3D0%26max_results%3D3",
+        "status": "web_reader_inaccessible",
+        "checked_at": "2026-11-20T14:45:29.290Z",
+        "note": "The arXiv metadata endpoint could not be opened; individual arXiv HTML pages were accessible. Failure does not establish no research."
+      }
+    ]
+  },
+  "tldr": [
+    "Google's new Gemini tool retrieval and Genie 4 API make large agent toolkits and interactive multimodal environments more accessible, while desktop automation and European-model deployments broaden practical AI workflows.",
+    "OpenEval's expanded item-level data and research on speculative decoding, coding-agent environments and distillation offer promising efficiency and evaluation ideas, but their measurements are largely maintainer- or author-reported; chip-export disclosures concern approvals rather than proven deliveries."
+  ],
+  "news": [
+    {
+      "id": "ai-news-gemini-tool-retrieval-2026-11-19",
+      "title": "Google previews on-demand tool-schema retrieval in Gemini API",
+      "category": "agents",
+      "tags": [
+        "AI",
+        "LLM",
+        "agent tools",
+        "API"
+      ],
+      "summary": "Google added Tool Retrieval preview to the Interactions API: developers can defer function schemas and have the system load them when selected by tool search.",
+      "why_it_matters": "Large tool inventories may avoid repeated schema tokens and preserve prompt-cache prefixes.",
+      "caveat": "Models still see tool descriptions; authorization remains the developer's responsibility. Token and latency gains are conditional and calls are billed normally.",
+      "review_status": "publisher_reviewed_first_party_statement_attributed",
+      "release_status": "public_preview",
+      "source_url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-api-tool-retrieval/",
+      "publication_date": "2026-11-19",
+      "event_date": "2026-11-19",
+      "discovered_at": "2026-11-20T14:45:29.290Z",
+      "added_to_atlas_at": "2026-11-20T14:54:12.109Z",
+      "collection_classification": "previous_day",
+      "source_record_id": "ai-news:gemini-tool-retrieval:2026-11-19"
+    },
+    {
+      "id": "ai-news-genie4-gemini-api-2026-11-19",
+      "title": "Genie 4 interactive world generation reaches Gemini API",
+      "category": "multimodal",
+      "tags": [
+        "AI",
+        "DL",
+        "video",
+        "audio",
+        "world models",
+        "robotics"
+      ],
+      "summary": "Google opened Genie 4 developer access through Gemini Interactions API and AI Studio, describing interactive 720p, 24-fps visual worlds with native audio and live controls.",
+      "why_it_matters": "Interactive simulation could support prototyping, game design and synthetic robot-agent environments.",
+      "caveat": "World consistency, physical fidelity, latency, access and cost are not independently tested; SynthID watermarking is announced.",
+      "review_status": "publisher_reviewed_first_party_statement_attributed",
+      "release_status": "api_availability",
+      "source_url": "https://blog.google/innovation-and-ai/technology/developers-tools/genie-4-in-gemini-api/",
+      "publication_date": "2026-11-19",
+      "event_date": "2026-11-19",
+      "discovered_at": "2026-11-20T14:45:29.290Z",
+      "added_to_atlas_at": "2026-11-20T14:54:12.109Z",
+      "collection_classification": "previous_day",
+      "source_record_id": "ai-news:genie4-gemini-api:2026-11-19"
+    },
+    {
+      "id": "ai-news-gemini-mac-computer-use-2026-11-19",
+      "title": "Gemini for Mac introduces isolated desktop computer-use agent",
+      "category": "agents",
+      "tags": [
+        "AI",
+        "agents",
+        "desktop",
+        "automation",
+        "safety"
+      ],
+      "summary": "Google began a U.S. English rollout of computer-use workflows in a separate Mac window with app permissions, action previews and user approvals.",
+      "why_it_matters": "Moves application and file automation beyond browser-only agents while preserving user interaction with the main desktop.",
+      "caveat": "Requires Apple Silicon, macOS 15+, eligible adult personal account and paid AI plan; computer-use mistakes and data exposure remain risks.",
+      "review_status": "publisher_reviewed_first_party_statement_attributed",
+      "release_status": "rolling_release",
+      "source_url": "https://blog.google/innovation-and-ai/products/gemini-app/computer-use-mac/",
+      "publication_date": "2026-11-19",
+      "event_date": "2026-11-19",
+      "discovered_at": "2026-11-20T14:45:29.290Z",
+      "added_to_atlas_at": "2026-11-20T14:54:12.109Z",
+      "collection_classification": "previous_day",
+      "source_record_id": "ai-news:gemini-mac-computer-use:2026-11-19"
+    },
+    {
+      "id": "ai-news-google-blueorigin-suncatcher-2026-11-19",
+      "title": "Google targets 2029 orbital AI infrastructure launch with Blue Origin",
+      "category": "infrastructure",
+      "tags": [
+        "AI",
+        "compute",
+        "power",
+        "satellites"
+      ],
+      "summary": "Google announced a Blue Origin New Glenn partnership targeting Q1 2029 to launch rack-scale compute satellites for Project Suncatcher.",
+      "why_it_matters": "Tests an unconventional long-horizon response to AI energy and facility constraints.",
+      "caveat": "This is a plan, not a deployed AI data center; economics, radiation tolerance, thermal design, networking and mission success are unproven.",
+      "review_status": "publisher_reviewed_first_party_statement_attributed",
+      "release_status": "announced_future_plan",
+      "source_url": "https://blog.google/innovation-and-ai/models-and-research/google-research/blue-origin-project-suncatcher-partnership/",
+      "publication_date": "2026-11-19",
+      "event_date": "2026-11-19",
+      "discovered_at": "2026-11-20T14:45:29.290Z",
+      "added_to_atlas_at": "2026-11-20T14:54:12.109Z",
+      "collection_classification": "previous_day",
+      "source_record_id": "ai-news:google-blueorigin-suncatcher:2026-11-19"
+    },
+    {
+      "id": "ai-news-nvidia-microsoft-ignite-accelerated-2026-11-19",
+      "title": "NVIDIA and Microsoft expand cloud-to-PC AI deployment stack",
+      "category": "infrastructure",
+      "tags": [
+        "AI",
+        "DL",
+        "hardware",
+        "cloud",
+        "edge"
+      ],
+      "summary": "NVIDIA described expanded Azure Vera Rubin NVL72 VM access, model customization through Microsoft Foundry, and enterprise edge/Windows deployment options.",
+      "why_it_matters": "Provides additional GPU and software pathways for training, customizing and serving models across cloud and local environments.",
+      "caveat": "Availability varies by product and region; this announcement does not establish independent benchmarks or universal customer access.",
+      "review_status": "publisher_reviewed_first_party_statement_attributed",
+      "release_status": "official_release_or_report",
+      "source_url": "https://blogs.nvidia.com/blog/microsoft-ignite-accelerated-computing-azure-windows-pcs/",
+      "publication_date": "2026-11-19",
+      "event_date": "2026-11-19",
+      "discovered_at": "2026-11-20T14:45:29.290Z",
+      "added_to_atlas_at": "2026-11-20T14:54:12.109Z",
+      "collection_classification": "previous_day",
+      "source_record_id": "ai-news:nvidia-microsoft-ignite-accelerated:2026-11-19"
+    },
+    {
+      "id": "ai-news-google-vrp-disclosure-policy-2026-11-19",
+      "title": "Google plans wider vulnerability-report publication amid AI-assisted submissions",
+      "category": "safety",
+      "tags": [
+        "AI",
+        "cybersecurity",
+        "bug bounty",
+        "governance"
+      ],
+      "summary": "Google updated its vulnerability reward program disclosure policy for qualifying reports filed from December 1, citing higher volumes of AI-generated and duplicate findings.",
+      "why_it_matters": "More transparent, repaired vulnerability disclosures can improve the training signal for defenders and security researchers.",
+      "caveat": "This is a policy change, not a new attack incident; publication is restricted by rewards, remediation and privacy conditions.",
+      "review_status": "publisher_reviewed_first_party_statement_attributed",
+      "release_status": "announced_future_policy",
+      "source_url": "https://blog.google/security/expanding-transparency-google-alphabet-vrp-disclosure-policy-update/",
+      "publication_date": "2026-11-19",
+      "event_date": "2026-12-01",
+      "discovered_at": "2026-11-20T14:45:29.290Z",
+      "added_to_atlas_at": "2026-11-20T14:54:12.109Z",
+      "collection_classification": "previous_day",
+      "source_record_id": "ai-news:google-vrp-disclosure-policy:2026-11-19"
+    },
+    {
+      "id": "ai-news-openeval-commons-expansion-2026-11-19",
+      "title": "OpenEval adds item-level data from hundreds of models",
+      "category": "evaluation",
+      "tags": [
+        "AI",
+        "ML",
+        "LLM",
+        "benchmarks",
+        "datasets"
+      ],
+      "summary": "The Open Eval Commons dataset card records expansion to 41 benchmarks, about 4.74M items and 23.12M responses from 567 models.",
+      "why_it_matters": "Response-level data can support reanalysis of rankings, error modes and model agreement instead of aggregate-only claims.",
+      "caveat": "Counts are maintainer-reported, benchmarks overlap, and dataset is CC BY-NC 4.0; large downloads and redistribution rights need review.",
+      "review_status": "publisher_reviewed_first_party_statement_attributed",
+      "release_status": "dataset_update",
+      "source_url": "https://huggingface.co/datasets/Open-Eval-Commons/OpenEval",
+      "publication_date": "2026-11-19",
+      "event_date": "2026-11-19",
+      "discovered_at": "2026-11-20T14:45:29.290Z",
+      "added_to_atlas_at": "2026-11-20T14:54:12.109Z",
+      "collection_classification": "previous_day",
+      "source_record_id": "ai-news:openeval-commons-expansion:2026-11-19"
+    },
+    {
+      "id": "ai-news-qwant-ovh-sovereign-ai-2026-11-19",
+      "title": "Qwant and OVHcloud detail EU-hosted search and model partnership",
+      "category": "applications",
+      "tags": [
+        "AI",
+        "SLM",
+        "LLM",
+        "search",
+        "deployment"
+      ],
+      "summary": "OVHcloud, Qwant, Shadow and EUSP announced a European-hosted search-answer stack using Olala mini, Shadow GPUs and an independent web index.",
+      "why_it_matters": "A deployment example connecting European model training, search provenance and hosting rather than a model announcement alone.",
+      "caveat": "Three-million-query daily volume and speed/resource comparisons are company claims; data-residency and sovereignty compliance were not independently audited.",
+      "review_status": "publisher_reviewed_first_party_statement_attributed",
+      "release_status": "partnership_deployment",
+      "source_url": "https://corporate.ovhcloud.com/en-au/newsroom/news/qwant-shadow-eusp-ovhcloud-alliancy/",
+      "publication_date": "2026-11-19",
+      "event_date": "2026-11-19",
+      "discovered_at": "2026-11-20T14:45:29.290Z",
+      "added_to_atlas_at": "2026-11-20T14:54:12.109Z",
+      "collection_classification": "previous_day",
+      "source_record_id": "ai-news:qwant-ovh-sovereign-ai:2026-11-19"
+    },
+    {
+      "id": "ai-news-olala-mini-7a1b-launch-2026-11-19",
+      "title": "OVHcloud debuts sparse 7B-parameter Olala mini model at AI summit",
+      "category": "models",
+      "tags": [
+        "AI",
+        "SLM",
+        "LLM",
+        "MoE",
+        "inference"
+      ],
+      "summary": "Announced November 17 for a November 19 summit launch, Olala mini 7A1B combines 7B total and about 1B active parameters with a hybrid Differential-TPA/Mamba-3 design.",
+      "why_it_matters": "Adds a compact European-trained language-model alternative for constrained inference and search summarization.",
+      "caveat": "Publisher's 8GB GPU and CPU token speeds are configuration-dependent; independently verified model artifacts, license and pricing require checking.",
+      "review_status": "publisher_reviewed_first_party_statement_attributed",
+      "release_status": "summit_launch",
+      "source_url": "https://corporate.ovhcloud.com/en-sg/newsroom/news/ovh-olala-mini/",
+      "publication_date": "2026-11-17",
+      "event_date": "2026-11-19",
+      "discovered_at": "2026-11-20T14:45:29.290Z",
+      "added_to_atlas_at": "2026-11-20T14:54:12.109Z",
+      "collection_classification": "catch_up",
+      "source_record_id": "ai-news:olala-mini-7a1b-launch:2026-11-19"
+    },
+    {
+      "id": "ai-news-us-ai-chip-export-approvals-2026-11-19",
+      "title": "Reuters reports House disclosure of 879,000 AI-chip export approvals",
+      "category": "industry",
+      "tags": [
+        "AI",
+        "hardware",
+        "policy",
+        "export controls"
+      ],
+      "summary": "Reuters reported that a U.S. House committee released figures for 879,000 Nvidia and AMD AI-chip export approvals to Chinese buyers during December 2025–May 2026.",
+      "why_it_matters": "Shows policy-defined potential compute supply in a politically sensitive AI hardware market.",
+      "caveat": "Approvals are not verified deliveries; company military-link descriptions are allegations, not proven violations. The reported approvals concern older months.",
+      "review_status": "publisher_reviewed_reuters_reporting_attributed",
+      "release_status": "reported_government_disclosure",
+      "source_url": "https://www.reuters.com/world/license-information-ai-chips-sent-china-released-by-us-house-committee-2026-11-19/",
+      "publication_date": "2026-11-19",
+      "event_date": "2026-11-19",
+      "discovered_at": "2026-11-20T14:45:29.290Z",
+      "added_to_atlas_at": "2026-11-20T14:54:12.109Z",
+      "collection_classification": "previous_day",
+      "source_record_id": "ai-news:us-ai-chip-export-approvals:2026-11-19"
+    },
+    {
+      "id": "ai-news-nvidia-agent-simulation-showcase-2026-11-19",
+      "title": "NVIDIA showcases agent-built Omniverse simulations",
+      "category": "robotics",
+      "tags": [
+        "AI",
+        "agents",
+        "robotics",
+        "simulation",
+        "3D"
+      ],
+      "summary": "NVIDIA published developer examples combining frontier coding agents with Omniverse physics, rendering and sensor-simulation libraries.",
+      "why_it_matters": "Illustrates a human-supervised workflow for constructing and iterating virtual environments used in robot development.",
+      "caveat": "These are vendor-curated demonstrations, not proof of reliable general-purpose autonomous simulation generation.",
+      "review_status": "publisher_reviewed_first_party_statement_attributed",
+      "release_status": "controlled_demo",
+      "source_url": "https://blogs.nvidia.com/blog/developers-simulation-frontier-ai-agents/",
+      "publication_date": "2026-11-19",
+      "event_date": "2026-11-19",
+      "discovered_at": "2026-11-20T14:45:29.290Z",
+      "added_to_atlas_at": "2026-11-20T14:54:12.109Z",
+      "collection_classification": "previous_day",
+      "source_record_id": "ai-news:nvidia-agent-simulation-showcase:2026-11-19"
+    },
+    {
+      "id": "ai-news-dneo-draft-feature-encoding-2611-21925",
+      "title": "DNeo preprint revisits speculative drafter feature encoding",
+      "category": "research",
+      "tags": [
+        "LLM",
+        "inference",
+        "speculative decoding",
+        "SLM"
+      ],
+      "summary": "A November 16 preprint proposes mixture-of-features attention, rejected-draft memory and layer-selection changes to improve parallel draft acceptance.",
+      "why_it_matters": "Could improve throughput when GPU verification and drafter features are the bottleneck.",
+      "caveat": "Authors report a 1.3× advantage over DFlash-2 in studied settings; results are not an independent universal throughput ranking.",
+      "review_status": "publisher_reviewed_first_party_statement_attributed",
+      "release_status": "research_preprint",
+      "source_url": "https://arxiv.org/abs/2611.21925",
+      "publication_date": "2026-11-16",
+      "event_date": "2026-11-16",
+      "discovered_at": "2026-11-20T14:45:29.290Z",
+      "added_to_atlas_at": "2026-11-20T14:54:12.109Z",
+      "collection_classification": "catch_up",
+      "source_record_id": "ai-news:dneo-draft-feature-encoding:2611.21925"
+    },
+    {
+      "id": "ai-news-repofactory-environment-evolution-2611-21152",
+      "title": "RepoFactory evolves verifiable training environments for coding agents",
+      "category": "research",
+      "tags": [
+        "LLM",
+        "agents",
+        "training",
+        "evaluation"
+      ],
+      "summary": "A November 16 preprint creates 10,159 repository-derived build-from-spec environments, optimizing validity and scope with an Environment Evolution Loop.",
+      "why_it_matters": "Provides a possible way to scale training feedback for long-horizon coding tasks without repeatedly training an agent for every candidate environment.",
+      "caveat": "Reported benchmark improvements are author-run and depend on the selected environment and baseline.",
+      "review_status": "publisher_reviewed_first_party_statement_attributed",
+      "release_status": "research_preprint",
+      "source_url": "https://arxiv.org/abs/2611.21152",
+      "publication_date": "2026-11-16",
+      "event_date": "2026-11-16",
+      "discovered_at": "2026-11-20T14:45:29.290Z",
+      "added_to_atlas_at": "2026-11-20T14:54:12.109Z",
+      "collection_classification": "catch_up",
+      "source_record_id": "ai-news:repofactory-environment-evolution:2611.21152"
+    },
+    {
+      "id": "ai-news-multi-branch-transformer-2611-19800",
+      "title": "Multi-Branch Transformer explores parallel full-block branches",
+      "category": "research",
+      "tags": [
+        "DL",
+        "LLM",
+        "architecture",
+        "MoE"
+      ],
+      "summary": "A November 15 preprint evaluates shared initial/final transformer layers around parallel independently parameterized block branches in 0.8B–2.1B MoE training experiments.",
+      "why_it_matters": "Investigates architecture scaling beyond simply increasing depth or width, with potential speed/quality tradeoffs.",
+      "caveat": "Matched-budget results are author-reported, small relative to frontier LLMs and not a verified production replacement.",
+      "review_status": "publisher_reviewed_first_party_statement_attributed",
+      "release_status": "research_preprint",
+      "source_url": "https://arxiv.org/abs/2611.19800",
+      "publication_date": "2026-11-15",
+      "event_date": "2026-11-15",
+      "discovered_at": "2026-11-20T14:45:29.290Z",
+      "added_to_atlas_at": "2026-11-20T14:54:12.109Z",
+      "collection_classification": "catch_up",
+      "source_record_id": "ai-news:multi-branch-transformer:2611.19800"
+    },
+    {
+      "id": "ai-news-agentic-opd-react-negative-transfer-2611-19244",
+      "title": "On-policy distillation study flags harmful cross-domain tool habits",
+      "category": "research",
+      "tags": [
+        "LLM",
+        "SLM",
+        "distillation",
+        "agents",
+        "safety"
+      ],
+      "summary": "A November 14 preprint studies how on-policy distillation shifts ReAct tool use and reports negative transfer to τ²-bench from an ALFWorld-trained student.",
+      "why_it_matters": "Warns that fine-tuning a small agent on one environment can silently transplant poor tool-use policies to another.",
+      "caveat": "The authors' 41.5%-to-6.6% drop and partial mitigation are particular experimental conditions, not an inherent consequence of all distillation.",
+      "review_status": "publisher_reviewed_first_party_statement_attributed",
+      "release_status": "research_preprint",
+      "source_url": "https://arxiv.org/abs/2611.19244",
+      "publication_date": "2026-11-14",
+      "event_date": "2026-11-14",
+      "discovered_at": "2026-11-20T14:45:29.290Z",
+      "added_to_atlas_at": "2026-11-20T14:54:12.109Z",
+      "collection_classification": "catch_up",
+      "source_record_id": "ai-news:agentic-opd-react-negative-transfer:2611.19244"
+    }
+  ],
+  "technologies": [],
+  "terms": [],
+  "site_changes": [],
+  "corrections": []
+}

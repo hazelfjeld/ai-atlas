@@ -353,9 +353,17 @@
       "sha256": "bd4f5e59c69fc35ab719e9949f4a31c1dc1ae41eb9b8086682d0f7e4bfcf7d56",
       "bytes": 24611,
       "published_at": "2026-11-19T15:33:04.684Z"
+    },
+    {
+      "date": "2026-11-20",
+      "revision": 1,
+      "path": "data/daily/editions/2026-11-20-v1.json",
+      "sha256": "e17eb7eade556b3011bea6d2da3d26798f0e9168a3ec929fe2b7ed4bf30713ae",
+      "bytes": 25287,
+      "published_at": "2026-11-20T14:54:12.109Z"
     }
   ],
-  "last_successful_publish_at": "2026-11-19T19:50:08Z",
+  "last_successful_publish_at": "2026-11-20T14:54:12.109Z",
   "status": "edition_revision_1_production_verified",
   "coverage_note": "2026-11-19 v1 — 14 source-reviewed reports from November 16–19, 15 sources checked and one failed endpoint; 4 technology and 3 terminology proposals deferred for catalog/license/alias checks. Partial coverage. Cloudflare production HTTP, GitHack and hosted browser checks verified on main 75eb1d33; the exact dated query permalink was not independently reopened outside CI."
 }
