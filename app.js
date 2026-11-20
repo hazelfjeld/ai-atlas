@@ -108,6 +108,10 @@ function renderNav(){
     const selectedName=nav.querySelector('a.nav-link[aria-current="page"] span:not(.nav-count)');
     const currentName=selectedName?.textContent?.trim()||labels[view];
     mobileHeading.dataset.pageLabel=currentName;
+    // Keep the real shared desktop header title synchronized with the selected
+    // SPA section. Updating data-page-label alone leaves visible text stale.
+    const workspaceTitle=mobileHeading.querySelector(':scope > .site-mobile-chrome__title');
+    if(workspaceTitle)workspaceTitle.textContent=currentName;
     // The breadcrumb is intentionally hidden in the narrow search-first topbar.
     // Announce its current section on the visible menu trigger instead.
     mobileHeading.setAttribute('aria-label','AI Updates mobile header · '+currentName);

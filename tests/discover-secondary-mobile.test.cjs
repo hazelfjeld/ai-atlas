@@ -39,10 +39,11 @@ test('Discover nested mobile More reflects the selected secondary workspace',()=
   const menuToggle={setAttribute:(key,val)=>menuAttrs.set(key,val),
     getAttribute:key=>menuAttrs.get(key)||null};
   const headerAttrs=new Map();
+  const workspaceTitle={textContent:'Discover'};
   const mobileHeading={dataset:{},
     setAttribute:(key,val)=>headerAttrs.set(key,val),
     getAttribute:key=>headerAttrs.get(key)||null,
-    querySelector:()=>menuToggle};
+    querySelector:selector=>selector===':scope > .site-mobile-chrome__title' ? workspaceTitle : menuToggle};
   const elements={navigation:rail,'additional-navigation':desktopMore,breadcrumb:{textContent:''},
     'snapshot-date':{textContent:''}};
   const context={document:{title:'',querySelectorAll:()=>mobile,
@@ -59,6 +60,7 @@ test('Discover nested mobile More reflects the selected secondary workspace',()=
     assert.equal(more.open,true,section+' is visible within More');
     assert.equal(desktopMore.open,true,section+' is visible in desktop More');
     assert.equal(mobileHeading.dataset.pageLabel,sectionNames[section]);
+    assert.equal(workspaceTitle.textContent,sectionNames[section], 'visible shared topbar follows SPA routing');
     assert.equal(mobileHeading.getAttribute('aria-label'),'AI Updates mobile header · '+sectionNames[section]);
     assert.equal(menuToggle.getAttribute('aria-label'),'Toggle navigation · '+sectionNames[section]);
   }
@@ -68,6 +70,7 @@ test('Discover nested mobile More reflects the selected secondary workspace',()=
   assert.equal(more.open,false,'Auto-opened mobile disclosure closes on primary navigation');
   assert.equal(desktopMore.open,false,'Auto-opened desktop disclosure closes on primary navigation');
   assert.equal(menuToggle.getAttribute('aria-label'),'Toggle navigation · Discover');
+  assert.equal(workspaceTitle.textContent,'Discover', 'return navigation restores the visible header');
   // User-expanded disclosures must stay open across primary hash changes.
   more.open=true;desktopMore.open=true;
   context.view='dictionary';context.renderNav();

@@ -458,6 +458,26 @@ with sync_playwright() as p:
                       page.locator('#discover-mobile-nav > summary').get_attribute('aria-label') == 'Toggle navigation · ' + expected_label
                       and page.locator('.discover-mobile-chrome').get_attribute('aria-label') == 'AI Updates mobile header · ' + expected_label
                       and page.locator('#navigation a.nav-link[aria-current="page"] span:not(.nav-count)').first.inner_text() == expected_label)
+        if width > 650:
+            # The SPA once updated only the attribute and mobile announcement,
+            # leaving the actual desktop topbar title stuck on Discover.
+            for chosen_theme in ('light', 'dark'):
+                page.evaluate('(theme) => { document.documentElement.dataset.theme = theme; }', chosen_theme)
+                for section, expected_label in (
+                    ('papers', 'Research library'),
+                    ('technologies', 'Technology profiles'),
+                    ('saved', 'Your notebook'),
+                    ('overview', 'Discover'),
+                ):
+                    page.evaluate('(route) => { location.hash = "#/" + route; }', section)
+                    title = page.locator('.discover-mobile-chrome > .site-mobile-chrome__title')
+                    page.wait_for_function(
+                        '(label) => document.querySelector(".discover-mobile-chrome > .site-mobile-chrome__title")?.textContent?.trim() === label',
+                        arg=expected_label)
+                    check('Discover visible desktop workspace title follows ' + section + ' at ' + str(width) + ' ' + chosen_theme,
+                          title.is_visible()
+                          and title.inner_text().strip() == expected_label
+                          and page.locator('#navigation a.nav-link[aria-current="page"] span:not(.nav-count)').first.inner_text() == expected_label)
         if width <= 650:
             page.locator('#discover-mobile-nav > summary').click()
             check('Discover native mobile drawer opens at ' + str(width),
