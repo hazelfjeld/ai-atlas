@@ -1839,7 +1839,7 @@ test('generated dictionary and technology skip links target article content afte
     'the native rail must never be duplicated or moved after hydration');
   assert.ok(css.includes('body > .directory-mobile-topbar.site-mobile-chrome:has(+ nav.site-chrome + main.term-shell)'),
     'Concept header must not retain negative nested gutters when it becomes a body sibling');
-  assert.ok(css.includes('html:has(.site-chrome){scroll-padding-top:96px}'));
+  assert.ok(css.includes('html:has(.site-chrome),html:has(.app-shell){scroll-padding-top:96px}'));
   assert.ok(!css.includes('scroll-margin-top:96px'), 'root offset must not double-stack with article scroll margins');
   const helper = read('scripts/site_chrome.py');
   assert.ok(helper.includes('def native_directory_article_skip(body, path, *, native_concept_article=False):'));
@@ -1884,7 +1884,7 @@ test('generated dictionary and technology skip links target article content afte
 
 test('shared desktop hash navigation clears the fixed workspace bar on editorial and reference pages', () => {
   const css = read('site-chrome.css');
-  assert.match(css, /html:has\(\.site-chrome\)\{scroll-padding-top:96px\}/);
+  assert.match(css, /html:has\(\.site-chrome\),html:has\(\.app-shell\)\{scroll-padding-top:96px\}/);
   assert.match(css, /height:78px/);
   for (const route of ['catalog-review.html','hardware-review.html',
     'research.html','terms/index.html','technology/index.html']) {
@@ -1929,7 +1929,7 @@ test('shared mobile navigation remains a native dropdown without JavaScript', ()
 test('shared sticky mobile header clears native hash targets without JavaScript', () => {
   const css = read('site-chrome.css');
   assert.match(css, /@media \(max-width:650px\)\{\s*html:has\(\.site-chrome\)\{scroll-padding-top:80px\}\s*\}/);
-  assert.match(css, /@media \(min-width:651px\)\{[\s\S]*?html:has\(\.site-chrome\)\{scroll-padding-top:96px\}/);
+  assert.match(css, /@media \(min-width:651px\)\{[\s\S]*?html:has\(\.site-chrome\),html:has\(\.app-shell\)\{scroll-padding-top:96px\}/);
   for (const route of ['catalog-review.html', 'terms/index.html', 'technology/index.html']) {
     const html = read(route);
     assert.match(html, /<a class="skip" href="#main">/);
