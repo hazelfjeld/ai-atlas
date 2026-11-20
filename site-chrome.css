@@ -1038,6 +1038,17 @@ body:has(.site-chrome) > a.skip:focus{
 .site-static-fallback__links a:hover{border-color:var(--accent,#47715a);text-decoration:underline}
 .site-static-fallback__links a:focus-visible{outline:3px solid #b77833;outline-offset:2px}
 @media(max-width:650px){.site-static-fallback{padding:14px 16px}.site-static-fallback__links a{flex:1 1 100%}}
+/* One source-linked preview treatment across script-free daily and research views. */
+.site-static-fallback__stories{list-style:none;padding:0;margin:12px 0 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,235px),1fr));gap:12px}
+.site-static-fallback__stories li{min-width:0;border:1px solid var(--line,#dce1d7);border-radius:10px;background:var(--surface,#fff);padding:14px}
+.site-static-fallback__stories h3{margin:0 0 9px;font-size:16px;line-height:1.35;letter-spacing:-.015em}
+.site-static-fallback__stories h3 a{color:var(--ink,#202b28);text-decoration-thickness:1px}
+.site-static-fallback__stories h3 a:hover{text-decoration-thickness:2px}
+.site-static-fallback__stories p{margin:0 0 8px;font-size:14px;line-height:1.5}
+.site-static-fallback__stories small{display:block;color:var(--muted,#627067);font-size:12px;line-height:1.5}
+.site-static-fallback .site-static-fallback__archive-title{margin:18px 0 8px;color:var(--ink,#202b28);font:650 15px/1.4 system-ui,-apple-system,sans-serif}
+.site-static-fallback .site-static-fallback__note{margin:12px 0 0;font-size:12px}
+@media(max-width:650px){.site-static-fallback__stories{grid-template-columns:minmax(0,1fr)}}
 /* atlas-scriptless-catalog-fallback:end */
 
 /* atlas-longform-reading-measure:begin */
