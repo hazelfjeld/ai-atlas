@@ -90,6 +90,34 @@ with sync_playwright() as p:
                           "new URLSearchParams(location.hash.split('?')[1]).get('q')") ==
                       'reward hacking')
             submit_page.close()
+    # Compare the rendered native search fields against Discover, not just
+    # their markup. A desktop 16px native input looked noticeably different
+    # from Discover's 12px field; both should remain 16px on phones.
+    for search_scheme in ('light', 'dark'):
+        for search_width in (390, 768, 1280):
+            search_page = browser.new_page(
+                viewport={'width': search_width, 'height': 844},
+                color_scheme=search_scheme, reduced_motion='reduce')
+            search_page.goto(base + 'index.html')
+            discover_font = search_page.locator('#global-query').evaluate(
+                'el => getComputedStyle(el).fontSize')
+            for search_route in ('whats-new.html', 'research.html',
+                                 'playbooks.html', 'games.html',
+                                 'technology/index.html'):
+                search_page.goto(base + search_route)
+                field = search_page.locator(
+                    'form.site-mobile-chrome__search-form input.site-mobile-chrome__search-input')
+                field.wait_for(state='attached')
+                native_font = field.evaluate('el => getComputedStyle(el).fontSize')
+                check('shared search type matches Discover ' + search_route +
+                      ' ' + search_scheme + ' ' + str(search_width),
+                      native_font == discover_font and
+                      native_font == ('16px' if search_width <= 650 else '12px'))
+                if search_width in (390, 1280) and search_route == 'research.html':
+                    search_page.screenshot(path=str(out /
+                        ('research-shared-search-' + search_scheme +
+                         '-' + str(search_width) + '.png')))
+            search_page.close()
     # Scriptless Discover retains exactly its original input and fallback
     # references; no extra dead button appears as an apparent search action.
     nojs_submit = browser.new_page(viewport={'width': 390, 'height': 844},

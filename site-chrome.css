@@ -658,6 +658,15 @@ body:has(.site-chrome) :is(.tech-controls,.playbook-tools,.controls,.search-cont
   border-radius:0;background:transparent;color:var(--ink,#202b28);
   font:inherit;font-size:16px;line-height:1.4;box-shadow:none
 }
+/* atlas-unified-desktop-search-type:begin */
+/* Discover's desktop search reads at 12px; native article headers used
+   16px from the phone zoom-prevention rule. Match the existing Discover
+   search scale on every standalone and reference page, while retaining
+   16px on phones so iOS doesn't zoom when a person searches. */
+@media (min-width:651px){
+  .site-mobile-chrome__search-form .site-mobile-chrome__search-input{font-size:12px}
+}
+/* atlas-unified-desktop-search-type:end */
 .site-mobile-chrome__search-input::placeholder{color:var(--muted,#627067);opacity:1}
 .site-mobile-chrome__search-submit{
   flex:none;display:grid;place-items:center;min-width:34px;min-height:36px;
