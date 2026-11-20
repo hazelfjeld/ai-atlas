@@ -34,7 +34,7 @@ test('reference logos and offline demo preserve one two-stroke mark in both them
   const shared = read('site-chrome.css');
   assert.match(shared, /:is\(\.brandmark,\.site-chrome__brand,\.site-mobile-chrome__brand\) svg path\{stroke-width:2\}/);
   const reference = anchor(read('terms/MLD-0001-a-b-test.html'), 'site-chrome__brand');
-  assert.match(reference, /stroke-width="2" stroke-linecap="round"\/><\/svg>/,
+  assert.match(reference, /stroke-linecap="round" stroke-width="2"\/><\/svg>/,
     'Preserve the exact canonical two-stroke SVG on immutable detail pages');
   for (const output of [discover, nativeRoot, nativeNested]) {
     assert.equal((output.match(/<svg/g) || []).length, 1);

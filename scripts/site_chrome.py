@@ -192,7 +192,7 @@ def render_directory_hero(eyebrow, title, summary, *, lead=False):
 # reference details. Their wrappers keep their original layout and routes.
 BRAND_SVG = (
     '<svg viewBox="0 0 36 36" fill="none" aria-hidden="true"><path d="M5 7h12v12H5zM21 17h10v12H21z" stroke="currentColor" stroke-width="2"/>'
-    '<path d="M21 6h10M26 1v10M5 25h12M5 30h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>'
+    '<path d="M21 6h10M26 1v10M5 25h12M5 30h8" stroke="currentColor" stroke-linecap="round" stroke-width="2"/></svg>'
 )
 BRAND_WORDMARK = 'AI Updates<small>THE FRONTIER, IN CONTEXT</small>'
 
