@@ -647,6 +647,6 @@ def normalize_standalone_chrome(html, path):
     if dual_scheme not in normalized:
         charset = '<meta charset="utf-8">'
         assert normalized.count(charset) == 1, path
-        normalized = normalized.replace(charset, charset + '\\n' + dual_scheme, 1)
+        normalized = normalized.replace(charset, charset + '\n' + dual_scheme, 1)
     assert normalized.count(dual_scheme) == 1, path
     return ensure_skip_destination_focusable(migrate_legacy_article_landmark(normalized, path), path)
