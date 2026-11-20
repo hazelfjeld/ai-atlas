@@ -727,7 +727,8 @@ test('one shared mobile disclosure exposes the existing secondary routes with ke
 test('Discover mobile drawer exposes the canonical eight secondary destinations without JavaScript', () => {
   const generator = fs.readFileSync(path.join(__dirname, '..', 'scripts/site_chrome.py'), 'utf8');
   const theme = fs.readFileSync(path.join(__dirname, '..', 'site-theme.js'), 'utf8');
-  assert.ok(generator.includes('render_mobile_secondary_nav("").replace('),
+  assert.ok(generator.includes('mobile = render_directory_nav(') &&
+    generator.includes('mobile_secondary=True,') && generator.includes('mobile_only=True'),
     'Discover must reuse the existing shared mobile link generator, not maintain a copied list');
   assert.ok(theme.includes("if (menu && !menu.querySelector('.site-mobile-chrome__more'))"),
     'Hydration must not add a duplicate disclosure to the script-free drawer');

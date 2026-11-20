@@ -64,7 +64,9 @@ test('Discover first-paint mobile context matches standalone pages without scrip
       route + ': initial active destination remains Discover');
   }
   const source = read('scripts/site_chrome.py');
-  assert.ok(source.includes(bar) && source.includes(toggle),
+  assert.ok(source.includes('mobile_classes="site-mobile-chrome discover-mobile-chrome"') &&
+    source.includes('page_label="Discover"') &&
+    source.includes('aria-label="Toggle navigation · Discover"'),
     'rebuilding navigation must preserve the same first-paint context');
   const app = read('app.js');
   assert.ok(app.includes('mobileHeading.dataset.pageLabel=currentName;'),

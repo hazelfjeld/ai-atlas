@@ -417,7 +417,8 @@ test('Discover shares the native script-free mobile drawer used by standalone pa
   const offline=read('downloads/Atlas_Demo_Offline.html');
   const shared=read('site-chrome.css'), generator=read('scripts/site_chrome.py');
   assert.match(generator, /def render_discover_mobile\(\):/);
-  assert.match(generator, /links = render_primary_links\("", "Discover"\)/);
+  assert.match(generator, /mobile = render_directory_nav\(\s*""\s*,\s*"Discover"/);
+  assert.match(generator, /def render_primary_links\(/, "The common renderer still supplies all seven destinations");
   assert.match(html, /<details class="site-mobile-chrome__nav" id="discover-mobile-nav">/);
   assert.match(html, /class="site-mobile-chrome__brand" href="#\/overview"/);
   assert.ok(!html.includes('id="menu-toggle"') && !html.includes('id="mobile-overlay"'));
