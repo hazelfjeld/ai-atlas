@@ -1174,6 +1174,19 @@ html.atlas-enhanced #catalog-loading{
  border:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);
  white-space:nowrap
 }
+
+// A linked Search, Research, dictionary or other workspace may replace the
+// static Discover teaser before the verified catalog finishes loading. The
+// original visually hidden status would then leave a completely blank page.
+// Reveal that SAME live status only while the requested workspace is empty;
+// keep the existing Discover first paint untouched (and preserve no-JS HTML).
+html.atlas-enhanced #main:has(> #page:empty) > #catalog-loading{
+ position:static;display:flex;align-items:flex-start;
+ width:auto;height:auto;min-height:min(36vh,320px);
+ margin:0;padding:24px 0 40px;border:0;overflow:visible;
+ clip:auto;clip-path:none;white-space:normal;
+ color:var(--muted,#6e7771);font-size:14px
+}
 /* atlas-discover-first-paint:end */
 
 /* atlas-mobile-news-intro-rhythm:begin */

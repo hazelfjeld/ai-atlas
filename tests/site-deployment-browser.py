@@ -72,6 +72,17 @@ with sync_playwright() as p:
         check('shared early search route before catalog hydration ' + str(early_width),
               early.evaluate('location.hash') == '#/search?q=preload%20search'
               and early.locator('#breadcrumb').text_content() == 'Search AI Updates')
+        # A search initiated from any native page must not turn Discover's
+        # old teaser into a blank workspace while catalog data is delayed.
+        # Inspect actual rendered dimensions and clipping, not just DOM text.
+        loading_frame = early.locator('#catalog-loading').bounding_box()
+        check('shared early search visibly announces pending catalog ' + str(early_width),
+              loading_frame is not None and loading_frame['width'] > 200
+              and loading_frame['height'] > 40
+              and early.locator('#catalog-loading').evaluate(
+                  '(el) => getComputedStyle(el).clipPath === "none"')
+              and early.locator('#catalog-loading').text_content().strip()
+                  == 'Loading verified search and catalog…')
         early.screenshot(path=str(out / (
             'shared-early-search-' + str(early_width) + '.png')))
         early.close()

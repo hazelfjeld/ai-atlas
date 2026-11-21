@@ -69,3 +69,23 @@ test('one shared source controls live and offline search with no duplicate handl
   assert.ok(offline.includes(read('app.js').slice(0, 3000)),
     'offline retains the hydrated app source prefix');
 });
+
+
+test('early cross-page search reveals a readable status instead of an empty workspace', () => {
+  const css = read('site-chrome.css');
+  const section = css.split('/* atlas-discover-first-paint:begin */')[1]
+    ?.split('/* atlas-discover-first-paint:end */')[0];
+  assert.ok(section, 'the shared Discover first-paint contract must exist');
+  assert.match(section, /#catalog-loading\{display:none\}/,
+    'the script-free featured Discover cards are not displaced by loading');
+  assert.match(section, /html\.atlas-enhanced #main:has\(> #page:empty\) > #catalog-loading\{/,
+    'show the real status only when prehydration has removed the old teaser');
+  assert.match(section, /clip-path:none/);
+  assert.match(section, /min-height:min\(36vh,320px\)/);
+  assert.ok(read('index.html').includes('id="catalog-loading" class="catalog-loading" role="status"'));
+  assert.ok(read('site-theme.js').includes('page.replaceChildren()'),
+    'native cross-page routes clear the static Discover teaser before hydration');
+  const offline=read('downloads/Atlas_Demo_Offline.html');
+  assert.ok(offline.includes(section),
+    'single-file offline uses identical shared status styling');
+});
