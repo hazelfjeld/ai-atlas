@@ -224,7 +224,7 @@ test('canonical legacy hashes and unknown routes stay in sync before and after h
   assert.equal(state.mainMore.open, false);
   assert.equal(state.mobileMore.open, false);
   const app = read('app.js');
-  const parse = app.split('\\n').find(line => line.startsWith('function parse(){'));
+  const parse = app.split('\n').find(line => line.startsWith('function parse(){'));
   assert.ok(parse?.includes('a[data-view-aliases]'), 'hydrated router reads canonical alias attributes');
   for (const [hash, expected] of [
     ['#/terms', 'dictionary'], ['#/alerts?topic=alignment', 'safety'],
