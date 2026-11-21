@@ -75,8 +75,12 @@ def sync_discover_secondary(secondary):
         attrs = re.sub(r' data-view-aliases="[^"]+"', '', match.group(4))
         alias = (' data-view-aliases="' + ROUTE_ALIASES[key] + '"'
                  if key in ROUTE_ALIASES else '')
+        # Discover enters the canonical native Research workspace even on first
+        # paint and without JavaScript. Preserve the legacy hash as an addressable
+        # route, and keep the separate offline builder on its bundled hash view.
+        href = "research.html" if key == "papers" else route.removeprefix("index.html")
         return ('<a class="nav-link" data-' + kind + '="' + key +
-                '" href="' + route.removeprefix("index.html") + '"' +
+                '" href="' + href + '"' +
                 alias + attrs + '>' + inner + '</a>')
     return pattern.sub(replace, secondary)
 
@@ -456,9 +460,12 @@ def render_discover_mobile():
         include_search=False, mobile_only=True,
     )
     assert mobile.count('aria-label="Toggle navigation"') == 1
+    assert mobile.count('href="index.html#/papers">Research library') == 1
     return (mobile.replace('aria-label="Toggle navigation"',
                            'aria-label="Toggle navigation · Discover"', 1)
-                  .replace('href="index.html#/', 'href="#/'))
+                  .replace('href="index.html#/', 'href="#/')
+                  .replace('href="#/papers">Research library',
+                           'href="research.html">Research library'))
 
 
 def normalize_discover_sidebar(html, term_count, tech_count):

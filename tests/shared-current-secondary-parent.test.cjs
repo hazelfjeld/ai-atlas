@@ -81,7 +81,9 @@ test('shared Research link hydration routes live page families to one native wor
   assert.deepEqual(exercise('../index.html#/overview'),['../research.html','../research.html','index.html#/papers?q=reward']);
   assert.deepEqual(exercise('#/overview',true),['#/papers','#/papers','index.html#/papers?q=reward']);
   assert.ok(read('discovery.js').includes("window.ATLAS_OFFLINE?'#/papers':'research.html'"));
-  assert.ok(read('index.html').includes('href="#/papers"'));
+  assert.ok(read('index.html').includes('data-view="papers" href="research.html"'));
+  assert.ok(read('index.html').includes('href="research.html">Research library</a>'));
+  assert.ok(!read('index.html').includes('href="#/papers">Research library</a>'));
   assert.ok(read('terms/index.html').includes('href="../index.html#/papers"'));
   const offline=read('downloads/Atlas_Demo_Offline.html');
   assert.ok(offline.includes('href="#/papers">Open the library'));
@@ -145,4 +147,28 @@ test('Research early click, pointer and keyboard handlers share one canonicalize
   assert.ok(offline.includes(start+block+end),'offline includes the exact shared canonicalizer');
   for(const route of ['index.html','research.html','terms/index.html','technology/index.html'])
     assert.ok(read(route).includes('Research library'),route+' preserves script-free Research access');
+});
+
+
+test('build-time Discover Research navigation is canonical before JavaScript and safe offline',()=>{
+  const live=read('index.html');
+  const generator=read('scripts/site_chrome.py');
+  const builder=read('scripts/build_offline.py');
+  const offline=read('downloads/Atlas_Demo_Offline.html');
+  assert.equal((live.match(/href="research\.html"/g)||[]).length,3,
+    'desktop Research link, mobile menu and reading desk share one native destination');
+  assert.match(live,/data-view="papers" href="research\.html"/,
+    'legacy hash route still has the same data-view for selection');
+  assert.match(live,/href="research\.html">Research library<\/a>/,
+    'mobile Research is native even with JavaScript disabled');
+  assert.match(generator,/href = "research\.html" if key == "papers"/,
+    'build must preserve the canonical link instead of regenerating the hash alias');
+  assert.match(generator,/href="research\.html">Research library/,
+    'mobile generator must create the canonical link');
+  assert.match(builder,/html = html\.replace\('href="research\.html"', 'href="#\/papers"'\)/,
+    'offline builder rewrites every Research link to the bundled hash route');
+  assert.equal((offline.match(/href="#\/papers"/g)||[]).length,3,
+    'offline navigation and reading desk retain the actual bundled research view');
+  assert.ok(read('research.html').includes('id="main"'),
+    'native Research destination retains its real article target');
 });
