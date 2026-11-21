@@ -421,6 +421,7 @@ document.addEventListener('keydown', (event) => {
 // A tap or keyboard activation of the existing search link must have the same
 // one-step focus behavior as /. Do not affect modified/new-tab navigation.
 document.addEventListener('click', event => {
+  normalizeResearchEarlyLink(event);
   if (event.defaultPrevented || event.button !== 0 || event.ctrlKey ||
       event.metaKey || event.altKey || event.shiftKey) return;
   if (!event.target?.closest?.('a.site-mobile-chrome__search[href]')) return;
@@ -442,6 +443,7 @@ function dismissInactiveDesktopMore(target, restoreFocusedSummary = false) {
   });
 }
 document.addEventListener('pointerdown', (event) => {
+  normalizeResearchEarlyLink(event);
   // A modal drawer deliberately makes the background inert. An outside tap
   // dismisses it first; return keyboard/AT focus to the still-visible toggle.
   if ([...document.querySelectorAll('details.site-mobile-chrome__nav[open]')]
@@ -491,6 +493,7 @@ document.addEventListener('toggle', event => {
 let lastDesktopRailFocus = null;
 let lastMobileToggleFocus = null;
 document.addEventListener('focusin', event => {
+  normalizeResearchEarlyLink(event);
   lastDesktopRailFocus = event.target?.closest?.('.site-chrome,#navigation') ? event.target : null;
   lastMobileToggleFocus = event.target?.matches?.('details.site-mobile-chrome__nav summary')
     ? event.target : null;
@@ -784,20 +787,17 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* atlas-early-research-activation:begin */
-// The shared canonicalizer normally runs at DOMContentLoaded. Real visitors can
-// reach a script-free navigation link while a deferred catalog script is still
-// loading. Normalize the existing link before pointer, keyboard, middle-click
-// or context-menu activation; the no-JavaScript and offline hash routes stay
-// intact, and no second destination map or header is introduced.
-for (const eventName of ['focusin', 'pointerdown', 'click', 'auxclick', 'contextmenu']) {
-  document.addEventListener(eventName, event => {
-    const link = event.target?.closest?.('a[href]');
-    if (!link || !link.closest(
-      '#navigation, #discover-mobile-nav, .site-chrome__more-links, .site-mobile-chrome__more-links')) return;
-    const label = link.querySelector('span:not(.nav-count)')?.textContent?.trim() ||
-      link.textContent?.trim();
-    if (label === 'Research library') syncCanonicalResearchEntry();
-  }, true);
+// Reuse the already registered shared click, pointerdown and focus handlers;
+// additional global listeners would compete with the existing drawer/focus
+// behavior. Canonicalize Research just before early link activation while
+// preserving script-free and offline routes and every other destination.
+function normalizeResearchEarlyLink(event) {
+  const link = event.target?.closest?.('a[href]');
+  if (!link || !link.closest(
+    '#navigation, #discover-mobile-nav, .site-chrome__more-links, .site-mobile-chrome__more-links')) return;
+  const label = link.querySelector('span:not(.nav-count)')?.textContent?.trim() ||
+    link.textContent?.trim();
+  if (label === 'Research library') syncCanonicalResearchEntry();
 }
 /* atlas-early-research-activation:end */
 

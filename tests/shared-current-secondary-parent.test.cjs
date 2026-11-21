@@ -88,7 +88,8 @@ test('shared Research link hydration routes live page families to one native wor
   assert.ok(offline.includes("window.ATLAS_OFFLINE?'#/papers':'research.html'"));
 });
 
-test('Research navigation resolves to the native workspace before DOMContentLoaded on every shared rail',()=>{
+
+test('Research early click, pointer and keyboard handlers share one canonicalizer without overriding drawer behavior',()=>{
   const vm=require('node:vm');
   const script=read('site-theme.js');
   const start='/* atlas-early-research-activation:begin */',end='/* atlas-early-research-activation:end */';
@@ -97,8 +98,13 @@ test('Research navigation resolves to the native workspace before DOMContentLoad
   assert.equal(script.split(start).length-1,1);
   assert.equal(script.split(end).length-1,1);
   const block=script.split(start)[1].split(end)[0];
-  const expectedEvents=['focusin','pointerdown','click','auxclick','contextmenu'];
-  const exercise=(home,eventName,offline=false)=>{
+  assert.ok(!block.includes('addEventListener('),'reuse existing keyboard, pointer and click listeners');
+  for(const expression of [
+    /document\.addEventListener\('click', event => \{\s*normalizeResearchEarlyLink\(event\);\s*if \(event\.defaultPrevented/,
+    /document\.addEventListener\('pointerdown', \(event\) => \{\s*normalizeResearchEarlyLink\(event\);/,
+    /document\.addEventListener\('focusin', event => \{\s*normalizeResearchEarlyLink\(event\);\s*lastDesktopRailFocus/
+  ]) assert.match(script,expression,'existing global handler invokes the shared early canonicalizer');
+  const exercise=(home,offline=false)=>{
     const original=home==='#/overview'?'#/papers':
       home.replace('index.html#/overview','index.html#/papers');
     const rows=[
@@ -114,40 +120,29 @@ test('Research navigation resolves to the native workspace before DOMContentLoad
       closest(selector){return selector==='a[href]'?this:row.shared?{}:null;},
       matches:()=>false
     }));
-    const events=new Map();
     const document={
-      addEventListener:(name,fn,capture)=>{
-        assert.equal(capture,true,'early events must run before the router/default activation');
-        assert.equal(events.has(name),false);
-        events.set(name,fn);
-      },
       querySelector:()=>({getAttribute:()=>home}),
       querySelectorAll:selector=>{
         assert.equal(selector,'a[href]');
         return anchors;
       }
     };
-    vm.runInNewContext(helper+'\n'+block,{document,window:{ATLAS_OFFLINE:offline}});
-    assert.deepEqual([...events.keys()],expectedEvents);
-    // Unrelated links and non-navigation links cannot trigger canonicalization.
-    events.get(eventName)({target:anchors[1]});
-    events.get(eventName)({target:anchors[2]});
-    assert.equal(rows[0].href,original);
-    events.get(eventName)({target:anchors[0]});
+    const context={document,window:{ATLAS_OFFLINE:offline},event:{target:anchors[1]}};
+    const run=()=>vm.runInNewContext(helper+'\n'+block+'\nnormalizeResearchEarlyLink(event);',context);
+    run();context.event.target=anchors[2];run();
+    assert.equal(rows[0].href,original,'unrelated and non-navigation links remain untouched');
+    context.event.target=anchors[0];run();
     return rows.map(row=>row.href);
   };
-  for(const eventName of expectedEvents){
-    assert.deepEqual(exercise('#/overview',eventName),
-      ['research.html','#/papers','#/papers'],eventName+' Discover');
-    assert.deepEqual(exercise('../index.html#/overview',eventName),
-      ['../research.html','../index.html#/papers','../index.html#/papers'],
-      eventName+' nested reference');
-    assert.deepEqual(exercise('#/overview',eventName,true),
-      ['#/papers','#/papers','#/papers'],eventName+' offline');
-  }
+  assert.deepEqual(exercise('#/overview'),
+    ['research.html','#/papers','#/papers'],'Discover is canonical before DOMContentLoaded');
+  assert.deepEqual(exercise('../index.html#/overview'),
+    ['../research.html','../index.html#/papers','../index.html#/papers'],
+    'nested generated references use the same canonical route');
+  assert.deepEqual(exercise('#/overview',true),
+    ['#/papers','#/papers','#/papers'],'offline keeps native hash navigation');
   const offline=read('downloads/Atlas_Demo_Offline.html');
-  assert.ok(offline.includes(start+block+end),'offline includes the exact shared early handler');
-  for(const route of ['index.html','research.html','terms/index.html','technology/index.html']){
-    assert.ok(read(route).includes('Research library'),route+' keeps script-free Research access');
-  }
+  assert.ok(offline.includes(start+block+end),'offline includes the exact shared canonicalizer');
+  for(const route of ['index.html','research.html','terms/index.html','technology/index.html'])
+    assert.ok(read(route).includes('Research library'),route+' preserves script-free Research access');
 });
