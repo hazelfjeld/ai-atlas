@@ -26,7 +26,7 @@ class SecondaryNavigationTests(unittest.TestCase):
     def test_every_technology_profile_has_native_secondary_navigation(self):
         """All published technology detail links work even with JavaScript off."""
         from site_chrome import render_secondary_nav
-        expected = render_secondary_nav("../")
+        expected = render_secondary_nav("../", canonical_research=True)
         self.assertEqual(expected.count("<a "), len(SECONDARY_DESTINATIONS))
         pages = sorted((ROOT / "technology").glob("TECH-*.html"))
         self.assertEqual(len(pages), 303)
@@ -36,7 +36,8 @@ class SecondaryNavigationTests(unittest.TestCase):
                 self.assertEqual(source.count('<details class="site-chrome__more">'), 1)
                 self.assertIn(expected, source)
                 self.assertEqual(source.count('<details class="site-mobile-chrome__more">'), 1)
-                self.assertIn(render_mobile_secondary_nav("../"), source)
+                self.assertIn(render_mobile_secondary_nav("../", canonical_research=True), source)
+                self.assertNotIn('href="../index.html#/papers"', source)
                 self.assertEqual(source.count('<div class="site-mobile-chrome__more-links">'), 1)
                 self.assertEqual(source.count('aria-label="AI Updates primary navigation"'), 1)
                 self.assertIn('href="../index.html#/search"', source)
