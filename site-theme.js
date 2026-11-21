@@ -98,10 +98,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // A visitor can change hashes before the async catalog binds its own
     // router. Keep both rails and the workspace title correct until hydration.
     if (!document.getElementById('catalog-loading')) return;
-    const route = window.location.hash.match(/^#\/([a-z-]+)(?:\?|$)/)?.[1];
-    if (!route) return;
+    const route = window.location.hash.match(/^#\/([a-z-]+)(?:\?|$)/)?.[1] || 'overview';
     const links = [...rail.querySelectorAll('a[data-view]')];
-  const current = links.find(link => link.dataset.view === route);
+    // The canonical anchors own legacy aliases for both early and hydrated
+    // routing. Never maintain a second alias table or fake mobile destination.
+    const matched = links.find(link => link.dataset.view === route ||
+      (link.dataset.viewAliases || '').split(/\s+/).includes(route));
+    // The hydrated router renders unknown hashes as Discover. Follow it here
+    // too, including after rapid navigation from a secondary workspace.
+    const current = matched || (route === 'search' || route === 'queue' ? null :
+      links.find(link => link.dataset.view === 'overview'));
   // Search is an existing functional workspace, but has no primary rail link.
   // Use the real search field's accessible name; never invent a second route list.
   const searchLabel = route === 'search'
@@ -149,7 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // its requested section is pending. Keep the real loading status visible;
   // only remove the original teaser, never an already-rendered view or error.
   const page = document.getElementById('page');
-    if (route !== 'overview' && page?.querySelector('.discover-heading'))
+    if (current?.dataset.view !== 'overview' && page?.querySelector('.discover-heading'))
       page.replaceChildren();
   };
   syncWhileLoading();

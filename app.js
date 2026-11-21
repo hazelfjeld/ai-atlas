@@ -37,7 +37,7 @@ function href(v,params={}){const q=new URLSearchParams(Object.entries(params).fi
 function recordHref(r){if(r._type==='technologies'&&!window.ATLAS_OFFLINE)return C.technologyPath(r);if(r._type==='dictionary'&&!window.ATLAS_OFFLINE)return C.termPath(r);return href(r._type==='queue'?'queue':r._type,{record:r.id});}
 function goto(v,params={}){const h=href(v,params);if(location.hash===h)route();else location.hash=h;}
 function updateURL(){const h=href(view,state);try{history.replaceState(null,'',h);}catch{location.hash=h;}}
-function parse(){const raw=location.hash.replace(/^#\/?/,'')||'overview';const [v,q]=raw.split('?');view=({alerts:'safety',coverage:'sources',terms:'dictionary'})[v]||(Object.hasOwn(labels,v)?v:'overview');state=Object.fromEntries(new URLSearchParams(q||''));}
+function parse(){const raw=location.hash.replace(/^#\/?/,'')||'overview';const [v,q]=raw.split('?');const alias=[...$('navigation').querySelectorAll('a[data-view-aliases]')].find(link=>(link.dataset.viewAliases||'').split(/\s+/).includes(v))?.dataset.view;view=alias||(Object.hasOwn(labels,v)?v:'overview');state=Object.fromEntries(new URLSearchParams(q||''));}
 function unique(rows,key){return [...new Set(rows.flatMap(r=>Array.isArray(r[key])?r[key]:[r[key]]).filter(Boolean))].sort((a,b)=>a.localeCompare(b));}
 function cleaned(r){return Object.fromEntries(Object.entries(r).filter(([k])=>!k.startsWith('_')));}
 function chips(tags=[],target=''){return `<div class="chips">${tags.map(t=>target?`<button class="chip chip-button" data-go="${target}" data-tag="${E(t)}">${E(t)}</button>`:`<span class="chip">${E(t)}</span>`).join('')}</div>`;}

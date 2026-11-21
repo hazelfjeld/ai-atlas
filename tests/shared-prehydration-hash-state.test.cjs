@@ -11,8 +11,10 @@ const block = source.split('/* atlas-prehydration-section-state:begin */')[1]
 function makeLink(key, label, secondary = false) {
   const attrs = new Map([['href', '#/' + key]]);
   const classes = new Set();
+  const alias = read('index.html').match(new RegExp('data-view="' + key +
+    '" data-view-aliases="([^"]+)"'))?.[1] || '';
   return {
-    dataset: {view: key}, attrs, classes,
+    dataset: {view: key, viewAliases: alias}, attrs, classes,
     classList: {toggle(name, selected) { if (selected) classes.add(name); else classes.delete(name); }},
     getAttribute(name) { return attrs.get(name); },
     setAttribute(name, value) { attrs.set(name, value); },
@@ -24,7 +26,8 @@ function makeLink(key, label, secondary = false) {
 function exercise(hash) {
   const labels = [['overview','Discover'],['dictionary','Concept dictionary'],
     ['technologies','Technology profiles'],['games','Games'],
-    ['papers','Research library'],['safety','Safety observatory']];
+    ['papers','Research library'],['safety','Safety observatory'],
+    ['sources','Sources & coverage']];
   const links = labels.map(([key,label])=>makeLink(key,label,['papers','safety'].includes(key)));
   const mobile = labels.map(([key,label])=>makeLink(key,label));
   links[0].setAttribute('aria-current','page');
@@ -197,4 +200,52 @@ test('manual More choice survives catalog hydration and leaving a secondary rout
   assert.equal(untouched.dataset.atlasAutoOpened, undefined);
   assert.ok(read('downloads/Atlas_Demo_Offline.html').includes(
     "if(selected && !disclosure.open && disclosure.dataset.atlasManualTouched !== 'true'){"));
+});
+
+test('canonical legacy hashes and unknown routes stay in sync before and after hydration', () => {
+  for (const [alias, section, title] of [
+    ['terms', 'dictionary', 'Concept dictionary'],
+    ['alerts', 'safety', 'Safety observatory'],
+    ['coverage', 'sources', 'Sources & coverage'],
+  ]) {
+    const state = exercise('#/' + alias + '?topic=research');
+    assert.equal(state.links.find(link => link.dataset.view === section)
+      .attrs.get('aria-current'), 'page', alias + ': desktop rail');
+    assert.equal(state.mobile.find(link => link.dataset.view === section)
+      .attrs.get('aria-current'), 'page', alias + ': mobile rail');
+    assert.equal(state.title.textContent, title, alias + ': workspace title');
+    assert.equal(state.links.filter(link => link.attrs.has('aria-current')).length, 1);
+  }
+  const state = exercise('#/safety');
+  state.navigate('#/not-a-workspace');
+  assert.equal(state.title.textContent, 'Discover');
+  assert.equal(state.links.find(link => link.dataset.view === 'overview')
+    .attrs.get('aria-current'), 'page', 'invalid hash resets to Discover');
+  assert.equal(state.mainMore.open, false);
+  assert.equal(state.mobileMore.open, false);
+  const app = read('app.js');
+  const parse = app.split('\\n').find(line => line.startsWith('function parse(){'));
+  assert.ok(parse?.includes('a[data-view-aliases]'), 'hydrated router reads canonical alias attributes');
+  for (const [hash, expected] of [
+    ['#/terms', 'dictionary'], ['#/alerts?topic=alignment', 'safety'],
+    ['#/coverage', 'sources'], ['#/not-a-workspace', 'overview'],
+  ]) {
+    const context = {
+      location: {hash}, URLSearchParams, labels: {
+        overview: 'Discover', dictionary: 'Concept dictionary',
+        safety: 'Safety observatory', sources: 'Sources & coverage'
+      },
+      $: id => {
+        assert.equal(id, 'navigation');
+        const links = ['dictionary', 'safety', 'sources'].map(key => makeLink(key, key));
+        return {querySelectorAll(selector) {
+          assert.equal(selector, 'a[data-view-aliases]');
+          return links;
+        }};
+      },
+      view: 'overview', state: {}
+    };
+    vm.runInNewContext(parse + ';parse();', context);
+    assert.equal(context.view, expected, hash + ': hydrated route');
+  }
 });
