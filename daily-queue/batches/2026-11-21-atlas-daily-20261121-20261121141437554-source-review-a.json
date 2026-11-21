@@ -1,0 +1,1187 @@
+{
+  "schema": 1,
+  "batch_id": "atlas-daily-20261121-20261121141437554-source-review-a",
+  "edition_date": "2026-11-21",
+  "timezone": "America/Chicago",
+  "collected_at": "2026-11-21T14:14:37.554Z",
+  "coverage_start": "2026-11-20T14:45:29.290Z",
+  "coverage_end": "2026-11-21T14:14:37.554Z",
+  "coverage_status": "partial",
+  "coverage_note": "Bounded first-party research and journalism pass following the November 20 indexed batch; selected November 19 first-submitted papers are labeled catch-up. No prior completely successful collector cutoff exists. Historical missing intervals and a full specialist source sweep remain unresolved; do not advance cutoff.",
+  "overlap_lookback_start": "2026-11-19T14:45:29.290Z",
+  "sources_checked": [
+    {
+      "url": "https://thinkingmachines.ai/news/inkling-2-mini/",
+      "publisher": "Thinking Machines Lab",
+      "type": "official model announcement",
+      "status": "full_page_opened",
+      "checked_at": "2026-11-21T14:14:37.554Z"
+    },
+    {
+      "url": "https://thinkingmachines.ai/model-card/inkling-2-mini/",
+      "publisher": "Thinking Machines Lab",
+      "type": "official model card",
+      "status": "full_page_opened",
+      "checked_at": "2026-11-21T14:14:37.554Z"
+    },
+    {
+      "url": "https://thinkingmachines.ai/model-card/tml-d24-varloop-research/",
+      "publisher": "Thinking Machines Lab",
+      "type": "official research model card",
+      "status": "full_page_opened",
+      "checked_at": "2026-11-21T14:14:37.554Z"
+    },
+    {
+      "url": "https://signal.org/blog/protecting-your-privacy/",
+      "publisher": "Signal",
+      "type": "official privacy announcement",
+      "status": "full_page_opened",
+      "checked_at": "2026-11-21T14:14:37.554Z"
+    },
+    {
+      "url": "https://www.reuters.com/legal/litigation/signal-restricts-screenshots-block-ai-agents-reading-messages-2026-11-20/",
+      "publisher": "Reuters",
+      "type": "independent journalism",
+      "status": "full_page_opened",
+      "checked_at": "2026-11-21T14:14:37.554Z"
+    },
+    {
+      "url": "https://www.reuters.com/world/states-agree-to-un-talks-aiming-regulate-killer-robots-by-2028-2026-11-21/",
+      "publisher": "Reuters",
+      "type": "international-governance journalism",
+      "status": "full_page_opened",
+      "checked_at": "2026-11-21T14:14:37.554Z"
+    },
+    {
+      "url": "https://www.reuters.com/world/china/trump-xi-agreed-that-military-ai-decisions-should-involve-humans-bessent-says-2026-11-20/",
+      "publisher": "Reuters",
+      "type": "attributed official remarks reporting",
+      "status": "full_page_opened",
+      "checked_at": "2026-11-21T14:14:37.554Z"
+    },
+    {
+      "url": "https://www.reuters.com/technology/trump-says-us-penalize-firms-building-data-centers-abroad-2026-11-20/",
+      "publisher": "Reuters",
+      "type": "policy statement reporting",
+      "status": "full_page_opened",
+      "checked_at": "2026-11-21T14:14:37.554Z"
+    },
+    {
+      "url": "https://arxiv.org/list/cs.LG/recent",
+      "publisher": "arXiv",
+      "type": "research submission index",
+      "status": "full_page_opened",
+      "checked_at": "2026-11-21T14:14:37.554Z"
+    },
+    {
+      "url": "https://arxiv.org/list/cs.CL/recent",
+      "publisher": "arXiv",
+      "type": "research submission index",
+      "status": "full_page_opened",
+      "checked_at": "2026-11-21T14:14:37.554Z"
+    },
+    {
+      "url": "https://arxiv.org/list/cs.RO/recent",
+      "publisher": "arXiv",
+      "type": "research submission index",
+      "status": "full_page_opened",
+      "checked_at": "2026-11-21T14:14:37.554Z"
+    },
+    {
+      "url": "https://arxiv.org/abs/2611.26510",
+      "publisher": "arXiv / AutoMaster authors",
+      "type": "research preprint v1",
+      "status": "full_page_opened",
+      "checked_at": "2026-11-21T14:14:37.554Z"
+    },
+    {
+      "url": "https://arxiv.org/abs/2611.26363",
+      "publisher": "arXiv / HiSA authors",
+      "type": "research preprint v1",
+      "status": "full_page_opened",
+      "checked_at": "2026-11-21T14:14:37.554Z"
+    },
+    {
+      "url": "https://arxiv.org/abs/2611.26275",
+      "publisher": "arXiv / dLoop authors",
+      "type": "research preprint v1",
+      "status": "full_page_opened",
+      "checked_at": "2026-11-21T14:14:37.554Z"
+    },
+    {
+      "url": "https://arxiv.org/abs/2611.26009",
+      "publisher": "arXiv / safeguarding authors",
+      "type": "research preprint v1",
+      "status": "full_page_opened",
+      "checked_at": "2026-11-21T14:14:37.554Z"
+    },
+    {
+      "url": "https://arxiv.org/abs/2611.26000",
+      "publisher": "arXiv / Xing-Audio authors",
+      "type": "research preprint v1",
+      "status": "full_page_opened",
+      "checked_at": "2026-11-21T14:14:37.554Z"
+    },
+    {
+      "url": "https://arxiv.org/abs/2611.26613",
+      "publisher": "arXiv / AgentRoboCritic authors",
+      "type": "research preprint v1",
+      "status": "full_page_opened",
+      "checked_at": "2026-11-21T14:14:37.554Z"
+    },
+    {
+      "url": "https://arxiv.org/abs/2611.26239",
+      "publisher": "arXiv / SAFI authors",
+      "type": "research preprint v1",
+      "status": "full_page_opened",
+      "checked_at": "2026-11-21T14:14:37.554Z"
+    },
+    {
+      "url": "https://arxiv.org/abs/2611.26413",
+      "publisher": "arXiv / sequential testing authors",
+      "type": "research preprint v1",
+      "status": "full_page_opened",
+      "checked_at": "2026-11-21T14:14:37.554Z"
+    }
+  ],
+  "sources_failed": [
+    {
+      "url": "https://export.arxiv.org/api/query?search_query=cat%3Acs.LG%26start%3D0%26max_results%3D3",
+      "publisher": "arXiv",
+      "type": "metadata API",
+      "status": "web_reader_inaccessible",
+      "checked_at": "2026-11-21T14:14:37.554Z",
+      "note": "Metadata endpoint inaccessible; individual HTML listing and research paper pages opened successfully. This is a source failure, not evidence of no papers."
+    }
+  ],
+  "source_health_note": "19 accessible source pages including official model cards, Signal, Reuters, arXiv research listings and 8 individually opened paper abstracts. arXiv metadata API failed; this is an access failure, not an empty result.",
+  "coverage_backlog": [
+    "Continue bounded recovery of the incomplete November 3–6 collection gap without replaying already published story IDs.",
+    "Check specialist model, robotics, multimodal, inference-library and hardware release feeds for Nov 20–21; compare each canonical URL and primary event date.",
+    "Retry arXiv metadata API; the HTML listings and paper pages were accessible in this run.",
+    "Independently test Inkling mixed-precision runtime and author-reported benchmarks, and verify code/license/availability for HiSA, AutoMaster and Xing-Audio before catalog integration.",
+    "Publisher to reconcile all five tech and five term proposals against canonical IDs and aliases; no permanent profile/page is claimed yet."
+  ],
+  "tldr": [
+    "Thinking Machines Lab released open-weight looping models for local multimodal and reasoning research, while Signal introduced partial screen protections against operating-system AI agents.",
+    "New papers tackle training smaller models, sparse attention, speech event labeling and robot safety; international discussions about autonomous weapons and AI infrastructure remain proposals or negotiations, not settled safeguards, and all author benchmark claims need replication."
+  ],
+  "news": [
+    {
+      "id": "ai-news:inkling-2-mini:2026-11-20",
+      "title": "Thinking Machines Lab releases Apache-licensed Inkling 2 Mini",
+      "category": "models",
+      "tags": [
+        "AI",
+        "LLM",
+        "SLM",
+        "open weights",
+        "multimodal",
+        "agents",
+        "inference"
+      ],
+      "summary": "Inkling 2 Mini is a 26.4B-parameter sparse MoE with 3.4B active parameters and three shared-layer loops per token. It accepts text/images, emits text and provides downloadable Apache-2.0 weights.",
+      "why_it_matters": "A published low-bit checkpoint offers developers a local alternative for coding and tool-use research, with adjustable application integrations.",
+      "caveat": "5.4B effective activations per token are not equivalent to 5.4B unique weights; benchmark leadership, speed and 1M context are provider claims and workload-dependent. About 20GB checkpoint and at least 32GB GPU/unified memory are recommended.",
+      "canonical_url": "https://thinkingmachines.ai/news/inkling-2-mini/",
+      "source_url": "https://thinkingmachines.ai/news/inkling-2-mini/",
+      "publication_date": "2026-11-20",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-20",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-21T14:14:37.554Z",
+      "checked_at": "2026-11-21T14:14:37.554Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "first_party_release",
+      "release_status": "open_weights_available",
+      "collection_classification": "previous_day",
+      "publisher": "Thinking Machines Lab",
+      "type": "official model launch",
+      "version": null,
+      "arxiv_id": null,
+      "sources": [
+        {
+          "url": "https://thinkingmachines.ai/news/inkling-2-mini/",
+          "publisher": "Thinking Machines Lab",
+          "type": "release post"
+        },
+        {
+          "url": "https://thinkingmachines.ai/model-card/inkling-2-mini/",
+          "publisher": "Thinking Machines Lab",
+          "type": "model card"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:tml-d24-variable-loop-model:2026-11-20",
+      "title": "Open variable-loop model enables studies of hidden reasoning and oversight",
+      "category": "research",
+      "tags": [
+        "AI",
+        "LLM",
+        "interpretability",
+        "safety",
+        "reasoning"
+      ],
+      "summary": "Thinking Machines Lab published TML-d24-varloop-research, a 26.4B total-parameter multimodal research checkpoint allowing inference-time selection of shared-middle-layer passes.",
+      "why_it_matters": "Holding weights fixed while changing loop count provides a controlled way to compare hidden computation, reasoning performance and chain-of-thought monitorability.",
+      "caveat": "Only a research checkpoint, not a production API. Authors trained with 1–5 passes; generalization to more passes and no-CoT safety effects are not independently validated.",
+      "canonical_url": "https://thinkingmachines.ai/model-card/tml-d24-varloop-research/",
+      "source_url": "https://thinkingmachines.ai/model-card/tml-d24-varloop-research/",
+      "publication_date": "2026-11-20",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-20",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-21T14:14:37.554Z",
+      "checked_at": "2026-11-21T14:14:37.554Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "first_party_research_release",
+      "release_status": "open_weights_research_only",
+      "collection_classification": "previous_day",
+      "publisher": "Thinking Machines Lab",
+      "type": "official research model card",
+      "version": null,
+      "arxiv_id": null,
+      "sources": [
+        {
+          "url": "https://thinkingmachines.ai/model-card/tml-d24-varloop-research/",
+          "publisher": "Thinking Machines Lab",
+          "type": "official research model card"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:signal-os-agent-screen-privacy:2026-11-20",
+      "title": "Signal adds screenshot defenses against operating-system AI agents",
+      "category": "security",
+      "tags": [
+        "AI",
+        "agents",
+        "privacy",
+        "security",
+        "mobile"
+      ],
+      "summary": "Signal announced screen-capture restrictions on iOS 27 and selective Android AI-assistant capture checks to limit automated reading of private conversations.",
+      "why_it_matters": "OS-integrated agents can cross app privacy boundaries even when message transport is encrypted; Signal is testing app-level mitigations.",
+      "caveat": "Protections are incomplete, can be disabled and do not block all filesystem or OS-level access; Signal did not report that this announcement was a newly confirmed leak.",
+      "canonical_url": "https://signal.org/blog/protecting-your-privacy/",
+      "source_url": "https://signal.org/blog/protecting-your-privacy/",
+      "publication_date": "2026-11-20",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-20",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-21T14:14:37.554Z",
+      "checked_at": "2026-11-21T14:14:37.554Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "first_party_security_mitigation",
+      "release_status": "new_protections_announced",
+      "collection_classification": "previous_day",
+      "publisher": "Signal",
+      "type": "official privacy release",
+      "version": null,
+      "arxiv_id": null,
+      "sources": [
+        {
+          "url": "https://signal.org/blog/protecting-your-privacy/",
+          "publisher": "Signal",
+          "type": "official privacy announcement"
+        },
+        {
+          "url": "https://www.reuters.com/legal/litigation/signal-restricts-screenshots-block-ai-agents-reading-messages-2026-11-20/",
+          "publisher": "Reuters",
+          "type": "independent coverage"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:un-lethal-autonomy-talks:2026-11-21",
+      "title": "UN weapons talks commit to more autonomous-weapons negotiations through 2028",
+      "category": "governance",
+      "tags": [
+        "AI",
+        "robotics",
+        "military",
+        "autonomous weapons",
+        "policy"
+      ],
+      "summary": "Countries at Geneva Convention on Certain Conventional Weapons talks agreed to continue negotiating autonomous-weapons rules within two years, Reuters reported November 21 UTC.",
+      "why_it_matters": "Human control of lethal decisions remains an international governance issue as increasingly autonomous targeting tools proliferate.",
+      "caveat": "No binding global ban or substantive treaty was adopted; the U.S., Russia and Israel opposed the requested binding rules, and consensus language remains limited.",
+      "canonical_url": "https://www.reuters.com/world/states-agree-to-un-talks-aiming-regulate-killer-robots-by-2028-2026-11-21/",
+      "source_url": "https://www.reuters.com/world/states-agree-to-un-talks-aiming-regulate-killer-robots-by-2028-2026-11-21/",
+      "publication_date": "2026-11-21",
+      "publication_date_precision": "day",
+      "publication_time_utc": "2026-11-21T05:36:00Z",
+      "event_date": "2026-11-21",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-21T14:14:37.554Z",
+      "checked_at": "2026-11-21T14:14:37.554Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "independently_reported_policy_process",
+      "release_status": "negotiations_planned",
+      "collection_classification": "same_edition_utc_2026_11_21",
+      "publisher": "Reuters",
+      "type": "international journalism",
+      "version": null,
+      "arxiv_id": null,
+      "sources": [
+        {
+          "url": "https://www.reuters.com/world/states-agree-to-un-talks-aiming-regulate-killer-robots-by-2028-2026-11-21/",
+          "publisher": "Reuters",
+          "type": "international journalism"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:bessent-reports-us-china-military-ai-humans:2026-11-20",
+      "title": "US Treasury chief says Washington and Beijing backed human oversight of military AI",
+      "category": "governance",
+      "tags": [
+        "AI",
+        "safety",
+        "autonomy",
+        "military",
+        "international relations"
+      ],
+      "summary": "Treasury Secretary Scott Bessent told CNBC that Trump and Xi agreed humans should be involved in major military decisions supported by AI, Reuters reported.",
+      "why_it_matters": "An attributed bilateral position may affect expectations for human involvement in military AI, separate from multilateral treaty negotiations.",
+      "caveat": "This is one official's description of an agreement, not a published, independently verified, binding treaty or deployed safeguard.",
+      "canonical_url": "https://www.reuters.com/world/china/trump-xi-agreed-that-military-ai-decisions-should-involve-humans-bessent-says-2026-11-20/",
+      "source_url": "https://www.reuters.com/world/china/trump-xi-agreed-that-military-ai-decisions-should-involve-humans-bessent-says-2026-11-20/",
+      "publication_date": "2026-11-20",
+      "publication_date_precision": "day",
+      "publication_time_utc": "2026-11-20T16:48:00Z",
+      "event_date": "2026-11-20",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-21T14:14:37.554Z",
+      "checked_at": "2026-11-21T14:14:37.554Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "attributed_official_statement",
+      "release_status": "reported_political_position",
+      "collection_classification": "previous_day",
+      "publisher": "Reuters",
+      "type": "political reporting",
+      "version": null,
+      "arxiv_id": null,
+      "sources": [
+        {
+          "url": "https://www.reuters.com/world/china/trump-xi-agreed-that-military-ai-decisions-should-involve-humans-bessent-says-2026-11-20/",
+          "publisher": "Reuters",
+          "type": "political reporting"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:us-foreign-ai-datacenter-tax-threat:2026-11-20",
+      "title": "US president threatens penalties for American companies building data centers abroad",
+      "category": "industry",
+      "tags": [
+        "AI",
+        "infrastructure",
+        "policy",
+        "data centers",
+        "economics"
+      ],
+      "summary": "President Trump said his administration would penalize U.S. companies that build overseas data centers, suggesting a large tax; Reuters reported the remarks from a press conference.",
+      "why_it_matters": "A future policy could materially change regional AI capacity planning, latency, and foreign investment decisions.",
+      "caveat": "A public threat is not an enacted law, published tax rule or proof penalties have been imposed; key implementation details remain unknown.",
+      "canonical_url": "https://www.reuters.com/technology/trump-says-us-penalize-firms-building-data-centers-abroad-2026-11-20/",
+      "source_url": "https://www.reuters.com/technology/trump-says-us-penalize-firms-building-data-centers-abroad-2026-11-20/",
+      "publication_date": "2026-11-20",
+      "publication_date_precision": "day",
+      "publication_time_utc": "2026-11-20T18:08:00Z",
+      "event_date": "2026-11-20",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-21T14:14:37.554Z",
+      "checked_at": "2026-11-21T14:14:37.554Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "reported_policy_proposal",
+      "release_status": "proposed_not_enacted",
+      "collection_classification": "previous_day",
+      "publisher": "Reuters",
+      "type": "political and industry reporting",
+      "version": null,
+      "arxiv_id": null,
+      "sources": [
+        {
+          "url": "https://www.reuters.com/technology/trump-says-us-penalize-firms-building-data-centers-abroad-2026-11-20/",
+          "publisher": "Reuters",
+          "type": "political and industry reporting"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:automaster-skill-guided-posttraining:2611.26510",
+      "title": "AutoMaster paper uses skill-guided rollouts to improve post-training of small models",
+      "category": "research",
+      "tags": [
+        "ML",
+        "SLM",
+        "LLM",
+        "fine-tuning",
+        "agents",
+        "distillation"
+      ],
+      "summary": "AutoMaster generates behavior-focused skill instructions to shape teacher trajectories before SFT, reporting gains of 1.42–8.99 percentage points over a controlled baseline on 4B/9B coding, search and terminal tasks.",
+      "why_it_matters": "Targets better synthetic training demonstrations rather than simply buying more teacher calls or model scale.",
+      "caveat": "Preprint, author-selected benchmarks and no independent replication; skill instruction leakage and broader task transfer require study.",
+      "canonical_url": "https://arxiv.org/abs/2611.26510",
+      "source_url": "https://arxiv.org/abs/2611.26510",
+      "publication_date": "2026-11-19",
+      "publication_date_precision": "day",
+      "publication_time_utc": "2026-11-19T17:57:59Z",
+      "event_date": "2026-11-19",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-21T14:14:37.554Z",
+      "checked_at": "2026-11-21T14:14:37.554Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "research_preprint_author_claims",
+      "release_status": "research_preprint",
+      "collection_classification": "catch_up_research_2026_11_19",
+      "publisher": "arXiv / authors",
+      "type": "research preprint",
+      "version": "v1",
+      "arxiv_id": "2611.26510",
+      "sources": [
+        {
+          "url": "https://arxiv.org/abs/2611.26510",
+          "publisher": "arXiv / authors",
+          "type": "research preprint"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:hisa-hidden-feature-sparse-attention:2611.26363",
+      "title": "HiSA research sparsifies attention feature dimensions instead of tokens",
+      "category": "research",
+      "tags": [
+        "DL",
+        "LLM",
+        "attention",
+        "inference",
+        "training efficiency"
+      ],
+      "summary": "Hidden Sparse Attention omits selected RoPE query-key feature-product components, reporting about one-third of the dot-product terms in tested settings and FlashAttention-3 integration.",
+      "why_it_matters": "Feature-axis sparsity offers a different computational tradeoff from token pruning or sliding-window attention.",
+      "caveat": "Training from scratch and custom kernels limit drop-in adoption; author-measured accuracy, memory and speed have not been independently replicated.",
+      "canonical_url": "https://arxiv.org/abs/2611.26363",
+      "source_url": "https://arxiv.org/abs/2611.26363",
+      "publication_date": "2026-11-19",
+      "publication_date_precision": "day",
+      "publication_time_utc": "2026-11-19T16:31:46Z",
+      "event_date": "2026-11-19",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-21T14:14:37.554Z",
+      "checked_at": "2026-11-21T14:14:37.554Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "research_preprint_author_claims",
+      "release_status": "research_preprint",
+      "collection_classification": "catch_up_research_2026_11_19",
+      "publisher": "arXiv / authors",
+      "type": "research preprint",
+      "version": "v1",
+      "arxiv_id": "2611.26363",
+      "sources": [
+        {
+          "url": "https://arxiv.org/abs/2611.26363",
+          "publisher": "arXiv / authors",
+          "type": "research preprint"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:dloop-latent-refinement-diffusion-lms:2611.26275",
+      "title": "dLoop explores more computation before diffusion-language token commitment",
+      "category": "research",
+      "tags": [
+        "DL",
+        "LLM",
+        "diffusion language models",
+        "inference"
+      ],
+      "summary": "The dLoop preprint adds repeated parameter-shared middle-block processing of a partially masked sequence before committing generated tokens, and reports favorable accuracy/throughput tradeoffs on selected tasks.",
+      "why_it_matters": "Refinement loops may reduce errors in parallel token generation without only changing confidence thresholds.",
+      "caveat": "Authors report mixed throughput comparisons depending on baseline and accounting for repeated passes; results are not a general speed guarantee.",
+      "canonical_url": "https://arxiv.org/abs/2611.26275",
+      "source_url": "https://arxiv.org/abs/2611.26275",
+      "publication_date": "2026-11-19",
+      "publication_date_precision": "day",
+      "publication_time_utc": "2026-11-19T15:40:24Z",
+      "event_date": "2026-11-19",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-21T14:14:37.554Z",
+      "checked_at": "2026-11-21T14:14:37.554Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "research_preprint_author_claims",
+      "release_status": "research_preprint",
+      "collection_classification": "catch_up_research_2026_11_19",
+      "publisher": "arXiv / authors",
+      "type": "research preprint",
+      "version": "v1",
+      "arxiv_id": "2611.26275",
+      "sources": [
+        {
+          "url": "https://arxiv.org/abs/2611.26275",
+          "publisher": "arXiv / authors",
+          "type": "research preprint"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:multiturn-safeguarding-distributed-cues:2611.26009",
+      "title": "Multi-turn safeguarding study finds risks missed when warning cues appear gradually",
+      "category": "safety",
+      "tags": [
+        "AI",
+        "LLM",
+        "evaluation",
+        "human factors",
+        "safety"
+      ],
+      "summary": "A research preprint using nine scenarios and over 7,400 simulated conversations reports that several assistants met community-worker safeguarding criteria less often when subtle risk cues were dispersed across turns.",
+      "why_it_matters": "Tests whether safety evaluations built around one obvious message overstate performance in longer, realistic conversations.",
+      "caveat": "Scenario judgments are from three support workers; synthetic interactions, model versions and prompts constrain generalization. These are findings, not a confirmed individual-user incident.",
+      "canonical_url": "https://arxiv.org/abs/2611.26009",
+      "source_url": "https://arxiv.org/abs/2611.26009",
+      "publication_date": "2026-11-19",
+      "publication_date_precision": "day",
+      "publication_time_utc": "2026-11-19T12:28:53Z",
+      "event_date": "2026-11-19",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-21T14:14:37.554Z",
+      "checked_at": "2026-11-21T14:14:37.554Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "research_preprint_author_claims",
+      "release_status": "research_preprint",
+      "collection_classification": "catch_up_research_2026_11_19",
+      "publisher": "arXiv / authors",
+      "type": "research preprint",
+      "version": "v1",
+      "arxiv_id": "2611.26009",
+      "sources": [
+        {
+          "url": "https://arxiv.org/abs/2611.26009",
+          "publisher": "arXiv / authors",
+          "type": "research preprint"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:xing-audio-nvvasr-vocalizations:2611.26000",
+      "title": "Xing-Audio study combines speech transcripts and six classes of vocal sounds",
+      "category": "audio",
+      "tags": [
+        "AI",
+        "DL",
+        "audio",
+        "speech recognition",
+        "multimodal"
+      ],
+      "summary": "Authors describe a 1.7B-parameter model trained with about 800,000 cross-audited/mined utterances to label speech alongside non-verbal vocalizations such as breathing.",
+      "why_it_matters": "Unified recognition could preserve communication cues that conventional speech-to-text systems omit.",
+      "caveat": "Author benchmarks only; weights, inference code, dataset and evaluation artifacts are described as planned for release, not currently verified available.",
+      "canonical_url": "https://arxiv.org/abs/2611.26000",
+      "source_url": "https://arxiv.org/abs/2611.26000",
+      "publication_date": "2026-11-19",
+      "publication_date_precision": "day",
+      "publication_time_utc": "2026-11-19T12:21:07Z",
+      "event_date": "2026-11-19",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-21T14:14:37.554Z",
+      "checked_at": "2026-11-21T14:14:37.554Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "research_preprint_author_claims",
+      "release_status": "research_preprint_artifacts_planned",
+      "collection_classification": "catch_up_research_2026_11_19",
+      "publisher": "arXiv / authors",
+      "type": "research preprint",
+      "version": "v1",
+      "arxiv_id": "2611.26000",
+      "sources": [
+        {
+          "url": "https://arxiv.org/abs/2611.26000",
+          "publisher": "arXiv / authors",
+          "type": "research preprint"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:agentrobocritic-action-level-robot-analysis:2611.26613",
+      "title": "AgentRoboCritic analyzes action-by-action robot-control failures",
+      "category": "robotics",
+      "tags": [
+        "AI",
+        "robotics",
+        "agents",
+        "evaluation",
+        "vision"
+      ],
+      "summary": "Researchers introduce intent-grounded critiques across 12 robot-manipulation benchmarks with 12,844 labeled actions; they report a fine-tuned critic improves failure-mode accuracy in their human-annotated test.",
+      "why_it_matters": "Action-level diagnosis can reveal grasping, alignment and recovery weaknesses hidden by episode pass rates.",
+      "caveat": "The disclosed benchmark and fine-tuned critic do not establish safe or robust physical deployment; reported performance is from a research test, not independent field validation.",
+      "canonical_url": "https://arxiv.org/abs/2611.26613",
+      "source_url": "https://arxiv.org/abs/2611.26613",
+      "publication_date": "2026-11-19",
+      "publication_date_precision": "day",
+      "publication_time_utc": "2026-11-19T18:57:25Z",
+      "event_date": "2026-11-19",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-21T14:14:37.554Z",
+      "checked_at": "2026-11-21T14:14:37.554Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "research_preprint_author_claims",
+      "release_status": "research_preprint_dataset_announced",
+      "collection_classification": "catch_up_research_2026_11_19",
+      "publisher": "arXiv / authors",
+      "type": "research preprint",
+      "version": "v1",
+      "arxiv_id": "2611.26613",
+      "sources": [
+        {
+          "url": "https://arxiv.org/abs/2611.26613",
+          "publisher": "arXiv / authors",
+          "type": "research preprint"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:safi-vision-language-action-stop-safely:2611.26239",
+      "title": "SAFI trains vision-language-action robots to halt prohibited tasks mid-execution",
+      "category": "robotics",
+      "tags": [
+        "DL",
+        "robotics",
+        "safety",
+        "VLA",
+        "imitation learning"
+      ],
+      "summary": "State-Aware Fallback Imitation (SAFI) trains a policy to hold a safe stationary arm and gripper state when takeover occurs after a forbidden task has already started, tested on LIBERO/BadLIBERO.",
+      "why_it_matters": "A refusal at task start alone is insufficient when a robot is already moving or holding an object.",
+      "caveat": "The 1.3% prohibited-completion result and lack of recorded physical incidents apply only to evaluated setups; do not infer guaranteed real-world safety.",
+      "canonical_url": "https://arxiv.org/abs/2611.26239",
+      "source_url": "https://arxiv.org/abs/2611.26239",
+      "publication_date": "2026-11-19",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-19",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-21T14:14:37.554Z",
+      "checked_at": "2026-11-21T14:14:37.554Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "research_preprint_author_claims",
+      "release_status": "research_preprint",
+      "collection_classification": "catch_up_research_2026_11_19",
+      "publisher": "arXiv / authors",
+      "type": "research preprint",
+      "version": "v1",
+      "arxiv_id": "2611.26239",
+      "sources": [
+        {
+          "url": "https://arxiv.org/abs/2611.26239",
+          "publisher": "arXiv / authors",
+          "type": "research preprint"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:anytime-valid-inference-alignment-tests:2611.26413",
+      "title": "Anytime-valid testing paper formalizes when an AI answer sampler may stop",
+      "category": "research",
+      "tags": [
+        "ML",
+        "LLM",
+        "alignment",
+        "inference",
+        "statistics"
+      ],
+      "summary": "Researchers propose reward-weighted answer clustering and an e-process-based stopping rule that can certify sampled majority answers under stated statistical assumptions.",
+      "why_it_matters": "Variable per-query sample budgets could cut unnecessary best-of-N inference while bounding a specific premature-certification error.",
+      "caveat": "A certified answer majority is not a guarantee of factual correctness; sequential validity depends on distributional assumptions and the reported cost gains are author-evaluated.",
+      "canonical_url": "https://arxiv.org/abs/2611.26413",
+      "source_url": "https://arxiv.org/abs/2611.26413",
+      "publication_date": "2026-11-19",
+      "publication_date_precision": "day",
+      "publication_time_utc": "2026-11-19T17:00:42Z",
+      "event_date": "2026-11-19",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-21T14:14:37.554Z",
+      "checked_at": "2026-11-21T14:14:37.554Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "research_preprint_author_claims",
+      "release_status": "research_preprint",
+      "collection_classification": "catch_up_research_2026_11_19",
+      "publisher": "arXiv / authors",
+      "type": "research preprint",
+      "version": "v1",
+      "arxiv_id": "2611.26413",
+      "sources": [
+        {
+          "url": "https://arxiv.org/abs/2611.26413",
+          "publisher": "arXiv / authors",
+          "type": "research preprint"
+        }
+      ]
+    }
+  ],
+  "technologies": [
+    {
+      "id": "tech-proposal:inkling-2-mini:2026-11-21",
+      "name": "Inkling 2 Mini",
+      "aliases": [
+        "Inkling-2-Mini"
+      ],
+      "usage_tags": [
+        "AI",
+        "DL",
+        "LLM",
+        "SLM",
+        "Multimodal",
+        "Agents"
+      ],
+      "explanation": "Apache-2.0 open-weight 26.4B-total/3.4B-active MoE with three shared-middle-layer passes, native text/image input, text generation and mixed NVFP4/MXFP8 weights.",
+      "conditional_advantage": "A laptop or single 32GB-class device can run a comparatively capable coding/tool model without sending prompts to a hosted API; economics depend on hardware and decoding workload.",
+      "best_fit_uses": [
+        "Local coding assistant",
+        "Multimodal agent evaluation",
+        "LoRA or post-training experiments using published checkpoint"
+      ],
+      "tradeoffs": [
+        "20GB mixed-precision weights and 32GB memory class",
+        "Repeated layer passes add inference work",
+        "Cloud alternatives may have stronger frontier reasoning"
+      ],
+      "alternatives": [
+        "Qwen-class open multimodal models",
+        "Llama open-weight deployment",
+        "Hosted proprietary coding APIs"
+      ],
+      "hardware_runtime_constraints": "Checkpoint approximately 20GB, typically 32GB or more GPU/unified memory (DGX Spark, capable NVIDIA card or Apple Silicon); support depends on model-specific Ollama/SGLang/vLLM integration.",
+      "official_documentation_url": "https://thinkingmachines.ai/model-card/inkling-2-mini/",
+      "license_uncertainty": "Model card explicitly states Apache-2.0 for released weights; inspect third-party runtime and training dependencies separately.",
+      "availability_uncertainty": "Weights downloadable as of checked date; third-party hosts and runtime compatibility may vary.",
+      "pricing_uncertainty": "Local weights have no per-token license fee stated, but hardware/electricity and third-party hosted API/Tinker service fees may apply.",
+      "existing_profile_id": null,
+      "profile_relationship": "new_candidate_pending_canonical_dedup",
+      "source_links": [
+        {
+          "url": "https://thinkingmachines.ai/model-card/inkling-2-mini/",
+          "publisher": "Thinking Machines Lab",
+          "type": "model card"
+        },
+        {
+          "url": "https://thinkingmachines.ai/news/inkling-2-mini/",
+          "publisher": "Thinking Machines Lab",
+          "type": "release post"
+        }
+      ],
+      "date_checked": "2026-11-21",
+      "checked_at": "2026-11-21T14:14:37.554Z",
+      "review_status": "source_checked_pending_publisher_catalog_dedup"
+    },
+    {
+      "id": "tech-proposal:tml-d24-varloop-research:2026-11-21",
+      "name": "TML-d24-varloop-research",
+      "aliases": [
+        "TML variable-loop Inkling research model"
+      ],
+      "usage_tags": [
+        "AI",
+        "DL",
+        "LLM",
+        "Interpretability",
+        "Safety"
+      ],
+      "explanation": "Open-weight 26.4B-total, 3.4B-active model exposing an inference-time loop count over shared transformer middle layers; trained across one through five passes.",
+      "conditional_advantage": "Holding checkpoint weights constant while changing loop depth isolates computational-depth effects for interpretability, hidden-reasoning, and oversight studies.",
+      "best_fit_uses": [
+        "CoT monitorability experiments",
+        "Reasoning depth/compute tradeoff ablations",
+        "Variable-pass evaluation"
+      ],
+      "tradeoffs": [
+        "Research-only checkpoint, no Tinker or public model API",
+        "Memory and latency increase with extra passes",
+        "Findings are not generalizable to all transformer families"
+      ],
+      "alternatives": [
+        "Fixed-loop Inkling 2 Mini",
+        "Recurrent transformer research baselines",
+        "Test-time token-budget controls"
+      ],
+      "hardware_runtime_constraints": "Approximately 20GB checkpoint, 32GB+ GPU/unified memory, specialized mixed NVFP4/MXFP8 runtime; no API availability.",
+      "official_documentation_url": "https://thinkingmachines.ai/model-card/tml-d24-varloop-research/",
+      "license_uncertainty": "Published model card says Apache-2.0 weights; optional runtime dependencies separately licensed.",
+      "availability_uncertainty": "Research weights downloadable as of checked date; no public hosted API.",
+      "pricing_uncertainty": "No model license fee specified; local computing costs and any downstream hosting costs are separate.",
+      "existing_profile_id": null,
+      "profile_relationship": "distinct_research_variant_pending_canonical_dedup",
+      "source_links": [
+        {
+          "url": "https://thinkingmachines.ai/model-card/tml-d24-varloop-research/",
+          "publisher": "Thinking Machines Lab",
+          "type": "model card"
+        }
+      ],
+      "date_checked": "2026-11-21",
+      "checked_at": "2026-11-21T14:14:37.554Z",
+      "review_status": "source_checked_pending_publisher_catalog_dedup"
+    },
+    {
+      "id": "tech-proposal:hisa-feature-sparse-attention:2026-11-21",
+      "name": "Hidden Sparse Attention (HiSA)",
+      "aliases": [
+        "HiSA",
+        "RoPE hidden-dimension sparse attention"
+      ],
+      "usage_tags": [
+        "DL",
+        "LLM",
+        "Attention",
+        "Inference",
+        "Training"
+      ],
+      "explanation": "RoPE-aware partial query-key dot products that omit statically chosen feature dimensions, with proposed FlashAttention-3 training and inference kernel integrations.",
+      "conditional_advantage": "May reduce dot-product multiplication/memory costs when training models around this rule and deploying on supported GPU kernels, versus full feature-dimension attention.",
+      "best_fit_uses": [
+        "Research on attention compute reduction",
+        "Training RoPE-based decoder models from scratch",
+        "Custom GPU attention-kernel experiments"
+      ],
+      "tradeoffs": [
+        "Not general token-sparse attention",
+        "Reported gains depend on retraining and kernel support",
+        "Generic pretrained-model drop-in accuracy not established"
+      ],
+      "alternatives": [
+        "FlashAttention-3 dense attention",
+        "Sliding-window or block-sparse attention",
+        "Grouped-query attention"
+      ],
+      "hardware_runtime_constraints": "CUDA/GPU FlashAttention-3-style kernel integration suggested; precise architecture/kernel requirements must be confirmed in code and reproduction.",
+      "official_documentation_url": "https://arxiv.org/abs/2611.26363",
+      "license_uncertainty": "A linked code repository is described in paper; code license not audited.",
+      "availability_uncertainty": "Research implementation mentioned, but production packaging and binary availability not independently verified.",
+      "pricing_uncertainty": "No public product price; research implementation may still incur GPU retraining and integration costs.",
+      "existing_profile_id": null,
+      "profile_relationship": "new_specific_method_related_to_MLD-1138",
+      "source_links": [
+        {
+          "url": "https://arxiv.org/abs/2611.26363",
+          "publisher": "arXiv / HiSA authors",
+          "type": "research preprint"
+        }
+      ],
+      "date_checked": "2026-11-21",
+      "checked_at": "2026-11-21T14:14:37.554Z",
+      "review_status": "source_checked_pending_publisher_catalog_dedup"
+    },
+    {
+      "id": "tech-proposal:automaster-skill-ft:2026-11-21",
+      "name": "AutoMaster with Skill-Guided Fine-Tuning",
+      "aliases": [
+        "AutoMaster",
+        "Skill-FT"
+      ],
+      "usage_tags": [
+        "AI",
+        "ML",
+        "SLM",
+        "LLM",
+        "Post-training",
+        "Agents"
+      ],
+      "explanation": "Agentic post-training workflow that analyzes rollout errors, generates natural-language skill constraints for a teacher and selects examples for target-model supervised fine-tuning.",
+      "conditional_advantage": "May improve smaller coding/search/terminal models with the same teacher/data budget if unguided successful trajectories contain repeated bad habits.",
+      "best_fit_uses": [
+        "Small-model coding agent SFT",
+        "Synthetic-data quality experiments",
+        "Teacher-trajectory behavior-shaping ablations"
+      ],
+      "tradeoffs": [
+        "Agent review and skill-design costs",
+        "Sensitive to evaluation design",
+        "Teacher-model weaknesses can persist"
+      ],
+      "alternatives": [
+        "Vanilla SFT of teacher demonstrations",
+        "DPO with ranked examples",
+        "Human-curated task demonstrations"
+      ],
+      "hardware_runtime_constraints": "Requires teacher agent inference, trajectory storage, SFT training GPUs appropriate to 4B/9B target checkpoints; no plug-and-play deployed API verified.",
+      "official_documentation_url": "https://arxiv.org/abs/2611.26510",
+      "license_uncertainty": "Paper access verified; code/data/model licensing not established.",
+      "availability_uncertainty": "Research method described, runnable artifact not verified.",
+      "pricing_uncertainty": "No vendor product price; dependent on training and teacher-inference costs.",
+      "existing_profile_id": null,
+      "profile_relationship": "research_method_candidate_distinct_from_existing_sft",
+      "source_links": [
+        {
+          "url": "https://arxiv.org/abs/2611.26510",
+          "publisher": "arXiv / AutoMaster authors",
+          "type": "research preprint"
+        }
+      ],
+      "date_checked": "2026-11-21",
+      "checked_at": "2026-11-21T14:14:37.554Z",
+      "review_status": "source_checked_pending_publisher_catalog_dedup"
+    },
+    {
+      "id": "tech-proposal:xing-audio-nvvasr:2026-11-21",
+      "name": "Xing-Audio-NVVASR",
+      "aliases": [
+        "NVVASR",
+        "Xing-Audio nonverbal vocalization ASR"
+      ],
+      "usage_tags": [
+        "AI",
+        "DL",
+        "Audio",
+        "Speech",
+        "Multimodal"
+      ],
+      "explanation": "Proposed 1.7B ASR model producing speech transcripts with inline labels for six non-verbal vocalization classes from speech and breath/event-rich audio.",
+      "conditional_advantage": "Could retain labeled non-speech vocal events that generic speech-to-text often drops, conditional on evaluation transfer and released artifacts.",
+      "best_fit_uses": [
+        "Conversation transcription with vocal events",
+        "Audio-dataset labeling research",
+        "Accessibility/audio understanding experiments"
+      ],
+      "tradeoffs": [
+        "Speech and vocalization annotation errors",
+        "Model is not independently benchmarked",
+        "Weights/inference code are only planned"
+      ],
+      "alternatives": [
+        "Whisper-like ASR plus separate event detector",
+        "Multimodal audio LLM event tagging",
+        "Dedicated voice activity and sound event detection pipeline"
+      ],
+      "hardware_runtime_constraints": "1.7B model; precise memory, inference latency, GPU/CPU runtime not published in verified abstract.",
+      "official_documentation_url": "https://arxiv.org/abs/2611.26000",
+      "license_uncertainty": "No model/data/code licenses verified; authors describe prospective release.",
+      "availability_uncertainty": "Planned model weights, inference code and benchmark releases are not verified available.",
+      "pricing_uncertainty": "No product pricing published; research training/inference hardware costs would apply.",
+      "existing_profile_id": null,
+      "profile_relationship": "new_candidate_related_to_ASR",
+      "source_links": [
+        {
+          "url": "https://arxiv.org/abs/2611.26000",
+          "publisher": "arXiv / Xing-Audio authors",
+          "type": "research preprint"
+        }
+      ],
+      "date_checked": "2026-11-21",
+      "checked_at": "2026-11-21T14:14:37.554Z",
+      "review_status": "source_checked_pending_publisher_catalog_dedup"
+    }
+  ],
+  "terms": [
+    {
+      "id": "term-proposal:looped-transformer:2026-11-21",
+      "name": "Looped transformer",
+      "aliases": [
+        "Layer-looped transformer",
+        "Parameter-shared recurrent transformer depth"
+      ],
+      "definition": "A transformer that reuses the same layer weights over more than one sequential computation pass, increasing effective compute depth without adding a fresh parameter set per pass.",
+      "mechanism": "An intermediate layer block processes a token representation repeatedly, sometimes with a fixed or selectable number of passes, before the next stage or emitted token.",
+      "usage_tags": [
+        "AI",
+        "DL",
+        "LLM",
+        "SLM",
+        "Architecture"
+      ],
+      "example": "Inkling 2 Mini applies its 12 middle layers three times per output token, with shared weights.",
+      "caveat": "Reusing weights is not free: additional passes increase latency and activations, and hidden intermediate computation may be harder to supervise than printed reasoning traces.",
+      "related_existing_ids": [
+        "MLD-1000",
+        "MLD-0992",
+        "MLD-0554"
+      ],
+      "related_existing_names": [
+        "Recurrent neural network",
+        "Reasoning trace",
+        "Inference"
+      ],
+      "primary_references": [
+        {
+          "url": "https://thinkingmachines.ai/model-card/inkling-2-mini/",
+          "publisher": "Thinking Machines Lab",
+          "type": "model card"
+        },
+        {
+          "url": "https://arxiv.org/abs/2611.26275",
+          "publisher": "arXiv / dLoop authors",
+          "type": "related preprint"
+        }
+      ],
+      "term_origin": "established_concept_new_to_atlas",
+      "date_checked": "2026-11-21",
+      "checked_at": "2026-11-21T14:14:37.554Z",
+      "review_status": "source_checked_pending_publisher_canonical_dedup"
+    },
+    {
+      "id": "term-proposal:hidden-dimension-sparse-attention:2026-11-21",
+      "name": "Hidden-dimension sparse attention",
+      "aliases": [
+        "Hidden Sparse Attention",
+        "HiSA",
+        "Feature-axis sparse attention"
+      ],
+      "definition": "An attention computation that skips selected query-key feature-dimension products rather than skipping attention links between token positions.",
+      "mechanism": "For RoPE queries and keys, HiSA chooses dot-product feature subsets with a fixed position-conditioned rule and computes a smaller sum for each retained token pair.",
+      "usage_tags": [
+        "AI",
+        "DL",
+        "LLM",
+        "Attention",
+        "Efficiency"
+      ],
+      "example": "A HiSA-trained model may calculate only about a third of the dense query-key feature products in the reported experiment.",
+      "caveat": "Not synonymous with token-sparse attention; accuracy depends on training/kernel details and author results do not prove universal speedups.",
+      "related_existing_ids": [
+        "MLD-1138",
+        "MLD-1080",
+        "MLD-0433"
+      ],
+      "related_existing_names": [
+        "Sparse attention",
+        "Scaled dot-product attention",
+        "FlashAttention"
+      ],
+      "primary_references": [
+        {
+          "url": "https://arxiv.org/abs/2611.26363",
+          "publisher": "arXiv / HiSA authors",
+          "type": "research preprint"
+        }
+      ],
+      "term_origin": "newly_released_method_name",
+      "date_checked": "2026-11-21",
+      "checked_at": "2026-11-21T14:14:37.554Z",
+      "review_status": "source_checked_pending_publisher_canonical_dedup"
+    },
+    {
+      "id": "term-proposal:nonverbal-vocalization-recognition:2026-11-21",
+      "name": "Non-verbal vocalization recognition",
+      "aliases": [
+        "NVV recognition",
+        "Non-speech human vocal event tagging"
+      ],
+      "definition": "Recognition and labeling of human vocal sounds other than lexical speech, such as laughter, sobbing or audible breathing, often alongside a transcript.",
+      "mechanism": "A speech/audio model predicts aligned event categories on acoustic segments and may insert typed tags into transcribed output.",
+      "usage_tags": [
+        "AI",
+        "DL",
+        "Audio",
+        "ASR",
+        "Speech"
+      ],
+      "example": "An ASR transcript adds [breathing] between two spoken sentences instead of omitting it.",
+      "caveat": "Labels are model- and dataset-specific; recognition cannot reliably infer emotion, mental state or intent from sound alone.",
+      "related_existing_ids": [
+        "MLD-0078",
+        "MLD-1229"
+      ],
+      "related_existing_names": [
+        "Automatic speech recognition",
+        "Text-to-speech"
+      ],
+      "primary_references": [
+        {
+          "url": "https://arxiv.org/abs/2611.26000",
+          "publisher": "arXiv / Xing-Audio authors",
+          "type": "research preprint"
+        }
+      ],
+      "term_origin": "established_concept_new_to_atlas",
+      "date_checked": "2026-11-21",
+      "checked_at": "2026-11-21T14:14:37.554Z",
+      "review_status": "source_checked_pending_publisher_canonical_dedup"
+    },
+    {
+      "id": "term-proposal:state-aware-fallback-imitation:2026-11-21",
+      "name": "State-Aware Fallback Imitation",
+      "aliases": [
+        "SAFI",
+        "Mid-execution robot stop-policy imitation"
+      ],
+      "definition": "A robotic imitation-learning procedure that supplies safe alternative actions for prohibited behavior at intermediate task states, not only a refusal at initiation.",
+      "mechanism": "Fallback trajectories assign stationary manipulator commands and consistent gripper targets, then joint policy adaptation trains to enact them while preserving permitted tasks.",
+      "usage_tags": [
+        "AI",
+        "DL",
+        "Robotics",
+        "Safety",
+        "Imitation learning"
+      ],
+      "example": "If a robot discovers a disallowed task while holding an object, its learned response keeps the gripper stable rather than releasing the object abruptly.",
+      "caveat": "An experimentally learned fallback does not establish safe physical execution across unseen robots, hazards or state distributions.",
+      "related_existing_ids": [
+        "MLD-1065",
+        "MLD-0528",
+        "MLD-0010"
+      ],
+      "related_existing_names": [
+        "Safety evaluation",
+        "Human-in-the-loop",
+        "Action space"
+      ],
+      "primary_references": [
+        {
+          "url": "https://arxiv.org/abs/2611.26239",
+          "publisher": "arXiv / SAFI authors",
+          "type": "research preprint"
+        }
+      ],
+      "term_origin": "newly_released_method_name",
+      "date_checked": "2026-11-21",
+      "checked_at": "2026-11-21T14:14:37.554Z",
+      "review_status": "source_checked_pending_publisher_canonical_dedup"
+    },
+    {
+      "id": "term-proposal:anytime-valid-answer-stopping:2026-11-21",
+      "name": "Anytime-valid answer certification",
+      "aliases": [
+        "E-process stopping",
+        "Sequential anytime-valid inference"
+      ],
+      "definition": "A sequential test that lets a sampler stop at a data-dependent time while maintaining a specified bound on the chance of incorrectly certifying a property under the test's assumptions.",
+      "mechanism": "A nonnegative e-process accumulates betting evidence across sampled answers; crossing a preset threshold can certify a majority-cluster property without ordinary repeated-peeking inflation.",
+      "usage_tags": [
+        "ML",
+        "LLM",
+        "Inference",
+        "Statistics",
+        "Evaluation"
+      ],
+      "example": "For repeated model answers, stop drawing candidates once an e-process supports that an answer dominates the model's own sampling distribution at the chosen error tolerance.",
+      "caveat": "Certifying statistical dominance does not prove the answer true; validity needs the assumed sequential sampling/model conditions.",
+      "related_existing_ids": [
+        "MLD-0345",
+        "MLD-0554",
+        "MLD-0078"
+      ],
+      "related_existing_names": [
+        "Early stopping",
+        "Inference"
+      ],
+      "primary_references": [
+        {
+          "url": "https://arxiv.org/abs/2611.26413",
+          "publisher": "arXiv / sequential testing authors",
+          "type": "research preprint"
+        }
+      ],
+      "term_origin": "established_statistical_method_applied_to_llm_inference",
+      "date_checked": "2026-11-21",
+      "checked_at": "2026-11-21T14:14:37.554Z",
+      "review_status": "source_checked_pending_publisher_canonical_dedup"
+    }
+  ],
+  "corrections": []
+}
