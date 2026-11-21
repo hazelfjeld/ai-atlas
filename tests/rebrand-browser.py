@@ -79,7 +79,15 @@ with sync_playwright() as p:
                                         (width == 1280 and source == 'whats-new.html')):
                     if width <= 650:
                         page.locator('details.site-mobile-chrome__nav > summary').click()
-                    page.locator(menu + ' > summary').click()
+                    more = page.locator(menu)
+                    # The encyclopedia is itself the selected secondary page:
+                    # its nested More disclosure already starts open without JS.
+                    # Only open a closed disclosure; clicking an open one hides
+                    # Research and makes the real link impossible to activate.
+                    if not more.evaluate('(el) => el.open'):
+                        more.locator('> summary').click()
+                    check(f'{source} {width}px dark has an open and usable Research menu',
+                          more.evaluate('(el) => el.open') and entry.is_visible())
                     page.screenshot(path=str(out / f'canonical-research-before-{width}.png'))
                     entry.click()
                     check(f'{source} {width}px dark script-free Research actually opens',
