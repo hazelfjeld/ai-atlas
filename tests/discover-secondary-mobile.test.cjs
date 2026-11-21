@@ -6,6 +6,7 @@ const vm=require('node:vm');
 const path=require('node:path');
 const root=path.resolve(__dirname,'..');
 const app=fs.readFileSync(path.join(root,'app.js'),'utf8');
+const shared=fs.readFileSync(path.join(root,'site-theme.js'),'utf8');
 const offline=fs.readFileSync(path.join(root,'downloads/Atlas_Demo_Offline.html'),'utf8');
 
 const sectionNames={overview:'Discover',dictionary:'Concept dictionary',
@@ -14,7 +15,7 @@ const sectionNames={overview:'Discover',dictionary:'Concept dictionary',
   sources:'Sources & coverage'};
 function navLink(href,key){
   const attrs=new Map([['href',href]]);
-  return {dataset:{view:key},classList:{toggle(){}},
+  return {dataset:{view:key},textContent:sectionNames[key],classList:{toggle(){}},
     querySelector:selector=>selector==='span:not(.nav-count)'?{textContent:sectionNames[key]}:null,
     getAttribute:name=>attrs.get(name)??null,
     setAttribute:(name,value)=>attrs.set(name,value),
@@ -28,7 +29,11 @@ test('Discover nested mobile More reflects the selected secondary workspace',()=
   assert.ok(start>=0&&end>start);
   const sections=['overview','dictionary','technologies','games','safety','papers','compare','saved','sources'];
   const desktop=sections.map(s=>navLink('#/'+s,s));
-  const mobile=sections.map(s=>navLink('#/'+s,s));
+  const mobile=sections.map(s=>navLink(s==='papers'?'research.html':'#/'+s,s));
+  const syncStart=shared.indexOf('function syncDiscoverMobileSelection(');
+  const syncEnd=shared.indexOf('\nif (typeof window !== \'undefined\') window.atlasSyncDiscoverMobileSelection',syncStart);
+  assert.ok(syncStart>=0&&syncEnd>syncStart,'use real shared mobile selector, not a mock');
+  const sync=vm.runInNewContext('('+shared.slice(syncStart,syncEnd)+')');
   const more={open:false,dataset:{},querySelector:()=>mobile.slice(4).find(a=>a.current())||null};
   const desktopMore={open:false,dataset:{}};
   const rail={querySelectorAll:()=>desktop,querySelector:selector=>{
@@ -43,11 +48,13 @@ test('Discover nested mobile More reflects the selected secondary workspace',()=
     setAttribute:(key,val)=>headerAttrs.set(key,val),
     getAttribute:key=>headerAttrs.get(key)||null,
     querySelector:()=>menuToggle};
-  const elements={navigation:rail,'additional-navigation':desktopMore,breadcrumb:{textContent:''},
+  const elements={navigation:rail,'discover-mobile-nav':{querySelectorAll:()=>mobile},
+    'additional-navigation':desktopMore,breadcrumb:{textContent:''},
     'snapshot-date':{textContent:''}};
   const context={document:{title:'',querySelectorAll:()=>mobile,
+      getElementById:id=>elements[id]||null,
       querySelector:selector=>selector==='.discover-mobile-chrome'?mobileHeading:more},
-    window:{ATLAS_OFFLINE:false},$:name=>elements[name],
+    window:{ATLAS_OFFLINE:false,atlasSyncDiscoverMobileSelection:sync},$:name=>elements[name],
     sets:{},notebook:{saved:[]},labels:Object.fromEntries(sections.map(s=>[s,s])),
     view:'overview',D:{meta:{research_checked_on:'2026-11-01'}},date:x=>x,renderDock(){}};
   vm.runInNewContext(app.slice(start,end),context);
@@ -55,7 +62,8 @@ test('Discover nested mobile More reflects the selected secondary workspace',()=
     context.view=section;
     context.renderNav();
     assert.equal(mobile.filter(a=>a.current()).length,1,section);
-    assert.equal(mobile.find(a=>a.getAttribute('href')==='#/'+section).current(),true,section);
+    const expectedHref=section==='papers'?'research.html':'#/'+section;
+    assert.equal(mobile.find(a=>a.getAttribute('href')===expectedHref).current(),true,section);
     assert.equal(more.open,true,section+' is visible within More');
     assert.equal(desktopMore.open,true,section+' is visible in desktop More');
     assert.equal(mobileHeading.dataset.pageLabel,sectionNames[section]);

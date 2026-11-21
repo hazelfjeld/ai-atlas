@@ -1805,7 +1805,7 @@ function syncDiscoverMobileSelection(mobileNav, current) {
     else link.removeAttribute('aria-current');
   });
 }
-window.atlasSyncDiscoverMobileSelection = syncDiscoverMobileSelection;
+if (typeof window !== 'undefined') window.atlasSyncDiscoverMobileSelection = syncDiscoverMobileSelection;
 
 /* The catalog is loaded asynchronously. A visitor can manually close and
    reopen an auto-revealed More disclosure before app.js starts; record that
