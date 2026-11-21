@@ -87,3 +87,67 @@ test('shared Research link hydration routes live page families to one native wor
   assert.ok(offline.includes('href="#/papers">Open the library'));
   assert.ok(offline.includes("window.ATLAS_OFFLINE?'#/papers':'research.html'"));
 });
+
+test('Research navigation resolves to the native workspace before DOMContentLoaded on every shared rail',()=>{
+  const vm=require('node:vm');
+  const script=read('site-theme.js');
+  const start='/* atlas-early-research-activation:begin */',end='/* atlas-early-research-activation:end */';
+  const helper=script.split('/* atlas-canonical-research-entry:begin */')[1]
+    .split('/* atlas-canonical-research-entry:end */')[0];
+  assert.equal(script.split(start).length-1,1);
+  assert.equal(script.split(end).length-1,1);
+  const block=script.split(start)[1].split(end)[0];
+  const expectedEvents=['focusin','pointerdown','click','auxclick','contextmenu'];
+  const exercise=(home,eventName,offline=false)=>{
+    const original=home==='#/overview'?'#/papers':
+      home.replace('index.html#/overview','index.html#/papers');
+    const rows=[
+      {href:original,label:'Research library',shared:true},
+      {href:original,label:'Research library',shared:false},
+      {href:original,label:'Compare tools',shared:true}
+    ];
+    const anchors=rows.map(row=>({
+      getAttribute:name=>name==='href'?row.href:null,
+      setAttribute:(name,value)=>{if(name==='href')row.href=value;},
+      querySelector:()=>({textContent:row.label}),
+      textContent:row.label,
+      closest(selector){return selector==='a[href]'?this:row.shared?{}:null;},
+      matches:()=>false
+    }));
+    const events=new Map();
+    const document={
+      addEventListener:(name,fn,capture)=>{
+        assert.equal(capture,true,'early events must run before the router/default activation');
+        assert.equal(events.has(name),false);
+        events.set(name,fn);
+      },
+      querySelector:()=>({getAttribute:()=>home}),
+      querySelectorAll:selector=>{
+        assert.equal(selector,'a[href]');
+        return anchors;
+      }
+    };
+    vm.runInNewContext(helper+'\n'+block,{document,window:{ATLAS_OFFLINE:offline}});
+    assert.deepEqual([...events.keys()],expectedEvents);
+    // Unrelated links and non-navigation links cannot trigger canonicalization.
+    events.get(eventName)({target:anchors[1]});
+    events.get(eventName)({target:anchors[2]});
+    assert.equal(rows[0].href,original);
+    events.get(eventName)({target:anchors[0]});
+    return rows.map(row=>row.href);
+  };
+  for(const eventName of expectedEvents){
+    assert.deepEqual(exercise('#/overview',eventName),
+      ['research.html','#/papers','#/papers'],eventName+' Discover');
+    assert.deepEqual(exercise('../index.html#/overview',eventName),
+      ['../research.html','../index.html#/papers','../index.html#/papers'],
+      eventName+' nested reference');
+    assert.deepEqual(exercise('#/overview',eventName,true),
+      ['#/papers','#/papers','#/papers'],eventName+' offline');
+  }
+  const offline=read('downloads/Atlas_Demo_Offline.html');
+  assert.ok(offline.includes(start+block+end),'offline includes the exact shared early handler');
+  for(const route of ['index.html','research.html','terms/index.html','technology/index.html']){
+    assert.ok(read(route).includes('Research library'),route+' keeps script-free Research access');
+  }
+});

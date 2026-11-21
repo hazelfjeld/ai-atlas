@@ -2496,6 +2496,24 @@ document.addEventListener('DOMContentLoaded', () => {
   }  syncCanonicalResearchEntry();
 });
 
+/* atlas-early-research-activation:begin */
+// The shared canonicalizer normally runs at DOMContentLoaded. Real visitors can
+// reach a script-free navigation link while a deferred catalog script is still
+// loading. Normalize the existing link before pointer, keyboard, middle-click
+// or context-menu activation; the no-JavaScript and offline hash routes stay
+// intact, and no second destination map or header is introduced.
+for (const eventName of ['focusin', 'pointerdown', 'click', 'auxclick', 'contextmenu']) {
+  document.addEventListener(eventName, event => {
+    const link = event.target?.closest?.('a[href]');
+    if (!link || !link.closest(
+      '#navigation, #discover-mobile-nav, .site-chrome__more-links, .site-mobile-chrome__more-links')) return;
+    const label = link.querySelector('span:not(.nav-count)')?.textContent?.trim() ||
+      link.textContent?.trim();
+    if (label === 'Research library') syncCanonicalResearchEntry();
+  }, true);
+}
+/* atlas-early-research-activation:end */
+
 /* atlas-canonical-research-entry:begin */
 // Preserve legacy hash links for script-free and offline users, but use the
 // existing native Research workspace on live pages after shared chrome builds.
