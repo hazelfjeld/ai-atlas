@@ -646,7 +646,7 @@ document.addEventListener('DOMContentLoaded', () => {
       /* atlas-secondary-data:begin */
       const sharedSecondarySections = [
         ["index.html#/safety", "Safety observatory"],
-        ["index.html#/papers", "Research library"],
+        ["research.html", "Research library"],
         ["index.html#/compare", "Compare tools"],
         ["index.html#/saved", "Your notebook"],
         ["index.html#/sources", "Sources & coverage"],

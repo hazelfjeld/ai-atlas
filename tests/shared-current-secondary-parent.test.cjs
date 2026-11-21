@@ -43,3 +43,32 @@ test('selected current secondary route remains the only current link in each nat
   assert.ok(app.includes('syncAutomaticDisclosure(mobileMore,!!mobileMore?.querySelector(\'a[aria-current="page"]\'))'),
     'live hash-route selection remains the source of truth');
 });
+
+
+test('Research library uses one native entry point across Discover and all page families without breaking offline or legacy links',()=>{
+  const source=read('scripts/site_chrome.py');
+  const discover=read('index.html');
+  const template=read('discovery.js');
+  const nativeScript=read('site-theme.js');
+  assert.ok(source.includes('("papers", "view", "research.html", "Research library")'));
+  assert.ok(nativeScript.includes('["research.html", "Research library"]'));
+  assert.ok(discover.includes('data-view="papers" href="research.html"'));
+  assert.ok(discover.includes('href="research.html">Research library</a>'));
+  assert.ok(discover.includes('class="btn" href="research.html">Open the library'));
+  assert.ok(template.includes("window.ATLAS_OFFLINE?'#/papers':'research.html'"));
+  for(const page of [
+    'about.html','catalog-review.html','demo.html','games.html','hardware-review.html',
+    'playbooks.html','research.html','technologies.html','whats-new.html',
+    'terms/index.html','technology/index.html',
+  ]){
+    const html=read(page);
+    const prefix=page.includes('/')?'../':'';
+    assert.ok(html.includes('href="'+prefix+'research.html"'),page+' links to the native research library');
+    assert.ok(!html.includes('href="'+prefix+'index.html#/papers"'),page+' does not link to the duplicate old entry');
+  }
+  const offline=read('downloads/Atlas_Demo_Offline.html');
+  assert.ok(offline.includes('href="#/papers">Open the library'));
+  assert.ok(offline.includes("window.ATLAS_OFFLINE?'#/papers':'research.html'"));
+  assert.ok(!offline.includes('href="research.html"'), 'offline navigation is self-contained');
+  assert.ok(read('app.js').includes("window.addEventListener('hashchange',route)"), 'legacy hash route is still registered');
+});
