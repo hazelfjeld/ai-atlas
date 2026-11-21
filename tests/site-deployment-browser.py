@@ -76,6 +76,14 @@ with sync_playwright() as p:
         # old teaser into a blank workspace while catalog data is delayed.
         # Inspect actual rendered dimensions and clipping, not just DOM text.
         loading_frame = early.locator('#catalog-loading').bounding_box()
+        loading_diagnostics = early.locator('#catalog-loading').evaluate("""(el) => ({
+          text: el.textContent.trim(), clipping: getComputedStyle(el).clipPath,
+          position: getComputedStyle(el).position, display: getComputedStyle(el).display,
+          pageEmpty: !document.querySelector('#page')?.hasChildNodes(),
+          enhanced: document.documentElement.classList.contains('atlas-enhanced')
+        })""")
+        print('EARLY SEARCH STATUS', early_width, loading_frame,
+              json.dumps(loading_diagnostics), flush=True)
         check('shared early search visibly announces pending catalog ' + str(early_width),
               loading_frame is not None and loading_frame['width'] > 200
               and loading_frame['height'] > 40
