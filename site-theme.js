@@ -137,6 +137,57 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 /* atlas-prehydration-section-state:end */
 
+/* atlas-native-research-prehydration:begin */
+/* Research has three native hash views, but its shared desktop/mobile rails
+   used to announce "Research library" until the catalog finished loading.
+   Use the already-rendered local view links as the label source; this makes
+   Safety and Publication progress correct on first paint without introducing
+   a second route list or affecting script-free navigation. */
+document.addEventListener('DOMContentLoaded', () => {
+  const nav = document.querySelector('.research-local-nav');
+  const chrome = document.querySelector('.research-mobile-topbar');
+  if (!nav || !chrome || !document.querySelector('.site-chrome.research-site-chrome')) return;
+  const views = [...nav.querySelectorAll('a[data-nav]')];
+  const labelFor = key => views.find(link => link.dataset.nav === key)
+    ?.firstChild?.textContent?.trim();
+  const researchLabel = labelFor('papers');
+  const safetyLabel = labelFor('alerts');
+  if (!researchLabel || !safetyLabel) return;
+
+  const sync = () => {
+    const hashView = window.location.hash.match(/^#\/?([a-z]+)(?:\?|$)/)?.[1];
+    const selected = views.find(link => link.dataset.nav === hashView) ||
+      views.find(link => link.dataset.nav === 'papers');
+    if (!selected) return;
+    const label = selected.firstChild?.textContent?.trim();
+    if (!label) return;
+    const parentLabel = selected.dataset.nav === 'alerts' ? safetyLabel : researchLabel;
+    // Both rails already contain canonical links generated from site_chrome.py.
+    // Change their state, not the routes, order or content of those links.
+    document.querySelectorAll(
+      '.site-chrome.research-site-chrome .site-chrome__more-links a, ' +
+      '.research-mobile-topbar .site-mobile-chrome__more-links a'
+    ).forEach(link => {
+      const name = link.textContent.trim();
+      if (name !== researchLabel && name !== safetyLabel) return;
+      if (name === parentLabel) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+    views.forEach(link => {
+      if (link === selected) link.setAttribute('aria-current', 'page');
+      else link.removeAttribute('aria-current');
+    });
+    chrome.dataset.pageLabel = label;
+    const title = chrome.querySelector('.site-mobile-chrome__title');
+    if (title) title.textContent = label;
+    chrome.querySelector('details.site-mobile-chrome__nav > summary')
+      ?.setAttribute('aria-label', 'Toggle navigation · ' + label);
+  };
+  sync();
+  window.addEventListener('hashchange', sync);
+});
+/* atlas-native-research-prehydration:end */
+
 /* Real search everywhere: keep the static link as the no-JavaScript fallback,
    and use its relative route on both root and nested reference pages. */
 document.addEventListener('DOMContentLoaded', () => {
