@@ -31,6 +31,16 @@ SECONDARY_DESTINATIONS = (
     ("offline", "static", "downloads/Atlas_Demo_Offline.html", "Offline demo download ↓"),
 )
 
+def secondary_destination_href(prefix, key, route, canonical_research=False):
+    """Share a native Research route across script-free page-family navigation.
+
+    Unmigrated generated detail profiles retain their stable legacy hash link
+    until their deterministic catalog-wide regeneration. Deep links still work.
+    """
+    assert prefix in ("", "../")
+    return prefix + ("research.html" if canonical_research and key == "papers" else route)
+
+
 def render_secondary_script_data():
     """Generate only the existing native desktop enhancement destinations."""
     import json
@@ -78,13 +88,13 @@ def sync_discover_secondary(secondary):
         # Discover enters the canonical native Research workspace even on first
         # paint and without JavaScript. Preserve the legacy hash as an addressable
         # route, and keep the separate offline builder on its bundled hash view.
-        href = "research.html" if key == "papers" else route.removeprefix("index.html")
+        href = secondary_destination_href("", key, route, True).removeprefix("index.html")
         return ('<a class="nav-link" data-' + kind + '="' + key +
                 '" href="' + href + '"' +
                 alias + attrs + '>' + inner + '</a>')
     return pattern.sub(replace, secondary)
 
-def render_secondary_nav(prefix, current=None):
+def render_secondary_nav(prefix, current=None, *, canonical_research=False):
     """Script-free desktop disclosure using Discover's canonical secondary routes.
 
     On a page that is itself a secondary destination, expose its current
@@ -97,7 +107,7 @@ def render_secondary_nav(prefix, current=None):
         '><summary>More sections</summary>'
         '<div class="site-chrome__more-links">'
         + "".join(
-            '<a href="' + prefix + route + '"' +
+            '<a href="' + secondary_destination_href(prefix, key, route, canonical_research) + '"' +
             (' aria-current="location"' if key == current else '') +
             (' download' if route == "downloads/Atlas_Demo_Offline.html" else '') +
             '>' + escape(label) + '</a>'
@@ -106,7 +116,7 @@ def render_secondary_nav(prefix, current=None):
         '</div></details>'
     )
 
-def render_mobile_secondary_nav(prefix, current=None):
+def render_mobile_secondary_nav(prefix, current=None, *, canonical_research=False):
     """The same eight script-free links in the native mobile drawer."""
     assert prefix in ("", "../")
     assert current is None or current in {key for key, _, _, _ in SECONDARY_DESTINATIONS}
@@ -115,7 +125,7 @@ def render_mobile_secondary_nav(prefix, current=None):
         '><summary>More sections</summary>'
         '<div class="site-mobile-chrome__more-links">'
         + "".join(
-            '<a href="' + prefix + route + '"' +
+            '<a href="' + secondary_destination_href(prefix, key, route, canonical_research) + '"' +
             (' aria-current="location"' if key == current else '') +
             (' download' if route == "downloads/Atlas_Demo_Offline.html" else '') +
             '>' + escape(label) + '</a>'
@@ -232,7 +242,7 @@ def render_directory_nav(prefix, selected, *, mobile_classes="directory-mobile-t
                          search_classes="site-mobile-chrome__search", icon_classes="site-mobile-chrome__search-icon",
                          search_label_classes="site-mobile-chrome__search-placeholder",
                          desktop_classes="site-chrome term-nav", labeled=True, current_kind="page", page_label=None, mobile_brand=False, native_secondary=False, mobile_secondary=False, secondary_current=None, topbar_title=None, rail_bottom=False,
-                         include_search=True, mobile_only=False):
+                         include_search=True, mobile_only=False, canonical_research=False):
     """One script-free site header, with only page-specific shell classes configurable."""
     assert prefix in ("", "../")
     assert selected is None or selected in {name for _, name in DESTINATIONS}
@@ -256,13 +266,13 @@ def render_directory_nav(prefix, selected, *, mobile_classes="directory-mobile-t
         '<details class="' + details_classes + '" id="' + details_id + '">'
         '<summary class="' + toggle_classes + '" aria-label="Toggle navigation"><span aria-hidden="true">☰</span></summary>'
         '<nav class="' + menu_classes + '" aria-label="AI Updates sections">' + mobile_wordmark + links +
-        (render_mobile_secondary_nav(prefix, secondary_current) if mobile_secondary else '') + '</nav></details>' + title +
+        (render_mobile_secondary_nav(prefix, secondary_current, canonical_research=canonical_research) if mobile_secondary else '') + '</nav></details>' + title +
         mobile_search + '</div>'
     )
     desktop = (
         '<nav class="' + desktop_classes + '" aria-label="AI Updates primary navigation">'
         + brand + '<div class="site-chrome__links">' + links + '</div>' +
-        (render_secondary_nav(prefix, secondary_current) if native_secondary else '') +
+        (render_secondary_nav(prefix, secondary_current, canonical_research=canonical_research) if native_secondary else '') +
         (render_static_rail_bottom(prefix) if rail_bottom else '') + '</nav>'
     )
     return mobile if mobile_only else mobile + desktop
@@ -342,6 +352,7 @@ def render_standalone_nav(path):
         page_label=page_title, topbar_title=page_title,
         mobile_brand=True, native_secondary=True, mobile_secondary=True,
         secondary_current=secondary_current, rail_bottom=True,
+        canonical_research=True,
     )
     # All native and reference rails now use the same first-paint component
     # boundary. Keep each page's article landmark outside this navigation.
@@ -457,15 +468,13 @@ def render_discover_mobile():
         mobile_classes="site-mobile-chrome discover-mobile-chrome",
         details_id="discover-mobile-nav",
         page_label="Discover", mobile_brand=True, mobile_secondary=True,
-        include_search=False, mobile_only=True,
+        include_search=False, mobile_only=True, canonical_research=True,
     )
     assert mobile.count('aria-label="Toggle navigation"') == 1
-    assert mobile.count('href="index.html#/papers">Research library') == 1
+    assert mobile.count('href="research.html">Research library') == 1
     return (mobile.replace('aria-label="Toggle navigation"',
                            'aria-label="Toggle navigation · Discover"', 1)
-                  .replace('href="index.html#/', 'href="#/')
-                  .replace('href="#/papers">Research library',
-                           'href="research.html">Research library'))
+                  .replace('href="index.html#/', 'href="#/'))
 
 
 def normalize_discover_sidebar(html, term_count, tech_count):

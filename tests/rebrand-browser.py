@@ -60,6 +60,33 @@ with sync_playwright() as p:
           and page.locator('main .site-static-fallback a[href="technology/index.html"]').count() == 1
           and not page.locator('#load-status').is_visible()
           and not page.locator('.catalog-badge').is_visible())
+    # Cross-page navigation must enter native Research before scripts run:
+    # inspect real static links and navigate at mobile/desktop widths.
+    for width in (390, 1280):
+        page.set_viewport_size({'width':width,'height':900})
+        for theme in ('light', 'dark'):
+            page.emulate_media(color_scheme=theme)
+            for source, prefix in (('whats-new.html', ''), ('playbooks.html', ''),
+                                   ('research.html', ''), ('terms/index.html', '../'),
+                                   ('technology/index.html', '../')):
+                page.goto(base + source)
+                menu = ('details.site-mobile-chrome__more' if width <= 650
+                        else 'details.site-chrome__more')
+                entry = page.locator(menu + ' a').filter(has_text='Research library')
+                check(f'{source} {width}px {theme} script-free Research uses canonical route',
+                      entry.count() == 1 and entry.get_attribute('href') == prefix + 'research.html')
+                if theme == 'dark' and ((width == 390 and source == 'terms/index.html') or
+                                        (width == 1280 and source == 'whats-new.html')):
+                    if width <= 650:
+                        page.locator('details.site-mobile-chrome__nav > summary').click()
+                    page.locator(menu + ' > summary').click()
+                    page.screenshot(path=str(out / f'canonical-research-before-{width}.png'))
+                    entry.click()
+                    check(f'{source} {width}px dark script-free Research actually opens',
+                          page.url.split('#')[0].endswith('/research.html')
+                          and page.locator('#scriptfree-research-catalog').is_visible())
+                    page.screenshot(path=str(out / f'canonical-research-after-{width}.png'))
+    page.emulate_media(color_scheme='light')
     page.goto(base)
 
     # All native page families must use the same readable OS-dark palette even

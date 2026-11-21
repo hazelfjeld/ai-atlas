@@ -51,8 +51,8 @@ class SecondaryNavigationTests(unittest.TestCase):
         ):
             with self.subTest(route=route):
                 html = (ROOT / route).read_text(encoding="utf-8")
-                desktop = render_secondary_nav(prefix, key)
-                mobile = render_mobile_secondary_nav(prefix, key)
+                desktop = render_secondary_nav(prefix, key, canonical_research=True)
+                mobile = render_mobile_secondary_nav(prefix, key, canonical_research=True)
                 self.assertIn(desktop, html)
                 self.assertIn(mobile, html)
                 self.assertIn('<details class="site-chrome__more" open>', desktop)

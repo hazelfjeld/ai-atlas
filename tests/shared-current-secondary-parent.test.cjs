@@ -84,7 +84,7 @@ test('shared Research link hydration routes live page families to one native wor
   assert.ok(read('index.html').includes('data-view="papers" href="research.html"'));
   assert.ok(read('index.html').includes('href="research.html">Research library</a>'));
   assert.ok(!read('index.html').includes('href="#/papers">Research library</a>'));
-  assert.ok(read('terms/index.html').includes('href="../index.html#/papers"'));
+  assert.ok(read('terms/index.html').includes('href="../research.html"'));
   const offline=read('downloads/Atlas_Demo_Offline.html');
   assert.ok(offline.includes('href="#/papers">Open the library'));
   assert.ok(offline.includes("window.ATLAS_OFFLINE?'#/papers':'research.html'"));
@@ -161,7 +161,7 @@ test('build-time Discover Research navigation is canonical before JavaScript and
     'legacy hash route still has the same data-view for selection');
   assert.match(live,/href="research\.html">Research library<\/a>/,
     'mobile Research is native even with JavaScript disabled');
-  assert.match(generator,/href = "research\.html" if key == "papers"/,
+  assert.match(generator,/secondary_destination_href\("", key, route, True\)/,
     'build must preserve the canonical link instead of regenerating the hash alias');
   assert.match(generator,/href="research\.html">Research library/,
     'mobile generator must create the canonical link');
