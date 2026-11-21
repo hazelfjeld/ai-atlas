@@ -371,7 +371,7 @@
       "published_at": "2026-11-21T14:28:51.327Z"
     }
   ],
-  "last_successful_publish_at": "2026-11-20T15:15:36Z",
-  "status": "edition_revision_1_pending_production_verification",
-  "coverage_note": "2026-11-21 revision 1: source-reviewed batch staged with 14 reports; exact Cloudflare/GitHack/hosted-browser verification pending. November 20 remains the last certified public edition. Ten technology/term proposals deferred."
+  "last_successful_publish_at": "2026-11-21T14:46:02Z",
+  "status": "edition_revision_1_production_verified",
+  "coverage_note": "2026-11-21 revision 1 now production-verified: 14 source-attributed reports, 13 first published before the edition date and one on November 21; partial coverage, one metadata lookup failure, five technology and five terminology proposals remain deferred. No unreviewed catalog additions."
 }

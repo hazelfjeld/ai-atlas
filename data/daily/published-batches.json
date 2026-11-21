@@ -1743,8 +1743,8 @@
       "source_batch_bytes": 54922,
       "edition_date": "2026-11-21",
       "validation_result": "independent_sha256_utf8_bytes_counts_unique_source_ids_prior_receipt_dedup_primary_sources_publication_dates_and_editorial_attribution_review",
-      "status": "partially_published_with_10_deferred_catalog_proposals_pending_production_verification",
-      "publication_outcome": "immutable_revision_1_pending_production_verification",
+      "status": "partially_published_with_10_deferred_catalog_proposals",
+      "publication_outcome": "immutable_revision_1_cloudflare_http_browser_and_githack_verified",
       "publication_edition": "2026-11-21-v1",
       "accepted_news_ids": [
         "ai-news-inkling-2-mini-2026-11-20",
@@ -1801,15 +1801,29 @@
         "catalog_deferred": 10,
         "technology_updated": 0
       },
-      "review_notes": "14 independently reviewed source-attributed reports (3 first-party developer/privacy releases, 3 Reuters reports, 8 arXiv preprints); 11 reports published before Nov 21, 1 same-day, with catches dated explicitly. Benchmark outcomes are author claims. One arXiv metadata API failure remains declared. Five technologies and five terms deferred pending dedup and licensing.",
+      "review_notes": "14 independently reviewed source-attributed reports (3 first-party developer/privacy releases, 3 Reuters reports, 8 arXiv preprints): 13 published before November 21, one first reported November 21. All retain original source dates. Benchmark results are attributed author claims. One arXiv metadata API failure disclosed; five technologies and five terms deferred pending canonical deduplication and licensing.",
       "publication_history": [
         {
           "edition": "2026-11-21-v1",
           "status": "pending_production_verification",
           "note": "Independently source-reviewed and SHA-256-validated staged edition; static archive and receipt prepared on main, exact-host production checks pending.",
           "prepared_at": "2026-11-21T14:28:51.327Z"
+        },
+        {
+          "edition": "2026-11-21-v1",
+          "status": "cloudflare_http_browser_and_githack_verified",
+          "note": "Exact main 94eaa32354a4613a8b0a94f0e64d4aa2901296c8 passed the catalog/GitHack workflow 44914700253 (430 Node tests, zero failures; catalog integrity, deterministic generation, offline reproducibility and exact-revision GitHack parity), and Cloudflare workflow 44914700292 on November 21, 2026 (allowlisted local hosted-browser suite across responsive sizes and themes, exact tested-artifact deployment, production HTTP/asset/caching checks, navigation, Quiz and Match browser verification). The production workflow completed successfully at 2026-11-21T14:46:02Z; direct independent reopening of the exact dated query permalink through external web search was unavailable. Immutable edition 2026-11-21-v1 SHA-256 51046554bd5a085599322f88c535fc6f30602d78f74771fbb39454e749ce4416, 26,353 UTF-8 bytes.",
+          "verified_at": "2026-11-21T14:46:02Z"
         }
-      ]
+      ],
+      "production_verified_at": "2026-11-21T14:46:02Z",
+      "production_verified_revision": 1,
+      "last_verified_at": "2026-11-21T14:46:02Z",
+      "last_verified_public_url": "https://aiupdates.app/whats-new.html?date=2026-11-21&revision=1",
+      "production_commit": "94eaa32354a4613a8b0a94f0e64d4aa2901296c8",
+      "production_workflow_run_id": 44914700292,
+      "githack_workflow_run_id": 44914700253,
+      "verification_scope": "Exact main 94eaa32354a4613a8b0a94f0e64d4aa2901296c8 passed the catalog/GitHack workflow 44914700253 (430 Node tests, zero failures; catalog integrity, deterministic generation, offline reproducibility and exact-revision GitHack parity), and Cloudflare workflow 44914700292 on November 21, 2026 (allowlisted local hosted-browser suite across responsive sizes and themes, exact tested-artifact deployment, production HTTP/asset/caching checks, navigation, Quiz and Match browser verification). The production workflow completed successfully at 2026-11-21T14:46:02Z; direct independent reopening of the exact dated query permalink through external web search was unavailable. Immutable edition 2026-11-21-v1 SHA-256 51046554bd5a085599322f88c535fc6f30602d78f74771fbb39454e749ce4416, 26,353 UTF-8 bytes."
     }
   ]
 }

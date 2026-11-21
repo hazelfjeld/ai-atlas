@@ -2,7 +2,10 @@
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),crypto=require('node:crypto');
 const h=fs.readFileSync('whats-new.html','utf8'),r=fs.readFileSync('research.html','utf8'),c=fs.readFileSync('site-chrome.css','utf8'),j=fs.readFileSync('checkpoint.js','utf8');
 const manifest=JSON.parse(fs.readFileSync('data/daily/index.json','utf8'));
-const entry=manifest.editions.find(x=>x.date==='2026-11-20'&&x.revision===1);
+const receipts=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8')).receipts;
+const certified=receipts.filter(r=>r.production_verified_at&&r.publication_outcome.endsWith('_verified'));
+const publishedEdition=certified.at(-1).publication_edition;
+const entry=manifest.editions.find(x=>x.path==='data/daily/editions/'+publishedEdition+'.json');
 const raw=fs.readFileSync(entry.path),edition=JSON.parse(raw.toString('utf8'));
 const papers=JSON.parse(fs.readFileSync('data/papers-01.json','utf8'));
 const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
@@ -17,7 +20,15 @@ test('script-free news headlines come from a verified immutable edition',()=>{
   assert.ok(html.includes(esc(row.summary)));
   assert.ok(html.includes('Source published '+row.publication_date));
  }
- for(const date of ['2026-11-20','2026-11-19','2026-11-18'])assert.ok(html.includes('href="data/daily/editions/'+date+'-v1.json"'));
+ const certifiedPaths=new Set(certified.map(r=>'data/daily/editions/'+r.publication_edition+'.json'));
+ const newestByDate=new Map();
+ for(const item of manifest.editions.filter(x=>certifiedPaths.has(x.path))){
+  const old=newestByDate.get(item.date);
+  if(!old||item.revision>old.revision)newestByDate.set(item.date,item);
+ }
+ const expected=[...newestByDate.values()].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,3);
+ for(const item of expected)assert.ok(html.includes('href="'+item.path+'"'));
+ assert.equal(expected.length,3,'Three certified native archive links remain available');
  assert.ok(html.includes('href="data/daily/index.json"'));
  assert.match(h,/html\.atlas-daily-ready #scriptfree-daily-archive\{display:none!important\}/);
 });
