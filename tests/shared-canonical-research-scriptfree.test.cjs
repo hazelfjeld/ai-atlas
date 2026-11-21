@@ -33,10 +33,14 @@ test('shared generator, legacy details and bundled offline research routes remai
   assert.ok(generator.includes('canonical_research=(path == \'technology/index.html\')') === false,
     'technology landing switch is selected by the SEO builder, not duplicated in the nav source');
   assert.ok(read('scripts/build_seo.py').includes("render_directory_nav(prefix, 'Technology profiles', canonical_research=True"));
-  assert.ok(read('scripts/build_term_pages.py').includes("canonical_research=(path == 'terms/index.html')"));
+  assert.ok(read('scripts/build_term_pages.py').includes('canonical_research=True'),
+    'Concept profiles and directory generate the same native Research destination');
   for (const file of ['terms/MLD-1179-structured-output.html']) {
-    assert.ok(read(file).includes('href="../index.html#/papers"'),
-      file + ' retains the original generated detail link until its whole family is rebuilt');
+    const page = read(file);
+    assert.equal((page.match(/href="\.\.\/research\.html">Research library<\/a>/g) || []).length, 2,
+      file + ' uses the canonical native Research page in both navigation landmarks');
+    assert.ok(!page.includes('href="../index.html#/papers"'),
+      file + ' must not need JavaScript to choose the Research layout');
   }
   const offline = read('downloads/Atlas_Demo_Offline.html');
   assert.ok(offline.includes('href="#/papers">Research library</a>'));
