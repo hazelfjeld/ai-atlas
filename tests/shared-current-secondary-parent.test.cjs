@@ -51,6 +51,8 @@ test('shared Research link hydration routes live page families to one native wor
   assert.equal(source.split(a).length,2);
   assert.equal(source.split(b).length,2);
   assert.ok(source.includes('syncCanonicalResearchEntry();'), 'shared post-chrome handler runs after mobile links are created');
+  const nativeStart=source.indexOf("  const chrome = document.querySelector('.site-mobile-chrome');");
+  assert.ok(nativeStart>0 && source.slice(Math.max(0,nativeStart-320),nativeStart).includes('syncCanonicalResearchEntry();'), 'Discover normalization runs before native-only early return');
   const helper=source.split(a)[1].split(b)[0];
   function exercise(home, offline=false){
     const targets=[

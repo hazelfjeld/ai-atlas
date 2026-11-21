@@ -2317,6 +2317,10 @@ if (typeof window !== 'undefined' && window.addEventListener) {
 /* Use the existing canonical selected link as the standalone workspace
    breadcrumb, matching Discover without introducing duplicate navigation. */
 document.addEventListener('DOMContentLoaded', () => {
+  // Discover has no native .site-mobile-chrome element. Normalize its
+  // script-free navigation before the early return, then again for generated
+  // native menus that are appended during this same hydration callback.
+  syncCanonicalResearchEntry();
   const chrome = document.querySelector('.site-mobile-chrome');
   if (!chrome) return;
   const active = document.querySelector('.site-chrome__links a[aria-current]');
