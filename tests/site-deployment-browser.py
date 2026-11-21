@@ -61,6 +61,14 @@ with sync_playwright() as p:
               early.locator('#catalog-loading').count() == 1)
         early.locator('#global-query').fill('preload search')
         early.locator('#global-query').press('Enter')
+        # Assigning a fragment is synchronous, but browsers dispatch hashchange
+        # asynchronously. Wait for the REAL shared prehydration handler before
+        # asserting its title, rather than racing it on faster local Workers.
+        # Keep both the canonical route and accessible workspace title required.
+        early.wait_for_function("""() =>
+            location.hash === '#/search?q=preload%20search' &&
+            document.getElementById('breadcrumb')?.textContent?.trim() === 'Search AI Updates'
+        """, timeout=5000)
         check('shared early search route before catalog hydration ' + str(early_width),
               early.evaluate('location.hash') == '#/search?q=preload%20search'
               and early.locator('#breadcrumb').text_content() == 'Search AI Updates')
