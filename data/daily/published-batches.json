@@ -1733,6 +1733,83 @@
       "production_workflow_run_id": 44759028003,
       "githack_workflow_run_id": 44759028287,
       "verification_scope": "Exact main e6e8a94abb72fd3ba53fe3632684e88249a37c29 passed catalog/GitHack workflow 44759028287 (392 Node tests, zero failures; deterministic generation, offline reproducibility, GitHack parity) and Cloudflare production workflow 44759028003 on November 20, 2026: exact-artifact deployment, production HTTP/asset-revision checks across workers.dev, aiupdates.app and www.aiupdates.app, 69 hosted site-browser checks and 40 Games checks. The 16 staging batches were independently rehashed and reconciled with receipts; 2026-11-20-v1 immutable edition SHA-256 e17eb7eade556b3011bea6d2da3d26798f0e9168a3ec929fe2b7ed4bf30713ae and 25,287 UTF-8 bytes verified. The live archive rendered in hosted Chromium; direct independent opening of the exact dated query permalink was unavailable."
+    },
+    {
+      "batch_id": "atlas-daily-20261121-20261121141437554-source-review-a",
+      "source_branch": "atlas-daily-staging",
+      "source_commit": "e7a94043ba9d2237bb86300a330178a1d136bb1a",
+      "source_batch_path": "daily-queue/batches/2026-11-21-atlas-daily-20261121-20261121141437554-source-review-a.json",
+      "source_batch_sha256": "4cfd97f0d01165e5b291ed49b265d20e72fefe4652dee1f4024e6abb2b9cc5f5",
+      "source_batch_bytes": 54922,
+      "edition_date": "2026-11-21",
+      "validation_result": "independent_sha256_utf8_bytes_counts_unique_source_ids_prior_receipt_dedup_primary_sources_publication_dates_and_editorial_attribution_review",
+      "status": "partially_published_with_10_deferred_catalog_proposals_pending_production_verification",
+      "publication_outcome": "immutable_revision_1_pending_production_verification",
+      "publication_edition": "2026-11-21-v1",
+      "accepted_news_ids": [
+        "ai-news-inkling-2-mini-2026-11-20",
+        "ai-news-tml-d24-variable-loop-model-2026-11-20",
+        "ai-news-signal-os-agent-screen-privacy-2026-11-20",
+        "ai-news-un-lethal-autonomy-talks-2026-11-21",
+        "ai-news-bessent-reports-us-china-military-ai-humans-2026-11-20",
+        "ai-news-us-foreign-ai-datacenter-tax-threat-2026-11-20",
+        "ai-news-automaster-skill-guided-posttraining-2611-26510",
+        "ai-news-hisa-hidden-feature-sparse-attention-2611-26363",
+        "ai-news-dloop-latent-refinement-diffusion-lms-2611-26275",
+        "ai-news-multiturn-safeguarding-distributed-cues-2611-26009",
+        "ai-news-xing-audio-nvvasr-vocalizations-2611-26000",
+        "ai-news-agentrobocritic-action-level-robot-analysis-2611-26613",
+        "ai-news-safi-vision-language-action-stop-safely-2611-26239",
+        "ai-news-anytime-valid-inference-alignment-tests-2611-26413"
+      ],
+      "source_news_ids": [
+        "ai-news:inkling-2-mini:2026-11-20",
+        "ai-news:tml-d24-variable-loop-model:2026-11-20",
+        "ai-news:signal-os-agent-screen-privacy:2026-11-20",
+        "ai-news:un-lethal-autonomy-talks:2026-11-21",
+        "ai-news:bessent-reports-us-china-military-ai-humans:2026-11-20",
+        "ai-news:us-foreign-ai-datacenter-tax-threat:2026-11-20",
+        "ai-news:automaster-skill-guided-posttraining:2611.26510",
+        "ai-news:hisa-hidden-feature-sparse-attention:2611.26363",
+        "ai-news:dloop-latent-refinement-diffusion-lms:2611.26275",
+        "ai-news:multiturn-safeguarding-distributed-cues:2611.26009",
+        "ai-news:xing-audio-nvvasr-vocalizations:2611.26000",
+        "ai-news:agentrobocritic-action-level-robot-analysis:2611.26613",
+        "ai-news:safi-vision-language-action-stop-safely:2611.26239",
+        "ai-news:anytime-valid-inference-alignment-tests:2611.26413"
+      ],
+      "deferred_news_ids": [],
+      "deferred_catalog_proposal_ids": [
+        "tech-proposal:inkling-2-mini:2026-11-21",
+        "tech-proposal:tml-d24-varloop-research:2026-11-21",
+        "tech-proposal:hisa-feature-sparse-attention:2026-11-21",
+        "tech-proposal:automaster-skill-ft:2026-11-21",
+        "tech-proposal:xing-audio-nvvasr:2026-11-21",
+        "term-proposal:looped-transformer:2026-11-21",
+        "term-proposal:hidden-dimension-sparse-attention:2026-11-21",
+        "term-proposal:nonverbal-vocalization-recognition:2026-11-21",
+        "term-proposal:state-aware-fallback-imitation:2026-11-21",
+        "term-proposal:anytime-valid-answer-stopping:2026-11-21"
+      ],
+      "rejected_ids": [],
+      "counts": {
+        "news_published": 14,
+        "technology_added": 0,
+        "term_added": 0,
+        "corrections": 0,
+        "news_deferred": 0,
+        "catalog_deferred": 10,
+        "technology_updated": 0
+      },
+      "review_notes": "14 independently reviewed source-attributed reports (3 first-party developer/privacy releases, 3 Reuters reports, 8 arXiv preprints); 11 reports published before Nov 21, 1 same-day, with catches dated explicitly. Benchmark outcomes are author claims. One arXiv metadata API failure remains declared. Five technologies and five terms deferred pending dedup and licensing.",
+      "publication_history": [
+        {
+          "edition": "2026-11-21-v1",
+          "status": "pending_production_verification",
+          "note": "Independently source-reviewed and SHA-256-validated staged edition; static archive and receipt prepared on main, exact-host production checks pending.",
+          "prepared_at": "2026-11-21T14:28:51.327Z"
+        }
+      ]
     }
   ]
 }

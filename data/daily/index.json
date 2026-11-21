@@ -361,9 +361,17 @@
       "sha256": "e17eb7eade556b3011bea6d2da3d26798f0e9168a3ec929fe2b7ed4bf30713ae",
       "bytes": 25287,
       "published_at": "2026-11-20T14:54:12.109Z"
+    },
+    {
+      "date": "2026-11-21",
+      "revision": 1,
+      "path": "data/daily/editions/2026-11-21-v1.json",
+      "sha256": "51046554bd5a085599322f88c535fc6f30602d78f74771fbb39454e749ce4416",
+      "bytes": 26353,
+      "published_at": "2026-11-21T14:28:51.327Z"
     }
   ],
   "last_successful_publish_at": "2026-11-20T15:15:36Z",
-  "status": "edition_revision_1_production_verified",
-  "coverage_note": "2026-11-20 v1 — 15 source-reviewed dated reports (November 14–19), 15 original sources checked, one failed arXiv metadata endpoint; 6 technology and 4 terminology proposals deferred for canonical/alias/license review. Partial coverage. Exact main e6e8a94abb72fd3ba53fe3632684e88249a37c29 passed GitHack (run 44759028287) and Cloudflare/hosted-browser production verification (run 44759028003) on November 20; hosted archive rendered, independent exact dated permalink opening unavailable. Last verified at 2026-11-20T15:15:36Z."
+  "status": "partial_coverage_with_latest_edition_pending_production_verification",
+  "coverage_note": "Latest 2026-11-21 edition contains 14 publisher-reviewed, source-attributed news reports and 10 deferred catalog proposals. Production-browser verification pending; prior successful publish clock remains unchanged."
 }
