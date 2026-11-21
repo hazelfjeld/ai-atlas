@@ -696,6 +696,10 @@ with sync_playwright() as p:
     check('Discover desktop More closes on outside pointer without navigating',
           not page.locator('#additional-navigation').evaluate('(el) => el.open'))
     page.locator('#additional-navigation summary').click()
+    page.locator('#global-query').focus()
+    check('Discover desktop More dismisses when keyboard focus moves to shared search',
+          not page.locator('#additional-navigation').evaluate('(el) => el.open'))
+    page.locator('#additional-navigation summary').click()
     page.locator('#navigation a[href="#/safety"]').click()
     page.wait_for_function("document.querySelector('#navigation a[data-view=safety]')?.getAttribute('aria-current') === 'page'")
     check('secondary workspace navigation keeps disclosure expanded',
@@ -826,6 +830,10 @@ with sync_playwright() as p:
               and more.locator('a').last.get_attribute('href') == 'downloads/Atlas_Demo_Offline.html')
         page.locator('.site-mobile-chrome__title').click()
         check('shared native desktop More closes on outside pointer on ' + route,
+              not more.evaluate('(el) => el.open'))
+        more.locator('summary').click()
+        desktop_search.locator('input').focus()
+        check('shared native desktop More closes when keyboard leaves for search on ' + route,
               not more.evaluate('(el) => el.open'))
 
         if route == 'hardware-review.html':

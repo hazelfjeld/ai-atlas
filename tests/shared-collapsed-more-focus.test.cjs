@@ -91,7 +91,12 @@ test('browser handoff and offline demo retain the shared responsive focus fix', 
 });
 
 
-/* One pointer-dismissal behavior for native and Discover desktop More menus. */
+/* One shared pointer/keyboard dismissal policy for native and Discover rails. */
+const helperStart = script.indexOf('function dismissInactiveDesktopMore(');
+const helperEnd = script.indexOf("\\ndocument.addEventListener('pointerdown'", helperStart);
+assert.ok(helperStart >= 0 && helperEnd > helperStart);
+const sharedDismissSource = script.slice(helperStart, helperEnd);
+assert.match(script, /document\\.addEventListener\\('focusin', event => \\{\\s*dismissInactiveDesktopMore\\(event\\.target\\)/);
 const outsideBlock = script.split('/* atlas-shared-desktop-more-dismiss:begin */')[1]
   ?.split('/* atlas-shared-desktop-more-dismiss:end */')[0];
 function exerciseOutsideDismiss(width, active = 'article') {
@@ -127,10 +132,12 @@ function exerciseOutsideDismiss(width, active = 'article') {
       return [discover, native].filter(x => x.open);
     },
   };
-  pointer = vm.runInNewContext('(function(event) {' + outsideBlock + '\n})',
+  const events = vm.runInNewContext(sharedDismissSource +
+    '\n({ pointer:(event)=>{' + outsideBlock + '\n}, keyboard:(event)=>dismissInactiveDesktopMore(event.target) })',
     {window:{innerWidth:width},document:doc});
+  pointer = events.pointer;
   assert.equal(typeof pointer, 'function');
-  return {discover, native, focused, pointer};
+  return {discover, native, focused, pointer, keyboard:events.keyboard};
 }
 test('outside pointer closes shared desktop More without blocking the destination', () => {
   const state = exerciseOutsideDismiss(1280);
@@ -172,4 +179,25 @@ test('active secondary destination remains visible on outside desktop content in
   state.native.hasCurrent = false;
   state.pointer({target:{}});
   assert.equal(state.native.open, false, 'inactive secondary disclosure dismisses normally');
+});
+
+test('keyboard focus leaving native and Discover More closes only inactive desktop disclosures', () => {
+  const state = exerciseOutsideDismiss(1280);
+  state.keyboard({target:{inside:state.native}});
+  assert.equal(state.native.open, true, 'focus within a disclosure must retain it');
+  assert.equal(state.discover.open, false, 'other inactive disclosure is dismissed');
+  state.keyboard({target:{}});
+  assert.equal(state.native.open, false, 'Tabbing to workspace content dismisses inactive More');
+  assert.deepEqual(state.focused, [], 'focus stays on the newly focused destination');
+});
+test('keyboard focus preserves active secondary section and script-free/mobile behavior', () => {
+  const desktop = exerciseOutsideDismiss(1280);
+  desktop.native.hasCurrent = true;
+  desktop.keyboard({target:{}});
+  assert.equal(desktop.native.open, true, 'current secondary section stays revealed');
+  assert.equal(desktop.discover.open, false);
+  const mobile = exerciseOutsideDismiss(390);
+  mobile.keyboard({target:{}});
+  assert.equal(mobile.native.open, true);
+  assert.equal(mobile.discover.open, true);
 });

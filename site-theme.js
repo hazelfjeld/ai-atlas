@@ -393,6 +393,21 @@ document.addEventListener('click', event => {
   if (!event.target?.closest?.('a.site-mobile-chrome__search[href]')) return;
   rememberSearchFocus();
 });
+// The same desktop More dismissal policy applies to pointer and keyboard
+// navigation across Discover and every native page. Preserve an active
+// secondary destination so its section indication remains visible.
+function dismissInactiveDesktopMore(target, restoreFocusedSummary = false) {
+  if (typeof window === 'undefined' || window.innerWidth <= 650) return;
+  document.querySelectorAll(
+    'details.site-chrome__more[open], details#additional-navigation[open]'
+  ).forEach(menu => {
+    if (menu.contains(target)) return;
+    if (menu.querySelector('.site-chrome__more-links a[aria-current], .nav-more-links a[aria-current]')) return;
+    const hadFocus = restoreFocusedSummary && menu.contains(document.activeElement);
+    menu.open = false;
+    if (hadFocus) menu.querySelector(':scope > summary')?.focus({preventScroll:true});
+  });
+}
 document.addEventListener('pointerdown', (event) => {
   // A modal drawer deliberately makes the background inert. An outside tap
   // dismisses it first; return keyboard/AT focus to the still-visible toggle.
@@ -401,19 +416,15 @@ document.addEventListener('pointerdown', (event) => {
     closeSharedDrawers({restoreFocus:true});
   }
   /* atlas-shared-desktop-more-dismiss:begin */
-  if (typeof window === 'undefined' || window.innerWidth <= 650) return;
-  document.querySelectorAll(
-    'details.site-chrome__more[open], details#additional-navigation[open]'
-  ).forEach(menu => {
-    if (menu.contains(event.target)) return;
-    // Keep the current secondary destination visibly highlighted on Research
-    // and Discover. The user can still collapse it deliberately by summary.
-    if (menu.querySelector('.site-chrome__more-links a[aria-current], .nav-more-links a[aria-current]')) return;
-    const hadFocus = menu.contains(document.activeElement);
-    menu.open = false;
-    if (hadFocus) menu.querySelector(':scope > summary')?.focus({preventScroll:true});
-  });
+  dismissInactiveDesktopMore(event.target, true);
   /* atlas-shared-desktop-more-dismiss:end */
+});
+// When keyboard focus leaves an inactive More disclosure, use the same shared
+// dismissal behavior as an outside pointer. This prevents the expanded rail
+// from persisting while tabbing through the page; script-free <details> and
+// the selected secondary destination keep their existing behavior.
+document.addEventListener('focusin', event => {
+  dismissInactiveDesktopMore(event.target);
 });
 
 /* Discover makes its open drawer modal to assistive technology. The native
