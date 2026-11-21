@@ -29,3 +29,12 @@ test('Catalog text cannot inject executable markup into discovery output',()=>{
   assert.ok(html.includes('&lt;script&gt;'));
   assert.ok(!html.includes('<script>alert(1)</script>'));
 });
+
+test('Live Discover Playbooks CTA matches canonical navigation; offline retains bundled route', () => {
+  const online = D.render(data);
+  const offline = D.render(data, {offline:true});
+  assert.match(online, /<a href="playbooks\.html"><span>Practical playbooks<\/span>/);
+  assert.doesNotMatch(online, /<a href="#\/playbooks"><span>Practical playbooks<\/span>/);
+  assert.match(offline, /<a href="#\/playbooks"><span>Practical playbooks<\/span>/);
+  assert.doesNotMatch(offline, /<a href="playbooks\.html"><span>Practical playbooks<\/span>/);
+});
