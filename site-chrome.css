@@ -1306,3 +1306,23 @@ main.term-shell > footer:not(.site-chrome__footer) a{color:var(--accent,#27664e)
   body:has(> nav.site-chrome.term-nav) > main.term-shell:has(> .breadcrumb-links){padding-top:16px}
 }
 /* atlas-desktop-first-content-alignment:end */
+
+/* atlas-rail-hover-not-current:begin */
+/* In the shared fixed rail, hover and the actual current section must never
+   look like two selected destinations. Older nearly identical translucent
+   hover/current fills made Games appear active on News, Research and Playbooks
+   whenever the pointer remained over that row after navigation. Keep a clear
+   text/underline hover affordance on both Discover and native rails; reserve
+   the filled surface and accent icon for aria-current / .active. */
+@media (min-width:651px){
+  :is(#navigation > .site-chrome__links a.nav-link,
+      .site-chrome .site-chrome__links a):hover:not([aria-current]):not(.active){
+    background:transparent!important;
+    color:#fff!important;
+    text-decoration:underline!important;
+    text-decoration-color:#d9a16f!important;
+    text-decoration-thickness:2px!important;
+    text-underline-offset:4px;
+  }
+}
+/* atlas-rail-hover-not-current:end */

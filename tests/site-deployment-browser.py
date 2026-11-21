@@ -2590,6 +2590,42 @@ with sync_playwright() as p:
                                                    'hardware-review.html', 'games.html'):
                     page.screenshot(path=str(out / f'shared-rail-{theme}-{route.replace("/", "-")}.png'),
                                     full_page=False)
+    # A hovered link is not another selected section. Compare the real pointer
+    # state against the current link across Discover and native page families,
+    # in both themes at tablet and desktop widths. Mobile has no visible rail.
+    for theme in ('light', 'dark'):
+        for width in (768, 1280):
+            page.set_viewport_size({'width': width, 'height': 900})
+            for route in ('index.html#/overview', 'whats-new.html', 'research.html'):
+                page.goto(base + route)
+                page.evaluate("(value) => localStorage.setItem('atlas.theme', value)", theme)
+                page.reload()
+                if route.startswith('index.html'):
+                    root = '#navigation'
+                    hovered = page.locator('#navigation a[href="#/games"]')
+                else:
+                    root = '.site-chrome'
+                    hovered = page.locator('.site-chrome__links a[href="index.html#/games"]')
+                hovered.hover()
+                check('hover never impersonates active section ' + route + ' ' + theme + ' ' + str(width),
+                      page.evaluate("""(rootSelector) => {
+                          const root = document.querySelector(rootSelector);
+                          const hovered = [...root.querySelectorAll('a')].find(
+                              a => a.matches(':hover') && /#\/games$/.test(a.getAttribute('href') || ''));
+                          const active = root.querySelector('a[aria-current]');
+                          if (!hovered || !active || hovered === active) return false;
+                          const hoverStyle = getComputedStyle(hovered);
+                          const activeStyle = getComputedStyle(active);
+                          const hoverTransparent = hoverStyle.backgroundColor === 'rgba(0, 0, 0, 0)';
+                          const marked = hoverStyle.textDecorationLine.includes('underline');
+                          return hoverTransparent && marked
+                              && activeStyle.backgroundColor !== hoverStyle.backgroundColor;
+                      }""", root))
+                if width == 1280:
+                    page.screenshot(path=str(out / ('rail-hover-distinction-' +
+                        route.split('.')[0].replace('/', '-') + '-' + theme + '.png')),
+                        full_page=False)
+
     # Exercise a real Discover -> archive -> About transition at tablet size.
     # Match rail geometry and theme across page families, not only on reload.
     for theme in ('light', 'dark'):
