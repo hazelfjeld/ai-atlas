@@ -62,12 +62,10 @@ function renderNav(){
   // Keep both primary AND secondary mobile destinations synchronized with the
   // canonical desktop rail. A deep-linked secondary section must not look like
   // Discover is still selected or hide its active destination in More sections.
-  const mobileLinks=document.querySelectorAll('#discover-mobile-nav .site-mobile-chrome__menu a[href]:not(.site-mobile-chrome__brand)');
-  const currentHref=nav.querySelector('a.nav-link[aria-current="page"]')?.getAttribute('href');
-  mobileLinks.forEach(link=>{
-    if(link.getAttribute('href')===currentHref)link.setAttribute('aria-current','page');
-    else link.removeAttribute('aria-current');
-  });
+  window.atlasSyncDiscoverMobileSelection?.(
+    document.getElementById('discover-mobile-nav'),
+    nav.querySelector('a.nav-link[aria-current="page"]')
+  );
   const mobileMore=document.querySelector('#discover-mobile-nav details.site-mobile-chrome__more');
   const more=$('additional-navigation');
   // Auto-reveal the active secondary route in both rails. A later primary

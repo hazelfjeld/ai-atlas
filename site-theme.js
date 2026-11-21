@@ -74,6 +74,26 @@ function ensureSharedWorkspaceTitle(chrome, label) {
 
 /* atlas-prehydration-section-state:begin */
 
+// A native page may become the canonical destination for an existing hash
+// workspace (currently Research), so its mobile href can differ from the
+// legacy desktop rail href. Prefer exact hrefs, then the rail's *own* visible
+// label; never maintain another page/alias table. This one helper serves both
+// prehydration and hydrated navigation and keeps only one mobile item current.
+function syncDiscoverMobileSelection(mobileNav, current) {
+  if (!mobileNav) return;
+  const links = [...mobileNav.querySelectorAll(
+    '.site-mobile-chrome__menu a[href]:not(.site-mobile-chrome__brand)')];
+  const href = current?.getAttribute('href');
+  const label = current?.querySelector('span:not(.nav-count)')?.textContent?.trim();
+  const selected = (href && links.find(link => link.getAttribute('href') === href)) ||
+    (label && links.find(link => link.textContent?.trim() === label));
+  links.forEach(link => {
+    if (link === selected) link.setAttribute('aria-current', 'page');
+    else link.removeAttribute('aria-current');
+  });
+}
+window.atlasSyncDiscoverMobileSelection = syncDiscoverMobileSelection;
+
 /* The catalog is loaded asynchronously. A visitor can manually close and
    reopen an auto-revealed More disclosure before app.js starts; record that
    choice in the shared parser-loaded chrome so navigation won't undo it. */
@@ -120,11 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (active) link.setAttribute('aria-current', 'page');
     else link.removeAttribute('aria-current');
   }
-  const target = current?.getAttribute('href');
-  for (const link of mobileNav.querySelectorAll('a[href^="#/"]')) {
-    if (link.getAttribute('href') === target) link.setAttribute('aria-current', 'page');
-    else link.removeAttribute('aria-current');
-  }
+  syncDiscoverMobileSelection(mobileNav, current);
   // Make a directly visited secondary workspace discoverable on both rails
   // just as the hydrated app does, without overriding user-opened disclosures.
   const secondary = !!current?.closest('details.nav-more');

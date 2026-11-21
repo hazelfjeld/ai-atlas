@@ -15,6 +15,7 @@ function makeLink(key, label, secondary = false) {
     '"[^>]*data-view-aliases="([^"]+)"'))?.[1] || '';
   return {
     dataset: {view: key, viewAliases: alias}, attrs, classes,
+    textContent: label,
     classList: {toggle(name, selected) { if (selected) classes.add(name); else classes.delete(name); }},
     getAttribute(name) { return attrs.get(name); },
     setAttribute(name, value) { attrs.set(name, value); },
@@ -29,7 +30,11 @@ function exercise(hash) {
     ['papers','Research library'],['safety','Safety observatory'],
     ['sources','Sources & coverage']];
   const links = labels.map(([key,label])=>makeLink(key,label,['papers','safety'].includes(key)));
-  const mobile = labels.map(([key,label])=>makeLink(key,label));
+  const mobile = labels.map(([key,label])=>{
+    const link=makeLink(key,label);
+    if(key==='papers') link.setAttribute('href','research.html');
+    return link;
+  });
   links[0].setAttribute('aria-current','page');
   mobile[0].setAttribute('aria-current','page');
   const mainMore = {open:false,dataset:{}};
@@ -40,7 +45,10 @@ function exercise(hash) {
     assert.equal(selector,'a[data-view]');return links;
   }};
   const drawer = {
-    querySelectorAll(selector){assert.equal(selector,'a[href^="#/"]');return mobile;},
+    querySelectorAll(selector){
+      assert.equal(selector,'.site-mobile-chrome__menu a[href]:not(.site-mobile-chrome__brand)');
+      return mobile;
+    },
     querySelector(selector){
       if(selector==='details.site-mobile-chrome__more')return mobileMore;
       if(selector===':scope > summary')return toggle;
@@ -104,6 +112,23 @@ test('deep-link prehydration uses the canonical primary or secondary rail and re
   assert.equal(unknown.links[0].attrs.get('aria-current'),'page');
   assert.equal(unknown.cleared,0);
 });
+test('native Research entry remains current when its canonical mobile href differs from the hash rail', () => {
+  const state=exercise('#/papers');
+  const research=state.mobile.find(link=>link.textContent==='Research library');
+  assert.equal(research.getAttribute('href'), 'research.html');
+  assert.equal(research.getAttribute('aria-current'), 'page');
+  assert.equal(state.mobile.filter(link=>link.attrs.has('aria-current')).length,1);
+  state.navigate('#/safety');
+  assert.equal(research.attrs.has('aria-current'),false);
+  state.navigate('#/papers');
+  assert.equal(research.getAttribute('aria-current'),'page');
+  state.navigate('#/overview');
+  assert.equal(research.attrs.has('aria-current'),false);
+  assert.equal(state.mobile.filter(link=>link.attrs.has('aria-current')).length,1);
+  assert.ok(read('app.js').includes('window.atlasSyncDiscoverMobileSelection?.('),
+    'hydrated navigation must reuse the same shared selector');
+});
+
 test('cross-page search opens the real search workspace before catalog hydration', () => {
   const state = exercise('#/search?q=reward%20hacking');
   // The global search is a workspace, not a fake eighth primary rail tab.
