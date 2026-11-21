@@ -53,7 +53,7 @@ function exercise(hash) {
   };
   const nodes = {'navigation':nav,'discover-mobile-nav':drawer,
     'additional-navigation':mainMore,'breadcrumb':title,'page':page,
-    'catalog-loading':{}};
+    'catalog-loading':{}, 'global-query':{getAttribute(name){return name==='aria-label'?'Search AI Updates':null;}}};
   let callback, earlyClick;
   const document = {
     addEventListener(event,fn){
@@ -94,6 +94,24 @@ test('deep-link prehydration uses the canonical primary or secondary rail and re
   assert.equal(unknown.links[0].attrs.get('aria-current'),'page');
   assert.equal(unknown.cleared,0);
 });
+test('cross-page search opens the real search workspace before catalog hydration', () => {
+  const state = exercise('#/search?q=reward%20hacking');
+  // The global search is a workspace, not a fake eighth primary rail tab.
+  assert.equal(state.links.filter(link=>link.attrs.has('aria-current')).length, 0);
+  assert.equal(state.mobile.filter(link=>link.attrs.has('aria-current')).length, 0);
+  assert.equal(state.title.textContent, 'Search AI Updates');
+  assert.equal(state.header.dataset.pageLabel, 'Search AI Updates');
+  assert.equal(state.toggleAttrs.get('aria-label'), 'Toggle navigation · Search AI Updates');
+  assert.equal(state.mainMore.open, false);
+  assert.equal(state.mobileMore.open, false);
+  assert.equal(state.cleared, 1, 'old Discover teaser must not flash on direct search');
+  assert.match(read('research.html'), /href="index\\.html#\\/search"/,
+    'standalone Research really routes into this live search workspace');
+  assert.match(read('technology/TECH-0303-tohoku-aisin-16-nm-stt-mram-edge-ai-soc.html'),
+    /href="\\.\\.\\/index\\.html#\\/search"/,
+    'nested technology pages use the same functional search destination');
+});
+
 test('manual More disclosure ownership is available before catalog hydration', () => {
   const result=exercise('#/safety');
   assert.equal(typeof result.earlyClick,'function');

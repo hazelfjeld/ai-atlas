@@ -1680,21 +1680,26 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!rail || !mobileNav || !route) return;
   const links = [...rail.querySelectorAll('a[data-view]')];
   const current = links.find(link => link.dataset.view === route);
-  if (!current) return; // Unknown/static routes keep the safe original fallback.
+  // Search is an existing functional workspace, but has no primary rail link.
+  // Use the real search field's accessible name; never invent a second route list.
+  const searchLabel = route === 'search'
+    ? document.getElementById('global-query')?.getAttribute('aria-label')?.trim()
+    : '';
+  if (!current && !searchLabel) return; // Unknown routes retain the safe fallback.
   for (const link of links) {
     const active = link === current;
     link.classList.toggle('active', active);
     if (active) link.setAttribute('aria-current', 'page');
     else link.removeAttribute('aria-current');
   }
-  const target = current.getAttribute('href');
+  const target = current?.getAttribute('href');
   for (const link of mobileNav.querySelectorAll('a[href^="#/"]')) {
     if (link.getAttribute('href') === target) link.setAttribute('aria-current', 'page');
     else link.removeAttribute('aria-current');
   }
   // Make a directly visited secondary workspace discoverable on both rails
   // just as the hydrated app does, without overriding user-opened disclosures.
-  if (current.closest('details.nav-more')) {
+  if (current?.closest('details.nav-more')) {
     for (const details of [
       document.getElementById('additional-navigation'),
       mobileNav.querySelector('details.site-mobile-chrome__more'),
@@ -1705,7 +1710,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   }
-  const name = current.querySelector('span:not(.nav-count)')?.textContent?.trim();
+  const name = current?.querySelector('span:not(.nav-count)')?.textContent?.trim() || searchLabel;
   const breadcrumb = document.getElementById('breadcrumb');
   if (name && breadcrumb) breadcrumb.textContent = name;
   const header = document.querySelector('.discover-mobile-chrome');
