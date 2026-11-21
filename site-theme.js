@@ -80,7 +80,11 @@ function ensureSharedWorkspaceTitle(chrome, label) {
 document.addEventListener('click', event => {
   const summary = event.target.closest?.(
     '#additional-navigation > summary, #discover-mobile-nav .site-mobile-chrome__more > summary');
-  if (summary) delete summary.parentElement.dataset.atlasAutoOpened;
+  if (summary) {
+    // A deliberate close or re-open wins over later asynchronous catalog hydration.
+    delete summary.parentElement.dataset.atlasAutoOpened;
+    summary.parentElement.dataset.atlasManualTouched = 'true';
+  }
 });
 /* Native pages expose their active rail destination in static HTML. Discover
    must also reflect a direct hash link before its asynchronous catalog loads;

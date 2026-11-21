@@ -75,7 +75,7 @@ function renderNav(){
   // leaving an explicitly opened More sections menu untouched.
   const syncAutomaticDisclosure=(disclosure,selected)=>{
     if(!disclosure)return;
-    if(selected && !disclosure.open){
+    if(selected && !disclosure.open && disclosure.dataset.atlasManualTouched !== 'true'){
       disclosure.open=true;
       disclosure.dataset.atlasAutoOpened='true';
     }else if(!selected && disclosure.dataset.atlasAutoOpened==='true'){

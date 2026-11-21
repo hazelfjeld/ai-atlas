@@ -110,6 +110,7 @@ test('manual More disclosure ownership is available before catalog hydration', (
       return {parentElement:details};
     }}});
     assert.equal(Object.hasOwn(details.dataset,'atlasAutoOpened'),false);
+    assert.equal(details.dataset.atlasManualTouched,'true');
   }
   assert.equal((read('app.js').match(/document.addEventListener\('click', event => \{/g)||[]).length,0);
 });
@@ -120,4 +121,28 @@ test('first-paint hash fix is exactly shared in the offline demo and does not du
   assert.equal(source.split('/* atlas-prehydration-section-state:begin */').length-1,1);
   assert.equal((read('index.html').match(/id="navigation"/g)||[]).length,1);
   assert.equal((read('index.html').match(/id="discover-mobile-nav"/g)||[]).length,1);
+});
+
+test('manual More choice survives catalog hydration and leaving a secondary route', () => {
+  const app = read('app.js');
+  const body = app.split('const syncAutomaticDisclosure=(disclosure,selected)=>{')[1]
+    ?.split('\n  };')[0];
+  assert.ok(body, 'Retain the canonical disclosure synchronization helper');
+  const sync = vm.runInNewContext('(disclosure,selected) => {' + body + '\n}', {});
+  const state = exercise('#/safety');
+  const menu = state.mobileMore;
+  assert.equal(menu.dataset.atlasAutoOpened, 'true');
+  menu.open = false;
+  state.earlyClick({target:{closest(){return {parentElement:menu};}}});
+  sync(menu, true);
+  assert.equal(menu.open, false, 'hydration cannot undo an intentional close');
+  menu.open = true;
+  sync(menu, false);
+  assert.equal(menu.open, true, 'a deliberate re-open persists after primary navigation');
+  const untouched = {open:true, dataset:{atlasAutoOpened:'true'}};
+  sync(untouched, false);
+  assert.equal(untouched.open, false, 'automatic expansions still collapse');
+  assert.equal(untouched.dataset.atlasAutoOpened, undefined);
+  assert.ok(read('downloads/Atlas_Demo_Offline.html').includes(
+    "if(selected && !disclosure.open && disclosure.dataset.atlasManualTouched !== 'true'){"));
 });
