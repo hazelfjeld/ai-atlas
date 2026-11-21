@@ -46,6 +46,45 @@ with sync_playwright() as p:
     page.on('pageerror', lambda e: errors.append(str(e)))
     page.goto(base)
     page.locator('#navigation a[href="#/games"]').wait_for()
+    # The appearance action belongs to the shared mobile drawer on every page.
+    # Its former dark-rail colors were pale on light menu backgrounds. Check
+    # actual computed contrast in BOTH themes at the narrowest phone widths.
+    for mobile_scheme in ('light', 'dark'):
+        for mobile_width in (320, 390):
+            for mobile_route in ('index.html', 'whats-new.html',
+                                 'research.html', 'playbooks.html',
+                                 'games.html', 'technology/index.html'):
+                contrast_page = browser.new_page(
+                    viewport={'width': mobile_width, 'height': 760},
+                    color_scheme=mobile_scheme, reduced_motion='reduce')
+                contrast_page.add_init_script(
+                    "localStorage.setItem('atlas.theme', '" + mobile_scheme + "')")
+                contrast_page.goto(base + mobile_route)
+                contrast_page.locator(
+                    'details.site-mobile-chrome__nav > summary').click()
+                toggle = contrast_page.locator(
+                    '.site-mobile-chrome__menu > .site-chrome__theme-toggle')
+                toggle.wait_for(state='visible')
+                actual_contrast = toggle.evaluate("""(el) => {
+                    const rgb = value => (value.match(/\d+(?:\.\d+)?/g) || [])
+                      .slice(0, 3).map(n => Number(n)/255)
+                      .map(n => n <= 0.04045 ? n/12.92 : ((n+0.055)/1.055)**2.4);
+                    const luminance = rgb => rgb[0]*.2126 + rgb[1]*.7152 + rgb[2]*.0722;
+                    const style = getComputedStyle(el);
+                    const a = luminance(rgb(style.color));
+                    const b = luminance(rgb(style.backgroundColor));
+                    return (Math.max(a,b)+.05)/(Math.min(a,b)+.05);
+                }""")
+                check('shared mobile appearance contrast ' + mobile_route +
+                      ' ' + mobile_scheme + ' ' + str(mobile_width),
+                      actual_contrast >= 4.5 and
+                      toggle.get_attribute('aria-label') == 'Toggle color theme')
+                if mobile_width == 390 and mobile_route in (
+                        'index.html', 'research.html', 'technology/index.html'):
+                    contrast_page.screenshot(path=str(out / (
+                        'shared-mobile-theme-' + mobile_route.replace('/', '-') +
+                        '-' + mobile_scheme + '.png')))
+                contrast_page.close()
     check('homepage retains original Atlas shell and native Games tab', page.locator('.app-shell').count() == 1)
     # One real submit action now belongs to both search layouts. Discover
     # retains its useful desktop '/' hint, while phone visitors can submit

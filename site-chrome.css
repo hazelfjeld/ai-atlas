@@ -306,9 +306,14 @@ body > .site-mobile-chrome:not([data-page-label]):has(+ .site-chrome .site-chrom
 @media (max-width:650px){
  .site-mobile-chrome__menu > .site-chrome__theme-toggle{
   flex:none;margin-top:14px;padding:10px 12px;
-  border:1px solid #405043;background:#ffffff0c;color:#c5cfc6
+  /* Match the shared drawer surface in light and dark modes. The previous
+     desktop-rail colors made this action unreadable on light mobile menus. */
+  border:1px solid var(--line,#dce1d7);
+  background:var(--soft,#eaf1ea);color:var(--ink,#202b28)
  }
- .site-mobile-chrome__menu > .site-chrome__theme-toggle:hover{background:#374b3c;color:#fff}
+ .site-mobile-chrome__menu > .site-chrome__theme-toggle:hover{
+   background:var(--accent-soft,#dfece2);color:var(--ink,#202b28)
+ }
 }
 @media (prefers-reduced-motion:reduce){
  .site-chrome__theme-toggle{transition:none}
