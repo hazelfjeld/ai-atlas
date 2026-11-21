@@ -226,7 +226,7 @@ test('native Research and demo navigation expose one current secondary route, no
   assert.ok(generator.includes('None if secondary_current else selected'),
     'The common generator must leave Discover clickable, not mark it current on secondary destinations');
   for (const [route, label, href] of [
-    ['research.html', 'Research library', 'index.html#/papers'],
+    ['research.html', 'Research library', 'research.html'],
     ['demo.html', 'Guided professor demo', 'demo.html']
   ]) {
     const html = fs.readFileSync(path.join(__dirname, '..', route), 'utf8');
@@ -680,8 +680,8 @@ test('native desktop rails expose Discover secondary destinations from one share
     'Discover uses the native Research page on first paint; other ordered shared destinations stay identical');
   assert.equal(existing.filter(([href,label]) => label === 'Research library' && href === 'research.html').length,1,
     'Discover keeps one canonical Research entry rather than a second copy');
-  assert.match(generator,/href = "research\.html" if key == "papers"/,
-    'Only the live Discover rendering overrides its legacy hash alias; native routes remain linkable');
+  assert.match(generator,/href = secondary_destination_href\("", key, route, True\)\.removeprefix\("index\.html"\)/,
+    'The Discover and native pages share the canonical destination resolver; legacy deep links remain valid');
   assert.ok(script.includes("desktopRail?.querySelector?.('.site-chrome__links')"));
   assert.ok(script.includes("!desktopRail.querySelector('.site-chrome__more')"),
     'Do not duplicate disclosure on repeated enhancement');
@@ -784,10 +784,11 @@ test('native editorial, archive, technology, research and Games pages keep Disco
   const build = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'build_seo.py'), 'utf8');
   const data = js.split('const sharedSecondarySections = [')[1]?.split('];')[0];
   assert.ok(data, 'Shared secondary destinations must exist');
-  const expected = [...data.matchAll(/\["([^"]+)", "([^"]+)"\]/g)].map(m => [m[1], m[2]]);
+  const expected = [...data.matchAll(/\["([^"]+)", "([^"]+)"\]/g)]
+    .map(m => [m[1] === 'index.html#/papers' ? 'research.html' : m[1], m[2]]);
   assert.equal(expected.length, 8);
   assert.match(home, /<details class="nav-more" id="additional-navigation">/);
-  assert.match(py, /def render_secondary_nav\(prefix, current=None\):/);
+  assert.match(py, /def render_secondary_nav\(prefix, current=None, \*, canonical_research=False\):/);
   assert.match(py, /native_secondary=True/);
   assert.match(build, /page_label='About', topbar_title='About', native_secondary=True, mobile_secondary=True/);
   for (const name of ['about.html', 'demo.html', 'research.html', 'catalog-review.html',
@@ -818,7 +819,7 @@ test('generated concept and technology directories expose shared secondary route
   const data = js.split('const sharedSecondarySections = [')[1]?.split('];')[0];
   assert.ok(data, 'Canonical Discover secondary routes must exist');
   const expected = [...data.matchAll(/\["([^"]+)", "([^"]+)"\]/g)]
-    .map(m => ['../' + m[1], m[2]]);
+    .map(m => ['../' + (m[1] === 'index.html#/papers' ? 'research.html' : m[1]), m[2]]);
   assert.equal(expected.length, 8);
   const termBuild = fs.readFileSync(path.join(__dirname, '..', 'scripts/build_term_pages.py'), 'utf8');
   const seoBuild = fs.readFileSync(path.join(__dirname, '..', 'scripts/build_seo.py'), 'utf8');
@@ -849,12 +850,13 @@ test('generated concept and technology directories expose shared secondary route
 
 test('standalone mobile drawers expose eight shared secondary routes without JavaScript', () => {
   const builder = fs.readFileSync(path.join(__dirname, '..', 'scripts/site_chrome.py'), 'utf8');
-  assert.match(builder, /def render_mobile_secondary_nav\(prefix, current=None\):/);
+  assert.match(builder, /def render_mobile_secondary_nav\(prefix, current=None, \*, canonical_research=False\):/);
   assert.match(builder, /mobile_brand=True, native_secondary=True, mobile_secondary=True/);
   assert.match(builder, /for key, _, route, label in SECONDARY_DESTINATIONS/);
   const source = fs.readFileSync(path.join(__dirname, '..', 'site-theme.js'), 'utf8');
   const data = source.split('const sharedSecondarySections = [')[1]?.split('];')[0];
-  const expected = [...data.matchAll(/\["([^"]+)", "([^"]+)"\]/g)].map(m => [m[1], m[2]]);
+  const expected = [...data.matchAll(/\["([^"]+)", "([^"]+)"\]/g)]
+    .map(m => [m[1] === 'index.html#/papers' ? 'research.html' : m[1], m[2]]);
   assert.equal(expected.length, 8);
   for (const route of ['about.html', 'demo.html', 'research.html', 'catalog-review.html',
                        'hardware-review.html', 'games.html', 'technologies.html',
