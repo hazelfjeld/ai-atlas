@@ -44,48 +44,44 @@ test('selected current secondary route remains the only current link in each nat
     'live hash-route selection remains the source of truth');
 });
 
-test('canonical Research navigation runs across the shared live chrome and preserves script-free, filtered and offline routes',()=>{
+test('shared Research link hydration routes live page families to one native workspace without breaking filtered and offline links',()=>{
   const vm=require('node:vm');
-  const markerA='/* atlas-canonical-research-entry:begin */';
-  const markerB='/* atlas-canonical-research-entry:end */';
-  const script=read('site-theme.js');
-  assert.equal(script.split(markerA).length,2);
-  assert.equal(script.split(markerB).length,2);
-  const code=script.split(markerA)[1].split(markerB)[0];
+  const source=read('site-theme.js');
+  const a='/* atlas-canonical-research-entry:begin */', b='/* atlas-canonical-research-entry:end */';
+  assert.equal(source.split(a).length,2);
+  assert.equal(source.split(b).length,2);
+  assert.ok(source.includes('syncCanonicalResearchEntry();'), 'shared post-chrome handler runs after mobile links are created');
+  const helper=source.split(a)[1].split(b)[0];
   function exercise(home, offline=false){
-    const calls=[];
-    const links=[
+    const targets=[
       {href:home==='#/overview'?'#/papers':home.replace('index.html#/overview','index.html#/papers'),label:'Research library',nav:true},
       {href:home==='#/overview'?'#/papers':home.replace('index.html#/overview','index.html#/papers'),label:'Open the library ↗',cta:true},
       {href:'index.html#/papers?q=reward',label:'Filtered research search'},
-    ].map(row=>({
-      row, textContent:row.label,
-      getAttribute:key=>key==='href'?row.href:null,
-      setAttribute:(key,value)=>{if(key==='href')row.href=value},
-      querySelector:()=>null,
-      matches:selector=>selector==='.reading-link a.btn' && !!row.cta,
+    ];
+    const links=targets.map(row=>({
+      getAttribute:name=>name==='href'?row.href:null,
+      setAttribute:(name,value)=>{if(name==='href')row.href=value},
+      querySelector:()=>null, textContent:row.label,
       closest:()=>row.nav?{}:null,
+      matches:selector=>selector==='.reading-link a.btn' && !!row.cta,
     }));
-    vm.runInNewContext(code,{
+    vm.runInNewContext(helper+'\nsyncCanonicalResearchEntry();',{
       window:{ATLAS_OFFLINE:offline},
       document:{
-        addEventListener:(event,fn)=>{if(event==='DOMContentLoaded')calls.push(fn)},
         querySelector:()=>({getAttribute:()=>home}),
         querySelectorAll:()=>links,
-      },
+      }
     });
-    assert.equal(calls.length,1);
-    calls[0]();
-    return links.map(link=>link.row.href);
+    return targets.map(row=>row.href);
   }
   assert.deepEqual(exercise('#/overview'),['research.html','research.html','index.html#/papers?q=reward']);
   assert.deepEqual(exercise('index.html#/overview'),['research.html','research.html','index.html#/papers?q=reward']);
   assert.deepEqual(exercise('../index.html#/overview'),['../research.html','../research.html','index.html#/papers?q=reward']);
   assert.deepEqual(exercise('#/overview',true),['#/papers','#/papers','index.html#/papers?q=reward']);
   assert.ok(read('discovery.js').includes("window.ATLAS_OFFLINE?'#/papers':'research.html'"));
-  assert.ok(read('index.html').includes('href="#/papers"'),'no-JS Discover entry remains available');
-  assert.ok(read('terms/index.html').includes('href="../index.html#/papers"'),'script-free reference route remains available');
-  const offlineHtml=read('downloads/Atlas_Demo_Offline.html');
-  assert.ok(offlineHtml.includes('href="#/papers">Open the library'));
-  assert.ok(offlineHtml.includes("window.ATLAS_OFFLINE?'#/papers':'research.html'"));
+  assert.ok(read('index.html').includes('href="#/papers"'));
+  assert.ok(read('terms/index.html').includes('href="../index.html#/papers"'));
+  const offline=read('downloads/Atlas_Demo_Offline.html');
+  assert.ok(offline.includes('href="#/papers">Open the library'));
+  assert.ok(offline.includes("window.ATLAS_OFFLINE?'#/papers':'research.html'"));
 });

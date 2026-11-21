@@ -760,19 +760,18 @@ document.addEventListener('DOMContentLoaded', () => {
       if (existing) existing.addEventListener('click', () => queueMicrotask(syncThemeButtons));
       syncThemeButtons();
     }
-  }
+  }  syncCanonicalResearchEntry();
 });
 
 /* atlas-canonical-research-entry:begin */
-// Keep legacy hash links usable without JavaScript and inside the offline
-// bundle, but let all hydrated page families enter the existing native
-// Research workspace. This is one shared enhancement, not another header.
-document.addEventListener('DOMContentLoaded', () => {
+// Preserve legacy hash links for script-free and offline users, but use the
+// existing native Research workspace on live pages after shared chrome builds.
+function syncCanonicalResearchEntry() {
   if (typeof window === 'undefined' || window.ATLAS_OFFLINE) return;
   const home = document.querySelector('#sidebar .brand, .site-chrome__brand')?.getAttribute('href') || '';
   const suffix = 'index.html#/overview';
   const prefix = home === '#/overview' ? '' : home.endsWith(suffix) ? home.slice(0, -suffix.length) : null;
-  if (prefix === null) return;
+  if (prefix === null || typeof document.querySelectorAll !== 'function') return;
   const oldLinks = new Set([prefix + 'index.html#/papers']);
   if (!prefix) oldLinks.add('#/papers');
   document.querySelectorAll('a[href]').forEach(link => {
@@ -785,5 +784,5 @@ document.addEventListener('DOMContentLoaded', () => {
       link.textContent?.includes('Open the library');
     if (sharedNav || discoveryCta) link.setAttribute('href', prefix + 'research.html');
   });
-});
+}
 /* atlas-canonical-research-entry:end */
