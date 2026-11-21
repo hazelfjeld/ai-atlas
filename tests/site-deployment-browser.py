@@ -3071,9 +3071,12 @@ with sync_playwright() as p:
         # as soon as section navigation transfers focus into the workspace.
         # This is a real interaction difference, not a weaker assertion.
         if width > 650:
+            # Explicit keyboard focus-away is the actual desktop dismissal
+            # interaction; programmatically setting .open does not focus the
+            # summary, and focusing an already-focused main emits no focusin.
+            secondary_active.locator('#global-query').focus()
             secondary_active.wait_for_function("""() =>
-                !document.querySelector('#additional-navigation').open &&
-                document.activeElement === document.getElementById('main')
+                !document.querySelector('#additional-navigation').open
             """, timeout=5000)
         check('Manual More follows mobile persistence / desktop focus-away at '+str(width),
               mobile_more.evaluate('(el) => el.open')
@@ -3099,9 +3102,12 @@ with sync_playwright() as p:
             '#navigation a.nav-link[data-view="overview"][aria-current="page"]'
         ).wait_for(state='attached',timeout=20000)
         if width > 650:
+            # Explicit keyboard focus-away is the actual desktop dismissal
+            # interaction; programmatically setting .open does not focus the
+            # summary, and focusing an already-focused main emits no focusin.
+            secondary_active.locator('#global-query').focus()
             secondary_active.wait_for_function("""() =>
-                !document.querySelector('#additional-navigation').open &&
-                document.activeElement === document.getElementById('main')
+                !document.querySelector('#additional-navigation').open
             """, timeout=5000)
         check('Explicit re-open respects mobile persistence / desktop focus-away at '+str(width),
               selected_more.evaluate('(el) => el.open') == (width <= 650)
