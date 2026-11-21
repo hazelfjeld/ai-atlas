@@ -88,6 +88,40 @@ with sync_playwright() as p:
         early.close()
     page.goto(base)
     page.locator('#navigation a[href="#/games"]').wait_for()
+    # The native headers previously used 16px (Games), 20px (news/reference)
+    # and 18px (Discover/Research) left gutters, so menu/search controls jumped
+    # horizontally between existing sections. Compare actual first-paint menu
+    # geometry with JavaScript disabled at both phone widths and themes.
+    for chrome_scheme in ('light', 'dark'):
+        chrome_context = browser.new_context(java_script_enabled=False,
+                                             color_scheme=chrome_scheme,
+                                             reduced_motion='reduce')
+        chrome_page = chrome_context.new_page()
+        for chrome_width in (320, 390):
+            chrome_page.set_viewport_size({'width': chrome_width, 'height': 844})
+            chrome_page.goto(base + 'index.html')
+            discover_menu = chrome_page.locator('#discover-mobile-nav > summary').bounding_box()
+            assert discover_menu, 'Discover has a visible native mobile menu'
+            for chrome_route in ('whats-new.html', 'research.html', 'playbooks.html',
+                                 'technologies.html', 'games.html', 'catalog-review.html',
+                                 'hardware-review.html', 'terms/index.html',
+                                 'technology/index.html', 'terms/MLD-0002-ablation-study.html'):
+                chrome_page.goto(base + chrome_route)
+                menu_frame = chrome_page.locator(
+                    'details.site-mobile-chrome__nav > summary').bounding_box()
+                check('shared mobile menu aligns with Discover '+ chrome_scheme + ' ' +
+                      str(chrome_width) + ' ' + chrome_route,
+                      menu_frame is not None and
+                      abs(menu_frame['x'] - discover_menu['x']) <= 1 and
+                      abs(menu_frame['width'] - discover_menu['width']) <= 1 and
+                      chrome_page.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'))
+                if chrome_width == 390 and chrome_route in (
+                        'whats-new.html', 'research.html', 'games.html',
+                        'technology/index.html'):
+                    chrome_page.screenshot(path=str(out / (
+                        'mobile-header-horizontal-'+chrome_route.replace('/', '-')+
+                        '-'+chrome_scheme+'.png')))
+        chrome_context.close()
     # The appearance action belongs to the shared mobile drawer on every page.
     # Its former dark-rail colors were pale on light menu backgrounds. Check
     # actual computed contrast in BOTH themes at the narrowest phone widths.

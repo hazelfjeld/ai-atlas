@@ -1619,6 +1619,29 @@ main.term-shell > footer:not(.site-chrome__footer) a{color:var(--accent,#27664e)
   }
 }
 /* atlas-rail-hover-not-current:end */
+
+/* atlas-unified-mobile-header-horizontal-frame:begin */
+/* Discover's 18px menu/search origin is the shared mobile chrome reference.
+   Legacy News, Playbooks, Technology and reference headers used 20px while
+   Games used 16px, making both controls jump sideways during page changes.
+   Keep the reading-column gutters/content layouts independent: only the real
+   menu/search frame uses this common token, in both themes and without JS. */
+@media (max-width:650px){
+  :root{--atlas-mobile-header-gutter:18px}
+  .topbar:has(.discover-mobile-chrome){padding-inline:var(--atlas-mobile-header-gutter)}
+  body:has(.site-chrome) .site-mobile-chrome:not(.discover-mobile-chrome){
+    padding-inline:var(--atlas-mobile-header-gutter)!important;
+  }
+  /* Games owns its padding in the containing sticky header; never double-pad
+     its nested two-control row or displace the playable content below. */
+  body:has(.site-chrome) .games-header__inner{
+    padding-inline:var(--atlas-mobile-header-gutter)!important;
+  }
+  body:has(.site-chrome) .games-header .site-mobile-chrome{
+    padding-inline:0!important;
+  }
+}
+/* atlas-unified-mobile-header-horizontal-frame:end */
 </style><script>/* Enhance the native dropdown only when scripts can make its drawer modal.
    Without JavaScript, keep the accessible, nonmodal <details> fallback. */
 document.documentElement.classList?.add('atlas-enhanced');
