@@ -32,13 +32,28 @@ test('shared generator, legacy details and bundled offline research routes remai
   assert.ok(generator.includes('canonical_research=True'));
   assert.ok(generator.includes('canonical_research=(path == \'technology/index.html\')') === false,
     'technology landing switch is selected by the SEO builder, not duplicated in the nav source');
-  assert.ok(read('scripts/build_seo.py').includes("canonical_research=(path == 'technology/index.html')"));
+  assert.ok(read('scripts/build_seo.py').includes("render_directory_nav(prefix, 'Technology profiles', canonical_research=True"));
   assert.ok(read('scripts/build_term_pages.py').includes("canonical_research=(path == 'terms/index.html')"));
-  for (const file of ['terms/MLD-1179-structured-output.html', 'technology/TECH-0216-pytorch.html']) {
+  for (const file of ['terms/MLD-1179-structured-output.html']) {
     assert.ok(read(file).includes('href="../index.html#/papers"'),
       file + ' retains the original generated detail link until its whole family is rebuilt');
   }
   const offline = read('downloads/Atlas_Demo_Offline.html');
   assert.ok(offline.includes('href="#/papers">Research library</a>'));
   assert.ok(offline.includes('href="#/papers">Open the library'));
+});
+
+// All technology references (not just a sample) must share a script-free
+// Research destination with native workspaces and the two directory landings.
+test('every published technology detail uses the canonical script-free Research destination', () => {
+  const pages = fs.readdirSync(path.join(__dirname, '..', 'technology'))
+    .filter(file => /^TECH-\d{4}-.*\.html$/.test(file));
+  assert.equal(pages.length, 303, 'all existing technology profiles are covered');
+  for (const file of pages) {
+    const html = read('technology/' + file);
+    assert.equal((html.match(/href="\.\.\/research\.html">Research library<\/a>/g) || []).length, 2,
+      file + ' mobile and desktop Research links share the native destination');
+    assert.ok(!html.includes('href="../index.html#/papers"'),
+      file + ' does not require JavaScript to enter native Research');
+  }
 });
