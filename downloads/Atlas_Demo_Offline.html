@@ -1787,6 +1787,8 @@ document.addEventListener('DOMContentLoaded', () => {
       else link.removeAttribute('aria-current');
     });
     chrome.dataset.pageLabel = label;
+    // The mobile header and its visible title must announce the same Research hash view.
+    chrome.setAttribute('aria-label', 'AI Updates mobile header · ' + label);
     const title = chrome.querySelector('.site-mobile-chrome__title');
     if (title) title.textContent = label;
     chrome.querySelector('details.site-mobile-chrome__nav > summary')
@@ -2178,6 +2180,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Respect the server-rendered page label on first paint and after hydration.
   const label = chrome.dataset.pageLabel || active?.textContent?.trim() || heading?.textContent?.trim() || document.title.split('·')[0].trim();
   chrome.dataset.pageLabel = label;
+  // Discover already names its mobile header; give every native page the same
+  // accessible workspace identity from its existing canonical title source.
+  chrome.setAttribute('aria-label', 'AI Updates mobile header · ' + label);
   ensureSharedWorkspaceTitle(chrome, label);
   // Every shared mobile menu should announce the same current workspace as
   // its visible header. Native reference pages still carry a generic

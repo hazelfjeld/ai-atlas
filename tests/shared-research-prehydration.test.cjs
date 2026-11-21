@@ -30,6 +30,8 @@ function run(initialHash) {
   const toggle = {attributes: new Map(),
     setAttribute(k, v) { this.attributes.set(k, v); }};
   const chrome = {dataset: {pageLabel: 'Research library'},
+    attributes: new Map(),
+    setAttribute(k, v) { this.attributes.set(k, v); },
     querySelector(selector) {
       if (selector === '.site-mobile-chrome__title') return title;
       if (selector === 'details.site-mobile-chrome__nav > summary') return toggle;
@@ -67,6 +69,7 @@ function run(initialHash) {
 function check(state, title, selected, parent) {
   assert.equal(state.title.textContent, title);
   assert.equal(state.chrome.dataset.pageLabel, title);
+  assert.equal(state.chrome.attributes.get('aria-label'), 'AI Updates mobile header · ' + title);
   assert.equal(state.toggle.attributes.get('aria-label'), 'Toggle navigation · ' + title);
   assert.deepEqual(state.views.filter(v => v.attributes.get('aria-current') === 'page')
     .map(v => v.dataset.nav), [selected]);
@@ -100,6 +103,8 @@ test('first-paint fix reuses native routes, survives offline and adds no header'
   assert.ok(offline.includes('/* atlas-native-research-prehydration:begin */' +
     block + '/* atlas-native-research-prehydration:end */'));
   assert.equal(script.split('/* atlas-native-research-prehydration:begin */').length - 1, 1);
+  assert.equal(script.split("chrome.setAttribute('aria-label', 'AI Updates mobile header · ' + label);").length - 1, 2,
+    'Research and all native page families must share contextual mobile header labels');
   assert.equal((research.match(/class="research-mobile-topbar site-mobile-chrome"/g) || []).length, 1);
   assert.equal((research.match(/class="site-chrome research-site-chrome"/g) || []).length, 1);
   for (const key of ['papers', 'alerts', 'coverage'])
