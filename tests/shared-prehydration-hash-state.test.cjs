@@ -54,16 +54,20 @@ function exercise(hash) {
   const nodes = {'navigation':nav,'discover-mobile-nav':drawer,
     'additional-navigation':mainMore,'breadcrumb':title,'page':page,
     'catalog-loading':{}};
-  let callback;
+  let callback, earlyClick;
   const document = {
-    addEventListener(event,fn){assert.equal(event,'DOMContentLoaded');callback=fn;},
+    addEventListener(event,fn){
+      if(event==='DOMContentLoaded') callback=fn;
+      else if(event==='click') earlyClick=fn;
+      else assert.fail('unexpected event listener: '+event);
+    },
     getElementById(id){return nodes[id]||null;},
     querySelector(selector){return selector==='.discover-mobile-chrome'?header:null;},
   };
   vm.runInNewContext(block,{window:{location:{hash}},document});
   assert.equal(typeof callback,'function');
   callback();
-  return {links,mobile,mainMore,mobileMore,title,header,toggleAttrs,cleared};
+  return {links,mobile,mainMore,mobileMore,title,header,toggleAttrs,cleared,earlyClick};
 }
 test('deep-link prehydration uses the canonical primary or secondary rail and real mobile title', () => {
   assert.ok(block);
@@ -89,6 +93,25 @@ test('deep-link prehydration uses the canonical primary or secondary rail and re
   const unknown=exercise('#/unrecognized');
   assert.equal(unknown.links[0].attrs.get('aria-current'),'page');
   assert.equal(unknown.cleared,0);
+});
+test('manual More disclosure ownership is available before catalog hydration', () => {
+  const result=exercise('#/safety');
+  assert.equal(typeof result.earlyClick,'function');
+  assert.equal(result.mainMore.dataset.atlasAutoOpened,'true');
+  assert.equal(result.mobileMore.dataset.atlasAutoOpened,'true');
+  // A normal link click must not forfeit ownership of an auto-opened menu.
+  result.earlyClick({target:{closest(){return null;}}});
+  assert.equal(result.mainMore.dataset.atlasAutoOpened,'true');
+  // Both pointer and keyboard summary activation generate a click.
+  for (const details of [result.mobileMore,result.mainMore]) {
+    result.earlyClick({target:{closest(selector){
+      assert.match(selector, /additional-navigation/);
+      assert.match(selector, /site-mobile-chrome__more/);
+      return {parentElement:details};
+    }}});
+    assert.equal(Object.hasOwn(details.dataset,'atlasAutoOpened'),false);
+  }
+  assert.equal((read('app.js').match(/document.addEventListener\('click', event => \{/g)||[]).length,0);
 });
 test('first-paint hash fix is exactly shared in the offline demo and does not duplicate chrome', () => {
   const offline=read('downloads/Atlas_Demo_Offline.html');

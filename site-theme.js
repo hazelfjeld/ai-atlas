@@ -73,6 +73,15 @@ function ensureSharedWorkspaceTitle(chrome, label) {
 // Use the same handoff for the slash shortcut and the visible search link.
 
 /* atlas-prehydration-section-state:begin */
+
+/* The catalog is loaded asynchronously. A visitor can manually close and
+   reopen an auto-revealed More disclosure before app.js starts; record that
+   choice in the shared parser-loaded chrome so navigation won't undo it. */
+document.addEventListener('click', event => {
+  const summary = event.target.closest?.(
+    '#additional-navigation > summary, #discover-mobile-nav .site-mobile-chrome__more > summary');
+  if (summary) delete summary.parentElement.dataset.atlasAutoOpened;
+});
 /* Native pages expose their active rail destination in static HTML. Discover
    must also reflect a direct hash link before its asynchronous catalog loads;
    otherwise Research, dictionary and Games links briefly appear as Discover.
