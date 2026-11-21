@@ -125,7 +125,8 @@ function exerciseOutsideDismiss(width, active = 'article') {
       return [discover, native].filter(x => x.open);
     },
   };
-  vm.runInNewContext(outsideBlock, {window:{innerWidth:width},document:doc});
+  pointer = vm.runInNewContext('(function(event) {' + outsideBlock + '\n})',
+    {window:{innerWidth:width},document:doc});
   assert.equal(typeof pointer, 'function');
   return {discover, native, focused, pointer};
 }

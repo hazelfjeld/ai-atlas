@@ -400,12 +400,7 @@ document.addEventListener('pointerdown', (event) => {
       .some(menu => !menu.contains(event.target))) {
     closeSharedDrawers({restoreFocus:true});
   }
-});
-/* atlas-shared-desktop-more-dismiss:begin */
-// The desktop More menu must not obscure the destination after an outside
-// pointer. This is shared by Discover, editorial and reference page families;
-// script-free native disclosures and mobile modal menus remain untouched.
-document.addEventListener('pointerdown', event => {
+  /* atlas-shared-desktop-more-dismiss:begin */
   if (typeof window === 'undefined' || window.innerWidth <= 650) return;
   document.querySelectorAll(
     'details.site-chrome__more[open], details#additional-navigation[open]'
@@ -415,8 +410,8 @@ document.addEventListener('pointerdown', event => {
     menu.open = false;
     if (hadFocus) menu.querySelector(':scope > summary')?.focus({preventScroll:true});
   });
+  /* atlas-shared-desktop-more-dismiss:end */
 });
-/* atlas-shared-desktop-more-dismiss:end */
 
 /* Discover makes its open drawer modal to assistive technology. The native
    shared drawer already traps Tab and scroll; isolate its background as well.
