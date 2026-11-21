@@ -92,7 +92,7 @@ test('first-paint sidebar uses the same canonical workspace destinations as hydr
   assert.deepEqual(links,[
     ['overview','#/overview'],['daily','whats-new.html'],['dictionary','#/dictionary'],
     ['technologies','#/technologies'],['games','#/games'],['playbooks','playbooks.html'],
-    ['about','about.html'],['safety','#/safety'],['papers','#/papers'],['compare','#/compare'],
+    ['about','about.html'],['safety','#/safety'],['papers','research.html'],['compare','#/compare'],
     ['saved','#/saved'],['sources','#/sources'],['demo','demo.html'],
     ['encyclopedia','terms/index.html'],['offline','downloads/Atlas_Demo_Offline.html']
   ].map(([id,href])=>({id,href})));

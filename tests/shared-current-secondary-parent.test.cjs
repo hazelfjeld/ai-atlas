@@ -167,8 +167,12 @@ test('build-time Discover Research navigation is canonical before JavaScript and
     'mobile generator must create the canonical link');
   assert.match(builder,/html = html\.replace\('href="research\.html"', 'href="#\/papers"'\)/,
     'offline builder rewrites every Research link to the bundled hash route');
-  assert.equal((offline.match(/href="#\/papers"/g)||[]).length,3,
-    'offline navigation and reading desk retain the actual bundled research view');
+  assert.match(offline,/data-view="papers" href="#\/papers"/,
+    'offline desktop Research rail still opens its bundled research view');
+  assert.match(offline,/href="#\/papers">Research library<\/a>/,
+    'offline mobile Research entry remains script-free and bundled');
+  assert.match(offline,/href="#\/papers">Open the library/,
+    'offline reading desk also opens its bundled research view');
   assert.ok(read('research.html').includes('id="main"'),
     'native Research destination retains its real article target');
 });

@@ -674,7 +674,14 @@ test('native desktop rails expose Discover secondary destinations from one share
   assert.match(script, /atlas-secondary-data:begin/);
   assert.match(script, /atlas-secondary-data:end/);
   assert.equal(rendered.length, 8, 'Keep existing eight destinations, without expanding the catalog');
-  assert.deepEqual(rendered, existing, 'Secondary destinations and order must match Discover');
+  const discoverCanonical = canonical.map(([href, label]) =>
+    [label === 'Research library' ? 'research.html' : href, label]);
+  assert.deepEqual(existing, discoverCanonical,
+    'Discover uses the native Research page on first paint; other ordered shared destinations stay identical');
+  assert.equal(existing.filter(([href,label]) => label === 'Research library' && href === 'research.html').length,1,
+    'Discover keeps one canonical Research entry rather than a second copy');
+  assert.match(generator,/href = "research\.html" if key == "papers"/,
+    'Only the live Discover rendering overrides its legacy hash alias; native routes remain linkable');
   assert.ok(script.includes("desktopRail?.querySelector?.('.site-chrome__links')"));
   assert.ok(script.includes("!desktopRail.querySelector('.site-chrome__more')"),
     'Do not duplicate disclosure on repeated enhancement');
@@ -753,6 +760,7 @@ test('Discover mobile drawer exposes the canonical eight secondary destinations 
       .map(m => [m[1], m[3].replaceAll('&amp;', '&')]);
     const expected = canonical.map(([href, label]) => {
       let local = href.replace(/^index\.html(?=#\/)/, '');
+      if (!offline && label === 'Research library') local = 'research.html';
       if (offline && local === 'demo.html') local = '#/overview';
       if (offline && local === 'terms/index.html') local = '#/dictionary';
       if (offline && local === 'downloads/Atlas_Demo_Offline.html') local = 'https://aiupdates.app/downloads/Atlas_Demo_Offline.html';
