@@ -3078,7 +3078,10 @@ with sync_playwright() as p:
             '#navigation a.nav-link[data-view="'+section+'"][aria-current="page"]'
         ).wait_for(state='attached',timeout=20000)
         nested = secondary_active.locator('#discover-mobile-nav details.site-mobile-chrome__more')
-        selected = nested.locator('a[href="#/'+section+'"]')
+        # A direct legacy #/papers URL still selects Research, while its
+        # visible mobile link now opens the native shared Research workspace.
+        selected = nested.locator('a[href="research.html"]' if section == 'papers'
+                                  else 'a[href="#/'+section+'"]')
         check('Discover secondary mobile active '+section,
               selected.get_attribute('aria-current') == 'page'
               and nested.evaluate('(el) => el.open')
