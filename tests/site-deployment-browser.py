@@ -692,6 +692,10 @@ with sync_playwright() as p:
     page.locator('#additional-navigation summary').click()
     check('disclosure reveals the original safety navigation link',
           page.locator('#navigation a[href="#/safety"]').is_visible())
+    page.locator('#breadcrumb').click()
+    check('Discover desktop More closes on outside pointer without navigating',
+          not page.locator('#additional-navigation').evaluate('(el) => el.open'))
+    page.locator('#additional-navigation summary').click()
     page.locator('#navigation a[href="#/safety"]').click()
     page.wait_for_function("document.querySelector('#navigation a[data-view=safety]')?.getAttribute('aria-current') === 'page'")
     check('secondary workspace navigation keeps disclosure expanded',
@@ -820,7 +824,9 @@ with sync_playwright() as p:
         check('secondary destinations navigate to real workspace routes on ' + route,
               more.locator('a').first.get_attribute('href') == 'index.html#/safety'
               and more.locator('a').last.get_attribute('href') == 'downloads/Atlas_Demo_Offline.html')
-        more.locator('summary').click()
+        page.locator('.site-mobile-chrome__title').click()
+        check('shared native desktop More closes on outside pointer on ' + route,
+              not more.evaluate('(el) => el.open'))
 
         if route == 'hardware-review.html':
             check('hardware article header stacks heading, lead and evidence note on desktop',
