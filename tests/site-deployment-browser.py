@@ -728,7 +728,7 @@ with sync_playwright() as p:
     scriptless.wait_for_url('**/about.html')
     scriptless.locator('#about-mobile-nav > summary').click() if scriptless.locator('#about-mobile-nav > summary').count() else scriptless.locator('.site-mobile-chrome__nav > summary').click()
     check('No-JavaScript Discover to About transition preserves secondary navigation',
-          scriptless.locator('.site-mobile-chrome__more-links a[href="index.html#/papers"]').count() == 1)
+          scriptless.locator('.site-mobile-chrome__more-links a[href="research.html"]').count() == 1)
 
     # The A-Z concept and technology directory pages must share Discover's
     # secondary destinations with JavaScript disabled, not only after hydration.
@@ -745,9 +745,10 @@ with sync_playwright() as p:
             check('Concept Encyclopedia is identified as the script-free active secondary section',
                   more_menu.locator('a[href="../terms/index.html"][aria-current="location"]').count() == 1
                   and more_menu.evaluate('(el) => el.open'))
+        expected_research = '../research.html' if route in ('terms/index.html', 'technology/index.html') else '../index.html#/papers'
         check('A-Z directory script-free mobile secondary navigation: ' + route,
               scriptless.locator('#directory-mobile-nav .site-mobile-chrome__more-links a').count() == 8
-              and scriptless.locator('#directory-mobile-nav .site-mobile-chrome__more-links a[href="../index.html#/papers"]').is_visible()
+              and scriptless.locator('#directory-mobile-nav .site-mobile-chrome__more-links a[href="' + expected_research + '"]').is_visible()
               and scriptless.locator('.site-mobile-chrome__search[href="../index.html#/search"]').count() == 1)
     scriptless.locator('#directory-mobile-nav .site-mobile-chrome__more-links a[href="../terms/index.html"]').click()
     scriptless.wait_for_url('**/terms/index.html')
@@ -2912,9 +2913,10 @@ with sync_playwright() as p:
                               and secondary.evaluate('el => el.open'))
                     else:
                         secondary.locator('summary').click()
+                    expected_research = '../research.html' if route in ('terms/index.html', 'technology/index.html') else '../index.html#/papers'
                     check('reference native mobile secondary routes before JS ' + route + ' ' + theme + ' ' + str(width),
                           secondary.locator('a').count() == 8 and
-                          secondary.locator('a[href="../index.html#/papers"]').is_visible())
+                          secondary.locator('a[href="' + expected_research + '"]').is_visible())
     reference_nav.close()
     # Generated concepts retain usable script-free navigation, but enhanced
     # article landmarks must match technology profiles without extra controls.
