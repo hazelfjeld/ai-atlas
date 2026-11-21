@@ -32,6 +32,9 @@ def main():
     html = html.replace('<main id="main" tabindex="-1">', f'<main id="main" tabindex="-1"><p class="notice">Offline demonstration fallback: all {count:,} catalog records (1,705 preserved originals), search, comparisons, Games and JSON exports work without internet. Term explanations open as record dialogs here. Expanded web pages, original downloads and external citations require the served edition.</p>')
     html = html.replace('href="playbooks.html"', 'href="#/playbooks"').replace('href="about.html"', 'href="#/sources"').replace('href="technology/index.html"', 'href="#/technologies"')
     html = html.replace('href="demo.html"', 'href="#/overview"').replace('href="terms/index.html"', 'href="#/dictionary"')
+    # The live Discover reading desk now uses the native Research page.
+    # Inside the downloaded single-file demo, keep its bundled hash workspace.
+    html = html.replace('href="research.html">Open the library', 'href="#/papers">Open the library')
     # Unlike self-contained workspace routes, daily editions are not bundled.
     # Resolve the shared nav to the real archive, not a nonexistent sibling of
     # the downloaded single-file HTML (which otherwise produces a file:// 404).
