@@ -30,14 +30,20 @@ PAGES = {
 
 
 def sync_scriptfree_daily_archive(html):
-    """Mirror the three newest immutable edition dates in the no-JS archive.
+    """Link the three newest *production-verified* immutable daily editions.
 
-    The live reader already uses data/daily/index.json; reuse that same
-    reviewed index instead of leaving a separately maintained list frozen
-    at November 7–9. Never link a missing or checksum-mismatched edition.
+    The live reader uses the full integrity-checked edition index. But a
+    pending edition can enter that index before public HTTP/browser checks
+    finish. The script-free headline preview must not promote that record
+    to a certified release merely because it is present in the repository.
+    Consult the same publisher receipts used by the release-status checks.
     """
     index = json.loads((ROOT / 'data/daily/index.json').read_text(encoding='utf-8'))
-    assert index['schema'] == 1
+    ledger = json.loads((ROOT / 'data/daily/published-batches.json').read_text(encoding='utf-8'))
+    assert index['schema'] == ledger['schema'] == 1
+    verified = {receipt['publication_edition'] for receipt in ledger['receipts']
+                if receipt.get('production_verified_at') and
+                receipt.get('publication_outcome', '').endswith('_verified')}
     latest = {}
     for edition in index['editions']:
         day = edition['date']
@@ -46,6 +52,8 @@ def sync_scriptfree_daily_archive(html):
         revision = edition['revision']
         assert isinstance(revision, int) and revision > 0
         assert edition['path'] == f'data/daily/editions/{day}-v{revision}.json'
+        if f'{day}-v{revision}' not in verified:
+            continue
         if day not in latest or revision > latest[day]['revision']:
             latest[day] = edition
     links = []
