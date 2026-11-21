@@ -1552,7 +1552,12 @@ test('Discover mobile live search shares the native search frame used across the
   const home=read('index.html');
   assert.match(home,/<form class="global-search" id="global-search" role="search">/);
   assert.match(home,/<input id="global-query" type="search"/);
-  assert.match(read('app.js'),/\$\('global-search'\)\.addEventListener\('submit'/);
+  assert.doesNotMatch(read('app.js'),/\$\('global-search'\)\.addEventListener\('submit'/);
+  const sharedSearch = read('site-theme.js');
+  assert.match(sharedSearch,/document\.addEventListener\('submit'/);
+  assert.match(sharedSearch,/form\?\.matches\?\.\('#global-search, form\.site-mobile-chrome__search-form'\)/);
+  assert.match(sharedSearch,/window\.location\.hash = destination/);
+  assert.ok(offline.includes(sharedSearch),'offline demo includes canonical prehydration search handler');
   for(const page of ['about.html','whats-new.html','games.html','technologies.html']){
     assert.ok(read(page).includes('site-mobile-chrome__search'),page+' retains its working search destination');
   }
