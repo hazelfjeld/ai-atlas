@@ -1676,9 +1676,14 @@ document.addEventListener('click', event => {
 document.addEventListener('DOMContentLoaded', () => {
   const rail = document.getElementById('navigation');
   const mobileNav = document.getElementById('discover-mobile-nav');
-  const route = window.location.hash.match(/^#\/([a-z-]+)(?:\?|$)/)?.[1];
-  if (!rail || !mobileNav || !route) return;
-  const links = [...rail.querySelectorAll('a[data-view]')];
+  if (!rail || !mobileNav) return;
+  const syncWhileLoading = () => {
+    // A visitor can change hashes before the async catalog binds its own
+    // router. Keep both rails and the workspace title correct until hydration.
+    if (!document.getElementById('catalog-loading')) return;
+    const route = window.location.hash.match(/^#\/([a-z-]+)(?:\?|$)/)?.[1];
+    if (!route) return;
+    const links = [...rail.querySelectorAll('a[data-view]')];
   const current = links.find(link => link.dataset.view === route);
   // Search is an existing functional workspace, but has no primary rail link.
   // Use the real search field's accessible name; never invent a second route list.
@@ -1699,15 +1704,18 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   // Make a directly visited secondary workspace discoverable on both rails
   // just as the hydrated app does, without overriding user-opened disclosures.
-  if (current?.closest('details.nav-more')) {
-    for (const details of [
-      document.getElementById('additional-navigation'),
-      mobileNav.querySelector('details.site-mobile-chrome__more'),
-    ]) {
-      if (details && !details.open) {
-        details.open = true;
-        details.dataset.atlasAutoOpened = 'true';
-      }
+  const secondary = !!current?.closest('details.nav-more');
+  for (const details of [
+    document.getElementById('additional-navigation'),
+    mobileNav.querySelector('details.site-mobile-chrome__more'),
+  ]) {
+    if (!details) continue;
+    if (secondary && !details.open && details.dataset.atlasManualTouched !== 'true') {
+      details.open = true;
+      details.dataset.atlasAutoOpened = 'true';
+    } else if (!secondary && details.dataset.atlasAutoOpened === 'true') {
+      details.open = false;
+      delete details.dataset.atlasAutoOpened;
     }
   }
   const name = current?.querySelector('span:not(.nav-count)')?.textContent?.trim() || searchLabel;
@@ -1724,8 +1732,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // its requested section is pending. Keep the real loading status visible;
   // only remove the original teaser, never an already-rendered view or error.
   const page = document.getElementById('page');
-  if (route !== 'overview' && document.getElementById('catalog-loading') &&
-      page?.querySelector('.discover-heading')) page.replaceChildren();
+    if (route !== 'overview' && page?.querySelector('.discover-heading'))
+      page.replaceChildren();
+  };
+  syncWhileLoading();
+  window.addEventListener('hashchange', syncWhileLoading);
 });
 /* atlas-prehydration-section-state:end */
 

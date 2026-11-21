@@ -54,7 +54,12 @@ function exercise(hash) {
   const nodes = {'navigation':nav,'discover-mobile-nav':drawer,
     'additional-navigation':mainMore,'breadcrumb':title,'page':page,
     'catalog-loading':{}, 'global-query':{getAttribute(name){return name==='aria-label'?'Search AI Updates':null;}}};
-  let callback, earlyClick;
+  let callback, earlyClick, hashchange;
+  const location = {hash};
+  const window = {location, addEventListener(event, fn) {
+    assert.equal(event, 'hashchange');
+    hashchange = fn;
+  }};
   const document = {
     addEventListener(event,fn){
       if(event==='DOMContentLoaded') callback=fn;
@@ -64,10 +69,12 @@ function exercise(hash) {
     getElementById(id){return nodes[id]||null;},
     querySelector(selector){return selector==='.discover-mobile-chrome'?header:null;},
   };
-  vm.runInNewContext(block,{window:{location:{hash}},document});
+  vm.runInNewContext(block,{window,document});
   assert.equal(typeof callback,'function');
   callback();
-  return {links,mobile,mainMore,mobileMore,title,header,toggleAttrs,cleared,earlyClick};
+  return {links,mobile,mainMore,mobileMore,title,header,toggleAttrs,cleared,earlyClick,
+    navigate(hash) {location.hash = hash; hashchange();},
+    finishLoading() {delete nodes['catalog-loading'];}};
 }
 test('deep-link prehydration uses the canonical primary or secondary rail and real mobile title', () => {
   assert.ok(block);
@@ -110,6 +117,33 @@ test('cross-page search opens the real search workspace before catalog hydration
   assert.ok(read('technology/TECH-0303-tohoku-aisin-16-nm-stt-mram-edge-ai-soc.html')
     .includes('href="../index.html#/search"'),
     'nested technology pages use the same functional search destination');
+});
+
+
+test('shared rails follow rapid hash navigation while the catalog is still loading', () => {
+  const state = exercise('#/overview');
+  state.navigate('#/safety');
+  assert.equal(state.title.textContent, 'Safety observatory');
+  assert.equal(state.links.find(x => x.dataset.view === 'safety').attrs.get('aria-current'), 'page');
+  assert.equal(state.mobile.find(x => x.dataset.view === 'safety').attrs.get('aria-current'), 'page');
+  assert.equal(state.mainMore.open, true);
+  assert.equal(state.mobileMore.open, true);
+  state.navigate('#/dictionary');
+  assert.equal(state.title.textContent, 'Concept dictionary');
+  assert.equal(state.mainMore.open, false, 'only the auto-opened disclosure closes');
+  assert.equal(state.mobileMore.open, false);
+  state.navigate('#/search?q=agent');
+  assert.equal(state.title.textContent, 'Search AI Updates');
+  assert.equal(state.links.filter(x => x.attrs.has('aria-current')).length, 0);
+  state.navigate('#/papers');
+  state.earlyClick({target:{closest() {return {parentElement:state.mainMore};}}});
+  state.mainMore.open = false;
+  state.navigate('#/overview');
+  assert.equal(state.mainMore.open, false, 'manual disclosure ownership survives another hash');
+  const before = state.title.textContent;
+  state.finishLoading();
+  state.navigate('#/safety');
+  assert.equal(state.title.textContent, before, 'hydrated router owns navigation afterward');
 });
 
 test('manual More disclosure ownership is available before catalog hydration', () => {
