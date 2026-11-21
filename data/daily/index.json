@@ -372,6 +372,6 @@
     }
   ],
   "last_successful_publish_at": "2026-11-20T15:15:36Z",
-  "status": "partial_coverage_with_latest_edition_pending_production_verification",
-  "coverage_note": "Latest 2026-11-21 edition contains 14 publisher-reviewed, source-attributed news reports and 10 deferred catalog proposals. Production-browser verification pending; prior successful publish clock remains unchanged."
+  "status": "edition_revision_1_pending_production_verification",
+  "coverage_note": "November 21 edition staged after independent source and checksum review; production verification pending. The immutable November 20 edition remains the latest certified public release. Ten catalog proposals remain deferred."
 }
