@@ -745,7 +745,7 @@ with sync_playwright() as p:
             check('Concept Encyclopedia is identified as the script-free active secondary section',
                   more_menu.locator('a[href="../terms/index.html"][aria-current="location"]').count() == 1
                   and more_menu.evaluate('(el) => el.open'))
-        expected_research = '../research.html' if route in ('terms/index.html', 'technology/index.html') else '../index.html#/papers'
+        expected_research = '../research.html' if (route in ('terms/index.html', 'technology/index.html') or route.startswith('technology/TECH-')) else '../index.html#/papers'
         check('A-Z directory script-free mobile secondary navigation: ' + route,
               scriptless.locator('#directory-mobile-nav .site-mobile-chrome__more-links a').count() == 8
               and scriptless.locator('#directory-mobile-nav .site-mobile-chrome__more-links a[href="' + expected_research + '"]').is_visible()
@@ -2913,7 +2913,7 @@ with sync_playwright() as p:
                               and secondary.evaluate('el => el.open'))
                     else:
                         secondary.locator('summary').click()
-                    expected_research = '../research.html' if route in ('terms/index.html', 'technology/index.html') else '../index.html#/papers'
+                    expected_research = '../research.html' if (route in ('terms/index.html', 'technology/index.html') or route.startswith('technology/TECH-')) else '../index.html#/papers'
                     check('reference native mobile secondary routes before JS ' + route + ' ' + theme + ' ' + str(width),
                           secondary.locator('a').count() == 8 and
                           secondary.locator('a[href="' + expected_research + '"]').is_visible())
