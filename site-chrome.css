@@ -895,11 +895,11 @@ html.atlas-enhanced #catalog-loading{
  white-space:nowrap
 }
 
-// A linked Search, Research, dictionary or other workspace may replace the
-// static Discover teaser before the verified catalog finishes loading. The
-// original visually hidden status would then leave a completely blank page.
-// Reveal that SAME live status only while the requested workspace is empty;
-// keep the existing Discover first paint untouched (and preserve no-JS HTML).
+/* A linked Search, Research, dictionary or other workspace may replace
+   the static Discover teaser before verified catalog data loads. Without
+   this rule, hiding its original teaser leaves the entire workspace blank.
+   Reveal the existing live loading status only while the requested workspace
+   is empty; keep Discover's useful script-free first paint intact. */
 html.atlas-enhanced #main:has(> #page:empty) > #catalog-loading{
  position:static;display:flex;align-items:flex-start;
  width:auto;height:auto;min-height:min(36vh,320px);
