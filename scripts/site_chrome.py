@@ -16,6 +16,10 @@ DESTINATIONS = (
 )
 # Build-time source of truth for Discover and native desktop secondary destinations.
 # Existing Discover icons and dynamic counts are preserved; this adds no routes.
+# These legacy hash aliases belong to the existing canonical navigation,
+# not to separately maintained early and hydrated JavaScript route tables.
+ROUTE_ALIASES = {"dictionary": "terms", "safety": "alerts", "sources": "coverage"}
+
 SECONDARY_DESTINATIONS = (
     ("safety", "view", "index.html#/safety", "Safety observatory"),
     ("papers", "view", "index.html#/papers", "Research library"),
@@ -68,9 +72,12 @@ def sync_discover_secondary(secondary):
                                  lambda _: "<span>" + label + "</span>",
                                  match.group(5), count=1)
         assert changed == 1, "Missing Discover secondary label"
+        attrs = re.sub(r' data-view-aliases="[^"]+"', '', match.group(4))
+        alias = (' data-view-aliases="' + ROUTE_ALIASES[key] + '"'
+                 if key in ROUTE_ALIASES else '')
         return ('<a class="nav-link" data-' + kind + '="' + key +
                 '" href="' + route.removeprefix("index.html") + '"' +
-                match.group(4) + '>' + inner + '</a>')
+                alias + attrs + '>' + inner + '</a>')
     return pattern.sub(replace, secondary)
 
 def render_secondary_nav(prefix, current=None):
@@ -426,8 +433,10 @@ def render_discover_primary(term_count, tech_count):
                  if key == "dictionary" else
                  '<span class="nav-count">' + format(tech_count, ",") + '</span>'
                  if key == "technologies" else "")
+        alias = (' data-view-aliases="' + ROUTE_ALIASES[key] + '"'
+                 if key in ROUTE_ALIASES else '')
         parts.append('<a class="' + cls + '" data-' + kind + '="' + key +
-                     '" href="' + href + '"' + current + '>' + icon +
+                     '" href="' + href + '"' + alias + current + '>' + icon +
                      '<span>' + escape(label) + '</span>' + count + '</a>')
     return "".join(parts)
 

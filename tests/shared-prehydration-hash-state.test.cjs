@@ -12,7 +12,7 @@ function makeLink(key, label, secondary = false) {
   const attrs = new Map([['href', '#/' + key]]);
   const classes = new Set();
   const alias = read('index.html').match(new RegExp('data-view="' + key +
-    '" data-view-aliases="([^"]+)"'))?.[1] || '';
+    '"[^>]*data-view-aliases="([^"]+)"'))?.[1] || '';
   return {
     dataset: {view: key, viewAliases: alias}, attrs, classes,
     classList: {toggle(name, selected) { if (selected) classes.add(name); else classes.delete(name); }},
