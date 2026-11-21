@@ -745,7 +745,7 @@ with sync_playwright() as p:
             check('Concept Encyclopedia is identified as the script-free active secondary section',
                   more_menu.locator('a[href="../terms/index.html"][aria-current="location"]').count() == 1
                   and more_menu.evaluate('(el) => el.open'))
-        expected_research = '../research.html' if (route in ('terms/index.html', 'technology/index.html') or route.startswith('technology/TECH-')) else '../index.html#/papers'
+        expected_research = '../research.html'
         check('A-Z directory script-free mobile secondary navigation: ' + route,
               scriptless.locator('#directory-mobile-nav .site-mobile-chrome__more-links a').count() == 8
               and scriptless.locator('#directory-mobile-nav .site-mobile-chrome__more-links a[href="' + expected_research + '"]').is_visible()
@@ -2913,11 +2913,38 @@ with sync_playwright() as p:
                               and secondary.evaluate('el => el.open'))
                     else:
                         secondary.locator('summary').click()
-                    expected_research = '../research.html' if (route in ('terms/index.html', 'technology/index.html') or route.startswith('technology/TECH-')) else '../index.html#/papers'
+                    expected_research = '../research.html'
                     check('reference native mobile secondary routes before JS ' + route + ' ' + theme + ' ' + str(width),
                           secondary.locator('a').count() == 8 and
                           secondary.locator('a[href="' + expected_research + '"]').is_visible())
     reference_nav.close()
+    # Follow the actual shared Research destination from BOTH generated detail
+    # families, not just examine href strings. This remains usable without JS
+    # on mobile and desktop, in light and dark OS schemes, and preserves URLs.
+    for scheme in ('light', 'dark'):
+        nav_context = browser.new_context(java_script_enabled=False,
+                                          color_scheme=scheme, reduced_motion='reduce')
+        nav_page = nav_context.new_page()
+        for width in (390, 1280):
+            nav_page.set_viewport_size({'width':width, 'height':844})
+            for route in ('terms/MLD-0001-a-b-test.html',
+                          'technology/TECH-0001-adversarial-robustness-toolbox.html'):
+                nav_page.goto(base + route)
+                if width < 651:
+                    nav_page.locator('details.site-mobile-chrome__nav > summary').click()
+                    disclosure = nav_page.locator('details.site-mobile-chrome__more')
+                else:
+                    disclosure = nav_page.locator('details.site-chrome__more')
+                disclosure.locator(':scope > summary').click()
+                disclosure.locator('a[href="../research.html"]').click()
+                check('script-free generated reference enters the SAME native Research layout '
+                      + route + ' ' + scheme + ' ' + str(width),
+                      nav_page.url.split('?', 1)[0].endswith('/research.html') and
+                      nav_page.locator('main').count() == 1)
+                if width == 390:
+                    nav_page.screenshot(path=str(out / ('reference-to-research-' +
+                        route.split('/')[0] + '-' + scheme + '.png')), full_page=False)
+        nav_context.close()
     # Generated concepts retain usable script-free navigation, but enhanced
     # article landmarks must match technology profiles without extra controls.
     enhanced_concept = browser.new_page(viewport={'width':390, 'height':844},
