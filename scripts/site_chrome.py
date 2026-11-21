@@ -22,7 +22,7 @@ ROUTE_ALIASES = {"dictionary": "terms", "safety": "alerts", "sources": "coverage
 
 SECONDARY_DESTINATIONS = (
     ("safety", "view", "index.html#/safety", "Safety observatory"),
-    ("papers", "view", "research.html", "Research library"),
+    ("papers", "view", "index.html#/papers", "Research library"),
     ("compare", "view", "index.html#/compare", "Compare tools"),
     ("saved", "view", "index.html#/saved", "Your notebook"),
     ("sources", "view", "index.html#/sources", "Sources & coverage"),

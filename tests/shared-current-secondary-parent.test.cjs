@@ -44,31 +44,48 @@ test('selected current secondary route remains the only current link in each nat
     'live hash-route selection remains the source of truth');
 });
 
-
-test('Research library uses one native entry point across Discover and all page families without breaking offline or legacy links',()=>{
-  const source=read('scripts/site_chrome.py');
-  const discover=read('index.html');
-  const template=read('discovery.js');
-  const nativeScript=read('site-theme.js');
-  assert.ok(source.includes('("papers", "view", "research.html", "Research library")'));
-  assert.ok(nativeScript.includes('["research.html", "Research library"]'));
-  assert.ok(discover.includes('data-view="papers" href="research.html"'));
-  assert.ok(discover.includes('href="research.html">Research library</a>'));
-  assert.ok(discover.includes('class="btn" href="research.html">Open the library'));
-  assert.ok(template.includes("window.ATLAS_OFFLINE?'#/papers':'research.html'"));
-  for(const page of [
-    'about.html','catalog-review.html','demo.html','games.html','hardware-review.html',
-    'playbooks.html','research.html','technologies.html','whats-new.html',
-    'terms/index.html','technology/index.html',
-  ]){
-    const html=read(page);
-    const prefix=page.includes('/')?'../':'';
-    assert.ok(html.includes('href="'+prefix+'research.html"'),page+' links to the native research library');
-    assert.ok(!html.includes('href="'+prefix+'index.html#/papers"'),page+' does not link to the duplicate old entry');
+test('canonical Research navigation runs across the shared live chrome and preserves script-free, filtered and offline routes',()=>{
+  const vm=require('node:vm');
+  const markerA='/* atlas-canonical-research-entry:begin */';
+  const markerB='/* atlas-canonical-research-entry:end */';
+  const script=read('site-theme.js');
+  assert.equal(script.split(markerA).length,2);
+  assert.equal(script.split(markerB).length,2);
+  const code=script.split(markerA)[1].split(markerB)[0];
+  function exercise(home, offline=false){
+    const calls=[];
+    const links=[
+      {href:home==='#/overview'?'#/papers':home.replace('index.html#/overview','index.html#/papers'),label:'Research library',nav:true},
+      {href:home==='#/overview'?'#/papers':home.replace('index.html#/overview','index.html#/papers'),label:'Open the library ↗',cta:true},
+      {href:'index.html#/papers?q=reward',label:'Filtered research search'},
+    ].map(row=>({
+      row, textContent:row.label,
+      getAttribute:key=>key==='href'?row.href:null,
+      setAttribute:(key,value)=>{if(key==='href')row.href=value},
+      querySelector:()=>null,
+      matches:selector=>selector==='.reading-link a.btn' && !!row.cta,
+      closest:()=>row.nav?{}:null,
+    }));
+    vm.runInNewContext(code,{
+      window:{ATLAS_OFFLINE:offline},
+      document:{
+        addEventListener:(event,fn)=>{if(event==='DOMContentLoaded')calls.push(fn)},
+        querySelector:()=>({getAttribute:()=>home}),
+        querySelectorAll:()=>links,
+      },
+    });
+    assert.equal(calls.length,1);
+    calls[0]();
+    return links.map(link=>link.row.href);
   }
-  const offline=read('downloads/Atlas_Demo_Offline.html');
-  assert.ok(offline.includes('href="#/papers">Open the library'));
-  assert.ok(offline.includes("window.ATLAS_OFFLINE?'#/papers':'research.html'"));
-  assert.ok(!offline.includes('href="research.html"'), 'offline navigation is self-contained');
-  assert.ok(read('app.js').includes("window.addEventListener('hashchange',route)"), 'legacy hash route is still registered');
+  assert.deepEqual(exercise('#/overview'),['research.html','research.html','index.html#/papers?q=reward']);
+  assert.deepEqual(exercise('index.html#/overview'),['research.html','research.html','index.html#/papers?q=reward']);
+  assert.deepEqual(exercise('../index.html#/overview'),['../research.html','../research.html','index.html#/papers?q=reward']);
+  assert.deepEqual(exercise('#/overview',true),['#/papers','#/papers','index.html#/papers?q=reward']);
+  assert.ok(read('discovery.js').includes("window.ATLAS_OFFLINE?'#/papers':'research.html'"));
+  assert.ok(read('index.html').includes('href="#/papers"'),'no-JS Discover entry remains available');
+  assert.ok(read('terms/index.html').includes('href="../index.html#/papers"'),'script-free reference route remains available');
+  const offlineHtml=read('downloads/Atlas_Demo_Offline.html');
+  assert.ok(offlineHtml.includes('href="#/papers">Open the library'));
+  assert.ok(offlineHtml.includes("window.ATLAS_OFFLINE?'#/papers':'research.html'"));
 });

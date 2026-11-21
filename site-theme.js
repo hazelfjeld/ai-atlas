@@ -646,7 +646,7 @@ document.addEventListener('DOMContentLoaded', () => {
       /* atlas-secondary-data:begin */
       const sharedSecondarySections = [
         ["index.html#/safety", "Safety observatory"],
-        ["research.html", "Research library"],
+        ["index.html#/papers", "Research library"],
         ["index.html#/compare", "Compare tools"],
         ["index.html#/saved", "Your notebook"],
         ["index.html#/sources", "Sources & coverage"],
@@ -762,3 +762,28 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 });
+
+/* atlas-canonical-research-entry:begin */
+// Keep legacy hash links usable without JavaScript and inside the offline
+// bundle, but let all hydrated page families enter the existing native
+// Research workspace. This is one shared enhancement, not another header.
+document.addEventListener('DOMContentLoaded', () => {
+  if (typeof window === 'undefined' || window.ATLAS_OFFLINE) return;
+  const home = document.querySelector('#sidebar .brand, .site-chrome__brand')?.getAttribute('href') || '';
+  const suffix = 'index.html#/overview';
+  const prefix = home === '#/overview' ? '' : home.endsWith(suffix) ? home.slice(0, -suffix.length) : null;
+  if (prefix === null) return;
+  const oldLinks = new Set([prefix + 'index.html#/papers']);
+  if (!prefix) oldLinks.add('#/papers');
+  document.querySelectorAll('a[href]').forEach(link => {
+    if (!oldLinks.has(link.getAttribute('href'))) return;
+    const label = link.querySelector('span:not(.nav-count)')?.textContent?.trim() ||
+      link.textContent?.trim();
+    const sharedNav = label === 'Research library' && link.closest(
+      '#navigation, #discover-mobile-nav, .site-chrome__more-links, .site-mobile-chrome__more-links');
+    const discoveryCta = link.matches('.reading-link a.btn') &&
+      link.textContent?.includes('Open the library');
+    if (sharedNav || discoveryCta) link.setAttribute('href', prefix + 'research.html');
+  });
+});
+/* atlas-canonical-research-entry:end */
