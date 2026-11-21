@@ -970,6 +970,35 @@ with sync_playwright() as p:
           page.locator('#global-query').is_visible())
 
 
+    # Discover's field-guide Playbooks link used to open a second SPA catalog
+    # while the canonical primary navigation opened the standalone, searchable
+    # Playbooks workspace. Exercise the same destination via the actual CTA at
+    # phone, tablet and desktop widths in BOTH themes, then navigate back.
+    for playbook_scheme in ('light', 'dark'):
+        for playbook_width in (320, 390, 768, 1280):
+            playbook_probe = browser.new_page(
+                viewport={'width':playbook_width,'height':844},
+                color_scheme=playbook_scheme, reduced_motion='reduce')
+            playbook_probe.goto(base + 'index.html')
+            playbook_probe.locator('.rail-counts a').filter(
+                has_text='Practical playbooks').click()
+            playbook_probe.wait_for_url('**/playbooks.html')
+            check('Discover-to-Playbooks canonical destination ' +
+                  playbook_scheme + ' ' + str(playbook_width),
+                  playbook_probe.locator(
+                      '.site-chrome__links a[aria-current="page"]').text_content().strip()
+                  == 'Playbooks'
+                  and playbook_probe.locator('main.playbook-content').count() == 1)
+            playbook_probe.screenshot(path=str(out / (
+                'shared-playbooks-entry-' + playbook_scheme + '-' +
+                str(playbook_width) + '.png')))
+            playbook_probe.go_back()
+            check('Playbooks-to-Discover browser history ' +
+                  playbook_scheme + ' ' + str(playbook_width),
+                  playbook_probe.url.split('#')[0].endswith('/index.html') and
+                  playbook_probe.locator('.discover-heading h1').count() == 1)
+            playbook_probe.close()
+
     # Compare Discover with news, Games and generated references in both
     # themes and at four responsive widths; actually submit and navigate.
     for scheme in ('light', 'dark'):
