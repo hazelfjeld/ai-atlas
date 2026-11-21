@@ -93,10 +93,10 @@ test('browser handoff and offline demo retain the shared responsive focus fix', 
 
 /* One shared pointer/keyboard dismissal policy for native and Discover rails. */
 const helperStart = script.indexOf('function dismissInactiveDesktopMore(');
-const helperEnd = script.indexOf("\\ndocument.addEventListener('pointerdown'", helperStart);
+const helperEnd = script.indexOf("document.addEventListener('pointerdown'", helperStart);
 assert.ok(helperStart >= 0 && helperEnd > helperStart);
 const sharedDismissSource = script.slice(helperStart, helperEnd);
-assert.match(script, /document\\.addEventListener\\('focusin', event => \\{\\s*dismissInactiveDesktopMore\\(event\\.target\\)/);
+assert.ok(script.includes("document.addEventListener('focusin', event => {\n  dismissInactiveDesktopMore(event.target);"), 'keyboard focus uses shared dismissal helper');
 const outsideBlock = script.split('/* atlas-shared-desktop-more-dismiss:begin */')[1]
   ?.split('/* atlas-shared-desktop-more-dismiss:end */')[0];
 function exerciseOutsideDismiss(width, active = 'article') {
