@@ -652,13 +652,20 @@ with sync_playwright() as p:
                       'Safety observatory', 'Research library', 'Compare tools',
                       'Your notebook', 'Sources & coverage', 'Guided professor demo',
                       'Concept encyclopedia', 'Offline demo download ↓']
-                  and native_more.locator('a[href="index.html#/papers"]').is_visible())
+                  and native_more.locator('a[href="research.html"]').is_visible())
             if width == 390:
-                native_more.locator('a[href="index.html#/papers"]').click()
-                page.wait_for_url('**/index.html#/papers')
+                native_more.locator('a[href="research.html"]').click()
+                page.wait_for_url('**/research.html')
+                page.wait_for_function(
+                    "document.querySelector('.site-chrome__more a[href=\"research.html\"]')?.getAttribute('aria-current') === 'location'")
+                check('About mobile secondary navigation reaches live Research library',
+                      page.locator('.site-chrome__more a[href="research.html"][aria-current="location"]').count() == 1)
+                # The older direct SPA deep link remains supported; the new
+                # canonical native destination does not remove it.
+                page.goto(base + 'index.html#/papers')
                 page.wait_for_function(
                     "document.querySelector('#navigation a[data-view=papers]')?.getAttribute('aria-current') === 'page'")
-                check('About mobile secondary navigation reaches live Research library',
+                check('Legacy Research hash URL still opens its original catalog view',
                       page.locator('#navigation a[data-view="papers"][aria-current="page"]').count() == 1)
 
     # A native Research URL is a real secondary destination. Both native
@@ -669,8 +676,8 @@ with sync_playwright() as p:
         page.goto(base + 'research.html')
         check('Research canonical secondary identity at ' + str(width),
               page.locator('.site-chrome__links a[aria-current]').count() == 0
-              and page.locator('.site-chrome__more[open] a[aria-current="location"][href="index.html#/papers"]').count() == 1
-              and page.locator('.site-mobile-chrome__more[open] a[aria-current="location"][href="index.html#/papers"]').count() == 1
+              and page.locator('.site-chrome__more[open] a[aria-current="location"][href="research.html"]').count() == 1
+              and page.locator('.site-mobile-chrome__more[open] a[aria-current="location"][href="research.html"]').count() == 1
               and page.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'))
         if width <= 650:
             page.locator('.site-mobile-chrome__nav > summary').click()
@@ -1656,15 +1663,15 @@ with sync_playwright() as p:
         check('Research safety hash synchronizes shared chrome '+str(width),
               mobile_research.locator('.site-chrome__more a[aria-current="location"][href="index.html#/safety"]').count() == 1
               and mobile_research.locator('.site-mobile-chrome__more a[aria-current="location"][href="index.html#/safety"]').count() == 1
-              and mobile_research.locator('.site-chrome__more a[aria-current="location"][href="index.html#/papers"]').count() == 0
-              and mobile_research.locator('.site-mobile-chrome__more a[aria-current="location"][href="index.html#/papers"]').count() == 0
+              and mobile_research.locator('.site-chrome__more a[aria-current="location"][href="research.html"]').count() == 0
+              and mobile_research.locator('.site-mobile-chrome__more a[aria-current="location"][href="research.html"]').count() == 0
               and mobile_research.locator('.research-mobile-topbar .site-mobile-chrome__title').inner_text() == 'Safety observatory'
               and mobile_research.evaluate("document.title === 'Safety observatory | AI Updates' && document.documentElement.scrollWidth <= innerWidth + 1"))
     mobile_research.locator('.research-local-nav a[href="#papers"]').click()
-    mobile_research.wait_for_function("""() => document.querySelector('.site-chrome__more a[href="index.html#/papers"]').getAttribute('aria-current') === 'location'""")
+    mobile_research.wait_for_function("""() => document.querySelector('.site-chrome__more a[href="research.html"]').getAttribute('aria-current') === 'location'""")
     check('Research return restores shared section and site title',
           mobile_research.locator('.site-chrome__more a[aria-current="location"][href="index.html#/safety"]').count() == 0
-          and mobile_research.locator('.site-mobile-chrome__more a[aria-current="location"][href="index.html#/papers"]').count() == 1
+          and mobile_research.locator('.site-mobile-chrome__more a[aria-current="location"][href="research.html"]').count() == 1
           and mobile_research.locator('.research-mobile-topbar .site-mobile-chrome__title').inner_text() == 'Research library'
           and mobile_research.evaluate("document.title === 'Research library | AI Updates'"))
     mobile_research.set_viewport_size({'width': 320, 'height': 720})
