@@ -1989,6 +1989,9 @@ document.addEventListener('pointerdown', (event) => {
     'details.site-chrome__more[open], details#additional-navigation[open]'
   ).forEach(menu => {
     if (menu.contains(event.target)) return;
+    // Keep the current secondary destination visibly highlighted on Research
+    // and Discover. The user can still collapse it deliberately by summary.
+    if (menu.querySelector('.site-chrome__more-links a[aria-current], .nav-more-links a[aria-current]')) return;
     const hadFocus = menu.contains(document.activeElement);
     menu.open = false;
     if (hadFocus) menu.querySelector(':scope > summary')?.focus({preventScroll:true});

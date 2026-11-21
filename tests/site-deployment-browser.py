@@ -1519,22 +1519,9 @@ with sync_playwright() as p:
           and mobile_research.locator('.shell > aside').count() == 0
           and mobile_research.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'))
     mobile_research.set_viewport_size({'width':1440, 'height':900})
-    # Keep the full navigation contract; report each observable field when
-    # a shared desktop browser check fails rather than masking the regression.
-    research_nav_diagnostics = {
-        'rail_visible': mobile_research.locator('.research-site-chrome').is_visible(),
-        'primary_labels': mobile_research.locator('.site-chrome__links a').all_text_contents(),
-        'local_visible': mobile_research.locator('.research-local-nav').is_visible(),
-        'primary_currents': mobile_research.locator(
-            '.research-site-chrome .site-chrome__links [aria-current]').count(),
-        'secondary_currents': mobile_research.locator(
-            '.research-site-chrome .site-chrome__more a[aria-current="location"]').all_text_contents(),
-        'old_sidebar': mobile_research.locator('.shell > aside').count(),
-        'url': mobile_research.url,
-        'desktop_more_open': mobile_research.locator(
-            '.research-site-chrome .site-chrome__more').evaluate('(el) => el.open'),
-    }
-    print('RESEARCH DESKTOP RAIL DIAGNOSTICS', json.dumps(research_nav_diagnostics), flush=True)
+    mobile_research.locator('.research-mobile-topbar .site-mobile-chrome__title').click()
+    check('Research active secondary rail remains visible after desktop content interaction',
+          mobile_research.locator('.research-site-chrome .site-chrome__more').evaluate('(el) => el.open'))
     check('desktop research primary navigation matches AI Updates sections',
           mobile_research.locator('.research-site-chrome').is_visible()
           and mobile_research.locator('.site-chrome__links a').all_text_contents()

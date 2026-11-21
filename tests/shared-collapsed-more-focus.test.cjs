@@ -103,6 +103,8 @@ function exerciseOutsideDismiss(width, active = 'article') {
       open: true,
       contains(target) { return target === this || target?.inside === this; },
       querySelector(selector) {
+        if (selector === '.site-chrome__more-links a[aria-current], .nav-more-links a[aria-current]')
+          return this.hasCurrent ? {} : null;
         assert.equal(selector, ':scope > summary');
         return {focus(options) {
           assert.equal(options.preventScroll, true);
@@ -159,4 +161,15 @@ test('mobile and no-JavaScript navigation remain intact with offline parity', ()
     assert.match(read(page), /More sections/, 'script-free secondary links: ' + page);
   assert.ok(read('downloads/Atlas_Demo_Offline.html').includes(script),
     'offline standalone embeds the exact current shared script');
+});
+
+test('active secondary destination remains visible on outside desktop content interaction', () => {
+  const state = exerciseOutsideDismiss(1280, 'article');
+  state.native.hasCurrent = true;
+  state.pointer({target:{}});
+  assert.equal(state.native.open, true, 'Research active section cannot disappear behind closed More');
+  assert.equal(state.discover.open, false, 'inactive Discover More can still dismiss');
+  state.native.hasCurrent = false;
+  state.pointer({target:{}});
+  assert.equal(state.native.open, false, 'inactive secondary disclosure dismisses normally');
 });
