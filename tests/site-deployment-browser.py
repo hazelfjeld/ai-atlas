@@ -490,8 +490,17 @@ with sync_playwright() as p:
     # and disabled filters to script-free visitors, unlike Research/Playbooks/Tech.
     # Its native fallback must retain the same shared site navigation and point
     # at immutable source records rather than pretending there is a live feed.
+    # Pending review batches can be registered for deployment testing before
+    # the publisher has recorded production HTTP/browser certification.
+    # Script-free previews must only promote previously certified editions.
+    receipts = json.loads((ROOT / 'data/daily/published-batches.json').read_text(encoding='utf-8'))['receipts']
+    verified_edition_ids = {r['publication_edition'] for r in receipts
+                            if r.get('production_verified_at') and
+                            r.get('publication_outcome', '').endswith('_verified')}
     published_dates = {}
     for edition in json.loads((ROOT / 'data/daily/index.json').read_text(encoding='utf-8'))['editions']:
+        if f"{edition['date']}-v{edition['revision']}" not in verified_edition_ids:
+            continue
         old = published_dates.get(edition['date'])
         if old is None or edition['revision'] > old['revision']:
             published_dates[edition['date']] = edition
