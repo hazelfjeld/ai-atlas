@@ -60,7 +60,8 @@ test('shared renderer preserves native editorial headings, no-JS fallback and Di
   assert.match(read('terms/MLD-1345-zero-shot-prompting.html'), /data-page-label="Zero-shot prompting"/);
   assert.match(read('terms/index.html'), /data-page-label="Concept encyclopedia"/);
   assert.match(read('whats-new.html'), /<span class="site-mobile-chrome__title">What.s New Today<\/span>/);
-  assert.match(script, /chrome\.dataset\.pageLabel = label;\s*ensureSharedWorkspaceTitle\(chrome, label\)/);
+  assert.match(script, /chrome\.dataset\.pageLabel = label;[\s\S]*?chrome\.setAttribute\('aria-label', 'AI Updates mobile header · ' \+ label\);\s*ensureSharedWorkspaceTitle\(chrome, label\)/,
+    'All native headings must update the same contextual mobile header name before rendering');
 });
 
 test('offline fallback embeds identical title behavior without another title implementation', () => {
