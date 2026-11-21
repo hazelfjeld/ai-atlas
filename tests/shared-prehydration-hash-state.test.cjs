@@ -105,10 +105,10 @@ test('cross-page search opens the real search workspace before catalog hydration
   assert.equal(state.mainMore.open, false);
   assert.equal(state.mobileMore.open, false);
   assert.equal(state.cleared, 1, 'old Discover teaser must not flash on direct search');
-  assert.match(read('research.html'), /href="index\\.html#\\/search"/,
+  assert.ok(read('research.html').includes('href="index.html#/search"'),
     'standalone Research really routes into this live search workspace');
-  assert.match(read('technology/TECH-0303-tohoku-aisin-16-nm-stt-mram-edge-ai-soc.html'),
-    /href="\\.\\.\\/index\\.html#\\/search"/,
+  assert.ok(read('technology/TECH-0303-tohoku-aisin-16-nm-stt-mram-edge-ai-soc.html')
+    .includes('href="../index.html#/search"'),
     'nested technology pages use the same functional search destination');
 });
 
