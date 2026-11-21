@@ -1362,3 +1362,72 @@ main.term-shell > footer:not(.site-chrome__footer) a{color:var(--accent,#27664e)
   }
 }
 /* atlas-unified-mobile-header-horizontal-frame:end */
+
+/* atlas-unified-desktop-workspace-bar:begin */
+/* Discover and native article/directory/research/game pages formerly used
+   different 76/78px bar heights, white/off-white fills, 38/40px gutters,
+   and 11/13px titles. These are one workspace header, even though Discover
+   keeps its sticky SPA container and static pages keep their fixed native
+   container. Keep those functional DOM structures; share their geometry,
+   palette, title rhythm and real search frame from these tokens. */
+@media (min-width:651px){
+  :root{
+    --atlas-workspace-bar-height:78px;
+    --atlas-workspace-bar-gutter:38px;
+    --atlas-workspace-bar-surface:#fff;
+    --atlas-workspace-bar-ink:#202b28;
+    --atlas-workspace-bar-line:#dfe3dc;
+  }
+  :root[data-theme="dark"]{
+    --atlas-workspace-bar-surface:#222d27;
+    --atlas-workspace-bar-ink:#f1f5ef;
+    --atlas-workspace-bar-line:#3b4a40;
+  }
+  :is(.app-shell .topbar,body:has(.site-chrome) .site-mobile-chrome){
+    box-sizing:border-box;
+    height:var(--atlas-workspace-bar-height)!important;
+    padding-inline:var(--atlas-workspace-bar-gutter)!important;
+    background:var(--atlas-workspace-bar-surface)!important;
+    border-bottom:1px solid var(--atlas-workspace-bar-line)!important;
+  }
+  :is(.app-shell .topbar #breadcrumb,
+      body:has(.site-chrome) .site-mobile-chrome__title,
+      body:has(.site-chrome) .site-mobile-chrome::before){
+    font-size:13px!important;
+    font-weight:550!important;
+    line-height:1.6;
+    color:var(--atlas-workspace-bar-ink)!important;
+  }
+  :is(.app-shell .topbar .global-search,
+      body:has(.site-chrome) .site-mobile-chrome__search){
+    box-sizing:border-box;
+    min-height:40px;
+    max-width:340px;
+    border-radius:9px;
+    border-color:var(--atlas-workspace-bar-line);
+    background:var(--atlas-workspace-bar-surface);
+  }
+  body:has(.site-chrome) .site-mobile-chrome__search{
+    flex-basis:340px;
+  }
+  /* The native 36px submit button must fit the same 40px search row;
+     the 16px mobile field and submit targets remain entirely unchanged. */
+  body:has(.site-chrome) .site-mobile-chrome__search-form{
+    padding-block:1px;
+  }
+}
+@media (min-width:651px) and (max-width:1200px){
+  :root{--atlas-workspace-bar-gutter:26px}
+  /* Retain enough title space on tablets as the shared sidebar narrows. */
+  body:has(.site-chrome) .site-mobile-chrome__search{
+    flex-basis:clamp(184px,calc(100vw - 528px),340px);
+  }
+}
+@media (min-width:651px) and (prefers-color-scheme:dark){
+  :root:not([data-theme]){
+    --atlas-workspace-bar-surface:#222d27;
+    --atlas-workspace-bar-ink:#f1f5ef;
+    --atlas-workspace-bar-line:#3b4a40;
+  }
+}
+/* atlas-unified-desktop-workspace-bar:end */

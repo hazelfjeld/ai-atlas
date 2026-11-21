@@ -3412,6 +3412,54 @@ with sync_playwright() as p:
                     guide_page.screenshot(path=str(out/('expanded-guide-'+route.split('/')[1].split('.')[0]+'-390-dark.png')))
         guide_context.close()
 
+    # Discover's 76px/off-white workspace bar and the 78px/white native bar
+    # visibly changed height, reading origin and title type on each page jump.
+    # Compare the *rendered* shared frame, not just declared CSS or one page.
+    for scheme in ('light', 'dark'):
+        bar_context = browser.new_context(color_scheme=scheme, reduced_motion='reduce')
+        bar_page = bar_context.new_page()
+        for width in (768, 1280):
+            bar_page.set_viewport_size({'width':width, 'height':844})
+            baseline = None
+            for route in (
+                'index.html', 'whats-new.html', 'research.html',
+                'playbooks.html', 'technology/index.html', 'terms/index.html',
+                'games.html'
+            ):
+                bar_page.goto(base + route)
+                frame = bar_page.evaluate("""() => {
+                    const el=[...document.querySelectorAll('.topbar,.site-mobile-chrome')]
+                        .find(node => getComputedStyle(node).display !== 'none' &&
+                              node.getBoundingClientRect().height > 40);
+                    if (!el) return null;
+                    const style=getComputedStyle(el);
+                    const title=el.querySelector('#breadcrumb,.site-mobile-chrome__title');
+                    const search=el.querySelector('.global-search,.site-mobile-chrome__search');
+                    return {height:Math.round(el.getBoundingClientRect().height),
+                            padding:Math.round(parseFloat(style.paddingLeft)),
+                            background:style.backgroundColor,
+                            border:style.borderBottomColor,
+                            titleSize:title?getComputedStyle(title).fontSize:null,
+                            searchHeight:search?Math.round(search.getBoundingClientRect().height):null};
+                }""")
+                expected_padding = 26 if width == 768 else 38
+                check('Shared desktop workspace bar '+route+' '+scheme+' '+str(width),
+                      frame is not None and frame['height']==78
+                      and frame['padding']==expected_padding
+                      and frame['titleSize']=='13px'
+                      and frame['searchHeight'] is not None
+                      and frame['searchHeight']>=40
+                      and (baseline is None or
+                           all(frame[key]==baseline[key]
+                               for key in ('height','padding','background','border','titleSize'))))
+                if baseline is None:
+                    baseline = frame
+                if route in ('index.html','research.html','technology/index.html'):
+                    bar_page.screenshot(path=str(out/(
+                        'shared-workspace-bar-'+route.replace('/','-')+'-'+
+                        scheme+'-'+str(width)+'.png')))
+        bar_context.close()
+
     check('no application runtime exceptions', not errors)
     browser.close()
 (out / 'report.json').write_text(json.dumps({'base':base, 'checks':checks, 'checks_passed':len(checks), 'errors':errors}, indent=2), encoding='utf-8')
