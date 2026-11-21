@@ -1824,6 +1824,27 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 /* atlas-native-research-prehydration:end */
 
+/* atlas-shared-search-submit:begin */
+/* One real submit handler for Discover and native pages. This parser-loaded
+   script catches Discover searches before the catalog finishes loading, while
+   native forms retain their no-JavaScript navigation-link fallback. */
+document.addEventListener('submit', event => {
+  const form = event.target;
+  if (!form?.matches?.('#global-search, form.site-mobile-chrome__search-form')) return;
+  event.preventDefault();
+  const query = (form.querySelector('input[type="search"]')?.value || '').trim();
+  const route = form.dataset.searchRoute || '#/search';
+  const destination = route + (query ? '?q=' + encodeURIComponent(query) : '');
+  if (route.startsWith('#/')) {
+    if (window.location.hash === destination) window.dispatchEvent(new Event('hashchange'));
+    else window.location.hash = destination;
+  } else {
+    rememberSearchFocus();
+    window.location.assign(destination);
+  }
+});
+/* atlas-shared-search-submit:end */
+
 /* Real search everywhere: keep the static link as the no-JavaScript fallback,
    and use its relative route on both root and nested reference pages. */
 document.addEventListener('DOMContentLoaded', () => {
@@ -1860,12 +1881,6 @@ document.addEventListener('DOMContentLoaded', () => {
     hint.textContent = '/';
     hint.setAttribute('aria-hidden', 'true');
     form.append(field, hint, submit);
-    form.addEventListener('submit', event => {
-      event.preventDefault();
-      const query = field.value.trim();
-      rememberSearchFocus();
-      window.location.assign(route + (query ? '?q=' + encodeURIComponent(query) : ''));
-    });
     link.replaceWith(form);
   });
 });
@@ -3064,7 +3079,6 @@ document.addEventListener('click',async e=>{if(e.target.closest('.skip-link')){e
 });
 document.addEventListener('input',e=>{if(e.target.id==='record-notes'){const id=e.target.dataset.record;notebook.notes[id]=e.target.value;const ok=saveNotebook();$('notes-status').textContent=ok?'Saved in this browser.':'Not persisted. Export a backup before closing.';}});
 $('notebook-file').addEventListener('change',async e=>{const file=e.target.files[0];if(!file)return;try{if(file.size>10*1024*1024)throw new Error('Notebook file exceeds 10 MB.');const incoming=C.validateNotebook(JSON.parse(await file.text()),validIDs);notebook.saved=[...new Set([...notebook.saved,...incoming.saved])];notebook.notes={...notebook.notes,...incoming.notes};if(incoming.compare.length)notebook.compare=incoming.compare;saveNotebook();route();toast('Notebook merged. Imported notes replace notes for the same record.');}catch(err){toast('Import failed: '+err.message);}finally{e.target.value='';}});
-$('global-search').addEventListener('submit',e=>{e.preventDefault();goto('search',{q:$('global-query').value.trim()});});
 $('theme-toggle').addEventListener('click',()=>{const currentTheme=document.documentElement.dataset.theme||(window.matchMedia?.('(prefers-color-scheme: dark)').matches?'dark':'light');const theme=currentTheme==='dark'?'light':'dark';document.documentElement.dataset.theme=theme;// Notify the canonical shared chrome after this native action has committed.
 if(typeof syncSharedStoredTheme==='function')syncSharedStoredTheme(theme);try{if(!SHARED_HOST)localStorage.setItem('atlas.theme',theme);}catch{};});
 // Keep the off-canvas navigation out of the keyboard order when closed, and modal while open.

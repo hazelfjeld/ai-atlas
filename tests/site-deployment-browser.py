@@ -44,6 +44,29 @@ with sync_playwright() as p:
     browser = p.chromium.launch(executable_path=os.environ.get('CHROMIUM_PATH'), headless=True)
     page = browser.new_page(viewport={'width':1440, 'height':1000}, reduced_motion='reduce')
     page.on('pageerror', lambda e: errors.append(str(e)))
+    # Hold the first manifest fetch to test early Discover form submission
+    # before asynchronous catalog verification. This avoids a network race.
+    for early_width in (390, 1280):
+        early = browser.new_page(viewport={'width': early_width, 'height': 800},
+                                 reduced_motion='reduce')
+        early.add_init_script("""(() => {
+          const originalFetch = window.fetch.bind(window);
+          window.fetch = (resource, options) =>
+            String(resource).endsWith('publication.json')
+              ? new Promise(() => {})
+              : originalFetch(resource, options);
+        })();""")
+        early.goto(base + 'index.html', wait_until='domcontentloaded')
+        check('Discover pending catalog before early search ' + str(early_width),
+              early.locator('#catalog-loading').count() == 1)
+        early.locator('#global-query').fill('preload search')
+        early.locator('#global-query').press('Enter')
+        check('shared early search route before catalog hydration ' + str(early_width),
+              early.evaluate('location.hash') == '#/search?q=preload%20search'
+              and early.locator('#breadcrumb').text_content() == 'Search AI Updates')
+        early.screenshot(path=str(out / (
+            'shared-early-search-' + str(early_width) + '.png')))
+        early.close()
     page.goto(base)
     page.locator('#navigation a[href="#/games"]').wait_for()
     # The appearance action belongs to the shared mobile drawer on every page.

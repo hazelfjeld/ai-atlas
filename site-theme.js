@@ -216,6 +216,27 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 /* atlas-native-research-prehydration:end */
 
+/* atlas-shared-search-submit:begin */
+/* One real submit handler for Discover and native pages. This parser-loaded
+   script catches Discover searches before the catalog finishes loading, while
+   native forms retain their no-JavaScript navigation-link fallback. */
+document.addEventListener('submit', event => {
+  const form = event.target;
+  if (!form?.matches?.('#global-search, form.site-mobile-chrome__search-form')) return;
+  event.preventDefault();
+  const query = (form.querySelector('input[type="search"]')?.value || '').trim();
+  const route = form.dataset.searchRoute || '#/search';
+  const destination = route + (query ? '?q=' + encodeURIComponent(query) : '');
+  if (route.startsWith('#/')) {
+    if (window.location.hash === destination) window.dispatchEvent(new Event('hashchange'));
+    else window.location.hash = destination;
+  } else {
+    rememberSearchFocus();
+    window.location.assign(destination);
+  }
+});
+/* atlas-shared-search-submit:end */
+
 /* Real search everywhere: keep the static link as the no-JavaScript fallback,
    and use its relative route on both root and nested reference pages. */
 document.addEventListener('DOMContentLoaded', () => {
@@ -252,12 +273,6 @@ document.addEventListener('DOMContentLoaded', () => {
     hint.textContent = '/';
     hint.setAttribute('aria-hidden', 'true');
     form.append(field, hint, submit);
-    form.addEventListener('submit', event => {
-      event.preventDefault();
-      const query = field.value.trim();
-      rememberSearchFocus();
-      window.location.assign(route + (query ? '?q=' + encodeURIComponent(query) : ''));
-    });
     link.replaceWith(form);
   });
 });

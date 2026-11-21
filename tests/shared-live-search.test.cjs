@@ -11,7 +11,8 @@ test('one progressive search component preserves every native no-JavaScript rout
   assert.match(script,/form\.setAttribute\('role', 'search'\)/);
   assert.match(script,/field\.type = 'search'/);
   assert.match(script,/field\.setAttribute\('aria-label', 'Search AI Updates'\)/);
-  assert.match(script,/window\.location\.assign\(route \+ \(query \? '\?q=' \+ encodeURIComponent\(query\) : ''\)\)/);
+  assert.match(script,/window\.location\.assign\(destination\)/);
+  assert.match(script,/form\?\.matches\?\.\('#global-search, form\.site-mobile-chrome__search-form'\)/);
   assert.match(script,/inline\.focus\(\{preventScroll:true\}\)/);
   for(const route of ['whats-new.html','research.html','playbooks.html','games.html',
     'about.html','terms/MLD-0002-ablation-study.html','technology/TECH-0216-pytorch.html']){

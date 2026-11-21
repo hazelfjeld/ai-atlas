@@ -13,7 +13,8 @@ test('Discover uses the native functional search-submit component once', () => {
   assert.match(form[0], /id="global-query" type="search"/);
   assert.match(form[0], /<kbd>\/<\/kbd><button type="submit" class="site-mobile-chrome__search-submit" aria-label="Submit search">↵<\/button>/);
   assert.equal((form[0].match(/type="submit"/g) || []).length, 1);
-  assert.match(read('app.js'), /\$\('global-search'\)\.addEventListener\('submit',e=>\{e\.preventDefault\(\);goto\('search'/);
+  assert.doesNotMatch(read('app.js'), /\$\('global-search'\)\.addEventListener\('submit'/);
+  assert.match(read('site-theme.js'), /form\?\.matches\?\.\('#global-search, form\.site-mobile-chrome__search-form'\)/);
   assert.match(read('site-theme.js'), /submit.className = 'site-mobile-chrome__search-submit'/);
 });
 
