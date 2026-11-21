@@ -525,7 +525,17 @@ with sync_playwright() as p:
     page.locator('#catalog-loading').wait_for(state='detached')
     hydrated_nav=page.locator('#navigation a.nav-link').evaluate_all(
         "(els)=>els.map(a=>[a.getAttribute('href'),a.textContent.replace(/\\s+/g,' ').trim()])")
-    check('sidebar links and order stay stable after hydration',hydrated_nav==initial_nav)
+    # The one intentional canonical upgrade moves the legacy Research hash
+    # entry to the existing native workspace. Every label, position and other
+    # destination must remain identical; do not weaken the navigation contract.
+    expected_hydrated_nav = [
+        ['research.html' if href == '#/papers' else href, label]
+        for href, label in initial_nav
+    ]
+    check('sidebar order and labels stay stable with one canonical Research destination',
+          hydrated_nav == expected_hydrated_nav
+          and sum(href == 'research.html' for href, _ in hydrated_nav) == 1
+          and all(href != '#/papers' for href, _ in hydrated_nav))
     # A keyboard-activated sidebar link used to keep focus in the old navigation,
     # rather than placing the user at the newly rendered workspace content.
     check('initial hydration does not steal keyboard focus',
