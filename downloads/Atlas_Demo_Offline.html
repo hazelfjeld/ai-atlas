@@ -1989,7 +1989,7 @@ document.addEventListener('pointerdown', (event) => {
 // pointer. This is shared by Discover, editorial and reference page families;
 // script-free native disclosures and mobile modal menus remain untouched.
 document.addEventListener('pointerdown', event => {
-  if (window.innerWidth <= 650) return;
+  if (typeof window === 'undefined' || window.innerWidth <= 650) return;
   document.querySelectorAll(
     'details.site-chrome__more[open], details#additional-navigation[open]'
   ).forEach(menu => {
