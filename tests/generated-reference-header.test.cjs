@@ -25,6 +25,10 @@ test('all generated concept and technology profiles expose their article title w
       assert.ok(html.includes('<span class="site-mobile-chrome__title">' + heading + '</span>'),
         file + ' must expose real static title text without JavaScript');
       assert.equal((html.match(/<main\b/g) || []).length, 1, file);
+      assert.equal((html.match(/href="\.\.\/research\.html"/g) || []).length, 2,
+        file + ' must offer canonical Research from desktop and mobile without JavaScript');
+      assert.doesNotMatch(html, /href="\.\.\/index\.html#\/papers"/,
+        file + ' must not route script-free visitors through the legacy hash workspace');
       if (folder === 'technology' || folder === 'terms') {
         const rail = html.match(/<nav class="site-chrome term-nav"[^>]*>([\s\S]*?)<\/nav><main class="term-shell">/)?.[1];
         assert.ok(rail, file + ' must keep the primary rail outside article content');

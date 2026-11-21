@@ -34,8 +34,8 @@ SECONDARY_DESTINATIONS = (
 def secondary_destination_href(prefix, key, route, canonical_research=False):
     """Share a native Research route across script-free page-family navigation.
 
-    Unmigrated generated detail profiles retain their stable legacy hash link
-    until their deterministic catalog-wide regeneration. Deep links still work.
+    Canonical native Research links are available in all generated catalogs.
+    Legacy hash deep links remain supported separately in Discover and offline.
     """
     assert prefix in ("", "../")
     return prefix + ("research.html" if canonical_research and key == "papers" else route)
