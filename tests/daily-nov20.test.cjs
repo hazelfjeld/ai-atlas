@@ -41,12 +41,17 @@ test('November 20 queued evidence is a single integrity-checked, dated edition',
  assert.equal(receipt.githack_workflow_run_id,44759028287);
  assert.equal(receipt.last_verified_public_url,'https://aiupdates.app/whats-new.html?date=2026-11-20&revision=1');
  assert.ok(receipt.publication_history.some(h=>h.edition==='2026-11-20-v1'&&h.status==='cloudflare_http_browser_and_githack_verified'&&h.verified_at===receipt.production_verified_at));
- assert.equal(index.last_successful_publish_at,receipt.production_verified_at);
- assert.equal(index.status,'edition_revision_1_production_verified');
- assert.equal(index.editions.at(-1).path,entry.path);
- assert.equal(index.status,'edition_revision_1_'+(receipt.production_verified_at?'production_verified':'pending_production_verification'));
+ // Historical production evidence remains certified even after newer
+ // editions enter the index in a pending state.
+ assert.ok(index.editions.some(e=>e.path===entry.path));
  const lastVerified=receipts.filter(r=>r.production_verified_at).at(-1);
  assert.equal(index.last_successful_publish_at,lastVerified.production_verified_at);
+ const latest=index.editions.at(-1);
+ const latestReceipt=receipts.find(r=>r.publication_edition===latest.date+'-v'+latest.revision);
+ assert.ok(latestReceipt,'Every indexed edition needs its source-batch receipt');
+ assert.equal(index.status,'edition_revision_'+latest.revision+
+  (latestReceipt.production_verified_at?'_production_verified':'_pending_production_verification'));
  const archive=fs.readFileSync('whats-new.html','utf8');
- assert.ok(archive.includes('href="'+entry.path+'">November 20, 2026 · reviewed edition JSON</a>'));
+ assert.ok(archive.includes('href="data/daily/index.json"'),
+  'Script-free visitors can inspect the immutable archive register');
 });

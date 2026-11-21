@@ -373,5 +373,5 @@
   ],
   "last_successful_publish_at": "2026-11-20T15:15:36Z",
   "status": "edition_revision_1_pending_production_verification",
-  "coverage_note": "November 21 edition staged after independent source and checksum review; production verification pending. The immutable November 20 edition remains the latest certified public release. Ten catalog proposals remain deferred."
+  "coverage_note": "2026-11-21 revision 1: source-reviewed batch staged with 14 reports; exact Cloudflare/GitHack/hosted-browser verification pending. November 20 remains the last certified public edition. Ten technology/term proposals deferred."
 }

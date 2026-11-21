@@ -180,10 +180,14 @@ test('daily archive shares script-free collection fallback instead of trapping r
   assert.ok(block.includes('href="data/daily/index.json"'), 'Always-current edition register is available');
   assert.ok(block.includes('not a live news feed'), 'Do not present older snapshots as fresh news');
   assert.ok(block.includes('href="about.html"'), 'Coverage and editorial policy stay available');
-  // The static fallback must follow the actual immutable register after each
-  // future daily publication, not freeze on the November 7–9 examples.
+  // The static snapshot must use the newest production-verified editions,
+  // not a newly indexed but still unverified edition or stale examples.
+  // The canonical register remains available for pending editions.
+  const receipts = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data/daily/published-batches.json'), 'utf8')).receipts;
+  const verifiedPaths = new Set(receipts.filter(r=>r.production_verified_at)
+    .map(r=>'data/daily/editions/'+r.publication_edition+'.json'));
   const newestByDate = new Map();
-  for (const edition of published.editions) {
+  for (const edition of published.editions.filter(e=>verifiedPaths.has(e.path))) {
     const old = newestByDate.get(edition.date);
     if (!old || edition.revision > old.revision) newestByDate.set(edition.date, edition);
   }
