@@ -36,3 +36,23 @@ test('script-free legacy aliases share the canonical desktop and mobile active t
     assert.ok(rules.includes('a[href="#/'+canonical+'"]'));
   }
 });
+
+
+test('untabbed script-free Search and Review queue routes clear stale Discover selection', () => {
+  const css=read('site-chrome.css');
+  const index=read('index.html');
+  for(const route of ['search','queue']) {
+    assert.ok(index.includes('<section class="notice" id="/'+route+'">'),
+      route+': the existing fallback heading is the active location');
+    for(const target of [
+      ' #navigation > .site-chrome__links > a.nav-link[data-view="overview"]',
+      ' #navigation > .site-chrome__links > a.nav-link[data-view="overview"] svg',
+      ' .discover-mobile-chrome .site-mobile-chrome__menu > a[href="#/overview"]',
+    ]) {
+      assert.ok(css.includes('html:has(.nojs-primary-routes > .notice[id="/'+route+'"]:target)'+target+','),
+        route+': shared desktop/mobile Discover reset for '+target);
+    }
+  }
+  assert.ok(read('downloads/Atlas_Demo_Offline.html').includes(css),
+    'the download retains the exact shared reset rules');
+});

@@ -82,6 +82,9 @@ with sync_playwright() as p:
                   queue_section.is_visible() and scriptless_page.locator('#page').is_hidden()
                   and queue_section.locator('[role="heading"][aria-level="1"]').text_content() == 'Review queue'
                   and queue_policy.get_attribute('href') == 'about.html')
+            check('Script-free Review queue clears stale Discover rail ' + scriptless_scheme + ' ' + str(queue_width),
+                  scriptless_page.locator('#navigation a[data-view="overview"]').evaluate(
+                      'el => getComputedStyle(el).backgroundColor === "rgba(0, 0, 0, 0)"'))
             if queue_width == 320:
                 scriptless_page.screenshot(path=str(out / (
                     'discover-nojs-queue-' + scriptless_scheme + '-320.png')))
@@ -89,6 +92,11 @@ with sync_playwright() as p:
             scriptless_page.wait_for_url(base + 'about.html', wait_until='domcontentloaded', timeout=15000)
             check('Script-free queue policy destination ' + scriptless_scheme + ' ' + str(queue_width),
                   scriptless_page.locator('main').count() == 1)
+            scriptless_page.goto(base + 'index.html#/search', wait_until='domcontentloaded')
+            check('Script-free Search clears stale Discover rail ' + scriptless_scheme + ' ' + str(queue_width),
+                  scriptless_page.locator('[id="/search"]').is_visible()
+                  and scriptless_page.locator('#navigation a[data-view="overview"]').evaluate(
+                      'el => getComputedStyle(el).backgroundColor === "rgba(0, 0, 0, 0)"'))
         # Native and generated headers deliberately retain the same SPA hash
         # destinations as Discover. Without JS, those hashes now identify
         # real route-specific fallback content rather than a generic home page.
