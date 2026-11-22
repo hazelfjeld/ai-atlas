@@ -171,6 +171,22 @@ with sync_playwright() as p:
                     && (!desktopVisible || getComputedStyle(active).backgroundColor !== getComputedStyle(before).backgroundColor)
                     && (!mobileVisible || getComputedStyle(mobile).backgroundColor !== getComputedStyle(mobileBefore).backgroundColor));
             }""", route_key)
+            if not selected_visual:
+                detail = scriptless_page.evaluate("""key => {
+                    const dsel=key=>document.querySelector(key);
+                    const nodes={overview:dsel('#navigation a[data-view="overview"]'),
+                      active:dsel('#navigation a[data-view="'+key+'"]'),
+                      mobileOverview:dsel('.discover-mobile-chrome .site-mobile-chrome__menu > a[href="#/overview"]'),
+                      mobileActive:dsel('.discover-mobile-chrome .site-mobile-chrome__menu a[href="#/'+key+'"]'),
+                      sidebar:dsel('.sidebar'),mobileHeader:dsel('.discover-mobile-chrome')};
+                    return {hash:location.hash,width:innerWidth,activeTarget:document.querySelector('.notice:target')?.id,
+                      selectors:Object.fromEntries(Object.entries(nodes).map(([k,v])=>[k,{exists:!!v,
+                        display:v?getComputedStyle(v).display:null,
+                        bg:v?getComputedStyle(v).backgroundColor:null,
+                        color:v?getComputedStyle(v).color:null,
+                        classes:v?.className}]))};
+                }""", route_key)
+                print('SCRIPT-FREE ACTIVE DETAIL', scriptless_scheme, route_width, route_key, detail, flush=True)
             check('script-free cross-page current section '+scriptless_scheme+' '+str(route_width)+' '+route_key,
                   selected_visual)
             if route_width in (320, 1280):
