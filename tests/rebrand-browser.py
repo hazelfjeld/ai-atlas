@@ -1825,6 +1825,47 @@ with sync_playwright() as p:
                 if width==390 and theme=='dark' and route in ('index.html','whats-new.html','terms/index.html','games.html'):
                     page.screenshot(path=str(out / f'mobile-frame-{route.replace("/", "-")}-390-dark.png'))
 
+    # One real, shared enhanced More disclosure across Discover, native news,
+    # Research, Games and references. Its background is the dark sidebar in
+    # BOTH themes: matching light-theme body ink here was nearly invisible.
+    for width in (320, 390):
+        page.set_viewport_size({'width':width,'height':844})
+        for theme in ('light', 'dark'):
+            for route in ('index.html', 'whats-new.html', 'research.html',
+                          'terms/index.html', 'games.html'):
+                page.goto(base + route)
+                page.evaluate('(value) => localStorage.setItem("atlas.theme", value)', theme)
+                page.reload()
+                page.locator('.site-mobile-chrome__nav > summary').first.click()
+                more = page.locator('details.site-mobile-chrome__more').first
+                check(f'{route} {width}px {theme} has one shared enhanced More disclosure',
+                      more.count() == 1 and more.is_visible() and
+                      page.locator('html.atlas-enhanced').count() == 1)
+                result = more.locator('summary').evaluate("""el => {
+                    const menu = el.closest('.site-mobile-chrome__menu');
+                    const color = getComputedStyle(el).color;
+                    const background = getComputedStyle(el).backgroundColor;
+                    const rail = getComputedStyle(menu).backgroundColor;
+                    const lum = value => {
+                        const parts = value.match(/[\\d.]+/g).slice(0,3).map(Number);
+                        const channels = parts.map(x => {
+                            const c=x/255;
+                            return c<=.04045 ? c/12.92 : ((c+.055)/1.055)**2.4;
+                        });
+                        return .2126*channels[0]+.7152*channels[1]+.0722*channels[2];
+                    };
+                    const contrast = (a,b) => {
+                        const x=lum(a), y=lum(b);
+                        return (Math.max(x,y)+.05)/(Math.min(x,y)+.05);
+                    };
+                    const surface = background === 'rgba(0, 0, 0, 0)' ? rail : background;
+                    return {contrast:contrast(color,surface), color, surface};
+                }""")
+                check(f'{route} {width}px {theme} More label meets WCAG AA',
+                      result['contrast'] >= 4.5)
+                if width == 390 and route == 'research.html':
+                    page.screenshot(path=str(out / f'enhanced-more-research-{theme}.png'))
+
     # One footer frame across Discover, dated news, reference directories and
     # Games. Verify the actual computed layout with scripts unavailable: static
     # policy/evidence links must work without a hydration-only replacement.
