@@ -34,8 +34,14 @@ test('November 21 edition is SHA-256 pinned, source-reviewed and not prematurely
  assert.equal(edition.coverage.status,'partial');
  assert.equal(edition.coverage.sources_failed.length,1);
  assert.ok(receipt.publication_history.some(h=>h.status==='pending_production_verification'));
- const latestReceipt=receipts.find(r=>r.publication_edition==='2026-11-21-v1');
- assert.equal(index.status,'edition_revision_1_'+(latestReceipt.production_verified_at?'production_verified':'pending_production_verification'));
+ const historicReceipt=receipts.find(r=>r.publication_edition==='2026-11-21-v1');
+ assert.ok(historicReceipt.production_verified_at,
+   'November 21 preserves its independent production certification after later editions');
+ const active=index.editions.at(-1),activeReceipt=receipts.find(r=>r.publication_edition===active.date+'-v'+active.revision);
+ assert.ok(activeReceipt,'Current indexed edition must have a receipt');
+ assert.equal(index.status,'edition_revision_'+active.revision+'_'+
+   (activeReceipt.production_verified_at?'production_verified':'pending_production_verification'),
+   'The current archive banner follows the newest edition, never overwrites Nov 21 history');
  const latestVerified=receipts.filter(r=>r.production_verified_at).at(-1);
  assert.equal(index.last_successful_publish_at,latestVerified.production_verified_at);
  const sourceFree=fs.readFileSync('whats-new.html','utf8');
