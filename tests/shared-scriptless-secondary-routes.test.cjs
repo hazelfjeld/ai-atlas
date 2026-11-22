@@ -46,3 +46,29 @@ test('secondary navigation hash routes remain accessible without JavaScript acro
   assert.ok(read('scripts/build_offline.py').includes('Missing script-free route handoff'));
   assert.match(read('scripts/site_chrome.py'), /SECONDARY_DESTINATIONS = \(/);
 });
+
+test('script-free hash navigation does not announce Discover as the wrong current section', () => {
+  const index = read('index.html');
+  const offline = read('downloads/Atlas_Demo_Offline.html');
+  const generator = read('scripts/site_chrome.py');
+  for (const html of [index, offline]) {
+    const rail = html.split('<div id="navigation">')[1].split('</details></div><div class="sidebar-bottom">')[0];
+    const drawer = html.split('id="discover-mobile-nav"')[1].split('</nav></details></div>')[0];
+    assert.ok(!/<a[^>]+data-view="overview"[^>]+aria-current=/.test(rail),
+      'a hash route must not be announced as Discover before routing');
+    assert.ok(!drawer.includes('href="#/overview" aria-current="page">Discover'),
+      'mobile hash routes must not incorrectly announce Discover');
+    const fallback = html.split('<!-- atlas-nojs-primary-hash-routes:begin -->')[1]
+      .split('<!-- atlas-nojs-primary-hash-routes:end -->')[0];
+    for (const key of ['dictionary','technologies','games','safety','papers',
+                       'compare','saved','sources','queue','search']) {
+      assert.ok(fallback.includes('<section class="notice" id="/' + key +
+        '"><div role="heading" aria-level="1" aria-current="location">'),
+        key + ': only the :target heading is exposed as the current location');
+    }
+  }
+  assert.ok(generator.includes('aria-current at DOMContentLoaded'),
+    'the shared Discover generator must not restore stale semantics');
+  assert.ok(read('site-theme.js').includes("link.setAttribute('aria-current', 'page')"),
+    'enhanced shared navigation restores the precise current section');
+});

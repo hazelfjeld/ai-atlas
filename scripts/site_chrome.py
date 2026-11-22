@@ -442,7 +442,6 @@ def render_discover_primary(term_count, tech_count):
     parts = []
     for (route, label), (key, kind, icon) in zip(DESTINATIONS, DISCOVER_LINKS, strict=True):
         href = route.removeprefix("index.html")
-        current = ' aria-current="page"' if key == "overview" else ""
         cls = "nav-link active" if key == "overview" else "nav-link"
         count = ('<span class="nav-count">' + format(term_count, ",") + '</span>'
                  if key == "dictionary" else
@@ -451,7 +450,7 @@ def render_discover_primary(term_count, tech_count):
         alias = (' data-view-aliases="' + ROUTE_ALIASES[key] + '"'
                  if key in ROUTE_ALIASES else '')
         parts.append('<a class="' + cls + '" data-' + kind + '="' + key +
-                     '" href="' + href + '"' + alias + current + '>' + icon +
+                     '" href="' + href + '"' + alias + '>' + icon +
                      '<span>' + escape(label) + '</span>' + count + '</a>')
     return "".join(parts)
 
@@ -472,9 +471,15 @@ def render_discover_mobile():
     )
     assert mobile.count('aria-label="Toggle navigation"') == 1
     assert mobile.count('href="research.html">Research library') == 1
+    # The initial route is hash-dependent. The shared client router assigns
+    # aria-current at DOMContentLoaded; do not statically announce Discover
+    # as current when no-JavaScript native links target another hash view.
+    assert mobile.count('href="index.html#/overview" aria-current="page">Discover') == 1
     return (mobile.replace('aria-label="Toggle navigation"',
                            'aria-label="Toggle navigation · Discover"', 1)
-                  .replace('href="index.html#/', 'href="#/'))
+                  .replace('href="index.html#/', 'href="#/')
+                  .replace('href="#/overview" aria-current="page">Discover',
+                           'href="#/overview">Discover', 1))
 
 
 def normalize_discover_sidebar(html, term_count, tech_count):
