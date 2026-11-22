@@ -1937,7 +1937,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const searchLabel = route === 'search'
     ? document.getElementById('global-query')?.getAttribute('aria-label')?.trim()
     : '';
-  if (!current && !searchLabel) return; // Unknown routes retain the safe fallback.
+  // Review queue is also a real workspace without a primary navigation tab.
+  // Give it the same early mobile/desktop title and clear the stale Discover
+  // selection while catalog hydration is pending, as already done for Search.
+  const untabbedLabel = route === 'queue' ? 'Review queue' : searchLabel;
+  if (!current && !untabbedLabel) return; // Unknown routes retain the safe fallback.
   for (const link of links) {
     const active = link === current;
     link.classList.toggle('active', active);
@@ -1961,7 +1965,7 @@ document.addEventListener('DOMContentLoaded', () => {
       delete details.dataset.atlasAutoOpened;
     }
   }
-  const name = current?.querySelector('span:not(.nav-count)')?.textContent?.trim() || searchLabel;
+  const name = current?.querySelector('span:not(.nav-count)')?.textContent?.trim() || untabbedLabel;
   const breadcrumb = document.getElementById('breadcrumb');
   if (name && breadcrumb) breadcrumb.textContent = name;
   const header = document.querySelector('.discover-mobile-chrome');

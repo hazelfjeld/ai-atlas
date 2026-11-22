@@ -129,6 +129,31 @@ test('native Research entry remains current when its canonical mobile href diffe
     'hydrated navigation must reuse the same shared selector');
 });
 
+test('review queue has correct shared navigation context before catalog hydration', () => {
+  const state = exercise('#/queue');
+  assert.equal(state.links.filter(link => link.attrs.has('aria-current')).length, 0,
+    'a non-tabbed workspace must not announce Discover as current');
+  assert.equal(state.mobile.filter(link => link.attrs.has('aria-current')).length, 0);
+  assert.equal(state.title.textContent, 'Review queue');
+  assert.equal(state.header.dataset.pageLabel, 'Review queue');
+  assert.equal(state.toggleAttrs.get('aria-label'), 'Toggle navigation · Review queue');
+  assert.equal(state.cleared, 1, 'remove the unrelated Discover teaser');
+  assert.equal(state.mainMore.open, false);
+  assert.equal(state.mobileMore.open, false);
+  assert.ok(read('index.html').includes('id="/queue"><div role="heading" aria-level="1" aria-current="location">Review queue</div>'),
+    'script-free destination and hydrated workspace keep the same label');
+  state.navigate('#/safety');
+  assert.equal(state.links.find(link => link.dataset.view === 'safety').attrs.get('aria-current'), 'page');
+  assert.equal(state.header.dataset.pageLabel, 'Safety observatory');
+  state.navigate('#/queue');
+  assert.equal(state.links.filter(link => link.attrs.has('aria-current')).length, 0);
+  assert.equal(state.mainMore.open, false, 'auto-opened secondary rail collapses on queue');
+  assert.equal(state.header.dataset.pageLabel, 'Review queue');
+  state.navigate('#/overview');
+  assert.equal(state.links[0].attrs.get('aria-current'), 'page');
+  assert.equal(state.header.dataset.pageLabel, 'Discover');
+});
+
 test('cross-page search opens the real search workspace before catalog hydration', () => {
   const state = exercise('#/search?q=reward%20hacking');
   // The global search is a workspace, not a fake eighth primary rail tab.
