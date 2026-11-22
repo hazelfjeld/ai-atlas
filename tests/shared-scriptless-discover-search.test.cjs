@@ -54,8 +54,15 @@ test('script-free primary hash routes expose real static destinations without ch
   }
   assert.ok(html.includes('<!-- atlas-nojs-primary-hash-routes:begin -->' + String.fromCharCode(10) + '<noscript>'),
     'the route-specific fallback is gated to browsers with JavaScript disabled');
-  assert.ok(html.indexOf('<!-- atlas-nojs-primary-hash-routes:begin -->') > html.indexOf('<!-- discovery:end -->'),
-    'the fallback must survive deterministic Discover regeneration');
+  for (const page of [html, offline]) {
+    assert.ok(page.indexOf('<!-- atlas-nojs-primary-hash-routes:begin -->') <
+      page.indexOf('<div id="page"><!-- discovery:start -->'),
+      'script-free native destinations come before the long Discover feed');
+    assert.ok(page.includes('<div id="page"><!-- discovery:start -->'),
+      'preserve the canonical generated Discover preview without changing its boundary');
+    assert.ok(page.includes('.nojs-primary-routes>.notice:not(:target){display:none!important}'),
+      'only the requested hash destination is shown, not nine fallback notices');
+  }
   assert.ok(html.includes('.nojs-primary-routes>.notice:target'),
     'the requested section gets an accessible visible focus ring');
   assert.ok(html.includes('href="#/dictionary" data-view-aliases="terms"'),

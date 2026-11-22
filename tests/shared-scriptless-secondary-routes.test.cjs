@@ -13,6 +13,13 @@ test('secondary navigation hash routes remain accessible without JavaScript acro
     ['saved', 'terms/index.html', 'concepts'],
     ['sources', 'about.html', 'policy']
   ];
+  for (const page of [html, offline]) {
+    assert.ok(page.indexOf('<!-- atlas-nojs-primary-hash-routes:begin -->') <
+      page.indexOf('<div id="page"><!-- discovery:start -->'),
+      'cross-page no-JavaScript destination appears above Discover without breaking the generated preview');
+    assert.ok(page.includes('.nojs-primary-routes:not(:has(> .notice:target)){display:none!important}'),
+      'the default Discover page is not cluttered with inactive fallback sections');
+  }
   const region = html.slice(html.indexOf('<!-- atlas-nojs-primary-hash-routes:begin -->'),
     html.indexOf('<!-- atlas-nojs-primary-hash-routes:end -->'));
   assert.ok(region.startsWith('<!-- atlas-nojs-primary-hash-routes:begin -->\n<noscript>'));

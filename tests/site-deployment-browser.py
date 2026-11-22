@@ -59,7 +59,8 @@ with sync_playwright() as p:
             check('Discover no-JS truthful search fallback ' + scriptless_scheme + ' ' + str(scriptless_width),
                   scriptless_page.locator('#global-search').is_hidden()
                   and fallback.count() == 1 and fallback.is_visible()
-                  and fallback.get_attribute('href') == 'terms/index.html')
+                  and fallback.get_attribute('href') == 'terms/index.html'
+                  and scriptless_page.locator('.nojs-primary-routes').is_hidden())
             if scriptless_width in (320, 1280):
                 scriptless_page.screenshot(path=str(out / (
                     'discover-nojs-search-' + scriptless_scheme + '-' +
@@ -93,6 +94,7 @@ with sync_playwright() as p:
                   scriptless_page.url.endswith('/index.html#/' + route_key)
                   and fallback_route.is_visible()
                   and fallback_route.locator('a[href="' + catalog_href + '"]').count() == 1
+                  and scriptless_page.locator('.nojs-primary-routes > section.notice:visible').count() == 1
                   and frame is not None and frame['y'] < 844 and frame['y']+frame['height'] > 0)
             if route_width in (320, 1280):
                 scriptless_page.screenshot(path=str(out / (
@@ -139,6 +141,7 @@ with sync_playwright() as p:
                   scriptless_page.url.endswith('/index.html#/' + section)
                   and fallback.is_visible()
                   and fallback.locator('a[href="' + target_path + '"]').count() == 1
+                  and scriptless_page.locator('.nojs-primary-routes > section.notice:visible').count() == 1
                   and frame is not None and frame['y'] < 844
                   and frame['y'] + frame['height'] > 0)
             if secondary_width in (320, 1280):
