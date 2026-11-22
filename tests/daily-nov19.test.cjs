@@ -27,7 +27,12 @@ test('November 19 source-reviewed queue becomes exactly one immutable partially 
  assert.ok(e.news.every(n=>n.source_record_id&&n.review_status&&n.caveat&&n.source_url.startsWith('https://')));
  assert.ok(e.news.some(n=>n.id.includes('mlperf')&&n.publication_date==='2026-11-16'&&n.event_date==='2026-11-18'),'Catch-up post retains distinct post/update dates');
  const html=fs.readFileSync('whats-new.html','utf8');
- assert.ok(html.includes('href="'+entry.path+'"'),'Latest archive remains accessible without JavaScript');
+ assert.ok(html.includes('href="data/daily/index.json"'),
+   'The script-free archive retains its durable complete edition register');
+ assert.ok(idx.editions.some(x=>x.path===entry.path),
+   'Historic November 19 permalink remains discoverable when it leaves the latest-three preview');
+ assert.ok(fs.existsSync(entry.path),
+   'The original immutable edition stays directly readable without JavaScript');
  assert.equal(receipt.publication_outcome,'immutable_revision_1_cloudflare_http_browser_and_githack_verified');
  assert.equal(receipt.production_commit,'75eb1d33811831f79c2c38fa6aa7a424025ee94c');
  assert.equal(receipt.production_workflow_run_id,44600094128);
