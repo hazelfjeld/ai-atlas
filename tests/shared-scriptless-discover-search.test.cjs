@@ -27,7 +27,7 @@ test('script-free navigation never announces a catalog that cannot finish loadin
   const online = read('index.html');
   const offline = read('downloads/Atlas_Demo_Offline.html');
   for (const [file, html] of [['index.html', online], ['offline demo', offline]]) {
-    const style = html.match(/<noscript><style>([\\s\\S]*?)<\\/style><\\/noscript>/)?.[1];
+    const style = html.match(/<noscript><style>([\s\S]*?)<\/style><\/noscript>/)?.[1];
     assert.ok(style, file + ' retains a script-free-only style block');
     assert.ok(style.includes('#catalog-loading{display:none!important}'),
       file + ' hides the otherwise permanent loading status when scripts are disabled');
