@@ -48,6 +48,13 @@ test('The public archive clock and visible release status agree with the latest 
     assert.ok(receipt.production_workflow_run_id > 0, 'Production proof must identify the completed workflow');
     assert.equal(receipt.last_verified_public_url,
       'https://aiupdates.app/whats-new.html?date=' + entry.date + '&revision=' + entry.revision);
+    // The public index must not keep a stale pending banner after its receipt is certified.
+    assert.ok(archive.coverage_note.startsWith(entry.date + ' v' + entry.revision),
+      'Coverage note must describe the current immutable edition');
+    assert.match(archive.coverage_note, /production.verified/i,
+      'Archive and static fallback must agree on verified publication');
+    assert.doesNotMatch(archive.coverage_note, /pending exact Cloudflare\/GitHack\/browser checks/i,
+      'Old pending deploy copy must not survive successful production verification');
   }
   const reader = read('whats-new.js');
   assert.ok(reader.includes('Last successful publication: '), 'Archive must surface the actual verified clock');

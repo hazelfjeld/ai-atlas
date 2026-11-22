@@ -381,5 +381,5 @@
   ],
   "last_successful_publish_at": "2026-11-22T14:51:45Z",
   "status": "edition_revision_1_production_verified",
-  "coverage_note": "2026-11-22 v1 pending exact Cloudflare/GitHack/browser checks: 8 primary-source reviewed reports, all published Nov19 or Nov21; three Reuters reports and seven catalog proposals deferred, six source-access failures/limitations; partial overlap collection and no complete cutoff."
+  "coverage_note": "2026-11-22 v1 production-verified on November 22 (Cloudflare workflow 45033807744; catalog/GitHack workflow 45033807733): eight primary-source-reviewed reports published November 19 or 21. Three Reuters reports and seven catalog proposals deferred, six source-access limitations; overlapping partial collection, not exhaustive coverage. The exact dated query permalink was not independently retrievable; production archive reader and immutable edition asset were verified by CI."
 }
