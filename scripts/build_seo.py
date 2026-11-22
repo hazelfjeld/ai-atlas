@@ -56,6 +56,46 @@ def sync_scriptfree_daily_archive(html):
             continue
         if day not in latest or revision > latest[day]['revision']:
             latest[day] = edition
+    # The same release receipt also owns the script-free headline preview.
+    # This prevents an older dated headline appearing alongside an already
+    # certified newer edition when JavaScript is unavailable.
+    if latest:
+        newest_day = sorted(latest, reverse=True)[0]
+        newest_entry = latest[newest_day]
+        edition_bytes = (ROOT / newest_entry['path']).read_bytes()
+        assert len(edition_bytes) == newest_entry['bytes']
+        assert sha256(edition_bytes).hexdigest() == newest_entry['sha256']
+        edition = json.loads(edition_bytes)
+        assert edition['edition_date'] == newest_day
+        assert edition['news'], 'Latest certified edition needs actual reviewed reports'
+        parsed_day = date.fromisoformat(newest_day)
+        display_date = f"{parsed_day.strftime('%B')} {parsed_day.day}, {parsed_day.year}"
+        stories = []
+        for row in edition['news'][:3]:
+            assert row['review_status'].startswith('publisher_reviewed_')
+            assert row['source_url'].startswith('https://')
+            source_date = row.get('publication_date') or 'unreported'
+            stories.append(
+                '<li><article><h3><a href="' + e(row['source_url'], quote=True) +
+                '" rel="noopener noreferrer">' + e(row['title']) + '</a></h3><p>' +
+                e(row['summary']) + '</p><small>Source published ' +
+                e(source_date) + ' · Primary report reviewed; independent replication not established'
+                '</small></article></li>'
+            )
+        intro = (
+            f'<h2>{parsed_day.strftime("%B")} {parsed_day.day} reviewed reports</h2>'
+            '<p>Selected headlines from the production-verified ' + display_date +
+            ' edition. Source dates appear on each story. This curated collection '
+            'is not a live news feed, and publisher or author claims are not '
+            'independently replicated.</p><ol class="site-static-fallback__stories" '
+            'data-edition-date="' + newest_day + '">' + ''.join(stories) + '</ol>'
+        )
+        preview_start = html.index('>', html.index(
+            '<section class="site-static-fallback" id="scriptfree-daily-archive"')) + 1
+        preview_end = html.index(
+            '<h3 class="site-static-fallback__archive-title">', preview_start)
+        html = html[:preview_start] + intro + html[preview_end:]
+
     links = []
     for day in sorted(latest, reverse=True)[:3]:
         entry = latest[day]
