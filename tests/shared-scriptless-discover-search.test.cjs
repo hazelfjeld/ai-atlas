@@ -88,8 +88,8 @@ test('script-free deep links replace unrelated Discover feed with their requeste
       file + ' still hides unrequested hash fallback notices');
     for (const section of ['dictionary', 'technologies', 'games', 'safety', 'papers',
                            'compare', 'saved', 'sources', 'search']) {
-      assert.ok(html.includes('<section class="notice" id="/' + section + '"><h1>'),
-        file + ': ' + section + ' has a real heading when the Discover feed is hidden');
+      assert.ok(html.includes('<section class="notice" id="/' + section + '"><h2 role="heading" aria-level="1">'),
+        file + ': ' + section + ' has an accessible level-one heading when the Discover feed is hidden');
     }
     assert.ok(html.includes('<div id="page"><!-- discovery:start -->'),
       file + ' preserves the enhanced Discover workspace and its source boundary');

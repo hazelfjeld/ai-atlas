@@ -133,7 +133,7 @@ with sync_playwright() as p:
             check('cross-page no-JS hash route '+scriptless_scheme+' '+str(route_width)+' '+route_key,
                   scriptless_page.url.endswith('/index.html#/' + route_key)
                   and fallback_route.is_visible()
-                  and fallback_route.locator('h1').count() == 1
+                  and fallback_route.locator('h2[role="heading"][aria-level="1"]').count() == 1
                   and scriptless_page.locator('#page').is_hidden()
                   and fallback_route.locator('a[href="' + catalog_href + '"]').count() == 1
                   and scriptless_page.locator('.nojs-primary-routes > section.notice:visible').count() == 1
@@ -184,7 +184,7 @@ with sync_playwright() as p:
                   ' ' + str(secondary_width) + ' ' + section,
                   scriptless_page.url.endswith('/index.html#/' + section)
                   and fallback.is_visible()
-                  and fallback.locator('h1').count() == 1
+                  and fallback.locator('h2[role="heading"][aria-level="1"]').count() == 1
                   and scriptless_page.locator('#page').is_hidden()
                   and fallback.locator('a[href="' + target_path + '"]').count() == 1
                   and scriptless_page.locator('.nojs-primary-routes > section.notice:visible').count() == 1
