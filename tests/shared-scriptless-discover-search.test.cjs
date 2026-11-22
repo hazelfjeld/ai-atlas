@@ -102,7 +102,7 @@ test('script-free deep links replace unrelated Discover feed with their requeste
     assert.ok(html.includes('.nojs-primary-routes>.notice:not(:target){display:none!important}'),
       file + ' still hides unrequested hash fallback notices');
     for (const section of ['dictionary', 'technologies', 'games', 'safety', 'papers',
-                           'compare', 'saved', 'sources', 'search']) {
+                           'compare', 'saved', 'sources', 'queue', 'search']) {
       assert.ok(html.includes('<section class="notice" id="/' + section + '"><div role="heading" aria-level="1">'),
         file + ': ' + section + ' has an accessible level-one heading when the Discover feed is hidden');
     }

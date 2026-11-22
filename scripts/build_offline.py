@@ -66,6 +66,8 @@ def main():
          'href="https://aiupdates.app/research.html" title="Online research library; internet required" data-nojs-static="research"', 2),
         ('href="#/sources" data-nojs-static="policy"',
          'href="https://aiupdates.app/about.html" title="Online editorial policy; internet required" data-nojs-static="policy"', 1),
+        ('href="#/sources" data-nojs-static="queue-policy"',
+         'href="https://aiupdates.app/about.html" title="Online editorial policy; internet required" data-nojs-static="queue-policy"', 1),
     ):
         assert html.count(original) == expected, 'Missing script-free route handoff: ' + original
         html = html.replace(original, replacement)

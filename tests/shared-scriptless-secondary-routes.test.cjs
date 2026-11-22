@@ -11,7 +11,8 @@ test('secondary navigation hash routes remain accessible without JavaScript acro
     ['papers', 'research.html', 'research'],
     ['compare', 'technology/index.html', 'technologies'],
     ['saved', 'terms/index.html', 'concepts'],
-    ['sources', 'about.html', 'policy']
+    ['sources', 'about.html', 'policy'],
+    ['queue', 'about.html', 'queue-policy']
   ];
   for (const page of [html, offline]) {
     assert.ok(page.indexOf('<!-- atlas-nojs-primary-hash-routes:begin -->') <
@@ -40,6 +41,8 @@ test('secondary navigation hash routes remain accessible without JavaScript acro
         route + ' keeps the shared native secondary route ' + key);
     }
   }
+  assert.ok(read('app.js').includes('href="#/queue"'),
+    'the existing Safety workspace still links to its review queue');
   assert.ok(read('scripts/build_offline.py').includes('Missing script-free route handoff'));
   assert.match(read('scripts/site_chrome.py'), /SECONDARY_DESTINATIONS = \(/);
 });

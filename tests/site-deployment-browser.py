@@ -71,6 +71,24 @@ with sync_playwright() as p:
             check('Discover no-JS browse navigation ' + scriptless_scheme + ' ' + str(scriptless_width),
                   scriptless_page.url.endswith('/terms/index.html')
                   and scriptless_page.locator('main').count() == 1)
+        # The existing Safety review-queue link has no primary navigation tab.
+        # Without JavaScript its hash needs a truthful, focused fallback.
+        for queue_width in (320, 1280):
+            scriptless_page.set_viewport_size({'width': queue_width, 'height': 844})
+            scriptless_page.goto(base + 'index.html#/queue', wait_until='domcontentloaded')
+            queue_section = scriptless_page.locator('[id="/queue"]')
+            queue_policy = queue_section.locator('a[data-nojs-static="queue-policy"]')
+            check('Script-free review queue ' + scriptless_scheme + ' ' + str(queue_width),
+                  queue_section.is_visible() and scriptless_page.locator('#page').is_hidden()
+                  and queue_section.locator('[role="heading"][aria-level="1"]').text_content() == 'Review queue'
+                  and queue_policy.get_attribute('href') == 'about.html')
+            if queue_width == 320:
+                scriptless_page.screenshot(path=str(out / (
+                    'discover-nojs-queue-' + scriptless_scheme + '-320.png')))
+            queue_policy.click()
+            scriptless_page.wait_for_url(base + 'about.html', wait_until='domcontentloaded', timeout=15000)
+            check('Script-free queue policy destination ' + scriptless_scheme + ' ' + str(queue_width),
+                  scriptless_page.locator('main').count() == 1)
         # Native and generated headers deliberately retain the same SPA hash
         # destinations as Discover. Without JS, those hashes now identify
         # real route-specific fallback content rather than a generic home page.
