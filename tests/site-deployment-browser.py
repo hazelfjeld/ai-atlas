@@ -192,6 +192,43 @@ with sync_playwright() as p:
             if route_width in (320, 1280):
                 scriptless_page.screenshot(path=str(out / (
                     'discover-nojs-route-'+route_key+'-'+scriptless_scheme+'-'+str(route_width)+'.png')))
+        # Legacy public hash aliases must land on the same real script-free
+        # destination and selected shared rail as their canonical routes.
+        for alias_width, legacy_key, canonical_key, destination in (
+                (320, 'terms', 'dictionary', 'terms/index.html'),
+                (390, 'alerts', 'safety', 'research.html'),
+                (1280, 'coverage', 'sources', 'about.html')):
+            scriptless_page.set_viewport_size({'width': alias_width, 'height': 844})
+            scriptless_page.goto(base + 'research.html')
+            scriptless_page.goto(base + 'index.html#/' + legacy_key,
+                                 wait_until='domcontentloaded')
+            alias_section = scriptless_page.locator(
+                '.nojs-primary-routes > section[id="/' + legacy_key + '"]')
+            check('script-free legacy alias ' + scriptless_scheme + ' ' +
+                  str(alias_width) + ' ' + legacy_key,
+                  scriptless_page.url.endswith('/index.html#/' + legacy_key)
+                  and alias_section.is_visible()
+                  and scriptless_page.locator('#page').is_hidden()
+                  and scriptless_page.locator('.nojs-primary-routes > section.notice:visible').count() == 1
+                  and scriptless_page.get_by_role('heading', level=1).count() == 1
+                  and alias_section.locator('a[href="' + destination + '"]').count() == 1)
+            check('legacy alias retains canonical rail selection ' + legacy_key,
+                  scriptless_page.evaluate("""key => {
+                      const nav=document.querySelector('#navigation');
+                      const active=nav?.querySelector('a[data-view="'+key+'"]');
+                      const discover=nav?.querySelector('a[data-view="overview"]');
+                      return !!(active && discover &&
+                        getComputedStyle(active).backgroundColor !==
+                          getComputedStyle(discover).backgroundColor);
+                  }""", canonical_key))
+            if alias_width in (320, 1280):
+                scriptless_page.screenshot(path=str(out / (
+                    'discover-nojs-legacy-' + legacy_key + '-' +
+                    scriptless_scheme + '-' + str(alias_width) + '.png')))
+            alias_section.locator('a[href="' + destination + '"]').click()
+            check('script-free legacy alias reaches native catalog ' + legacy_key,
+                  scriptless_page.url.endswith('/' + destination)
+                  and scriptless_page.locator('main').count() == 1)
         # Shared native secondary links also need useful script-free content.
         # The Research route itself is already canonical; the remaining
         # hash workspaces must not fall through to generic Discover content.

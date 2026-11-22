@@ -24,3 +24,15 @@ test('shared nav follows script-free cross-page hash fallback on desktop and mob
   assert.ok(read('downloads/Atlas_Demo_Offline.html').includes(css),
     'offline embeds the exact shared stylesheet without URL-rewrite drift');
 });
+
+test('script-free legacy aliases share the canonical desktop and mobile active treatment', () => {
+  const css=read('site-chrome.css');
+  const start=css.indexOf('/* atlas-scriptless-current-visual:begin */');
+  const end=css.indexOf('/* atlas-scriptless-current-visual:end */');
+  const rules=css.slice(start,end);
+  for(const [canonical,alias] of [['dictionary','terms'],['safety','alerts'],['sources','coverage']]){
+    assert.ok(rules.includes('html:is(:has(.nojs-primary-routes > .notice[id="/'+canonical+'"]:target),:has(.nojs-primary-routes > .notice[id="/'+alias+'"]:target))'));
+    assert.ok(rules.includes('a.nav-link[data-view="'+canonical+'"]'));
+    assert.ok(rules.includes('a[href="#/'+canonical+'"]'));
+  }
+});

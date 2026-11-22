@@ -72,3 +72,30 @@ test('script-free hash navigation does not announce Discover as the wrong curren
   assert.ok(read('site-theme.js').includes("link.setAttribute('aria-current', 'page')"),
     'enhanced shared navigation restores the precise current section');
 });
+
+test('legacy Discover aliases retain the same script-free destination and canonical active rail', () => {
+  const hosted = read('index.html'), offline = read('downloads/Atlas_Demo_Offline.html');
+  const css = read('site-chrome.css'), generator = read('scripts/site_chrome.py');
+  const cases = [
+    ['terms', 'dictionary', 'terms/index.html', 'concepts'],
+    ['alerts', 'safety', 'research.html', 'research'],
+    ['coverage', 'sources', 'about.html', 'policy']
+  ];
+  const section = (block, id) => block.match(new RegExp('<section class="notice" id="/' + id + '">[\\s\\S]*?<\\/section>'))?.[0];
+  for (const [alias, canonical, destination, kind] of cases) {
+    assert.ok(generator.includes('"' + canonical + '": "' + alias + '"'), 'alias derives from canonical route vocabulary');
+    for (const [name, html] of [['hosted', hosted], ['offline', offline]]) {
+      const block = html.split('<!-- atlas-nojs-primary-hash-routes:begin -->')[1]
+        .split('<!-- atlas-nojs-primary-hash-routes:end -->')[0];
+      const original = section(block, canonical), legacy = section(block, alias);
+      assert.ok(original && legacy, name + ': both legacy and canonical targets exist');
+      assert.equal(legacy.replace('id="/' + alias + '"', 'id="/' + canonical + '"'), original,
+        name + ': legacy route uses the same accessible, source-qualified content');
+      assert.ok(legacy.includes('data-nojs-static="' + kind + '"'));
+      const expected = name === 'hosted' ? destination : 'https://aiupdates.app/' + destination;
+      assert.ok(legacy.includes('href="' + expected + '"'), name + ': usable destination');
+    }
+    assert.ok(css.includes('.notice[id="/' + canonical + '"]:target),:has(.nojs-primary-routes > .notice[id="/' + alias + '"]:target))'),
+      alias + ': legacy route shares the canonical visible active-section treatment');
+  }
+});
