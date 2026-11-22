@@ -1499,7 +1499,7 @@ html:has(.nojs-primary-routes > .notice[id="/dictionary"]:target) .discover-mobi
 html:has(.nojs-primary-routes > .notice[id="/technologies"]:target) .discover-mobile-chrome .site-mobile-chrome__menu a[href="#/technologies"],
 html:has(.nojs-primary-routes > .notice[id="/games"]:target) .discover-mobile-chrome .site-mobile-chrome__menu a[href="#/games"],
 html:has(.nojs-primary-routes > .notice[id="/safety"]:target) .discover-mobile-chrome .site-mobile-chrome__menu a[href="#/safety"],
-html:has(.nojs-primary-routes > .notice[id="/papers"]:target) .discover-mobile-chrome .site-mobile-chrome__menu a[href="research.html"],
+html:has(.nojs-primary-routes > .notice[id="/papers"]:target) .discover-mobile-chrome .site-mobile-chrome__more-links > a:nth-of-type(2),
 html:has(.nojs-primary-routes > .notice[id="/compare"]:target) .discover-mobile-chrome .site-mobile-chrome__menu a[href="#/compare"],
 html:has(.nojs-primary-routes > .notice[id="/saved"]:target) .discover-mobile-chrome .site-mobile-chrome__menu a[href="#/saved"],
 html:has(.nojs-primary-routes > .notice[id="/sources"]:target) .discover-mobile-chrome .site-mobile-chrome__menu a[href="#/sources"]{
