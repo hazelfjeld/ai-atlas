@@ -158,16 +158,18 @@ with sync_playwright() as p:
                   and fallback_route.locator('a[href="' + catalog_href + '"]').count() == 1
                   and scriptless_page.locator('.nojs-primary-routes > section.notice:visible').count() == 1
                   and frame is not None and frame['y'] < 844 and frame['y']+frame['height'] > 0)
-            # The script-free section visibly selects the same existing
-            # desktop and mobile destinations after crossing from native pages.
+            # Check the actually visible navigation at each breakpoint (not a
+            # hidden desktop or mobile duplicate); both layouts are exercised.
             selected_visual = scriptless_page.evaluate("""key => {
                 const before=document.querySelector('#navigation a[data-view="overview"]');
                 const active=document.querySelector('#navigation a[data-view="'+key+'"]');
                 const mobile=document.querySelector('.discover-mobile-chrome .site-mobile-chrome__menu a[href="#/'+key+'"]');
                 const mobileBefore=document.querySelector('.discover-mobile-chrome .site-mobile-chrome__menu > a[href="#/overview"]');
-                return !!(before && active && mobile && mobileBefore
-                    && getComputedStyle(active).backgroundColor !== getComputedStyle(before).backgroundColor
-                    && getComputedStyle(mobile).backgroundColor !== getComputedStyle(mobileBefore).backgroundColor);
+                const desktopVisible=getComputedStyle(document.querySelector('.sidebar')).display!=='none';
+                const mobileVisible=getComputedStyle(document.querySelector('.discover-mobile-chrome')).display!=='none';
+                return !!(before && active && mobile && mobileBefore && (desktopVisible || mobileVisible)
+                    && (!desktopVisible || getComputedStyle(active).backgroundColor !== getComputedStyle(before).backgroundColor)
+                    && (!mobileVisible || getComputedStyle(mobile).backgroundColor !== getComputedStyle(mobileBefore).backgroundColor));
             }""", route_key)
             check('script-free cross-page current section '+scriptless_scheme+' '+str(route_width)+' '+route_key,
                   selected_visual)
