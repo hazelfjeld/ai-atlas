@@ -61,6 +61,7 @@ with sync_playwright() as p:
                   and fallback.count() == 1 and fallback.is_visible()
                   and fallback.get_attribute('href') == 'terms/index.html'
                   and scriptless_page.locator('.nojs-primary-routes').is_hidden()
+                  and scriptless_page.locator('#catalog-loading').is_hidden()
                   and scriptless_page.locator('#page').is_visible())
             if scriptless_width in (320, 1280):
                 scriptless_page.screenshot(path=str(out / (
