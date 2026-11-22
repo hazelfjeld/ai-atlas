@@ -271,6 +271,28 @@ with sync_playwright() as p:
           and not nojs_submit.locator(
               '#global-search > button.site-mobile-chrome__search-submit').is_visible()
           and nojs_fallback.count() == 1 and nojs_fallback.is_visible())
+    # The old fallback wrapped into two lines at 320px, making Discover's
+    # script-free mobile header taller than the shared native search entry.
+    # Keep the visible label compact, while its aria-label explains the
+    # JavaScript limitation to assistive technology.
+    for fallback_scheme in ('light', 'dark'):
+        nojs_submit.emulate_media(color_scheme=fallback_scheme)
+        for fallback_width in (320, 390):
+            nojs_submit.set_viewport_size({'width': fallback_width, 'height': 844})
+            check('script-free Discover search entry stays on one line ' +
+                  fallback_scheme + ' ' + str(fallback_width),
+                  nojs_fallback.evaluate("""el => {
+                    const range = document.createRange();
+                    range.selectNodeContents(el);
+                    return range.getClientRects().length === 1;
+                  }""")
+                  and nojs_fallback.inner_text().strip() == 'Browse concepts ↗'
+                  and 'interactive search requires JavaScript' in
+                  (nojs_fallback.get_attribute('aria-label') or ''))
+            nojs_submit.screenshot(path=str(out / (
+                'discover-scriptless-search-' + fallback_scheme + '-' +
+                str(fallback_width) + '.png')))
+    nojs_submit.set_viewport_size({'width':390,'height':844})
     nojs_fallback.click()
     check('script-free Discover fallback opens the actual catalog',
           nojs_submit.url.endswith('/terms/index.html')

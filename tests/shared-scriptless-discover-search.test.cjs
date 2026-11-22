@@ -12,6 +12,8 @@ test('script-free Discover never masquerades as a functioning search form', () =
   assert.match(noscriptStyle[1], /\.topbar > form\.global-search\{display:none!important\}/);
   assert.match(html, /<noscript><a class="global-search nojs-catalog-link" href="terms\/index\.html"/);
   assert.match(html, /interactive search requires JavaScript/);
+  assert.match(html, /nojs-catalog-link[^>]*>Browse concepts ↗<\/a>/,
+    'script-free Discover uses the same one-line mobile search frame as native pages');
   assert.match(html, /<form class="global-search" id="global-search" role="search">/,
     'preserve the exact enhanced Discover search form');
   for (const route of ['whats-new.html','research.html','technology/index.html','terms/index.html']) {
@@ -30,4 +32,6 @@ test('offline demo reflects the same progressive search contract', () => {
     'offline search fallback stays within its bundled dictionary route');
   assert.match(html, /id="global-search" role="search"/,
     'the functional live offline search is not replaced');
+  assert.match(html, /nojs-catalog-link[^>]*>Browse concepts ↗<\/a>/,
+    'offline fallback keeps the same compact visible navigation label');
 });
