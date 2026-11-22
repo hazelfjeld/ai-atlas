@@ -18,5 +18,9 @@ test('shared nav follows script-free cross-page hash fallback on desktop and mob
   assert.ok(rules.includes('#additional-navigation > summary'),'secondary section highlighted on closed More parent');
   assert.ok(rules.includes('a[href="#/overview"]'),'stale Discover highlight reset');
   assert.ok(rules.includes('@supports selector('),'progressive hash-only treatment');
-  assert.ok(read('downloads/Atlas_Demo_Offline.html').includes(css),'offline rebuild matches shared stylesheet');
+  // The existing offline builder rewrites canonical Research page links to the bundled hash workspace.
+  const offlineCss=css.replace('.site-mobile-chrome__menu a[href="research.html"]',
+                               '.site-mobile-chrome__menu a[href="#/papers"]');
+  assert.ok(read('downloads/Atlas_Demo_Offline.html').includes(offlineCss),
+    'offline rebuild matches the shared stylesheet after the canonical route rewrite');
 });
