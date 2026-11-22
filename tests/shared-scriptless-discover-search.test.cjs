@@ -23,6 +23,21 @@ test('script-free Discover never masquerades as a functioning search form', () =
   }
 });
 
+test('script-free navigation never announces a catalog that cannot finish loading', () => {
+  const online = read('index.html');
+  const offline = read('downloads/Atlas_Demo_Offline.html');
+  for (const [file, html] of [['index.html', online], ['offline demo', offline]]) {
+    const style = html.match(/<noscript><style>([\\s\\S]*?)<\\/style><\\/noscript>/)?.[1];
+    assert.ok(style, file + ' retains a script-free-only style block');
+    assert.ok(style.includes('#catalog-loading{display:none!important}'),
+      file + ' hides the otherwise permanent loading status when scripts are disabled');
+    assert.ok(html.includes('<div id="catalog-loading" class="catalog-loading" role="status">'),
+      file + ' preserves the live loading status for enhanced catalog startup');
+    assert.ok(style.includes('.nojs-primary-routes>.notice:not(:target){display:none!important}'),
+      file + ' still reveals only the requested static hash destination');
+  }
+});
+
 test('offline demo reflects the same progressive search contract', () => {
   const html = read('downloads/Atlas_Demo_Offline.html');
   const live = read('index.html');
