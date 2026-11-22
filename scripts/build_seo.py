@@ -94,6 +94,10 @@ def sync_scriptfree_daily_archive(html):
             '<section class="site-static-fallback" id="scriptfree-daily-archive"')) + 1
         preview_end = html.index(
             '<h3 class="site-static-fallback__archive-title">', preview_start)
+        # Match the reader's existing static text escaper and fixture contract.
+        # html.escape uses &#x27; for apostrophes; the published native preview
+        # consistently encodes them as &#39; (both render identically).
+        intro = intro.replace('&#x27;', '&#39;')
         html = html[:preview_start] + intro + html[preview_end:]
 
     links = []
