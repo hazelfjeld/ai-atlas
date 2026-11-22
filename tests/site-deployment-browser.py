@@ -68,6 +68,35 @@ with sync_playwright() as p:
             check('Discover no-JS browse navigation ' + scriptless_scheme + ' ' + str(scriptless_width),
                   scriptless_page.url.endswith('/terms/index.html')
                   and scriptless_page.locator('main').count() == 1)
+        # Native and generated headers deliberately retain the same SPA hash
+        # destinations as Discover. Without JS, those hashes now identify
+        # real route-specific fallback content rather than a generic home page.
+        routes = {320: ('dictionary', 'terms/index.html'),
+                  390: ('technologies', 'technology/index.html'),
+                  768: ('games', 'games.html'),
+                  1280: ('dictionary', 'terms/index.html')}
+        for route_width, (route_key, catalog_href) in routes.items():
+            scriptless_page.set_viewport_size({'width': route_width, 'height': 844})
+            scriptless_page.goto(base + 'research.html')
+            if route_width <= 650:
+                scriptless_page.locator('details.site-mobile-chrome__nav > summary').click()
+                route_link = scriptless_page.locator(
+                    'nav.site-mobile-chrome__menu > a[href="index.html#/' + route_key + '"]')
+            else:
+                route_link = scriptless_page.locator(
+                    '.site-chrome__links > a[href="index.html#/' + route_key + '"]')
+            route_link.click()
+            fallback_route = scriptless_page.locator(
+                '.nojs-primary-routes > section[id="/' + route_key + '"]')
+            frame = fallback_route.bounding_box()
+            check('cross-page no-JS hash route '+scriptless_scheme+' '+str(route_width)+' '+route_key,
+                  scriptless_page.url.endswith('/index.html#/' + route_key)
+                  and fallback_route.is_visible()
+                  and fallback_route.locator('a[href="' + catalog_href + '"]').count() == 1
+                  and frame is not None and frame['y'] < 844 and frame['y']+frame['height'] > 0)
+            if route_width in (320, 1280):
+                scriptless_page.screenshot(path=str(out / (
+                    'discover-nojs-route-'+route_key+'-'+scriptless_scheme+'-'+str(route_width)+'.png')))
         scriptless_context.close()
     # Hold the first manifest fetch to test early Discover form submission
     # before asynchronous catalog verification. This avoids a network race.

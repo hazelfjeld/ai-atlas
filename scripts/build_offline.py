@@ -52,6 +52,19 @@ def main():
     # directory beside the single HTML file.
     html = html.replace('href="downloads/Atlas_Demo_Offline.html" download',
                         'href="https://aiupdates.app/downloads/Atlas_Demo_Offline.html" download title="Online re-download; internet required"')
+    # Live no-JavaScript hash destinations jump to actual static catalog links.
+    # The downloaded demo must not point them at non-existent local files or
+    # loop into its JavaScript-only bundled hash workspace.
+    for original, replacement, expected in (
+        ('href="#/dictionary" data-nojs-static="concepts"',
+         'href="https://aiupdates.app/terms/index.html" title="Online static catalog; internet required" data-nojs-static="concepts"', 2),
+        ('href="#/technologies" data-nojs-static="technologies"',
+         'href="https://aiupdates.app/technology/index.html" title="Online static catalog; internet required" data-nojs-static="technologies"', 1),
+        ('href="games.html" data-nojs-static="games"',
+         'href="https://aiupdates.app/games.html" title="Online Games; JavaScript required" data-nojs-static="games"', 1),
+    ):
+        assert html.count(original) == expected, 'Missing script-free route handoff: ' + original
+        html = html.replace(original, replacement)
     # Discover's featured story and reference cards use hosted detail URLs.
     # Inside a single downloaded HTML file, these resolve beneath downloads/
     # and fail offline. Reuse the already bundled catalog record-dialog routes

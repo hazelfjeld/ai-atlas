@@ -35,3 +35,33 @@ test('offline demo reflects the same progressive search contract', () => {
   assert.match(html, /nojs-catalog-link[^>]*>Browse concepts ↗<\/a>/,
     'offline fallback keeps the same compact visible navigation label');
 });
+
+test('script-free primary hash routes expose real static destinations without changing SPA links', () => {
+  const html = read('index.html');
+  const offline = read('downloads/Atlas_Demo_Offline.html');
+  for (const [route, onlinePath] of [
+    ['dictionary', 'terms/index.html'],
+    ['technologies', 'technology/index.html'],
+    ['games', 'games.html'],
+    ['search', 'terms/index.html'],
+  ]) {
+    assert.ok(html.includes('id="/' + route + '"'), route + ' has a real no-JavaScript anchor');
+    assert.ok(html.includes('href="' + onlinePath + '" data-nojs-static='),
+      route + ' reaches the existing static/interactive destination');
+    assert.ok(offline.includes('id="/' + route + '"'), route + ' offline anchor survives');
+    assert.ok(offline.includes('href="https://aiupdates.app/' + onlinePath + '"'),
+      route + ' offline fallback does not point at a nonexistent local file');
+  }
+  assert.match(html, /<!-- atlas-nojs-primary-hash-routes:begin -->[\\s\\S]*?<noscript>/);
+  assert.ok(html.includes('.nojs-primary-routes>.notice:target'),
+    'the requested section gets an accessible visible focus ring');
+  assert.ok(html.includes('href="#/dictionary" data-view-aliases="terms"'),
+    'the JS-enabled Discover dictionary route remains untouched');
+  assert.ok(html.includes('href="#/technologies"'),
+    'the live SPA technology route remains untouched');
+  assert.ok(html.includes('href="#/games"'),
+    'the live SPA Games route remains untouched');
+  const builder = read('scripts/build_offline.py');
+  assert.ok(builder.includes('Missing script-free route handoff'),
+    'offline canonical links come from the deterministic builder');
+});
