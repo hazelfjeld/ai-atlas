@@ -44,6 +44,31 @@ with sync_playwright() as p:
     browser = p.chromium.launch(executable_path=os.environ.get('CHROMIUM_PATH'), headless=True)
     page = browser.new_page(viewport={'width':1440, 'height':1000}, reduced_motion='reduce')
     page.on('pageerror', lambda e: errors.append(str(e)))
+    # Discover's parser-loaded live search requires JavaScript. With scripts
+    # disabled, do not leave an inert form pretending to search: offer a real
+    # script-free route into the preserved catalog instead.
+    for scriptless_scheme in ('light', 'dark'):
+        scriptless_context = browser.new_context(java_script_enabled=False,
+                                                color_scheme=scriptless_scheme,
+                                                reduced_motion='reduce')
+        scriptless_page = scriptless_context.new_page()
+        for scriptless_width in (320, 390, 768, 1280):
+            scriptless_page.set_viewport_size({'width': scriptless_width, 'height': 844})
+            scriptless_page.goto(base + 'index.html')
+            fallback = scriptless_page.locator('a.nojs-catalog-link')
+            check('Discover no-JS truthful search fallback ' + scriptless_scheme + ' ' + str(scriptless_width),
+                  scriptless_page.locator('#global-search').is_hidden()
+                  and fallback.count() == 1 and fallback.is_visible()
+                  and fallback.get_attribute('href') == 'terms/index.html')
+            if scriptless_width in (320, 1280):
+                scriptless_page.screenshot(path=str(out / (
+                    'discover-nojs-search-' + scriptless_scheme + '-' +
+                    str(scriptless_width) + '.png')))
+            fallback.click()
+            check('Discover no-JS browse navigation ' + scriptless_scheme + ' ' + str(scriptless_width),
+                  scriptless_page.url.endswith('/terms/index.html')
+                  and scriptless_page.locator('main').count() == 1)
+        scriptless_context.close()
     # Hold the first manifest fetch to test early Discover form submission
     # before asynchronous catalog verification. This avoids a network race.
     for early_width in (390, 1280):
