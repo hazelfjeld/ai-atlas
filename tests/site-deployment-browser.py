@@ -87,6 +87,12 @@ with sync_playwright() as p:
                 route_link = scriptless_page.locator(
                     '.site-chrome__links > a[href="index.html#/' + route_key + '"]')
             route_link.click()
+            # Wait for the destination document, not just a click on its source.
+            # Remote cross-document navigation can commit after Playwright's
+            # click returns; evaluating visibility in the old page races the
+            # transition even when the new hash target is on screen.
+            scriptless_page.wait_for_url(base + 'index.html#/' + route_key,
+                                         wait_until='domcontentloaded', timeout=15000)
             # The browser completes a cross-document fragment jump after
             # navigation resolves on some production requests. Wait for native
             # scrolling, as we already do for secondary routes below; do not
@@ -159,6 +165,11 @@ with sync_playwright() as p:
                 route_link = scriptless_page.locator(
                     '.site-chrome__more-links > a[href="index.html#/' + section + '"]')
             route_link.click()
+            # Require the exact destination document before polling the real
+            # native fragment scroll. This does not scroll or reveal anything
+            # on behalf of the visitor; missing links remain hard failures.
+            scriptless_page.wait_for_url(base + 'index.html#/' + section,
+                                         wait_until='domcontentloaded', timeout=15000)
             # A cross-document hash scroll can complete one or two frames after
             # Playwright's click/navigation resolves, especially with cold CDN
             # styles. Wait for the browser's *own* fragment scroll; never call
