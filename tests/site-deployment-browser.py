@@ -158,6 +158,19 @@ with sync_playwright() as p:
                   and fallback_route.locator('a[href="' + catalog_href + '"]').count() == 1
                   and scriptless_page.locator('.nojs-primary-routes > section.notice:visible').count() == 1
                   and frame is not None and frame['y'] < 844 and frame['y']+frame['height'] > 0)
+            # The script-free section visibly selects the same existing
+            # desktop and mobile destinations after crossing from native pages.
+            selected_visual = scriptless_page.evaluate("""key => {
+                const before=document.querySelector('#navigation a[data-view="overview"]');
+                const active=document.querySelector('#navigation a[data-view="'+key+'"]');
+                const mobile=document.querySelector('.discover-mobile-chrome .site-mobile-chrome__menu a[href="#/'+key+'"]');
+                const mobileBefore=document.querySelector('.discover-mobile-chrome .site-mobile-chrome__menu > a[href="#/overview"]');
+                return !!(before && active && mobile && mobileBefore
+                    && getComputedStyle(active).backgroundColor !== getComputedStyle(before).backgroundColor
+                    && getComputedStyle(mobile).backgroundColor !== getComputedStyle(mobileBefore).backgroundColor);
+            }""", route_key)
+            check('script-free cross-page current section '+scriptless_scheme+' '+str(route_width)+' '+route_key,
+                  selected_visual)
             if route_width in (320, 1280):
                 scriptless_page.screenshot(path=str(out / (
                     'discover-nojs-route-'+route_key+'-'+scriptless_scheme+'-'+str(route_width)+'.png')))

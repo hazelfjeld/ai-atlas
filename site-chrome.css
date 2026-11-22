@@ -1439,3 +1439,86 @@ main.term-shell > footer:not(.site-chrome__footer) a{color:var(--accent,#27664e)
   }
 }
 /* atlas-unified-desktop-workspace-bar:end */
+
+/* atlas-scriptless-current-visual:begin */
+/* When a native page reaches a Discover hash with JS off, the requested
+   section—not the static Discover default—receives the shared rail treatment.
+   The focused notice heading remains the accessible location indication. */
+@supports selector(html:has(.nojs-primary-routes > .notice:target)){
+html:has(.nojs-primary-routes > .notice[id="/dictionary"]:target) #navigation > .site-chrome__links > a.nav-link[data-view="overview"],
+html:has(.nojs-primary-routes > .notice[id="/technologies"]:target) #navigation > .site-chrome__links > a.nav-link[data-view="overview"],
+html:has(.nojs-primary-routes > .notice[id="/games"]:target) #navigation > .site-chrome__links > a.nav-link[data-view="overview"],
+html:has(.nojs-primary-routes > .notice[id="/safety"]:target) #navigation > .site-chrome__links > a.nav-link[data-view="overview"],
+html:has(.nojs-primary-routes > .notice[id="/papers"]:target) #navigation > .site-chrome__links > a.nav-link[data-view="overview"],
+html:has(.nojs-primary-routes > .notice[id="/compare"]:target) #navigation > .site-chrome__links > a.nav-link[data-view="overview"],
+html:has(.nojs-primary-routes > .notice[id="/saved"]:target) #navigation > .site-chrome__links > a.nav-link[data-view="overview"],
+html:has(.nojs-primary-routes > .notice[id="/sources"]:target) #navigation > .site-chrome__links > a.nav-link[data-view="overview"]{
+  color:var(--side-text);background:transparent;
+}
+html:has(.nojs-primary-routes > .notice[id="/dictionary"]:target) #navigation > .site-chrome__links > a.nav-link[data-view="overview"] svg,
+html:has(.nojs-primary-routes > .notice[id="/technologies"]:target) #navigation > .site-chrome__links > a.nav-link[data-view="overview"] svg,
+html:has(.nojs-primary-routes > .notice[id="/games"]:target) #navigation > .site-chrome__links > a.nav-link[data-view="overview"] svg,
+html:has(.nojs-primary-routes > .notice[id="/safety"]:target) #navigation > .site-chrome__links > a.nav-link[data-view="overview"] svg,
+html:has(.nojs-primary-routes > .notice[id="/papers"]:target) #navigation > .site-chrome__links > a.nav-link[data-view="overview"] svg,
+html:has(.nojs-primary-routes > .notice[id="/compare"]:target) #navigation > .site-chrome__links > a.nav-link[data-view="overview"] svg,
+html:has(.nojs-primary-routes > .notice[id="/saved"]:target) #navigation > .site-chrome__links > a.nav-link[data-view="overview"] svg,
+html:has(.nojs-primary-routes > .notice[id="/sources"]:target) #navigation > .site-chrome__links > a.nav-link[data-view="overview"] svg{
+  color:inherit;opacity:.8;
+}
+html:has(.nojs-primary-routes > .notice[id="/dictionary"]:target) .discover-mobile-chrome .site-mobile-chrome__menu > a[href="#/overview"],
+html:has(.nojs-primary-routes > .notice[id="/technologies"]:target) .discover-mobile-chrome .site-mobile-chrome__menu > a[href="#/overview"],
+html:has(.nojs-primary-routes > .notice[id="/games"]:target) .discover-mobile-chrome .site-mobile-chrome__menu > a[href="#/overview"],
+html:has(.nojs-primary-routes > .notice[id="/safety"]:target) .discover-mobile-chrome .site-mobile-chrome__menu > a[href="#/overview"],
+html:has(.nojs-primary-routes > .notice[id="/papers"]:target) .discover-mobile-chrome .site-mobile-chrome__menu > a[href="#/overview"],
+html:has(.nojs-primary-routes > .notice[id="/compare"]:target) .discover-mobile-chrome .site-mobile-chrome__menu > a[href="#/overview"],
+html:has(.nojs-primary-routes > .notice[id="/saved"]:target) .discover-mobile-chrome .site-mobile-chrome__menu > a[href="#/overview"],
+html:has(.nojs-primary-routes > .notice[id="/sources"]:target) .discover-mobile-chrome .site-mobile-chrome__menu > a[href="#/overview"]{
+  color:var(--ink);background:transparent;
+}
+html:has(.nojs-primary-routes > .notice[id="/dictionary"]:target) #navigation a.nav-link[data-view="dictionary"],
+html:has(.nojs-primary-routes > .notice[id="/technologies"]:target) #navigation a.nav-link[data-view="technologies"],
+html:has(.nojs-primary-routes > .notice[id="/games"]:target) #navigation a.nav-link[data-view="games"],
+html:has(.nojs-primary-routes > .notice[id="/safety"]:target) #navigation a.nav-link[data-view="safety"],
+html:has(.nojs-primary-routes > .notice[id="/papers"]:target) #navigation a.nav-link[data-view="papers"],
+html:has(.nojs-primary-routes > .notice[id="/compare"]:target) #navigation a.nav-link[data-view="compare"],
+html:has(.nojs-primary-routes > .notice[id="/saved"]:target) #navigation a.nav-link[data-view="saved"],
+html:has(.nojs-primary-routes > .notice[id="/sources"]:target) #navigation a.nav-link[data-view="sources"]{
+  color:#f5f7ef;background:#374b3c;
+}
+html:has(.nojs-primary-routes > .notice[id="/dictionary"]:target) #navigation a.nav-link[data-view="dictionary"] svg,
+html:has(.nojs-primary-routes > .notice[id="/technologies"]:target) #navigation a.nav-link[data-view="technologies"] svg,
+html:has(.nojs-primary-routes > .notice[id="/games"]:target) #navigation a.nav-link[data-view="games"] svg,
+html:has(.nojs-primary-routes > .notice[id="/safety"]:target) #navigation a.nav-link[data-view="safety"] svg,
+html:has(.nojs-primary-routes > .notice[id="/papers"]:target) #navigation a.nav-link[data-view="papers"] svg,
+html:has(.nojs-primary-routes > .notice[id="/compare"]:target) #navigation a.nav-link[data-view="compare"] svg,
+html:has(.nojs-primary-routes > .notice[id="/saved"]:target) #navigation a.nav-link[data-view="saved"] svg,
+html:has(.nojs-primary-routes > .notice[id="/sources"]:target) #navigation a.nav-link[data-view="sources"] svg{
+  color:#efb77e;opacity:1;
+}
+html:has(.nojs-primary-routes > .notice[id="/dictionary"]:target) .discover-mobile-chrome .site-mobile-chrome__menu a[href="#/dictionary"],
+html:has(.nojs-primary-routes > .notice[id="/technologies"]:target) .discover-mobile-chrome .site-mobile-chrome__menu a[href="#/technologies"],
+html:has(.nojs-primary-routes > .notice[id="/games"]:target) .discover-mobile-chrome .site-mobile-chrome__menu a[href="#/games"],
+html:has(.nojs-primary-routes > .notice[id="/safety"]:target) .discover-mobile-chrome .site-mobile-chrome__menu a[href="#/safety"],
+html:has(.nojs-primary-routes > .notice[id="/papers"]:target) .discover-mobile-chrome .site-mobile-chrome__menu a[href="research.html"],
+html:has(.nojs-primary-routes > .notice[id="/compare"]:target) .discover-mobile-chrome .site-mobile-chrome__menu a[href="#/compare"],
+html:has(.nojs-primary-routes > .notice[id="/saved"]:target) .discover-mobile-chrome .site-mobile-chrome__menu a[href="#/saved"],
+html:has(.nojs-primary-routes > .notice[id="/sources"]:target) .discover-mobile-chrome .site-mobile-chrome__menu a[href="#/sources"]{
+  color:var(--green,#28664f);background:var(--soft,#eaf1ea);
+}
+html:has(.nojs-primary-routes > .notice[id="/safety"]:target) #additional-navigation > summary,
+html:has(.nojs-primary-routes > .notice[id="/papers"]:target) #additional-navigation > summary,
+html:has(.nojs-primary-routes > .notice[id="/compare"]:target) #additional-navigation > summary,
+html:has(.nojs-primary-routes > .notice[id="/saved"]:target) #additional-navigation > summary,
+html:has(.nojs-primary-routes > .notice[id="/sources"]:target) #additional-navigation > summary{
+  color:#fff;background:#ffffff13;box-shadow:inset 3px 0 0 #edba87;
+}
+html:has(.nojs-primary-routes > .notice[id="/safety"]:target) .discover-mobile-chrome .site-mobile-chrome__more > summary,
+html:has(.nojs-primary-routes > .notice[id="/papers"]:target) .discover-mobile-chrome .site-mobile-chrome__more > summary,
+html:has(.nojs-primary-routes > .notice[id="/compare"]:target) .discover-mobile-chrome .site-mobile-chrome__more > summary,
+html:has(.nojs-primary-routes > .notice[id="/saved"]:target) .discover-mobile-chrome .site-mobile-chrome__more > summary,
+html:has(.nojs-primary-routes > .notice[id="/sources"]:target) .discover-mobile-chrome .site-mobile-chrome__more > summary{
+  color:var(--green,#28664f);background:var(--soft,#eaf1ea);
+  box-shadow:inset 3px 0 0 var(--orange,#b77833);
+}
+}
+/* atlas-scriptless-current-visual:end */
