@@ -22,7 +22,9 @@ test('eleven native/editorial/reference landings share canonical script-free Res
     assert.ok(!html.includes('href="' + prefix + 'index.html#/papers"'),
       file + ' must not require hydration to enter the canonical Research workspace');
   }
-  assert.equal((read('index.html').split('<!-- atlas-nojs-primary-hash-routes:begin -->')[0].match(/href="research\.html"/g) || []).length, 3,
+  const discover = read('index.html');
+  const outsideFallback = discover.replace(/<!-- atlas-nojs-primary-hash-routes:begin -->[\s\S]*?<!-- atlas-nojs-primary-hash-routes:end -->\n?/, '');
+  assert.equal((outsideFallback.match(/href="research\.html"/g) || []).length, 3,
     'Discover remains canonical in desktop, mobile and the reading desk');
 });
 

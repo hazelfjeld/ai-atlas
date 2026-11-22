@@ -155,7 +155,8 @@ test('build-time Discover Research navigation is canonical before JavaScript and
   const generator=read('scripts/site_chrome.py');
   const builder=read('scripts/build_offline.py');
   const offline=read('downloads/Atlas_Demo_Offline.html');
-  assert.equal((live.split('<!-- atlas-nojs-primary-hash-routes:begin -->')[0].match(/href="research\.html"/g)||[]).length,3,
+  const outsideFallback = live.replace(/<!-- atlas-nojs-primary-hash-routes:begin -->[\s\S]*?<!-- atlas-nojs-primary-hash-routes:end -->\n?/, '');
+  assert.equal((outsideFallback.match(/href="research\.html"/g)||[]).length,3,
     'desktop Research link, mobile menu and reading desk share one native destination');
   assert.match(live,/data-view="papers" href="research\.html"/,
     'legacy hash route still has the same data-view for selection');
