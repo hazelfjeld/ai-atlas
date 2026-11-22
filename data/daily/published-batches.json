@@ -1824,6 +1824,72 @@
       "production_workflow_run_id": 44914700292,
       "githack_workflow_run_id": 44914700253,
       "verification_scope": "Exact main 94eaa32354a4613a8b0a94f0e64d4aa2901296c8 passed the catalog/GitHack workflow 44914700253 (430 Node tests, zero failures; catalog integrity, deterministic generation, offline reproducibility and exact-revision GitHack parity), and Cloudflare workflow 44914700292 on November 21, 2026 (allowlisted local hosted-browser suite across responsive sizes and themes, exact tested-artifact deployment, production HTTP/asset/caching checks, navigation, Quiz and Match browser verification). The production workflow completed successfully at 2026-11-21T14:46:02Z; direct independent reopening of the exact dated query permalink through external web search was unavailable. Immutable edition 2026-11-21-v1 SHA-256 51046554bd5a085599322f88c535fc6f30602d78f74771fbb39454e749ce4416, 26,353 UTF-8 bytes."
+    },
+    {
+      "batch_id": "atlas-daily-20261122-primary-reviewed-bounded-0820ct-a",
+      "source_branch": "atlas-daily-staging",
+      "source_commit": "d9a02b055922263cd2623bc445366d6d44a9e277",
+      "source_batch_path": "daily-queue/batches/2026-11-22-atlas-daily-20261122-primary-reviewed-bounded-0820ct-a.json",
+      "source_batch_sha256": "1cb4ba6667df152a5bf91909fc619f377210516482a5e23e92d9f85656fcac63",
+      "source_batch_bytes": 40859,
+      "edition_date": "2026-11-22",
+      "validation_result": "independent_batch_sha256_utf8_bytes_counts_unique_ids_prior_receipt_dedup_first_party_release_and_preprint_source_dates",
+      "status": "partially_published_with_3_news_and_7_catalog_proposals_deferred",
+      "publication_outcome": "immutable_revision_1_pending_production_verification",
+      "publication_edition": "2026-11-22-v1",
+      "accepted_news_ids": [
+        "ai-news-riemann-lean-community-certification-2026-11-21",
+        "ai-news-transformers-5-24-model-runtime-2026-11-21",
+        "ai-news-llamacpp-hibiki-duplex-2026-11-21",
+        "ai-news-seer-deep-research-agent-value-models-2611-26423",
+        "ai-news-glide-distilled-decision-models-2611-26509",
+        "ai-news-r2-vla-risk-control-testtime-2611-26438",
+        "ai-news-learning-to-defer-expert-drift-2611-26440",
+        "ai-news-scaleworld-shared-video-backbone-2611-26615"
+      ],
+      "source_news_ids": [
+        "ai-news:riemann-lean-community-certification:2026-11-21",
+        "ai-news:transformers-5-24-model-runtime:2026-11-21",
+        "ai-news:llamacpp-hibiki-duplex:2026-11-21",
+        "ai-news:seer-deep-research-agent-value-models:2611.26423",
+        "ai-news:glide-distilled-decision-models:2611.26509",
+        "ai-news:r2-vla-risk-control-testtime:2611.26438",
+        "ai-news:learning-to-defer-expert-drift:2611.26440",
+        "ai-news:scaleworld-shared-video-backbone:2611.26615"
+      ],
+      "deferred_news_ids": [
+        "ai-news:waymo-construction-manual-controls-recalls:2026-11-20",
+        "ai-news:korea-ulsan-ai-datacenter-visit:2026-11-21",
+        "ai-news:oracle-openai-infra-funded-statement:2026-11-20"
+      ],
+      "deferred_catalog_proposal_ids": [
+        "tech-proposal:seer-deep-research-planning:2026-11-22",
+        "tech-proposal:glide-decision-model:2026-11-22",
+        "tech-proposal:r2-vla-risk-controlled-retrieval:2026-11-22",
+        "tech-proposal:llamacpp-kyutai-hibiki-duplex:2026-11-22",
+        "term-proposal:expert-drift:2026-11-22",
+        "term-proposal:tool-response-simulation:2026-11-22",
+        "term-proposal:risk-calibrated-deferral:2026-11-22"
+      ],
+      "rejected_ids": [],
+      "counts": {
+        "news_published": 8,
+        "technology_added": 0,
+        "term_added": 0,
+        "corrections": 0,
+        "news_deferred": 3,
+        "catalog_deferred": 7,
+        "technology_updated": 0
+      },
+      "review_notes": "Eight directly confirmed primary reports: Lean/Mathlib certification, two software release entries (llama.cpp b12619 is pre-release), five Nov19 arXiv papers. Claims and benchmark figures attributed. Publisher could not access three Reuters article bodies and deferred them; all catalog proposals deferred pending canonical checks. Original time and completeness limitations preserved. Publication requires passing exact artifact production/GitHack checks.",
+      "publication_history": [
+        {
+          "edition": "2026-11-22-v1",
+          "status": "pending_production_verification",
+          "prepared_at": "2026-11-22T14:36:41.154Z",
+          "note": "Eight qualified news reports accepted after source review. Three reports and seven catalog proposals held. Immutable edition SHA-256 5553217403b6d466489b1c360e345e8e0b2da2d0f81e4202c854a2720ebe49e9, 18047 UTF-8 bytes; public deployment not yet confirmed."
+        }
+      ]
     }
   ]
 }

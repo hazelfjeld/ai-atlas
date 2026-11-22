@@ -369,9 +369,17 @@
       "sha256": "51046554bd5a085599322f88c535fc6f30602d78f74771fbb39454e749ce4416",
       "bytes": 26353,
       "published_at": "2026-11-21T14:28:51.327Z"
+    },
+    {
+      "date": "2026-11-22",
+      "revision": 1,
+      "path": "data/daily/editions/2026-11-22-v1.json",
+      "sha256": "5553217403b6d466489b1c360e345e8e0b2da2d0f81e4202c854a2720ebe49e9",
+      "bytes": 18047,
+      "published_at": "2026-11-22T14:36:41.154Z"
     }
   ],
   "last_successful_publish_at": "2026-11-21T14:46:02Z",
-  "status": "edition_revision_1_production_verified",
-  "coverage_note": "2026-11-21 revision 1 now production-verified: 14 source-attributed reports, 13 first published before the edition date and one on November 21; partial coverage, one metadata lookup failure, five technology and five terminology proposals remain deferred. No unreviewed catalog additions."
+  "status": "edition_revision_1_pending_production_verification",
+  "coverage_note": "2026-11-22 v1 pending exact Cloudflare/GitHack/browser checks: 8 primary-source reviewed reports, all published Nov19 or Nov21; three Reuters reports and seven catalog proposals deferred, six source-access failures/limitations; partial overlap collection and no complete cutoff."
 }

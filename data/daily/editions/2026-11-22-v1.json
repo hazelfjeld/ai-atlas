@@ -1,0 +1,337 @@
+{
+  "schema": 1,
+  "edition_date": "2026-11-22",
+  "timezone": "America/Chicago",
+  "published_at": "2026-11-22T14:36:41.154Z",
+  "coverage": {
+    "start": "2026-11-20T14:14:37.554Z",
+    "end": "2026-11-22T14:24:19.807Z",
+    "status": "partial",
+    "note": "Bounded November 20–22 collection and November 19 catch-up; collector cutoff remains unset. Eight publisher-reviewed primary sources retained (Lean/Mathlib joint statement, two open-source release records, five arXiv preprints). Three Reuters stories could not be independently reopened and remain deferred. The original collector also reported three failed sources. Seven catalog proposals remain deferred pending canonical deduplication, license and availability review. Older coverage gaps are not silently filled.",
+    "sources_checked": [
+      {
+        "url": "https://leanprover-community.github.io/blog/posts/riemann-hypothesis/",
+        "status": "collector_reported_source_checked",
+        "checked_at": "2026-11-22T14:24:19.807Z",
+        "method": "Opened formal verification report"
+      },
+      {
+        "url": "https://math.mit.edu/~drew/grh/",
+        "status": "collector_reported_source_checked",
+        "checked_at": "2026-11-22T14:24:19.807Z",
+        "method": "Opened formal verification report"
+      },
+      {
+        "url": "https://github.com/huggingface/transformers/releases/tag/v5.24.0",
+        "status": "collector_reported_source_checked",
+        "checked_at": "2026-11-22T14:24:19.807Z",
+        "method": "GitHub release primary record"
+      },
+      {
+        "url": "https://github.com/ggml-org/llama.cpp/releases/tag/b12619",
+        "status": "collector_reported_source_checked",
+        "checked_at": "2026-11-22T14:24:19.807Z",
+        "method": "GitHub release primary record"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.26423",
+        "status": "collector_reported_source_checked",
+        "checked_at": "2026-11-22T14:24:19.807Z",
+        "method": "Opened original arXiv abstract/HTML"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.26509",
+        "status": "collector_reported_source_checked",
+        "checked_at": "2026-11-22T14:24:19.807Z",
+        "method": "Opened original arXiv abstract/HTML"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.26438",
+        "status": "collector_reported_source_checked",
+        "checked_at": "2026-11-22T14:24:19.807Z",
+        "method": "Opened original arXiv abstract/HTML"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.26440",
+        "status": "collector_reported_source_checked",
+        "checked_at": "2026-11-22T14:24:19.807Z",
+        "method": "Opened original arXiv abstract/HTML"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.26615",
+        "status": "collector_reported_source_checked",
+        "checked_at": "2026-11-22T14:24:19.807Z",
+        "method": "Opened original arXiv abstract/HTML"
+      },
+      {
+        "url": "https://www.reuters.com/legal/litigation/waymo-recalls-self-driving-cars-over-closed-freeway-lanes-manual-traffic-control-2026-11-20/",
+        "status": "collector_reported_source_checked",
+        "checked_at": "2026-11-22T14:24:19.807Z",
+        "method": "Opened article"
+      },
+      {
+        "url": "https://www.reuters.com/business/media-telecom/south-koreas-lee-says-speed-is-vital-ai-race-data-centre-visit-2026-11-21/",
+        "status": "collector_reported_source_checked",
+        "checked_at": "2026-11-22T14:24:19.807Z",
+        "method": "Opened article"
+      },
+      {
+        "url": "https://www.reuters.com/business/oracle-says-openai-infrastructure-deal-is-fully-funded-after-final-capital-raise-2026-11-20/",
+        "status": "collector_reported_source_checked",
+        "checked_at": "2026-11-22T14:24:19.807Z",
+        "method": "Opened article"
+      }
+    ],
+    "sources_failed": [
+      {
+        "url": "https://export.arxiv.org/api/query",
+        "status": "failed",
+        "checked_at": "2026-11-22T14:24:19.807Z",
+        "error": "Metadata endpoint inaccessible through research reader; individual arXiv pages reviewed instead"
+      },
+      {
+        "url": "https://www.ft.com/content/f3ad8a81-3890-4a8a-8853-ff0a94b08ba9",
+        "status": "failed",
+        "checked_at": "2026-11-22T14:24:19.807Z",
+        "error": "Paywalled article body; allegations not imported as verified news"
+      },
+      {
+        "url": "https://huggingface.co/docs/transformers/main/en/model_doc/inkling2_loop",
+        "status": "failed",
+        "checked_at": "2026-11-22T14:24:19.807Z",
+        "error": "Documentation URL reader inaccessible; GitHub release record available"
+      },
+      {
+        "url": "https://www.reuters.com/legal/litigation/waymo-recalls-self-driving-cars-over-closed-freeway-lanes-manual-traffic-control-2026-11-20/",
+        "status": "publisher_direct_article_unavailable",
+        "checked_at": "2026-11-22T14:36:41.154Z",
+        "error": "Publisher could not independently access complete Reuters text; story deferred, not represented as source-reviewed publication."
+      },
+      {
+        "url": "https://www.reuters.com/business/media-telecom/south-koreas-lee-says-speed-is-vital-ai-race-data-centre-visit-2026-11-21/",
+        "status": "publisher_direct_article_unavailable",
+        "checked_at": "2026-11-22T14:36:41.154Z",
+        "error": "Publisher could not independently access complete Reuters text; story deferred, not represented as source-reviewed publication."
+      },
+      {
+        "url": "https://www.reuters.com/business/oracle-says-openai-infrastructure-deal-is-fully-funded-after-final-capital-raise-2026-11-20/",
+        "status": "publisher_direct_article_unavailable",
+        "checked_at": "2026-11-22T14:36:41.154Z",
+        "error": "Publisher could not independently access complete Reuters text; story deferred, not represented as source-reviewed publication."
+      }
+    ]
+  },
+  "tldr": [
+    "Lean and Mathlib issued a formal certification of a major proof claim, and open-source model tooling advanced through Transformers and llama.cpp releases; these publisher statements must not be confused with independently benchmarked model capabilities.",
+    "Five November 19 research preprints explore small-agent planning, scoring, human oversight and video models. Results remain author-reported, three inaccessible journalism reports stay unpublished and all proposed catalog additions remain under review."
+  ],
+  "news": [
+    {
+      "id": "ai-news-riemann-lean-community-certification-2026-11-21",
+      "title": "Lean and Mathlib teams certify a formal proof of the Riemann hypothesis",
+      "category": "research",
+      "tags": [
+        "AI",
+        "formal methods",
+        "theorem proving",
+        "mathematics",
+        "verification"
+      ],
+      "summary": "A November 21 joint Lean/Mathlib statement reports independent checks of Levent Alpöge's enormous Lean proof released November 20, including statement matching and multiple proof kernels. Alpöge credits collaboration with Claude.",
+      "why_it_matters": "Demonstrates a striking use of AI-assisted mathematics plus machine-verifiable proofs, with independent checks separating a claimed breakthrough from model-generated plausibility.",
+      "caveat": "Formal checking validates a theorem relative to mathematical foundations and the exact statement; independent conceptual exposition and broader mathematical scrutiny can continue. The Lean organizations' certification does not by itself establish how much of the discovery was caused by AI.",
+      "review_status": "publisher_reviewed_first_party_statement_attributed",
+      "release_status": "research_report",
+      "source_url": "https://leanprover-community.github.io/blog/posts/riemann-hypothesis/",
+      "publication_date": "2026-11-21",
+      "event_date": "2026-11-21",
+      "discovered_at": "2026-11-22T14:24:19.807Z",
+      "added_to_atlas_at": "2026-11-22T14:36:41.154Z",
+      "collection_classification": "previous_day",
+      "source_record_id": "ai-news:riemann-lean-community-certification:2026-11-21"
+    },
+    {
+      "id": "ai-news-transformers-5-24-model-runtime-2026-11-21",
+      "title": "Transformers v5.24 adds native support for looped, audio and multimodal architectures",
+      "category": "developer_tools",
+      "tags": [
+        "AI",
+        "DL",
+        "LLM",
+        "SLM",
+        "multimodal",
+        "audio",
+        "frameworks"
+      ],
+      "summary": "Hugging Face's November 21 v5.24.0 release documents support for Inkling 2 Mini, Apertus 1.5, WavTokenizer, Dory, HY4-VL, Omnilingual ASR and Lara Mini.",
+      "why_it_matters": "New architecture integrations can reduce custom implementation work and give researchers more standard loading paths for varied speech, vision and small-model systems.",
+      "caveat": "This is a library compatibility release, not proof that each model first launched on November 21; weights, gated access, license and device memory vary by model.",
+      "review_status": "publisher_reviewed_first_party_statement_attributed",
+      "release_status": "available_software_release",
+      "source_url": "https://github.com/huggingface/transformers/releases/tag/v5.24.0",
+      "publication_date": "2026-11-21",
+      "event_date": "2026-11-21",
+      "discovered_at": "2026-11-22T14:24:19.807Z",
+      "added_to_atlas_at": "2026-11-22T14:36:41.154Z",
+      "collection_classification": "previous_day",
+      "source_record_id": "ai-news:transformers-5-24-model-runtime:2026-11-21"
+    },
+    {
+      "id": "ai-news-llamacpp-hibiki-duplex-2026-11-21",
+      "title": "llama.cpp adds Kyutai Hibiki real-time duplex support",
+      "category": "inference",
+      "tags": [
+        "AI",
+        "audio",
+        "speech",
+        "multimodal",
+        "inference",
+        "open source"
+      ],
+      "summary": "The ggml-org b12619 release adds mtmd support for Kyutai Hibiki real-time duplex, including a long-session-quality fix and a Metal fusion regression baseline.",
+      "why_it_matters": "Extends local inference plumbing for simultaneous listening and speaking workloads, a distinct path from fixed-turn ASR-LLM-TTS chains.",
+      "caveat": "The release note documents implementation support, not measured end-to-end latency or stability across all devices; specific model checkpoints and compute support must be validated.",
+      "review_status": "publisher_reviewed_first_party_statement_attributed",
+      "release_status": "available_prerelease",
+      "source_url": "https://github.com/ggml-org/llama.cpp/releases/tag/b12619",
+      "publication_date": "2026-11-21",
+      "event_date": "2026-11-21",
+      "discovered_at": "2026-11-22T14:24:19.807Z",
+      "added_to_atlas_at": "2026-11-22T14:36:41.154Z",
+      "collection_classification": "previous_day",
+      "source_record_id": "ai-news:llamacpp-hibiki-duplex:2026-11-21"
+    },
+    {
+      "id": "ai-news-seer-deep-research-agent-value-models-2611-26423",
+      "title": "Seer steers small research agents using predicted tool results and action values",
+      "category": "research",
+      "tags": [
+        "AI",
+        "LLM",
+        "SLM",
+        "agents",
+        "evaluation",
+        "inference"
+      ],
+      "summary": "A November 19 arXiv preprint introduces reusable offline-trained tool-response and value models that score multiple proposed research actions but execute only the selected tool call. Authors report substantial gains on agent benchmarks for 4B/9B Qwen variants.",
+      "why_it_matters": "Suggests a targeted way to spend local compute on action selection rather than hiring a larger reasoning model or paying for every candidate tool call.",
+      "caveat": "Simulator errors can misrank actions; gains are author-reported in studied benchmarks and no production reliability guarantee or universally usable weights were confirmed.",
+      "review_status": "publisher_reviewed_preprint_claims_attributed",
+      "release_status": "research_report",
+      "source_url": "https://arxiv.org/abs/2611.26423",
+      "publication_date": "2026-11-19",
+      "event_date": "2026-11-19",
+      "discovered_at": "2026-11-22T14:24:19.807Z",
+      "added_to_atlas_at": "2026-11-22T14:36:41.154Z",
+      "collection_classification": "catch_up",
+      "source_record_id": "ai-news:seer-deep-research-agent-value-models:2611.26423"
+    },
+    {
+      "id": "ai-news-glide-distilled-decision-models-2611-26509",
+      "title": "GLiDE distills reasoning into single-pass calibrated candidate scoring",
+      "category": "research",
+      "tags": [
+        "AI",
+        "ML",
+        "DL",
+        "LLM",
+        "SLM",
+        "distillation",
+        "inference",
+        "evaluation"
+      ],
+      "summary": "GLiDE proposes 0.4B–27B decision models that score candidate answers without autoregressive reasoning traces, using partial bidirectional attention and soft-target teacher distillation; the paper reports 92.9 ms median single-GPU latency for its 27B configuration.",
+      "why_it_matters": "Potentially useful for low-latency reranking, grading and discrete choices where full answer generation is unnecessary.",
+      "caveat": "Reported scores and timing are from authors' setup, not a head-to-head universal comparison; model-weight/license availability and calibration transfer remain to be checked.",
+      "review_status": "publisher_reviewed_preprint_claims_attributed",
+      "release_status": "research_report",
+      "source_url": "https://arxiv.org/abs/2611.26509",
+      "publication_date": "2026-11-19",
+      "event_date": "2026-11-19",
+      "discovered_at": "2026-11-22T14:24:19.807Z",
+      "added_to_atlas_at": "2026-11-22T14:36:41.154Z",
+      "collection_classification": "catch_up",
+      "source_record_id": "ai-news:glide-distilled-decision-models:2611.26509"
+    },
+    {
+      "id": "ai-news-r2-vla-risk-control-testtime-2611-26438",
+      "title": "R2-VLA conditions robot action on calibrated uncertainty and expert intervention",
+      "category": "robotics",
+      "tags": [
+        "AI",
+        "DL",
+        "robotics",
+        "vision",
+        "retrieval",
+        "safety",
+        "evaluation"
+      ],
+      "summary": "The R2-VLA preprint adds a learned uncertainty predictor and task-level failure-risk calibration to retrieval-based robot policy adaptation; authors report 9.2–11.2 percentage-point success improvements on LIBERO suites.",
+      "why_it_matters": "A concrete design for when a robotic agent should request expert help rather than blindly trusting retrieved demonstrations.",
+      "caveat": "Controlled benchmark results and a stated statistical risk threshold do not certify real-world robot safety under distribution shift.",
+      "review_status": "publisher_reviewed_preprint_claims_attributed",
+      "release_status": "research_report",
+      "source_url": "https://arxiv.org/abs/2611.26438",
+      "publication_date": "2026-11-19",
+      "event_date": "2026-11-19",
+      "discovered_at": "2026-11-22T14:24:19.807Z",
+      "added_to_atlas_at": "2026-11-22T14:36:41.154Z",
+      "collection_classification": "catch_up",
+      "source_record_id": "ai-news:r2-vla-risk-control-testtime:2611.26438"
+    },
+    {
+      "id": "ai-news-learning-to-defer-expert-drift-2611-26440",
+      "title": "Expert-drift study adapts human-AI handoffs as expert reliability changes",
+      "category": "safety",
+      "tags": [
+        "AI",
+        "ML",
+        "human oversight",
+        "safety",
+        "evaluation",
+        "healthcare"
+      ],
+      "summary": "EDA-L2D models recent expert outcomes when deciding whether a model or human should handle a case; authors evaluate simulated shifts in expert reliability on images, medical tasks and hate-speech data.",
+      "why_it_matters": "A useful challenge to the assumption that human oversight is uniformly reliable at all hours and conditions.",
+      "caveat": "A predictive deferral policy is not proof of safe clinical or legal deployment; the study is a preprint with domain-specific evaluation.",
+      "review_status": "publisher_reviewed_preprint_claims_attributed",
+      "release_status": "research_report",
+      "source_url": "https://arxiv.org/abs/2611.26440",
+      "publication_date": "2026-11-19",
+      "event_date": "2026-11-19",
+      "discovered_at": "2026-11-22T14:24:19.807Z",
+      "added_to_atlas_at": "2026-11-22T14:36:41.154Z",
+      "collection_classification": "catch_up",
+      "source_record_id": "ai-news:learning-to-defer-expert-drift:2611.26440"
+    },
+    {
+      "id": "ai-news-scaleworld-shared-video-backbone-2611-26615",
+      "title": "ScaleWorld shares video prediction and high-resolution refinement in one backbone",
+      "category": "multimodal",
+      "tags": [
+        "AI",
+        "DL",
+        "video",
+        "world models",
+        "distillation",
+        "inference"
+      ],
+      "summary": "ScaleWorld proposes a causal video architecture that alternates low-resolution future prediction with one-step high-resolution refinement, trained with task-asymmetric on-policy distillation from specialists.",
+      "why_it_matters": "Combining forecasting and refinement may reduce duplicate models and memory costs for interactive video-world applications.",
+      "caveat": "The efficiency/quality tradeoff is author-reported; no broad hardware throughput replication or production license was independently established.",
+      "review_status": "publisher_reviewed_preprint_claims_attributed",
+      "release_status": "research_report",
+      "source_url": "https://arxiv.org/abs/2611.26615",
+      "publication_date": "2026-11-19",
+      "event_date": "2026-11-19",
+      "discovered_at": "2026-11-22T14:24:19.807Z",
+      "added_to_atlas_at": "2026-11-22T14:36:41.154Z",
+      "collection_classification": "catch_up",
+      "source_record_id": "ai-news:scaleworld-shared-video-backbone:2611.26615"
+    }
+  ],
+  "technologies": [],
+  "terms": [],
+  "site_changes": [],
+  "corrections": []
+}
