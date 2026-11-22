@@ -52,7 +52,7 @@ test('script-free primary hash routes expose real static destinations without ch
     assert.ok(offline.includes('href="https://aiupdates.app/' + onlinePath + '"'),
       route + ' offline fallback does not point at a nonexistent local file');
   }
-  assert.ok(html.includes('<!-- atlas-nojs-primary-hash-routes:begin -->\\n<noscript>'),
+  assert.ok(html.includes('<!-- atlas-nojs-primary-hash-routes:begin -->' + String.fromCharCode(10) + '<noscript>'),
     'the route-specific fallback is gated to browsers with JavaScript disabled');
   assert.ok(html.includes('.nojs-primary-routes>.notice:target'),
     'the requested section gets an accessible visible focus ring');

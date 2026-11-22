@@ -45,7 +45,20 @@ const primaryMobile = menu => {
 
 test('Games is an original workspace hash route, not a second website link', () => {
   const html = read('index.html'), app = read('app.js');
-  assert.ok(!html.includes('href="games.html"'));
+  // The actual Discover application keeps Games as its canonical SPA route.
+  // The only permitted standalone Games link is in a no-JavaScript fallback
+  // section, where playing a game is explicitly documented as requiring JS.
+  const nojsStart = '<!-- atlas-nojs-primary-hash-routes:begin -->';
+  const nojsEnd = '<!-- atlas-nojs-primary-hash-routes:end -->';
+  const start = html.indexOf(nojsStart), end = html.indexOf(nojsEnd);
+  assert.ok(start >= 0 && end > start, 'Missing script-free section fallback');
+  const nojs = html.slice(start, end);
+  const interactive = html.slice(0, start) + html.slice(end + nojsEnd.length);
+  assert.ok(!interactive.includes('href="games.html"'),
+    'the interactive Discover primary Games link must remain an SPA route');
+  assert.equal((nojs.match(/href="games.html" data-nojs-static="games"/g) || []).length, 1,
+    'no-JavaScript visitors receive one honest link to the existing Games page');
+  assert.ok(nojs.includes('Quiz and Match require JavaScript to play.'));
   assert.match(app, /"games":"Games"/);
   assert.match(app, /nav\.querySelectorAll\('a\[data-view\]'\)/);
   assert.ok(app.includes("else if(view==='games')"));
