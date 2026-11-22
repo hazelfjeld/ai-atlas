@@ -264,7 +264,7 @@ with sync_playwright() as p:
     nojs_submit = browser.new_page(viewport={'width': 390, 'height': 844},
                                    java_script_enabled=False)
     nojs_submit.goto(base + 'index.html')
-    nojs_fallback = nojs_submit.locator('noscript a[href="terms/index.html"]')
+    nojs_fallback = nojs_submit.locator('a.nojs-catalog-link[href="terms/index.html"]')
     check('script-free Discover does not advertise an inert submit button',
           nojs_submit.locator('#global-search').is_hidden()
           and nojs_submit.locator('#global-query').is_hidden()
