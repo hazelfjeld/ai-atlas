@@ -57,11 +57,15 @@ def main():
     # loop into its JavaScript-only bundled hash workspace.
     for original, replacement, expected in (
         ('href="#/dictionary" data-nojs-static="concepts"',
-         'href="https://aiupdates.app/terms/index.html" title="Online static catalog; internet required" data-nojs-static="concepts"', 2),
+         'href="https://aiupdates.app/terms/index.html" title="Online static catalog; internet required" data-nojs-static="concepts"', 3),
         ('href="#/technologies" data-nojs-static="technologies"',
-         'href="https://aiupdates.app/technology/index.html" title="Online static catalog; internet required" data-nojs-static="technologies"', 1),
+         'href="https://aiupdates.app/technology/index.html" title="Online static catalog; internet required" data-nojs-static="technologies"', 2),
         ('href="games.html" data-nojs-static="games"',
          'href="https://aiupdates.app/games.html" title="Online Games; JavaScript required" data-nojs-static="games"', 1),
+        ('href="#/papers" data-nojs-static="research"',
+         'href="https://aiupdates.app/research.html" title="Online research library; internet required" data-nojs-static="research"', 2),
+        ('href="#/sources" data-nojs-static="policy"',
+         'href="https://aiupdates.app/about.html" title="Online editorial policy; internet required" data-nojs-static="policy"', 1),
     ):
         assert html.count(original) == expected, 'Missing script-free route handoff: ' + original
         html = html.replace(original, replacement)

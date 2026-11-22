@@ -97,6 +97,44 @@ with sync_playwright() as p:
             if route_width in (320, 1280):
                 scriptless_page.screenshot(path=str(out / (
                     'discover-nojs-route-'+route_key+'-'+scriptless_scheme+'-'+str(route_width)+'.png')))
+        # Shared native secondary links also need useful script-free content.
+        # The Research route itself is already canonical; the remaining
+        # hash workspaces must not fall through to generic Discover content.
+        secondary_routes = {320: ('safety', 'research.html'),
+                            390: ('compare', 'technology/index.html'),
+                            768: ('saved', 'terms/index.html'),
+                            1280: ('sources', 'about.html')}
+        for secondary_width, (section, target_path) in secondary_routes.items():
+            scriptless_page.set_viewport_size({'width': secondary_width, 'height': 844})
+            scriptless_page.goto(base + 'research.html')
+            if secondary_width <= 650:
+                scriptless_page.locator('details.site-mobile-chrome__nav > summary').click()
+                more = scriptless_page.locator('details.site-mobile-chrome__more')
+                if more.get_attribute('open') is None:
+                    more.locator('summary').click()
+                route_link = scriptless_page.locator(
+                    '.site-mobile-chrome__more-links > a[href="index.html#/' + section + '"]')
+            else:
+                more = scriptless_page.locator('details.site-chrome__more')
+                if more.get_attribute('open') is None:
+                    more.locator('summary').click()
+                route_link = scriptless_page.locator(
+                    '.site-chrome__more-links > a[href="index.html#/' + section + '"]')
+            route_link.click()
+            fallback = scriptless_page.locator(
+                '.nojs-primary-routes > section[id="/' + section + '"]')
+            frame = fallback.bounding_box()
+            check('cross-page no-JS secondary route ' + scriptless_scheme +
+                  ' ' + str(secondary_width) + ' ' + section,
+                  scriptless_page.url.endswith('/index.html#/' + section)
+                  and fallback.is_visible()
+                  and fallback.locator('a[href="' + target_path + '"]').count() == 1
+                  and frame is not None and frame['y'] < 844
+                  and frame['y'] + frame['height'] > 0)
+            if secondary_width in (320, 1280):
+                scriptless_page.screenshot(path=str(out / (
+                    'discover-nojs-secondary-' + section + '-' +
+                    scriptless_scheme + '-' + str(secondary_width) + '.png')))
         scriptless_context.close()
     # Hold the first manifest fetch to test early Discover form submission
     # before asynchronous catalog verification. This avoids a network race.
