@@ -16,7 +16,7 @@ test('shared nav follows script-free cross-page hash fallback on desktop and mob
       '.site-mobile-chrome__menu a[href="#/'+key+'"]';
     assert.ok(rules.includes(mobileLink),'same selected mobile link '+key);
   }
-  assert.ok(rules.includes('#additional-navigation > summary'),'secondary section highlighted on closed More parent');
+  assert.ok(rules.includes('color:#f5f7ef!important;background:#374b3c!important'),\n    'the selected desktop route wins over the shared unselected hover override');\n  assert.ok(rules.includes('#additional-navigation > summary'),'secondary section highlighted on closed More parent');
   assert.ok(rules.includes('a[href="#/overview"]'),'stale Discover highlight reset');
   assert.ok(rules.includes('@supports selector('),'progressive hash-only treatment');
   assert.ok(read('downloads/Atlas_Demo_Offline.html').includes(css),
