@@ -75,7 +75,10 @@ with sync_playwright() as p:
         # Without JavaScript its hash needs a truthful, focused fallback.
         for queue_width in (320, 1280):
             scriptless_page.set_viewport_size({'width': queue_width, 'height': 844})
-            scriptless_page.goto(base + 'index.html#/queue', wait_until='domcontentloaded')
+            # CSS that clears the static Discover selection is an external stylesheet.
+            # DOMContentLoaded can precede its load in JS-disabled browsers;
+            # assert the fully rendered state rather than racing network CSS.
+            scriptless_page.goto(base + 'index.html#/queue', wait_until='load')
             queue_section = scriptless_page.locator('[id="/queue"]')
             queue_policy = queue_section.locator('a[data-nojs-static="queue-policy"]')
             check('Script-free review queue ' + scriptless_scheme + ' ' + str(queue_width),
@@ -92,7 +95,7 @@ with sync_playwright() as p:
             scriptless_page.wait_for_url(base + 'about.html', wait_until='domcontentloaded', timeout=15000)
             check('Script-free queue policy destination ' + scriptless_scheme + ' ' + str(queue_width),
                   scriptless_page.locator('main').count() == 1)
-            scriptless_page.goto(base + 'index.html#/search', wait_until='domcontentloaded')
+            scriptless_page.goto(base + 'index.html#/search', wait_until='load')
             check('Script-free Search clears stale Discover rail ' + scriptless_scheme + ' ' + str(queue_width),
                   scriptless_page.locator('[id="/search"]').is_visible()
                   and scriptless_page.locator('#navigation a[data-view="overview"]').evaluate(
