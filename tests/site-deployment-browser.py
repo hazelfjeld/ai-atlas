@@ -121,6 +121,16 @@ with sync_playwright() as p:
                 route_link = scriptless_page.locator(
                     '.site-chrome__more-links > a[href="index.html#/' + section + '"]')
             route_link.click()
+            # A cross-document hash scroll can complete one or two frames after
+            # Playwright's click/navigation resolves, especially with cold CDN
+            # styles. Wait for the browser's *own* fragment scroll; never call
+            # scroll_into_view, which would mask a broken native deep link.
+            scriptless_page.wait_for_function("""section => {
+                const target = document.getElementById('/' + section);
+                if (!target) return false;
+                const frame = target.getBoundingClientRect();
+                return frame.top < innerHeight && frame.bottom > 0;
+            }""", arg=section, timeout=5000)
             fallback = scriptless_page.locator(
                 '.nojs-primary-routes > section[id="/' + section + '"]')
             frame = fallback.bounding_box()
