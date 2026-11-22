@@ -1,0 +1,864 @@
+{
+  "schema": 1,
+  "batch_id": "atlas-daily-20261122-primary-reviewed-bounded-0820ct-a",
+  "edition_date": "2026-11-22",
+  "timezone": "America/Chicago",
+  "collected_at": "2026-11-22T14:24:19.807Z",
+  "coverage_start": "2026-11-20T14:14:37.554Z",
+  "coverage_end": "2026-11-22T14:24:19.807Z",
+  "coverage_status": "partial",
+  "coverage_note": "Bounded Nov20–Nov22 primary-source and selected Nov19 research catch-up. Last successful collector cutoff remains null; earlier partial-collection recovery and unswept specialists still outstanding. November 19 papers are deliberately tagged catch_up. This date is collection/edition date, not publication date of the discoveries.",
+  "overlap_lookback_start": "2026-11-19T00:00:00Z",
+  "sources_checked": [
+    {
+      "url": "https://leanprover-community.github.io/blog/posts/riemann-hypothesis/",
+      "status": "success",
+      "checked_at": "2026-11-22T14:24:19.807Z",
+      "method": "Opened formal verification report"
+    },
+    {
+      "url": "https://math.mit.edu/~drew/grh/",
+      "status": "success",
+      "checked_at": "2026-11-22T14:24:19.807Z",
+      "method": "Opened formal verification report"
+    },
+    {
+      "url": "https://github.com/huggingface/transformers/releases/tag/v5.24.0",
+      "status": "success",
+      "checked_at": "2026-11-22T14:24:19.807Z",
+      "method": "GitHub release primary record"
+    },
+    {
+      "url": "https://github.com/ggml-org/llama.cpp/releases/tag/b12619",
+      "status": "success",
+      "checked_at": "2026-11-22T14:24:19.807Z",
+      "method": "GitHub release primary record"
+    },
+    {
+      "url": "https://arxiv.org/abs/2611.26423",
+      "status": "success",
+      "checked_at": "2026-11-22T14:24:19.807Z",
+      "method": "Opened original arXiv abstract/HTML"
+    },
+    {
+      "url": "https://arxiv.org/abs/2611.26509",
+      "status": "success",
+      "checked_at": "2026-11-22T14:24:19.807Z",
+      "method": "Opened original arXiv abstract/HTML"
+    },
+    {
+      "url": "https://arxiv.org/abs/2611.26438",
+      "status": "success",
+      "checked_at": "2026-11-22T14:24:19.807Z",
+      "method": "Opened original arXiv abstract/HTML"
+    },
+    {
+      "url": "https://arxiv.org/abs/2611.26440",
+      "status": "success",
+      "checked_at": "2026-11-22T14:24:19.807Z",
+      "method": "Opened original arXiv abstract/HTML"
+    },
+    {
+      "url": "https://arxiv.org/abs/2611.26615",
+      "status": "success",
+      "checked_at": "2026-11-22T14:24:19.807Z",
+      "method": "Opened original arXiv abstract/HTML"
+    },
+    {
+      "url": "https://www.reuters.com/legal/litigation/waymo-recalls-self-driving-cars-over-closed-freeway-lanes-manual-traffic-control-2026-11-20/",
+      "status": "success",
+      "checked_at": "2026-11-22T14:24:19.807Z",
+      "method": "Opened article"
+    },
+    {
+      "url": "https://www.reuters.com/business/media-telecom/south-koreas-lee-says-speed-is-vital-ai-race-data-centre-visit-2026-11-21/",
+      "status": "success",
+      "checked_at": "2026-11-22T14:24:19.807Z",
+      "method": "Opened article"
+    },
+    {
+      "url": "https://www.reuters.com/business/oracle-says-openai-infrastructure-deal-is-fully-funded-after-final-capital-raise-2026-11-20/",
+      "status": "success",
+      "checked_at": "2026-11-22T14:24:19.807Z",
+      "method": "Opened article"
+    }
+  ],
+  "sources_failed": [
+    {
+      "url": "https://export.arxiv.org/api/query",
+      "status": "failed",
+      "checked_at": "2026-11-22T14:24:19.807Z",
+      "error": "Metadata endpoint inaccessible through research reader; individual arXiv pages reviewed instead"
+    },
+    {
+      "url": "https://www.ft.com/content/f3ad8a81-3890-4a8a-8853-ff0a94b08ba9",
+      "status": "failed",
+      "checked_at": "2026-11-22T14:24:19.807Z",
+      "error": "Paywalled article body; allegations not imported as verified news"
+    },
+    {
+      "url": "https://huggingface.co/docs/transformers/main/en/model_doc/inkling2_loop",
+      "status": "failed",
+      "checked_at": "2026-11-22T14:24:19.807Z",
+      "error": "Documentation URL reader inaccessible; GitHub release record available"
+    }
+  ],
+  "source_health_note": "12 directly accessible unique source pages for 11 stories, including original papers, GitHub tagged releases, formal verification and Reuters reporting. arXiv metadata API, paywalled FT investigation and a model documentation reader failed; no inference of absence from those errors.",
+  "coverage_backlog": [
+    "Recover older unswept partial windows since first November 2 collection, without changing null last_successful_coverage_end",
+    "Broaden Nov20–22 specialist releases, research subfields including audio/robotics, smaller codebases and hardware notices",
+    "Recheck arXiv metadata API, inaccessible model documentation and evidence-sensitive industry reports; avoid double-counting syndicated or previously published IDs",
+    "Publisher to review licenses, model artifacts, catalog aliases and relation IDs before integrating technology or term profiles"
+  ],
+  "tldr": [
+    "A formal Lean-community certification of a Claude-assisted Riemann hypothesis proof and new open-source runtime integrations mark major developments in AI-assisted mathematics and practical multimodal tooling.",
+    "Catch-up research on small-agent planning, single-pass distilled decision models, robotic risk control and video generation is promising but remains benchmark- and author-dependent; infrastructure plans and real-world self-driving recalls require careful date and evidence labels."
+  ],
+  "news": [
+    {
+      "id": "ai-news:riemann-lean-community-certification:2026-11-21",
+      "title": "Lean and Mathlib teams certify a formal proof of the Riemann hypothesis",
+      "category": "research",
+      "tags": [
+        "AI",
+        "formal methods",
+        "theorem proving",
+        "mathematics",
+        "verification"
+      ],
+      "summary": "A November 21 joint Lean/Mathlib statement reports independent checks of Levent Alpöge's enormous Lean proof released November 20, including statement matching and multiple proof kernels. Alpöge credits collaboration with Claude.",
+      "why_it_matters": "Demonstrates a striking use of AI-assisted mathematics plus machine-verifiable proofs, with independent checks separating a claimed breakthrough from model-generated plausibility.",
+      "caveat": "Formal checking validates a theorem relative to mathematical foundations and the exact statement; independent conceptual exposition and broader mathematical scrutiny can continue. The Lean organizations' certification does not by itself establish how much of the discovery was caused by AI.",
+      "canonical_url": "https://leanprover-community.github.io/blog/posts/riemann-hypothesis/",
+      "source_url": "https://leanprover-community.github.io/blog/posts/riemann-hypothesis/",
+      "publisher": "Lean and Mathlib communities",
+      "type": "joint technical verification",
+      "publication_date": "2026-11-21",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-21",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-22T14:24:19.807Z",
+      "checked_at": "2026-11-22T14:24:19.807Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "independently_reported_formal_verification",
+      "release_status": "research_report",
+      "collection_classification": "recent",
+      "version": null,
+      "arxiv_id": null,
+      "sources": [
+        {
+          "url": "https://leanprover-community.github.io/blog/posts/riemann-hypothesis/",
+          "publisher": "Lean and Mathlib communities",
+          "type": "joint technical verification"
+        },
+        {
+          "url": "https://math.mit.edu/~drew/grh/",
+          "publisher": "Andrew Sutherland (MIT)",
+          "type": "independent technical verification"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:transformers-5-24-model-runtime:2026-11-21",
+      "title": "Transformers v5.24 adds native support for looped, audio and multimodal architectures",
+      "category": "developer_tools",
+      "tags": [
+        "AI",
+        "DL",
+        "LLM",
+        "SLM",
+        "multimodal",
+        "audio",
+        "frameworks"
+      ],
+      "summary": "Hugging Face's November 21 v5.24.0 release documents support for Inkling 2 Mini, Apertus 1.5, WavTokenizer, Dory, HY4-VL, Omnilingual ASR and Lara Mini.",
+      "why_it_matters": "New architecture integrations can reduce custom implementation work and give researchers more standard loading paths for varied speech, vision and small-model systems.",
+      "caveat": "This is a library compatibility release, not proof that each model first launched on November 21; weights, gated access, license and device memory vary by model.",
+      "canonical_url": "https://github.com/huggingface/transformers/releases/tag/v5.24.0",
+      "source_url": "https://github.com/huggingface/transformers/releases/tag/v5.24.0",
+      "publisher": "Hugging Face",
+      "type": "official GitHub release",
+      "publication_date": "2026-11-21",
+      "publication_date_precision": "day",
+      "publication_time_utc": "2026-11-21T12:28:26Z",
+      "event_date": "2026-11-21",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-22T14:24:19.807Z",
+      "checked_at": "2026-11-22T14:24:19.807Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "first_party_release",
+      "release_status": "available_software_release",
+      "collection_classification": "recent",
+      "version": "v5.24.0",
+      "arxiv_id": null,
+      "sources": [
+        {
+          "url": "https://github.com/huggingface/transformers/releases/tag/v5.24.0",
+          "publisher": "Hugging Face",
+          "type": "official GitHub release"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:llamacpp-hibiki-duplex:2026-11-21",
+      "title": "llama.cpp adds Kyutai Hibiki real-time duplex support",
+      "category": "inference",
+      "tags": [
+        "AI",
+        "audio",
+        "speech",
+        "multimodal",
+        "inference",
+        "open source"
+      ],
+      "summary": "The ggml-org b12619 release adds mtmd support for Kyutai Hibiki real-time duplex, including a long-session-quality fix and a Metal fusion regression baseline.",
+      "why_it_matters": "Extends local inference plumbing for simultaneous listening and speaking workloads, a distinct path from fixed-turn ASR-LLM-TTS chains.",
+      "caveat": "The release note documents implementation support, not measured end-to-end latency or stability across all devices; specific model checkpoints and compute support must be validated.",
+      "canonical_url": "https://github.com/ggml-org/llama.cpp/releases/tag/b12619",
+      "source_url": "https://github.com/ggml-org/llama.cpp/releases/tag/b12619",
+      "publisher": "ggml-org",
+      "type": "official GitHub release",
+      "publication_date": "2026-11-21",
+      "publication_date_precision": "day",
+      "publication_time_utc": "2026-11-21T23:45:36Z",
+      "event_date": "2026-11-21",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-22T14:24:19.807Z",
+      "checked_at": "2026-11-22T14:24:19.807Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "first_party_release",
+      "release_status": "available_prerelease",
+      "collection_classification": "recent",
+      "version": "b12619",
+      "arxiv_id": null,
+      "sources": [
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/releases/tag/b12619",
+          "publisher": "ggml-org",
+          "type": "official GitHub release"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:seer-deep-research-agent-value-models:2611.26423",
+      "title": "Seer steers small research agents using predicted tool results and action values",
+      "category": "research",
+      "tags": [
+        "AI",
+        "LLM",
+        "SLM",
+        "agents",
+        "evaluation",
+        "inference"
+      ],
+      "summary": "A November 19 arXiv preprint introduces reusable offline-trained tool-response and value models that score multiple proposed research actions but execute only the selected tool call. Authors report substantial gains on agent benchmarks for 4B/9B Qwen variants.",
+      "why_it_matters": "Suggests a targeted way to spend local compute on action selection rather than hiring a larger reasoning model or paying for every candidate tool call.",
+      "caveat": "Simulator errors can misrank actions; gains are author-reported in studied benchmarks and no production reliability guarantee or universally usable weights were confirmed.",
+      "canonical_url": "https://arxiv.org/abs/2611.26423",
+      "source_url": "https://arxiv.org/abs/2611.26423",
+      "publisher": "Seer paper authors",
+      "type": "arXiv v1 preprint",
+      "publication_date": "2026-11-19",
+      "publication_date_precision": "day",
+      "publication_time_utc": "2026-11-19T17:03:24Z",
+      "event_date": "2026-11-19",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-22T14:24:19.807Z",
+      "checked_at": "2026-11-22T14:24:19.807Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "research_preprint",
+      "release_status": "research_report",
+      "collection_classification": "catch_up",
+      "version": "v1",
+      "arxiv_id": "2611.26423",
+      "sources": [
+        {
+          "url": "https://arxiv.org/abs/2611.26423",
+          "publisher": "Seer paper authors",
+          "type": "arXiv v1 preprint"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:glide-distilled-decision-models:2611.26509",
+      "title": "GLiDE distills reasoning into single-pass calibrated candidate scoring",
+      "category": "research",
+      "tags": [
+        "AI",
+        "ML",
+        "DL",
+        "LLM",
+        "SLM",
+        "distillation",
+        "inference",
+        "evaluation"
+      ],
+      "summary": "GLiDE proposes 0.4B–27B decision models that score candidate answers without autoregressive reasoning traces, using partial bidirectional attention and soft-target teacher distillation; the paper reports 92.9 ms median single-GPU latency for its 27B configuration.",
+      "why_it_matters": "Potentially useful for low-latency reranking, grading and discrete choices where full answer generation is unnecessary.",
+      "caveat": "Reported scores and timing are from authors' setup, not a head-to-head universal comparison; model-weight/license availability and calibration transfer remain to be checked.",
+      "canonical_url": "https://arxiv.org/abs/2611.26509",
+      "source_url": "https://arxiv.org/abs/2611.26509",
+      "publisher": "GLiDE paper authors",
+      "type": "arXiv v1 preprint",
+      "publication_date": "2026-11-19",
+      "publication_date_precision": "day",
+      "publication_time_utc": "2026-11-19T17:56:44Z",
+      "event_date": "2026-11-19",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-22T14:24:19.807Z",
+      "checked_at": "2026-11-22T14:24:19.807Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "research_preprint",
+      "release_status": "research_report",
+      "collection_classification": "catch_up",
+      "version": "v1",
+      "arxiv_id": "2611.26509",
+      "sources": [
+        {
+          "url": "https://arxiv.org/abs/2611.26509",
+          "publisher": "GLiDE paper authors",
+          "type": "arXiv v1 preprint"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:r2-vla-risk-control-testtime:2611.26438",
+      "title": "R2-VLA conditions robot action on calibrated uncertainty and expert intervention",
+      "category": "robotics",
+      "tags": [
+        "AI",
+        "DL",
+        "robotics",
+        "vision",
+        "retrieval",
+        "safety",
+        "evaluation"
+      ],
+      "summary": "The R2-VLA preprint adds a learned uncertainty predictor and task-level failure-risk calibration to retrieval-based robot policy adaptation; authors report 9.2–11.2 percentage-point success improvements on LIBERO suites.",
+      "why_it_matters": "A concrete design for when a robotic agent should request expert help rather than blindly trusting retrieved demonstrations.",
+      "caveat": "Controlled benchmark results and a stated statistical risk threshold do not certify real-world robot safety under distribution shift.",
+      "canonical_url": "https://arxiv.org/abs/2611.26438",
+      "source_url": "https://arxiv.org/abs/2611.26438",
+      "publisher": "R2-VLA paper authors",
+      "type": "arXiv v1 preprint",
+      "publication_date": "2026-11-19",
+      "publication_date_precision": "day",
+      "publication_time_utc": "2026-11-19T17:12:48Z",
+      "event_date": "2026-11-19",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-22T14:24:19.807Z",
+      "checked_at": "2026-11-22T14:24:19.807Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "research_preprint",
+      "release_status": "research_report",
+      "collection_classification": "catch_up",
+      "version": "v1",
+      "arxiv_id": "2611.26438",
+      "sources": [
+        {
+          "url": "https://arxiv.org/abs/2611.26438",
+          "publisher": "R2-VLA paper authors",
+          "type": "arXiv v1 preprint"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:learning-to-defer-expert-drift:2611.26440",
+      "title": "Expert-drift study adapts human-AI handoffs as expert reliability changes",
+      "category": "safety",
+      "tags": [
+        "AI",
+        "ML",
+        "human oversight",
+        "safety",
+        "evaluation",
+        "healthcare"
+      ],
+      "summary": "EDA-L2D models recent expert outcomes when deciding whether a model or human should handle a case; authors evaluate simulated shifts in expert reliability on images, medical tasks and hate-speech data.",
+      "why_it_matters": "A useful challenge to the assumption that human oversight is uniformly reliable at all hours and conditions.",
+      "caveat": "A predictive deferral policy is not proof of safe clinical or legal deployment; the study is a preprint with domain-specific evaluation.",
+      "canonical_url": "https://arxiv.org/abs/2611.26440",
+      "source_url": "https://arxiv.org/abs/2611.26440",
+      "publisher": "EDA-L2D paper authors",
+      "type": "arXiv v1 preprint",
+      "publication_date": "2026-11-19",
+      "publication_date_precision": "day",
+      "publication_time_utc": "2026-11-19T17:13:58Z",
+      "event_date": "2026-11-19",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-22T14:24:19.807Z",
+      "checked_at": "2026-11-22T14:24:19.807Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "research_preprint",
+      "release_status": "research_report",
+      "collection_classification": "catch_up",
+      "version": "v1",
+      "arxiv_id": "2611.26440",
+      "sources": [
+        {
+          "url": "https://arxiv.org/abs/2611.26440",
+          "publisher": "EDA-L2D paper authors",
+          "type": "arXiv v1 preprint"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:scaleworld-shared-video-backbone:2611.26615",
+      "title": "ScaleWorld shares video prediction and high-resolution refinement in one backbone",
+      "category": "multimodal",
+      "tags": [
+        "AI",
+        "DL",
+        "video",
+        "world models",
+        "distillation",
+        "inference"
+      ],
+      "summary": "ScaleWorld proposes a causal video architecture that alternates low-resolution future prediction with one-step high-resolution refinement, trained with task-asymmetric on-policy distillation from specialists.",
+      "why_it_matters": "Combining forecasting and refinement may reduce duplicate models and memory costs for interactive video-world applications.",
+      "caveat": "The efficiency/quality tradeoff is author-reported; no broad hardware throughput replication or production license was independently established.",
+      "canonical_url": "https://arxiv.org/abs/2611.26615",
+      "source_url": "https://arxiv.org/abs/2611.26615",
+      "publisher": "ScaleWorld paper authors",
+      "type": "arXiv v1 preprint",
+      "publication_date": "2026-11-19",
+      "publication_date_precision": "day",
+      "publication_time_utc": "2026-11-19T18:58:04Z",
+      "event_date": "2026-11-19",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-22T14:24:19.807Z",
+      "checked_at": "2026-11-22T14:24:19.807Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "research_preprint",
+      "release_status": "research_report",
+      "collection_classification": "catch_up",
+      "version": "v1",
+      "arxiv_id": "2611.26615",
+      "sources": [
+        {
+          "url": "https://arxiv.org/abs/2611.26615",
+          "publisher": "ScaleWorld paper authors",
+          "type": "arXiv v1 preprint"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:waymo-construction-manual-controls-recalls:2026-11-20",
+      "title": "Waymo announces two robotaxi safety recalls over lane closures and manual traffic signals",
+      "category": "robotics",
+      "tags": [
+        "AI",
+        "robotics",
+        "autonomous vehicles",
+        "safety",
+        "real-world incidents"
+      ],
+      "summary": "Reuters reports Waymo filing two recalls involving closed freeway lanes and responses to officials' manual traffic directions. The company says its freeway-closure remedy is still in work, while the manual-control software update was completed November 6.",
+      "why_it_matters": "An operational example of edge cases where automated driving must handle human-directed traffic control and changing road restrictions.",
+      "caveat": "One crash is tied to the manual-control issue; Waymo reported no collisions/injuries for closed-lane incidents. Distinguish actual recalls from ongoing investigations and Waymo's own safety-performance comparisons.",
+      "canonical_url": "https://www.reuters.com/legal/litigation/waymo-recalls-self-driving-cars-over-closed-freeway-lanes-manual-traffic-control-2026-11-20/",
+      "source_url": "https://www.reuters.com/legal/litigation/waymo-recalls-self-driving-cars-over-closed-freeway-lanes-manual-traffic-control-2026-11-20/",
+      "publisher": "Reuters",
+      "type": "independent reporting on company regulatory filing",
+      "publication_date": "2026-11-20",
+      "publication_date_precision": "day",
+      "publication_time_utc": "2026-11-20T20:04:00Z",
+      "event_date": "2026-11-20",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-22T14:24:19.807Z",
+      "checked_at": "2026-11-22T14:24:19.807Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "reported_official_recall",
+      "release_status": "research_report",
+      "collection_classification": "catch_up",
+      "version": null,
+      "arxiv_id": null,
+      "sources": [
+        {
+          "url": "https://www.reuters.com/legal/litigation/waymo-recalls-self-driving-cars-over-closed-freeway-lanes-manual-traffic-control-2026-11-20/",
+          "publisher": "Reuters",
+          "type": "independent reporting on company regulatory filing"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:korea-ulsan-ai-datacenter-visit:2026-11-21",
+      "title": "South Korean leader spotlights SK–AWS Ulsan data center during construction",
+      "category": "infrastructure",
+      "tags": [
+        "AI",
+        "hardware",
+        "cloud",
+        "infrastructure",
+        "industry"
+      ],
+      "summary": "On November 21 South Korea's president toured a future AI facility in Ulsan, with SK Group and AWS building a data center whose operations were scheduled to begin in late 2027; the project was budgeted at about 7 trillion won through 2029.",
+      "why_it_matters": "Illustrates regional diversification and long lead times for new AI compute capacity beyond chip procurement alone.",
+      "caveat": "Planned capacity, budget and 2027 timing are projections and not already functioning deployed compute.",
+      "canonical_url": "https://www.reuters.com/business/media-telecom/south-koreas-lee-says-speed-is-vital-ai-race-data-centre-visit-2026-11-21/",
+      "source_url": "https://www.reuters.com/business/media-telecom/south-koreas-lee-says-speed-is-vital-ai-race-data-centre-visit-2026-11-21/",
+      "publisher": "Reuters",
+      "type": "independent reporting",
+      "publication_date": "2026-11-21",
+      "publication_date_precision": "day",
+      "publication_time_utc": "2026-11-21T05:34:00Z",
+      "event_date": "2026-11-21",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-22T14:24:19.807Z",
+      "checked_at": "2026-11-22T14:24:19.807Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "news_report_confirmed_visit",
+      "release_status": "research_report",
+      "collection_classification": "recent",
+      "version": null,
+      "arxiv_id": null,
+      "sources": [
+        {
+          "url": "https://www.reuters.com/business/media-telecom/south-koreas-lee-says-speed-is-vital-ai-race-data-centre-visit-2026-11-21/",
+          "publisher": "Reuters",
+          "type": "independent reporting"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:oracle-openai-infra-funded-statement:2026-11-20",
+      "title": "Oracle says financing for its OpenAI infrastructure deal is in place",
+      "category": "infrastructure",
+      "tags": [
+        "AI",
+        "LLM",
+        "hardware",
+        "cloud",
+        "financing",
+        "infrastructure"
+      ],
+      "summary": "In a November 20 statement reported by Reuters, Oracle said funding arrangements for its OpenAI-related data-center contract were in place following its capital raise, while describing future capacity and rack deliveries.",
+      "why_it_matters": "Clarifies a major cloud-compute funding claim while distinguishing contractual finance from operational capacity.",
+      "caveat": "Oracle's financing statement is not independent verification of completion of planned 4.5GW facilities or delivery of Vera Rubin equipment.",
+      "canonical_url": "https://www.reuters.com/business/oracle-says-openai-infrastructure-deal-is-fully-funded-after-final-capital-raise-2026-11-20/",
+      "source_url": "https://www.reuters.com/business/oracle-says-openai-infrastructure-deal-is-fully-funded-after-final-capital-raise-2026-11-20/",
+      "publisher": "Reuters",
+      "type": "independent reporting of company statement",
+      "publication_date": "2026-11-20",
+      "publication_date_precision": "day",
+      "publication_time_utc": "2026-11-20T22:11:00Z",
+      "event_date": "2026-11-20",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-22T14:24:19.807Z",
+      "checked_at": "2026-11-22T14:24:19.807Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "company_claim_reported_by_reuters",
+      "release_status": "research_report",
+      "collection_classification": "catch_up",
+      "version": null,
+      "arxiv_id": null,
+      "sources": [
+        {
+          "url": "https://www.reuters.com/business/oracle-says-openai-infrastructure-deal-is-fully-funded-after-final-capital-raise-2026-11-20/",
+          "publisher": "Reuters",
+          "type": "independent reporting of company statement"
+        }
+      ]
+    }
+  ],
+  "technologies": [
+    {
+      "id": "tech-proposal:seer-deep-research-planning:2026-11-22",
+      "name": "Seer (shared decision models)",
+      "aliases": [
+        "Seer shared decision model guidance"
+      ],
+      "usage_tags": [
+        "AI",
+        "ML",
+        "DL",
+        "LLM",
+        "SLM",
+        "Agents"
+      ],
+      "explanation": "Inference-time research-agent guidance using a reusable tool-response simulator and a value estimator trained offline on trajectories. A host agent proposes actions; Seer estimates outcomes and runs only the selected real call.",
+      "conditional_advantage": "Can improve small agents' action choice without executing every candidate web/tool call, when simulations approximate real tool outcomes.",
+      "best_fit_uses": [
+        "Private or local deep research",
+        "Budget-limited agent search strategy experiments"
+      ],
+      "tradeoffs": [
+        "Simulator/value bias can select harmful actions",
+        "Additional local GPU inference work",
+        "Benchmarks not independently reproduced"
+      ],
+      "alternatives": [
+        "Direct prompting and tool calling",
+        "Tree search with real tool execution",
+        "Hosted larger research agents"
+      ],
+      "hardware_runtime_constraints": "Requires an underlying research agent plus additional model inference and memory; compute footprint and compatible checkpoints not confirmed.",
+      "official_documentation_url": "https://arxiv.org/abs/2611.26423",
+      "license_uncertainty": "Source is a preprint; availability/license of any reusable checkpoints or code not verified.",
+      "availability_uncertainty": "Proposed research method; ready-to-use public implementation not established.",
+      "pricing_uncertainty": "No commercial API price or compute budget verified; local compute costs vary.",
+      "existing_profile_id": null,
+      "profile_relationship": "new_candidate_pending_canonical_dedup",
+      "source_links": [
+        {
+          "url": "https://arxiv.org/abs/2611.26423",
+          "publisher": "Seer paper authors",
+          "type": "first-party documentation"
+        }
+      ],
+      "date_checked": "2026-11-22",
+      "checked_at": "2026-11-22T14:24:19.807Z",
+      "review_status": "source_checked_pending_publisher_catalog_dedup"
+    },
+    {
+      "id": "tech-proposal:glide-decision-model:2026-11-22",
+      "name": "GLiDE decision-model family",
+      "aliases": [
+        "Fast Calibrated Decision Model"
+      ],
+      "usage_tags": [
+        "AI",
+        "ML",
+        "DL",
+        "SLM",
+        "LLM",
+        "Distillation"
+      ],
+      "explanation": "Distilled candidate scorer (0.4B–27B sizes studied) using selective bidirectional attention and soft teacher outputs to make decisions in one forward pass.",
+      "conditional_advantage": "Useful when candidate choices are explicit and latency/calibration matters more than free-form generation.",
+      "best_fit_uses": [
+        "Response reranking",
+        "Automated classification and grading under a controlled choice set",
+        "Confidence-aware decision research"
+      ],
+      "tradeoffs": [
+        "Cannot itself generate open-ended responses",
+        "Calibration can degrade on unseen distributions",
+        "27B memory demands are substantial"
+      ],
+      "alternatives": [
+        "Cross-encoder reranker",
+        "Generative judge",
+        "Small task classifier"
+      ],
+      "hardware_runtime_constraints": "Studied 0.4B–27B parameters; inference memory and GPU timings depend heavily on precision, batch and device; reported 27B latency is single-GPU experimental.",
+      "official_documentation_url": "https://arxiv.org/abs/2611.26509",
+      "license_uncertainty": "Preprint does not establish public model license; inspect checkpoints if released.",
+      "availability_uncertainty": "Availability of weights, inference scripts and hosted endpoints unverified.",
+      "pricing_uncertainty": "Pricing not established; local inference may be cheaper for repeated classification but costs are workload-specific.",
+      "existing_profile_id": null,
+      "profile_relationship": "new_candidate_pending_canonical_dedup",
+      "source_links": [
+        {
+          "url": "https://arxiv.org/abs/2611.26509",
+          "publisher": "GLiDE paper authors",
+          "type": "first-party documentation"
+        }
+      ],
+      "date_checked": "2026-11-22",
+      "checked_at": "2026-11-22T14:24:19.807Z",
+      "review_status": "source_checked_pending_publisher_catalog_dedup"
+    },
+    {
+      "id": "tech-proposal:r2-vla-risk-controlled-retrieval:2026-11-22",
+      "name": "R2-VLA",
+      "aliases": [
+        "Risk-Controlled Test-Time Adaptation VLA"
+      ],
+      "usage_tags": [
+        "AI",
+        "ML",
+        "DL",
+        "Robotics",
+        "Safety"
+      ],
+      "explanation": "Robotics adaptation method augmenting a vision-language-action model with retrieved demonstrations, uncertainty estimation, task-level risk calibration and expert corrections.",
+      "conditional_advantage": "Supports conditional human intervention rather than blindly running a retrieved-demonstration policy.",
+      "best_fit_uses": [
+        "Robot manipulation under evolving tasks",
+        "Testing calibrated human-in-the-loop safety controls"
+      ],
+      "tradeoffs": [
+        "Risk guarantee depends on calibration assumptions",
+        "Requires labeled/expert feedback",
+        "Not demonstrated as a safety-certified real-world robot system"
+      ],
+      "alternatives": [
+        "Retrieval-augmented in-context robot control",
+        "Manual teleoperation",
+        "Policy fine-tuning"
+      ],
+      "hardware_runtime_constraints": "Requires robot/VLA backbone and retrieval memory, an uncertainty predictor and expert control path; tested on LIBERO simulation suites.",
+      "official_documentation_url": "https://arxiv.org/abs/2611.26438",
+      "license_uncertainty": "Paper's code/model licenses not verified.",
+      "availability_uncertainty": "Research proposal only; live robot integration not confirmed.",
+      "pricing_uncertainty": "No official pricing; human-in-the-loop expenses may dominate.",
+      "existing_profile_id": null,
+      "profile_relationship": "new_candidate_pending_canonical_dedup",
+      "source_links": [
+        {
+          "url": "https://arxiv.org/abs/2611.26438",
+          "publisher": "R2-VLA paper authors",
+          "type": "first-party documentation"
+        }
+      ],
+      "date_checked": "2026-11-22",
+      "checked_at": "2026-11-22T14:24:19.807Z",
+      "review_status": "source_checked_pending_publisher_catalog_dedup"
+    },
+    {
+      "id": "tech-proposal:llamacpp-kyutai-hibiki-duplex:2026-11-22",
+      "name": "llama.cpp Hibiki duplex integration",
+      "aliases": [
+        "mtmd Hibiki full duplex"
+      ],
+      "usage_tags": [
+        "AI",
+        "DL",
+        "Audio",
+        "Inference",
+        "LLM"
+      ],
+      "explanation": "New mtmd backend support in llama.cpp b12619 for realtime Kyutai Hibiki full-duplex audio, with long-session-quality fixes.",
+      "conditional_advantage": "May allow lower-level self-hosted simultaneous-listening-and-speaking workflows without separate complete-turn batching.",
+      "best_fit_uses": [
+        "Local streaming speech research",
+        "Low-level audio model runtime interoperability"
+      ],
+      "tradeoffs": [
+        "End-to-end barge-in quality unbenchmarked",
+        "Model checkpoint compatibility must be tested",
+        "Hardware audio/compute performance may constrain latency"
+      ],
+      "alternatives": [
+        "Kyutai-native runtime",
+        "Moshi inference",
+        "Cascaded ASR+LLM+TTS"
+      ],
+      "hardware_runtime_constraints": "Prebuilt llama.cpp binaries cover many CPU/GPU targets but Hibiki duplex model support, RAM/VRAM and audio backend need device-specific verification.",
+      "official_documentation_url": "https://github.com/ggml-org/llama.cpp/releases/tag/b12619",
+      "license_uncertainty": "llama.cpp repository license and selected Hibiki model license must be checked separately.",
+      "availability_uncertainty": "Integration documented in tagged prerelease; production-quality availability unverified.",
+      "pricing_uncertainty": "Open-source runtime but hardware and cloud serving costs vary.",
+      "existing_profile_id": null,
+      "profile_relationship": "new_candidate_pending_canonical_dedup",
+      "source_links": [
+        {
+          "url": "https://github.com/ggml-org/llama.cpp/releases/tag/b12619",
+          "publisher": "ggml-org",
+          "type": "first-party documentation"
+        }
+      ],
+      "date_checked": "2026-11-22",
+      "checked_at": "2026-11-22T14:24:19.807Z",
+      "review_status": "source_checked_pending_publisher_catalog_dedup"
+    }
+  ],
+  "terms": [
+    {
+      "id": "term-proposal:expert-drift:2026-11-22",
+      "name": "Expert drift",
+      "aliases": [
+        "Temporal expert reliability drift",
+        "Human expert performance drift"
+      ],
+      "definition": "Changes over time in a human expert's accuracy or decision consistency, which alter whether an AI should defer a task to that expert.",
+      "mechanism": "A deferral policy uses recent error/outcome history to estimate when human judgments may be more or less reliable.",
+      "usage_tags": [
+        "AI",
+        "ML",
+        "Safety",
+        "Human oversight"
+      ],
+      "example": "A reviewer becomes less accurate late in a shift; a model reduces automatic handoffs until the human's measured reliability recovers.",
+      "caveat": "Predicting fatigue or drift from observed outcomes is statistical; it must not be used to stereotype individuals or silently eliminate oversight.",
+      "related_existing_ids": [
+        "MLD-0191",
+        "MLD-0528",
+        "MLD-1283"
+      ],
+      "primary_references": [
+        {
+          "url": "https://arxiv.org/abs/2611.26440",
+          "publisher": "EDA-L2D authors",
+          "type": "research paper"
+        }
+      ],
+      "term_origin": "research_concept_new_to_atlas",
+      "date_checked": "2026-11-22",
+      "checked_at": "2026-11-22T14:24:19.807Z",
+      "review_status": "source_checked_pending_publisher_canonical_dedup"
+    },
+    {
+      "id": "term-proposal:tool-response-simulation:2026-11-22",
+      "name": "Tool-response simulation",
+      "aliases": [
+        "Tool result simulation",
+        "Imagined tool outcomes"
+      ],
+      "definition": "Predicting what an external API, web search or other agent tool might return without actually invoking it.",
+      "mechanism": "A learned model trained on past tool-call/response pairs generates candidate outcome estimates for planning; only chosen actions need real execution.",
+      "usage_tags": [
+        "AI",
+        "LLM",
+        "SLM",
+        "Agents",
+        "Planning"
+      ],
+      "example": "A 4B research agent imagines three possible web searches and executes only the one its separate value model predicts will help most.",
+      "caveat": "Predicted tool responses are not evidence and must never be cited as if retrieved; inaccurate predictions can worsen search decisions.",
+      "related_existing_ids": [
+        "MLD-0234",
+        "MLD-1283"
+      ],
+      "primary_references": [
+        {
+          "url": "https://arxiv.org/abs/2611.26423",
+          "publisher": "Seer authors",
+          "type": "research paper"
+        }
+      ],
+      "term_origin": "established_mechanism_new_to_atlas",
+      "date_checked": "2026-11-22",
+      "checked_at": "2026-11-22T14:24:19.807Z",
+      "review_status": "source_checked_pending_publisher_canonical_dedup"
+    },
+    {
+      "id": "term-proposal:risk-calibrated-deferral:2026-11-22",
+      "name": "Risk-calibrated deferral",
+      "aliases": [
+        "Risk-controlled expert handoff",
+        "Task-level uncertainty threshold"
+      ],
+      "definition": "Setting a model-to-expert handoff threshold from calibration data to target a specified failure-risk bound under stated assumptions.",
+      "mechanism": "A predictor scores model uncertainty, a calibration procedure chooses the action/ask-human threshold, and new expert corrections can be stored for later retrieval.",
+      "usage_tags": [
+        "AI",
+        "ML",
+        "DL",
+        "Robotics",
+        "Safety"
+      ],
+      "example": "A robot requests expert correction on risky grasp actions rather than proceeding solely from a retrieved example.",
+      "caveat": "A calibrated bound under laboratory/task distribution assumptions is not a blanket real-world safety guarantee, especially under distribution shift.",
+      "related_existing_ids": [
+        "MLD-0142",
+        "MLD-0528",
+        "MLD-1283"
+      ],
+      "primary_references": [
+        {
+          "url": "https://arxiv.org/abs/2611.26438",
+          "publisher": "R2-VLA authors",
+          "type": "research paper"
+        }
+      ],
+      "term_origin": "research_combination_new_to_atlas",
+      "date_checked": "2026-11-22",
+      "checked_at": "2026-11-22T14:24:19.807Z",
+      "review_status": "source_checked_pending_publisher_canonical_dedup"
+    }
+  ],
+  "corrections": []
+}
