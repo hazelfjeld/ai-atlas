@@ -91,12 +91,38 @@ with sync_playwright() as p:
             # navigation resolves on some production requests. Wait for native
             # scrolling, as we already do for secondary routes below; do not
             # scroll the target ourselves or excuse an offscreen destination.
-            scriptless_page.wait_for_function("""section => {
-                const target = document.getElementById('/' + section);
-                if (!target) return false;
-                const frame = target.getBoundingClientRect();
-                return frame.top < innerHeight && frame.bottom > 0;
-            }""", arg=route_key, timeout=5000)
+            try:
+                scriptless_page.wait_for_function("""section => {
+                    const target = document.getElementById('/' + section);
+                    if (!target) return false;
+                    const frame = target.getBoundingClientRect();
+                    return frame.top < innerHeight && frame.bottom > 0;
+                }""", arg=route_key, timeout=5000)
+            except Exception:
+                # Keep this a hard failure. Capture independent browser evidence
+                # to distinguish a missing fragment, hidden content, layout shift
+                # or remote redirect instead of guessing from a bare timeout.
+                snapshot = scriptless_page.evaluate("""section => {
+                    const t=document.getElementById('/'+section);
+                    const r=t?.getBoundingClientRect();
+                    const style=t?getComputedStyle(t):null;
+                    const group=document.querySelector('.nojs-primary-routes');
+                    return {url:location.href, hash:location.hash,
+                      scrollY, innerHeight, readyState:document.readyState,
+                      targetExists:!!t, targetRect:r?.toJSON(),
+                      targetDisplay:style?.display, targetVisibility:style?.visibility,
+                      groupDisplay:group?getComputedStyle(group).display:null,
+                      mainRect:document.querySelector('main')?.getBoundingClientRect().toJSON(),
+                      headings:[...document.querySelectorAll('h1')].map(x=>x.textContent.trim()),
+                      visibleFallbacks:[...document.querySelectorAll('.nojs-primary-routes > section')]
+                        .filter(x=>getComputedStyle(x).display!=='none')
+                        .map(x=>x.id)};
+                }""", route_key)
+                print('REMOTE SCRIPT-FREE HASH DIAGNOSTIC', scriptless_scheme,
+                      route_width, route_key, snapshot, flush=True)
+                scriptless_page.screenshot(path=str(out / (
+                    'failed-primary-route-'+route_key+'-'+scriptless_scheme+'-'+str(route_width)+'.png')))
+                raise
             fallback_route = scriptless_page.locator(
                 '.nojs-primary-routes > section[id="/' + route_key + '"]')
             frame = fallback_route.bounding_box()
