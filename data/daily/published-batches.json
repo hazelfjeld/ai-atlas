@@ -1835,7 +1835,7 @@
       "edition_date": "2026-11-22",
       "validation_result": "independent_batch_sha256_utf8_bytes_counts_unique_ids_prior_receipt_dedup_first_party_release_and_preprint_source_dates",
       "status": "partially_published_with_3_news_and_7_catalog_proposals_deferred",
-      "publication_outcome": "immutable_revision_1_pending_production_verification",
+      "publication_outcome": "immutable_revision_1_cloudflare_http_browser_and_githack_verified",
       "publication_edition": "2026-11-22-v1",
       "accepted_news_ids": [
         "ai-news-riemann-lean-community-certification-2026-11-21",
@@ -1888,8 +1888,22 @@
           "status": "pending_production_verification",
           "prepared_at": "2026-11-22T14:36:41.154Z",
           "note": "Eight qualified news reports accepted after source review. Three reports and seven catalog proposals held. Immutable edition SHA-256 5553217403b6d466489b1c360e345e8e0b2da2d0f81e4202c854a2720ebe49e9, 18047 UTF-8 bytes; public deployment not yet confirmed."
+        },
+        {
+          "edition": "2026-11-22-v1",
+          "status": "cloudflare_http_browser_and_githack_verified",
+          "note": "Production commit 1cf471973143aa104844a82beddf6fbd8ad7fc7c passed Cloudflare workflow 45033807744 on November 22, 2026: hosted local browser validation across responsive widths/themes, exact tested-artifact deployment, production asset/HTTP/cache checks, navigation, Quiz and Match. Catalog/GitHack workflow 45033807733 passed catalog validation, Node regression tests, offline reproducibility and exact revision parity. Workflow completion confirmed at 2026-11-22T14:51:45Z. Direct independent retrieval of the exact dated query permalink via an external reader was unavailable; archive reader and immutable edition asset were checked by CI. November 22 edition 18047 UTF-8 bytes, SHA-256 5553217403b6d466489b1c360e345e8e0b2da2d0f81e4202c854a2720ebe49e9.",
+          "verified_at": "2026-11-22T14:51:45Z"
         }
-      ]
+      ],
+      "production_verified_at": "2026-11-22T14:51:45Z",
+      "production_verified_revision": 1,
+      "last_verified_at": "2026-11-22T14:51:45Z",
+      "last_verified_public_url": "https://aiupdates.app/whats-new.html?date=2026-11-22&revision=1",
+      "production_commit": "1cf471973143aa104844a82beddf6fbd8ad7fc7c",
+      "production_workflow_run_id": 45033807744,
+      "githack_workflow_run_id": 45033807733,
+      "verification_scope": "Production commit 1cf471973143aa104844a82beddf6fbd8ad7fc7c passed Cloudflare workflow 45033807744 on November 22, 2026: hosted local browser validation across responsive widths/themes, exact tested-artifact deployment, production asset/HTTP/cache checks, navigation, Quiz and Match. Catalog/GitHack workflow 45033807733 passed catalog validation, Node regression tests, offline reproducibility and exact revision parity. Workflow completion confirmed at 2026-11-22T14:51:45Z. Direct independent retrieval of the exact dated query permalink via an external reader was unavailable; archive reader and immutable edition asset were checked by CI. November 22 edition 18047 UTF-8 bytes, SHA-256 5553217403b6d466489b1c360e345e8e0b2da2d0f81e4202c854a2720ebe49e9."
     }
   ]
 }

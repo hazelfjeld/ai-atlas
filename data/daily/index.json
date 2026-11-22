@@ -379,7 +379,7 @@
       "published_at": "2026-11-22T14:36:41.154Z"
     }
   ],
-  "last_successful_publish_at": "2026-11-21T14:46:02Z",
-  "status": "edition_revision_1_pending_production_verification",
+  "last_successful_publish_at": "2026-11-22T14:51:45Z",
+  "status": "edition_revision_1_production_verified",
   "coverage_note": "2026-11-22 v1 pending exact Cloudflare/GitHack/browser checks: 8 primary-source reviewed reports, all published Nov19 or Nov21; three Reuters reports and seven catalog proposals deferred, six source-access failures/limitations; partial overlap collection and no complete cutoff."
 }
