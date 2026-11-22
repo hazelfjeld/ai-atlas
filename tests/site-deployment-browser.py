@@ -87,6 +87,16 @@ with sync_playwright() as p:
                 route_link = scriptless_page.locator(
                     '.site-chrome__links > a[href="index.html#/' + route_key + '"]')
             route_link.click()
+            # The browser completes a cross-document fragment jump after
+            # navigation resolves on some production requests. Wait for native
+            # scrolling, as we already do for secondary routes below; do not
+            # scroll the target ourselves or excuse an offscreen destination.
+            scriptless_page.wait_for_function("""section => {
+                const target = document.getElementById('/' + section);
+                if (!target) return false;
+                const frame = target.getBoundingClientRect();
+                return frame.top < innerHeight && frame.bottom > 0;
+            }""", arg=route_key, timeout=5000)
             fallback_route = scriptless_page.locator(
                 '.nojs-primary-routes > section[id="/' + route_key + '"]')
             frame = fallback_route.bounding_box()
