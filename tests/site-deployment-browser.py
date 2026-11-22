@@ -258,16 +258,23 @@ with sync_playwright() as p:
                         ('research-shared-search-' + search_scheme +
                          '-' + str(search_width) + '.png')))
             search_page.close()
-    # Scriptless Discover retains exactly its original input and fallback
-    # references; no extra dead button appears as an apparent search action.
+    # Scriptless Discover must not advertise an inert input or submit button.
+    # The real native browse fallback is keyboard and pointer navigable instead.
+    # Keep this independent of the matrix above so a one-off regression fails.
     nojs_submit = browser.new_page(viewport={'width': 390, 'height': 844},
                                    java_script_enabled=False)
     nojs_submit.goto(base + 'index.html')
+    nojs_fallback = nojs_submit.locator('noscript a[href="terms/index.html"]')
     check('script-free Discover does not advertise an inert submit button',
-          nojs_submit.locator('#global-query').is_visible()
+          nojs_submit.locator('#global-search').is_hidden()
+          and nojs_submit.locator('#global-query').is_hidden()
           and not nojs_submit.locator(
               '#global-search > button.site-mobile-chrome__search-submit').is_visible()
-          and nojs_submit.locator('noscript a[href="terms/index.html"]').count() == 1)
+          and nojs_fallback.count() == 1 and nojs_fallback.is_visible())
+    nojs_fallback.click()
+    check('script-free Discover fallback opens the actual catalog',
+          nojs_submit.url.endswith('/terms/index.html')
+          and nojs_submit.locator('main').count() == 1)
     nojs_submit.close()
     # Discover's desktop workspace title is a real text node. Native article
     # families must provide the same accessible heading instead of a CSS-only
