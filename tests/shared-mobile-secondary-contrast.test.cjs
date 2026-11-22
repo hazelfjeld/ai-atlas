@@ -22,11 +22,21 @@ test('enhanced native More sections is readable in both themes across page famil
     'Shared theme foregrounds must remain explicit');
   assert.ok(contrast('#18211E', '#FFFFFF') >= 4.5);
   assert.ok(contrast('#F6F6F2', '#222D27') >= 4.5);
-  assert.ok(contrast('#C5CFC6', '#FFFFFF') < 4.5,
-    'The previous pale foreground must not be reintroduced');
-  assert.match(css, /html\.atlas-enhanced \.site-mobile-chrome__more>summary\{color:var\(--ink,#202b28\);font-size:14px\}/);
-  assert.match(css, /html\.atlas-enhanced \.site-mobile-chrome__more\{border-top-color:var\(--line,#dce1d7\)\}/);
-  assert.match(css, /html\.atlas-enhanced \.site-mobile-chrome__more>summary:hover,html\.atlas-enhanced \.site-mobile-chrome__more\[open\]>summary\{background:var\(--soft,#eaf1ea\);color:var\(--ink,#202b28\)\}/);
+  // Script-free native dropdowns use a theme-matched surface; enhanced mobile
+  // drawers always use the dark Discover sidebar, even in the light theme.
+  for (const rail of ['#18211E', '#111A15']) {
+    assert.ok(contrast('#C5CFC6', rail) >= 4.5, 'closed More label must meet WCAG AA');
+    assert.ok(contrast('#F5F7EF', rail) >= 4.5, 'open More label must meet WCAG AA');
+  }
+  assert.ok(contrast('#F5F7EF', '#374B3C') >= 4.5,
+    'highlighted More label must meet WCAG AA');
+  assert.ok(css.includes('.site-mobile-chrome__more>summary{display:flex;align-items:center;min-height:44px;padding:10px 12px;border-radius:7px;list-style:none;cursor:pointer;color:var(--ink,#202b28)'),
+    'script-free dropdown must retain theme-aware ink');
+  assert.ok(css.includes('html.atlas-enhanced .site-mobile-chrome__more{border-top-color:#405043}'));
+  assert.ok(css.includes('html.atlas-enhanced .site-mobile-chrome__more>summary{color:#c5cfc6;font-size:14px}'));
+  assert.ok(css.includes('html.atlas-enhanced .site-mobile-chrome__more[open]>summary{background:#374b3c;color:#f5f7ef}'));
+  assert.ok(css.includes('html.atlas-enhanced .site-mobile-chrome__more:has(.site-mobile-chrome__more-links a[aria-current]) > summary{\n    color:#f5f7ef;\n    background:#374b3c;'),
+    'selected More section must remain readable on the enhanced dark drawer');
   for (const file of ['index.html', 'whats-new.html', 'research.html',
                       'playbooks.html', 'games.html', 'about.html',
                       'terms/index.html', 'technology/TECH-0288-vllm.html',

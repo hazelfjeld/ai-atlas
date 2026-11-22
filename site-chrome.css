@@ -62,9 +62,9 @@
 .site-mobile-chrome__more-links a{padding-left:22px}
 /* Enhanced and script-free navigation must use the same theme colors.
    The previous pale text was only 1.6:1 on the light menu surface. */
-html.atlas-enhanced .site-mobile-chrome__more{border-top-color:var(--line,#dce1d7)}
-html.atlas-enhanced .site-mobile-chrome__more>summary{color:var(--ink,#202b28);font-size:14px}
-html.atlas-enhanced .site-mobile-chrome__more>summary:hover,html.atlas-enhanced .site-mobile-chrome__more[open]>summary{background:var(--soft,#eaf1ea);color:var(--ink,#202b28)}
+html.atlas-enhanced .site-mobile-chrome__more{border-top-color:#405043}
+html.atlas-enhanced .site-mobile-chrome__more>summary{color:#c5cfc6;font-size:14px}
+html.atlas-enhanced .site-mobile-chrome__more>summary:hover,html.atlas-enhanced .site-mobile-chrome__more[open]>summary{background:#374b3c;color:#f5f7ef}
 .site-mobile-chrome__search{display:flex;align-items:center;gap:12px;flex:1;min-width:0;min-height:44px;padding:8px 13px;border:1px solid var(--line,#dce1d7);border-radius:9px;background:var(--surface,#fff);color:var(--muted,#627067);text-decoration:none;font-size:16px}
 .site-mobile-chrome__search-icon{flex-shrink:0;font-size:22px;line-height:1}
 .site-mobile-chrome__search-placeholder{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -1295,6 +1295,14 @@ main.term-shell > footer:not(.site-chrome__footer) a{color:var(--accent,#27664e)
     color:var(--green,#28664f);
     background:var(--soft,#eaf1ea);
     box-shadow:inset 3px 0 0 var(--orange,#b77833);
+  }
+  /* The enhanced drawer has a dark rail surface in both site themes. Its
+     selected secondary parent must remain readable there; script-free native
+     dropdowns keep the light/dark token-based treatment above. */
+  html.atlas-enhanced .site-mobile-chrome__more:has(.site-mobile-chrome__more-links a[aria-current]) > summary{
+    color:#f5f7ef;
+    background:#374b3c;
+    box-shadow:inset 3px 0 0 #edba87;
   }
 }
 /* atlas-current-secondary-parent:end */
