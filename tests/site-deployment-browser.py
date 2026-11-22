@@ -6,7 +6,7 @@ import io
 import json
 import os
 from pathlib import Path
-from playwright.sync_api import sync_playwright
+from playwright.sync_api import expect, sync_playwright
 
 ROOT = Path(__file__).resolve().parents[1]
 parser = argparse.ArgumentParser()
@@ -97,13 +97,10 @@ with sync_playwright() as p:
             # navigation resolves on some production requests. Wait for native
             # scrolling, as we already do for secondary routes below; do not
             # scroll the target ourselves or excuse an offscreen destination.
+            # Locator assertions poll across remote navigation and do not rely
+            # on page-side requestAnimationFrame in a JS-disabled context.
             try:
-                scriptless_page.wait_for_function("""section => {
-                    const target = document.getElementById('/' + section);
-                    if (!target) return false;
-                    const frame = target.getBoundingClientRect();
-                    return frame.top < innerHeight && frame.bottom > 0;
-                }""", arg=route_key, timeout=5000)
+                expect(scriptless_page.locator('[id="/' + route_key + '"]')).to_be_in_viewport(timeout=15000)
             except Exception:
                 # Keep this a hard failure. Capture independent browser evidence
                 # to distinguish a missing fragment, hidden content, layout shift
@@ -174,12 +171,9 @@ with sync_playwright() as p:
             # Playwright's click/navigation resolves, especially with cold CDN
             # styles. Wait for the browser's *own* fragment scroll; never call
             # scroll_into_view, which would mask a broken native deep link.
-            scriptless_page.wait_for_function("""section => {
-                const target = document.getElementById('/' + section);
-                if (!target) return false;
-                const frame = target.getBoundingClientRect();
-                return frame.top < innerHeight && frame.bottom > 0;
-            }""", arg=section, timeout=5000)
+            # Use a Playwright visibility assertion instead of in-page polling
+            # because scripts are intentionally disabled in this context.
+            expect(scriptless_page.locator('[id="/' + section + '"]')).to_be_in_viewport(timeout=15000)
             fallback = scriptless_page.locator(
                 '.nojs-primary-routes > section[id="/' + section + '"]')
             frame = fallback.bounding_box()
