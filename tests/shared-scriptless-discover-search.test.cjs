@@ -75,3 +75,23 @@ test('script-free primary hash routes expose real static destinations without ch
   assert.ok(builder.includes('Missing script-free route handoff'),
     'offline canonical links come from the deterministic builder');
 });
+
+
+test('script-free deep links replace unrelated Discover feed with their requested heading', () => {
+  for (const file of ['index.html', 'downloads/Atlas_Demo_Offline.html']) {
+    const html = read(file);
+    assert.ok(html.includes('<noscript><style>'),
+      file + ' retains JavaScript-disabled-only navigation styles');
+    assert.ok(html.includes('body:has(.nojs-primary-routes>.notice:target) #page{display:none!important}'),
+      file + ' hides unrelated Discover content only for real script-free hash targets');
+    assert.ok(html.includes('.nojs-primary-routes>.notice:not(:target){display:none!important}'),
+      file + ' still hides unrequested hash fallback notices');
+    for (const section of ['dictionary', 'technologies', 'games', 'safety', 'papers',
+                           'compare', 'saved', 'sources', 'search']) {
+      assert.ok(html.includes('<section class="notice" id="/' + section + '"><h1>'),
+        file + ': ' + section + ' has a real heading when the Discover feed is hidden');
+    }
+    assert.ok(html.includes('<div id="page"><!-- discovery:start -->'),
+      file + ' preserves the enhanced Discover workspace and its source boundary');
+  }
+});
