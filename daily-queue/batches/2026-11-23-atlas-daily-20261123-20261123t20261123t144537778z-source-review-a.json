@@ -1,0 +1,1007 @@
+{
+  "schema": 1,
+  "batch_id": "atlas-daily-20261123-20261123t20261123t144537778z-source-review-a",
+  "edition_date": "2026-11-23",
+  "timezone": "America/Chicago",
+  "collected_at": "2026-11-23T14:45:37.778Z",
+  "coverage_start": "2026-11-22T12:24:19.807Z",
+  "coverage_end": "2026-11-23T14:45:37.778Z",
+  "coverage_status": "partial",
+  "coverage_note": "No successful editorial cutoff is recorded in the queue (last_successful_coverage_end remains null). This bounded run covers the most recent daily window with a two-hour overlap, with Nov 18–20 sources labeled catch-up. It does NOT assert full recovery of earlier incomplete batches.",
+  "overlap_lookback_start": "2026-11-22T12:24:19.807Z",
+  "sources_checked": [
+    {
+      "url": "https://openai.com/index/perplexity-and-intelligence/",
+      "status": "success",
+      "checked_at": "2026-11-23T14:45:37.778Z",
+      "method": "opened first-party source or independently reported full article"
+    },
+    {
+      "url": "https://huggingface.co/inclusionAI/LingSante-3.1-air-VL",
+      "status": "success",
+      "checked_at": "2026-11-23T14:45:37.778Z",
+      "method": "opened first-party source or independently reported full article"
+    },
+    {
+      "url": "https://huggingface.co/inclusionAI/LingSante-3.1-flash",
+      "status": "success",
+      "checked_at": "2026-11-23T14:45:37.778Z",
+      "method": "opened first-party source or independently reported full article"
+    },
+    {
+      "url": "https://www.reuters.com/legal/litigation/some-us-banks-tighten-ai-agent-controls-concern-about-models-escaping-safeguards-2026-11-23/",
+      "status": "success",
+      "checked_at": "2026-11-23T14:45:37.778Z",
+      "method": "opened first-party source or independently reported full article"
+    },
+    {
+      "url": "https://arxiv.org/abs/2611.27116",
+      "status": "success",
+      "checked_at": "2026-11-23T14:45:37.778Z",
+      "method": "opened arXiv abstract/full text"
+    },
+    {
+      "url": "https://arxiv.org/abs/2611.27106",
+      "status": "success",
+      "checked_at": "2026-11-23T14:45:37.778Z",
+      "method": "opened arXiv abstract/full text"
+    },
+    {
+      "url": "https://arxiv.org/abs/2611.25123",
+      "status": "success",
+      "checked_at": "2026-11-23T14:45:37.778Z",
+      "method": "opened arXiv abstract/full text"
+    },
+    {
+      "url": "https://metr.org/blog/2026-11-20-q4-2026-capability-update/",
+      "status": "success",
+      "checked_at": "2026-11-23T14:45:37.778Z",
+      "method": "opened first-party source or independently reported full article"
+    },
+    {
+      "url": "https://aws.amazon.com/blogs/machine-learning/announcing-amazon-textract-insights-verifiable-generative-ai-for-documents/",
+      "status": "success",
+      "checked_at": "2026-11-23T14:45:37.778Z",
+      "method": "opened first-party source or independently reported full article"
+    },
+    {
+      "url": "https://aws.amazon.com/blogs/machine-learning/introducing-amazon-sagemaker-hyperpod-global-inference-gateway-one-endpoint-across-regions-and-clusters/",
+      "status": "success",
+      "checked_at": "2026-11-23T14:45:37.778Z",
+      "method": "opened first-party source or independently reported full article"
+    },
+    {
+      "url": "https://aws.amazon.com/blogs/machine-learning/introducing-enhanced-observability-in-amazon-sagemaker-hyperpod-to-diagnose-gpu-training-issues/",
+      "status": "success",
+      "checked_at": "2026-11-23T14:45:37.778Z",
+      "method": "opened first-party source or independently reported full article"
+    },
+    {
+      "url": "https://huggingface.co/inclusionAI",
+      "status": "success",
+      "checked_at": "2026-11-23T14:45:37.778Z",
+      "method": "opened first-party source or independently reported full article"
+    }
+  ],
+  "sources_failed": [
+    {
+      "url": "https://www.antgroup.com/en/news-media/press-releases/1795402800000",
+      "status": "partial",
+      "checked_at": "2026-11-23T14:45:37.778Z",
+      "method": "search discovered official dated announcement; full-page reader returned no readable lines",
+      "error": "Official press release search content available but full page extraction empty; relied primarily on model cards for technical details."
+    },
+    {
+      "url": "https://export.arxiv.org/api/query?search_query=cat%3Acs.AI",
+      "status": "failed",
+      "checked_at": "2026-11-23T14:45:37.778Z",
+      "method": "open arXiv API",
+      "error": "Endpoint inaccessible to reader; individual arXiv paper pages succeeded."
+    },
+    {
+      "url": "https://apnews.com/article/02e1f69e46ad9f82484b66b2f86df53b",
+      "status": "failed",
+      "checked_at": "2026-11-23T14:45:37.778Z",
+      "method": "open AP source",
+      "error": "Reader blocked, so EU Academy disclosure was not added as a confirmed item."
+    },
+    {
+      "url": "https://www.artificialintelligence.io/today/2026-11-23",
+      "status": "failed",
+      "checked_at": "2026-11-23T14:45:37.778Z",
+      "method": "open specialist roundup",
+      "error": "Reader blocked; individual original arXiv sources were checked instead."
+    }
+  ],
+  "source_health_note": "Individual source pages accessed successfully; arXiv API and selected readers unavailable. Lack of a source response is not a no-news finding.",
+  "coverage_backlog": [
+    "Recover unverified research and specialist-source gaps from Nov 2–22 in bounded future collector batches; keep previous successful cutoff null until a complete collection is established.",
+    "Investigate full publication/weight-upload commit dates for LingSante models and distinguish them from Nov 23 company announcement.",
+    "Check robotics, TTS, vision/video, model runtimes, small-project GitHub releases and government notices not comprehensively covered in this bounded edition.",
+    "Reattempt arXiv metadata API and inaccessible AP/EU Academy story with a primary institutional notice before promoting.",
+    "Catalog de-duplication: MLD-0890 Perplexity is an enrichment, not a new canonical term; reconcile new terms and technologies with current main catalog before publication."
+  ],
+  "tldr": [
+    "Ant Group's newly announced open-weight medical models and OpenAI's proposal for capability-linked safety limits signal major new developments in specialized AI and frontier governance; model benchmarks and proposed thresholds are not guarantees.",
+    "Research on agent memory, agent-system co-evolution and structured-output correctness suggests concrete engineering techniques, while Reuters reports banks tightening controls and AWS expands grounded document processing and inference infrastructure.",
+    "Several technical findings are labeled catch-up, and safety-critical medical applications require independent validation and human oversight."
+  ],
+  "news": [
+    {
+      "id": "ai-news:openai-pachocki-perplexity-safety-pacing:2026-11-22",
+      "title": "OpenAI chief scientist proposes shared capability-linked development limits",
+      "category": "safety",
+      "tags": [
+        "AI",
+        "LLM",
+        "pretraining",
+        "governance",
+        "safety"
+      ],
+      "summary": "Jakub Pachocki published OpenAI's longitudinal held-out-code pretraining loss measurements and urged frontier labs to agree on capability-linked limits until monitoring meets concrete safety milestones.",
+      "why_it_matters": "Provides an explicit, debatable proposal for connecting model development pace to monitoring readiness rather than treating scaling as unconstrained.",
+      "caveat": "This is an author's proposal, not an adopted industry agreement; loss metrics depend on dataset/tokenization and do not measure all post-training capabilities. Numerical milestones are not universal thresholds.",
+      "canonical_url": "https://openai.com/index/perplexity-and-intelligence/",
+      "source_url": "https://openai.com/index/perplexity-and-intelligence/",
+      "publisher": "OpenAI / Jakub Pachocki",
+      "type": "primary research and opinion essay",
+      "publication_date": "2026-11-22",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-22",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-23T14:45:37.778Z",
+      "checked_at": "2026-11-23T14:45:37.778Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "author_proposal",
+      "release_status": "proposal",
+      "collection_classification": "recent",
+      "version": null,
+      "arxiv_id": null,
+      "sources": [
+        {
+          "url": "https://openai.com/index/perplexity-and-intelligence/",
+          "publisher": "OpenAI / Jakub Pachocki",
+          "type": "primary research and opinion essay"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:ant-lingsante-medical-model-family:2026-11-23",
+      "title": "Ant Group announces two open-weight LingSante medical models",
+      "category": "models",
+      "tags": [
+        "AI",
+        "ML",
+        "LLM",
+        "multimodal",
+        "medical",
+        "MoE",
+        "open-weights"
+      ],
+      "summary": "Ant Group's November 23 announcement presents LingSante-3.1-air-VL (124B total, 5.5B active, image and text) and LingSante-3.1-flash (560B total, ~25B active, long-context medical reasoning). Model cards show public MIT-labeled weights.",
+      "why_it_matters": "Offers differentiated medical multimodal and evidence-reasoning research checkpoints, including sparse active-parameter computation despite very large weights.",
+      "caveat": "Public repositories predate the November 23 company announcement; do not describe both weight uploads as happening today. Neither model is a medical device, and benchmarks, clinical reliability, privacy and deployment economics require independent validation.",
+      "canonical_url": "https://huggingface.co/inclusionAI/LingSante-3.1-air-VL",
+      "source_url": "https://huggingface.co/inclusionAI/LingSante-3.1-air-VL",
+      "publisher": "Ant Group inclusionAI",
+      "type": "first-party model card",
+      "publication_date": "2026-11-23",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-23",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-23T14:45:37.778Z",
+      "checked_at": "2026-11-23T14:45:37.778Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "company_announcement_and_public_model_artifacts",
+      "release_status": "open_weights_announced",
+      "collection_classification": "recent",
+      "version": null,
+      "arxiv_id": null,
+      "sources": [
+        {
+          "url": "https://huggingface.co/inclusionAI/LingSante-3.1-air-VL",
+          "publisher": "Ant Group inclusionAI",
+          "type": "first-party model card"
+        },
+        {
+          "url": "https://huggingface.co/inclusionAI/LingSante-3.1-flash",
+          "publisher": "Ant Group inclusionAI",
+          "type": "first-party model card"
+        },
+        {
+          "url": "https://www.antgroup.com/en/news-media/press-releases/1795402800000",
+          "publisher": "Ant Group",
+          "type": "corporate announcement; searchable but article reader returned empty"
+        }
+      ],
+      "related_release_urls": [
+        "https://huggingface.co/inclusionAI/LingSante-3.1-air-VL",
+        "https://huggingface.co/inclusionAI/LingSante-3.1-flash"
+      ],
+      "artifact_first_publication_date": "2026-11-19",
+      "artifact_first_publication_precision": "day",
+      "model_repository_history_note": "Repositories were created before corporate announcement; exact weight file upload times require repository history verification."
+    },
+    {
+      "id": "ai-news:us-banks-tighten-agent-isolation:2026-11-23",
+      "title": "Reuters reports U.S. banks restricting agents' credentials and execution windows",
+      "category": "industry",
+      "tags": [
+        "AI",
+        "agents",
+        "security",
+        "financial services",
+        "governance"
+      ],
+      "summary": "Reuters reports that several U.S. banks are tightening internal agent isolation, least-privilege permissions, time limits, audit logging and shutdown procedures following highly publicized experimental agent-control failures.",
+      "why_it_matters": "Illustrates risk management moving from prompt-only restrictions toward enforceable identity, logging and operational safeguards in consequential deployments.",
+      "caveat": "Sources are reported by Reuters and often anonymous; this is not evidence of a fresh bank breach, nor proof that the controls prevent all agent failures.",
+      "canonical_url": "https://www.reuters.com/legal/litigation/some-us-banks-tighten-ai-agent-controls-concern-about-models-escaping-safeguards-2026-11-23/",
+      "source_url": "https://www.reuters.com/legal/litigation/some-us-banks-tighten-ai-agent-controls-concern-about-models-escaping-safeguards-2026-11-23/",
+      "publisher": "Reuters / Nupur Anand",
+      "type": "independent reported journalism",
+      "publication_date": "2026-11-23",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-23",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-23T14:45:37.778Z",
+      "checked_at": "2026-11-23T14:45:37.778Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "journalistic_reporting",
+      "release_status": "reported_operational_changes",
+      "collection_classification": "recent",
+      "version": null,
+      "arxiv_id": null,
+      "sources": [
+        {
+          "url": "https://www.reuters.com/legal/litigation/some-us-banks-tighten-ai-agent-controls-concern-about-models-escaping-safeguards-2026-11-23/",
+          "publisher": "Reuters / Nupur Anand",
+          "type": "independent reported journalism"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:coevobench-model-harness-joint-optimization:2611.27116",
+      "title": "CoEvoBench tests whether AI can jointly improve its model and agent harness",
+      "category": "research",
+      "tags": [
+        "AI",
+        "ML",
+        "LLM",
+        "agents",
+        "evaluation",
+        "self-improvement"
+      ],
+      "summary": "A November 20 preprint introduces a five-domain benchmark in which model researchers have a 24-hour budget to revise both model weights and harness code, finding meaningful first-round gains but weak sustained improvement in long-horizon coding.",
+      "why_it_matters": "Separates the ability to improve an agent once from the harder recursive research problem of adapting future experiments to earlier improvements.",
+      "caveat": "Author-run benchmarks with a limited set of tasks and researchers; results do not establish general recursive self-improvement or universally strong agent research.",
+      "canonical_url": "https://arxiv.org/abs/2611.27116",
+      "source_url": "https://arxiv.org/abs/2611.27116",
+      "publisher": "CoEvoBench authors",
+      "type": "research preprint",
+      "publication_date": "2026-11-20",
+      "publication_date_precision": "day",
+      "publication_time_utc": "2026-11-20T04:40:59Z",
+      "event_date": "2026-11-20",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-23T14:45:37.778Z",
+      "checked_at": "2026-11-23T14:45:37.778Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "author_reported_research",
+      "release_status": "preprint",
+      "collection_classification": "catch_up",
+      "version": null,
+      "arxiv_id": "2611.27116",
+      "sources": [
+        {
+          "url": "https://arxiv.org/abs/2611.27116",
+          "publisher": "CoEvoBench authors",
+          "type": "research preprint"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:schema-valid-llm-workflows-benchmark:2611.27106",
+      "title": "Schema-valid LLM outputs still fail business tasks in six-framework study",
+      "category": "research",
+      "tags": [
+        "AI",
+        "LLM",
+        "agents",
+        "frameworks",
+        "evaluation",
+        "structured output"
+      ],
+      "summary": "A November 20 study evaluates five business tasks across six Python workflow implementations and finds that schema conformance can coexist with incorrect values, citations or decisions.",
+      "why_it_matters": "Encourages production evaluations to score semantic task correctness separately from JSON/schema parsing success.",
+      "caveat": "The comparison uses a particular model, prompt package and implementation conditions; it is not a universal ranking of PydanticAI, LangGraph, DSPy, CrewAI, Agno or SDKs.",
+      "canonical_url": "https://arxiv.org/abs/2611.27106",
+      "source_url": "https://arxiv.org/abs/2611.27106",
+      "publisher": "Shapiro et al.",
+      "type": "research preprint and reproducible benchmark",
+      "publication_date": "2026-11-20",
+      "publication_date_precision": "day",
+      "publication_time_utc": "2026-11-20T04:32:13Z",
+      "event_date": "2026-11-20",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-23T14:45:37.778Z",
+      "checked_at": "2026-11-23T14:45:37.778Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "author_reported_research",
+      "release_status": "preprint",
+      "collection_classification": "catch_up",
+      "version": null,
+      "arxiv_id": "2611.27106",
+      "sources": [
+        {
+          "url": "https://arxiv.org/abs/2611.27106",
+          "publisher": "Shapiro et al.",
+          "type": "research preprint and reproducible benchmark"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:grepmem-append-only-agent-recall:2611.25123",
+      "title": "GrepMem explores searchable logs instead of compressed agent memory",
+      "category": "research",
+      "tags": [
+        "AI",
+        "SLM",
+        "LLM",
+        "agents",
+        "memory",
+        "RAG"
+      ],
+      "summary": "A November 18 research preprint proposes keeping complete agent history in an append-only text log and retrieving relevant spans by regex search; authors report strong recall against lossy summarization baselines.",
+      "why_it_matters": "Provides a low-complexity memory-design alternative that does not require vector indexes or a summarizer model when exact phrase retrieval is viable.",
+      "caveat": "Regex retrieval can miss semantically related paraphrases; log storage and sensitive-data protection remain concerns. Results are benchmark-specific and author-reported.",
+      "canonical_url": "https://arxiv.org/abs/2611.25123",
+      "source_url": "https://arxiv.org/abs/2611.25123",
+      "publisher": "GrepMem authors",
+      "type": "research preprint",
+      "publication_date": "2026-11-18",
+      "publication_date_precision": "day",
+      "publication_time_utc": "2026-11-18T20:02:57Z",
+      "event_date": "2026-11-18",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-23T14:45:37.778Z",
+      "checked_at": "2026-11-23T14:45:37.778Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "author_reported_research",
+      "release_status": "preprint",
+      "collection_classification": "catch_up",
+      "version": null,
+      "arxiv_id": "2611.25123",
+      "sources": [
+        {
+          "url": "https://arxiv.org/abs/2611.25123",
+          "publisher": "GrepMem authors",
+          "type": "research preprint"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:metr-nov2026-capability-irt-horizons:2026-11-20",
+      "title": "METR finds frontier AI progress increasingly hard to measure",
+      "category": "research",
+      "tags": [
+        "AI",
+        "LLM",
+        "agents",
+        "evaluation",
+        "safety",
+        "benchmarks"
+      ],
+      "summary": "METR's November 20 evaluation update reports strong performance on verifiable coding and optimization tasks, weaker expert-level judgment without clear feedback, and task time horizons doubling about every 3.6 months on its combined suite.",
+      "why_it_matters": "Helps interpret frontier capability claims without conflating narrow benchmark saturation with reliable autonomy in messy real work.",
+      "caveat": "Forecasting is uncertain; task choice, human baselines, feedback cost and statistical method materially affect outcomes. Not evidence that all research work is automatable.",
+      "canonical_url": "https://metr.org/blog/2026-11-20-q4-2026-capability-update/",
+      "source_url": "https://metr.org/blog/2026-11-20-q4-2026-capability-update/",
+      "publisher": "METR",
+      "type": "independent evaluation research",
+      "publication_date": "2026-11-20",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-20",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-23T14:45:37.778Z",
+      "checked_at": "2026-11-23T14:45:37.778Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "independent_evaluation_study",
+      "release_status": "research_report",
+      "collection_classification": "catch_up",
+      "version": null,
+      "arxiv_id": null,
+      "sources": [
+        {
+          "url": "https://metr.org/blog/2026-11-20-q4-2026-capability-update/",
+          "publisher": "METR",
+          "type": "independent evaluation research"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:amazon-textract-insights-ga:2026-11-20",
+      "title": "AWS launches Textract Insights for grounded multi-document extraction",
+      "category": "technologies",
+      "tags": [
+        "AI",
+        "ML",
+        "documents",
+        "OCR",
+        "API",
+        "retrieval"
+      ],
+      "summary": "AWS announced November 20 general availability of Textract Insights, an asynchronous document-processing API using natural-language field blueprints, mixed-packet splitting, and per-field confidence plus page/bounding-box provenance.",
+      "why_it_matters": "Lets teams evaluate extracted values against original documents rather than relying on ungrounded generated prose.",
+      "caveat": "Confidence is not guaranteed calibration; price is per page and supported languages and processing Regions are limited. Sensitive document workflows still need privacy controls and review.",
+      "canonical_url": "https://aws.amazon.com/blogs/machine-learning/announcing-amazon-textract-insights-verifiable-generative-ai-for-documents/",
+      "source_url": "https://aws.amazon.com/blogs/machine-learning/announcing-amazon-textract-insights-verifiable-generative-ai-for-documents/",
+      "publisher": "AWS",
+      "type": "first-party product announcement and technical documentation",
+      "publication_date": "2026-11-20",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-20",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-23T14:45:37.778Z",
+      "checked_at": "2026-11-23T14:45:37.778Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "product_general_availability",
+      "release_status": "generally_available",
+      "collection_classification": "catch_up",
+      "version": null,
+      "arxiv_id": null,
+      "sources": [
+        {
+          "url": "https://aws.amazon.com/blogs/machine-learning/announcing-amazon-textract-insights-verifiable-generative-ai-for-documents/",
+          "publisher": "AWS",
+          "type": "first-party product announcement and technical documentation"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:hyperpod-global-inference-gateway:2026-11-20",
+      "title": "AWS introduces a multi-cluster SageMaker HyperPod inference gateway",
+      "category": "infrastructure",
+      "tags": [
+        "AI",
+        "LLM",
+        "inference",
+        "cloud",
+        "availability"
+      ],
+      "summary": "AWS described HyperPod Global Inference Gateway, exposing one authenticated endpoint for inference requests across clusters and Regions with placement and failover options.",
+      "why_it_matters": "Useful when operators need multi-cluster routing without manually managing every client endpoint.",
+      "caveat": "This is a specific HyperPod-managed feature, not the same as generic cross-Region Bedrock inference; it requires compatible AWS infrastructure, network configuration and associated costs.",
+      "canonical_url": "https://aws.amazon.com/blogs/machine-learning/introducing-amazon-sagemaker-hyperpod-global-inference-gateway-one-endpoint-across-regions-and-clusters/",
+      "source_url": "https://aws.amazon.com/blogs/machine-learning/introducing-amazon-sagemaker-hyperpod-global-inference-gateway-one-endpoint-across-regions-and-clusters/",
+      "publisher": "AWS",
+      "type": "first-party technical announcement",
+      "publication_date": "2026-11-20",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-20",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-23T14:45:37.778Z",
+      "checked_at": "2026-11-23T14:45:37.778Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "product_announcement",
+      "release_status": "announced",
+      "collection_classification": "catch_up",
+      "version": null,
+      "arxiv_id": null,
+      "sources": [
+        {
+          "url": "https://aws.amazon.com/blogs/machine-learning/introducing-amazon-sagemaker-hyperpod-global-inference-gateway-one-endpoint-across-regions-and-clusters/",
+          "publisher": "AWS",
+          "type": "first-party technical announcement"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:hyperpod-gpu-observability:2026-11-20",
+      "title": "SageMaker HyperPod gains cross-layer GPU training diagnostics",
+      "category": "infrastructure",
+      "tags": [
+        "AI",
+        "DL",
+        "training",
+        "hardware",
+        "GPU",
+        "observability"
+      ],
+      "summary": "AWS's November 20 HyperPod update adds accelerator outlier comparisons, error and throttling diagnostics, network telemetry and optional advanced profiling for EKS and Slurm workloads.",
+      "why_it_matters": "Makes troubleshooting expensive distributed training jobs more granular than a fleet-level GPU usage dashboard.",
+      "caveat": "Availability and monitoring cost depend on cluster configuration and AWS Region; outlier flags do not by themselves prove root cause or guarantee reduced training downtime.",
+      "canonical_url": "https://aws.amazon.com/blogs/machine-learning/introducing-enhanced-observability-in-amazon-sagemaker-hyperpod-to-diagnose-gpu-training-issues/",
+      "source_url": "https://aws.amazon.com/blogs/machine-learning/introducing-enhanced-observability-in-amazon-sagemaker-hyperpod-to-diagnose-gpu-training-issues/",
+      "publisher": "AWS",
+      "type": "first-party technical announcement",
+      "publication_date": "2026-11-20",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-20",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-23T14:45:37.778Z",
+      "checked_at": "2026-11-23T14:45:37.778Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "product_announcement",
+      "release_status": "announced",
+      "collection_classification": "catch_up",
+      "version": null,
+      "arxiv_id": null,
+      "sources": [
+        {
+          "url": "https://aws.amazon.com/blogs/machine-learning/introducing-enhanced-observability-in-amazon-sagemaker-hyperpod-to-diagnose-gpu-training-issues/",
+          "publisher": "AWS",
+          "type": "first-party technical announcement"
+        }
+      ]
+    }
+  ],
+  "technologies": [
+    {
+      "id": "tech-proposal:lingsante-31-air-vl:2026-11-23",
+      "name": "LingSante-3.1-air-VL",
+      "aliases": [
+        "LingSante Air VL",
+        "LingSante 3.1 air VL"
+      ],
+      "usage_tags": [
+        "AI",
+        "ML",
+        "DL",
+        "LLM",
+        "SLM",
+        "multimodal"
+      ],
+      "explanation": "Open-weight 124B-total, 5.5B-active sparse vision-language medical research model for scans, reports, image search and tool-assisted workflows.",
+      "conditional_advantage": "Lower active-parameter compute per token than dense 124B models when supported MoE kernels and serving topology are available.",
+      "best_fit_uses": [
+        "Research on medical image-and-text reasoning",
+        "Auditable report draft generation",
+        "Multimodal medical retrieval research"
+      ],
+      "tradeoffs": [
+        "Weights still require substantial GPU memory",
+        "Image failures, hallucinations and demographic/domain shifts",
+        "Not validated for independent clinical decisions"
+      ],
+      "alternatives": [
+        "General VLM plus clinical retrieval",
+        "Specialized supervised imaging models"
+      ],
+      "hardware_runtime_constraints": "Official card recommends SGLang with four 141GB-class GPUs for long context or 8x80GB H100/H800; requires trust-remote-code in examples.",
+      "official_documentation_url": "https://huggingface.co/inclusionAI/LingSante-3.1-air-VL",
+      "license_uncertainty": "Hugging Face card labels MIT; confirm inherited data, dependencies and weight terms independently.",
+      "availability_uncertainty": "Open weights visible; clinical deployment rights, supported runtimes and region restrictions need review.",
+      "pricing_uncertainty": "No local deployment cost estimate or hosted API price verified.",
+      "existing_profile_id": null,
+      "profile_relationship": "new_candidate_pending_canonical_dedup",
+      "source_links": [
+        {
+          "url": "https://huggingface.co/inclusionAI/LingSante-3.1-air-VL",
+          "publisher": "Ant Group inclusionAI",
+          "type": "first-party documentation"
+        }
+      ],
+      "date_checked": "2026-11-23",
+      "checked_at": "2026-11-23T14:45:37.778Z",
+      "review_status": "source_checked_pending_publisher_catalog_dedup"
+    },
+    {
+      "id": "tech-proposal:lingsante-31-flash:2026-11-23",
+      "name": "LingSante-3.1-flash",
+      "aliases": [
+        "LingSante Flash 3.1"
+      ],
+      "usage_tags": [
+        "AI",
+        "ML",
+        "DL",
+        "LLM",
+        "medical"
+      ],
+      "explanation": "Open-weight 560B-total, about 25B-active medical reasoning MoE with a reported million-token context and tool-enabled workflows.",
+      "conditional_advantage": "More capability headroom for extended professional healthcare research workflows than smaller general-purpose models, if enough GPU resources and external tool controls exist.",
+      "best_fit_uses": [
+        "Medical evidence synthesis research",
+        "Clinical reasoning benchmark evaluation",
+        "Long-chain supervised agent experiments"
+      ],
+      "tradeoffs": [
+        "Extremely large weight and memory footprint",
+        "Medical factual and safety limits",
+        "Evaluation not independently replicated"
+      ],
+      "alternatives": [
+        "LingSante-3.1-air-VL",
+        "General long-context LLM with clinical RAG"
+      ],
+      "hardware_runtime_constraints": "Large distributed GPU inference required for unquantized full weights; SGLang/vLLM paths documented; no ordinary-laptop claim.",
+      "official_documentation_url": "https://huggingface.co/inclusionAI/LingSante-3.1-flash",
+      "license_uncertainty": "Card labels MIT but operational dependencies and data provenance should be separately audited.",
+      "availability_uncertainty": "Public weight repository; no evidence of regulatory clearance or unrestricted clinical use.",
+      "pricing_uncertainty": "Computrix API is linked, but current prices and quota were not verified.",
+      "existing_profile_id": null,
+      "profile_relationship": "new_candidate_pending_canonical_dedup",
+      "source_links": [
+        {
+          "url": "https://huggingface.co/inclusionAI/LingSante-3.1-flash",
+          "publisher": "Ant Group inclusionAI",
+          "type": "first-party documentation"
+        }
+      ],
+      "date_checked": "2026-11-23",
+      "checked_at": "2026-11-23T14:45:37.778Z",
+      "review_status": "source_checked_pending_publisher_catalog_dedup"
+    },
+    {
+      "id": "tech-proposal:grepmem-index-free-agent-history:2026-11-23",
+      "name": "GrepMem",
+      "aliases": [
+        "Grep-based agent memory",
+        "Append-only regex agent recall"
+      ],
+      "usage_tags": [
+        "AI",
+        "ML",
+        "SLM",
+        "LLM",
+        "Agents"
+      ],
+      "explanation": "Research memory design that records every agent turn to a text log and retrieves remembered spans with regex searches instead of embeddings or lossy summaries.",
+      "conditional_advantage": "Preserves exact past content and can lower indexing overhead when the agent can formulate useful text search patterns.",
+      "best_fit_uses": [
+        "Auditable coding-agent histories",
+        "Long-session exact recall",
+        "Low-infrastructure agent memory experiments"
+      ],
+      "tradeoffs": [
+        "Search misses paraphrases",
+        "Logs grow without bound",
+        "Raw logs can expose secrets"
+      ],
+      "alternatives": [
+        "Vector RAG",
+        "Summarized memory",
+        "Hybrid keyword plus semantic retrieval"
+      ],
+      "hardware_runtime_constraints": "Plain-text storage, grep-compatible tool, filesystem permissions; storage grows with interaction history and regex quality controls latency.",
+      "official_documentation_url": "https://arxiv.org/abs/2611.25123",
+      "license_uncertainty": "Research paper license/implementation code license not verified.",
+      "availability_uncertainty": "Method described publicly; independently maintained package/checkpoint availability not established.",
+      "pricing_uncertainty": "No hosted price; local storage and context-retrieval costs depend on use.",
+      "existing_profile_id": null,
+      "profile_relationship": "new_candidate_pending_canonical_dedup",
+      "source_links": [
+        {
+          "url": "https://arxiv.org/abs/2611.25123",
+          "publisher": "Research authors",
+          "type": "first-party documentation"
+        }
+      ],
+      "date_checked": "2026-11-23",
+      "checked_at": "2026-11-23T14:45:37.778Z",
+      "review_status": "source_checked_pending_publisher_catalog_dedup"
+    },
+    {
+      "id": "tech-proposal:coevobench-agent-research:2026-11-23",
+      "name": "CoEvoBench",
+      "aliases": [
+        "Agent model–harness co-evolution benchmark"
+      ],
+      "usage_tags": [
+        "AI",
+        "ML",
+        "DL",
+        "LLM",
+        "Agents",
+        "Evaluation"
+      ],
+      "explanation": "Research benchmark where an LLM acts as a researcher and has 24 hours to modify a target agent's model and tool harness across five task domains.",
+      "conditional_advantage": "Tests improvement decisions across both policy/model training and agent infrastructure rather than holding one side fixed.",
+      "best_fit_uses": [
+        "Automated AI R&D evaluation",
+        "Research agent red-team experiments",
+        "Agent harness improvement comparisons"
+      ],
+      "tradeoffs": [
+        "Costly multi-run training/evaluation",
+        "Benchmark-specific feedback can overfit",
+        "Shared task environments do not reflect all real research"
+      ],
+      "alternatives": [
+        "RE-Bench",
+        "Fixed-model agent benchmark",
+        "Standalone harness benchmarks"
+      ],
+      "hardware_runtime_constraints": "Requires a model-training and tool-execution environment, task splits, evaluator and compute over repeated experiments.",
+      "official_documentation_url": "https://arxiv.org/abs/2611.27116",
+      "license_uncertainty": "Paper is public; code and dataset license not independently checked.",
+      "availability_uncertainty": "Research benchmark; runnable artifact availability is not independently verified.",
+      "pricing_uncertainty": "Compute budget and usage costs depend on models and repeated 24-hour experimental runs.",
+      "existing_profile_id": null,
+      "profile_relationship": "new_candidate_pending_canonical_dedup",
+      "source_links": [
+        {
+          "url": "https://arxiv.org/abs/2611.27116",
+          "publisher": "Research authors",
+          "type": "first-party documentation"
+        }
+      ],
+      "date_checked": "2026-11-23",
+      "checked_at": "2026-11-23T14:45:37.778Z",
+      "review_status": "source_checked_pending_publisher_catalog_dedup"
+    },
+    {
+      "id": "tech-proposal:amazon-textract-insights:2026-11-23",
+      "name": "Amazon Textract Insights",
+      "aliases": [
+        "Textract Insights",
+        "Document Insights API"
+      ],
+      "usage_tags": [
+        "AI",
+        "ML",
+        "DL",
+        "document processing"
+      ],
+      "explanation": "Managed asynchronous extraction for mixed documents with JSON field blueprints, splitting, per-field confidence and page/bounding-box provenance.",
+      "conditional_advantage": "Reduces custom OCR/classification assembly work when documents are heterogeneous and reviewers need source-page audit trails.",
+      "best_fit_uses": [
+        "Insurance claims packets",
+        "Mortgage document ingestion",
+        "Source-grounded financial record extraction"
+      ],
+      "tradeoffs": [
+        "Per-page costs",
+        "Confidence and inferred values need QA",
+        "Limited language and Region support"
+      ],
+      "alternatives": [
+        "Traditional Textract Core plus custom pipeline",
+        "OCR plus general-purpose LLM",
+        "Document AI providers"
+      ],
+      "hardware_runtime_constraints": "Managed AWS service via S3 and Textract API; inputs PDF/PNG/JPEG/TIFF; six languages per launch and mixed packets up to 3,000 pages.",
+      "official_documentation_url": "https://aws.amazon.com/blogs/machine-learning/announcing-amazon-textract-insights-verifiable-generative-ai-for-documents/",
+      "license_uncertainty": "Proprietary managed AWS service; not open-source software.",
+      "availability_uncertainty": "GA announced Nov 20 but availability is Region-specific; check current AWS documentation.",
+      "pricing_uncertainty": "Per-page pricing stated; exact current regional rate not verified.",
+      "existing_profile_id": null,
+      "profile_relationship": "new_candidate_pending_canonical_dedup",
+      "source_links": [
+        {
+          "url": "https://aws.amazon.com/blogs/machine-learning/announcing-amazon-textract-insights-verifiable-generative-ai-for-documents/",
+          "publisher": "AWS",
+          "type": "first-party documentation"
+        }
+      ],
+      "date_checked": "2026-11-23",
+      "checked_at": "2026-11-23T14:45:37.778Z",
+      "review_status": "source_checked_pending_publisher_catalog_dedup"
+    },
+    {
+      "id": "tech-proposal:hyperpod-global-inference-gateway:2026-11-23",
+      "name": "SageMaker HyperPod Global Inference Gateway",
+      "aliases": [
+        "HyperPod Global Inference Gateway"
+      ],
+      "usage_tags": [
+        "AI",
+        "ML",
+        "LLM",
+        "inference"
+      ],
+      "explanation": "Managed authenticated entry point routing inference across self-hosted HyperPod clusters, with cluster placement and failover controls.",
+      "conditional_advantage": "Reduces endpoint management and supports cross-Region resilience when a team already operates several compatible HyperPod clusters.",
+      "best_fit_uses": [
+        "Multi-cluster self-hosted LLM serving",
+        "Regional failover for inference fleets"
+      ],
+      "tradeoffs": [
+        "Requires AWS private networking and identity management",
+        "Latency, locality and egress constraints",
+        "Cost and behavior depend on cluster health"
+      ],
+      "alternatives": [
+        "Self-managed API gateway/load balancer",
+        "Amazon Bedrock cross-Region inference",
+        "Multi-cloud routing gateways"
+      ],
+      "hardware_runtime_constraints": "Requires SageMaker HyperPod, SigV4/IAM and PrivateLink-compatible networking across chosen clusters.",
+      "official_documentation_url": "https://aws.amazon.com/blogs/machine-learning/introducing-amazon-sagemaker-hyperpod-global-inference-gateway-one-endpoint-across-regions-and-clusters/",
+      "license_uncertainty": "Proprietary AWS platform feature.",
+      "availability_uncertainty": "Feature described Nov 20; check supported configurations and Regions.",
+      "pricing_uncertainty": "Gateway and underlying infrastructure charges not independently priced.",
+      "existing_profile_id": null,
+      "profile_relationship": "new_candidate_pending_canonical_dedup",
+      "source_links": [
+        {
+          "url": "https://aws.amazon.com/blogs/machine-learning/introducing-amazon-sagemaker-hyperpod-global-inference-gateway-one-endpoint-across-regions-and-clusters/",
+          "publisher": "AWS",
+          "type": "first-party documentation"
+        }
+      ],
+      "date_checked": "2026-11-23",
+      "checked_at": "2026-11-23T14:45:37.778Z",
+      "review_status": "source_checked_pending_publisher_catalog_dedup"
+    }
+  ],
+  "terms": [
+    {
+      "id": "term-proposal:perplexity-capability-pacing:2026-11-23",
+      "name": "Perplexity as a capability proxy",
+      "aliases": [
+        "Held-out pretraining log-perplexity",
+        "Cross-entropy-based capability monitoring"
+      ],
+      "definition": "The use of a language model's held-out next-token prediction loss as a proxy for broad pretraining progress and a proposed input to model-development safety thresholds.",
+      "mechanism": "Train base models, evaluate cross-entropy on a fixed held-out corpus and compare changes under a consistent tokenizer and data distribution.",
+      "usage_tags": [
+        "AI",
+        "ML",
+        "LLM",
+        "Safety"
+      ],
+      "example": "A lab tracks changes in log-perplexity on a stable internal code set and proposes a monitoring review before crossing a further loss threshold.",
+      "caveat": "A lower loss on one corpus is neither a universal intelligence score nor a safety certificate; post-training and dataset choice alter interpretation.",
+      "related_existing_ids": [
+        "MLD-0890"
+      ],
+      "primary_references": [
+        {
+          "url": "https://openai.com/index/perplexity-and-intelligence/",
+          "publisher": "OpenAI",
+          "type": "primary source"
+        }
+      ],
+      "term_origin": "existing_term_enrichment_new_application",
+      "existing_term_id": "MLD-0890",
+      "related_profile_ids": [],
+      "date_checked": "2026-11-23",
+      "checked_at": "2026-11-23T14:45:37.778Z",
+      "review_status": "source_checked_pending_publisher_canonical_dedup"
+    },
+    {
+      "id": "term-proposal:model-harness-coevolution:2026-11-23",
+      "name": "Model–harness co-evolution",
+      "aliases": [
+        "Agentic system co-evolution",
+        "Joint model and harness optimization"
+      ],
+      "definition": "Iterative research that changes both a model and the software scaffold controlling its tools, prompts, environment and workflow, selecting improvements based on their interaction.",
+      "mechanism": "At each round, experiment with weight/training changes, harness changes or both, and measure the resulting pair on held-out agent tasks.",
+      "usage_tags": [
+        "AI",
+        "ML",
+        "LLM",
+        "Agents",
+        "Evaluation"
+      ],
+      "example": "A coding agent learns a new tool policy while its harness adds a better test runner; the next round evaluates their combined effect.",
+      "caveat": "A good first update is not evidence of indefinite autonomous recursive improvement, and benchmark feedback can overfit.",
+      "related_existing_ids": [],
+      "primary_references": [
+        {
+          "url": "https://arxiv.org/abs/2611.27116",
+          "publisher": "Research authors",
+          "type": "primary source"
+        }
+      ],
+      "term_origin": "research_concept_new_to_atlas",
+      "existing_term_id": null,
+      "related_profile_ids": [],
+      "date_checked": "2026-11-23",
+      "checked_at": "2026-11-23T14:45:37.778Z",
+      "review_status": "source_checked_pending_publisher_canonical_dedup"
+    },
+    {
+      "id": "term-proposal:structural-validity-task-correctness:2026-11-23",
+      "name": "Structural validity versus task correctness",
+      "aliases": [
+        "Schema-valid but wrong output",
+        "Syntactic–semantic evaluation gap"
+      ],
+      "definition": "The distinction between a model response satisfying its declared JSON/schema shape and its values being correct, sourced and appropriate for the underlying task.",
+      "mechanism": "Score parsing and schema matching independently of comparisons to source facts, test execution, policy outcomes or expert ratings.",
+      "usage_tags": [
+        "AI",
+        "ML",
+        "LLM",
+        "Evaluation",
+        "Agents"
+      ],
+      "example": "A receipt extractor returns a valid JSON object with a wrong total: the first validator passes while the business accuracy check fails.",
+      "caveat": "Structured decoding, retries and type checking do not guarantee factual truth or that a decision is safe.",
+      "related_existing_ids": [
+        "MLD-1179"
+      ],
+      "primary_references": [
+        {
+          "url": "https://arxiv.org/abs/2611.27106",
+          "publisher": "Research authors",
+          "type": "primary source"
+        }
+      ],
+      "term_origin": "established_concept_new_to_atlas",
+      "existing_term_id": null,
+      "related_profile_ids": [],
+      "date_checked": "2026-11-23",
+      "checked_at": "2026-11-23T14:45:37.778Z",
+      "review_status": "source_checked_pending_publisher_canonical_dedup"
+    },
+    {
+      "id": "term-proposal:index-free-log-recall:2026-11-23",
+      "name": "Index-free log retrieval",
+      "aliases": [
+        "Regex-based agent memory recall",
+        "Append-only transcript retrieval"
+      ],
+      "definition": "An agent memory approach that preserves a raw append-only activity log and locates prior facts with text or regular-expression search rather than a prebuilt vector index.",
+      "mechanism": "Write each event to chronological text, formulate a search query when memory is needed, then insert the matching spans into current context.",
+      "usage_tags": [
+        "AI",
+        "LLM",
+        "SLM",
+        "Agents",
+        "Retrieval"
+      ],
+      "example": "A coding agent searches its interaction history for the exact compiler error string instead of retrieving a summarized memory.",
+      "caveat": "Cannot retrieve semantically similar events without suitable search terms; log size, private data and access boundaries remain important.",
+      "related_existing_ids": [],
+      "primary_references": [
+        {
+          "url": "https://arxiv.org/abs/2611.25123",
+          "publisher": "Research authors",
+          "type": "primary source"
+        }
+      ],
+      "term_origin": "research_concept_new_to_atlas",
+      "existing_term_id": null,
+      "related_profile_ids": [],
+      "date_checked": "2026-11-23",
+      "checked_at": "2026-11-23T14:45:37.778Z",
+      "review_status": "source_checked_pending_publisher_canonical_dedup"
+    },
+    {
+      "id": "term-proposal:document-extraction-blueprint:2026-11-23",
+      "name": "Document extraction blueprint",
+      "aliases": [
+        "Textract Insights blueprint",
+        "Natural-language field blueprint"
+      ],
+      "definition": "A JSON Schema-based extraction specification whose fields describe the information to find or infer in a document, used to produce source-grounded structured results.",
+      "mechanism": "Associate field definitions with document types; a document processor splits mixed packets, selects blueprints, extracts fields and attaches confidence and page coordinates.",
+      "usage_tags": [
+        "AI",
+        "ML",
+        "Document AI"
+      ],
+      "example": "An insurance file blueprint asks for policy number, incident date and claims amount from a multi-form upload.",
+      "caveat": "Blueprint descriptions do not guarantee correct inferred values; human review and privacy controls are still needed.",
+      "related_existing_ids": [
+        "MLD-1179"
+      ],
+      "primary_references": [
+        {
+          "url": "https://aws.amazon.com/blogs/machine-learning/announcing-amazon-textract-insights-verifiable-generative-ai-for-documents/",
+          "publisher": "AWS",
+          "type": "primary source"
+        }
+      ],
+      "term_origin": "vendor_specific_term_new_to_atlas",
+      "existing_term_id": null,
+      "related_profile_ids": [],
+      "date_checked": "2026-11-23",
+      "checked_at": "2026-11-23T14:45:37.778Z",
+      "review_status": "source_checked_pending_publisher_canonical_dedup"
+    }
+  ],
+  "corrections": []
+}
