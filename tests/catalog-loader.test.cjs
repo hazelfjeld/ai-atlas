@@ -47,6 +47,34 @@ test('a transient fetch failure is retried without publishing a partial catalog'
   assert.equal((await promise).terms.length, 1345);
   assert.equal(failed, true);
 });
+test('a stalled term shard does not block other catalog families or exceed four fetches', async () => {
+  let releaseStall;
+  const stalled = new Promise(resolve => { releaseStall = resolve; });
+  let startedTechnology = false, active = 0, peak = 0;
+  const window = {};
+  const context = {window, crypto: webcrypto, TextDecoder, AbortSignal, URL, console, setTimeout,
+    fetch: async p => {
+      active++; peak = Math.max(peak, active);
+      try {
+        if (p === 'data/terms-01.json') await stalled;
+        if (p === 'data/technologies-01.json') startedTechnology = true;
+        const bytes = fs.readFileSync(path.join(root, p));
+        return {ok: true, arrayBuffer: async () => Uint8Array.from(bytes).buffer};
+      } finally { active--; }
+    }};
+  vm.runInNewContext(loader, context);
+  // The first term file remains pending. Technology must nevertheless start;
+  // this failed under the old sequential kind-by-kind loader.
+  await new Promise(resolve => setTimeout(resolve, 200));
+  const beganWhileBlocked = startedTechnology;
+  releaseStall();
+  const data = await window.ATLAS_READY;
+  assert.equal(beganWhileBlocked, true, 'a slow concept shard must not starve technology requests');
+  assert.ok(peak <= 4, 'global request concurrency must stay bounded at four');
+  assert.equal(data.terms.length, 1345);
+  assert.equal(data.technologies.length, 303);
+});
+
 test('all browser-generated term URLs exactly match generated static pages', () => {
   const C = require('../core.js');
   const pages = JSON.parse(fs.readFileSync(path.join(root, 'terms/manifest.json')));

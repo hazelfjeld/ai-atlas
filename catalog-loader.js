@@ -34,16 +34,31 @@ window.ATLAS_READY = (async () => {
  }
  const data = {}, seen = new Set();
  const kinds = ['papers', 'alerts', 'playbooks', 'terms', 'technologies'];
- for (const kind of kinds) {
+ const byKind = new Map(kinds.map(kind => {
   const files = kind === 'papers' || kind === 'alerts' ? manifest.files.filter(f => f.kind === kind) : manifest.extensions[kind];
   if (!Array.isArray(files) || !files.length) throw new Error(`Missing ${kind} catalog.`);
-  const batches = await mapLimit(files, async file => {
-   if (file.kind !== kind || !new RegExp(`^data/${kind}-\\d{2}\\.json$`).test(file.path)) throw new Error('Invalid catalog manifest.');
-   const rows = await checked(file);
-   if (!Array.isArray(rows) || rows.length !== file.count) throw new Error(`Count mismatch: ${file.path}`);
-   return rows;
-  });
-  data[kind] = batches.flat();
+  return [kind, files];
+ }));
+ // The former kind-by-kind fetch held every later catalog behind the slowest
+ // term shard. Interleave existing files under the SAME global four-request
+ // limit: one stalled term can no longer prevent technology/research prefetch.
+ // Keep per-kind shard order, published counts and all SHA-256 checks intact.
+ const jobs = [];
+ const longest = Math.max(...kinds.map(kind => byKind.get(kind).length));
+ for (let index = 0; index < longest; index++) {
+  for (const kind of kinds) {
+   const file = byKind.get(kind)[index];
+   if (file) jobs.push({kind, file});
+  }
+ }
+ const batches = await mapLimit(jobs, async ({kind, file}) => {
+  if (file.kind !== kind || !new RegExp(`^data/${kind}-\\d{2}\\.json$`).test(file.path)) throw new Error('Invalid catalog manifest.');
+  const rows = await checked(file);
+  if (!Array.isArray(rows) || rows.length !== file.count) throw new Error(`Count mismatch: ${file.path}`);
+  return rows;
+ });
+ for (const kind of kinds) {
+  data[kind] = batches.flatMap((rows, index) => jobs[index].kind === kind ? rows : []);
   if (data[kind].length !== manifest.published_counts[kind]) throw new Error(`Wrong ${kind} total.`);
   for (const row of data[kind]) {
    if (typeof row.id !== 'string' || seen.has(row.id) || !Array.isArray(row.tags)) throw new Error(`Invalid or duplicate ID: ${row.id}`);
