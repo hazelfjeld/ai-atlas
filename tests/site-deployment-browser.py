@@ -211,8 +211,12 @@ with sync_playwright() as p:
                 (1280, 'coverage', 'sources', 'about.html')):
             scriptless_page.set_viewport_size({'width': alias_width, 'height': 844})
             scriptless_page.goto(base + 'research.html')
+            # Visual contrast depends on the shared external stylesheet.
+            # DOMContentLoaded may fire before CSS on a cold production CDN.
+            # Wait for the actual page load; keep the selected-vs-Discover
+            # computed-color assertion unchanged so genuine CSS bugs still fail.
             scriptless_page.goto(base + 'index.html#/' + legacy_key,
-                                 wait_until='domcontentloaded')
+                                 wait_until='load')
             alias_section = scriptless_page.locator(
                 '.nojs-primary-routes > section[id="/' + legacy_key + '"]')
             check('script-free legacy alias ' + scriptless_scheme + ' ' +
