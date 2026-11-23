@@ -41,13 +41,13 @@ def shell(title, body, path, description, structured=None, *, native_concept_art
     # Read the article h1 into the shared, script-free workspace title before any JavaScript enhancement.
     # All 1,345 existing concept references use the shared first-paint rail.
     # Keep the threshold pinned to the preserved catalog for repeatable builds.
-    # The first 400 preserved concept IDs now have contextual script-free mobile
+    # The first 420 preserved concept IDs now have contextual script-free mobile
     # toggles. Migrate the remaining reference IDs only with their matching
     # generated HTML and manifest checksums, never via a JS-only override.
     first_paint_reference = (path.startswith('terms/MLD-') and
                              int(path[10:14]) <= 1345)
     directory_nav = render_directory_nav('../', (None if path == 'terms/index.html' else 'Concept dictionary'), canonical_research=True, mobile_brand=True, native_secondary=True, mobile_secondary=True, secondary_current=('encyclopedia' if path == 'terms/index.html' else None), page_label=('Concept encyclopedia' if path == 'terms/index.html' else title), topbar_title=('Concept encyclopedia' if path == 'terms/index.html' else title), rail_bottom=(path == 'terms/index.html' or expanded_concept or first_paint_reference), first_paint_context=(path == 'terms/index.html' or expanded_concept or
-                                      (first_paint_reference and int(path[10:14]) <= 400)))
+                                      (first_paint_reference and int(path[10:14]) <= 420)))
     if expanded_concept or first_paint_reference:
         assert directory_nav.count('class="sidebar-bottom site-chrome__bottom"') == 1, path
     elif path.startswith('terms/MLD-'):
