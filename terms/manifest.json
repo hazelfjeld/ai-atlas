@@ -1701,52 +1701,52 @@
   },
   "MLD-0341": {
     "path": "terms/MLD-0341-dropout.html",
-    "sha256": "44070bb462689ff8ba141c0b2aa543ba7841bd8c3d13911b35fb7caebb5a51f1",
+    "sha256": "7000ee868b812e72b30ae8123e42e0b25681b331e22f2a825f1c42525f2381d3",
     "expanded": false
   },
   "MLD-0342": {
     "path": "terms/MLD-0342-dynamic-batching.html",
-    "sha256": "bacf27db4167535b6ac80cb6601834a2e0b2808455fdd5ced7fb71b0dfb80ff6",
+    "sha256": "18f11ba4a897c8e2ffcce934055c5cc42ea7c02c2ec04ba9a6996a104ede36a1",
     "expanded": false
   },
   "MLD-0343": {
     "path": "terms/MLD-0343-dynamic-padding.html",
-    "sha256": "836f3d56be3d5adf2d37e9211b2269618cc949e1a35f92e9cbeed61acb9c1ef6",
+    "sha256": "08dc8e60048c9e7e3ab6d1fe426fbe5b823948f62c6ea22967e3b4442303dec1",
     "expanded": false
   },
   "MLD-0344": {
     "path": "terms/MLD-0344-dynamic-programming.html",
-    "sha256": "f59a5df65f85b8a633c6dcf13b2af3eed752262c5042e86bac01614a15d2174a",
+    "sha256": "cc479b87d4432dd70b3c001f98fe68b4571de466ccef83ed87e04ea39afa41d7",
     "expanded": false
   },
   "MLD-0345": {
     "path": "terms/MLD-0345-early-stopping.html",
-    "sha256": "4a42c3bab23881c564ed34d7a5559b86327ddd608b259c8caecab1600936f26f",
+    "sha256": "7debdf0310643d46d8f5ac67cb4fd701249112c8a72a12052fba8026732855a5",
     "expanded": false
   },
   "MLD-0346": {
     "path": "terms/MLD-0346-edge-ai.html",
-    "sha256": "24eda017cfbc35389d3af03cab10084a117256e8f0d1c9c09952152776d45892",
+    "sha256": "0d5a85e2e1152e76046e1726250d9551247615fc16911f32c244cc67c4051013",
     "expanded": false
   },
   "MLD-0347": {
     "path": "terms/MLD-0347-edit-distance.html",
-    "sha256": "109f8d82a30f101970a9280ed43c2be608b0c20c5b6e5aee987fb6ed1d4e47a7",
+    "sha256": "e97e9c67fd531a8e577bed93747ce22df4e0e4e26267ff3f73b9f12fcddd6099",
     "expanded": false
   },
   "MLD-0348": {
     "path": "terms/MLD-0348-effect-size.html",
-    "sha256": "d82e14ea6a7a8bb1b6d3b5aa33a724ed6bc2ce1ce8138a53ba510082f5d1b8ac",
+    "sha256": "27ed64e95626c51113c2518e51ef22ac8a31b9fe857265e6112b252d5a9be009",
     "expanded": false
   },
   "MLD-0349": {
     "path": "terms/MLD-0349-effective-batch-size.html",
-    "sha256": "0f03853443235a972a80ca89036eaadef668a04d86a1ba0229318e6a1b4c104b",
+    "sha256": "ea584bb3a7733302341912dcfa612d5952be6b82d0e83163aeaad6f0a96bfdae",
     "expanded": false
   },
   "MLD-0350": {
     "path": "terms/MLD-0350-effective-horizon.html",
-    "sha256": "a541d8610ec05f4fe125db8d77a7f472352c2ef40480bb1e6f606ebb62e5c4f9",
+    "sha256": "1c0d3781381370cac2d1b757134ebad8127639b28251a6e7058b31953a143576",
     "expanded": false
   },
   "MLD-0351": {
