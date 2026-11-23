@@ -1801,52 +1801,52 @@
   },
   "MLD-0361": {
     "path": "terms/MLD-0361-empirical-risk.html",
-    "sha256": "89f20f9cd5aa7e7aad023ef38da163a0ef753f83752d1b3a396e22093703e700",
+    "sha256": "d91d1e6c94444b31031fccac819345d9e4e76c9e6c9d7fda8ad2e0939a9bedea",
     "expanded": false
   },
   "MLD-0362": {
     "path": "terms/MLD-0362-empirical-risk-minimization.html",
-    "sha256": "1df160700fbc0c7e4dda0018f67cc5e63d9b163634083341ad0619b9094b5e65",
+    "sha256": "6ae0d43791f9cedb3655a385f1af5475e3d172d6992d36295a40c2c980e143dc",
     "expanded": false
   },
   "MLD-0363": {
     "path": "terms/MLD-0363-encoder.html",
-    "sha256": "756d2f9761b3b0c5ffd21d970910ec94f9746cabc66dda7d9c762915c745f31c",
+    "sha256": "17a1952fa81df3e6549b1c5fb0cd518ffb475a8b6036029f1853a868cf5a6bc4",
     "expanded": false
   },
   "MLD-0364": {
     "path": "terms/MLD-0364-encoder-decoder-model.html",
-    "sha256": "9b905f73a725b002288c5b4ace90c66323457d28a4863044c1b46ca78a11d307",
+    "sha256": "b896f07d7475e828778c26344d135c38feb963f477c61c01c5907bcc290236a0",
     "expanded": false
   },
   "MLD-0365": {
     "path": "terms/MLD-0365-encoder-only-model.html",
-    "sha256": "a85a0b39dbe316f9e0d90bd282cfe988ef56498a08dc29e3e72a2ec3a22b8b24",
+    "sha256": "c24cd3ac9985f327e8bf9620e309707fd6ca9939c24fd8121b0d217f16c9bd99",
     "expanded": false
   },
   "MLD-0366": {
     "path": "terms/MLD-0366-end-to-end-learning.html",
-    "sha256": "15910d55822f65627b738a8d930020673a43f90b70d2e0a1e5e29fc52fe0d874",
+    "sha256": "46cf14860d88e804a161176040fb6c9e51c7fabbb1848afe560b064262418ef1",
     "expanded": false
   },
   "MLD-0367": {
     "path": "terms/MLD-0367-ensemble-learning.html",
-    "sha256": "af909cb77f8184d7932d93f1d020422f1f51ec762dfabee316aaffec903fdfae",
+    "sha256": "08eb42b3bc1afb6b0fb08a944f50bdd68c677135514146759e27e2a8428b3d30",
     "expanded": false
   },
   "MLD-0368": {
     "path": "terms/MLD-0368-entity-linking.html",
-    "sha256": "5f9dca7fada7f5258a3c6d07ec7d8c221aa0800f565dc3be9b772e525bcbee98",
+    "sha256": "115146fe0193df4f87f558fd5b3819f8ada57d1a067d5817180159be728c4dbb",
     "expanded": false
   },
   "MLD-0369": {
     "path": "terms/MLD-0369-entropy.html",
-    "sha256": "819ff7b71d798193c3ac067a4b4202fea35c29709110a707e77864a894c27227",
+    "sha256": "2e93c8c134045309e91cfd3e0af95c8eff5d93d3d8208f57bd1fabf86abd673f",
     "expanded": false
   },
   "MLD-0370": {
     "path": "terms/MLD-0370-entropy-bonus.html",
-    "sha256": "958b15ba01c8eb4cdbb49a07e29a9de667f014679fccc7f78481ee562b5f1821",
+    "sha256": "06428d90daf21a02702669906221f513848ef07500b822fbcff1fc535adb1829",
     "expanded": false
   },
   "MLD-0371": {
@@ -1856,72 +1856,72 @@
   },
   "MLD-0372": {
     "path": "terms/MLD-0372-eos-token.html",
-    "sha256": "ff65770459f8335c42dcff3685d01de6041e2090c9e6ecb228a9637668d64550",
+    "sha256": "5087deb942a867f9b341a8d3a58f4e9e2297e055bd39b2e35d869f339abe665e",
     "expanded": false
   },
   "MLD-0373": {
     "path": "terms/MLD-0373-episode.html",
-    "sha256": "e789c19974dadb032d652036bc0ec67821fa798d44e3e5338fc151a7945734ad",
+    "sha256": "a89b4adc500d4fc18d56731036ecb6f42f63aba87df28deb8d9d3d8dfbd9328c",
     "expanded": false
   },
   "MLD-0374": {
     "path": "terms/MLD-0374-episodic-memory.html",
-    "sha256": "f877b8af35ebcf321ce02fca5d77a19c65fcd5ffc8ccbfd2c734535ed2b24032",
+    "sha256": "9d35752817052c7dddfcd889c612461914da19c8abe6d9cb8cc4016b32f63e08",
     "expanded": false
   },
   "MLD-0375": {
     "path": "terms/MLD-0375-epistemic-uncertainty.html",
-    "sha256": "cfcb8cfd9e3b533bd9fc83b4567668a7dd14f3d1459e82b319820642c173b6f6",
+    "sha256": "19f9c2af924d249be8db5006666e19eb8c8045c2a1018841d300989c973052f2",
     "expanded": false
   },
   "MLD-0376": {
     "path": "terms/MLD-0376-epoch.html",
-    "sha256": "3f9e47dd2cbd8bb4e83d84a2784b538164da19c53fee27c083196650f81645e1",
+    "sha256": "941c21b0ccdd2258dcd387d852d57e554625b8bf61098aaf304dd2a80ca33c98",
     "expanded": false
   },
   "MLD-0377": {
     "path": "terms/MLD-0377-epsilon-greedy.html",
-    "sha256": "e4650718da335465b9ff6cb121c407ba46988c065dfad8865ac5aac9f1fa4a3f",
+    "sha256": "5d5d0ded337a5f6bf8c113174a5282e2aebe7bba59dcf71d472277f212e96835",
     "expanded": false
   },
   "MLD-0378": {
     "path": "terms/MLD-0378-equal-opportunity-fairness.html",
-    "sha256": "f8f08d164eb4788b2aa2bdcbeac3744fc34abc33a3ae4c68ac965d95884fa856",
+    "sha256": "d217ae9c1d3b6830b8202c5cabf882c177fa25415d035ac4dff3a0a816eae237",
     "expanded": false
   },
   "MLD-0379": {
     "path": "terms/MLD-0379-equalized-odds.html",
-    "sha256": "9b81da9f537e21d6f353d0add1affc63b8705e6287a3dd023efeab5db9a613a1",
+    "sha256": "b10fc67014edfca14518b0e9e5e93c0fae92eaea380aa003cc960c9eb891e9bf",
     "expanded": false
   },
   "MLD-0380": {
     "path": "terms/MLD-0380-euclidean-distance.html",
-    "sha256": "30dc0e4a333db8d79b918fcb789917812521c7a75176fca43b5662e9c41781e9",
+    "sha256": "94f415015d9d9ba46da8426af00acaf78cd6da063d4cacd1cc2698138513b079",
     "expanded": false
   },
   "MLD-0381": {
     "path": "terms/MLD-0381-evaluation-awareness.html",
-    "sha256": "555923015f3edf269899684c6d2e5fab3b5689a11a03718071eeb7605fb780df",
+    "sha256": "c0ffa0c8ed9005da9fa52e33b5e72a7e637c9ae6e68de3d0d01ca967d25652bb",
     "expanded": false
   },
   "MLD-0382": {
     "path": "terms/MLD-0382-evaluation-variance.html",
-    "sha256": "d001986d4a77b53d78478c1cff61e464c7bfa256d0e5d51449aac5ea30b1cbea",
+    "sha256": "aae29df16bb35667d95f0814f6c0846d4a40efe3302ae6659058780f1465cf7a",
     "expanded": false
   },
   "MLD-0383": {
     "path": "terms/MLD-0383-evaluator-bias.html",
-    "sha256": "75158cdd7db73c2a10a086aa0981b112966d8e4bc0a65e4627ca5a44746a1b72",
+    "sha256": "d93af74d68e87999680a96f80e166090e4cd037126d1469496c48b654ec73ab0",
     "expanded": false
   },
   "MLD-0384": {
     "path": "terms/MLD-0384-evaluator-integrity.html",
-    "sha256": "b49d0f616672dddfd62bbc9eb20236b36c3c3f0e2107c7668436434d6fecb460",
+    "sha256": "bc6076337c95f2a1329c26b3e8d6d1d5ca438469d69c0f690cf5c3b889a21dab",
     "expanded": false
   },
   "MLD-0385": {
     "path": "terms/MLD-0385-evidence-lower-bound.html",
-    "sha256": "c595c50bc23a5e41fbbb3ecbcbf0de7aae7acbdd1ae3fb63018fc477eb3d3e03",
+    "sha256": "4c360cac7b637ac241fb9fb74341697560f7644c749a0ba5cb809c067f27375a",
     "expanded": false
   },
   "MLD-0386": {
@@ -1931,12 +1931,12 @@
   },
   "MLD-0387": {
     "path": "terms/MLD-0387-expectation.html",
-    "sha256": "27d2e576f9e420984ccb846f091b68371ab142c27d30fb75eafacb4b7f0c46ed",
+    "sha256": "766d24806017508ca290576f69e551e9b9546270391425378d08fad8e02ecb68",
     "expanded": false
   },
   "MLD-0388": {
     "path": "terms/MLD-0388-expectation-maximization.html",
-    "sha256": "c38005ef952f7741380c1167e8f14bfe57a8f76be78c69849df86e8ed936c4d4",
+    "sha256": "dfcc8bfee4745feebc4018e3faaf71fc6ce3b33f99113021e0fbe29accf9a8ff",
     "expanded": false
   },
   "MLD-0389": {
@@ -1946,57 +1946,57 @@
   },
   "MLD-0390": {
     "path": "terms/MLD-0390-expected-risk.html",
-    "sha256": "5dc159e9a47f288b4c83abb3a50d28da2d5691108f2b26886d4d40783af26d9a",
+    "sha256": "57367d4aec6089fe93799bdef104d1b6d505170f69d639c9a26ccba7899d11e6",
     "expanded": false
   },
   "MLD-0391": {
     "path": "terms/MLD-0391-experiment-tracking.html",
-    "sha256": "e74bb8c5d67a48b04e4b77a12431e5d1f295b2dad9c69dc93d6cd8d054366309",
+    "sha256": "87292f72634daccffbb802b0fc13eebf85d32c305afad4632d8ecfa6b6d611f8",
     "expanded": false
   },
   "MLD-0392": {
     "path": "terms/MLD-0392-expert.html",
-    "sha256": "5fd395d9785e2b9696e9f1c961477861c5a2d3bc6920e858497e79fe6e819d31",
+    "sha256": "af6cd336488da2bb097ae255c00bfe9e777d436e37b3d183ed73a2e634856211",
     "expanded": false
   },
   "MLD-0393": {
     "path": "terms/MLD-0393-expert-capacity.html",
-    "sha256": "beafc3a2a95fc811553ffe3ae3a47fe2ce753fdb43d3c9af82d814ef4137db40",
+    "sha256": "7f263907ba2a46d71a0ea44866ee5d4f8e773b9e87c983b60fcebc48bd206e56",
     "expanded": false
   },
   "MLD-0394": {
     "path": "terms/MLD-0394-expert-parallelism.html",
-    "sha256": "6095692456802a6cd90a6573a702dd0a603054b748f786d3ef7cb077dbd220d5",
+    "sha256": "29ec5efe47b94c189ab8a0c55252d71a3dbb83581a991d024f1e02a598874fac",
     "expanded": false
   },
   "MLD-0395": {
     "path": "terms/MLD-0395-explainability.html",
-    "sha256": "6bd828de784fc94ddaf0d2a115053eb0d13ad22a0b14018cb9de8dcc8e11422f",
+    "sha256": "e7fd0b28759951978948a8bad3299ca75dc7499e3cfaa906e035b1eea68fdb47",
     "expanded": false
   },
   "MLD-0396": {
     "path": "terms/MLD-0396-explained-variance.html",
-    "sha256": "2f5756e86c6603a1428537647a356f214fded07ad6031109ed69a36ead279b7b",
+    "sha256": "881bf8db4d055d4fc2375c4aae6ada2572b8069b7f7c84ba08fb10a358204a88",
     "expanded": false
   },
   "MLD-0397": {
     "path": "terms/MLD-0397-exploration-exploitation-tradeoff.html",
-    "sha256": "bbb6d1fed66765baee013b39a790611c1df5cbab42fdce8e983df3550c65f801",
+    "sha256": "19b1d17956890326e5321c35cb125edc96734593c2e8de7caf8e246c133cf680",
     "expanded": false
   },
   "MLD-0398": {
     "path": "terms/MLD-0398-exponential-decay.html",
-    "sha256": "936c062ecf98554974e9ff1f0af42bca1030547af4387853e437f05c240ea8a0",
+    "sha256": "b6d71a083b827f63a54a5bfce7dec01e5e840c29fa160e5d1247082c991cdb80",
     "expanded": false
   },
   "MLD-0399": {
     "path": "terms/MLD-0399-exposure-bias.html",
-    "sha256": "f80bf2a259d1964d34c942f996bcaee2a34688c8161242cd60a0dd6334ac3f3b",
+    "sha256": "13510164e811ac9193995df1aa54a3646f7dbef3b4524cde0a6f76565bc86e7f",
     "expanded": false
   },
   "MLD-0400": {
     "path": "terms/MLD-0400-expressivity.html",
-    "sha256": "3bb7cbc440e6fedd2869fcc8edfff5dc82ef11eb575a25c78a5328c61a351973",
+    "sha256": "c212e6cf0e69b9508845b127ee0a9d6c1752f821547fe1b30770277a243b5ee7",
     "expanded": false
   },
   "MLD-0401": {
