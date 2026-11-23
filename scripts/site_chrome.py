@@ -241,7 +241,7 @@ def render_directory_nav(prefix, selected, *, mobile_classes="directory-mobile-t
                          toggle_classes="site-mobile-chrome__toggle", menu_classes="site-mobile-chrome__menu",
                          search_classes="site-mobile-chrome__search", icon_classes="site-mobile-chrome__search-icon",
                          search_label_classes="site-mobile-chrome__search-placeholder",
-                         desktop_classes="site-chrome term-nav", labeled=True, current_kind="page", page_label=None, mobile_brand=False, native_secondary=False, mobile_secondary=False, secondary_current=None, topbar_title=None, rail_bottom=False,
+                         desktop_classes="site-chrome term-nav", labeled=True, current_kind="page", page_label=None, mobile_brand=False, native_secondary=False, mobile_secondary=False, secondary_current=None, topbar_title=None, rail_bottom=False, first_paint_context=False,
                          include_search=True, mobile_only=False, canonical_research=False):
     """One script-free site header, with only page-specific shell classes configurable."""
     assert prefix in ("", "../")
@@ -250,6 +250,7 @@ def render_directory_nav(prefix, selected, *, mobile_classes="directory-mobile-t
     # An encyclopedia subdestination is the current page, not its parent
     # dictionary workspace. Announcing both as current confuses navigation.
     assert not (selected and secondary_current), "Only one current navigation destination"
+    assert not first_paint_context or (topbar_title or page_label), "A contextual toggle needs a real workspace title"
     links = render_primary_links(prefix, selected, current_kind)
     brand = render_brand(prefix)
     mobile_wordmark = render_brand(prefix, "site-mobile-chrome__brand") if mobile_brand else ""
@@ -264,7 +265,9 @@ def render_directory_nav(prefix, selected, *, mobile_classes="directory-mobile-t
         (' aria-label="AI Updates mobile header"' if labeled else '') +
         (' data-page-label="' + escape(page_label) + '"' if page_label else '') + '>'
         '<details class="' + details_classes + '" id="' + details_id + '">'
-        '<summary class="' + toggle_classes + '" aria-label="Toggle navigation"><span aria-hidden="true">☰</span></summary>'
+        '<summary class="' + toggle_classes + '" aria-label="Toggle navigation' +
+        (' · ' + escape(topbar_title or page_label) if first_paint_context else '') +
+        '"><span aria-hidden="true">☰</span></summary>'
         '<nav class="' + menu_classes + '" aria-label="AI Updates sections">' + mobile_wordmark + links +
         (render_mobile_secondary_nav(prefix, secondary_current, canonical_research=canonical_research) if mobile_secondary else '') + '</nav></details>' + title +
         mobile_search + '</div>'
@@ -352,16 +355,13 @@ def render_standalone_nav(path):
         page_label=page_title, topbar_title=page_title,
         mobile_brand=True, native_secondary=True, mobile_secondary=True,
         secondary_current=secondary_current, rail_bottom=True,
-        canonical_research=True,
+        canonical_research=True, first_paint_context=True,
     )
     # All native and reference rails now use the same first-paint component
     # boundary. Keep each page's article landmark outside this navigation.
     # Match Discover's section-aware mobile navigation announcement at first
     # paint. Native pages retain this context without needing JavaScript.
-    toggle_label = 'aria-label="Toggle navigation"'
-    assert markup.count(toggle_label) == 1, "Unexpected mobile navigation toggle: " + path
-    return markup.replace(toggle_label,
-                          'aria-label="Toggle navigation · ' + escape(page_title) + '"', 1)
+    return markup
 
 
 # Discover has a distinct interactive sidebar, but uses the same canonical
