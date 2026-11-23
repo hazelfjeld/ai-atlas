@@ -1914,8 +1914,8 @@
       "source_batch_bytes": 49126,
       "edition_date": "2026-11-23",
       "validation_result": "independent_sha256_utf8_bytes_counts_ids_dates_prior_receipt_dedup_primary_source_review",
-      "status": "partially_published_with_1_news_and_11_catalog_proposals_deferred",
-      "publication_outcome": "pending_production_verification",
+      "status": "partially_published_9_news_1_news_and_11_catalog_proposals_deferred",
+      "publication_outcome": "immutable_revision_1_cloudflare_http_browser_and_githack_verified",
       "publication_edition": "2026-11-23-v1",
       "accepted_news_ids": [
         "ai-news-openai-pachocki-perplexity-safety-pacing-2026-11-22",
@@ -1972,10 +1972,22 @@
           "status": "pending_production_verification",
           "prepared_at": "2026-11-23T15:30:34.146Z",
           "note": "Nine source-checked reports and original partial-source coverage staged for production. Immutable edition SHA-256 aff347a4b8ab09978bd46207632d47d29a0a659e19f8b6b2b9373fae0e87ab20, 20056 UTF-8 bytes. Direct public verification pending."
+        },
+        {
+          "edition": "2026-11-23-v1",
+          "status": "cloudflare_http_browser_and_githack_verified",
+          "note": "Exact main 0ea327aae169f9e0ad44e55c8d9c5b26d08742d9 passed Cloudflare workflow 45206873742 on November 23, 2026: tested artifact deployed, 512 HTTP assets verified against exact bytes on each of three production hosts (including immutable November 23 JSON and archive index), 48 editions and 19 receipts validated, responsive/light/dark/no-script/keyboard hosted browser checks and native plus standalone Games passed. Catalog/GitHack workflow 45206873665 passed 458 Node regression tests, integrity and offline/reproducibility checks and exact GitHack revision parity. Hosted production job completed at 2026-11-23T15:54:12Z. External reader could not independently retrieve the exact query permalink; dated archive reader and edition bytes were verified through hosted production checks. Edition SHA-256 aff347a4b8ab09978bd46207632d47d29a0a659e19f8b6b2b9373fae0e87ab20, 20056 UTF-8 bytes.",
+          "verified_at": "2026-11-23T15:54:12Z"
         }
       ],
-      "production_verified_at": null,
-      "production_verified_revision": null
+      "production_verified_at": "2026-11-23T15:54:12Z",
+      "production_verified_revision": 1,
+      "last_verified_at": "2026-11-23T15:54:12Z",
+      "last_verified_public_url": "https://aiupdates.app/whats-new.html?date=2026-11-23&revision=1",
+      "production_commit": "0ea327aae169f9e0ad44e55c8d9c5b26d08742d9",
+      "production_workflow_run_id": 45206873742,
+      "githack_workflow_run_id": 45206873665,
+      "verification_scope": "Exact main 0ea327aae169f9e0ad44e55c8d9c5b26d08742d9 passed Cloudflare workflow 45206873742 on November 23, 2026: tested artifact deployed, 512 HTTP assets verified against exact bytes on each of three production hosts (including immutable November 23 JSON and archive index), 48 editions and 19 receipts validated, responsive/light/dark/no-script/keyboard hosted browser checks and native plus standalone Games passed. Catalog/GitHack workflow 45206873665 passed 458 Node regression tests, integrity and offline/reproducibility checks and exact GitHack revision parity. Hosted production job completed at 2026-11-23T15:54:12Z. External reader could not independently retrieve the exact query permalink; dated archive reader and edition bytes were verified through hosted production checks. Edition SHA-256 aff347a4b8ab09978bd46207632d47d29a0a659e19f8b6b2b9373fae0e87ab20, 20056 UTF-8 bytes."
     }
   ]
 }

@@ -1904,3 +1904,21 @@ test('November 18 reviewed queue preserves immutable partial coverage, deferred 
  assert.equal(idx.status,'edition_revision_'+latest.revision+'_'+(latestReceipt.production_verified_at?'production_verified':'pending_production_verification'),'Current archive status is based on the newest batch, not this historic November 18 receipt');
  assert.equal(idx.last_successful_publish_at,verifiedPublicationClock(),'Pending batch cannot advance previously verified publication time');
 });
+
+test('script-free news preview always uses the most recent production-verified edition and source links',()=>{
+ const index=JSON.parse(fs.readFileSync('data/daily/index.json','utf8'));
+ const ledger=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8'));
+ const latest=[...ledger.receipts].reverse().find(r=>r.production_verified_at);
+ assert.ok(latest,'At least one edition must be independently production-certified');
+ const editionRef=index.editions.find(e=>e.path==='data/daily/editions/'+latest.publication_edition+'.json');
+ assert.ok(editionRef,'Certified edition must remain permanently indexed');
+ const edition=JSON.parse(fs.readFileSync(editionRef.path,'utf8'));
+ const html=fs.readFileSync('whats-new.html','utf8');
+ const start=html.indexOf('id="scriptfree-daily-archive"'),end=html.indexOf('</section>',start);
+ assert.ok(start>0&&end>start,'Script-free archive remains rendered');
+ const fallback=html.slice(start,end);
+ assert.ok(fallback.includes('data-edition-date="'+edition.edition_date+'"'),'Fallback must not show an older or still-pending edition');
+ assert.ok(fallback.includes('href="'+editionRef.path+'"'),'Fallback links to the certified immutable edition');
+ assert.ok(fallback.includes('href="'+edition.news[0].source_url+'"'),'Fallback links to actual current source evidence');
+ assert.equal(index.last_successful_publish_at,latest.production_verified_at,'Certified clock matches last deployment');
+});
