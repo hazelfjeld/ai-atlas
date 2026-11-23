@@ -1751,32 +1751,32 @@
   },
   "MLD-0351": {
     "path": "terms/MLD-0351-effective-sample-size.html",
-    "sha256": "7e5b64c5fc1ce7fb5d731247affad1e95a26a191a81fd4de638f696297c35bb2",
+    "sha256": "d4b61152b5cd308d1cf3526d09e69333284c999ce7125b670d1921b4b1d597c6",
     "expanded": false
   },
   "MLD-0352": {
     "path": "terms/MLD-0352-eigenvalue.html",
-    "sha256": "310da49264164a7a59db359bc0cf60d477d9a3944c46688575d3303f2d438291",
+    "sha256": "c91ea2b149ba6a56e734e2aadfd394af6d73de0178dcc58d4f1384e4f9958b6b",
     "expanded": false
   },
   "MLD-0353": {
     "path": "terms/MLD-0353-eigenvector.html",
-    "sha256": "6f9098dc3967057984b478e33561b2258eda8a40a482bc530a9da1f41235ca5e",
+    "sha256": "5fbc623bbd967e37f93cba24907fc8257ef6d6090346cffcb6e27a13d33d7443",
     "expanded": false
   },
   "MLD-0354": {
     "path": "terms/MLD-0354-elastic-net.html",
-    "sha256": "01da54b98fb5d21023bde048e40eebe813327b29c8088b81b85b942826f8bd12",
+    "sha256": "7195cae4fe6407f1002eddb5601eb747730762a35df3eebe6337517846c054b2",
     "expanded": false
   },
   "MLD-0355": {
     "path": "terms/MLD-0355-elastic-weight-consolidation.html",
-    "sha256": "6b2c5e4b872769c5b6d05b864e4acdbdf2198a57c209dbfbae1a6f722a587526",
+    "sha256": "9f62c1a19273cdfc2bc278503dc18d2e70a106733503038266ce7719a2f6ec0a",
     "expanded": false
   },
   "MLD-0356": {
     "path": "terms/MLD-0356-elu.html",
-    "sha256": "21f32040b40c77e9740405b71fe3912c3f42fff3c41ef5f6f4f16357c728e832",
+    "sha256": "dbcfc9916c4a354843a36f509ce3c17df7e23ee921312c5ae772a0e41c9622cd",
     "expanded": false
   },
   "MLD-0357": {
@@ -1786,17 +1786,17 @@
   },
   "MLD-0358": {
     "path": "terms/MLD-0358-embedding-dimension.html",
-    "sha256": "36fd8d142fdbcec48ee45781423f0dc833c57243f61ac3845788ea8ba8ff5cf9",
+    "sha256": "41b1df4f1cb87369efa1c5c821f3d2ba7f03e671d296804bd62c5ba868040c58",
     "expanded": false
   },
   "MLD-0359": {
     "path": "terms/MLD-0359-embedding-matrix.html",
-    "sha256": "465065dd877e204100b0f90931bb35b23fdfc4bfa45f9bc389b8e20ac9d30820",
+    "sha256": "1f2ae5782901eb4c8740432c1116d02acc699baba2330675ccec3e88e2ceb1c8",
     "expanded": false
   },
   "MLD-0360": {
     "path": "terms/MLD-0360-embedding-space.html",
-    "sha256": "34f9c9a911c451c9ae71d530fc8d1aed0476bdd12e3554823ebee5fcd8008f58",
+    "sha256": "73d8e858c1dab38ce1c2a65890f2197028414048da654e2f9a4692ceadec5889",
     "expanded": false
   },
   "MLD-0361": {

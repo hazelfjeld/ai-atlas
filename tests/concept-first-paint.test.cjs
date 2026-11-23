@@ -6,8 +6,8 @@ const crypto=require('node:crypto');
 const root=path.resolve(__dirname,'..');
 const manifest=JSON.parse(fs.readFileSync(path.join(root,'terms/manifest.json'),'utf8'));
 
-test('first 350 concept pages keep native, contextual navigation with JavaScript disabled',()=>{
-  for(let num=1;num<=350;num++){
+test('first 360 concept pages keep native, contextual navigation with JavaScript disabled',()=>{
+  for(let num=1;num<=360;num++){
     const id='MLD-'+String(num).padStart(4,'0');
     const record=manifest[id];
     assert.ok(record,id+' permanent route remains');
@@ -26,6 +26,6 @@ test('first 350 concept pages keep native, contextual navigation with JavaScript
 });
 test('concept first-paint labels come from the shared generator',()=>{
   const builder=fs.readFileSync(path.join(root,'scripts/build_term_pages.py'),'utf8');
-  assert.match(builder,/first_paint_reference and int\(path\[10:14\]\) <= 350/);
+  assert.match(builder,/first_paint_reference and int\(path\[10:14\]\) <= 360/);
   assert.match(builder,/expanded_concept or/);
 });
