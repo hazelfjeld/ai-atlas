@@ -377,9 +377,17 @@
       "sha256": "5553217403b6d466489b1c360e345e8e0b2da2d0f81e4202c854a2720ebe49e9",
       "bytes": 18047,
       "published_at": "2026-11-22T14:36:41.154Z"
+    },
+    {
+      "date": "2026-11-23",
+      "revision": 1,
+      "path": "data/daily/editions/2026-11-23-v1.json",
+      "sha256": "aff347a4b8ab09978bd46207632d47d29a0a659e19f8b6b2b9373fae0e87ab20",
+      "bytes": 20056,
+      "published_at": "2026-11-23T15:30:34.146Z"
     }
   ],
   "last_successful_publish_at": "2026-11-22T14:51:45Z",
-  "status": "edition_revision_1_production_verified",
-  "coverage_note": "2026-11-22 v1 production-verified on November 22 (Cloudflare workflow 45033807744; catalog/GitHack workflow 45033807733): eight primary-source-reviewed reports published November 19 or 21. Three Reuters reports and seven catalog proposals deferred, six source-access limitations; overlapping partial collection, not exhaustive coverage. The exact dated query permalink was not independently retrievable; production archive reader and immutable edition asset were verified by CI."
+  "status": "edition_revision_1_pending_production_verification",
+  "coverage_note": "2026-11-23 v1 prepared from nine source-checked reports (one Reuters report and eleven catalog proposals deferred); partial coverage with previous successful publication clock preserved. Pending exact Cloudflare/GitHack/browser checks and direct public archive verification."
 }

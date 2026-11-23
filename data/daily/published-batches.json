@@ -1904,6 +1904,78 @@
       "production_workflow_run_id": 45033807744,
       "githack_workflow_run_id": 45033807733,
       "verification_scope": "Production commit 1cf471973143aa104844a82beddf6fbd8ad7fc7c passed Cloudflare workflow 45033807744 on November 22, 2026: hosted local browser validation across responsive widths/themes, exact tested-artifact deployment, production asset/HTTP/cache checks, navigation, Quiz and Match. Catalog/GitHack workflow 45033807733 passed catalog validation, Node regression tests, offline reproducibility and exact revision parity. Workflow completion confirmed at 2026-11-22T14:51:45Z. Direct independent retrieval of the exact dated query permalink via an external reader was unavailable; archive reader and immutable edition asset were checked by CI. November 22 edition 18047 UTF-8 bytes, SHA-256 5553217403b6d466489b1c360e345e8e0b2da2d0f81e4202c854a2720ebe49e9."
+    },
+    {
+      "batch_id": "atlas-daily-20261123-20261123t20261123t144537778z-source-review-a",
+      "source_branch": "atlas-daily-staging",
+      "source_commit": "dfb0e137e5fd0caddf6a296289ee25d75b9a386a",
+      "source_batch_path": "daily-queue/batches/2026-11-23-atlas-daily-20261123-20261123t20261123t144537778z-source-review-a.json",
+      "source_batch_sha256": "8350a6df242e04b443e2f964442a72b49fe5e0968b53e550643bb81bca767c6d",
+      "source_batch_bytes": 49126,
+      "edition_date": "2026-11-23",
+      "validation_result": "independent_sha256_utf8_bytes_counts_ids_dates_prior_receipt_dedup_primary_source_review",
+      "status": "partially_published_with_1_news_and_11_catalog_proposals_deferred",
+      "publication_outcome": "pending_production_verification",
+      "publication_edition": "2026-11-23-v1",
+      "accepted_news_ids": [
+        "ai-news-openai-pachocki-perplexity-safety-pacing-2026-11-22",
+        "ai-news-ant-lingsante-medical-model-family-2026-11-23",
+        "ai-news-coevobench-model-harness-joint-optimization-2611-27116",
+        "ai-news-schema-valid-llm-workflows-benchmark-2611-27106",
+        "ai-news-grepmem-append-only-agent-recall-2611-25123",
+        "ai-news-metr-nov2026-capability-irt-horizons-2026-11-20",
+        "ai-news-amazon-textract-insights-ga-2026-11-20",
+        "ai-news-hyperpod-global-inference-gateway-2026-11-20",
+        "ai-news-hyperpod-gpu-observability-2026-11-20"
+      ],
+      "source_news_ids": [
+        "ai-news:openai-pachocki-perplexity-safety-pacing:2026-11-22",
+        "ai-news:ant-lingsante-medical-model-family:2026-11-23",
+        "ai-news:coevobench-model-harness-joint-optimization:2611.27116",
+        "ai-news:schema-valid-llm-workflows-benchmark:2611.27106",
+        "ai-news:grepmem-append-only-agent-recall:2611.25123",
+        "ai-news:metr-nov2026-capability-irt-horizons:2026-11-20",
+        "ai-news:amazon-textract-insights-ga:2026-11-20",
+        "ai-news:hyperpod-global-inference-gateway:2026-11-20",
+        "ai-news:hyperpod-gpu-observability:2026-11-20"
+      ],
+      "deferred_news_ids": [
+        "ai-news:us-banks-tighten-agent-isolation:2026-11-23"
+      ],
+      "deferred_catalog_proposal_ids": [
+        "tech-proposal:lingsante-31-air-vl:2026-11-23",
+        "tech-proposal:lingsante-31-flash:2026-11-23",
+        "tech-proposal:grepmem-index-free-agent-history:2026-11-23",
+        "tech-proposal:coevobench-agent-research:2026-11-23",
+        "tech-proposal:amazon-textract-insights:2026-11-23",
+        "tech-proposal:hyperpod-global-inference-gateway:2026-11-23",
+        "term-proposal:perplexity-capability-pacing:2026-11-23",
+        "term-proposal:model-harness-coevolution:2026-11-23",
+        "term-proposal:structural-validity-task-correctness:2026-11-23",
+        "term-proposal:index-free-log-recall:2026-11-23",
+        "term-proposal:document-extraction-blueprint:2026-11-23"
+      ],
+      "rejected_ids": [],
+      "counts": {
+        "news_published": 9,
+        "technology_added": 0,
+        "term_added": 0,
+        "corrections": 0,
+        "news_deferred": 1,
+        "catalog_deferred": 11,
+        "technology_updated": 0
+      },
+      "review_notes": "Nine reports checked against OpenAI, Ant Group/Hugging Face, arXiv, METR and AWS source records. Reuters full text not directly accessible, so held. Medical-model benchmarks are not clinical validation; preprints are author-reported. Eleven catalog proposals held pending deduplication/license/availability, including existing Perplexity concept.",
+      "publication_history": [
+        {
+          "edition": "2026-11-23-v1",
+          "status": "pending_production_verification",
+          "prepared_at": "2026-11-23T15:30:34.146Z",
+          "note": "Nine source-checked reports and original partial-source coverage staged for production. Immutable edition SHA-256 aff347a4b8ab09978bd46207632d47d29a0a659e19f8b6b2b9373fae0e87ab20, 20056 UTF-8 bytes. Direct public verification pending."
+        }
+      ],
+      "production_verified_at": null,
+      "production_verified_revision": null
     }
   ]
 }
