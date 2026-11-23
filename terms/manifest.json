@@ -1671,32 +1671,32 @@
   },
   "MLD-0335": {
     "path": "terms/MLD-0335-double-descent.html",
-    "sha256": "1112a087991954adff36f4c65cfeb44f2470886edfdecf36cb78cb79c4f8ff03",
+    "sha256": "16e786b5fbddeb5cc7081f109fc0ce1420f9d7c3b6a9f838f05c047f65d22550",
     "expanded": false
   },
   "MLD-0336": {
     "path": "terms/MLD-0336-double-quantization.html",
-    "sha256": "ef3159f68e995f7d5040a5cb931c45fe2ecef666a40a15bb17977f46bbeadbd3",
+    "sha256": "bfc2a6c7e4c9c690e835710dfb40f93b5afc6093e75cc3c0a731b630175f30c5",
     "expanded": false
   },
   "MLD-0337": {
     "path": "terms/MLD-0337-dp-sgd.html",
-    "sha256": "0bef2ccb5f950af8f87ff4835288314321695fdd11b3e20a67ac90607c638082",
+    "sha256": "a3950bed2251b64210fc3caddd255cec342e3141993dbc7cacb02476a65f3ebe",
     "expanded": false
   },
   "MLD-0338": {
     "path": "terms/MLD-0338-dpo.html",
-    "sha256": "6de3fce9569dbd4ba5a4f072dd930177d744dabd4d8b29386b71c7490c6db37a",
+    "sha256": "f9fa8e8bc0a565e13ac566853e630d35c4671d1467713c0c076537f29fda0523",
     "expanded": false
   },
   "MLD-0339": {
     "path": "terms/MLD-0339-draft-model.html",
-    "sha256": "e10572750ae2b35b79bc6618ea926c9a7f0a6909e0942d6733fff1adee889652",
+    "sha256": "67d3a85bac2c271f1dd57f40fc35d2c3d589d3651a9e8a18b426a1ca07d49d95",
     "expanded": false
   },
   "MLD-0340": {
     "path": "terms/MLD-0340-dropconnect.html",
-    "sha256": "e7b2288d7215da7682820b9d1a90d333e86a5c2e1756b3b955ce32bd0ebaa15c",
+    "sha256": "7d597a918703251bb1b69d7a5f3d4fcfc832bb973e1a21f92ef7aca89768f0d9",
     "expanded": false
   },
   "MLD-0341": {
