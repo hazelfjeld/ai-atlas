@@ -20,7 +20,10 @@ test('November 22 edition stays hash pinned, source reviewed and idempotently re
  assert.deepEqual([r.counts.news_deferred,r.counts.catalog_deferred],[3,7]);
  assert.equal(edition.coverage.status,'partial');
  assert.ok(edition.coverage.sources_failed.length>=6);
- assert.equal(ix.status,'edition_revision_1_'+(r.production_verified_at?'production_verified':'pending_production_verification'));
+ assert.ok(r.production_verified_at,'The November 22 release remains certified');
+ const latestReceipt=ledger.receipts.at(-1);
+ assert.equal(ix.status,'edition_revision_'+ix.editions.at(-1).revision+'_'+(latestReceipt.production_verified_at?'production_verified':'pending_production_verification'));
+
  const lastVerified=ledger.receipts.filter(x=>x.production_verified_at).at(-1);
  assert.equal(ix.last_successful_publish_at,lastVerified.production_verified_at);
 });

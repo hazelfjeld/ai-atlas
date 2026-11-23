@@ -11,7 +11,15 @@ assert.deepEqual([e.news.filter(n=>n.publication_date===e.edition_date).length,e
 assert.equal(e.coverage.status,'partial');assert.ok(e.coverage.sources_failed.length>=5);
 assert.ok(e.news.every(x=>x.review_status.startsWith('publisher_reviewed_')&&x.source_url.startsWith('https://')&&x.caveat));
 assert.ok(r.deferred_news_ids.some(x=>x.includes('us-banks-tighten')));
-const html=fs.readFileSync('whats-new.html','utf8');assert.match(html,/data-edition-date="2026-11-23"/);assert.ok(html.includes('href="'+entry.path+'"'));
+const html=fs.readFileSync('whats-new.html','utf8');
+const latestCertified=ledger.receipts.filter(x=>x.production_verified_at).at(-1);
+const previewDate=r.production_verified_at?'2026-11-23':latestCertified.edition_date;
+assert.ok(html.includes('data-edition-date="'+previewDate+'"'),
+ 'Script-free headlines must use a production-certified edition, not pending records');
+assert.ok(html.includes('href="data/daily/index.json"'),
+ 'Pending immutable edition remains discoverable through the complete archive register');
+if(!r.production_verified_at)assert.ok(!html.includes('data-edition-date="2026-11-23"'),
+ 'No script-free headline may announce the pending edition as certified');
 const lastVerified=ledger.receipts.filter(x=>x.production_verified_at).at(-1);assert.equal(index.last_successful_publish_at,lastVerified.production_verified_at);
 assert.equal(index.status,'edition_revision_1_'+(r.production_verified_at?'production_verified':'pending_production_verification'));
 });
