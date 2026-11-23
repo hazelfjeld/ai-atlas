@@ -669,7 +669,7 @@ test('all generated technology profiles use shared directory chrome with native 
       .replace(' data-page-label="Technology profiles"', ' data-page-label="' + heading + '"')
       .replace('<span class="site-mobile-chrome__title">Technology profiles</span>',
         '<span class="site-mobile-chrome__title">' + heading + '</span>')
-      .replace('aria-label="Toggle navigation · Technology profiles"', 'aria-label="Toggle navigation"');
+      .replace('aria-label="Toggle navigation · Technology profiles"', 'aria-label="Toggle navigation · ' + heading + '"');
     assert.equal(landingNav(html), detailFrame, file);
     assert.equal((html.match(/class="sidebar-bottom site-chrome__bottom"/g)||[]).length, 1,
       file + ' renders the same script-free lower rail as the directory');
@@ -682,7 +682,7 @@ test('all generated technology profiles use shared directory chrome with native 
     assert.equal((html.match(/class="site-chrome__more"/g) || []).length, 1, file);
   }
   const generator = read('scripts/build_seo.py');
-  assert.ok(generator.includes("render_directory_nav(prefix, 'Technology profiles', canonical_research=True, mobile_brand=True, native_secondary=True, mobile_secondary=True, page_label=('Technology profiles' if path == 'technology/index.html' else article_title), topbar_title=('Technology profiles' if path == 'technology/index.html' else article_title), rail_bottom=True, first_paint_context=(path == 'technology/index.html')) if path.startswith('technology/')"));
+  assert.ok(generator.includes("render_directory_nav(prefix, 'Technology profiles', canonical_research=True, mobile_brand=True, native_secondary=True, mobile_secondary=True, page_label=('Technology profiles' if path == 'technology/index.html' else article_title), topbar_title=('Technology profiles' if path == 'technology/index.html' else article_title), rail_bottom=True, first_paint_context=True) if path.startswith('technology/')"));
   assert.ok(generator.includes("DIRECTORY_MOBILE_CSS if path.startswith('technology/')"));
   assert.ok(read('downloads/Atlas_Demo_Offline.html').includes('/* Native, script-free reference pages: readable two-column touch navigation on phones.'));
 });
@@ -916,7 +916,7 @@ test('both generated catalog directories share Discover navigation and the nativ
   }
   const termGenerator=read('scripts/build_term_pages.py'), techGenerator=read('scripts/build_seo.py');
   assert.ok(termGenerator.includes("render_directory_nav('../', (None if path == 'terms/index.html' else 'Concept dictionary'), canonical_research=True, mobile_brand=True, native_secondary=True, mobile_secondary=True, secondary_current=('encyclopedia' if path == 'terms/index.html' else None), page_label=('Concept encyclopedia' if path == 'terms/index.html' else title), topbar_title=('Concept encyclopedia' if path == 'terms/index.html' else title), rail_bottom=(path == 'terms/index.html' or expanded_concept or first_paint_reference), first_paint_context=(path == 'terms/index.html'))"));
-  assert.ok(techGenerator.includes("render_directory_nav(prefix, 'Technology profiles', canonical_research=True, mobile_brand=True, native_secondary=True, mobile_secondary=True, page_label=('Technology profiles' if path == 'technology/index.html' else article_title), topbar_title=('Technology profiles' if path == 'technology/index.html' else article_title), rail_bottom=True, first_paint_context=(path == 'technology/index.html'))"));
+  assert.ok(techGenerator.includes("render_directory_nav(prefix, 'Technology profiles', canonical_research=True, mobile_brand=True, native_secondary=True, mobile_secondary=True, page_label=('Technology profiles' if path == 'technology/index.html' else article_title), topbar_title=('Technology profiles' if path == 'technology/index.html' else article_title), rail_bottom=True, first_paint_context=True)"));
   assert.ok(read('scripts/site_chrome.py').includes('DIRECTORY_MOBILE_CSS'));
   assert.match(read('site-chrome.css'), /\.site-mobile-chrome__menu a\{[^}]*min-height:44px/);
 });
