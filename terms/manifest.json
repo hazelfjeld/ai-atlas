@@ -371,52 +371,52 @@
   },
   "MLD-0075": {
     "path": "terms/MLD-0075-autocorrelation.html",
-    "sha256": "5c320636db306a522850d48c40851b9325fbc43749f8c2c2b8b81676c799f9ef",
+    "sha256": "0f5ec26a28d568a060b293672c66bc5b7c22a9469547885dcbff1c99ce0e13b2",
     "expanded": false
   },
   "MLD-0076": {
     "path": "terms/MLD-0076-autoencoder.html",
-    "sha256": "73b2e6491298135522f8cd680bfd5b50c6dfe3a35cfc3b0984204286cb6bb06e",
+    "sha256": "01fe17a4bb950218d12aff23dfc083f77f63ecd4918aa594d527cb7a0e0a62f6",
     "expanded": false
   },
   "MLD-0077": {
     "path": "terms/MLD-0077-automatic-differentiation.html",
-    "sha256": "86d529ec76009e103f9bc4f1a315c1a1500d4f53b93c0866da0e6da38c1d1913",
+    "sha256": "e41c6b77f699e44494715623805c4af43eb3860e7c321cc0fb4e19a2d15f23c6",
     "expanded": false
   },
   "MLD-0078": {
     "path": "terms/MLD-0078-automatic-speech-recognition.html",
-    "sha256": "82c48ae6ea9b9dd7962245486127ac4b87e0abab086935d9ef82d2ce8b28ff32",
+    "sha256": "3188180550355f45dc8ccb110d76a1f236df8f4a6b9b88d7d9d9db68fd686ff8",
     "expanded": false
   },
   "MLD-0079": {
     "path": "terms/MLD-0079-autoregression.html",
-    "sha256": "9db6ffac2a378be32bdb3623416b484c68b56d518ef74822de168d2ecdddcff9",
+    "sha256": "a7c548da8c71e1e1aa0bd87d85fe370059059ea9559b4aeb8b0affee42b2f536",
     "expanded": false
   },
   "MLD-0080": {
     "path": "terms/MLD-0080-auxiliary-loss.html",
-    "sha256": "9223efd723f29be248b29868c7a93c99613ac262d19513ba7fbea170efd98992",
+    "sha256": "862df7c34b2c3b3fefd13fd9a6ae714743d956fd6ddb01f1a2f9d30ca913cd69",
     "expanded": false
   },
   "MLD-0081": {
     "path": "terms/MLD-0081-average-pooling.html",
-    "sha256": "432496af20f39ebbe0a3fd4ece07009c1a209e9a914c0579b32f02b046f66ead",
+    "sha256": "631dc0cbf9981f32fe992f861bdb25dadb00df3e42d69b8fe9b594593b8e3c3f",
     "expanded": false
   },
   "MLD-0082": {
     "path": "terms/MLD-0082-average-precision.html",
-    "sha256": "a37ece56755e43f078b5b31ade5009f7452f91e43f9a9576c366fb0dcabbd17a",
+    "sha256": "f47d25970d67dbd8bc5f49f586d745581b0bd857f668c0dde96e3a30d3468902",
     "expanded": false
   },
   "MLD-0083": {
     "path": "terms/MLD-0083-awq.html",
-    "sha256": "262f4d12d0acbbcbdf3eb914fc14cfbc74de89ed75d8e3e6b004e8129667eeed",
+    "sha256": "dbc1964cd2380947c97605c0526f3221b6aafa10dcce9b8698b2b48a6b6fbab7",
     "expanded": false
   },
   "MLD-0084": {
     "path": "terms/MLD-0084-backbone.html",
-    "sha256": "3abb48af984194faa760a055fe3cbebd2cfb660033bcb2c748d1389ac8c9e486",
+    "sha256": "7be40818789d69d8f8d3aaf944765ba68fe2317e0cae3ca6977dafec87e12a1b",
     "expanded": false
   },
   "MLD-0085": {
@@ -426,122 +426,122 @@
   },
   "MLD-0086": {
     "path": "terms/MLD-0086-backpropagation.html",
-    "sha256": "f409c481c58bd451b9933dbfa4ad97781238452e6462e8796299d9ceb3d1915e",
+    "sha256": "f6343fecca7475586cb94e9055a51eaba298370531a1d8609e63a8b76ce52f71",
     "expanded": false
   },
   "MLD-0087": {
     "path": "terms/MLD-0087-backpropagation-through-time.html",
-    "sha256": "0b3282bbbfcc045d7a85789813e637ee9eca3337cd913cff798a75889e9cf740",
+    "sha256": "cb0343577bc91e8df8a32c7d3ece5271d7c9bde3564833f9f1d3a99d6439263f",
     "expanded": false
   },
   "MLD-0088": {
     "path": "terms/MLD-0088-bag-of-words.html",
-    "sha256": "166a97d2554f7fcb730489cb950f8a61a0bf091123e2e526b73b9d2f9f95fae5",
+    "sha256": "87977759a28f32da9c77279a48e7331acf27902436d789b9c267b616a2847a1b",
     "expanded": false
   },
   "MLD-0089": {
     "path": "terms/MLD-0089-bagging.html",
-    "sha256": "04bf808bafa2ac6917866c15199ee1611ee7765b520dfdc884735fa42d9ea501",
+    "sha256": "1366ae290b83a0266c32f9b6fbd99f46dc62df3a2911534c3a9be96de429a1bb",
     "expanded": false
   },
   "MLD-0090": {
     "path": "terms/MLD-0090-balanced-accuracy.html",
-    "sha256": "83b08f85a9c93b9da533f237412ee3018669d9beee4dfbdddda776b6318832ac",
+    "sha256": "3138671ea5bf29fcc00a2100e24efc445438adc032cee8a8e775e625b2ee9a21",
     "expanded": false
   },
   "MLD-0091": {
     "path": "terms/MLD-0091-ball-tree.html",
-    "sha256": "405bcf6a3f6a8fb49f5472d165dfd163ecc5fc977c96a0a79bf059f426fa97eb",
+    "sha256": "fe561fbc52ba75b2a60710c6f095cd54a54f9ad588e503ecedc5d511e90e8cd5",
     "expanded": false
   },
   "MLD-0092": {
     "path": "terms/MLD-0092-bandwidth.html",
-    "sha256": "b278e73ce15779ae1e0e7f8e69851d4bc7ff9d463c2a3ddecf99a29032b27412",
+    "sha256": "bef797cbdc942231b037022b1b39d0cc416a22120f37910947e05eba6aa2b6aa",
     "expanded": false
   },
   "MLD-0093": {
     "path": "terms/MLD-0093-base-model.html",
-    "sha256": "a0a2f70f4a32ac27872ebb948fffd7b78ec0a7de7744883ef1bed75e136959f5",
+    "sha256": "f9a1110c87b709f1ba4ba1bdfcf3df66a68add3fe8284201dc3234a4608d6c3a",
     "expanded": false
   },
   "MLD-0094": {
     "path": "terms/MLD-0094-base-optimizer.html",
-    "sha256": "003574b604c36fd1c9322e80c1a8b711259762417d70374b3fbfb0d3b0d192b5",
+    "sha256": "eae16cd107930dbb1c9c9db881fb1b4db7ab20fdc0b5992ae527a0e56b498acd",
     "expanded": false
   },
   "MLD-0095": {
     "path": "terms/MLD-0095-baseline.html",
-    "sha256": "066b2fea5bfa354b84ca0776b4fce7039dcfb501828f5098b9052ba53910b864",
+    "sha256": "bd0a1a36ff73cca16ac9462068612a98f926e34c0baa32cf7aaf3ba902e9d66a",
     "expanded": false
   },
   "MLD-0096": {
     "path": "terms/MLD-0096-batch-inference.html",
-    "sha256": "621bf00b3eac7c0d274cbc547c40474f0c63db6335caf4831b1fd60728755505",
+    "sha256": "f99766932d8dcab07d8ba69980feb3a3b4253eee076117b1854229885cd71cc4",
     "expanded": false
   },
   "MLD-0097": {
     "path": "terms/MLD-0097-batch-learning.html",
-    "sha256": "27b52fb10b093f4e6a06b86a2b2d924cdcb0238ad8d12e3795b2256d23a67f7d",
+    "sha256": "ef3b094f85f98b86429af7dc9093e47ac1b92daad1f8fd7311b51eff9d553966",
     "expanded": false
   },
   "MLD-0098": {
     "path": "terms/MLD-0098-batch-normalization.html",
-    "sha256": "e1b547ed4d6eb04b053deb563fa96d8bdaa3e838fa75d8b453986b72ce0914ec",
+    "sha256": "784c8d0d1dfa89e29d0513d14cfb30490272fd84f5651094545ca4f169f7af2f",
     "expanded": false
   },
   "MLD-0099": {
     "path": "terms/MLD-0099-batch-size.html",
-    "sha256": "573f74e24d6777fbc574d8510bceed31973ebda660a33cb4ada83261b0452ce1",
+    "sha256": "a9a787aeea8b6c09d082b10ae7816ae5d784aadb5ec1f04a6002ef839d351b1c",
     "expanded": false
   },
   "MLD-0100": {
     "path": "terms/MLD-0100-bayes-theorem.html",
-    "sha256": "9571d25e56b49c81e78779ff92ae6c85bcce4f65fd2e2d83235eb806545ef5f3",
+    "sha256": "474987f0271d8157dbef7cacd80785e493d9d87cfd40b163d1ac68379bdde3d7",
     "expanded": false
   },
   "MLD-0101": {
     "path": "terms/MLD-0101-bayesian-inference.html",
-    "sha256": "0b99a5972735c5fc14bef1e20041883e6fdf4986736a3b567a78aea2e4c0b786",
+    "sha256": "25b60eaecbd242593e39048773c0322b9caf480c40d2c471f1f4dd52f5514eea",
     "expanded": false
   },
   "MLD-0102": {
     "path": "terms/MLD-0102-bayesian-linear-regression.html",
-    "sha256": "3c1a4ee7fa6b4b89e395db52eda9731b18bfde55f8c9e7a8822e838234e8149c",
+    "sha256": "ff68eacc465bad111a0419eeac974cee429df2f20a3a0799e5b516e237763c8d",
     "expanded": false
   },
   "MLD-0103": {
     "path": "terms/MLD-0103-bayesian-neural-network.html",
-    "sha256": "880b21d96fd30c497153bcdfcdf5a4aaaaec320b0f304abb2676986d8a2ff46b",
+    "sha256": "b18f4f5b101548ef84b924d3144b577feaa0edf4af7585837a44a29771635366",
     "expanded": false
   },
   "MLD-0104": {
     "path": "terms/MLD-0104-bayesian-optimization.html",
-    "sha256": "b3b7fd4443999609d7660edf46e5e79585bc2531c4d1a9529a4c42e8eec81da1",
+    "sha256": "e9e907bf2907129b49fcde8f5d0678df12e6d7c22d945235b657a89816427450",
     "expanded": false
   },
   "MLD-0105": {
     "path": "terms/MLD-0105-beam-search.html",
-    "sha256": "126a0e6b03f00f13b4b5a500c85148e910d8eac84e611a28ec7cac7e8b8f6204",
+    "sha256": "731f61c847c7bd044e07d50e1d25ef22045e0db69936c16b321c15ed0c40c5ad",
     "expanded": false
   },
   "MLD-0106": {
     "path": "terms/MLD-0106-beam-width.html",
-    "sha256": "c8ec7ad434ef72e7a41292706b46bb3d8e9ca03973b91f647bd64aaef9eed347",
+    "sha256": "c52cd1fcbdd143f4e87b7dde3cc461f78cd273c8e943dabcbb248fe470ae64b7",
     "expanded": false
   },
   "MLD-0107": {
     "path": "terms/MLD-0107-behavioral-cloning.html",
-    "sha256": "ebf0d75dbf1e6bda663b0c118c5c4ef19db735fde6d7632dfbb7aa2ebc8c96e1",
+    "sha256": "106d155b4d9eb4ac7d936e3bcec4a785e42437589663b6b8e6d07ba73e5a77fe",
     "expanded": false
   },
   "MLD-0108": {
     "path": "terms/MLD-0108-belief-state.html",
-    "sha256": "b6b1b3b12080755eff4e93bf9d3fe1e9d5254e1154ba126d6ce9151a533b148b",
+    "sha256": "96a0a47a57637436ee8085f57183eca03f9cb17e9ea78fafe9425418006eae05",
     "expanded": false
   },
   "MLD-0109": {
     "path": "terms/MLD-0109-bellman-equation.html",
-    "sha256": "3f5dc6dabe27610de08607f892f2bcfde64b7b5a330077a3fedafc7d3023feac",
+    "sha256": "a9dbffb1dbec5ba05a97d3563b6b46cfa3e061a70768f66f540a43727f3fb614",
     "expanded": false
   },
   "MLD-0110": {
@@ -551,122 +551,122 @@
   },
   "MLD-0111": {
     "path": "terms/MLD-0111-bernoulli-distribution.html",
-    "sha256": "04c898ebe592b51251dd938459d42364b6907ba960f1c10ddd05606a175553e5",
+    "sha256": "575f7a8261de7ad3eb5a38e651e80a13d0c14685ed53a2f4dd59fc2741dfcaf4",
     "expanded": false
   },
   "MLD-0112": {
     "path": "terms/MLD-0112-bernoulli-naive-bayes.html",
-    "sha256": "dacbf4195992d70d4ebe616b99169f2b242dbe4e7d44dec1f36c5df981a6ce83",
+    "sha256": "9d50f6973cce99f2358ea90d17fc50c68149d416056c2beb30f86afd42005c8f",
     "expanded": false
   },
   "MLD-0113": {
     "path": "terms/MLD-0113-bert.html",
-    "sha256": "e46a81ed7266e81aad6f7f5bff49e64deee7a260c448a4fe325c579eb051b3d9",
+    "sha256": "e76105aeea5839b68797e68fc312ece178bb4931011f7488ff67b392e830fd13",
     "expanded": false
   },
   "MLD-0114": {
     "path": "terms/MLD-0114-bertscore.html",
-    "sha256": "0804c280f5937fef44bba43c7acc352f9b4cfa1b0b73c0487b0ea2fbd8d02952",
+    "sha256": "b3dadae758bb7b795f1bc0254b7fdc3c0b8284262901abe50dda09d4aed432d2",
     "expanded": false
   },
   "MLD-0115": {
     "path": "terms/MLD-0115-best-of-n-sampling.html",
-    "sha256": "f8915c0a9af9e082d1910bfbe7a5b38c64b7979d93ab090836d158b6849627bc",
+    "sha256": "7d66c749b5733432134bee0d8b9dd1a845b33c71a1500e7b707c791b9d4fa573",
     "expanded": false
   },
   "MLD-0116": {
     "path": "terms/MLD-0116-bfloat16.html",
-    "sha256": "53a74091116f936d9d7dd46349b60cc151635828e7517090ac47f74a3f82d39e",
+    "sha256": "88f4465a09af4b0f4c8bcaf18f19cf0db4ff9069d3139bb6004ac4e997c18818",
     "expanded": false
   },
   "MLD-0117": {
     "path": "terms/MLD-0117-bi-encoder.html",
-    "sha256": "21d2cf45471922b5b9f3f4ab6bd297b77fc49d476bf0c3807617eefe9e6c2fd1",
+    "sha256": "b9bdcc5004d699873c30ff884fa4024e1917533773fd631553191bba5fe0f9e8",
     "expanded": false
   },
   "MLD-0118": {
     "path": "terms/MLD-0118-bias-audit.html",
-    "sha256": "9536a79879b3da18b7f19f0bf7a4ff19f318e4dff3521029067167d3fd1d931d",
+    "sha256": "5bae4c104b69f49a73c5f6445a49c3ff49dc9e47970ab78bbefbd4720393a883",
     "expanded": false
   },
   "MLD-0119": {
     "path": "terms/MLD-0119-bias-parameter.html",
-    "sha256": "cf476ae271a0dcdbf94237e79aaf9d67c42a4867e29463cc83a59489dee8938b",
+    "sha256": "60009d47718c5206029309e564f1075f2e049450cf6dc888be53a413075eb1b6",
     "expanded": false
   },
   "MLD-0120": {
     "path": "terms/MLD-0120-bias-variance-tradeoff.html",
-    "sha256": "975d30367803cabc5c0794e6f435b91c48e316a74c0014368dee7500dac4c972",
+    "sha256": "73ef6cf42b83570c3d7dab27d240eaf8f6cb9d48afb40137cd464c9b18dbd586",
     "expanded": false
   },
   "MLD-0121": {
     "path": "terms/MLD-0121-bidirectional-context.html",
-    "sha256": "fb83fdd136b177e2710b6cf80d91b7077b0881281adc65fc035383a235530e5e",
+    "sha256": "c280a15e3d28a1c5e5dc32d6c774388de76830ed692e06874187a9d82edf2884",
     "expanded": false
   },
   "MLD-0122": {
     "path": "terms/MLD-0122-bidirectional-rnn.html",
-    "sha256": "6e3f7477a280fede12693a48cb573d0d8da40e298bc649f9a011904ad2c982fb",
+    "sha256": "17e2597f07c45de5d35c127ddc0d9c6e62db8be859198227b523aa0e895e167b",
     "expanded": false
   },
   "MLD-0123": {
     "path": "terms/MLD-0123-binary-classification.html",
-    "sha256": "38e9f5ee5a15720e04fac1dccded928f97d3c325a29b803ae0ca8b36d4669ecf",
+    "sha256": "a396c85d9611e577e742bdca12856775fe57bffd750d45fccb3b957266801e6d",
     "expanded": false
   },
   "MLD-0124": {
     "path": "terms/MLD-0124-binary-cross-entropy.html",
-    "sha256": "f3d5cf15582b785c24cbf14e3e49e6c634d40f0e48d3b0264006fe332209e356",
+    "sha256": "1df3812084caf9383e20dad98e3aaf81b7122eaff5eb9ffd89488e3302a3958d",
     "expanded": false
   },
   "MLD-0125": {
     "path": "terms/MLD-0125-binomial-distribution.html",
-    "sha256": "5386ccdc384749fb48824596222acd2bfe00329b8ca71050dc333deed9ca8e00",
+    "sha256": "a3e056db72acdb50267e8698346712af359d79d4794ca7b4f82fa244195ad5fe",
     "expanded": false
   },
   "MLD-0126": {
     "path": "terms/MLD-0126-bits-per-character.html",
-    "sha256": "c6db39c1cb63174a7d6978454e4c59c08a73a5a72618ae25663c766a393905a7",
+    "sha256": "3028d997eb701d237b2a76557adfe549ac50235d345bf695b84ac70890b8a5de",
     "expanded": false
   },
   "MLD-0127": {
     "path": "terms/MLD-0127-blending.html",
-    "sha256": "fd57c8f62b2c52ebb11165fde6120d9f0fa026685dfbff77fa07ff0a5ab2cef1",
+    "sha256": "08d1addf19af81b7568dcbdf8a3ede26495235fedc4ed94d98fa05f8ec551431",
     "expanded": false
   },
   "MLD-0128": {
     "path": "terms/MLD-0128-bleu.html",
-    "sha256": "53679421f28956d9bca899c70e5e77feea6823c165ea31bc9eda83234578b5cb",
+    "sha256": "251ff5ddc5e81f0dddd2b80d3663b5b330de25cf1ca1f4b59a51fc8662531fcf",
     "expanded": false
   },
   "MLD-0129": {
     "path": "terms/MLD-0129-bm25.html",
-    "sha256": "48458db14cadd11bdbc9e60f13f7ee1d44143c779167acb1d5a510088fd68d67",
+    "sha256": "6f41d8990cbcfcb67371df8ccf0af9a24b8e4d439b5481a8514ccf43854df610",
     "expanded": false
   },
   "MLD-0130": {
     "path": "terms/MLD-0130-bonferroni-correction.html",
-    "sha256": "e538e1808012337b6edd9db6b8c6780dd0305d3369c68ccb2b87953c50a637bf",
+    "sha256": "3d17dabc546750b2e437576f3b4526e473ff563a6120876fca880c158e2d7699",
     "expanded": false
   },
   "MLD-0131": {
     "path": "terms/MLD-0131-boosting.html",
-    "sha256": "9c76baa22d1360291731c958d07e93086bd91ef5ddf54912624ed2e654e0484c",
+    "sha256": "c333d7b9f54e4dc70ed4c739a41dee4ff7f3fae751c6c6447532553e0c6de4a5",
     "expanded": false
   },
   "MLD-0132": {
     "path": "terms/MLD-0132-bootstrap.html",
-    "sha256": "f6abf1a950b1771521b12bc7a74d3d42df5e5a5d812ea53f797f1fafcdb06389",
+    "sha256": "a6e115656e3e94a2d34e3eb2bc29407f7fe2e5e0a1e3b9b9527e95a6c723c4be",
     "expanded": false
   },
   "MLD-0133": {
     "path": "terms/MLD-0133-bootstrapping-rl.html",
-    "sha256": "e6b402fe42b8b3d931c5c2da3d2558d677181e29f373a08937bf7682ec20bc01",
+    "sha256": "d72ddfab8972ebf410bde48eedf9cb1f9ce9eb9afd15dc7901d1aa9425c0bf0e",
     "expanded": false
   },
   "MLD-0134": {
     "path": "terms/MLD-0134-bos-token.html",
-    "sha256": "af4da4266d1788181e5ee49c70b4ba68664ae6c2c6e046894517581bc542ffbf",
+    "sha256": "61161975c1a87d88710647c09295b6fdebd16d89e7ea91f575b553fe829159e4",
     "expanded": false
   },
   "MLD-0135": {
