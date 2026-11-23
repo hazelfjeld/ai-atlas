@@ -25,7 +25,7 @@ test('every authored concept guide uses the shared contextual script-free mobile
 
 test('the authored-guide renderer reuses the shared navigation generator', () => {
   const builder = read('scripts/build_term_pages.py');
-  assert.ok(builder.includes("first_paint_context=(path == 'terms/index.html' or expanded_concept or\n                                      (first_paint_reference and int(path[10:14]) <= 32))"),
+  assert.ok(builder.includes("first_paint_context=(path == 'terms/index.html' or expanded_concept or\n                                      (first_paint_reference and int(path[10:14]) <= 74))"),
     'authored concept guides and landing share their prehydration title semantics');
   const chrome = read('scripts/site_chrome.py');
   assert.ok(chrome.includes("(' · ' + escape(topbar_title or page_label) if first_paint_context else '')"),

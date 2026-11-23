@@ -161,7 +161,7 @@
   },
   "MLD-0033": {
     "path": "terms/MLD-0033-adversarial-evaluation.html",
-    "sha256": "9edece32a610f7117c4705147aa4c2b0b264246e5868b817ec1ba2b2fdd748df",
+    "sha256": "dc1df8522f6e62ffe2912fd75dc1b89abac2988c27e72e008e6f2b2466cc2c2f",
     "expanded": false
   },
   "MLD-0034": {
@@ -171,7 +171,7 @@
   },
   "MLD-0035": {
     "path": "terms/MLD-0035-adversarial-loss.html",
-    "sha256": "346744c8301771d2884aa252e662dcd5620e59c26ee41ec64c6853c2851cfd76",
+    "sha256": "656623081033bba2c83ac81969a7e8144e99ddbce36ee23e70aef95bd48b881c",
     "expanded": false
   },
   "MLD-0036": {
@@ -181,22 +181,22 @@
   },
   "MLD-0037": {
     "path": "terms/MLD-0037-adversarial-training.html",
-    "sha256": "918ae49602e01d8e02a6c2724dcb1c7b00cf7363e2739eee71b580876fddb985",
+    "sha256": "2cd90159aae3f3940b33ac1c924ea0a7711b37b1ee831875cea46dec3371df1d",
     "expanded": false
   },
   "MLD-0038": {
     "path": "terms/MLD-0038-affinity-propagation.html",
-    "sha256": "e0f5e489e7448f68b69fc94072bda8625c8493ae20d92c56e71bad1b7d6a7051",
+    "sha256": "e5abec0aaf4cda52acfb8410902047d4bd6891cb46f97a4a7b1c310c28b5a448",
     "expanded": false
   },
   "MLD-0039": {
     "path": "terms/MLD-0039-agent.html",
-    "sha256": "f10ed841356cafe1c9a9d299206fa14394631cd59afd333733ad2cc877990b05",
+    "sha256": "ad8a0acd27117301e1b6335277c68ef89ba5a403448b593ad75fe72449250c27",
     "expanded": false
   },
   "MLD-0040": {
     "path": "terms/MLD-0040-agent-containment.html",
-    "sha256": "ba06a60fe97cfdfe1103d3791bd0eee09cadfd81c2298fcbc40bf77bd37e9f96",
+    "sha256": "776ba0a67cb0c51178ea960746a9d5c92993f9b0dd0c1183c5dc4dd3ce7aefe2",
     "expanded": false
   },
   "MLD-0041": {
@@ -206,7 +206,7 @@
   },
   "MLD-0042": {
     "path": "terms/MLD-0042-agent-memory.html",
-    "sha256": "295aeb22f11757783f3ed72377bdd9ab315002930dbe1e41e62f86c4c4524bb2",
+    "sha256": "06891d277803f3f1613c74c73ea50188fcc5a37792433ba0458598301c5f23e0",
     "expanded": false
   },
   "MLD-0043": {
@@ -216,92 +216,92 @@
   },
   "MLD-0044": {
     "path": "terms/MLD-0044-agglomerative-clustering.html",
-    "sha256": "e6318800227cae39ff47a60ad5d12d5b9bd34cd716822a856ade6eff19f46472",
+    "sha256": "2a439473c90f1b61cb1f5b5d61b58042f96ed5f1cf8c081a9e617e5e7976b2d5",
     "expanded": false
   },
   "MLD-0045": {
     "path": "terms/MLD-0045-ai-alignment.html",
-    "sha256": "99344cb166325351594f332bd4419e91d2546690fd7ac368f4c9ecf9b2d8719b",
+    "sha256": "df73f3d88ffc151dcb5dfb3eab37d6d15e357e8d6e451b27b472c0d75f03e52b",
     "expanded": false
   },
   "MLD-0046": {
     "path": "terms/MLD-0046-ai-safety.html",
-    "sha256": "3535744945424be24fff94a632a733879571663a73f5c27ddc419b2be06268c5",
+    "sha256": "efa0d49d9962c2209528015a8bc5c37e1be1111d7bced5d25f6cb4752dd802dd",
     "expanded": false
   },
   "MLD-0047": {
     "path": "terms/MLD-0047-aleatoric-uncertainty.html",
-    "sha256": "2dcaf92aa1ab0e173b25ea5312ee076dbcb7d6ec5631ea8a56d98d82e7cc483a",
+    "sha256": "c44cb9b4fe77869f9899632af8462499e44811b296e8059762ddef0c96bb602c",
     "expanded": false
   },
   "MLD-0048": {
     "path": "terms/MLD-0048-algorithm.html",
-    "sha256": "ad7999590c0cc373d4ad1b186826d5d8d859afb81fd434ef598bf61ea7ef0cd8",
+    "sha256": "3d1baf8578f5e0bbdd023caf2db29528602d353478f0196dbdf4c42cad61f83e",
     "expanded": false
   },
   "MLD-0049": {
     "path": "terms/MLD-0049-alibi.html",
-    "sha256": "05c4644871f695148182dbc218e2b8ed2862df9973ae6bc9d298a0458f776a08",
+    "sha256": "a664d31c1aceed2e002ae2da552a785c13527ec90706dd6e56dd62667d09f96b",
     "expanded": false
   },
   "MLD-0050": {
     "path": "terms/MLD-0050-alignment-faking.html",
-    "sha256": "4341341a65c51104b7dc871763f582f1dfe16236bed0d3c7b852dcb07afa0f6b",
+    "sha256": "097b76eb783f969c2d0dd00dbfa31431081aaf6bfc23f22b85a96111460cc69a",
     "expanded": false
   },
   "MLD-0051": {
     "path": "terms/MLD-0051-alignment-tax.html",
-    "sha256": "a7b27d8510af54028d1798eed389c3c2d972a6e7289802bd91f096f95382d886",
+    "sha256": "c9dcd4da6d7bf50d32d24c9a6d5457b9de85a58e56fb2efa04da5a0a0a0dc796",
     "expanded": false
   },
   "MLD-0052": {
     "path": "terms/MLD-0052-all-gather.html",
-    "sha256": "1ae8359eed746d8b38c8fdc9f62e9b609fa859bd56091803bc73c595db719d4b",
+    "sha256": "23fb100de97467dae3ea4ea59c2ac0912eb5d2aa96909c27297aba5d43dd30a1",
     "expanded": false
   },
   "MLD-0053": {
     "path": "terms/MLD-0053-all-reduce.html",
-    "sha256": "2e329f1afd75feae53a5e09e9f063c2007eccf6ceb4e2d8f79aa59516e28b8a3",
+    "sha256": "7353ca4ab2b765f56604e27f7587553f2b94529b6bbb26ff8a011617986db5f5",
     "expanded": false
   },
   "MLD-0054": {
     "path": "terms/MLD-0054-alternative-hypothesis.html",
-    "sha256": "a1a9d844be3851adf9e0d707226c928556cd46c2e7d97c5da0558cb2c659875f",
+    "sha256": "5b9938602e3417e1b75e97603263bae44139d3e840cd251455b476546c11c29a",
     "expanded": false
   },
   "MLD-0055": {
     "path": "terms/MLD-0055-annotation.html",
-    "sha256": "5016fafe59905b957a4ecfcaa88fdf5745a0d813378481fa720c6b5451c36f06",
+    "sha256": "4b297f628dc3607a78d17a22dea70b49b8480dfac629f272d93054f16c439497",
     "expanded": false
   },
   "MLD-0056": {
     "path": "terms/MLD-0056-anomaly-detection.html",
-    "sha256": "761464d2e1a546f14e08ade35f28b7aa8a19a93410c2bd56e647972e55916490",
+    "sha256": "1e79340022f07ec622313200780248a7a6733ad5ebb50f4988277deccfea0e4f",
     "expanded": false
   },
   "MLD-0057": {
     "path": "terms/MLD-0057-answer-normalization.html",
-    "sha256": "079040fb8187139831089f39e9967f44f498db786d3510b48461dba7468aeb24",
+    "sha256": "b71f2264c720ff3f9fe3d00c122cc2f7fe7a5403b51577b80edee7892e684447",
     "expanded": false
   },
   "MLD-0058": {
     "path": "terms/MLD-0058-answer-relevance.html",
-    "sha256": "0ac34cb349e6c9813004f8daf2cf3233ed6d090e6c70d91f38ff82cb937cbf81",
+    "sha256": "5381669c69ca16b9f42c5d47f3724b5c4f4b81c0b1e5eb247f84840d07f0424a",
     "expanded": false
   },
   "MLD-0059": {
     "path": "terms/MLD-0059-approximate-nearest-neighbor-search.html",
-    "sha256": "d95261c07ebba0b2ef1890d8f6e6c0418d109c9837ce27e4cc365820fd7ebf56",
+    "sha256": "369250492ba005eafce7a275486e23abc559159b81557f995c87b231b7bebb03",
     "expanded": false
   },
   "MLD-0060": {
     "path": "terms/MLD-0060-architecture.html",
-    "sha256": "933f7a0e37ad8be5a4fbc53f7a54c463c18a8512d47eb280c5e1993d8840c340",
+    "sha256": "28f27a7103c82e6b5eeec015ba511f8fdfaae8ed0ef92e0da61ab136b60e2b40",
     "expanded": false
   },
   "MLD-0061": {
     "path": "terms/MLD-0061-arima.html",
-    "sha256": "d3237129c8f796edd0e847801508c9ef48314e7224e30afde8bee6583c39a766",
+    "sha256": "493ad10033621e9358a2e13a4c77b4b5dd08d2d5d2e6bac8c3a444f7175627c6",
     "expanded": false
   },
   "MLD-0062": {
@@ -311,62 +311,62 @@
   },
   "MLD-0063": {
     "path": "terms/MLD-0063-artificial-intelligence.html",
-    "sha256": "3b1053c8d2a297580a6efa70e6cd23c3b289efacc091e4a5c6b186a6d487c31a",
+    "sha256": "4e4219262c48f4eb85f5c0bae20152cba4b92ee8e90f41a43597053b7087fe80",
     "expanded": false
   },
   "MLD-0064": {
     "path": "terms/MLD-0064-assistant-only-loss.html",
-    "sha256": "7bb9156774909d4c8269da905dd527696749b8a5d6788261616c6ea540db5010",
+    "sha256": "ce8f0b1d03a01d0db62c4d83fa1c77dc0d05b1f6c9eea8285f7aeafb9bf207fa",
     "expanded": false
   },
   "MLD-0065": {
     "path": "terms/MLD-0065-asymmetric-quantization.html",
-    "sha256": "5a7d361229e90a1919a7407e2480db5e0033a02343675facd1c57881dde24475",
+    "sha256": "bf282c44cab4617edc2b2acf38e9a5e27c0704eb0540a8ac5c086bf6b966d09c",
     "expanded": false
   },
   "MLD-0066": {
     "path": "terms/MLD-0066-attack-surface.html",
-    "sha256": "df8688d54e6813dc310fe14f926cff804d3ca503f094292a9417bac7e9ce14ec",
+    "sha256": "a9e059a550df1df11fa24a955db6a0f34584beb21d44b51df895bcb6d1473133",
     "expanded": false
   },
   "MLD-0067": {
     "path": "terms/MLD-0067-attention.html",
-    "sha256": "a28391223fe2b543054b37d89d4f27fd3c536db9a3acb449f0ed3c19d90c9ec7",
+    "sha256": "3dd78a16fa794b0c0d898a553d49f6aef19b493cd0cff3f7b68f2d7873c31d7e",
     "expanded": false
   },
   "MLD-0068": {
     "path": "terms/MLD-0068-attention-distillation.html",
-    "sha256": "00a1ea0db45a281ffe6a5ebe9a9bb307eb1c88fc1bc02c0c975c2655bfbf8de4",
+    "sha256": "9287e043b6ab6fdc59245ad0a94a021680ea9e4448bde6dd5207ac434daa2cfa",
     "expanded": false
   },
   "MLD-0069": {
     "path": "terms/MLD-0069-attention-head.html",
-    "sha256": "e83bc83fca8d55b6311e9618c43c4163a8e020509e16b2b0d5ec48b1d091312a",
+    "sha256": "046bcf14e92480e16e1ca7c29836c392f8a33b2e81aa6c8bd8e3c9e08a6a8d98",
     "expanded": false
   },
   "MLD-0070": {
     "path": "terms/MLD-0070-attention-map.html",
-    "sha256": "848af1c5f80f65f95f1d7529659966ec505d47d63ba788f7f4bf82cdda5245cb",
+    "sha256": "443d47f5ae2dac9541f7de15d2f54cfc785d282cfb59f3d32d197356053eeb70",
     "expanded": false
   },
   "MLD-0071": {
     "path": "terms/MLD-0071-attention-mask.html",
-    "sha256": "1a6afb25bd2ce99aef101595b4d00004aec0af651cb1bb7d518f5736fbb40153",
+    "sha256": "ee0644c0dc7310ddff05b70f8ada8434823a2aed2aeb66068b69ec67cf7e17f8",
     "expanded": false
   },
   "MLD-0072": {
     "path": "terms/MLD-0072-attention-score.html",
-    "sha256": "a6d06b31eac4ad47981ab9cebf476a400bc4b6372e66ba61a92967854d7ab98e",
+    "sha256": "d42fa5c48b2b156df95189d19558cfccd61fd14fd797e41f80af01c6731f4ed9",
     "expanded": false
   },
   "MLD-0073": {
     "path": "terms/MLD-0073-attention-weight.html",
-    "sha256": "388ad0a431b4d635205dbc729fa83a00015de6c50469d1d07e117b118dfcf1f7",
+    "sha256": "e15fbe07b01bcaaa6f221e7d7f3abfba8fedc24902a58a02ab8a8910fdee16e0",
     "expanded": false
   },
   "MLD-0074": {
     "path": "terms/MLD-0074-attribution-graph.html",
-    "sha256": "37fe2460c2f23b4ec636ad9f4b6ae1111a733d5b9637d9d1d65542ec6420e171",
+    "sha256": "9b00061bbf7c3a73c935f97c33e55c6066516ddd609fc1ba08256acf54371d81",
     "expanded": false
   },
   "MLD-0075": {
