@@ -3213,7 +3213,17 @@ with sync_playwright() as p:
             nav_page.set_viewport_size({'width':width, 'height':844})
             for route in ('terms/MLD-0001-a-b-test.html',
                           'technology/TECH-0001-adversarial-robustness-toolbox.html'):
-                nav_page.goto(base + route)
+                # These published reference pages have no client-side content to await.
+                # Waiting for every external asset's load event intermittently timed out
+                # after the exact HTML already arrived. Still require a successful HTTP
+                # response, the real article heading and complete shared navigation.
+                response = nav_page.goto(base + route, wait_until='domcontentloaded')
+                check('script-free reference response and article load '
+                      + route + ' ' + scheme + ' ' + str(width),
+                      response is not None and response.status == 200 and
+                      nav_page.locator('main.term-shell h1').count() == 1 and
+                      nav_page.locator('nav.site-chrome .site-chrome__links a').count() == 7 and
+                      nav_page.locator('details.site-mobile-chrome__nav').count() == 1)
                 if width < 651:
                     nav_page.locator('details.site-mobile-chrome__nav > summary').click()
                     disclosure = nav_page.locator('details.site-mobile-chrome__more')
