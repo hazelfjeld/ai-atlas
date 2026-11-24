@@ -1605,6 +1605,19 @@ main.term-shell > footer:not(.site-chrome__footer) a{color:var(--accent,#27664e)
      first on technology profiles; a hero-only page keeps its 8px margin. */
   body:has(> nav.site-chrome.term-nav) > main.term-shell{padding-top:8px}
   body:has(> nav.site-chrome.term-nav) > main.term-shell:has(> .breadcrumb-links){padding-top:16px}
+  /* The remaining native editorial desks retain legacy shell/hero padding.
+     Match the same 16px inset below the common fixed bar, with 8px + 8px
+     for the existing hero padding/margin and 16px for the plain article.
+     Leave the content widths, cards, news grid and phone rhythm intact. */
+  .playbook-shell:has(> .site-chrome.playbook-top){padding-top:8px}
+  .playbook-shell:has(> .site-chrome.playbook-top) > main > .playbook-hero{margin-top:8px}
+  .shell:has(> .site-chrome.nav){padding-top:0}
+  .shell:has(> .site-chrome:is(.top,.nav)) > main{padding-top:8px}
+  .shell:has(> .site-chrome:is(.top,.nav)) > main > header{padding-top:8px}
+  body:has(> .site-chrome.review-nav) > main.review-shell{padding-top:16px}
+  body:has(> .site-chrome.review-nav) > main.review-shell > header{padding-top:0}
+  body:has(> .site-chrome.demo-site-chrome) > main{padding-top:8px}
+  body:has(> .site-chrome.demo-site-chrome) > main > header{padding-top:8px}
 }
 /* atlas-desktop-first-content-alignment:end */
 

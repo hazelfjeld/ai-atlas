@@ -85,3 +85,34 @@ test('generated reference first-content offsets are desktop-only, not leaked ont
   assert.ok(read('downloads/Atlas_Demo_Offline.html').includes(css),
     'offline build carries the corrected desktop-only query');
 });
+
+test('remaining native editorial workspaces share the desktop first-content inset', () => {
+  const css = read('site-chrome.css');
+  const block = css.split('/* atlas-desktop-first-content-alignment:begin */')[1]
+    .split('/* atlas-desktop-first-content-alignment:end */')[0];
+  const rules = [
+    '.playbook-shell:has(> .site-chrome.playbook-top){padding-top:8px}',
+    '.playbook-shell:has(> .site-chrome.playbook-top) > main > .playbook-hero{margin-top:8px}',
+    '.shell:has(> .site-chrome.nav){padding-top:0}',
+    '.shell:has(> .site-chrome:is(.top,.nav)) > main{padding-top:8px}',
+    '.shell:has(> .site-chrome:is(.top,.nav)) > main > header{padding-top:8px}',
+    'body:has(> .site-chrome.review-nav) > main.review-shell{padding-top:16px}',
+    'body:has(> .site-chrome.review-nav) > main.review-shell > header{padding-top:0}',
+    'body:has(> .site-chrome.demo-site-chrome) > main{padding-top:8px}',
+    'body:has(> .site-chrome.demo-site-chrome) > main > header{padding-top:8px}',
+  ];
+  for (const rule of rules) assert.ok(block.includes(rule), rule);
+  for (const [file, rail] of [
+    ['whats-new.html','top'], ['catalog-review.html','nav'],
+    ['playbooks.html','playbook-top'], ['hardware-review.html','review-nav'],
+    ['demo.html','demo-site-chrome'],
+  ]) {
+    const html = read(file);
+    assert.ok(html.includes('class="site-chrome ' + rail + '"'), file);
+    assert.ok(html.indexOf('class="site-chrome ' + rail + '"') < html.indexOf('<main'), file);
+    assert.ok(html.includes('id="main" tabindex="-1"'), file);
+    assert.ok(html.includes('href="index.html#/search"'), file);
+  }
+  assert.ok(read('downloads/Atlas_Demo_Offline.html').includes(css));
+  assert.match(read('tests/site-deployment-browser.py'), /Editorial first-content inset/);
+});

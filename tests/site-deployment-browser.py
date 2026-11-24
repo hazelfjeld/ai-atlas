@@ -3604,6 +3604,22 @@ with sync_playwright() as p:
                       }"""))
                 if width in (390,1280):
                     lead_page.screenshot(path=str(out/('intro-'+route.split('.')[0]+'-'+scheme+'-'+str(width)+'.png')))
+        # A native workspace must begin at the same 16px inset below the
+        # fixed bar; legacy hero/shell spacing must not stack on navigation.
+        for width in (768,1280):
+            lead_page.set_viewport_size({'width':width,'height':844})
+            for route in ('playbooks.html','whats-new.html','catalog-review.html',
+                          'hardware-review.html','demo.html'):
+                lead_page.goto(base+route, wait_until='domcontentloaded')
+                check('Editorial first-content inset '+route+' '+scheme+' '+str(width),
+                      lead_page.locator('#main').evaluate("""el => {
+                        const bar = document.querySelector('.site-mobile-chrome');
+                        if (!bar) return false;
+                        const y = el.getBoundingClientRect().top +
+                                  parseFloat(getComputedStyle(el).paddingTop);
+                        return Math.abs(y - bar.getBoundingClientRect().bottom - 16) <= 2;
+                      }"""))
+                lead_page.screenshot(path=str(out/('editorial-inset-'+route.split('.')[0]+'-'+scheme+'-'+str(width)+'.png')))
         lead_context.close()
 
 
