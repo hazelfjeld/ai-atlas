@@ -2074,3 +2074,15 @@ test('Guided demo uses Discover editorial chrome and native article skipping whi
   assert.match(html, /class="site-mobile-chrome__search" href="index.html#\/search"/);
   assert.match(html, /href="index.html#\/games"/);
 });
+
+
+test('verified daily story titles reuse the Discover editorial card type scale', () => {
+  const brand = read('brand.css'), archive = read('whats-new.html');
+  const shared = '.story-body h3,#edition-content .item > h3';
+  for (const declaration of ["font:400 21px/1.22 Georgia,'Times New Roman',serif;letter-spacing:-.025em", 'font-size:24px', 'font-size:22px', 'font-size:21px;line-height:1.25', 'font-size:27px', 'font-size:25px']) {
+    assert.ok(brand.includes(shared + '{' + declaration + '}'), declaration);
+  }
+  assert.doesNotMatch(archive, /\.item h3\{[^}]*\b(?:font(?:-size|-family|-weight)?|line-height|letter-spacing)\s*:/);
+  assert.ok(archive.includes('.item h3{margin:0}'), 'archive keeps its own compact card spacing');
+  assert.ok(read('downloads/Atlas_Demo_Offline.html').includes(brand), 'offline fallback embeds exact shared type scale');
+});

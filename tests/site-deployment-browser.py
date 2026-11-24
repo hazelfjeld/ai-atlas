@@ -840,6 +840,53 @@ with sync_playwright() as p:
           and archive_enhanced_page.locator('#edition-search').is_enabled()
           and archive_enhanced_page.locator('html.atlas-enhanced.atlas-daily-ready').count() == 1)
     archive_enhanced.close()
+    # Daily news and Discover are the same editorial desk, not separate type
+    # systems. Check actual verified cards after following the native nav.
+    for story_scheme in ('light', 'dark'):
+        story_context = browser.new_context(color_scheme=story_scheme)
+        story_page = story_context.new_page()
+        for story_width in (320, 390, 768, 1280):
+            story_page.set_viewport_size({'width': story_width, 'height': 900})
+            story_page.goto(base + 'index.html#/overview')
+            story_page.locator('#catalog-loading').wait_for(state='detached', timeout=45000)
+            discover_story = story_page.locator('.story-body h3').first
+            discover_story.wait_for(state='visible')
+            story_style = """el => {
+                const s = getComputedStyle(el);
+                return [s.fontFamily,s.fontWeight,s.fontSize,s.lineHeight,s.letterSpacing];
+            }"""
+            baseline = discover_story.evaluate(story_style)
+            discover_story.scroll_into_view_if_needed()
+            story_page.screenshot(path=str(out / f'discover-story-type-{story_scheme}-{story_width}.png'))
+            if story_width <= 650:
+                story_page.locator('#discover-mobile-nav > summary').click()
+                story_page.locator('#discover-mobile-nav .site-mobile-chrome__menu a[href="whats-new.html"]').click()
+            else:
+                story_page.locator('#navigation a[href="whats-new.html"]').click()
+            story_page.wait_for_function(
+                "() => document.documentElement.classList.contains('atlas-daily-ready')",
+                timeout=45000)
+            # Use an immutable known nonempty edition so a legitimate empty
+            # future collection does not break the presentation regression.
+            edition = story_page.locator('#edition-select')
+            pinned_path = 'data/daily/editions/2026-11-23-v1.json'
+            if edition.input_value() != pinned_path:
+                edition.select_option(pinned_path)
+            story_page.wait_for_function(
+                "() => location.search.includes('date=2026-11-23') && location.search.includes('revision=1') && document.querySelector('#edition-content').getAttribute('aria-busy') === 'false'",
+                timeout=45000)
+            archive_story = story_page.locator('#edition-content .item > h3').first
+            archive_story.wait_for(state='visible')
+            actual = archive_story.evaluate(story_style)
+            archive_story.scroll_into_view_if_needed()
+            story_page.screenshot(path=str(out / f'archive-story-type-{story_scheme}-{story_width}.png'))
+            print('Editorial story type', story_scheme, story_width, baseline, actual)
+            check('Verified news cards match Discover type '+story_scheme+' '+str(story_width),
+                  actual == baseline and
+                  story_page.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'))
+            check('Verified news card retains readable source links '+story_scheme+' '+str(story_width),
+                  archive_story.locator('xpath=..').locator('a[href^="https://"]').first.is_visible())
+        story_context.close()
     # Check actual Discover-to-editorial transitions, not CSS similarity alone.
     for width in (320, 390, 768, 1280):
         page.set_viewport_size({'width':width, 'height':844})
