@@ -273,10 +273,18 @@ test('Playbooks, Technology, Research and editorial reviews reuse Discover card 
   assert.ok(block, 'Missing shared card typography implementation');
   for (const selector of [
     '.playbook-shell .playbook > h2',
-    '.tech-shell .tech-card > h3',
+    '.tech-shell .tech-card > h2',
     '.shell:has(> .site-chrome.nav) article.card > h3',
-    '.shell:has(> .site-chrome.research-site-chrome) .cards > .card > h3'
+    '.shell:has(> .site-chrome.research-site-chrome) .cards > .card > h2'
   ]) assert.ok(block.includes(selector), 'Missing card family: ' + selector);
+  const tech = fs.readFileSync(path.join(__dirname, '..', 'technologies.js'), 'utf8');
+  const research = fs.readFileSync(path.join(__dirname, '..', 'checkpoint.js'), 'utf8');
+  assert.match(tech, /const h = el\('h2'\), route = el\('a',r\.name\)/,
+    'Technology cards must retain their semantic heading and native anchor');
+  assert.match(research, /const h = element\('h2'\), button = element\('button', record\.title, 'title-button'\)/,
+    'Research cards must retain their semantic heading and native dialog button');
+  assert.match(block, /\.cards > \.card > h2 > \.title-button\s*\{\s*font:inherit;\s*letter-spacing:inherit;\s*color:inherit;/,
+    'Research buttons must inherit the shared heading type and contrast');
   assert.match(block, /font:400 clamp\(20px,2vw,23px\)\/1\.25 Georgia/);
   assert.match(block, /color:var\(--ink\)/);
   assert.match(block, /\.playbook-shell \.playbook > p,[\s\S]*?color:var\(--muted\)/);
