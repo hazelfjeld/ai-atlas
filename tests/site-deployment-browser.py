@@ -68,6 +68,9 @@ with sync_playwright() as p:
                     'discover-nojs-search-' + scriptless_scheme + '-' +
                     str(scriptless_width) + '.png')))
             fallback.click()
+            scriptless_page.wait_for_url(base + 'terms/index.html', wait_until='load', timeout=15000)
+            expect(scriptless_page.locator('main')).to_have_count(1, timeout=15000)
+            expect(scriptless_page.locator('main h1')).to_be_visible(timeout=15000)
             check('Discover no-JS browse navigation ' + scriptless_scheme + ' ' + str(scriptless_width),
                   scriptless_page.url.endswith('/terms/index.html')
                   and scriptless_page.locator('main').count() == 1)
@@ -523,7 +526,13 @@ with sync_playwright() as p:
                 'discover-scriptless-search-' + fallback_scheme + '-' +
                 str(fallback_width) + '.png')))
     nojs_submit.set_viewport_size({'width':390,'height':844})
+    # Click the real link and await the exact document. A click can return
+    # before the navigation commits or before the generated catalog is parsed.
+    # Keep the destination assertion strict; do not navigate directly or retry the click.
     nojs_fallback.click()
+    nojs_submit.wait_for_url(base + 'terms/index.html', wait_until='load', timeout=15000)
+    expect(nojs_submit.locator('main')).to_have_count(1, timeout=15000)
+    expect(nojs_submit.locator('main h1')).to_be_visible(timeout=15000)
     check('script-free Discover fallback opens the actual catalog',
           nojs_submit.url.endswith('/terms/index.html')
           and nojs_submit.locator('main').count() == 1)
