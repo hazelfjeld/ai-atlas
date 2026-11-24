@@ -397,5 +397,5 @@
   ],
   "last_successful_publish_at": "2026-11-24T15:37:47Z",
   "status": "edition_revision_1_production_verified",
-  "coverage_note": "November 24 v1: nine source-reviewed reports, two news and seven catalog proposals deferred. Partial coverage; author-reported findings caveated. Exact production revision 98d7a5bf passed Cloudflare HTTP/browser and GitHack on November 24, 2026; independent external query retrieval unavailable."
+  "coverage_note": "2026-11-24 v1: nine source-reviewed reports, two news and seven catalog proposals deferred. Partial coverage; author-reported findings caveated. Production-verified revision 98d7a5bf passed Cloudflare HTTP/browser and GitHack on November 24, 2026; independent external query retrieval unavailable."
 }
