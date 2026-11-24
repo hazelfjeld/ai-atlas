@@ -1,0 +1,946 @@
+{
+  "schema": 1,
+  "batch_id": "atlas-daily-20261124-20261124t141644729z-source-review-a",
+  "edition_date": "2026-11-24",
+  "timezone": "America/Chicago",
+  "collected_at": "2026-11-24T14:16:44.729Z",
+  "coverage_start": "2026-11-23T12:45:37.778Z",
+  "coverage_end": "2026-11-24T14:16:44.729Z",
+  "coverage_status": "partial",
+  "coverage_note": "Bounded current-window sweep with two-hour overlap from prior attempted endpoint. Successful cutoff remains null; original Nov 1 onward historical backlog unresolved. Research listing dates differ from v1 submission dates; no claim that all listed papers were reviewed.",
+  "overlap_lookback_start": "2026-11-23T12:45:37.778Z",
+  "sources_checked": [
+    {
+      "url": "https://www.aboutamazon.com/news/company-news/amazon-decart-ai-optimization",
+      "status": "success",
+      "checked_at": "2026-11-24T14:16:44.729Z",
+      "method": "opened source page; selected records reviewed, listings sampled"
+    },
+    {
+      "url": "https://huggingface.co/inclusionAI/Ling-3.2-air",
+      "status": "success",
+      "checked_at": "2026-11-24T14:16:44.729Z",
+      "method": "opened source page; selected records reviewed, listings sampled"
+    },
+    {
+      "url": "https://huggingface.co/inclusionAI",
+      "status": "success",
+      "checked_at": "2026-11-24T14:16:44.729Z",
+      "method": "opened source page; selected records reviewed, listings sampled"
+    },
+    {
+      "url": "https://github.com/AtomicBot-ai/atomic-engine",
+      "status": "success",
+      "checked_at": "2026-11-24T14:16:44.729Z",
+      "method": "opened source page; selected records reviewed, listings sampled"
+    },
+    {
+      "url": "https://explainx.ai/blog/atomic-engine-inkling-2-mini-3x-speed-memory-budget-november-2026",
+      "status": "success",
+      "checked_at": "2026-11-24T14:16:44.729Z",
+      "method": "opened source page; selected records reviewed, listings sampled"
+    },
+    {
+      "url": "https://arxiv.org/list/cs.AI/recent",
+      "status": "success",
+      "checked_at": "2026-11-24T14:16:44.729Z",
+      "method": "opened source page; selected records reviewed, listings sampled"
+    },
+    {
+      "url": "https://arxiv.org/list/cs.CL/recent",
+      "status": "success",
+      "checked_at": "2026-11-24T14:16:44.729Z",
+      "method": "opened source page; selected records reviewed, listings sampled"
+    },
+    {
+      "url": "https://arxiv.org/list/cs.RO/recent",
+      "status": "success",
+      "checked_at": "2026-11-24T14:16:44.729Z",
+      "method": "opened source page; selected records reviewed, listings sampled"
+    },
+    {
+      "url": "https://arxiv.org/list/eess.AS/recent",
+      "status": "success",
+      "checked_at": "2026-11-24T14:16:44.729Z",
+      "method": "opened source page; selected records reviewed, listings sampled"
+    },
+    {
+      "url": "https://arxiv.org/list/cs.LG/recent",
+      "status": "success",
+      "checked_at": "2026-11-24T14:16:44.729Z",
+      "method": "opened source page; selected records reviewed, listings sampled"
+    },
+    {
+      "url": "https://arxiv.org/abs/2611.31228",
+      "status": "success",
+      "checked_at": "2026-11-24T14:16:44.729Z",
+      "method": "opened source page; selected records reviewed, listings sampled"
+    },
+    {
+      "url": "https://arxiv.org/abs/2611.31198",
+      "status": "success",
+      "checked_at": "2026-11-24T14:16:44.729Z",
+      "method": "opened source page; selected records reviewed, listings sampled"
+    },
+    {
+      "url": "https://arxiv.org/abs/2611.31112",
+      "status": "success",
+      "checked_at": "2026-11-24T14:16:44.729Z",
+      "method": "opened source page; selected records reviewed, listings sampled"
+    },
+    {
+      "url": "https://arxiv.org/abs/2611.31205",
+      "status": "success",
+      "checked_at": "2026-11-24T14:16:44.729Z",
+      "method": "opened source page; selected records reviewed, listings sampled"
+    },
+    {
+      "url": "https://arxiv.org/abs/2611.31190",
+      "status": "success",
+      "checked_at": "2026-11-24T14:16:44.729Z",
+      "method": "opened source page; selected records reviewed, listings sampled"
+    },
+    {
+      "url": "https://arxiv.org/abs/2611.30927",
+      "status": "success",
+      "checked_at": "2026-11-24T14:16:44.729Z",
+      "method": "opened source page; selected records reviewed, listings sampled"
+    },
+    {
+      "url": "https://arxiv.org/abs/2611.30723",
+      "status": "success",
+      "checked_at": "2026-11-24T14:16:44.729Z",
+      "method": "opened source page; selected records reviewed, listings sampled"
+    },
+    {
+      "url": "https://arxiv.org/abs/2611.31227",
+      "status": "success",
+      "checked_at": "2026-11-24T14:16:44.729Z",
+      "method": "opened source page; selected records reviewed, listings sampled"
+    },
+    {
+      "url": "https://github.com/unslothai/unsloth/releases",
+      "status": "success",
+      "checked_at": "2026-11-24T14:16:44.729Z",
+      "method": "opened source page; selected records reviewed, listings sampled"
+    },
+    {
+      "url": "https://www.anthropic.com/news/safeguards",
+      "status": "success",
+      "checked_at": "2026-11-24T14:16:44.729Z",
+      "method": "opened source page; selected records reviewed, listings sampled"
+    },
+    {
+      "url": "https://github.blog/changelog/",
+      "status": "success",
+      "checked_at": "2026-11-24T14:16:44.729Z",
+      "method": "opened source page; selected records reviewed, listings sampled"
+    }
+  ],
+  "sources_failed": [
+    {
+      "url": "https://export.arxiv.org/api/query?search_query=cat%3Acs.AI&max_results=5",
+      "status": "partial",
+      "checked_at": "2026-11-24T14:16:44.729Z",
+      "error": "Metadata endpoint not accessible; recent category pages and selected abstracts readable."
+    },
+    {
+      "url": "https://huggingface.co/inclusionAI/Ling-3.2-air/commits/main",
+      "status": "partial",
+      "checked_at": "2026-11-24T14:16:44.729Z",
+      "error": "Commit history not accessible; initial upload timestamp unknown."
+    },
+    {
+      "url": "https://github.com/AtomicBot-ai/atomic-engine/releases",
+      "status": "partial",
+      "checked_at": "2026-11-24T14:16:44.729Z",
+      "error": "Release endpoint unavailable; repository README readable."
+    },
+    {
+      "url": "https://explainx.ai/blog/inclusionai-ling-3-2-air-open-weights-november-2026",
+      "status": "partial",
+      "checked_at": "2026-11-24T14:16:44.729Z",
+      "error": "Secondary report search excerpt readable, full page not opened; primary model card opened. Date attributed to secondary discovery only."
+    }
+  ],
+  "source_health_note": "Five arXiv category listings accessible; metadata API failure persists. Official Anthropic safeguards listing did not establish a new November announcement; a November 24 secondary article was retrospective, not treated as a launch. GitHub changelog had no directly relevant November 23 AI-specific entry identified in sampled results.",
+  "coverage_backlog": [
+    "Historical recovery Nov 1-22 remains unresolved; collect bounded specialist intervals with deduplication.",
+    "Broader cs.LG, vision/video, training, governance, independent journalism and smaller release feeds incomplete; no absence-of-news inference.",
+    "Confirm Ling-3.2-air original upload time, Atomic Engine tagged release and independent measurements.",
+    "Ant LingSante syndicated November 24 reports excluded as prior batch event; verify any material new releases separately.",
+    "Catalog alias review and execution/weight/license audits remain publisher gates."
+  ],
+  "tldr": [
+    "Amazon's Decart agreement and new sparse-model inference options emphasize efficiency across cloud and local hardware, while a new multimodal model targets document workflows.",
+    "Recent research explores confidence failures, speculative decoding, robot coordination, speech generation and risk-aware query validation; results remain limited to reported experiments and do not establish real-world safety guarantees."
+  ],
+  "news": [
+    {
+      "id": "ai-news:amazon-decart-optimization-stack-agreement:2026-11-23",
+      "title": "Amazon signs agreement to acquire Decart's optimization technology",
+      "category": "industry",
+      "tags": [
+        "AI",
+        "inference",
+        "hardware",
+        "infrastructure"
+      ],
+      "summary": "Amazon announced a signed agreement for Decart's proprietary optimization stack and for its engineering team to join Amazon, building on prior collaboration on Trainium.",
+      "why_it_matters": "Inference software and chip co-design are increasingly important competitive levers, including for multimodal and world-model workloads.",
+      "caveat": "An agreement is not a completed acquisition or a released service. Amazon did not disclose a transaction price in the announcement; no new cost or throughput result independently measured.",
+      "canonical_url": "https://www.aboutamazon.com/news/company-news/amazon-decart-ai-optimization",
+      "source_url": "https://www.aboutamazon.com/news/company-news/amazon-decart-ai-optimization",
+      "publisher": "Amazon",
+      "type": "first-party announcement",
+      "publication_date": "2026-11-23",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-23",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-24T14:16:44.729Z",
+      "checked_at": "2026-11-24T14:16:44.729Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "first_party_announcement",
+      "release_status": "agreement_signed",
+      "collection_classification": "recent",
+      "version": null,
+      "arxiv_id": null,
+      "sources": [
+        {
+          "url": "https://www.aboutamazon.com/news/company-news/amazon-decart-ai-optimization",
+          "publisher": "Amazon",
+          "type": "first-party announcement"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:inclusionai-ling-32-air:2026-11",
+      "title": "Ling-3.2-air targets document-heavy agent workflows with open weights",
+      "category": "models",
+      "tags": [
+        "AI",
+        "ML",
+        "DL",
+        "LLM",
+        "multimodal",
+        "MoE"
+      ],
+      "summary": "The model card describes a hybrid attention and mixture-of-experts vision-language model with 124B total and 5.5B active parameters, intended for workflow automation and professional document reasoning.",
+      "why_it_matters": "Teams can study a sparse multimodal architecture with self-hosted serving recipes for SGLang and vLLM.",
+      "caveat": "Card benchmarks are vendor-reported. The legal benchmark's full-pass rate after hallucination screening is below 1%; do not interpret the model as a reliable legal professional. Exact first upload time was not verified.",
+      "canonical_url": "https://huggingface.co/inclusionAI/Ling-3.2-air",
+      "source_url": "https://huggingface.co/inclusionAI/Ling-3.2-air",
+      "publisher": "Ant Group inclusionAI",
+      "type": "first-party model card",
+      "publication_date": "2026-11-24",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": null,
+      "event_date_precision": "unknown",
+      "discovered_at": "2026-11-24T14:16:44.729Z",
+      "checked_at": "2026-11-24T14:16:44.729Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "first_party_announcement",
+      "release_status": "open_weight_artifact_observed",
+      "collection_classification": "recent",
+      "version": "3.2-air",
+      "arxiv_id": null,
+      "sources": [
+        {
+          "url": "https://huggingface.co/inclusionAI/Ling-3.2-air",
+          "publisher": "Ant Group inclusionAI",
+          "type": "first-party model card"
+        },
+        {
+          "url": "https://explainx.ai/blog/inclusionai-ling-3-2-air-open-weights-november-2026",
+          "publisher": "Explainx",
+          "type": "specialist secondary reporting"
+        }
+      ],
+      "publication_date_basis": "dated specialist report November 24; first-party model-card first publication date unknown",
+      "primary_publication_date": null
+    },
+    {
+      "id": "ai-news:atomic-engine-ssd-expert-streaming:2026-11",
+      "title": "Atomic Engine explores SSD-backed local MoE inference",
+      "category": "inference",
+      "tags": [
+        "AI",
+        "LLM",
+        "MoE",
+        "inference",
+        "local AI"
+      ],
+      "summary": "The experimental llama.cpp-based engine can load selected expert weights from storage and manage model and runtime buffers within a configurable memory budget. Its README reports local Inkling 2 Mini experiments.",
+      "why_it_matters": "Storage-backed experts can make sparse models usable on machines that cannot keep all weights resident in memory.",
+      "caveat": "Disk bandwidth, prompt mix, context and hardware determine performance. Project measurements are not independent; the reported November 23 demonstration date comes from specialist coverage, and the repository's initial release date is unverified.",
+      "canonical_url": "https://github.com/AtomicBot-ai/atomic-engine",
+      "source_url": "https://github.com/AtomicBot-ai/atomic-engine",
+      "publisher": "Atomic Chat",
+      "type": "first-party repository documentation",
+      "publication_date": "2026-11-24",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-23",
+      "event_date_precision": "day_reported",
+      "discovered_at": "2026-11-24T14:16:44.729Z",
+      "checked_at": "2026-11-24T14:16:44.729Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "project_documentation_and_secondary_report",
+      "release_status": "experimental_repository",
+      "collection_classification": "recent",
+      "version": null,
+      "arxiv_id": null,
+      "sources": [
+        {
+          "url": "https://github.com/AtomicBot-ai/atomic-engine",
+          "publisher": "Atomic Chat",
+          "type": "first-party repository documentation"
+        },
+        {
+          "url": "https://explainx.ai/blog/atomic-engine-inkling-2-mini-3x-speed-memory-budget-november-2026",
+          "publisher": "Explainx",
+          "type": "specialist secondary reporting"
+        }
+      ],
+      "publication_date_basis": "November 24 specialist report, first-party repository is undated in reader",
+      "primary_publication_date": null
+    },
+    {
+      "id": "ai-news:uncertainty-steering-self-monitoring:2611.31228",
+      "title": "Small open-weight models respond to injected doubt but miss their own errors",
+      "category": "safety",
+      "tags": [
+        "AI",
+        "SLM",
+        "LLM",
+        "calibration",
+        "reasoning",
+        "safety"
+      ],
+      "summary": "Across four open-weight language models, confidence statements poorly distinguished incorrect reasoning steps from valid ones. Supplying an external low-confidence signal sometimes improved repair but also caused unnecessary changes to correct reasoning.",
+      "why_it_matters": "Separates detecting errors from correcting them, suggesting independent monitors may be more valuable than relying on verbal self-confidence alone.",
+      "caveat": "Controlled math experiments, not proof about all models or tasks; unnecessary intervention can lower accuracy. Author-reported, not replicated.",
+      "canonical_url": "https://arxiv.org/abs/2611.31228",
+      "source_url": "https://arxiv.org/abs/2611.31228",
+      "publisher": "arXiv / paper authors",
+      "type": "primary research preprint",
+      "publication_date": "2026-11-24",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-23",
+      "event_date_precision": "second",
+      "discovered_at": "2026-11-24T14:16:44.729Z",
+      "checked_at": "2026-11-24T14:16:44.729Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "author_reported_research",
+      "release_status": "preprint",
+      "collection_classification": "recent",
+      "version": "v1",
+      "arxiv_id": "2611.31228",
+      "sources": [
+        {
+          "url": "https://arxiv.org/abs/2611.31228",
+          "publisher": "arXiv / paper authors",
+          "type": "primary research preprint"
+        }
+      ],
+      "submission_date": "2026-11-23",
+      "submission_time_utc": "2026-11-23T18:58:52Z",
+      "publication_date_basis": "arXiv November 24 public listing; v1 submitted November 23, public posting clock time not established",
+      "doi": "10.48550/arXiv.2611.31228"
+    },
+    {
+      "id": "ai-news:toolsmith-multimodal-search:2611.31198",
+      "title": "ToolSmith proposes reusable generated tools for multimodal search",
+      "category": "agents",
+      "tags": [
+        "AI",
+        "LLM",
+        "multimodal",
+        "retrieval",
+        "agents"
+      ],
+      "summary": "The framework constructs reusable modules from a small initial tool set and evaluates them across multimodal search tasks. Authors report gains over the fixed library with several agent backbones.",
+      "why_it_matters": "Could reduce manual tool-library maintenance when new evidence types or search workflows emerge.",
+      "caveat": "Model-graded benchmarks may reflect judge bias; generated tools require sandboxing, permissions, and security review. No independent execution or artifact audit.",
+      "canonical_url": "https://arxiv.org/abs/2611.31198",
+      "source_url": "https://arxiv.org/abs/2611.31198",
+      "publisher": "arXiv / paper authors",
+      "type": "primary research preprint",
+      "publication_date": "2026-11-24",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-23",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-24T14:16:44.729Z",
+      "checked_at": "2026-11-24T14:16:44.729Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "author_reported_research",
+      "release_status": "preprint",
+      "collection_classification": "recent",
+      "version": "v1",
+      "arxiv_id": "2611.31198",
+      "sources": [
+        {
+          "url": "https://arxiv.org/abs/2611.31198",
+          "publisher": "arXiv / paper authors",
+          "type": "primary research preprint"
+        }
+      ],
+      "submission_date": "2026-11-23",
+      "submission_time_utc": null,
+      "publication_date_basis": "arXiv November 24 public listing; v1 submitted November 23, public posting clock time not established",
+      "doi": "10.48550/arXiv.2611.31198"
+    },
+    {
+      "id": "ai-news:corrective-prefix-attention:2611.31112",
+      "title": "Corrective prefix attention aims to improve parallel speculative decoding",
+      "category": "inference",
+      "tags": [
+        "AI",
+        "DL",
+        "SLM",
+        "LLM",
+        "inference"
+      ],
+      "summary": "The proposed drafter scores candidate tokens using earlier choices in the same block, plus an auxiliary sequential training loss. Authors report more accepted tokens and faster generation on Qwen3 4B and 8B targets using Ascend NPUs.",
+      "why_it_matters": "Reduces wasted speculative suffix tokens when early draft choices conflict, without repeatedly running the neural drafter during selection.",
+      "caveat": "Reported speedups are hardware- and workload-specific. Larger acceptance alone does not establish lower latency; target verification remains necessary.",
+      "canonical_url": "https://arxiv.org/abs/2611.31112",
+      "source_url": "https://arxiv.org/abs/2611.31112",
+      "publisher": "arXiv / paper authors",
+      "type": "primary research preprint",
+      "publication_date": "2026-11-24",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-23",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-24T14:16:44.729Z",
+      "checked_at": "2026-11-24T14:16:44.729Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "author_reported_research",
+      "release_status": "preprint",
+      "collection_classification": "recent",
+      "version": "v1",
+      "arxiv_id": "2611.31112",
+      "sources": [
+        {
+          "url": "https://arxiv.org/abs/2611.31112",
+          "publisher": "arXiv / paper authors",
+          "type": "primary research preprint"
+        }
+      ],
+      "submission_date": "2026-11-23",
+      "submission_time_utc": null,
+      "publication_date_basis": "arXiv November 24 public listing; v1 submitted November 23, public posting clock time not established",
+      "doi": "10.48550/arXiv.2611.31112"
+    },
+    {
+      "id": "ai-news:acap-robot-control:2611.31205",
+      "title": "ACAP assigns robot components to coordinated asynchronous coding agents",
+      "category": "robotics",
+      "tags": [
+        "AI",
+        "LLM",
+        "robotics",
+        "agents",
+        "control"
+      ],
+      "summary": "Persistent agents manage separate robot control groups while a coordinating agent handles dependencies and task assignment. Authors report a 28.2% reduction in task-balanced time cost versus one agent in 72 real-world rollouts.",
+      "why_it_matters": "Concurrent planning and execution can reduce idle time where robot activities are physically independent.",
+      "caveat": "Limited experimental settings; conflicts, timing failures and unsafe actions remain possible. Not a certified safety controller or deployment recommendation.",
+      "canonical_url": "https://arxiv.org/abs/2611.31205",
+      "source_url": "https://arxiv.org/abs/2611.31205",
+      "publisher": "arXiv / paper authors",
+      "type": "primary research preprint",
+      "publication_date": "2026-11-24",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-23",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-24T14:16:44.729Z",
+      "checked_at": "2026-11-24T14:16:44.729Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "author_reported_research",
+      "release_status": "preprint",
+      "collection_classification": "recent",
+      "version": "v1",
+      "arxiv_id": "2611.31205",
+      "sources": [
+        {
+          "url": "https://arxiv.org/abs/2611.31205",
+          "publisher": "arXiv / paper authors",
+          "type": "primary research preprint"
+        }
+      ],
+      "submission_date": "2026-11-23",
+      "submission_time_utc": null,
+      "publication_date_basis": "arXiv November 24 public listing; v1 submitted November 23, public posting clock time not established",
+      "doi": "10.48550/arXiv.2611.31205"
+    },
+    {
+      "id": "ai-news:conformal-text-to-sql-confidence:2611.31190",
+      "title": "Conformal validation study tests when text-to-SQL systems should abstain",
+      "category": "evaluation",
+      "tags": [
+        "AI",
+        "ML",
+        "LLM",
+        "SQL",
+        "calibration",
+        "evaluation"
+      ],
+      "summary": "A separate critic and a fitted feature-based validator estimate correctness after query execution. Calibration allows a risk threshold for accepting results; on Spider the authors report accepting about half of queries at a measured error rate below their 15% target.",
+      "why_it_matters": "A query can run correctly while answering the wrong question; risk-aware acceptance may be useful for database assistants.",
+      "caveat": "The statistical guarantee did not transfer to BIRD without recalibration. Assumptions and calibration data matter; restrict query permissions regardless of confidence.",
+      "canonical_url": "https://arxiv.org/abs/2611.31190",
+      "source_url": "https://arxiv.org/abs/2611.31190",
+      "publisher": "arXiv / paper authors",
+      "type": "primary research preprint",
+      "publication_date": "2026-11-24",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-23",
+      "event_date_precision": "second",
+      "discovered_at": "2026-11-24T14:16:44.729Z",
+      "checked_at": "2026-11-24T14:16:44.729Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "author_reported_research",
+      "release_status": "preprint",
+      "collection_classification": "recent",
+      "version": "v1",
+      "arxiv_id": "2611.31190",
+      "sources": [
+        {
+          "url": "https://arxiv.org/abs/2611.31190",
+          "publisher": "arXiv / paper authors",
+          "type": "primary research preprint"
+        }
+      ],
+      "submission_date": "2026-11-23",
+      "submission_time_utc": "2026-11-23T18:42:54Z",
+      "publication_date_basis": "arXiv November 24 public listing; v1 submitted November 23, public posting clock time not established",
+      "doi": "10.48550/arXiv.2611.31190"
+    },
+    {
+      "id": "ai-news:speechsplice-pronunciation-control:2611.30927",
+      "title": "SpeechSplice tests pronunciation editing through encoder representations",
+      "category": "audio",
+      "tags": [
+        "AI",
+        "DL",
+        "LLM",
+        "TTS",
+        "audio"
+      ],
+      "summary": "Researchers modify internal text-encoder states at inference time to target pronunciations without changing model weights. Their listener study found a high target-reading success rate in the tested architecture.",
+      "why_it_matters": "Could support correction of names and ambiguous readings without retraining a speech model.",
+      "caveat": "Study-specific listeners and architectures; cross-attention and shared self-attention systems behaved differently. Code and model compatibility were not independently tested.",
+      "canonical_url": "https://arxiv.org/abs/2611.30927",
+      "source_url": "https://arxiv.org/abs/2611.30927",
+      "publisher": "arXiv / paper authors",
+      "type": "primary research preprint",
+      "publication_date": "2026-11-24",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-23",
+      "event_date_precision": "second",
+      "discovered_at": "2026-11-24T14:16:44.729Z",
+      "checked_at": "2026-11-24T14:16:44.729Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "author_reported_research",
+      "release_status": "preprint",
+      "collection_classification": "recent",
+      "version": "v1",
+      "arxiv_id": "2611.30927",
+      "sources": [
+        {
+          "url": "https://arxiv.org/abs/2611.30927",
+          "publisher": "arXiv / paper authors",
+          "type": "primary research preprint"
+        }
+      ],
+      "submission_date": "2026-11-23",
+      "submission_time_utc": "2026-11-23T16:17:10Z",
+      "publication_date_basis": "arXiv November 24 public listing; v1 submitted November 23, public posting clock time not established",
+      "doi": "10.48550/arXiv.2611.30927"
+    },
+    {
+      "id": "ai-news:bisat-speech-tokenization:2611.30723",
+      "title": "BiSAT explores balancing speech meaning and acoustic detail in discrete tokens",
+      "category": "audio",
+      "tags": [
+        "AI",
+        "ML",
+        "DL",
+        "audio",
+        "speech language models"
+      ],
+      "summary": "The authors train a speech tokenizer to preserve complementary semantic and acoustic information and report competitive speech synthesis results with less training data than selected baselines.",
+      "why_it_matters": "A speech-token representation that preserves both linguistic content and sound detail could support understanding and generation in one system.",
+      "caveat": "Preprint results depend on training data, codec settings and evaluation. No independent listening test, deployment or license review.",
+      "canonical_url": "https://arxiv.org/abs/2611.30723",
+      "source_url": "https://arxiv.org/abs/2611.30723",
+      "publisher": "arXiv / paper authors",
+      "type": "primary research preprint",
+      "publication_date": "2026-11-24",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-23",
+      "event_date_precision": "second",
+      "discovered_at": "2026-11-24T14:16:44.729Z",
+      "checked_at": "2026-11-24T14:16:44.729Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "author_reported_research",
+      "release_status": "preprint",
+      "collection_classification": "recent",
+      "version": "v1",
+      "arxiv_id": "2611.30723",
+      "sources": [
+        {
+          "url": "https://arxiv.org/abs/2611.30723",
+          "publisher": "arXiv / paper authors",
+          "type": "primary research preprint"
+        }
+      ],
+      "submission_date": "2026-11-23",
+      "submission_time_utc": "2026-11-23T14:03:02Z",
+      "publication_date_basis": "arXiv November 24 public listing; v1 submitted November 23, public posting clock time not established",
+      "doi": "10.48550/arXiv.2611.30723"
+    },
+    {
+      "id": "ai-news:bipert-single-cell-linear-baseline:2611.31227",
+      "title": "BiPert tests simple linear models for predicting and identifying gene perturbations",
+      "category": "research",
+      "tags": [
+        "AI",
+        "ML",
+        "biology",
+        "evaluation"
+      ],
+      "summary": "The study evaluates linear methods for transferring genetic perturbation effects across cellular contexts and identifying perturbed genes from expression measurements. Authors report useful few-shot adaptation and strong inverse-identification baselines.",
+      "why_it_matters": "Shows why interpretable classical baselines matter in biomedical ML, even against more complex neural approaches.",
+      "caveat": "Benchmark and cell-context specific; no clinical or therapeutic conclusion and no independent replication.",
+      "canonical_url": "https://arxiv.org/abs/2611.31227",
+      "source_url": "https://arxiv.org/abs/2611.31227",
+      "publisher": "arXiv / paper authors",
+      "type": "primary research preprint",
+      "publication_date": "2026-11-24",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-23",
+      "event_date_precision": "second",
+      "discovered_at": "2026-11-24T14:16:44.729Z",
+      "checked_at": "2026-11-24T14:16:44.729Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "author_reported_research",
+      "release_status": "preprint",
+      "collection_classification": "recent",
+      "version": "v1",
+      "arxiv_id": "2611.31227",
+      "sources": [
+        {
+          "url": "https://arxiv.org/abs/2611.31227",
+          "publisher": "arXiv / paper authors",
+          "type": "primary research preprint"
+        }
+      ],
+      "submission_date": "2026-11-23",
+      "submission_time_utc": "2026-11-23T18:58:32Z",
+      "publication_date_basis": "arXiv November 24 public listing; v1 submitted November 23, public posting clock time not established",
+      "doi": "10.48550/arXiv.2611.31227"
+    }
+  ],
+  "technologies": [
+    {
+      "id": "tech-proposal:ling-32-air:2026-11-24",
+      "name": "Ling-3.2-air",
+      "aliases": [
+        "Ling 3.2 Air"
+      ],
+      "usage_tags": [
+        "AI",
+        "ML",
+        "DL",
+        "LLM",
+        "multimodal"
+      ],
+      "explanation": "Open-weight sparse multimodal model for professional documents and agent workflows.",
+      "conditional_advantage": "Sparse expert activation can reduce compute compared with dense models of similar total parameter count, if optimized kernels and topology are available.",
+      "best_fit_uses": [
+        "Document reasoning research",
+        "Self-hosted agent workflow evaluation"
+      ],
+      "tradeoffs": [
+        "Large total weight footprint",
+        "Vendor benchmarks not independent",
+        "Hallucinations in professional tasks"
+      ],
+      "alternatives": [
+        "General VLM with retrieval",
+        "Dense document VLM"
+      ],
+      "hardware_runtime_constraints": "Model card recommends SGLang on four 141 GB-class GPUs or four Blackwell GPUs for 256K context; eight 80 GB cards also suggested. Review remote model code before use.",
+      "official_documentation_url": "https://huggingface.co/inclusionAI/Ling-3.2-air",
+      "license_uncertainty": "MIT label observed; inherited dependencies and weights terms require review.",
+      "availability_uncertainty": "Model card and files visible; deployment not tested.",
+      "pricing_uncertainty": "API and hosting costs unverified.",
+      "existing_profile_id": null,
+      "profile_relationship": "new_candidate_pending_canonical_dedup",
+      "source_links": [
+        {
+          "url": "https://huggingface.co/inclusionAI/Ling-3.2-air",
+          "publisher": "Ant Group inclusionAI",
+          "type": "first-party model card"
+        }
+      ],
+      "date_checked": "2026-11-24",
+      "checked_at": "2026-11-24T14:16:44.729Z",
+      "review_status": "source_checked_pending_publisher_catalog_dedup"
+    },
+    {
+      "id": "tech-proposal:atomic-engine:2026-11-24",
+      "name": "Atomic Engine",
+      "aliases": [
+        "Atomic Chat inference engine"
+      ],
+      "usage_tags": [
+        "AI",
+        "LLM",
+        "inference",
+        "MoE"
+      ],
+      "explanation": "Experimental llama.cpp derivative with SSD-backed experts and managed memory limits.",
+      "conditional_advantage": "Can reduce resident weight memory where a model's experts are sparsely accessed and storage is sufficiently fast.",
+      "best_fit_uses": [
+        "Local sparse-model experiments",
+        "Memory-constrained inference"
+      ],
+      "tradeoffs": [
+        "SSD latency and bandwidth",
+        "Context and cache consume additional memory",
+        "Experimental behavior"
+      ],
+      "alternatives": [
+        "llama.cpp with CPU offload",
+        "Resident GPU inference"
+      ],
+      "hardware_runtime_constraints": "README documents Apple Silicon Metal experiments and GGUF weights; reserve host RAM outside the engine budget. Other hardware performance unverified.",
+      "official_documentation_url": "https://github.com/AtomicBot-ai/atomic-engine",
+      "license_uncertainty": "Repository displays MIT; dependencies and model weights may have separate licenses.",
+      "availability_uncertainty": "Public experimental source; no tagged release date or compatibility audit established.",
+      "pricing_uncertainty": "No software or service price verified; storage and compute costs vary.",
+      "existing_profile_id": null,
+      "profile_relationship": "new_candidate_pending_canonical_dedup",
+      "source_links": [
+        {
+          "url": "https://github.com/AtomicBot-ai/atomic-engine",
+          "publisher": "Atomic Chat",
+          "type": "first-party repository documentation"
+        },
+        {
+          "url": "https://explainx.ai/blog/atomic-engine-inkling-2-mini-3x-speed-memory-budget-november-2026",
+          "publisher": "Explainx",
+          "type": "specialist secondary reporting"
+        }
+      ],
+      "date_checked": "2026-11-24",
+      "checked_at": "2026-11-24T14:16:44.729Z",
+      "review_status": "source_checked_pending_publisher_catalog_dedup"
+    },
+    {
+      "id": "tech-proposal:toolsmith:2026-11-24",
+      "name": "ToolSmith",
+      "aliases": [
+        "ToolSmith automatic tool generation"
+      ],
+      "usage_tags": [
+        "AI",
+        "LLM",
+        "multimodal",
+        "agents"
+      ],
+      "explanation": "Research framework that builds and reuses search modules from primitive tools.",
+      "conditional_advantage": "May reduce repeated manual engineering for heterogeneous search tasks when generated modules can be safely verified.",
+      "best_fit_uses": [
+        "Multimodal retrieval experiments",
+        "Reusable tool libraries"
+      ],
+      "tradeoffs": [
+        "Judge bias",
+        "Generated code can introduce vulnerabilities",
+        "Library quality and maintenance"
+      ],
+      "alternatives": [
+        "Fixed tool library",
+        "Human-authored modules"
+      ],
+      "hardware_runtime_constraints": "Requires agent/VLM inference and search tools; exact accelerator and runtime requirements not verified from abstract.",
+      "official_documentation_url": "https://arxiv.org/abs/2611.31198",
+      "license_uncertainty": "Paper points to code and data; repository license not verified.",
+      "availability_uncertainty": "Research artifact claim only; runnable release not inspected.",
+      "pricing_uncertainty": "No cost verified; inference and tool calls may incur expense.",
+      "existing_profile_id": null,
+      "profile_relationship": "new_candidate_pending_canonical_dedup",
+      "source_links": [
+        {
+          "url": "https://arxiv.org/abs/2611.31198",
+          "publisher": "arXiv / paper authors",
+          "type": "primary research preprint"
+        }
+      ],
+      "date_checked": "2026-11-24",
+      "checked_at": "2026-11-24T14:16:44.729Z",
+      "review_status": "source_checked_pending_publisher_catalog_dedup"
+    },
+    {
+      "id": "tech-proposal:speechsplice:2026-11-24",
+      "name": "SpeechSplice",
+      "aliases": [
+        "SpeechSplice pronunciation control"
+      ],
+      "usage_tags": [
+        "AI",
+        "DL",
+        "LLM",
+        "audio"
+      ],
+      "explanation": "Research technique for modifying encoder hidden states to control pronunciation at inference time.",
+      "conditional_advantage": "Allows targeted corrections without weight updates if a compatible encoder-decoder architecture exposes relevant internal states.",
+      "best_fit_uses": [
+        "Pronunciation-control research",
+        "Domain-specific TTS evaluation"
+      ],
+      "tradeoffs": [
+        "Architecture-dependent",
+        "Potential side effects on sound quality",
+        "Requires model internals"
+      ],
+      "alternatives": [
+        "Phoneme-conditioned TTS",
+        "Pronunciation lexicons",
+        "Fine-tuning"
+      ],
+      "hardware_runtime_constraints": "Needs access to text encoder representations and speech decoder; hardware and model implementation requirements not independently verified.",
+      "official_documentation_url": "https://arxiv.org/abs/2611.30927",
+      "license_uncertainty": "Implementation license unknown.",
+      "availability_uncertainty": "Paper reports experiments; code and supported models not verified.",
+      "pricing_uncertainty": "No price verified.",
+      "existing_profile_id": null,
+      "profile_relationship": "new_candidate_pending_canonical_dedup",
+      "source_links": [
+        {
+          "url": "https://arxiv.org/abs/2611.30927",
+          "publisher": "arXiv / paper authors",
+          "type": "primary research preprint"
+        }
+      ],
+      "date_checked": "2026-11-24",
+      "checked_at": "2026-11-24T14:16:44.729Z",
+      "review_status": "source_checked_pending_publisher_catalog_dedup"
+    }
+  ],
+  "terms": [
+    {
+      "id": "term-proposal:corrective-prefix-attention:2026-11-24",
+      "name": "Corrective Prefix Attention",
+      "aliases": [
+        "CPA"
+      ],
+      "definition": "A proposed drafting mechanism that conditions candidate tokens on earlier selections within a parallel speculative token block.",
+      "mechanism": "Precompute interactions among candidate shortlists, then use prior token choices to score later candidates before target-model verification.",
+      "usage_tags": [
+        "AI",
+        "DL",
+        "SLM",
+        "LLM",
+        "inference"
+      ],
+      "example": "If a draft chooses a singular noun, later candidates can favor a matching verb before the verifier checks the block.",
+      "caveat": "Not a replacement for target verification or a guarantee of speedup; CPA is an ambiguous acronym.",
+      "related_existing_ids": [
+        "MLD-1155"
+      ],
+      "primary_references": [
+        {
+          "url": "https://arxiv.org/abs/2611.31112",
+          "publisher": "arXiv / paper authors",
+          "type": "primary research preprint"
+        }
+      ],
+      "term_origin": "newly_proposed_research_method",
+      "existing_term_id": null,
+      "related_profile_ids": [],
+      "date_checked": "2026-11-24",
+      "checked_at": "2026-11-24T14:16:44.729Z",
+      "review_status": "source_checked_pending_publisher_canonical_dedup"
+    },
+    {
+      "id": "term-proposal:ssd-expert-streaming:2026-11-24",
+      "name": "SSD-backed expert streaming",
+      "aliases": [
+        "Storage-backed MoE expert streaming"
+      ],
+      "definition": "An inference strategy that fetches selected mixture-of-experts weights from persistent storage instead of keeping all experts resident in RAM or VRAM.",
+      "mechanism": "The router selects experts; the runtime reads their weights into a limited working buffer, with caching or prefetching where available.",
+      "usage_tags": [
+        "AI",
+        "LLM",
+        "inference"
+      ],
+      "example": "A sparse local model can read a cold expert from NVMe storage when requested instead of preloading every expert.",
+      "caveat": "Different from reducing parameter count; random storage access and bandwidth may dominate latency.",
+      "related_existing_ids": [
+        "MLD-0742"
+      ],
+      "primary_references": [
+        {
+          "url": "https://github.com/AtomicBot-ai/atomic-engine",
+          "publisher": "Atomic Chat",
+          "type": "first-party repository documentation"
+        }
+      ],
+      "term_origin": "new_to_atlas_candidate",
+      "existing_term_id": null,
+      "related_profile_ids": [],
+      "date_checked": "2026-11-24",
+      "checked_at": "2026-11-24T14:16:44.729Z",
+      "review_status": "source_checked_pending_publisher_canonical_dedup"
+    },
+    {
+      "id": "term-proposal:risk-controlled-text-to-sql:2026-11-24",
+      "name": "Risk-controlled abstention in text-to-SQL",
+      "aliases": [],
+      "definition": "Applying a calibrated acceptance threshold so a generated query is withheld when evidence of its correctness is insufficient.",
+      "mechanism": "Fit a validator on labeled query results and select an acceptance threshold with a specified statistical risk budget.",
+      "usage_tags": [
+        "AI",
+        "ML",
+        "LLM",
+        "evaluation"
+      ],
+      "example": "A database assistant asks for clarification instead of returning a questionable query result.",
+      "caveat": "Guarantees require suitable calibration assumptions; query execution success does not establish semantic correctness.",
+      "related_existing_ids": [
+        "MLD-0198",
+        "MLD-0142"
+      ],
+      "primary_references": [
+        {
+          "url": "https://arxiv.org/abs/2611.31190",
+          "publisher": "arXiv / paper authors",
+          "type": "primary research preprint"
+        }
+      ],
+      "term_origin": "existing_term_enrichment_new_application",
+      "existing_term_id": "MLD-0198",
+      "related_profile_ids": [],
+      "date_checked": "2026-11-24",
+      "checked_at": "2026-11-24T14:16:44.729Z",
+      "review_status": "source_checked_pending_publisher_canonical_dedup"
+    }
+  ],
+  "corrections": []
+}
