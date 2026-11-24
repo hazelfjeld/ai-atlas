@@ -887,6 +887,62 @@ with sync_playwright() as p:
             check('Verified news card retains readable source links '+story_scheme+' '+str(story_width),
                   archive_story.locator('xpath=..').locator('a[href^="https://"]').first.is_visible())
         story_context.close()
+    # Compact reference cards intentionally keep a denser scale than the
+    # illustrated Discover feed, but the three native catalog families share it.
+    for compact_scheme in ('light', 'dark'):
+        compact_context = browser.new_context(color_scheme=compact_scheme)
+        compact_page = compact_context.new_page()
+        compact_style = """el => {
+            const s = getComputedStyle(el);
+            return [s.fontFamily,s.fontWeight,s.fontSize,s.lineHeight,s.letterSpacing];
+        }"""
+        for compact_width in (320, 390, 768, 1280):
+            compact_page.set_viewport_size({'width': compact_width, 'height': 900})
+            compact_page.goto(base + 'technologies.html')
+            tech_title = compact_page.locator('#tech-results .tech-card > h2').first
+            tech_title.wait_for(state='visible', timeout=45000)
+            tech_type = tech_title.evaluate(compact_style)
+            tech_title.scroll_into_view_if_needed()
+            compact_page.screenshot(path=str(out / f'compact-tech-{compact_scheme}-{compact_width}.png'))
+            check('Technology card retains a real title link ' + compact_scheme + str(compact_width),
+                  tech_title.locator('a[href^="#"]').is_visible())
+            if compact_width <= 650:
+                compact_page.locator('.site-mobile-chrome__nav > summary').click()
+                compact_page.locator('.site-mobile-chrome__menu a[href="playbooks.html"]').click()
+            else:
+                compact_page.locator('.site-chrome__links a[href="playbooks.html"]').click()
+            play_title = compact_page.locator('.playbook-shell .playbook > h2').first
+            play_title.wait_for(state='visible', timeout=45000)
+            play_type = play_title.evaluate(compact_style)
+            play_title.scroll_into_view_if_needed()
+            compact_page.screenshot(path=str(out / f'compact-playbooks-{compact_scheme}-{compact_width}.png'))
+            if compact_width <= 650:
+                compact_page.locator('.site-mobile-chrome__nav > summary').click()
+                compact_more = compact_page.locator('.site-mobile-chrome__menu .site-mobile-chrome__more')
+            else:
+                compact_more = compact_page.locator('.site-chrome > .site-chrome__more')
+            if not compact_more.evaluate('el => el.open'):
+                compact_more.locator('summary').click()
+            compact_more.locator('a[href="research.html"]').click()
+            research_title = compact_page.locator('#results .card > h2').first
+            research_title.wait_for(state='visible', timeout=45000)
+            research_type = research_title.evaluate(compact_style)
+            title_button = research_title.locator('button.title-button')
+            research_title.scroll_into_view_if_needed()
+            compact_page.screenshot(path=str(out / f'compact-research-{compact_scheme}-{compact_width}.png'))
+            print('Compact editorial card type', compact_scheme, compact_width, tech_type, play_type, research_type)
+            check('Shared compact card type ' + compact_scheme + ' ' + str(compact_width),
+                  tech_type == play_type == research_type
+                  and research_type == title_button.evaluate(compact_style)
+                  and research_type[1] == '400'
+                  and research_type[2] == ('23px' if compact_width == 1280 else '20px')
+                  and compact_page.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'))
+            title_button.focus()
+            compact_page.keyboard.press('Enter')
+            check('Shared Research card preserves keyboard dialog ' + compact_scheme + str(compact_width),
+                  compact_page.locator('#detail').evaluate('el => el.open'))
+            compact_page.locator('#close-detail').click()
+        compact_context.close()
     # Check actual Discover-to-editorial transitions, not CSS similarity alone.
     for width in (320, 390, 768, 1280):
         page.set_viewport_size({'width':width, 'height':844})

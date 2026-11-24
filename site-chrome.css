@@ -837,12 +837,20 @@ body:has(.site-chrome) :is(.tech-controls,.playbook-tools,.controls,.search-cont
    Technology and Research cards keep their own grids and interactions, while
    using one title treatment rather than separate page-local headline fonts. */
 :is(.playbook-shell .playbook > h2,
-    .tech-shell .tech-card > h3,
+    .tech-shell .tech-card > h2,
     .shell:has(> .site-chrome.nav) article.card > h3,
-    .shell:has(> .site-chrome.research-site-chrome) .cards > .card > h3){
+    .shell:has(> .site-chrome.research-site-chrome) .cards > .card > h2){
   font:400 clamp(20px,2vw,23px)/1.25 Georgia,'Times New Roman',serif;
   letter-spacing:-.025em;
   color:var(--ink);
+  overflow-wrap:anywhere;
+}
+/* Research titles are native dialog buttons; inherit the heading's tracking
+   as well as its font without changing keyboard or dialog behavior. */
+.shell:has(> .site-chrome.research-site-chrome) .cards > .card > h2 > .title-button{
+  font:inherit;
+  letter-spacing:inherit;
+  color:inherit;
   overflow-wrap:anywhere;
 }
 /* The old Playbook stylesheet hard-codes light-theme grey on its summaries;

@@ -2086,3 +2086,19 @@ test('verified daily story titles reuse the Discover editorial card type scale',
   assert.ok(archive.includes('.item h3{margin:0}'), 'archive keeps its own compact card spacing');
   assert.ok(read('downloads/Atlas_Demo_Offline.html').includes(brand), 'offline fallback embeds exact shared type scale');
 });
+
+test('compact research and technology cards match the actual shared editorial heading elements', () => {
+  const css = read('site-chrome.css');
+  const rule = css.split('/* atlas-editorial-card-copy:begin */')[1].split('/* atlas-editorial-card-copy:end */')[0];
+  for (const selector of ['.playbook-shell .playbook > h2', '.tech-shell .tech-card > h2',
+    '.shell:has(> .site-chrome.research-site-chrome) .cards > .card > h2']) {
+    assert.ok(rule.includes(selector), selector);
+  }
+  assert.doesNotMatch(rule, /\.tech-card > h3|\.research-site-chrome\) \.cards > \.card > h3/);
+  assert.ok(rule.includes("font:400 clamp(20px,2vw,23px)/1.25 Georgia,'Times New Roman',serif"));
+  assert.match(rule, /\.title-button\{\s*font:inherit;\s*letter-spacing:inherit;/);
+  assert.match(read('checkpoint.js'), /element\('h2'\), button = element\('button', record.title, 'title-button'\)/);
+  assert.match(read('technologies.js'), /const h = el\('h2'\), route = el\('a',r.name\)/);
+  assert.match(read('technologies.html'), /\.tech-card h2\{margin:7px 0\}/);
+  assert.ok(read('downloads/Atlas_Demo_Offline.html').includes(css));
+});
