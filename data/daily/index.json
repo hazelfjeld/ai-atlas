@@ -395,7 +395,7 @@
       "published_at": "2026-11-24T14:26:22Z"
     }
   ],
-  "last_successful_publish_at": "2026-11-23T15:54:12Z",
-  "status": "edition_revision_1_pending_production_verification",
-  "coverage_note": "November 24 revision 1 prepared from a partial source collection; production verification pending. Last successful publication timestamp still refers to the latest certified edition."
+  "last_successful_publish_at": "2026-11-24T15:37:47Z",
+  "status": "edition_revision_1_production_verified",
+  "coverage_note": "November 24 v1: nine source-reviewed reports, two news and seven catalog proposals deferred. Partial coverage; author-reported findings caveated. Exact production revision 98d7a5bf passed Cloudflare HTTP/browser and GitHack on November 24, 2026; independent external query retrieval unavailable."
 }

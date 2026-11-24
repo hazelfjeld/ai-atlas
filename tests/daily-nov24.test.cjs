@@ -18,3 +18,14 @@ test('November 24 source-reviewed queue preserves immutable bytes, source dates,
  const latest=index.editions.at(-1),latestReceipt=ledger.receipts.find(x=>x.publication_edition===latest.date+'-v'+latest.revision);assert.ok(latestReceipt);
  assert.equal(index.status,'edition_revision_'+latest.revision+'_'+(latestReceipt.production_verified_at?'production_verified':'pending_production_verification'));
 });
+
+ test('certified November 24 receipt preserves its production evidence and script-free source preview',()=>{
+ const ledger=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8')),r=ledger.receipts.find(x=>x.batch_id==='atlas-daily-20261124-20261124t141644729z-source-review-a');
+ assert.equal(r.production_verified_at,'2026-11-24T15:37:47Z');assert.equal(r.production_commit,'98d7a5bfd218d12b1fed007692d54e194f802d9f');assert.equal(r.production_workflow_run_id,45414581877);assert.equal(r.githack_workflow_run_id,45414582114);assert.equal(r.publication_history.at(-1).status,'cloudflare_http_browser_and_githack_verified');
+ if(ledger.receipts.filter(x=>x.production_verified_at).at(-1)===r){
+ const html=fs.readFileSync('whats-new.html','utf8'),section=html.match(/<section class="site-static-fallback" id="scriptfree-daily-archive"[\s\S]*?<\/section>/)[0];
+ const edition=JSON.parse(fs.readFileSync('data/daily/editions/2026-11-24-v1.json','utf8'));
+ for(const n of edition.news.slice(0,3)){assert.ok(section.includes('href="'+n.source_url+'"'));assert.ok(section.includes('Source published '+n.publication_date));}
+ for(const d of [24,23,22])assert.ok(section.includes('href="data/daily/editions/2026-11-'+d+'-v1.json"'));
+ }
+ });

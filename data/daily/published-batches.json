@@ -1999,7 +1999,7 @@
       "edition_date": "2026-11-24",
       "validation_result": "independent_batch_sha256_utf8_bytes_counts_unique_ids_receipt_reconciliation_primary_source_dates_and_arxiv_listing_review",
       "status": "partially_published_9_news_2_news_and_7_catalog_proposals_deferred",
-      "publication_outcome": "pending_production_verification",
+      "publication_outcome": "immutable_revision_1_cloudflare_http_browser_and_githack_verified",
       "publication_edition": "2026-11-24-v1",
       "accepted_news_ids": [
         "ai-news-amazon-decart-optimization-stack-agreement-2026-11-23",
@@ -2053,8 +2053,22 @@
           "status": "pending_production_verification",
           "prepared_at": "2026-11-24T14:26:22Z",
           "note": "Nine reviewed reports; two news and seven catalog proposals held. Immutable SHA-256 b3d3da391fef218c09cba129134d7284b6650c6ec11d91e4cc81f57f5a337133, 26290 UTF-8 bytes. Public verification pending."
+        },
+        {
+          "edition": "2026-11-24-v1",
+          "status": "cloudflare_http_browser_and_githack_verified",
+          "note": "Exact main 98d7a5bfd218d12b1fed007692d54e194f802d9f passed Cloudflare workflow 45414581877 attempt 2 on November 24, 2026: tested artifact deployed, 513 exact HTTP assets on each of three production hosts, including the immutable edition and archive index. Hosted archive reader, permalink, no-script recovery, responsive light/dark, keyboard and Games checks passed. Catalog/GitHack workflow 45414582114 passed 467 Node tests, reproducibility and exact GitHack revision parity. Production job completed at 2026-11-24T15:37:47Z. External reader could not independently retrieve the exact dated query permalink. Immutable edition SHA-256 b3d3da391fef218c09cba129134d7284b6650c6ec11d91e4cc81f57f5a337133, 26290 UTF-8 bytes.",
+          "verified_at": "2026-11-24T15:37:47Z"
         }
-      ]
+      ],
+      "production_verified_at": "2026-11-24T15:37:47Z",
+      "production_verified_revision": 1,
+      "last_verified_at": "2026-11-24T15:37:47Z",
+      "last_verified_public_url": "https://aiupdates.app/whats-new.html?date=2026-11-24&revision=1",
+      "production_commit": "98d7a5bfd218d12b1fed007692d54e194f802d9f",
+      "production_workflow_run_id": 45414581877,
+      "githack_workflow_run_id": 45414582114,
+      "verification_scope": "Exact main 98d7a5bfd218d12b1fed007692d54e194f802d9f passed Cloudflare workflow 45414581877 attempt 2 on November 24, 2026: tested artifact deployed, 513 exact HTTP assets on each of three production hosts, including the immutable edition and archive index. Hosted archive reader, permalink, no-script recovery, responsive light/dark, keyboard and Games checks passed. Catalog/GitHack workflow 45414582114 passed 467 Node tests, reproducibility and exact GitHack revision parity. Production job completed at 2026-11-24T15:37:47Z. External reader could not independently retrieve the exact dated query permalink. Immutable edition SHA-256 b3d3da391fef218c09cba129134d7284b6650c6ec11d91e4cc81f57f5a337133, 26290 UTF-8 bytes."
     }
   ]
 }
