@@ -1301,3 +1301,17 @@ test('MLD-0915–1345 use the deterministic shared first-paint rail', () => {
   assert.equal(Object.keys(manifest).length, 1345,
     'completion of shared rail coverage must not drop any concept records');
 });
+
+test('Primary editorial summaries share the archive reading rhythm without changing supplemental copy', () => {
+  const block = css.split('/* atlas-shared-primary-card-summary:begin */')[1]
+    ?.split('/* atlas-shared-primary-card-summary:end */')[0];
+  assert.ok(block);
+  for (const selector of [
+    '.playbook-shell .playbook > h2 + p',
+    '.tech-shell .tech-card > .lede',
+    '.shell:has(> .site-chrome.research-site-chrome) .cards > .card > h2 + p',
+    '#edition-content .item > h3 + p'
+  ]) assert.ok(block.includes(selector), 'Missing primary summary: ' + selector);
+  assert.match(block, /font-size:14px;\s*line-height:1\.65;\s*color:var\(--muted\);/);
+  assert.doesNotMatch(block, /\.advantage|\.why|\.caveat|\.story-body|display:none/);
+});

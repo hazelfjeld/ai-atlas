@@ -1162,6 +1162,20 @@ body:has(.site-chrome) :is(.tech-controls,.playbook-tools,.controls,.search-cont
 }
 /* atlas-card-copy-contrast:end */
 
+/* atlas-shared-primary-card-summary:begin */
+/* Use the existing archive's readable 14px/1.65 body rhythm for compact
+   editorial cards. Only primary summaries change: details, metadata, tags,
+   and Discover's illustrated responsive feed keep their own density. */
+.playbook-shell .playbook > h2 + p,
+.tech-shell .tech-card > .lede,
+.shell:has(> .site-chrome.research-site-chrome) .cards > .card > h2 + p,
+#edition-content .item > h3 + p{
+  font-size:14px;
+  line-height:1.65;
+  color:var(--muted);
+}
+/* atlas-shared-primary-card-summary:end */
+
 
 /* atlas-discover-first-paint:begin */
 /* Discover already renders six useful cards before data hydration.

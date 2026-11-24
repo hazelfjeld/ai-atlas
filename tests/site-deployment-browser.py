@@ -878,6 +878,12 @@ with sync_playwright() as p:
             archive_story = story_page.locator('#edition-content .item > h3').first
             archive_story.wait_for(state='visible')
             actual = archive_story.evaluate(story_style)
+            archive_summary = story_page.locator('#edition-content .item > h3 + p').first.evaluate("""el => {
+                const s = getComputedStyle(el);
+                return [s.fontSize, s.lineHeight];
+            }""")
+            check('Archive primary summary preserves readable type ' + story_scheme + ' ' + str(story_width),
+                  archive_summary == ['14px', '23.1px'])
             archive_story.scroll_into_view_if_needed()
             story_page.screenshot(path=str(out / f'archive-story-type-{story_scheme}-{story_width}.png'))
             print('Editorial story type', story_scheme, story_width, baseline, actual)
@@ -896,12 +902,22 @@ with sync_playwright() as p:
             const s = getComputedStyle(el);
             return [s.fontFamily,s.fontWeight,s.fontSize,s.lineHeight,s.letterSpacing];
         }"""
+        summary_style = """el => {
+            const s = getComputedStyle(el);
+            const probe = document.createElement('span');
+            probe.style.color = 'var(--muted)';
+            el.append(probe);
+            const muted = getComputedStyle(probe).color;
+            probe.remove();
+            return [s.fontSize, s.lineHeight, s.color === muted];
+        }"""
         for compact_width in (320, 390, 768, 1280):
             compact_page.set_viewport_size({'width': compact_width, 'height': 900})
             compact_page.goto(base + 'technologies.html')
             tech_title = compact_page.locator('#tech-results .tech-card > h2').first
             tech_title.wait_for(state='visible', timeout=45000)
             tech_type = tech_title.evaluate(compact_style)
+            tech_summary = compact_page.locator('#tech-results .tech-card > .lede').first.evaluate(summary_style)
             tech_title.scroll_into_view_if_needed()
             compact_page.screenshot(path=str(out / f'compact-tech-{compact_scheme}-{compact_width}.png'))
             check('Technology card retains a real title link ' + compact_scheme + str(compact_width),
@@ -914,6 +930,7 @@ with sync_playwright() as p:
             play_title = compact_page.locator('.playbook-shell .playbook > h2').first
             play_title.wait_for(state='visible', timeout=45000)
             play_type = play_title.evaluate(compact_style)
+            play_summary = compact_page.locator('.playbook-shell .playbook > h2 + p').first.evaluate(summary_style)
             play_title.scroll_into_view_if_needed()
             compact_page.screenshot(path=str(out / f'compact-playbooks-{compact_scheme}-{compact_width}.png'))
             if compact_width <= 650:
@@ -927,6 +944,7 @@ with sync_playwright() as p:
             research_title = compact_page.locator('#results .card > h2').first
             research_title.wait_for(state='visible', timeout=45000)
             research_type = research_title.evaluate(compact_style)
+            research_summary = compact_page.locator('#results .card > h2 + p').first.evaluate(summary_style)
             title_button = research_title.locator('button.title-button')
             research_title.scroll_into_view_if_needed()
             compact_page.screenshot(path=str(out / f'compact-research-{compact_scheme}-{compact_width}.png'))
@@ -937,6 +955,9 @@ with sync_playwright() as p:
                   and research_type[1] == '400'
                   and research_type[2] == ('23px' if compact_width == 1280 else '20px')
                   and compact_page.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'))
+            print('Compact editorial summary', compact_scheme, compact_width, tech_summary, play_summary, research_summary)
+            check('Shared primary card summary ' + compact_scheme + ' ' + str(compact_width),
+                  tech_summary == play_summary == research_summary == ['14px', '23.1px', True])
             title_button.focus()
             compact_page.keyboard.press('Enter')
             check('Shared Research card preserves keyboard dialog ' + compact_scheme + str(compact_width),
