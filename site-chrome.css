@@ -1543,19 +1543,21 @@ html:is(:has(.nojs-primary-routes > .notice[id="/sources"]:target),:has(.nojs-pr
 /* atlas-scriptless-current-visual:end */
 
 /* atlas-shared-editorial-reading-gutter:begin */
-/* Discover's reading column is the reference. News formerly stacked the
-   generic main inset on its own shell inset; Playbooks used a smaller
-   independent clamp. Give all three one desktop gutter owner, retaining
-   the existing editorial width caps, mobile layouts and inner card grids. */
+/* Discover's reading column is the reference. News and Research formerly
+   stacked the generic main inset on their shell inset; the two searchable
+   directories used a smaller independent clamp. Use one desktop gutter
+   owner, retaining editorial width caps, phone layouts and inner card grids. */
 @media (min-width:651px){
   :root{--atlas-workspace-content-gutter:40px}
   :is(.app-shell .workspace > main,
       .playbook-shell:has(> .site-chrome.playbook-top),
-      .shell:has(> .site-chrome.top)){
+      .tech-shell:has(> .site-chrome.tech-top),
+      .shell:has(> .site-chrome:is(.top,.research-site-chrome))){
     padding-inline:var(--atlas-workspace-content-gutter)!important;
   }
   :is(.playbook-shell:has(> .site-chrome.playbook-top),
-      .shell:has(> .site-chrome.top)) > main{
+      .tech-shell:has(> .site-chrome.tech-top),
+      .shell:has(> .site-chrome:is(.top,.research-site-chrome))) > main{
     padding-inline:0;
   }
 }

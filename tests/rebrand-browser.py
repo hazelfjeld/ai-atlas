@@ -1130,16 +1130,20 @@ with sync_playwright() as p:
                     return {max:s.maxWidth,padding:parseFloat(s.paddingLeft),
                             contentLeft:r.left+parseFloat(s.paddingLeft)};
                 }""")
-                # Playbooks now deliberately uses Discover's exact 40/26px
-                # desktop/tablet gutter, rather than the legacy 24–36px clamp.
-                # Retain the prior frame width, origin, overflow and theme checks
-                # for every route; require tighter heading alignment for Playbooks.
-                if route == 'playbooks.html' and width >= 651:
+                # Shared editorial desks deliberately use Discover's exact
+                # 40/26px desktop/tablet gutter, not the legacy 24–36px clamp.
+                # Retain frame width, origin, overflow and theme checks, and
+                # measure the actual heading rather than only the outer shell.
+                if route in ('playbooks.html','technologies.html','research.html') and width >= 651:
                     expected_gutter = 26 if width <= 1200 else 40
-                    heading_x = page.locator('.playbook-hero h1').evaluate(
+                    heading_x = page.locator('main h1').first.evaluate(
                         'el => el.getBoundingClientRect().left')
+                    inner_padding = page.locator('main').first.evaluate(
+                        'el => parseFloat(getComputedStyle(el).paddingLeft)')
                     padding_ok = (abs(metrics['padding']-expected_gutter) <= 0.5 and
-                                  abs(heading_x-discover_x) <= 2)
+                                  abs(heading_x-discover_x) <= 2 and
+                                  abs(inner_padding) <= 0.5)
+                    metrics['innerPadding'] = inner_padding
                     metrics['headingLeft'] = heading_x
                     metrics['expectedGutter'] = expected_gutter
                 else:
@@ -1148,7 +1152,7 @@ with sync_playwright() as p:
                            (metrics['max']=='1120px' and padding_ok and
                             abs(metrics['contentLeft']-discover_x) <= 16))
                 # Preserve the exact failing frame as well as successful ones.
-                if route == 'playbooks.html' or ((width,theme)==(1280,'light') and
+                if route in ('playbooks.html','technologies.html','research.html') or ((width,theme)==(1280,'light') and
                     route in ('about.html','hardware-review.html','catalog-review.html')):
                     page.screenshot(path=str(out/f'reading-frame-{route}-{width}-{theme}.png'))
                 check(f'{route} {width}px {theme} shares Discover reading frame without overflow '

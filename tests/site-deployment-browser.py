@@ -3641,8 +3641,16 @@ with sync_playwright() as p:
             reference = lead_page.locator('h1').first.evaluate(
                 'el => el.getBoundingClientRect().left')
             lead_page.screenshot(path=str(out/('reading-gutter-discover-'+scheme+'-'+str(width)+'.png')))
-            for route in ('playbooks.html','whats-new.html'):
-                lead_page.locator('#navigation > .site-chrome__links a[href="'+route+'"]').click()
+            for route in ('playbooks.html','whats-new.html','research.html','technologies.html'):
+                if route == 'research.html':
+                    lead_page.locator('#additional-navigation > summary').click()
+                    lead_page.locator('#additional-navigation a[href="research.html"]').click()
+                elif route == 'technologies.html':
+                    lead_page.locator('#navigation > .site-chrome__links a[href="#/technologies"]').click()
+                    lead_page.locator('section[id="/technologies"] a[data-nojs-static="technologies"]').click()
+                    lead_page.locator('a[href="../technologies.html"]').click()
+                else:
+                    lead_page.locator('#navigation > .site-chrome__links a[href="'+route+'"]').click()
                 lead_page.wait_for_load_state('load')
                 heading = lead_page.locator('h1').first
                 left = heading.evaluate('el => el.getBoundingClientRect().left')
