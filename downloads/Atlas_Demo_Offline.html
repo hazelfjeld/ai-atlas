@@ -649,7 +649,8 @@ body > .site-mobile-chrome:not([data-page-label]):has(+ .site-chrome .site-chrom
    Keep article-specific spacing and card layouts; share only the narrative
    heading treatment across About, directories, detail pages and evidence reviews. */
 :is(.term-shell > .profile-section, .term-shell > .detail-block,
-    .review-shell > section, .shell > main > section) > h2{
+    .review-shell > section, .shell > main > section,
+    :where(#edition-content) > section > .heading) > h2{
   font:400 clamp(21px,2.2vw,25px)/1.25 Georgia,'Times New Roman',serif;
   letter-spacing:-.025em;
   color:var(--ink);

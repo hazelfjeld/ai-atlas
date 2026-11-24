@@ -4050,6 +4050,36 @@ with sync_playwright() as p:
                         scheme+'-'+str(width)+'.png')))
         bar_context.close()
 
+    # News collection headings and long-form reference subsections have the
+    # same narrative role. Compare actual rendered type, not card headlines.
+    for scheme in ('light', 'dark'):
+        heading_context = browser.new_context(color_scheme=scheme, reduced_motion='reduce')
+        heading_page = heading_context.new_page()
+        for width in (320, 390, 768, 1280):
+            heading_page.set_viewport_size({'width': width, 'height': 844})
+            styles = """el => {
+                const s = getComputedStyle(el);
+                return [s.fontFamily, s.fontSize, s.fontWeight, s.lineHeight, s.letterSpacing];
+            }"""
+            heading_page.goto(base + 'terms/index.html', wait_until='load')
+            reference = heading_page.locator('.term-shell > .detail-block > h2').first
+            expect(reference).to_be_visible()
+            baseline = reference.evaluate(styles)
+            heading_page.goto(base + 'technology/TECH-0216-pytorch.html', wait_until='load')
+            profile = heading_page.locator('.term-shell > .profile-section > h2').first
+            expect(profile).to_be_visible()
+            check('Reference subsection type ' + scheme + ' ' + str(width),
+                  profile.evaluate(styles) == baseline)
+            heading_page.goto(base + 'whats-new.html', wait_until='load')
+            heading = heading_page.locator('#edition-content > section > .heading > h2').first
+            expect(heading).to_be_visible(timeout=20000)
+            check('Shared news/reference subsection type ' + scheme + ' ' + str(width),
+                  heading.evaluate(styles) == baseline)
+            heading.scroll_into_view_if_needed()
+            heading_page.screenshot(path=str(out / (
+                'shared-news-subsection-' + scheme + '-' + str(width) + '.png')))
+        heading_context.close()
+
     check('no application runtime exceptions', not errors)
     browser.close()
 (out / 'report.json').write_text(json.dumps({'base':base, 'checks':checks, 'checks_passed':len(checks), 'errors':errors}, indent=2), encoding='utf-8')

@@ -1315,3 +1315,16 @@ test('Primary editorial summaries share the archive reading rhythm without chang
   assert.match(block, /font-size:14px;\s*line-height:1\.65;\s*color:var\(--muted\);/);
   assert.doesNotMatch(block, /\.advantage|\.why|\.caveat|\.story-body|display:none/);
 });
+
+test('Daily archive collection headings reuse the shared reference subsection type', () => {
+  const rule = css.match(/:is\(\.term-shell > \.profile-section,[\s\S]*?\) > h2\{[^}]*\}/)?.[0];
+  assert.ok(rule, 'Shared narrative heading rule must exist');
+  assert.ok(rule.includes(':where(#edition-content) > section > .heading'),
+    'The news collection heading belongs in the existing shared type rule, without increasing specificity');
+  assert.match(rule, /font:400 clamp\(21px,2\.2vw,25px\)\/1\.25 Georgia/);
+  assert.match(rule, /letter-spacing:-\.025em;/);
+  const archive = fs.readFileSync(path.join(__dirname, '..', 'whats-new.js'), 'utf8');
+  assert.ok(archive.includes("heading=element('div',undefined,'heading'),title=element('h2',label)"));
+  const offline = fs.readFileSync(path.join(__dirname, '..', 'downloads/Atlas_Demo_Offline.html'), 'utf8');
+  assert.ok(offline.includes(css), 'Offline stylesheet must match the shared source exactly');
+});
