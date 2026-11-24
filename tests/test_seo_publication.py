@@ -45,6 +45,18 @@ class Page(HTMLParser):
 
 
 class SEOPublication(unittest.TestCase):
+    def test_scriptfree_daily_preview_generator_executes_and_is_reproducible(self):
+        # Import and execute the real generator, rather than just inspecting
+        # its committed HTML. Syntax errors must fail this publication test.
+        from build_seo import sync_scriptfree_daily_archive
+        html = (ROOT / 'whats-new.html').read_text(encoding='utf-8')
+        self.assertEqual(sync_scriptfree_daily_archive(html), html)
+        start = html.index('>', html.index(
+            '<section class="site-static-fallback" id="scriptfree-daily-archive"')) + 1
+        end = html.index('<h3 class="site-static-fallback__archive-title">', start)
+        stale = html[:start] + '<p>Stale preview</p>' + html[end:]
+        self.assertEqual(sync_scriptfree_daily_archive(stale), html)
+
     def test_community_discussion_invite_is_crawlable_and_generator_owned(self):
         invite = 'https://discord.gg/mvRJjgdM4R'
         html = (ROOT/'about.html').read_text(encoding='utf-8')

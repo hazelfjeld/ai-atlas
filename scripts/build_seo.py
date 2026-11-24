@@ -80,7 +80,7 @@ def sync_scriptfree_daily_archive(html):
                 '<li><article><h3><a href="' + e(row['source_url'], quote=True) +
                 '" rel="noopener noreferrer">' + e(row['title']) + '</a></h3><p>' +
                 e(row['summary']) + '</p><small>Source published ' +
-                e(source_date) + ' · ' + e(caveat)
+                e(source_date) + ' · ' + e(caveat) +
                 '</small></article></li>'
             )
         intro = (
