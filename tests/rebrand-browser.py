@@ -1119,23 +1119,42 @@ with sync_playwright() as p:
             page.locator('.discover-heading h1').wait_for()
             page.evaluate("t => {localStorage.setItem('atlas.theme',t);document.documentElement.dataset.theme=t}",theme)
             discover_x = page.locator('.discover-heading h1').evaluate('el => el.getBoundingClientRect().left')
+            page.screenshot(path=str(out/f'reading-frame-discover-{width}-{theme}.png'))
             for route, selector in reading_routes:
-                page.goto(base+route)
+                response = page.goto(base+route, wait_until='load')
+                check(f'{route} {width}px {theme} reading frame HTTP 200',
+                      response is not None and response.status == 200)
                 el = page.locator(selector).first
                 metrics = el.evaluate("""el => {
                     const r=el.getBoundingClientRect(), s=getComputedStyle(el);
                     return {max:s.maxWidth,padding:parseFloat(s.paddingLeft),
                             contentLeft:r.left+parseFloat(s.paddingLeft)};
                 }""")
+                # Playbooks now deliberately uses Discover's exact 40/26px
+                # desktop/tablet gutter, rather than the legacy 24–36px clamp.
+                # Retain the prior frame width, origin, overflow and theme checks
+                # for every route; require tighter heading alignment for Playbooks.
+                if route == 'playbooks.html' and width >= 651:
+                    expected_gutter = 26 if width <= 1200 else 40
+                    heading_x = page.locator('.playbook-hero h1').evaluate(
+                        'el => el.getBoundingClientRect().left')
+                    padding_ok = (abs(metrics['padding']-expected_gutter) <= 0.5 and
+                                  abs(heading_x-discover_x) <= 2)
+                    metrics['headingLeft'] = heading_x
+                    metrics['expectedGutter'] = expected_gutter
+                else:
+                    padding_ok = 24 <= metrics['padding'] <= 36
                 aligned = (width < 651 or
-                           (metrics['max']=='1120px' and
-                            24 <= metrics['padding'] <= 36 and
+                           (metrics['max']=='1120px' and padding_ok and
                             abs(metrics['contentLeft']-discover_x) <= 16))
-                check(f'{route} {width}px {theme} shares Discover reading frame without overflow',
+                # Preserve the exact failing frame as well as successful ones.
+                if route == 'playbooks.html' or ((width,theme)==(1280,'light') and
+                    route in ('about.html','hardware-review.html','catalog-review.html')):
+                    page.screenshot(path=str(out/f'reading-frame-{route}-{width}-{theme}.png'))
+                check(f'{route} {width}px {theme} shares Discover reading frame without overflow '
+                      f'(Discover x={discover_x}, metrics={metrics})',
                       aligned and page.evaluate('document.documentElement.scrollWidth <= innerWidth') and
                       page.evaluate('document.documentElement.dataset.theme')==theme)
-                if (width,theme)==(1280,'light') and route in ('about.html','playbooks.html','hardware-review.html','catalog-review.html'):
-                    page.screenshot(path=str(out/f'reading-frame-{route}-1280-light.png'))
 
 
     # Cards from seven established page families should read as one workspace,
