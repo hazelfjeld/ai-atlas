@@ -1920,5 +1920,11 @@ test('script-free news preview always uses the most recent production-verified e
  assert.ok(fallback.includes('data-edition-date="'+edition.edition_date+'"'),'Fallback must not show an older or still-pending edition');
  assert.ok(fallback.includes('href="'+editionRef.path+'"'),'Fallback links to the certified immutable edition');
  assert.ok(fallback.includes('href="'+edition.news[0].source_url+'"'),'Fallback links to actual current source evidence');
+ const escapePreview=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+ assert.ok(fallback.includes('edition ('+edition.news.length+' reports total).'),'Fallback count comes from the certified edition, not hardcoded copy');
+ for(const item of edition.news.slice(0,3)){
+  const note=item.caveat||'Primary report reviewed; independent replication not established';
+  assert.ok(fallback.includes('Source published '+escapePreview(item.publication_date||'unreported')+' · '+escapePreview(note)+'</small>'),'Fallback must preserve the specific source caveat: '+item.id);
+ }
  assert.equal(index.last_successful_publish_at,latest.production_verified_at,'Certified clock matches last deployment');
 });

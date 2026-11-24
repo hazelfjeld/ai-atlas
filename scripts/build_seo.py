@@ -75,17 +75,18 @@ def sync_scriptfree_daily_archive(html):
             assert row['review_status'].startswith('publisher_reviewed_')
             assert row['source_url'].startswith('https://')
             source_date = row.get('publication_date') or 'unreported'
+            caveat = row.get('caveat') or 'Primary report reviewed; independent replication not established'
             stories.append(
                 '<li><article><h3><a href="' + e(row['source_url'], quote=True) +
                 '" rel="noopener noreferrer">' + e(row['title']) + '</a></h3><p>' +
                 e(row['summary']) + '</p><small>Source published ' +
-                e(source_date) + ' · Primary report reviewed; independent replication not established'
+                e(source_date) + ' · ' + e(caveat)
                 '</small></article></li>'
             )
         intro = (
             f'<h2>{parsed_day.strftime("%B")} {parsed_day.day} reviewed reports</h2>'
             '<p>Selected headlines from the production-verified ' + display_date +
-            ' edition. Source dates appear on each story. This curated collection '
+            f' edition ({len(edition["news"])} reports total). Source dates appear on each story. This curated collection '
             'is not a live news feed, and publisher or author claims are not '
             'independently replicated.</p><ol class="site-static-fallback__stories" '
             'data-edition-date="' + newest_day + '">' + ''.join(stories) + '</ol>'
