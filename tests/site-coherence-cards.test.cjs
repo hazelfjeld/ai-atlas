@@ -333,9 +333,11 @@ test('generated concept and technology article headlines reuse Discover typograp
     ?.split('/* atlas-shared-headlines:end */')[0];
   assert.ok(block, 'Missing shared reference-heading source');
   assert.ok(brand.includes('.discover-heading h1{font:400 clamp(40px,4.2vw,56px)/1.08 Georgia'), 'Discover desktop heading token changed');
-  assert.ok(block.includes('font:400 clamp(40px,4.2vw,56px)/1.08 Georgia'), 'Reference desktop title must match Discover');
-  assert.ok(block.includes('@media(max-width:650px)') && block.includes('h1{font-size:43px}'),
-    'Reference mobile title must match Discover, including 320px');
+  const shared = '.term-shell > .hero:not(:has(.discover-heading)) h1,.discover-heading h1';
+  assert.ok(brand.includes(shared + '{font:400 clamp(40px,4.2vw,56px)/1.08 Georgia'), 'Desktop titles must use one declaration');
+  assert.ok(brand.includes(shared + '{font-size:45px}'), 'Tablet titles must share the 45px Discover breakpoint');
+  assert.ok(brand.includes(shared + '{font-size:43px}'), 'Mobile titles must share the 43px Discover breakpoint');
+  assert.ok(!block.includes('font-size:') && !block.includes('font:'), 'Do not duplicate the shared heading scale');
   assert.ok(block.includes(':not(:has(.discover-heading))'), 'Do not override existing directory landing headings');
   assert.ok(!block.includes('display:none'), 'Do not conceal native article headings');
   for (const route of ['terms/MLD-0001-a-b-test.html', 'technology/TECH-0288-vllm.html']) {
@@ -346,6 +348,7 @@ test('generated concept and technology article headlines reuse Discover typograp
   }
   const offline=fs.readFileSync(path.join(__dirname, '..', 'downloads/Atlas_Demo_Offline.html'), 'utf8');
   assert.ok(offline.includes(css), 'Offline fallback must embed the exact shared CSS');
+  assert.ok(offline.includes(brand), 'Offline fallback must embed the same responsive heading rules');
 });
 
 test('native mobile header shares Discover height across directories, news, editorials and Games', () => {

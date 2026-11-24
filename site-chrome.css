@@ -822,20 +822,12 @@ body:has(.site-chrome) :is(.tech-controls,.playbook-tools,.controls,.search-cont
 
 
 /* atlas-shared-headlines:begin */
-/* Existing standalone editorial headlines already use Discover's component.
-   Align generated concept/technology articles and A-Z directories with it,
-   without overriding original .discover-heading sizes or changing Games,
-   daily news cards, navigation or content. */
+/* The reference headings and Discover now share the same responsive font
+   rules in brand.css, including its 45px tablet breakpoint. Keep native
+   article wrapping here without duplicating the type scale. */
 .term-shell > .hero:not(:has(.discover-heading)) h1{
-  /* Same desktop type scale as Discover; preserve each article's native heading. */
-  font:400 clamp(40px,4.2vw,56px)/1.08 Georgia,"Times New Roman",serif;
-  letter-spacing:-.045em;
   text-wrap:balance;
   overflow-wrap:break-word;
-}
-@media(max-width:650px){
-  /* Discover's 43px mobile title, shared by concept and technology articles. */
-  .term-shell > .hero:not(:has(.discover-heading)) h1{font-size:43px}
 }
 /* atlas-shared-headlines:end */
 

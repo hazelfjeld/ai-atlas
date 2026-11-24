@@ -3640,6 +3640,11 @@ with sync_playwright() as p:
             lead_page.goto(base+'index.html', wait_until='load')
             reference = lead_page.locator('h1').first.evaluate(
                 'el => el.getBoundingClientRect().left')
+            reference_type = """el => {
+                const s=getComputedStyle(el);
+                return [s.fontFamily.split(',')[0].replaceAll(String.fromCharCode(34),'').replaceAll(String.fromCharCode(39),'').trim().toLowerCase(),s.fontWeight,s.fontSize,s.lineHeight,s.letterSpacing];
+            }"""
+            discover_type = lead_page.locator('h1').first.evaluate(reference_type)
             lead_page.screenshot(path=str(out/('reading-gutter-discover-'+scheme+'-'+str(width)+'.png')))
             for route in ('playbooks.html','whats-new.html','research.html','technologies.html'):
                 if route == 'research.html':
@@ -3703,6 +3708,10 @@ with sync_playwright() as p:
                 left = heading.evaluate('el => el.getBoundingClientRect().left')
                 label = detail_link or section
                 lead_page.screenshot(path=str(out/('reference-gutter-'+label+'-'+scheme+'-'+str(width)+'.png')))
+                if directory_link:
+                    actual_type = heading.evaluate(reference_type)
+                    check('Shared reference heading typography '+label+' '+scheme+' '+str(width)+' '+str((discover_type,actual_type)),
+                          actual_type==discover_type)
                 check('Shared reference reading gutter '+label+' '+scheme+' '+str(width)+' '+str((reference,left)),
                       heading.is_visible() and abs(left-reference)<=2 and
                       lead_page.evaluate('document.documentElement.scrollWidth <= innerWidth'))

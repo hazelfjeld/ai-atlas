@@ -1602,6 +1602,14 @@ with sync_playwright() as p:
     for width in (320,390,768,1280):
         for theme in ('light','dark'):
             page.set_viewport_size({'width':width,'height':844 if width<=650 else 900})
+            page.goto(base+'index.html#/overview')
+            page.evaluate("t => {localStorage.setItem('atlas.theme',t);document.documentElement.dataset.theme=t}",theme)
+            type_metrics = """el => {
+                const s=getComputedStyle(el);
+                return {face:s.fontFamily.split(',')[0].trim().replaceAll(String.fromCharCode(34),'').replaceAll(String.fromCharCode(39),'').toLowerCase(),
+                        weight:s.fontWeight,size:s.fontSize,lineHeight:s.lineHeight,spacing:s.letterSpacing};
+            }"""
+            baseline = page.locator('.discover-heading h1').evaluate(type_metrics)
             for route, selector in (
                 ('terms/index.html','.term-shell > .hero h1'),
                 ('technology/index.html','.term-shell > .hero h1'),
@@ -1611,16 +1619,14 @@ with sync_playwright() as p:
                 page.goto(base+route)
                 page.evaluate('(t)=>localStorage.setItem("atlas.theme",t)',theme)
                 page.reload()
-                check(f'{route} {width}px {theme} matches shared Discover headline',
-                      page.evaluate("""selector => {
-                        const node=document.querySelector(selector);
-                        if(!node) return false;
-                        const cs=getComputedStyle(node), size=parseFloat(cs.fontSize);
-                        return cs.fontFamily.includes('Georgia') &&
-                          cs.fontWeight==='400' && size>=36 && size<=56.1 &&
-                          cs.lineHeight!=='normal' &&
-                          document.documentElement.scrollWidth<=innerWidth+1;
-                      }""",selector))
+                title=page.locator(selector)
+                title.wait_for()
+                actual=title.evaluate(type_metrics)
+                check(f'{route} {width}px {theme} matches shared Discover headline {actual} vs {baseline}',
+                      actual==baseline and actual['face']=='georgia' and actual['weight']=='400'
+                      and 36<=float(actual['size'].removesuffix('px'))<=56.1
+                      and page.evaluate('document.documentElement.scrollWidth<=innerWidth+1')
+                      and page.evaluate('document.documentElement.dataset.theme')==theme)
                 if width in (390,1280) and theme=='dark' and route in (
                     'terms/index.html','technology/index.html','terms/MLD-0002-ablation-study.html'):
                     page.screenshot(path=str(out/f'coherent-heading-{route.replace("/", "-")}-{width}-dark.png'))
