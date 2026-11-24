@@ -1,0 +1,20 @@
+'use strict';
+const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),crypto=require('node:crypto'),Core=require('../daily-core.js');
+test('November 24 source-reviewed queue preserves immutable bytes, source dates, and publication boundaries',()=>{
+ const index=Core.validateIndex(JSON.parse(fs.readFileSync('data/daily/index.json','utf8'))),ledger=JSON.parse(fs.readFileSync('data/daily/published-batches.json','utf8'));
+ const matches=ledger.receipts.filter(x=>x.batch_id==="atlas-daily-20261124-20261124t141644729z-source-review-a");assert.equal(matches.length,1);const r=matches[0];
+ assert.equal(r.source_batch_sha256,"6d62a0c544907829fbde3919bbee80efc59621026f2c2c9f946736b6463d8903");assert.equal(r.source_batch_bytes,43293);
+ const entry=index.editions.find(x=>x.date==='2026-11-24'&&x.revision===1);assert.ok(entry);
+ const raw=fs.readFileSync(entry.path);assert.equal(raw.length,entry.bytes);assert.equal(crypto.createHash('sha256').update(raw).digest('hex'),entry.sha256);
+ const e=Core.validateEdition(JSON.parse(raw),entry);assert.equal(e.news.length,9);assert.deepEqual(e.news.map(n=>n.id),r.accepted_news_ids);
+ assert.deepEqual([e.news.filter(n=>n.publication_date===e.edition_date).length,e.technologies.length,e.terms.length,e.corrections.length,r.counts.news_deferred,r.counts.catalog_deferred],[8,0,0,0,2,7]);
+ assert.ok(e.news.every(n=>n.review_status.startsWith('publisher_reviewed_')&&n.source_url.startsWith('https://')&&n.caveat));
+ assert.ok(e.news.filter(n=>n.arxiv_id).every(n=>n.submission_date==='2026-11-23'&&n.publication_date==='2026-11-24'));
+ assert.equal(e.coverage.status,'partial');assert.ok(e.coverage.sources_failed.length>=6);
+ assert.ok(r.deferred_news_ids.some(x=>x.includes('ling-32-air'))&&r.deferred_news_ids.some(x=>x.includes('atomic-engine')));
+ const html=fs.readFileSync('whats-new.html','utf8'),lastVerified=ledger.receipts.filter(x=>x.production_verified_at).at(-1);
+ assert.equal(index.last_successful_publish_at,lastVerified.production_verified_at);assert.ok(html.includes('data-edition-date="'+lastVerified.edition_date+'"'));
+ if(!r.production_verified_at)assert.ok(!html.includes('data-edition-date="2026-11-24"'));
+ const latest=index.editions.at(-1),latestReceipt=ledger.receipts.find(x=>x.publication_edition===latest.date+'-v'+latest.revision);assert.ok(latestReceipt);
+ assert.equal(index.status,'edition_revision_'+latest.revision+'_'+(latestReceipt.production_verified_at?'production_verified':'pending_production_verification'));
+});

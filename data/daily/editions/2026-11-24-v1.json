@@ -1,0 +1,520 @@
+{
+  "schema": 1,
+  "edition_date": "2026-11-24",
+  "timezone": "America/Chicago",
+  "published_at": "2026-11-24T14:26:22Z",
+  "coverage": {
+    "start": "2026-11-23T12:45:37.778Z",
+    "end": "2026-11-24T14:16:44.729Z",
+    "status": "partial",
+    "note": "Bounded November 23–24 collection with overlap; not exhaustive, and successful editorial cutoff remains unset. Nine independently source-reviewed reports; two undated-release reports and seven catalog proposals deferred pending publication-date, canonical relationship and catalog integration checks. Original collection limitations retained.",
+    "sources_checked": [
+      {
+        "url": "https://www.aboutamazon.com/news/company-news/amazon-decart-ai-optimization",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-24T14:16:44.729Z",
+        "method": "opened source page; selected records reviewed, listings sampled"
+      },
+      {
+        "url": "https://huggingface.co/inclusionAI/Ling-3.2-air",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-24T14:16:44.729Z",
+        "method": "opened source page; selected records reviewed, listings sampled"
+      },
+      {
+        "url": "https://huggingface.co/inclusionAI",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-24T14:16:44.729Z",
+        "method": "opened source page; selected records reviewed, listings sampled"
+      },
+      {
+        "url": "https://github.com/AtomicBot-ai/atomic-engine",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-24T14:16:44.729Z",
+        "method": "opened source page; selected records reviewed, listings sampled"
+      },
+      {
+        "url": "https://explainx.ai/blog/atomic-engine-inkling-2-mini-3x-speed-memory-budget-november-2026",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-24T14:16:44.729Z",
+        "method": "opened source page; selected records reviewed, listings sampled"
+      },
+      {
+        "url": "https://arxiv.org/list/cs.AI/recent",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-24T14:16:44.729Z",
+        "method": "opened source page; selected records reviewed, listings sampled"
+      },
+      {
+        "url": "https://arxiv.org/list/cs.CL/recent",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-24T14:16:44.729Z",
+        "method": "opened source page; selected records reviewed, listings sampled"
+      },
+      {
+        "url": "https://arxiv.org/list/cs.RO/recent",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-24T14:16:44.729Z",
+        "method": "opened source page; selected records reviewed, listings sampled"
+      },
+      {
+        "url": "https://arxiv.org/list/eess.AS/recent",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-24T14:16:44.729Z",
+        "method": "opened source page; selected records reviewed, listings sampled"
+      },
+      {
+        "url": "https://arxiv.org/list/cs.LG/recent",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-24T14:16:44.729Z",
+        "method": "opened source page; selected records reviewed, listings sampled"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.31228",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-24T14:16:44.729Z",
+        "method": "opened source page; selected records reviewed, listings sampled"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.31198",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-24T14:16:44.729Z",
+        "method": "opened source page; selected records reviewed, listings sampled"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.31112",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-24T14:16:44.729Z",
+        "method": "opened source page; selected records reviewed, listings sampled"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.31205",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-24T14:16:44.729Z",
+        "method": "opened source page; selected records reviewed, listings sampled"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.31190",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-24T14:16:44.729Z",
+        "method": "opened source page; selected records reviewed, listings sampled"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.30927",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-24T14:16:44.729Z",
+        "method": "opened source page; selected records reviewed, listings sampled"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.30723",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-24T14:16:44.729Z",
+        "method": "opened source page; selected records reviewed, listings sampled"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.31227",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-24T14:16:44.729Z",
+        "method": "opened source page; selected records reviewed, listings sampled"
+      },
+      {
+        "url": "https://github.com/unslothai/unsloth/releases",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-24T14:16:44.729Z",
+        "method": "opened source page; selected records reviewed, listings sampled"
+      },
+      {
+        "url": "https://www.anthropic.com/news/safeguards",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-24T14:16:44.729Z",
+        "method": "opened source page; selected records reviewed, listings sampled"
+      },
+      {
+        "url": "https://github.blog/changelog/",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-24T14:16:44.729Z",
+        "method": "opened source page; selected records reviewed, listings sampled"
+      },
+      {
+        "url": "https://www.aboutamazon.com/news/company-news/amazon-decart-ai-optimization",
+        "status": "publisher_checked_primary_source",
+        "checked_at": "2026-11-24T14:26:22Z",
+        "method": "Opened dated Amazon announcement; agreement, not completion"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.31228",
+        "status": "publisher_checked_primary_source",
+        "checked_at": "2026-11-24T14:26:22Z",
+        "method": "Opened arXiv abstract and verified v1 submission date and November 24 public listing"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.31198",
+        "status": "publisher_checked_primary_source",
+        "checked_at": "2026-11-24T14:26:22Z",
+        "method": "Opened arXiv abstract and verified v1 submission date and November 24 public listing"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.31112",
+        "status": "publisher_checked_primary_source",
+        "checked_at": "2026-11-24T14:26:22Z",
+        "method": "Opened arXiv abstract and verified v1 submission date and November 24 public listing"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.31205",
+        "status": "publisher_checked_primary_source",
+        "checked_at": "2026-11-24T14:26:22Z",
+        "method": "Opened arXiv abstract and verified v1 submission date and November 24 public listing"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.31190",
+        "status": "publisher_checked_primary_source",
+        "checked_at": "2026-11-24T14:26:22Z",
+        "method": "Opened arXiv abstract and verified v1 submission date and November 24 public listing"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.30927",
+        "status": "publisher_checked_primary_source",
+        "checked_at": "2026-11-24T14:26:22Z",
+        "method": "Opened arXiv abstract and verified v1 submission date and November 24 public listing"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.30723",
+        "status": "publisher_checked_primary_source",
+        "checked_at": "2026-11-24T14:26:22Z",
+        "method": "Opened arXiv abstract and verified v1 submission date and November 24 public listing"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.31227",
+        "status": "publisher_checked_primary_source",
+        "checked_at": "2026-11-24T14:26:22Z",
+        "method": "Opened arXiv abstract and verified v1 submission date and November 24 public listing"
+      },
+      {
+        "url": "https://arxiv.org/list/cs.AI/recent",
+        "status": "publisher_checked_public_listing",
+        "checked_at": "2026-11-24T14:26:22Z",
+        "method": "Matched queued paper IDs under November 24 public listing"
+      },
+      {
+        "url": "https://arxiv.org/list/cs.CL/recent",
+        "status": "publisher_checked_public_listing",
+        "checked_at": "2026-11-24T14:26:22Z",
+        "method": "Matched queued paper IDs under November 24 public listing"
+      },
+      {
+        "url": "https://arxiv.org/list/cs.RO/recent",
+        "status": "publisher_checked_public_listing",
+        "checked_at": "2026-11-24T14:26:22Z",
+        "method": "Matched queued paper IDs under November 24 public listing"
+      },
+      {
+        "url": "https://arxiv.org/list/cs.LG/recent",
+        "status": "publisher_checked_public_listing",
+        "checked_at": "2026-11-24T14:26:22Z",
+        "method": "Matched queued paper IDs under November 24 public listing"
+      },
+      {
+        "url": "https://arxiv.org/list/eess.AS/recent",
+        "status": "publisher_checked_public_listing",
+        "checked_at": "2026-11-24T14:26:22Z",
+        "method": "Matched queued paper IDs under November 24 public listing"
+      }
+    ],
+    "sources_failed": [
+      {
+        "url": "https://export.arxiv.org/api/query?search_query=cat%3Acs.AI&max_results=5",
+        "status": "partial",
+        "checked_at": "2026-11-24T14:16:44.729Z",
+        "error": "Metadata endpoint not accessible; recent category pages and selected abstracts readable."
+      },
+      {
+        "url": "https://huggingface.co/inclusionAI/Ling-3.2-air/commits/main",
+        "status": "partial",
+        "checked_at": "2026-11-24T14:16:44.729Z",
+        "error": "Commit history not accessible; initial upload timestamp unknown."
+      },
+      {
+        "url": "https://github.com/AtomicBot-ai/atomic-engine/releases",
+        "status": "partial",
+        "checked_at": "2026-11-24T14:16:44.729Z",
+        "error": "Release endpoint unavailable; repository README readable."
+      },
+      {
+        "url": "https://explainx.ai/blog/inclusionai-ling-3-2-air-open-weights-november-2026",
+        "status": "partial",
+        "checked_at": "2026-11-24T14:16:44.729Z",
+        "error": "Secondary report search excerpt readable, full page not opened; primary model card opened. Date attributed to secondary discovery only."
+      },
+      {
+        "url": "https://huggingface.co/inclusionAI/Ling-3.2-air",
+        "status": "publisher_release_date_unresolved",
+        "checked_at": "2026-11-24T14:26:22Z",
+        "error": "Primary documentation available; original release/publication date not independently established. Held for review."
+      },
+      {
+        "url": "https://github.com/AtomicBot-ai/atomic-engine",
+        "status": "publisher_release_date_unresolved",
+        "checked_at": "2026-11-24T14:26:22Z",
+        "error": "Primary documentation available; original release/publication date not independently established. Held for review."
+      }
+    ]
+  },
+  "tldr": [
+    "Amazon announced an agreement to acquire Decart optimization technology, not a completed acquisition. Eight preprints publicly listed November 24 cover model self-monitoring, generated search tools, speculative decoding, robot control, SQL abstention, speech and biomedical ML.",
+    "The research results are author-reported, not independent replications. Two additional reports and seven catalog proposals remain deferred, and coverage is partial."
+  ],
+  "news": [
+    {
+      "id": "ai-news-amazon-decart-optimization-stack-agreement-2026-11-23",
+      "title": "Amazon signs agreement to acquire Decart's optimization technology",
+      "category": "industry",
+      "tags": [
+        "AI",
+        "inference",
+        "hardware",
+        "infrastructure"
+      ],
+      "summary": "Amazon announced a signed agreement for Decart's proprietary optimization stack and for its engineering team to join Amazon, building on prior collaboration on Trainium.",
+      "why_it_matters": "Inference software and chip co-design are increasingly important competitive levers, including for multimodal and world-model workloads.",
+      "caveat": "An agreement is not a completed acquisition or a released service. Amazon did not disclose a transaction price in the announcement; no new cost or throughput result independently measured.",
+      "review_status": "publisher_reviewed_first_party_agreement",
+      "release_status": "agreement_signed",
+      "source_url": "https://www.aboutamazon.com/news/company-news/amazon-decart-ai-optimization",
+      "publication_date": "2026-11-23",
+      "event_date": "2026-11-23",
+      "discovered_at": "2026-11-24T14:16:44.729Z",
+      "added_to_atlas_at": "2026-11-24T14:26:22Z",
+      "collection_classification": "recent",
+      "source_record_id": "ai-news:amazon-decart-optimization-stack-agreement:2026-11-23"
+    },
+    {
+      "id": "ai-news-uncertainty-steering-self-monitoring-2611-31228",
+      "title": "Small open-weight models respond to injected doubt but miss their own errors",
+      "category": "safety",
+      "tags": [
+        "AI",
+        "SLM",
+        "LLM",
+        "calibration",
+        "reasoning",
+        "safety"
+      ],
+      "summary": "Across four open-weight language models, confidence statements poorly distinguished incorrect reasoning steps from valid ones. Supplying an external low-confidence signal sometimes improved repair but also caused unnecessary changes to correct reasoning.",
+      "why_it_matters": "Separates detecting errors from correcting them, suggesting independent monitors may be more valuable than relying on verbal self-confidence alone.",
+      "caveat": "Controlled math experiments, not proof about all models or tasks; unnecessary intervention can lower accuracy. Author-reported, not replicated.",
+      "review_status": "publisher_reviewed_author_reported_preprint",
+      "release_status": "preprint",
+      "source_url": "https://arxiv.org/abs/2611.31228",
+      "publication_date": "2026-11-24",
+      "event_date": "2026-11-23",
+      "discovered_at": "2026-11-24T14:16:44.729Z",
+      "added_to_atlas_at": "2026-11-24T14:26:22Z",
+      "collection_classification": "recent",
+      "source_record_id": "ai-news:uncertainty-steering-self-monitoring:2611.31228",
+      "arxiv_id": "2611.31228",
+      "submission_date": "2026-11-23",
+      "submission_time_utc": "2026-11-23T18:58:52Z",
+      "publication_date_basis": "arXiv November 24 public listing; v1 submitted November 23, public posting clock time not established"
+    },
+    {
+      "id": "ai-news-toolsmith-multimodal-search-2611-31198",
+      "title": "ToolSmith proposes reusable generated tools for multimodal search",
+      "category": "agents",
+      "tags": [
+        "AI",
+        "LLM",
+        "multimodal",
+        "retrieval",
+        "agents"
+      ],
+      "summary": "The framework constructs reusable modules from a small initial tool set and evaluates them across multimodal search tasks. Authors report gains over the fixed library with several agent backbones.",
+      "why_it_matters": "Could reduce manual tool-library maintenance when new evidence types or search workflows emerge.",
+      "caveat": "Model-graded benchmarks may reflect judge bias; generated tools require sandboxing, permissions, and security review. No independent execution or artifact audit.",
+      "review_status": "publisher_reviewed_author_reported_preprint",
+      "release_status": "preprint",
+      "source_url": "https://arxiv.org/abs/2611.31198",
+      "publication_date": "2026-11-24",
+      "event_date": "2026-11-23",
+      "discovered_at": "2026-11-24T14:16:44.729Z",
+      "added_to_atlas_at": "2026-11-24T14:26:22Z",
+      "collection_classification": "recent",
+      "source_record_id": "ai-news:toolsmith-multimodal-search:2611.31198",
+      "arxiv_id": "2611.31198",
+      "submission_date": "2026-11-23",
+      "submission_time_utc": null,
+      "publication_date_basis": "arXiv November 24 public listing; v1 submitted November 23, public posting clock time not established"
+    },
+    {
+      "id": "ai-news-corrective-prefix-attention-2611-31112",
+      "title": "Corrective prefix attention aims to improve parallel speculative decoding",
+      "category": "inference",
+      "tags": [
+        "AI",
+        "DL",
+        "SLM",
+        "LLM",
+        "inference"
+      ],
+      "summary": "The proposed drafter scores candidate tokens using earlier choices in the same block, plus an auxiliary sequential training loss. Authors report more accepted tokens and faster generation on Qwen3 4B and 8B targets using Ascend NPUs.",
+      "why_it_matters": "Reduces wasted speculative suffix tokens when early draft choices conflict, without repeatedly running the neural drafter during selection.",
+      "caveat": "Reported speedups are hardware- and workload-specific. Larger acceptance alone does not establish lower latency; target verification remains necessary.",
+      "review_status": "publisher_reviewed_author_reported_preprint",
+      "release_status": "preprint",
+      "source_url": "https://arxiv.org/abs/2611.31112",
+      "publication_date": "2026-11-24",
+      "event_date": "2026-11-23",
+      "discovered_at": "2026-11-24T14:16:44.729Z",
+      "added_to_atlas_at": "2026-11-24T14:26:22Z",
+      "collection_classification": "recent",
+      "source_record_id": "ai-news:corrective-prefix-attention:2611.31112",
+      "arxiv_id": "2611.31112",
+      "submission_date": "2026-11-23",
+      "submission_time_utc": null,
+      "publication_date_basis": "arXiv November 24 public listing; v1 submitted November 23, public posting clock time not established"
+    },
+    {
+      "id": "ai-news-acap-robot-control-2611-31205",
+      "title": "ACAP assigns robot components to coordinated asynchronous coding agents",
+      "category": "robotics",
+      "tags": [
+        "AI",
+        "LLM",
+        "robotics",
+        "agents",
+        "control"
+      ],
+      "summary": "Persistent agents manage separate robot control groups while a coordinating agent handles dependencies and task assignment. Authors report a 28.2% reduction in task-balanced time cost versus one agent in 72 real-world rollouts.",
+      "why_it_matters": "Concurrent planning and execution can reduce idle time where robot activities are physically independent.",
+      "caveat": "Limited experimental settings; conflicts, timing failures and unsafe actions remain possible. Not a certified safety controller or deployment recommendation.",
+      "review_status": "publisher_reviewed_author_reported_preprint",
+      "release_status": "preprint",
+      "source_url": "https://arxiv.org/abs/2611.31205",
+      "publication_date": "2026-11-24",
+      "event_date": "2026-11-23",
+      "discovered_at": "2026-11-24T14:16:44.729Z",
+      "added_to_atlas_at": "2026-11-24T14:26:22Z",
+      "collection_classification": "recent",
+      "source_record_id": "ai-news:acap-robot-control:2611.31205",
+      "arxiv_id": "2611.31205",
+      "submission_date": "2026-11-23",
+      "submission_time_utc": null,
+      "publication_date_basis": "arXiv November 24 public listing; v1 submitted November 23, public posting clock time not established"
+    },
+    {
+      "id": "ai-news-conformal-text-to-sql-confidence-2611-31190",
+      "title": "Conformal validation study tests when text-to-SQL systems should abstain",
+      "category": "evaluation",
+      "tags": [
+        "AI",
+        "ML",
+        "LLM",
+        "SQL",
+        "calibration",
+        "evaluation"
+      ],
+      "summary": "A separate critic and a fitted feature-based validator estimate correctness after query execution. Calibration allows a risk threshold for accepting results; on Spider the authors report accepting about half of queries at a measured error rate below their 15% target.",
+      "why_it_matters": "A query can run correctly while answering the wrong question; risk-aware acceptance may be useful for database assistants.",
+      "caveat": "The statistical guarantee did not transfer to BIRD without recalibration. Assumptions and calibration data matter; restrict query permissions regardless of confidence.",
+      "review_status": "publisher_reviewed_author_reported_preprint",
+      "release_status": "preprint",
+      "source_url": "https://arxiv.org/abs/2611.31190",
+      "publication_date": "2026-11-24",
+      "event_date": "2026-11-23",
+      "discovered_at": "2026-11-24T14:16:44.729Z",
+      "added_to_atlas_at": "2026-11-24T14:26:22Z",
+      "collection_classification": "recent",
+      "source_record_id": "ai-news:conformal-text-to-sql-confidence:2611.31190",
+      "arxiv_id": "2611.31190",
+      "submission_date": "2026-11-23",
+      "submission_time_utc": "2026-11-23T18:42:54Z",
+      "publication_date_basis": "arXiv November 24 public listing; v1 submitted November 23, public posting clock time not established"
+    },
+    {
+      "id": "ai-news-speechsplice-pronunciation-control-2611-30927",
+      "title": "SpeechSplice tests pronunciation editing through encoder representations",
+      "category": "audio",
+      "tags": [
+        "AI",
+        "DL",
+        "LLM",
+        "TTS",
+        "audio"
+      ],
+      "summary": "Researchers modify internal text-encoder states at inference time to target pronunciations without changing model weights. Their listener study found a high target-reading success rate in the tested architecture.",
+      "why_it_matters": "Could support correction of names and ambiguous readings without retraining a speech model.",
+      "caveat": "Study-specific listeners and architectures; cross-attention and shared self-attention systems behaved differently. Code and model compatibility were not independently tested.",
+      "review_status": "publisher_reviewed_author_reported_preprint",
+      "release_status": "preprint",
+      "source_url": "https://arxiv.org/abs/2611.30927",
+      "publication_date": "2026-11-24",
+      "event_date": "2026-11-23",
+      "discovered_at": "2026-11-24T14:16:44.729Z",
+      "added_to_atlas_at": "2026-11-24T14:26:22Z",
+      "collection_classification": "recent",
+      "source_record_id": "ai-news:speechsplice-pronunciation-control:2611.30927",
+      "arxiv_id": "2611.30927",
+      "submission_date": "2026-11-23",
+      "submission_time_utc": "2026-11-23T16:17:10Z",
+      "publication_date_basis": "arXiv November 24 public listing; v1 submitted November 23, public posting clock time not established"
+    },
+    {
+      "id": "ai-news-bisat-speech-tokenization-2611-30723",
+      "title": "BiSAT explores balancing speech meaning and acoustic detail in discrete tokens",
+      "category": "audio",
+      "tags": [
+        "AI",
+        "ML",
+        "DL",
+        "audio",
+        "speech language models"
+      ],
+      "summary": "The authors train a speech tokenizer to preserve complementary semantic and acoustic information and report competitive speech synthesis results with less training data than selected baselines.",
+      "why_it_matters": "A speech-token representation that preserves both linguistic content and sound detail could support understanding and generation in one system.",
+      "caveat": "Preprint results depend on training data, codec settings and evaluation. No independent listening test, deployment or license review.",
+      "review_status": "publisher_reviewed_author_reported_preprint",
+      "release_status": "preprint",
+      "source_url": "https://arxiv.org/abs/2611.30723",
+      "publication_date": "2026-11-24",
+      "event_date": "2026-11-23",
+      "discovered_at": "2026-11-24T14:16:44.729Z",
+      "added_to_atlas_at": "2026-11-24T14:26:22Z",
+      "collection_classification": "recent",
+      "source_record_id": "ai-news:bisat-speech-tokenization:2611.30723",
+      "arxiv_id": "2611.30723",
+      "submission_date": "2026-11-23",
+      "submission_time_utc": "2026-11-23T14:03:02Z",
+      "publication_date_basis": "arXiv November 24 public listing; v1 submitted November 23, public posting clock time not established"
+    },
+    {
+      "id": "ai-news-bipert-single-cell-linear-baseline-2611-31227",
+      "title": "BiPert tests simple linear models for predicting and identifying gene perturbations",
+      "category": "research",
+      "tags": [
+        "AI",
+        "ML",
+        "biology",
+        "evaluation"
+      ],
+      "summary": "The study evaluates linear methods for transferring genetic perturbation effects across cellular contexts and identifying perturbed genes from expression measurements. Authors report useful few-shot adaptation and strong inverse-identification baselines.",
+      "why_it_matters": "Shows why interpretable classical baselines matter in biomedical ML, even against more complex neural approaches.",
+      "caveat": "Benchmark and cell-context specific; no clinical or therapeutic conclusion and no independent replication.",
+      "review_status": "publisher_reviewed_author_reported_preprint",
+      "release_status": "preprint",
+      "source_url": "https://arxiv.org/abs/2611.31227",
+      "publication_date": "2026-11-24",
+      "event_date": "2026-11-23",
+      "discovered_at": "2026-11-24T14:16:44.729Z",
+      "added_to_atlas_at": "2026-11-24T14:26:22Z",
+      "collection_classification": "recent",
+      "source_record_id": "ai-news:bipert-single-cell-linear-baseline:2611.31227",
+      "arxiv_id": "2611.31227",
+      "submission_date": "2026-11-23",
+      "submission_time_utc": "2026-11-23T18:58:32Z",
+      "publication_date_basis": "arXiv November 24 public listing; v1 submitted November 23, public posting clock time not established"
+    }
+  ],
+  "technologies": [],
+  "terms": [],
+  "site_changes": [],
+  "corrections": []
+}

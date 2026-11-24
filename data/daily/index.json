@@ -385,9 +385,17 @@
       "sha256": "aff347a4b8ab09978bd46207632d47d29a0a659e19f8b6b2b9373fae0e87ab20",
       "bytes": 20056,
       "published_at": "2026-11-23T15:30:34.146Z"
+    },
+    {
+      "date": "2026-11-24",
+      "revision": 1,
+      "path": "data/daily/editions/2026-11-24-v1.json",
+      "sha256": "b3d3da391fef218c09cba129134d7284b6650c6ec11d91e4cc81f57f5a337133",
+      "bytes": 26290,
+      "published_at": "2026-11-24T14:26:22Z"
     }
   ],
   "last_successful_publish_at": "2026-11-23T15:54:12Z",
-  "status": "edition_revision_1_production_verified",
-  "coverage_note": "2026-11-23 v1 production-verified: nine publisher/source-checked news reports; one Reuters item and eleven catalog proposals deferred. Partial-source coverage, first-party and preprint claims caveated. Exact production revision 0ea327aa validated by Cloudflare hosted browser, HTTP/asset byte-parity and GitHack on November 23, 2026; external reader could not independently open exact query permalink."
+  "status": "edition_revision_1_pending_production_verification",
+  "coverage_note": "November 24 revision 1 prepared from a partial source collection; production verification pending. Last successful publication timestamp still refers to the latest certified edition."
 }

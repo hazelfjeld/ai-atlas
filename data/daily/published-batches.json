@@ -1988,6 +1988,73 @@
       "production_workflow_run_id": 45206873742,
       "githack_workflow_run_id": 45206873665,
       "verification_scope": "Exact main 0ea327aae169f9e0ad44e55c8d9c5b26d08742d9 passed Cloudflare workflow 45206873742 on November 23, 2026: tested artifact deployed, 512 HTTP assets verified against exact bytes on each of three production hosts (including immutable November 23 JSON and archive index), 48 editions and 19 receipts validated, responsive/light/dark/no-script/keyboard hosted browser checks and native plus standalone Games passed. Catalog/GitHack workflow 45206873665 passed 458 Node regression tests, integrity and offline/reproducibility checks and exact GitHack revision parity. Hosted production job completed at 2026-11-23T15:54:12Z. External reader could not independently retrieve the exact query permalink; dated archive reader and edition bytes were verified through hosted production checks. Edition SHA-256 aff347a4b8ab09978bd46207632d47d29a0a659e19f8b6b2b9373fae0e87ab20, 20056 UTF-8 bytes."
+    },
+    {
+      "batch_id": "atlas-daily-20261124-20261124t141644729z-source-review-a",
+      "source_branch": "atlas-daily-staging",
+      "source_commit": "303b9e7a31e364d8d430e53d66affe936abffbc2",
+      "source_batch_path": "daily-queue/batches/2026-11-24-atlas-daily-20261124-20261124t141644729z-source-review-a.json",
+      "source_batch_sha256": "6d62a0c544907829fbde3919bbee80efc59621026f2c2c9f946736b6463d8903",
+      "source_batch_bytes": 43293,
+      "edition_date": "2026-11-24",
+      "validation_result": "independent_batch_sha256_utf8_bytes_counts_unique_ids_receipt_reconciliation_primary_source_dates_and_arxiv_listing_review",
+      "status": "partially_published_9_news_2_news_and_7_catalog_proposals_deferred",
+      "publication_outcome": "pending_production_verification",
+      "publication_edition": "2026-11-24-v1",
+      "accepted_news_ids": [
+        "ai-news-amazon-decart-optimization-stack-agreement-2026-11-23",
+        "ai-news-uncertainty-steering-self-monitoring-2611-31228",
+        "ai-news-toolsmith-multimodal-search-2611-31198",
+        "ai-news-corrective-prefix-attention-2611-31112",
+        "ai-news-acap-robot-control-2611-31205",
+        "ai-news-conformal-text-to-sql-confidence-2611-31190",
+        "ai-news-speechsplice-pronunciation-control-2611-30927",
+        "ai-news-bisat-speech-tokenization-2611-30723",
+        "ai-news-bipert-single-cell-linear-baseline-2611-31227"
+      ],
+      "source_news_ids": [
+        "ai-news:amazon-decart-optimization-stack-agreement:2026-11-23",
+        "ai-news:uncertainty-steering-self-monitoring:2611.31228",
+        "ai-news:toolsmith-multimodal-search:2611.31198",
+        "ai-news:corrective-prefix-attention:2611.31112",
+        "ai-news:acap-robot-control:2611.31205",
+        "ai-news:conformal-text-to-sql-confidence:2611.31190",
+        "ai-news:speechsplice-pronunciation-control:2611.30927",
+        "ai-news:bisat-speech-tokenization:2611.30723",
+        "ai-news:bipert-single-cell-linear-baseline:2611.31227"
+      ],
+      "deferred_news_ids": [
+        "ai-news:inclusionai-ling-32-air:2026-11",
+        "ai-news:atomic-engine-ssd-expert-streaming:2026-11"
+      ],
+      "deferred_catalog_proposal_ids": [
+        "tech-proposal:ling-32-air:2026-11-24",
+        "tech-proposal:atomic-engine:2026-11-24",
+        "tech-proposal:toolsmith:2026-11-24",
+        "tech-proposal:speechsplice:2026-11-24",
+        "term-proposal:corrective-prefix-attention:2026-11-24",
+        "term-proposal:ssd-expert-streaming:2026-11-24",
+        "term-proposal:risk-controlled-text-to-sql:2026-11-24"
+      ],
+      "rejected_ids": [],
+      "counts": {
+        "news_published": 9,
+        "technology_added": 0,
+        "term_added": 0,
+        "corrections": 0,
+        "news_deferred": 2,
+        "catalog_deferred": 7,
+        "technology_updated": 0
+      },
+      "review_notes": "Amazon primary statement confirms agreement dated November 23. Eight arXiv abstracts and November 24 public listings checked; v1 submission November 23 preserved. Ling-3.2-air and Atomic Engine primary documents were checked but release dates not confirmed. All seven catalog proposals remain pending canonical deduplication, license/availability or integration checks; no new IDs claimed. Pending records must not replace certified script-free preview.",
+      "publication_history": [
+        {
+          "edition": "2026-11-24-v1",
+          "status": "pending_production_verification",
+          "prepared_at": "2026-11-24T14:26:22Z",
+          "note": "Nine reviewed reports; two news and seven catalog proposals held. Immutable SHA-256 b3d3da391fef218c09cba129134d7284b6650c6ec11d91e4cc81f57f5a337133, 26290 UTF-8 bytes. Public verification pending."
+        }
+      ]
     }
   ]
 }
