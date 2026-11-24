@@ -1370,9 +1370,11 @@ test('reference and editorial section headings reuse Discover reading-desk typog
   const offline = read('downloads/Atlas_Demo_Offline.html');
   assert.match(brand, /\.reading-link h2\{font:400 25px\/1\.25 Georgia,serif/);
   assert.match(css, /:is\(\.term-shell > \.profile-section, \.term-shell > \.detail-block,/);
-  assert.match(css, /\.review-shell > section, \.shell > main > section\) > h2\{/);
-  assert.match(css, /font:400 clamp\(21px,2\.2vw,25px\)\/1\.25 Georgia,'Times New Roman',serif/);
-  assert.match(css, /color:var\(--ink\)/);
+  const rule = css.match(/:is\(\.term-shell > \.profile-section, \.term-shell > \.detail-block,\s*\.review-shell > section, \.shell > main > section,\s*:where\(#edition-content\) > section > \.heading\) > h2\{[^}]*\}/)?.[0];
+  assert.ok(rule, 'all reference families and news must share the same heading rule');
+  assert.match(rule, /font:400 clamp\(21px,2\.2vw,25px\)\/1\.25 Georgia,'Times New Roman',serif/);
+  assert.match(rule, /color:var\(--ink\)/);
+  assert.ok(offline.includes(rule), 'offline build embeds the exact shared heading rule');
   assert.ok(offline.includes('Editorial/reference subsections use Discover'), 'single-file demo embeds the same source CSS');
   for (const [page, heading] of [
     ['about.html', 'class="profile-section"><h2>'],
