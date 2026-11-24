@@ -18,6 +18,8 @@ test('Discover, Playbooks, News, Research and Technology use a single desktop re
     '.playbook-shell:has(> .site-chrome.playbook-top)',
     '.tech-shell:has(> .site-chrome.tech-top)',
     '.shell:has(> .site-chrome:is(.top,.research-site-chrome))']) assert.ok(block.includes(selector));
+  for (const selector of ['.term-shell,', '.review-shell,',
+    '.shell:has(> .site-chrome.nav),']) assert.ok(block.includes(selector));
   assert.ok(block.includes('padding-inline:var(--atlas-workspace-content-gutter)!important'));
   assert.ok(block.includes('> main{\n    padding-inline:0;'));
   assert.ok(read('downloads/Atlas_Demo_Offline.html').includes(css));
@@ -30,4 +32,14 @@ test('Discover, Playbooks, News, Research and Technology use a single desktop re
   assert.ok(browser.includes('Shared editorial reading gutter'));
   assert.ok(browser.includes('for route in (\'playbooks.html\',\'whats-new.html\',\'research.html\',\'technologies.html\'):'));
   assert.ok(browser.includes('Open searchable technology') || browser.includes('a[href="../technologies.html"]'));
+});
+
+test('reference reading frame shares exact desktop origin and native navigation', () => {
+  const browser = read('tests/rebrand-browser.py');
+  assert.ok(browser.includes("abs(metrics['contentLeft']-discover_x) <= 2"));
+  assert.ok(browser.includes("abs(heading_x-discover_x) <= 2"));
+  const hosted = read('tests/site-deployment-browser.py');
+  assert.ok(hosted.includes('Shared reference reading gutter'));
+  assert.ok(hosted.includes('MLD-0002-ablation-study.html'));
+  assert.ok(hosted.includes('TECH-0216-pytorch.html'));
 });

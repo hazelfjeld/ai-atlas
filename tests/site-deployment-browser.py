@@ -3661,6 +3661,29 @@ with sync_playwright() as p:
                 lead_page.wait_for_load_state('load')
                 check('Editorial return to Discover '+route+' '+scheme+' '+str(width),
                       lead_page.locator('h1').first.inner_text().strip()=='Discover')
+            # Follow actual native primary and directory links to reference
+            # articles, then return to Discover without JavaScript.
+            for section, directory_link, detail_link in (
+                ('about.html', None, None),
+                ('#/dictionary', 'concepts', 'MLD-0002-ablation-study.html'),
+                ('#/technologies', 'technologies', 'TECH-0216-pytorch.html'),
+            ):
+                lead_page.locator('#navigation > .site-chrome__links a[href="'+section+'"]').click()
+                if directory_link:
+                    lead_page.locator('section[id="'+section[1:]+'"] a[data-nojs-static="'+directory_link+'"]').click()
+                    lead_page.locator('a[href="'+detail_link+'"]').click()
+                lead_page.wait_for_load_state('load')
+                heading = lead_page.locator('h1').first
+                left = heading.evaluate('el => el.getBoundingClientRect().left')
+                label = detail_link or section
+                lead_page.screenshot(path=str(out/('reference-gutter-'+label+'-'+scheme+'-'+str(width)+'.png')))
+                check('Shared reference reading gutter '+label+' '+scheme+' '+str(width)+' '+str((reference,left)),
+                      heading.is_visible() and abs(left-reference)<=2 and
+                      lead_page.evaluate('document.documentElement.scrollWidth <= innerWidth'))
+                lead_page.locator('.site-chrome .site-chrome__links a[href$="index.html#/overview"]').click()
+                lead_page.wait_for_load_state('load')
+                check('Reference return to Discover '+label+' '+scheme+' '+str(width),
+                      lead_page.locator('h1').first.inner_text().strip()=='Discover')
         lead_context.close()
 
 

@@ -1134,13 +1134,17 @@ with sync_playwright() as p:
                 # 40/26px desktop/tablet gutter, not the legacy 24–36px clamp.
                 # Retain frame width, origin, overflow and theme checks, and
                 # measure the actual heading rather than only the outer shell.
-                if route in ('playbooks.html','technologies.html','research.html') and width >= 651:
+                if width >= 651:
                     expected_gutter = 26 if width <= 1200 else 40
                     heading_x = page.locator('main h1').first.evaluate(
                         'el => el.getBoundingClientRect().left')
-                    inner_padding = page.locator('main').first.evaluate(
+                    # Article mains own the gutter; only nested editorial
+                    # mains must have zero extra padding.
+                    inner_padding = (page.locator('main').first.evaluate(
                         'el => parseFloat(getComputedStyle(el).paddingLeft)')
+                        if route in ('playbooks.html','technologies.html','research.html','catalog-review.html') else 0)
                     padding_ok = (abs(metrics['padding']-expected_gutter) <= 0.5 and
+                                  abs(metrics['contentLeft']-discover_x) <= 2 and
                                   abs(heading_x-discover_x) <= 2 and
                                   abs(inner_padding) <= 0.5)
                     metrics['innerPadding'] = inner_padding
@@ -1152,8 +1156,7 @@ with sync_playwright() as p:
                            (metrics['max']=='1120px' and padding_ok and
                             abs(metrics['contentLeft']-discover_x) <= 16))
                 # Preserve the exact failing frame as well as successful ones.
-                if route in ('playbooks.html','technologies.html','research.html') or ((width,theme)==(1280,'light') and
-                    route in ('about.html','hardware-review.html','catalog-review.html')):
+                if width >= 651 or width == 390:
                     page.screenshot(path=str(out/f'reading-frame-{route}-{width}-{theme}.png'))
                 check(f'{route} {width}px {theme} shares Discover reading frame without overflow '
                       f'(Discover x={discover_x}, metrics={metrics})',
