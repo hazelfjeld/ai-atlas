@@ -3671,7 +3671,33 @@ with sync_playwright() as p:
                 lead_page.locator('#navigation > .site-chrome__links a[href="'+section+'"]').click()
                 if directory_link:
                     lead_page.locator('section[id="'+section[1:]+'"] a[data-nojs-static="'+directory_link+'"]').click()
-                    lead_page.locator('a[href="'+detail_link+'"]').click()
+                    # Expanded guides intentionally occur in both the featured
+                    # list and the complete A–Z directory. Preserve both links
+                    # and exercise the canonical directory, not an ambiguous
+                    # page-wide selector (which fails Playwright strict mode).
+                    detail_selector = 'a[href="'+detail_link+'"]'
+                    if directory_link == 'concepts':
+                        featured = lead_page.locator('section.detail-block').filter(
+                            has=lead_page.get_by_role('heading',
+                                name='Start with an expanded guide', exact=True))
+                        directory = lead_page.locator('section.detail-block').filter(
+                            has=lead_page.get_by_role('heading',
+                                name='All concepts, A–Z', exact=True))
+                        check('Featured concept retains its direct link '+scheme+' '+str(width),
+                              featured.locator(detail_selector).count()==1 and
+                              featured.locator(detail_selector).is_visible())
+                    else:
+                        directory = lead_page.locator('main .reference-grid')
+                    detail = directory.locator(detail_selector)
+                    check('Canonical directory exposes one visible detail link '+
+                          detail_link+' '+scheme+' '+str(width),
+                          detail.count()==1 and detail.is_visible())
+                    detail.click()
+                    lead_page.wait_for_load_state('load')
+                    expected_detail = ('terms/' if directory_link == 'concepts'
+                                       else 'technology/') + detail_link
+                    check('Native directory reaches the expected detail route '+expected_detail,
+                          lead_page.url == base+expected_detail)
                 lead_page.wait_for_load_state('load')
                 heading = lead_page.locator('h1').first
                 left = heading.evaluate('el => el.getBoundingClientRect().left')
