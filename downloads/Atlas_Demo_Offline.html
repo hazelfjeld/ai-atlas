@@ -1821,6 +1821,28 @@ html:is(:has(.nojs-primary-routes > .notice[id="/sources"]:target),:has(.nojs-pr
 }
 }
 /* atlas-scriptless-current-visual:end */
+
+/* atlas-shared-editorial-reading-gutter:begin */
+/* Discover's reading column is the reference. News formerly stacked the
+   generic main inset on its own shell inset; Playbooks used a smaller
+   independent clamp. Give all three one desktop gutter owner, retaining
+   the existing editorial width caps, mobile layouts and inner card grids. */
+@media (min-width:651px){
+  :root{--atlas-workspace-content-gutter:40px}
+  :is(.app-shell .workspace > main,
+      .playbook-shell:has(> .site-chrome.playbook-top),
+      .shell:has(> .site-chrome.top)){
+    padding-inline:var(--atlas-workspace-content-gutter)!important;
+  }
+  :is(.playbook-shell:has(> .site-chrome.playbook-top),
+      .shell:has(> .site-chrome.top)) > main{
+    padding-inline:0;
+  }
+}
+@media (min-width:651px) and (max-width:1200px){
+  :root{--atlas-workspace-content-gutter:26px}
+}
+/* atlas-shared-editorial-reading-gutter:end */
 </style><script>/* Enhance the native dropdown only when scripts can make its drawer modal.
    Without JavaScript, keep the accessible, nonmodal <details> fallback. */
 document.documentElement.classList?.add('atlas-enhanced');

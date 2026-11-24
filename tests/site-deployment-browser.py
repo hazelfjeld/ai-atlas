@@ -3633,6 +3633,26 @@ with sync_playwright() as p:
                       geometry['ready']=='complete' and not geometry['missing'])
                 check('Editorial first-content inset '+label+' '+json.dumps(geometry),
                       geometry['inset'] is not None and abs(geometry['inset'] - 16) <= 2)
+        # Cross the actual primary links, rather than comparing disconnected
+        # screenshots: the desktop heading origin must not jump sideways.
+        for width in (768,1280):
+            lead_page.set_viewport_size({'width':width,'height':844})
+            lead_page.goto(base+'index.html', wait_until='load')
+            reference = lead_page.locator('h1').first.evaluate(
+                'el => el.getBoundingClientRect().left')
+            lead_page.screenshot(path=str(out/('reading-gutter-discover-'+scheme+'-'+str(width)+'.png')))
+            for route in ('playbooks.html','whats-new.html'):
+                lead_page.locator('#navigation > .site-chrome__links a[href="'+route+'"]').click()
+                lead_page.wait_for_load_state('load')
+                heading = lead_page.locator('h1').first
+                left = heading.evaluate('el => el.getBoundingClientRect().left')
+                lead_page.screenshot(path=str(out/('reading-gutter-'+route.split('.')[0]+'-'+scheme+'-'+str(width)+'.png')))
+                check('Shared editorial reading gutter '+route+' '+scheme+' '+str(width)+' '+str((reference,left)),
+                      heading.is_visible() and abs(left-reference)<=2)
+                lead_page.locator('.site-chrome .site-chrome__links a[href="index.html#/overview"]').click()
+                lead_page.wait_for_load_state('load')
+                check('Editorial return to Discover '+route+' '+scheme+' '+str(width),
+                      lead_page.locator('h1').first.inner_text().strip()=='Discover')
         lead_context.close()
 
 
