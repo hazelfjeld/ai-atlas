@@ -2002,6 +2002,7 @@ test('existing editorial and reference page titles share Discover headline typog
   assert.ok(brand.includes(shared + '{font:400 clamp(40px,4.2vw,56px)/1.08 Georgia'), 'Desktop reference and Discover headlines share one font declaration');
   assert.ok(brand.includes(shared + '{font-size:45px}'), 'Tablet reference headline matches Discover');
   assert.ok(brand.includes(shared + '{font-size:43px}'), 'Mobile reference headline matches Discover');
+  assert.doesNotMatch(brand, /\.term-shell\s+\.hero\s+h1\s*\{[^}]*\b(?:font(?:-family|-weight|-size)?|letter-spacing|line-height)\s*:/, 'Legacy article selector must not override the nested Discover heading in reference directories or About');
   assert.ok(!block.includes('font:') && !block.includes('font-size:'), 'Reference wrapping rule must not duplicate shared typography');
   assert.ok(offline.includes(brand), 'Single-file fallback must embed the exact shared brand typography');
   assert.ok(block.includes('overflow-wrap:break-word'));
