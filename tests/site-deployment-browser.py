@@ -3610,16 +3610,29 @@ with sync_playwright() as p:
             lead_page.set_viewport_size({'width':width,'height':844})
             for route in ('playbooks.html','whats-new.html','catalog-review.html',
                           'hardware-review.html','demo.html'):
-                lead_page.goto(base+route, wait_until='domcontentloaded')
-                check('Editorial first-content inset '+route+' '+scheme+' '+str(width),
-                      lead_page.locator('#main').evaluate("""el => {
-                        const bar = document.querySelector('.site-mobile-chrome');
-                        if (!bar) return false;
-                        const y = el.getBoundingClientRect().top +
-                                  parseFloat(getComputedStyle(el).paddingTop);
-                        return Math.abs(y - bar.getBoundingClientRect().bottom - 16) <= 2;
-                      }"""))
+                # DOMContentLoaded alone does not guarantee linked CSS has
+                # loaded in this script-free context. Measure the rendered page,
+                # not a partially styled response, on slower production hosts.
+                response = lead_page.goto(base+route, wait_until='load')
+                label = route+' '+scheme+' '+str(width)
+                check('Editorial document HTTP 200 '+label,
+                      response is not None and response.status == 200)
+                geometry = lead_page.locator('#main').evaluate("""el => {
+                  const bar = document.querySelector('.site-mobile-chrome');
+                  const top = el.getBoundingClientRect().top;
+                  const padding = parseFloat(getComputedStyle(el).paddingTop);
+                  const bottom = bar ? bar.getBoundingClientRect().bottom : null;
+                  const missing = [...document.querySelectorAll('link[rel="stylesheet"]')]
+                    .filter(link => !link.sheet).map(link => link.getAttribute('href'));
+                  return {top, padding, bottom, inset: bottom === null ? null : top + padding - bottom,
+                          missing, ready: document.readyState};
+                }""")
+                # Preserve the failing frame as well as passing frames.
                 lead_page.screenshot(path=str(out/('editorial-inset-'+route.split('.')[0]+'-'+scheme+'-'+str(width)+'.png')))
+                check('Editorial stylesheets ready '+label+' '+json.dumps(geometry),
+                      geometry['ready']=='complete' and not geometry['missing'])
+                check('Editorial first-content inset '+label+' '+json.dumps(geometry),
+                      geometry['inset'] is not None and abs(geometry['inset'] - 16) <= 2)
         lead_context.close()
 
 
