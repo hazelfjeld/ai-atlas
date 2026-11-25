@@ -13,7 +13,11 @@ test('News and Catalog Review share one mobile reading gutter without stacking m
   assert.ok(css.includes(rule));
   assert.ok(css.includes('.shell:has(> .site-chrome.top) > .mobile-topbar{margin-inline:-20px;padding-inline:20px}'));
   assert.ok(read('downloads/Atlas_Demo_Offline.html').includes(css));
-  assert.ok(read('whats-new.html').includes('href="catalog-review.html"'));
+  const archive = read('whats-new.html');
+  // The no-script rule hides edition-footnotes, so the editorial review
+  // must remain outside that section, not merely exist somewhere in HTML.
+  assert.match(archive, /<\/section>\s*<p class="notice" id="catalog-review-notice"[^>]*>[^\n]*href="catalog-review\.html"[^\n]*<\/p>\s*<\/main>/);
+  assert.match(archive, /<noscript><style>[^<]*\.edition-footnotes\{display:none!important\}/);
   assert.ok(read('catalog-review.html').includes('href="index.html#/overview"'));
   assert.ok(read('tests/site-deployment-browser.py').includes('Shared mobile reading gutter'));
 });

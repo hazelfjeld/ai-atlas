@@ -3778,10 +3778,13 @@ with sync_playwright() as p:
                       and lead_page.evaluate('document.documentElement.scrollWidth <= innerWidth'))
                 lead_page.screenshot(path=str(out/('mobile-reading-gutter-'+route+'-'+scheme+'-'+str(width)+'.png')))
                 if route == 'whats-new.html':
-                    lead_page.locator('a[href="catalog-review.html"]').click()
+                    review_link = lead_page.locator('#catalog-review-notice a[href="catalog-review.html"]')
+                    check('Script-free archive review link visible '+scheme+' '+str(width),
+                          review_link.count()==1 and review_link.is_visible())
+                    review_link.click()
                     lead_page.wait_for_load_state('load')
             lead_page.locator('.site-mobile-chrome__nav > summary').click()
-            lead_page.locator('.site-mobile-chrome__menu > a[href="index.html#/overview"]').click()
+            lead_page.locator('.site-mobile-chrome__menu > a:not(.site-mobile-chrome__brand)[href="index.html#/overview"]').click()
             lead_page.wait_for_load_state('load')
             check('Catalog Review mobile return to Discover '+scheme+' '+str(width),
                   lead_page.locator('h1').first.inner_text().strip()=='Discover')
