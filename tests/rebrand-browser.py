@@ -1265,6 +1265,7 @@ with sync_playwright() as p:
         ('technologies.html', '.tech-card .card-actions'),
         ('research.html', '.cards .card-bottom'),
         ('whats-new.html', '#edition-content .item .links:has(a[target="_blank"])'),
+        ('catalog-review.html', 'article.card .links.story-footer'),
     )
     action_style = """el => {
         const s=getComputedStyle(el), a=el.querySelector('a');
@@ -1296,7 +1297,7 @@ with sync_playwright() as p:
                                   const expectedColor=getComputedStyle(probe).color;
                                   probe.remove();
                                   return getComputedStyle(el).borderTopColor===expectedColor;
-                              }""")) if route=='whats-new.html' else actual==expected
+                              }""")) if route in ('whats-new.html','catalog-review.html') else actual==expected
                 check(f'{route} {width}px {theme} shared action frame',
                       same_frame
                       and row.evaluate('el => el.scrollWidth <= el.clientWidth + 1')
@@ -1309,6 +1310,15 @@ with sync_playwright() as p:
                           and set(source.get_attribute('rel').split())=={'noopener','noreferrer'}
                           and source.get_attribute('aria-label').startswith('Original source for ')
                           and row.locator('button').count()==0)
+                elif route=='catalog-review.html':
+                    check(f'{route} {width}px {theme} retains all seven static evidence rows',
+                          page.locator('article.card .links.story-footer').count()==7
+                          and page.locator('article.card .links.story-footer a[href]').count()==21
+                          and row.locator('button').count()==0)
+                    first=row.locator('a').first
+                    first.focus()
+                    check(f'{route} {width}px {theme} shared evidence-link keyboard focus',
+                          first.evaluate("el => document.activeElement===el && getComputedStyle(el).outlineStyle==='solid' && getComputedStyle(el).outlineOffset==='3px'"))
                 else:
                     check(f'{route} {width}px {theme} preserves native action controls',
                           row.locator('a[href]').count()==1

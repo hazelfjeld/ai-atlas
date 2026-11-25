@@ -38,3 +38,16 @@ test('playbook disclosures reuse the shared action frame and retain native summa
   assert.ok(!page.includes('.playbook details[open]{margin-top:16px}'));
   assert.ok(page.includes('data/playbooks-01.json'));
 });
+
+test('catalog review evidence links reuse the shared action frame without changing static routes', () => {
+  const page = read('catalog-review.html');
+  const rows = [...page.matchAll(/<div class="links story-footer">([\s\S]*?)<\/div>/g)];
+  assert.equal(rows.length,7);
+  assert.ok(rows.every(row => (row[1].match(/<a href="/g)||[]).length >= 2));
+  assert.equal(rows.reduce((n,row) => n+(row[1].match(/<a href="/g)||[]).length,0),21);
+  assert.ok(rows.some(row => row[1].includes('href="terms/MLD-0110-benchmark.html"')));
+  assert.ok(rows.some(row => row[1].includes('href="https://gdpx.semianalysis.com/" rel="noopener noreferrer"')));
+  assert.ok(page.includes('.card .links{font-size:14px;margin-top:14px}'));
+  assert.ok(page.includes('.card .links a{white-space:normal;margin-left:0}'));
+  assert.ok(!page.includes('.links{display:flex;flex-wrap:wrap;gap:8px 18px'));
+});
