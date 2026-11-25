@@ -4061,6 +4061,20 @@ with sync_playwright() as p:
                 const s = getComputedStyle(el);
                 return [s.fontFamily, s.fontSize, s.fontWeight, s.lineHeight, s.letterSpacing];
             }"""
+            spacing = """el => {
+                const s = getComputedStyle(el);
+                return [s.marginTop, s.marginBottom];
+            }"""
+            heading_page.goto(base + 'index.html#/overview', wait_until='load')
+            feed_heading = heading_page.locator('.feed-heading').first
+            expect(feed_heading).to_be_visible(timeout=20000)
+            feed_spacing = feed_heading.evaluate(spacing)
+            expected_spacing = ['26px', '16px'] if width <= 650 else ['25px', '17px']
+            check('Discover feed section rhythm ' + scheme + ' ' + str(width),
+                  feed_spacing == expected_spacing)
+            feed_heading.scroll_into_view_if_needed()
+            heading_page.screenshot(path=str(out / (
+                'shared-discover-feed-rhythm-' + scheme + '-' + str(width) + '.png')))
             heading_page.goto(base + 'terms/index.html', wait_until='load')
             reference = heading_page.locator('.term-shell > .detail-block > h2').first
             expect(reference).to_be_visible()
@@ -4075,6 +4089,8 @@ with sync_playwright() as p:
             expect(heading).to_be_visible(timeout=20000)
             check('Shared news/reference subsection type ' + scheme + ' ' + str(width),
                   heading.evaluate(styles) == baseline)
+            check('Shared Discover/news collection spacing ' + scheme + ' ' + str(width),
+                  heading.locator('..').evaluate(spacing) == feed_spacing)
             heading.scroll_into_view_if_needed()
             heading_page.screenshot(path=str(out / (
                 'shared-news-subsection-' + scheme + '-' + str(width) + '.png')))

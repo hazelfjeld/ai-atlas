@@ -376,6 +376,17 @@ body > .site-mobile-chrome:not([data-page-label]):has(+ .site-chrome .site-chrom
   color:var(--ink);
 }
 
+/* atlas-shared-feed-section-rhythm:begin */
+/* The Discover feed is the spacing baseline for the dated news collection.
+   Keep the archive divider, counts, card grid and narrative heading type. */
+.feed-heading,
+#edition-content > section > .heading{margin:25px 0 17px}
+@media(max-width:650px){
+  .feed-heading,
+  #edition-content > section > .heading{margin:26px 0 16px}
+}
+/* atlas-shared-feed-section-rhythm:end */
+
 /* One desktop reading frame shared by existing editorial and reference families.
    Discover remains the shell reference; the wider daily edition and playable
    Games layouts retain their distinct content widths. Mobile stays unchanged. */

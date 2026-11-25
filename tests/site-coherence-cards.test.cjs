@@ -1328,3 +1328,19 @@ test('Daily archive collection headings reuse the shared reference subsection ty
   const offline = fs.readFileSync(path.join(__dirname, '..', 'downloads/Atlas_Demo_Offline.html'), 'utf8');
   assert.ok(offline.includes(css), 'Offline stylesheet must match the shared source exactly');
 });
+
+
+test('Discover and the daily news collection have one responsive feed spacing source', () => {
+  const rule = css.split('/* atlas-shared-feed-section-rhythm:begin */')[1]
+    ?.split('/* atlas-shared-feed-section-rhythm:end */')[0];
+  assert.ok(rule, 'Missing shared section rhythm');
+  assert.match(rule, /\.feed-heading,\s*#edition-content > section > \.heading\{margin:25px 0 17px\}/);
+  assert.match(rule, /@media\(max-width:650px\)\{\s*\.feed-heading,\s*#edition-content > section > \.heading\{margin:26px 0 16px\}/);
+  const brand = fs.readFileSync(path.join(__dirname, '..', 'brand.css'), 'utf8');
+  const news = fs.readFileSync(path.join(__dirname, '..', 'whats-new.html'), 'utf8');
+  const offline = fs.readFileSync(path.join(__dirname, '..', 'downloads/Atlas_Demo_Offline.html'), 'utf8');
+  assert.doesNotMatch(brand, /\.feed-heading\{[^}]*margin:/);
+  assert.doesNotMatch(news, /\.heading\{[^}]*margin:/);
+  assert.match(news, /\.heading\{[^}]*border-bottom:1px solid var\(--line\);padding-bottom:12px/);
+  assert.ok(offline.includes(css) && offline.includes(brand), 'Offline uses exact current shared styles');
+});
