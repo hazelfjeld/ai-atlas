@@ -23,7 +23,8 @@ function drawRecord(record) {
  field(details, 'Limitations and risks', record.caveat);
  const options=el('section'); options.append(el('h3','Technology options')); record.technologies.forEach((name,i)=>{const a=el('a',name);a.href='index.html#/technologies?record='+encodeURIComponent(record.technology_ids[i]);options.append(a,document.createTextNode(' · '));});details.append(options);
  field(details, 'Review status', record.status);
- article.append(details); return article;
+ const actions = el('div', undefined, 'story-footer playbook-disclosure');
+ actions.append(details); article.append(actions); return article;
 }
 function restoreAnchor() { const id = decodeURIComponent(location.hash.slice(1)); if (!/^PB-\d{2}$/.test(id)) return; const record = document.getElementById(id); if (record) { const details = record.querySelector('details'); if (details) details.open = true; record.scrollIntoView({block:'start'}); } }
 function render() {

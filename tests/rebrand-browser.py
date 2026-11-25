@@ -1316,6 +1316,43 @@ with sync_playwright() as p:
                 if (width,theme) in ((390,'light'),(1280,'dark')):
                     row.screenshot(path=str(out/f'card-actions-{route}-{width}-{theme}.png'))
 
+
+            # Playbooks reuse the action frame, not an artificial button in place
+            # of their native summary. Preserve keyboard and expanded content.
+            page.goto(base+'playbooks.html')
+            row=page.locator('#playbook-results .playbook-disclosure').first
+            row.wait_for(state='visible',timeout=15000)
+            summary=row.locator('details > summary')
+            details=row.locator('details')
+            check(f'Playbooks {width}px {theme} shared disclosure frame',
+                  row.evaluate(action_style)[:7]==expected[:7]
+                  and row.evaluate("""el => {
+                      const s=getComputedStyle(el), p=document.createElement('span');
+                      p.style.color='var(--line)';el.append(p);
+                      const c=getComputedStyle(p).color;p.remove();
+                      return s.borderTopColor===c;
+                  }""")
+                  and summary.evaluate("el => getComputedStyle(el).display==='list-item' && getComputedStyle(el).fontWeight==='600'")
+                  and page.evaluate('document.documentElement.dataset.theme')==theme)
+            summary.focus()
+            summary.press('Enter')
+            check(f'Playbooks {width}px {theme} native disclosure opens and retains focus',
+                  details.evaluate('el => el.open')
+                  and summary.evaluate("el => document.activeElement===el && getComputedStyle(el).outlineStyle==='solid'")
+                  and row.locator('a[href^="index.html#/technologies?record="]').first.is_visible()
+                  and row.evaluate('el => el.scrollWidth <= el.clientWidth + 1')
+                  and page.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'))
+            if (width,theme) in ((390,'light'),(1280,'dark')):
+                row.screenshot(path=str(out/f'card-actions-playbooks-open-{width}-{theme}.png'))
+            summary.press('Space')
+            check(f'Playbooks {width}px {theme} native disclosure closes and retains focus',
+                  not details.evaluate('el => el.open')
+                  and summary.evaluate('el => document.activeElement===el'))
+    page.goto(base+'playbooks.html#PB-01')
+    page.locator('#PB-01 details[open]').wait_for(state='visible',timeout=15000)
+    check('Playbooks deep link still opens native disclosure',
+          page.locator('#PB-01 details').evaluate('el => el.open'))
+
     # A single real footer rhythm should carry across the standalone families.
     # Compare Discover's computed footer, not just class names or CSS text.
     # Section-specific copy and links remain intact and functional.

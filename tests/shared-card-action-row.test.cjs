@@ -25,3 +25,16 @@ test('daily source links reuse the shared story action row without overriding it
   assert.ok(archive.includes('.item .links a{white-space:normal;margin-left:0}'));
   assert.equal([...archive.matchAll(/\.item \.links\{([^}]+)\}/g)].length, 1);
 });
+
+test('playbook disclosures reuse the shared action frame and retain native summary and deep links', () => {
+  const reader = read('playbooks.js');
+  const page = read('playbooks.html');
+  assert.ok(reader.includes("el('div', undefined, 'story-footer playbook-disclosure')"));
+  assert.ok(reader.includes("const details = el('details'); const summary = el('summary', 'Read steps, checks and tradeoffs'); details.append(summary)"));
+  assert.ok(reader.includes('actions.append(details); article.append(actions)'));
+  assert.ok(reader.includes("record.querySelector('details')"));
+  assert.ok(page.includes('.playbook .playbook-disclosure>details{flex:1 1 100%;min-width:0;margin:0}'));
+  assert.ok(page.includes('.playbook .playbook-disclosure summary{font-weight:600;min-height:44px;padding:10px 0;line-height:1.5}'));
+  assert.ok(!page.includes('.playbook details[open]{margin-top:16px}'));
+  assert.ok(page.includes('data/playbooks-01.json'));
+});
