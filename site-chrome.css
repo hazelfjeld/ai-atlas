@@ -1664,3 +1664,31 @@ html:is(:has(.nojs-primary-routes > .notice[id="/sources"]:target),:has(.nojs-pr
   padding-inline:var(--atlas-editorial-card-inset);
 }
 /* atlas-shared-editorial-card-inset:end */
+
+/* atlas-shared-card-action-row:begin */
+/* Discover's quiet divider and action spacing also frame Technology and
+   Research card actions. Keep native buttons, disclosures and link targets;
+   wrap long labels rather than overflowing narrow cards. */
+:is(.story-footer,
+    .tech-shell .tech-card .card-actions,
+    .shell:has(> .site-chrome.research-site-chrome) .cards .card-bottom){
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:9px;
+  padding-top:12px;
+  border-top:1px solid var(--line);
+}
+:is(.story-footer,
+    .tech-shell .tech-card .card-actions,
+    .shell:has(> .site-chrome.research-site-chrome) .cards .card-bottom) > a{
+  font-weight:600;
+}
+:is(.story-footer,
+    .tech-shell .tech-card .card-actions,
+    .shell:has(> .site-chrome.research-site-chrome) .cards .card-bottom) > :is(a,button):focus-visible{
+  outline:3px solid var(--orange,#b77833);
+  outline-offset:3px;
+}
+/* atlas-shared-card-action-row:end */

@@ -1259,6 +1259,43 @@ with sync_playwright() as p:
                     page.screenshot(path=str(out/f'editorial-cards-{route}-{width}-{theme}.png'))
 
 
+    # Compare the actual action rows with Discover in each theme and viewport.
+    # The controls keep their native link/button semantics and existing labels.
+    action_routes = (
+        ('technologies.html', '.tech-card .card-actions'),
+        ('research.html', '.cards .card-bottom'),
+    )
+    action_style = """el => {
+        const s=getComputedStyle(el), a=el.querySelector('a');
+        return [s.display,s.justifyContent,s.alignItems,s.flexWrap,s.columnGap,
+                s.paddingTop,s.borderTopWidth,s.borderTopColor,
+                a ? getComputedStyle(a).fontWeight : null];
+    }"""
+    for width, height in ((320,700),(390,844),(768,900),(1280,900)):
+        page.set_viewport_size({'width':width,'height':height})
+        for theme in ('light','dark'):
+            page.goto(base+'index.html#/overview')
+            page.locator('.story-footer a').first.wait_for(state='visible')
+            page.evaluate("t => {localStorage.setItem('atlas.theme',t);document.documentElement.dataset.theme=t}",theme)
+            expected=page.locator('.story-footer').first.evaluate(action_style)
+            check(f'Discover {width}px {theme} shared action frame',
+                  expected[:7]==['flex','space-between','center','wrap','9px','12px','1px']
+                  and expected[8]=='600')
+            for route, selector in action_routes:
+                page.goto(base+route)
+                row=page.locator(selector).first
+                row.wait_for(state='visible',timeout=15000)
+                check(f'{route} {width}px {theme} shared action frame',
+                      row.evaluate(action_style)==expected
+                      and row.evaluate('el => el.scrollWidth <= el.clientWidth + 1')
+                      and page.evaluate('document.documentElement.scrollWidth <= innerWidth')
+                      and page.evaluate('document.documentElement.dataset.theme')==theme)
+                check(f'{route} {width}px {theme} preserves native action controls',
+                      row.locator('a[href]').count()==1
+                      and row.locator('button').count()==1)
+                if (width,theme) in ((390,'light'),(1280,'dark')):
+                    row.screenshot(path=str(out/f'card-actions-{route}-{width}-{theme}.png'))
+
     # A single real footer rhythm should carry across the standalone families.
     # Compare Discover's computed footer, not just class names or CSS text.
     # Section-specific copy and links remain intact and functional.
