@@ -1612,3 +1612,23 @@ html:is(:has(.nojs-primary-routes > .notice[id="/sources"]:target),:has(.nojs-pr
   :root{--atlas-workspace-content-gutter:26px}
 }
 /* atlas-shared-editorial-reading-gutter:end */
+
+/* atlas-shared-card-heading-rhythm:begin */
+/* Discover's metadata-to-title and title-to-summary gaps are the common
+   editorial card rhythm. Keep illustrated cards, news flex gaps, evidence
+   callouts, details and controls otherwise unchanged. */
+.story-body > h3,
+.playbook-shell .playbook > h2,
+.tech-shell .tech-card > h2,
+.shell:has(> .site-chrome.nav) article.card > h3,
+.shell:has(> .site-chrome.research-site-chrome) .cards > .card > h2{
+  margin-block:12px 11px;
+}
+.story-body > h3 + p,
+.playbook-shell .playbook > h2 + p,
+.tech-shell .tech-card > .lede,
+.shell:has(> .site-chrome.nav) article.card > h3 + p,
+.shell:has(> .site-chrome.research-site-chrome) .cards > .card > h2 + p{
+  margin-block-start:0;
+}
+/* atlas-shared-card-heading-rhythm:end */

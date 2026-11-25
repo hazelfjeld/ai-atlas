@@ -920,12 +920,19 @@ with sync_playwright() as p:
             probe.remove();
             return [s.fontSize, s.lineHeight, s.color === muted];
         }"""
+        heading_gap = """el => {
+            const next = el.nextElementSibling;
+            return [getComputedStyle(el).marginTop, getComputedStyle(el).marginBottom,
+                    getComputedStyle(next).marginTop,
+                    Math.round(next.getBoundingClientRect().top - el.getBoundingClientRect().bottom)];
+        }"""
         for compact_width in (320, 390, 768, 1280):
             compact_page.set_viewport_size({'width': compact_width, 'height': 900})
             compact_page.goto(base + 'technologies.html')
             tech_title = compact_page.locator('#tech-results .tech-card > h2').first
             tech_title.wait_for(state='visible', timeout=45000)
             tech_type = tech_title.evaluate(compact_style)
+            tech_gap = tech_title.evaluate(heading_gap)
             tech_summary = compact_page.locator('#tech-results .tech-card > .lede').first.evaluate(summary_style)
             tech_title.scroll_into_view_if_needed()
             compact_page.screenshot(path=str(out / f'compact-tech-{compact_scheme}-{compact_width}.png'))
@@ -939,6 +946,7 @@ with sync_playwright() as p:
             play_title = compact_page.locator('.playbook-shell .playbook > h2').first
             play_title.wait_for(state='visible', timeout=45000)
             play_type = play_title.evaluate(compact_style)
+            play_gap = play_title.evaluate(heading_gap)
             play_summary = compact_page.locator('.playbook-shell .playbook > h2 + p').first.evaluate(summary_style)
             play_title.scroll_into_view_if_needed()
             compact_page.screenshot(path=str(out / f'compact-playbooks-{compact_scheme}-{compact_width}.png'))
@@ -953,6 +961,7 @@ with sync_playwright() as p:
             research_title = compact_page.locator('#results .card > h2').first
             research_title.wait_for(state='visible', timeout=45000)
             research_type = research_title.evaluate(compact_style)
+            research_gap = research_title.evaluate(heading_gap)
             research_summary = compact_page.locator('#results .card > h2 + p').first.evaluate(summary_style)
             title_button = research_title.locator('button.title-button')
             research_title.scroll_into_view_if_needed()
@@ -972,6 +981,19 @@ with sync_playwright() as p:
             check('Shared Research card preserves keyboard dialog ' + compact_scheme + str(compact_width),
                   compact_page.locator('#detail').evaluate('el => el.open'))
             compact_page.locator('#close-detail').click()
+            compact_page.goto(base + 'catalog-review.html')
+            review_title = compact_page.locator('article.card > h3').first
+            review_title.wait_for(state='visible', timeout=45000)
+            review_gap = review_title.evaluate(heading_gap)
+            review_title.scroll_into_view_if_needed()
+            compact_page.screenshot(path=str(out / f'compact-review-{compact_scheme}-{compact_width}.png'))
+            compact_page.goto(base + 'index.html#/overview')
+            compact_page.locator('#catalog-loading').wait_for(state='detached', timeout=45000)
+            discover_title = compact_page.locator('.story-body > h3').first
+            discover_title.wait_for(state='visible', timeout=45000)
+            discover_gap = discover_title.evaluate(heading_gap)
+            check('Shared card heading rhythm ' + compact_scheme + ' ' + str(compact_width),
+                  tech_gap == play_gap == research_gap == review_gap == discover_gap == ['12px', '11px', '0px', 11])
         compact_context.close()
     # Check actual Discover-to-editorial transitions, not CSS similarity alone.
     for width in (320, 390, 768, 1280):
