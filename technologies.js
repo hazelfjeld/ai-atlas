@@ -60,9 +60,21 @@ function card(r) {
  const toggle = el('button',selected.has(r.id) ? 'Remove from comparison' : 'Add to comparison');
  toggle.type = 'button'; toggle.setAttribute('aria-pressed',selected.has(r.id) ? 'true':'false');
  toggle.disabled = !selected.has(r.id) && selected.size >= 3;
- toggle.onclick = () => { if (selected.has(r.id)) selected.delete(r.id); else if(selected.size < 3) selected.add(r.id); render(false); };
+ toggle.onclick = () => { if (selected.has(r.id)) selected.delete(r.id); else if(selected.size < 3) selected.add(r.id); refreshComparisonControls(); };
  actions.append(toggle,safeLink(r.source_url,'Original documentation ↗')); a.append(actions);
  return a;
+}
+// Match the workspace's in-place comparison updates: keep the focused button
+// and any open evidence disclosures mounted when a selection changes.
+function refreshComparisonControls() {
+ for (const button of $('tech-results').querySelectorAll('.tech-card .card-actions > button')) {
+  const active = selected.has(button.closest('.tech-card').id);
+  button.textContent = active ? 'Remove from comparison' : 'Add to comparison';
+  button.setAttribute('aria-pressed', String(active));
+  button.disabled = !active && selected.size >= 3;
+ }
+ $('compare-button').textContent = 'Compare selected (' + selected.size + ')';
+ $('compare-button').disabled = selected.size < 2;
 }
 function anchor() {
  const id = decodeURIComponent(location.hash.slice(1)); if (!/^TECH-\d{4}$/.test(id)) return;

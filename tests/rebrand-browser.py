@@ -627,7 +627,32 @@ with sync_playwright() as p:
     page.keyboard.press('Enter')
     check('removing the last tool returns focus to main content',
           page.evaluate("document.querySelector('#compare-dock').hidden && document.activeElement.id === 'main'"))
-    page.locator('#navigation a[data-view="overview"]').click()
+    # Standalone technology comparison must preserve keyboard context just
+    # like the workspace. Selection changes must not replace open cards.
+    page.goto(base + 'technologies.html')
+    standalone = page.locator('.tech-card .card-actions > button')
+    standalone.first.wait_for(state='visible')
+    disclosure = page.locator('.tech-card > details').first
+    disclosure.locator('summary').first.click()
+    standalone.first.focus()
+    page.keyboard.press('Enter')
+    check('standalone comparison preserves focus and open evidence',
+          standalone.first.get_attribute('aria-pressed') == 'true'
+          and standalone.first.evaluate('(el) => el === document.activeElement')
+          and disclosure.evaluate('(el) => el.open'))
+    for i in (1, 2):
+        standalone.nth(i).focus()
+        page.keyboard.press('Enter')
+    check('standalone comparison preserves the three-tool limit',
+          standalone.nth(3).is_disabled()
+          and page.locator('#compare-button').inner_text() == 'Compare selected (3)')
+    page.keyboard.press('Enter')
+    check('standalone comparison removal keeps focus and re-enables other tools',
+          standalone.nth(2).get_attribute('aria-pressed') == 'false'
+          and standalone.nth(2).evaluate('(el) => el === document.activeElement')
+          and standalone.nth(3).is_enabled()
+          and disclosure.evaluate('(el) => el.open'))
+    page.goto(base)
     page.locator('#daily-panel-title').wait_for()
 
     check('new brand and requested palette render', page.get_by_role('link',name='AI Updates home',exact=True).is_visible() and page.evaluate("getComputedStyle(document.body).backgroundColor")=='rgb(246, 246, 242)')
