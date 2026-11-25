@@ -4094,6 +4094,32 @@ with sync_playwright() as p:
             heading.scroll_into_view_if_needed()
             heading_page.screenshot(path=str(out / (
                 'shared-news-subsection-' + scheme + '-' + str(width) + '.png')))
+            # The long-form reading pages share the feed's section cadence,
+            # but keep heading margins inside their own content surfaces.
+            for route, selector in (
+                ('about.html', '.term-shell > .profile-section'),
+                ('technology/TECH-0001-adversarial-robustness-toolbox.html', '.term-shell > .profile-section'),
+                ('terms/MLD-0724-memory-bandwidth.html', '.term-shell > .detail-block'),
+                ('hardware-review.html', '.review-shell > section'),
+                ('catalog-review.html', '.shell > main > section'),
+            ):
+                heading_page.goto(base + route, wait_until='load')
+                section = heading_page.locator(selector).first
+                expect(section).to_be_visible()
+                subsection = section.locator('h2').first
+                expect(subsection).to_be_visible()
+                check('Shared reading-section rhythm ' + route + ' ' + scheme + ' ' + str(width),
+                      section.evaluate(spacing) == [feed_spacing[0], '0px']
+                      and subsection.evaluate(spacing) == ['0px', '12px']
+                      and section.evaluate("""el => {
+                          const next = el.nextElementSibling;
+                          return next && Math.round(next.getBoundingClientRect().top -
+                              el.getBoundingClientRect().bottom) === parseInt(getComputedStyle(el).marginTop);
+                      }"""))
+                section.scroll_into_view_if_needed()
+                heading_page.screenshot(path=str(out / (
+                    'shared-reading-rhythm-' + route.replace('/', '-') + '-' +
+                    scheme + '-' + str(width) + '.png')))
         heading_context.close()
 
     check('no application runtime exceptions', not errors)

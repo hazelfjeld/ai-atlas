@@ -667,6 +667,23 @@ body > .site-mobile-chrome:not([data-page-label]):has(+ .site-chrome .site-chrom
 }
 /* atlas-shared-feed-section-rhythm:end */
 
+/* atlas-shared-reading-section-rhythm:begin */
+/* Match Discover's responsive section cadence for long-form reading pages.
+   Put the gap on the section, not the heading; cards retain their padding,
+   and plain evidence sections retain their tables and in-page anchors. */
+:is(.term-shell > .profile-section, .term-shell > .detail-block,
+    .review-shell > section,
+    .shell:has(> .site-chrome.nav) > main > section){margin-block:25px 0}
+:is(.term-shell > .profile-section, .term-shell > .detail-block,
+    .review-shell > section,
+    .shell:has(> .site-chrome.nav) > main > section) > h2{margin:0 0 12px}
+@media(max-width:650px){
+  :is(.term-shell > .profile-section, .term-shell > .detail-block,
+      .review-shell > section,
+      .shell:has(> .site-chrome.nav) > main > section){margin-block:26px 0}
+}
+/* atlas-shared-reading-section-rhythm:end */
+
 /* One desktop reading frame shared by existing editorial and reference families.
    Discover remains the shell reference; the wider daily edition and playable
    Games layouts retain their distinct content widths. Mobile stays unchanged. */

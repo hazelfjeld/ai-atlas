@@ -2104,3 +2104,21 @@ test('compact research and technology cards match the actual shared editorial he
   assert.match(read('technologies.html'), /\.tech-card h2\{margin:7px 0\}/);
   assert.ok(read('downloads/Atlas_Demo_Offline.html').includes(css));
 });
+
+test('shared reading sections use Discover cadence without stacking heading margins', () => {
+  const css=read('site-chrome.css'), offline=read('downloads/Atlas_Demo_Offline.html');
+  const start='/* atlas-shared-reading-section-rhythm:begin */';
+  const end='/* atlas-shared-reading-section-rhythm:end */';
+  assert.equal(css.split(start).length,2);
+  assert.equal(css.split(end).length,2);
+  const block=css.slice(css.indexOf(start),css.indexOf(end)+end.length);
+  for (const selector of ['.term-shell > .profile-section','.term-shell > .detail-block',
+    '.review-shell > section','.shell:has(> .site-chrome.nav) > main > section']) {
+    assert.equal(block.split(selector).length,4,selector+' needs desktop, heading and mobile rules');
+  }
+  assert.ok(block.includes('{margin-block:25px 0}'));
+  assert.ok(block.includes('> h2{margin:0 0 12px}'));
+  assert.ok(block.includes('@media(max-width:650px)'));
+  assert.ok(block.includes('{margin-block:26px 0}'));
+  assert.ok(offline.includes(block),'offline fallback embeds exact shared section rule');
+});
