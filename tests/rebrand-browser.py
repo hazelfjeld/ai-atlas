@@ -1735,6 +1735,20 @@ with sync_playwright() as p:
                   and frame['railVisible']==(width>650) and not frame['overflow'])
             check(f'guided demo {width}px {theme} honors saved theme on real content',
                   frame['card']!=frame['body'])
+            rows=page.locator('.demo-actions.story-footer')
+            first=rows.first
+            check(f'guided demo {width}px {theme} shares native card action frame',
+                  rows.count()==10 and rows.locator('a[href]').count()==12
+                  and first.evaluate(action_style)[:7]==['flex','space-between','center','wrap','9px','12px','1px']
+                  and first.evaluate(action_style)[8]=='600'
+                  and rows.evaluate_all('els => els.every(el => el.scrollWidth <= el.clientWidth + 1)'))
+            link=first.locator('a').first
+            link.focus()
+            check(f'guided demo {width}px {theme} shared keyboard focus',
+                  link.evaluate("el => document.activeElement===el && getComputedStyle(el).outlineStyle==='solid' && getComputedStyle(el).outlineOffset==='3px'"))
+            link.press('Enter')
+            page.wait_for_url('**/terms/MLD-0691-machine-learning.html')
+            page.goto(base+'demo.html')
             if (width==390 and theme=='dark') or (width==1280 and theme=='light'):
                 page.screenshot(path=str(out/f'guided-demo-{width}-{theme}.png'))
             if width<=650:

@@ -51,3 +51,15 @@ test('catalog review evidence links reuse the shared action frame without changi
   assert.ok(page.includes('.card .links a{white-space:normal;margin-left:0}'));
   assert.ok(!page.includes('.links{display:flex;flex-wrap:wrap;gap:8px 18px'));
 });
+
+test('guided tour groups all native action links in the shared frame', () => {
+  const page=read('demo.html');
+  const rows=[...page.matchAll(/<div class="story-footer demo-actions">([\s\S]*?)<\/div>/g)];
+  assert.equal(rows.length,10);
+  assert.equal(rows.reduce((n,r)=>n+(r[1].match(/<a href="/g)||[]).length,0),12);
+  assert.ok(rows.every(r=>r[1].startsWith('<a href=') && !r[1].includes('<button')));
+  for (const href of ['terms/MLD-0691-machine-learning.html','index.html#/technologies?q=pytorch','index.html#/games','whats-new.html','technologies.html','playbooks.html','index.html#/sources'])
+    assert.ok(rows.some(r=>r[1].includes('href="'+href+'"')),href);
+  assert.ok(!page.includes('class="go"'));
+  assert.ok(page.includes('downloads/Atlas_Demo_Offline.html'));
+});
