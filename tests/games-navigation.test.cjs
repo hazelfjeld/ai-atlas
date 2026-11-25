@@ -1791,7 +1791,7 @@ test('Guided demo inherits the actual shared navigation instead of an independen
   assert.ok(html.includes('href="index.html#/sources">Inspect published inventory'));
   assert.ok(html.includes(':root[data-theme="dark"]'));
   assert.ok(html.includes('article{padding:26px;background:var(--demo-card)'));
-  assert.ok(html.includes('<a class="go" href="terms/MLD-0691-machine-learning.html">'));
+  assert.ok(html.includes('<div class="story-footer demo-actions"><a href="terms/MLD-0691-machine-learning.html">'));
   assert.ok(html.includes('index.html#/papers?q=reward'));
   assert.ok(html.includes('index.html#/safety'));
   assert.ok(read('scripts/build_seo.py').includes("str(guide_count) + ' now have expanded explanations'"));
