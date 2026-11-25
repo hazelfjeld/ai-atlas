@@ -1187,6 +1187,17 @@ with sync_playwright() as p:
                 return {background:s.backgroundColor,border:s.borderTopColor,
                         width:s.borderTopWidth,radius:s.borderTopLeftRadius};
             }""")
+            # Compact cards now share the story body's responsive inline inset,
+            # not the older long-form panel padding range. Keep the independent
+            # numeric contract as well as the measured Discover comparison.
+            expected_inset = 20 if width <= 520 else 13 if width <= 650 else 16 if width <= 1150 else 17
+            discover_inset = page.locator('.story-body > h3').first.evaluate("""el => {
+                const s=getComputedStyle(el.parentElement);
+                return [parseFloat(s.paddingLeft),parseFloat(s.paddingRight)];
+            }""")
+            check(f'Discover {width}px {theme} responsive card inset {discover_inset}',
+                  discover_inset == [expected_inset, expected_inset])
+            compact_routes = ('playbooks.html', 'technologies.html', 'catalog-review.html')
             for route, selector in card_routes:
                 page.goto(base+route)
                 card=page.locator(selector).first
@@ -1195,15 +1206,21 @@ with sync_playwright() as p:
                     const s=getComputedStyle(el);
                     return {background:s.backgroundColor,border:s.borderTopColor,
                             width:s.borderTopWidth,radius:s.borderTopLeftRadius,
-                            padding:parseFloat(s.paddingLeft),borderStyle:s.borderTopStyle};
+                            padding:parseFloat(s.paddingLeft),
+                            paddingRight:parseFloat(s.paddingRight),borderStyle:s.borderTopStyle};
                 }""")
-                check(f'{route} {width}px {theme} shares Discover editorial card surface',
+                if route in compact_routes:
+                    inset_ok = [style['padding'], style['paddingRight']] == discover_inset
+                else:
+                    inset_ok = 18 <= style['padding'] <= 24.1
+                check(f'{route} {width}px {theme} shares Discover editorial card surface '
+                      f'(inset={style["padding"]}/{style["paddingRight"]}, reference={discover_inset})',
                       style['background']==discover_surface['background']
                       and style['border']==discover_surface['border']
                       and style['width']==discover_surface['width']=='1px'
                       and style['radius']==discover_surface['radius']=='11px'
                       and style['borderStyle']=='solid'
-                      and 18<=style['padding']<=24.1
+                      and inset_ok
                       and page.evaluate('document.documentElement.dataset.theme')==theme
                       and page.evaluate('document.documentElement.scrollWidth <= innerWidth'))
                 if (width,theme) in ((1280,'light'),(390,'dark')) and route in ('about.html','playbooks.html','catalog-review.html','whats-new.html'):
