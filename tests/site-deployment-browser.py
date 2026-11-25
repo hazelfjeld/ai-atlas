@@ -3759,6 +3759,32 @@ with sync_playwright() as p:
                       }"""))
                 if width in (390,1280):
                     lead_page.screenshot(path=str(out/('intro-'+route.split('.')[0]+'-'+scheme+'-'+str(width)+'.png')))
+        # On phones, the archive and Catalog Review must share the same
+        # shell-owned gutter. Exercise the actual links before measuring.
+        for width in (320,390):
+            lead_page.set_viewport_size({'width':width,'height':844})
+            lead_page.goto(base+'index.html', wait_until='load')
+            discover_left = lead_page.locator('h1').first.evaluate(
+                'el => el.getBoundingClientRect().left')
+            lead_page.locator('#discover-mobile-nav > summary').click()
+            lead_page.locator('#discover-mobile-nav a[href="whats-new.html"]').click()
+            lead_page.wait_for_load_state('load')
+            for route in ('whats-new.html','catalog-review.html'):
+                heading = lead_page.locator('h1').first
+                left = heading.evaluate('el => el.getBoundingClientRect().left')
+                check('Shared mobile reading gutter '+route+' '+scheme+' '+str(width),
+                      lead_page.url == base+route and heading.is_visible()
+                      and abs(left-discover_left)<=2
+                      and lead_page.evaluate('document.documentElement.scrollWidth <= innerWidth'))
+                lead_page.screenshot(path=str(out/('mobile-reading-gutter-'+route+'-'+scheme+'-'+str(width)+'.png')))
+                if route == 'whats-new.html':
+                    lead_page.locator('a[href="catalog-review.html"]').click()
+                    lead_page.wait_for_load_state('load')
+            lead_page.locator('.site-mobile-chrome__nav > summary').click()
+            lead_page.locator('.site-mobile-chrome__menu > a[href="index.html#/overview"]').click()
+            lead_page.wait_for_load_state('load')
+            check('Catalog Review mobile return to Discover '+scheme+' '+str(width),
+                  lead_page.locator('h1').first.inner_text().strip()=='Discover')
         # A native workspace must begin at the same 16px inset below the
         # fixed bar; legacy hero/shell spacing must not stack on navigation.
         for width in (768,1280):
