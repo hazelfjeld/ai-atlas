@@ -653,6 +653,9 @@ with sync_playwright() as p:
           and standalone.nth(3).is_enabled()
           and disclosure.evaluate('(el) => el.open'))
     page.goto(base)
+    # Static Discover includes the same daily title and topic links. Wait for
+    # catalog hydration before testing the enhanced router's focus behavior.
+    page.locator('#catalog-loading').wait_for(state='detached', timeout=45000)
     page.locator('#daily-panel-title').wait_for()
 
     check('new brand and requested palette render', page.get_by_role('link',name='AI Updates home',exact=True).is_visible() and page.evaluate("getComputedStyle(document.body).backgroundColor")=='rgb(246, 246, 242)')
@@ -670,7 +673,11 @@ with sync_playwright() as p:
     page.locator('#global-query').focus()
     check('global search has a visible full-field focus ring in light theme', page.evaluate(focus_ring))
     page.screenshot(path=str(out/'desktop.png'),full_page=True)
-    page.get_by_role('navigation',name='Discover topics').get_by_role('link',name='Tools & models',exact=True).click()
+    tools_topic = page.get_by_role('navigation',name='Discover topics').get_by_role('link',name='Tools & models',exact=True)
+    tools_topic.focus()
+    check('keyboard focus reaches the hydrated Discover topic link',
+          tools_topic.evaluate('(el) => el === document.activeElement'))
+    page.keyboard.press('Enter')
     page.wait_for_function("document.querySelectorAll('.discovery-card').length===2")
     check('topic tabs filter the editorial collection', page.locator('.discovery-card').count()==2 and 'topic=tools' in page.url)
     check('re-rendering discovery topics does not strand focus on a removed link',
