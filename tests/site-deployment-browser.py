@@ -4125,6 +4125,9 @@ with sync_playwright() as p:
                 return [s.marginTop, s.marginBottom];
             }"""
             heading_page.goto(base + 'index.html#/overview', wait_until='load')
+            # The initial script-free feed is replaced when the catalog hydrates.
+            # Measure and capture the enhanced feed only after that replacement.
+            heading_page.locator('#catalog-loading').wait_for(state='detached', timeout=45000)
             feed_heading = heading_page.locator('.feed-heading').first
             expect(feed_heading).to_be_visible(timeout=20000)
             feed_spacing = feed_heading.evaluate(spacing)
@@ -4187,6 +4190,9 @@ with sync_playwright() as p:
             }"""
             expected_metadata = ['12px', '700', '18px', '0.48px', 'uppercase']
             heading_page.goto(base + 'index.html#/overview', wait_until='load')
+            # The initial script-free feed is replaced when the catalog hydrates.
+            # Measure and capture the enhanced feed only after that replacement.
+            heading_page.locator('#catalog-loading').wait_for(state='detached', timeout=45000)
             discover_overline = heading_page.locator('.story-body .story-kicker').first
             expect(discover_overline).to_be_visible(timeout=20000)
             discover_metadata = discover_overline.evaluate(metadata_style)
