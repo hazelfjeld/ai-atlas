@@ -933,6 +933,7 @@ with sync_playwright() as p:
             tech_title.wait_for(state='visible', timeout=45000)
             tech_type = tech_title.evaluate(compact_style)
             tech_gap = tech_title.evaluate(heading_gap)
+            tech_inset = tech_title.evaluate("el => [getComputedStyle(el.parentElement).paddingLeft, getComputedStyle(el.parentElement).paddingRight]")
             tech_summary = compact_page.locator('#tech-results .tech-card > .lede').first.evaluate(summary_style)
             tech_title.scroll_into_view_if_needed()
             compact_page.screenshot(path=str(out / f'compact-tech-{compact_scheme}-{compact_width}.png'))
@@ -947,6 +948,7 @@ with sync_playwright() as p:
             play_title.wait_for(state='visible', timeout=45000)
             play_type = play_title.evaluate(compact_style)
             play_gap = play_title.evaluate(heading_gap)
+            play_inset = play_title.evaluate("el => [getComputedStyle(el.parentElement).paddingLeft, getComputedStyle(el.parentElement).paddingRight]")
             play_summary = compact_page.locator('.playbook-shell .playbook > h2 + p').first.evaluate(summary_style)
             play_title.scroll_into_view_if_needed()
             compact_page.screenshot(path=str(out / f'compact-playbooks-{compact_scheme}-{compact_width}.png'))
@@ -962,6 +964,7 @@ with sync_playwright() as p:
             research_title.wait_for(state='visible', timeout=45000)
             research_type = research_title.evaluate(compact_style)
             research_gap = research_title.evaluate(heading_gap)
+            research_inset = research_title.evaluate("el => [getComputedStyle(el.parentElement).paddingLeft, getComputedStyle(el.parentElement).paddingRight]")
             research_summary = compact_page.locator('#results .card > h2 + p').first.evaluate(summary_style)
             title_button = research_title.locator('button.title-button')
             research_title.scroll_into_view_if_needed()
@@ -985,6 +988,7 @@ with sync_playwright() as p:
             review_title = compact_page.locator('article.card > h3').first
             review_title.wait_for(state='visible', timeout=45000)
             review_gap = review_title.evaluate(heading_gap)
+            review_inset = review_title.evaluate("el => [getComputedStyle(el.parentElement).paddingLeft, getComputedStyle(el.parentElement).paddingRight]")
             review_title.scroll_into_view_if_needed()
             compact_page.screenshot(path=str(out / f'compact-review-{compact_scheme}-{compact_width}.png'))
             compact_page.goto(base + 'index.html#/overview')
@@ -992,8 +996,12 @@ with sync_playwright() as p:
             discover_title = compact_page.locator('.story-body > h3').first
             discover_title.wait_for(state='visible', timeout=45000)
             discover_gap = discover_title.evaluate(heading_gap)
+            discover_inset = discover_title.evaluate("el => [getComputedStyle(el.parentElement).paddingLeft, getComputedStyle(el.parentElement).paddingRight]")
             check('Shared card heading rhythm ' + compact_scheme + ' ' + str(compact_width),
                   tech_gap == play_gap == research_gap == review_gap == discover_gap == ['12px', '11px', '0px', 11])
+            expected_inset = '20px' if compact_width <= 520 else '13px' if compact_width <= 650 else '16px' if compact_width <= 1150 else '17px'
+            check('Shared editorial card inline inset ' + compact_scheme + ' ' + str(compact_width),
+                  tech_inset == play_inset == research_inset == review_inset == discover_inset == [expected_inset, expected_inset])
         compact_context.close()
     # Check actual Discover-to-editorial transitions, not CSS similarity alone.
     for width in (320, 390, 768, 1280):

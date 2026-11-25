@@ -1927,6 +1927,23 @@ html:is(:has(.nojs-primary-routes > .notice[id="/sources"]:target),:has(.nojs-pr
   overflow-wrap:anywhere;
 }
 /* atlas-shared-card-metadata:end */
+
+/* atlas-shared-editorial-card-inset:begin */
+/* Use Discover's responsive inline inset for the compact editorial card
+   families. Vertical padding, illustrations, disclosures and controls keep
+   their existing layout; the narrow single-column feed has more room. */
+:root{--atlas-editorial-card-inset:17px}
+@media(max-width:1150px){:root{--atlas-editorial-card-inset:16px}}
+@media(max-width:650px){:root{--atlas-editorial-card-inset:13px}}
+@media(max-width:520px){:root{--atlas-editorial-card-inset:20px}}
+:is(.story-body,
+    .playbook-shell .playbook,
+    .tech-shell .tech-card,
+    .shell:has(> .site-chrome.nav) article.card,
+    .shell:has(> .site-chrome.research-site-chrome) .cards > .card){
+  padding-inline:var(--atlas-editorial-card-inset);
+}
+/* atlas-shared-editorial-card-inset:end */
 </style><script>/* Enhance the native dropdown only when scripts can make its drawer modal.
    Without JavaScript, keep the accessible, nonmodal <details> fallback. */
 document.documentElement.classList?.add('atlas-enhanced');
