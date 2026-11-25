@@ -269,7 +269,9 @@ with sync_playwright() as p:
     # Guided demo and evidence review now share Discover's navigation-as-sibling
     # structure, including with JavaScript disabled. Check the actual reading
     # landmark, mobile overflow and first paint in both native themes.
-    for width in (320, 390, 768, 1280):
+    # Include the narrow desktop-rail boundary where two intrinsic-width
+    # tour columns overflow even if phone and wide-desktop checks pass.
+    for width in (320, 390, 651, 700, 768, 900, 901, 1280):
         page.set_viewport_size({'width': width, 'height': 844 if width <= 650 else 900})
         for theme in ('light', 'dark'):
             page.emulate_media(color_scheme=theme)
@@ -288,6 +290,21 @@ with sync_playwright() as p:
                 }""")
                 check(f'{route} {width}px {theme} shares sibling navigation and readable article',
                       layout['landmarks'] and not layout['overflow'] and layout['navCount'] == 1)
+                if route == 'demo.html':
+                    grids = page.evaluate("""() => [...document.querySelectorAll('main .grid')].map(grid => {
+                        const cards = [...grid.querySelectorAll(':scope > article')];
+                        const box = grid.getBoundingClientRect();
+                        return {columns:getComputedStyle(grid).gridTemplateColumns.split(' ').length,
+                            fits:grid.scrollWidth <= grid.clientWidth + 1 &&
+                                cards.every(card => card.getBoundingClientRect().right <= box.right + 1 &&
+                                    card.scrollWidth <= card.clientWidth + 1)};
+                    })""")
+                    check(f'guided demo {width}px {theme} script-free cards fit the available reading column',
+                          len(grids) == 2 and all(g['fits'] and g['columns'] == (1 if width <= 900 else 2)
+                                                  for g in grids))
+                    if width == 768 and theme == 'light':
+                        page.locator('#quick-tour').scroll_into_view_if_needed()
+                        page.screenshot(path=str(out / 'guided-demo-tablet-card-fit.png'))
                 if width == 390 and theme == 'dark':
                     page.screenshot(path=str(out / f'editorial-sibling-nav-{route}-390-dark.png'))
     page.emulate_media(color_scheme='light')
