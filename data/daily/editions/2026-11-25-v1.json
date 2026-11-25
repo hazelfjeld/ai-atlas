@@ -1,0 +1,528 @@
+{
+  "schema": 1,
+  "edition_date": "2026-11-25",
+  "timezone": "America/Chicago",
+  "published_at": "2026-11-25T15:26:34Z",
+  "coverage": {
+    "start": "2026-11-24T12:16:44.729Z",
+    "end": "2026-11-25T14:42:15.229Z",
+    "status": "partial",
+    "note": "Bounded November 24–25 collection, not exhaustive. Eleven primary-source records independently checked; seven preprints submitted November 24 and publicly listed November 25, and four first-party announcements dated November 24. Seven catalog proposals deferred pending canonical deduplication, licensing/availability and integration checks. Collector metadata lookup failure retained.",
+    "sources_checked": [
+      {
+        "url": "https://arxiv.org/abs/2611.33148",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-25T14:42:15.229Z",
+        "method": "opened source page and reviewed relevant claims"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.33133",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-25T14:42:15.229Z",
+        "method": "opened source page and reviewed relevant claims"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.33111",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-25T14:42:15.229Z",
+        "method": "opened source page and reviewed relevant claims"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.33158",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-25T14:42:15.229Z",
+        "method": "opened source page and reviewed relevant claims"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.33093",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-25T14:42:15.229Z",
+        "method": "opened source page and reviewed relevant claims"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.33059",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-25T14:42:15.229Z",
+        "method": "opened source page and reviewed relevant claims"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.33153",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-25T14:42:15.229Z",
+        "method": "opened source page and reviewed relevant claims"
+      },
+      {
+        "url": "https://openclaw.ai/blog/shellbench",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-25T14:42:15.229Z",
+        "method": "opened source page and reviewed relevant claims"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.32946",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-25T14:42:15.229Z",
+        "method": "opened source page and reviewed relevant claims"
+      },
+      {
+        "url": "https://www.computerworld.com/article/4252841/openclaw-launches-an-ai-performance-benchmark-that-it-argues-is-more-realistic-than-others.html",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-25T14:42:15.229Z",
+        "method": "opened source page and reviewed relevant claims"
+      },
+      {
+        "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/cloudformation-coverage-expansion/",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-25T14:42:15.229Z",
+        "method": "opened source page and reviewed relevant claims"
+      },
+      {
+        "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/amazon-opensearch-serverless-available-cape-town-region/",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-25T14:42:15.229Z",
+        "method": "opened source page and reviewed relevant claims"
+      },
+      {
+        "url": "https://investors.delltechnologies.com/sec-filings/all-sec-filings/content/0001571996-26-000050/exhibit991earnings8kq3fy27.htm",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-25T14:42:15.229Z",
+        "method": "opened source page and reviewed relevant claims"
+      },
+      {
+        "url": "https://arxiv.org/list/cs.CL/recent",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-25T14:42:15.229Z",
+        "method": "recent category listing sampled; not exhaustive"
+      },
+      {
+        "url": "https://arxiv.org/list/cs.LG/recent",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-25T14:42:15.229Z",
+        "method": "recent category listing sampled; not exhaustive"
+      },
+      {
+        "url": "https://arxiv.org/list/cs.RO/recent",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-25T14:42:15.229Z",
+        "method": "recent category listing sampled; not exhaustive"
+      },
+      {
+        "url": "https://arxiv.org/list/eess.AS/recent",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-25T14:42:15.229Z",
+        "method": "recent category listing sampled; not exhaustive"
+      },
+      {
+        "url": "https://arxiv.org/list/cs.CV/recent",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-25T14:42:15.229Z",
+        "method": "recent category listing sampled; not exhaustive"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.33148",
+        "status": "publisher_checked_primary_source",
+        "checked_at": "2026-11-25T15:26:34Z",
+        "method": "Opened primary abstract, dated announcement or earnings filing; verified material claims"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.33133",
+        "status": "publisher_checked_primary_source",
+        "checked_at": "2026-11-25T15:26:34Z",
+        "method": "Opened primary abstract, dated announcement or earnings filing; verified material claims"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.33111",
+        "status": "publisher_checked_primary_source",
+        "checked_at": "2026-11-25T15:26:34Z",
+        "method": "Opened primary abstract, dated announcement or earnings filing; verified material claims"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.33158",
+        "status": "publisher_checked_primary_source",
+        "checked_at": "2026-11-25T15:26:34Z",
+        "method": "Opened primary abstract, dated announcement or earnings filing; verified material claims"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.33093",
+        "status": "publisher_checked_primary_source",
+        "checked_at": "2026-11-25T15:26:34Z",
+        "method": "Opened primary abstract, dated announcement or earnings filing; verified material claims"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.33059",
+        "status": "publisher_checked_primary_source",
+        "checked_at": "2026-11-25T15:26:34Z",
+        "method": "Opened primary abstract, dated announcement or earnings filing; verified material claims"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.33153",
+        "status": "publisher_checked_primary_source",
+        "checked_at": "2026-11-25T15:26:34Z",
+        "method": "Opened primary abstract, dated announcement or earnings filing; verified material claims"
+      },
+      {
+        "url": "https://openclaw.ai/blog/shellbench",
+        "status": "publisher_checked_primary_source",
+        "checked_at": "2026-11-25T15:26:34Z",
+        "method": "Opened primary abstract, dated announcement or earnings filing; verified material claims"
+      },
+      {
+        "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/cloudformation-coverage-expansion/",
+        "status": "publisher_checked_primary_source",
+        "checked_at": "2026-11-25T15:26:34Z",
+        "method": "Opened primary abstract, dated announcement or earnings filing; verified material claims"
+      },
+      {
+        "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/amazon-opensearch-serverless-available-cape-town-region/",
+        "status": "publisher_checked_primary_source",
+        "checked_at": "2026-11-25T15:26:34Z",
+        "method": "Opened primary abstract, dated announcement or earnings filing; verified material claims"
+      },
+      {
+        "url": "https://investors.delltechnologies.com/sec-filings/all-sec-filings/content/0001571996-26-000050/exhibit991earnings8kq3fy27.htm",
+        "status": "publisher_checked_primary_source",
+        "checked_at": "2026-11-25T15:26:34Z",
+        "method": "Opened primary abstract, dated announcement or earnings filing; verified material claims"
+      },
+      {
+        "url": "https://arxiv.org/list/cs.CL/recent",
+        "status": "publisher_checked_public_listing",
+        "checked_at": "2026-11-25T15:26:34Z",
+        "method": "Matched queued paper identifiers under November 25 public listing"
+      },
+      {
+        "url": "https://arxiv.org/list/cs.LG/recent",
+        "status": "publisher_checked_public_listing",
+        "checked_at": "2026-11-25T15:26:34Z",
+        "method": "Matched queued paper identifiers under November 25 public listing"
+      },
+      {
+        "url": "https://arxiv.org/list/cs.RO/recent",
+        "status": "publisher_checked_public_listing",
+        "checked_at": "2026-11-25T15:26:34Z",
+        "method": "Matched queued paper identifiers under November 25 public listing"
+      },
+      {
+        "url": "https://arxiv.org/list/eess.AS/recent",
+        "status": "publisher_checked_public_listing",
+        "checked_at": "2026-11-25T15:26:34Z",
+        "method": "Matched queued paper identifiers under November 25 public listing"
+      },
+      {
+        "url": "https://arxiv.org/list/cs.CV/recent",
+        "status": "publisher_checked_public_listing",
+        "checked_at": "2026-11-25T15:26:34Z",
+        "method": "Matched queued paper identifiers under November 25 public listing"
+      }
+    ],
+    "sources_failed": [
+      {
+        "url": "https://export.arxiv.org/api/query?search_query=cat%3Acs.AI&max_results=5",
+        "status": "failed",
+        "checked_at": "2026-11-25T14:42:15.229Z",
+        "error": "Metadata endpoint inaccessible; category listings and individual abstracts were accessible."
+      }
+    ]
+  },
+  "tldr": [
+    "Seven new preprints cover agent policy distillation, small-model reasoning loops, speculative decoding, robot policies, hardware verification, voice detection and audiovisual captioning. All were submitted November 24 and listed November 25.",
+    "November 24 announcements cover ShellBench, AWS infrastructure and regional search availability, and Dell's reported AI-server revenue. Research and company claims remain source-attributed; seven catalog proposals await integration review."
+  ],
+  "news": [
+    {
+      "id": "ai-news-cot-proxy-action-distillation-2611-33148",
+      "title": "Action-only distillation transfers long-horizon agent policies",
+      "category": "training",
+      "tags": [
+        "AI",
+        "DL",
+        "SLM",
+        "LLM",
+        "distillation",
+        "agents"
+      ],
+      "summary": "Researchers train a student on teacher actions without exposing the teacher's private reasoning, with KL regularization on student-generated replay. For a 4B student, the reported AppWorld success rises from 7% to 18% using actions from a 27B teacher, and to 35% with short reasoning summaries.",
+      "why_it_matters": "May make agent distillation possible when teachers expose actions but not internal reasoning.",
+      "caveat": "Preprint results on selected tasks; teacher output reuse rights, data quality, compute and replication require review. Summaries are not hidden reasoning. Author-reported preprint; no independent replication performed.",
+      "review_status": "publisher_reviewed_author_reported_preprint",
+      "release_status": "preprint",
+      "source_url": "https://arxiv.org/abs/2611.33148",
+      "publication_date": "2026-11-25",
+      "event_date": "2026-11-24",
+      "discovered_at": "2026-11-25T14:42:15.229Z",
+      "added_to_atlas_at": "2026-11-25T15:26:34Z",
+      "collection_classification": "recent",
+      "source_record_id": "ai-news:cot-proxy-action-distillation:2611.33148",
+      "arxiv_id": "2611.33148",
+      "submission_date": "2026-11-24",
+      "submission_time_utc": "2026-11-24T18:58:53Z",
+      "publication_date_basis": "arXiv November 25 public listing; v1 submitted November 24, exact public posting time not established"
+    },
+    {
+      "id": "ai-news-sparse-gradient-edit-reasoning-loops-2611-33133",
+      "title": "Tiny gradient-selected weight edits reduce reasoning loops in a 0.8B model",
+      "category": "training",
+      "tags": [
+        "DL",
+        "SLM",
+        "interpretability",
+        "fine-tuning"
+      ],
+      "summary": "A study of Qwen3.5-0.8B reports that editing a small gradient-selected subset of weights improves MATH-500 accuracy at a 4K token budget from 15.4% to as much as 45.5%. The selected channels act like constant residual-stream additions.",
+      "why_it_matters": "A useful experimental baseline for testing whether costly reasoning failures can be reduced by localized post-training.",
+      "caveat": "Single model and task family; token budgets and scoring protocols matter. This does not establish general reasoning or safety gains. Author-reported preprint; no independent replication performed.",
+      "review_status": "publisher_reviewed_author_reported_preprint",
+      "release_status": "preprint",
+      "source_url": "https://arxiv.org/abs/2611.33133",
+      "publication_date": "2026-11-25",
+      "event_date": "2026-11-24",
+      "discovered_at": "2026-11-25T14:42:15.229Z",
+      "added_to_atlas_at": "2026-11-25T15:26:34Z",
+      "collection_classification": "recent",
+      "source_record_id": "ai-news:sparse-gradient-edit-reasoning-loops:2611.33133",
+      "arxiv_id": "2611.33133",
+      "submission_date": "2026-11-24",
+      "submission_time_utc": "2026-11-24T18:53:22Z",
+      "publication_date_basis": "arXiv November 25 public listing; v1 submitted November 24, exact public posting time not established"
+    },
+    {
+      "id": "ai-news-draft-calibration-speculative-decoding-2611-33111",
+      "title": "Calibrating draft probabilities can improve speculative decoding",
+      "category": "inference",
+      "tags": [
+        "DL",
+        "SLM",
+        "LLM",
+        "inference",
+        "calibration"
+      ],
+      "summary": "Researchers report that temperature scaling of draft-model probabilities improves accepted draft length by up to approximately 10% in the evaluated settings, with little additional calibration overhead.",
+      "why_it_matters": "A low-overhead adjustment could reduce expensive target-model verification cycles when draft and target probabilities differ.",
+      "caveat": "Acceptance length is not a universal throughput guarantee; measure serving latency, quality and distribution preservation for the implementation. Author-reported preprint; no independent replication performed.",
+      "review_status": "publisher_reviewed_author_reported_preprint",
+      "release_status": "preprint",
+      "source_url": "https://arxiv.org/abs/2611.33111",
+      "publication_date": "2026-11-25",
+      "event_date": "2026-11-24",
+      "discovered_at": "2026-11-25T14:42:15.229Z",
+      "added_to_atlas_at": "2026-11-25T15:26:34Z",
+      "collection_classification": "recent",
+      "source_record_id": "ai-news:draft-calibration-speculative-decoding:2611.33111",
+      "arxiv_id": "2611.33111",
+      "submission_date": "2026-11-24",
+      "submission_time_utc": "2026-11-24T18:41:59Z",
+      "publication_date_basis": "arXiv November 25 public listing; v1 submitted November 24, exact public posting time not established"
+    },
+    {
+      "id": "ai-news-omniact-kinematic-graph-policy-2611-33158",
+      "title": "OmniAct conditions one manipulation policy on robot morphology",
+      "category": "robotics",
+      "tags": [
+        "AI",
+        "DL",
+        "robotics",
+        "flow matching"
+      ],
+      "summary": "The authors train on procedurally generated robot designs in simulation, encoding the kinematic structure in a graph and predicting joint motions using flow matching. They report 63% success on 2,000 held-out embodiment-scene episodes.",
+      "why_it_matters": "A shared policy may adapt to hardware with different joints and degrees of freedom instead of requiring one policy per robot.",
+      "caveat": "One million generated embodiments are not one million physical robots. Limited real-world tests do not establish safe deployment; collision and force limits need independent verification. Author-reported preprint; no independent replication performed.",
+      "review_status": "publisher_reviewed_author_reported_preprint",
+      "release_status": "preprint",
+      "source_url": "https://arxiv.org/abs/2611.33158",
+      "publication_date": "2026-11-25",
+      "event_date": "2026-11-24",
+      "discovered_at": "2026-11-25T14:42:15.229Z",
+      "added_to_atlas_at": "2026-11-25T15:26:34Z",
+      "collection_classification": "recent",
+      "source_record_id": "ai-news:omniact-kinematic-graph-policy:2611.33158",
+      "arxiv_id": "2611.33158",
+      "submission_date": "2026-11-24",
+      "submission_time_utc": "2026-11-24T18:59:58Z",
+      "publication_date_basis": "arXiv November 25 public listing; v1 submitted November 24, exact public posting time not established"
+    },
+    {
+      "id": "ai-news-aichipbench-rtl-state-verification-2611-33093",
+      "title": "AIChipBench tests coding agents on stateful accelerator design",
+      "category": "evaluation",
+      "tags": [
+        "AI",
+        "LLM",
+        "agents",
+        "hardware",
+        "verification"
+      ],
+      "summary": "Agents implement quantized model decoders in synthesizable RTL. The authors report that feedback on internal state mismatches improves acceptance relative to output-only feedback; 45 of 69 previously accepted designs fail on fresh tests.",
+      "why_it_matters": "Shows why hardware code evaluation must check persistent internal state, resets and unseen sequences, rather than only current outputs.",
+      "caveat": "Research benchmark and simulation/synthesis checks, not certified silicon or proof of correct hardware. No general agent ranking inferred. Author-reported preprint; no independent replication performed.",
+      "review_status": "publisher_reviewed_author_reported_preprint",
+      "release_status": "preprint",
+      "source_url": "https://arxiv.org/abs/2611.33093",
+      "publication_date": "2026-11-25",
+      "event_date": "2026-11-24",
+      "discovered_at": "2026-11-25T14:42:15.229Z",
+      "added_to_atlas_at": "2026-11-25T15:26:34Z",
+      "collection_classification": "recent",
+      "source_record_id": "ai-news:aichipbench-rtl-state-verification:2611.33093",
+      "arxiv_id": "2611.33093",
+      "submission_date": "2026-11-24",
+      "submission_time_utc": "2026-11-24T18:28:41Z",
+      "publication_date_basis": "arXiv November 25 public listing; v1 submitted November 24, exact public posting time not established"
+    },
+    {
+      "id": "ai-news-clustervad-unsupervised-speech-detection-2611-33059",
+      "title": "ClusterVAD detects speech using frozen audio representations",
+      "category": "audio",
+      "tags": [
+        "AI",
+        "ML",
+        "DL",
+        "audio",
+        "speech"
+      ],
+      "summary": "The proposed detector clusters frozen speech-model features, labels clusters using an acoustic measure and uses a two-state hidden Markov model to identify speech intervals without a manually selected decision threshold.",
+      "why_it_matters": "May reduce the need for labeled voice-activity datasets when adapting transcription or speech pipelines to different recording conditions.",
+      "caveat": "Threshold-free does not mean assumption-free; pretrained representations, cluster fitting and recording-dependent inference remain relevant. Streaming latency and generalization untested here. Author-reported preprint; no independent replication performed.",
+      "review_status": "publisher_reviewed_author_reported_preprint",
+      "release_status": "preprint",
+      "source_url": "https://arxiv.org/abs/2611.33059",
+      "publication_date": "2026-11-25",
+      "event_date": "2026-11-24",
+      "discovered_at": "2026-11-25T14:42:15.229Z",
+      "added_to_atlas_at": "2026-11-25T15:26:34Z",
+      "collection_classification": "recent",
+      "source_record_id": "ai-news:clustervad-unsupervised-speech-detection:2611.33059",
+      "arxiv_id": "2611.33059",
+      "submission_date": "2026-11-24",
+      "submission_time_utc": "2026-11-24T18:03:21Z",
+      "publication_date_basis": "arXiv November 25 public listing; v1 submitted November 24, exact public posting time not established"
+    },
+    {
+      "id": "ai-news-diacap-audiovisual-dialogue-captioning-2611-33153",
+      "title": "DiaCap combines dialogue transcription, timing and speaker descriptions",
+      "category": "multimodal",
+      "tags": [
+        "AI",
+        "DL",
+        "LLM",
+        "audio",
+        "vision",
+        "video"
+      ],
+      "summary": "A proposed audiovisual model produces utterance text, timestamps and speaker descriptions together. Training combines synthetic captions with reinforcement learning on human-corrected video clips; the authors report improved timestamp accuracy on their evaluation.",
+      "why_it_matters": "Joint timing and speaker assignment could help video accessibility, captioning and dialogue analysis.",
+      "caveat": "Benchmark-specific author results; speaker descriptions are not identity verification and may be inaccurate. Respect recording consent and privacy. Author-reported preprint; no independent replication performed.",
+      "review_status": "publisher_reviewed_author_reported_preprint",
+      "release_status": "preprint",
+      "source_url": "https://arxiv.org/abs/2611.33153",
+      "publication_date": "2026-11-25",
+      "event_date": "2026-11-24",
+      "discovered_at": "2026-11-25T14:42:15.229Z",
+      "added_to_atlas_at": "2026-11-25T15:26:34Z",
+      "collection_classification": "recent",
+      "source_record_id": "ai-news:diacap-audiovisual-dialogue-captioning:2611.33153",
+      "arxiv_id": "2611.33153",
+      "submission_date": "2026-11-24",
+      "submission_time_utc": "2026-11-24T18:59:08Z",
+      "publication_date_basis": "arXiv November 25 public listing; v1 submitted November 24, exact public posting time not established"
+    },
+    {
+      "id": "ai-news-shellbench-everyday-agent-evaluation-2026-11-24",
+      "title": "ShellBench measures everyday agent reliability and safety",
+      "category": "evaluation",
+      "tags": [
+        "AI",
+        "LLM",
+        "agents",
+        "evaluation",
+        "safety"
+      ],
+      "summary": "OpenClaw and collaborators report 53,100 graded runs covering 100 file-based tasks, 12 models and five harnesses. The highest single-attempt completion rate reported was 62.5%; 9.9% of otherwise correct runs still failed a safety requirement.",
+      "why_it_matters": "Separates successful retrieval from complete, evidence-backed and authorized task execution; repeated attempts reveal reliability gaps.",
+      "caveat": "Controlled benchmark, not actual incidents or general deployment failure rates. Most tasks use rubric grading and only 20% of rollouts concern public-release tasks. Organizer involvement and judge sensitivity limit conclusions. Findings are organizer-reported, not an independent assessment of deployment safety.",
+      "review_status": "publisher_reviewed_benchmark_announcement",
+      "release_status": "benchmark_announced",
+      "source_url": "https://openclaw.ai/blog/shellbench",
+      "publication_date": "2026-11-24",
+      "event_date": "2026-11-24",
+      "discovered_at": "2026-11-25T14:42:15.229Z",
+      "added_to_atlas_at": "2026-11-25T15:26:34Z",
+      "collection_classification": "recent",
+      "source_record_id": "ai-news:shellbench-everyday-agent-evaluation:2026-11-24"
+    },
+    {
+      "id": "ai-news-aws-cloudformation-ai-resource-coverage-2026-11-24",
+      "title": "CloudFormation adds declarative support for more AI infrastructure",
+      "category": "infrastructure",
+      "tags": [
+        "AI",
+        "ML",
+        "agents",
+        "cloud",
+        "governance"
+      ],
+      "summary": "AWS adds 206 resource types across 88 services, including SageMaker Hub and Bedrock AgentCore PolicyEngine; Cloud Control API gains matching support and additional read-only resource types.",
+      "why_it_matters": "Infrastructure-as-code can improve repeatable deployment and change review for AI systems and agent policy controls.",
+      "caveat": "Availability follows the underlying service by region. Declarative coverage does not establish safe policy configuration or eliminate operational review.",
+      "review_status": "publisher_reviewed_first_party_availability",
+      "release_status": "available",
+      "source_url": "https://aws.amazon.com/about-aws/whats-new/2026/11/cloudformation-coverage-expansion/",
+      "publication_date": "2026-11-24",
+      "event_date": "2026-11-24",
+      "discovered_at": "2026-11-25T14:42:15.229Z",
+      "added_to_atlas_at": "2026-11-25T15:26:34Z",
+      "collection_classification": "recent",
+      "source_record_id": "ai-news:aws-cloudformation-ai-resource-coverage:2026-11-24"
+    },
+    {
+      "id": "ai-news-opensearch-serverless-cape-town-2026-11-24",
+      "title": "OpenSearch Serverless expands to Cape Town",
+      "category": "retrieval",
+      "tags": [
+        "AI",
+        "ML",
+        "LLM",
+        "retrieval",
+        "vector search",
+        "cloud"
+      ],
+      "summary": "AWS makes its next-generation managed search and vector engine available in the Africa (Cape Town) Region, including independent compute scaling and idle scale-to-zero.",
+      "why_it_matters": "Offers regional managed retrieval infrastructure for variable-demand applications and RAG pipelines.",
+      "caveat": "Provider claims about savings depend on workload; regional compliance, storage, request latency and prices need separate checks.",
+      "review_status": "publisher_reviewed_first_party_availability",
+      "release_status": "regional_availability",
+      "source_url": "https://aws.amazon.com/about-aws/whats-new/2026/11/amazon-opensearch-serverless-available-cape-town-region/",
+      "publication_date": "2026-11-24",
+      "event_date": "2026-11-24",
+      "discovered_at": "2026-11-25T14:42:15.229Z",
+      "added_to_atlas_at": "2026-11-25T15:26:34Z",
+      "collection_classification": "recent",
+      "source_record_id": "ai-news:opensearch-serverless-cape-town:2026-11-24"
+    },
+    {
+      "id": "ai-news-dell-fy27-q3-ai-server-revenue-2026-11-24",
+      "title": "Dell reports $22 billion in quarterly AI-optimized server revenue",
+      "category": "industry",
+      "tags": [
+        "AI",
+        "hardware",
+        "infrastructure",
+        "industry"
+      ],
+      "summary": "Dell reported quarterly revenue of $22.0 billion from AI-optimized servers, up 291% year over year, and raised its fiscal 2027 AI-server revenue guidance from $74 billion to $78 billion.",
+      "why_it_matters": "Provides a concrete measure of commercial infrastructure demand beyond model-release announcements.",
+      "caveat": "Company financial reporting is not a measure of installed usable compute; annual guidance is forward-looking and backlog is not completed revenue.",
+      "review_status": "publisher_reviewed_company_financial_report",
+      "release_status": "reported_financial_results",
+      "source_url": "https://investors.delltechnologies.com/sec-filings/all-sec-filings/content/0001571996-26-000050/exhibit991earnings8kq3fy27.htm",
+      "publication_date": "2026-11-24",
+      "event_date": "2026-11-24",
+      "discovered_at": "2026-11-25T14:42:15.229Z",
+      "added_to_atlas_at": "2026-11-25T15:26:34Z",
+      "collection_classification": "recent",
+      "source_record_id": "ai-news:dell-fy27-q3-ai-server-revenue:2026-11-24"
+    }
+  ],
+  "technologies": [],
+  "terms": [],
+  "site_changes": [],
+  "corrections": []
+}

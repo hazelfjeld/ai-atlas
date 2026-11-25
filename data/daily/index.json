@@ -393,9 +393,17 @@
       "sha256": "b3d3da391fef218c09cba129134d7284b6650c6ec11d91e4cc81f57f5a337133",
       "bytes": 26290,
       "published_at": "2026-11-24T14:26:22Z"
+    },
+    {
+      "date": "2026-11-25",
+      "revision": 1,
+      "path": "data/daily/editions/2026-11-25-v1.json",
+      "sha256": "525b0375f86fd0592de307a49764c5514b9de342c8dcff2d0db08ee7c505be0b",
+      "bytes": 28126,
+      "published_at": "2026-11-25T15:26:34Z"
     }
   ],
   "last_successful_publish_at": "2026-11-24T15:37:47Z",
-  "status": "edition_revision_1_production_verified",
-  "coverage_note": "2026-11-24 v1: nine source-reviewed reports, two news and seven catalog proposals deferred. Partial coverage; author-reported findings caveated. Production-verified revision 98d7a5bf passed Cloudflare HTTP/browser and GitHack on November 24, 2026; independent external query retrieval unavailable."
+  "status": "edition_revision_1_pending_production_verification",
+  "coverage_note": "2026-11-25 v1: eleven primary-source-reviewed reports, seven catalog proposals deferred; partial coverage. Prepared and committed pending Cloudflare HTTP/browser and GitHack verification. Last successful production clock unchanged."
 }
