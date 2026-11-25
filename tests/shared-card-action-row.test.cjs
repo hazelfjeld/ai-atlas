@@ -14,3 +14,14 @@ test('Discover, Technology and Research use the same action row source', () => {
   const offline = read('downloads/Atlas_Demo_Offline.html');
   assert.ok(offline.includes(css) && offline.includes(brand));
 });
+
+test('daily source links reuse the shared story action row without overriding its layout', () => {
+  const reader = read('whats-new.js');
+  const archive = read('whats-new.html');
+  assert.ok(reader.includes("element('div',undefined,'links story-footer')"));
+  assert.ok(reader.includes("a.target='_blank';a.rel='noopener noreferrer'"));
+  assert.ok(reader.includes('if(links.childNodes.length)article.append(links)'));
+  assert.ok(archive.includes('.item .links{margin-top:auto;font-size:13px}'));
+  assert.ok(archive.includes('.item .links a{white-space:normal;margin-left:0}'));
+  assert.equal([...archive.matchAll(/\.item \.links\{([^}]+)\}/g)].length, 1);
+});

@@ -1264,6 +1264,7 @@ with sync_playwright() as p:
     action_routes = (
         ('technologies.html', '.tech-card .card-actions'),
         ('research.html', '.cards .card-bottom'),
+        ('whats-new.html', '#edition-content .item .links:has(a[target="_blank"])'),
     )
     action_style = """el => {
         const s=getComputedStyle(el), a=el.querySelector('a');
@@ -1285,14 +1286,33 @@ with sync_playwright() as p:
                 page.goto(base+route)
                 row=page.locator(selector).first
                 row.wait_for(state='visible',timeout=15000)
+                actual=row.evaluate(action_style)
+                # The archive retains its own reading palette, but uses the same
+                # theme-aware divider token, layout, and link emphasis.
+                same_frame = (actual[:7]==expected[:7] and actual[8]==expected[8]
+                              and row.evaluate("""el => {
+                                  const probe=document.createElement('span');
+                                  probe.style.color='var(--line)';el.append(probe);
+                                  const expectedColor=getComputedStyle(probe).color;
+                                  probe.remove();
+                                  return getComputedStyle(el).borderTopColor===expectedColor;
+                              }""")) if route=='whats-new.html' else actual==expected
                 check(f'{route} {width}px {theme} shared action frame',
-                      row.evaluate(action_style)==expected
+                      same_frame
                       and row.evaluate('el => el.scrollWidth <= el.clientWidth + 1')
                       and page.evaluate('document.documentElement.scrollWidth <= innerWidth')
                       and page.evaluate('document.documentElement.dataset.theme')==theme)
-                check(f'{route} {width}px {theme} preserves native action controls',
-                      row.locator('a[href]').count()==1
-                      and row.locator('button').count()==1)
+                if route=='whats-new.html':
+                    source=row.locator('a[target="_blank"]').first
+                    check(f'{route} {width}px {theme} preserves source links',
+                          source.get_attribute('href').startswith('https://')
+                          and set(source.get_attribute('rel').split())=={'noopener','noreferrer'}
+                          and source.get_attribute('aria-label').startswith('Original source for ')
+                          and row.locator('button').count()==0)
+                else:
+                    check(f'{route} {width}px {theme} preserves native action controls',
+                          row.locator('a[href]').count()==1
+                          and row.locator('button').count()==1)
                 if (width,theme) in ((390,'light'),(1280,'dark')):
                     row.screenshot(path=str(out/f'card-actions-{route}-{width}-{theme}.png'))
 

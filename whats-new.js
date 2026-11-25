@@ -102,7 +102,7 @@ function card(item,kind){
  dates.textContent=bits.join(' · ')||'Dates not independently established';
  article.append(dates);
  if(Array.isArray(item.tags)&&item.tags.length){const tags=element('div',undefined,'tags');item.tags.slice(0,7).forEach(t=>tags.append(element('span',t,'tag')));article.append(tags);}
- const links=element('div',undefined,'links'),source=href(item.source_url,'Original source'),internal=localHref(item.catalog_path,'Explore in AI Updates');
+ const links=element('div',undefined,'links story-footer'),source=href(item.source_url,'Original source'),internal=localHref(item.catalog_path,'Explore in AI Updates');
  if(source){
   source.setAttribute('aria-label','Original source for '+item.title+' (opens in new tab)');
   links.append(source);
