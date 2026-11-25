@@ -1632,3 +1632,18 @@ html:is(:has(.nojs-primary-routes > .notice[id="/sources"]:target),:has(.nojs-pr
   margin-block-start:0;
 }
 /* atlas-shared-card-heading-rhythm:end */
+
+/* atlas-shared-card-metadata:begin */
+/* Card overlines carry editorial context, not status badges. Keep the
+   featured-story treatment and badge semantics separate. */
+.story-body .story-kicker,
+.shell:has(> .site-chrome.nav) article.card > .label{
+  font-size:12px;
+  font-weight:700;
+  line-height:1.5;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  color:var(--accent);
+  overflow-wrap:anywhere;
+}
+/* atlas-shared-card-metadata:end */

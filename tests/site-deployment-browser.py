@@ -4142,6 +4142,35 @@ with sync_playwright() as p:
                 heading_page.screenshot(path=str(out / (
                     'shared-reading-rhythm-' + route.replace('/', '-') + '-' +
                     scheme + '-' + str(width) + '.png')))
+            # Readable card overlines use one shared rule, independently of badges.
+            metadata_style = """el => {
+                const s = getComputedStyle(el);
+                return [s.fontSize, s.fontWeight, s.lineHeight,
+                        s.letterSpacing, s.textTransform];
+            }"""
+            expected_metadata = ['12px', '700', '18px', '0.48px', 'uppercase']
+            heading_page.goto(base + 'index.html#/overview', wait_until='load')
+            discover_overline = heading_page.locator('.story-body .story-kicker').first
+            expect(discover_overline).to_be_visible(timeout=20000)
+            discover_metadata = discover_overline.evaluate(metadata_style)
+            featured = heading_page.locator('.featured-copy .story-kicker').first
+            expect(featured).to_be_visible()
+            check('Discover overline and featured distinction ' + scheme + ' ' + str(width),
+                  discover_metadata == expected_metadata
+                  and featured.evaluate("el => getComputedStyle(el).fontSize") == '10px')
+            discover_overline.scroll_into_view_if_needed()
+            heading_page.screenshot(path=str(out / (
+                'shared-metadata-discover-' + scheme + '-' + str(width) + '.png')))
+            heading_page.goto(base + 'catalog-review.html', wait_until='load')
+            review_overline = heading_page.locator('article.card > .label').first
+            expect(review_overline).to_be_visible()
+            check('Shared card overline typography ' + scheme + ' ' + str(width),
+                  review_overline.evaluate(metadata_style) == discover_metadata
+                  and review_overline.evaluate("el => el.scrollWidth <= el.clientWidth")
+                  and heading_page.evaluate("document.documentElement.scrollWidth <= innerWidth"))
+            review_overline.scroll_into_view_if_needed()
+            heading_page.screenshot(path=str(out / (
+                'shared-metadata-review-' + scheme + '-' + str(width) + '.png')))
         heading_context.close()
 
     check('no application runtime exceptions', not errors)
