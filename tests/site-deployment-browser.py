@@ -344,6 +344,45 @@ with sync_playwright() as p:
         early.screenshot(path=str(out / (
             'shared-early-search-' + str(early_width) + '.png')))
         early.close()
+    # Release a genuinely pending catalog after keyboard routing from a native
+    # Discover topic. The initial render replaces the focused static anchor,
+    # so it must use the same landmark-focus policy as later topic changes.
+    for focus_scheme in ('light', 'dark'):
+        for focus_width in (320, 390, 768, 1280):
+            early_topic = browser.new_page(
+                viewport={'width': focus_width, 'height': 844},
+                color_scheme=focus_scheme, reduced_motion='reduce')
+            early_topic.add_init_script("""(() => {
+              const originalFetch = window.fetch.bind(window);
+              window.fetch = (resource, options) =>
+                String(resource).endsWith('publication.json')
+                  ? new Promise(resolve => {
+                      window.releaseAtlasManifest = () => {
+                        resolve(originalFetch(resource, options));
+                      };
+                    })
+                  : originalFetch(resource, options);
+            })();""")
+            early_topic.goto(base + 'index.html', wait_until='domcontentloaded')
+            early_topic.wait_for_function(
+                "typeof window.releaseAtlasManifest === 'function'")
+            topic = early_topic.get_by_role('navigation', name='Discover topics').get_by_role(
+                'link', name='Tools & models', exact=True)
+            topic.focus()
+            check('early topic focus before hydration ' + focus_scheme + ' ' + str(focus_width),
+                  early_topic.locator('#catalog-loading').count() == 1
+                  and topic.evaluate('(el) => document.activeElement === el'))
+            early_topic.keyboard.press('Enter')
+            early_topic.wait_for_function("location.hash === '#/overview?topic=tools'")
+            early_topic.evaluate("window.releaseAtlasManifest()")
+            early_topic.locator('#catalog-loading').wait_for(state='detached', timeout=45000)
+            early_topic.wait_for_function(
+                "document.querySelectorAll('.discovery-card').length === 2")
+            check('early topic focus recovers on actual catalog hydration ' +
+                  focus_scheme + ' ' + str(focus_width),
+                  early_topic.evaluate("document.activeElement.id === 'main'")
+                  and topic.get_attribute('aria-current') == 'page')
+            early_topic.close()
     page.goto(base)
     page.locator('#navigation a[href="#/games"]').wait_for()
     # The native headers previously used 16px (Games), 20px (news/reference)

@@ -3480,7 +3480,9 @@ function route(){
   if(view==='overview'&&!window.ATLAS_OFFLINE)void loadDailyPreview();
   if(state.record)openRecord(state.record);
   else if(dialog.open){recordReturnFocus=null;dialog.close();}
-  const focusMain = !state.record && (wasRecordOpen || navigatedFromMobileNav || changedSection || (routeInitialized && focusWasInPage));
+  // The first hydrated render also replaces the script-free Discover links.
+  // Recover focus if that replacement removed the visitor's active control.
+  const focusMain = !state.record && (wasRecordOpen || navigatedFromMobileNav || changedSection || focusWasInPage);
   routeInitialized = true;
   if(focusMain){$('main').focus({preventScroll:true});$('main').scrollIntoView({block:'start'});}
 }
