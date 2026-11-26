@@ -3779,6 +3779,42 @@ with sync_playwright() as p:
                     path=str(out/'collapsed-more-keyboard-research-768-dark.png'))
         collapsed_context.close()
 
+    # Discover's brand and appearance control are siblings of #navigation,
+    # unlike native rails. All of them must transfer focus when hidden by a
+    # responsive resize, without automatically opening the mobile drawer.
+    for scheme in ('light', 'dark'):
+        rail_context = browser.new_context(color_scheme=scheme,
+            viewport={'width':1280, 'height':844}, reduced_motion='reduce')
+        rail_page = rail_context.new_page()
+        rail_page.on('pageerror', lambda e: errors.append(str(e)))
+        for route, controls in (
+            ('index.html', ('#sidebar .brand', '#sidebar #theme-toggle')),
+            ('research.html', ('.site-chrome .site-chrome__brand',
+                               '.site-chrome .site-chrome__theme-toggle--rail')),
+        ):
+            rail_page.set_viewport_size({'width':1280,'height':844})
+            rail_page.goto(base + route)
+            toggle = rail_page.locator('details.site-mobile-chrome__nav > summary')
+            for desktop_width, mobile_width in ((1280, 320), (768, 390)):
+                for selector in controls:
+                    rail_page.set_viewport_size({'width':desktop_width,'height':844})
+                    control = rail_page.locator(selector)
+                    control.wait_for(state='visible')
+                    control.focus()
+                    check('Desktop rail control receives focus ' + route + ' ' + selector,
+                          control.evaluate('(el) => document.activeElement === el'))
+                    rail_page.set_viewport_size({'width':mobile_width,'height':844})
+                    rail_page.wait_for_function("""() => {
+                        const toggle = document.querySelector('details.site-mobile-chrome__nav > summary');
+                        return toggle && document.activeElement === toggle;
+                    }""", timeout=10000)
+                    check('Whole desktop rail transfers focus to closed mobile toggle ' +
+                          route + ' ' + selector + ' ' + scheme + ' ' + str(mobile_width),
+                          toggle.is_visible() and not toggle.evaluate('(el) => el.parentElement.open'))
+                    if route == 'index.html' and scheme == 'dark' and mobile_width == 390:
+                        rail_page.screenshot(path=str(out/'discover-rail-resize-focus-390-dark.png'))
+        rail_context.close()
+
     # Verify actual cross-page introduction rhythm at mobile and desktop
     # widths in both OS themes, before any JavaScript can apply a patch.
     lead_routes = (

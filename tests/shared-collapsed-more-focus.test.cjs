@@ -201,3 +201,51 @@ test('keyboard focus preserves active secondary section and script-free/mobile b
   assert.equal(mobile.native.open, true);
   assert.equal(mobile.discover.open, true);
 });
+
+test('desktop-to-mobile focus follows the entire shared rail, not only Discover links', () => {
+  const start = script.indexOf('let lastDesktopRailFocus = null;');
+  const end = script.indexOf('// Restore a saved appearance', start);
+  assert.ok(start >= 0 && end > start);
+  const source = script.slice(start, end);
+  for (const family of ['Discover', 'native']) {
+    for (const control of ['brand', 'appearance', 'coverage', 'section', 'content']) {
+      const listeners = {};
+      const body = {}, documentElement = {};
+      let focused = 0;
+      const target = {
+        closest(selector) {
+          const scopes = selector.split(',');
+          return control !== 'content' && (family === 'native'
+            ? scopes.includes('.site-chrome')
+            : scopes.includes('#sidebar') || (control === 'section' && scopes.includes('#navigation'))) ? {} : null;
+        },
+        matches: () => false,
+        getClientRects: () => [],
+      };
+      const document = {
+        body, documentElement, activeElement: target,
+        addEventListener(type, fn) { listeners[type] = fn; },
+        querySelector(selector) {
+          assert.equal(selector, 'details.site-mobile-chrome__nav summary');
+          return { focus(options) {
+            assert.equal(options.preventScroll, true);
+            focused++;
+          } };
+        },
+      };
+      const window = { innerWidth: 768, addEventListener(type, fn) { listeners[type] = fn; } };
+      vm.runInNewContext(source, {
+        window, document, normalizeResearchEarlyLink() {}, syncSharedDrawerIsolation() {},
+        closeSharedDrawers() {}, focusSharedDesktopRail() {},
+      });
+      listeners.focusin({ target });
+      window.innerWidth = 390;
+      // The browser can drop the focused rail control when CSS hides it.
+      document.activeElement = control === 'content' ? target : body;
+      listeners.resize();
+      assert.equal(focused, control === 'content' ? 0 : 1, family + ': ' + control);
+    }
+  }
+  assert.ok(read('downloads/Atlas_Demo_Offline.html').includes(script),
+    'offline standalone embeds the exact updated focus policy');
+});

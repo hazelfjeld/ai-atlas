@@ -2487,7 +2487,9 @@ let lastDesktopRailFocus = null;
 let lastMobileToggleFocus = null;
 document.addEventListener('focusin', event => {
   normalizeResearchEarlyLink(event);
-  lastDesktopRailFocus = event.target?.closest?.('.site-chrome,#navigation') ? event.target : null;
+  // Discover's brand, appearance action and coverage link sit outside #navigation.
+  // Track the whole desktop rail, just as on every native page.
+  lastDesktopRailFocus = event.target?.closest?.('.site-chrome,#sidebar') ? event.target : null;
   lastMobileToggleFocus = event.target?.matches?.('details.site-mobile-chrome__nav summary')
     ? event.target : null;
 });
