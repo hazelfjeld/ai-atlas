@@ -420,11 +420,15 @@ test('theme preference stays synchronized across open editorial and reference ta
 
 
 test('mobile news intro uses the same editorial content-start rhythm as directory landings',()=>{
-  const block=css.split('/* atlas-mobile-news-intro-rhythm:begin */')[1]
-    ?.split('/* atlas-mobile-news-intro-rhythm:end */')[0];
+  const block=css.split('/* atlas-mobile-first-content-alignment:begin */')[1]
+    ?.split('/* atlas-mobile-first-content-alignment:end */')[0];
   assert.ok(block,'Shared news landing intro rhythm missing');
   assert.match(block,/@media \(max-width:650px\)/);
-  assert.match(block,/\.shell:has\(> \.site-chrome\.top\) > main > header\{padding-top:8px\}/);
+  assert.match(block, /:root\{--atlas-workspace-intro-inset:29px\}/);
+  assert.match(block, /\.app-shell \.workspace > main\{padding-top:var\(--atlas-workspace-intro-inset\)\}/);
+  assert.match(block, /\.shell:has\(> \.site-chrome:is\(\.top,\.nav,\.research-site-chrome\)\) > main,\s*body:has\(> \.site-chrome\.demo-site-chrome\) > main\{padding-top:calc\(var\(--atlas-workspace-intro-inset\) - 1px\)\}/);
+  assert.match(block, /\.shell:has\(> \.site-chrome:is\(\.top,\.nav\)\) > main > header,\s*body:has\(> \.site-chrome\.demo-site-chrome\) > main > header\{padding-top:0\}/);
+  assert.match(block, /body:has\(> nav\.site-chrome\.term-nav\) > main\.term-shell:not\(:has\(> \.breadcrumb-links\)\) > \.hero:has\(> \.discover-heading\)\{margin-top:calc\(var\(--atlas-workspace-intro-inset\) - 1px\)\}/);
   const archive=fs.readFileSync(path.join(__dirname,'..','whats-new.html'),'utf8');
   const terms=fs.readFileSync(path.join(__dirname,'..','terms/index.html'),'utf8');
   const playbooks=fs.readFileSync(path.join(__dirname,'..','playbooks.html'),'utf8');
