@@ -1790,7 +1790,11 @@ test('Guided demo inherits the actual shared navigation instead of an independen
     'Demo is the current secondary destination in both mobile and desktop navigation');
   assert.ok(html.includes('href="index.html#/sources">Inspect published inventory'));
   assert.ok(html.includes(':root[data-theme="dark"]'));
-  assert.ok(html.includes('article{padding:26px;background:var(--demo-card)'));
+  assert.ok(html.includes('article{background:var(--demo-card)'));
+  assert.equal((html.match(/<article class="story-body">/g)||[]).length,10,
+    'All ten guided cards inherit the shared story body');
+  assert.ok(read('site-chrome.css').includes('padding-inline:var(--atlas-editorial-card-inset)'));
+  assert.ok(!html.includes('article{padding:26px'),'No page-local card inset override');
   assert.ok(html.includes('<div class="story-footer demo-actions"><a href="terms/MLD-0691-machine-learning.html">'));
   assert.ok(html.includes('index.html#/papers?q=reward'));
   assert.ok(html.includes('index.html#/safety'));

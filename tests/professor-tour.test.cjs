@@ -12,7 +12,7 @@ test('Three-minute tour links real, existing Atlas features without a second app
   assert.match(app,/"games":"Games"/);
   assert.match(fs.readFileSync(path.join(__dirname,'..','scripts','validate_checkpoint.py'),'utf8'), /routes\s*=\s*\{[^}]*'games'/);
   assert.match(news,/id="edition-select"/);
-  assert.equal((html.match(/class="step">0[0-3]:/g)||[]).length,4);
+  assert.equal((html.match(/class="step story-kicker">0[0-3]:/g)||[]).length,4);
 });
 test('Demo stays printable, accessible, and honest about the published baseline',()=>{
   assert.match(html,/<a class="skip" href="#main">Skip to content<\/a>/);
