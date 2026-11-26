@@ -43,3 +43,36 @@ test('native editorial footers group notes and resource links without loose flex
   ].join('\n');
   execFileSync('python3', ['-c', script], {cwd:root, stdio:'pipe'});
 });
+
+test('reference landings and link-only hardware footer use the same grouping', () => {
+  const routes = {
+    'about.html': ['about.html', 'index.html#/sources'],
+    'terms/index.html': ['../about.html', '../index.html#/sources'],
+    'technology/index.html': ['../about.html', '../index.html#/sources'],
+    'hardware-review.html': ['catalog-review.html#nov03-queue', 'whats-new.html?date=2026-11-03&amp;revision=4', 'about.html', 'index.html#/sources'],
+  };
+  for (const [route, destinations] of Object.entries(routes)) {
+    const html = fs.readFileSync(path.join(root, route), 'utf8');
+    const footer = html.match(/<footer\b[^>]*>[\s\S]*?<\/footer>/)?.[0];
+    const groups = footer?.match(/^<footer class="site-chrome__footer">(?:<span class="site-chrome__footer-note">([^<]+)<\/span> )?<span class="site-chrome__footer-links">([\s\S]+)<\/span><\/footer>$/);
+    assert.ok(groups, route);
+    assert.equal(Boolean(groups[1]), route !== 'hardware-review.html', route + ': preserve note only where one existed');
+    const anchors = [...groups[2].matchAll(/<a href="([^"]+)"[^>]*>[^<]*<\/a>/g)];
+    assert.deepEqual(anchors.map(x => x[1]), destinations, route);
+    assert.equal(groups[2], anchors.map(x => x[0]).join(' · '), route);
+    assert.ok(html.indexOf(footer) > html.indexOf('</main>'), route);
+  }
+  const script = [
+    'import sys, re',
+    'from pathlib import Path',
+    'sys.path.insert(0, "scripts")',
+    'from site_chrome import REFERENCE_LANDING_PATHS, group_editorial_footer',
+    'for route in REFERENCE_LANDING_PATHS:',
+    '    h = Path(route).read_text(encoding="utf-8")',
+    '    footer = re.search(r"<footer\\b[^>]*>[\\s\\S]*?</footer>", h).group()',
+    '    assert group_editorial_footer(footer) == footer, route',
+    '    raw = re.sub(r"</?span(?: class=\"site-chrome__footer-(?:note|links)\")?>", "", footer)',
+    '    assert group_editorial_footer(raw) == footer, route',
+  ].join('\n');
+  execFileSync('python3', ['-c', script], {cwd:root, stdio:'pipe'});
+});

@@ -160,8 +160,10 @@ def wrap_reference_shell(nav, content, path, main_id, *, expanded_concept=False)
             # Preserve the original policy/source links rather than copying them.
             assert content.count('<footer>') == 1 and content.endswith('</footer>'), path
             article, footer_tail = content.rsplit('<footer>', 1)
-            return (nav + '<main class="term-shell">' + article + '</main>'
-                    + '<footer class="site-chrome__footer">' + footer_tail)
+            footer = '<footer class="site-chrome__footer">' + footer_tail
+            if path in REFERENCE_LANDING_PATHS:
+                footer = group_editorial_footer(footer)
+            return nav + '<main class="term-shell">' + article + '</main>' + footer
         return nav + '<main class="term-shell">' + content + '</main>'
     return '<main class="term-shell"' + main_id + '>' + nav + content + '</main>'
 
@@ -601,33 +603,34 @@ def ensure_skip_destination_focusable(html, path=None):
 EDITORIAL_FOOTER_GROUP_PATHS = (
     "demo.html", "research.html", "catalog-review.html",
     "whats-new.html", "playbooks.html", "technologies.html",
+    "hardware-review.html",
 )
 
 
 def group_editorial_footer(footer):
-    """Retain every existing anchor and caveat in two shared footer groups."""
+    """Retain every anchor and optional caveat in shared footer groups."""
     import re
     prefix = '<footer class="site-chrome__footer">'
     note_start = '<span class="site-chrome__footer-note">'
     links_start = '<span class="site-chrome__footer-links">'
     anchor = r'<a\b[^>]*>[^<]*</a>'
-    if footer.startswith(prefix + note_start):
-        pattern = (re.escape(prefix + note_start) + r'[^<]+</span> ' +
-                   re.escape(links_start) + anchor + r'(?: · ' + anchor +
-                   r')+</span></footer>')
+    if footer.startswith(prefix + note_start) or footer.startswith(prefix + links_start):
+        pattern = (re.escape(prefix) + '(?:' + re.escape(note_start) +
+                   r'[^<]+</span> )?' + re.escape(links_start) + anchor +
+                   r'(?: · ' + anchor + r')+</span></footer>')
         assert re.fullmatch(pattern, footer), "Unexpected grouped editorial footer"
         return footer
     assert footer.startswith(prefix) and footer.endswith('</footer>')
     first = footer.index('<a ')
     note = footer[len(prefix):first].strip().rstrip('·').rstrip()
-    assert note and '<' not in note
-    if not note.endswith(('.', '!', '?')):
+    assert '<' not in note
+    if note and not note.endswith(('.', '!', '?')):
         note += '.'
     suffix = footer[first:-len('</footer>')]
     links = re.findall(anchor, suffix)
     assert len(links) >= 2 and not re.sub(anchor, '', suffix).strip(' .·\t\r\n')
-    return (prefix + note_start + note + '</span> ' + links_start +
-            ' · '.join(links) + '</span></footer>')
+    return (prefix + (note_start + note + '</span> ' if note else '') +
+            links_start + ' · '.join(links) + '</span></footer>')
 
 
 def ensure_footer_resources(html, path):

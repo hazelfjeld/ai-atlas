@@ -2197,7 +2197,7 @@ with sync_playwright() as p:
             page.emulate_media(color_scheme=theme)
             for route in ('index.html', 'whats-new.html', 'catalog-review.html', 'about.html', 'research.html',
                           'demo.html', 'playbooks.html', 'technologies.html', 'terms/index.html',
-                          'technology/index.html', 'games.html'):
+                          'technology/index.html', 'games.html', 'hardware-review.html'):
                 page.goto(base + route)
                 page.evaluate('(value) => document.documentElement.dataset.theme = value', theme)
                 footer=page.locator('footer').last
@@ -2215,9 +2215,11 @@ with sync_playwright() as p:
                 check(f'{route} {width}px {theme} uses Discover footer layout',
                       frame['display']==expected and frame['border']=='solid'
                       and not frame['overflow'])
-                if route in ('demo.html','research.html','catalog-review.html','whats-new.html','playbooks.html','technologies.html'):
+                if route in ('demo.html','research.html','catalog-review.html','whats-new.html','playbooks.html','technologies.html',
+                             'about.html','terms/index.html','technology/index.html','hardware-review.html'):
                     check(f'{route} {width}px {theme} editorial footer groups note and links without loose text',
-                          frame['noteGroups']==1 and frame['linkGroups']==1 and not frame['bareText'])
+                          frame['noteGroups']==(0 if route=='hardware-review.html' else 1)
+                          and frame['linkGroups']==1 and not frame['bareText'])
                 if route in ('whats-new.html','catalog-review.html'):
                     check(f'{route} {width}px {theme} global contentinfo outside main',
                           frame['globalLandmark'])
