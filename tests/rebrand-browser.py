@@ -1347,6 +1347,32 @@ with sync_playwright() as p:
                       page.evaluate('document.documentElement.dataset.theme')==theme)
 
 
+    # Narrower native desks retain their own caps but share the Discover
+    # reading origin even when the available desktop workspace exceeds 1500px.
+    wide_routes = tuple(route for route, _ in reading_routes) + (
+        'whats-new.html', 'demo.html', 'games.html',
+    )
+    for width in (1536, 1920, 2560):
+        page.set_viewport_size({'width':width,'height':900})
+        for theme in ('light','dark'):
+            page.goto(base+'index.html#/overview')
+            page.locator('.discover-heading h1').wait_for()
+            page.evaluate("t => {localStorage.setItem('atlas.theme',t);document.documentElement.dataset.theme=t}",theme)
+            discover_x = page.locator('.discover-heading h1').evaluate(
+                'el => el.getBoundingClientRect().left')
+            for route in wide_routes:
+                response = page.goto(base+route, wait_until='load')
+                heading_x = page.locator('main h1:visible').first.evaluate(
+                    'el => el.getBoundingClientRect().left')
+                check(f'{route} {width}px {theme} wide reading origin '
+                      f'(Discover={discover_x}, actual={heading_x})',
+                      response is not None and response.status == 200 and
+                      abs(heading_x-discover_x)<=2 and
+                      page.evaluate('document.documentElement.scrollWidth <= innerWidth') and
+                      page.evaluate('document.documentElement.dataset.theme')==theme)
+                if width==1920:
+                    page.screenshot(path=str(out/f'wide-frame-{route.replace("/", "-")}-{theme}.png'))
+
     # Cards from seven established page families should read as one workspace,
     # rather than alternating between independent white/cream panels and radii.
     # Use Discover's actual computed surface/border as the reference.

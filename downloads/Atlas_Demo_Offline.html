@@ -1993,6 +1993,23 @@ html:is(:has(.nojs-primary-routes > .notice[id="/sources"]:target),:has(.nojs-pr
   body:has(> .games-header):not(.is-playing) > main > .hero{padding-top:0}
 }
 /* atlas-mobile-first-content-alignment:end */
+
+/* atlas-wide-workspace-alignment:begin */
+/* Anchor narrower native reading desks to Discover's centered 1500px
+   workspace, retaining their own content width caps. */
+@media (min-width:651px){
+  :root{--atlas-workspace-max:1500px}
+  .app-shell .workspace > main{max-width:var(--atlas-workspace-max)}
+  :is(.term-shell,.tech-shell,.playbook-shell,.review-shell,
+      .shell:has(> .site-chrome:is(.top,.nav,.research-site-chrome)),
+      body:has(> .site-chrome.demo-site-chrome) > main,
+      body:has(> .games-header):not(.is-playing) > main){
+    margin-inline-start:max(0px,calc((100% - var(--atlas-workspace-max))/2));
+    margin-inline-end:auto;
+    padding-inline:var(--atlas-workspace-content-gutter)!important;
+  }
+}
+/* atlas-wide-workspace-alignment:end */
 </style><script>/* Enhance the native dropdown only when scripts can make its drawer modal.
    Without JavaScript, keep the accessible, nonmodal <details> fallback. */
 document.documentElement.classList?.add('atlas-enhanced');
