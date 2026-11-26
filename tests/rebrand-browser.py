@@ -1036,6 +1036,31 @@ with sync_playwright() as p:
                       and page.evaluate('document.documentElement.dataset.theme')==theme
                       and page.evaluate('document.documentElement.scrollWidth <= innerWidth'))
 
+    # Demo presentation notes reuse the existing editorial info surface.
+    callout_metrics = """el => {
+        const s = getComputedStyle(el);
+        return [s.backgroundColor,s.color,s.borderLeftColor,s.borderLeftWidth,
+                s.borderTopWidth,s.borderRadius,s.padding,s.fontSize,s.lineHeight];
+    }"""
+    for width, height in ((320, 900), (390, 900), (768, 900), (1280, 900)):
+        page.set_viewport_size({'width':width,'height':height})
+        for theme in ('light','dark'):
+            page.goto(base+'index.html#/overview')
+            page.evaluate("(t) => {localStorage.setItem('atlas.theme',t);document.documentElement.dataset.theme=t}",theme)
+            page.goto(base+'research.html')
+            reference = page.locator('main > .notice').evaluate(callout_metrics)
+            page.goto(base+'catalog-review.html')
+            check(f'Review {width}px {theme} uses shared evidence callout',
+                  page.locator('main .notice').first.evaluate(callout_metrics)==reference)
+            page.goto(base+'demo.html')
+            notes=page.locator('main > section.note.site-info-callout')
+            check(f'Demo {width}px {theme} shares editorial callout appearance',
+                  notes.count()==2 and all(n.evaluate(callout_metrics)==reference for n in notes.all())
+                  and page.evaluate('document.documentElement.scrollWidth <= innerWidth')
+                  and page.evaluate('document.documentElement.dataset.theme')==theme
+                  and notes.first.get_attribute('aria-labelledby')=='opening'
+                  and notes.last.get_attribute('aria-labelledby')=='feedback')
+
     # Three standalone page families now adopt Discover's existing heading
     # component rather than copying its type rules into page-specific CSS.
     # Check computed typography and lack of horizontal clipping in both themes.

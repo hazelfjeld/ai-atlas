@@ -656,7 +656,8 @@ body:has(.site-chrome) :is(.tech-controls,.playbook-tools,.controls,.search-cont
 :is(.term-shell .notice,
     .shell:has(> .site-chrome.research-site-chrome) .notice,
     .shell:has(> .site-chrome.nav) .notice,
-    .review-shell .review-callout){
+    .review-shell .review-callout,
+    .site-info-callout){
   box-sizing:border-box;
   min-width:0;
   padding:16px 18px;
@@ -962,6 +963,7 @@ html.atlas-enhanced #main:has(> #page:empty) > #catalog-loading{
     .tech-shell .tech-warning,
     .playbook-shell .playbook-note,
     .review-shell .review-callout,
+    .site-info-callout,
     .term-shell .notice){
   background:var(--accent-soft,var(--soft,#e9eee7));
   color:var(--ink,#18211e);
@@ -977,6 +979,7 @@ html.atlas-enhanced #main:has(> #page:empty) > #catalog-loading{
     .tech-shell .tech-warning,
     .playbook-shell .playbook-note,
     .review-shell .review-callout,
+    .site-info-callout,
     .term-shell .notice) a{
   color:var(--accent,#27664e);
   white-space:normal;
@@ -987,6 +990,7 @@ html.atlas-enhanced #main:has(> #page:empty) > #catalog-loading{
     .tech-shell .tech-warning,
     .playbook-shell .playbook-note,
     .review-shell .review-callout,
+    .site-info-callout,
     .term-shell .notice) a:focus-visible{
   outline:3px solid var(--orange,#b76d32);
   outline-offset:3px;
@@ -996,6 +1000,7 @@ html.atlas-enhanced #main:has(> #page:empty) > #catalog-loading{
       .tech-shell .tech-warning,
       .playbook-shell .playbook-note,
       .review-shell .review-callout,
+      .site-info-callout,
       .term-shell .notice){padding:14px 16px}
 }
 /* The archive retains one historical inline border declaration; preserve its
