@@ -1061,6 +1061,28 @@ with sync_playwright() as p:
                   and notes.first.get_attribute('aria-labelledby')=='opening'
                   and notes.last.get_attribute('aria-labelledby')=='feedback')
 
+    # The guided demo's four narrative subsection headings share the existing
+    # editorial reading-desk treatment. Do not alter card hierarchy or links.
+    subsection_metrics = """el => {
+        const s=getComputedStyle(el);
+        return [s.fontFamily,s.fontSize,s.fontWeight,s.lineHeight,s.letterSpacing];
+    }"""
+    for width in (320,390,768,1280):
+        page.set_viewport_size({'width':width,'height':900})
+        for theme in ('light','dark'):
+            page.goto(base+'index.html#/overview')
+            page.evaluate("(t) => {localStorage.setItem('atlas.theme',t);document.documentElement.dataset.theme=t}",theme)
+            page.goto(base+'catalog-review.html')
+            reference=page.locator('main > section > h2').first.evaluate(subsection_metrics)
+            page.goto(base+'demo.html')
+            headings=page.locator('main > :is(.quick-intro,.site-info-callout) > h2')
+            check(f'Demo {width}px {theme} shares editorial subsection typography',
+                  headings.count()==4
+                  and all(h.evaluate(subsection_metrics)==reference for h in headings.all())
+                  and headings.evaluate_all("els=>els.map(e=>e.id)")==['opening','quick-heading','extended-heading','feedback']
+                  and page.evaluate('document.documentElement.scrollWidth <= innerWidth')
+                  and page.evaluate('document.documentElement.dataset.theme')==theme)
+
     # Three standalone page families now adopt Discover's existing heading
     # component rather than copying its type rules into page-specific CSS.
     # Check computed typography and lack of horizontal clipping in both themes.

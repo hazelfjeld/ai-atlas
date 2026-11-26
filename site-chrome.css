@@ -370,6 +370,7 @@ body > .site-mobile-chrome:not([data-page-label]):has(+ .site-chrome .site-chrom
    heading treatment across About, directories, detail pages and evidence reviews. */
 :is(.term-shell > .profile-section, .term-shell > .detail-block,
     .review-shell > section, .shell > main > section,
+    body:has(> .site-chrome.demo-site-chrome) > main > :is(.quick-intro,.site-info-callout),
     :where(#edition-content) > section > .heading) > h2{
   font:400 clamp(21px,2.2vw,25px)/1.25 Georgia,'Times New Roman',serif;
   letter-spacing:-.025em;
