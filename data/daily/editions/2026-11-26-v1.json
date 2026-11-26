@@ -1,0 +1,598 @@
+{
+  "schema": 1,
+  "edition_date": "2026-11-26",
+  "timezone": "America/Chicago",
+  "published_at": "2026-11-26T16:26:30Z",
+  "coverage": {
+    "start": "2026-11-25T12:42:15.229Z",
+    "end": "2026-11-26T14:28:23Z",
+    "status": "partial",
+    "note": "Thirteen source-reviewed reports; six preprints submitted November 25 and listed November 26. One attributed Reuters report checked via indexed news text, not full article. Six catalog proposals deferred pending canonical alias, licensing, availability and integration checks. Collection remains bounded and incomplete.",
+    "sources_checked": [
+      {
+        "url": "https://arxiv.org/abs/2611.34923",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-26T14:28:23Z",
+        "method": "opened source page; scoped editorial review"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.34934",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-26T14:28:23Z",
+        "method": "opened source page; scoped editorial review"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.34920",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-26T14:28:23Z",
+        "method": "opened source page; scoped editorial review"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.34698",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-26T14:28:23Z",
+        "method": "opened source page; scoped editorial review"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.34852",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-26T14:28:23Z",
+        "method": "opened source page; scoped editorial review"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.34762",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-26T14:28:23Z",
+        "method": "opened source page; scoped editorial review"
+      },
+      {
+        "url": "https://www.together.ai/blog/introducing-hurdle-run-agent-evals-on-your-api-skills-and-docs",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-26T14:28:23Z",
+        "method": "opened source page; scoped editorial review"
+      },
+      {
+        "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/transcribe-turbo-preview/",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-26T14:28:23Z",
+        "method": "opened source page; scoped editorial review"
+      },
+      {
+        "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/lambda-durable-microvm/",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-26T14:28:23Z",
+        "method": "opened source page; scoped editorial review"
+      },
+      {
+        "url": "https://deepmind.google/blog/interpreting-mass-spectra-with-google-antigravity/",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-26T14:28:23Z",
+        "method": "opened source page; scoped editorial review"
+      },
+      {
+        "url": "https://www.together.ai/blog/distilling-kimi-into-qwen",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-26T14:28:23Z",
+        "method": "opened source page; scoped editorial review"
+      },
+      {
+        "url": "https://www.nysenate.gov/legislation/bills/2025/S9408/amendment/A",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-26T14:28:23Z",
+        "method": "opened source page; scoped editorial review"
+      },
+      {
+        "url": "https://www.reuters.com/world/china/us-chip-curbs-distillation-crackdown-threaten-chinese-ai-model-development-2026-11-26/",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-26T14:28:23Z",
+        "method": "opened source page; scoped editorial review"
+      },
+      {
+        "url": "https://www.theguardian.com/us-news/2026/nov/25/new-york-bans-ai-toys",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-26T14:28:23Z",
+        "method": "opened source page; scoped editorial review"
+      },
+      {
+        "url": "https://arxiv.org/list/cs.CL/recent",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-26T14:28:23Z",
+        "method": "opened category listing; bounded screening"
+      },
+      {
+        "url": "https://arxiv.org/list/cs.LG/recent",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-26T14:28:23Z",
+        "method": "opened category listing; bounded screening"
+      },
+      {
+        "url": "https://arxiv.org/list/cs.AI/recent",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-26T14:28:23Z",
+        "method": "opened category listing; bounded screening"
+      },
+      {
+        "url": "https://arxiv.org/list/cs.RO/recent",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-26T14:28:23Z",
+        "method": "opened category listing; bounded screening"
+      },
+      {
+        "url": "https://arxiv.org/list/eess.AS/recent",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-26T14:28:23Z",
+        "method": "opened category listing; bounded screening"
+      },
+      {
+        "url": "https://blogs.cisco.com/news/expanding-the-defenders-window-with-self-defending-infrastructure",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-26T14:28:23Z",
+        "method": "opened source page; scoped editorial review"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.34923",
+        "status": "publisher_checked_primary_source",
+        "checked_at": "2026-11-26T16:26:30Z",
+        "method": "Opened dated source or primary abstract; checked material claims"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.34934",
+        "status": "publisher_checked_primary_source",
+        "checked_at": "2026-11-26T16:26:30Z",
+        "method": "Opened dated source or primary abstract; checked material claims"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.34920",
+        "status": "publisher_checked_primary_source",
+        "checked_at": "2026-11-26T16:26:30Z",
+        "method": "Opened dated source or primary abstract; checked material claims"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.34698",
+        "status": "publisher_checked_primary_source",
+        "checked_at": "2026-11-26T16:26:30Z",
+        "method": "Opened dated source or primary abstract; checked material claims"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.34852",
+        "status": "publisher_checked_primary_source",
+        "checked_at": "2026-11-26T16:26:30Z",
+        "method": "Opened dated source or primary abstract; checked material claims"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.34762",
+        "status": "publisher_checked_primary_source",
+        "checked_at": "2026-11-26T16:26:30Z",
+        "method": "Opened dated source or primary abstract; checked material claims"
+      },
+      {
+        "url": "https://www.together.ai/blog/introducing-hurdle-run-agent-evals-on-your-api-skills-and-docs",
+        "status": "publisher_checked_primary_source",
+        "checked_at": "2026-11-26T16:26:30Z",
+        "method": "Opened dated source or primary abstract; checked material claims"
+      },
+      {
+        "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/transcribe-turbo-preview/",
+        "status": "publisher_checked_primary_source",
+        "checked_at": "2026-11-26T16:26:30Z",
+        "method": "Opened dated source or primary abstract; checked material claims"
+      },
+      {
+        "url": "https://aws.amazon.com/about-aws/whats-new/2026/11/lambda-durable-microvm/",
+        "status": "publisher_checked_primary_source",
+        "checked_at": "2026-11-26T16:26:30Z",
+        "method": "Opened dated source or primary abstract; checked material claims"
+      },
+      {
+        "url": "https://deepmind.google/blog/interpreting-mass-spectra-with-google-antigravity/",
+        "status": "publisher_checked_primary_source",
+        "checked_at": "2026-11-26T16:26:30Z",
+        "method": "Opened dated source or primary abstract; checked material claims"
+      },
+      {
+        "url": "https://www.together.ai/blog/distilling-kimi-into-qwen",
+        "status": "publisher_checked_primary_source",
+        "checked_at": "2026-11-26T16:26:30Z",
+        "method": "Opened dated source or primary abstract; checked material claims"
+      },
+      {
+        "url": "https://www.nysenate.gov/legislation/bills/2025/S9408/amendment/A",
+        "status": "publisher_checked_primary_source",
+        "checked_at": "2026-11-26T16:26:30Z",
+        "method": "Opened dated source or primary abstract; checked material claims"
+      },
+      {
+        "url": "https://www.reuters.com/world/china/us-chip-curbs-distillation-crackdown-threaten-chinese-ai-model-development-2026-11-26/",
+        "status": "publisher_checked_indexed_attributed_reporting",
+        "checked_at": "2026-11-26T16:26:30Z",
+        "method": "Indexed Reuters news text; direct full article inaccessible"
+      },
+      {
+        "url": "https://arxiv.org/list/cs.LG/recent",
+        "status": "publisher_checked_public_listing",
+        "checked_at": "2026-11-26T16:26:30Z",
+        "method": "Matched queued arXiv identifiers under November 26 listing"
+      },
+      {
+        "url": "https://arxiv.org/list/cs.CL/recent",
+        "status": "publisher_checked_public_listing",
+        "checked_at": "2026-11-26T16:26:30Z",
+        "method": "Matched queued arXiv identifiers under November 26 listing"
+      },
+      {
+        "url": "https://arxiv.org/list/cs.AI/recent",
+        "status": "publisher_checked_public_listing",
+        "checked_at": "2026-11-26T16:26:30Z",
+        "method": "Matched queued arXiv identifiers under November 26 listing"
+      }
+    ],
+    "sources_failed": [
+      {
+        "url": "https://export.arxiv.org/api/query?search_query=cat%3Acs.AI&max_results=5",
+        "status": "failed",
+        "checked_at": "2026-11-26T14:28:23Z",
+        "error": "Metadata API inaccessible; category listings and individual abstracts accessible."
+      },
+      {
+        "url": "https://www.reuters.com/world/china/us-chip-curbs-distillation-crackdown-threaten-chinese-ai-model-development-2026-11-26/",
+        "status": "direct_retrieval_failed",
+        "checked_at": "2026-11-26T16:26:30Z",
+        "error": "Direct full article unavailable; indexed Reuters text corroborated the attributed report."
+      }
+    ]
+  },
+  "tldr": [
+    "Six preprints examine compact-model loops, monitor evaluation, shared voice agents, targeted driving-policy data, research coverage and memory reliability. These are author-reported results, not independent replication.",
+    "Dated release and experiment reports cover coding-agent tests, AWS speech and isolated execution, chemistry skills and Lao translation. New York legislation and attributed reporting on model delays are qualified separately; six catalog candidates remain deferred."
+  ],
+  "news": [
+    {
+      "id": "ai-news-mixture-of-loops-transformer-2611-34923",
+      "title": "Looped transformers reuse attention memory to improve compact-model efficiency",
+      "category": "architecture",
+      "tags": [
+        "AI",
+        "DL",
+        "SLM",
+        "LLM",
+        "inference"
+      ],
+      "summary": "Mixture-of-Loops Transformer selectively reuses attention keys and values across repeated layer passes. Authors report 1.7× validation-loss token efficiency for their 700M model against OLMo3 under a 400B-token pretraining experiment.",
+      "why_it_matters": "May improve the quality attainable per training token while reducing redundant loop computation.",
+      "caveat": "Author-reported comparison at selected scales; validation loss is not end-user intelligence, wall-clock speed or independent reproduction. Author-reported preprint; no independent replication performed.",
+      "review_status": "publisher_reviewed_author_reported_preprint",
+      "release_status": "preprint",
+      "source_url": "https://arxiv.org/abs/2611.34923",
+      "publication_date": "2026-11-26",
+      "event_date": "2026-11-25",
+      "discovered_at": "2026-11-26T14:28:23Z",
+      "added_to_atlas_at": "2026-11-26T16:26:30Z",
+      "collection_classification": "recent",
+      "source_record_id": "ai-news:mixture-of-loops-transformer:2611.34923",
+      "publication_date_basis": "November 26 public arXiv category listing; submitted November 25; exact public posting time not established",
+      "arxiv_id": "2611.34923",
+      "submission_date": "2026-11-25",
+      "submission_time_utc": "2026-11-25T18:58:53Z"
+    },
+    {
+      "id": "ai-news-monitor-evaluation-attack-policy-2611-34934",
+      "title": "Monitor safety scores depend strongly on how evaluation cases are generated",
+      "category": "safety",
+      "tags": [
+        "AI",
+        "LLM",
+        "agents",
+        "evaluation",
+        "safety"
+      ],
+      "summary": "In a controlled study of a former production monitor, measured missed-detection rates changed substantially across evaluation conditions. The authors warn against interpreting a narrow test suite as a deployment guarantee.",
+      "why_it_matters": "Safety evaluations need diverse, justified threat models and held-out cases.",
+      "caveat": "A controlled evaluation of one monitor, not an observed deployment incident or a general estimate of current monitor performance. Author-reported preprint; no independent replication performed.",
+      "review_status": "publisher_reviewed_author_reported_preprint",
+      "release_status": "preprint",
+      "source_url": "https://arxiv.org/abs/2611.34934",
+      "publication_date": "2026-11-26",
+      "event_date": "2026-11-25",
+      "discovered_at": "2026-11-26T14:28:23Z",
+      "added_to_atlas_at": "2026-11-26T16:26:30Z",
+      "collection_classification": "recent",
+      "source_record_id": "ai-news:monitor-evaluation-attack-policy:2611.34934",
+      "publication_date_basis": "November 26 public arXiv category listing; submitted November 25; exact public posting time not established",
+      "arxiv_id": "2611.34934",
+      "submission_date": "2026-11-25",
+      "submission_time_utc": "2026-11-25T18:59:28Z"
+    },
+    {
+      "id": "ai-news-mu-bench-shared-voice-2611-34920",
+      "title": "Multi-user voice benchmark tests privacy, attribution and shared task completion",
+      "category": "audio",
+      "tags": [
+        "AI",
+        "DL",
+        "LLM",
+        "audio",
+        "agents",
+        "evaluation"
+      ],
+      "summary": "Mu-Bench evaluates full-duplex voice assistants using 800 simulated cases across 20 domains. In the authors' 13-system study, tested open-weight systems scored below 20% joint success, and larger groups were harder to coordinate.",
+      "why_it_matters": "Single-user voice accuracy can conceal failures when several speakers have different permissions and goals.",
+      "caveat": "Simulated participants and benchmark-specific criteria; not a real-world privacy incident or a definitive ranking. Author-reported preprint; no independent replication performed.",
+      "review_status": "publisher_reviewed_author_reported_preprint",
+      "release_status": "preprint",
+      "source_url": "https://arxiv.org/abs/2611.34920",
+      "publication_date": "2026-11-26",
+      "event_date": "2026-11-25",
+      "discovered_at": "2026-11-26T14:28:23Z",
+      "added_to_atlas_at": "2026-11-26T16:26:30Z",
+      "collection_classification": "recent",
+      "source_record_id": "ai-news:mu-bench-shared-voice:2611.34920",
+      "publication_date_basis": "November 26 public arXiv category listing; submitted November 25; exact public posting time not established",
+      "arxiv_id": "2611.34920",
+      "submission_date": "2026-11-25",
+      "submission_time_utc": "2026-11-25T18:58:42Z"
+    },
+    {
+      "id": "ai-news-failure-driven-vla-data-flywheel-2611-34698",
+      "title": "Driving-policy post-training targets remaining failure conditions",
+      "category": "robotics",
+      "tags": [
+        "AI",
+        "ML",
+        "DL",
+        "robotics",
+        "post-training"
+      ],
+      "summary": "Researchers repeatedly generate targeted scenarios based on a model's remaining failures. In one sealed simulation test, the collision-free fraction for ReCogDrive rose from 0.390 to 0.765; a small real-vehicle demonstration also improved.",
+      "why_it_matters": "Adaptive data generation could help teams focus training on rare difficult cases without a large deployed fleet.",
+      "caveat": "Specific scenarios and very small real-vehicle trial; not proof of roadworthiness or general safety. Author-reported preprint; no independent replication performed.",
+      "review_status": "publisher_reviewed_author_reported_preprint",
+      "release_status": "preprint",
+      "source_url": "https://arxiv.org/abs/2611.34698",
+      "publication_date": "2026-11-26",
+      "event_date": "2026-11-25",
+      "discovered_at": "2026-11-26T14:28:23Z",
+      "added_to_atlas_at": "2026-11-26T16:26:30Z",
+      "collection_classification": "recent",
+      "source_record_id": "ai-news:failure-driven-vla-data-flywheel:2611.34698",
+      "publication_date_basis": "November 26 public arXiv category listing; submitted November 25; exact public posting time not established",
+      "arxiv_id": "2611.34698",
+      "submission_date": "2026-11-25",
+      "submission_time_utc": "2026-11-25T16:54:15Z"
+    },
+    {
+      "id": "ai-news-drbench-pro-knowledge-coverage-2611-34852",
+      "title": "Deep-research benchmark measures breadth and depth of evidence coverage",
+      "category": "evaluation",
+      "tags": [
+        "AI",
+        "LLM",
+        "agents",
+        "retrieval",
+        "evaluation"
+      ],
+      "summary": "DRBench Pro builds structured knowledge rubrics from Wikipedia. In 144 cases across 24 domains, the authors report that the strongest of 16 tested agents covered about 57% on their combined metric.",
+      "why_it_matters": "Separates topical coverage from the depth of related explanations rather than relying only on a holistic judge.",
+      "caveat": "Wikipedia-derived knowledge and rubric design may bias results; coverage does not establish factual correctness or exhaustive research. Author-reported preprint; no independent replication performed.",
+      "review_status": "publisher_reviewed_author_reported_preprint",
+      "release_status": "preprint",
+      "source_url": "https://arxiv.org/abs/2611.34852",
+      "publication_date": "2026-11-26",
+      "event_date": "2026-11-25",
+      "discovered_at": "2026-11-26T14:28:23Z",
+      "added_to_atlas_at": "2026-11-26T16:26:30Z",
+      "collection_classification": "recent",
+      "source_record_id": "ai-news:drbench-pro-knowledge-coverage:2611.34852",
+      "publication_date_basis": "November 26 public arXiv category listing; submitted November 25; exact public posting time not established",
+      "arxiv_id": "2611.34852",
+      "submission_date": "2026-11-25",
+      "submission_time_utc": "2026-11-25T18:25:30Z"
+    },
+    {
+      "id": "ai-news-task-memory-use-time-hallucinations-2611-34762",
+      "title": "Agent memory can fail even when retrieval succeeds",
+      "category": "research",
+      "tags": [
+        "AI",
+        "DL",
+        "LLM",
+        "memory",
+        "interpretability"
+      ],
+      "summary": "Researchers distinguish cases where retrieved facts are ignored, associated with the wrong subject, or confused with obsolete versions. Their TASK Memory approach combines external text with activation steering and editable model knowledge.",
+      "why_it_matters": "Highlights a failure beyond retrieval recall: whether the model uses the right information at generation time.",
+      "caveat": "Preprint with five tested open models; intervention side effects, portability and persistent-memory privacy need separate evaluation. Author-reported preprint; no independent replication performed.",
+      "review_status": "publisher_reviewed_author_reported_preprint",
+      "release_status": "preprint",
+      "source_url": "https://arxiv.org/abs/2611.34762",
+      "publication_date": "2026-11-26",
+      "event_date": "2026-11-25",
+      "discovered_at": "2026-11-26T14:28:23Z",
+      "added_to_atlas_at": "2026-11-26T16:26:30Z",
+      "collection_classification": "recent",
+      "source_record_id": "ai-news:task-memory-use-time-hallucinations:2611.34762",
+      "publication_date_basis": "November 26 public arXiv category listing; submitted November 25; exact public posting time not established",
+      "arxiv_id": "2611.34762",
+      "submission_date": "2026-11-25",
+      "submission_time_utc": "2026-11-25T17:30:37Z"
+    },
+    {
+      "id": "ai-news-together-hurdle-2026-11-25",
+      "title": "Together releases Hurdle for repeatable coding-agent integration tests",
+      "category": "tools",
+      "tags": [
+        "AI",
+        "LLM",
+        "agents",
+        "evaluation",
+        "developer-tools"
+      ],
+      "summary": "The npm library runs coding agents on developer-defined tasks under varying models and initial conditions. It supports programmatic checks, restrictions on actions and rubric-based judging, with optional isolated runs.",
+      "why_it_matters": "Teams can test whether their APIs, documentation and skills actually help agents complete real workflows.",
+      "caveat": "Publisher describes the library as open source; exact license and security isolation not independently audited. Sandboxed runs and model access can incur charges.",
+      "review_status": "publisher_reviewed_first_party_claims",
+      "release_status": "announced",
+      "source_url": "https://www.together.ai/blog/introducing-hurdle-run-agent-evals-on-your-api-skills-and-docs",
+      "publication_date": "2026-11-25",
+      "event_date": "2026-11-25",
+      "discovered_at": "2026-11-26T14:28:23Z",
+      "added_to_atlas_at": "2026-11-26T16:26:30Z",
+      "collection_classification": "recent",
+      "source_record_id": "ai-news:together-hurdle:2026-11-25",
+      "publication_date_basis": "Dated source report; publisher checked"
+    },
+    {
+      "id": "ai-news-aws-transcribe-turbo-2026-11-25",
+      "title": "AWS previews Transcribe Turbo with speech-aware turn detection",
+      "category": "audio",
+      "tags": [
+        "AI",
+        "ML",
+        "DL",
+        "audio",
+        "ASR",
+        "agents"
+      ],
+      "summary": "AWS announces an updated speech recognition model with context hints and end-of-turn detection for English streaming. It reports roughly 14% relative English streaming word-error reduction versus its production model; English batch is already generally available in most regions.",
+      "why_it_matters": "Combining speech and language cues may reduce awkward interruptions in real-time voice interfaces.",
+      "caveat": "Vendor metrics; streaming preview in US East (Ohio), language and region availability vary, and interruption behavior requires application-specific testing.",
+      "review_status": "publisher_reviewed_first_party_claims",
+      "release_status": "public_preview",
+      "source_url": "https://aws.amazon.com/about-aws/whats-new/2026/11/transcribe-turbo-preview/",
+      "publication_date": "2026-11-25",
+      "event_date": "2026-11-25",
+      "discovered_at": "2026-11-26T14:28:23Z",
+      "added_to_atlas_at": "2026-11-26T16:26:30Z",
+      "collection_classification": "recent",
+      "source_record_id": "ai-news:aws-transcribe-turbo:2026-11-25",
+      "publication_date_basis": "Dated source report; publisher checked"
+    },
+    {
+      "id": "ai-news-aws-lambda-durable-microvm-2026-11-25",
+      "title": "AWS previews checkpointed orchestration for isolated code execution",
+      "category": "infrastructure",
+      "tags": [
+        "AI",
+        "LLM",
+        "agents",
+        "infrastructure",
+        "security"
+      ],
+      "summary": "A Lambda durable-functions extension can coordinate individual or stateful MicroVM tasks, retry failures and checkpoint progress, including parallel isolated environments.",
+      "why_it_matters": "Agent-generated code can be separated from the workflow controller while retaining multi-step recovery.",
+      "caveat": "Developer preview explicitly not intended for production; isolation is not a complete security guarantee. Requires regions supporting both services.",
+      "review_status": "publisher_reviewed_first_party_claims",
+      "release_status": "developer_preview",
+      "source_url": "https://aws.amazon.com/about-aws/whats-new/2026/11/lambda-durable-microvm/",
+      "publication_date": "2026-11-25",
+      "event_date": "2026-11-25",
+      "discovered_at": "2026-11-26T14:28:23Z",
+      "added_to_atlas_at": "2026-11-26T16:26:30Z",
+      "collection_classification": "recent",
+      "source_record_id": "ai-news:aws-lambda-durable-microvm:2026-11-25",
+      "publication_date_basis": "Dated source report; publisher checked"
+    },
+    {
+      "id": "ai-news-deepmind-antigravity-mass-spec-2026-11-25",
+      "title": "DeepMind packages chemistry tools as Antigravity skills",
+      "category": "applications",
+      "tags": [
+        "AI",
+        "ML",
+        "LLM",
+        "agents",
+        "science"
+      ],
+      "summary": "Mass Spec Skills connects Gemini reasoning with established mass-spectrometry software and chemical databases to propose candidate molecular structures and explain supporting evidence.",
+      "why_it_matters": "Specialized computational tools can make scientific agents more useful than a standalone language model for exact calculations and retrieval.",
+      "caveat": "Candidate structures need expert and experimental verification; performance depends on spectrum quality and database coverage, and vendor claims are not independently replicated.",
+      "review_status": "publisher_reviewed_first_party_claims",
+      "release_status": "announced",
+      "source_url": "https://deepmind.google/blog/interpreting-mass-spectra-with-google-antigravity/",
+      "publication_date": "2026-11-25",
+      "event_date": "2026-11-25",
+      "discovered_at": "2026-11-26T14:28:23Z",
+      "added_to_atlas_at": "2026-11-26T16:26:30Z",
+      "collection_classification": "recent",
+      "source_record_id": "ai-news:deepmind-antigravity-mass-spec:2026-11-25",
+      "publication_date_basis": "Dated source report; publisher checked"
+    },
+    {
+      "id": "ai-news-together-lao-distillation-2026-11-26",
+      "title": "Targeted translation distillation narrows a Lao-language capability gap",
+      "category": "training",
+      "tags": [
+        "AI",
+        "DL",
+        "LLM",
+        "distillation",
+        "multilingual"
+      ],
+      "summary": "Together reports that an adapter trained on teacher-generated Lao and Thai translations improved a 27B student's Lao chrF++ from 5.5 to 44.3 on 1,012 sentences, versus 47.5 for the teacher, while preserving Thai performance. The full experiment series reportedly cost $260.",
+      "why_it_matters": "Mixing retention examples with new-language data can reduce regressions during narrow capability transfer.",
+      "caveat": "Company case study; 93% refers to a translation metric ratio, not general model capability. Costs and teacher-output rights must be independently assessed.",
+      "review_status": "publisher_reviewed_first_party_claims",
+      "release_status": "experiment",
+      "source_url": "https://www.together.ai/blog/distilling-kimi-into-qwen",
+      "publication_date": "2026-11-26",
+      "event_date": null,
+      "discovered_at": "2026-11-26T14:28:23Z",
+      "added_to_atlas_at": "2026-11-26T16:26:30Z",
+      "collection_classification": "recent",
+      "source_record_id": "ai-news:together-lao-distillation:2026-11-26",
+      "publication_date_basis": "Dated source report; publisher checked"
+    },
+    {
+      "id": "ai-news-ny-chatbot-toy-moratorium-2026-11-24",
+      "title": "New York signs a temporary prohibition on chatbot toys",
+      "category": "governance",
+      "tags": [
+        "AI",
+        "LLM",
+        "policy",
+        "child-safety"
+      ],
+      "summary": "The New York Senate records S9408A as signed on November 24, chapter 416. The legislation provides a five-year moratorium on covered chatbot toys, effective 90 days after becoming law.",
+      "why_it_matters": "Product safety and privacy requirements increasingly affect AI systems embedded in children's physical products.",
+      "caveat": "Scope and exceptions depend on statutory definitions; signing is not immediate enforcement. Reported product risks are not universal to all toys.",
+      "review_status": "publisher_reviewed_legislative_record",
+      "release_status": "signed",
+      "source_url": "https://www.nysenate.gov/legislation/bills/2025/S9408/amendment/A",
+      "publication_date": null,
+      "event_date": "2026-11-24",
+      "discovered_at": "2026-11-26T14:28:23Z",
+      "added_to_atlas_at": "2026-11-26T16:26:30Z",
+      "collection_classification": "catch-up",
+      "source_record_id": "ai-news:ny-chatbot-toy-moratorium:2026-11-24",
+      "publication_date_basis": "Official action dated November 24; legislative page publication date unknown; November 25 secondary coverage."
+    },
+    {
+      "id": "ai-news-reuters-chip-curbs-model-delays-2026-11-26",
+      "title": "Reuters reports possible Chinese model-development delays under compute restrictions",
+      "category": "industry",
+      "tags": [
+        "AI",
+        "LLM",
+        "hardware",
+        "infrastructure",
+        "governance"
+      ],
+      "summary": "Reuters reports that tighter access to overseas advanced-chip compute and restrictions on model-output distillation could delay upcoming model releases at Z.AI and Moonshot AI, according to people familiar with the companies.",
+      "why_it_matters": "Compute access and training-data policy can alter model release cadence and costs.",
+      "caveat": "Attributed reporting from unnamed sources; future timelines are not confirmed company commitments. Exact rule text and company responses require separate verification. Reuters report located through indexed news text; direct full article retrieval unavailable.",
+      "review_status": "publisher_reviewed_attributed_reporting",
+      "release_status": "reported_not_confirmed",
+      "source_url": "https://www.reuters.com/world/china/us-chip-curbs-distillation-crackdown-threaten-chinese-ai-model-development-2026-11-26/",
+      "publication_date": "2026-11-26",
+      "event_date": null,
+      "discovered_at": "2026-11-26T14:28:23Z",
+      "added_to_atlas_at": "2026-11-26T16:26:30Z",
+      "collection_classification": "recent",
+      "source_record_id": "ai-news:reuters-chip-curbs-model-delays:2026-11-26",
+      "publication_date_basis": "Dated source report; publisher checked"
+    }
+  ],
+  "technologies": [],
+  "terms": [],
+  "site_changes": [],
+  "corrections": []
+}

@@ -2151,6 +2151,77 @@
       "production_workflow_run_id": 45645574966,
       "githack_workflow_run_id": 45645574964,
       "verification_scope": "Exact main df87a21fb0944ea8aa4f2ac933c87435ec270653 passed Cloudflare workflow 45645574966 on November 25, 2026: tested artifact deployed, 514 exact HTTP assets on each of three production hosts, including the immutable edition and archive index. Hosted archive reader, permalink, no-script recovery, responsive light/dark, keyboard and Games checks passed. Catalog/GitHack workflow 45645574964 passed 476 Node tests, reproducibility and exact GitHack revision parity. Production job completed at 2026-11-25T15:47:36Z. External reader could not independently retrieve the exact dated query permalink. Immutable edition SHA-256 525b0375f86fd0592de307a49764c5514b9de342c8dcff2d0db08ee7c505be0b, 28126 UTF-8 bytes."
+    },
+    {
+      "batch_id": "atlas-daily-20261126-142823z-source-review-a",
+      "source_branch": "atlas-daily-staging",
+      "source_commit": "7f79d2c6da6964b5f865f241a61dc2f160637b46",
+      "source_batch_path": "daily-queue/batches/2026-11-26-atlas-daily-20261126-142823z-source-review-a.json",
+      "source_batch_sha256": "af1e1e0ddffd505bfae1ef4d68bc70228eb419d4ca2c897c9ae50d870f6ba757",
+      "source_batch_bytes": 43060,
+      "edition_date": "2026-11-26",
+      "validation_result": "independent_batch_sha256_utf8_bytes_counts_unique_ids_prior_receipt_reconciliation_source_review_public_arxiv_listings_recent_archive_dedup",
+      "status": "partially_published_13_news_6_catalog_proposals_deferred",
+      "publication_outcome": "pending_production_verification",
+      "publication_edition": "2026-11-26-v1",
+      "accepted_news_ids": [
+        "ai-news-mixture-of-loops-transformer-2611-34923",
+        "ai-news-monitor-evaluation-attack-policy-2611-34934",
+        "ai-news-mu-bench-shared-voice-2611-34920",
+        "ai-news-failure-driven-vla-data-flywheel-2611-34698",
+        "ai-news-drbench-pro-knowledge-coverage-2611-34852",
+        "ai-news-task-memory-use-time-hallucinations-2611-34762",
+        "ai-news-together-hurdle-2026-11-25",
+        "ai-news-aws-transcribe-turbo-2026-11-25",
+        "ai-news-aws-lambda-durable-microvm-2026-11-25",
+        "ai-news-deepmind-antigravity-mass-spec-2026-11-25",
+        "ai-news-together-lao-distillation-2026-11-26",
+        "ai-news-ny-chatbot-toy-moratorium-2026-11-24",
+        "ai-news-reuters-chip-curbs-model-delays-2026-11-26"
+      ],
+      "source_news_ids": [
+        "ai-news:mixture-of-loops-transformer:2611.34923",
+        "ai-news:monitor-evaluation-attack-policy:2611.34934",
+        "ai-news:mu-bench-shared-voice:2611.34920",
+        "ai-news:failure-driven-vla-data-flywheel:2611.34698",
+        "ai-news:drbench-pro-knowledge-coverage:2611.34852",
+        "ai-news:task-memory-use-time-hallucinations:2611.34762",
+        "ai-news:together-hurdle:2026-11-25",
+        "ai-news:aws-transcribe-turbo:2026-11-25",
+        "ai-news:aws-lambda-durable-microvm:2026-11-25",
+        "ai-news:deepmind-antigravity-mass-spec:2026-11-25",
+        "ai-news:together-lao-distillation:2026-11-26",
+        "ai-news:ny-chatbot-toy-moratorium:2026-11-24",
+        "ai-news:reuters-chip-curbs-model-delays:2026-11-26"
+      ],
+      "deferred_news_ids": [],
+      "deferred_catalog_proposal_ids": [
+        "tech-proposal:mixture-of-loops-transformer:2026-11-26",
+        "tech-proposal:mu-bench:2026-11-26",
+        "tech-proposal:drbench-pro:2026-11-26",
+        "tech-proposal:hurdle:2026-11-26",
+        "term-proposal:use-time-memory-hallucination:2026-11-26",
+        "term-proposal:joint-task-success:2026-11-26"
+      ],
+      "rejected_ids": [],
+      "counts": {
+        "news_published": 13,
+        "technology_added": 0,
+        "term_added": 0,
+        "corrections": 0,
+        "news_deferred": 0,
+        "catalog_deferred": 6,
+        "technology_updated": 0
+      },
+      "review_notes": "All six abstracts and November 26 public listings checked; first-party announcements, legislative record and Together experiment reviewed. Reuters indexed news text checked, full article unavailable; report stays attributed. Previous receipts and November 18–25 archives checked for duplicate IDs/source identity. Six catalog proposals remain deferred, no canonical additions. Keep prior certified script-free preview until hosted verification.",
+      "publication_history": [
+        {
+          "edition": "2026-11-26-v1",
+          "status": "pending_production_verification",
+          "prepared_at": "2026-11-26T16:26:30Z",
+          "note": "13 source-reviewed reports, six proposals deferred. Immutable SHA-256 9444ac4df8a07bb5ee7d4e2a13d160bd83c542cc1b0c9c2dcdc8f759e9682f5f, 31098 UTF-8 bytes. Public verification pending."
+        }
+      ]
     }
   ]
 }
