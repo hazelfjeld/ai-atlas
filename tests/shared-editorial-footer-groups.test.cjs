@@ -71,7 +71,7 @@ test('reference landings and link-only hardware footer use the same grouping', (
     '    h = Path(route).read_text(encoding="utf-8")',
     '    footer = re.search(r"<footer\\b[^>]*>[\\s\\S]*?</footer>", h).group()',
     '    assert group_editorial_footer(footer) == footer, route',
-    '    raw = re.sub(r"</?span(?: class=\"site-chrome__footer-(?:note|links)\")?>", "", footer)',
+    '    raw = re.sub(r"</?span[^>]*>", "", footer)',
     '    assert group_editorial_footer(raw) == footer, route',
   ].join('\n');
   execFileSync('python3', ['-c', script], {cwd:root, stdio:'pipe'});
