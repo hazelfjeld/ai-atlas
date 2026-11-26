@@ -3835,7 +3835,7 @@ with sync_playwright() as p:
             lead_page.wait_for_load_state('load')
             check('Catalog Review mobile return to Discover '+scheme+' '+str(width),
                   lead_page.locator('h1').first.inner_text().strip()=='Discover')
-        # A native workspace must begin at the same 16px inset below the
+        # A native workspace must begin at the same Discover inset below the
         # fixed bar; legacy hero/shell spacing must not stack on navigation.
         for width in (768,1280):
             lead_page.set_viewport_size({'width':width,'height':844})
@@ -3863,7 +3863,7 @@ with sync_playwright() as p:
                 check('Editorial stylesheets ready '+label+' '+json.dumps(geometry),
                       geometry['ready']=='complete' and not geometry['missing'])
                 check('Editorial first-content inset '+label+' '+json.dumps(geometry),
-                      geometry['inset'] is not None and abs(geometry['inset'] - 16) <= 2)
+                      geometry['inset'] is not None and abs(geometry['inset'] - (30 if width <= 1150 else 37)) <= 2)
         # Cross the actual primary links, rather than comparing disconnected
         # screenshots: the desktop heading origin must not jump sideways.
         for width in (768,1280):

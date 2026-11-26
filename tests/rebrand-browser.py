@@ -987,6 +987,23 @@ with sync_playwright() as p:
                 if width==1280 and theme=='light' and route in ('about.html','playbooks.html','whats-new.html'):
                     page.screenshot(path=str(out/('intro-'+route.replace('.html','')+'-1280-light.png')),full_page=False)
 
+    # Compare the shared heading container itself, not page-specific text line boxes.
+    for width, height in ((768, 900), (1280, 900)):
+        page.set_viewport_size({'width':width,'height':height})
+        for theme in ('light','dark'):
+            page.goto(base+'index.html#/overview')
+            page.evaluate("(t) => {localStorage.setItem('atlas.theme',t);document.documentElement.dataset.theme=t}",theme)
+            baseline = page.locator('.discover-heading').first.evaluate('el => el.getBoundingClientRect().top')
+            for route in ('whats-new.html','technologies.html','research.html','playbooks.html',
+                          'games.html','about.html','demo.html','hardware-review.html','catalog-review.html'):
+                page.goto(base+route, wait_until='load')
+                heading = page.locator('.discover-heading').first
+                heading.wait_for()
+                top = heading.evaluate('el => el.getBoundingClientRect().top')
+                check(f'{route} {width}px {theme} shares Discover desktop intro baseline',
+                      abs(top-baseline)<=2 and page.evaluate('document.documentElement.scrollWidth <= innerWidth')
+                      and page.evaluate('document.documentElement.dataset.theme')==theme)
+
     # Three standalone page families now adopt Discover's existing heading
     # component rather than copying its type rules into page-specific CSS.
     # Check computed typography and lack of horizontal clipping in both themes.
