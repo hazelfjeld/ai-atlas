@@ -1109,7 +1109,9 @@ with sync_playwright() as p:
             reference=page.locator('main > section[aria-labelledby="decision-matrix-title"]')
             check(f'Review {width}px {theme} preserves shared narrative measure and scrollable matrix',
                   reference.evaluate(narrative_metrics)==expected
-                  and page.locator('.matrix-wrap table').is_visible())
+                  and page.locator('.matrix-wrap table').count()==2
+                  and all(table.is_visible() for table in page.locator('.matrix-wrap table').all())
+                  and reference.locator('.matrix-wrap table').count()==1)
             page.goto(base+'demo.html')
             routes=page.locator('main > .quick-intro')
             check(f'Demo {width}px {theme} shares narrative measure and section cadence',
