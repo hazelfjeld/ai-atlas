@@ -2162,7 +2162,7 @@
       "edition_date": "2026-11-26",
       "validation_result": "independent_batch_sha256_utf8_bytes_counts_unique_ids_prior_receipt_reconciliation_source_review_public_arxiv_listings_recent_archive_dedup",
       "status": "partially_published_13_news_6_catalog_proposals_deferred",
-      "publication_outcome": "pending_production_verification",
+      "publication_outcome": "immutable_revision_1_cloudflare_http_browser_and_githack_verified",
       "publication_edition": "2026-11-26-v1",
       "accepted_news_ids": [
         "ai-news-mixture-of-loops-transformer-2611-34923",
@@ -2220,8 +2220,22 @@
           "status": "pending_production_verification",
           "prepared_at": "2026-11-26T16:26:30Z",
           "note": "13 source-reviewed reports, six proposals deferred. Immutable SHA-256 9444ac4df8a07bb5ee7d4e2a13d160bd83c542cc1b0c9c2dcdc8f759e9682f5f, 31098 UTF-8 bytes. Public verification pending."
+        },
+        {
+          "edition": "2026-11-26-v1",
+          "status": "cloudflare_http_browser_and_githack_verified",
+          "note": "Exact main ce50312dd60b05c1f6923b7ee3f2993b54eaa3d5 passed Cloudflare workflow 45867471348 (attempt 2) on November 26, 2026: 515 exact HTTP assets per hostname across three production hosts, hosted archive reader, permalink, script-free recovery, responsive light/dark, navigation and Games checks passed. The previous Discover 390px dark More disclosure failure did not recur on retry; cause not established. Catalog/GitHack workflow 45867471332 passed. Production job completed at 2026-11-26T18:37:51Z. Independent external retrieval of dated permalink unavailable. Immutable edition SHA-256 9444ac4df8a07bb5ee7d4e2a13d160bd83c542cc1b0c9c2dcdc8f759e9682f5f, 31098 UTF-8 bytes.",
+          "verified_at": "2026-11-26T18:37:51Z"
         }
-      ]
+      ],
+      "production_verified_at": "2026-11-26T18:37:51Z",
+      "production_verified_revision": 1,
+      "last_verified_at": "2026-11-26T18:37:51Z",
+      "last_verified_public_url": "https://aiupdates.app/whats-new.html?date=2026-11-26&revision=1",
+      "production_commit": "ce50312dd60b05c1f6923b7ee3f2993b54eaa3d5",
+      "production_workflow_run_id": 45867471348,
+      "githack_workflow_run_id": 45867471332,
+      "verification_scope": "Exact main ce50312dd60b05c1f6923b7ee3f2993b54eaa3d5 passed Cloudflare workflow 45867471348 (attempt 2) on November 26, 2026: 515 exact HTTP assets per hostname across three production hosts, hosted archive reader, permalink, script-free recovery, responsive light/dark, navigation and Games checks passed. The previous Discover 390px dark More disclosure failure did not recur on retry; cause not established. Catalog/GitHack workflow 45867471332 passed. Production job completed at 2026-11-26T18:37:51Z. Independent external retrieval of dated permalink unavailable. Immutable edition SHA-256 9444ac4df8a07bb5ee7d4e2a13d160bd83c542cc1b0c9c2dcdc8f759e9682f5f, 31098 UTF-8 bytes."
     }
   ]
 }
