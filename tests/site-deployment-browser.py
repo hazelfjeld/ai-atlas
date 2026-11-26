@@ -607,16 +607,17 @@ with sync_playwright() as p:
                 if width in (390,1280) and route in ('research.html','whats-new.html'):
                     title_page.screenshot(path=str(out/('workspace-title-'+route.split('.')[0]+'-'+scheme+'-'+str(width)+'.png')))
         title_context.close()
-    # Discover keeps its 68px mobile header followed by a compact article
-    # intro. Both generated reference families and About previously left a
-    # 38px legacy gap after the same shared navigation. Check actual computed
-    # geometry with scripts disabled and both OS theme preferences.
+    # Landing pages share Discover's first-content baseline. Generated
+    # individual articles retain their compact 18px article rhythm. Check
+    # both contracts before JavaScript and under both OS theme preferences.
     for scheme in ('light', 'dark'):
         intro_context = browser.new_context(java_script_enabled=False, color_scheme=scheme)
         intro_page = intro_context.new_page()
         for width in (320, 390):
             intro_page.set_viewport_size({'width': width, 'height': 844})
-            intro_page.goto(base + 'index.html')
+            intro_page.goto(base + 'index.html', wait_until='load')
+            discover_top = intro_page.locator('.discover-heading').first.evaluate(
+                'el => el.getBoundingClientRect().top')
             for route in (
                 'about.html',
                 'terms/index.html',
@@ -624,14 +625,23 @@ with sync_playwright() as p:
                 'technology/index.html',
                 'technology/TECH-0001-adversarial-robustness-toolbox.html'
             ):
-                intro_page.goto(base + route)
-                measurement = intro_page.locator('.term-shell > .hero').evaluate(
-                    'el => ({margin: getComputedStyle(el).marginTop, '
-                    'visible: el.getBoundingClientRect().height > 0})')
-                check('script-free reference article intro matches Discover mobile spacing '
-                      + scheme + ' ' + str(width) + ' ' + route,
-                      measurement['margin'] == '18px' and measurement['visible'])
-                if route.startswith(('terms/MLD-', 'technology/TECH-')):
+                intro_page.goto(base + route, wait_until='load')
+                detail = route.startswith(('terms/MLD-', 'technology/TECH-'))
+                measurement = intro_page.locator('.term-shell > .hero').evaluate("""el => {
+                    const heading = el.querySelector('.discover-heading');
+                    return {margin: getComputedStyle(el).marginTop,
+                            visible: el.getBoundingClientRect().height > 0,
+                            headingTop: heading ? heading.getBoundingClientRect().top : null,
+                            fits: document.documentElement.scrollWidth <= innerWidth};
+                }""")
+                label = scheme + ' ' + str(width) + ' ' + route + ' ' + json.dumps(measurement)
+                check('script-free reference article retains compact spacing ' + label
+                      if detail else 'script-free reference landing aligns with Discover ' + label,
+                      measurement['visible'] and measurement['fits']
+                      and measurement['margin'] == ('18px' if detail else '28px')
+                      and (detail or (measurement['headingTop'] is not None
+                                      and abs(measurement['headingTop'] - discover_top) <= 2)))
+                if detail:
                     check('script-free generated profile has separate shared nav and main '
                           + scheme + ' ' + str(width) + ' ' + route,
                           intro_page.locator('body > .directory-mobile-topbar.site-mobile-chrome').count() == 1
