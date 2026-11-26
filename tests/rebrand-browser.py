@@ -1370,6 +1370,11 @@ with sync_playwright() as p:
                       abs(heading_x-discover_x)<=2 and
                       page.evaluate('document.documentElement.scrollWidth <= innerWidth') and
                       page.evaluate('document.documentElement.dataset.theme')==theme)
+                foot = page.locator('footer').last
+                footer_x = foot.evaluate('el => el.getBoundingClientRect().left')
+                check(f'{route} {width}px {theme} footer shares reading origin '
+                      f'(heading={heading_x}, footer={footer_x})',
+                      abs(footer_x-heading_x)<=2)
                 if width==1920:
                     page.screenshot(path=str(out/f'wide-frame-{route.replace("/", "-")}-{theme}.png'))
 
@@ -1556,6 +1561,13 @@ with sync_playwright() as p:
             page.goto(base+'index.html#/overview')
             page.locator('.main-footer').wait_for(state='attached')
             page.evaluate("t => {localStorage.setItem('atlas.theme',t);document.documentElement.dataset.theme=t}",theme)
+            if width >= 651:
+                heading_x = page.locator('.discover-heading h1').evaluate(
+                    'el => el.getBoundingClientRect().left')
+                footer_x = page.locator('.main-footer').evaluate(
+                    'el => el.getBoundingClientRect().left')
+                check(f'Discover {width}px {theme} footer aligns with heading',
+                      abs(footer_x-heading_x)<=2)
             reference=page.locator('.main-footer').evaluate("""el => {
                 const s=getComputedStyle(el);
                 return {border:s.borderTopWidth,padding:s.paddingTop,margin:s.marginTop,
@@ -1578,6 +1590,12 @@ with sync_playwright() as p:
                       and values['width']>0
                       and page.evaluate('document.documentElement.dataset.theme')==theme
                       and page.evaluate('document.documentElement.scrollWidth <= innerWidth'))
+                if width >= 651:
+                    heading_x = page.locator('main h1:visible').first.evaluate(
+                        'el => el.getBoundingClientRect().left')
+                    footer_x = foot.evaluate('el => el.getBoundingClientRect().left')
+                    check(f'{route} {width}px {theme} footer aligns with heading',
+                          abs(footer_x-heading_x)<=2)
                 if (width,theme) in ((1280,'light'),(390,'dark')) and route in ('about.html','whats-new.html','games.html'):
                     foot.scroll_into_view_if_needed()
                     page.screenshot(path=str(out/f'shared-footer-{route}-{width}-{theme}.png'))

@@ -2010,6 +2010,28 @@ html:is(:has(.nojs-primary-routes > .notice[id="/sources"]:target),:has(.nojs-pr
   }
 }
 /* atlas-wide-workspace-alignment:end */
+
+/* atlas-shared-footer-alignment:begin */
+/* Use the same reading origin for the global footer as for the workspace.
+   Nested native footers already sit inside the shared reading gutter. */
+@media screen and (min-width:651px){
+  .workspace > .main-footer.site-chrome__footer{
+    width:calc(100% - 2 * var(--atlas-workspace-content-gutter));
+    max-width:calc(var(--atlas-workspace-max) - 2 * var(--atlas-workspace-content-gutter));
+  }
+  body:has(.site-chrome) > .site-chrome__footer{
+    width:min(1000px,calc(100% - 2 * var(--atlas-workspace-content-gutter)));
+    margin-inline-start:calc(max(0px,(100% - var(--atlas-workspace-max))/2) + var(--atlas-workspace-content-gutter));
+    margin-inline-end:auto;
+  }
+  :is(.term-shell,.tech-shell,.playbook-shell,.review-shell,
+      .shell:has(> .site-chrome:is(.top,.nav,.research-site-chrome))) > .site-chrome__footer{
+    width:100%;
+    margin-inline-start:0;
+    margin-inline-end:auto;
+  }
+}
+/* atlas-shared-footer-alignment:end */
 </style><script>/* Enhance the native dropdown only when scripts can make its drawer modal.
    Without JavaScript, keep the accessible, nonmodal <details> fallback. */
 document.documentElement.classList?.add('atlas-enhanced');
