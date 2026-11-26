@@ -60,6 +60,8 @@ test('guided tour groups all native action links in the shared frame', () => {
   assert.ok(rows.every(r=>r[1].startsWith('<a href=') && !r[1].includes('<button')));
   for (const href of ['terms/MLD-0691-machine-learning.html','index.html#/technologies?q=pytorch','index.html#/games','whats-new.html','technologies.html','playbooks.html','index.html#/sources'])
     assert.ok(rows.some(r=>r[1].includes('href="'+href+'"')),href);
+  assert.ok(page.includes('.demo-actions.story-footer{font-size:14px}'));
+  assert.ok(page.includes('.demo-actions.story-footer>a{white-space:normal;min-width:0;max-width:100%;overflow-wrap:anywhere;margin-left:0}'));
   assert.ok(!page.includes('class="go"'));
   assert.ok(page.includes('downloads/Atlas_Demo_Offline.html'));
 });

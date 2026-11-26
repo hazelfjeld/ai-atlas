@@ -1754,11 +1754,29 @@ with sync_playwright() as p:
                   frame['card']!=frame['body'])
             rows=page.locator('.demo-actions.story-footer')
             first=rows.first
+            # Keep the original frame/count/overflow contract. Report each
+            # measured row to make font-dependent failures actionable in CI.
+            measured = rows.evaluate_all("""els => els.map(el => ({
+                row: [el.clientWidth, el.scrollWidth],
+                links: [...el.querySelectorAll('a[href]')].map(a => {
+                    const s=getComputedStyle(a);
+                    return {href:a.getAttribute('href'), whitespace:s.whiteSpace,
+                            font:s.fontSize, client:a.clientWidth, scroll:a.scrollWidth};
+                })
+            }))""")
+            first_style=first.evaluate(action_style)
+            print('GUIDED-DEMO-ACTIONS', width, theme, json.dumps({
+                'style':first_style,'rows':measured
+            }), flush=True)
             check(f'guided demo {width}px {theme} shares native card action frame',
                   rows.count()==10 and rows.locator('a[href]').count()==12
-                  and first.evaluate(action_style)[:7]==['flex','space-between','center','wrap','9px','12px','1px']
-                  and first.evaluate(action_style)[8]=='600'
-                  and rows.evaluate_all('els => els.every(el => el.scrollWidth <= el.clientWidth + 1)'))
+                  and first_style[:7]==['flex','space-between','center','wrap','9px','12px','1px']
+                  and first_style[8]=='600'
+                  and all(r['row'][1]<=r['row'][0]+1 for r in measured))
+            check(f'guided demo {width}px {theme} native action links remain readable and wrap',
+                  all(a['whitespace']=='normal' and a['font']=='14px'
+                      and a['scroll']<=a['client']+1
+                      for r in measured for a in r['links']))
             link=first.locator('a').first
             link.focus()
             check(f'guided demo {width}px {theme} shared keyboard focus',
