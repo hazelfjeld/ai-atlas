@@ -952,23 +952,6 @@ html.atlas-enhanced #main:has(> #page:empty) > #catalog-loading{
 }
 /* atlas-discover-first-paint:end */
 
-/* atlas-mobile-news-intro-rhythm:begin */
-/* Discover and the Concept/Technology/Playbook landings begin their mobile
-   introductions just below the shared 68px header. The dated news archive
-   retained an extra 30px legacy hero pad on top of its mobile shell, moving
-   its eyebrow lower during cross-page navigation. Preserve the archive's
-   actual edition panel, date selector and news filters. */
-@media (max-width:650px){
-  .shell:has(> .site-chrome.top) > main > header{padding-top:8px}
-  /* Research and Playbooks already pad their mobile main. Their legacy hero
-     margins stacked another 27px/35px of blank space after the same shared
-     header, unlike Discover. Align their first heading with the workspace
-     rhythm while preserving independent tabs, search and content grids. */
-  .shell:has(> .site-chrome.research-site-chrome) > main > .hero{margin-top:8px}
-  .playbook-shell:has(> .site-chrome.playbook-top) > main > .playbook-hero{margin-top:20px}
-}
-/* atlas-mobile-news-intro-rhythm:end */
-
 
 /* atlas-shared-evidence-callouts:begin */
 /* The same evidence-first note component across Research, Technology,
@@ -1688,3 +1671,24 @@ html:is(:has(.nojs-primary-routes > .notice[id="/sources"]:target),:has(.nojs-pr
   outline-offset:3px;
 }
 /* atlas-shared-card-action-row:end */
+
+/* atlas-mobile-first-content-alignment:begin */
+/* Match Discover's 29px reading inset after the compact mobile bar.
+   Native page bars include a 1px border; keep their content aligned without
+   altering the menu, search, article breadcrumbs or playing Games state. */
+@media (max-width:650px){
+  :root{--atlas-workspace-intro-inset:29px}
+  .app-shell .workspace > main{padding-top:var(--atlas-workspace-intro-inset)}
+  .shell:has(> .site-chrome:is(.top,.nav,.research-site-chrome)) > main,
+  body:has(> .site-chrome.demo-site-chrome) > main{padding-top:calc(var(--atlas-workspace-intro-inset) - 1px)}
+  .shell:has(> .site-chrome:is(.top,.nav)) > main > header,
+  body:has(> .site-chrome.demo-site-chrome) > main > header{padding-top:0}
+  .shell:has(> .site-chrome.research-site-chrome) > main > .hero{margin-top:0}
+  .tech-shell:has(> .site-chrome.tech-top) > main > .tech-hero{padding-top:calc(var(--atlas-workspace-intro-inset) - 1px)}
+  .playbook-shell:has(> .site-chrome.playbook-top) > main > .playbook-hero{margin-top:calc(var(--atlas-workspace-intro-inset) - 1px)}
+  body:has(> nav.site-chrome.term-nav) > main.term-shell:not(:has(> .breadcrumb-links)) > .hero:has(> .discover-heading){margin-top:calc(var(--atlas-workspace-intro-inset) - 1px)}
+  body:has(> .site-chrome.review-nav) > main.review-shell > header{padding-top:calc(var(--atlas-workspace-intro-inset) - 1px)}
+  body:has(> .games-header):not(.is-playing) > main{padding-top:calc(var(--atlas-workspace-intro-inset) - 1px)}
+  body:has(> .games-header):not(.is-playing) > main > .hero{padding-top:0}
+}
+/* atlas-mobile-first-content-alignment:end */
