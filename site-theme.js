@@ -494,12 +494,12 @@ document.addEventListener('toggle', event => {
 // A desktop rail link can lose DOM focus when CSS hides the rail during a
 // desktop-to-mobile resize. Remember actual keyboard focus before the browser
 // blurs it, so it never gets stranded on <body> behind the mobile header.
+// Discover's brand, appearance action and coverage link sit outside #navigation.
+// Track the whole desktop rail, just as on every native page.
 let lastDesktopRailFocus = null;
 let lastMobileToggleFocus = null;
 document.addEventListener('focusin', event => {
   normalizeResearchEarlyLink(event);
-  // Discover's brand, appearance action and coverage link sit outside #navigation.
-  // Track the whole desktop rail, just as on every native page.
   lastDesktopRailFocus = event.target?.closest?.('.site-chrome,#sidebar') ? event.target : null;
   lastMobileToggleFocus = event.target?.matches?.('details.site-mobile-chrome__nav summary')
     ? event.target : null;
