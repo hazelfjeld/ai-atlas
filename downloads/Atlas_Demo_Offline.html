@@ -674,14 +674,17 @@ body > .site-mobile-chrome:not([data-page-label]):has(+ .site-chrome .site-chrom
    and plain evidence sections retain their tables and in-page anchors. */
 :is(.term-shell > .profile-section, .term-shell > .detail-block,
     .review-shell > section,
-    .shell:has(> .site-chrome.nav) > main > section){margin-block:25px 0}
+    .shell:has(> .site-chrome.nav) > main > section,
+    body:has(> .site-chrome.demo-site-chrome) > main > .quick-intro){margin-block:25px 0}
 :is(.term-shell > .profile-section, .term-shell > .detail-block,
     .review-shell > section,
-    .shell:has(> .site-chrome.nav) > main > section) > h2{margin:0 0 12px}
+    .shell:has(> .site-chrome.nav) > main > section,
+    body:has(> .site-chrome.demo-site-chrome) > main > .quick-intro) > h2{margin:0 0 12px}
 @media(max-width:650px){
   :is(.term-shell > .profile-section, .term-shell > .detail-block,
       .review-shell > section,
-      .shell:has(> .site-chrome.nav) > main > section){margin-block:26px 0}
+      .shell:has(> .site-chrome.nav) > main > section,
+    body:has(> .site-chrome.demo-site-chrome) > main > .quick-intro){margin-block:26px 0}
 }
 /* atlas-shared-reading-section-rhythm:end */
 
@@ -1410,7 +1413,9 @@ body:has(.site-chrome) > a.skip:focus{
     .term-shell > .detail-block > p,
     .review-shell > header > p.lead,
     .review-shell > section > p,
-    .shell:has(> .site-chrome.nav) > main > header > p.lead){
+    .shell:has(> .site-chrome.nav) > main > header > p.lead,
+    .shell:has(> .site-chrome.nav) > main > section > p,
+    body:has(> .site-chrome.demo-site-chrome) > main > .quick-intro > p:not(.eyebrow)){
   max-width:70ch;
 }
 /* atlas-longform-reading-measure:end */

@@ -1260,7 +1260,9 @@ test('shared long-form reading widths follow Discover without shrinking cards or
     '.term-shell > .profile-section > p',
     '.term-shell > .detail-block > p',
     '.review-shell > header > p.lead',
-    '.review-shell > section > p'
+    '.review-shell > section > p',
+    '.shell:has(> .site-chrome.nav) > main > section > p',
+    'body:has(> .site-chrome.demo-site-chrome) > main > .quick-intro > p:not(.eyebrow)'
   ]) assert.ok(block.includes(selector), 'Missing prose family: ' + selector);
   assert.ok(block.includes('max-width:70ch'),
     'Long-form text must keep the same readable measure as Discover introductions');
@@ -1268,7 +1270,8 @@ test('shared long-form reading widths follow Discover without shrinking cards or
     'Do not alter navigation, interactive cards, wide tables, or games');
   for (const route of [
     'about.html', 'technology/TECH-0216-pytorch.html',
-    'terms/MLD-0691-machine-learning.html', 'hardware-review.html'
+    'terms/MLD-0691-machine-learning.html', 'hardware-review.html',
+    'catalog-review.html', 'demo.html'
   ]) {
     const html = fs.readFileSync(path.join(__dirname, '..', route), 'utf8');
     assert.ok(html.includes('site-chrome.css'), route + ' must share the new measure');

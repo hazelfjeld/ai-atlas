@@ -2120,7 +2120,8 @@ test('shared reading sections use Discover cadence without stacking heading marg
   assert.equal(css.split(end).length,2);
   const block=css.slice(css.indexOf(start),css.indexOf(end)+end.length);
   for (const selector of ['.term-shell > .profile-section','.term-shell > .detail-block',
-    '.review-shell > section','.shell:has(> .site-chrome.nav) > main > section']) {
+    '.review-shell > section','.shell:has(> .site-chrome.nav) > main > section',
+    'body:has(> .site-chrome.demo-site-chrome) > main > .quick-intro']) {
     assert.equal(block.split(selector).length,4,selector+' needs desktop, heading and mobile rules');
   }
   assert.ok(block.includes('{margin-block:25px 0}'));

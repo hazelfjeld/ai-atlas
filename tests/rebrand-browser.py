@@ -1083,6 +1083,42 @@ with sync_playwright() as p:
                   and page.evaluate('document.documentElement.scrollWidth <= innerWidth')
                   and page.evaluate('document.documentElement.dataset.theme')==theme)
 
+    # Narrative supporting copy shares the existing reading measure and section
+    # cadence. Keep the wide decision table and the demo's two route grids intact.
+    narrative_metrics = """el => {
+        const s = getComputedStyle(el);
+        const p = el.querySelector('p:not(.eyebrow)');
+        const ps = getComputedStyle(p);
+        const h = getComputedStyle(el.querySelector('h2'));
+        const probe = document.createElement('span');
+        probe.style.cssText = 'position:absolute;visibility:hidden;width:70ch;font:' + ps.font;
+        document.body.append(probe);
+        const measure = probe.getBoundingClientRect().width;
+        probe.remove();
+        return {start:parseFloat(s.marginBlockStart),end:parseFloat(s.marginBlockEnd),
+                headingTop:parseFloat(h.marginTop),measureOK:Math.abs(parseFloat(ps.maxWidth)-measure)<1,
+                fits:p.getBoundingClientRect().width<=measure+1};
+    }"""
+    for width in (320,390,768,1280):
+        page.set_viewport_size({'width':width,'height':900})
+        for theme in ('light','dark'):
+            page.goto(base+'index.html#/overview')
+            page.evaluate("(t) => {localStorage.setItem('atlas.theme',t);document.documentElement.dataset.theme=t}",theme)
+            expected = {'start':26 if width<=650 else 25,'end':0,'headingTop':0,'measureOK':True,'fits':True}
+            page.goto(base+'catalog-review.html')
+            reference=page.locator('main > section[aria-labelledby="decision-matrix-title"]')
+            check(f'Review {width}px {theme} preserves shared narrative measure and scrollable matrix',
+                  reference.evaluate(narrative_metrics)==expected
+                  and page.locator('.matrix-wrap table').is_visible())
+            page.goto(base+'demo.html')
+            routes=page.locator('main > .quick-intro')
+            check(f'Demo {width}px {theme} shares narrative measure and section cadence',
+                  routes.count()==2 and all(route.evaluate(narrative_metrics)==expected for route in routes.all())
+                  and page.locator('#quick-tour article').count()==4
+                  and page.locator('#tour article').count()==6
+                  and page.evaluate('document.documentElement.scrollWidth <= innerWidth')
+                  and page.evaluate('document.documentElement.dataset.theme')==theme)
+
     # Three standalone page families now adopt Discover's existing heading
     # component rather than copying its type rules into page-specific CSS.
     # Check computed typography and lack of horizontal clipping in both themes.
