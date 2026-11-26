@@ -2196,7 +2196,7 @@ with sync_playwright() as p:
         for theme in ('light', 'dark'):
             page.emulate_media(color_scheme=theme)
             for route in ('index.html', 'whats-new.html', 'catalog-review.html', 'about.html', 'research.html',
-                          'playbooks.html', 'technologies.html', 'terms/index.html',
+                          'demo.html', 'playbooks.html', 'technologies.html', 'terms/index.html',
                           'technology/index.html', 'games.html'):
                 page.goto(base + route)
                 page.evaluate('(value) => document.documentElement.dataset.theme = value', theme)
@@ -2206,12 +2206,18 @@ with sync_playwright() as p:
                     display:getComputedStyle(el).display,
                     border:getComputedStyle(el).borderTopStyle,
                     overflow:document.documentElement.scrollWidth > innerWidth,
-                    globalLandmark:!el.closest('main')
+                    globalLandmark:!el.closest('main'),
+                    noteGroups:el.querySelectorAll(':scope > .site-chrome__footer-note').length,
+                    linkGroups:el.querySelectorAll(':scope > .site-chrome__footer-links').length,
+                    bareText:[...el.childNodes].some(n=>n.nodeType===3 && n.textContent.trim())
                 })""")
                 expected='block' if width <= 850 else 'flex'
                 check(f'{route} {width}px {theme} uses Discover footer layout',
                       frame['display']==expected and frame['border']=='solid'
                       and not frame['overflow'])
+                if route in ('demo.html','research.html','catalog-review.html','whats-new.html','playbooks.html','technologies.html'):
+                    check(f'{route} {width}px {theme} editorial footer groups note and links without loose text',
+                          frame['noteGroups']==1 and frame['linkGroups']==1 and not frame['bareText'])
                 if route in ('whats-new.html','catalog-review.html'):
                     check(f'{route} {width}px {theme} global contentinfo outside main',
                           frame['globalLandmark'])

@@ -598,6 +598,38 @@ def ensure_skip_destination_focusable(html, path=None):
     return result
 
 
+EDITORIAL_FOOTER_GROUP_PATHS = (
+    "demo.html", "research.html", "catalog-review.html",
+    "whats-new.html", "playbooks.html", "technologies.html",
+)
+
+
+def group_editorial_footer(footer):
+    """Retain every existing anchor and caveat in two shared footer groups."""
+    import re
+    prefix = '<footer class="site-chrome__footer">'
+    note_start = '<span class="site-chrome__footer-note">'
+    links_start = '<span class="site-chrome__footer-links">'
+    anchor = r'<a\b[^>]*>[^<]*</a>'
+    if footer.startswith(prefix + note_start):
+        pattern = (re.escape(prefix + note_start) + r'[^<]+</span> ' +
+                   re.escape(links_start) + anchor + r'(?: · ' + anchor +
+                   r')+</span></footer>')
+        assert re.fullmatch(pattern, footer), "Unexpected grouped editorial footer"
+        return footer
+    assert footer.startswith(prefix) and footer.endswith('</footer>')
+    first = footer.index('<a ')
+    note = footer[len(prefix):first].strip().rstrip('·').rstrip()
+    assert note and '<' not in note
+    if not note.endswith(('.', '!', '?')):
+        note += '.'
+    suffix = footer[first:-len('</footer>')]
+    links = re.findall(anchor, suffix)
+    assert len(links) >= 2 and not re.sub(anchor, '', suffix).strip(' .·\t\r\n')
+    return (prefix + note_start + note + '</span> ' + links_start +
+            ' · '.join(links) + '</span></footer>')
+
+
 def ensure_footer_resources(html, path):
     """Keep existing footer caveats and links while making resources universal.
 
@@ -643,11 +675,13 @@ def ensure_footer_resources(html, path):
     for url, label in footer_labels:
         if ('href="' + url + '"') not in footer:
             extra += ' · <a href="' + url + '">' + label + "</a>"
-    if not extra and footer == original_footer:
-        return html
-    # Replace the footer atomically; its length may change during normalization.
-    # A second build produces identical output with no duplicate links.
+    # Keep native editorial notes and resource links as two explicit flex
+    # items, not loose separator text nodes that become isolated flex items.
     updated_footer = footer.replace("</footer>", extra + "</footer>", 1)
+    if path in EDITORIAL_FOOTER_GROUP_PATHS:
+        updated_footer = group_editorial_footer(updated_footer)
+    if updated_footer == original_footer:
+        return html
     return html[:match.start()] + updated_footer + html[match.end():]
 
 
