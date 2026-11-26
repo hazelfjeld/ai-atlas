@@ -1057,7 +1057,9 @@ body:has(.site-chrome) > a.skip:focus{
 :is(.playbook-shell > .playbook-hero > p,
     .tech-shell > .tech-hero > p,
     .shell:has(> .site-chrome.research-site-chrome) > main > .hero > p,
-    .shell:has(> .site-chrome.top) > main > header .lead){
+    .shell:has(> .site-chrome.top) > main > header .lead,
+    .shell:has(> .site-chrome.nav) > main > header > .lead,
+    body:has(> .site-chrome.demo-site-chrome) > main > header > .lead){
   max-width:70ch;
   font-size:17px;
   line-height:1.65;
@@ -1067,7 +1069,15 @@ body:has(.site-chrome) > a.skip:focus{
 :is(.playbook-shell > .playbook-hero > p,
     .tech-shell > .tech-hero > p,
     .shell:has(> .site-chrome.research-site-chrome) > main > .hero > p,
-    .shell:has(> .site-chrome.top) > main > header .lead){font-size:16px}
+    .shell:has(> .site-chrome.top) > main > header .lead,
+    .shell:has(> .site-chrome.nav) > main > header > .lead,
+    body:has(> .site-chrome.demo-site-chrome) > main > header > .lead){font-size:16px}
+}
+/* These editorial landings had independent h1 margins on top of the
+   shared Discover heading wrapper. Match the Research/Playbooks rhythm. */
+:is(.shell:has(> .site-chrome.nav) > main > header,
+    body:has(> .site-chrome.demo-site-chrome) > main > header) > .discover-heading h1{
+  margin:12px 0 15px;
 }
 /* atlas-shared-introduction-copy:end */
 

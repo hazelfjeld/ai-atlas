@@ -1006,6 +1006,36 @@ with sync_playwright() as p:
                       abs(top-baseline)<=2 and page.evaluate('document.documentElement.scrollWidth <= innerWidth')
                       and page.evaluate('document.documentElement.dataset.theme')==theme)
 
+    # Intro copy on the demo and catalog review shares the Research rhythm.
+    # Compare computed styles and actual spacing, not just CSS class names.
+    intro_metrics = """el => {
+        const heading = el.parentElement.querySelector('.discover-heading h1');
+        const style = getComputedStyle(el);
+        return {font:style.fontSize,line:style.lineHeight,measure:style.maxWidth,
+                gap:Math.round(el.getBoundingClientRect().top-heading.getBoundingClientRect().bottom)};
+    }"""
+    for width, height in ((320, 900), (390, 900), (768, 900), (1280, 900)):
+        page.set_viewport_size({'width':width,'height':height})
+        for theme in ('light','dark'):
+            page.goto(base+'index.html#/overview')
+            page.evaluate("(t) => {localStorage.setItem('atlas.theme',t);document.documentElement.dataset.theme=t}",theme)
+            page.goto(base+'research.html')
+            reference = page.locator('section.hero > p:not(.eyebrow)').first.evaluate(intro_metrics)
+            check(f'Research {width}px {theme} editorial reading scale',
+                  reference['font']==('16px' if width<=650 else '17px'))
+            for route in ('demo.html','catalog-review.html'):
+                page.goto(base+route)
+                lead = page.locator('header#main > .lead')
+                lead.wait_for()
+                actual = lead.evaluate(intro_metrics)
+                check(f'{route} {width}px {theme} shares editorial intro copy rhythm',
+                      actual['font']==reference['font']
+                      and actual['line']==reference['line']
+                      and actual['measure']==reference['measure']
+                      and abs(actual['gap']-reference['gap'])<=2
+                      and page.evaluate('document.documentElement.dataset.theme')==theme
+                      and page.evaluate('document.documentElement.scrollWidth <= innerWidth'))
+
     # Three standalone page families now adopt Discover's existing heading
     # component rather than copying its type rules into page-specific CSS.
     # Check computed typography and lack of horizontal clipping in both themes.
