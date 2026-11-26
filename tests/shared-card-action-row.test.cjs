@@ -65,3 +65,18 @@ test('guided tour groups all native action links in the shared frame', () => {
   assert.ok(!page.includes('class="go"'));
   assert.ok(page.includes('downloads/Atlas_Demo_Offline.html'));
 });
+
+
+test('guided tour steps reuse Discover title and metadata styles with nested headings', () => {
+  const page=read('demo.html');
+  const cards=[...page.matchAll(/<article class="story-body">([\s\S]*?)<\/article>/g)];
+  assert.equal(cards.length,10);
+  for (const [,card] of cards) {
+    assert.match(card, /^<span class="step story-kicker">[^<]+<\/span><h3>[^<]+<\/h3>/);
+    assert.doesNotMatch(card, /<h2\b/);
+  }
+  assert.match(page, /<h2 id="quick-heading">/);
+  assert.match(page, /<h2 id="extended-heading">/);
+  assert.ok(page.includes('article.story-body>p{color:var(--muted);font-size:16px;line-height:1.65;margin:12px 0}'));
+  assert.ok(read('brand.css').includes('.story-body h3,#edition-content .item > h3'));
+});

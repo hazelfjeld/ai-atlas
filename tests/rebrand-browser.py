@@ -1826,6 +1826,20 @@ with sync_playwright() as p:
                   and frame['railVisible']==(width>650) and not frame['overflow'])
             check(f'guided demo {width}px {theme} honors saved theme on real content',
                   frame['card']!=frame['body'])
+            # The ten steps are subordinate to the two route headings, not peers.
+            # Compare actual shared Discover card typography, without shrinking the
+            # presentation-specific body copy or losing its action destinations.
+            titles=page.locator('article.story-body > h3')
+            check(f'guided demo {width}px {theme} uses nested shared card headings',
+                  titles.count()==10 and page.locator('#quick-tour article h2, #tour article h2').count()==0
+                  and page.locator('#quick-heading, #extended-heading').count()==2
+                  and page.locator('article.story-body > .story-kicker').count()==10)
+            check(f'guided demo {width}px {theme} shared titles and readable presentation copy',
+                  titles.evaluate_all("""els => els.every(el => {
+                    const title=getComputedStyle(el), body=getComputedStyle(el.nextElementSibling);
+                    return title.fontFamily.includes('Georgia') && title.fontWeight==='400' &&
+                           body.fontSize==='16px' && el.scrollWidth<=el.clientWidth+1;
+                  })"""))
             rows=page.locator('.demo-actions.story-footer')
             first=rows.first
             # Keep the original frame/count/overflow contract. Report each
