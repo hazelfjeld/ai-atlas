@@ -1441,7 +1441,14 @@ main:has(+ .site-chrome__footer){padding-bottom:24px}
   color:var(--atlas-footer-muted);
 }
 @media(max-width:1200px){.workspace > .main-footer.site-chrome__footer{width:calc(100% - 52px)}}
-@media(max-width:650px){.workspace > .main-footer.site-chrome__footer{width:calc(100% - 34px)}}
+@media(max-width:650px){
+  .workspace > .main-footer.site-chrome__footer{width:calc(100% - 40px)}
+  /* The shell owns the mobile reading inset; a nested footer must not add it again. */
+  :is(.tech-shell,.playbook-shell,
+      .shell:has(> .site-chrome:is(.top,.nav))) > .site-chrome__footer{
+    width:100%;margin-inline-start:0;margin-inline-end:auto;
+  }
+}
 @media print{.workspace > .main-footer.site-chrome__footer{width:auto;max-width:none;margin:14px 0 0}}
 /* atlas-discover-global-footer:end */
 

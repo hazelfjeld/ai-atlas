@@ -234,7 +234,7 @@ test('Discover and native pages expose sibling main and global footer landmarks,
   }
   assert.ok(css.includes('/* atlas-discover-global-footer:begin */'),
     'shared stylesheet provides one Discover footer-layout variant');
-  for (const gutter of ['76px', '52px', '34px']) {
+  for (const gutter of ['76px', '52px', '40px']) {
     assert.ok(css.includes('width:calc(100% - ' + gutter + ')'),
       'footer width must match desktop, tablet and mobile main gutters: ' + gutter);
   }
@@ -275,4 +275,12 @@ test('Discover, native editorial, Games, and generated reference footers share o
     assert.match(html, /<footer class="(?:main-footer )?site-chrome__footer">/,
       page + ': footer uses canonical component, not a page-specific copy');
   }
+});
+
+test('mobile global footers consume the reading gutter exactly once', () => {
+  const css = fs.readFileSync(path.join(root, 'site-chrome.css'), 'utf8');
+  assert.ok(css.includes('@media(max-width:650px){\n  .workspace > .main-footer.site-chrome__footer{width:calc(100% - 40px)}'));
+  assert.ok(css.includes('.shell:has(> .site-chrome:is(.top,.nav))) > .site-chrome__footer{\n    width:100%;margin-inline-start:0;margin-inline-end:auto;'));
+  assert.ok(!css.includes('.workspace > .main-footer.site-chrome__footer{width:calc(100% - 34px)}'));
+  assert.ok(fs.readFileSync(path.join(root, 'downloads/Atlas_Demo_Offline.html'), 'utf8').includes(css));
 });

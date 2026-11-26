@@ -1548,6 +1548,14 @@ with sync_playwright() as p:
     # A single real footer rhythm should carry across the standalone families.
     # Compare Discover's computed footer, not just class names or CSS text.
     # Section-specific copy and links remain intact and functional.
+    def mobile_footer_matches_main(footer):
+        return footer.evaluate("""el => {
+            const m = document.querySelector('main'), s = getComputedStyle(m);
+            const r = m.getBoundingClientRect(), f = el.getBoundingClientRect();
+            return Math.abs(f.left - r.left - parseFloat(s.paddingLeft)) <= 2 &&
+                   Math.abs(f.right - r.right + parseFloat(s.paddingRight)) <= 2;
+        }""")
+
     footer_routes = (
         'about.html','whats-new.html','terms/index.html',
         'terms/MLD-0002-ablation-study.html','technologies.html',
@@ -1568,6 +1576,9 @@ with sync_playwright() as p:
                     'el => el.getBoundingClientRect().left')
                 check(f'Discover {width}px {theme} footer aligns with heading',
                       abs(footer_x-heading_x)<=2)
+            else:
+                check(f'Discover {width}px {theme} footer shares both mobile reading edges',
+                      mobile_footer_matches_main(page.locator('.main-footer')))
             reference=page.locator('.main-footer').evaluate("""el => {
                 const s=getComputedStyle(el);
                 return {border:s.borderTopWidth,padding:s.paddingTop,margin:s.marginTop,
@@ -1596,6 +1607,9 @@ with sync_playwright() as p:
                     footer_x = foot.evaluate('el => el.getBoundingClientRect().left')
                     check(f'{route} {width}px {theme} footer aligns with heading',
                           abs(footer_x-heading_x)<=2)
+                else:
+                    check(f'{route} {width}px {theme} footer shares both mobile reading edges',
+                          mobile_footer_matches_main(foot))
                 if (width,theme) in ((1280,'light'),(390,'dark')) and route in ('about.html','whats-new.html','games.html'):
                     foot.scroll_into_view_if_needed()
                     page.screenshot(path=str(out/f'shared-footer-{route}-{width}-{theme}.png'))
