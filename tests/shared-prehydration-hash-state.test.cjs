@@ -321,3 +321,27 @@ test('committed query is restored before and after hydration without erasing a d
   assert.equal(direct.searchField.value, 'last query');
   assert.ok(read('app.js').includes("window.atlasSyncDiscoverSearchQuery?.(view, state.q || '')"));
 });
+
+test('slashless legacy hashes have the same rail and search state as hydrated routes', () => {
+  const state = exercise('#terms');
+  assert.equal(state.title.textContent, 'Concept dictionary');
+  assert.equal(state.links.find(link => link.dataset.view === 'dictionary').attrs.get('aria-current'), 'page');
+  assert.equal(state.mobile.find(link => link.dataset.view === 'dictionary').attrs.get('aria-current'), 'page');
+  state.navigate('#alerts?topic=alignment');
+  assert.equal(state.title.textContent, 'Safety observatory');
+  assert.equal(state.mainMore.open, true);
+  assert.equal(state.mobileMore.open, true);
+  state.navigate('#search?q=reward%20hacking');
+  assert.equal(state.title.textContent, 'Search AI Updates');
+  assert.equal(state.searchField.value, 'reward hacking');
+  assert.equal(state.links.filter(link => link.attrs.has('aria-current')).length, 0);
+  assert.equal(state.mobile.filter(link => link.attrs.has('aria-current')).length, 0);
+  assert.equal(state.mainMore.open, false);
+  assert.equal(state.mobileMore.open, false);
+  state.navigate('#papers');
+  assert.equal(state.title.textContent, 'Research library');
+  assert.equal(state.mobile.find(link => link.dataset.view === 'papers').attrs.get('aria-current'), 'page');
+  state.navigate('#not-a-workspace');
+  assert.equal(state.title.textContent, 'Discover');
+  assert.equal(state.links.filter(link => link.attrs.get('aria-current') === 'page').length, 1);
+});

@@ -134,8 +134,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // A visitor can change hashes before the async catalog binds its own
     // router. Keep both rails and the workspace title correct until hydration.
     if (!document.getElementById('catalog-loading')) return;
-    const route = window.location.hash.match(/^#\/([a-z-]+)(?:\?|$)/)?.[1] || 'overview';
-    const query = Object.fromEntries(new URLSearchParams(window.location.hash.split('?')[1] || '')).q || '';
+    const [routeValue, queryString] = window.location.hash.replace(/^#\/?/, '').split('?');
+    const route = routeValue || 'overview';
+    const query = Object.fromEntries(new URLSearchParams(queryString || '')).q || '';
     syncDiscoverSearchQuery(route, query);
     const links = [...rail.querySelectorAll('a[data-view]')];
     // The canonical anchors own legacy aliases for both early and hydrated
