@@ -963,8 +963,8 @@ with sync_playwright() as p:
             check('Verified news card retains readable source links '+story_scheme+' '+str(story_width),
                   archive_story.locator('xpath=..').locator('a[href^="https://"]').first.is_visible())
         story_context.close()
-    # Compact reference cards intentionally keep a denser scale than the
-    # illustrated Discover feed, but the three native catalog families share it.
+    # Compact reference cards share Discover's responsive title scale while
+    # retaining their own summary density and native interactions.
     for compact_scheme in ('light', 'dark'):
         compact_context = browser.new_context(color_scheme=compact_scheme)
         compact_page = compact_context.new_page()
@@ -1035,7 +1035,7 @@ with sync_playwright() as p:
                   tech_type == play_type == research_type
                   and research_type == title_button.evaluate(compact_style)
                   and research_type[1] == '400'
-                  and research_type[2] == ('23px' if compact_width == 1280 else '20px')
+                  and research_type[2] == {320: '25px', 390: '27px', 768: '22px', 1280: '21px'}[compact_width]
                   and compact_page.evaluate('document.documentElement.scrollWidth <= innerWidth + 1'))
             print('Compact editorial summary', compact_scheme, compact_width, tech_summary, play_summary, research_summary)
             check('Shared primary card summary ' + compact_scheme + ' ' + str(compact_width),
@@ -1048,6 +1048,7 @@ with sync_playwright() as p:
             compact_page.goto(base + 'catalog-review.html')
             review_title = compact_page.locator('article.card > h3').first
             review_title.wait_for(state='visible', timeout=45000)
+            review_type = review_title.evaluate(compact_style)
             review_gap = review_title.evaluate(heading_gap)
             review_inset = review_title.evaluate("el => [getComputedStyle(el.parentElement).paddingLeft, getComputedStyle(el.parentElement).paddingRight]")
             review_title.scroll_into_view_if_needed()
@@ -1056,6 +1057,9 @@ with sync_playwright() as p:
             compact_page.locator('#catalog-loading').wait_for(state='detached', timeout=45000)
             discover_title = compact_page.locator('.story-body > h3').first
             discover_title.wait_for(state='visible', timeout=45000)
+            discover_type = discover_title.evaluate(compact_style)
+            check('Shared compact card type matches Discover and Catalog Review ' + compact_scheme + ' ' + str(compact_width),
+                  tech_type == play_type == research_type == review_type == discover_type)
             discover_gap = discover_title.evaluate(heading_gap)
             discover_inset = discover_title.evaluate("el => [getComputedStyle(el.parentElement).paddingLeft, getComputedStyle(el.parentElement).paddingRight]")
             check('Shared card heading rhythm ' + compact_scheme + ' ' + str(compact_width),
