@@ -3873,6 +3873,39 @@ with sync_playwright() as p:
                         rail_page.screenshot(path=str(out/'discover-rail-resize-focus-390-dark.png'))
         rail_context.close()
 
+    # Search controls that disappear when rotating must hand keyboard focus
+    # back to a real visible control, without submitting the current draft.
+    for scheme in ('light', 'dark'):
+        search_context = browser.new_context(color_scheme=scheme,
+            viewport={'width':390, 'height':844}, reduced_motion='reduce')
+        search_page = search_context.new_page()
+        search_page.on('pageerror', lambda e: errors.append(str(e)))
+        for route in ('index.html', 'research.html', 'terms/MLD-0002-ablation-study.html'):
+            for mobile_width, desktop_width in ((320, 768), (390, 1280)):
+                search_page.set_viewport_size({'width':mobile_width,'height':844})
+                search_page.goto(base + route)
+                submit = search_page.locator('.site-mobile-chrome__search-submit')
+                field = search_page.locator('#global-query, .site-mobile-chrome__search-input')
+                field.fill('unsubmitted draft')
+                submit.focus()
+                initial_url = search_page.url
+                check('Shared mobile search submit receives focus ' + route + ' ' + scheme,
+                      submit.evaluate('(el) => document.activeElement === el'))
+                search_page.set_viewport_size({'width':desktop_width,'height':844})
+                search_page.wait_for_function("""() => {
+                    const submit=document.querySelector('.site-mobile-chrome__search-submit');
+                    const field=document.querySelector('#global-query, .site-mobile-chrome__search-input');
+                    const focused=document.activeElement;
+                    if (submit.getClientRects().length) return focused===submit;
+                    if (field.getClientRects().length) return focused===field;
+                    return !!focused?.closest('.site-chrome,#sidebar') && !!focused.getClientRects().length;
+                }""", timeout=10000)
+                check('Responsive search focus and draft survive ' + route + ' ' + scheme + ' ' + str(desktop_width),
+                      search_page.url == initial_url and field.input_value() == 'unsubmitted draft')
+                if route == 'index.html' and scheme == 'dark' and desktop_width == 1280:
+                    search_page.screenshot(path=str(out/'shared-search-resize-focus-1280-dark.png'))
+        search_context.close()
+
     # Verify actual cross-page introduction rhythm at mobile and desktop
     # widths in both OS themes, before any JavaScript can apply a patch.
     lead_routes = (

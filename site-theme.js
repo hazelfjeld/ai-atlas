@@ -542,11 +542,15 @@ document.addEventListener('toggle', event => {
 // Track the whole desktop rail, just as on every native page.
 let lastDesktopRailFocus = null;
 let lastMobileToggleFocus = null;
+let lastSharedSearchFocus = null;
 document.addEventListener('focusin', event => {
   normalizeResearchEarlyLink(event);
   lastDesktopRailFocus = event.target?.closest?.('.site-chrome,#sidebar') ? event.target : null;
   lastMobileToggleFocus = event.target?.matches?.('details.site-mobile-chrome__nav summary')
     ? event.target : null;
+  lastSharedSearchFocus = event.target?.matches?.(
+    '#global-query, .site-mobile-chrome__search-input, .site-mobile-chrome__search-submit'
+  ) ? event.target : null;
 });
 let lastViewportWasDesktop = typeof window !== 'undefined' && window.innerWidth > 650;
 if (typeof window !== 'undefined' && window.addEventListener) {
@@ -562,6 +566,16 @@ if (typeof window !== 'undefined' && window.addEventListener) {
       const drawerWasOpen = !!document.querySelector('details.site-mobile-chrome__nav[open]');
       closeSharedDrawers({desktopFocus:true});
       if (restoreClosedToggle && !drawerWasOpen) focusSharedDesktopRail();
+      // Discover hides its mobile submit button on desktop; some generated
+      // references hide the whole search form. Keep keyboard context without
+      // submitting a draft or navigating away during a viewport change.
+      if (!lastViewportWasDesktop && !drawerWasOpen && lastSharedSearchFocus &&
+          !lastSharedSearchFocus.getClientRects().length &&
+          [document.body, document.documentElement, lastSharedSearchFocus].includes(document.activeElement)) {
+        const input = lastSharedSearchFocus.closest('form')?.querySelector('input[type="search"]');
+        if (input?.getClientRects().length) input.focus({preventScroll:true});
+        else focusSharedDesktopRail();
+      }
     } else {
       syncSharedDrawerIsolation();
       // Only restore focus if a previously focused rail item just became
