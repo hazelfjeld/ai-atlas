@@ -459,9 +459,8 @@ with sync_playwright() as p:
                         '-' + mobile_scheme + '.png')))
                 contrast_page.close()
     check('homepage retains original Atlas shell and native Games tab', page.locator('.app-shell').count() == 1)
-    # One real submit action now belongs to both search layouts. Discover
-    # retains its useful desktop '/' hint, while phone visitors can submit
-    # the same input with a visible 36px button as on standalone pages.
+    # Discover and native pages retain the same real submit action at
+    # every viewport. The desktop slash hint and 44px mobile row remain.
     for scheme in ('light', 'dark'):
         for width in (320, 390, 768, 1280):
             submit_page = browser.new_page(
@@ -470,10 +469,10 @@ with sync_playwright() as p:
             submit_page.goto(base + 'index.html')
             submit_button = submit_page.locator(
                 '#global-search > button.site-mobile-chrome__search-submit')
-            check('shared Discover submit only appears on mobile ' +
+            check('shared Discover submit appears at every viewport ' +
                   scheme + ' ' + str(width),
                   submit_button.count() == 1 and
-                  submit_button.is_visible() == (width <= 650) and
+                  submit_button.is_visible() and
                   submit_page.locator('#global-search').count() == 1)
             if width <= 650:
                 frame = submit_page.locator('#global-search').bounding_box()
@@ -487,26 +486,31 @@ with sync_playwright() as p:
                 if width == 390:
                     submit_page.screenshot(
                         path=str(out / ('discover-submit-' + scheme + '-390.png')))
-                submit_page.locator('#global-query').fill('reward hacking')
-                submit_page.wait_for_function(
-                    "() => !document.getElementById('catalog-loading')",
-                    timeout=45000)
-                submit_button.click()
-                submit_page.wait_for_function(
-                    """() => location.hash.startsWith('#/search?q=') &&
-                    new URLSearchParams(location.hash.split('?')[1]).get('q') === 'reward hacking'""",
-                    timeout=15000)
-                check('shared Discover submit executes real search ' +
+            else:
+                frame = submit_page.locator('#global-search').bounding_box()
+                check('Discover desktop search shares the 40px native row ' +
                       scheme + ' ' + str(width),
-                      submit_page.evaluate(
-                          "new URLSearchParams(location.hash.split('?')[1]).get('q')") ==
-                      'reward hacking')
+                      frame is not None and abs(frame['height'] - 40) <= 1)
+            submit_page.locator('#global-query').fill('reward hacking')
+            submit_page.wait_for_function(
+                "() => !document.getElementById('catalog-loading')",
+                timeout=45000)
+            submit_button.click()
+            submit_page.wait_for_function(
+                """() => location.hash.startsWith('#/search?q=') &&
+                new URLSearchParams(location.hash.split('?')[1]).get('q') === 'reward hacking'""",
+                timeout=15000)
+            check('shared Discover submit executes real search ' +
+                  scheme + ' ' + str(width),
+                  submit_page.evaluate(
+                      "new URLSearchParams(location.hash.split('?')[1]).get('q')") ==
+                  'reward hacking')
             submit_page.close()
     # Compare the rendered native search fields against Discover, not just
     # their markup. A desktop 16px native input looked noticeably different
     # from Discover's 12px field; both should remain 16px on phones.
     for search_scheme in ('light', 'dark'):
-        for search_width in (390, 768, 1280):
+        for search_width in (320, 390, 768, 1280):
             search_page = browser.new_page(
                 viewport={'width': search_width, 'height': 844},
                 color_scheme=search_scheme, reduced_motion='reduce')
@@ -515,12 +519,20 @@ with sync_playwright() as p:
                 'el => getComputedStyle(el).fontSize')
             for search_route in ('whats-new.html', 'research.html',
                                  'playbooks.html', 'games.html',
-                                 'technology/index.html'):
+                                 'technology/index.html', 'terms/index.html',
+                                 'about.html', 'catalog-review.html',
+                                 'hardware-review.html', 'demo.html',
+                                 'terms/MLD-0002-ablation-study.html',
+                                 'technology/TECH-0216-pytorch.html', 'technologies.html'):
                 search_page.goto(base + search_route)
                 field = search_page.locator(
                     'form.site-mobile-chrome__search-form input.site-mobile-chrome__search-input')
                 field.wait_for(state='attached')
                 native_font = field.evaluate('el => getComputedStyle(el).fontSize')
+                native_submit = search_page.locator('form.site-mobile-chrome__search-form button.site-mobile-chrome__search-submit')
+                check('native shared search has a real visible submit ' + search_route +
+                      ' ' + search_scheme + ' ' + str(search_width),
+                      field.is_visible() and native_submit.count() == 1 and native_submit.is_visible())
                 check('shared search type matches Discover ' + search_route +
                       ' ' + search_scheme + ' ' + str(search_width),
                       native_font == discover_font and

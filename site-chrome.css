@@ -1481,10 +1481,17 @@ main.term-shell > footer:not(.site-chrome__footer) a{color:var(--accent,#27664e)
   body:has(.site-chrome) .site-mobile-chrome__search{
     flex-basis:340px;
   }
-  /* The native 36px submit button must fit the same 40px search row;
-     the 16px mobile field and submit targets remain entirely unchanged. */
-  body:has(.site-chrome) .site-mobile-chrome__search-form{
+  /* Keep the existing functional submit available in both desktop headers.
+     The 36px control fits the same 40px search row on every page family. */
+  :is(html.atlas-enhanced .app-shell .topbar .global-search,
+      body:has(.site-chrome) .site-mobile-chrome__search-form){
     padding-block:1px;
+  }
+  html.atlas-enhanced .app-shell .topbar .global-search > .site-mobile-chrome__search-submit{
+    display:grid;
+  }
+  .app-shell .topbar .global-search > input{
+    flex:1 1 auto;min-width:0;width:0;
   }
 }
 @media (min-width:651px) and (max-width:1200px){
