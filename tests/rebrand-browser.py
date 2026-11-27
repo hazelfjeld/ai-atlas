@@ -1252,8 +1252,16 @@ with sync_playwright() as p:
         for theme in ('light','dark'):
             page.goto(base+'index.html#/overview')
             page.evaluate("t => {localStorage.setItem('atlas.theme',t);document.documentElement.dataset.theme=t}",theme)
+            # Compare the actual primary icons, not the former standalone-only
+            # 16px size. The unified rail uses Discover's 17px reference.
+            discover_icon_sizes=page.locator('#navigation > .site-chrome__links > a.nav-link > svg').evaluate_all("""els => els.map(el => {
+                const s=getComputedStyle(el);
+                return [s.width,s.height];
+            })""")
             check(f'Discover {width}px {theme} keeps native SVG primary icons',
-                  page.locator('#navigation a.nav-link svg').count() >= 7)
+                  page.locator('#navigation a.nav-link svg').count() >= 7
+                  and len(discover_icon_sizes)==7
+                  and all(size==['17px','17px'] for size in discover_icon_sizes))
             for route in ('about.html','whats-new.html','terms/index.html',
                           'technology/TECH-0216-pytorch.html','games.html'):
                 page.goto(base+route)
@@ -1275,8 +1283,9 @@ with sync_playwright() as p:
                 }))""")
                 check(f'{route} {width}px {theme} shares seven rendered desktop SVG icons',
                       len(icons)==7 and all(decoded)
-                      and all(icon['width']=='16px' and icon['height']=='16px'
-                              and 'data:image/svg+xml,' in icon['icon'] for icon in icons)
+                      and all([icon['width'],icon['height']]==discover_icon_sizes[i]
+                              and 'data:image/svg+xml,' in icon['icon']
+                              for i,icon in enumerate(icons))
                       and sum(icon['current'] for icon in icons)<=1
                       and page.evaluate('document.documentElement.dataset.theme')==theme
                       and page.evaluate('document.documentElement.scrollWidth <= innerWidth'))
