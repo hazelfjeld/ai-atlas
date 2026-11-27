@@ -1546,12 +1546,21 @@ main.term-shell > footer:not(.site-chrome__footer) a{color:var(--accent,#27664e)
     font-size:9px;
     margin:0 13px 12px;
   }
+  /* Keep primary rows identical even when Discover includes catalog counts.
+     The tighter icon/count gaps preserve the full label at the tablet width. */
+  #navigation > .site-chrome__links > a.nav-link,
   .site-chrome .site-chrome__links a{
+    min-height:44px;
     padding:11px 12px!important;
     border-radius:8px!important;
     font-size:13px!important;
     line-height:1.55!important;
+    gap:4px;
   }
+  #navigation > .site-chrome__links > a.nav-link > .nav-count{
+    flex:none;padding:2px 3px;
+  }
+  .site-chrome .site-chrome__links a::before{flex-basis:17px;width:17px;height:17px}
 }
 @media (min-width:651px) and (max-width:1200px){
   :root{
@@ -1562,7 +1571,10 @@ main.term-shell > footer:not(.site-chrome__footer) a{color:var(--accent,#27664e)
     --atlas-desktop-rail-brand-x:8px;
   }
   .site-chrome .site-chrome__name{font-size:22px}
+  #navigation > .site-chrome__links > a.nav-link,
   .site-chrome .site-chrome__links a{font-size:12px!important}
+  #navigation > .site-chrome__links > a.nav-link,
+  .site-chrome .site-chrome__links a{padding-inline:8px!important}
 }
 /* atlas-unified-desktop-rail-frame:end */
 

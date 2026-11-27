@@ -2995,15 +2995,26 @@ with sync_playwright() as p:
     # well as desktop, while retaining the native mobile menu below 651px.
     for theme in ('light', 'dark'):
         page.evaluate("(chosen) => localStorage.setItem('atlas.theme', chosen)", theme)
-        for width in (651, 768, 1280):
+        for width in (651, 768, 1175, 1280):
             page.set_viewport_size({'width':width, 'height':900})
             page.goto(base + 'index.html#/overview')
             page.locator('#catalog-loading').wait_for(state='detached', timeout=45000)
             reference_rail_width = page.locator('#sidebar').evaluate('el => el.getBoundingClientRect().width')
             check(f'Discover has canonical desktop rail width at {width}px in {theme}',
                   abs(reference_rail_width - (215 if width <= 1200 else 242)) <= 1)
+            # The former 1151–1200px breakpoint disagreement and wrapping
+            # catalog-count rows made the primary rail jump between pages.
+            rail_row_metrics = """selector => [...document.querySelectorAll(selector)].map(a => {
+                const s = getComputedStyle(a);
+                return [s.fontSize, s.lineHeight, s.gap, s.padding, a.offsetHeight];
+            })"""
+            discover_rows = page.evaluate(rail_row_metrics, '#navigation > .site-chrome__links > a.nav-link')
+            check(f'Discover primary rail has seven uniform readable rows at {width}px in {theme}',
+                  len(discover_rows) == 7 and all(row[-1] == 44 for row in discover_rows))
             for route in ('about.html', 'technologies.html', 'playbooks.html', 'research.html'):
                 page.goto(base + route)
+                check(f'{route} primary rail matches Discover row rhythm at {width}px in {theme}',
+                      page.evaluate(rail_row_metrics, 'nav.site-chrome .site-chrome__links > a') == discover_rows)
                 if theme == 'light' and width == 651 and route == 'about.html':
                     print('TABLET NAV DIAGNOSTICS', page.evaluate("""() => {
                         const nav=document.querySelector('.site-chrome');
