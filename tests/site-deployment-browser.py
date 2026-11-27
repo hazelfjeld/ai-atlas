@@ -3716,6 +3716,26 @@ with sync_playwright() as p:
               selected_more.evaluate('(el) => el.open') == (width <= 650)
               and selected_more.evaluate(
                   '(el) => el.dataset.atlasManualTouched === "true"'))
+    # Escape from an automatically revealed desktop rail must have the same
+    # ownership as clicking its summary, including a later same-section render.
+    secondary_active.set_viewport_size({'width':1280,'height':844})
+    secondary_active.goto(base+'index.html#/safety')
+    secondary_active.reload()
+    secondary_active.locator('#local-query').wait_for(state='visible',timeout=20000)
+    escape_more = secondary_active.locator('#additional-navigation')
+    escape_more.locator('summary').focus()
+    secondary_active.keyboard.press('Escape')
+    check('Desktop Escape explicitly dismisses auto-revealed More',
+          escape_more.evaluate('(el) => !el.open && el.dataset.atlasManualTouched === "true"'))
+    secondary_active.evaluate("location.hash='#/safety?q=alignment'")
+    secondary_active.wait_for_function("""() =>
+        document.querySelector('#local-query')?.value === 'alignment'
+    """, timeout=10000)
+    check('Desktop Escape dismissal survives same-section render',
+          escape_more.evaluate('(el) => !el.open && !el.dataset.atlasAutoOpened')
+          and secondary_active.locator(
+              '#discover-mobile-nav details.site-mobile-chrome__more'
+          ).evaluate('(el) => el.open'))
     secondary_active.close()
 
     # A rotated mobile drawer must focus its actual active secondary destination

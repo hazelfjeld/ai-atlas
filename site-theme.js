@@ -110,6 +110,21 @@ function syncDiscoverSearchQuery(view, query) {
 }
 if (typeof window !== 'undefined') window.atlasSyncDiscoverSearchQuery = syncDiscoverSearchQuery;
 
+// One ownership rule for both early and hydrated Discover navigation.
+// Only an automatically opened More may be automatically collapsed; an
+// explicit user choice survives subsequent renders.
+function syncAutomaticDisclosure(disclosure, selected) {
+  if (!disclosure) return;
+  if (selected && !disclosure.open && disclosure.dataset.atlasManualTouched !== 'true') {
+    disclosure.open = true;
+    disclosure.dataset.atlasAutoOpened = 'true';
+  } else if (!selected && disclosure.dataset.atlasAutoOpened === 'true') {
+    disclosure.open = false;
+    delete disclosure.dataset.atlasAutoOpened;
+  }
+}
+if (typeof window !== 'undefined') window.atlasSyncAutomaticDisclosure = syncAutomaticDisclosure;
+
 /* The catalog is loaded asynchronously. A visitor can manually close and
    reopen an auto-revealed More disclosure before app.js starts; record that
    choice in the shared parser-loaded chrome so navigation won't undo it. */
@@ -171,14 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('additional-navigation'),
     mobileNav.querySelector('details.site-mobile-chrome__more'),
   ]) {
-    if (!details) continue;
-    if (secondary && !details.open && details.dataset.atlasManualTouched !== 'true') {
-      details.open = true;
-      details.dataset.atlasAutoOpened = 'true';
-    } else if (!secondary && details.dataset.atlasAutoOpened === 'true') {
-      details.open = false;
-      delete details.dataset.atlasAutoOpened;
-    }
+    syncAutomaticDisclosure(details, secondary);
   }
   const name = current?.querySelector('span:not(.nav-count)')?.textContent?.trim() || untabbedLabel;
   const breadcrumb = document.getElementById('breadcrumb');
@@ -401,6 +409,12 @@ document.addEventListener('keydown', (event) => {
     if (document.querySelector('dialog[open],[role="dialog"][aria-modal="true"]')) return;
     const more = document.activeElement?.closest?.('details.site-chrome__more[open], details#additional-navigation[open]');
     if (more) {
+      // Escape is an explicit dismissal too, not an automatic route change.
+      // Do not let asynchronous hydration reopen an auto-revealed Discover rail.
+      if (more.dataset?.atlasAutoOpened === 'true') {
+        delete more.dataset.atlasAutoOpened;
+        more.dataset.atlasManualTouched = 'true';
+      }
       more.open = false;
       more.querySelector(':scope > summary')?.focus({preventScroll:true});
       event.preventDefault();

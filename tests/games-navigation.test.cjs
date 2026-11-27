@@ -150,11 +150,13 @@ test('progressive sidebar retains all canonical links and reveals deep-linked se
   assert.match(nav, /data-static="offline"[\s\S]*?<\/div><\/details>$/);
   for(const id of ['overview','dictionary','technologies','games','safety','papers','playbooks','compare','saved','sources'])
     assert.match(nav, new RegExp('data-view="'+id+'"'), 'Missing native workspace destination: '+id);
-  assert.match(app, /syncAutomaticDisclosure\(more,\['safety','papers','compare','saved','sources'\]\.includes\(view\)\)/);
+  assert.match(app, /syncAutomaticDisclosure\(more,!!more\?\.querySelector/);
   assert.match(app, /syncAutomaticDisclosure\(mobileMore,!!mobileMore\?\.querySelector/);
   // A user-controlled More disclosure must not be re-opened by late catalog hydration.
-  assert.match(app, /if\(selected && !disclosure\.open && disclosure\.dataset\.atlasManualTouched !== 'true'\)/);
-  assert.match(app, /!selected && disclosure\.dataset\.atlasAutoOpened==='true'/);
+  assert.ok(app.includes('const syncAutomaticDisclosure=window.atlasSyncAutomaticDisclosure;'));
+  const shared = read('site-theme.js');
+  assert.match(shared, /if \(selected && !disclosure\.open && disclosure\.dataset\.atlasManualTouched !== 'true'\)/);
+  assert.match(shared, /!selected && disclosure\.dataset\.atlasAutoOpened === 'true'/);
   assert.match(css, /\.nav-more-toggle:focus-visible/);
   assert.match(css, /prefers-reduced-motion:reduce/);
 });

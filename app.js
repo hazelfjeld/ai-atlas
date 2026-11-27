@@ -71,18 +71,11 @@ function renderNav(){
   // Auto-reveal the active secondary route in both rails. A later primary
   // hash navigation must collapse ONLY disclosures opened automatically,
   // leaving an explicitly opened More sections menu untouched.
-  const syncAutomaticDisclosure=(disclosure,selected)=>{
-    if(!disclosure)return;
-    if(selected && !disclosure.open && disclosure.dataset.atlasManualTouched !== 'true'){
-      disclosure.open=true;
-      disclosure.dataset.atlasAutoOpened='true';
-    }else if(!selected && disclosure.dataset.atlasAutoOpened==='true'){
-      disclosure.open=false;
-      delete disclosure.dataset.atlasAutoOpened;
-    }
-  };
-  syncAutomaticDisclosure(mobileMore,!!mobileMore?.querySelector('a[aria-current="page"]'));
-  syncAutomaticDisclosure(more,['safety','papers','compare','saved','sources'].includes(view));
+  const syncAutomaticDisclosure=window.atlasSyncAutomaticDisclosure;
+  if(syncAutomaticDisclosure){
+    syncAutomaticDisclosure(mobileMore,!!mobileMore?.querySelector('a[aria-current="page"]'));
+    syncAutomaticDisclosure(more,!!more?.querySelector('a[aria-current="page"]'));
+  }
   if(window.ATLAS_OFFLINE){
     for(const id of ['daily','offline'])nav.querySelector(`[data-static="${id}"]`)?.setAttribute('hidden','');
     const demo=nav.querySelector('[data-static="demo"]'), encyclopedia=nav.querySelector('[data-static="encyclopedia"]');

@@ -85,6 +85,7 @@ function exercise(hash) {
   callback();
   return {links,mobile,mainMore,mobileMore,title,header,toggleAttrs,cleared,earlyClick,
     searchField:nodes['global-query'], syncSearch:window.atlasSyncDiscoverSearchQuery,
+    syncDisclosure:window.atlasSyncAutomaticDisclosure,
     navigate(hash) {location.hash = hash; hashchange();},
     finishLoading() {delete nodes['catalog-loading'];}};
 }
@@ -231,11 +232,11 @@ test('first-paint hash fix is exactly shared in the offline demo and does not du
 
 test('manual More choice survives catalog hydration and leaving a secondary route', () => {
   const app = read('app.js');
-  const body = app.split('const syncAutomaticDisclosure=(disclosure,selected)=>{')[1]
-    ?.split('\n  };')[0];
-  assert.ok(body, 'Retain the canonical disclosure synchronization helper');
-  const sync = vm.runInNewContext('(disclosure,selected) => {' + body + '\n}', {});
   const state = exercise('#/safety');
+  const sync = state.syncDisclosure;
+  assert.equal(typeof sync, 'function');
+  assert.ok(app.includes('const syncAutomaticDisclosure=window.atlasSyncAutomaticDisclosure;'),
+    'hydrated navigation uses the actual parser-loaded ownership helper');
   const menu = state.mobileMore;
   assert.equal(menu.dataset.atlasAutoOpened, 'true');
   menu.open = false;
@@ -250,7 +251,7 @@ test('manual More choice survives catalog hydration and leaving a secondary rout
   assert.equal(untouched.open, false, 'automatic expansions still collapse');
   assert.equal(untouched.dataset.atlasAutoOpened, undefined);
   assert.ok(read('downloads/Atlas_Demo_Offline.html').includes(
-    "if(selected && !disclosure.open && disclosure.dataset.atlasManualTouched !== 'true'){"));
+    "if (selected && !disclosure.open && disclosure.dataset.atlasManualTouched !== 'true') {"));
 });
 
 test('canonical legacy hashes and unknown routes stay in sync before and after hydration', () => {
@@ -344,4 +345,36 @@ test('slashless legacy hashes have the same rail and search state as hydrated ro
   state.navigate('#not-a-workspace');
   assert.equal(state.title.textContent, 'Discover');
   assert.equal(state.links.filter(link => link.attrs.get('aria-current') === 'page').length, 1);
+});
+
+test('Escape owns the dismissal of an auto-revealed desktop More across hydration', () => {
+  const state = exercise('#/safety');
+  const more = state.mainMore;
+  assert.equal(more.dataset.atlasAutoOpened, 'true');
+  const marker = source.indexOf('/* The native details menu works without scripts;');
+  const start = source.indexOf("document.addEventListener('keydown', (event) => {", marker);
+  const end = source.indexOf('// A tap or keyboard activation', start);
+  assert.ok(marker >= 0 && start > marker && end > start);
+  let handler, focused = false, prevented = false;
+  more.querySelector = selector => {
+    assert.equal(selector, ':scope > summary');
+    return {focus() { focused = true; }};
+  };
+  const document = {
+    addEventListener(type, fn) { assert.equal(type, 'keydown'); handler = fn; },
+    querySelectorAll() { return []; },
+    querySelector() { return null; },
+    activeElement: {closest() { return more; }},
+  };
+  vm.runInNewContext(source.slice(start, end), {document});
+  handler({key:'Escape', preventDefault() { prevented = true; }});
+  assert.equal(more.open, false);
+  assert.equal(focused, true);
+  assert.equal(prevented, true);
+  state.finishLoading();
+  state.syncDisclosure(more, true);
+  assert.equal(more.open, false, 'late hydration must respect keyboard dismissal');
+  assert.equal(more.dataset.atlasManualTouched, 'true');
+  assert.equal(more.dataset.atlasAutoOpened, undefined);
+  assert.equal(state.mobileMore.open, true, 'desktop dismissal must not collapse mobile selection');
 });

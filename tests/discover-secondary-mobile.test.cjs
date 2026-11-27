@@ -34,8 +34,12 @@ test('Discover nested mobile More reflects the selected secondary workspace',()=
   const syncEnd=shared.indexOf('\nif (typeof window !== \'undefined\') window.atlasSyncDiscoverMobileSelection',syncStart);
   assert.ok(syncStart>=0&&syncEnd>syncStart,'use real shared mobile selector, not a mock');
   const sync=vm.runInNewContext('('+shared.slice(syncStart,syncEnd)+')');
+  const disclosureStart=shared.indexOf('function syncAutomaticDisclosure(');
+  const disclosureEnd=shared.indexOf("\nif (typeof window !== 'undefined') window.atlasSyncAutomaticDisclosure",disclosureStart);
+  assert.ok(disclosureStart>=0&&disclosureEnd>disclosureStart,'use real shared disclosure ownership');
+  const syncDisclosure=vm.runInNewContext('('+shared.slice(disclosureStart,disclosureEnd)+')');
   const more={open:false,dataset:{},querySelector:()=>mobile.slice(4).find(a=>a.current())||null};
-  const desktopMore={open:false,dataset:{}};
+  const desktopMore={open:false,dataset:{},querySelector:()=>desktop.slice(4).find(a=>a.current())||null};
   const rail={querySelectorAll:()=>desktop,querySelector:selector=>{
     const active=desktop.find(a=>a.current())||null;
     return selector.includes('span:not(.nav-count)')?active?.querySelector('span:not(.nav-count)'):active;
@@ -54,7 +58,7 @@ test('Discover nested mobile More reflects the selected secondary workspace',()=
   const context={document:{title:'',querySelectorAll:()=>mobile,
       getElementById:id=>elements[id]||null,
       querySelector:selector=>selector==='.discover-mobile-chrome'?mobileHeading:more},
-    window:{ATLAS_OFFLINE:false,atlasSyncDiscoverMobileSelection:sync},$:name=>elements[name],
+    window:{ATLAS_OFFLINE:false,atlasSyncDiscoverMobileSelection:sync,atlasSyncAutomaticDisclosure:syncDisclosure},$:name=>elements[name],
     sets:{},notebook:{saved:[]},labels:Object.fromEntries(sections.map(s=>[s,s])),
     view:'overview',D:{meta:{research_checked_on:'2026-11-01'}},date:x=>x,renderDock(){}};
   vm.runInNewContext(app.slice(start,end),context);
