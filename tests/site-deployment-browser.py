@@ -926,6 +926,10 @@ with sync_playwright() as p:
                 return [s.fontFamily,s.fontWeight,s.fontSize,s.lineHeight,s.letterSpacing];
             }"""
             baseline = discover_story.evaluate(story_style)
+            discover_summary = story_page.locator('.story-body > h3 + p').first.evaluate("""el => {
+                const s = getComputedStyle(el);
+                return [s.fontSize, s.lineHeight];
+            }""")
             discover_story.scroll_into_view_if_needed()
             story_page.screenshot(path=str(out / f'discover-story-type-{story_scheme}-{story_width}.png'))
             if story_width <= 650:
@@ -953,7 +957,7 @@ with sync_playwright() as p:
                 return [s.fontSize, s.lineHeight];
             }""")
             check('Archive primary summary preserves readable type ' + story_scheme + ' ' + str(story_width),
-                  archive_summary == ['14px', '23.1px'])
+                  archive_summary == discover_summary == ['14px', '23.1px'])
             archive_story.scroll_into_view_if_needed()
             story_page.screenshot(path=str(out / f'archive-story-type-{story_scheme}-{story_width}.png'))
             print('Editorial story type', story_scheme, story_width, baseline, actual)
@@ -963,8 +967,8 @@ with sync_playwright() as p:
             check('Verified news card retains readable source links '+story_scheme+' '+str(story_width),
                   archive_story.locator('xpath=..').locator('a[href^="https://"]').first.is_visible())
         story_context.close()
-    # Compact reference cards share Discover's responsive title scale while
-    # retaining their own summary density and native interactions.
+    # Compact reference cards share Discover's responsive title and primary
+    # summary scale while retaining their own native interactions.
     for compact_scheme in ('light', 'dark'):
         compact_context = browser.new_context(color_scheme=compact_scheme)
         compact_page = compact_context.new_page()
@@ -1049,6 +1053,7 @@ with sync_playwright() as p:
             review_title = compact_page.locator('article.card > h3').first
             review_title.wait_for(state='visible', timeout=45000)
             review_type = review_title.evaluate(compact_style)
+            review_summary = compact_page.locator('article.card > h3 + p').first.evaluate(summary_style)
             review_gap = review_title.evaluate(heading_gap)
             review_inset = review_title.evaluate("el => [getComputedStyle(el.parentElement).paddingLeft, getComputedStyle(el.parentElement).paddingRight]")
             review_title.scroll_into_view_if_needed()
@@ -1058,6 +1063,9 @@ with sync_playwright() as p:
             discover_title = compact_page.locator('.story-body > h3').first
             discover_title.wait_for(state='visible', timeout=45000)
             discover_type = discover_title.evaluate(compact_style)
+            discover_summary = compact_page.locator('.story-body > h3 + p').first.evaluate(summary_style)
+            check('Shared primary summary matches Discover and Catalog Review ' + compact_scheme + ' ' + str(compact_width),
+                  tech_summary == play_summary == research_summary == review_summary == discover_summary == ['14px', '23.1px', True])
             check('Shared compact card type matches Discover and Catalog Review ' + compact_scheme + ' ' + str(compact_width),
                   tech_type == play_type == research_type == review_type == discover_type)
             discover_gap = discover_title.evaluate(heading_gap)

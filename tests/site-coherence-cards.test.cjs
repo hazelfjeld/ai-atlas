@@ -1348,13 +1348,17 @@ test('Primary editorial summaries share the archive reading rhythm without chang
     ?.split('/* atlas-shared-primary-card-summary:end */')[0];
   assert.ok(block);
   for (const selector of [
+    '.story-body > h3 + p',
+    '.shell:has(> .site-chrome.nav) article.card > h3 + p',
     '.playbook-shell .playbook > h2 + p',
     '.tech-shell .tech-card > .lede',
     '.shell:has(> .site-chrome.research-site-chrome) .cards > .card > h2 + p',
     '#edition-content .item > h3 + p'
   ]) assert.ok(block.includes(selector), 'Missing primary summary: ' + selector);
   assert.match(block, /font-size:14px;\s*line-height:1\.65;\s*color:var\(--muted\);/);
-  assert.doesNotMatch(block, /\.advantage|\.why|\.caveat|\.story-body|display:none/);
+  assert.doesNotMatch(block, /\.advantage|\.why|\.caveat|\.featured-copy|display:none/);
+  assert.doesNotMatch(brand, /\.story-body\s*>\s*p\{[^}]*?(?:font-size|line-height)\s*:/,
+    'Discover summary type must come from shared site chrome');
 });
 
 test('Daily archive collection headings reuse the shared reference subsection type', () => {
