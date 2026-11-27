@@ -867,14 +867,22 @@ body:has(.site-chrome) :is(.tech-controls,.playbook-tools,.controls,.search-cont
 
 
 /* atlas-editorial-card-copy:begin */
-/* Discover's editorial cards are the typography reference. Existing Playbook,
-   Technology and Research cards keep their own grids and interactions, while
-   using one title treatment rather than separate page-local headline fonts. */
-:is(.playbook-shell .playbook > h2,
+/* Discover's existing responsive title scale is shared by the daily archive,
+   Playbooks, Technology, Research and editorial review cards. Preserve each
+   family's own card layout, native links and dialog interactions. */
+:root{--atlas-card-title-size:21px;--atlas-card-title-leading:1.22}
+@media(min-width:1750px){:root{--atlas-card-title-size:24px}}
+@media(max-width:1150px){:root{--atlas-card-title-size:22px}}
+@media(max-width:650px){:root{--atlas-card-title-size:21px;--atlas-card-title-leading:1.25}}
+@media(max-width:520px){:root{--atlas-card-title-size:27px}}
+@media(max-width:380px){:root{--atlas-card-title-size:25px}}
+:is(.story-body > h3,
+    #edition-content .item > h3,
+    .playbook-shell .playbook > h2,
     .tech-shell .tech-card > h2,
     .shell:has(> .site-chrome.nav) article.card > h3,
     .shell:has(> .site-chrome.research-site-chrome) .cards > .card > h2){
-  font:400 clamp(20px,2vw,23px)/1.25 Georgia,'Times New Roman',serif;
+  font:400 var(--atlas-card-title-size)/var(--atlas-card-title-leading) Georgia,'Times New Roman',serif;
   letter-spacing:-.025em;
   color:var(--ink);
   overflow-wrap:anywhere;

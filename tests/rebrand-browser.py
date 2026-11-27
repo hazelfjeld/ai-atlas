@@ -2288,8 +2288,14 @@ with sync_playwright() as p:
     for width in (320, 390, 768, 1280):
         page.set_viewport_size({'width': width, 'height': 844 if width <= 650 else 900})
         for theme in ('light', 'dark'):
-            for route, selector in (('catalog-review.html', 'article.card > h3'),
-                                    ('playbooks.html', '.playbook > h2')):
+            title_baseline = None
+            for route, selector in (
+                    ('index.html', '.story-body > h3'),
+                    ('catalog-review.html', 'article.card > h3'),
+                    ('playbooks.html', '.playbook > h2'),
+                    ('technologies.html', '.tech-card > h2'),
+                    ('research.html', '.cards > .card > h2'),
+                    ('whats-new.html?date=2026-11-27&revision=1', '#edition-content .item > h3')):
                 page.goto(base + route)
                 page.evaluate('(t) => localStorage.setItem("atlas.theme", t)', theme)
                 page.reload()
@@ -2301,6 +2307,19 @@ with sync_playwright() as p:
                     bodyColor:getComputedStyle(document.body).color,
                     overflow:document.documentElement.scrollWidth > innerWidth
                 })""")
+                title_type = headline.evaluate("""el => {
+                    const s = getComputedStyle(el);
+                    return [s.fontFamily, s.fontSize, s.fontWeight, s.lineHeight, s.letterSpacing];
+                }""")
+                if route == 'index.html':
+                    title_baseline = title_type
+                expected_size = {320:'25px', 390:'27px', 768:'22px', 1280:'21px'}[width]
+                check(f'{route} {width}px {theme} matches Discover responsive card title scale',
+                      title_type == title_baseline and title_type[1] == expected_size
+                      and 'Georgia' in title_type[0] and title_type[2] == '400'
+                      and not result['overflow'])
+                if route not in ('catalog-review.html', 'playbooks.html'):
+                    continue
                 check(f'{route} {width}px {theme} shares editorial card typography',
                       'Georgia' in result['family'] and
                       result['color'] == result['bodyColor'] and

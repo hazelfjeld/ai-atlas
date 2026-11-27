@@ -292,7 +292,22 @@ test('Playbooks, Technology, Research and editorial reviews reuse Discover card 
     'Research cards must retain their semantic heading and native dialog button');
   assert.match(block, /\.cards > \.card > h2 > \.title-button\s*\{\s*font:inherit;\s*letter-spacing:inherit;\s*color:inherit;/,
     'Research buttons must inherit the shared heading type and contrast');
-  assert.match(block, /font:400 clamp\(20px,2vw,23px\)\/1\.25 Georgia/);
+  for (const selector of ['.story-body > h3', '#edition-content .item > h3'])
+    assert.ok(block.includes(selector), 'Discover and daily archive use the same declaration');
+  assert.match(block, /font:400 var\(--atlas-card-title-size\)\/var\(--atlas-card-title-leading\) Georgia/);
+  for (const rule of [
+    ':root{--atlas-card-title-size:21px;--atlas-card-title-leading:1.22}',
+    '@media(min-width:1750px){:root{--atlas-card-title-size:24px}}',
+    '@media(max-width:1150px){:root{--atlas-card-title-size:22px}}',
+    '@media(max-width:650px){:root{--atlas-card-title-size:21px;--atlas-card-title-leading:1.25}}',
+    '@media(max-width:520px){:root{--atlas-card-title-size:27px}}',
+    '@media(max-width:380px){:root{--atlas-card-title-size:25px}}'
+  ]) assert.ok(block.includes(rule), 'Preserve Discover responsive scale: ' + rule);
+  const brand = fs.readFileSync(path.join(__dirname, '..', 'brand.css'), 'utf8');
+  assert.doesNotMatch(brand, /\.story-body h3,#edition-content \.item > h3\{/,
+    'One authoritative title scale, not duplicate responsive overrides');
+  const offline = fs.readFileSync(path.join(__dirname, '..', 'downloads/Atlas_Demo_Offline.html'), 'utf8');
+  assert.ok(offline.includes(css) && offline.includes(brand), 'Offline embeds both exact stylesheets');
   assert.match(block, /color:var\(--ink\)/);
   assert.match(block, /\.playbook-shell \.playbook > p,[\s\S]*?color:var\(--muted\)/);
   assert.ok(!block.includes('display:none'), 'Do not hide page navigation or cards');
