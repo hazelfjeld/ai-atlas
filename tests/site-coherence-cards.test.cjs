@@ -90,11 +90,18 @@ test('Playbooks and Technology separate the shared navigation from main', () => 
       route + ' must retain native script-free record access in main');
     assert.ok(html.includes('<a class="skip" href="#main">'),
       route + ' must keep native keyboard skip links');
-    const intro = '.' + shell + '-shell>main>.' + hero + '>p';
-    assert.ok(html.includes(intro + '{max-width:70ch;font-size:17px;line-height:1.65'),
+    const intro = '.' + shell + '-shell > main > .' + hero + ' > p';
+    const shared = css.split('/* atlas-shared-introduction-copy:begin */')[1]
+      ?.split('/* atlas-shared-introduction-copy:end */')[0];
+    assert.ok(shared, 'Shared introduction CSS must exist');
+    const [desktop, mobile] = shared.split('@media(max-width:650px)');
+    assert.ok(desktop.includes(intro) && /max-width:70ch;\s*font-size:17px;\s*line-height:1\.65/.test(desktop),
       route + ' must preserve the shared desktop reading rhythm');
-    assert.ok(html.includes(intro + '{font-size:16px}'),
+    assert.ok(mobile.includes(intro) && /\{font-size:16px\}/.test(mobile),
       route + ' must preserve the shared mobile reading scale');
+    assert.ok(html.includes('href="site-chrome.css"'), route + ' loads shared typography');
+    assert.ok(!html.includes(intro.replaceAll(' ', '')+'{font-size:16px}'),
+      route + ' must not reintroduce a separate mobile introduction override');
   }
   // The shell already owns page gutters. After migrating <main>, generic
   // Discover main padding used to add a second inset at every breakpoint.
@@ -996,7 +1003,7 @@ test('Research, Playbooks, Technology and daily news share one introduction comp
   const block=css.split('/* atlas-shared-introduction-copy:begin */')[1]
     ?.split('/* atlas-shared-introduction-copy:end */')[0];
   assert.ok(block, 'Missing shared intro typography');
-  for(const family of [".playbook-shell > .playbook-hero > p",".tech-shell > .tech-hero > p",".shell:has(> .site-chrome.research-site-chrome) > main > .hero > p",".shell:has(> .site-chrome.top) > main > header .lead"])
+  for(const family of [".playbook-shell > main > .playbook-hero > p",".tech-shell > main > .tech-hero > p",".shell:has(> .site-chrome.research-site-chrome) > main > .hero > p",".shell:has(> .site-chrome.top) > main > header .lead"])
     assert.ok(block.includes(family), 'Missing shared introduction: '+family);
   assert.match(block,/max-width:70ch/);
   assert.match(block,/font-size:17px/);
