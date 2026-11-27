@@ -191,6 +191,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const name = current?.querySelector('span:not(.nav-count)')?.textContent?.trim() || untabbedLabel;
   const breadcrumb = document.getElementById('breadcrumb');
   if (name && breadcrumb) breadcrumb.textContent = name;
+  if (name) document.title = current?.dataset.view === 'overview'
+    ? 'AI Updates — AI research, tools & concepts' : name + ' · AI Updates';
   const header = document.querySelector('.discover-mobile-chrome');
   if (name && header) {
     header.dataset.pageLabel = name;
@@ -216,7 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
    Use the already-rendered local view links as the label source; this makes
    Safety and Publication progress correct on first paint without introducing
    a second route list or affecting script-free navigation. */
-document.addEventListener('DOMContentLoaded', () => {
+function syncResearchNavigation(hashView) {
   const nav = document.querySelector('.research-local-nav');
   const chrome = document.querySelector('.research-mobile-topbar');
   if (!nav || !chrome || !document.querySelector('.site-chrome.research-site-chrome')) return;
@@ -227,37 +229,41 @@ document.addEventListener('DOMContentLoaded', () => {
   const safetyLabel = labelFor('alerts');
   if (!researchLabel || !safetyLabel) return;
 
-  const sync = () => {
-    const hashView = window.location.hash.match(/^#\/?([a-z]+)(?:\?|$)/)?.[1];
-    const selected = views.find(link => link.dataset.nav === hashView) ||
-      views.find(link => link.dataset.nav === 'papers');
-    if (!selected) return;
-    const label = selected.firstChild?.textContent?.trim();
-    if (!label) return;
-    const parentLabel = selected.dataset.nav === 'alerts' ? safetyLabel : researchLabel;
-    // Both rails already contain canonical links generated from site_chrome.py.
-    // Change their state, not the routes, order or content of those links.
-    document.querySelectorAll(
-      '.site-chrome.research-site-chrome .site-chrome__more-links a, ' +
-      '.research-mobile-topbar .site-mobile-chrome__more-links a'
-    ).forEach(link => {
-      const name = link.textContent.trim();
-      if (name !== researchLabel && name !== safetyLabel) return;
-      if (name === parentLabel) link.setAttribute('aria-current', 'location');
-      else link.removeAttribute('aria-current');
-    });
-    views.forEach(link => {
-      if (link === selected) link.setAttribute('aria-current', 'page');
-      else link.removeAttribute('aria-current');
-    });
-    chrome.dataset.pageLabel = label;
-    // The mobile header and its visible title must announce the same Research hash view.
-    chrome.setAttribute('aria-label', 'AI Updates mobile header · ' + label);
-    const title = chrome.querySelector('.site-mobile-chrome__title');
-    if (title) title.textContent = label;
-    chrome.querySelector('details.site-mobile-chrome__nav > summary')
-      ?.setAttribute('aria-label', 'Toggle navigation · ' + label);
-  };
+  const selected = views.find(link => link.dataset.nav === hashView) ||
+    views.find(link => link.dataset.nav === 'papers');
+  if (!selected) return;
+  const label = selected.firstChild?.textContent?.trim();
+  if (!label) return;
+  const parentLabel = selected.dataset.nav === 'alerts' ? safetyLabel : researchLabel;
+  // Both rails already contain canonical links generated from site_chrome.py.
+  // Change their state, not the routes, order or content of those links.
+  document.querySelectorAll(
+    '.site-chrome.research-site-chrome .site-chrome__more-links a, ' +
+    '.research-mobile-topbar .site-mobile-chrome__more-links a'
+  ).forEach(link => {
+    const name = link.textContent.trim();
+    if (name !== researchLabel && name !== safetyLabel) return;
+    if (name === parentLabel) link.setAttribute('aria-current', 'location');
+    else link.removeAttribute('aria-current');
+  });
+  views.forEach(link => {
+    link.classList.toggle('active', link === selected);
+    if (link === selected) link.setAttribute('aria-current', 'page');
+    else link.removeAttribute('aria-current');
+  });
+  document.title = label + ' | AI Updates';
+  chrome.dataset.pageLabel = label;
+  // The mobile header and its visible title must announce the same Research hash view.
+  chrome.setAttribute('aria-label', 'AI Updates mobile header · ' + label);
+  const title = chrome.querySelector('.site-mobile-chrome__title');
+  if (title) title.textContent = label;
+  chrome.querySelector('details.site-mobile-chrome__nav > summary')
+    ?.setAttribute('aria-label', 'Toggle navigation · ' + label);
+}
+if (typeof window !== 'undefined') window.atlasSyncResearchNavigation = syncResearchNavigation;
+document.addEventListener('DOMContentLoaded', () => {
+  if (!document.querySelector('.research-local-nav')) return;
+  const sync = () => syncResearchNavigation(window.location.hash.replace(/^#\/?/, '').split('?')[0]);
   sync();
   window.addEventListener('hashchange', sync);
 });

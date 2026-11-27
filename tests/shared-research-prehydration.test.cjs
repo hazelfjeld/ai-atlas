@@ -15,10 +15,12 @@ function run(initialHash) {
     ['coverage', 'Publication progress']];
   const views = labels.map(([key, label]) => ({
     dataset: {nav: key}, firstChild: {textContent: label + ' '},
-    attributes: new Map(),
+    attributes: new Map(), classes: new Set(),
+    classList: {toggle(k, on) { if (on) this.owner.classes.add(k); else this.owner.classes.delete(k); }},
     setAttribute(k, v) { this.attributes.set(k, v); },
     removeAttribute(k) { this.attributes.delete(k); }
   }));
+  views.forEach(view => { view.classList.owner = view; });
   const makeRail = () => labels.slice(0, 2).map(([, label]) => ({
     textContent: label, attributes: new Map([['aria-current',
       label === 'Research library' ? 'location' : '']]),
@@ -48,6 +50,7 @@ function run(initialHash) {
     onHash = fn;
   }};
   const document = {
+    title: 'AI Safety Research Library | AI Updates',
     addEventListener(event, fn) { assert.equal(event, 'DOMContentLoaded'); ready = fn; },
     querySelector(selector) {
       return {'.research-local-nav': local, '.research-mobile-topbar': chrome,
@@ -63,11 +66,13 @@ function run(initialHash) {
   vm.runInNewContext(block, {document, window});
   assert.equal(typeof ready, 'function');
   ready();
-  return {views, rails, title, toggle, chrome, window,
+  return {views, rails, title, toggle, chrome, window, document,
     next(hash) { window.location.hash = hash; onHash(); }};
 }
 function check(state, title, selected, parent) {
   assert.equal(state.title.textContent, title);
+  assert.equal(state.document.title, title + ' | AI Updates');
+  assert.deepEqual(state.views.filter(v => v.classes.has('active')).map(v => v.dataset.nav), [selected]);
   assert.equal(state.chrome.dataset.pageLabel, title);
   assert.equal(state.chrome.attributes.get('aria-label'), 'AI Updates mobile header · ' + title);
   assert.equal(state.toggle.attributes.get('aria-label'), 'Toggle navigation · ' + title);
@@ -111,4 +116,14 @@ test('first-paint fix reuses native routes, survives offline and adds no header'
     assert.ok(research.includes('data-nav="' + key + '"'));
   assert.ok(read('checkpoint.js').includes("window.addEventListener('hashchange', route)"),
     'Keep the real Research search/filter routes operational after hydration');
+});
+
+
+test('hydrated Research uses the same visible selection and title as the pending catalog', () => {
+  const state = run('#alerts');
+  state.window.atlasSyncResearchNavigation('coverage');
+  check(state, 'Publication progress', 'coverage', 'Research library');
+  state.window.atlasSyncResearchNavigation('papers');
+  check(state, 'Research library', 'papers', 'Research library');
+  assert.ok(read('checkpoint.js').includes('window.atlasSyncResearchNavigation(view);'));
 });

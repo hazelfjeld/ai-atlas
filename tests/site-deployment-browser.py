@@ -2092,6 +2092,40 @@ with sync_playwright() as p:
 
     # Research uses the same mobile navigation classes and seven primary
     # destinations as Games, while keeping its own three research-view tabs.
+    # Hold catalog hydration to verify actual first-paint Research tab styling.
+    early_research = browser.new_page(viewport={'width':390, 'height':844}, reduced_motion='reduce')
+    early_research.add_init_script("""(() => {
+      const originalFetch = window.fetch.bind(window);
+      window.fetch = (resource, options) =>
+        String(resource).endsWith('publication.json')
+          ? new Promise(() => {})
+          : originalFetch(resource, options);
+    })();""")
+    early_research.goto(base + 'research.html#alerts', wait_until='domcontentloaded')
+    for width in (320, 390, 768, 1280):
+        early_research.set_viewport_size({'width': width, 'height': 844})
+        for scheme in ('light', 'dark'):
+            early_research.emulate_media(color_scheme=scheme)
+            for section, label in (('coverage', 'Publication progress'), ('alerts', 'Safety observatory')):
+                early_research.locator('.research-local-nav a[data-nav="' + section + '"]').click()
+                early_research.wait_for_function("""([section, label]) => {
+                    const links = [...document.querySelectorAll('.research-local-nav a[data-nav]')];
+                    return document.title === label + ' | AI Updates' &&
+                      links.filter(a => a.classList.contains('active')).length === 1 &&
+                      links.find(a => a.classList.contains('active'))?.dataset.nav === section &&
+                      links.find(a => a.getAttribute('aria-current') === 'page')?.dataset.nav === section;
+                }""", arg=[section, label])
+                check(f'Research {width}px {scheme} {section}: visible pending-catalog selection',
+                      early_research.evaluate("""() => {
+                        const active = document.querySelector('.research-local-nav a.active');
+                        const other = document.querySelector('.research-local-nav a:not(.active)');
+                        return !document.documentElement.classList.contains('atlas-research-ready') &&
+                          getComputedStyle(active).backgroundColor !== getComputedStyle(other).backgroundColor &&
+                          document.documentElement.scrollWidth <= innerWidth + 1;
+                      }"""))
+            if width in (390, 1280):
+                early_research.screenshot(path=str(out / f'research-early-{width}-{scheme}.png'))
+    early_research.close()
     mobile_research = browser.new_page(viewport={'width':320, 'height':720}, reduced_motion='reduce')
     mobile_research.goto(base + 'research.html')
 

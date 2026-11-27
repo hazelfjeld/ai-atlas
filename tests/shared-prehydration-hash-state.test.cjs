@@ -83,7 +83,7 @@ function exercise(hash) {
   vm.runInNewContext(block,{window,document,URLSearchParams});
   assert.equal(typeof callback,'function');
   callback();
-  return {links,mobile,mainMore,mobileMore,title,header,toggleAttrs,cleared,earlyClick,
+  return {links,mobile,mainMore,mobileMore,title,header,toggleAttrs,cleared,earlyClick,document,
     searchField:nodes['global-query'], syncSearch:window.atlasSyncDiscoverSearchQuery,
     syncDisclosure:window.atlasSyncAutomaticDisclosure,
     navigate(hash) {location.hash = hash; hashchange();},
@@ -377,4 +377,14 @@ test('Escape owns the dismissal of an auto-revealed desktop More across hydratio
   assert.equal(more.dataset.atlasManualTouched, 'true');
   assert.equal(more.dataset.atlasAutoOpened, undefined);
   assert.equal(state.mobileMore.open, true, 'desktop dismissal must not collapse mobile selection');
+});
+
+
+test('browser tab names follow the visible Discover workspace before catalog hydration', () => {
+  const state = exercise('#alerts');
+  assert.equal(state.document.title, 'Safety observatory · AI Updates');
+  state.navigate('#/search?q=agent');
+  assert.equal(state.document.title, 'Search AI Updates · AI Updates');
+  state.navigate('#/not-a-workspace');
+  assert.equal(state.document.title, 'AI Updates — AI research, tools & concepts');
 });
