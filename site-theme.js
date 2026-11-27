@@ -85,8 +85,12 @@ function syncDiscoverMobileSelection(mobileNav, current) {
     '.site-mobile-chrome__menu a[href]:not(.site-mobile-chrome__brand)')];
   const href = current?.getAttribute('href');
   const label = current?.querySelector('span:not(.nav-count)')?.textContent?.trim();
-  const selected = (href && links.find(link => link.getAttribute('href') === href)) ||
-    (label && links.find(link => link.textContent?.trim() === label));
+  // Offline About, demo and encyclopedia links deliberately share bundled
+  // workspace hrefs. Disambiguate by the canonical rail label, not DOM order.
+  const sameHref = href ? links.filter(link => link.getAttribute('href') === href) : [];
+  const selected = (label && sameHref.find(link => link.textContent?.trim() === label)) ||
+    (sameHref.length === 1 ? sameHref[0] : null) ||
+    (label && links.find(link => link.textContent?.trim() === label)) || sameHref[0];
   links.forEach(link => {
     if (link === selected) link.setAttribute('aria-current', 'page');
     else link.removeAttribute('aria-current');
