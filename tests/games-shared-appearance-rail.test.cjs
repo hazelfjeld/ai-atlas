@@ -15,7 +15,7 @@ test('Games reuses its real appearance action in the canonical desktop rail with
     'the original Games header button is hidden on desktop and mobile before enhancement');
   assert.ok(!css.includes('position:fixed;top:17px;right:40px;z-index:26'),
     'the abandoned independent topbar placement must not return');
-  assert.match(css, /\.site-chrome \.sidebar-actions \.site-chrome__theme-toggle--rail/);
+  assert.match(css, /\.sidebar-bottom \.sidebar-actions > button\.icon-button\{[^}]*width:44px;height:44px;min-height:44px/s);
   assert.match(css, /\.site-mobile-chrome__menu > \.site-chrome__theme-toggle/);
 });
 

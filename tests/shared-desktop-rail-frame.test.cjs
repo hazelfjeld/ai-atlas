@@ -93,7 +93,7 @@ test('native editorial families render the shared rail bottom before hydration',
   assert.match(generator, /secondary_current=secondary_current, rail_bottom=True/);
   assert.match(script, /const previous = rail\.querySelector\('\.sidebar-bottom'\)/);
   assert.match(script, /if \(previous\) return previous;/);
-  assert.match(css, /\.site-chrome \.sidebar-bottom/);
+  assert.match(css, /\.sidebar-bottom\{width:100%;box-sizing:border-box;padding:45px 12px 0;line-height:1\.55\}/);
   for (const path of paths) {
     const page = read(path);
     const rail = page.match(/<nav class="site-chrome [^"]+" aria-label="AI Updates primary navigation">([\s\S]*?)<\/nav>/)?.[1];

@@ -39,5 +39,10 @@ test('standalone desktop uses one toggle while Games keeps its existing header c
   assert.match(script,/existing \? \[menu\] : \[\]/);
   assert.match(script,/syncSharedThemeAction\(button, theme\)/);
   assert.match(script,/button\.textContent = '◐  ' \+ \(theme === 'dark' \? 'Dark' : 'Light'\) \+ ' theme'/);
-  assert.match(read('site-chrome.css'),/\.site-chrome \.sidebar-actions \.site-chrome__theme-toggle--rail::before/);
+  assert.match(read('site-chrome.css'),/\.sidebar-bottom \.sidebar-actions > button\.icon-button::before\{\s*content:'◐';font-size:17px;line-height:1;\s*\}/);
+  assert.match(read('site-chrome.css'),/\.sidebar-bottom \.sidebar-actions > button\.icon-button:focus-visible\{outline:3px solid [^;]+;outline-offset:2px\}/);
+  assert.match(read('site-chrome.css'),/\.sidebar-bottom \.sidebar-actions > button\.icon-button:hover\{[^}]*background:[^}]+\}/);
+  assert.match(read('index.html'),/<div class="sidebar-actions"><button id="theme-toggle" class="icon-button"/);
+  assert.match(read('games.html'),/<button class="icon-button" id="theme-toggle"/);
+  assert.match(script,/container === desktopAction \? ' site-chrome__theme-toggle--rail icon-button'/);
 });

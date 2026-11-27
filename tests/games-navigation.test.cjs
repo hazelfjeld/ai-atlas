@@ -1187,7 +1187,7 @@ test('existing shared standalone chrome exposes the Discover appearance action w
     'Cross-page theme preference uses Discover existing storage key');
   assert.match(js, /a\[href\],button:not\(\[disabled\]\)/,
     'A new drawer action must join the keyboard focus trap');
-  assert.match(css, /\.site-chrome \.sidebar-actions \.site-chrome__theme-toggle--rail/);
+  assert.match(css, /\.sidebar-bottom \.sidebar-actions > button\.icon-button\{[^}]*width:44px;height:44px;min-height:44px/s);
   assert.match(css, /\.site-mobile-chrome__menu > \.site-chrome__theme-toggle/);
   assert.match(js, /'aria-pressed', String\(theme === 'dark'\)/);
 });
