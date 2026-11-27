@@ -18,6 +18,18 @@ test('November 27 edition preserves reviewed source dates, bytes and receipt',()
  assert.ok(e.news.every(x=>x.publication_date<e.edition_date));assert.equal(e.coverage.status,'partial');
  assert.deepEqual([e.technologies.length,e.terms.length,e.corrections.length,r.deferred_catalog_proposal_ids.length],[0,0,0,6]);
  assert.equal(index.last_successful_publish_at,[...ledger.receipts].reverse().find(x=>x.production_verified_at).production_verified_at);
- const recent=[...new Map(index.editions.map(x=>[x.date,x])).values()].slice(-3);
- if(recent.some(x=>x.path===ref.path))assert.ok(fs.readFileSync('whats-new.html','utf8').includes('href="'+ref.path+'"'));
+ // The canonical register includes pending editions; the native preview
+ // must expose only certified editions until deployment verification succeeds.
+ const certified=new Set(ledger.receipts.filter(x=>x.production_verified_at)
+   .map(x=>'data/daily/editions/'+x.publication_edition+'.json'));
+ const byDate=new Map();
+ for(const x of index.editions.filter(x=>certified.has(x.path))){
+  if(!byDate.has(x.date)||byDate.get(x.date).revision<x.revision)byDate.set(x.date,x);
+ }
+ const recent=[...byDate.values()].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,3);
+ const html=fs.readFileSync('whats-new.html','utf8');
+ const preview=html.split('id="scriptfree-daily-archive"')[1].split('</section>')[0];
+ assert.ok(preview.includes('href="data/daily/index.json"'));
+ assert.equal(preview.includes('href="'+ref.path+'"'),recent.some(x=>x.path===ref.path));
+ if(!r.production_verified_at)assert.ok(!preview.includes('data-edition-date="'+ref.date+'"'));
 });
