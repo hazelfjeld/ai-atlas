@@ -1344,6 +1344,7 @@ test('MLD-0915–1345 use the deterministic shared first-paint rail', () => {
 });
 
 test('Primary editorial summaries share the archive reading rhythm without changing supplemental copy', () => {
+  const brand = fs.readFileSync(path.join(__dirname, '..', 'brand.css'), 'utf8');
   const block = css.split('/* atlas-shared-primary-card-summary:begin */')[1]
     ?.split('/* atlas-shared-primary-card-summary:end */')[0];
   assert.ok(block);
