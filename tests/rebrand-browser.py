@@ -1076,6 +1076,25 @@ with sync_playwright() as p:
                       and page.evaluate('document.documentElement.dataset.theme')==theme
                       and page.evaluate('document.documentElement.scrollWidth <= innerWidth'))
 
+            # The native and hash-route Games landings now use the same
+            # editorial lead rule as Research and both directories.
+            for route, selector in (
+                ('games.html', 'main > .hero > div > .lead'),
+                ('index.html#/games', '.atlas-games > .hero > div > .lead'),
+                ('playbooks.html', '.playbook-shell > main > .playbook-hero > p'),
+                ('technologies.html', '.tech-shell > main > .tech-hero > p'),
+            ):
+                page.goto(base+route)
+                lead = page.locator(selector)
+                lead.wait_for(state='visible')
+                actual = lead.evaluate(intro_metrics)
+                check(f'{route} {width}px {theme} uses the shared editorial lead',
+                      actual['font']==reference['font']
+                      and actual['line']==reference['line']
+                      and actual['measure']!='none'
+                      and page.evaluate('document.documentElement.dataset.theme')==theme
+                      and page.evaluate('document.documentElement.scrollWidth <= innerWidth'))
+
     # Demo presentation notes reuse the existing editorial info surface.
     callout_metrics = """el => {
         const s = getComputedStyle(el);
