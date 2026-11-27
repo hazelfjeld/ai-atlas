@@ -94,10 +94,10 @@ test('Playbooks and Technology separate the shared navigation from main', () => 
     const shared = css.split('/* atlas-shared-introduction-copy:begin */')[1]
       ?.split('/* atlas-shared-introduction-copy:end */')[0];
     assert.ok(shared, 'Shared introduction CSS must exist');
-    const [desktop, mobile] = shared.split('@media(max-width:650px)');
-    assert.ok(desktop.includes(intro) && /max-width:70ch;\s*font-size:17px;\s*line-height:1\.65/.test(desktop),
+    const [desktopIntro, mobileIntro] = shared.split('@media(max-width:650px)');
+    assert.ok(desktopIntro.includes(intro) && /max-width:70ch;\s*font-size:17px;\s*line-height:1\.65/ .test(desktopIntro),
       route + ' must preserve the shared desktop reading rhythm');
-    assert.ok(mobile.includes(intro) && /\{font-size:16px\}/.test(mobile),
+    assert.ok(mobileIntro.includes(intro) && /\{font-size:16px\}/ .test(mobileIntro),
       route + ' must preserve the shared mobile reading scale');
     assert.ok(html.includes('href="site-chrome.css"'), route + ' loads shared typography');
     assert.ok(!html.includes(intro.replaceAll(' ', '')+'{font-size:16px}'),
