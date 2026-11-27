@@ -2062,8 +2062,11 @@ with sync_playwright() as p:
             check(f'guided demo {width}px {theme} shared titles and readable presentation copy',
                   titles.evaluate_all("""els => els.every(el => {
                     const title=getComputedStyle(el), body=getComputedStyle(el.nextElementSibling);
+                    const detail=getComputedStyle(el.nextElementSibling.nextElementSibling);
                     return title.fontFamily.includes('Georgia') && title.fontWeight==='400' &&
-                           body.fontSize==='16px' && el.scrollWidth<=el.clientWidth+1;
+                           body.fontSize==='16px' && body.lineHeight==='26.4px' &&
+                           detail.fontSize==='16px' && detail.lineHeight==='26.4px' &&
+                           el.scrollWidth<=el.clientWidth+1;
                   })"""))
             rows=page.locator('.demo-actions.story-footer')
             first=rows.first
