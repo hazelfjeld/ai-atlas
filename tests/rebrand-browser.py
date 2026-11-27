@@ -60,6 +60,46 @@ with sync_playwright() as p:
           and page.locator('main .site-static-fallback a[href="technology/index.html"]').count() == 1
           and not page.locator('#load-status').is_visible()
           and not page.locator('.catalog-badge').is_visible())
+    # The real script-free dropdown shares one anchor and wordmark layout
+    # rather than inheriting the positioning or justification of each page.
+    for width in (320, 390):
+        page.set_viewport_size({'width':width,'height':844})
+        for theme in ('light', 'dark'):
+            page.emulate_media(color_scheme=theme)
+            for route in ('index.html', 'whats-new.html', 'research.html', 'terms/index.html',
+                          'technology/index.html', 'games.html', 'about.html', 'demo.html',
+                          'catalog-review.html', 'hardware-review.html', 'playbooks.html', 'technologies.html',
+                          'terms/MLD-0470-goodhart-s-law.html',
+                          'technology/TECH-0303-tohoku-aisin-16-nm-stt-mram-edge-ai-soc.html'):
+                page.goto(base + route)
+                drawer = page.locator('details.site-mobile-chrome__nav')
+                toggle = drawer.locator(':scope > summary')
+                toggle.focus()
+                toggle.press('Enter')
+                menu = drawer.locator('.site-mobile-chrome__menu')
+                metrics = menu.evaluate("""el => {
+                    const m=el.getBoundingClientRect();
+                    const t=el.parentElement.querySelector(':scope > summary').getBoundingClientRect();
+                    const brand=el.querySelector('.site-mobile-chrome__brand');
+                    const icon=brand.querySelector('svg').getBoundingClientRect();
+                    const word=brand.querySelector('.site-chrome__name').getBoundingClientRect();
+                    return {open:el.parentElement.open, dx:m.x-t.x, gap:m.y-t.bottom,
+                            wordGap:word.left-icon.right, right:m.right, bottom:m.bottom,
+                            overflow:document.documentElement.scrollWidth>innerWidth,
+                            links:el.querySelectorAll('a[href]:not(.site-mobile-chrome__brand)').length};
+                }""")
+                check(f'{route} {width}px {theme} native dropdown and wordmark share toggle alignment',
+                      drawer.count()==1 and metrics['open'] and menu.is_visible()
+                      and abs(metrics['dx'])<=1 and abs(metrics['gap']-12)<=1
+                      and abs(metrics['wordGap']-8)<=1 and metrics['right']<=width+1
+                      and metrics['bottom']<=845 and not metrics['overflow'] and metrics['links']==15)
+                if width==390 and theme=='dark' and route in ('index.html','whats-new.html','research.html','games.html'):
+                    page.screenshot(path=str(out / f'native-dropdown-{route.replace("/", "-")}.png'))
+                toggle.press('Space')
+                check(f'{route} {width}px {theme} native dropdown closes by keyboard',
+                      not drawer.evaluate('el=>el.open'))
+    page.emulate_media(color_scheme='light')
+
     # Cross-page navigation must enter native Research before scripts run:
     # inspect real static links and navigate at mobile/desktop widths.
     for width in (390, 1280):

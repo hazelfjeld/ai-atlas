@@ -1759,3 +1759,18 @@ html:is(:has(.nojs-primary-routes > .notice[id="/sources"]:target),:has(.nojs-pr
   }
 }
 /* atlas-shared-footer-alignment:end */
+
+/* atlas-scriptfree-mobile-menu-anchor:begin */
+/* Anchor the native nonmodal dropdown to its own 44px toggle, not to
+   differing page-family header containers. The enhanced modal drawer keeps
+   its existing fixed viewport placement, focus management and isolation. */
+@media(max-width:650px){
+  html:not(.atlas-enhanced) .site-mobile-chrome__nav{position:relative}
+  html:not(.atlas-enhanced) .site-mobile-chrome__nav > .site-mobile-chrome__menu{
+    left:0;top:calc(100% + 12px);
+  }
+  html:not(.atlas-enhanced) .site-mobile-chrome__menu > .site-mobile-chrome__brand{
+    justify-content:flex-start;gap:8px;
+  }
+}
+/* atlas-scriptfree-mobile-menu-anchor:end */
