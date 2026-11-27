@@ -1254,6 +1254,18 @@ with sync_playwright() as p:
             page.evaluate("t => {localStorage.setItem('atlas.theme',t);document.documentElement.dataset.theme=t}",theme)
             # Compare the actual primary icons, not the former standalone-only
             # 16px size. The unified rail uses Discover's 17px reference.
+            # The wordmark and first navigation row must not jump between
+            # the app sidebar and the native rail.
+            brand_geometry = """(el) => {
+                const brand = el.querySelector('.brand, .site-chrome__brand');
+                const name = brand.lastElementChild;
+                const first = el.querySelector('.site-chrome__links a');
+                const rect = e => e.getBoundingClientRect();
+                return {x:rect(name).x, y:rect(name).y, first:rect(first).y,
+                        size:getComputedStyle(name).fontSize,
+                        tracking:getComputedStyle(name.querySelector('small')).letterSpacing};
+            }"""
+            discover_brand = page.locator('#sidebar').evaluate(brand_geometry)
             discover_icon_sizes=page.locator('#navigation > .site-chrome__links > a.nav-link > svg').evaluate_all("""els => els.map(el => {
                 const s=getComputedStyle(el);
                 return [s.width,s.height];
@@ -1265,6 +1277,12 @@ with sync_playwright() as p:
             for route in ('about.html','whats-new.html','terms/index.html',
                           'technology/TECH-0216-pytorch.html','games.html'):
                 page.goto(base+route)
+                native_brand = page.locator('nav.site-chrome').evaluate(brand_geometry)
+                check(f'{route} {width}px {theme} aligns desktop wordmark and first row with Discover',
+                      all(abs(native_brand[key]-discover_brand[key]) <= 1
+                          for key in ('x','y','first'))
+                      and all(native_brand[key]==discover_brand[key]
+                              for key in ('size','tracking')))
                 icons=page.locator('.site-chrome .site-chrome__links a').evaluate_all("""els => els.map(a => {
                     const s=getComputedStyle(a,'::before');
                     return {width:s.width, height:s.height,

@@ -1578,6 +1578,41 @@ main.term-shell > footer:not(.site-chrome__footer) a{color:var(--accent,#27664e)
 }
 /* atlas-unified-desktop-rail-frame:end */
 
+/* atlas-shared-desktop-brand-rhythm:begin */
+@media (min-width:651px){
+  :root{--atlas-rail-wordmark-size:25px;--atlas-rail-mark-width:35px}
+  :is(.app-shell > .sidebar > .brand,.site-chrome .site-chrome__brand){
+    box-sizing:border-box;flex:0 0 auto;min-height:0;
+    padding:0 7px 36px!important;gap:10px!important;
+    color:#f4f5ed!important;
+  }
+  :is(.app-shell > .sidebar > .brand,.site-chrome .site-chrome__name){
+    font-size:var(--atlas-rail-wordmark-size);font-weight:650;
+    letter-spacing:-.05em;line-height:1.05;white-space:nowrap;
+  }
+  :is(.app-shell > .sidebar > .brand small,.site-chrome .site-chrome__name small){
+    font-size:8px;font-weight:550;letter-spacing:.13em;
+    line-height:1.4;margin-top:7px;color:#9cab9e;
+  }
+  :is(.app-shell > .sidebar .brandmark,.site-chrome .site-chrome__brand > svg){
+    width:var(--atlas-rail-mark-width);height:38px;flex:none;color:#D4AA7F;
+  }
+  .app-shell > .sidebar .brandmark svg{width:var(--atlas-rail-mark-width);height:35px}
+  .app-shell > .sidebar > .nav-label,
+  .site-chrome .site-chrome__links::before{
+    font-size:10px;font-weight:700;letter-spacing:.13em;line-height:1.6;
+    margin:0 13px 12px;color:#87998b;
+  }
+  /* Discover's real heading is between two 4px flex gaps. Native rails
+     render that heading as the first child of the primary link list. */
+  .app-shell > .sidebar{gap:4px}
+  .site-chrome .site-chrome__links::before{margin-top:4px}
+}
+@media (min-width:651px) and (max-width:1150px){
+  :root{--atlas-rail-wordmark-size:22px;--atlas-rail-mark-width:30px}
+}
+/* atlas-shared-desktop-brand-rhythm:end */
+
 /* atlas-unified-more-disclosure:begin */
 /* One native details/summary treatment for the desktop secondary rail on
    Discover and every standalone page. Links stay native and usable without JS;
