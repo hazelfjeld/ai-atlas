@@ -78,5 +78,7 @@ test('guided tour steps reuse Discover title and metadata styles with nested hea
   assert.match(page, /<h2 id="quick-heading">/);
   assert.match(page, /<h2 id="extended-heading">/);
   assert.ok(page.includes('article.story-body>p{color:var(--muted);font-size:16px;line-height:1.65;margin:12px 0}'));
-  assert.ok(read('brand.css').includes('.story-body h3,#edition-content .item > h3'));
+  const shared=read('site-chrome.css').split('/* atlas-editorial-card-copy:begin */')[1].split('/* atlas-editorial-card-copy:end */')[0];
+  assert.match(shared, /:is\(\.story-body > h3,[\s\S]*?#edition-content \.item > h3,[\s\S]*?\)\{\s*font:400 var\(--atlas-card-title-size\)\/var\(--atlas-card-title-leading\)/);
+  assert.ok(page.includes('href="site-chrome.css"'), 'Guided tour loads the same responsive title scale');
 });

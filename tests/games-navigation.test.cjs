@@ -2088,14 +2088,23 @@ test('Guided demo uses Discover editorial chrome and native article skipping whi
 
 
 test('verified daily story titles reuse the Discover editorial card type scale', () => {
-  const brand = read('brand.css'), archive = read('whats-new.html');
-  const shared = '.story-body h3,#edition-content .item > h3';
-  for (const declaration of ["font:400 21px/1.22 Georgia,'Times New Roman',serif;letter-spacing:-.025em", 'font-size:24px', 'font-size:22px', 'font-size:21px;line-height:1.25', 'font-size:27px', 'font-size:25px']) {
-    assert.ok(brand.includes(shared + '{' + declaration + '}'), declaration);
-  }
+  const brand = read('brand.css'), archive = read('whats-new.html'), css = read('site-chrome.css');
+  const block = css.split('/* atlas-editorial-card-copy:begin */')[1].split('/* atlas-editorial-card-copy:end */')[0];
+  const shared = block.match(/:is\((\.story-body > h3,[\s\S]*?)\)\{\s*font:400 var\(--atlas-card-title-size\)\/var\(--atlas-card-title-leading\) Georgia,'Times New Roman',serif;\s*letter-spacing:-\.025em;/);
+  assert.ok(shared && shared[1].includes('#edition-content .item > h3'), 'One shared declaration for Discover and daily cards');
+  for (const declaration of [
+    ':root{--atlas-card-title-size:21px;--atlas-card-title-leading:1.22}',
+    '@media(min-width:1750px){:root{--atlas-card-title-size:24px}}',
+    '@media(max-width:1150px){:root{--atlas-card-title-size:22px}}',
+    '@media(max-width:650px){:root{--atlas-card-title-size:21px;--atlas-card-title-leading:1.25}}',
+    '@media(max-width:520px){:root{--atlas-card-title-size:27px}}',
+    '@media(max-width:380px){:root{--atlas-card-title-size:25px}}'
+  ]) assert.ok(block.includes(declaration), declaration);
+  assert.doesNotMatch(brand, /\.story-body h3,#edition-content \.item > h3\{/);
   assert.doesNotMatch(archive, /\.item h3\{[^}]*\b(?:font(?:-size|-family|-weight)?|line-height|letter-spacing)\s*:/);
   assert.ok(archive.includes('.item h3{margin:0}'), 'archive keeps its own compact card spacing');
-  assert.ok(read('downloads/Atlas_Demo_Offline.html').includes(brand), 'offline fallback embeds exact shared type scale');
+  const offline = read('downloads/Atlas_Demo_Offline.html');
+  assert.ok(offline.includes(brand) && offline.includes(css), 'offline fallback embeds exact shared type scale');
 });
 
 test('compact research and technology cards match the actual shared editorial heading elements', () => {
@@ -2106,7 +2115,7 @@ test('compact research and technology cards match the actual shared editorial he
     assert.ok(rule.includes(selector), selector);
   }
   assert.doesNotMatch(rule, /\.tech-card > h3|\.research-site-chrome\) \.cards > \.card > h3/);
-  assert.ok(rule.includes("font:400 clamp(20px,2vw,23px)/1.25 Georgia,'Times New Roman',serif"));
+  assert.ok(rule.includes("font:400 var(--atlas-card-title-size)/var(--atlas-card-title-leading) Georgia,'Times New Roman',serif"));
   assert.match(rule, /\.title-button\{\s*font:inherit;\s*letter-spacing:inherit;/);
   assert.match(read('checkpoint.js'), /element\('h2'\), button = element\('button', record.title, 'title-button'\)/);
   assert.match(read('technologies.js'), /const h = el\('h2'\), route = el\('a',r.name\)/);
