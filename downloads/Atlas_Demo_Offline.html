@@ -2150,6 +2150,22 @@ function syncDiscoverMobileSelection(mobileNav, current) {
 }
 if (typeof window !== 'undefined') window.atlasSyncDiscoverMobileSelection = syncDiscoverMobileSelection;
 
+// Restore the committed search query in the shared header, not just the
+// results form. A pending catalog hydration must not overwrite a new draft
+// the visitor has started typing after the same route was already applied.
+let lastDiscoverSearchQuery = null;
+function syncDiscoverSearchQuery(view, query) {
+  if (view !== 'search') {
+    lastDiscoverSearchQuery = null;
+    return;
+  }
+  const field = document.getElementById('global-query');
+  if (!field || query === lastDiscoverSearchQuery) return;
+  field.value = query;
+  lastDiscoverSearchQuery = query;
+}
+if (typeof window !== 'undefined') window.atlasSyncDiscoverSearchQuery = syncDiscoverSearchQuery;
+
 /* The catalog is loaded asynchronously. A visitor can manually close and
    reopen an auto-revealed More disclosure before app.js starts; record that
    choice in the shared parser-loaded chrome so navigation won't undo it. */
@@ -2175,6 +2191,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // router. Keep both rails and the workspace title correct until hydration.
     if (!document.getElementById('catalog-loading')) return;
     const route = window.location.hash.match(/^#\/([a-z-]+)(?:\?|$)/)?.[1] || 'overview';
+    const query = Object.fromEntries(new URLSearchParams(window.location.hash.split('?')[1] || '')).q || '';
+    syncDiscoverSearchQuery(route, query);
     const links = [...rail.querySelectorAll('a[data-view]')];
     // The canonical anchors own legacy aliases for both early and hydrated
     // routing. Never maintain a second alias table or fake mobile destination.
@@ -3574,6 +3592,7 @@ function route(){
   const previousView = view;
   if(disposeGames){disposeGames();disposeGames=null;}
   parse();
+  window.atlasSyncDiscoverSearchQuery?.(view, state.q || '');
   const changedSection = routeInitialized && previousView !== view;
   renderNav();
   const fromMobileNav = $('discover-mobile-nav').open;

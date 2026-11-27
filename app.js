@@ -194,6 +194,7 @@ function route(){
   const previousView = view;
   if(disposeGames){disposeGames();disposeGames=null;}
   parse();
+  window.atlasSyncDiscoverSearchQuery?.(view, state.q || '');
   const changedSection = routeInitialized && previousView !== view;
   renderNav();
   const fromMobileNav = $('discover-mobile-nav').open;

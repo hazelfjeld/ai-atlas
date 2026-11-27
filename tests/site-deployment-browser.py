@@ -2244,7 +2244,9 @@ with sync_playwright() as p:
     mobile_research.wait_for_url('**/index.html#/search?q=reward%20hacking')
     mobile_research.locator('#catalog-loading').wait_for(state='detached', timeout=45000)
     check('shared search submits a real query to Discover',
-          mobile_research.locator('#all-query').input_value() == 'reward hacking')
+          mobile_research.locator('#all-query').input_value() == 'reward hacking'
+          and mobile_research.locator('#global-query').input_value() == 'reward hacking'
+          and mobile_research.evaluate("document.activeElement?.id === 'global-query'"))
     mobile_research.close()
     # Desktop hides the native mobile search row, but its real destination
     # must remain available via the same '/' shortcut as Discover. Previously
@@ -2280,7 +2282,9 @@ with sync_playwright() as p:
         desktop_search.locator('#catalog-loading').wait_for(state='detached', timeout=45000)
         check('native desktop slash reaches functional Discover search '+route+' '+scheme,
               desktop_search.evaluate("document.activeElement?.id === 'global-query'")
-              and desktop_search.locator('#global-query').is_visible())
+              and desktop_search.locator('#global-query').is_visible()
+              and desktop_search.locator('#global-query').input_value() ==
+                  ('reward hacking' if input_visible else ''))
         desktop_search.close()
     # Direct concept detail pages share the same native, script-free menu
     # and current-section indication as the dictionary and technology directories.

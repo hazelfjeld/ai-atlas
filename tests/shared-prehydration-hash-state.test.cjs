@@ -80,10 +80,11 @@ function exercise(hash) {
     getElementById(id){return nodes[id]||null;},
     querySelector(selector){return selector==='.discover-mobile-chrome'?header:null;},
   };
-  vm.runInNewContext(block,{window,document});
+  vm.runInNewContext(block,{window,document,URLSearchParams});
   assert.equal(typeof callback,'function');
   callback();
   return {links,mobile,mainMore,mobileMore,title,header,toggleAttrs,cleared,earlyClick,
+    searchField:nodes['global-query'], syncSearch:window.atlasSyncDiscoverSearchQuery,
     navigate(hash) {location.hash = hash; hashchange();},
     finishLoading() {delete nodes['catalog-loading'];}};
 }
@@ -298,4 +299,25 @@ test('canonical legacy hashes and unknown routes stay in sync before and after h
     vm.runInNewContext(parse + ';parse();', context);
     assert.equal(context.view, expected, hash + ': hydrated route');
   }
+});
+
+test('committed query is restored before and after hydration without erasing a draft', () => {
+  const state = exercise('#/search?q=reward%20hacking');
+  assert.equal(state.searchField.value, 'reward hacking');
+  state.searchField.value = 'draft';
+  state.finishLoading();
+  state.syncSearch('search', 'reward hacking');
+  assert.equal(state.searchField.value, 'draft');
+  state.syncSearch('search', 'LoRA & safety');
+  assert.equal(state.searchField.value, 'LoRA & safety');
+  state.syncSearch('search', '');
+  assert.equal(state.searchField.value, '');
+  state.searchField.value = 'another draft';
+  state.syncSearch('dictionary', '');
+  assert.equal(state.searchField.value, 'another draft');
+  state.syncSearch('search', '');
+  assert.equal(state.searchField.value, '');
+  const direct = exercise('#/search?q=first&q=last%20query');
+  assert.equal(direct.searchField.value, 'last query');
+  assert.ok(read('app.js').includes("window.atlasSyncDiscoverSearchQuery?.(view, state.q || '')"));
 });
