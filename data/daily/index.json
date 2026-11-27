@@ -419,7 +419,7 @@
       "published_at": "2026-11-27T15:27:39Z"
     }
   ],
-  "last_successful_publish_at": "2026-11-26T18:37:51Z",
-  "status": "edition_revision_1_pending_production_verification",
-  "coverage_note": "November 27 source-reviewed edition revision 1 prepared; production verification pending. Prior certified publication clock retained."
+  "last_successful_publish_at": "2026-11-27T16:48:49Z",
+  "status": "edition_revision_1_production_verified",
+  "coverage_note": "November 27 source-reviewed edition revision 1 production verified; partial, non-exhaustive coverage. Six catalog proposals remain deferred."
 }

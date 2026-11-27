@@ -2247,7 +2247,7 @@
       "edition_date": "2026-11-27",
       "validation_result": "independent_sha256_counts_unique_ids_receipt_reconciliation_recent_archive_dedup_primary_source_public_listing_review",
       "status": "partially_published_12_news_6_catalog_proposals_deferred",
-      "publication_outcome": "pending_production_verification",
+      "publication_outcome": "immutable_revision_1_cloudflare_http_browser_and_githack_verified",
       "publication_edition": "2026-11-27-v1",
       "accepted_news_ids": [
         "ai-news-dfly2-sparse-cache-release-2026-11-26",
@@ -2303,8 +2303,22 @@
           "status": "pending_production_verification",
           "prepared_at": "2026-11-27T15:27:39Z",
           "note": "12 reviewed reports; six catalog proposals deferred. Edition SHA-256 8623c84b489bc4a290921bd33f56be36b383db0b7524bcf9b3b101c16363488f, 29713 UTF-8 bytes. Public verification pending."
+        },
+        {
+          "edition": "2026-11-27-v1",
+          "status": "cloudflare_http_browser_and_githack_verified",
+          "note": "Exact main 21ac54a3fe1102ece8891ea8992d19a98f7727a8 passed Cloudflare workflow 46034105428 on November 27, 2026: 516 exact HTTP assets per hostname across three production hosts; hosted archive reader, permalink, script-free recovery, responsive light/dark navigation and Games checks passed. Catalog/GitHack workflow 46034105229 passed, including the immutable November 27 edition. Production job completed at 2026-11-27T16:48:49Z. Independent direct retrieval of the dated permalink unavailable. Immutable edition SHA-256 8623c84b489bc4a290921bd33f56be36b383db0b7524bcf9b3b101c16363488f, 29713 UTF-8 bytes.",
+          "verified_at": "2026-11-27T16:48:49Z"
         }
-      ]
+      ],
+      "production_verified_at": "2026-11-27T16:48:49Z",
+      "production_verified_revision": 1,
+      "last_verified_at": "2026-11-27T16:48:49Z",
+      "last_verified_public_url": "https://aiupdates.app/whats-new.html?date=2026-11-27&revision=1",
+      "production_commit": "21ac54a3fe1102ece8891ea8992d19a98f7727a8",
+      "production_workflow_run_id": 46034105428,
+      "githack_workflow_run_id": 46034105229,
+      "verification_scope": "Exact main 21ac54a3fe1102ece8891ea8992d19a98f7727a8 passed Cloudflare workflow 46034105428 on November 27, 2026: 516 exact HTTP assets per hostname across three production hosts; hosted archive reader, permalink, script-free recovery, responsive light/dark navigation and Games checks passed. Catalog/GitHack workflow 46034105229 passed, including the immutable November 27 edition. Production job completed at 2026-11-27T16:48:49Z. Independent direct retrieval of the dated permalink unavailable. Immutable edition SHA-256 8623c84b489bc4a290921bd33f56be36b383db0b7524bcf9b3b101c16363488f, 29713 UTF-8 bytes."
     }
   ]
 }
