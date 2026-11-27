@@ -1266,6 +1266,22 @@ with sync_playwright() as p:
                         tracking:getComputedStyle(name.querySelector('small')).letterSpacing};
             }"""
             discover_brand = page.locator('#sidebar').evaluate(brand_geometry)
+            # Compare the actual rail action rather than only its native class.
+            rail_action_geometry = """el => {
+                const r=el.getBoundingClientRect(), s=getComputedStyle(el);
+                const icon=getComputedStyle(el,'::before');
+                return {width:r.width,height:r.height,radius:s.borderRadius,
+                        icon:icon.content,iconSize:icon.fontSize,
+                        label:el.getAttribute('aria-label')};
+            }"""
+            discover_action = page.locator('#sidebar .sidebar-actions button')
+            discover_action.wait_for()
+            discover_action_style = discover_action.evaluate(rail_action_geometry)
+            check(f'Discover {width}px {theme} shared rail appearance action is 44px',
+                  discover_action_style['width']==44
+                  and discover_action_style['height']==44
+                  and discover_action_style['iconSize']=='17px'
+                  and discover_action_style['label']=='Toggle color theme')
             discover_icon_sizes=page.locator('#navigation > .site-chrome__links > a.nav-link > svg').evaluate_all("""els => els.map(el => {
                 const s=getComputedStyle(el);
                 return [s.width,s.height];
@@ -1278,6 +1294,11 @@ with sync_playwright() as p:
                           'technology/TECH-0216-pytorch.html','games.html'):
                 page.goto(base+route)
                 native_brand = page.locator('nav.site-chrome').evaluate(brand_geometry)
+                native_action = page.locator('nav.site-chrome .sidebar-actions button')
+                native_action.wait_for()
+                check(f'{route} {width}px {theme} rail appearance action matches Discover',
+                      native_action.count()==1
+                      and native_action.evaluate(rail_action_geometry)==discover_action_style)
                 check(f'{route} {width}px {theme} aligns desktop wordmark and first row with Discover',
                       all(abs(native_brand[key]-discover_brand[key]) <= 1
                           for key in ('x','y','first'))

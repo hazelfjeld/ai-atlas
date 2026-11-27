@@ -1217,16 +1217,18 @@ main.term-shell > footer:not(.site-chrome__footer) a{color:var(--accent,#27664e)
 .sidebar-actions{display:flex;justify-content:space-between;align-items:center;margin-top:22px;color:#859888;font-size:10px}
 .sidebar-actions .icon-button{border-color:#435446;color:#d2dfd3;background:none}
 @media(min-width:651px){
-  .site-chrome .sidebar-bottom{width:100%;box-sizing:border-box;padding:32px 12px 0}
-  .site-chrome .sidebar-actions .site-chrome__theme-toggle--rail{
+  .sidebar-bottom{width:100%;box-sizing:border-box;padding:45px 12px 0;line-height:1.55}
+  .sidebar-bottom .sidebar-actions > button.icon-button{
+    box-sizing:border-box;display:flex;align-items:center;justify-content:center;
     width:44px;height:44px;min-height:44px;padding:0;margin:0;
-    flex:0 0 44px;justify-content:center;border:1px solid #435446;
-    color:#d2dfd3;background:none;font-size:0;
+    flex:0 0 44px;border:1px solid #435446;border-radius:8px;
+    color:#d2dfd3;background:none;font-size:0;cursor:pointer;
   }
-  .site-chrome .sidebar-actions .site-chrome__theme-toggle--rail::before{
+  .sidebar-bottom .sidebar-actions > button.icon-button::before{
     content:'◐';font-size:17px;line-height:1;
   }
-  .site-chrome .sidebar-actions .site-chrome__theme-toggle--rail:hover{color:#fff;background:#374b3c}
+  .sidebar-bottom .sidebar-actions > button.icon-button:hover{color:#fff;background:#374b3c}
+  .sidebar-bottom .sidebar-actions > button.icon-button:focus-visible{outline:3px solid #edba87;outline-offset:2px}
 }
 
 /* atlas-unified-desktop-rail-frame:begin */
