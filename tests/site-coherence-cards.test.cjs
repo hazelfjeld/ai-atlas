@@ -1096,17 +1096,29 @@ test('research contextual views reuse Discover horizontal topic navigation', () 
 
 
 test('Research hash views update both shared navigation landmarks and the real workspace title', () => {
-  const script = fs.readFileSync(path.join(__dirname, '..', 'checkpoint.js'), 'utf8');
+  const checkpoint = fs.readFileSync(path.join(__dirname, '..', 'checkpoint.js'), 'utf8');
+  const shared = fs.readFileSync(path.join(__dirname, '..', 'site-theme.js'), 'utf8');
   const html = fs.readFileSync(path.join(__dirname, '..', 'research.html'), 'utf8');
-  assert.ok(script.includes("view === 'alerts' ? 'index.html#/safety' : 'index.html#/papers'"),
+  const script = shared.split('/* atlas-native-research-prehydration:begin */')[1]
+    ?.split('/* atlas-native-research-prehydration:end */')[0];
+  assert.ok(script, 'Keep a single shared Research navigation controller');
+  assert.ok(checkpoint.includes('window.atlasSyncResearchNavigation(view);') &&
+    script.includes('window.atlasSyncResearchNavigation = syncResearchNavigation') &&
+    script.includes('const sync = () => syncResearchNavigation('),
+    'Pending and hydrated catalog routes must call the same controller');
+  assert.ok(script.includes("const parentLabel = selected.dataset.nav === 'alerts' ? safetyLabel : researchLabel"),
     'Safety and research hash views must select the corresponding shared rail link');
-  assert.ok(script.includes("document.querySelectorAll('.site-chrome__more-links a, .site-mobile-chrome__more-links a')"),
+  assert.ok(script.includes('.site-chrome.research-site-chrome .site-chrome__more-links a, ') &&
+    script.includes('.research-mobile-topbar .site-mobile-chrome__more-links a'),
     'Desktop and mobile must share the same active-section update');
-  assert.ok(script.includes("a.removeAttribute('aria-current')"),
+  assert.ok(script.includes("else link.removeAttribute('aria-current')"),
     'Do not leave two active secondary destinations');
-  assert.ok(script.includes('mobileChrome.dataset.pageLabel = workspaceName'));
-  assert.ok(script.includes("mobileChrome.querySelector('.site-mobile-chrome__title').textContent = workspaceName"));
-  assert.ok(script.includes("document.title = workspaceName + ' | AI Updates'"),
+  assert.ok(script.includes("link.classList.toggle('active', link === selected)"),
+    'Visible local view selection must follow the same current link');
+  assert.ok(script.includes('chrome.dataset.pageLabel = label'));
+  assert.ok(script.includes("chrome.querySelector('.site-mobile-chrome__title')") &&
+    script.includes('if (title) title.textContent = label'));
+  assert.ok(script.includes("document.title = label + ' | AI Updates'"),
     'Research route changes must keep the AI Updates site identity');
   assert.ok(html.includes('class="site-chrome__more-links"') &&
     html.includes('class="site-mobile-chrome__more-links"'), 'Shared navigation landmarks are present');
