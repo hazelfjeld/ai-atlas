@@ -2236,6 +2236,75 @@
       "production_workflow_run_id": 45867471348,
       "githack_workflow_run_id": 45867471332,
       "verification_scope": "Exact main ce50312dd60b05c1f6923b7ee3f2993b54eaa3d5 passed Cloudflare workflow 45867471348 (attempt 2) on November 26, 2026: 515 exact HTTP assets per hostname across three production hosts, hosted archive reader, permalink, script-free recovery, responsive light/dark, navigation and Games checks passed. The previous Discover 390px dark More disclosure failure did not recur on retry; cause not established. Catalog/GitHack workflow 45867471332 passed. Production job completed at 2026-11-26T18:37:51Z. Independent external retrieval of dated permalink unavailable. Immutable edition SHA-256 9444ac4df8a07bb5ee7d4e2a13d160bd83c542cc1b0c9c2dcdc8f759e9682f5f, 31098 UTF-8 bytes."
+    },
+    {
+      "batch_id": "atlas-daily-20261127-145246z-source-review-a",
+      "source_branch": "atlas-daily-staging",
+      "source_commit": "7035ef7c585734066a55b8ece3956e6d20f7c798",
+      "source_batch_path": "daily-queue/batches/2026-11-27-atlas-daily-20261127-145246z-source-review-a.json",
+      "source_batch_sha256": "c5f8535c1e15a0f187e4d3038eae5161580f39e81a35981dbe38eaca43350559",
+      "source_batch_bytes": 42684,
+      "edition_date": "2026-11-27",
+      "validation_result": "independent_sha256_counts_unique_ids_receipt_reconciliation_recent_archive_dedup_primary_source_public_listing_review",
+      "status": "partially_published_12_news_6_catalog_proposals_deferred",
+      "publication_outcome": "pending_production_verification",
+      "publication_edition": "2026-11-27-v1",
+      "accepted_news_ids": [
+        "ai-news-dfly2-sparse-cache-release-2026-11-26",
+        "ai-news-llamacpp-amd-dashboard-2026-11-26",
+        "ai-news-nemotron-35-parse-training-and-draft-2026-11-26",
+        "ai-news-hf-training-swarms-2026-11-26",
+        "ai-news-generated-helper-visual-reasoning-2611-34935",
+        "ai-news-tokenisation-approximation-hardness-2611-34938",
+        "ai-news-dart-reasoning-trace-mining-2611-34928",
+        "ai-news-dexlink-hand-object-templates-2611-34936",
+        "ai-news-umai-frozen-asr-fillers-2611-34256",
+        "ai-news-theory-in-context-llm-solver-2611-34751",
+        "ai-news-swiss-ncsc-agent-assisted-incidents-2026-11-24",
+        "ai-news-clickhouse-aws-data-stack-agreement-2026-11-23"
+      ],
+      "source_news_ids": [
+        "ai-news:dfly2-sparse-cache-release:2026-11-26",
+        "ai-news:llamacpp-amd-dashboard:2026-11-26",
+        "ai-news:nemotron-35-parse-training-and-draft:2026-11-26",
+        "ai-news:hf-training-swarms:2026-11-26",
+        "ai-news:generated-helper-visual-reasoning:2611.34935",
+        "ai-news:tokenisation-approximation-hardness:2611.34938",
+        "ai-news:dart-reasoning-trace-mining:2611.34928",
+        "ai-news:dexlink-hand-object-templates:2611.34936",
+        "ai-news:umai-frozen-asr-fillers:2611.34256",
+        "ai-news:theory-in-context-llm-solver:2611.34751",
+        "ai-news:swiss-ncsc-agent-assisted-incidents:2026-11-24",
+        "ai-news:clickhouse-aws-data-stack-agreement:2026-11-23"
+      ],
+      "deferred_news_ids": [],
+      "deferred_catalog_proposal_ids": [
+        "tech-proposal:dfly2:2026-11-27",
+        "tech-proposal:llamacpp-amd-dashboard:2026-11-27",
+        "tech-proposal:nemotron-35-parse-dflash2:2026-11-27",
+        "tech-proposal:dart-reasoning-trace-mining:2026-11-27",
+        "tech-proposal:umai-asr:2026-11-27",
+        "term-proposal:filled-pause:2026-11-27"
+      ],
+      "rejected_ids": [],
+      "counts": {
+        "news_published": 12,
+        "technology_added": 0,
+        "term_added": 0,
+        "corrections": 0,
+        "news_deferred": 0,
+        "catalog_deferred": 6,
+        "technology_updated": 0
+      },
+      "review_notes": "Twelve primary pages and five arXiv listings checked. Swiss NCSC report restricted to government notice; later case count omitted. Prior receipt IDs and latest eight dated editions checked for duplicates; earlier llama.cpp duplex announcement is distinct. Five technology and one terminology proposals remain deferred pending alias and canonical integration review. Prior certified no-JavaScript preview retained.",
+      "publication_history": [
+        {
+          "edition": "2026-11-27-v1",
+          "status": "pending_production_verification",
+          "prepared_at": "2026-11-27T15:27:39Z",
+          "note": "12 reviewed reports; six catalog proposals deferred. Edition SHA-256 8623c84b489bc4a290921bd33f56be36b383db0b7524bcf9b3b101c16363488f, 29713 UTF-8 bytes. Public verification pending."
+        }
+      ]
     }
   ]
 }

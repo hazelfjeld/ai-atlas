@@ -1,0 +1,606 @@
+{
+  "schema": 1,
+  "edition_date": "2026-11-27",
+  "timezone": "America/Chicago",
+  "published_at": "2026-11-27T15:27:39Z",
+  "coverage": {
+    "start": "2026-11-26T12:28:23Z",
+    "end": "2026-11-27T14:52:46Z",
+    "status": "partial",
+    "note": "12 source-reviewed reports; six preprints listed November 26 and submitted November 25. All reports have earlier source dates than the edition. Six catalog proposals deferred pending canonical alias, evidence and integration review. Collection remains bounded and incomplete.",
+    "sources_checked": [
+      {
+        "url": "https://github.com/Tencent/AngelSpec",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-27T14:52:46Z",
+        "method": "opened source page; scoped editorial review"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.34776",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-27T14:52:46Z",
+        "method": "opened source page; scoped editorial review"
+      },
+      {
+        "url": "https://huggingface.co/blog/ggml-org/llamacpp-amd-bench",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-27T14:52:46Z",
+        "method": "opened source page; scoped editorial review"
+      },
+      {
+        "url": "https://huggingface.co/blog/nvidia/building-on-nemotron-35-parse-open-data-fine-tunin",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-27T14:52:46Z",
+        "method": "opened source page; scoped editorial review"
+      },
+      {
+        "url": "https://huggingface.co/blog/training-swarms",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-27T14:52:46Z",
+        "method": "opened source page; scoped editorial review"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.34935",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-27T14:52:46Z",
+        "method": "opened source page; scoped editorial review"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.34938",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-27T14:52:46Z",
+        "method": "opened source page; scoped editorial review"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.34928",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-27T14:52:46Z",
+        "method": "opened source page; scoped editorial review"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.34936",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-27T14:52:46Z",
+        "method": "opened source page; scoped editorial review"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.34256",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-27T14:52:46Z",
+        "method": "opened source page; scoped editorial review"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.34751",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-27T14:52:46Z",
+        "method": "opened source page; scoped editorial review"
+      },
+      {
+        "url": "https://www.bacs.admin.ch/en/26-ki-agenten-1-en",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-27T14:52:46Z",
+        "method": "opened source page; scoped editorial review"
+      },
+      {
+        "url": "https://www.reuters.com/legal/litigation/ai-agents-used-five-cyber-attacks-switzerland-government-says-2026-11-26/",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-27T14:52:46Z",
+        "method": "opened source page; scoped editorial review"
+      },
+      {
+        "url": "https://clickhouse.com/blog/clickhouse-expands-aws-strategic-collaboration-scale-unified-enterprise-ai-data-stack",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-27T14:52:46Z",
+        "method": "opened source page; scoped editorial review"
+      },
+      {
+        "url": "https://arxiv.org/list/cs.LG/recent",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-27T14:52:46Z",
+        "method": "opened source page; scoped editorial review"
+      },
+      {
+        "url": "https://arxiv.org/list/cs.CL/recent",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-27T14:52:46Z",
+        "method": "opened source page; scoped editorial review"
+      },
+      {
+        "url": "https://arxiv.org/list/cs.AI/recent",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-27T14:52:46Z",
+        "method": "opened source page; scoped editorial review"
+      },
+      {
+        "url": "https://arxiv.org/list/cs.RO/recent",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-27T14:52:46Z",
+        "method": "opened source page; scoped editorial review"
+      },
+      {
+        "url": "https://arxiv.org/list/eess.AS/recent",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-27T14:52:46Z",
+        "method": "opened source page; scoped editorial review"
+      },
+      {
+        "url": "https://openai.com/news/",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-27T14:52:46Z",
+        "method": "opened source page; scoped editorial review"
+      },
+      {
+        "url": "https://www.anthropic.com/research",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-27T14:52:46Z",
+        "method": "opened source page; scoped editorial review"
+      },
+      {
+        "url": "https://metr.org/blog/",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-27T14:52:46Z",
+        "method": "opened source page; scoped editorial review"
+      },
+      {
+        "url": "https://github.com/vllm-project/vllm/releases",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-27T14:52:46Z",
+        "method": "opened source page; scoped editorial review"
+      },
+      {
+        "url": "https://github.com/NousResearch/hermes-agent/releases",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-27T14:52:46Z",
+        "method": "opened source page; scoped editorial review"
+      },
+      {
+        "url": "https://huggingface.co/blog/nvidia/microduck-obstacle-avoidance",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-27T14:52:46Z",
+        "method": "opened source page; scoped editorial review"
+      },
+      {
+        "url": "https://blog.st.com/physical-ai-electronica-2026/",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-27T14:52:46Z",
+        "method": "opened source page; scoped editorial review"
+      },
+      {
+        "url": "https://metr.org/blog/2026-11-24-interpreting-a-recent-acceleration-in-pretraining-loss/",
+        "status": "collector_reported_success",
+        "checked_at": "2026-11-27T14:52:46Z",
+        "method": "opened source page; scoped editorial review"
+      },
+      {
+        "url": "https://github.com/Tencent/AngelSpec",
+        "status": "publisher_checked_primary_source",
+        "checked_at": "2026-11-27T15:27:39Z",
+        "method": "Opened dated source or abstract; checked material claims"
+      },
+      {
+        "url": "https://huggingface.co/blog/ggml-org/llamacpp-amd-bench",
+        "status": "publisher_checked_primary_source",
+        "checked_at": "2026-11-27T15:27:39Z",
+        "method": "Opened dated source or abstract; checked material claims"
+      },
+      {
+        "url": "https://huggingface.co/blog/nvidia/building-on-nemotron-35-parse-open-data-fine-tunin",
+        "status": "publisher_checked_primary_source",
+        "checked_at": "2026-11-27T15:27:39Z",
+        "method": "Opened dated source or abstract; checked material claims"
+      },
+      {
+        "url": "https://huggingface.co/blog/training-swarms",
+        "status": "publisher_checked_primary_source",
+        "checked_at": "2026-11-27T15:27:39Z",
+        "method": "Opened dated source or abstract; checked material claims"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.34935",
+        "status": "publisher_checked_primary_source",
+        "checked_at": "2026-11-27T15:27:39Z",
+        "method": "Opened dated source or abstract; checked material claims"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.34938",
+        "status": "publisher_checked_primary_source",
+        "checked_at": "2026-11-27T15:27:39Z",
+        "method": "Opened dated source or abstract; checked material claims"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.34928",
+        "status": "publisher_checked_primary_source",
+        "checked_at": "2026-11-27T15:27:39Z",
+        "method": "Opened dated source or abstract; checked material claims"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.34936",
+        "status": "publisher_checked_primary_source",
+        "checked_at": "2026-11-27T15:27:39Z",
+        "method": "Opened dated source or abstract; checked material claims"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.34256",
+        "status": "publisher_checked_primary_source",
+        "checked_at": "2026-11-27T15:27:39Z",
+        "method": "Opened dated source or abstract; checked material claims"
+      },
+      {
+        "url": "https://arxiv.org/abs/2611.34751",
+        "status": "publisher_checked_primary_source",
+        "checked_at": "2026-11-27T15:27:39Z",
+        "method": "Opened dated source or abstract; checked material claims"
+      },
+      {
+        "url": "https://www.bacs.admin.ch/en/26-ki-agenten-1-en",
+        "status": "publisher_checked_primary_source",
+        "checked_at": "2026-11-27T15:27:39Z",
+        "method": "Opened dated source or abstract; checked material claims"
+      },
+      {
+        "url": "https://clickhouse.com/blog/clickhouse-expands-aws-strategic-collaboration-scale-unified-enterprise-ai-data-stack",
+        "status": "publisher_checked_primary_source",
+        "checked_at": "2026-11-27T15:27:39Z",
+        "method": "Opened dated source or abstract; checked material claims"
+      },
+      {
+        "url": "https://arxiv.org/list/cs.CL/recent",
+        "status": "publisher_checked_public_listing",
+        "checked_at": "2026-11-27T15:27:39Z",
+        "method": "Matched queued preprint under November 26 listing"
+      },
+      {
+        "url": "https://arxiv.org/list/cs.LG/recent",
+        "status": "publisher_checked_public_listing",
+        "checked_at": "2026-11-27T15:27:39Z",
+        "method": "Matched queued preprint under November 26 listing"
+      },
+      {
+        "url": "https://arxiv.org/list/cs.AI/recent",
+        "status": "publisher_checked_public_listing",
+        "checked_at": "2026-11-27T15:27:39Z",
+        "method": "Matched queued preprint under November 26 listing"
+      },
+      {
+        "url": "https://arxiv.org/list/cs.RO/recent",
+        "status": "publisher_checked_public_listing",
+        "checked_at": "2026-11-27T15:27:39Z",
+        "method": "Matched queued preprint under November 26 listing"
+      },
+      {
+        "url": "https://arxiv.org/list/eess.AS/recent",
+        "status": "publisher_checked_public_listing",
+        "checked_at": "2026-11-27T15:27:39Z",
+        "method": "Matched queued preprint under November 26 listing"
+      }
+    ],
+    "sources_failed": [
+      {
+        "url": "https://export.arxiv.org/api/query?search_query=cat%3Acs.AI&max_results=5",
+        "status": "failed",
+        "checked_at": "2026-11-27T14:52:46Z",
+        "error": "Metadata endpoint inaccessible; public category lists and individual abstracts accessible."
+      },
+      {
+        "url": "https://huggingface.co/AngelSlim/Hy4-flash-DFly2-B6",
+        "status": "failed",
+        "checked_at": "2026-11-27T14:52:46Z",
+        "error": "Model card inaccessible; official repository announcement checked instead."
+      }
+    ]
+  },
+  "tldr": [
+    "New sparse-cache drafting, AMD inference benchmarking and document parsing tools offer practical routes to evaluate inference efficiency, while small-model team training and reasoning-trace mining explore better use of limited compute.",
+    "Research on visual helper images and speech fillers highlights the need for targeted evaluation; Swiss authorities confirm attacker-directed agent-assisted incidents, reinforcing conventional defensive controls."
+  ],
+  "news": [
+    {
+      "id": "ai-news-dfly2-sparse-cache-release-2026-11-26",
+      "title": "Tencent extends DFly2 drafting to three sparse-attention model families",
+      "category": "inference",
+      "tags": [
+        "AI",
+        "DL",
+        "LLM",
+        "open-source"
+      ],
+      "summary": "AngelSpec's November 26 entry announces training code, draft checkpoints and a report for DFly2, including new drafts for Hy4 flash, DeepSeek-V4.1-Flash and GLM-5.3-Flash. Draft layers reuse target attention cache and selected token indices.",
+      "why_it_matters": "Could reduce redundant computation for long-context speculative generation when the target and serving engine support sharing.",
+      "caveat": "Checkpoint page inaccessible during this review; actual downloads, license terms and serving compatibility not verified. Acceptance length and decoding speed do not establish end-to-end latency.",
+      "review_status": "publisher_reviewed_first_party_report",
+      "release_status": "announced_artifacts",
+      "source_url": "https://github.com/Tencent/AngelSpec",
+      "publication_date": "2026-11-26",
+      "event_date": "2026-11-26",
+      "discovered_at": "2026-11-27T14:52:46Z",
+      "added_to_atlas_at": "2026-11-27T15:27:39Z",
+      "collection_classification": "catch-up",
+      "source_record_id": "ai-news:dfly2-sparse-cache-release:2026-11-26"
+    },
+    {
+      "id": "ai-news-llamacpp-amd-dashboard-2026-11-26",
+      "title": "Public llama.cpp benchmark dashboard tracks AMD local inference",
+      "category": "hardware",
+      "tags": [
+        "AI",
+        "LLM",
+        "SLM",
+        "inference",
+        "evaluation"
+      ],
+      "summary": "The ggml team introduced a dashboard comparing prompt processing and generation across AMD hardware, model formats and llama.cpp builds. The announcement describes weekly workflows, ten repetitions per configuration and public raw results.",
+      "why_it_matters": "Makes regression diagnosis and hardware/model tradeoffs easier to inspect instead of relying on a single tokens-per-second number.",
+      "caveat": "Results cover tested hardware and builds; not a general AMD-versus-NVIDIA ranking. Dashboard execution not independently tested.",
+      "review_status": "publisher_reviewed_first_party_report",
+      "release_status": "public_dashboard_announced",
+      "source_url": "https://huggingface.co/blog/ggml-org/llamacpp-amd-bench",
+      "publication_date": "2026-11-26",
+      "event_date": "2026-11-26",
+      "discovered_at": "2026-11-27T14:52:46Z",
+      "added_to_atlas_at": "2026-11-27T15:27:39Z",
+      "collection_classification": "catch-up",
+      "source_record_id": "ai-news:llamacpp-amd-dashboard:2026-11-26"
+    },
+    {
+      "id": "ai-news-nemotron-35-parse-training-and-draft-2026-11-26",
+      "title": "NVIDIA shares document parsing training recipe and DFlash2 draft",
+      "category": "multimodal",
+      "tags": [
+        "AI",
+        "DL",
+        "LLM",
+        "vision",
+        "fine-tuning",
+        "RAG"
+      ],
+      "summary": "NVIDIA describes synthetic training data, supervised tuning and verifiable-reward RL for Nemotron 3.5 Parse, plus a DFlash2 draft. On one H200 in BF16, reported throughput gains over the non-speculative 3.5 configuration are 7.62x at concurrency 1 and 1.52x at 512.",
+      "why_it_matters": "A documented route to adapt structured document extraction and assess whether speculation improves serving cost.",
+      "caveat": "Vendor benchmarks on selected pages and accelerator; extraction errors remain possible. Artifact terms and deployment not independently tested.",
+      "review_status": "publisher_reviewed_first_party_report",
+      "release_status": "training_recipe_and_draft_announced",
+      "source_url": "https://huggingface.co/blog/nvidia/building-on-nemotron-35-parse-open-data-fine-tunin",
+      "publication_date": "2026-11-26",
+      "event_date": "2026-11-26",
+      "discovered_at": "2026-11-27T14:52:46Z",
+      "added_to_atlas_at": "2026-11-27T15:27:39Z",
+      "collection_classification": "catch-up",
+      "source_record_id": "ai-news:nemotron-35-parse-training-and-draft:2026-11-26"
+    },
+    {
+      "id": "ai-news-hf-training-swarms-2026-11-26",
+      "title": "Hugging Face demonstrates reinforcement learning for four 0.6B agents",
+      "category": "training",
+      "tags": [
+        "AI",
+        "ML",
+        "DL",
+        "SLM",
+        "LLM",
+        "agents"
+      ],
+      "summary": "A shared Qwen3-0.6B policy was trained for a cooperative number-ordering task with four logical agents. The authors report 26 of 32 held-out tasks solved at update 75 and a 37.4% decline in generated tokens per team between early and late training windows.",
+      "why_it_matters": "Provides a small-model team-training example with explicit communication and compute accounting.",
+      "caveat": "Toy task, small holdout, and token savings measured during training rather than held-out inference. Original run used eight GPUs; cannot infer general software-engineering superiority.",
+      "review_status": "publisher_reviewed_author_reported_experiment",
+      "release_status": "technical_walkthrough",
+      "source_url": "https://huggingface.co/blog/training-swarms",
+      "publication_date": "2026-11-26",
+      "event_date": "2026-11-26",
+      "discovered_at": "2026-11-27T14:52:46Z",
+      "added_to_atlas_at": "2026-11-27T15:27:39Z",
+      "collection_classification": "catch-up",
+      "source_record_id": "ai-news:hf-training-swarms:2026-11-26"
+    },
+    {
+      "id": "ai-news-generated-helper-visual-reasoning-2611-34935",
+      "title": "Generated helper images often hurt visual reasoning in tested systems",
+      "category": "multimodal",
+      "tags": [
+        "AI",
+        "DL",
+        "LLM",
+        "vision",
+        "evaluation"
+      ],
+      "summary": "Across 13 model-generator pairings, adding generated visual aids reduced mean answer accuracy by 3.7 percentage points; nine of ten tasks declined.",
+      "why_it_matters": "Suggests testing intermediate visual artifacts against text-only planning and no-generation baselines.",
+      "caveat": "Selected models and tasks; not evidence that all visual reasoning or image generation is harmful. Author-reported preprint; no independent replication.",
+      "review_status": "publisher_reviewed_author_reported_preprint",
+      "release_status": "preprint",
+      "source_url": "https://arxiv.org/abs/2611.34935",
+      "publication_date": "2026-11-26",
+      "event_date": null,
+      "discovered_at": "2026-11-27T14:52:46Z",
+      "added_to_atlas_at": "2026-11-27T15:27:39Z",
+      "collection_classification": "catch-up",
+      "source_record_id": "ai-news:generated-helper-visual-reasoning:2611.34935",
+      "arxiv_id": "2611.34935",
+      "submission_date": "2026-11-25",
+      "publication_date_basis": "November 26 public arXiv category listing; submitted November 25; exact posting time not established"
+    },
+    {
+      "id": "ai-news-tokenisation-approximation-hardness-2611-34938",
+      "title": "Theoretical work establishes limits on optimal tokenizer approximation",
+      "category": "research",
+      "tags": [
+        "AI",
+        "ML",
+        "LLM",
+        "tokenization"
+      ],
+      "summary": "The authors prove conditional hardness results for direct and bottom-up tokenizer optimization under compression and unigram-likelihood objectives, ruling out constant-factor polynomial approximation for the specified formulations unless P equals NP.",
+      "why_it_matters": "Explains why practical tokenizer construction may require heuristics rather than efficient universally optimal algorithms.",
+      "caveat": "Theoretical objectives and worst-case complexity, not a claim that existing tokenizers are ineffective or all practical corpora are hard. Author-reported preprint; no independent replication.",
+      "review_status": "publisher_reviewed_author_reported_preprint",
+      "release_status": "preprint",
+      "source_url": "https://arxiv.org/abs/2611.34938",
+      "publication_date": "2026-11-26",
+      "event_date": null,
+      "discovered_at": "2026-11-27T14:52:46Z",
+      "added_to_atlas_at": "2026-11-27T15:27:39Z",
+      "collection_classification": "catch-up",
+      "source_record_id": "ai-news:tokenisation-approximation-hardness:2611.34938",
+      "arxiv_id": "2611.34938",
+      "submission_date": "2026-11-25",
+      "publication_date_basis": "November 26 public arXiv category listing; submitted November 25; exact posting time not established"
+    },
+    {
+      "id": "ai-news-dart-reasoning-trace-mining-2611-34928",
+      "title": "DART mines useful alternatives from rejected reasoning traces",
+      "category": "training",
+      "tags": [
+        "AI",
+        "DL",
+        "SLM",
+        "LLM",
+        "post-training"
+      ],
+      "summary": "DART selects uncertain steps of failed mathematical reasoning and branches into alternative completions with answer guidance. Authors report recovering 37% more previously unsolved problems than independent sampling at equal trace counts.",
+      "why_it_matters": "Potentially expands post-training coverage of difficult examples rather than discarding failed traces.",
+      "caveat": "Reference-answer guidance and verifier quality matter; comparable trace count does not establish equal token cost or broad generalization. Author-reported preprint; no independent replication.",
+      "review_status": "publisher_reviewed_author_reported_preprint",
+      "release_status": "preprint",
+      "source_url": "https://arxiv.org/abs/2611.34928",
+      "publication_date": "2026-11-26",
+      "event_date": null,
+      "discovered_at": "2026-11-27T14:52:46Z",
+      "added_to_atlas_at": "2026-11-27T15:27:39Z",
+      "collection_classification": "catch-up",
+      "source_record_id": "ai-news:dart-reasoning-trace-mining:2611.34928",
+      "arxiv_id": "2611.34928",
+      "submission_date": "2026-11-25",
+      "publication_date_basis": "November 26 public arXiv category listing; submitted November 25; exact posting time not established"
+    },
+    {
+      "id": "ai-news-dexlink-hand-object-templates-2611-34936",
+      "title": "DexLink builds dexterous robot policies from reusable pose templates",
+      "category": "robotics",
+      "tags": [
+        "AI",
+        "ML",
+        "DL",
+        "robotics",
+        "reinforcement learning"
+      ],
+      "summary": "The framework retargets reusable hand-object interaction poses, links them into reference trajectories and refines behavior using residual RL in simulation.",
+      "why_it_matters": "Could reduce the need for object-specific demonstrations in manipulation research.",
+      "caveat": "Author experiments and preliminary transfer results; no broad real-world reliability or safety certification. Author-reported preprint; no independent replication.",
+      "review_status": "publisher_reviewed_author_reported_preprint",
+      "release_status": "preprint",
+      "source_url": "https://arxiv.org/abs/2611.34936",
+      "publication_date": "2026-11-26",
+      "event_date": null,
+      "discovered_at": "2026-11-27T14:52:46Z",
+      "added_to_atlas_at": "2026-11-27T15:27:39Z",
+      "collection_classification": "catch-up",
+      "source_record_id": "ai-news:dexlink-hand-object-templates:2611.34936",
+      "arxiv_id": "2611.34936",
+      "submission_date": "2026-11-25",
+      "publication_date_basis": "November 26 public arXiv category listing; submitted November 25; exact posting time not established"
+    },
+    {
+      "id": "ai-news-umai-frozen-asr-fillers-2611-34256",
+      "title": "Frozen speech recognizer recovers omitted verbal fillers",
+      "category": "audio",
+      "tags": [
+        "AI",
+        "ML",
+        "DL",
+        "SLM",
+        "audio",
+        "ASR"
+      ],
+      "summary": "UMAI combines frame-level outputs and decoder states from Qwen3-ASR-1.7B to insert hesitation tags without changing recognized words. On held-out AMI, reported filler F1 improves from 12.2 to 82.6, with 14% extra processing time.",
+      "why_it_matters": "Useful for verbatim dialogue datasets and conversational timing analysis without modifying the base recognizer.",
+      "caveat": "Threshold selected on a separate benchmark; F1 measures filler detection, not overall transcription quality or universal speaker performance. Author-reported preprint; no independent replication.",
+      "review_status": "publisher_reviewed_author_reported_preprint",
+      "release_status": "preprint",
+      "source_url": "https://arxiv.org/abs/2611.34256",
+      "publication_date": "2026-11-26",
+      "event_date": null,
+      "discovered_at": "2026-11-27T14:52:46Z",
+      "added_to_atlas_at": "2026-11-27T15:27:39Z",
+      "collection_classification": "catch-up",
+      "source_record_id": "ai-news:umai-frozen-asr-fillers:2611.34256",
+      "arxiv_id": "2611.34256",
+      "submission_date": "2026-11-25",
+      "publication_date_basis": "November 26 public arXiv category listing; submitted November 25; exact posting time not established"
+    },
+    {
+      "id": "ai-news-theory-in-context-llm-solver-2611-34751",
+      "title": "Providing relevant mathematical theory improves constrained LLM problem solving",
+      "category": "research",
+      "tags": [
+        "AI",
+        "LLM",
+        "reasoning",
+        "evaluation"
+      ],
+      "summary": "In a length-matched experiment on pattern waiting-time problems, Qwen3-14B pass@1 rose from 0.37 to 0.83 with a relevant theory in context; the reported median correct-solution length also fell.",
+      "why_it_matters": "Motivates testing compact reusable domain knowledge rather than merely extending prompts with examples.",
+      "caveat": "Narrow problem family and oracle theory condition; results shrink with solver size and token budget. Author-reported preprint; no independent replication.",
+      "review_status": "publisher_reviewed_author_reported_preprint",
+      "release_status": "preprint",
+      "source_url": "https://arxiv.org/abs/2611.34751",
+      "publication_date": "2026-11-26",
+      "event_date": null,
+      "discovered_at": "2026-11-27T14:52:46Z",
+      "added_to_atlas_at": "2026-11-27T15:27:39Z",
+      "collection_classification": "catch-up",
+      "source_record_id": "ai-news:theory-in-context-llm-solver:2611.34751",
+      "arxiv_id": "2611.34751",
+      "submission_date": "2026-11-25",
+      "publication_date_basis": "November 26 public arXiv category listing; submitted November 25; exact posting time not established"
+    },
+    {
+      "id": "ai-news-swiss-ncsc-agent-assisted-incidents-2026-11-24",
+      "title": "Swiss cyber authority confirms agent-assisted intrusions",
+      "category": "safety",
+      "tags": [
+        "AI",
+        "agents",
+        "security",
+        "AI safety"
+      ],
+      "summary": "The Swiss NCSC confirmed successful intrusions involving attacker-directed AI assistance, affecting organizations including critical infrastructure operators.",
+      "why_it_matters": "Supports prioritizing patching, access controls, MFA and incident detection in exposed systems.",
+      "caveat": "The November 24 notice does not establish exact incident dates or attribution. No independent verification of later case counts. Not evidence of independent AI intent.",
+      "review_status": "publisher_reviewed_government_notice",
+      "release_status": "government_advisory",
+      "source_url": "https://www.bacs.admin.ch/en/26-ki-agenten-1-en",
+      "publication_date": "2026-11-24",
+      "event_date": null,
+      "discovered_at": "2026-11-27T14:52:46Z",
+      "added_to_atlas_at": "2026-11-27T15:27:39Z",
+      "collection_classification": "catch-up",
+      "source_record_id": "ai-news:swiss-ncsc-agent-assisted-incidents:2026-11-24"
+    },
+    {
+      "id": "ai-news-clickhouse-aws-data-stack-agreement-2026-11-23",
+      "title": "ClickHouse announces expanded five-year AWS data-stack agreement",
+      "category": "industry",
+      "tags": [
+        "AI",
+        "agents",
+        "infrastructure",
+        "data"
+      ],
+      "summary": "ClickHouse announced a framework for more than $1.5 billion in potential investment over five years, including planned integration with AWS agent services and real-time enterprise data.",
+      "why_it_matters": "Highlights growing demand for data access, tracing and evaluation infrastructure around production agents.",
+      "caveat": "Agreement framework is not realized expenditure; planned integrations and preview features are not general availability.",
+      "review_status": "publisher_reviewed_first_party_report",
+      "release_status": "agreement_announced",
+      "source_url": "https://clickhouse.com/blog/clickhouse-expands-aws-strategic-collaboration-scale-unified-enterprise-ai-data-stack",
+      "publication_date": "2026-11-23",
+      "event_date": "2026-11-23",
+      "discovered_at": "2026-11-27T14:52:46Z",
+      "added_to_atlas_at": "2026-11-27T15:27:39Z",
+      "collection_classification": "catch-up",
+      "source_record_id": "ai-news:clickhouse-aws-data-stack-agreement:2026-11-23"
+    }
+  ],
+  "technologies": [],
+  "terms": [],
+  "site_changes": [],
+  "corrections": []
+}

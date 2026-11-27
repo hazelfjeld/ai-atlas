@@ -409,9 +409,17 @@
       "sha256": "9444ac4df8a07bb5ee7d4e2a13d160bd83c542cc1b0c9c2dcdc8f759e9682f5f",
       "bytes": 31098,
       "published_at": "2026-11-26T16:26:30Z"
+    },
+    {
+      "date": "2026-11-27",
+      "revision": 1,
+      "path": "data/daily/editions/2026-11-27-v1.json",
+      "sha256": "8623c84b489bc4a290921bd33f56be36b383db0b7524bcf9b3b101c16363488f",
+      "bytes": 29713,
+      "published_at": "2026-11-27T15:27:39Z"
     }
   ],
   "last_successful_publish_at": "2026-11-26T18:37:51Z",
-  "status": "edition_revision_1_production_verified",
-  "coverage_note": "2026-11-26 v1: source-reviewed and production-verified; 13 reports, six catalog proposals deferred. Partial coverage; production HTTP, hosted browser and GitHack checks passed."
+  "status": "edition_revision_1_pending_production_verification",
+  "coverage_note": "November 27 source-reviewed edition prepared; production verification pending. Prior certified publication clock retained."
 }
