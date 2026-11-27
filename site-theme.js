@@ -397,7 +397,8 @@ document.addEventListener('keydown', (event) => {
   // Do not leave Research detail dialogs for the site-wide search route.
   if (document.querySelector('dialog[open],[role="dialog"][aria-modal="true"]')) return;
   if (document.querySelector('details.site-mobile-chrome__nav[open]')) return;
-  const inline = document.querySelector('.site-mobile-chrome__search-input');
+  const inline = document.querySelector('#global-query') ||
+    document.querySelector('.site-mobile-chrome__search-input');
   if (inline && inline.getClientRects().length) {
     event.preventDefault();
     inline.focus({preventScroll:true});

@@ -2453,7 +2453,8 @@ document.addEventListener('keydown', (event) => {
   // Do not leave Research detail dialogs for the site-wide search route.
   if (document.querySelector('dialog[open],[role="dialog"][aria-modal="true"]')) return;
   if (document.querySelector('details.site-mobile-chrome__nav[open]')) return;
-  const inline = document.querySelector('.site-mobile-chrome__search-input');
+  const inline = document.querySelector('#global-query') ||
+    document.querySelector('.site-mobile-chrome__search-input');
   if (inline && inline.getClientRects().length) {
     event.preventDefault();
     inline.focus({preventScroll:true});
@@ -3634,7 +3635,6 @@ $('discover-mobile-nav').addEventListener('click',e=>{
  }
 });
 dialog.addEventListener('cancel',e=>{e.preventDefault();closeRecord();});dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)closeRecord();}});
-document.addEventListener('keydown',e=>{const typing=/INPUT|TEXTAREA|SELECT/.test(document.activeElement?.tagName);if(e.key==='/'&&!typing&&!dialog.open&&!$('discover-mobile-nav').open){e.preventDefault();$('global-query').focus();}});
 window.addEventListener('hashchange',route);route();
 // Finish a slash-to-search journey only after catalog hydration. Consume the
 // one-shot hint on any arrival so a later unrelated visit cannot steal focus.
