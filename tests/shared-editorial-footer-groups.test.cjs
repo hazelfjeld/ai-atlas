@@ -6,6 +6,7 @@ const path = require('node:path');
 const {execFileSync} = require('node:child_process');
 const root = path.join(__dirname, '..');
 const expected = {
+  'games.html': ['index.html#/dictionary', 'index.html#/sources', 'about.html'],
   'demo.html': ['https://github.com/hazelfjeld/ai-atlas', 'about.html', 'index.html#/sources'],
   'research.html': ['about.html', 'index.html#/sources'],
   'catalog-review.html': ['about.html', 'https://github.com/hazelfjeld/ai-atlas', 'index.html#/sources'],

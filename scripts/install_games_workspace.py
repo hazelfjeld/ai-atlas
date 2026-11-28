@@ -67,7 +67,7 @@ def build_tab():
     footer = re.search(r'<footer class="site-chrome__footer">(.*?)</footer>', remainder, re.S)
     if not footer or remainder.count('<footer') != 1:
         raise RuntimeError('Standalone Games global footer missing or changed')
-    body = (match.group(1) + '<footer>' + footer.group(1) + '</footer>\n').replace('href="index.html#/', 'href="#/')
+    body = (match.group(1) + '<footer class="site-chrome__footer">' + footer.group(1) + '</footer>\n').replace('href="index.html#/', 'href="#/')
     # The standalone Games page provides a native no-JavaScript path to the
     # encyclopedia. The embedded Games *app* only mounts after JavaScript
     # hydration and has its own source-backed fallback. Do not duplicate the
@@ -87,7 +87,9 @@ def build_tab():
     # The standalone page needs its own script-free policy link; the native
     # workspace already has the canonical app-shell policy footer. Avoid duplicates
     # and retain byte-identical generated Games/offline artifacts.
-    body = body.replace(' · <a href="about.html">Editorial policy & coverage</a>', '')
+    policy = ' · <a href="about.html">Editorial policy & coverage</a>'
+    assert body.count(policy) == 1, 'Native Games must omit exactly one shell policy link'
+    body = body.replace(policy, '', 1)
     template = '<div class="atlas-games">' + body + '</div>'
     ui = (ROOT / 'games.js').read_text(encoding='utf-8')
     ui = replace_once(ui, '(async () => {', '''(function () {

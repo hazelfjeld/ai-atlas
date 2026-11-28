@@ -166,7 +166,7 @@ test('native Games generation strips only the standalone script-free fallback', 
     'script-free fallback must appear exactly once on the standalone Games page');
   const globalFooter = standalone.match(/<\/main>\s*<footer class="site-chrome__footer">([\s\S]*?)<\/footer>/);
   assert.ok(globalFooter, 'standalone Games footer remains global and native view still preserves its guidance');
-  let body = (main[1] + '<footer>' + globalFooter[1] + '</footer>\n')
+  let body = (main[1] + '<footer class="site-chrome__footer">' + globalFooter[1] + '</footer>\n')
     .replaceAll('href="index.html#/', 'href="#/')
     .replace('Scores and missed concepts stay in this tab’s memory.',
       'Leaving Games ends the current round. Best times stay in this browser tab’s memory.')
@@ -178,6 +178,8 @@ test('native Games generation strips only the standalone script-free fallback', 
   assert.ok(embedded, 'native Games exposes an embedded deterministic template');
   assert.equal(JSON.parse(embedded[1]), '<div class="atlas-games">' + body + '</div>',
     'native Games must remain byte-reproducible from standalone source without no-JS-only content');
+  assert.match(JSON.parse(embedded[1]), /<footer class="site-chrome__footer"><span class="site-chrome__footer-note">[^<]+<\/span> <span class="site-chrome__footer-links">/);
+  assert.match(JSON.parse(embedded[1]), /href="#\/sources">Sources & downloads<\/a>/);
   assert.ok(!native.includes('Browse concepts without JavaScript'),
     'native app must not embed a redundant standalone fallback');
   assert.ok(read('scripts/install_games_workspace.py').includes('fallback_count == 1'),

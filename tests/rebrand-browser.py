@@ -2503,7 +2503,7 @@ with sync_playwright() as p:
                       frame['display']==expected and frame['border']=='solid'
                       and not frame['overflow'])
                 if route in ('index.html','demo.html','research.html','catalog-review.html','whats-new.html','playbooks.html','technologies.html',
-                             'about.html','terms/index.html','technology/index.html','hardware-review.html'):
+                             'about.html','terms/index.html','technology/index.html','hardware-review.html','games.html'):
                     check(f'{route} {width}px {theme} editorial footer groups note and links without loose text',
                           frame['noteGroups']==(0 if route=='hardware-review.html' else 1)
                           and frame['linkGroups']==1 and not frame['bareText'])

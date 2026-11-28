@@ -607,7 +607,7 @@ def ensure_skip_destination_focusable(html, path=None):
 EDITORIAL_FOOTER_GROUP_PATHS = (
     "demo.html", "research.html", "catalog-review.html",
     "whats-new.html", "playbooks.html", "technologies.html",
-    "hardware-review.html",
+    "hardware-review.html", "games.html",
 )
 
 
@@ -649,10 +649,15 @@ def group_editorial_footer(footer):
     assert footer.startswith(prefix) and footer.endswith('</footer>')
     first = footer.index('<a ')
     note = footer[len(prefix):first].strip().rstrip('·').rstrip()
+    # Legacy Games had two plain-text paragraphs and a separator span.
+    # Fold their full guidance into the same note group used elsewhere.
+    if note.startswith('<p>'):
+        assert re.fullmatch(r'(?:<p>[^<]+</p>)+', note), "Unexpected footer note markup"
+        note = ' '.join(re.findall(r'<p>([^<]+)</p>', note))
     assert '<' not in note
     if note and not note.endswith(('.', '!', '?')):
         note += '.'
-    suffix = footer[first:-len('</footer>')]
+    suffix = footer[first:-len('</footer>')].replace('<span> · </span>', ' · ')
     links = re.findall(anchor, suffix)
     assert len(links) >= 2 and not re.sub(anchor, '', suffix).strip(' .·\t\r\n')
     return (prefix + (note_start + note + '</span> ' if note else '') +
@@ -688,10 +693,6 @@ def ensure_footer_resources(html, path):
     # Only exact local policy/coverage anchors are changed, not external links.
     footer_labels = FOOTER_RESOURCE_LABELS
     for url, label in footer_labels:
-        # The Games app embeds this same guidance from its native module;
-        # preserve its established source label until both outputs rebuild.
-        if path == "games.html" and url == "index.html#/sources":
-            continue
         link = re.compile(r'(<a href="' + re.escape(url) + r'">)[^<]*(</a>)')
         footer, count = link.subn(
             lambda match: match.group(1) + label + match.group(2), footer

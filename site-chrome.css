@@ -513,6 +513,7 @@ body:has(.site-chrome) footer a:focus-visible{
    row and stacks them on phones. Bring existing standalone footers into that
    same frame without replacing their source notes, anchors or Games guidance. */
 @media (min-width:851px){
+  .atlas-games > .site-chrome__footer,
   body:has(.site-chrome) footer{
     display:flex;
     flex-wrap:wrap;
@@ -529,9 +530,16 @@ body:has(.site-chrome) footer a:focus-visible{
   }
 }
 @media (max-width:850px){
+  .atlas-games > .site-chrome__footer,
   body:has(.site-chrome) footer{display:block}
   .site-chrome__footer > .site-chrome__footer-links{display:block;margin-top:8px}
   .site-chrome__footer > .site-chrome__footer-links:first-child{margin-top:0}
+}
+/* Native Games retains its contextual guidance inside the workspace; the
+   app shell supplies the one global contentinfo footer. */
+.atlas-games > .site-chrome__footer{
+  width:100%;max-width:none;margin:40px 0 0;padding:18px 0 0;
+  font-size:13px;line-height:1.65;
 }
 /* atlas-shared-footer-layout:end */
 
