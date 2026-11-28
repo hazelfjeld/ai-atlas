@@ -649,8 +649,10 @@ test('Discover and all standalone families share footer flow while preserving ev
       page + ' must load shared footer styling');
   }
   const games=fs.readFileSync(path.join(__dirname, '..', 'games.html'), 'utf8');
-  assert.match(games, /<\/main>\s*<footer class="site-chrome__footer"><p>[\s\S]*?<p>/,
-    'Games guidance uses the global contentinfo footer, preserving both paragraphs');
+  const guidance=games.match(/<\/main>\s*<footer class="site-chrome__footer"><span class="site-chrome__footer-note">([^<]+)<\/span> <span class="site-chrome__footer-links">/)?.[1];
+  assert.ok(guidance, 'Games guidance uses the global contentinfo footer and shared note/link groups');
+  assert.equal(guidance, 'Built from AI Updates’s published dictionary, not generated trivia. Short definitions can overlap; this is practice, not a certification. Scores and missed concepts stay in this tab’s memory. No account, leaderboard, analytics, or server submission. Reloading clears them.',
+    'both original guidance paragraphs are preserved verbatim in the shared note');
   const offline=fs.readFileSync(path.join(__dirname, '..', 'downloads/Atlas_Demo_Offline.html'), 'utf8');
   assert.ok(offline.includes(css), 'Offline edition must use the exact shared footer component');
 });
@@ -681,7 +683,7 @@ test('all standalone page families expose the same real policy and source destin
     assert.ok(!/onclick\s*=/.test(footer), route + ' resources require no script');
   }
   const games = fs.readFileSync(path.join(__dirname, '..', 'games.html'), 'utf8');
-  assert.match(games, /<\/main>\s*<footer class="site-chrome__footer"><p>Built from AI Updates/,
+  assert.match(games, /<\/main>\s*<footer class="site-chrome__footer"><span class="site-chrome__footer-note">Built from AI Updates/,
     'Games preserves its no-script editorial guidance in the global footer');
   assert.match(games, /Scores and missed concepts stay in this tab/);
 });
