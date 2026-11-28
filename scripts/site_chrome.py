@@ -607,9 +607,22 @@ EDITORIAL_FOOTER_GROUP_PATHS = (
 )
 
 
+FOOTER_RESOURCE_LABELS = (
+    ("about.html", "Editorial policy & coverage"),
+    ("index.html#/sources", "Sources & downloads"),
+)
+
+
 def group_editorial_footer(footer):
-    """Retain every anchor and optional caveat in shared footer groups."""
+    """Retain every anchor and caveat, with canonical resource names."""
     import re
+    # Generated reference landings use relative links; normalize only those
+    # exact local destinations, never repository links or contextual caveats.
+    for resource_prefix in ("", "../"):
+        for url, label in FOOTER_RESOURCE_LABELS:
+            link = re.compile(r'(<a href="' + re.escape(resource_prefix + url) + r'">)[^<]*(</a>)')
+            footer, count = link.subn(lambda match: match.group(1) + label + match.group(2), footer)
+            assert count <= 1, "Duplicate grouped footer resource: " + resource_prefix + url
     prefix = '<footer class="site-chrome__footer">'
     note_start = '<span class="site-chrome__footer-note">'
     links_start = '<span class="site-chrome__footer-links">'
@@ -660,10 +673,7 @@ def ensure_footer_resources(html, path):
     # One canonical resource label for all native page families, matching
     # their shared navigation and preserving page-specific editorial caveats.
     # Only exact local policy/coverage anchors are changed, not external links.
-    footer_labels = (
-        ("about.html", "Editorial policy & coverage"),
-        ("index.html#/sources", "Sources & downloads"),
-    )
+    footer_labels = FOOTER_RESOURCE_LABELS
     for url, label in footer_labels:
         # The Games app embeds this same guidance from its native module;
         # preserve its established source label until both outputs rebuild.

@@ -59,6 +59,10 @@ test('reference landings and link-only hardware footer use the same grouping', (
     assert.equal(Boolean(groups[1]), route !== 'hardware-review.html', route + ': preserve note only where one existed');
     const anchors = [...groups[2].matchAll(/<a href="([^"]+)"[^>]*>[^<]*<\/a>/g)];
     assert.deepEqual(anchors.map(x => x[1]), destinations, route);
+    for (const anchor of anchors) {
+      if (anchor[1].endsWith('about.html')) assert.match(anchor[0], />Editorial policy & coverage<\/a>$/, route);
+      if (anchor[1].endsWith('index.html#/sources')) assert.match(anchor[0], />Sources & downloads<\/a>$/, route);
+    }
     assert.equal(groups[2], anchors.map(x => x[0]).join(' · '), route);
     assert.ok(html.indexOf(footer) > html.indexOf('</main>'), route);
   }
@@ -73,6 +77,9 @@ test('reference landings and link-only hardware footer use the same grouping', (
     '    assert group_editorial_footer(footer) == footer, route',
     '    raw = re.sub(r"</?span[^>]*>", "", footer)',
     '    assert group_editorial_footer(raw) == footer, route',
+    '    legacy = raw.replace("Editorial policy & coverage</a>", "Editorial policy</a>").replace("Sources & downloads</a>", "Source registers & downloads</a>")',
+    '    assert group_editorial_footer(legacy) == footer, route',
+    '    assert group_editorial_footer(group_editorial_footer(legacy)) == footer, route',
   ].join('\n');
   execFileSync('python3', ['-c', script], {cwd:root, stdio:'pipe'});
 });
