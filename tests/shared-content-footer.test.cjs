@@ -222,8 +222,15 @@ test('Discover and native pages expose sibling main and global footer landmarks,
       name + ': site-wide footer is a sibling after main, not part of article');
     assert.ok(endFooter < html.indexOf('</div></div><dialog id="record-dialog"', endFooter),
       name + ': original app shell and record dialog remain in order');
-    assert.ok(html.includes('href="#/sources"') && html.includes('Evidence & coverage'),
-      name + ': functional evidence link remains');
+    const footerHtml = html.slice(footer, endFooter + '</footer>'.length);
+    assert.match(footerHtml, /<span class="site-chrome__footer-note">[^<]+<\/span> <span class="site-chrome__footer-links">/);
+    const resourceLinks = [...footerHtml.matchAll(/<a href="([^"]+)">([^<]+)<\/a>/g)]
+      .map(match => [match[1], match[2]]);
+    assert.deepEqual(resourceLinks, [
+      [index ? '#/sources' : 'about.html', 'Editorial policy & coverage'],
+      [index ? '#/overview' : 'demo.html', 'Guided demo'],
+      ['#/sources', 'Sources & downloads'],
+    ], name + ': preserve every route and share canonical footer labels');
     assert.ok(html.includes('id="navigation"') && html.includes('class="global-search"'),
       name + ': original desktop navigation and genuine search remain');
     const bodyStart = html.indexOf('</head>') + '</head>'.length;

@@ -2459,17 +2459,23 @@ with sync_playwright() as p:
                     globalLandmark:!el.closest('main'),
                     noteGroups:el.querySelectorAll(':scope > .site-chrome__footer-note').length,
                     linkGroups:el.querySelectorAll(':scope > .site-chrome__footer-links').length,
+                    linkDisplay:el.querySelector(':scope > .site-chrome__footer-links') ? getComputedStyle(el.querySelector(':scope > .site-chrome__footer-links')).display : null,
+                    linkGap:el.querySelector(':scope > .site-chrome__footer-links') ? getComputedStyle(el.querySelector(':scope > .site-chrome__footer-links')).marginTop : null,
                     bareText:[...el.childNodes].some(n=>n.nodeType===3 && n.textContent.trim())
                 })""")
                 expected='block' if width <= 850 else 'flex'
                 check(f'{route} {width}px {theme} uses Discover footer layout',
                       frame['display']==expected and frame['border']=='solid'
                       and not frame['overflow'])
-                if route in ('demo.html','research.html','catalog-review.html','whats-new.html','playbooks.html','technologies.html',
+                if route in ('index.html','demo.html','research.html','catalog-review.html','whats-new.html','playbooks.html','technologies.html',
                              'about.html','terms/index.html','technology/index.html','hardware-review.html'):
                     check(f'{route} {width}px {theme} editorial footer groups note and links without loose text',
                           frame['noteGroups']==(0 if route=='hardware-review.html' else 1)
                           and frame['linkGroups']==1 and not frame['bareText'])
+                    if width <= 850:
+                        check(f'{route} {width}px {theme} footer resources separate from editorial note',
+                              frame['linkDisplay']=='block' and
+                              frame['linkGap']==('0px' if route=='hardware-review.html' else '8px'))
                 if route in ('whats-new.html','catalog-review.html'):
                     check(f'{route} {width}px {theme} global contentinfo outside main',
                           frame['globalLandmark'])

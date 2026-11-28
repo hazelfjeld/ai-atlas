@@ -555,6 +555,10 @@ def normalize_discover_sidebar(html, term_count, tech_count):
     if 'href="site-chrome.css"' not in normalized:
         normalized = normalized.replace(css_anchor, css_anchor + '<link rel="stylesheet" href="site-chrome.css"><script src="site-theme.js"></script>', 1)
     assert normalized.count('id="discover-mobile-nav"') == 1
+    normalized, count = re.subn(
+        r'<footer class="main-footer site-chrome__footer">[\s\S]*?</footer>',
+        lambda match: group_editorial_footer(match.group(0)), normalized)
+    assert count == 1, 'Discover global footer missing or duplicated'
     return normalized
 
 
@@ -616,14 +620,23 @@ FOOTER_RESOURCE_LABELS = (
 def group_editorial_footer(footer):
     """Retain every anchor and caveat, with canonical resource names."""
     import re
+    prefix = '<footer class="site-chrome__footer">'
+    discover_prefix = '<footer class="main-footer site-chrome__footer">'
+    if footer.startswith(discover_prefix):
+        prefix = discover_prefix
+        if footer.startswith(prefix + '<span>'):
+            footer = footer.replace(prefix + '<span>', prefix, 1).replace('</span><a ', ' <a ', 1)
+        # Discover retains its native hash route; use the same label source.
+        resources = FOOTER_RESOURCE_LABELS + (("#/sources", dict(FOOTER_RESOURCE_LABELS)["index.html#/sources"]),)
+    else:
+        resources = FOOTER_RESOURCE_LABELS
     # Generated reference landings use relative links; normalize only those
     # exact local destinations, never repository links or contextual caveats.
     for resource_prefix in ("", "../"):
-        for url, label in FOOTER_RESOURCE_LABELS:
+        for url, label in resources:
             link = re.compile(r'(<a href="' + re.escape(resource_prefix + url) + r'">)[^<]*(</a>)')
             footer, count = link.subn(lambda match: match.group(1) + label + match.group(2), footer)
             assert count <= 1, "Duplicate grouped footer resource: " + resource_prefix + url
-    prefix = '<footer class="site-chrome__footer">'
     note_start = '<span class="site-chrome__footer-note">'
     links_start = '<span class="site-chrome__footer-links">'
     anchor = r'<a\b[^>]*>[^<]*</a>'
