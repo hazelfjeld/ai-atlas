@@ -20,6 +20,36 @@ def check(name, condition):
     print('PASS', name, flush=True)
 
 
+def capture_mobile_frame_failure(page, box, out, route, width, theme, baseline, metrics):
+    """Record the original failed frame, not a retried or settled measurement."""
+    details = box.evaluate("""el => {
+        const root = document.documentElement;
+        const rect = el.getBoundingClientRect();
+        const overflow = Array.from(document.querySelectorAll('body *')).map(node => {
+            const r = node.getBoundingClientRect();
+            return {tag:node.tagName,id:node.id,classes:node.getAttribute('class'),
+                    left:r.left,right:r.right,width:r.width,scrollWidth:node.scrollWidth,
+                    clientWidth:node.clientWidth,overflowX:getComputedStyle(node).overflowX};
+        }).filter(r => r.width > 0 && (r.right > innerWidth + 1 || r.left < -1 ||
+                    r.scrollWidth > r.clientWidth + 1))
+          .sort((a,b) => Math.max(b.right-innerWidth,-b.left,b.scrollWidth-b.clientWidth) -
+                         Math.max(a.right-innerWidth,-a.left,a.scrollWidth-a.clientWidth))
+          .slice(0,30);
+        return {viewport:innerWidth,rootWidth:root.clientWidth,rootScrollWidth:root.scrollWidth,
+                bodyScrollWidth:document.body.scrollWidth,readyState:document.readyState,
+                fontStatus:document.fonts.status,rootClasses:root.className,
+                frame:{x:rect.x,y:rect.y,width:rect.width,height:rect.height},
+                researchStatus:document.getElementById('loading-status')?.textContent ?? null,
+                overflowCandidates:overflow};
+    }""")
+    record = {'route':route,'width':width,'theme':theme,'baseline':baseline,
+              'originalMetrics':metrics,'diagnostic':details}
+    stem = f'mobile-frame-failure-{route.replace("/", "-")}-{width}-{theme}'
+    (out / (stem + '.json')).write_text(json.dumps(record,indent=2))
+    print('MOBILE FRAME FAILURE',json.dumps(record),flush=True)
+    page.screenshot(path=str(out / (stem + '.png')))
+
+
 def has_visible_workspace_title(header, expected):
     """Read actual accessible DOM text on native pages; keep CSS first-paint
     checks for generated references that have no explicit title node."""
@@ -2391,9 +2421,14 @@ with sync_playwright() as p:
                           discover_reading_x is not None and
                           abs(archive_reading_x-discover_reading_x)<=2.5 and
                           abs(nav_frame['x'])<=2.5 and abs(nav_frame['width']-width)<=2.5)
-                check(f'{route} {width}px {theme} shared mobile header frame',
-                      abs(metrics['height']-baseline)<=2.5 and
-                      not metrics['overflow'] and metrics['theme']==theme)
+                frame_ok = (abs(metrics['height']-baseline)<=2.5 and
+                            not metrics['overflow'] and metrics['theme']==theme)
+                if not frame_ok:
+                    try:
+                        capture_mobile_frame_failure(page, box, out, route, width, theme, baseline, metrics)
+                    except Exception as diagnostic_error:
+                        print('MOBILE FRAME DIAGNOSTIC ERROR',repr(diagnostic_error),flush=True)
+                check(f'{route} {width}px {theme} shared mobile header frame', frame_ok)
                 if width==390 and theme=='dark' and route in ('index.html','whats-new.html','terms/index.html','games.html'):
                     page.screenshot(path=str(out / f'mobile-frame-{route.replace("/", "-")}-390-dark.png'))
 
