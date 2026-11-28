@@ -926,6 +926,13 @@ with sync_playwright() as p:
                 return [s.fontFamily,s.fontWeight,s.fontSize,s.lineHeight,s.letterSpacing];
             }"""
             baseline = discover_story.evaluate(story_style)
+            fact_style = """el => {
+                const s = getComputedStyle(el);
+                return [s.fontSize, s.lineHeight, s.whiteSpace, s.overflowWrap];
+            }"""
+            discover_fact = story_page.locator('.story-body > .story-footer > span').first.evaluate(fact_style)
+            check('Discover secondary facts remain readable '+story_scheme+' '+str(story_width),
+                  discover_fact == ['12px', '18px', 'normal', 'anywhere'])
             discover_summary = story_page.locator('.story-body > h3 + p').first.evaluate("""el => {
                 const s = getComputedStyle(el);
                 return [s.fontSize, s.lineHeight];
@@ -951,6 +958,9 @@ with sync_playwright() as p:
                 timeout=45000)
             archive_story = story_page.locator('#edition-content .item > h3').first
             archive_story.wait_for(state='visible')
+            archive_fact = story_page.locator('#edition-content .item > .fact').first.evaluate(fact_style)
+            check('Archive and Discover secondary facts match '+story_scheme+' '+str(story_width),
+                  archive_fact == discover_fact)
             actual = archive_story.evaluate(story_style)
             archive_summary = story_page.locator('#edition-content .item > h3 + p').first.evaluate("""el => {
                 const s = getComputedStyle(el);
@@ -997,6 +1007,13 @@ with sync_playwright() as p:
             tech_title = compact_page.locator('#tech-results .tech-card > h2').first
             tech_title.wait_for(state='visible', timeout=45000)
             tech_type = tech_title.evaluate(compact_style)
+            compact_fact_style = """el => {
+                const s = getComputedStyle(el);
+                return [s.fontSize, s.lineHeight, s.whiteSpace, s.overflowWrap];
+            }"""
+            tech_fact = compact_page.locator('#tech-results .tech-card > .meta').first.evaluate(compact_fact_style)
+            check('Technology identifiers remain readable '+compact_scheme+' '+str(compact_width),
+                  tech_fact == ['12px', '18px', 'normal', 'anywhere'])
             tech_gap = tech_title.evaluate(heading_gap)
             tech_inset = tech_title.evaluate("el => [getComputedStyle(el.parentElement).paddingLeft, getComputedStyle(el.parentElement).paddingRight]")
             tech_summary = compact_page.locator('#tech-results .tech-card > .lede').first.evaluate(summary_style)
@@ -1028,6 +1045,9 @@ with sync_playwright() as p:
             research_title = compact_page.locator('#results .card > h2').first
             research_title.wait_for(state='visible', timeout=45000)
             research_type = research_title.evaluate(compact_style)
+            research_fact = compact_page.locator('#results .card > .card-top > time').first.evaluate(compact_fact_style)
+            check('Research dates and Technology identifiers share type '+compact_scheme+' '+str(compact_width),
+                  research_fact == tech_fact)
             research_gap = research_title.evaluate(heading_gap)
             research_inset = research_title.evaluate("el => [getComputedStyle(el.parentElement).paddingLeft, getComputedStyle(el.parentElement).paddingRight]")
             research_summary = compact_page.locator('#results .card > h2 + p').first.evaluate(summary_style)

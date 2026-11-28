@@ -2055,6 +2055,24 @@ html:is(:has(.nojs-primary-routes > .notice[id="/sources"]:target),:has(.nojs-pr
   outline-offset:3px;
 }
 /* atlas-shared-card-action-row:end */
+/* atlas-shared-card-secondary-facts:begin */
+/* A card's identifier, subject or publication date is secondary to its
+   summary, but must remain readable. Keep badges and evidence caveats
+   distinct, and let narrow cards wrap facts without losing text. */
+.story-body > .story-footer > span,
+.tech-shell .tech-card > .meta,
+.shell:has(> .site-chrome.research-site-chrome) .cards > .card > .card-top > time,
+#edition-content .item > .fact{
+  font-size:12px;
+  line-height:1.5;
+  color:var(--muted);
+  min-width:0;
+  max-width:100%;
+  white-space:normal;
+  overflow-wrap:anywhere;
+}
+/* atlas-shared-card-secondary-facts:end */
+
 
 /* atlas-mobile-first-content-alignment:begin */
 /* Match Discover's 29px reading inset after the compact mobile bar.
