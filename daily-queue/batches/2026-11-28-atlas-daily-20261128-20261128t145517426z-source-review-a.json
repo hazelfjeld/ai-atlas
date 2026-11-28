@@ -1,0 +1,996 @@
+{
+  "schema": 1,
+  "batch_id": "atlas-daily-20261128-20261128t145517426z-source-review-a",
+  "edition_date": "2026-11-28",
+  "timezone": "America/Chicago",
+  "collected_at": "2026-11-28T14:55:17.426Z",
+  "coverage_start": "2026-11-27T12:52:46Z",
+  "coverage_end": "2026-11-28T14:55:17.426Z",
+  "coverage_status": "partial",
+  "coverage_note": "Bounded current window plus explicitly marked catch-up discoveries from November 25-26; no successful historical cutoff exists. Search and abstract review are not exhaustive.",
+  "overlap_lookback_start": "2026-11-27T12:52:46Z",
+  "sources_checked": [
+    {
+      "url": "https://giga.chat/blog/en/posts/gigachat-4",
+      "status": "success",
+      "checked_at": "2026-11-28T14:55:17.426Z",
+      "method": "opened source page; scoped review, abstracts only for preprints"
+    },
+    {
+      "url": "https://huggingface.co/ai-sage/GigaChat4-708B-A41B",
+      "status": "success",
+      "checked_at": "2026-11-28T14:55:17.426Z",
+      "method": "opened source page; scoped review, abstracts only for preprints"
+    },
+    {
+      "url": "https://huggingface.co/ai-sage/GigaChat4-37B-A4B",
+      "status": "success",
+      "checked_at": "2026-11-28T14:55:17.426Z",
+      "method": "opened source page; scoped review, abstracts only for preprints"
+    },
+    {
+      "url": "https://giga.chat/blog/en/posts/giga-edge-enhance-sdk",
+      "status": "success",
+      "checked_at": "2026-11-28T14:55:17.426Z",
+      "method": "opened source page; scoped review, abstracts only for preprints"
+    },
+    {
+      "url": "https://github.com/salute-developers/giga-edge-enhance",
+      "status": "success",
+      "checked_at": "2026-11-28T14:55:17.426Z",
+      "method": "opened source page; scoped review, abstracts only for preprints"
+    },
+    {
+      "url": "https://huggingface.co/blog/sensenova/roborsi",
+      "status": "success",
+      "checked_at": "2026-11-28T14:55:17.426Z",
+      "method": "opened source page; scoped review, abstracts only for preprints"
+    },
+    {
+      "url": "https://huggingface.co/sensenova/SenseNova-RoboRSI-27B",
+      "status": "success",
+      "checked_at": "2026-11-28T14:55:17.426Z",
+      "method": "opened source page; scoped review, abstracts only for preprints"
+    },
+    {
+      "url": "https://www.kimi.ai/news/kimi-for-science-program",
+      "status": "success",
+      "checked_at": "2026-11-28T14:55:17.426Z",
+      "method": "opened source page; scoped review, abstracts only for preprints"
+    },
+    {
+      "url": "https://ashutoshai.com/ai-compass/2026/11/27/",
+      "status": "success",
+      "checked_at": "2026-11-28T14:55:17.426Z",
+      "method": "opened source page; scoped review, abstracts only for preprints"
+    },
+    {
+      "url": "https://github.com/google-gemini/demolab/blob/main/skills/deep-research/SKILL.md",
+      "status": "success",
+      "checked_at": "2026-11-28T14:55:17.426Z",
+      "method": "opened source page; scoped review, abstracts only for preprints"
+    },
+    {
+      "url": "https://github.com/agentnativeinc/v2",
+      "status": "success",
+      "checked_at": "2026-11-28T14:55:17.426Z",
+      "method": "opened source page; scoped review, abstracts only for preprints"
+    },
+    {
+      "url": "https://arxiv.org/abs/2611.34930",
+      "status": "success",
+      "checked_at": "2026-11-28T14:55:17.426Z",
+      "method": "opened source page; scoped review, abstracts only for preprints"
+    },
+    {
+      "url": "https://arxiv.org/abs/2611.34915",
+      "status": "success",
+      "checked_at": "2026-11-28T14:55:17.426Z",
+      "method": "opened source page; scoped review, abstracts only for preprints"
+    },
+    {
+      "url": "https://arxiv.org/abs/2611.34848",
+      "status": "success",
+      "checked_at": "2026-11-28T14:55:17.426Z",
+      "method": "opened source page; scoped review, abstracts only for preprints"
+    },
+    {
+      "url": "https://arxiv.org/abs/2611.34914",
+      "status": "success",
+      "checked_at": "2026-11-28T14:55:17.426Z",
+      "method": "opened source page; scoped review, abstracts only for preprints"
+    },
+    {
+      "url": "https://arxiv.org/abs/2611.34241",
+      "status": "success",
+      "checked_at": "2026-11-28T14:55:17.426Z",
+      "method": "opened source page; scoped review, abstracts only for preprints"
+    },
+    {
+      "url": "https://arxiv.org/abs/2611.34912",
+      "status": "success",
+      "checked_at": "2026-11-28T14:55:17.426Z",
+      "method": "opened source page; scoped review, abstracts only for preprints"
+    },
+    {
+      "url": "https://arxiv.org/abs/2611.34426",
+      "status": "success",
+      "checked_at": "2026-11-28T14:55:17.426Z",
+      "method": "opened source page; scoped review, abstracts only for preprints"
+    },
+    {
+      "url": "https://arxiv.org/list/cs.CL/recent",
+      "status": "success",
+      "checked_at": "2026-11-28T14:55:17.426Z",
+      "method": "opened source page; scoped review, abstracts only for preprints"
+    },
+    {
+      "url": "https://arxiv.org/list/cs.LG/recent",
+      "status": "success",
+      "checked_at": "2026-11-28T14:55:17.426Z",
+      "method": "opened source page; scoped review, abstracts only for preprints"
+    },
+    {
+      "url": "https://arxiv.org/list/cs.RO/recent",
+      "status": "success",
+      "checked_at": "2026-11-28T14:55:17.426Z",
+      "method": "opened source page; scoped review, abstracts only for preprints"
+    },
+    {
+      "url": "https://arxiv.org/list/cs.SD/recent",
+      "status": "success",
+      "checked_at": "2026-11-28T14:55:17.426Z",
+      "method": "opened source page; scoped review, abstracts only for preprints"
+    },
+    {
+      "url": "https://arxiv.org/list/cs.CV/recent",
+      "status": "success",
+      "checked_at": "2026-11-28T14:55:17.426Z",
+      "method": "opened source page; scoped review, abstracts only for preprints"
+    },
+    {
+      "url": "https://www.reuters.com/world/china/us-chip-curbs-distillation-crackdown-threaten-chinese-ai-model-development-2026-11-26/",
+      "status": "success",
+      "checked_at": "2026-11-28T14:55:17.426Z",
+      "method": "opened source page; scoped review, abstracts only for preprints"
+    },
+    {
+      "url": "https://giga.chat/blog/en",
+      "status": "success",
+      "checked_at": "2026-11-28T14:55:17.426Z",
+      "method": "opened source page; scoped review, abstracts only for preprints"
+    }
+  ],
+  "sources_failed": [
+    {
+      "url": "https://export.arxiv.org/api/query?max_results=5&search_query=cat%3Acs.LG",
+      "error": "metadata endpoint inaccessible",
+      "status": "failed",
+      "checked_at": "2026-11-28T14:55:17.426Z"
+    },
+    {
+      "url": "https://github.com/google-gemini/demolab/pull/2",
+      "error": "PR page inaccessible; skill source available",
+      "status": "failed",
+      "checked_at": "2026-11-28T14:55:17.426Z"
+    },
+    {
+      "url": "https://github.com/agentnativeinc/v2/commits/main/",
+      "error": "commit history inaccessible",
+      "status": "failed",
+      "checked_at": "2026-11-28T14:55:17.426Z"
+    },
+    {
+      "url": "https://github.com/agentnativeinc/v2/releases",
+      "error": "release history inaccessible",
+      "status": "failed",
+      "checked_at": "2026-11-28T14:55:17.426Z"
+    }
+  ],
+  "source_health_note": "Five category lists accessible, latest listing November 26. Searches covered models, frameworks, industry, hardware, agents, research, robotics, audio and vision. Reuters chip restrictions item excluded as duplicate of November 26 batch.",
+  "coverage_backlog": [
+    "Historical recovery from November 1 remains open; no successful cutoff advancement.",
+    "Check Liquid AI decision model first-party release, governance and chip infrastructure, smaller project releases, source-date and version history for Google and v2. Broader coverage is incomplete.",
+    "Complete full catalog alias and historical canonical URL checks and independent runtime/benchmark validation; research abstracts only. No security or clinical guarantees."
+  ],
+  "tldr": [
+    "Hybrid language models, CPU speech enhancement and robot agents that combine learned motion with explicit control expand deployment options, while scientific API credits may lower research costs.",
+    "Compact speech generation, streaming video encoding and controlled reliability studies offer promising directions; reported performance remains author- or vendor-reported and is not an independent safety or quality guarantee."
+  ],
+  "news": [
+    {
+      "id": "ai-news:gigachat4-family:2026-11-26",
+      "title": "GigaChat 4 combines long-context reasoning and fast responses in two sparse models",
+      "category": "models",
+      "tags": [
+        "AI",
+        "DL",
+        "LLM",
+        "inference"
+      ],
+      "summary": "Sber announced 708B and 37B models with about 41B and 4B active parameters respectively. Both combine recurrent and sparse attention layers, offer two response modes in one checkpoint, and advertise a million-token context.",
+      "why_it_matters": "A shared checkpoint can support different latency budgets without swapping model weights.",
+      "caveat": "The flagship card labels its weights MIT; the smaller model uses a noncommercial individual license. Active parameters are not memory footprint; vendor benchmarks, legal eligibility and actual long-context performance require independent checks.",
+      "canonical_url": "https://giga.chat/blog/en/posts/gigachat-4",
+      "source_url": "https://giga.chat/blog/en/posts/gigachat-4",
+      "publisher": "GigaChat team",
+      "type": "official announcement",
+      "publication_date": "2026-11-26",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-26",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-28T14:55:17.426Z",
+      "checked_at": "2026-11-28T14:55:17.426Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "first_party_release",
+      "release_status": "announced_artifacts",
+      "collection_classification": "catch-up",
+      "sources": [
+        {
+          "url": "https://giga.chat/blog/en/posts/gigachat-4",
+          "publisher": "GigaChat team",
+          "type": "official announcement"
+        },
+        {
+          "url": "https://huggingface.co/ai-sage/GigaChat4-708B-A41B",
+          "publisher": "ai-sage",
+          "type": "official model card"
+        },
+        {
+          "url": "https://huggingface.co/ai-sage/GigaChat4-37B-A4B",
+          "publisher": "ai-sage",
+          "type": "official model card"
+        }
+      ],
+      "version": "GigaChat 4"
+    },
+    {
+      "id": "ai-news:gigaedge-enhance-sdk:2026-11-27",
+      "title": "GigaEdge packages neural speech cleanup for CPU and browser streaming",
+      "category": "audio",
+      "tags": [
+        "AI",
+        "ML",
+        "DL",
+        "audio",
+        "edge"
+      ],
+      "summary": "A cross-platform SDK combines noise suppression with audio conditioning and optional echo cancellation. The team documents three neural denoisers, a common C++ core and ONNX Runtime or TensorFlow Lite integration.",
+      "why_it_matters": "Local voice interfaces can share a deployment architecture across servers, mobile and web instead of maintaining unrelated audio pipelines.",
+      "caveat": "Reported throughput is from vendor tests; processing faster than real time does not remove chunk buffering delay. Echo cancellation is platform-dependent; no runtime test performed.",
+      "canonical_url": "https://giga.chat/blog/en/posts/giga-edge-enhance-sdk",
+      "source_url": "https://giga.chat/blog/en/posts/giga-edge-enhance-sdk",
+      "publisher": "GigaChat team",
+      "type": "official technical article",
+      "publication_date": "2026-11-27",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-27",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-28T14:55:17.426Z",
+      "checked_at": "2026-11-28T14:55:17.426Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "first_party_release",
+      "release_status": "announced_artifacts",
+      "collection_classification": "recent",
+      "sources": [
+        {
+          "url": "https://giga.chat/blog/en/posts/giga-edge-enhance-sdk",
+          "publisher": "GigaChat team",
+          "type": "official technical article"
+        },
+        {
+          "url": "https://github.com/salute-developers/giga-edge-enhance",
+          "publisher": "Salute Developers",
+          "type": "official repository"
+        }
+      ]
+    },
+    {
+      "id": "ai-news:sensenova-roborsi-27b:2026-11-25",
+      "title": "SenseNova robot agent alternates learned motion with generated control code",
+      "category": "robotics",
+      "tags": [
+        "AI",
+        "DL",
+        "LLM",
+        "vision",
+        "robotics"
+      ],
+      "summary": "The November 25 technical article describes a 27B visual agent that can inspect and invoke a separate motion policy or compute gripper targets with code. The model card reports 6/10 pick-and-place and 9/10 stacking successes on two robot platforms.",
+      "why_it_matters": "Separating high-level correction from learned movement may help manipulation recover from errors.",
+      "caveat": "Small vendor trials and one simulation configuration do not establish broad robot reliability; generated control must stay within enforced physical constraints.",
+      "canonical_url": "https://huggingface.co/blog/sensenova/roborsi",
+      "source_url": "https://huggingface.co/blog/sensenova/roborsi",
+      "publisher": "SenseNova",
+      "type": "official technical article",
+      "publication_date": "2026-11-25",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": "2026-11-25",
+      "event_date_precision": "day",
+      "discovered_at": "2026-11-28T14:55:17.426Z",
+      "checked_at": "2026-11-28T14:55:17.426Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "first_party_release",
+      "release_status": "announced_artifacts",
+      "collection_classification": "catch-up",
+      "sources": [
+        {
+          "url": "https://huggingface.co/blog/sensenova/roborsi",
+          "publisher": "SenseNova",
+          "type": "official technical article"
+        },
+        {
+          "url": "https://huggingface.co/sensenova/SenseNova-RoboRSI-27B",
+          "publisher": "SenseNova",
+          "type": "official model card"
+        }
+      ],
+      "version": "SenseNova-RoboRSI-27B"
+    },
+    {
+      "id": "ai-news:kimi-for-science-program:2026-11-27",
+      "title": "Moonshot opens applications for science-focused API credit support",
+      "category": "industry",
+      "tags": [
+        "AI",
+        "LLM",
+        "research",
+        "applications"
+      ],
+      "summary": "The official program page offers selected science and engineering teams up to $20,000 in model API credits plus technical support, with a first-cohort deadline of December 8.",
+      "why_it_matters": "Could reduce inference costs for eligible experiments and scientific workflows.",
+      "caveat": "Credits are not cash; awards are selective. The official page has no visible publication timestamp; November 27 is the secondary report date, not independently established launch time.",
+      "canonical_url": "https://www.kimi.ai/news/kimi-for-science-program",
+      "source_url": "https://www.kimi.ai/news/kimi-for-science-program",
+      "publisher": "Moonshot AI",
+      "type": "official program page",
+      "publication_date": "2026-11-27",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": null,
+      "event_date_precision": "unknown",
+      "discovered_at": "2026-11-28T14:55:17.426Z",
+      "checked_at": "2026-11-28T14:55:17.426Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "first_party_program_with_secondary_date",
+      "release_status": "applications_open",
+      "collection_classification": "recent",
+      "sources": [
+        {
+          "url": "https://www.kimi.ai/news/kimi-for-science-program",
+          "publisher": "Moonshot AI",
+          "type": "official program page"
+        },
+        {
+          "url": "https://ashutoshai.com/ai-compass/2026/11/27/",
+          "publisher": "AI Compass",
+          "type": "secondary dated release roundup"
+        }
+      ],
+      "publication_date_basis": "dated secondary report; official page undated"
+    },
+    {
+      "id": "ai-news:google-demolab-deep-research-skill:2026-11-27",
+      "title": "Google publishes an experimental bounded parallel research skill",
+      "category": "agents",
+      "tags": [
+        "AI",
+        "LLM",
+        "agents",
+        "evaluation"
+      ],
+      "summary": "The public DemoLab skill defines a lead researcher workflow that divides broad questions into independent tracks, limits tool use, prioritizes primary evidence, and stops stalled tracks before synthesis.",
+      "why_it_matters": "A compact portable workflow offers a concrete starting point for comparing agent orchestration strategies.",
+      "caveat": "No evaluation win-rate claim retained: primary source reviewed is the skill text, not an evaluation report. November 27 is the dated secondary report; exact repository introduction date unverified.",
+      "canonical_url": "https://github.com/google-gemini/demolab/blob/main/skills/deep-research/SKILL.md",
+      "source_url": "https://github.com/google-gemini/demolab/blob/main/skills/deep-research/SKILL.md",
+      "publisher": "Google Gemini",
+      "type": "official experimental skill source",
+      "publication_date": "2026-11-27",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": null,
+      "event_date_precision": "unknown",
+      "discovered_at": "2026-11-28T14:55:17.426Z",
+      "checked_at": "2026-11-28T14:55:17.426Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "first_party_artifact_with_secondary_date",
+      "release_status": "experimental_source_available",
+      "collection_classification": "recent",
+      "sources": [
+        {
+          "url": "https://github.com/google-gemini/demolab/blob/main/skills/deep-research/SKILL.md",
+          "publisher": "Google Gemini",
+          "type": "official experimental skill source"
+        },
+        {
+          "url": "https://ashutoshai.com/ai-compass/2026/11/27/",
+          "publisher": "AI Compass",
+          "type": "secondary dated release roundup"
+        }
+      ],
+      "version": "1.0.0",
+      "publication_date_basis": "dated secondary report; GitHub commit history not accessible"
+    },
+    {
+      "id": "ai-news:agentnative-v2-video:2026-11-27",
+      "title": "v2 adds restorable media snapshots to coding-agent video projects",
+      "category": "tools",
+      "tags": [
+        "AI",
+        "LLM",
+        "video",
+        "agents"
+      ],
+      "summary": "The repository describes a local versioning tool that keeps text and code in Git but stores rendered video, audio and other media separately, with prompt-linked revisions, timed review comments and restoration.",
+      "why_it_matters": "Can make iterative programmatic video editing easier to audit and roll back.",
+      "caveat": "It is a workflow utility rather than a generative model. Hosted sharing terms and runtime were not tested. The November 27 launch date is secondary-reported; commit and release history could not be opened.",
+      "canonical_url": "https://github.com/agentnativeinc/v2",
+      "source_url": "https://github.com/agentnativeinc/v2",
+      "publisher": "AgentNative",
+      "type": "official repository",
+      "publication_date": "2026-11-27",
+      "publication_date_precision": "day",
+      "publication_time_utc": null,
+      "event_date": null,
+      "event_date_precision": "unknown",
+      "discovered_at": "2026-11-28T14:55:17.426Z",
+      "checked_at": "2026-11-28T14:55:17.426Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "first_party_artifact_with_secondary_date",
+      "release_status": "repository_available",
+      "collection_classification": "recent",
+      "sources": [
+        {
+          "url": "https://github.com/agentnativeinc/v2",
+          "publisher": "AgentNative",
+          "type": "official repository"
+        },
+        {
+          "url": "https://ashutoshai.com/ai-compass/2026/11/27/",
+          "publisher": "AI Compass",
+          "type": "secondary dated release roundup"
+        }
+      ],
+      "publication_date_basis": "dated secondary report; repository history inaccessible"
+    },
+    {
+      "id": "ai-news:bioscore-pathology:2611.34930",
+      "title": "BioScore probes whether pathology encoders represent cell identities",
+      "category": "evaluation",
+      "tags": [
+        "AI",
+        "ML",
+        "DL",
+        "vision",
+        "health"
+      ],
+      "summary": "Researchers compare sparse features from image encoders against gene expression patterns in matching tissue sections. Their test covers 52 cell identities, eight pathology encoders and three general image models.",
+      "why_it_matters": "Offers a biological representation diagnostic beyond classification accuracy.",
+      "caveat": "Preprint abstract reviewed; ranking does not establish diagnostic utility or clinical validity.",
+      "canonical_url": "https://arxiv.org/abs/2611.34930",
+      "source_url": "https://arxiv.org/abs/2611.34930",
+      "publisher": "arXiv / paper authors",
+      "type": "primary research preprint",
+      "publication_date": "2026-11-25",
+      "publication_date_precision": "second",
+      "publication_time_utc": "2026-11-25T18:59:13Z",
+      "event_date": null,
+      "event_date_precision": "unknown",
+      "discovered_at": "2026-11-28T14:55:17.426Z",
+      "checked_at": "2026-11-28T14:55:17.426Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "author_reported_research",
+      "release_status": "preprint",
+      "collection_classification": "catch-up",
+      "sources": [
+        {
+          "url": "https://arxiv.org/abs/2611.34930",
+          "publisher": "arXiv / paper authors",
+          "type": "primary research preprint"
+        }
+      ],
+      "version": "v1",
+      "arxiv_id": "2611.34930",
+      "doi": "10.48550/arXiv.2611.34930",
+      "publication_date_basis": "v1 submission timestamp; listed November 26, actual public posting hour unknown"
+    },
+    {
+      "id": "ai-news:robot-memory-actionability:2611.34915",
+      "title": "Robot navigation study separates stale memory from evidence of absence",
+      "category": "safety",
+      "tags": [
+        "AI",
+        "DL",
+        "robotics",
+        "vision",
+        "safety"
+      ],
+      "summary": "Repeated missed detections from nearby viewpoints can be correlated. A reversible memory policy stops relying on unsupported locations for navigation without asserting that the target disappeared.",
+      "why_it_matters": "Separating actionability from factual belief may prevent repeated trips to stale goals.",
+      "caveat": "Three matched decision contexts and a complementary trial are narrow evidence, not a safety guarantee.",
+      "canonical_url": "https://arxiv.org/abs/2611.34915",
+      "source_url": "https://arxiv.org/abs/2611.34915",
+      "publisher": "arXiv / paper authors",
+      "type": "primary research preprint",
+      "publication_date": "2026-11-25",
+      "publication_date_precision": "second",
+      "publication_time_utc": "2026-11-25T18:57:52Z",
+      "event_date": null,
+      "event_date_precision": "unknown",
+      "discovered_at": "2026-11-28T14:55:17.426Z",
+      "checked_at": "2026-11-28T14:55:17.426Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "author_reported_research",
+      "release_status": "preprint",
+      "collection_classification": "catch-up",
+      "sources": [
+        {
+          "url": "https://arxiv.org/abs/2611.34915",
+          "publisher": "arXiv / paper authors",
+          "type": "primary research preprint"
+        }
+      ],
+      "version": "v1",
+      "arxiv_id": "2611.34915",
+      "doi": "10.48550/arXiv.2611.34915",
+      "publication_date_basis": "v1 submission timestamp; listed November 26, actual public posting hour unknown"
+    },
+    {
+      "id": "ai-news:timestamp-grounded-reasoning:2611.34848",
+      "title": "Timestamp interventions reveal shortcuts in time-series reasoning tests",
+      "category": "evaluation",
+      "tags": [
+        "AI",
+        "ML",
+        "LLM",
+        "evaluation"
+      ],
+      "summary": "The authors perturb timestamps and event alignment in 310 questions across two tasks; accuracy can remain high without dates when inputs are already aligned.",
+      "why_it_matters": "Evaluation design can test whether models genuinely connect real events to measurements.",
+      "caveat": "Two tasks do not establish behavior in all time-series applications; source abstract only.",
+      "canonical_url": "https://arxiv.org/abs/2611.34848",
+      "source_url": "https://arxiv.org/abs/2611.34848",
+      "publisher": "arXiv / paper authors",
+      "type": "primary research preprint",
+      "publication_date": "2026-11-25",
+      "publication_date_precision": "second",
+      "publication_time_utc": "2026-11-25T18:23:07Z",
+      "event_date": null,
+      "event_date_precision": "unknown",
+      "discovered_at": "2026-11-28T14:55:17.426Z",
+      "checked_at": "2026-11-28T14:55:17.426Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "author_reported_research",
+      "release_status": "preprint",
+      "collection_classification": "catch-up",
+      "sources": [
+        {
+          "url": "https://arxiv.org/abs/2611.34848",
+          "publisher": "arXiv / paper authors",
+          "type": "primary research preprint"
+        }
+      ],
+      "version": "v1",
+      "arxiv_id": "2611.34848",
+      "doi": "10.48550/arXiv.2611.34848",
+      "publication_date_basis": "v1 submission timestamp; listed November 26, actual public posting hour unknown"
+    },
+    {
+      "id": "ai-news:cairn-frozen-vla:2611.34914",
+      "title": "Cairn steers frozen robot policies with object trajectory priors",
+      "category": "robotics",
+      "tags": [
+        "AI",
+        "DL",
+        "robotics",
+        "vision"
+      ],
+      "summary": "A separate 3D planner proposes paths for an object already in a robot gripper and guides a frozen action model. On 1,941 modified LIBERO scenes the authors report success rising from 24.5% to 95.1%.",
+      "why_it_matters": "May adapt manipulation to changed layouts without updating the main policy.",
+      "caveat": "Benchmark-specific improvement and limited real robot demonstration; code and data availability were promised, not verified.",
+      "canonical_url": "https://arxiv.org/abs/2611.34914",
+      "source_url": "https://arxiv.org/abs/2611.34914",
+      "publisher": "arXiv / paper authors",
+      "type": "primary research preprint",
+      "publication_date": "2026-11-25",
+      "publication_date_precision": "second",
+      "publication_time_utc": "2026-11-25T18:57:29Z",
+      "event_date": null,
+      "event_date_precision": "unknown",
+      "discovered_at": "2026-11-28T14:55:17.426Z",
+      "checked_at": "2026-11-28T14:55:17.426Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "author_reported_research",
+      "release_status": "preprint",
+      "collection_classification": "catch-up",
+      "sources": [
+        {
+          "url": "https://arxiv.org/abs/2611.34914",
+          "publisher": "arXiv / paper authors",
+          "type": "primary research preprint"
+        }
+      ],
+      "version": "v1",
+      "arxiv_id": "2611.34914",
+      "doi": "10.48550/arXiv.2611.34914",
+      "publication_date_basis": "v1 submission timestamp; listed November 26, actual public posting hour unknown"
+    },
+    {
+      "id": "ai-news:tigertts-parallel-speech:2611.34241",
+      "title": "TigerTTS uses a small draft-and-refine speech model",
+      "category": "audio",
+      "tags": [
+        "AI",
+        "DL",
+        "SLM",
+        "audio",
+        "inference"
+      ],
+      "summary": "A nonautoregressive draft produces aligned speech tokens that a 0.15B autoregressive backbone refines across multiple frames per step. The author reports a real-time factor of 0.05 on one GPU.",
+      "why_it_matters": "A compact speech model that generates several tokens per step could reduce sequential decoding overhead.",
+      "caveat": "Backbone size excludes other pipeline components; exact device, total latency, weights, and reproducibility were not established in the abstract review.",
+      "canonical_url": "https://arxiv.org/abs/2611.34241",
+      "source_url": "https://arxiv.org/abs/2611.34241",
+      "publisher": "arXiv / paper authors",
+      "type": "primary research preprint",
+      "publication_date": "2026-11-25",
+      "publication_date_precision": "second",
+      "publication_time_utc": "2026-11-25T12:05:52Z",
+      "event_date": null,
+      "event_date_precision": "unknown",
+      "discovered_at": "2026-11-28T14:55:17.426Z",
+      "checked_at": "2026-11-28T14:55:17.426Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "author_reported_research",
+      "release_status": "preprint",
+      "collection_classification": "catch-up",
+      "sources": [
+        {
+          "url": "https://arxiv.org/abs/2611.34241",
+          "publisher": "arXiv / paper authors",
+          "type": "primary research preprint"
+        }
+      ],
+      "version": "v1",
+      "arxiv_id": "2611.34241",
+      "doi": "10.48550/arXiv.2611.34241",
+      "publication_date_basis": "v1 submission timestamp; listed November 26, actual public posting hour unknown"
+    },
+    {
+      "id": "ai-news:livevae-streaming-video:2611.34912",
+      "title": "LiveVAE targets both encoding and decoding delays in streaming video",
+      "category": "inference",
+      "tags": [
+        "AI",
+        "DL",
+        "video",
+        "inference"
+      ],
+      "summary": "A causal local-attention autoencoder is distilled to preserve a pretrained latent representation while bounding temporal cache growth. On MiniMax-H3 the authors report 5.2-6.2x encoding and 3.0-3.3x decoding speedups over its official VAE.",
+      "why_it_matters": "May remove a bottleneck that remains even after video diffusion sampling accelerates.",
+      "caveat": "These are component-level, author-reported measurements; no code or model download was verified.",
+      "canonical_url": "https://arxiv.org/abs/2611.34912",
+      "source_url": "https://arxiv.org/abs/2611.34912",
+      "publisher": "arXiv / paper authors",
+      "type": "primary research preprint",
+      "publication_date": "2026-11-25",
+      "publication_date_precision": "second",
+      "publication_time_utc": "2026-11-25T18:57:14Z",
+      "event_date": null,
+      "event_date_precision": "unknown",
+      "discovered_at": "2026-11-28T14:55:17.426Z",
+      "checked_at": "2026-11-28T14:55:17.426Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "author_reported_research",
+      "release_status": "preprint",
+      "collection_classification": "catch-up",
+      "sources": [
+        {
+          "url": "https://arxiv.org/abs/2611.34912",
+          "publisher": "arXiv / paper authors",
+          "type": "primary research preprint"
+        }
+      ],
+      "version": "v1",
+      "arxiv_id": "2611.34912",
+      "doi": "10.48550/arXiv.2611.34912",
+      "publication_date_basis": "v1 submission timestamp; listed November 26, actual public posting hour unknown"
+    },
+    {
+      "id": "ai-news:synthetic-speech-head-ablation:2611.34426",
+      "title": "Speech spoofing research isolates useful and harmful attention heads",
+      "category": "safety",
+      "tags": [
+        "AI",
+        "DL",
+        "audio",
+        "interpretability",
+        "safety"
+      ],
+      "summary": "Ablations on frozen WavLM and Wav2Vec2 backbones identify heads whose removal improves equal-error rate on ASVspoof 5, with reported relative reductions of 13% and 22%.",
+      "why_it_matters": "Head-level analysis can help distinguish information present in a representation from information actually driving a classifier.",
+      "caveat": "Controlled benchmark results are not proof of robust detection on unseen real-world generated audio.",
+      "canonical_url": "https://arxiv.org/abs/2611.34426",
+      "source_url": "https://arxiv.org/abs/2611.34426",
+      "publisher": "arXiv / paper authors",
+      "type": "primary research preprint",
+      "publication_date": "2026-11-25",
+      "publication_date_precision": "second",
+      "publication_time_utc": "2026-11-25T14:13:47Z",
+      "event_date": null,
+      "event_date_precision": "unknown",
+      "discovered_at": "2026-11-28T14:55:17.426Z",
+      "checked_at": "2026-11-28T14:55:17.426Z",
+      "review_status": "source_checked_pending_publisher_review",
+      "evidence_type": "author_reported_research",
+      "release_status": "preprint",
+      "collection_classification": "catch-up",
+      "sources": [
+        {
+          "url": "https://arxiv.org/abs/2611.34426",
+          "publisher": "arXiv / paper authors",
+          "type": "primary research preprint"
+        }
+      ],
+      "version": "v1",
+      "arxiv_id": "2611.34426",
+      "doi": "10.48550/arXiv.2611.34426",
+      "publication_date_basis": "v1 submission timestamp; listed November 26, actual public posting hour unknown"
+    }
+  ],
+  "technologies": [
+    {
+      "id": "tech-proposal:gigachat4:2026-11-28",
+      "name": "GigaChat 4",
+      "aliases": [
+        "GigaChat4-708B-A41B",
+        "GigaChat4-37B-A4B"
+      ],
+      "usage_tags": [
+        "AI",
+        "DL",
+        "LLM"
+      ],
+      "explanation": "Sparse hybrid language model family with selectable reasoning and instant modes.",
+      "conditional_advantage": "One checkpoint can serve different reasoning budgets when the runtime supports the mode flag.",
+      "best_fit_uses": [
+        "Long document experiments",
+        "Self-hosted agent evaluations"
+      ],
+      "tradeoffs": [
+        "Large total weights",
+        "Long context costs",
+        "Different license by size"
+      ],
+      "alternatives": [
+        "Other sparse MoE models",
+        "Dense instruction models"
+      ],
+      "hardware_runtime_constraints": "Flagship FP8 recipe uses two eight-GPU H100 80 GB nodes with SGLang or vLLM; smaller model still stores 37B weights.",
+      "official_documentation_url": "https://huggingface.co/ai-sage/GigaChat4-708B-A41B",
+      "license_uncertainty": "708B card says MIT, 37B noncommercial individual license; verify applicable terms and compliance before deployment.",
+      "availability_uncertainty": "Cards available; weights and runtime not downloaded or executed.",
+      "pricing_uncertainty": "No hosted price or deployment cost independently validated.",
+      "existing_profile_id": null,
+      "profile_relationship": "new_candidate_pending_canonical_dedup",
+      "source_links": [
+        {
+          "url": "https://huggingface.co/ai-sage/GigaChat4-708B-A41B",
+          "publisher": "ai-sage",
+          "type": "official model card"
+        },
+        {
+          "url": "https://huggingface.co/ai-sage/GigaChat4-37B-A4B",
+          "publisher": "ai-sage",
+          "type": "official model card"
+        },
+        {
+          "url": "https://giga.chat/blog/en/posts/gigachat-4",
+          "publisher": "GigaChat team",
+          "type": "official announcement"
+        }
+      ],
+      "date_checked": "2026-11-28",
+      "checked_at": "2026-11-28T14:55:17.426Z",
+      "review_status": "source_checked_pending_publisher_catalog_dedup"
+    },
+    {
+      "id": "tech-proposal:gigaedge-enhance:2026-11-28",
+      "name": "GigaEdge Enhance",
+      "aliases": [
+        "Giga Edge Enhance"
+      ],
+      "usage_tags": [
+        "AI",
+        "ML",
+        "DL",
+        "audio"
+      ],
+      "explanation": "Stateful streaming speech-cleanup SDK using neural and conventional signal-processing blocks.",
+      "conditional_advantage": "Shared C++ core can reduce platform-specific integration effort for local denoising.",
+      "best_fit_uses": [
+        "Voice interfaces",
+        "Live communication",
+        "Local microphone cleanup"
+      ],
+      "tradeoffs": [
+        "Quality vs chunk latency",
+        "Platform-specific features",
+        "Audio artifacts"
+      ],
+      "alternatives": [
+        "RNNoise",
+        "DPDFNet2",
+        "Traditional DSP"
+      ],
+      "hardware_runtime_constraints": "CPU, mobile and WebAssembly backends; ONNX Runtime or TensorFlow Lite, 8 kHz INT8 or 48 kHz FP32 models.",
+      "official_documentation_url": "https://github.com/salute-developers/giga-edge-enhance",
+      "license_uncertainty": "Repository MIT; separate model and dependencies require review.",
+      "availability_uncertainty": "Documentation and source visible; no release download or execution.",
+      "pricing_uncertainty": "No hosted price or deployment cost independently validated.",
+      "existing_profile_id": null,
+      "profile_relationship": "new_candidate_pending_canonical_dedup",
+      "source_links": [
+        {
+          "url": "https://github.com/salute-developers/giga-edge-enhance",
+          "publisher": "Salute Developers",
+          "type": "official repository"
+        },
+        {
+          "url": "https://giga.chat/blog/en/posts/giga-edge-enhance-sdk",
+          "publisher": "GigaChat team",
+          "type": "official technical article"
+        }
+      ],
+      "date_checked": "2026-11-28",
+      "checked_at": "2026-11-28T14:55:17.426Z",
+      "review_status": "source_checked_pending_publisher_catalog_dedup"
+    },
+    {
+      "id": "tech-proposal:sensenova-roborsi-27b:2026-11-28",
+      "name": "SenseNova-RoboRSI-27B",
+      "aliases": [
+        "RoboRSI-27B"
+      ],
+      "usage_tags": [
+        "AI",
+        "DL",
+        "LLM",
+        "robotics",
+        "vision"
+      ],
+      "explanation": "Visual robot agent orchestrating learned motion and explicit gripper-target code.",
+      "conditional_advantage": "Can make local pose corrections when an existing action policy proposes imperfect motion.",
+      "best_fit_uses": [
+        "Manipulation research",
+        "Simulation-to-real evaluation"
+      ],
+      "tradeoffs": [
+        "Controller integration",
+        "Small real-world trial evidence",
+        "Physical safety constraints"
+      ],
+      "alternatives": [
+        "Standalone VLA policy",
+        "Classical motion planner"
+      ],
+      "hardware_runtime_constraints": "Official BF16 vLLM recipe uses four NVIDIA GPUs on x86 Linux; GGUF option documented. Robot camera/control adapters required.",
+      "official_documentation_url": "https://huggingface.co/sensenova/SenseNova-RoboRSI-27B",
+      "license_uncertainty": "Card license requires direct verification before redistribution; no dependency audit.",
+      "availability_uncertainty": "Model card and download recipe visible; no weights or physical testing.",
+      "pricing_uncertainty": "No hosted price or deployment cost independently validated.",
+      "existing_profile_id": null,
+      "profile_relationship": "new_candidate_pending_canonical_dedup",
+      "source_links": [
+        {
+          "url": "https://huggingface.co/sensenova/SenseNova-RoboRSI-27B",
+          "publisher": "SenseNova",
+          "type": "official model card"
+        },
+        {
+          "url": "https://huggingface.co/blog/sensenova/roborsi",
+          "publisher": "SenseNova",
+          "type": "official technical article"
+        }
+      ],
+      "date_checked": "2026-11-28",
+      "checked_at": "2026-11-28T14:55:17.426Z",
+      "review_status": "source_checked_pending_publisher_catalog_dedup"
+    },
+    {
+      "id": "tech-proposal:v2-video-versioning:2026-11-28",
+      "name": "v2 (AgentNative video versioning)",
+      "aliases": [
+        "v2.video",
+        "agentnativeinc/v2"
+      ],
+      "usage_tags": [
+        "AI",
+        "LLM",
+        "video"
+      ],
+      "explanation": "Prompt-linked media snapshots with browser review and restoration for code-driven video projects.",
+      "conditional_advantage": "Separate media store can avoid bloating ordinary Git text history while retaining exact edit versions.",
+      "best_fit_uses": [
+        "Programmatic video editing",
+        "Agent-assisted review"
+      ],
+      "tradeoffs": [
+        "Extra media storage",
+        "External sharing privacy",
+        "No independent restoration test"
+      ],
+      "alternatives": [
+        "Git LFS",
+        "Manual render versioning",
+        "Video review platforms"
+      ],
+      "hardware_runtime_constraints": "Git and ffmpeg on macOS/Linux; source build requires Go and Node 24.",
+      "official_documentation_url": "https://github.com/agentnativeinc/v2",
+      "license_uncertainty": "Repository declares MIT; hosted service terms not verified.",
+      "availability_uncertainty": "Source visible; signed releases claimed but release listing inaccessible.",
+      "pricing_uncertainty": "No hosted price or deployment cost independently validated.",
+      "existing_profile_id": null,
+      "profile_relationship": "new_candidate_pending_canonical_dedup",
+      "source_links": [
+        {
+          "url": "https://github.com/agentnativeinc/v2",
+          "publisher": "AgentNative",
+          "type": "official repository"
+        },
+        {
+          "url": "https://ashutoshai.com/ai-compass/2026/11/27/",
+          "publisher": "AI Compass",
+          "type": "secondary dated release roundup"
+        }
+      ],
+      "date_checked": "2026-11-28",
+      "checked_at": "2026-11-28T14:55:17.426Z",
+      "review_status": "source_checked_pending_publisher_catalog_dedup"
+    }
+  ],
+  "terms": [
+    {
+      "id": "term-proposal:multi-teacher-on-policy-distillation:2026-11-28",
+      "name": "Multi-teacher on-policy distillation",
+      "aliases": [
+        "MOPD",
+        "Multi-teacher OPD"
+      ],
+      "definition": "A distillation approach in which a student generates its own trajectories and receives target distributions from different teachers selected for the task or domain.",
+      "mechanism": "Sample from the current student, select a teacher for the example, and train the student to match teacher predictions along its own trajectory. This exposes the teacher to states the student actually visits.",
+      "usage_tags": [
+        "AI",
+        "ML",
+        "DL",
+        "SLM",
+        "LLM",
+        "training"
+      ],
+      "example": "A coding teacher supervises student-generated repository edits while a mathematics teacher supervises its own attempted proof trajectories.",
+      "caveat": "A specialization of established on-policy distillation, not a claim of new coinage; requires useful teacher feedback and does not guarantee transfer or safety.",
+      "related_existing_ids": [
+        "MLD-0838",
+        "MLD-0607"
+      ],
+      "related_profile_ids": [],
+      "primary_references": [
+        {
+          "url": "https://giga.chat/blog/en/posts/gigachat-4",
+          "publisher": "GigaChat team",
+          "type": "official announcement"
+        }
+      ],
+      "term_origin": "established_concept_new_to_atlas_candidate",
+      "existing_term_id": null,
+      "date_checked": "2026-11-28",
+      "checked_at": "2026-11-28T14:55:17.426Z",
+      "review_status": "source_checked_pending_publisher_canonical_dedup"
+    }
+  ],
+  "corrections": []
+}
