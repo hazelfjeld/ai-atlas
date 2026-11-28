@@ -1560,7 +1560,10 @@ with sync_playwright() as p:
         const s=getComputedStyle(el), a=el.querySelector('a');
         return [s.display,s.justifyContent,s.alignItems,s.flexWrap,s.columnGap,
                 s.paddingTop,s.borderTopWidth,s.borderTopColor,
-                a ? getComputedStyle(a).fontWeight : null];
+                a ? getComputedStyle(a).fontWeight : null,
+                a ? getComputedStyle(a).fontSize : null,
+                a ? getComputedStyle(a).lineHeight : null,
+                a ? getComputedStyle(a).whiteSpace : null];
     }"""
     for width, height in ((320,700),(390,844),(768,900),(1280,900)):
         page.set_viewport_size({'width':width,'height':height})
@@ -1571,7 +1574,7 @@ with sync_playwright() as p:
             expected=page.locator('.story-footer').first.evaluate(action_style)
             check(f'Discover {width}px {theme} shared action frame',
                   expected[:7]==['flex','space-between','center','wrap','9px','12px','1px']
-                  and expected[8]=='600')
+                  and expected[8:]==['600','14px','21px','normal'])
             for route, selector in action_routes:
                 page.goto(base+route)
                 row=page.locator(selector).first
@@ -1579,7 +1582,7 @@ with sync_playwright() as p:
                 actual=row.evaluate(action_style)
                 # The archive retains its own reading palette, but uses the same
                 # theme-aware divider token, layout, and link emphasis.
-                same_frame = (actual[:7]==expected[:7] and actual[8]==expected[8]
+                same_frame = (actual[:7]==expected[:7] and actual[8:]==expected[8:]
                               and row.evaluate("""el => {
                                   const probe=document.createElement('span');
                                   probe.style.color='var(--line)';el.append(probe);

@@ -7,7 +7,7 @@ test('Discover, Technology and Research use the same action row source', () => {
   const css = read('site-chrome.css');
   const block = css.split('/* atlas-shared-card-action-row:begin */')[1].split('/* atlas-shared-card-action-row:end */')[0];
   for (const selector of ['.story-footer', '.tech-shell .tech-card .card-actions', '.cards .card-bottom']) assert.ok(block.includes(selector));
-  for (const rule of ['flex-wrap:wrap','gap:9px','padding-top:12px','border-top:1px solid var(--line)','font-weight:600','outline-offset:3px']) assert.ok(block.includes(rule),rule);
+  for (const rule of ['flex-wrap:wrap','gap:9px','padding-top:12px','border-top:1px solid var(--line)','font-weight:600','font-size:14px','line-height:1.5','min-width:0','max-width:100%','white-space:normal','overflow-wrap:anywhere','outline-offset:3px']) assert.ok(block.includes(rule),rule);
   const brand = read('brand.css');
   assert.ok(brand.includes('.story-footer{margin-top:auto;font-size:10px}'));
   assert.ok(read('technologies.html').includes('.tech-card .card-actions{margin-top:13px}'));

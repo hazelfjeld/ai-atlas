@@ -1760,7 +1760,13 @@ html:is(:has(.nojs-primary-routes > .notice[id="/sources"]:target),:has(.nojs-pr
 :is(.story-footer,
     .tech-shell .tech-card .card-actions,
     .shell:has(> .site-chrome.research-site-chrome) .cards .card-bottom) > a{
+  font-size:14px;
+  line-height:1.5;
   font-weight:600;
+  min-width:0;
+  max-width:100%;
+  white-space:normal;
+  overflow-wrap:anywhere;
 }
 :is(.story-footer,
     .tech-shell .tech-card .card-actions,
