@@ -77,8 +77,13 @@ test('Games keeps canonical script-free policy links without duplicating the nat
   assert.ok(app.includes(appFooter), 'native workspace keeps its canonical shared footer');
   assert.ok(app.indexOf(appFooter) > app.indexOf('</main>'),
             'native workspace footer is now a global contentinfo landmark');
-  assert.ok(app.includes('href="about.html">About & editorial policy</a>'),
-            'native workspace already provides the policy destination');
+  const policyLinks = html => {
+    const footers = [...html.matchAll(/<footer class="main-footer site-chrome__footer">([\s\S]*?)<\/footer>/g)];
+    assert.equal(footers.length, 1, 'exactly one global app footer');
+    return links(footers[0][1]).filter(([, label]) => label === 'Editorial policy & coverage');
+  };
+  assert.deepEqual(policyLinks(app), [['about.html', 'Editorial policy & coverage']],
+            'native workspace already provides exactly one canonical policy link');
   const canonical=read('scripts/site_chrome.py');
   assert.ok(!canonical.includes('if path == "games.html":'),
             'Games footer follows the shared resource synchronizer');
@@ -88,8 +93,9 @@ test('Games keeps canonical script-free policy links without duplicating the nat
             'native Games deliberately omits the redundant link');
   assert.ok(!read('games-tab.js').includes('Editorial policy & coverage'),
             'generated native module remains free of duplicated shell policy links');
-  assert.ok(read('downloads/Atlas_Demo_Offline.html').includes('About & editorial policy'),
-            'offline app keeps its canonical policy label');
+  assert.deepEqual(policyLinks(read('downloads/Atlas_Demo_Offline.html')),
+            [['#/sources', 'Editorial policy & coverage']],
+            'offline app keeps exactly one canonical policy link with its bundled route');
 });
 
 test('standalone editorial footers use the shared policy label and retain sources', () => {
